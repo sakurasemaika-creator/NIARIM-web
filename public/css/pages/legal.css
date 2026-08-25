@@ -1,0 +1,93 @@
+/* ==========================================================================
+   NIARIM legal.css - プライバシーポリシー / 利用規約 / FAQページ共通
+   ========================================================================== */
+
+.legal-header {
+  padding-block: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-header h1 {
+  font-size: var(--fs-h1);
+}
+
+.legal-header .updated-at {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.legal-notice {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-tint);
+  color: var(--color-brand-dark);
+  font-size: var(--fs-small);
+}
+
+.legal-body {
+  padding-block: var(--space-xl);
+  max-width: 760px;
+}
+
+.legal-body section {
+  margin-bottom: var(--space-lg);
+}
+
+.legal-body h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-sm);
+}
+
+.legal-body h3 {
+  font-size: 1rem;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.legal-body p,
+.legal-body li {
+  color: var(--color-gray-700);
+}
+
+.legal-body ul,
+.legal-body ol {
+  padding-left: 1.4rem;
+  margin-top: var(--space-xs);
+  display: grid;
+  gap: 0.4rem;
+}
+
+.legal-body ul {
+  list-style: disc;
+}
+
+.legal-body ol {
+  list-style: decimal;
+}
+
+.legal-body table {
+  width: 100%;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-small);
+}
+
+.legal-body th,
+.legal-body td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.todo-flag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 107, 74, 0.14);
+  color: var(--color-accent-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}

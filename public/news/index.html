@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>お知らせ | NIARIM</title>
+<meta name="description" content="NIARIMの正式リリース・アップデート・メンテナンス情報をお知らせします。" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://niarim.example.com/news/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="お知らせ | NIARIM" />
+<meta property="og:description" content="NIARIMの正式リリース・アップデート・メンテナンス情報をお知らせします。" />
+<meta property="og:url" content="https://niarim.example.com/news/" />
+<meta property="og:image" content="/assets/images/ogp-default.png" />
+<meta property="og:locale" content="ja_JP" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="お知らせ | NIARIM" />
+<meta name="twitter:description" content="NIARIMの正式リリース・アップデート・メンテナンス情報をお知らせします。" />
+<meta name="twitter:image" content="/assets/images/ogp-default.png" />
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<link rel="stylesheet" href="/css/pages/news.css" />
+</head>
+<body data-i18n-title="meta.news.title" data-i18n-description="meta.news.description">
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img src="/assets/images/logo/NIARIM_LOGO_PLACEHOLDER.svg" alt="NIARIM" width="32" height="32" />
+      <span>NIARIM</span>
+    </a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/news/" aria-current="page" data-i18n="nav.news">お知らせ</a></li>
+        <li><a href="/#faq" data-i18n="nav.faq">よくある質問</a></li>
+        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+      </ul>
+      <div class="lang-dropdown" data-lang-dropdown data-open="false">
+        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">
+          <span data-current-lang-label>日本語</span>
+        </button>
+        <ul class="lang-menu" data-lang-menu></ul>
+      </div>
+      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <div class="news-header reveal">
+      <span class="eyebrow" data-i18n="newsPage.eyebrow">News</span>
+      <h1 data-i18n="newsPage.title">お知らせ</h1>
+      <p data-i18n="newsPage.lead">正式リリース・アップデート・メンテナンス情報などを、こちらでお知らせします。</p>
+    </div>
+
+    <!--
+      正式リリース後、お知らせが公開され次第、以下の news-empty ブロックを
+      news-item ブロックへ差し替えてください（実在しないお知らせを掲載しないための措置）。
+      例:
+      <div class="news-item">
+        <time datetime="2026-00-00">2026.00.00</time>
+        <span class="news-tag">お知らせ</span>
+        <h2>見出しテキスト</h2>
+      </div>
+    -->
+    <div class="news-list reveal">
+      <p class="news-empty" data-i18n="newsPage.empty">現在、公開中のお知らせはありません。新しい情報が入り次第、こちらに掲載します。</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <img src="/assets/images/logo/NIARIM_LOGO_PLACEHOLDER.svg" alt="NIARIM" width="32" height="32" />
+          <span>NIARIM</span>
+        </a>
+        <p data-i18n="footer.tagline">Animation made by your hands.</p>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.product">Product</h3>
+        <ul>
+          <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+          <li><a href="/#faq" data-i18n="nav.faq">よくある質問</a></li>
+          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.support">Support</h3>
+        <ul>
+          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <ul>
+          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
+          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
+      <div class="footer-social">
+        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/config.js"></script>
+<script src="/js/i18n-dict.js"></script>
+<script src="/js/i18n-dict-intl.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  (function () {
+    var c = window.NIARIM_CONFIG || {};
+    ["footer-x-link", "footer-x-icon"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && c.X_URL) el.setAttribute("href", c.X_URL);
+    });
+  })();
+</script>
+</body>
+</html>

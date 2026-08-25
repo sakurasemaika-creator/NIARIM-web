@@ -1,0 +1,13 @@
+{
+  "name": "niarim-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NIARIM 公式サイト（Cloudflare Workers Static Assets + Worker）",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

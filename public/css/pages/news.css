@@ -1,0 +1,73 @@
+/* ==========================================================================
+   NIARIM news.css - お知らせページ専用スタイル
+   ========================================================================== */
+
+.news-header {
+  padding-block: var(--space-xl) var(--space-lg);
+}
+
+.news-header h1 {
+  font-size: var(--fs-h1);
+}
+
+.news-header p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.news-list {
+  padding-block: var(--space-lg) var(--space-2xl);
+  display: grid;
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.news-item {
+  background: var(--color-white);
+  padding: var(--space-md) var(--space-lg);
+  display: grid;
+  grid-template-columns: 140px auto 1fr;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.news-item time {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.news-tag {
+  justify-self: start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-sub-tint);
+  color: var(--color-brand-dark);
+  white-space: nowrap;
+}
+
+.news-item h2 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.news-empty {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  color: var(--color-text-muted);
+  background: var(--color-white);
+}
+
+@media (max-width: 640px) {
+  .news-item {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.4rem;
+  }
+}

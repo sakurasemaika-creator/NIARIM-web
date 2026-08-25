@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NIARIM（ニアリム）| 描く、動かす、物語にするアニメーション制作アプリ</title>
+<meta name="description" content="NIARIMは、自分の手で描いた絵を動かし、アニメーション作品として書き出せる制作アプリです。ペン・タイムライン・非破壊編集で、あなたの物語を動かしましょう。" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://niarim.example.com/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="NIARIM（ニアリム）| 描く、動かす、物語にするアニメーション制作アプリ" />
+<meta property="og:description" content="NIARIMは、自分の手で描いた絵を動かし、アニメーション作品として書き出せる制作アプリです。" />
+<meta property="og:url" content="https://niarim.example.com/" />
+<meta property="og:image" content="/assets/images/ogp-default.png" />
+<meta property="og:locale" content="ja_JP" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="NIARIM（ニアリム）| 描く、動かす、物語にするアニメーション制作アプリ" />
+<meta name="twitter:description" content="NIARIMは、自分の手で描いた絵を動かし、アニメーション作品として書き出せる制作アプリです。" />
+<meta name="twitter:image" content="/assets/images/ogp-default.png" />
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<link rel="stylesheet" href="/css/pages/home.css" />
+</head>
+<body data-i18n-title="meta.home.title" data-i18n-description="meta.home.description">
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img src="/assets/images/logo/NIARIM_LOGO_PLACEHOLDER.svg" alt="NIARIM" width="32" height="32" />
+      <span>NIARIM</span>
+    </a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        <li><a href="/#faq" data-i18n="nav.faq">よくある質問</a></li>
+        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+      </ul>
+      <div class="lang-dropdown" data-lang-dropdown data-open="false">
+        <button type="button" class="lang-trigger" data-lang-trigger aria-label="言語を切り替える" data-i18n-attr="aria-label:lang.switch">
+          <span data-current-lang-label>日本語</span>
+        </button>
+        <ul class="lang-menu" data-lang-menu></ul>
+      </div>
+      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="hero.eyebrow">Animation Creation App</span>
+        <h1 class="hero-title">
+          <span data-i18n="hero.title.line1">描く。動かす。</span><br />
+          <span class="accent" data-i18n="hero.title.line2">物語にする。</span>
+        </h1>
+        <p class="hero-lead" data-i18n="hero.lead">
+          NIARIMは、手描きの一枚一枚をあなた自身の手でアニメーションへと変えていく制作アプリです。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#download" data-i18n="hero.cta.primary">アプリをダウンロード</a>
+          <a class="btn btn-outline" href="/features/" data-i18n="hero.cta.secondary">機能を見る</a>
+        </div>
+        <p class="hero-note" data-i18n="hero.note">対応端末・提供状況は Google Play のページをご確認ください。</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="frame-mock">
+          <svg viewBox="0 0 200 260" width="100%" height="100%">
+            <path class="stroke-path" d="M30 210 C 40 120, 80 60, 100 50 S 170 70, 160 140 S 100 220, 60 190" />
+          </svg>
+          <div class="timeline-mock">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="intro.eyebrow">About NIARIM</span>
+        <h2 data-i18n="intro.title">NIARIMとは</h2>
+        <p data-i18n="intro.lead">
+          NIARIMは、AIが自動で作品を生成するアプリではありません。あなたが描いた絵を、あなた自身の手でアニメーションへと動かしていくための制作アプリです。
+        </p>
+      </div>
+      <div class="intro-grid">
+        <div class="intro-card reveal">
+          <div class="icon" aria-hidden="true">✎</div>
+          <h3 data-i18n="intro.card1.title">Drawing</h3>
+          <p data-i18n="intro.card1.body">Gペン・ペン・エアブラシなど複数のブラシと、色・透明度・ズームまで、描く工程にこだわりました。</p>
+        </div>
+        <div class="intro-card reveal" data-reveal-delay="80">
+          <div class="icon" aria-hidden="true">▶</div>
+          <h3 data-i18n="intro.card2.title">Animation</h3>
+          <p data-i18n="intro.card2.body">フレームを重ね、タイムラインで編集し、プレビューしながら動きを組み立てられます。</p>
+        </div>
+        <div class="intro-card reveal" data-reveal-delay="160">
+          <div class="icon" aria-hidden="true">↧</div>
+          <h3 data-i18n="intro.card3.title">Export</h3>
+          <p data-i18n="intro.card3.body">描いた作品は動画として書き出し、あなたの手で完成させ、共有できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="features.eyebrow">Core Features</span>
+        <h2 data-i18n="features.title">主要機能</h2>
+        <p data-i18n="features.lead">制作の一つひとつの工程を、丁寧に作り込んでいます。</p>
+      </div>
+
+      <div class="feature-row reveal">
+        <div class="feature-copy">
+          <h3 data-i18n="features.drawing.title">思い通りに描ける、描画ツール</h3>
+          <p data-i18n="features.drawing.body">Gペン・ペン・エアブラシ・ユーザーペンなど、目的に合わせてブラシを使い分けられます。色選択・透明色・不透明度の調整、ズームやパンで細部まで描き込めます。</p>
+          <ul class="feature-tags">
+            <li>Gペン</li><li>エアブラシ</li><li>不透明度</li><li>ズーム／パン</li>
+          </ul>
+        </div>
+        <div class="feature-media">
+          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+        </div>
+      </div>
+
+      <div class="feature-row is-reverse reveal">
+        <div class="feature-copy">
+          <h3 data-i18n="features.animation.title">フレームを重ねて、動きをつくる</h3>
+          <p data-i18n="features.animation.body">フレームの追加・編集をタイムライン上で管理し、アニメーションプレビューで動きを確認しながら制作できます。</p>
+          <ul class="feature-tags">
+            <li>フレーム</li><li>タイムライン</li><li>プレビュー</li>
+          </ul>
+        </div>
+        <div class="feature-media">
+          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div class="feature-copy">
+          <h3 data-i18n="features.editing.title">編集を、やり直せる自由さ</h3>
+          <p data-i18n="features.editing.body">非破壊編集に対応し、塗りつぶしや許容値の調整、レイヤーによる管理で、納得のいくまで描き直せます。</p>
+          <ul class="feature-tags">
+            <li>非破壊編集</li><li>塗りつぶし</li><li>レイヤー</li>
+          </ul>
+        </div>
+        <div class="feature-media">
+          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+        </div>
+      </div>
+
+      <div class="feature-row is-reverse reveal">
+        <div class="feature-copy">
+          <h3 data-i18n="features.export.title">作品を書き出し、届ける</h3>
+          <p data-i18n="features.export.body">Full HDまでの解像度、自由な縦横比の設定に対応し、完成した作品を動画として書き出せます。</p>
+          <ul class="feature-tags">
+            <li>Full HD</li><li>縦横比自由設定</li><li>動画書き出し</li>
+          </ul>
+        </div>
+        <div class="feature-media">
+          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top: var(--space-xl);" class="reveal">
+        <a class="btn btn-outline" href="/features/" data-i18n="features.linkAll">すべての機能を見る</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="screenshots.eyebrow">App Preview</span>
+        <h2 data-i18n="screenshots.title">アプリ画面紹介</h2>
+      </div>
+      <div class="screenshot-scroller reveal">
+        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
+        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
+        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
+        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download">
+    <div class="container">
+      <div class="download-panel reveal">
+        <h2 data-i18n="download.title">NIARIMを、はじめよう。</h2>
+        <p data-i18n="download.body">あなたの手で描いた絵を、あなたの手でアニメーションにする。今すぐNIARIMをダウンロードして、物語を動かしはじめましょう。</p>
+        <div class="download-actions">
+          <a class="btn btn-accent" href="#" id="google-play-link" data-i18n="download.cta.googlePlay">Google Playで手に入れる</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+        <h2 data-i18n="faq.title">よくある質問</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q1">NIARIMとは、どんなアプリですか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a1">NIARIMは、自分で描いた絵を自分の手で動かし、アニメーション作品として制作できるスマートフォン向けアプリです。AIが自動で作品を生成する機能ではありません。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q2">無料で使えますか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a2">料金プランの詳細は、正式リリース時にGoogle Playのアプリページでご確認いただけます。[要確認]</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q3">対応端末を教えてください。</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a3">対応OS・対応端末の詳細は、Google Playのアプリページに記載の情報をご確認ください。[要確認]</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q4">作った作品を書き出せますか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a4">はい。Full HDまでの解像度、自由な縦横比で動画として書き出せます。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q5">作った作品を共有できますか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a5">書き出した動画ファイルを、お使いの端末やSNSアプリを通じて共有いただけます。アプリ内SNS機能の有無は正式リリース時の仕様をご確認ください。[要確認]</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q6">アカウント登録は必要ですか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a6">アカウントの要否については、正式リリース時の仕様をご確認ください。[要確認]</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span data-i18n="faq.q7">不具合や要望はどこに連絡すればいいですか？</span><span class="icon" aria-hidden="true"></span></button>
+          <div class="faq-answer"><p data-i18n="faq.a7">このサイトのお問い合わせフォームから、不具合報告・機能要望などをお送りください。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section final-cta">
+    <div class="container reveal">
+      <h2 data-i18n="cta.title">あなたの物語を、動かそう。</h2>
+      <p data-i18n="cta.body">NIARIMで、次のアニメーション作品をはじめましょう。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#download" data-i18n="hero.cta.primary">アプリをダウンロード</a>
+        <a class="btn btn-outline" href="/contact/" data-i18n="nav.contact">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <img src="/assets/images/logo/NIARIM_LOGO_PLACEHOLDER.svg" alt="NIARIM" width="32" height="32" />
+          <span>NIARIM</span>
+        </a>
+        <p data-i18n="footer.tagline">Animation made by your hands.</p>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.product">Product</h3>
+        <ul>
+          <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+          <li><a href="/#faq" data-i18n="nav.faq">よくある質問</a></li>
+          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.support">Support</h3>
+        <ul>
+          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <ul>
+          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
+          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
+      <div class="footer-social">
+        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/config.js"></script>
+<script src="/js/i18n-dict.js"></script>
+<script src="/js/i18n-dict-intl.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/animations.js"></script>
+<script>
+  (function () {
+    var c = window.NIARIM_CONFIG || {};
+    var play = document.getElementById("google-play-link");
+    if (play && c.GOOGLE_PLAY_URL) play.setAttribute("href", c.GOOGLE_PLAY_URL);
+    ["footer-x-link", "footer-x-icon"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && c.X_URL) {
+        el.setAttribute("href", c.X_URL);
+        el.removeAttribute("target");
+      }
+    });
+  })();
+</script>
+</body>
+</html>

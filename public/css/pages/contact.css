@@ -1,0 +1,179 @@
+/* ==========================================================================
+   NIARIM contact.css - お問い合わせページ専用スタイル
+   ========================================================================== */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.contact-intro h1 {
+  font-size: var(--fs-h1);
+}
+
+.contact-intro p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: 42ch;
+}
+
+.contact-channel {
+  margin-top: var(--space-xl);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tint);
+}
+
+.contact-channel h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-xs);
+}
+
+.contact-channel a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-xs);
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+.contact-form {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-row {
+  margin-bottom: var(--space-md);
+}
+
+.form-row label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-small);
+  margin-bottom: 0.5rem;
+}
+
+.form-row .required {
+  color: var(--color-accent);
+  margin-left: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-gray-300);
+  background: var(--color-white);
+  font-size: 1rem;
+  transition: border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.form-control:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 4px var(--color-sub-tint);
+}
+
+textarea.form-control {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.form-hint {
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.form-error {
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--color-error);
+  display: none;
+}
+
+.form-row.has-error .form-control {
+  border-color: var(--color-error);
+}
+
+.form-row.has-error .form-error {
+  display: block;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: var(--fs-small);
+}
+
+.form-checkbox input {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.1rem;
+  accent-color: var(--color-brand);
+  flex-shrink: 0;
+}
+
+.form-checkbox a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+
+/* honeypot: 通常ユーザーには見えない位置に隠す */
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+.form-status {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  display: none;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.is-success {
+  background: rgba(47, 158, 110, 0.1);
+  color: var(--color-success);
+}
+
+.form-status.is-error {
+  background: rgba(229, 72, 77, 0.1);
+  color: var(--color-error);
+}
+
+.form-status h2 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    padding: var(--space-lg);
+  }
+}

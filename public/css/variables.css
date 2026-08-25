@@ -1,0 +1,86 @@
+/* ==========================================================================
+   NIARIM variables.css
+   ブランドカラー・タイポグラフィ・余白などのデザイントークン。
+   全ページで色とスペーシングの意味を統一するため、必ずここを参照する。
+   ========================================================================== */
+
+:root {
+  /* ---- Brand Colors ----
+     ベース: ブランドの主色（インディゴ系。創造性と信頼感を両立）
+     サブ  : ベースより淡いトーン。背景の淡色演出や補助要素に使用
+     アクセント: CTAや強調に限定して使用する差し色
+  */
+  --color-brand: #4b4acf;
+  --color-brand-dark: #3532a3;
+  --color-sub: #b9b7ff;
+  --color-sub-tint: #f1f0ff;
+  --color-accent: #ff6b4a;
+  --color-accent-dark: #e0532f;
+
+  /* ---- Neutral ---- */
+  --color-white: #ffffff;
+  --color-black: #121116;
+  --color-ink: #1a1a22;
+  --color-gray-900: #2a2a33;
+  --color-gray-700: #4d4d59;
+  --color-gray-500: #7b7b88;
+  --color-gray-300: #c7c7d1;
+  --color-gray-100: #eeeef3;
+  --color-gray-50: #f8f8fb;
+
+  /* ---- Surface / Background ---- */
+  --color-bg: var(--color-white);
+  --color-bg-tint: var(--color-sub-tint);
+  --color-bg-dark: var(--color-black);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-on-dark: var(--color-gray-50);
+  --color-border: var(--color-gray-100);
+
+  /* ---- Feedback ---- */
+  --color-success: #2f9e6e;
+  --color-error: #e5484d;
+
+  /* ---- Typography ---- */
+  --font-sans: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    sans-serif;
+  --font-serif: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+
+  --fs-hero: clamp(2.4rem, 6vw + 1rem, 5.2rem);
+  --fs-h1: clamp(2rem, 3.4vw + 1rem, 3.4rem);
+  --fs-h2: clamp(1.5rem, 2vw + 1rem, 2.4rem);
+  --fs-h3: clamp(1.2rem, 1.2vw + 1rem, 1.6rem);
+  --fs-body: clamp(1rem, 0.3vw + 0.9rem, 1.125rem);
+  --fs-small: 0.875rem;
+
+  /* ---- Spacing ---- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6.5rem;
+  --space-3xl: 9rem;
+
+  /* ---- Layout ---- */
+  --container-width: 1180px;
+  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 180ms;
+  --duration-base: 420ms;
+  --duration-slow: 800ms;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 2px 8px rgba(26, 26, 34, 0.06);
+  --shadow-md: 0 12px 32px rgba(26, 26, 34, 0.1);
+  --shadow-lg: 0 24px 64px rgba(26, 26, 34, 0.16);
+
+  --header-height: 72px;
+}

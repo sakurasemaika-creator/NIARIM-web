@@ -1,0 +1,477 @@
+/* ==========================================================================
+   NIARIM home.css - トップページ専用スタイル
+   ========================================================================== */
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: var(--space-2xl);
+  overflow: hidden;
+  background: radial-gradient(
+      120% 100% at 85% -10%,
+      var(--color-sub-tint) 0%,
+      transparent 55%
+    ),
+    var(--color-bg);
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.hero-copy .eyebrow {
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.05s forwards;
+}
+
+.hero-title {
+  font-size: var(--fs-hero);
+  line-height: 1.15;
+  color: var(--color-ink);
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.15s forwards;
+}
+
+.hero-title .accent {
+  color: var(--color-brand);
+}
+
+.hero-lead {
+  margin-top: var(--space-md);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 46ch;
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.3s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.42s forwards;
+}
+
+.hero-note {
+  margin-top: var(--space-sm);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.5s forwards;
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Hero visual: 手描きストロークが描かれ、フレームが切り替わる演出 */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--color-ink) 0%, #26243f 100%);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-visual .frame-mock {
+  position: relative;
+  width: 78%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.hero-visual .stroke-path {
+  fill: none;
+  stroke: var(--color-brand);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: draw-stroke 2.6s var(--ease-out) 0.4s infinite;
+}
+
+@keyframes draw-stroke {
+  0% {
+    stroke-dashoffset: 620;
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -620;
+    opacity: 0.4;
+  }
+}
+
+.hero-visual .timeline-mock {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 6%;
+  display: flex;
+  gap: 6px;
+}
+
+.hero-visual .timeline-mock span {
+  flex: 1;
+  height: 10px;
+  border-radius: 4px;
+  background: var(--color-gray-100);
+  animation: timeline-pulse 2.6s var(--ease-out) infinite;
+}
+
+.hero-visual .timeline-mock span:nth-child(1) {
+  animation-delay: 0s;
+}
+.hero-visual .timeline-mock span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.hero-visual .timeline-mock span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.hero-visual .timeline-mock span:nth-child(4) {
+  animation-delay: 0.45s;
+}
+.hero-visual .timeline-mock span:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+@keyframes timeline-pulse {
+  0%,
+  100% {
+    background: var(--color-gray-100);
+  }
+  50% {
+    background: var(--color-brand);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .stroke-path,
+  .hero-visual .timeline-mock span {
+    animation: none;
+  }
+  .hero-visual .stroke-path {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+    margin-inline: auto;
+  }
+}
+
+/* ---- Intro (NIARIMとは) ---- */
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.intro-card {
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.intro-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.intro-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--color-sub-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--color-brand);
+}
+
+.intro-card h3 {
+  margin-bottom: var(--space-xs);
+  font-size: var(--fs-h3);
+}
+
+.intro-card p {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 860px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Feature showcase ---- */
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  padding-block: var(--space-xl);
+}
+
+.feature-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feature-row.is-reverse .feature-media {
+  order: 2;
+}
+
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--space-md);
+}
+
+.feature-tags li {
+  font-size: var(--fs-small);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-sub-tint);
+  color: var(--color-brand-dark);
+}
+
+.feature-media {
+  aspect-ratio: 16 / 11;
+  border-radius: var(--radius-md);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-media .placeholder-label {
+  font-size: var(--fs-small);
+  color: var(--color-gray-300);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 860px) {
+  .feature-row,
+  .feature-row.is-reverse .feature-media {
+    grid-template-columns: 1fr;
+    order: initial;
+  }
+}
+
+/* ---- Screenshot gallery ---- */
+.screenshot-scroller {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--space-sm);
+  margin: 0 calc(var(--container-padding) * -1);
+  padding-inline: var(--container-padding);
+}
+
+.screenshot-scroller::-webkit-scrollbar {
+  height: 6px;
+}
+
+.screenshot-scroller::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: var(--radius-pill);
+}
+
+.screenshot-card {
+  flex: 0 0 auto;
+  width: min(72vw, 280px);
+  aspect-ratio: 9 / 19.5;
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  background: var(--color-ink);
+  border: 6px solid var(--color-ink);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.screenshot-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.screenshot-card .placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  background: var(--color-gray-50);
+  font-size: var(--fs-small);
+  text-align: center;
+  padding: var(--space-sm);
+}
+
+/* ---- Download CTA ---- */
+.download-panel {
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-ink), #2b2950);
+  color: var(--color-white);
+}
+
+.download-panel h2 {
+  font-size: var(--fs-h1);
+}
+
+.download-panel p {
+  margin-top: var(--space-sm);
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+.download-actions {
+  margin-top: var(--space-lg);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ---- FAQ accordion ---- */
+.faq-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.faq-question .icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.faq-question .icon::before,
+.faq-question .icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--color-ink);
+  transform: translate(-50%, -50%);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.faq-question .icon::before {
+  width: 14px;
+  height: 2px;
+}
+
+.faq-question .icon::after {
+  width: 2px;
+  height: 14px;
+}
+
+.faq-item.is-open .faq-question .icon::after {
+  transform: translate(-50%, -50%) rotate(90deg) scale(0);
+}
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--duration-base) var(--ease-out);
+}
+
+.faq-answer p {
+  padding-bottom: var(--space-md);
+  color: var(--color-text-muted);
+  max-width: 62ch;
+}
+
+/* ---- Final CTA ---- */
+.final-cta {
+  text-align: center;
+}
+
+.final-cta h2 {
+  font-size: var(--fs-h1);
+}
+
+.final-cta p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.final-cta .hero-actions {
+  justify-content: center;
+  animation: none;
+  opacity: 1;
+}
