@@ -6,6 +6,19 @@ NIARIMは、AIが自動で作品を生成するアプリではありません。
 
 表示言語は日本語・英語・簡体字中国語・繁体字中国語・韓国語・フランス語・スペイン語の7言語に対応しています。`public/js/i18n.js` によりページ内の文言をJavaScriptで切り替える方式で、URLパスは全言語共通です（`/`, `/features/`, `/contact/` など）。選択した言語は `localStorage` に保存され、次回訪問時も維持されます。
 
+## アプリ本体（NIARIMリポジトリ）との整合について
+
+本サイトのロゴ・プライバシーポリシー・利用規約・機能紹介は、NIARIMアプリ本体リポジトリ（`sakurasemaika-creator/NIARIM`、`dev_branch`）の実データを確認したうえで反映しています。
+
+- **ロゴ**: `public/assets/images/logo/app_logo.svg` は、アプリリポジトリの `assets/logo/app_logo.svg` をそのまま使用しています（favicon も同一データ）。
+- **配色**: `public/css/variables.css` のブランドカラーは、アプリのデフォルトUIテーマ（`lib/models/app_theme_preset.dart` の `accentColor #FF5C7A`）およびロゴの配色（`#4A4636`）に合わせています。
+- **プライバシーポリシー・利用規約**: `public/js/i18n-dict-legal.js` に、アプリ本体の `lib/l10n/app_*.arb`（7言語）に定義されている実際の条文をそのまま転記しています。アプリ側で既にAI翻訳・逆翻訳照合を経ていますが、専門家（弁護士等）による正式な法的確認は経ていない点はアプリ側と同様です。プライバシーポリシー第8条（お問い合わせ）のみ、アプリ側では連絡先未確定のプレースホルダーのままですが、本サイトには実際に機能するお問い合わせフォームがあるため、そちらへ案内する文言に差し替えています。
+- **機能紹介**: `public/js/i18n-dict-advanced.js` に、アプリの `lib/engine/`・`lib/models/` に実装が確認できる機能（オニオンスキン・トーン・スタンプ・定規・テキスト・フィルター・フォント管理・ウォーターマーク）を追加しています。逆に、コミュニティ（作品共有）機能はUI・ダミーデータのみでバックエンド未実装であることを確認したため、既存の通り「[要確認]」のままとし、実装済みと断定していません。
+- **FAQの訂正**: `public/js/i18n-dict-faq-fix.js` にて、当初「[要確認]」としていた2項目を、アプリの実データに基づき確定情報へ更新しました。
+  - 対応端末: `pubspec.yaml`（`description: Hand-drawn animation creation app for Android`）および利用規約第2条により、Android向け提供であることを確認済み
+  - アカウント要否: プライバシーポリシー第2条・利用規約第4条・第8条により、本アプリはサーバーへのデータ送信・アカウント機能を持たず、プロジェクトデータは端末内にのみ保存されることを確認済み（アカウント登録は不要）
+- 上記以外の未確定情報（料金プラン詳細、公式Xアカウント、Google Play URL等）は、意図的に「[要確認]」のまま維持しています。アプリ側に存在する将来の課金・広告に関する内部方針（`lib/config/monetization_gate.dart` 等）は、公開時期や税務上の判断を含む未確定の内部情報のため、本サイトには反映していません。
+
 ## ディレクトリ構成
 
 ```
@@ -20,7 +33,7 @@ NIARIM-web/
 │   ├── features/index.html
 │   ├── assets/
 │   │   ├── images/
-│   │   │   ├── logo/NIARIM_LOGO_PLACEHOLDER.svg   # 正式ロゴ確定後に差し替え
+│   │   │   ├── logo/app_logo.svg                   # NIARIMアプリ本体と共通の正式ロゴ
 │   │   │   ├── screenshots/                        # アプリ画面キャプチャ差し替え用
 │   │   │   └── ogp-default.png                     # OGP画像（プレースホルダー）
 │   │   ├── icons/              # favicon.svg / apple-touch-icon.png
@@ -143,11 +156,10 @@ npx wrangler kv namespace create RATE_LIMIT_KV
 - `public/js/config.js` の `GOOGLE_PLAY_URL`：Google Play公開URL確定後に差し替え
 - `public/js/config.js` の `X_URL`：公式Xアカウント確定後に差し替え
 - `public/js/config.js` の `CONTACT_EMAIL` / `SITE_URL`：本番ドメイン・問い合わせ受信アドレス確定後に差し替え（あわせて全ページの `og:url` / `canonical` / hreflang内の `https://niarim.example.com` も本番ドメインへ置換）
-- `public/assets/images/logo/NIARIM_LOGO_PLACEHOLDER.svg`：正式ロゴ・アプリアイコン確定後に差し替え
 - `public/assets/images/screenshots/` 配下：実際のアプリ画面キャプチャに差し替え（現在はプレースホルダ構造のみ）
 - `public/assets/images/ogp-default.png`：現在は単色のプレースホルダー画像。正式公開前に1200×630pxのブランドOGP画像へ差し替え、各ページの `og:image` / `twitter:image` を確認すること
 - `public/assets/icons/apple-touch-icon.png`：現在は単色のプレースホルダー画像。正式なアプリアイコンへ差し替え
-- FAQ・機能紹介ページ内の `[要確認]` 表記（対応OS、対応端末、アカウント要否、アプリ内共有機能の有無、料金プラン等）：正式リリース時の仕様確定後に更新
+- FAQ・機能紹介ページ内の `[要確認]` 表記（アプリ内共有機能の有無、料金プラン等）：正式リリース時の仕様確定後に更新（対応OS・アカウント要否は確定情報へ更新済み。上記「アプリ本体との整合について」参照）
 - `public/privacy/index.html` `public/terms/index.html` 内の `[要確認]` 表記（最終更新日、制作物の権利帰属、Cookie/アクセス解析の使用有無、準拠法・裁判管轄等）：法務の最終確認を経て更新
 - Cloudflare Turnstileの導入要否（現状はhoneypot + レート制限のみ。スパムが多い場合に追加検討）
 - 利用規約・プライバシーポリシーの法的最終確認（本サイトの内容はAIが一般的な条項として作成したものであり、専門家によるレビューを経ていません）

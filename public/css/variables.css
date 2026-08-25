@@ -6,21 +6,22 @@
 
 :root {
   /* ---- Brand Colors ----
-     ベース: ブランドの主色（インディゴ系。創造性と信頼感を両立）
-     サブ  : ベースより淡いトーン。背景の淡色演出や補助要素に使用
-     アクセント: CTAや強調に限定して使用する差し色
+     ベース: NIARIMロゴ（ペンの意匠）の配色（温かみのあるダークブラウン）
+     サブ  : アクセントより淡いコーラルトーン。背景の淡色演出や補助要素に使用
+     アクセント: NIARIMアプリの既定UIテーマ（レッド系プリセット）の差し色と統一
+                 (lib/models/app_theme_preset.dart の accentColor #FF5C7A)
   */
-  --color-brand: #4b4acf;
-  --color-brand-dark: #3532a3;
-  --color-sub: #b9b7ff;
-  --color-sub-tint: #f1f0ff;
-  --color-accent: #ff6b4a;
-  --color-accent-dark: #e0532f;
+  --color-brand: #4a4636;
+  --color-brand-dark: #322f24;
+  --color-sub: #ffc3ce;
+  --color-sub-tint: #fff2f4;
+  --color-accent: #ff5c7a;
+  --color-accent-dark: #e8425f;
 
   /* ---- Neutral ---- */
   --color-white: #ffffff;
-  --color-black: #121116;
-  --color-ink: #1a1a22;
+  --color-black: #17161c;
+  --color-ink: #2b2730;
   --color-gray-900: #2a2a33;
   --color-gray-700: #4d4d59;
   --color-gray-500: #7b7b88;
