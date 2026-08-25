@@ -7,8 +7,14 @@
  *
  * 法的文書(プライバシーポリシー・利用規約)の本文自体はここでは翻訳せず、
  * 日本語を正本としてHTMLに直接記述し、他言語では案内バナーのみ表示する。
+ *
+ * 他の i18n-dict-*.js と同様、既存のDICTへキーをマージする方式にしている
+ * （<script>の読み込み順に依存して既存の翻訳を丸ごと上書きしないため）。
  */
-window.NIARIM_I18N_DICT = {
+(function () {
+  "use strict";
+  var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
+  var BASE = {
   ja: {
     "nav.features": "機能",
     "nav.news": "お知らせ",
@@ -482,4 +488,8 @@ window.NIARIM_I18N_DICT = {
       "The page you're looking for may have been moved or removed. Please check the URL, or start again from the home page.",
     "error404.cta": "Back to home",
   },
-};
+  };
+  for (var lang in BASE) {
+    DICT[lang] = Object.assign(DICT[lang] || {}, BASE[lang]);
+  }
+})();

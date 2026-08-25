@@ -132,6 +132,11 @@ function validateInput(body) {
   return { ok: true, data: { type, name, email, message, agree } };
 }
 
+// 既知の制約: KVには compare-and-swap がないため、ここでのチェックと
+// recordSubmission()での書き込みはアトミックではない。同一IPから
+// ほぼ同時に複数リクエストが届いた場合、レート制限をすり抜ける可能性がある
+// （honeypot・入力バリデーションと合わせた多層防御の一部として許容している）。
+// 厳密な制御が必要になった場合はDurable Objectsへの置き換えを検討すること。
 async function isRateLimited(kv, clientIp) {
   const shortKey = `contact:short:${clientIp}`;
   const dailyKey = `contact:daily:${clientIp}`;

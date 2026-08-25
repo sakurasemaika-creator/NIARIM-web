@@ -155,7 +155,7 @@ npx wrangler kv namespace create RATE_LIMIT_KV
 
 - `public/js/config.js` の `GOOGLE_PLAY_URL`：Google Play公開URL確定後に差し替え
 - `public/js/config.js` の `X_URL`：公式Xアカウント確定後に差し替え
-- `public/js/config.js` の `CONTACT_EMAIL` / `SITE_URL`：本番ドメイン・問い合わせ受信アドレス確定後に差し替え（あわせて全ページの `og:url` / `canonical` / hreflang内の `https://niarim.example.com` も本番ドメインへ置換）
+- 本番ドメイン確定後、全ページの `og:url` / `canonical` 内の `https://niarim.example.com` を本番ドメインへ置換
 - `public/assets/images/screenshots/` 配下：実際のアプリ画面キャプチャに差し替え（現在はプレースホルダ構造のみ）
 - `public/assets/images/ogp-default.png`：現在は単色のプレースホルダー画像。正式公開前に1200×630pxのブランドOGP画像へ差し替え、各ページの `og:image` / `twitter:image` を確認すること
 - `public/assets/icons/apple-touch-icon.png`：現在は単色のプレースホルダー画像。正式なアプリアイコンへ差し替え

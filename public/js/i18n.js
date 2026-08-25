@@ -61,10 +61,7 @@
   function applyLang(lang) {
     if (!DICT[lang]) lang = "ja";
     document.documentElement.setAttribute("lang", lang);
-    document.documentElement.setAttribute(
-      "dir",
-      lang === "ar" ? "rtl" : "ltr"
-    );
+    // 対応7言語はすべて左から右書きのため dir は常に ltr で固定してよい。
 
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       el.textContent = t(lang, el.getAttribute("data-i18n"));
