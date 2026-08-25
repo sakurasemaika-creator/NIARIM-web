@@ -17,7 +17,13 @@ NIARIMは、AIが自動で作品を生成するアプリではありません。
 - **FAQの訂正**: `public/js/i18n-dict-faq-fix.js` にて、当初「[要確認]」としていた2項目を、アプリの実データに基づき確定情報へ更新しました。
   - 対応端末: `pubspec.yaml`（`description: Hand-drawn animation creation app for Android`）および利用規約第2条により、Android向け提供であることを確認済み
   - アカウント要否: プライバシーポリシー第2条・利用規約第4条・第8条により、本アプリはサーバーへのデータ送信・アカウント機能を持たず、プロジェクトデータは端末内にのみ保存されることを確認済み（アカウント登録は不要）
-- 上記以外の未確定情報（料金プラン詳細、公式Xアカウント、Google Play URL等）は、意図的に「[要確認]」のまま維持しています。アプリ側に存在する将来の課金・広告に関する内部方針（`lib/config/monetization_gate.dart` 等）は、公開時期や税務上の判断を含む未確定の内部情報のため、本サイトには反映していません。
+- 上記以外の未確定情報（具体的な料金額、公式Xアカウント、Google Play URL等）は、意図的に「[要確認]」のまま維持しています。アプリ側に存在する将来の課金・広告に関する内部方針（`lib/config/monetization_gate.dart` の公開時期・税務上の判断等）は、未確定の内部情報のため本サイトには反映していません。
+
+### NIARIMとはページ・使い方ガイドページの追加
+
+- **`/about/`（NIARIMとは）**: アプリの開発思想（AIに描かせない・低スペック端末対応・作り込みの自由度）、対応環境（`docs/AI設計書/01_プロジェクト概要.md` に基づく板タブ・液晶タブレット接続、Galaxy DeXモード・Sペン対応）、他のお絵描きアプリにはない特徴的な機能（ブレンドモード・クリッピング・共通レイヤー・自動塗り＋グラデーション塗り・投げ縄塗り／自由変形・メッシュ変形・筆圧カーブ等のブラシ設定・トーン塗り／ピクセルモード・カメラキーフレーム・レイヤーキーフレーム／レイヤーグループ・セーブツリー／ゴミ箱・独自共有＝引き継ぎ形式`.niashare`/`.niatra`・ワークスペース／ジェスチャー／ペン設定・26種のテーマカラー・約2,000書体のフォントライブラリ）を、`lib/engine/`・`lib/models/`・`lib/services/theme_service.dart` 等の実装確認に基づいて掲載しています（`i18n-dict-about.js`）。誠実な情報提供のため、現時点で搭載していない機能（AI自動生成・クラウド同期・ベクター描画・3D機能）も明記しています。
+- **`/help/`（使い方ガイド）**: アプリ内の「ヘルプ」画面（`lib/screens/help/help_screen.dart`）に定義されている68項目・11カテゴリの説明文を、`lib/l10n/app_*.arb`（7言語）からそのまま転記し、キーワード検索機能付きでウェブ上に再現しています（`i18n-dict-help.js`、`public/js/help.js`）。アプリ内ヘルプとほぼ同じ内容をウェブからも閲覧できるようにするためのものです。
+- FAQも実データに基づき更新：無料版でも動画書き出しを含む全ての基本制作機能が利用可能であること、板タブ・液晶タブレット接続やGalaxy DeXモード・Sペンに対応していることを追記しています。
 
 ## ディレクトリ構成
 
@@ -26,6 +32,8 @@ NIARIM-web/
 ├── public/                    # 静的アセット（Workers Static Assetsが配信）
 │   ├── index.html             # トップページ
 │   ├── 404.html
+│   ├── about/index.html        # NIARIMとは（コンセプト・対応環境・独自機能）
+│   ├── help/index.html         # 使い方ガイド（アプリ内ヘルプの再現、検索付き）
 │   ├── privacy/index.html
 │   ├── terms/index.html
 │   ├── contact/index.html
@@ -40,14 +48,21 @@ NIARIM-web/
 │   │   └── fonts/
 │   ├── css/
 │   │   ├── reset.css / variables.css / common.css
-│   │   └── pages/ (home.css / contact.css / legal.css / features.css / news.css)
+│   │   └── pages/ (home.css / contact.css / legal.css / features.css / news.css / about.css / help.css)
 │   └── js/
-│       ├── config.js           # サイト内の変更可能な値を集約（URL・メールアドレス等）
+│       ├── config.js           # サイト内の変更可能な値を集約（URL等）
 │       ├── i18n.js              # 多言語切り替えロジック
-│       ├── i18n-dict.js         # 翻訳辞書（日本語・英語）
+│       ├── i18n-dict.js         # 翻訳辞書（日本語・英語、共通nav/footer等）
 │       ├── i18n-dict-intl.js    # 翻訳辞書（簡体字中国語・繁体字中国語・韓国語・仏語・西語）
+│       ├── i18n-dict-nav-extra.js  # About/Guideナビ用の追加辞書（全ページ共通）
+│       ├── i18n-dict-legal.js      # プライバシーポリシー・利用規約辞書（/privacy/, /terms/ のみ）
+│       ├── i18n-dict-advanced.js   # 追加機能紹介辞書（/, /features/ のみ）
+│       ├── i18n-dict-faq-fix.js    # FAQ訂正辞書（/ のみ）
+│       ├── i18n-dict-about.js      # NIARIMとはページ辞書（/about/ のみ）
+│       ├── i18n-dict-help.js       # 使い方ガイド辞書（/help/ のみ）
 │       ├── main.js              # ヘッダー・メニュー・FAQアコーディオン
 │       ├── animations.js        # スクロールアニメーション（IntersectionObserver）
+│       ├── help.js              # 使い方ガイドのキーワード検索フィルタ
 │       └── contact.js           # お問い合わせフォーム送信ロジック
 ├── src/
 │   ├── index.js            # Workerエントリポイント（ルーティング）

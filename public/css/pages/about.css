@@ -1,0 +1,58 @@
+/* ==========================================================================
+   NIARIM about.css - NIARIMとはページ専用スタイル
+   （philosophy / spec-grid 等の基本レイアウトは home.css / features.css を再利用）
+   ========================================================================== */
+
+.about-hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-size: var(--fs-h1);
+}
+
+.about-hero p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: 62ch;
+  margin-inline: auto;
+}
+
+.about-not-supported {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+}
+
+.about-not-supported h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-sm);
+}
+
+.about-not-supported p {
+  color: var(--color-gray-700);
+  max-width: 68ch;
+}
+
+.about-cta {
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  background: linear-gradient(135deg, var(--color-ink), #2b2950);
+  color: var(--color-white);
+}
+
+.about-cta h2 {
+  font-size: var(--fs-h2);
+}
+
+.about-cta p {
+  margin-top: var(--space-sm);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.about-cta .btn {
+  margin-top: var(--space-lg);
+}
