@@ -16,8 +16,8 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var LEGAL = {
   "ja": {
-    "legal.notice.privacy": "本文はNIARIMアプリの正式なプライバシーポリシーと共通の内容です。日本語原文をAI翻訳し、逆翻訳による確認を行っていますが、専門家（弁護士等）による法的レビューは未了です。",
-    "legal.notice.terms": "本文はNIARIMアプリの正式な利用規約と共通の内容です（フォント・OSSライセンス等の記載を除く）。日本語原文をAI翻訳し、逆翻訳による確認を行っていますが、専門家（弁護士等）による法的レビューは未了です。",
+    "legal.notice.privacy": "本文はNIARIMアプリの正式なプライバシーポリシーと共通の内容です。多言語対応のため翻訳しておりますが、専門家（弁護士等）による法的レビューは未了です。",
+    "legal.notice.terms": "本文はNIARIMアプリの正式な利用規約と共通の内容です（フォント・OSSライセンス等の記載を除く）。多言語対応のため翻訳しておりますが、専門家（弁護士等）による法的レビューは未了です。",
     "legal.privacy.art1.title": "第1条（本ポリシーの位置づけ）",
     "legal.privacy.art1.body": "このプライバシーポリシー（以下「本ポリシー」といいます。）は、本アプリ「NIARIM」（以下「本アプリ」といいます。）における情報の取扱いについて定めるものです。本アプリの利用条件全般については別途「利用規約・ライセンス」画面をご確認ください。",
     "legal.privacy.art2.title": "第2条（本アプリが取得しないデータ）",
@@ -60,8 +60,8 @@
     "legal.terms.art12.body": "1. 本規約の解釈にあたっては、日本法を準拠法とします。\n2. 本アプリに関して紛争が生じた場合には、訴額に応じて開発者の所在地を管轄する地方裁判所または簡易裁判所を第一審の専属的合意管轄裁判所とします。"
   },
   "en": {
-    "legal.notice.privacy": "This text is shared with the official Privacy Policy inside the NIARIM app. The Japanese original was translated by AI and checked via back-translation, but has not yet undergone legal review by a professional (such as a lawyer).",
-    "legal.notice.terms": "This text is shared with the official Terms of Service inside the NIARIM app (excluding font/OSS license credits). The Japanese original was translated by AI and checked via back-translation, but has not yet undergone legal review by a professional (such as a lawyer).",
+    "legal.notice.privacy": "This text is shared with the official Privacy Policy inside the NIARIM app. It has been translated for multilingual support, but has not yet undergone legal review by a professional (such as a lawyer).",
+    "legal.notice.terms": "This text is shared with the official Terms of Service inside the NIARIM app (excluding font/OSS license credits). It has been translated for multilingual support, but has not yet undergone legal review by a professional (such as a lawyer).",
     "legal.privacy.art1.title": "Article 1 (Purpose of This Policy)",
     "legal.privacy.art1.body": "This Privacy Policy (the \"Policy\") sets out how information is handled in the app \"NIARIM\" (the \"App\"). For the general terms of use of the App, please refer separately to the \"Terms of Service / License\" screen.",
     "legal.privacy.art2.title": "Article 2 (Data the App Does Not Collect)",
@@ -104,8 +104,8 @@
     "legal.terms.art12.body": "1. These Terms shall be governed by and construed in accordance with the laws of Japan.\n2. In the event a dispute arises in connection with the App, the district court or summary court having jurisdiction over the developer's place of business, depending on the amount in dispute, shall have exclusive agreed jurisdiction as the court of first instance."
   },
   "zh-Hans": {
-    "legal.notice.privacy": "本文与NIARIM应用内的正式隐私政策内容相同。日文原文由AI翻译并通过回译进行了核对，但尚未经过专业人士（律师等）的法律审查。",
-    "legal.notice.terms": "本文与NIARIM应用内的正式使用条款内容相同（不含字体/开源许可等信息）。日文原文由AI翻译并通过回译进行了核对，但尚未经过专业人士（律师等）的法律审查。",
+    "legal.notice.privacy": "本文与NIARIM应用内的正式隐私政策内容相同。为提供多语言版本进行了翻译，但尚未经过专业人士（律师等）的法律审查。",
+    "legal.notice.terms": "本文与NIARIM应用内的正式使用条款内容相同（不含字体/开源许可等信息）。为提供多语言版本进行了翻译，但尚未经过专业人士（律师等）的法律审查。",
     "legal.privacy.art1.title": "第1条（本政策的定位）",
     "legal.privacy.art1.body": "本隐私政策（以下称「本政策」）规定了本应用「NIARIM」（以下称「本应用」）中信息的处理方式。有关本应用使用条件的整体内容，请另行参阅「使用条款・许可」画面。",
     "legal.privacy.art2.title": "第2条（本应用不会获取的数据）",
@@ -148,8 +148,8 @@
     "legal.terms.art12.body": "1. 本条款的解释以日本法为准据法。\n2. 若因本应用产生纠纷，根据诉讼标的额，以管辖开发者所在地的地方法院或简易法院作为第一审的专属合意管辖法院。"
   },
   "zh-Hant": {
-    "legal.notice.privacy": "本文與NIARIM應用程式內的正式隱私政策內容相同。日文原文由AI翻譯並透過回譯進行核對，但尚未經過專業人士（律師等）的法律審查。",
-    "legal.notice.terms": "本文與NIARIM應用程式內的正式使用條款內容相同（不含字型/開源授權等資訊）。日文原文由AI翻譯並透過回譯進行核對，但尚未經過專業人士（律師等）的法律審查。",
+    "legal.notice.privacy": "本文與NIARIM應用程式內的正式隱私政策內容相同。為提供多語言版本進行了翻譯，但尚未經過專業人士（律師等）的法律審查。",
+    "legal.notice.terms": "本文與NIARIM應用程式內的正式使用條款內容相同（不含字型/開源授權等資訊）。為提供多語言版本進行了翻譯，但尚未經過專業人士（律師等）的法律審查。",
     "legal.privacy.art1.title": "第1條（本政策之定位）",
     "legal.privacy.art1.body": "本隱私權政策（以下稱「本政策」）規定本應用程式「NIARIM」（以下稱「本應用程式」）就資訊之處理方式。關於本應用程式使用條件之整體內容，請另行參閱「使用條款・授權」畫面。",
     "legal.privacy.art2.title": "第2條（本應用程式不蒐集之資料）",
@@ -192,8 +192,8 @@
     "legal.terms.art12.body": "1. 本條款之解釋以日本法為準據法。\n2. 因本應用程式發生紛爭時，依訴訟標的額，以管轄開發者所在地之地方法院或簡易法院為第一審之專屬合意管轄法院。"
   },
   "ko": {
-    "legal.notice.privacy": "본문은 NIARIM 앱 내 공식 개인정보처리방침과 동일한 내용입니다. 일본어 원문을 AI로 번역하고 역번역으로 확인했으나, 전문가(변호사 등)의 법적 검토는 아직 완료되지 않았습니다.",
-    "legal.notice.terms": "본문은 NIARIM 앱 내 공식 이용약관과 동일한 내용입니다（폰트・OSS 라이선스 등 표기는 제외）. 일본어 원문을 AI로 번역하고 역번역으로 확인했으나, 전문가(변호사 등)의 법적 검토는 아직 완료되지 않았습니다.",
+    "legal.notice.privacy": "본문은 NIARIM 앱 내 공식 개인정보처리방침과 동일한 내용입니다. 다국어 지원을 위해 번역하였으나, 전문가(변호사 등)의 법적 검토는 아직 완료되지 않았습니다.",
+    "legal.notice.terms": "본문은 NIARIM 앱 내 공식 이용약관과 동일한 내용입니다（폰트・OSS 라이선스 등 표기는 제외）. 다국어 지원을 위해 번역하였으나, 전문가(변호사 등)의 법적 검토는 아직 완료되지 않았습니다.",
     "legal.privacy.art1.title": "제1조（본 정책의 위치）",
     "legal.privacy.art1.body": "본 개인정보처리방침（이하「본 방침」이라 합니다）은 본 앱「NIARIM」（이하「본 앱」이라 합니다）에서의 정보 취급에 대해 정하는 것입니다. 본 앱의 전반적인 이용 조건에 대해서는 별도로「이용약관・라이선스」화면을 확인해 주십시오.",
     "legal.privacy.art2.title": "제2조（본 앱이 취득하지 않는 데이터）",
@@ -236,8 +236,8 @@
     "legal.terms.art12.body": "1. 본 약관의 해석에 있어서는 일본법을 준거법으로 합니다.\n2. 본 앱에 관하여 분쟁이 발생한 경우에는, 소송가액에 따라 개발자의 소재지를 관할하는 지방재판소 또는 간이재판소를 제1심의 전속적 합의관할 법원으로 합니다."
   },
   "fr": {
-    "legal.notice.privacy": "Ce texte est identique à la politique de confidentialité officielle de l'application NIARIM. Le texte original en japonais a été traduit par IA et vérifié par rétrotraduction, mais n'a pas encore fait l'objet d'une revue juridique par un professionnel (avocat, etc.).",
-    "legal.notice.terms": "Ce texte est identique aux conditions d'utilisation officielles de l'application NIARIM (à l'exclusion des mentions de polices/licences open source). Le texte original en japonais a été traduit par IA et vérifié par rétrotraduction, mais n'a pas encore fait l'objet d'une revue juridique par un professionnel (avocat, etc.).",
+    "legal.notice.privacy": "Ce texte est identique à la politique de confidentialité officielle de l'application NIARIM. Il a été traduit pour une prise en charge multilingue, mais n'a pas encore fait l'objet d'une revue juridique par un professionnel (avocat, etc.).",
+    "legal.notice.terms": "Ce texte est identique aux conditions d'utilisation officielles de l'application NIARIM (à l'exclusion des mentions de polices/licences open source). Il a été traduit pour une prise en charge multilingue, mais n'a pas encore fait l'objet d'une revue juridique par un professionnel (avocat, etc.).",
     "legal.privacy.art1.title": "Article 1 (Objet de la présente Politique)",
     "legal.privacy.art1.body": "La présente politique de confidentialité (la « Politique ») décrit la manière dont les informations sont traitées dans l'application « NIARIM » (l'« Application »). Pour les conditions générales d'utilisation de l'Application, veuillez vous référer séparément à l'écran « Conditions d'utilisation / Licence ».",
     "legal.privacy.art2.title": "Article 2 (Données que l'Application ne collecte pas)",
@@ -280,8 +280,8 @@
     "legal.terms.art12.body": "1. Les présentes Conditions sont régies et interprétées conformément au droit japonais.\n2. En cas de litige relatif à l'Application, le tribunal de district ou le tribunal sommaire compétent pour le lieu d'établissement du développeur, selon le montant en litige, disposera d'une compétence exclusive convenue en tant que juridiction de première instance."
   },
   "es": {
-    "legal.notice.privacy": "Este texto es el mismo que la política de privacidad oficial dentro de la app NIARIM. El texto original en japonés fue traducido por IA y verificado mediante retrotraducción, pero aún no ha sido revisado legalmente por un profesional (abogado, etc.).",
-    "legal.notice.terms": "Este texto es el mismo que los términos de servicio oficiales dentro de la app NIARIM (excluyendo los créditos de fuentes/licencias de código abierto). El texto original en japonés fue traducido por IA y verificado mediante retrotraducción, pero aún no ha sido revisado legalmente por un profesional (abogado, etc.).",
+    "legal.notice.privacy": "Este texto es el mismo que la política de privacidad oficial dentro de la app NIARIM. Se ha traducido para ofrecer soporte multilingüe, pero aún no ha sido revisado legalmente por un profesional (abogado, etc.).",
+    "legal.notice.terms": "Este texto es el mismo que los términos de servicio oficiales dentro de la app NIARIM (excluyendo los créditos de fuentes/licencias de código abierto). Se ha traducido para ofrecer soporte multilingüe, pero aún no ha sido revisado legalmente por un profesional (abogado, etc.).",
     "legal.privacy.art1.title": "Artículo 1 (Finalidad de esta Política)",
     "legal.privacy.art1.body": "Esta política de privacidad (la «Política») describe el tratamiento de la información en la aplicación «NIARIM» (la «Aplicación»). Para conocer las condiciones generales de uso de la Aplicación, consulte por separado la pantalla «Términos de servicio / Licencia».",
     "legal.privacy.art2.title": "Artículo 2 (Datos que la Aplicación no recopila)",

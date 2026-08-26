@@ -32,7 +32,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "关于 NIARIM",
     "intro.lead":
-      "NIARIM 并非由 AI 自动生成作品的应用，而是一款帮助你亲手将自己绘制的画面变成动画的创作应用。",
+      "为你亲手绘制的每一张画注入生命——从下笔的那一刻，到让它动起来、完成作品，全部由你亲手完成。",
     "intro.card1.title": "Drawing 绘画",
     "intro.card1.body": "多种画笔，配合颜色、透明度、缩放等设置，精心打磨每一个绘制环节。",
     "intro.card2.title": "Animation 动画",
@@ -68,18 +68,18 @@
     "faq.title": "常见问题",
     "faq.q1": "NIARIM 是一款怎样的应用？",
     "faq.a1":
-      "NIARIM 是一款让你亲手绘制并让画面动起来、制作动画作品的手机应用，并非由 AI 自动生成作品的功能。",
+      "NIARIM 是一款让你亲手绘制并让画面动起来、制作动画作品的手机应用。",
     "faq.q2": "可以免费使用吗？",
-    "faq.a2": "具体资费信息将在正式上线时于 Google Play 应用页面公布。【待确认】",
+    "faq.a2": "具体资费信息将在正式上线时于 Google Play 应用页面公布。",
     "faq.q3": "支持哪些设备？",
-    "faq.a3": "支持的系统版本与设备信息，请以 Google Play 应用页面为准。【待确认】",
+    "faq.a3": "支持的系统版本与设备信息，请以 Google Play 应用页面为准。",
     "faq.q4": "可以导出制作好的作品吗？",
     "faq.a4": "可以。支持最高 Full HD 分辨率，并可自由设置画面比例导出视频。",
     "faq.q5": "可以分享制作好的作品吗？",
     "faq.a5":
-      "导出的视频文件可以通过设备或其他应用进行分享。应用内是否内置分享功能，请以正式上线时的规格为准。【待确认】",
+      "导出的视频文件可以通过设备或其他应用进行分享。应用内是否内置分享功能，请以正式上线时的规格为准。",
     "faq.q6": "需要注册账号吗？",
-    "faq.a6": "是否需要账号，请以正式上线时的规格为准。【待确认】",
+    "faq.a6": "是否需要账号，请以正式上线时的规格为准。",
     "faq.q7": "在哪里可以反馈问题或提出需求？",
     "faq.a7": "请通过本网站的联系表单，发送故障报告或功能需求。",
 
@@ -209,7 +209,7 @@
 
     "meta.privacy.title": "隐私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方网站及应用程序的隐私政策。",
-    "legal.updated": "最后更新日期：【待确认】",
+    "legal.updated": "最后更新日期：2026年8月26日",
     "legal.notice.privacy": "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
     "legal.notice.terms": "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
 
@@ -249,7 +249,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "關於 NIARIM",
     "intro.lead":
-      "NIARIM 並非由 AI 自動生成作品的應用，而是一款協助你親手將自己繪製的畫面變成動畫的創作應用。",
+      "為你親手繪製的每一張畫注入生命——從下筆的那一刻，到讓它動起來、完成作品，全部由你親手完成。",
     "intro.card1.title": "Drawing 繪畫",
     "intro.card1.body": "多種畫筆，搭配顏色、透明度、縮放等設定，用心打磨每一個繪製環節。",
     "intro.card2.title": "Animation 動畫",
@@ -285,18 +285,18 @@
     "faq.title": "常見問題",
     "faq.q1": "NIARIM 是一款怎樣的應用程式？",
     "faq.a1":
-      "NIARIM 是一款讓你親手繪製並讓畫面動起來、製作動畫作品的手機應用程式，並非由 AI 自動生成作品的功能。",
+      "NIARIM 是一款讓你親手繪製並讓畫面動起來、製作動畫作品的手機應用程式。",
     "faq.q2": "可以免費使用嗎？",
-    "faq.a2": "具體資費資訊將於正式上線時在 Google Play 應用程式頁面公布。【待確認】",
+    "faq.a2": "具體資費資訊將於正式上線時在 Google Play 應用程式頁面公布。",
     "faq.q3": "支援哪些裝置？",
-    "faq.a3": "支援的系統版本與裝置資訊，請以 Google Play 應用程式頁面為準。【待確認】",
+    "faq.a3": "支援的系統版本與裝置資訊，請以 Google Play 應用程式頁面為準。",
     "faq.q4": "可以匯出製作好的作品嗎？",
     "faq.a4": "可以。支援最高 Full HD 解析度，並可自由設定畫面比例匯出影片。",
     "faq.q5": "可以分享製作好的作品嗎？",
     "faq.a5":
-      "匯出的影片檔案可透過裝置或其他應用程式進行分享。應用程式內是否內建分享功能，請以正式上線時的規格為準。【待確認】",
+      "匯出的影片檔案可透過裝置或其他應用程式進行分享。應用程式內是否內建分享功能，請以正式上線時的規格為準。",
     "faq.q6": "需要註冊帳號嗎？",
-    "faq.a6": "是否需要帳號，請以正式上線時的規格為準。【待確認】",
+    "faq.a6": "是否需要帳號，請以正式上線時的規格為準。",
     "faq.q7": "哪裡可以回報問題或提出需求？",
     "faq.a7": "請透過本網站的聯絡表單，傳送問題回報或功能需求。",
 
@@ -426,7 +426,7 @@
 
     "meta.privacy.title": "隱私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私政策。",
-    "legal.updated": "最後更新日期：【待確認】",
+    "legal.updated": "最後更新日期：2026年8月26日",
     "legal.notice.privacy": "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
     "legal.notice.terms": "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
 
@@ -466,7 +466,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "NIARIM이란",
     "intro.lead":
-      "NIARIM은 AI가 자동으로 작품을 생성하는 앱이 아닙니다. 직접 그린 그림을 스스로의 손으로 애니메이션으로 움직여가는 제작 앱입니다.",
+      "당신이 그린 그림 한 장 한 장에 직접 생명을 불어넣으세요. 선을 긋는 순간부터 움직이고 완성하기까지, 모든 과정을 당신의 손으로 완결하는 제작 앱입니다.",
     "intro.card1.title": "Drawing 드로잉",
     "intro.card1.body": "다양한 브러시와 색상, 투명도, 확대·축소까지, 그리는 과정을 세심하게 다듬었습니다.",
     "intro.card2.title": "Animation 애니메이션",
@@ -502,18 +502,18 @@
     "faq.title": "자주 묻는 질문",
     "faq.q1": "NIARIM은 어떤 앱인가요?",
     "faq.a1":
-      "NIARIM은 직접 그린 그림을 스스로 움직여 애니메이션 작품으로 만들 수 있는 스마트폰 앱입니다. AI가 자동으로 작품을 생성하는 기능이 아닙니다.",
+      "NIARIM은 직접 그린 그림을 스스로 움직여 애니메이션 작품으로 만들 수 있는 스마트폰 앱입니다.",
     "faq.q2": "무료로 사용할 수 있나요?",
-    "faq.a2": "요금 플랜에 대한 자세한 내용은 정식 출시 시 Google Play 앱 페이지에서 확인하실 수 있습니다. [확인 필요]",
+    "faq.a2": "요금 플랜에 대한 자세한 내용은 정식 출시 시 Google Play 앱 페이지에서 확인하실 수 있습니다.",
     "faq.q3": "지원 기기를 알려주세요.",
-    "faq.a3": "지원 OS 및 기기에 대한 자세한 내용은 Google Play 앱 페이지의 정보를 확인해 주세요. [확인 필요]",
+    "faq.a3": "지원 OS 및 기기에 대한 자세한 내용은 Google Play 앱 페이지의 정보를 확인해 주세요.",
     "faq.q4": "제작한 작품을 내보낼 수 있나요?",
     "faq.a4": "네. Full HD까지의 해상도, 자유로운 화면 비율로 영상으로 내보낼 수 있습니다.",
     "faq.q5": "제작한 작품을 공유할 수 있나요?",
     "faq.a5":
-      "내보낸 영상 파일을 사용 중인 기기나 SNS 앱을 통해 공유하실 수 있습니다. 앱 내 SNS 기능 유무는 정식 출시 시 사양을 확인해 주세요. [확인 필요]",
+      "내보낸 영상 파일을 사용 중인 기기나 SNS 앱을 통해 공유하실 수 있습니다. 앱 내 SNS 기능 유무는 정식 출시 시 사양을 확인해 주세요.",
     "faq.q6": "계정 등록이 필요한가요?",
-    "faq.a6": "계정 필요 여부는 정식 출시 시 사양을 확인해 주세요. [확인 필요]",
+    "faq.a6": "계정 필요 여부는 정식 출시 시 사양을 확인해 주세요.",
     "faq.q7": "오류나 요청 사항은 어디로 연락하면 되나요?",
     "faq.a7": "이 사이트의 문의 양식을 통해 오류 신고나 기능 요청 등을 보내 주세요.",
 
@@ -643,7 +643,7 @@
 
     "meta.privacy.title": "개인정보처리방침 | NIARIM",
     "meta.privacy.description": "NIARIM 공식 사이트 및 앱의 개인정보처리방침입니다.",
-    "legal.updated": "최종 업데이트: [확인 필요]",
+    "legal.updated": "최종 업데이트: 2026년 8월 26일",
     "legal.notice.privacy": "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
     "legal.notice.terms": "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
 
@@ -684,7 +684,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "Qu'est-ce que NIARIM",
     "intro.lead":
-      "NIARIM ne génère pas d'illustrations automatiquement par IA. C'est une application de création conçue pour transformer les images que vous dessinez en animation, de vos propres mains.",
+      "Donnez vie, de vos propres mains, à chaque image que vous dessinez. Du premier trait jusqu'à l'animation finale, tout se fait avec vos mains.",
     "intro.card1.title": "Drawing (Dessin)",
     "intro.card1.body":
       "Plusieurs pinceaux, ainsi que la couleur, l'opacité, le zoom et le panoramique : chaque étape du dessin est soignée.",
@@ -725,21 +725,21 @@
     "faq.title": "Questions fréquentes",
     "faq.q1": "Quel type d'application est NIARIM ?",
     "faq.a1":
-      "NIARIM est une application mobile permettant de créer une animation à partir de dessins que vous réalisez et animez vous-même. Elle ne génère pas d'illustrations automatiquement par IA.",
+      "NIARIM est une application mobile permettant de créer une animation à partir de dessins que vous réalisez et animez vous-même.",
     "faq.q2": "Est-ce gratuit ?",
     "faq.a2":
-      "Les détails tarifaires seront disponibles sur la fiche Google Play lors du lancement officiel. [À confirmer]",
+      "Les détails tarifaires seront disponibles sur la fiche Google Play lors du lancement officiel.",
     "faq.q3": "Quels appareils sont compatibles ?",
     "faq.a3":
-      "Veuillez consulter la fiche Google Play pour connaître les systèmes et appareils compatibles. [À confirmer]",
+      "Veuillez consulter la fiche Google Play pour connaître les systèmes et appareils compatibles.",
     "faq.q4": "Puis-je exporter ce que j'ai créé ?",
     "faq.a4":
       "Oui. Vous pouvez exporter votre travail en vidéo, jusqu'à une résolution Full HD, avec un rapport d'aspect librement configurable.",
     "faq.q5": "Puis-je partager ce que j'ai créé ?",
     "faq.a5":
-      "Vous pouvez partager vos fichiers vidéo exportés via votre appareil ou d'autres applications. La présence d'une fonction de partage intégrée sera confirmée lors du lancement officiel. [À confirmer]",
+      "Vous pouvez partager vos fichiers vidéo exportés via votre appareil ou d'autres applications. La présence d'une fonction de partage intégrée sera confirmée lors du lancement officiel.",
     "faq.q6": "Dois-je créer un compte ?",
-    "faq.a6": "Veuillez vous référer aux spécifications du lancement officiel à ce sujet. [À confirmer]",
+    "faq.a6": "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
     "faq.q7": "Où puis-je signaler un bug ou demander une fonctionnalité ?",
     "faq.a7":
       "Veuillez utiliser le formulaire de contact de ce site pour envoyer un signalement de bug ou une demande de fonctionnalité.",
@@ -876,7 +876,7 @@
 
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
     "meta.privacy.description": "La politique de confidentialité du site officiel et de l'application NIARIM.",
-    "legal.updated": "Dernière mise à jour : [À confirmer]",
+    "legal.updated": "Dernière mise à jour : 26 août 2026",
     "legal.notice.privacy":
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
     "legal.notice.terms":
@@ -920,7 +920,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "Qué es NIARIM",
     "intro.lead":
-      "NIARIM no genera ilustraciones automáticamente con IA. Es una app de creación diseñada para convertir los dibujos que haces en animación, con tus propias manos.",
+      "Dale vida, con tus propias manos, a cada dibujo que haces. Desde el primer trazo hasta la animación terminada, todo el proceso lo completas tú.",
     "intro.card1.title": "Drawing (Dibujo)",
     "intro.card1.body":
       "Varios pinceles, además de color, opacidad, zoom y desplazamiento: cada paso del dibujo está cuidado al detalle.",
@@ -961,21 +961,21 @@
     "faq.title": "Preguntas frecuentes",
     "faq.q1": "¿Qué tipo de app es NIARIM?",
     "faq.a1":
-      "NIARIM es una app móvil para crear animación a partir de dibujos que haces y mueves tú mismo. No genera ilustraciones automáticamente con IA.",
+      "NIARIM es una app móvil para crear animación a partir de dibujos que haces y mueves tú mismo.",
     "faq.q2": "¿Es gratis?",
     "faq.a2":
-      "Los detalles de precios estarán disponibles en la ficha de Google Play en el lanzamiento oficial. [Por confirmar]",
+      "Los detalles de precios estarán disponibles en la ficha de Google Play en el lanzamiento oficial.",
     "faq.q3": "¿Qué dispositivos son compatibles?",
     "faq.a3":
-      "Consulta la ficha de Google Play para conocer los sistemas y dispositivos compatibles. [Por confirmar]",
+      "Consulta la ficha de Google Play para conocer los sistemas y dispositivos compatibles.",
     "faq.q4": "¿Puedo exportar lo que he creado?",
     "faq.a4":
       "Sí. Puedes exportar tu trabajo como video, hasta resolución Full HD, con una relación de aspecto configurable libremente.",
     "faq.q5": "¿Puedo compartir lo que he creado?",
     "faq.a5":
-      "Puedes compartir tus archivos de video exportados a través de tu dispositivo u otras apps. La existencia de una función de compartir dentro de la app se confirmará en el lanzamiento oficial. [Por confirmar]",
+      "Puedes compartir tus archivos de video exportados a través de tu dispositivo u otras apps. La existencia de una función de compartir dentro de la app se confirmará en el lanzamiento oficial.",
     "faq.q6": "¿Necesito crear una cuenta?",
-    "faq.a6": "Consulta las especificaciones del lanzamiento oficial al respecto. [Por confirmar]",
+    "faq.a6": "Consulta las especificaciones del lanzamiento oficial al respecto.",
     "faq.q7": "¿Dónde puedo reportar un error o solicitar una función?",
     "faq.a7":
       "Utiliza el formulario de contacto de este sitio para enviar reportes de errores o solicitudes de funciones.",
@@ -1112,7 +1112,7 @@
 
     "meta.privacy.title": "Política de privacidad | NIARIM",
     "meta.privacy.description": "La política de privacidad del sitio oficial y la app de NIARIM.",
-    "legal.updated": "Última actualización: [Por confirmar]",
+    "legal.updated": "Última actualización: 26 de agosto de 2026",
     "legal.notice.privacy":
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
     "legal.notice.terms":

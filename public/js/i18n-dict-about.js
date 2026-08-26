@@ -56,8 +56,6 @@
     "about.unique.item7.title": "みんなの作品を見る",
     "about.unique.item7.body": "投稿された作品を新着・ランキングから発見できるコミュニティ機能です。閲覧はログイン不要で、誰でも気軽に楽しめます。",
     "about.unique.item7.link": "コミュニティページを見る",
-    "about.notSupported.title": "現時点で搭載していない機能について",
-    "about.notSupported.body": "誠実な情報提供のため、現時点で搭載していない機能も明記します。クラウド同期、ベクター描画、3D機能は搭載していません。ラスターベースの手描きアニメーション制作に特化しています。",
     "about.cta.title": "使い方をもっと詳しく知りたい方へ",
     "about.cta.body": "アプリ内のヘルプと同じ内容を、ウェブ上のガイドページでも検索・閲覧いただけます。",
     "about.cta.link": "使い方ガイドを見る"
@@ -103,8 +101,6 @@
     "about.unique.item7.title": "Community gallery",
     "about.unique.item7.body": "Discover posted works through new arrivals and rankings. Browsing requires no login, so anyone can enjoy it casually.",
     "about.unique.item7.link": "View the community page",
-    "about.notSupported.title": "What NIARIM does not currently offer",
-    "about.notSupported.body": "In the interest of accuracy, here's what NIARIM does not include: cloud sync, vector drawing, or 3D features. NIARIM is focused on raster-based, hand-drawn animation.",
     "about.cta.title": "Want to learn more about using NIARIM?",
     "about.cta.body": "Search and browse the same content as the app's built-in Help screen, right here on the web.",
     "about.cta.link": "View the guide"
@@ -150,8 +146,6 @@
     "about.unique.item7.title": "看看大家的作品",
     "about.unique.item7.body": "可通过新作与排行榜发现其他人投稿的作品。浏览无需登录，任何人都能轻松享受。",
     "about.unique.item7.link": "前往社区页面",
-    "about.notSupported.title": "目前尚未搭载的功能",
-    "about.notSupported.body": "为了如实说明，也在此列出目前尚未搭载的功能：云同步、矢量绘图、3D 功能均未搭载。NIARIM 专注于基于位图的手绘动画制作。",
     "about.cta.title": "想更详细了解使用方法？",
     "about.cta.body": "与应用内「帮助」画面相同的内容，也可以在网页版的指南页面中搜索、浏览。",
     "about.cta.link": "查看使用指南"
@@ -197,8 +191,6 @@
     "about.unique.item7.title": "看看大家的作品",
     "about.unique.item7.body": "可透過新作與排行榜發現其他人投稿的作品。瀏覽無需登入，任何人都能輕鬆享受。",
     "about.unique.item7.link": "前往社群頁面",
-    "about.notSupported.title": "目前尚未搭載的功能",
-    "about.notSupported.body": "為了如實說明，也在此列出目前尚未搭載的功能：雲端同步、向量繪圖、3D 功能均未搭載。NIARIM 專注於以點陣圖為基礎的手繪動畫製作。",
     "about.cta.title": "想更詳細了解使用方法？",
     "about.cta.body": "與應用程式內「說明」畫面相同的內容，也可以在網頁版的指南頁面中搜尋、瀏覽。",
     "about.cta.link": "查看使用指南"
@@ -244,8 +236,6 @@
     "about.unique.item7.title": "모두의 작품 보기",
     "about.unique.item7.body": "게시된 작품을 신작・랭킹에서 발견할 수 있는 커뮤니티 기능입니다. 열람은 로그인 없이 가능해 누구나 부담 없이 즐길 수 있습니다.",
     "about.unique.item7.link": "커뮤니티 페이지 보기",
-    "about.notSupported.title": "현재 탑재하지 않은 기능에 대해",
-    "about.notSupported.body": "정직한 정보 제공을 위해 현재 탑재하지 않은 기능도 명시합니다. 클라우드 동기화, 벡터 드로잉, 3D 기능은 탑재하지 않았습니다. 래스터 기반의 손그림 애니메이션 제작에 특화되어 있습니다.",
     "about.cta.title": "사용법을 더 자세히 알고 싶다면",
     "about.cta.body": "앱 내 도움말과 동일한 내용을 웹 가이드 페이지에서도 검색・열람하실 수 있습니다.",
     "about.cta.link": "이용 가이드 보기"
@@ -291,8 +281,6 @@
     "about.unique.item7.title": "Galerie de la communauté",
     "about.unique.item7.body": "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
     "about.unique.item7.link": "Voir la page communauté",
-    "about.notSupported.title": "Ce que NIARIM ne propose pas actuellement",
-    "about.notSupported.body": "Par souci d'exactitude, voici ce que NIARIM n'inclut pas : synchronisation cloud, dessin vectoriel ou fonctions 3D. NIARIM se concentre sur l'animation dessinée à la main, en mode raster.",
     "about.cta.title": "Vous voulez en savoir plus sur l'utilisation de NIARIM ?",
     "about.cta.body": "Retrouvez ici, sur le web, le même contenu que l'écran d'aide intégré à l'application.",
     "about.cta.link": "Voir le guide"
@@ -338,8 +326,6 @@
     "about.unique.item7.title": "Galería de la comunidad",
     "about.unique.item7.body": "Descubre las obras publicadas mediante novedades y clasificaciones. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",
     "about.unique.item7.link": "Ver la página de la comunidad",
-    "about.notSupported.title": "Lo que NIARIM no ofrece actualmente",
-    "about.notSupported.body": "Por transparencia, esto es lo que NIARIM no incluye: sincronización en la nube, dibujo vectorial o funciones 3D. NIARIM se centra en la animación dibujada a mano basada en mapa de bits.",
     "about.cta.title": "¿Quieres saber más sobre cómo usar NIARIM?",
     "about.cta.body": "Consulta aquí, en la web, el mismo contenido que la pantalla de ayuda integrada en la app.",
     "about.cta.link": "Ver la guía"

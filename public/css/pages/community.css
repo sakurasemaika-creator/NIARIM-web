@@ -57,13 +57,6 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-white);
-  transition: transform var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
-}
-
-.community-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
 }
 
 .community-card .thumb {
@@ -87,6 +80,31 @@
   font-weight: 700;
   padding: 0.2rem 0.6rem;
   border-radius: var(--radius-pill);
+}
+
+/* TOP3は金・銀・銅のメダルカラーで強調（ibisPaintのランキングページ等を参照） */
+.community-gallery .community-card:nth-child(1) {
+  border-color: #ffd76a;
+  box-shadow: 0 0 0 2px #ffd76a, var(--shadow-md);
+}
+
+.community-gallery .community-card:nth-child(1) .rank-badge {
+  background: var(--grad-gold);
+  color: var(--color-brand-dark);
+}
+
+.community-gallery .community-card:nth-child(1) .rank-badge::before {
+  content: "👑 ";
+}
+
+.community-gallery .community-card:nth-child(2) .rank-badge {
+  background: linear-gradient(120deg, #e3e6ee, #b9c0cf);
+  color: var(--color-ink);
+}
+
+.community-gallery .community-card:nth-child(3) .rank-badge {
+  background: linear-gradient(120deg, #e3a97a, #b9773f);
+  color: var(--color-white);
 }
 
 .community-card .meta {

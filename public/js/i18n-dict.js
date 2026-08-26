@@ -42,7 +42,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "NIARIMとは",
     "intro.lead":
-      "NIARIMは、AIが自動で作品を生成するアプリではありません。あなたが描いた絵を、あなた自身の手でアニメーションへと動かしていくための制作アプリです。",
+      "描いた絵の一枚一枚に、あなたの手で命を吹き込む。線を引く工程から動かし、仕上げるところまで、すべてをあなた自身の手で完結できる制作アプリです。",
     "intro.card1.title": "Drawing",
     "intro.card1.body":
       "Gペン・ペン・エアブラシなど複数のブラシと、色・透明度・ズームまで、描く工程にこだわりました。",
@@ -84,22 +84,22 @@
     "faq.title": "よくある質問",
     "faq.q1": "NIARIMとは、どんなアプリですか？",
     "faq.a1":
-      "NIARIMは、自分で描いた絵を自分の手で動かし、アニメーション作品として制作できるスマートフォン向けアプリです。AIが自動で作品を生成する機能ではありません。",
+      "NIARIMは、自分で描いた絵を自分の手で動かし、アニメーション作品として制作できるスマートフォン向けアプリです。",
     "faq.q2": "無料で使えますか？",
     "faq.a2":
-      "料金プランの詳細は、正式リリース時にGoogle Playのアプリページでご確認いただけます。[要確認]",
+      "料金プランの詳細は、正式リリース時にGoogle Playのアプリページでご確認いただけます。",
     "faq.q3": "対応端末を教えてください。",
     "faq.a3":
-      "対応OS・対応端末の詳細は、Google Playのアプリページに記載の情報をご確認ください。[要確認]",
+      "対応OS・対応端末の詳細は、Google Playのアプリページに記載の情報をご確認ください。",
     "faq.q4": "作った作品を書き出せますか？",
     "faq.a4":
       "はい。Full HDまでの解像度、自由な縦横比で動画として書き出せます。",
     "faq.q5": "作った作品を共有できますか？",
     "faq.a5":
-      "書き出した動画ファイルを、お使いの端末やSNSアプリを通じて共有いただけます。アプリ内SNS機能の有無は正式リリース時の仕様をご確認ください。[要確認]",
+      "書き出した動画ファイルを、お使いの端末やSNSアプリを通じて共有いただけます。アプリ内SNS機能の有無は正式リリース時の仕様をご確認ください。",
     "faq.q6": "アカウント登録は必要ですか？",
     "faq.a6":
-      "アカウントの要否については、正式リリース時の仕様をご確認ください。[要確認]",
+      "アカウントの要否については、正式リリース時の仕様をご確認ください。",
     "faq.q7": "不具合や要望はどこに連絡すればいいですか？",
     "faq.a7":
       "このサイトのお問い合わせフォームから、不具合報告・機能要望などをお送りください。",
@@ -236,7 +236,7 @@
 
     "meta.privacy.title": "プライバシーポリシー | NIARIM",
     "meta.privacy.description": "NIARIM公式サイトおよびアプリのプライバシーポリシーです。",
-    "legal.updated": "最終更新日：[要確認]",
+    "legal.updated": "最終更新日：2026年8月26日",
     "legal.notice.privacy":
       "この文書は日本語を正本としています。表示言語を変更した場合も、本文は日本語で表示されます。",
     "legal.notice.terms":
@@ -280,7 +280,7 @@
     "intro.eyebrow": "About NIARIM",
     "intro.title": "What is NIARIM",
     "intro.lead":
-      "NIARIM does not generate artwork automatically with AI. It's a creation app built for turning the pictures you draw into animation, with your own hands.",
+      "NIARIM lets you breathe life into every picture you draw, frame by frame — from the first line, to the motion, to the finished piece, all done with your own hands.",
     "intro.card1.title": "Drawing",
     "intro.card1.body":
       "Multiple brushes plus color, opacity, zoom, and pan — every drawing step is built with care.",
@@ -322,21 +322,21 @@
     "faq.title": "Frequently Asked Questions",
     "faq.q1": "What kind of app is NIARIM?",
     "faq.a1":
-      "NIARIM is a mobile app for creating animation from artwork you draw and move yourself. It does not automatically generate artwork with AI.",
+      "NIARIM is a mobile app for creating animation from artwork you draw and move yourself.",
     "faq.q2": "Is it free to use?",
     "faq.a2":
-      "Pricing details will be available on the Google Play listing at official launch. [To be confirmed]",
+      "Pricing details will be available on the Google Play listing at official launch.",
     "faq.q3": "Which devices are supported?",
     "faq.a3":
-      "Please check the Google Play listing for supported OS versions and devices. [To be confirmed]",
+      "Please check the Google Play listing for supported OS versions and devices.",
     "faq.q4": "Can I export what I've made?",
     "faq.a4":
       "Yes. You can export your work as video, up to Full HD, with a freely configurable aspect ratio.",
     "faq.q5": "Can I share what I've made?",
     "faq.a5":
-      "You can share your exported video files through your device or other apps. Whether an in-app sharing feature exists will be confirmed at official launch. [To be confirmed]",
+      "You can share your exported video files through your device or other apps. Whether an in-app sharing feature exists will be confirmed at official launch.",
     "faq.q6": "Do I need to create an account?",
-    "faq.a6": "Please check the official launch specification for this. [To be confirmed]",
+    "faq.a6": "Please check the official launch specification for this.",
     "faq.q7": "Where can I report a bug or request a feature?",
     "faq.a7": "Please use the contact form on this site to send bug reports or feature requests.",
 
@@ -472,7 +472,7 @@
 
     "meta.privacy.title": "Privacy Policy | NIARIM",
     "meta.privacy.description": "The privacy policy for the NIARIM official site and app.",
-    "legal.updated": "Last updated: [To be confirmed]",
+    "legal.updated": "Last updated: August 26, 2026",
     "legal.notice.privacy":
       "The Japanese version of this document is authoritative. The body text below is shown in Japanese regardless of the selected display language.",
     "legal.notice.terms":

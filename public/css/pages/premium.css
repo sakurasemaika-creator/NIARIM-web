@@ -43,6 +43,7 @@
 .pricing-price {
   margin-top: var(--space-sm);
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 0.4rem;
 }
@@ -51,11 +52,19 @@
   font-size: 2.2rem;
   font-weight: 700;
   font-family: var(--font-serif);
+  white-space: nowrap;
 }
 
 .pricing-price .unit {
   font-size: var(--fs-small);
   color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し
+   数字の途中で改行されないようにする */
+.pricing-plan-option .pricing-price .amount {
+  font-size: clamp(1.35rem, 6vw, 1.9rem);
 }
 
 .pricing-card.is-premium .pricing-price .unit {
@@ -84,8 +93,9 @@
 }
 
 .pricing-plan-option-best {
-  border-color: var(--color-accent);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: #ffd76a;
+  background: rgba(255, 215, 106, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 215, 106, 0.35), 0 12px 32px rgba(255, 159, 92, 0.18);
 }
 
 .pricing-plan-badge {
@@ -94,8 +104,8 @@
   right: var(--space-md);
   padding: 0.2rem 0.7rem;
   border-radius: var(--radius-pill);
-  background: var(--color-accent);
-  color: var(--color-white);
+  background: var(--grad-gold);
+  color: var(--color-brand-dark);
   font-size: 0.72rem;
   font-weight: 700;
   white-space: nowrap;

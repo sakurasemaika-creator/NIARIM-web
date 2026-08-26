@@ -2,21 +2,35 @@
    NIARIM home.css - トップページ専用スタイル
    ========================================================================== */
 
-/* ---- Hero ---- */
+/* ---- Hero ----
+   ゲーム公式サイトを参照し、単なる背景色ではなく複数の
+   放射グラデーション（メッシュ）と浮遊するグロー・粒子で
+   奥行きと高揚感を演出する。 */
 .hero {
   position: relative;
-  padding-top: clamp(3rem, 8vw, 6rem);
-  padding-bottom: var(--space-2xl);
+  padding-top: clamp(3.5rem, 10vw, 7.5rem);
+  padding-bottom: var(--space-3xl);
   overflow: hidden;
-  background: radial-gradient(
-      120% 100% at 85% -10%,
-      var(--color-sub-tint) 0%,
-      transparent 55%
-    ),
+  background: radial-gradient(120% 90% at 88% -12%, rgba(255, 92, 122, 0.16) 0%, transparent 55%),
+    radial-gradient(90% 80% at 8% 108%, rgba(255, 177, 92, 0.14) 0%, transparent 60%),
+    radial-gradient(60% 60% at 50% 40%, var(--color-sub-tint) 0%, transparent 70%),
     var(--color-bg);
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(rgba(74, 70, 54, 0.09) 1.4px, transparent 1.4px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(80% 70% at 50% 20%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
 .hero .container {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   align-items: center;
@@ -29,15 +43,18 @@
 }
 
 .hero-title {
-  font-size: var(--fs-hero);
-  line-height: 1.15;
+  font-size: clamp(2.8rem, 7.5vw + 1rem, 6.4rem);
+  line-height: 1.12;
   color: var(--color-ink);
   opacity: 0;
   animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.15s forwards;
 }
 
 .hero-title .accent {
-  color: var(--color-brand);
+  background: var(--grad-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .hero-lead {
@@ -89,27 +106,32 @@
 .hero-visual::before {
   content: "";
   position: absolute;
-  inset: -18%;
+  inset: -22%;
   z-index: -1;
-  background: radial-gradient(
-    closest-side,
-    var(--color-accent) 0%,
-    transparent 70%
+  background: conic-gradient(
+    from 0deg,
+    var(--color-accent),
+    #ffb15c,
+    var(--color-sub),
+    var(--color-accent)
   );
-  opacity: 0.35;
-  filter: blur(40px);
-  animation: hero-glow-pulse 6s ease-in-out infinite;
+  opacity: 0.4;
+  filter: blur(60px);
+  animation: hero-glow-pulse 8s linear infinite;
 }
 
 @keyframes hero-glow-pulse {
-  0%,
-  100% {
-    opacity: 0.25;
-    transform: scale(0.95);
+  0% {
+    opacity: 0.3;
+    transform: scale(0.96) rotate(0deg);
   }
   50% {
-    opacity: 0.4;
-    transform: scale(1.05);
+    opacity: 0.48;
+    transform: scale(1.06) rotate(180deg);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.96) rotate(360deg);
   }
 }
 
@@ -123,8 +145,8 @@
   position: relative;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--color-ink) 0%, #26243f 100%);
-  box-shadow: var(--shadow-lg);
+  background: var(--grad-ink);
+  box-shadow: var(--shadow-lg), var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -281,6 +303,53 @@
   }
 }
 
+/* ---- Marquee（機能キーワードの無限スクロール帯） ---- */
+.marquee-section {
+  position: relative;
+  padding-block: var(--space-md);
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding-inline: var(--space-lg);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+
+.marquee-track span::after {
+  content: "◆";
+  font-size: 0.6em;
+  color: var(--color-accent);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* ---- Intro (NIARIMとは) ---- */
 .intro-grid {
   display: grid;
@@ -293,13 +362,6 @@
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  transition: transform var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
-}
-
-.intro-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
 }
 
 .intro-card .icon {

@@ -42,10 +42,11 @@
   --color-success: #2f9e6e;
   --color-error: #e5484d;
 
-  /* ---- Typography ---- */
-  --font-sans: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+  /* ---- Typography ----
+     アプリ本体と同じフォント（白光明朝＝本文／くらむぼん＝見出し）を使用。 */
+  --font-sans: "HakkouMincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
     sans-serif;
-  --font-serif: "Shippori Mincho", "Hiragino Mincho ProN", serif;
 
   --fs-hero: clamp(2.4rem, 6vw + 1rem, 5.2rem);
   --fs-h1: clamp(2rem, 3.4vw + 1rem, 3.4rem);
@@ -82,6 +83,12 @@
   --shadow-sm: 0 2px 8px rgba(26, 26, 34, 0.06);
   --shadow-md: 0 12px 32px rgba(26, 26, 34, 0.1);
   --shadow-lg: 0 24px 64px rgba(26, 26, 34, 0.16);
+  --shadow-glow: 0 8px 40px rgba(255, 92, 122, 0.35);
+
+  /* ---- Gradients（ブランドカラーを基調とした演出用グラデーション） ---- */
+  --grad-brand: linear-gradient(120deg, var(--color-accent) 0%, #ffb15c 100%);
+  --grad-ink: linear-gradient(160deg, var(--color-ink) 0%, #2b2950 60%, #1a1830 100%);
+  --grad-gold: linear-gradient(120deg, #ffd76a 0%, #ff9f5c 100%);
 
   --header-height: 72px;
 }

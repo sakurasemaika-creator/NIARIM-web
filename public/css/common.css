@@ -3,10 +3,20 @@
    全ページ共通のベーススタイル・ヘッダー・フッター・汎用コンポーネント。
    ========================================================================== */
 
+/* NIARIMアプリ本体と同じフォントを使用（サイト表示に必要な文字のみのサブセット）。
+   HakkouMincho: 本文用（白光明朝／lavsic氏 作）
+   Kuramubon   : 見出し用（くらむぼん／フロップデザイン制作）
+   いずれもSIL Open Font License 1.1。詳細は /assets/fonts/LICENSE.md 参照。 */
 @font-face {
-  font-family: "Zen Kaku Gothic New";
+  font-family: "HakkouMincho";
   font-display: swap;
-  src: local("Zen Kaku Gothic New");
+  src: url("/assets/fonts/HakkouMincho-subset.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kuramubon";
+  font-display: swap;
+  src: url("/assets/fonts/Kuramubon-subset.woff2") format("woff2");
 }
 
 body {
@@ -14,6 +24,16 @@ body {
   font-size: var(--fs-body);
   color: var(--color-text);
   background: var(--color-bg);
+  /* 日本語・中国語・韓国語では単語の途中で改行されないようにし、
+     やむを得ない場合（長いURL等）のみ折り返す。
+     見出し等の短いキャッチコピーが変な位置で泣き別れしないよう
+     text-wrap: balance も合わせて指定する。
+     ※ overflow-wrap は "anywhere" ではなく "break-word" を使う。
+        anywhereはflex/grid内の最小コンテンツ幅の計算方法まで変えてしまい、
+        価格表示など本来折り返したくない短い文字列（¥5,500 等）まで
+        数字の途中で改行される副作用があったため。 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -24,6 +44,11 @@ h4 {
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .container {
@@ -56,12 +81,23 @@ h4 {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid transparent;
   transition: border-color var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
+}
+
+/* すりガラス風の背景は疑似要素に持たせる。backdrop-filterをsite-header自体に
+   付けると、その内部にあるmodal-nav（position: fixed）の containing block が
+   ヘッダーの小さな箱に変わってしまい、SP版メニューの全画面背景が正しく
+   表示されなくなるため（フィルタ系プロパティはfixed要素の基準を変える仕様）。 */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
 }
 
 .site-header.is-scrolled {
@@ -383,17 +419,38 @@ h4 {
 }
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
   font-size: var(--fs-small);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-brand);
-  margin-bottom: var(--space-xs);
+  color: var(--color-accent-dark);
+  background: linear-gradient(120deg, var(--color-sub-tint), transparent 85%);
+  border: 1px solid rgba(255, 92, 122, 0.25);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-sm);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  flex-shrink: 0;
 }
 
 .section-dark .eyebrow {
   color: var(--color-sub);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.section-head h2 {
+  position: relative;
 }
 
 /* ---- Reveal animation hooks（animations.jsが操作） ---- */
