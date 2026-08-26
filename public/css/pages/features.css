@@ -168,12 +168,26 @@
 
 /* ==========================================================================
    機能図解（feature-diagram）
-   アプリ本体のソース（theme_service.dart のデフォルトテーマ配色、
-   canvas/widgets 以下の各パネル、export_screen.dart、
-   onion_skin_settings.dart 等）で確認できる実際のUI構成・配色・文言を
-   再現したCSS図解。推測のスクリーンショットではなく、確認済みの事実
-   （ツール名・レイヤーのopacity表示・書き出しプリセット名・
-   オニオンスキンの前=赤/次=青という既定色など）のみを用いる。
+   px単位まで実際のアプリのソースに合わせた図解。以下のファイルで確認した
+   実測値のみを使用し、憶測の数値は使わない：
+   - theme_service.dart（AppThemePreset.defaultDarkの配色）
+   - canvas/widgets/canvas_icon_button.dart（常設ボタン：背景なし、
+     アイコン20×20＋パディング6、8方向オフセット重ね描きによる縁取り）
+   - canvas/widgets/toolbar_widget.dart（下部ツールバー：height 40、
+     horizontal padding 4、実ツール順序）
+   - canvas_screen.dart _buildTopBar()（上部バー：horizontal 8 / vertical 4
+     のpadding、Undo・Redo（左）→Spacer→定規・設定・ヘルプ（右））
+   - canvas/widgets/layer_panel.dart（ListTile dense=true=48px行、
+     eye 16px→4px→種別アイコン12px→4px→サムネイル24×24、
+     実際のレイヤー種別アイコンと配色、drag_handle 16px）
+   - canvas/widgets/frame_strip_widget.dart（フレームサムネイル 48×56、
+     ストリップ高さ64）
+   - timeline_screen.dart _buildPlaybackControls()（IconButton×5、
+     アイコン24px・タップ領域48×48、標準色のみで再生ボタンの特別装飾なし）
+   - export_screen.dart（SegmentedButton 3択、RadioListTile×3（二行）、
+     FilledButton.icon minimumSize height 48）
+   - onion_skin_settings.dart（前フレーム既定色#FF0000／次フレーム既定色
+     #0000FF）
    ========================================================================== */
 .feature-diagram {
   --fd-bg: #17161c; /* AppThemePreset.defaultDark.panelBgColor */
@@ -190,38 +204,37 @@
   overflow: hidden;
 }
 
-/* ---- 描画（ツールバー + キャンバス） ---- */
-.fd-toolbar {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: var(--space-sm);
-}
-
-.fd-tool {
-  display: flex;
+/* ---- 共通：CanvasIconButton方式のアイコン ----
+   実装(canvas_icon_button.dart)は背景を持たず、アイコンをmenuBg色で
+   8方向へ1pxずつオフセット重ね描きして縁取りにする。CSSでは
+   drop-shadowを4方向に重ねて同じ見た目を近似する。 */
+.fd-icon-btn {
+  --fd-icon-size: 20px; /* CanvasIconButton.iconSize の既定値 */
+  --fd-btn-size: calc(var(--fd-icon-size) + 12px); /* 内側パディング6×2 */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
-  background: var(--fd-panel);
+  width: var(--fd-btn-size);
+  height: var(--fd-btn-size);
+  flex-shrink: 0;
   color: var(--fd-text);
-  font-size: 1rem;
 }
 
-.fd-tool .ic {
-  width: 18px;
-  height: 18px;
+.fd-icon-btn .ic {
+  width: var(--fd-icon-size);
+  height: var(--fd-icon-size);
+  filter: drop-shadow(1px 0 0 var(--fd-panel)) drop-shadow(-1px 0 0 var(--fd-panel))
+    drop-shadow(0 1px 0 var(--fd-panel)) drop-shadow(0 -1px 0 var(--fd-panel));
 }
 
-.fd-tool.is-active {
-  background: var(--fd-accent);
-  color: var(--color-white);
+.fd-icon-btn.is-active {
+  color: var(--fd-accent);
 }
 
+/* ---- 描画：キャンバス＋下部フローティングツールバー ---- */
 .fd-canvas {
   position: relative;
-  height: 190px;
+  height: 220px;
   border-radius: var(--radius-md);
   background: #fff;
   overflow: hidden;
@@ -239,21 +252,44 @@
   stroke-linecap: round;
 }
 
-.fd-brush-indicator {
+/* toolbar_widget.dart: Container(height:40, padding: horizontal 4)。
+   実画面と同じく背景を持たせず、キャンバスの下端に直接重ねる。 */
+.fd-toolbar-overlay {
   position: absolute;
-  right: var(--space-md);
-  bottom: var(--space-md);
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid var(--fd-accent);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  padding-inline: 4px;
+  display: flex;
+  align-items: center;
+}
+
+/* canvas_screen.dart _buildTopBar(): padding horizontal 8 / vertical 4、
+   左詰めUndo・Redo→Spacer→右詰め定規・設定・ヘルプ。 */
+.fd-topbar {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  color: var(--fd-text);
+}
+
+.fd-topbar .fd-spacer {
+  flex: 1;
+}
+
+.fd-topbar .fd-icon-btn {
+  --fd-icon-size: 20px;
 }
 
 /* ---- アニメーション（タイムライン） ---- */
+/* frame_strip_widget.dart: ストリップ高さ64、サムネイル48×56 */
 .fd-frames {
   display: flex;
-  gap: 0.4rem;
-  padding: var(--space-sm);
+  align-items: center;
+  gap: 4px;
+  height: 64px;
+  padding-inline: 8px;
   background: var(--fd-panel);
   border-radius: var(--radius-md);
   overflow-x: auto;
@@ -261,104 +297,121 @@
 
 .fd-frame {
   flex: 0 0 auto;
-  width: 56px;
-  height: 74px;
-  border-radius: var(--radius-sm);
+  width: 48px;
+  height: 56px;
+  border-radius: 4px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--color-gray-500);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 .fd-frame.is-active {
+  border-width: 2px;
   border-color: var(--fd-accent);
   color: var(--fd-accent);
   font-weight: 700;
 }
 
+/* timeline_screen.dart _buildPlaybackControls(): IconButton×5を
+   mainAxisAlignment.centerで並べるのみ。再生ボタンだけを丸く強調する
+   実装は無いため、5つとも同じ見た目にする（前回の丸背景は誤り）。 */
 .fd-transport {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  margin-top: var(--space-sm);
-  color: var(--fd-text);
+  padding-block: 8px;
 }
 
-.fd-transport .ic {
-  width: 20px;
-  height: 20px;
-}
-
-.fd-transport .is-play {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--fd-accent);
-  color: var(--color-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fd-transport .is-play .ic {
-  width: 22px;
-  height: 22px;
+.fd-transport .fd-icon-btn {
+  --fd-icon-size: 24px; /* IconButton既定のアイコンサイズ */
+  --fd-btn-size: 48px; /* IconButtonの既定タップ領域 */
 }
 
 /* ---- 編集（レイヤーパネル） ---- */
+/* layer_panel.dart: ListTile(dense: true)の1行あたりの高さは
+   Material仕様のdense一行=48px。 */
 .fd-layers {
-  display: grid;
-  gap: 0.4rem;
   background: var(--fd-panel);
   border-radius: var(--radius-md);
-  padding: var(--space-sm);
+  overflow: hidden;
 }
 
 .fd-layer-row {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.6rem;
-  border-radius: var(--radius-sm);
+  height: 48px;
+  padding-inline: 12px;
+  gap: 4px;
   color: var(--fd-text);
   font-size: 0.8rem;
 }
 
-.fd-layer-row.is-active {
-  background: rgba(255, 92, 122, 0.22);
+.fd-layer-row:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.fd-layer-row .ic {
+.fd-layer-row.is-active {
+  background: rgba(255, 92, 122, 0.18);
+}
+
+.fd-layer-row .ic-eye {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 
+.fd-layer-row .ic-type {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* レイヤー種別アイコンの実配色（layer_panel.dart _layerTypeIcon）。
+   通常レイヤーはアイコン無し（12px分の空白のみ）。 */
+.fd-layer-row .ic-type.is-autofill-lineart {
+  color: #ff9800; /* Colors.orange */
+}
+.fd-layer-row .ic-type.is-autofill {
+  color: #4caf50; /* Colors.green */
+}
+.fd-layer-row .ic-type.is-common {
+  color: #2196f3; /* Colors.blue */
+}
+.fd-layer-row .ic-type.is-folder {
+  color: #ffc107; /* Colors.amber */
+}
+
 .fd-layer-thumb {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
   background: #fff;
   flex-shrink: 0;
+  margin-inline-start: 4px;
 }
 
 .fd-layer-name {
   flex: 1;
   min-width: 0;
+  margin-inline-start: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.fd-layer-row .fd-drag {
-  opacity: 0.55;
+.fd-layer-row .ic-drag {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-inline-start: 8px;
+  opacity: 0.6;
 }
 
-/* ---- 作画支援（オニオンスキン + トーン） ---- */
+/* ---- 作画支援（上部バー＋オニオンスキン） ---- */
 .fd-canvas .fd-stroke-prev {
   fill: none;
   stroke: #ff0000; /* OnionSkinSettings.prevColor の既定値 */
@@ -399,22 +452,26 @@
   background: #0000ff;
 }
 
-/* ---- 音声 ---- */
-.fd-waveform {
+/* ---- 音声 ----
+   timeline_screen.dart には波形表示は存在しない（音声クリップは
+   Icons.audiotrack付きのトラックとして表示される）ため、波形イラストは
+   使わず実際の構成要素（トラック・音量ラベルとスライダー）のみを示す。 */
+.fd-audio-track {
   display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 90px;
-  padding: var(--space-sm);
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding-inline: 12px;
   background: var(--fd-panel);
   border-radius: var(--radius-md);
+  color: var(--fd-text);
+  font-size: 0.85rem;
 }
 
-.fd-waveform span {
-  flex: 1;
-  background: var(--fd-accent);
-  border-radius: 2px;
-  opacity: 0.8;
+.fd-audio-track .ic {
+  width: 18px; /* timeline_screen.dart Icons.audiotrack, size: 18 */
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .fd-audio-controls {
@@ -426,10 +483,105 @@
   font-size: var(--fs-small);
 }
 
-.fd-audio-controls .ic {
-  width: 18px;
-  height: 18px;
+/* ---- 書き出し ---- */
+/* export_screen.dart: SegmentedButton（3択）、RadioListTile×3（二行）、
+   FilledButton.icon(minimumSize: Size.fromHeight(48))。 */
+.fd-segmented {
+  display: flex;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.fd-segment {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--fd-text);
+}
+
+.fd-segment:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.fd-segment.is-active {
+  background: var(--fd-accent);
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.fd-format-list {
+  margin-top: var(--space-md);
+}
+
+.fd-format-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px; /* Material二行ListTileの既定高さ */
+  padding-inline: 4px;
+}
+
+.fd-format-row:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fd-radio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 241, 240, 0.6);
   flex-shrink: 0;
+}
+
+.fd-radio.is-active {
+  border-color: var(--fd-accent);
+}
+
+.fd-radio.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--fd-accent);
+}
+
+.fd-format-text strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fd-text);
+}
+
+.fd-format-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(245, 241, 240, 0.6);
+  margin-top: 2px;
+}
+
+.fd-export-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px; /* FilledButton.styleFrom(minimumSize: Size.fromHeight(48)) */
+  margin-top: var(--space-md);
+  border-radius: var(--radius-pill);
+  background: var(--grad-brand);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: var(--fs-small);
+}
+
+.fd-export-btn .ic {
+  width: 20px;
+  height: 20px;
 }
 
 .fd-slider {
@@ -447,39 +599,6 @@
   border-radius: var(--radius-pill);
 }
 
-/* ---- 書き出し ---- */
-.fd-export-row {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: var(--space-sm);
-}
-
-.fd-chip {
-  padding: 0.45rem 1rem;
-  border-radius: var(--radius-pill);
-  background: var(--fd-panel);
-  color: var(--fd-text);
-  font-size: var(--fs-small);
-}
-
-.fd-chip.is-active {
-  background: var(--fd-accent);
-  color: var(--color-white);
-  font-weight: 700;
-}
-
-.fd-export-btn {
-  display: block;
-  width: 100%;
-  margin-top: var(--space-sm);
-  padding: 0.7rem;
-  border-radius: var(--radius-pill);
-  background: var(--grad-brand);
-  color: var(--color-white);
-  font-weight: 700;
-  text-align: center;
-  font-size: var(--fs-small);
-}
 
 @media (max-width: 640px) {
   .fd-canvas {

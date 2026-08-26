@@ -84,24 +84,25 @@
         <span data-i18n="featuresPage.drawing.lead">目的に合わせて選べる、複数のブラシと描画設定。</span>
       </div>
       <div class="feature-diagram" aria-hidden="true">
-        <!-- toolbar_widget.dart _buildToolItem の実アイコン・実順序
-             （ペン=brush／消しゴム=Font Awesome eraser／バケツ=
+        <!-- toolbar_widget.dart / canvas_icon_button.dart で確認した
+             実際の見た目：ツールバーは背景を持たず、アイコン(20px)を
+             キャンバス下端(高さ40px)に直接重ねる。実ツール順序は
+             ペン=brush／消しゴム=Font Awesome eraser／バケツ=
              format_color_fill／スポイト=colorize／選択=highlight_alt／
-             指ツール=pan_tool_alt／図形=category）をそのまま再現。 -->
-        <div class="fd-toolbar">
-          <span class="fd-tool is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
-          <span class="fd-tool"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
-        </div>
+             指ツール=pan_tool_alt／図形=category。 -->
         <div class="fd-canvas">
-          <svg viewBox="0 0 400 190">
+          <svg viewBox="0 0 400 220">
             <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
           </svg>
-          <div class="fd-brush-indicator"></div>
+          <div class="fd-toolbar-overlay">
+            <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
+          </div>
         </div>
       </div>
       <div class="spec-grid">
@@ -130,15 +131,17 @@
           <span class="fd-frame">6</span>
           <span class="fd-frame">7</span>
         </div>
-        <!-- timeline_screen.dart の再生バーの実アイコン・実順序
-             （skip_previous → fast_rewind → play_arrow → fast_forward →
-             skip_next）をそのまま再現。 -->
+        <!-- timeline_screen.dart _buildPlaybackControls(): IconButton×5
+             （アイコン24px・タップ領域48×48）を並べただけで、再生ボタンだけ
+             を丸く強調する実装は無いため、5つとも同じ見た目にする。実際の
+             アイコン・実順序（skip_previous→fast_rewind→play_arrow→
+             fast_forward→skip_next）をそのまま再現。 -->
         <div class="fd-transport">
-          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg>
-          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_rewind"></use></svg>
-          <span class="is-play"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
-          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg>
-          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_rewind"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg></span>
         </div>
       </div>
       <div class="spec-grid">
@@ -155,39 +158,41 @@
         <span data-i18n="featuresPage.editing.lead">納得がいくまで描き直せる、編集の自由さ。</span>
       </div>
       <div class="feature-diagram" aria-hidden="true">
-        <!-- layer_panel.dart の実際の行構成（左から 表示/非表示アイコン→
-             レイヤー種別アイコン→サムネイル→名前、右端にドラッグハンドル）
-             と、レイヤー種別アイコンの実割り当て（通常=brush_outlined／
-             フォルダ=folder_outlined／共通レイヤー=groups_outlined／
-             自動塗り=auto_fix_high_outlined）をそのまま再現。 -->
+        <!-- layer_panel.dart _layerTypeIcon() で確認した実際の行構成
+             （表示/非表示16px→4px→種別アイコン12px→4px→サムネイル24×24→
+             名前→ドラッグハンドル16px=Icons.drag_handle）と、レイヤー種別
+             ごとの実アイコン・実配色（自動塗り下書き=edit/オレンジ、
+             自動塗り=palette/緑、共通レイヤー=link/青、フォルダ=folder/
+             amber、通常レイヤー=アイコン無し）をそのまま再現。行の高さは
+             ListTile(dense: true)の一行分=48px。 -->
         <div class="fd-layers">
           <div class="fd-layer-row is-active">
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-auto_fix_high_outlined"></use></svg>
+            <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+            <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー4（自動塗り）</span>
-            <svg class="ic fd-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_indicator"></use></svg>
+            <span class="fd-layer-name">レイヤー4（自動塗り・下書き）</span>
+            <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-groups_outlined"></use></svg>
+            <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+            <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー3（共通レイヤー）</span>
-            <svg class="ic fd-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_indicator"></use></svg>
+            <span class="fd-layer-name">レイヤー3（自動塗り）</span>
+            <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-folder_outlined"></use></svg>
+            <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+            <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤーフォルダ</span>
-            <svg class="ic fd-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_indicator"></use></svg>
+            <span class="fd-layer-name">レイヤー2（共通レイヤー）</span>
+            <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
-            <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush_outlined"></use></svg>
+            <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
+            <span class="ic ic-type"></span>
             <span class="fd-layer-thumb"></span>
             <span class="fd-layer-name">レイヤー1</span>
-            <svg class="ic fd-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_indicator"></use></svg>
+            <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
         </div>
       </div>
@@ -204,7 +209,20 @@
         <h2 data-i18n="featuresPage.advanced.title">Advanced｜作画支援ツール</h2>
         <span data-i18n="featuresPage.advanced.lead">プロの作画・仕上げ工程を意識した、一歩進んだツール群。</span>
       </div>
+      <!-- canvas_screen.dart _buildTopBar()の実構成（左詰めUndo・Redo→
+           Spacer→右詰め定規・設定・ヘルプ。設定メニューにオニオンスキン・
+           フィルターが集約されている）と、onion_skin_settings.dartの
+           実際の既定色（前フレーム=赤#FF0000／次フレーム=青#0000FF）を
+           そのまま再現。 -->
       <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-topbar">
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
+          <span class="fd-spacer"></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+          <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+        </div>
         <div class="fd-canvas">
           <svg viewBox="0 0 400 190">
             <path class="fd-stroke-prev" d="M50 140 C 70 70, 140 40, 180 50 S 290 95, 270 140" />
@@ -234,21 +252,17 @@
         <h2 data-i18n="featuresPage.audio.title">Audio｜音声</h2>
         <span data-i18n="featuresPage.audio.lead">作品に音を添える、基本的な音声機能。</span>
       </div>
+      <!-- timeline_screen.dart には波形表示は存在しないため（音声クリップは
+           Icons.audiotrack(size:18)付きのトラックとして表示される）、
+           実際に存在する構成要素のみを再現する。「音量」はl10nの実文言
+           （timelineClipVolumeLabel）。 -->
       <div class="feature-diagram" aria-hidden="true">
-        <div class="fd-waveform">
-          <span style="height: 30%"></span><span style="height: 55%"></span><span style="height: 80%"></span>
-          <span style="height: 45%"></span><span style="height: 90%"></span><span style="height: 60%"></span>
-          <span style="height: 35%"></span><span style="height: 70%"></span><span style="height: 50%"></span>
-          <span style="height: 85%"></span><span style="height: 40%"></span><span style="height: 65%"></span>
-          <span style="height: 30%"></span><span style="height: 55%"></span><span style="height: 20%"></span>
-          <span style="height: 45%"></span><span style="height: 75%"></span><span style="height: 35%"></span>
-        </div>
-        <!-- timeline_screen.dart で音声クリップに使われる実アイコン
-             （audiotrack）と、実際のラベル文言（音量／timelineClipVolumeLabel）
-             をそのまま再現。 -->
-        <div class="fd-audio-controls">
-          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg>
+        <div class="fd-audio-track">
           <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-audiotrack"></use></svg>
+          <span>音声クリップ</span>
+        </div>
+        <div class="fd-audio-controls">
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
           <span>音量</span>
           <div class="fd-slider"><span></span></div>
         </div>
@@ -265,18 +279,34 @@
         <h2 data-i18n="featuresPage.export.title">Export｜書き出し</h2>
         <span data-i18n="featuresPage.export.lead">完成した作品を、動画として届けます。</span>
       </div>
+      <!-- export_screen.dart の実構成：SegmentedButton（標準/高画質/カスタム、
+           l10n.exportPreset*）、RadioListTile×3（二行、l10n.exportFormat*・
+           helpTransparentWebmTitle）、FilledButton.icon(Icons.file_download、
+           minimumSize height 48)をそのまま再現。 -->
       <div class="feature-diagram" aria-hidden="true">
-        <div class="fd-export-row">
-          <span class="fd-chip is-active">標準</span>
-          <span class="fd-chip">高画質</span>
-          <span class="fd-chip">カスタム</span>
+        <div class="fd-segmented">
+          <span class="fd-segment is-active">標準</span>
+          <span class="fd-segment">高画質</span>
+          <span class="fd-segment">カスタム</span>
         </div>
-        <div class="fd-export-row">
-          <span class="fd-chip is-active">MP4</span>
-          <span class="fd-chip">GIF</span>
-          <span class="fd-chip">透過WebM</span>
+        <div class="fd-format-list">
+          <div class="fd-format-row">
+            <span class="fd-radio is-active"></span>
+            <span class="fd-format-text"><strong>MP4</strong><span>汎用動画形式</span></span>
+          </div>
+          <div class="fd-format-row">
+            <span class="fd-radio"></span>
+            <span class="fd-format-text"><strong>GIF</strong><span>アニメーションGIF</span></span>
+          </div>
+          <div class="fd-format-row">
+            <span class="fd-radio"></span>
+            <span class="fd-format-text"><strong>透過WebM</strong><span>透明背景動画</span></span>
+          </div>
         </div>
-        <button type="button" class="fd-export-btn" tabindex="-1">書き出し開始</button>
+        <button type="button" class="fd-export-btn" tabindex="-1">
+          <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg>
+          書き出し開始
+        </button>
       </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item1.title">解像度</h3><p data-i18n="featuresPage.export.item1.body">Full HDまでの解像度で書き出せます。</p></div>
