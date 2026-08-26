@@ -551,6 +551,7 @@
   justify-content: space-between;
   gap: var(--space-md);
   padding: var(--space-md) 0;
+  font-family: var(--font-serif);
   text-align: left;
   font-weight: 600;
   font-size: 1.05rem;

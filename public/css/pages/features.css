@@ -148,7 +148,7 @@
 }
 
 .spec-item h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: 1rem;
   margin-bottom: 0.35rem;
 }
@@ -163,5 +163,297 @@
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
+  }
+}
+
+/* ==========================================================================
+   機能図解（feature-diagram）
+   アプリ本体のソース（theme_service.dart のデフォルトテーマ配色、
+   canvas/widgets 以下の各パネル、export_screen.dart、
+   onion_skin_settings.dart 等）で確認できる実際のUI構成・配色・文言を
+   再現したCSS図解。推測のスクリーンショットではなく、確認済みの事実
+   （ツール名・レイヤーのopacity表示・書き出しプリセット名・
+   オニオンスキンの前=赤/次=青という既定色など）のみを用いる。
+   ========================================================================== */
+.feature-diagram {
+  --fd-bg: #17161c; /* AppThemePreset.defaultDark.panelBgColor */
+  --fd-panel: #201f27; /* AppThemePreset.defaultDark.menuBgColor */
+  --fd-accent: #ff5c7a; /* AppThemePreset.defaultDark.accentColor */
+  --fd-text: #f5f1f0; /* AppThemePreset.defaultDark.textColor */
+  --fd-mark: #ffb020; /* AppThemePreset.defaultDark.updateMarkColor */
+  position: relative;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  background: var(--fd-bg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* ---- 描画（ツールバー + キャンバス） ---- */
+.fd-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.fd-tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--fd-panel);
+  color: var(--fd-text);
+  font-size: 1rem;
+}
+
+.fd-tool.is-active {
+  background: var(--fd-accent);
+  color: var(--color-white);
+}
+
+.fd-canvas {
+  position: relative;
+  height: 190px;
+  border-radius: var(--radius-md);
+  background: #fff;
+  overflow: hidden;
+}
+
+.fd-canvas svg {
+  width: 100%;
+  height: 100%;
+}
+
+.fd-canvas .fd-stroke {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.fd-brush-indicator {
+  position: absolute;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--fd-accent);
+}
+
+/* ---- アニメーション（タイムライン） ---- */
+.fd-frames {
+  display: flex;
+  gap: 0.4rem;
+  padding: var(--space-sm);
+  background: var(--fd-panel);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.fd-frame {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 74px;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  border: 2px solid transparent;
+}
+
+.fd-frame.is-active {
+  border-color: var(--fd-accent);
+  color: var(--fd-accent);
+  font-weight: 700;
+}
+
+.fd-transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  color: var(--fd-text);
+  font-size: 1.1rem;
+}
+
+.fd-transport .is-play {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--fd-accent);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- 編集（レイヤーパネル） ---- */
+.fd-layers {
+  display: grid;
+  gap: 0.4rem;
+  background: var(--fd-panel);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+}
+
+.fd-layer-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  color: var(--fd-text);
+  font-size: 0.8rem;
+}
+
+.fd-layer-row.is-active {
+  background: rgba(255, 92, 122, 0.22);
+}
+
+.fd-layer-thumb {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.fd-layer-name {
+  flex: 1;
+}
+
+.fd-layer-opacity {
+  color: var(--color-gray-500);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- 作画支援（オニオンスキン + トーン） ---- */
+.fd-canvas .fd-stroke-prev {
+  fill: none;
+  stroke: #ff0000; /* OnionSkinSettings.prevColor の既定値 */
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.35;
+}
+
+.fd-canvas .fd-stroke-next {
+  fill: none;
+  stroke: #0000ff; /* OnionSkinSettings.nextColor の既定値 */
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.35;
+}
+
+.fd-onion-legend {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  font-size: var(--fs-small);
+  color: var(--fd-text);
+}
+
+.fd-onion-legend .dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 0.3em;
+}
+
+.fd-onion-legend .dot.prev {
+  background: #ff0000;
+}
+
+.fd-onion-legend .dot.next {
+  background: #0000ff;
+}
+
+/* ---- 音声 ---- */
+.fd-waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 90px;
+  padding: var(--space-sm);
+  background: var(--fd-panel);
+  border-radius: var(--radius-md);
+}
+
+.fd-waveform span {
+  flex: 1;
+  background: var(--fd-accent);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.fd-audio-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  color: var(--fd-text);
+  font-size: var(--fs-small);
+}
+
+.fd-slider {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.fd-slider span {
+  position: absolute;
+  inset: 0 40% 0 0;
+  background: var(--fd-accent);
+  border-radius: var(--radius-pill);
+}
+
+/* ---- 書き出し ---- */
+.fd-export-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.fd-chip {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--fd-panel);
+  color: var(--fd-text);
+  font-size: var(--fs-small);
+}
+
+.fd-chip.is-active {
+  background: var(--fd-accent);
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+.fd-export-btn {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-sm);
+  padding: 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--grad-brand);
+  color: var(--color-white);
+  font-weight: 700;
+  text-align: center;
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 640px) {
+  .fd-canvas {
+    height: 150px;
   }
 }

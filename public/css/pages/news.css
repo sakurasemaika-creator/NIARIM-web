@@ -52,7 +52,7 @@
 }
 
 .news-item h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 600;
 }

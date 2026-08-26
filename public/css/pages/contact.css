@@ -163,7 +163,7 @@ textarea.form-control {
 }
 
 .form-status h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }

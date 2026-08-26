@@ -83,6 +83,22 @@
         <h2 data-i18n="featuresPage.drawing.title">Drawing｜描画</h2>
         <span data-i18n="featuresPage.drawing.lead">目的に合わせて選べる、複数のブラシと描画設定。</span>
       </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-toolbar">
+          <span class="fd-tool is-active">✎</span>
+          <span class="fd-tool">▭</span>
+          <span class="fd-tool">🪣</span>
+          <span class="fd-tool">➰</span>
+          <span class="fd-tool">💧</span>
+          <span class="fd-tool">⬚</span>
+        </div>
+        <div class="fd-canvas">
+          <svg viewBox="0 0 400 190">
+            <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+          </svg>
+          <div class="fd-brush-indicator"></div>
+        </div>
+      </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.drawing.item1.title">Gペン</h3><p data-i18n="featuresPage.drawing.item1.body">強弱のついた、輪郭線に向いたペン。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.drawing.item2.title">ペン</h3><p data-i18n="featuresPage.drawing.item2.body">均一な線を描ける、標準的なペン。</p></div>
@@ -99,6 +115,22 @@
         <h2 data-i18n="featuresPage.animation.title">Animation｜アニメーション</h2>
         <span data-i18n="featuresPage.animation.lead">フレームを重ね、タイムラインで動きを組み立てます。</span>
       </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-frames">
+          <span class="fd-frame">1</span>
+          <span class="fd-frame">2</span>
+          <span class="fd-frame is-active">3</span>
+          <span class="fd-frame">4</span>
+          <span class="fd-frame">5</span>
+          <span class="fd-frame">6</span>
+          <span class="fd-frame">7</span>
+        </div>
+        <div class="fd-transport">
+          <span>⏮</span>
+          <span class="is-play">▶</span>
+          <span>⏭</span>
+        </div>
+      </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.animation.item1.title">フレーム</h3><p data-i18n="featuresPage.animation.item1.body">一枚ずつフレームを追加し、絵を積み重ねます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.animation.item2.title">タイムライン</h3><p data-i18n="featuresPage.animation.item2.body">フレームの並び・タイミングを管理します。</p></div>
@@ -112,6 +144,34 @@
         <h2 data-i18n="featuresPage.editing.title">Editing｜編集</h2>
         <span data-i18n="featuresPage.editing.lead">納得がいくまで描き直せる、編集の自由さ。</span>
       </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-layers">
+          <div class="fd-layer-row is-active">
+            <span class="fd-layer-thumb"></span>
+            <span class="fd-layer-name">レイヤー4</span>
+            <span class="fd-layer-opacity">100%</span>
+            <span>👁</span>
+          </div>
+          <div class="fd-layer-row">
+            <span class="fd-layer-thumb"></span>
+            <span class="fd-layer-name">レイヤー3</span>
+            <span class="fd-layer-opacity">80%</span>
+            <span>👁</span>
+          </div>
+          <div class="fd-layer-row">
+            <span class="fd-layer-thumb"></span>
+            <span class="fd-layer-name">レイヤー2</span>
+            <span class="fd-layer-opacity">60%</span>
+            <span>👁</span>
+          </div>
+          <div class="fd-layer-row">
+            <span class="fd-layer-thumb"></span>
+            <span class="fd-layer-name">レイヤー1</span>
+            <span class="fd-layer-opacity">100%</span>
+            <span>🚫</span>
+          </div>
+        </div>
+      </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.editing.item1.title">非破壊編集</h3><p data-i18n="featuresPage.editing.item1.body">元の絵を保ったまま、編集内容を調整できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.editing.item2.title">塗りつぶし</h3><p data-i18n="featuresPage.editing.item2.body">囲まれた領域を素早く塗りつぶせます。</p></div>
@@ -124,6 +184,19 @@
       <div class="feature-section-head">
         <h2 data-i18n="featuresPage.advanced.title">Advanced｜作画支援ツール</h2>
         <span data-i18n="featuresPage.advanced.lead">プロの作画・仕上げ工程を意識した、一歩進んだツール群。</span>
+      </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-canvas">
+          <svg viewBox="0 0 400 190">
+            <path class="fd-stroke-prev" d="M50 140 C 70 70, 140 40, 180 50 S 290 95, 270 140" />
+            <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+            <path class="fd-stroke-next" d="M80 160 C 100 90, 170 60, 210 70 S 310 110, 290 160" />
+          </svg>
+        </div>
+        <div class="fd-onion-legend">
+          <span><span class="dot prev"></span>前フレーム</span>
+          <span><span class="dot next"></span>次フレーム</span>
+        </div>
       </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.advanced.item1.title">オニオンスキン</h3><p data-i18n="featuresPage.advanced.item1.body">前後のフレームを薄く重ねて表示し、動きのつながりを確認しながら描けます。</p></div>
@@ -142,6 +215,21 @@
         <h2 data-i18n="featuresPage.audio.title">Audio｜音声</h2>
         <span data-i18n="featuresPage.audio.lead">作品に音を添える、基本的な音声機能。</span>
       </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-waveform">
+          <span style="height: 30%"></span><span style="height: 55%"></span><span style="height: 80%"></span>
+          <span style="height: 45%"></span><span style="height: 90%"></span><span style="height: 60%"></span>
+          <span style="height: 35%"></span><span style="height: 70%"></span><span style="height: 50%"></span>
+          <span style="height: 85%"></span><span style="height: 40%"></span><span style="height: 65%"></span>
+          <span style="height: 30%"></span><span style="height: 55%"></span><span style="height: 20%"></span>
+          <span style="height: 45%"></span><span style="height: 75%"></span><span style="height: 35%"></span>
+        </div>
+        <div class="fd-audio-controls">
+          <span>▶</span>
+          <span>音量</span>
+          <div class="fd-slider"><span></span></div>
+        </div>
+      </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.audio.item1.title">音声の追加</h3><p data-i18n="featuresPage.audio.item1.body">作品に音声ファイルを追加できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.audio.item2.title">音量</h3><p data-i18n="featuresPage.audio.item2.body">音量を調整できます。</p></div>
@@ -153,6 +241,19 @@
       <div class="feature-section-head">
         <h2 data-i18n="featuresPage.export.title">Export｜書き出し</h2>
         <span data-i18n="featuresPage.export.lead">完成した作品を、動画として届けます。</span>
+      </div>
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-export-row">
+          <span class="fd-chip is-active">標準</span>
+          <span class="fd-chip">高画質</span>
+          <span class="fd-chip">カスタム</span>
+        </div>
+        <div class="fd-export-row">
+          <span class="fd-chip is-active">MP4</span>
+          <span class="fd-chip">GIF</span>
+          <span class="fd-chip">透過WebM</span>
+        </div>
+        <button type="button" class="fd-export-btn" tabindex="-1">書き出し開始</button>
       </div>
       <div class="spec-grid">
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item1.title">解像度</h3><p data-i18n="featuresPage.export.item1.body">Full HDまでの解像度で書き出せます。</p></div>

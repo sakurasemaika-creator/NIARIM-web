@@ -112,7 +112,7 @@
 }
 
 .community-card .meta h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-gray-300);
