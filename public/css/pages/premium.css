@@ -62,37 +62,55 @@
   color: rgba(255, 255, 255, 0.66);
 }
 
-.pricing-plan-toggle {
-  display: flex;
-  gap: 0.5rem;
+.pricing-plan-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
   margin-top: var(--space-md);
 }
 
-.pricing-plan-toggle button {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.75);
-  font-size: var(--fs-small);
-  font-weight: 600;
+.pricing-plan-option {
+  position: relative;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
 }
 
-.pricing-plan-toggle button.is-active {
-  background: var(--color-accent);
+.pricing-plan-option-label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pricing-plan-option-best {
   border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pricing-plan-badge {
+  position: absolute;
+  top: -0.7rem;
+  right: var(--space-md);
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
   color: var(--color-white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .pricing-yearly-note {
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   font-size: var(--fs-small);
   color: var(--color-sub);
-  display: none;
 }
 
-.pricing-yearly-note.is-visible {
-  display: block;
+@media (max-width: 520px) {
+  .pricing-plan-compare {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pricing-list {

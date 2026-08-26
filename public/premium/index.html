@@ -98,23 +98,23 @@
         <div class="pricing-card is-premium">
           <h3 data-i18n="premiumPage.premium.title">プレミアムプラン</h3>
 
-          <div class="pricing-plan-toggle" role="group" aria-label="プラン切り替え">
-            <button type="button" data-plan-toggle="monthly" data-i18n="premiumPage.premium.monthly.label">月額プラン</button>
-            <button type="button" data-plan-toggle="yearly" data-i18n="premiumPage.premium.yearly.label">年額プラン</button>
-          </div>
-
-          <div data-plan-block="monthly">
-            <div class="pricing-price">
-              <span class="amount" data-i18n="premiumPage.premium.monthly.price">550円</span>
-              <span class="unit" data-i18n="premiumPage.premium.monthly.unit">／月（税込）</span>
+          <div class="pricing-plan-compare">
+            <div class="pricing-plan-option" data-plan-block="monthly">
+              <span class="pricing-plan-option-label" data-i18n="premiumPage.premium.monthly.label">月額プラン</span>
+              <div class="pricing-price">
+                <span class="amount" data-i18n="premiumPage.premium.monthly.price">550円</span>
+                <span class="unit" data-i18n="premiumPage.premium.monthly.unit">／月（税込）</span>
+              </div>
             </div>
-          </div>
-          <div data-plan-block="yearly">
-            <div class="pricing-price">
-              <span class="amount" data-i18n="premiumPage.premium.yearly.price">5,500円</span>
-              <span class="unit" data-i18n="premiumPage.premium.yearly.unit">／年（税込）</span>
+            <div class="pricing-plan-option pricing-plan-option-best" data-plan-block="yearly">
+              <span class="pricing-plan-badge" data-i18n="premiumPage.premium.yearly.badge">実質2か月分無料</span>
+              <span class="pricing-plan-option-label" data-i18n="premiumPage.premium.yearly.label">年額プラン</span>
+              <div class="pricing-price">
+                <span class="amount" data-i18n="premiumPage.premium.yearly.price">5,500円</span>
+                <span class="unit" data-i18n="premiumPage.premium.yearly.unit">／年（税込）</span>
+              </div>
+              <p class="pricing-yearly-note" data-i18n="premiumPage.premium.yearly.note">月額プランを12か月分支払うより、年額プランなら実質2か月分無料になります。</p>
             </div>
-            <p class="pricing-yearly-note is-visible" data-i18n="premiumPage.premium.yearly.note">月額換算で実質2か月分お得です。</p>
           </div>
 
           <ul class="pricing-list">
@@ -208,7 +208,6 @@
 <script src="/js/i18n.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/animations.js"></script>
-<script src="/js/premium.js"></script>
 <script>
   (function () {
     var c = window.NIARIM_CONFIG || {};
