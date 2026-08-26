@@ -1,0 +1,107 @@
+/* ==========================================================================
+   NIARIM community.css - みんなの作品を見るページ専用スタイル
+   ========================================================================== */
+
+.community-banner {
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-sub-tint);
+  color: var(--color-brand-dark);
+  font-size: var(--fs-small);
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.community-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+.community-tabs button {
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-gray-300);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  transition: background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.community-tabs button.is-active {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.community-ranking-note {
+  text-align: center;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.community-gallery {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.community-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.community-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.community-card .thumb {
+  aspect-ratio: 16 / 9;
+  background: var(--color-gray-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-300);
+  font-size: var(--fs-small);
+  position: relative;
+}
+
+.community-card .rank-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+}
+
+.community-card .meta {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.community-card .meta h3 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-gray-300);
+}
+
+.community-card .meta p {
+  margin-top: 0.25rem;
+  font-size: var(--fs-small);
+  color: var(--color-gray-300);
+}

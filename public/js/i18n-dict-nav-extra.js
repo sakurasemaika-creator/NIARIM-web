@@ -6,6 +6,9 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
   "ja": {
+    "nav.premium": "プレミアム",
+    "nav.community": "みんなの作品",
+    "common.scrollTop": "ページトップへ戻る",
     "nav.about": "NIARIMとは",
     "nav.help": "使い方ガイド",
     "meta.about.title": "NIARIMとは | NIARIM",
@@ -16,6 +19,9 @@
     "help.backToTop": "カテゴリ一覧へ戻る"
   },
   "en": {
+    "nav.premium": "Premium",
+    "nav.community": "Community",
+    "common.scrollTop": "Back to top",
     "nav.about": "About",
     "nav.help": "Guide",
     "meta.about.title": "About NIARIM | NIARIM",
@@ -26,6 +32,9 @@
     "help.backToTop": "Back to categories"
   },
   "zh-Hans": {
+    "nav.premium": "高级会员",
+    "nav.community": "大家的作品",
+    "common.scrollTop": "返回顶部",
     "nav.about": "关于",
     "nav.help": "使用指南",
     "meta.about.title": "关于 NIARIM | NIARIM",
@@ -36,6 +45,9 @@
     "help.backToTop": "返回分类列表"
   },
   "zh-Hant": {
+    "nav.premium": "高級會員",
+    "nav.community": "大家的作品",
+    "common.scrollTop": "返回頂部",
     "nav.about": "關於",
     "nav.help": "使用指南",
     "meta.about.title": "關於 NIARIM | NIARIM",
@@ -46,6 +58,9 @@
     "help.backToTop": "返回分類列表"
   },
   "ko": {
+    "nav.premium": "프리미엄",
+    "nav.community": "모두의 작품",
+    "common.scrollTop": "위로 이동",
     "nav.about": "소개",
     "nav.help": "이용 가이드",
     "meta.about.title": "NIARIM 소개 | NIARIM",
@@ -56,6 +71,9 @@
     "help.backToTop": "카테고리 목록으로 돌아가기"
   },
   "fr": {
+    "nav.premium": "Premium",
+    "nav.community": "Communauté",
+    "common.scrollTop": "Retour en haut",
     "nav.about": "À propos",
     "nav.help": "Guide",
     "meta.about.title": "À propos de NIARIM | NIARIM",
@@ -66,6 +84,9 @@
     "help.backToTop": "Retour aux catégories"
   },
   "es": {
+    "nav.premium": "Premium",
+    "nav.community": "Comunidad",
+    "common.scrollTop": "Volver arriba",
     "nav.about": "Acerca de",
     "nav.help": "Guía",
     "meta.about.title": "Acerca de NIARIM | NIARIM",

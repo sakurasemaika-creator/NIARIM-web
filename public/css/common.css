@@ -200,7 +200,7 @@ h4 {
   font-weight: 700;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1180px) {
   .lang-dropdown {
     order: 3;
     margin-top: var(--space-sm);
@@ -267,7 +267,7 @@ h4 {
   transform: rotate(-45deg);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1180px) {
   .main-nav {
     position: fixed;
     inset: var(--header-height) 0 0 0;
@@ -505,6 +505,47 @@ h4 {
 
   .footer-brand {
     grid-column: 1 / -1;
+  }
+}
+
+/* ---- Scroll-to-top button (全ページ共通、main.jsが生成) ---- */
+.scroll-top-btn {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  z-index: 90;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent);
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top-btn {
+    transition: opacity var(--duration-fast) linear;
   }
 }
 

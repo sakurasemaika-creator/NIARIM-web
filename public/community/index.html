@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>みんなの作品を見る | NIARIM</title>
+<meta name="description" content="NIARIMで作られた作品を、新着やランキングから発見できるコミュニティ機能のご紹介です。" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://niarim.example.com/community/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="みんなの作品を見る | NIARIM" />
+<meta property="og:description" content="NIARIMで作られた作品を、新着やランキングから発見できるコミュニティ機能のご紹介です。" />
+<meta property="og:url" content="https://niarim.example.com/community/" />
+<meta property="og:image" content="/assets/images/ogp-default.png" />
+<meta property="og:locale" content="ja_JP" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="みんなの作品を見る | NIARIM" />
+<meta name="twitter:description" content="NIARIMで作られた作品を、新着やランキングから発見できるコミュニティ機能のご紹介です。" />
+<meta name="twitter:image" content="/assets/images/ogp-default.png" />
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<link rel="stylesheet" href="/css/pages/about.css" />
+<link rel="stylesheet" href="/css/pages/community.css" />
+</head>
+<body data-i18n-title="meta.community.title" data-i18n-description="meta.community.description">
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img src="/assets/images/logo/app_logo.svg" alt="NIARIM" width="32" height="32" />
+      <span>NIARIM</span>
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+        <li><a href="/community/" aria-current="page" data-i18n="nav.community">みんなの作品</a></li>
+        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+      </ul>
+      <div class="lang-dropdown" data-lang-dropdown data-open="false">
+        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">
+          <span data-current-lang-label>日本語</span>
+        </button>
+        <ul class="lang-menu" data-lang-menu></ul>
+      </div>
+      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="container">
+    <div class="about-hero reveal">
+      <span class="eyebrow" data-i18n="communityPage.eyebrow">Community</span>
+      <h1 data-i18n="communityPage.title">みんなの作品を見る</h1>
+      <p data-i18n="communityPage.lead">NIARIMで制作された作品を発見できるコミュニティ機能です。閲覧はログイン不要で、誰でも気軽に楽しめます。</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="community-banner reveal" data-i18n="communityPage.comingSoon">本ページはNIARIM正式リリースに向けて準備中の機能を紹介するページです。仕様は確定していますが、実装は今後行われます。画面キャプチャは後日、実際の画面に差し替えます。</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="community-tabs reveal">
+        <button type="button" class="is-active" data-community-tab="latest" data-i18n="communityPage.tabs.latest">新着</button>
+        <button type="button" data-community-tab="daily" data-i18n="communityPage.tabs.daily">デイリー</button>
+        <button type="button" data-community-tab="weekly" data-i18n="communityPage.tabs.weekly">週間</button>
+        <button type="button" data-community-tab="monthly" data-i18n="communityPage.tabs.monthly">月間</button>
+        <button type="button" data-community-tab="yearly" data-i18n="communityPage.tabs.yearly">年間</button>
+        <button type="button" data-community-tab="overall" data-i18n="communityPage.tabs.overall">累計</button>
+      </div>
+      <p class="community-ranking-note reveal" data-i18n="communityPage.ranking.note">各ランキングはTOP50を表示予定です。</p>
+
+      <div class="community-gallery reveal">
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">1</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">2</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">3</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">4</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">5</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">6</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">7</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="thumb">
+            <span class="rank-badge">8</span>
+            <span data-i18n="communityPage.placeholder.label">作品プレースホルダー</span>
+          </div>
+          <div class="meta">
+            <h3>SCREENSHOT_PLACEHOLDER</h3>
+            <p>SCREENSHOT_PLACEHOLDER</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-card reveal">
+          <div class="icon" aria-hidden="true">🔓</div>
+          <h3 data-i18n="communityPage.login.title">見るだけならログイン不要</h3>
+          <p data-i18n="communityPage.login.body">アニメを描いて遊ぶことはもちろん、みんなの作品の閲覧・新着・ランキングの表示・作者の作品一覧の閲覧は、ログインなしでお楽しみいただけます。作品の投稿・通報・ブロックにはGoogleアカウントでのログインが必要です。</p>
+        </div>
+        <div class="intro-card reveal" data-reveal-delay="80">
+          <div class="icon" aria-hidden="true">🔄</div>
+          <h3 data-i18n="communityPage.update.title">毎日更新される、集まる場所に</h3>
+          <p data-i18n="communityPage.update.body">新着は投稿され次第すぐに反映されます。ランキングは1日2回（作品数に応じて最大4回）更新を予定しており、いつ訪れても新しい発見がある、毎日集まりたくなる場所を目指しています。</p>
+        </div>
+        <div class="intro-card reveal" data-reveal-delay="160">
+          <div class="icon" aria-hidden="true">🔖</div>
+          <h3 data-i18n="communityPage.bookmark.title">ブックマーク機能</h3>
+          <p data-i18n="communityPage.bookmark.body">お気に入りの作品はブックマークして、あとから見返せます（ブックマークにはログインが必要です）。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-cta reveal">
+        <h2 data-i18n="communityPage.cta.title">あなたの作品も、ここに。</h2>
+        <p data-i18n="communityPage.cta.body">NIARIMで手描きアニメーションを制作して、いつか、みんなの作品欄に投稿してみませんか。</p>
+        <a class="btn btn-accent" href="/#download" data-i18n="communityPage.cta.link">アプリをダウンロード</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <img src="/assets/images/logo/app_logo.svg" alt="NIARIM" width="32" height="32" />
+          <span>NIARIM</span>
+        </a>
+        <p data-i18n="footer.tagline">Animation made by your hands.</p>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.product">Product</h3>
+        <ul>
+          <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+          <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+          <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+          <li><a href="/community/" data-i18n="nav.community">みんなの作品</a></li>
+          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.support">Support</h3>
+        <ul>
+          <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+          <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <ul>
+          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
+          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
+      <div class="footer-social">
+        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/config.js"></script>
+<script src="/js/i18n-dict.js"></script>
+<script src="/js/i18n-dict-intl.js"></script>
+<script src="/js/i18n-dict-nav-extra.js"></script>
+<script src="/js/i18n-dict-community.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/animations.js"></script>
+<script src="/js/community.js"></script>
+<script>
+  (function () {
+    var c = window.NIARIM_CONFIG || {};
+    ["footer-x-link", "footer-x-icon"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && c.X_URL) el.setAttribute("href", c.X_URL);
+    });
+  })();
+</script>
+</body>
+</html>

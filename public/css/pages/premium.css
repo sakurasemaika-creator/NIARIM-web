@@ -1,0 +1,126 @@
+/* ==========================================================================
+   NIARIM premium.css - プレミアムプランページ専用スタイル
+   ========================================================================== */
+
+.pricing-notice {
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+  color: var(--color-gray-700);
+  font-size: var(--fs-small);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.pricing-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.is-premium {
+  background: linear-gradient(160deg, var(--color-ink), #2b2950);
+  color: var(--color-white);
+  border: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-card h3 {
+  font-size: var(--fs-h3);
+}
+
+.pricing-price {
+  margin-top: var(--space-sm);
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.pricing-price .amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.pricing-price .unit {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.pricing-card.is-premium .pricing-price .unit {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.pricing-plan-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: var(--space-md);
+}
+
+.pricing-plan-toggle button {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.pricing-plan-toggle button.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.pricing-yearly-note {
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--color-sub);
+  display: none;
+}
+
+.pricing-yearly-note.is-visible {
+  display: block;
+}
+
+.pricing-list {
+  margin-top: var(--space-lg);
+  display: grid;
+  gap: 0.7rem;
+  font-size: var(--fs-small);
+}
+
+.pricing-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.pricing-list li::before {
+  content: "✓";
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.pricing-card.is-premium .pricing-list li::before {
+  color: var(--color-sub);
+}
+
+@media (max-width: 860px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}

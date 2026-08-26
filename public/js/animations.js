@@ -45,5 +45,35 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initReveal);
+  function initParallaxTilt() {
+    var el = document.querySelector("[data-parallax]");
+    if (!el || prefersReducedMotion()) return;
+    // タッチ端末ではホバー相当の操作がないため対象外（"any-hover"でマウス操作可能な環境のみ）
+    if (!window.matchMedia || !window.matchMedia("(any-hover: hover)").matches) {
+      return;
+    }
+
+    var maxTilt = 6; // deg
+
+    el.addEventListener("mousemove", function (event) {
+      var rect = el.getBoundingClientRect();
+      var x = (event.clientX - rect.left) / rect.width - 0.5;
+      var y = (event.clientY - rect.top) / rect.height - 0.5;
+      el.style.transform =
+        "perspective(1200px) rotateX(" +
+        (-y * maxTilt).toFixed(2) +
+        "deg) rotateY(" +
+        (x * maxTilt).toFixed(2) +
+        "deg)";
+    });
+
+    el.addEventListener("mouseleave", function () {
+      el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initReveal();
+    initParallaxTilt();
+  });
 })();
