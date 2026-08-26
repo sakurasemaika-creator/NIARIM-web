@@ -209,6 +209,11 @@
   font-size: 1rem;
 }
 
+.fd-tool .ic {
+  width: 18px;
+  height: 18px;
+}
+
 .fd-tool.is-active {
   background: var(--fd-accent);
   color: var(--color-white);
@@ -281,7 +286,11 @@
   gap: var(--space-md);
   margin-top: var(--space-sm);
   color: var(--fd-text);
-  font-size: 1.1rem;
+}
+
+.fd-transport .ic {
+  width: 20px;
+  height: 20px;
 }
 
 .fd-transport .is-play {
@@ -293,6 +302,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.fd-transport .is-play .ic {
+  width: 22px;
+  height: 22px;
 }
 
 /* ---- 編集（レイヤーパネル） ---- */
@@ -318,6 +332,12 @@
   background: rgba(255, 92, 122, 0.22);
 }
 
+.fd-layer-row .ic {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 .fd-layer-thumb {
   width: 30px;
   height: 30px;
@@ -328,11 +348,14 @@
 
 .fd-layer-name {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.fd-layer-opacity {
-  color: var(--color-gray-500);
-  font-variant-numeric: tabular-nums;
+.fd-layer-row .fd-drag {
+  opacity: 0.55;
 }
 
 /* ---- 作画支援（オニオンスキン + トーン） ---- */
@@ -401,6 +424,12 @@
   margin-top: var(--space-sm);
   color: var(--fd-text);
   font-size: var(--fs-small);
+}
+
+.fd-audio-controls .ic {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .fd-slider {

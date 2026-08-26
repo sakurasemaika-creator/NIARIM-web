@@ -51,6 +51,17 @@ p {
   text-wrap: pretty;
 }
 
+/* NIARIMアプリ本体と全く同じアイコン(Material Icons / Font Awesome Free)を
+   使用する場合の共通スタイル。アイコン本体は /assets/icons/ui/sprite.svg
+   （詳細は同ディレクトリのLICENSE.md参照）。 */
+.ic {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: -0.15em;
+}
+
 .container {
   width: min(100% - var(--container-padding) * 2, var(--container-width));
   margin-inline: auto;
