@@ -72,8 +72,42 @@
     });
   }
 
+  /**
+   * 機能紹介ページ: 画面内に入ったセクションに対応するタブへ
+   * is-active を付与するスクロールスパイ（/features/ のみ動作）。
+   */
+  function initFeatureNavSpy() {
+    var nav = document.querySelector(".feature-nav");
+    var sections = document.querySelectorAll(".feature-section[id]");
+    if (!nav || !sections.length || !("IntersectionObserver" in window)) return;
+
+    var links = nav.querySelectorAll("a[href^='#']");
+
+    function setActive(id) {
+      links.forEach(function (link) {
+        link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initParallaxTilt();
+    initFeatureNavSpy();
   });
 })();
