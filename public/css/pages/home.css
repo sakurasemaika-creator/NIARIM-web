@@ -57,11 +57,21 @@
   color: transparent;
 }
 
+.hero-subtitle {
+  margin-top: var(--space-sm);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  max-width: 42ch;
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.22s forwards;
+}
+
 .hero-lead {
   margin-top: var(--space-md);
   font-size: 1.1rem;
   color: var(--color-text-muted);
-  max-width: 46ch;
+  max-width: 52ch;
   opacity: 0;
   animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.3s forwards;
 }
@@ -75,12 +85,27 @@
   animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.42s forwards;
 }
 
+.hero-bridge {
+  margin-top: var(--space-md);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  max-width: 46ch;
+  opacity: 0;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.48s forwards;
+}
+
+.hero-bridge a {
+  color: var(--color-brand);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .hero-note {
   margin-top: var(--space-sm);
   font-size: var(--fs-small);
   color: var(--color-text-muted);
   opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.5s forwards;
+  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.56s forwards;
 }
 
 @keyframes hero-fade-up {

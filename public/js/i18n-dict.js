@@ -32,9 +32,12 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "描く。動かす。",
-    "hero.title.line2": "物語にする。",
+    "hero.title.line2": "みつける。",
+    "hero.subtitle": "つくる人と、みる人の境界を曖昧に。",
     "hero.lead":
-      "NIARIMは、手描きの一枚一枚をあなた自身の手でアニメーションへと変えていく制作アプリです。",
+      "NIARIMは、スマートフォンから本格的な手描きアニメーションをつくれる制作アプリです。一枚ずつ絵を描いて動かす手描きアニメーションはもちろん、キーフレームを使ったモーションアニメーションや、画像を組み合わせたストップモーションまで。描画からアニメーション、編集、音入れ、書き出しまで、一つのアプリで作品を完成させられます。",
+    "hero.bridge.html":
+      "そして、つくった作品はNIARIMの<a href=\"/community/\">「みんなの作品をみる」</a>へ。誰かの作品をみて、次の作品をつくる。人から作品へ。作品から人へ。",
     "hero.cta.primary": "アプリをダウンロード",
     "hero.cta.secondary": "機能を見る",
     "hero.note": "対応端末・提供状況は Google Play のページをご確認ください。",
@@ -296,9 +299,12 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Draw. Move.",
-    "hero.title.line2": "Tell your story.",
+    "hero.title.line2": "Discover.",
+    "hero.subtitle": "Blurring the line between the ones who make and the ones who watch.",
     "hero.lead":
-      "NIARIM is a creation app that lets you turn hand-drawn frames into animation, entirely with your own hands.",
+      "NIARIM is an app for creating full hand-drawn animation right from your smartphone. Draw and move one picture at a time, animate with keyframes, or even combine still images into stop motion. From drawing to animation, editing, sound, and export — finish your work in one single app.",
+    "hero.bridge.html":
+      "And once it's made, bring it to NIARIM's <a href=\"/community/\">“See Everyone's Work.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
     "hero.cta.primary": "Download the App",
     "hero.cta.secondary": "See the Features",
     "hero.note": "Please check the Google Play page for supported devices and availability.",

@@ -23,8 +23,10 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "绘制。让画面动起来。",
-    "hero.title.line2": "讲述你的故事。",
-    "hero.lead": "NIARIM 是一款创作应用，让你亲手将一张张手绘画面变成动画作品。",
+    "hero.title.line2": "遇见。",
+    "hero.subtitle": "让创作者与观众之间的界限变得模糊。",
+    "hero.lead": "NIARIM 是一款可以在智能手机上制作正式手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
+    "hero.bridge.html": "完成的作品，可以发布到 NIARIM 的<a href=\"/community/\">「看看大家的作品」</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。",
     "hero.cta.primary": "下载应用",
     "hero.cta.secondary": "查看功能",
     "hero.note": "支持的设备与上架情况，请以 Google Play 页面信息为准。",
@@ -266,8 +268,10 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "繪製。讓畫面動起來。",
-    "hero.title.line2": "說出你的故事。",
-    "hero.lead": "NIARIM 是一款創作應用，讓你親手將一張張手繪畫面變成動畫作品。",
+    "hero.title.line2": "遇見。",
+    "hero.subtitle": "讓創作者與觀眾之間的界線變得模糊。",
+    "hero.lead": "NIARIM 是一款可以在智慧型手機上製作正式手繪動畫的創作應用程式。既能一張張地畫圖並讓它動起來，製作手繪動畫，也能使用關鍵影格製作動態動畫，甚至可以將圖片組合成定格動畫。從繪圖、動畫、編輯、配音到匯出，一個應用程式就能完成作品。",
+    "hero.bridge.html": "完成的作品，可以發布到 NIARIM 的<a href=\"/community/\">「看看大家的作品」</a>。看看別人的作品，再創作下一個作品。從人到作品，從作品到人。",
     "hero.cta.primary": "下載應用程式",
     "hero.cta.secondary": "查看功能",
     "hero.note": "支援的裝置與上架狀況，請以 Google Play 頁面資訊為準。",
@@ -509,8 +513,10 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "그린다. 움직인다.",
-    "hero.title.line2": "이야기로 만든다.",
-    "hero.lead": "NIARIM은 손으로 그린 한 장 한 장을 직접 애니메이션으로 만들어가는 제작 앱입니다.",
+    "hero.title.line2": "발견한다.",
+    "hero.subtitle": "만드는 사람과 보는 사람의 경계를 흐리게.",
+    "hero.lead": "NIARIM은 스마트폰만으로 본격적인 손그림 애니메이션을 만들 수 있는 제작 앱입니다. 한 장씩 그림을 그려 움직이는 손그림 애니메이션은 물론, 키프레임을 활용한 모션 애니메이션, 이미지를 조합한 스톱모션까지. 그리기부터 애니메이션, 편집, 사운드, 내보내기까지 앱 하나로 작품을 완성할 수 있습니다.",
+    "hero.bridge.html": "그리고 완성한 작품은 NIARIM의 <a href=\"/community/\">「모두의 작품 보기」</a>로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.",
     "hero.cta.primary": "앱 다운로드",
     "hero.cta.secondary": "기능 살펴보기",
     "hero.note": "지원 기기 및 제공 현황은 Google Play 페이지를 확인해 주세요.",
@@ -752,9 +758,12 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dessiner. Animer.",
-    "hero.title.line2": "Raconter une histoire.",
+    "hero.title.line2": "Découvrez.",
+    "hero.subtitle": "Estomper la frontière entre celles et ceux qui créent et celles et ceux qui regardent.",
     "hero.lead":
-      "NIARIM est une application qui vous permet de transformer des images dessinées à la main en animation, entièrement par vous-même.",
+      "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
+    "hero.bridge.html":
+      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">« Voir les œuvres de tous »</a> de NIARIM. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
     "hero.cta.primary": "Télécharger l'application",
     "hero.cta.secondary": "Voir les fonctionnalités",
     "hero.note": "Veuillez consulter la page Google Play pour les appareils compatibles et la disponibilité.",
@@ -1014,9 +1023,12 @@
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dibuja. Anima.",
-    "hero.title.line2": "Cuenta tu historia.",
+    "hero.title.line2": "Descubre.",
+    "hero.subtitle": "Difuminando la frontera entre quienes crean y quienes miran.",
     "hero.lead":
-      "NIARIM es una app que te permite convertir dibujos hechos a mano en animación, enteramente con tus propias manos.",
+      "NIARIM es una app que te permite crear animación dibujada a mano de verdad, directamente desde tu smartphone. Dibuja y anima dibujo a dibujo, crea animación por fotogramas clave, o combina imágenes fijas en stop motion. Desde el dibujo hasta la animación, la edición, el sonido y la exportación: termina tu obra en una sola app.",
+    "hero.bridge.html":
+      "Y una vez terminada, llévala a <a href=\"/community/\">«Ver las obras de todos»</a> de NIARIM. Mira la obra de otra persona, y crea la siguiente. De las personas a las obras. De las obras a las personas.",
     "hero.cta.primary": "Descargar la app",
     "hero.cta.secondary": "Ver funciones",
     "hero.note": "Consulta la página de Google Play para conocer los dispositivos compatibles y la disponibilidad.",
