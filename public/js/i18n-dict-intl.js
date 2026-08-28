@@ -19,7 +19,7 @@
 
     "meta.home.title": "NIARIM | 用绘画、动作与故事打造动画的创作应用",
     "meta.home.description":
-      "NIARIM 是一款创作应用，能将你一格一格亲手绘制的画面变成动画作品并导出。通过画笔、时间轴与非破坏性编辑，让你的故事动起来。",
+      "NIARIM 是一款创作应用，能将你一格一格亲手绘制的画面变成动画作品并导出。通过画笔、时间轴与图层，让你的故事动起来。",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "绘制。让画面动起来。",
@@ -44,7 +44,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "主要功能",
-    "features.lead": "每一个制作环节，都经过用心打磨。",
+    "features.lead": "只要觉得「有了会很方便」，就毫不妥协地全部加进来。",
     "features.drawing.title": "随心所欲地绘制",
     "features.drawing.body":
       "可在 G 笔、钢笔、喷枪、自定义画笔间自由切换，并调整颜色、透明色与不透明度，配合缩放与平移绘制细节。",
@@ -52,7 +52,7 @@
     "features.animation.body": "在时间轴上添加与编辑帧画面，并可一边预览动画效果一边制作。",
     "features.editing.title": "可以反复修改的自由度",
     "features.editing.body":
-      "支持非破坏性编辑，配合填充与容差调整、图层管理，直到满意为止都可以重新绘制。",
+      "配合填充与容差调整、分图层管理，可以反复调整直到满意为止。",
     "features.export.title": "导出作品，分享给大家",
     "features.export.body": "支持最高 Full HD 分辨率，并可自由设置画面比例导出视频。",
     "features.linkAll": "查看全部功能",
@@ -191,8 +191,8 @@
 
     "featuresPage.editing.title": "Editing｜编辑",
     "featuresPage.editing.lead": "可以反复修改，直到满意为止的编辑自由度。",
-    "featuresPage.editing.item1.title": "非破坏性编辑",
-    "featuresPage.editing.item1.body": "在保留原始画面的前提下调整编辑内容。",
+    "featuresPage.editing.item1.title": "分图层，随时重新绘制",
+    "featuresPage.editing.item1.body": "把线稿、颜色、背景等分在不同图层，即使只想重新上色，也无需改动线稿。",
     "featuresPage.editing.item2.title": "填充",
     "featuresPage.editing.item2.body": "快速填充封闭区域。",
     "featuresPage.editing.item3.title": "容差",
@@ -270,7 +270,7 @@
 
     "meta.home.title": "NIARIM | 用繪畫、動作與故事打造動畫的創作應用",
     "meta.home.description":
-      "NIARIM 是一款創作應用，能將你一格一格親手繪製的畫面變成動畫作品並匯出。透過畫筆、時間軸與非破壞性編輯，讓你的故事動起來。",
+      "NIARIM 是一款創作應用，能將你一格一格親手繪製的畫面變成動畫作品並匯出。透過畫筆、時間軸與圖層，讓你的故事動起來。",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "繪製。讓畫面動起來。",
@@ -295,7 +295,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "主要功能",
-    "features.lead": "每一個製作環節，都經過用心打磨。",
+    "features.lead": "只要覺得「有了會很方便」，就毫不妥協地全部加進來。",
     "features.drawing.title": "隨心所欲地繪製",
     "features.drawing.body":
       "可在 G 筆、鋼筆、噴槍、自訂畫筆間自由切換，並調整顏色、透明色與不透明度，搭配縮放與平移繪製細節。",
@@ -303,7 +303,7 @@
     "features.animation.body": "在時間軸上新增與編輯影格，並可一邊預覽動畫效果一邊製作。",
     "features.editing.title": "可以反覆修改的自由度",
     "features.editing.body":
-      "支援非破壞性編輯，搭配填色與容許值調整、圖層管理，直到滿意為止都能重新繪製。",
+      "搭配填色與容許值調整、分圖層管理，可以反覆調整直到滿意為止。",
     "features.export.title": "匯出作品，分享給大家",
     "features.export.body": "支援最高 Full HD 解析度，並可自由設定畫面比例匯出影片。",
     "features.linkAll": "查看全部功能",
@@ -442,8 +442,8 @@
 
     "featuresPage.editing.title": "Editing｜編輯",
     "featuresPage.editing.lead": "可以反覆修改，直到滿意為止的編輯自由度。",
-    "featuresPage.editing.item1.title": "非破壞性編輯",
-    "featuresPage.editing.item1.body": "在保留原始畫面的前提下調整編輯內容。",
+    "featuresPage.editing.item1.title": "分圖層，隨時重新繪製",
+    "featuresPage.editing.item1.body": "把線稿、顏色、背景等分在不同圖層，即使只想重新上色，也不需要改動線稿。",
     "featuresPage.editing.item2.title": "填色",
     "featuresPage.editing.item2.body": "快速填滿封閉區域。",
     "featuresPage.editing.item3.title": "容許值",
@@ -521,7 +521,7 @@
 
     "meta.home.title": "NIARIM | 그리고, 움직이고, 이야기로 만드는 애니메이션 제작 앱",
     "meta.home.description":
-      "NIARIM은 한 장 한 장 직접 그린 그림을 애니메이션 작품으로 만들어 내보낼 수 있는 제작 앱입니다. 펜, 타임라인, 비파괴 편집으로 당신의 이야기를 움직여 보세요.",
+      "NIARIM은 한 장 한 장 직접 그린 그림을 애니메이션 작품으로 만들어 내보낼 수 있는 제작 앱입니다. 펜, 타임라인, 레이어로 당신의 이야기를 움직여 보세요.",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "그린다. 움직인다.",
@@ -546,7 +546,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "주요 기능",
-    "features.lead": "제작의 모든 과정을 세심하게 다듬었습니다.",
+    "features.lead": "「있으면 편리할 것 같은」 기능을, 타협 없이 전부 담았습니다.",
     "features.drawing.title": "원하는 대로 그릴 수 있는 드로잉 도구",
     "features.drawing.body":
       "G펜·펜·에어브러시·사용자 펜 등 목적에 맞게 브러시를 사용할 수 있습니다. 색상 선택, 투명색, 불투명도 조절, 확대·이동으로 세부까지 그릴 수 있습니다.",
@@ -554,7 +554,7 @@
     "features.animation.body": "타임라인에서 프레임을 추가·편집하고, 애니메이션 미리보기로 움직임을 확인하며 제작할 수 있습니다.",
     "features.editing.title": "몇 번이든 다시 그릴 수 있는 자유로움",
     "features.editing.body":
-      "비파괴 편집을 지원하며, 채우기와 허용값 조절, 레이어 관리로 만족할 때까지 다시 그릴 수 있습니다.",
+      "채우기와 허용값 조절, 레이어로 나눈 관리를 통해 만족할 때까지 다시 그릴 수 있습니다.",
     "features.export.title": "작품을 내보내고 전달하기",
     "features.export.body": "Full HD까지의 해상도, 자유로운 화면 비율 설정으로 완성한 작품을 영상으로 내보낼 수 있습니다.",
     "features.linkAll": "모든 기능 보기",
@@ -693,8 +693,8 @@
 
     "featuresPage.editing.title": "Editing｜편집",
     "featuresPage.editing.lead": "만족할 때까지 다시 그릴 수 있는 편집의 자유로움.",
-    "featuresPage.editing.item1.title": "비파괴 편집",
-    "featuresPage.editing.item1.body": "원본 그림을 유지한 채 편집 내용을 조정할 수 있습니다.",
+    "featuresPage.editing.item1.title": "레이어를 나누면 언제든 다시 그릴 수 있어요",
+    "featuresPage.editing.item1.body": "선화・색・배경 등을 레이어로 나눠두면, 색만 다시 칠하고 싶을 때도 선화를 건드리지 않고 조정할 수 있습니다.",
     "featuresPage.editing.item2.title": "채우기",
     "featuresPage.editing.item2.body": "닫힌 영역을 빠르게 채울 수 있습니다.",
     "featuresPage.editing.item3.title": "허용값",
@@ -772,7 +772,7 @@
 
     "meta.home.title": "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
     "meta.home.description":
-      "NIARIM est une application de création qui transforme les images que vous dessinez, image par image, en une animation que vous exportez vous-même. Dessinez, construisez une timeline et éditez sans destruction pour donner vie à votre histoire.",
+      "NIARIM est une application de création qui transforme les images que vous dessinez, image par image, en une animation que vous exportez vous-même. Dessin, timeline et calques donnent vie à votre histoire.",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dessiner. Animer.",
@@ -801,7 +801,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "Fonctionnalités principales",
-    "features.lead": "Chaque étape du processus de création, réalisée avec soin.",
+    "features.lead": "Toute fonctionnalité qui nous semblait utile, on l'a ajoutée sans compromis.",
     "features.drawing.title": "Dessinez exactement comme vous le souhaitez",
     "features.drawing.body":
       "Passez du stylo G au stylo, à l'aérographe et à un pinceau personnalisable. Ajustez la couleur, la transparence et l'opacité, et zoomez ou déplacez-vous pour les détails.",
@@ -810,7 +810,7 @@
       "Ajoutez et modifiez des images sur une timeline, et prévisualisez l'animation pendant que vous travaillez.",
     "features.editing.title": "La liberté de recommencer autant de fois que vous le souhaitez",
     "features.editing.body":
-      "L'édition non destructive, le remplissage avec tolérance réglable et la gestion des calques vous permettent d'affiner jusqu'à ce que ce soit parfait.",
+      "Le remplissage avec tolérance réglable et la gestion par calques séparés vous permettent d'affiner jusqu'à ce que ce soit parfait.",
     "features.export.title": "Exportez et partagez votre travail",
     "features.export.body":
       "Exportez jusqu'à une résolution Full HD, avec un rapport d'aspect librement configurable.",
@@ -961,8 +961,8 @@
 
     "featuresPage.editing.title": "Editing｜Édition",
     "featuresPage.editing.lead": "La liberté de recommencer jusqu'à ce que ce soit parfait.",
-    "featuresPage.editing.item1.title": "Édition non destructive",
-    "featuresPage.editing.item1.body": "Ajustez vos modifications tout en conservant le dessin original.",
+    "featuresPage.editing.item1.title": "Redessinez librement grâce aux calques séparés",
+    "featuresPage.editing.item1.body": "Gardez le trait, la couleur et les arrière-plans sur des calques séparés, pour pouvoir refaire juste la coloration sans toucher au trait.",
     "featuresPage.editing.item2.title": "Remplissage",
     "featuresPage.editing.item2.body": "Remplissez rapidement les zones fermées.",
     "featuresPage.editing.item3.title": "Tolérance",
@@ -1043,7 +1043,7 @@
 
     "meta.home.title": "NIARIM | Una app de animación para dibujar, mover y contar historias",
     "meta.home.description":
-      "NIARIM es una app de creación que convierte los dibujos que haces, cuadro a cuadro, en una animación que exportas tú mismo. Dibuja, crea una línea de tiempo y edita de forma no destructiva para dar vida a tu historia.",
+      "NIARIM es una app de creación que convierte los dibujos que haces, cuadro a cuadro, en una animación que exportas tú mismo. El dibujo, la línea de tiempo y las capas le dan vida a tu historia.",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dibuja. Anima.",
@@ -1072,7 +1072,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "Funciones principales",
-    "features.lead": "Cada paso del proceso de creación, cuidado al detalle.",
+    "features.lead": "Toda función que pensamos que sería útil, la incluimos sin concesiones.",
     "features.drawing.title": "Dibuja exactamente como quieras",
     "features.drawing.body":
       "Cambia entre el lápiz G, el lápiz, el aerógrafo y un pincel personalizable. Ajusta color, transparencia y opacidad, y haz zoom o desplázate para los detalles.",
@@ -1081,7 +1081,7 @@
       "Añade y edita cuadros en una línea de tiempo, y previsualiza la animación mientras trabajas.",
     "features.editing.title": "Libertad para rehacer tantas veces como quieras",
     "features.editing.body":
-      "La edición no destructiva, el relleno con tolerancia ajustable y la gestión de capas te permiten perfeccionar hasta que quede como quieres.",
+      "El relleno con tolerancia ajustable y la gestión con capas separadas te permiten perfeccionar hasta que quede como quieres.",
     "features.export.title": "Exporta y comparte tu trabajo",
     "features.export.body":
       "Exporta hasta resolución Full HD, con una relación de aspecto configurable libremente.",
@@ -1232,8 +1232,8 @@
 
     "featuresPage.editing.title": "Editing｜Edición",
     "featuresPage.editing.lead": "La libertad de rehacer tu trabajo hasta que quede como quieres.",
-    "featuresPage.editing.item1.title": "Edición no destructiva",
-    "featuresPage.editing.item1.body": "Ajusta tus ediciones manteniendo intacto el dibujo original.",
+    "featuresPage.editing.item1.title": "Redibuja con libertad gracias a las capas separadas",
+    "featuresPage.editing.item1.body": "Mantén el dibujo lineal, el color y los fondos en capas separadas, para poder rehacer solo el coloreado sin tocar el dibujo lineal.",
     "featuresPage.editing.item2.title": "Relleno",
     "featuresPage.editing.item2.body": "Rellena rápidamente áreas cerradas.",
     "featuresPage.editing.item3.title": "Tolerancia",

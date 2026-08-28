@@ -28,7 +28,7 @@
 
     "meta.home.title": "NIARIM（ニアリム）| 描く、動かす、物語にするアニメーション制作アプリ",
     "meta.home.description":
-      "NIARIMは、自分の手で描いた絵を動かし、アニメーション作品として書き出せる制作アプリです。ペン・タイムライン・非破壊編集で、あなたの物語を動かしましょう。",
+      "NIARIMは、自分の手で描いた絵を動かし、アニメーション作品として書き出せる制作アプリです。ペン・タイムライン・レイヤーで、あなたの物語を動かしましょう。",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "描く。動かす。",
@@ -58,7 +58,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "主要機能",
-    "features.lead": "制作の一つひとつの工程を、丁寧に作り込んでいます。",
+    "features.lead": "「あったら便利」と思う機能を、妥協なく全部詰め込みました。",
     "features.drawing.title": "思い通りに描ける、描画ツール",
     "features.drawing.body":
       "Gペン・ペン・エアブラシ・ユーザーペンなど、目的に合わせてブラシを使い分けられます。色選択・透明色・不透明度の調整、ズームやパンで細部まで描き込めます。",
@@ -67,7 +67,7 @@
       "フレームの追加・編集をタイムライン上で管理し、アニメーションプレビューで動きを確認しながら制作できます。",
     "features.editing.title": "編集を、やり直せる自由さ",
     "features.editing.body":
-      "非破壊編集に対応し、塗りつぶしや許容値の調整、レイヤーによる管理で、納得のいくまで描き直せます。",
+      "塗りつぶしや許容値の調整、レイヤーで分けた管理で、納得のいくまで描き直せます。",
     "features.export.title": "作品を書き出し、届ける",
     "features.export.body":
       "Full HDまでの解像度、自由な縦横比の設定に対応し、完成した作品を動画として書き出せます。",
@@ -219,8 +219,8 @@
 
     "featuresPage.editing.title": "Editing｜編集",
     "featuresPage.editing.lead": "納得がいくまで描き直せる、編集の自由さ。",
-    "featuresPage.editing.item1.title": "非破壊編集",
-    "featuresPage.editing.item1.body": "元の絵を保ったまま、編集内容を調整できます。",
+    "featuresPage.editing.item1.title": "レイヤーを分けて描き直せる",
+    "featuresPage.editing.item1.body": "線画・色・背景などをレイヤーで分けておけば、色だけをやり直したいときも線画に手を加えずに調整できます。",
     "featuresPage.editing.item2.title": "塗りつぶし",
     "featuresPage.editing.item2.body": "囲まれた領域を素早く塗りつぶせます。",
     "featuresPage.editing.item3.title": "許容値",
@@ -301,7 +301,7 @@
 
     "meta.home.title": "NIARIM | An animation app for drawing, moving, and telling your story",
     "meta.home.description":
-      "NIARIM is a creation app that turns the pictures you draw, frame by frame, into animation you export yourself. Draw, build a timeline, and edit non-destructively to bring your story to life.",
+      "NIARIM is a creation app that turns the pictures you draw, frame by frame, into animation you export yourself. Drawing, a timeline, and layers bring your story to life.",
 
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Draw. Move.",
@@ -331,7 +331,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "Core Features",
-    "features.lead": "Every step of the creation process, crafted with care.",
+    "features.lead": "We packed in every feature we thought would be handy, without compromise.",
     "features.drawing.title": "Draw exactly the way you want",
     "features.drawing.body":
       "Switch between the G-pen, pen, airbrush, and a customizable user pen. Adjust color, transparency, and opacity, and zoom or pan in for fine detail.",
@@ -340,7 +340,7 @@
       "Add and edit frames on a timeline, and preview the animation as you work.",
     "features.editing.title": "Freedom to redo as many times as you like",
     "features.editing.body":
-      "Non-destructive editing, fill with adjustable tolerance, and layer management let you keep refining until it's right.",
+      "Fill with adjustable tolerance and layer-separated management let you keep refining until it's right.",
     "features.export.title": "Export and share your work",
     "features.export.body":
       "Export up to Full HD resolution with a freely configurable aspect ratio.",
@@ -490,8 +490,8 @@
 
     "featuresPage.editing.title": "Editing",
     "featuresPage.editing.lead": "The freedom to redo your work until it feels right.",
-    "featuresPage.editing.item1.title": "Non-destructive editing",
-    "featuresPage.editing.item1.body": "Adjust your edits while keeping the original artwork intact.",
+    "featuresPage.editing.item1.title": "Redraw freely with separate layers",
+    "featuresPage.editing.item1.body": "Keep line art, color, and backgrounds on separate layers, so you can redo just the coloring without touching the line art.",
     "featuresPage.editing.item2.title": "Fill",
     "featuresPage.editing.item2.body": "Quickly fill in enclosed areas.",
     "featuresPage.editing.item3.title": "Tolerance",
