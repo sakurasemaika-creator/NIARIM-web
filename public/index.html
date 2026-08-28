@@ -385,7 +385,15 @@
           </div>
         </div>
         <div class="screenshot-card">
+          <!-- timeline_screen.dartの実構成(プレビュー欄+フレームストリップ+
+               再生コントロール)を再現。プレビュー欄の高さは可変(ドラッグ
+               ハンドルで調整可能)だが、ここでは既定的な比率で表示。 -->
           <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+              </svg>
+            </div>
             <div class="fd-frames">
               <span class="fd-frame">1</span>
               <span class="fd-frame">2</span>

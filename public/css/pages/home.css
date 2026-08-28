@@ -493,7 +493,9 @@
 }
 
 .screenshot-card .fd-canvas {
-  flex-shrink: 0;
+  flex: 1;
+  height: auto;
+  min-height: 0;
 }
 
 /* ---- Download CTA ---- */
