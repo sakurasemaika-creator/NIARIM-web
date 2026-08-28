@@ -12,7 +12,7 @@
   "ja": {
     "featuresPage.nav.advanced": "作画支援",
     "featuresPage.advanced.title": "Advanced｜作画支援ツール",
-    "featuresPage.advanced.lead": "プロの作画・仕上げ工程を意識した、一歩進んだツール群。",
+    "featuresPage.advanced.lead": "作画から仕上げまで、一歩進んだツール群。",
     "featuresPage.advanced.item1.title": "オニオンスキン",
     "featuresPage.advanced.item1.body": "前後のフレームを薄く重ねて表示し、動きのつながりを確認しながら描けます。",
     "featuresPage.advanced.item2.title": "トーン",
@@ -37,13 +37,13 @@
     "featuresPage.advanced.item11.body": "よく使うペン・ブラシ・サイズの組み合わせを登録しておき、ワンタップで順番に切り替えられます。",
     "featuresPage.advanced.item12.title": "描画フィルターと演出フィルター",
     "featuresPage.advanced.item12.body": "レイヤーに直接適用する「描画フィルター」と、シーン単位で開始・終了フレームを指定できる「演出フィルター」の2種類を搭載。ぼかし・色調補正・グロー・雨・フィルムのような粒状ノイズなど、映像的な演出を重ねられます。",
-    "features.advanced.title": "描き込みを支える、プロ仕様のツール",
+    "features.advanced.title": "描き込みを支える、一歩進んだツール",
     "features.advanced.body": "オニオンスキン・トーン・スタンプ・定規・テキストなど、仕上げまで見据えた作画支援ツールを搭載しています。"
   },
   "en": {
     "featuresPage.nav.advanced": "Pro Tools",
     "featuresPage.advanced.title": "Advanced Tools",
-    "featuresPage.advanced.lead": "A step further for professional drawing and finishing work.",
+    "featuresPage.advanced.lead": "A step further for drawing and finishing work.",
     "featuresPage.advanced.item1.title": "Onion skin",
     "featuresPage.advanced.item1.body": "Overlay faint previous and next frames so you can draw with the motion's continuity in view.",
     "featuresPage.advanced.item2.title": "Tone",
@@ -68,13 +68,13 @@
     "featuresPage.advanced.item11.body": "Register your favorite combinations of pen, brush, and size, then cycle through them with a single tap.",
     "featuresPage.advanced.item12.title": "Draw filters vs. effect filters",
     "featuresPage.advanced.item12.body": "Two kinds of filters: “draw filters” applied directly to a layer, and “effect filters” you can time to a start and end frame for a scene. Layer on cinematic touches — blur, color correction, glow, rain, film-like grain, and more.",
-    "features.advanced.title": "Professional-grade tools for finishing work",
+    "features.advanced.title": "Tools that go a step further for finishing work",
     "features.advanced.body": "Onion skin, tone, stamps, rulers, text, and more — drawing support built with finishing in mind."
   },
   "zh-Hans": {
     "featuresPage.nav.advanced": "进阶工具",
     "featuresPage.advanced.title": "Advanced｜进阶绘图工具",
-    "featuresPage.advanced.lead": "面向专业绘图与后期加工的进阶工具群。",
+    "featuresPage.advanced.lead": "面向绘图与后期加工的进阶工具群。",
     "featuresPage.advanced.item1.title": "洋葱皮（Onion Skin）",
     "featuresPage.advanced.item1.body": "以半透明方式叠加显示前后帧，便于在把握动作连贯性的同时进行绘制。",
     "featuresPage.advanced.item2.title": "网点纸（Tone）",
@@ -99,13 +99,13 @@
     "featuresPage.advanced.item11.body": "预先注册常用的笔・画笔・尺寸组合，一键即可依次切换。",
     "featuresPage.advanced.item12.title": "描绘滤镜与演出滤镜",
     "featuresPage.advanced.item12.body": "分为直接应用于图层的「描绘滤镜」，以及可按场景指定开始・结束帧的「演出滤镜」两种。可叠加模糊、色调校正、辉光、雨、类似胶片颗粒的噪点等富有影像感的演出效果。",
-    "features.advanced.title": "支撑精细创作的专业级工具",
+    "features.advanced.title": "支撑精细创作的进阶工具",
     "features.advanced.body": "洋葱皮、网点纸、图章、尺规、文字等，配备了着眼于最终完成度的绘图辅助工具。"
   },
   "zh-Hant": {
     "featuresPage.nav.advanced": "進階工具",
     "featuresPage.advanced.title": "Advanced｜進階繪圖工具",
-    "featuresPage.advanced.lead": "面向專業繪圖與後製加工的進階工具群。",
+    "featuresPage.advanced.lead": "面向繪圖與後製加工的進階工具群。",
     "featuresPage.advanced.item1.title": "洋蔥皮（Onion Skin）",
     "featuresPage.advanced.item1.body": "以半透明方式疊加顯示前後影格，便於在掌握動作連貫性的同時進行繪製。",
     "featuresPage.advanced.item2.title": "網點紙（Tone）",
@@ -130,13 +130,13 @@
     "featuresPage.advanced.item11.body": "預先註冊常用的筆・畫筆・尺寸組合，點一下即可依序切換。",
     "featuresPage.advanced.item12.title": "描繪濾鏡與演出濾鏡",
     "featuresPage.advanced.item12.body": "分為直接套用於圖層的「描繪濾鏡」，以及可依場景指定開始・結束影格的「演出濾鏡」兩種。可疊加模糊、色調校正、光暈、雨、類似底片顆粒的雜訊等富有影像感的演出效果。",
-    "features.advanced.title": "支撐精細創作的專業級工具",
+    "features.advanced.title": "支撐精細創作的進階工具",
     "features.advanced.body": "洋蔥皮、網點紙、圖章、尺規、文字等，配備了著眼於最終完成度的繪圖輔助工具。"
   },
   "ko": {
     "featuresPage.nav.advanced": "전문 도구",
     "featuresPage.advanced.title": "Advanced｜작화 지원 도구",
-    "featuresPage.advanced.lead": "프로의 작화·마무리 작업을 고려한 한 단계 앞선 도구들.",
+    "featuresPage.advanced.lead": "작화·마무리 작업을 고려한 한 단계 앞선 도구들.",
     "featuresPage.advanced.item1.title": "어니언 스킨",
     "featuresPage.advanced.item1.body": "앞뒤 프레임을 반투명하게 겹쳐 표시하여, 움직임의 연결을 확인하며 그릴 수 있습니다.",
     "featuresPage.advanced.item2.title": "톤(스크린톤)",
@@ -161,13 +161,13 @@
     "featuresPage.advanced.item11.body": "자주 쓰는 펜·브러시·크기 조합을 등록해두고, 한 번의 탭으로 순서대로 전환할 수 있습니다.",
     "featuresPage.advanced.item12.title": "드로잉 필터와 연출 필터",
     "featuresPage.advanced.item12.body": "레이어에 직접 적용하는 「드로잉 필터」와, 장면 단위로 시작·종료 프레임을 지정할 수 있는 「연출 필터」 두 가지를 탑재. 흐림·색조 보정·글로우·비·필름 같은 입자 노이즈 등 영상적인 연출을 더할 수 있습니다.",
-    "features.advanced.title": "완성도를 뒷받침하는 전문가급 도구",
+    "features.advanced.title": "완성도를 뒷받침하는 한 단계 앞선 도구",
     "features.advanced.body": "어니언 스킨, 톤, 스탬프, 자, 텍스트 등 마무리까지 고려한 작화 지원 도구를 갖추고 있습니다."
   },
   "fr": {
     "featuresPage.nav.advanced": "Outils pro",
     "featuresPage.advanced.title": "Outils avancés",
-    "featuresPage.advanced.lead": "Un cran au-dessus pour le dessin et la finition professionnels.",
+    "featuresPage.advanced.lead": "Un cran au-dessus pour le dessin et la finition.",
     "featuresPage.advanced.item1.title": "Pelure d'oignon (onion skin)",
     "featuresPage.advanced.item1.body": "Superposez en transparence les images précédentes et suivantes pour dessiner en gardant la continuité du mouvement.",
     "featuresPage.advanced.item2.title": "Trames (tone)",
@@ -192,13 +192,13 @@
     "featuresPage.advanced.item11.body": "Enregistrez vos combinaisons favorites de stylo, pinceau et taille, puis passez de l'une à l'autre d'un seul geste.",
     "featuresPage.advanced.item12.title": "Filtres de dessin et filtres d'effet",
     "featuresPage.advanced.item12.body": "Deux types de filtres : les « filtres de dessin », appliqués directement à un calque, et les « filtres d'effet », que vous pouvez caler sur une image de début et de fin pour une scène. Superposez des touches cinématographiques : flou, correction des couleurs, lueur, pluie, grain façon pellicule, et plus encore.",
-    "features.advanced.title": "Des outils de niveau professionnel pour la finition",
+    "features.advanced.title": "Des outils qui vont plus loin pour la finition",
     "features.advanced.body": "Pelure d'oignon, trames, tampons, règles, texte : des outils pensés jusqu'à la finition."
   },
   "es": {
     "featuresPage.nav.advanced": "Herramientas pro",
     "featuresPage.advanced.title": "Herramientas avanzadas",
-    "featuresPage.advanced.lead": "Un paso más allá para el dibujo y el acabado profesional.",
+    "featuresPage.advanced.lead": "Un paso más allá para el dibujo y el acabado.",
     "featuresPage.advanced.item1.title": "Piel de cebolla (onion skin)",
     "featuresPage.advanced.item1.body": "Superpone tenuemente los fotogramas anterior y siguiente para dibujar viendo la continuidad del movimiento.",
     "featuresPage.advanced.item2.title": "Tramas (tone)",
@@ -223,7 +223,7 @@
     "featuresPage.advanced.item11.body": "Registra tus combinaciones favoritas de pluma, pincel y tamaño, y cámbialas en orden con un solo toque.",
     "featuresPage.advanced.item12.title": "Filtros de dibujo y filtros de efecto",
     "featuresPage.advanced.item12.body": "Dos tipos de filtros: los «filtros de dibujo», aplicados directamente a una capa, y los «filtros de efecto», que puedes ajustar a un fotograma de inicio y fin para una escena. Añade toques cinematográficos: desenfoque, corrección de color, resplandor, lluvia, grano tipo película y más.",
-    "features.advanced.title": "Herramientas de nivel profesional para el acabado",
+    "features.advanced.title": "Herramientas que van un paso más allá para el acabado",
     "features.advanced.body": "Piel de cebolla, tramas, sellos, reglas, texto y más: herramientas de apoyo pensadas hasta el acabado final."
   }
 };

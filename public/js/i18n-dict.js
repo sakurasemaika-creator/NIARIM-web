@@ -211,6 +211,10 @@
     "featuresPage.animation.item3.body": "任意のフレームを選び、描き直せます。",
     "featuresPage.animation.item4.title": "アニメーションプレビュー",
     "featuresPage.animation.item4.body": "制作中の動きを、いつでも確認できます。",
+    "featuresPage.animation.item5.title": "カメラワーク（キーフレームアニメーション）",
+    "featuresPage.animation.item5.body": "XY移動・拡大・回転をキーフレームで指定すると、なめらかなカメラワークを自動で補間してくれます。レイヤー自体を描き直す必要はありません。",
+    "featuresPage.animation.item6.title": "レイヤーグループ",
+    "featuresPage.animation.item6.body": "複数のレイヤーをグループ化すれば、1つのキーフレームでまとめて動かせます。",
 
     "featuresPage.editing.title": "Editing｜編集",
     "featuresPage.editing.lead": "納得がいくまで描き直せる、編集の自由さ。",
@@ -469,6 +473,10 @@
     "featuresPage.animation.item3.body": "Select any frame and redraw it.",
     "featuresPage.animation.item4.title": "Animation preview",
     "featuresPage.animation.item4.body": "Check your motion at any point while you work.",
+    "featuresPage.animation.item5.title": "Camera work (keyframe animation)",
+    "featuresPage.animation.item5.body": "Set position, zoom, and rotation as keyframes, and the app smoothly interpolates the camera movement for you — no need to redraw the layer itself.",
+    "featuresPage.animation.item6.title": "Layer groups",
+    "featuresPage.animation.item6.body": "Group multiple layers together and move them all at once with a single keyframe.",
 
     "featuresPage.editing.title": "Editing",
     "featuresPage.editing.lead": "The freedom to redo your work until it feels right.",
