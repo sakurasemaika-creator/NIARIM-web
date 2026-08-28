@@ -75,6 +75,7 @@
       <a href="#editing" data-i18n="featuresPage.nav.editing">編集</a>
       <a href="#advanced" data-i18n="featuresPage.nav.advanced">作画支援</a>
       <a href="#audio" data-i18n="featuresPage.nav.audio">音声</a>
+      <a href="#save" data-i18n="featuresPage.nav.save">保存・共有</a>
       <a href="#export" data-i18n="featuresPage.nav.export">書き出し</a>
     </nav>
 
@@ -289,6 +290,52 @@
       </div>
     </section>
 
+    <section class="feature-section reveal" id="save">
+      <div class="feature-section-head">
+        <h2 data-i18n="featuresPage.save.title">Save &amp; Share｜保存・データ管理</h2>
+        <span data-i18n="featuresPage.save.lead">作品を守り、育て、別の端末へも届ける。柔軟な保存のしくみ。</span>
+      </div>
+      <!-- save_tree_service.dart / project_service.dart / niapro_serializer.dart /
+           niatra_serializer.dart の実装に基づく概念図（特定の設定画面の
+           ピクセル再現ではない）。セーブスロットは既定10、セーブツリーは
+           保存数制限なしの分岐履歴、自動保存はクラッシュ復元専用で
+           両者と別領域。.niashareは素材・フォント同梱の共有用、.niatraは
+           設定・ブラシ・トーン・スタンプ・オートフィル・テーマの引き継ぎ用。 -->
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-slots">
+          <span class="fd-slot">1</span>
+          <span class="fd-slot">2</span>
+          <span class="fd-slot is-active">3</span>
+          <span class="fd-slot">4</span>
+          <span class="fd-slot">5</span>
+          <span class="fd-slot is-more">…</span>
+        </div>
+        <div class="fd-diagram-label" data-i18n="fd.saveSlotsLabel">セーブスロット（最大10）</div>
+        <div class="fd-tree">
+          <div class="fd-tree-row"><span class="fd-tree-node"></span><span>1</span></div>
+          <div class="fd-tree-row"><span class="fd-tree-node"></span><span>├─ 2</span></div>
+          <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;├─ 3a</span></div>
+          <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;└─ 3b</span></div>
+          <div class="fd-tree-row"><span class="fd-tree-node"></span><span>└─ 2'</span></div>
+        </div>
+        <div class="fd-diagram-label" data-i18n="fd.saveTreeLabel">セーブツリー（保存数の制限なし）</div>
+        <div class="fd-share-formats">
+          <span class="fd-format-chip">.niapro</span>
+          <span class="fd-share-arrow">→</span>
+          <span class="fd-format-chip">.niashare</span>
+          <span class="fd-share-arrow">/</span>
+          <span class="fd-format-chip">.niatra</span>
+        </div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item"><h3 data-i18n="featuresPage.save.item1.title">自動保存</h3><p data-i18n="featuresPage.save.item1.body">不意にアプリが終了しても、直前の状態からすぐ復帰できるクラッシュ復元専用の保存です。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.save.item2.title">セーブスロット</h3><p data-i18n="featuresPage.save.item2.body">決まった数のスロットに保存し、好きなタイミングで呼び出せます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.save.item3.title">セーブツリー</h3><p data-i18n="featuresPage.save.item3.body">保存回数の制限なく、枝分かれした履歴として制作過程を残せます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.save.item4.title">作品を共有（.niashare）</h3><p data-i18n="featuresPage.save.item4.body">使用した素材・フォントも一緒に書き出せる共有ファイル形式で、別の端末でもそのまま開けます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.save.item5.title">環境を引き継ぐ（.niatra）</h3><p data-i18n="featuresPage.save.item5.body">設定・ブラシ・トーン・スタンプ・オートフィルプリセット・テーマなど、選んだ項目だけをまとめて別端末へ移行できます。</p></div>
+      </div>
+    </section>
+
     <section class="feature-section reveal" id="export">
       <div class="feature-section-head">
         <h2 data-i18n="featuresPage.export.title">Export｜書き出し</h2>
@@ -383,6 +430,7 @@
 <script src="/js/i18n-dict-intl.js"></script>
 <script src="/js/i18n-dict-nav-extra.js"></script>
 <script src="/js/i18n-dict-advanced.js"></script>
+<script src="/js/i18n-dict-save.js"></script>
 <script src="/js/i18n-dict-features-diagram.js"></script>
 <script src="/js/i18n.js"></script>
 <script src="/js/main.js"></script>

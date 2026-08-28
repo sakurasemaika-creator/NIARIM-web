@@ -25,7 +25,9 @@
       "fd.formatGifSubtitle": "アニメーションGIF",
       "fd.formatWebm": "透過WebM",
       "fd.formatWebmSubtitle": "透明背景動画",
-      "fd.exportStart": "書き出し開始"
+      "fd.exportStart": "書き出し開始",
+      "fd.saveSlotsLabel": "セーブスロット（最大10）",
+      "fd.saveTreeLabel": "セーブツリー（保存数の制限なし）"
     },
     "en": {
       "fd.layer4": "Layer 4 (Auto-fill, sketch)",
@@ -43,7 +45,9 @@
       "fd.formatGifSubtitle": "Animated GIF",
       "fd.formatWebm": "Transparent WebM",
       "fd.formatWebmSubtitle": "Transparent-background video",
-      "fd.exportStart": "Start export"
+      "fd.exportStart": "Start export",
+      "fd.saveSlotsLabel": "Save slots (up to 10)",
+      "fd.saveTreeLabel": "Save tree (unlimited saves)"
     },
     "zh-Hans": {
       "fd.layer4": "图层4（自动上色・草稿）",
@@ -61,7 +65,9 @@
       "fd.formatGifSubtitle": "动画GIF",
       "fd.formatWebm": "透明WebM",
       "fd.formatWebmSubtitle": "透明背景视频",
-      "fd.exportStart": "开始导出"
+      "fd.exportStart": "开始导出",
+      "fd.saveSlotsLabel": "存档栏位（最多10个）",
+      "fd.saveTreeLabel": "存档树（保存次数不限）"
     },
     "zh-Hant": {
       "fd.layer4": "圖層4（自動上色・草稿）",
@@ -79,7 +85,9 @@
       "fd.formatGifSubtitle": "動畫GIF",
       "fd.formatWebm": "透明WebM",
       "fd.formatWebmSubtitle": "透明背景影片",
-      "fd.exportStart": "開始匯出"
+      "fd.exportStart": "開始匯出",
+      "fd.saveSlotsLabel": "存檔欄位（最多10個）",
+      "fd.saveTreeLabel": "存檔樹（保存次數不限）"
     },
     "ko": {
       "fd.layer4": "레이어4(자동 채색・밑그림)",
@@ -97,7 +105,9 @@
       "fd.formatGifSubtitle": "애니메이션 GIF",
       "fd.formatWebm": "투명 WebM",
       "fd.formatWebmSubtitle": "투명 배경 동영상",
-      "fd.exportStart": "내보내기 시작"
+      "fd.exportStart": "내보내기 시작",
+      "fd.saveSlotsLabel": "세이브 슬롯(최대 10개)",
+      "fd.saveTreeLabel": "세이브 트리(저장 횟수 제한 없음)"
     },
     "fr": {
       "fd.layer4": "Calque 4 (remplissage auto, ébauche)",
@@ -115,7 +125,9 @@
       "fd.formatGifSubtitle": "GIF animé",
       "fd.formatWebm": "WebM transparent",
       "fd.formatWebmSubtitle": "Vidéo à fond transparent",
-      "fd.exportStart": "Démarrer l'export"
+      "fd.exportStart": "Démarrer l'export",
+      "fd.saveSlotsLabel": "Emplacements de sauvegarde (jusqu'à 10)",
+      "fd.saveTreeLabel": "Arbre de sauvegardes (illimité)"
     },
     "es": {
       "fd.layer4": "Capa 4 (relleno automático, boceto)",
@@ -133,7 +145,9 @@
       "fd.formatGifSubtitle": "GIF animado",
       "fd.formatWebm": "WebM transparente",
       "fd.formatWebmSubtitle": "Video con fondo transparente",
-      "fd.exportStart": "Iniciar exportación"
+      "fd.exportStart": "Iniciar exportación",
+      "fd.saveSlotsLabel": "Ranuras de guardado (hasta 10)",
+      "fd.saveTreeLabel": "Árbol de guardado (ilimitado)"
     }
   };
   for (var lang in DATA) {
