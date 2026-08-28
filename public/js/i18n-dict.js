@@ -33,7 +33,7 @@
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "描く。動かす。",
     "hero.title.line2": "みつける。",
-    "hero.subtitle": "つくる人と、みる人の境界を曖昧に。",
+    "hero.subtitle": "クリエイターと視聴者の境界を曖昧に。",
     "hero.lead":
       "NIARIMは、スマートフォンから本格的な手描きアニメーションをつくれる制作アプリです。一枚ずつ絵を描いて動かす手描きアニメーションはもちろん、キーフレームを使ったモーションアニメーションや、画像を組み合わせたストップモーションまで。描画からアニメーション、編集、音入れ、書き出しまで、一つのアプリで作品を完成させられます。",
     "hero.bridge.html":
@@ -98,8 +98,6 @@
     "faq.a4":
       "はい。Full HDまでの解像度、自由な縦横比で動画として書き出せます。",
     "faq.q5": "作った作品を共有できますか？",
-    "faq.a5":
-      "書き出した動画ファイルを、お使いの端末やSNSアプリを通じて共有いただけます。アプリ内SNS機能の有無は正式リリース時の仕様をご確認ください。",
     "faq.q6": "アカウント登録は必要ですか？",
     "faq.a6":
       "アカウントの要否については、正式リリース時の仕様をご確認ください。",
@@ -308,7 +306,7 @@
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Draw. Move.",
     "hero.title.line2": "Discover.",
-    "hero.subtitle": "Blurring the line between the ones who make and the ones who watch.",
+    "hero.subtitle": "Blurring the line between creators and viewers.",
     "hero.lead":
       "NIARIM is an app for creating full hand-drawn animation right from your smartphone. Draw and move one picture at a time, animate with keyframes, or even combine still images into stop motion. From drawing to animation, editing, sound, and export — finish your work in one single app.",
     "hero.bridge.html":
@@ -373,8 +371,6 @@
     "faq.a4":
       "Yes. You can export your work as video, up to Full HD, with a freely configurable aspect ratio.",
     "faq.q5": "Can I share what I've made?",
-    "faq.a5":
-      "You can share your exported video files through your device or other apps. Whether an in-app sharing feature exists will be confirmed at official launch.",
     "faq.q6": "Do I need to create an account?",
     "faq.a6": "Please check the official launch specification for this.",
     "faq.q7": "Where can I report a bug or request a feature?",

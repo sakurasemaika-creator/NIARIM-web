@@ -78,8 +78,6 @@
     "faq.q4": "可以导出制作好的作品吗？",
     "faq.a4": "可以。支持最高 Full HD 分辨率，并可自由设置画面比例导出视频。",
     "faq.q5": "可以分享制作好的作品吗？",
-    "faq.a5":
-      "导出的视频文件可以通过设备或其他应用进行分享。应用内是否内置分享功能，请以正式上线时的规格为准。",
     "faq.q6": "需要注册账号吗？",
     "faq.a6": "是否需要账号，请以正式上线时的规格为准。",
     "faq.q7": "在哪里可以反馈问题或提出需求？",
@@ -331,8 +329,6 @@
     "faq.q4": "可以匯出製作好的作品嗎？",
     "faq.a4": "可以。支援最高 Full HD 解析度，並可自由設定畫面比例匯出影片。",
     "faq.q5": "可以分享製作好的作品嗎？",
-    "faq.a5":
-      "匯出的影片檔案可透過裝置或其他應用程式進行分享。應用程式內是否內建分享功能，請以正式上線時的規格為準。",
     "faq.q6": "需要註冊帳號嗎？",
     "faq.a6": "是否需要帳號，請以正式上線時的規格為準。",
     "faq.q7": "哪裡可以回報問題或提出需求？",
@@ -530,7 +526,7 @@
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "그린다. 움직인다.",
     "hero.title.line2": "발견한다.",
-    "hero.subtitle": "만드는 사람과 보는 사람의 경계를 흐리게.",
+    "hero.subtitle": "크리에이터와 시청자의 경계를 흐리게.",
     "hero.lead": "NIARIM은 스마트폰만으로 본격적인 손그림 애니메이션을 만들 수 있는 제작 앱입니다. 한 장씩 그림을 그려 움직이는 손그림 애니메이션은 물론, 키프레임을 활용한 모션 애니메이션, 이미지를 조합한 스톱모션까지. 그리기부터 애니메이션, 편집, 사운드, 내보내기까지 앱 하나로 작품을 완성할 수 있습니다.",
     "hero.bridge.html": "그리고 완성한 작품은 <a href=\"/community/\">「NIARIM 작품광장」</a>으로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.",
     "hero.cta.primary": "앱 다운로드",
@@ -584,8 +580,6 @@
     "faq.q4": "제작한 작품을 내보낼 수 있나요?",
     "faq.a4": "네. Full HD까지의 해상도, 자유로운 화면 비율로 영상으로 내보낼 수 있습니다.",
     "faq.q5": "제작한 작품을 공유할 수 있나요?",
-    "faq.a5":
-      "내보낸 영상 파일을 사용 중인 기기나 SNS 앱을 통해 공유하실 수 있습니다. 앱 내 SNS 기능 유무는 정식 출시 시 사양을 확인해 주세요.",
     "faq.q6": "계정 등록이 필요한가요?",
     "faq.a6": "계정 필요 여부는 정식 출시 시 사양을 확인해 주세요.",
     "faq.q7": "오류나 요청 사항은 어디로 연락하면 되나요?",
@@ -783,7 +777,7 @@
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dessiner. Animer.",
     "hero.title.line2": "Découvrez.",
-    "hero.subtitle": "Estomper la frontière entre celles et ceux qui créent et celles et ceux qui regardent.",
+    "hero.subtitle": "Estomper la frontière entre créateurs et spectateurs.",
     "hero.lead":
       "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
     "hero.bridge.html":
@@ -847,8 +841,6 @@
     "faq.a4":
       "Oui. Vous pouvez exporter votre travail en vidéo, jusqu'à une résolution Full HD, avec un rapport d'aspect librement configurable.",
     "faq.q5": "Puis-je partager ce que j'ai créé ?",
-    "faq.a5":
-      "Vous pouvez partager vos fichiers vidéo exportés via votre appareil ou d'autres applications. La présence d'une fonction de partage intégrée sera confirmée lors du lancement officiel.",
     "faq.q6": "Dois-je créer un compte ?",
     "faq.a6": "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
     "faq.q7": "Où puis-je signaler un bug ou demander une fonctionnalité ?",
@@ -1056,7 +1048,7 @@
     "hero.eyebrow": "Animation Creation App",
     "hero.title.line1": "Dibuja. Anima.",
     "hero.title.line2": "Descubre.",
-    "hero.subtitle": "Difuminando la frontera entre quienes crean y quienes miran.",
+    "hero.subtitle": "Difuminando la frontera entre creadores y espectadores.",
     "hero.lead":
       "NIARIM es una app que te permite crear animación dibujada a mano de verdad, directamente desde tu smartphone. Dibuja y anima dibujo a dibujo, crea animación por fotogramas clave, o combina imágenes fijas en stop motion. Desde el dibujo hasta la animación, la edición, el sonido y la exportación: termina tu obra en una sola app.",
     "hero.bridge.html":
@@ -1120,8 +1112,6 @@
     "faq.a4":
       "Sí. Puedes exportar tu trabajo como video, hasta resolución Full HD, con una relación de aspecto configurable libremente.",
     "faq.q5": "¿Puedo compartir lo que he creado?",
-    "faq.a5":
-      "Puedes compartir tus archivos de video exportados a través de tu dispositivo u otras apps. La existencia de una función de compartir dentro de la app se confirmará en el lanzamiento oficial.",
     "faq.q6": "¿Necesito crear una cuenta?",
     "faq.a6": "Consulta las especificaciones del lanzamiento oficial al respecto.",
     "faq.q7": "¿Dónde puedo reportar un error o solicitar una función?",
