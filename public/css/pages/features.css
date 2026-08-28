@@ -49,11 +49,15 @@
   align-items: center;
   justify-content: center;
   line-height: 1.2;
+  /* 親.feature-navのflexコンテナ内で縮小されてボタンが文字数に対して
+     窮屈にならないよう、常に内容分の幅を確保する。 */
+  flex: 0 0 auto;
   padding: 0.5rem 1.1rem;
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-gray-300);
   font-size: var(--fs-small);
   font-weight: 600;
+  white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out);
@@ -130,6 +134,23 @@
   font-size: var(--fs-small);
   color: var(--color-text-muted);
   margin-top: 0.15rem;
+}
+
+.feature-narrative {
+  margin: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feature-narrative-block h3 {
+  font-size: var(--fs-h4, 1.1rem);
+  margin-bottom: 0.4rem;
+}
+
+.feature-narrative-block p {
+  color: var(--color-text-muted);
+  line-height: 1.8;
 }
 
 .spec-grid {
