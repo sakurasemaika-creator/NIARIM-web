@@ -259,6 +259,10 @@
     "featuresPage.export.item2.body": "縦横比を自由に設定できます。",
     "featuresPage.export.item3.title": "動画書き出し",
     "featuresPage.export.item3.body": "制作した作品を動画ファイルとして書き出せます。",
+    "featuresPage.export.item4.title": "書き出し形式",
+    "featuresPage.export.item4.body": "MP4・WebM・GIFに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
+    "featuresPage.export.item5.title": "制作・書き出し時間の上限",
+    "featuresPage.export.item5.body": "キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで、プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
 
     "meta.news.title": "お知らせ | NIARIM",
     "meta.news.description": "NIARIMの正式リリース・アップデート・メンテナンス情報をお知らせします。",
@@ -528,6 +532,10 @@
     "featuresPage.export.item2.body": "Set the aspect ratio freely.",
     "featuresPage.export.item3.title": "Video export",
     "featuresPage.export.item3.body": "Export your finished work as a video file.",
+    "featuresPage.export.item4.title": "Export formats",
+    "featuresPage.export.item4.body": "Supports MP4, WebM, and GIF. Transparent WebM lets you use your work as animation material with a see-through background.",
+    "featuresPage.export.item5.title": "Time limit per work",
+    "featuresPage.export.item5.body": "Canvas size has an upper limit, but within it you can set the size and aspect ratio to fit your work. The free plan supports up to 90 seconds per work; Premium supports up to 2 hours per work. There's no limit on the number of works you can make.",
 
     "meta.news.title": "News | NIARIM",
     "meta.news.description": "Official launch, update, and maintenance announcements for NIARIM.",
