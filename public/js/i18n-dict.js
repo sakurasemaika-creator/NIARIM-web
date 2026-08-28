@@ -236,7 +236,7 @@
     "featuresPage.editing.item7.title": "クリッピング",
     "featuresPage.editing.item7.body": "下のレイヤーの形に合わせて、上のレイヤーの描画をその範囲だけに制限できます。",
     "featuresPage.editing.item8.title": "自由変形・メッシュ変形",
-    "featuresPage.editing.item8.body": "描いた絵を自由変形やメッシュ変形で、狙った形へ細かく調整できます。",
+    "featuresPage.editing.item8.body": "描いた絵を自由変形やメッシュ変形で、狙った形へ細かく調整できます。メッシュ変形では、最大10×10の格子を使って、レイヤーを自由に変形できます。",
 
     "featuresPage.audio.title": "Audio｜音声",
     "featuresPage.audio.lead": "作品に音を添える、基本的な音声機能。",
@@ -505,7 +505,7 @@
     "featuresPage.editing.item7.title": "Clipping",
     "featuresPage.editing.item7.body": "Restrict a layer's drawing to the shape of the layer beneath it.",
     "featuresPage.editing.item8.title": "Free & mesh transform",
-    "featuresPage.editing.item8.body": "Fine-tune the shape of your artwork with free transform and mesh transform.",
+    "featuresPage.editing.item8.body": "Fine-tune the shape of your artwork with free transform and mesh transform. Mesh transform uses a grid of up to 10×10 to freely reshape a layer.",
 
     "featuresPage.audio.title": "Audio",
     "featuresPage.audio.lead": "Basic audio features to add sound to your work.",

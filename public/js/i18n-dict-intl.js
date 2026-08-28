@@ -208,7 +208,7 @@
     "featuresPage.editing.item7.title": "剪贴蒙版",
     "featuresPage.editing.item7.body": "可让上方图层的绘制内容，仅限于下方图层的形状范围内。",
     "featuresPage.editing.item8.title": "自由变形・网格变形",
-    "featuresPage.editing.item8.body": "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。",
+    "featuresPage.editing.item8.body": "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。网格变形最多可使用10×10的网格，自由地变形图层。",
 
     "featuresPage.audio.title": "Audio｜音频",
     "featuresPage.audio.lead": "为作品配上声音的基础音频功能。",
@@ -457,7 +457,7 @@
     "featuresPage.editing.item7.title": "剪裁遮罩",
     "featuresPage.editing.item7.body": "可讓上方圖層的繪製內容，僅限於下方圖層的形狀範圍內。",
     "featuresPage.editing.item8.title": "自由變形・網格變形",
-    "featuresPage.editing.item8.body": "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。",
+    "featuresPage.editing.item8.body": "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。網格變形最多可使用10×10的網格，自由地變形圖層。",
 
     "featuresPage.audio.title": "Audio｜音訊",
     "featuresPage.audio.lead": "為作品配上聲音的基礎音訊功能。",
@@ -706,7 +706,7 @@
     "featuresPage.editing.item7.title": "클리핑",
     "featuresPage.editing.item7.body": "아래 레이어의 형태에 맞춰, 위 레이어의 그리기를 그 범위로만 제한할 수 있습니다.",
     "featuresPage.editing.item8.title": "자유 변형・메시 변형",
-    "featuresPage.editing.item8.body": "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다.",
+    "featuresPage.editing.item8.body": "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다. 메시 변형은 최대 10×10 격자를 사용해 레이어를 자유롭게 변형합니다.",
 
     "featuresPage.audio.title": "Audio｜오디오",
     "featuresPage.audio.lead": "작품에 소리를 더하는 기본적인 오디오 기능.",
@@ -972,7 +972,7 @@
     "featuresPage.editing.item7.title": "Écrêtage (clipping)",
     "featuresPage.editing.item7.body": "Limitez le dessin d'un calque à la forme du calque situé en dessous.",
     "featuresPage.editing.item8.title": "Transformation libre et par maillage",
-    "featuresPage.editing.item8.body": "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage.",
+    "featuresPage.editing.item8.body": "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage. Celle-ci utilise une grille pouvant aller jusqu'à 10×10 pour déformer librement un calque.",
 
     "featuresPage.audio.title": "Audio",
     "featuresPage.audio.lead": "Des fonctions audio de base pour sonoriser votre œuvre.",
@@ -1241,7 +1241,7 @@
     "featuresPage.editing.item7.title": "Recorte (clipping)",
     "featuresPage.editing.item7.body": "Limita el dibujo de una capa a la forma de la capa que tiene debajo.",
     "featuresPage.editing.item8.title": "Transformación libre y por malla",
-    "featuresPage.editing.item8.body": "Ajusta con precisión la forma de tu dibujo con la transformación libre y la transformación por malla.",
+    "featuresPage.editing.item8.body": "Ajusta con precisión la forma de tu dibujo con la transformación libre y la transformación por malla. Esta última usa una cuadrícula de hasta 10×10 para deformar libremente una capa.",
 
     "featuresPage.audio.title": "Audio",
     "featuresPage.audio.lead": "Funciones básicas de audio para sonorizar tu obra.",
