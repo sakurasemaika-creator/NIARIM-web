@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="/css/variables.css" />
 <link rel="stylesheet" href="/css/common.css" />
 <link rel="stylesheet" href="/css/pages/home.css" />
+<link rel="stylesheet" href="/css/pages/features.css" />
 </head>
 <body data-i18n-title="meta.home.title" data-i18n-description="meta.home.description">
 <a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
@@ -161,7 +162,22 @@
           </ul>
         </div>
         <div class="feature-media">
-          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+              </svg>
+              <div class="fd-toolbar-overlay">
+                <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -174,7 +190,24 @@
           </ul>
         </div>
         <div class="feature-media">
-          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-frames">
+              <span class="fd-frame">1</span>
+              <span class="fd-frame">2</span>
+              <span class="fd-frame is-active">3</span>
+              <span class="fd-frame">4</span>
+              <span class="fd-frame">5</span>
+              <span class="fd-frame">6</span>
+              <span class="fd-frame">7</span>
+            </div>
+            <div class="fd-transport">
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_rewind"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg></span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -187,7 +220,38 @@
           </ul>
         </div>
         <div class="feature-media">
-          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-layers">
+              <div class="fd-layer-row is-active">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
+                <span class="ic ic-type"></span>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -200,7 +264,27 @@
           </ul>
         </div>
         <div class="feature-media">
-          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-topbar">
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
+              <span class="fd-spacer"></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+              <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+            </div>
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 190">
+                <path class="fd-stroke-prev" d="M50 140 C 70 70, 140 40, 180 50 S 290 95, 270 140" />
+                <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+                <path class="fd-stroke-next" d="M80 160 C 100 90, 170 60, 210 70 S 310 110, 290 160" />
+              </svg>
+            </div>
+            <div class="fd-onion-legend">
+              <span><span class="dot prev"></span><span data-i18n="fd.prevFrame">前フレーム</span></span>
+              <span><span class="dot next"></span><span data-i18n="fd.nextFrame">次フレーム</span></span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -213,7 +297,31 @@
           </ul>
         </div>
         <div class="feature-media">
-          <span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span>
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-segmented">
+              <span class="fd-segment is-active" data-i18n="fd.presetStandard">標準</span>
+              <span class="fd-segment" data-i18n="fd.presetHighQuality">高画質</span>
+              <span class="fd-segment" data-i18n="fd.presetCustom">カスタム</span>
+            </div>
+            <div class="fd-format-list">
+              <div class="fd-format-row">
+                <span class="fd-radio is-active"></span>
+                <span class="fd-format-text"><strong>MP4</strong><span data-i18n="fd.formatMp4Subtitle">汎用動画形式</span></span>
+              </div>
+              <div class="fd-format-row">
+                <span class="fd-radio"></span>
+                <span class="fd-format-text"><strong>GIF</strong><span data-i18n="fd.formatGifSubtitle">アニメーションGIF</span></span>
+              </div>
+              <div class="fd-format-row">
+                <span class="fd-radio"></span>
+                <span class="fd-format-text"><strong data-i18n="fd.formatWebm">透過WebM</strong><span data-i18n="fd.formatWebmSubtitle">透明背景動画</span></span>
+              </div>
+            </div>
+            <button type="button" class="fd-export-btn" tabindex="-1">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg>
+              <span data-i18n="fd.exportStart">書き出し開始</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -230,10 +338,161 @@
         <h2 data-i18n="screenshots.title">アプリ画面紹介</h2>
       </div>
       <div class="screenshot-scroller reveal">
-        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
-        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
-        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
-        <div class="screenshot-card"><span class="placeholder-label" data-i18n="screenshots.placeholder">SCREENSHOT_PLACEHOLDER</span></div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-topbar">
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
+              <span class="fd-spacer"></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+            </div>
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M60 150 C 80 60, 160 30, 200 40 S 320 90, 300 150 S 180 190, 100 160" />
+              </svg>
+              <div class="fd-toolbar-overlay">
+                <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
+                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-frames">
+              <span class="fd-frame">1</span>
+              <span class="fd-frame">2</span>
+              <span class="fd-frame is-active">3</span>
+              <span class="fd-frame">4</span>
+              <span class="fd-frame">5</span>
+              <span class="fd-frame">6</span>
+              <span class="fd-frame">7</span>
+            </div>
+            <div class="fd-transport">
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_rewind"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg></span>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-layers">
+              <div class="fd-layer-row is-active">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+              <div class="fd-layer-row">
+                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
+                <span class="ic ic-type"></span>
+                <span class="fd-layer-thumb"></span>
+                <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
+                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-segmented">
+              <span class="fd-segment is-active" data-i18n="fd.presetStandard">標準</span>
+              <span class="fd-segment" data-i18n="fd.presetHighQuality">高画質</span>
+              <span class="fd-segment" data-i18n="fd.presetCustom">カスタム</span>
+            </div>
+            <div class="fd-format-list">
+              <div class="fd-format-row">
+                <span class="fd-radio is-active"></span>
+                <span class="fd-format-text"><strong>MP4</strong><span data-i18n="fd.formatMp4Subtitle">汎用動画形式</span></span>
+              </div>
+              <div class="fd-format-row">
+                <span class="fd-radio"></span>
+                <span class="fd-format-text"><strong>GIF</strong><span data-i18n="fd.formatGifSubtitle">アニメーションGIF</span></span>
+              </div>
+              <div class="fd-format-row">
+                <span class="fd-radio"></span>
+                <span class="fd-format-text"><strong data-i18n="fd.formatWebm">透過WebM</strong><span data-i18n="fd.formatWebmSubtitle">透明背景動画</span></span>
+              </div>
+            </div>
+            <button type="button" class="fd-export-btn" tabindex="-1">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg>
+              <span data-i18n="fd.exportStart">書き出し開始</span>
+            </button>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-slots">
+              <span class="fd-slot">1</span>
+              <span class="fd-slot">2</span>
+              <span class="fd-slot is-active">3</span>
+              <span class="fd-slot">4</span>
+              <span class="fd-slot">5</span>
+              <span class="fd-slot is-more">…</span>
+            </div>
+            <div class="fd-diagram-label" data-i18n="fd.saveSlotsLabel">セーブスロット（最大10）</div>
+            <div class="fd-tree">
+              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>1</span></div>
+              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>├─ 2</span></div>
+              <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;├─ 3a</span></div>
+              <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;└─ 3b</span></div>
+              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>└─ 2'</span></div>
+            </div>
+            <div class="fd-diagram-label" data-i18n="fd.saveTreeLabel">セーブツリー（保存数の制限なし）</div>
+            <div class="fd-share-formats">
+              <span class="fd-format-chip">.niapro</span>
+              <span class="fd-share-arrow">→</span>
+              <span class="fd-format-chip">.niashare</span>
+              <span class="fd-share-arrow">/</span>
+              <span class="fd-format-chip">.niatra</span>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-card">
+          <div class="feature-diagram" aria-hidden="true">
+            <div class="fd-setting-row">
+              <span data-i18n="fd.leftHandedMode">左手モード</span>
+              <span class="fd-toggle is-on"></span>
+            </div>
+            <div class="fd-setting-row fd-gesture-map">
+              <span><strong data-i18n="fd.gestureTwoTap">二本指タップ</strong> → <span data-i18n="fd.gestureUndo">元に戻す</span></span>
+            </div>
+            <div class="fd-setting-row fd-gesture-map">
+              <span><strong data-i18n="fd.gestureThreeTap">三本指タップ</strong> → <span data-i18n="fd.gestureRedo">やり直す</span></span>
+            </div>
+            <div class="fd-setting-row fd-gesture-map">
+              <span><strong data-i18n="fd.gestureTwoSwipe">二本指スワイプ</strong> → <span data-i18n="fd.gestureFrameMove">フレーム移動</span></span>
+            </div>
+            <div class="fd-setting-row fd-gesture-map">
+              <span><strong data-i18n="fd.gestureLongPress">長押し</strong> → <span data-i18n="fd.gestureEyedropper">スポイト</span></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -340,6 +599,9 @@
 <script src="/js/i18n-dict-intl.js"></script>
 <script src="/js/i18n-dict-nav-extra.js"></script>
 <script src="/js/i18n-dict-advanced.js"></script>
+<script src="/js/i18n-dict-features-diagram.js"></script>
+<script src="/js/i18n-dict-save.js"></script>
+<script src="/js/i18n-dict-workspace.js"></script>
 <script src="/js/i18n-dict-about.js"></script>
 <script src="/js/i18n-dict-home-tags.js"></script>
 <script src="/js/i18n-dict-faq-fix.js"></script>
