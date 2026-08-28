@@ -227,6 +227,14 @@
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg></span>
             </div>
+            <div class="fd-material-track is-video">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-videocam"></use></svg>
+              <span class="fd-clip" data-i18n="fd.videoClip">動画クリップ</span>
+            </div>
+            <div class="fd-material-track is-audio">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-audiotrack"></use></svg>
+              <span class="fd-clip" data-i18n="fd.audioClip">音声クリップ</span>
+            </div>
           </div>
         </div>
       </div>
@@ -240,35 +248,46 @@
           </ul>
         </div>
         <div class="feature-media">
+          <!-- canvas_screen.dartの実装通り、レイヤーパネルは画面を置き換える
+               のではなく、キャンバスの右側に画面いっぱいの高さで重なって
+               表示される(Positioned, width:250)。キャンバスの絵は背後に
+               そのまま表示され続ける。 -->
           <div class="feature-diagram" aria-hidden="true">
-            <div class="fd-layers">
-              <div class="fd-layer-row is-active">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
-                <span class="ic ic-type"></span>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M50 150 C 65 70, 130 35, 165 45 S 260 90, 245 150" />
+              </svg>
+              <div class="fd-layer-panel-overlay">
+                <div class="fd-layers">
+                  <div class="fd-layer-row is-active">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
+                    <span class="ic ic-type"></span>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -410,38 +429,53 @@
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_forward"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_next"></use></svg></span>
             </div>
+            <div class="fd-material-track is-video">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-videocam"></use></svg>
+              <span class="fd-clip" data-i18n="fd.videoClip">動画クリップ</span>
+            </div>
+            <div class="fd-material-track is-audio">
+              <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-audiotrack"></use></svg>
+              <span class="fd-clip" data-i18n="fd.audioClip">音声クリップ</span>
+            </div>
           </div>
         </div>
         <div class="screenshot-card">
           <div class="feature-diagram" aria-hidden="true">
-            <div class="fd-layers">
-              <div class="fd-layer-row is-active">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
-                <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
-              </div>
-              <div class="fd-layer-row">
-                <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
-                <span class="ic ic-type"></span>
-                <span class="fd-layer-thumb"></span>
-                <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
-                <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+            <div class="fd-canvas">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M50 150 C 65 70, 130 35, 165 45 S 260 90, 245 150" />
+              </svg>
+              <div class="fd-layer-panel-overlay">
+                <div class="fd-layers">
+                  <div class="fd-layer-row is-active">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
+                    <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                  <div class="fd-layer-row">
+                    <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
+                    <span class="ic ic-type"></span>
+                    <span class="fd-layer-thumb"></span>
+                    <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
+                    <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
