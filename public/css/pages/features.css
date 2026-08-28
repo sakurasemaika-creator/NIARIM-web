@@ -372,6 +372,57 @@
   overflow: hidden;
 }
 
+/* layer_panel.dart build()冒頭のヘッダー行：タイトル→Spacer→
+   全レイヤー結合(merge_type)・ヘルプ(help_outline)・検索(search)。 */
+.fd-layer-header {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding-inline: 8px;
+  gap: 2px;
+  color: var(--fd-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fd-layer-header .fd-spacer {
+  flex: 1;
+}
+
+.fd-layer-header .fd-icon-btn {
+  --fd-icon-size: 16px;
+  --fd-btn-size: 24px;
+}
+
+/* レイヤー一覧の直上にある4分割ショートカット行：
+   新規レイヤー(add)・新規フォルダ(folder)・追加(library_add)・
+   画像読み込み(photo→ic-image流用)。 */
+.fd-layer-shortcuts {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fd-layer-shortcuts .fd-shortcut-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-block: 6px;
+  color: var(--fd-text);
+}
+
+.fd-layer-shortcuts .fd-shortcut-btn .ic {
+  width: 14px;
+  height: 14px;
+}
+
+.fd-layer-shortcuts .fd-shortcut-btn span {
+  font-size: 0.55rem;
+  white-space: nowrap;
+}
+
 .fd-layer-row {
   display: flex;
   align-items: center;

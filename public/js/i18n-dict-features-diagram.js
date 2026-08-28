@@ -10,6 +10,11 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
     "ja": {
+      "fd.layerPanelTitle": "レイヤー",
+      "fd.newLayer": "新規レイヤー",
+      "fd.newFolder": "新規フォルダ",
+      "fd.addLayer": "追加",
+      "fd.importImage": "画像読み込み",
       "fd.layer4": "レイヤー4（自動塗り・下書き）",
       "fd.layer3": "レイヤー3（自動塗り）",
       "fd.layer2": "レイヤー2（共通レイヤー）",
@@ -31,6 +36,11 @@
       "fd.saveTreeLabel": "セーブツリー（保存数の制限なし）"
     },
     "en": {
+      "fd.layerPanelTitle": "Layers",
+      "fd.newLayer": "New layer",
+      "fd.newFolder": "New folder",
+      "fd.addLayer": "Add",
+      "fd.importImage": "Import image",
       "fd.layer4": "Layer 4 (Auto-fill, sketch)",
       "fd.layer3": "Layer 3 (Auto-fill)",
       "fd.layer2": "Layer 2 (Common layer)",
@@ -52,6 +62,11 @@
       "fd.saveTreeLabel": "Save tree (unlimited saves)"
     },
     "zh-Hans": {
+      "fd.layerPanelTitle": "图层",
+      "fd.newLayer": "新建图层",
+      "fd.newFolder": "新建文件夹",
+      "fd.addLayer": "添加",
+      "fd.importImage": "导入图片",
       "fd.layer4": "图层4（自动上色・草稿）",
       "fd.layer3": "图层3（自动上色）",
       "fd.layer2": "图层2（公共图层）",
@@ -73,6 +88,11 @@
       "fd.saveTreeLabel": "存档树（保存次数不限）"
     },
     "zh-Hant": {
+      "fd.layerPanelTitle": "圖層",
+      "fd.newLayer": "新增圖層",
+      "fd.newFolder": "新增資料夾",
+      "fd.addLayer": "新增",
+      "fd.importImage": "匯入圖片",
       "fd.layer4": "圖層4（自動上色・草稿）",
       "fd.layer3": "圖層3（自動上色）",
       "fd.layer2": "圖層2（共用圖層）",
@@ -94,6 +114,11 @@
       "fd.saveTreeLabel": "存檔樹（保存次數不限）"
     },
     "ko": {
+      "fd.layerPanelTitle": "레이어",
+      "fd.newLayer": "새 레이어",
+      "fd.newFolder": "새 폴더",
+      "fd.addLayer": "추가",
+      "fd.importImage": "이미지 불러오기",
       "fd.layer4": "레이어4(자동 채색・밑그림)",
       "fd.layer3": "레이어3(자동 채색)",
       "fd.layer2": "레이어2(공통 레이어)",
@@ -115,6 +140,11 @@
       "fd.saveTreeLabel": "세이브 트리(저장 횟수 제한 없음)"
     },
     "fr": {
+      "fd.layerPanelTitle": "Calques",
+      "fd.newLayer": "Nouveau calque",
+      "fd.newFolder": "Nouveau dossier",
+      "fd.addLayer": "Ajouter",
+      "fd.importImage": "Importer une image",
       "fd.layer4": "Calque 4 (remplissage auto, ébauche)",
       "fd.layer3": "Calque 3 (remplissage auto)",
       "fd.layer2": "Calque 2 (calque commun)",
@@ -136,6 +166,11 @@
       "fd.saveTreeLabel": "Arbre de sauvegardes (illimité)"
     },
     "es": {
+      "fd.layerPanelTitle": "Capas",
+      "fd.newLayer": "Nueva capa",
+      "fd.newFolder": "Nueva carpeta",
+      "fd.addLayer": "Añadir",
+      "fd.importImage": "Importar imagen",
       "fd.layer4": "Capa 4 (relleno automático, boceto)",
       "fd.layer3": "Capa 3 (relleno automático)",
       "fd.layer2": "Capa 2 (capa común)",
