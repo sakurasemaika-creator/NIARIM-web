@@ -8,7 +8,7 @@
   "ja": {
     "a11y.skipToMain": "本文へスキップ",
     "nav.premium": "プレミアム",
-    "nav.community": "みんなの作品",
+    "nav.community": "作品広場",
     "common.scrollTop": "ページトップへ戻る",
     "nav.about": "NIARIMとは",
     "nav.help": "使い方ガイド",
@@ -22,7 +22,7 @@
   "en": {
     "a11y.skipToMain": "Skip to main content",
     "nav.premium": "Premium",
-    "nav.community": "Community",
+    "nav.community": "Gallery",
     "common.scrollTop": "Back to top",
     "nav.about": "About",
     "nav.help": "Guide",
@@ -36,7 +36,7 @@
   "zh-Hans": {
     "a11y.skipToMain": "跳至主要内容",
     "nav.premium": "高级会员",
-    "nav.community": "大家的作品",
+    "nav.community": "作品广场",
     "common.scrollTop": "返回顶部",
     "nav.about": "关于",
     "nav.help": "使用指南",
@@ -50,7 +50,7 @@
   "zh-Hant": {
     "a11y.skipToMain": "跳至主要內容",
     "nav.premium": "高級會員",
-    "nav.community": "大家的作品",
+    "nav.community": "作品廣場",
     "common.scrollTop": "返回頂部",
     "nav.about": "關於",
     "nav.help": "使用指南",
@@ -64,7 +64,7 @@
   "ko": {
     "a11y.skipToMain": "본문으로 건너뛰기",
     "nav.premium": "프리미엄",
-    "nav.community": "모두의 작품",
+    "nav.community": "작품 광장",
     "common.scrollTop": "위로 이동",
     "nav.about": "소개",
     "nav.help": "이용 가이드",
@@ -78,7 +78,7 @@
   "fr": {
     "a11y.skipToMain": "Passer au contenu principal",
     "nav.premium": "Premium",
-    "nav.community": "Communauté",
+    "nav.community": "Galerie",
     "common.scrollTop": "Retour en haut",
     "nav.about": "À propos",
     "nav.help": "Guide",
@@ -92,7 +92,7 @@
   "es": {
     "a11y.skipToMain": "Saltar al contenido principal",
     "nav.premium": "Premium",
-    "nav.community": "Comunidad",
+    "nav.community": "Galería",
     "common.scrollTop": "Volver arriba",
     "nav.about": "Acerca de",
     "nav.help": "Guía",
