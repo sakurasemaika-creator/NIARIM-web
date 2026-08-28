@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/pages/premium.css" />
 </head>
 <body data-i18n-title="meta.premium.title" data-i18n-description="meta.premium.description">
-<a class="skip-link" href="#main">本文へスキップ</a>
+<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
 
 <header class="site-header">
   <div class="container">
@@ -41,8 +41,8 @@
     <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">
       <ul>
         <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
-        <li><a href="/features/" data-i18n="nav.features">機能</a></li>        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
-
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
         <li><a href="/premium/" aria-current="page" data-i18n="nav.premium">プレミアム</a></li>
         <li><a href="/community/" data-i18n="nav.community">みんなの作品</a></li>
         <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
@@ -105,9 +105,12 @@
             <div class="pricing-plan-option pricing-plan-option-best" data-plan-block="yearly">
               <span class="pricing-plan-badge" data-i18n="premiumPage.premium.yearly.badge">実質2か月分無料</span>
               <span class="pricing-plan-option-label" data-i18n="premiumPage.premium.yearly.label">年額プラン</span>
-              <div class="pricing-price">
-                <span class="amount" data-i18n="premiumPage.premium.yearly.price">5,500円</span>
-                <span class="unit" data-i18n="premiumPage.premium.yearly.unit">／年（税込）</span>
+              <div class="pricing-price-compare">
+                <span class="amount-strike" data-i18n="premiumPage.premium.yearly.fullPrice">6,600円</span>
+                <div class="pricing-price">
+                  <span class="amount" data-i18n="premiumPage.premium.yearly.price">5,500円</span>
+                  <span class="unit" data-i18n="premiumPage.premium.yearly.unit">／年（税込）</span>
+                </div>
               </div>
               <p class="pricing-yearly-note" data-i18n="premiumPage.premium.yearly.note">月額プランを12か月分支払うより、年額プランなら実質2か月分無料になります。</p>
             </div>

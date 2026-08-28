@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="/css/pages/features.css" />
 </head>
 <body data-i18n-title="meta.features.title" data-i18n-description="meta.features.description">
-<a class="skip-link" href="#main">本文へスキップ</a>
+<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
 
 <header class="site-header">
   <div class="container">
@@ -170,28 +170,28 @@
             <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
             <svg class="ic ic-type is-autofill-lineart"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー4（自動塗り・下書き）</span>
+            <span class="fd-layer-name" data-i18n="fd.layer4">レイヤー4（自動塗り・下書き）</span>
             <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
             <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
             <svg class="ic ic-type is-autofill"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー3（自動塗り）</span>
+            <span class="fd-layer-name" data-i18n="fd.layer3">レイヤー3（自動塗り）</span>
             <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
             <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility"></use></svg>
             <svg class="ic ic-type is-common"><use href="/assets/icons/ui/sprite.svg#ic-link"></use></svg>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー2（共通レイヤー）</span>
+            <span class="fd-layer-name" data-i18n="fd.layer2">レイヤー2（共通レイヤー）</span>
             <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
           <div class="fd-layer-row">
             <svg class="ic ic-eye"><use href="/assets/icons/ui/sprite.svg#ic-visibility_off"></use></svg>
             <span class="ic ic-type"></span>
             <span class="fd-layer-thumb"></span>
-            <span class="fd-layer-name">レイヤー1</span>
+            <span class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</span>
             <svg class="ic ic-drag"><use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use></svg>
           </div>
         </div>
@@ -231,8 +231,8 @@
           </svg>
         </div>
         <div class="fd-onion-legend">
-          <span><span class="dot prev"></span>前フレーム</span>
-          <span><span class="dot next"></span>次フレーム</span>
+          <span><span class="dot prev"></span><span data-i18n="fd.prevFrame">前フレーム</span></span>
+          <span><span class="dot next"></span><span data-i18n="fd.nextFrame">次フレーム</span></span>
         </div>
       </div>
       <div class="spec-grid">
@@ -259,11 +259,11 @@
       <div class="feature-diagram" aria-hidden="true">
         <div class="fd-audio-track">
           <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-audiotrack"></use></svg>
-          <span>音声クリップ</span>
+          <span data-i18n="fd.audioClip">音声クリップ</span>
         </div>
         <div class="fd-audio-controls">
           <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
-          <span>音量</span>
+          <span data-i18n="fd.volume">音量</span>
           <div class="fd-slider"><span></span></div>
         </div>
       </div>
@@ -285,27 +285,27 @@
            minimumSize height 48)をそのまま再現。 -->
       <div class="feature-diagram" aria-hidden="true">
         <div class="fd-segmented">
-          <span class="fd-segment is-active">標準</span>
-          <span class="fd-segment">高画質</span>
-          <span class="fd-segment">カスタム</span>
+          <span class="fd-segment is-active" data-i18n="fd.presetStandard">標準</span>
+          <span class="fd-segment" data-i18n="fd.presetHighQuality">高画質</span>
+          <span class="fd-segment" data-i18n="fd.presetCustom">カスタム</span>
         </div>
         <div class="fd-format-list">
           <div class="fd-format-row">
             <span class="fd-radio is-active"></span>
-            <span class="fd-format-text"><strong>MP4</strong><span>汎用動画形式</span></span>
+            <span class="fd-format-text"><strong>MP4</strong><span data-i18n="fd.formatMp4Subtitle">汎用動画形式</span></span>
           </div>
           <div class="fd-format-row">
             <span class="fd-radio"></span>
-            <span class="fd-format-text"><strong>GIF</strong><span>アニメーションGIF</span></span>
+            <span class="fd-format-text"><strong>GIF</strong><span data-i18n="fd.formatGifSubtitle">アニメーションGIF</span></span>
           </div>
           <div class="fd-format-row">
             <span class="fd-radio"></span>
-            <span class="fd-format-text"><strong>透過WebM</strong><span>透明背景動画</span></span>
+            <span class="fd-format-text"><strong data-i18n="fd.formatWebm">透過WebM</strong><span data-i18n="fd.formatWebmSubtitle">透明背景動画</span></span>
           </div>
         </div>
         <button type="button" class="fd-export-btn" tabindex="-1">
           <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg>
-          書き出し開始
+          <span data-i18n="fd.exportStart">書き出し開始</span>
         </button>
       </div>
       <div class="spec-grid">
@@ -368,6 +368,7 @@
 <script src="/js/i18n-dict-intl.js"></script>
 <script src="/js/i18n-dict-nav-extra.js"></script>
 <script src="/js/i18n-dict-advanced.js"></script>
+<script src="/js/i18n-dict-features-diagram.js"></script>
 <script src="/js/i18n.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/animations.js"></script>

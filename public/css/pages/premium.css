@@ -67,6 +67,27 @@
   font-size: clamp(1.35rem, 6vw, 1.9rem);
 }
 
+/* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、
+   実際の価格を大きく強調する。 */
+.pricing-price-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pricing-price-compare .amount-strike {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: line-through;
+  text-decoration-color: var(--fd-mark, #ffb020);
+  text-decoration-thickness: 2px;
+  white-space: nowrap;
+}
+
+.pricing-price-compare .pricing-price {
+  margin-top: 0;
+}
+
 .pricing-card.is-premium .pricing-price .unit {
   color: rgba(255, 255, 255, 0.66);
 }

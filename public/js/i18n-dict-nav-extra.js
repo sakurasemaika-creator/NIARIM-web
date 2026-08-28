@@ -6,6 +6,7 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
   "ja": {
+    "a11y.skipToMain": "本文へスキップ",
     "nav.premium": "プレミアム",
     "nav.community": "みんなの作品",
     "common.scrollTop": "ページトップへ戻る",
@@ -19,6 +20,7 @@
     "help.backToTop": "カテゴリ一覧へ戻る"
   },
   "en": {
+    "a11y.skipToMain": "Skip to main content",
     "nav.premium": "Premium",
     "nav.community": "Community",
     "common.scrollTop": "Back to top",
@@ -32,6 +34,7 @@
     "help.backToTop": "Back to categories"
   },
   "zh-Hans": {
+    "a11y.skipToMain": "跳至主要内容",
     "nav.premium": "高级会员",
     "nav.community": "大家的作品",
     "common.scrollTop": "返回顶部",
@@ -45,6 +48,7 @@
     "help.backToTop": "返回分类列表"
   },
   "zh-Hant": {
+    "a11y.skipToMain": "跳至主要內容",
     "nav.premium": "高級會員",
     "nav.community": "大家的作品",
     "common.scrollTop": "返回頂部",
@@ -58,6 +62,7 @@
     "help.backToTop": "返回分類列表"
   },
   "ko": {
+    "a11y.skipToMain": "본문으로 건너뛰기",
     "nav.premium": "프리미엄",
     "nav.community": "모두의 작품",
     "common.scrollTop": "위로 이동",
@@ -71,6 +76,7 @@
     "help.backToTop": "카테고리 목록으로 돌아가기"
   },
   "fr": {
+    "a11y.skipToMain": "Passer au contenu principal",
     "nav.premium": "Premium",
     "nav.community": "Communauté",
     "common.scrollTop": "Retour en haut",
@@ -84,6 +90,7 @@
     "help.backToTop": "Retour aux catégories"
   },
   "es": {
+    "a11y.skipToMain": "Saltar al contenido principal",
     "nav.premium": "Premium",
     "nav.community": "Comunidad",
     "common.scrollTop": "Volver arriba",
