@@ -699,3 +699,62 @@
 .fd-share-arrow {
   color: var(--color-gray-500);
 }
+
+/* ---- 作業環境設定 ----
+   settings_service.dart（左手モード）・gesture_settings_screen.dart
+   （ジェスチャー割り当て）・workspace_preset_service.dart（ワークスペース
+   プリセット）の実装に基づく概念図。 */
+.fd-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 10px 12px;
+  color: var(--fd-text);
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fd-setting-row:last-child {
+  border-bottom: none;
+}
+
+.fd-toggle {
+  --fd-toggle-w: 36px;
+  --fd-toggle-h: 20px;
+  position: relative;
+  width: var(--fd-toggle-w);
+  height: var(--fd-toggle-h);
+  border-radius: var(--fd-toggle-h);
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+.fd-toggle.is-on {
+  background: var(--fd-accent);
+}
+
+.fd-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(var(--fd-toggle-h) - 4px);
+  height: calc(var(--fd-toggle-h) - 4px);
+  border-radius: 50%;
+  background: #fff;
+  transition: left var(--duration-fast) var(--ease-out);
+}
+
+.fd-toggle.is-on::after {
+  left: calc(var(--fd-toggle-w) - var(--fd-toggle-h) + 2px);
+}
+
+.fd-gesture-map {
+  color: var(--color-gray-500);
+}
+
+.fd-gesture-map strong {
+  color: var(--fd-text);
+  font-weight: 600;
+}

@@ -76,6 +76,7 @@
       <a href="#advanced" data-i18n="featuresPage.nav.advanced">作画支援</a>
       <a href="#audio" data-i18n="featuresPage.nav.audio">音声</a>
       <a href="#save" data-i18n="featuresPage.nav.save">保存・共有</a>
+      <a href="#workspace" data-i18n="featuresPage.nav.workspace">作業環境</a>
       <a href="#export" data-i18n="featuresPage.nav.export">書き出し</a>
     </nav>
 
@@ -336,6 +337,42 @@
       </div>
     </section>
 
+    <section class="feature-section reveal" id="workspace">
+      <div class="feature-section-head">
+        <h2 data-i18n="featuresPage.workspace.title">Workspace｜自分に合った制作環境へ</h2>
+        <span data-i18n="featuresPage.workspace.lead">利き手や操作スタイルに合わせて、UIそのものをカスタマイズできます。</span>
+      </div>
+      <!-- settings_service.dart（左手モード）・gesture_settings_screen.dart
+           （ジェスチャー割り当て：実際の既定値=二本指タップ→undo／
+           三本指タップ→redo／二本指スワイプ→フレーム移動／長押し→スポイト）
+           ・workspace_preset_service.dart（ワークスペースプリセットの
+           保存・切替）に基づく概念図。 -->
+      <div class="feature-diagram" aria-hidden="true">
+        <div class="fd-setting-row">
+          <span data-i18n="fd.leftHandedMode">左手モード</span>
+          <span class="fd-toggle is-on"></span>
+        </div>
+        <div class="fd-setting-row fd-gesture-map">
+          <span><strong data-i18n="fd.gestureTwoTap">二本指タップ</strong> → <span data-i18n="fd.gestureUndo">元に戻す</span></span>
+        </div>
+        <div class="fd-setting-row fd-gesture-map">
+          <span><strong data-i18n="fd.gestureThreeTap">三本指タップ</strong> → <span data-i18n="fd.gestureRedo">やり直す</span></span>
+        </div>
+        <div class="fd-setting-row fd-gesture-map">
+          <span><strong data-i18n="fd.gestureTwoSwipe">二本指スワイプ</strong> → <span data-i18n="fd.gestureFrameMove">フレーム移動</span></span>
+        </div>
+        <div class="fd-setting-row fd-gesture-map">
+          <span><strong data-i18n="fd.gestureLongPress">長押し</strong> → <span data-i18n="fd.gestureEyedropper">スポイト</span></span>
+        </div>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item"><h3 data-i18n="featuresPage.workspace.item1.title">ワークスペース</h3><p data-i18n="featuresPage.workspace.item1.body">左手モードやPC・DeXモードなどの設定をまとめて名前を付けて保存でき、アニメ用・線画用・背景用など、用途ごとに切り替えられます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.workspace.item2.title">左手モード</h3><p data-i18n="featuresPage.workspace.item2.body">左利きの方でも操作しやすいよう、UIのレイアウトを反転できます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.workspace.item3.title">ジェスチャー設定</h3><p data-i18n="featuresPage.workspace.item3.body">二本指タップ・三本指タップ・二本指スワイプ・長押しなどに、元に戻す・やり直す・フレーム移動・スポイトといった操作を割り当てられます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.workspace.item4.title">テーマ・外観</h3><p data-i18n="featuresPage.workspace.item4.body">虹の7色をベースにしたプリセットなど、26種類のテーマから選んで見た目を自分好みにカスタマイズできます。</p></div>
+      </div>
+    </section>
+
     <section class="feature-section reveal" id="export">
       <div class="feature-section-head">
         <h2 data-i18n="featuresPage.export.title">Export｜書き出し</h2>
@@ -431,6 +468,7 @@
 <script src="/js/i18n-dict-nav-extra.js"></script>
 <script src="/js/i18n-dict-advanced.js"></script>
 <script src="/js/i18n-dict-save.js"></script>
+<script src="/js/i18n-dict-workspace.js"></script>
 <script src="/js/i18n-dict-features-diagram.js"></script>
 <script src="/js/i18n.js"></script>
 <script src="/js/main.js"></script>
