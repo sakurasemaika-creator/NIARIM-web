@@ -10,6 +10,7 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
     "ja": {
+      "fd.projectName": "プロジェクト名",
       "fd.layerPanelTitle": "レイヤー",
       "fd.newLayer": "新規レイヤー",
       "fd.newFolder": "新規フォルダ",
@@ -36,6 +37,7 @@
       "fd.saveTreeLabel": "セーブツリー（保存数の制限なし）"
     },
     "en": {
+      "fd.projectName": "Project name",
       "fd.layerPanelTitle": "Layers",
       "fd.newLayer": "New layer",
       "fd.newFolder": "New folder",
@@ -62,6 +64,7 @@
       "fd.saveTreeLabel": "Save tree (unlimited saves)"
     },
     "zh-Hans": {
+      "fd.projectName": "项目名称",
       "fd.layerPanelTitle": "图层",
       "fd.newLayer": "新建图层",
       "fd.newFolder": "新建文件夹",
@@ -88,6 +91,7 @@
       "fd.saveTreeLabel": "存档树（保存次数不限）"
     },
     "zh-Hant": {
+      "fd.projectName": "專案名稱",
       "fd.layerPanelTitle": "圖層",
       "fd.newLayer": "新增圖層",
       "fd.newFolder": "新增資料夾",
@@ -114,6 +118,7 @@
       "fd.saveTreeLabel": "存檔樹（保存次數不限）"
     },
     "ko": {
+      "fd.projectName": "프로젝트 이름",
       "fd.layerPanelTitle": "레이어",
       "fd.newLayer": "새 레이어",
       "fd.newFolder": "새 폴더",
@@ -140,6 +145,7 @@
       "fd.saveTreeLabel": "세이브 트리(저장 횟수 제한 없음)"
     },
     "fr": {
+      "fd.projectName": "Nom du projet",
       "fd.layerPanelTitle": "Calques",
       "fd.newLayer": "Nouveau calque",
       "fd.newFolder": "Nouveau dossier",
@@ -166,6 +172,7 @@
       "fd.saveTreeLabel": "Arbre de sauvegardes (illimité)"
     },
     "es": {
+      "fd.projectName": "Nombre del proyecto",
       "fd.layerPanelTitle": "Capas",
       "fd.newLayer": "Nueva capa",
       "fd.newFolder": "Nueva carpeta",

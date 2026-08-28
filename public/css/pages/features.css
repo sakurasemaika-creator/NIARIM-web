@@ -314,6 +314,36 @@
   --fd-icon-size: 20px;
 }
 
+/* timeline_screen.dart _buildTopBar()内のプロジェクト名表示(Expanded、
+   Kuramubon 16px)。 */
+.fd-timeline-title {
+  flex: 1;
+  min-width: 0;
+  padding-inline: 4px;
+  font-family: "Kuramubon", var(--font-serif);
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* timeline_screen.dart _buildToolbar(): 高さ40・spaceEvenly。
+   動画・音声・ウォーターマーク・演出フィルター・カメラキーフレーム・
+   タイムスタンプ・書き出しの7項目を常設。 */
+.fd-timeline-toolbar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  padding-inline: 8px;
+  background: var(--fd-panel);
+  border-radius: var(--radius-md);
+}
+
+.fd-timeline-toolbar .fd-icon-btn {
+  --fd-icon-size: 18px;
+}
+
 /* ---- アニメーション（タイムライン） ---- */
 /* frame_strip_widget.dart: ストリップ高さ64、サムネイル48×56 */
 .fd-frames {

@@ -32,6 +32,24 @@
 <symbol id="ic-merge_type" viewBox="0 0 24 24">
 <path d="M17.5 15.5c-1.1 0-2.02.62-2.55 1.5H10c-1.65 0-3-1.35-3-3v-5.5C7 7.12 5.88 6 4.5 6S2 7.12 2 8.5 3.12 11 4.5 11c.36 0 .69-.08 1-.21v4.71C5.5 17.98 7.52 20 10 20h4.95c.53.88 1.45 1.5 2.55 1.5 1.66 0 3-1.34 3-3s-1.34-3-3-3zm-13-6C3.67 9.5 3 9 3 8.5s.67-1 1.5-1S6 8 6 8.5 5.33 9.5 4.5 9.5zM17.5 20c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
 </symbol>
+<symbol id="ic-arrow_back" viewBox="0 0 24 24">
+<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/>
+</symbol>
+<symbol id="ic-home_outlined" viewBox="0 0 24 24">
+<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+</symbol>
+<symbol id="ic-more_vert" viewBox="0 0 24 24">
+<path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+</symbol>
+<symbol id="ic-movie_filter" viewBox="0 0 24 24">
+<path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.06 13.61v-6.11l5.19 3.05-5.19 3.06z"/>
+</symbol>
+<symbol id="ic-camera" viewBox="0 0 24 24">
+<path d="M9 2 7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+</symbol>
+<symbol id="ic-push_pin_outlined" viewBox="0 0 24 24">
+<path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+</symbol>
 <symbol id="ic-category" viewBox="0 0 24 24">
 <path d="m12 2-5.5 9h11z"/>
 <path d="M3 13.5h8v8H3z"/>
