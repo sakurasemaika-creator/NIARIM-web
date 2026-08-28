@@ -19,6 +19,55 @@
   margin-inline: auto;
 }
 
+.about-name {
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+}
+
+.about-name h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-lg);
+}
+
+.about-name-formula {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-serif);
+}
+
+.about-name-word {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+}
+
+.about-name-plus,
+.about-name-equals {
+  font-size: var(--fs-h3);
+  color: var(--color-gray-300);
+}
+
+.about-name-result {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--color-brand);
+  letter-spacing: 0.02em;
+}
+
+.about-name p {
+  color: var(--color-gray-700);
+  max-width: 68ch;
+  margin-inline: auto;
+}
+
 .about-not-supported {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
