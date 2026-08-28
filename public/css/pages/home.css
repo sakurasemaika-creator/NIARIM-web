@@ -509,6 +509,10 @@
 
 .download-panel h2 {
   font-size: var(--fs-h1);
+  /* 日本語版のdownload.titleは句読点なしの2行見出し（"NIARIMを"改行
+     "はじめよう"）として辞書側に\nを埋め込んでいるため、これをそのまま
+     改行として描画する（他言語は\nを含まない1行見出しのため影響なし）。 */
+  white-space: pre-line;
 }
 
 .download-panel p {

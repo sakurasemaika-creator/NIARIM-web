@@ -77,7 +77,7 @@
     "screenshots.title": "アプリ画面紹介",
     "screenshots.placeholder": "画面キャプチャ準備中",
 
-    "download.title": "NIARIMを、はじめよう。",
+    "download.title": "NIARIMを\nはじめよう",
     "download.body":
       "あなたの手で描いた絵を、あなたの手でアニメーションにする。今すぐNIARIMをダウンロードして、物語を動かしはじめましょう。",
     "download.cta.googlePlay": "Google Playで手に入れる",

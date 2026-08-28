@@ -9,6 +9,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* SP幅でのカードグリッド等の横はみ出し対策。common.cssのbodyに
+     word-break: keep-all を指定しているため、日本語の文章は「1つの巨大な
+     単語」として扱われる。CSS Grid/Flexboxの子要素はデフォルトで
+     min-width: auto（＝中身のmin-content幅）が自動的な最小サイズとなり、
+     かつoverflow-wrap: break-wordはこのmin-content計算に反映されない仕様
+     のため、対策なしでは長い日本語文を含むgrid/flexアイテムがコンテナ幅
+     を超えてはみ出し、ページ全体が横スクロールしてしまう
+     （about/premium/faq/contact等、複数ページで発生していた表示崩れの
+     共通原因）。全要素の自動最小幅を0にリセットすることで、
+     overflow-wrap: break-wordが実際に効くようにする。
+     ※ white-space: nowrap を明示している価格表示（¥5,500等）や
+     バッジ文言はnowrap自体がその要素の最小内容幅を決めるため、この
+     リセットによる悪影響は受けない。 */
+  min-width: 0;
 }
 
 html {

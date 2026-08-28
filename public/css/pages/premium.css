@@ -76,7 +76,7 @@
 }
 
 .pricing-price-compare .amount-strike {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.55);
   text-decoration: line-through;
   text-decoration-color: var(--fd-mark, #ffb020);
@@ -121,21 +121,15 @@
 
 .pricing-plan-badge {
   position: absolute;
-  top: -0.7rem;
+  top: -0.9rem;
   right: var(--space-md);
-  padding: 0.2rem 0.7rem;
+  padding: 0.35rem 0.9rem;
   border-radius: var(--radius-pill);
   background: var(--grad-gold);
   color: var(--color-brand-dark);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 700;
   white-space: nowrap;
-}
-
-.pricing-yearly-note {
-  margin-top: 0.5rem;
-  font-size: var(--fs-small);
-  color: var(--color-sub);
 }
 
 @media (max-width: 520px) {

@@ -150,7 +150,13 @@ p {
   gap: var(--space-lg);
 }
 
-.main-nav ul {
+/* 子孫セレクタ（.main-nav ul）だとナビ本来の<ul>だけでなく、.lang-dropdown
+   の中に入れ子になっている.lang-menu（同じく<ul>）まで一致してしまい、
+   SP幅で「言語切替メニューが閉じているはずなのに常にdisplay:flexで開いた
+   ように見えてしまう」原因になっていた（.lang-menu側のdisplay:noneより
+   このルールの方が詳細度が高く勝ってしまうため）。直下の子要素のみに
+   絞る子コンビネータへ変更し、.lang-menuを意図せず巻き込まないようにする。 */
+.main-nav > ul {
   display: flex;
   gap: var(--space-md);
 }
@@ -323,7 +329,19 @@ p {
 @media (max-width: 1180px) {
   .main-nav {
     position: fixed;
-    inset: var(--header-height) 0 0 0;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    /* 以前は inset: var(--header-height) 0 0 0; （bottom: 0）で高さを
+       決めていたが、モバイルブラウザはアドレスバーの表示/非表示で実際の
+       表示領域（visual viewport）が変動し、bottom: 0 は必ずしもそれに
+       追従しないため、メニューの縦幅が端末の画面と合わない（下が切れる／
+       逆に余白が残る）ことがあった。動的ビューポート高さ（dvh）を使って
+       実際に見えている領域ぴったりの高さを明示的に指定することで解消する。
+       内容がその高さを超える場合（言語切替メニューを開いた状態＋項目数が
+       多い等）は内部スクロールできるようにしておく。 */
+    height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
     background: var(--color-white);
     flex-direction: column;
     align-items: stretch;
@@ -346,7 +364,7 @@ p {
       transform var(--duration-base) var(--ease-out);
   }
 
-  .main-nav ul {
+  .main-nav > ul {
     flex-direction: column;
     gap: var(--space-md);
   }
