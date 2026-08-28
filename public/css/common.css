@@ -133,9 +133,15 @@ p {
   color: var(--color-ink);
 }
 
-.brand img {
+.brand img.brand-icon {
   width: 32px;
   height: 32px;
+}
+
+.brand img.brand-title {
+  height: 24px;
+  width: auto;
+  display: block;
 }
 
 .main-nav {
@@ -503,6 +509,10 @@ p {
 .footer-brand .brand {
   color: var(--color-white);
   margin-bottom: var(--space-sm);
+}
+
+.footer-brand .brand-title {
+  filter: brightness(0) invert(1);
 }
 
 .footer-brand p {
