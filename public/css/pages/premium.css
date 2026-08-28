@@ -158,6 +158,21 @@
   color: var(--color-brand);
 }
 
+.pricing-list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pricing-list li strong {
+  display: block;
+}
+
+.pricing-list li span {
+  display: block;
+  color: var(--color-text-muted);
+}
+
 .pricing-card.is-premium .pricing-list li::before {
   color: var(--color-sub);
 }

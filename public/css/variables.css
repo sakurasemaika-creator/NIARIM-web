@@ -43,8 +43,12 @@
   --color-error: #e5484d;
 
   /* ---- Typography ----
-     アプリ本体と同じフォント（白光明朝＝本文／くらむぼん＝見出し）を使用。 */
-  --font-sans: "HakkouMincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+     アプリ本体と同じフォント（白光明朝＝本文／くらむぼん＝見出し）を使用。
+     白光明朝はサブセットフォントのため、収録されていない文字は
+     Noto Serif JP／Noto Serifで代用する（OSのシステムフォントに
+     依存せず、環境によらず同じ見た目のフォールバックにするため）。 */
+  --font-sans: "HakkouMincho", "Noto Serif JP", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
     sans-serif;
 
