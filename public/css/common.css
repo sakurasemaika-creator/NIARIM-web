@@ -657,3 +657,21 @@ p {
   padding: 0;
   margin: -1px;
 }
+
+/* ---- 見出し＋本文の読み物形式ブロック（Features/Premium/Community/Home等） ---- */
+.feature-narrative {
+  margin: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feature-narrative-block h3 {
+  font-size: var(--fs-h4, 1.1rem);
+  margin-bottom: 0.4rem;
+}
+
+.feature-narrative-block p {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
