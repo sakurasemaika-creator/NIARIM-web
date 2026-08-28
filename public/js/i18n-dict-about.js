@@ -6,8 +6,8 @@
  * (ブレンドモード・クリッピング・レイヤーフォルダ・投げ縄塗り等)を除外し、
  * 自動塗り・テーマ外観設定・活用Tips・演出フィルター・トーン塗り・
  * ピクセルモード・コミュニティ機能のみに絞っている。
- * 生成AIについての記述は、クリエイターの権利面の懸念から生成AI機能を
- * 実装していない、という立場のみを明示している(開発自体でのAI活用には言及しない)。
+ * 生成AIについての記述は、開発者の思想や賛否には触れず、生成AI機能を
+ * 実装していないという事実のみを簡潔に述べる(開発自体でのAI活用にも言及しない)。
  * 「誰でも手軽にアニメをつくれる」「誰もがクリエイターに」は開発動機の説明ではなく
  * 売り文句・キャッチコピーとして表現する。
  */
@@ -32,8 +32,8 @@
     "about.philosophy.item2.body": "2万円台の低価格帯Android端末でも快適に動作することを開発の最優先事項としています。高価な端末がなくても、本格的な制作を始められます。",
     "about.philosophy.item3.title": "妥協しない、作り込みの自由度",
     "about.philosophy.item3.body": "手軽さを大切にしながらも、レイヤーやブラシ、仕上げのフィルターまで、こだわって作り込みたい人の要望にも応えられる自由度を用意しています。",
-    "about.aiStance.title": "生成AIについての考え方",
-    "about.aiStance.body": "絵を描くクリエイターの中には、生成AIによる著作権・権利面の課題を懸念する声が多くあることを踏まえ、本アプリには作品を自動生成する生成AI機能は実装していません。あなたが描いた一枚一枚を、あなた自身の手で動かしていただくためのアプリです。",
+    "about.aiStance.title": "生成AIについて",
+    "about.aiStance.body": "本アプリには作品を自動生成する生成AI機能は実装していません。あなたが描いた一枚一枚を、あなた自身の手で動かしていただくためのアプリです。",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "対応環境",
     "about.device.lead": "スマートフォン単体はもちろん、外部機器を接続した本格的な制作環境にも対応しています。",
@@ -82,8 +82,8 @@
     "about.philosophy.item2.body": "Running smoothly on budget Android devices is our top development priority. You can start creating seriously without needing an expensive device.",
     "about.philosophy.item3.title": "No compromise on creative freedom",
     "about.philosophy.item3.body": "While keeping things approachable, we also provide the depth — layers, brushes, finishing filters — for those who want to dig in and craft their work in detail.",
-    "about.aiStance.title": "Our stance on generative AI",
-    "about.aiStance.body": "Many artists have raised copyright and rights concerns about generative AI, so NIARIM does not include any generative-AI feature that creates artwork automatically. This app exists so you can move every frame you draw with your own hands.",
+    "about.aiStance.title": "About generative AI",
+    "about.aiStance.body": "NIARIM does not include any generative-AI feature that creates artwork automatically. This app exists so you can move every frame you draw with your own hands.",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "Supported Environment",
     "about.device.lead": "NIARIM supports both standalone smartphone use and a more serious setup with external devices connected.",
@@ -132,8 +132,8 @@
     "about.philosophy.item2.body": "在两万日元级别的低价 Android 设备上也能流畅运行，是我们开发时的最优先事项。即使没有昂贵的设备，也能开始正式创作。",
     "about.philosophy.item3.title": "毫不妥协的创作自由度",
     "about.philosophy.item3.body": "在保持易用性的同时，也为想要深入打磨作品的用户准备了图层、画笔、后期滤镜等丰富的自由度。",
-    "about.aiStance.title": "关于生成式 AI 的立场",
-    "about.aiStance.body": "考虑到许多创作者对生成式 AI 在版权与权利方面存在的担忧，本应用并未搭载可自动生成作品的生成式 AI 功能。这是一款让你亲手让自己绘制的每一格画面动起来的应用。",
+    "about.aiStance.title": "关于生成式 AI",
+    "about.aiStance.body": "本应用并未搭载可自动生成作品的生成式 AI 功能。这是一款让你亲手让自己绘制的每一格画面动起来的应用。",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "支持的环境",
     "about.device.lead": "无论是仅使用手机，还是连接外部设备打造更专业的创作环境，NIARIM 都能支持。",
@@ -182,8 +182,8 @@
     "about.philosophy.item2.body": "在兩萬日圓級別的低價 Android 裝置上也能流暢運作，是我們開發時的最優先事項。即使沒有昂貴的裝置，也能開始正式創作。",
     "about.philosophy.item3.title": "毫不妥協的創作自由度",
     "about.philosophy.item3.body": "在保持易用性的同時，也為想要深入琢磨作品的使用者準備了圖層、畫筆、後製濾鏡等豐富的自由度。",
-    "about.aiStance.title": "關於生成式 AI 的立場",
-    "about.aiStance.body": "考量到許多創作者對生成式 AI 在著作權與權利方面存在的疑慮，本應用程式並未搭載可自動生成作品的生成式 AI 功能。這是一款讓你親手讓自己繪製的每一格畫面動起來的應用程式。",
+    "about.aiStance.title": "關於生成式 AI",
+    "about.aiStance.body": "本應用程式並未搭載可自動生成作品的生成式 AI 功能。這是一款讓你親手讓自己繪製的每一格畫面動起來的應用程式。",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "支援的環境",
     "about.device.lead": "無論是僅使用手機，還是連接外部裝置打造更專業的創作環境，NIARIM 都能支援。",
@@ -232,8 +232,8 @@
     "about.philosophy.item2.body": "저가형 Android 기기에서도 쾌적하게 동작하는 것을 개발 최우선 과제로 삼고 있습니다. 고가의 기기가 없어도 본격적인 제작을 시작할 수 있습니다.",
     "about.philosophy.item3.title": "타협하지 않는 제작 자유도",
     "about.philosophy.item3.body": "손쉬움을 소중히 하면서도, 레이어와 브러시, 마무리 필터까지 세밀하게 다듬고 싶은 사용자의 요구에도 응할 수 있는 자유도를 갖추고 있습니다.",
-    "about.aiStance.title": "생성형 AI에 대한 입장",
-    "about.aiStance.body": "그림을 그리는 크리에이터 중에는 생성형 AI로 인한 저작권·권리 문제를 우려하는 목소리가 많다는 점을 고려하여, 본 앱에는 작품을 자동으로 생성하는 생성형 AI 기능을 탑재하지 않았습니다. 당신이 그린 한 장 한 장을 당신 자신의 손으로 움직이기 위한 앱입니다.",
+    "about.aiStance.title": "생성형 AI에 대해",
+    "about.aiStance.body": "본 앱에는 작품을 자동으로 생성하는 생성형 AI 기능을 탑재하지 않았습니다. 당신이 그린 한 장 한 장을 당신 자신의 손으로 움직이기 위한 앱입니다.",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "지원 환경",
     "about.device.lead": "스마트폰 단독 사용은 물론, 외부 기기를 연결한 본격적인 제작 환경도 지원합니다.",
@@ -282,8 +282,8 @@
     "about.philosophy.item2.body": "Fonctionner sans accroc sur des appareils Android bon marché est notre priorité de développement absolue. Pas besoin d'un appareil coûteux pour se lancer sérieusement.",
     "about.philosophy.item3.title": "Aucun compromis sur la liberté créative",
     "about.philosophy.item3.body": "Tout en restant accessible, NIARIM offre aussi la profondeur — calques, pinceaux, filtres de finition — pour celles et ceux qui veulent peaufiner leur œuvre dans le détail.",
-    "about.aiStance.title": "Notre position sur l'IA générative",
-    "about.aiStance.body": "De nombreux artistes expriment des inquiétudes quant aux droits d'auteur liés à l'IA générative ; c'est pourquoi NIARIM n'intègre aucune fonction d'IA générative créant des illustrations automatiquement. Cette application existe pour que vous puissiez animer, de vos propres mains, chaque image que vous dessinez.",
+    "about.aiStance.title": "À propos de l'IA générative",
+    "about.aiStance.body": "NIARIM n'intègre aucune fonction d'IA générative créant des illustrations automatiquement. Cette application existe pour que vous puissiez animer, de vos propres mains, chaque image que vous dessinez.",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "Environnements pris en charge",
     "about.device.lead": "NIARIM fonctionne aussi bien sur smartphone seul qu'avec des périphériques externes pour une configuration plus poussée.",
@@ -332,8 +332,8 @@
     "about.philosophy.item2.body": "Que funcione con fluidez en dispositivos Android económicos es nuestra máxima prioridad de desarrollo. No necesitas un dispositivo caro para empezar a crear en serio.",
     "about.philosophy.item3.title": "Sin concesiones en la libertad creativa",
     "about.philosophy.item3.body": "Sin dejar de ser accesible, NIARIM también ofrece profundidad —capas, pinceles, filtros de acabado— para quienes quieran perfeccionar su obra al detalle.",
-    "about.aiStance.title": "Nuestra postura sobre la IA generativa",
-    "about.aiStance.body": "Muchos artistas han expresado preocupación por los derechos de autor relacionados con la IA generativa, por lo que NIARIM no incluye ninguna función de IA generativa que cree ilustraciones automáticamente. Esta app existe para que muevas, con tus propias manos, cada fotograma que dibujas.",
+    "about.aiStance.title": "Sobre la IA generativa",
+    "about.aiStance.body": "NIARIM no incluye ninguna función de IA generativa que cree ilustraciones automáticamente. Esta app existe para que muevas, con tus propias manos, cada fotograma que dibujas.",
     "about.device.eyebrow": "Supported Environment",
     "about.device.title": "Entornos compatibles",
     "about.device.lead": "NIARIM funciona tanto en el móvil solo como con dispositivos externos conectados para una configuración más avanzada.",
