@@ -599,6 +599,15 @@
 /* ---- 書き出し ---- */
 /* export_screen.dart: SegmentedButton（3択）、RadioListTile×3（二行）、
    FilledButton.icon(minimumSize: Size.fromHeight(48))。 */
+/* exportPresetSection・exportFormatSectionの見出しラベル(Bold, Kuramubon)。 */
+.fd-section-label {
+  font-family: "Kuramubon", var(--font-serif);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--fd-text);
+  margin-bottom: 6px;
+}
+
 .fd-segmented {
   display: flex;
   height: 40px;
