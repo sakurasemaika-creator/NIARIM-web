@@ -32,12 +32,32 @@
 }
 
 .legal-body section {
+  position: relative;
+  padding: var(--space-md) 0 var(--space-lg) var(--space-md);
   margin-bottom: var(--space-lg);
+}
+
+.legal-body section::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-md) auto var(--space-lg) 0;
+  width: 3px;
+  background: var(--color-border);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.legal-body section:hover::before {
+  background: var(--grad-brand);
+}
+
+.legal-body section:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
 }
 
 .legal-body h2 {
   font-size: var(--fs-h3);
   margin-bottom: var(--space-sm);
+  color: var(--color-accent-dark);
 }
 
 .legal-body h3 {
@@ -49,6 +69,7 @@
 .legal-body p,
 .legal-body li {
   color: var(--color-gray-700);
+  line-height: 1.85;
 }
 
 .legal-body ul,
