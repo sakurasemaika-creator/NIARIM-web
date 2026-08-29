@@ -15,7 +15,7 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
   "ja": {
-    "narrative.home.cta.heading": "実際にアニメーションをつくってみよう！",
+    "narrative.home.cta.heading": "実際にアニメーションを<br>つくってみよう！",
     "narrative.home.cta.body": "描きたいと思ったら、すぐに始められる。一枚の絵からでも、何十枚ものフレームを使った作品でも。手描きで動かす。キーフレームで動かす。画像や音を組み合わせる。仕上げまでこだわって、自分だけの作品にする。そして完成したら、「NIARIM作品広場」へ。つくって、公開して、みつけよう。NIARIMで、アニメーションをつくってみよう！",
 
     "narrative.drawing.1.heading": "描きたいものを、思い通りに。",
