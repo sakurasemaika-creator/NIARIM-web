@@ -424,6 +424,9 @@
   color: var(--color-brand-dark);
 }
 
+/* 機能図パネルは、行全体のフェードとは別に「画面の電源が入る」ような
+   見え方(内側から少しずつ開いて拡大する)にする。見出しの左右ワイプとは
+   方向・質感を変え、単なる使い回しにならないようにしている。 */
 .feature-media {
   aspect-ratio: 16 / 11;
   border-radius: var(--radius-md);
@@ -433,6 +436,27 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  opacity: 0;
+  clip-path: inset(8% round var(--radius-md));
+  transform: scale(0.94);
+  transition: opacity var(--duration-slow) var(--ease-out) 0.1s,
+    clip-path var(--duration-slow) var(--ease-out) 0.1s,
+    transform var(--duration-slow) var(--ease-out) 0.1s;
+}
+
+.reveal.is-visible .feature-media {
+  opacity: 1;
+  clip-path: inset(0% round var(--radius-md));
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-media {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
 }
 
 .feature-media img {
