@@ -62,6 +62,10 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-white);
+  /* ギャラリー全体のフェード(.reveal)に加えて、カードを1枚ずつ
+     少し間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
 
 .community-card .thumb {

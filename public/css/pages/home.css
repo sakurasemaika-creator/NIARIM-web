@@ -623,6 +623,10 @@
 
 .faq-item {
   border-bottom: 1px solid var(--color-border);
+  /* リスト全体のフェード(.reveal)に加えて、質問を上から順に少しずつ
+     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
 
 .faq-question {

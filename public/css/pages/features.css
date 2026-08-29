@@ -142,21 +142,6 @@
   gap: var(--space-md);
 }
 
-/* animations.js の initStaggerGrids() が画面内進入時に1枚ずつ間をおいて
-   .is-visible を付与する。JSが動かない/prefers-reduced-motion環境では
-   即座に is-visible が付与されるため、常時表示にフォールバックする。
-   transitionは.spec-item側で定義し、ここでは初期状態のopacity/
-   transformのみを設定する。 */
-.stagger-grid > * {
-  opacity: 0;
-  transform: translateY(14px);
-}
-
-.stagger-grid > *.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
 .spec-item {
   /* クリックできる要素ではないため、ホバーで動く演出は付けない
      （クリックできると誤認させないため）。表示自体の

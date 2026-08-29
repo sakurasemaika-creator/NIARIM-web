@@ -715,6 +715,23 @@ p {
   }
 }
 
+/* ---- Stagger grid（カード・リストの1枚ずつ間をおいた表示） ----
+   animations.js の initStaggerGrids() が画面内進入時に1枚ずつ間をおいて
+   .is-visible を付与する。JSが動かない/prefers-reduced-motion環境では
+   即座に is-visible が付与されるため、常時表示にフォールバックする。
+   transitionは各要素側(.spec-item / .screenshot-card / .faq-item等)で
+   定義し、ここでは初期状態のopacity/transformのみを設定する。
+   全ページ共通で使うため features.css ではなく common.css に置く。 */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.stagger-grid > *.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---- ペン先カーソルリング（animations.jsが生成、マウス操作可能なPC環境のみ） ----
    OSのカーソル自体は隠さず、少し遅れて追従する「ペン先の円」を添えるだけの
    純粋な装飾。実際にクリックできる要素の上に来たときだけ大きく開き、

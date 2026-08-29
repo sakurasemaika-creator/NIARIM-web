@@ -149,6 +149,10 @@
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+  /* リストのフェード(.reveal)に加えて、項目を上から順に少しずつ
+     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
 }
 
 .pricing-list li::before {

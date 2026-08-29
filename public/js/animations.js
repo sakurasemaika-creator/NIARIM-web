@@ -81,7 +81,9 @@
    * 待たされすぎないようにする。
    */
   function initStaggerGrids() {
-    var grids = document.querySelectorAll(".spec-grid, .screenshot-scroller");
+    var grids = document.querySelectorAll(
+      ".spec-grid, .screenshot-scroller, .community-gallery, .faq-list, .pricing-list"
+    );
     if (!grids.length) return;
 
     if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
