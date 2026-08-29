@@ -248,6 +248,8 @@
     "featuresPage.audio.item4.body": "音声の始まりと終わりを滑らかに調整できます。",
     "featuresPage.audio.item5.title": "タイムスタンプ",
     "featuresPage.audio.item5.body": "特定のフレームにコメント付きの目印を打てます。音に合わせた口パクや動きのタイミングを確認する目印として使えます。",
+    "featuresPage.audio.item6.title": "波形表示",
+    "featuresPage.audio.item6.body": "音声クリップに波形が薄く重ねて表示され、音の強弱を見ながらタイムライン上の配置を調整できます。",
 
     "featuresPage.export.title": "Export｜書き出し",
     "featuresPage.export.lead": "完成した作品を、動画として届けます。",
@@ -258,7 +260,7 @@
     "featuresPage.export.item3.title": "動画書き出し",
     "featuresPage.export.item3.body": "制作した作品を動画ファイルとして書き出せます。",
     "featuresPage.export.item4.title": "書き出し形式",
-    "featuresPage.export.item4.body": "MP4・WebM・GIFに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
+    "featuresPage.export.item4.body": "MP4・WebM・GIF・AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
     "featuresPage.export.item5.title": "制作・書き出し時間の上限",
     "featuresPage.export.item5.body": "キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで、プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
 
@@ -519,6 +521,8 @@
     "featuresPage.audio.item4.body": "Smooth out the start and end of your audio.",
     "featuresPage.audio.item5.title": "Timestamps",
     "featuresPage.audio.item5.body": "Drop a commented marker on a specific frame — handy as a reference point for lip-syncing or timing movement to sound.",
+    "featuresPage.audio.item6.title": "Waveform display",
+    "featuresPage.audio.item6.body": "Audio clips show a faint waveform overlay, letting you adjust their placement on the timeline while seeing the sound's loudness.",
 
     "featuresPage.export.title": "Export",
     "featuresPage.export.lead": "Deliver your finished work as a video.",
@@ -529,7 +533,7 @@
     "featuresPage.export.item3.title": "Video export",
     "featuresPage.export.item3.body": "Export your finished work as a video file.",
     "featuresPage.export.item4.title": "Export formats",
-    "featuresPage.export.item4.body": "Supports MP4, WebM, and GIF. Transparent WebM lets you use your work as animation material with a see-through background.",
+    "featuresPage.export.item4.body": "Supports MP4, WebM, GIF, and AVI. Transparent WebM lets you use your work as animation material with a see-through background.",
     "featuresPage.export.item5.title": "Time limit per work",
     "featuresPage.export.item5.body": "Canvas size has an upper limit, but within it you can set the size and aspect ratio to fit your work. The free plan supports up to 90 seconds per work; Premium supports up to 2 hours per work. There's no limit on the number of works you can make.",
 

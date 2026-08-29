@@ -41,7 +41,7 @@
     "narrative.animation.6.body": "画像をフレームとして並べれば、ストップモーションのような作品も制作できます。手描きアニメーションを中心に、さまざまな表現方法を組み合わせられます。",
 
     "narrative.audio.1.heading": "音にタイミングを合わせて絵を動かす",
-    "narrative.audio.1.body": "音声をタイムラインに配置して、音量やフェードイン・フェードアウトを調整できます。さらにタイムスタンプを打てば、音に合わせた口パクや動きのタイミングを確認する目印として使えます。",
+    "narrative.audio.1.body": "音声をタイムラインに配置して、音量やフェードイン・フェードアウトを調整できます。音声クリップには波形が薄く重ねて表示されるため、音の強弱を見ながら配置を調整できます。さらにタイムスタンプを打てば、音に合わせた口パクや動きのタイミングを確認する目印として使えます。",
 
     "narrative.editing.1.heading": "仕上げまで、しっかりこだわる。",
     "narrative.editing.1.body": "描いた後の調整も、NIARIMの中で。",
@@ -102,7 +102,7 @@
     "narrative.workspace.4.body": "2本指タップ、3本指タップ、スワイプ、長押しなどにUndo・Redo・フレーム移動・スポイトなどの操作を割り当てられます。よく使う操作を自分の手に合わせてカスタマイズできます。",
 
     "narrative.export.1.heading": "つくった作品を、もっと広く届けよう",
-    "narrative.export.1.body": "完成した作品は動画として書き出せます。MP4、WebM、GIFに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで。プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
+    "narrative.export.1.body": "完成した作品は動画として書き出せます。MP4、WebM、GIF、AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで。プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
 
     "narrative.premium.1.heading": "プレミアムでもっと自由に。",
     "narrative.premium.1.body": "プレミアムでは、制作だけでなく作品の公開もさらに快適になります。",
@@ -155,7 +155,7 @@
     "narrative.animation.6.body": "Arrange images as frames to create stop-motion-style work as well. With hand-drawn animation at its core, you can combine a wide range of expressive techniques.",
 
     "narrative.audio.1.heading": "Time your drawings to the sound",
-    "narrative.audio.1.body": "Place audio on the timeline and adjust volume and fade-in/fade-out. You can also drop timestamps as markers to check lip-sync or movement timing against the sound.",
+    "narrative.audio.1.body": "Place audio on the timeline and adjust volume and fade-in/fade-out. Each audio clip shows a faint waveform overlay, so you can see the sound's loudness while adjusting its placement. You can also drop timestamps as markers to check lip-sync or movement timing against the sound.",
 
     "narrative.editing.1.heading": "Refine every detail, right to the finish.",
     "narrative.editing.1.body": "Adjustments after drawing happen right inside NIARIM, too.",
@@ -216,7 +216,7 @@
     "narrative.workspace.4.body": "Assign actions like undo, redo, frame navigation, or the eyedropper to two-finger tap, three-finger tap, swipe, long-press, and more. Customize the gestures you use often to fit your own hand.",
 
     "narrative.export.1.heading": "Share your work with more people.",
-    "narrative.export.1.body": "Export finished work as video. MP4, WebM, and GIF are supported. Transparent WebM lets you export animation material with a transparent background. There's an upper limit on canvas size, but within that range you can set a size and aspect ratio that fits your work. The free version allows up to 90 seconds per piece; Premium lets you create and export up to 2 hours per piece. There's no limit on the number of pieces you can make.",
+    "narrative.export.1.body": "Export finished work as video. MP4, WebM, GIF, and AVI are supported. Transparent WebM lets you export animation material with a transparent background. There's an upper limit on canvas size, but within that range you can set a size and aspect ratio that fits your work. The free version allows up to 90 seconds per piece; Premium lets you create and export up to 2 hours per piece. There's no limit on the number of pieces you can make.",
 
     "narrative.premium.1.heading": "More freedom with Premium.",
     "narrative.premium.1.body": "Premium makes not just creating, but also publishing your work, even more comfortable.",
@@ -266,7 +266,7 @@
     "narrative.animation.6.body": "将图像按顺序排列为帧，也能制作出类似定格动画的作品。以手绘动画为核心，可以组合运用多种多样的表现方式。",
 
     "narrative.audio.1.heading": "让画面配合声音动起来",
-    "narrative.audio.1.body": "将音频放置到时间轴上，可以调整音量以及淡入淡出效果。此外，打上时间戳后，还能作为对口型或动作节奏的参考标记，配合声音使用。",
+    "narrative.audio.1.body": "将音频放置到时间轴上，可以调整音量以及淡入淡出效果。音频片段上会淡淡地叠加显示波形，方便一边查看声音强弱一边调整位置。此外，打上时间戳后，还能作为对口型或动作节奏的参考标记，配合声音使用。",
 
     "narrative.editing.1.heading": "精益求精，直到完成为止。",
     "narrative.editing.1.body": "作画之后的调整，也在NIARIM中完成。",
@@ -322,7 +322,7 @@
     "narrative.workspace.4.body": "可以为双指点按、三指点按、滑动、长按等手势分配撤销、重做、帧移动、吸管等操作。可以根据自己的使用习惯，自定义常用操作。",
 
     "narrative.export.1.heading": "让你的作品被更多人看到",
-    "narrative.export.1.body": "完成的作品可以导出为视频。支持MP4、WebM、GIF格式。选择透明WebM，还能导出背景透明的动画素材。画布尺寸设有上限，但在该范围内可自由设置符合作品需要的尺寸与画面比例。免费版每部作品最多可制作、导出90秒；高级会员每部作品最多可制作、导出2小时。作品数量本身没有限制。",
+    "narrative.export.1.body": "完成的作品可以导出为视频。支持MP4、WebM、GIF、AVI格式。选择透明WebM，还能导出背景透明的动画素材。画布尺寸设有上限，但在该范围内可自由设置符合作品需要的尺寸与画面比例。免费版每部作品最多可制作、导出90秒；高级会员每部作品最多可制作、导出2小时。作品数量本身没有限制。",
 
     "narrative.premium.1.heading": "开通高级会员，创作更自由。",
     "narrative.premium.1.body": "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
@@ -371,7 +371,7 @@
     "narrative.animation.6.body": "將圖像依序排列為影格，也能製作出類似定格動畫的作品。以手繪動畫為核心，可以組合運用多種多樣的表現方式。",
 
     "narrative.audio.1.heading": "讓畫面配合聲音動起來",
-    "narrative.audio.1.body": "將音訊放置到時間軸上，可以調整音量以及淡入淡出效果。此外，打上時間戳記後，還能作為對嘴型或動作節奏的參考標記，配合聲音使用。",
+    "narrative.audio.1.body": "將音訊放置到時間軸上，可以調整音量以及淡入淡出效果。音訊片段上會淡淡地疊加顯示波形，方便一邊查看聲音強弱一邊調整位置。此外，打上時間戳記後，還能作為對嘴型或動作節奏的參考標記，配合聲音使用。",
 
     "narrative.editing.1.heading": "精益求精，直到完成為止。",
     "narrative.editing.1.body": "作畫之後的調整，也在NIARIM中完成。",
@@ -427,7 +427,7 @@
     "narrative.workspace.4.body": "可以為雙指點按、三指點按、滑動、長按等手勢指定復原、重做、影格移動、滴管等操作。可以依照自己的使用習慣，自訂常用操作。",
 
     "narrative.export.1.heading": "讓你的作品被更多人看到",
-    "narrative.export.1.body": "完成的作品可以匯出為影片。支援MP4、WebM、GIF格式。選擇透明WebM，還能匯出背景透明的動畫素材。畫布尺寸設有上限，但在該範圍內可自由設定符合作品需要的尺寸與畫面比例。免費版每部作品最多可製作、匯出90秒；高級會員每部作品最多可製作、匯出2小時。作品數量本身沒有限制。",
+    "narrative.export.1.body": "完成的作品可以匯出為影片。支援MP4、WebM、GIF、AVI格式。選擇透明WebM，還能匯出背景透明的動畫素材。畫布尺寸設有上限，但在該範圍內可自由設定符合作品需要的尺寸與畫面比例。免費版每部作品最多可製作、匯出90秒；高級會員每部作品最多可製作、匯出2小時。作品數量本身沒有限制。",
 
     "narrative.premium.1.heading": "開通高級會員，創作更自由。",
     "narrative.premium.1.body": "高級會員不僅能讓創作更舒適，發布作品也會更加輕鬆。",
@@ -476,7 +476,7 @@
     "narrative.animation.6.body": "이미지를 프레임으로 나열하면 스톱모션 같은 작품도 제작할 수 있습니다. 손그림 애니메이션을 중심으로, 다양한 표현 방법을 조합할 수 있습니다.",
 
     "narrative.audio.1.heading": "소리에 타이밍을 맞춰 그림을 움직인다",
-    "narrative.audio.1.body": "음성을 타임라인에 배치해 음량이나 페이드인・페이드아웃을 조정할 수 있습니다. 또한 타임스탬프를 찍으면 소리에 맞춘 립싱크나 움직임의 타이밍을 확인하는 표시로 사용할 수 있습니다.",
+    "narrative.audio.1.body": "음성을 타임라인에 배치해 음량이나 페이드인・페이드아웃을 조정할 수 있습니다. 음성 클립에는 파형이 옅게 겹쳐 표시되어, 소리의 강약을 보면서 배치를 조정할 수 있습니다. 또한 타임스탬프를 찍으면 소리에 맞춘 립싱크나 움직임의 타이밍을 확인하는 표시로 사용할 수 있습니다.",
 
     "narrative.editing.1.heading": "마무리까지, 확실하게 신경 쓴다.",
     "narrative.editing.1.body": "그린 후의 조정도 NIARIM 안에서.",
@@ -532,7 +532,7 @@
     "narrative.workspace.4.body": "두 손가락 탭, 세 손가락 탭, 스와이프, 길게 누르기 등에 실행 취소・다시 실행・프레임 이동・스포이트 같은 조작을 할당할 수 있습니다. 자주 쓰는 조작을 자신의 손에 맞춰 커스터마이즈할 수 있습니다.",
 
     "narrative.export.1.heading": "만든 작품을, 더 널리 전하자",
-    "narrative.export.1.body": "완성된 작품은 동영상으로 내보낼 수 있습니다. MP4, WebM, GIF에 대응. 투명 WebM이라면 배경을 투명하게 한 애니메이션 소재로 이용할 수 있습니다. 캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞는 크기나 화면 비율을 설정할 수 있습니다. 무료판에서는 작품 하나당 90초까지. 프리미엄에서는 작품 하나당 최대 2시간까지 제작・내보내기가 가능합니다. 작품 수 자체에는 제한이 없습니다.",
+    "narrative.export.1.body": "완성된 작품은 동영상으로 내보낼 수 있습니다. MP4, WebM, GIF, AVI에 대응. 투명 WebM이라면 배경을 투명하게 한 애니메이션 소재로 이용할 수 있습니다. 캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞는 크기나 화면 비율을 설정할 수 있습니다. 무료판에서는 작품 하나당 90초까지. 프리미엄에서는 작품 하나당 최대 2시간까지 제작・내보내기가 가능합니다. 작품 수 자체에는 제한이 없습니다.",
 
     "narrative.premium.1.heading": "프리미엄으로 더 자유롭게.",
     "narrative.premium.1.body": "프리미엄에서는 제작뿐 아니라 작품 공개도 한층 쾌적해집니다.",
@@ -581,7 +581,7 @@
     "narrative.animation.6.body": "Disposez des images comme autant d'images-clés pour créer aussi des œuvres de style stop motion. Avec l'animation dessinée à la main au cœur du processus, vous pouvez combiner un large éventail de techniques expressives.",
 
     "narrative.audio.1.heading": "Synchronisez vos dessins avec le son",
-    "narrative.audio.1.body": "Placez un fichier audio sur la timeline et réglez le volume ainsi que les fondus d'entrée et de sortie. Vous pouvez aussi déposer des repères temporels comme marqueurs pour vérifier la synchro labiale ou le timing des mouvements par rapport au son.",
+    "narrative.audio.1.body": "Placez un fichier audio sur la timeline et réglez le volume ainsi que les fondus d'entrée et de sortie. Chaque clip audio affiche une forme d'onde en surimpression légère, pour voir l'intensité du son tout en ajustant son placement. Vous pouvez aussi déposer des repères temporels comme marqueurs pour vérifier la synchro labiale ou le timing des mouvements par rapport au son.",
 
     "narrative.editing.1.heading": "Peaufinez chaque détail, jusqu'à la fin.",
     "narrative.editing.1.body": "Les ajustements après le dessin se font aussi directement dans NIARIM.",
@@ -637,7 +637,7 @@
     "narrative.workspace.4.body": "Assignez des actions comme annuler, rétablir, navigation d'image ou pipette au tap à deux doigts, tap à trois doigts, glissement, appui long, et plus. Personnalisez les gestes que vous utilisez souvent selon votre propre main.",
 
     "narrative.export.1.heading": "Partagez votre travail avec plus de monde.",
-    "narrative.export.1.body": "Exportez votre travail terminé en vidéo. MP4, WebM et GIF sont pris en charge. Le WebM transparent permet d'exporter du matériel d'animation avec un fond transparent. Il existe une limite supérieure de taille de canevas, mais dans cette limite, vous pouvez définir une taille et un rapport d'aspect adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium permet de créer et d'exporter jusqu'à 2 heures par œuvre. Il n'y a pas de limite au nombre d'œuvres que vous pouvez créer.",
+    "narrative.export.1.body": "Exportez votre travail terminé en vidéo. MP4, WebM, GIF et AVI sont pris en charge. Le WebM transparent permet d'exporter du matériel d'animation avec un fond transparent. Il existe une limite supérieure de taille de canevas, mais dans cette limite, vous pouvez définir une taille et un rapport d'aspect adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium permet de créer et d'exporter jusqu'à 2 heures par œuvre. Il n'y a pas de limite au nombre d'œuvres que vous pouvez créer.",
 
     "narrative.premium.1.heading": "Plus de liberté avec Premium.",
     "narrative.premium.1.body": "Premium rend non seulement la création, mais aussi la publication de votre travail, encore plus confortable.",
@@ -686,7 +686,7 @@
     "narrative.animation.6.body": "Organiza imágenes como fotogramas para crear también obras al estilo stop motion. Con la animación dibujada a mano en su núcleo, puedes combinar una amplia variedad de técnicas expresivas.",
 
     "narrative.audio.1.heading": "Sincroniza tus dibujos con el sonido",
-    "narrative.audio.1.body": "Coloca audio en la línea de tiempo y ajusta el volumen y los fundidos de entrada y salida. También puedes colocar marcas de tiempo como marcadores para verificar la sincronización labial o el timing del movimiento con el sonido.",
+    "narrative.audio.1.body": "Coloca audio en la línea de tiempo y ajusta el volumen y los fundidos de entrada y salida. Cada clip de audio muestra una forma de onda superpuesta tenue, para que puedas ver la intensidad del sonido mientras ajustas su posición. También puedes colocar marcas de tiempo como marcadores para verificar la sincronización labial o el timing del movimiento con el sonido.",
 
     "narrative.editing.1.heading": "Perfecciona cada detalle, hasta el final.",
     "narrative.editing.1.body": "Los ajustes después de dibujar también se hacen dentro de NIARIM.",
@@ -742,7 +742,7 @@
     "narrative.workspace.4.body": "Asigna acciones como deshacer, rehacer, navegación de fotogramas o el cuentagotas al toque con dos dedos, toque con tres dedos, deslizar, mantener presionado, y más. Personaliza los gestos que usas a menudo según tu propia mano.",
 
     "narrative.export.1.heading": "Comparte tu trabajo con más gente.",
-    "narrative.export.1.body": "Exporta el trabajo terminado como video. Se admiten MP4, WebM y GIF. El WebM transparente te permite exportar material de animación con fondo transparente. Hay un límite superior en el tamaño del lienzo, pero dentro de ese rango puedes definir un tamaño y una relación de aspecto que se ajusten a tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium te permite crear y exportar hasta 2 horas por obra. No hay límite en la cantidad de obras que puedes hacer.",
+    "narrative.export.1.body": "Exporta el trabajo terminado como video. Se admiten MP4, WebM, GIF y AVI. El WebM transparente te permite exportar material de animación con fondo transparente. Hay un límite superior en el tamaño del lienzo, pero dentro de ese rango puedes definir un tamaño y una relación de aspecto que se ajusten a tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium te permite crear y exportar hasta 2 horas por obra. No hay límite en la cantidad de obras que puedes hacer.",
 
     "narrative.premium.1.heading": "Más libertad con Premium.",
     "narrative.premium.1.body": "Premium hace que no solo crear, sino también publicar tu trabajo, sea aún más cómodo.",

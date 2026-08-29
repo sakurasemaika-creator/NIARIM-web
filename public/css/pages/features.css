@@ -570,6 +570,7 @@
    Icons.audiotrack付きのトラックとして表示される）ため、波形イラストは
    使わず実際の構成要素（トラック・音量ラベルとスライダー）のみを示す。 */
 .fd-audio-track {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -579,6 +580,40 @@
   border-radius: var(--radius-md);
   color: var(--fd-text);
   font-size: 0.85rem;
+  overflow: hidden;
+}
+
+/* AudioWaveformService(ffmpeg showwavespic)が生成する波形PNGを、
+   実機と同じ「不透明度0.5でクリップ帯に重ねる」見た目でCSSのみで再現。 */
+.fd-waveform {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-inline: 12px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fd-waveform i {
+  flex: 1 1 auto;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--fd-text);
+}
+
+.fd-waveform i:nth-child(4n + 1) {
+  height: 40%;
+}
+.fd-waveform i:nth-child(4n + 2) {
+  height: 85%;
+}
+.fd-waveform i:nth-child(4n + 3) {
+  height: 55%;
+}
+.fd-waveform i:nth-child(4n) {
+  height: 70%;
 }
 
 .fd-audio-track .ic {

@@ -220,6 +220,8 @@
     "featuresPage.audio.item4.body": "可以让音频的开头和结尾变得平滑。",
     "featuresPage.audio.item5.title": "时间戳",
     "featuresPage.audio.item5.body": "可以在特定帧上打上带注释的标记，作为对口型或动作时机的参考点。",
+    "featuresPage.audio.item6.title": "波形显示",
+    "featuresPage.audio.item6.body": "音频片段上会淡淡地叠加显示波形，方便一边查看声音强弱一边调整在时间轴上的位置。",
 
     "featuresPage.export.title": "Export｜导出",
     "featuresPage.export.lead": "将完成的作品导出为视频。",
@@ -230,7 +232,7 @@
     "featuresPage.export.item3.title": "视频导出",
     "featuresPage.export.item3.body": "将制作好的作品导出为视频文件。",
     "featuresPage.export.item4.title": "导出格式",
-    "featuresPage.export.item4.body": "支持 MP4、WebM、GIF。透明 WebM 可作为背景透明的动画素材使用。",
+    "featuresPage.export.item4.body": "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
     "featuresPage.export.item5.title": "制作・导出时长上限",
     "featuresPage.export.item5.body": "画布尺寸有上限，但在此范围内可根据作品自由设置尺寸与纵横比。免费版每部作品最长90秒，高级版每部作品最长可达2小时进行制作与导出。作品数量本身没有限制。",
 
@@ -471,6 +473,8 @@
     "featuresPage.audio.item4.body": "可以讓音訊的開頭和結尾變得平滑。",
     "featuresPage.audio.item5.title": "時間戳記",
     "featuresPage.audio.item5.body": "可以在特定影格上打上帶註解的標記，作為對嘴型或動作時機的參考點。",
+    "featuresPage.audio.item6.title": "波形顯示",
+    "featuresPage.audio.item6.body": "音訊片段上會淡淡地疊加顯示波形，方便一邊查看聲音強弱一邊調整在時間軸上的位置。",
 
     "featuresPage.export.title": "Export｜匯出",
     "featuresPage.export.lead": "將完成的作品匯出為影片。",
@@ -481,7 +485,7 @@
     "featuresPage.export.item3.title": "影片匯出",
     "featuresPage.export.item3.body": "將製作好的作品匯出為影片檔案。",
     "featuresPage.export.item4.title": "匯出格式",
-    "featuresPage.export.item4.body": "支援 MP4、WebM、GIF。透明 WebM 可作為背景透明的動畫素材使用。",
+    "featuresPage.export.item4.body": "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
     "featuresPage.export.item5.title": "製作・匯出時長上限",
     "featuresPage.export.item5.body": "畫布尺寸有上限，但在此範圍內可依作品自由設定尺寸與長寬比。免費版每部作品最長90秒，付費進階版每部作品最長可達2小時進行製作與匯出。作品數量本身沒有限制。",
 
@@ -722,6 +726,8 @@
     "featuresPage.audio.item4.body": "음성의 시작과 끝을 부드럽게 조정할 수 있습니다.",
     "featuresPage.audio.item5.title": "타임스탬프",
     "featuresPage.audio.item5.body": "특정 프레임에 코멘트가 달린 표시를 남길 수 있습니다. 소리에 맞춘 입 모양이나 동작 타이밍을 확인하는 표시로 사용할 수 있습니다.",
+    "featuresPage.audio.item6.title": "파형 표시",
+    "featuresPage.audio.item6.body": "음성 클립에는 파형이 옅게 겹쳐 표시되어, 소리의 강약을 보면서 타임라인 상의 배치를 조정할 수 있습니다.",
 
     "featuresPage.export.title": "Export｜내보내기",
     "featuresPage.export.lead": "완성한 작품을 영상으로 전달합니다.",
@@ -732,7 +738,7 @@
     "featuresPage.export.item3.title": "영상 내보내기",
     "featuresPage.export.item3.body": "제작한 작품을 영상 파일로 내보낼 수 있습니다.",
     "featuresPage.export.item4.title": "내보내기 형식",
-    "featuresPage.export.item4.body": "MP4・WebM・GIF를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
+    "featuresPage.export.item4.body": "MP4・WebM・GIF・AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
     "featuresPage.export.item5.title": "제작・내보내기 시간 상한",
     "featuresPage.export.item5.body": "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작・내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
 
@@ -990,6 +996,8 @@
     "featuresPage.audio.item4.body": "Adoucissez le début et la fin de votre piste audio.",
     "featuresPage.audio.item5.title": "Horodatages",
     "featuresPage.audio.item5.body": "Placez un repère commenté sur une image précise — pratique pour synchroniser un mouvement de bouche ou une action avec le son.",
+    "featuresPage.audio.item6.title": "Affichage de la forme d'onde",
+    "featuresPage.audio.item6.body": "Les clips audio affichent une forme d'onde en surimpression légère, pour ajuster leur placement sur la timeline tout en voyant l'intensité du son.",
 
     "featuresPage.export.title": "Export",
     "featuresPage.export.lead": "Livrez votre travail terminé sous forme de vidéo.",
@@ -1000,7 +1008,7 @@
     "featuresPage.export.item3.title": "Export vidéo",
     "featuresPage.export.item3.body": "Exportez votre travail terminé sous forme de fichier vidéo.",
     "featuresPage.export.item4.title": "Formats d'export",
-    "featuresPage.export.item4.body": "Prend en charge MP4, WebM et GIF. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
+    "featuresPage.export.item4.body": "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
     "featuresPage.export.item5.title": "Limite de durée par œuvre",
     "featuresPage.export.item5.body": "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
 
@@ -1261,6 +1269,8 @@
     "featuresPage.audio.item4.body": "Suaviza el inicio y el final de tu audio.",
     "featuresPage.audio.item5.title": "Marcas de tiempo",
     "featuresPage.audio.item5.body": "Coloca una marca con comentario en un fotograma concreto: útil como referencia para sincronizar labios o movimientos con el sonido.",
+    "featuresPage.audio.item6.title": "Visualización de forma de onda",
+    "featuresPage.audio.item6.body": "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
 
     "featuresPage.export.title": "Export｜Exportar",
     "featuresPage.export.lead": "Entrega tu trabajo terminado como video.",
@@ -1271,7 +1281,7 @@
     "featuresPage.export.item3.title": "Exportación de video",
     "featuresPage.export.item3.body": "Exporta tu trabajo terminado como archivo de video.",
     "featuresPage.export.item4.title": "Formatos de exportación",
-    "featuresPage.export.item4.body": "Compatible con MP4, WebM y GIF. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",
+    "featuresPage.export.item4.body": "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",
     "featuresPage.export.item5.title": "Límite de duración por obra",
     "featuresPage.export.item5.body": "El tamaño del lienzo tiene un límite superior, pero dentro de él puedes ajustar el tamaño y la proporción según tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium, hasta 2 horas por obra. No hay límite en la cantidad de obras.",
 

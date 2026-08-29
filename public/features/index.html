@@ -421,15 +421,18 @@
       <div class="feature-narrative">
         <div class="feature-narrative-block">
           <h3 data-i18n="narrative.audio.1.heading">音にタイミングを合わせて絵を動かす</h3>
-          <p data-i18n="narrative.audio.1.body">音声をタイムラインに配置して、音量やフェードイン・フェードアウトを調整できます。さらにタイムスタンプを打てば、音に合わせた口パクや動きのタイミングを確認する目印として使えます。</p>
+          <p data-i18n="narrative.audio.1.body">音声をタイムラインに配置して、音量やフェードイン・フェードアウトを調整できます。音声クリップには波形が薄く重ねて表示されるため、音の強弱を見ながら配置を調整できます。さらにタイムスタンプを打てば、音に合わせた口パクや動きのタイミングを確認する目印として使えます。</p>
         </div>
       </div>
-      <!-- timeline_screen.dart には波形表示は存在しないため（音声クリップは
-           Icons.audiotrack(size:18)付きのトラックとして表示される）、
-           実際に存在する構成要素のみを再現する。「音量」はl10nの実文言
-           （timelineClipVolumeLabel）。 -->
+      <!-- timeline_screen.dart の音声クリップ帯：Icons.audiotrack(size:18)付き
+           のトラックに、AudioWaveformServiceが生成した波形PNGを不透明度0.5
+           で重ねて表示する（生成前・失敗時はプレーンな色帯にフォールバック）。
+           「音量」はl10nの実文言（timelineClipVolumeLabel）。 -->
       <div class="feature-diagram" aria-hidden="true">
         <div class="fd-audio-track">
+          <span class="fd-waveform">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
           <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-audiotrack"></use></svg>
           <span data-i18n="fd.audioClip">音声クリップ</span>
         </div>
@@ -445,6 +448,7 @@
         <div class="spec-item"><h3 data-i18n="featuresPage.audio.item3.title">開始フレーム</h3><p data-i18n="featuresPage.audio.item3.body">音声を再生し始めるフレームを指定できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.audio.item4.title">フェードイン・フェードアウト</h3><p data-i18n="featuresPage.audio.item4.body">音声の始まりと終わりを滑らかに調整できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.audio.item5.title">タイムスタンプ</h3><p data-i18n="featuresPage.audio.item5.body">特定のフレームにコメント付きの目印を打てます。音に合わせた口パクや動きのタイミングを確認する目印として使えます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.audio.item6.title">波形表示</h3><p data-i18n="featuresPage.audio.item6.body">音声クリップに波形が薄く重ねて表示され、音の強弱を見ながらタイムライン上の配置を調整できます。</p></div>
       </div>
     </section>
 
@@ -592,7 +596,7 @@
         </div>
       </div>
       <!-- export_screen.dart の実構成：SegmentedButton（標準/高画質/カスタム、
-           l10n.exportPreset*）、RadioListTile×3（二行、l10n.exportFormat*・
+           l10n.exportPreset*）、RadioListTile×4（二行、l10n.exportFormat*・
            helpTransparentWebmTitle）、FilledButton.icon(Icons.file_download、
            minimumSize height 48)をそのまま再現。 -->
       <div class="feature-diagram" aria-hidden="true">
@@ -616,6 +620,10 @@
             <span class="fd-radio"></span>
             <span class="fd-format-text"><strong data-i18n="fd.formatWebm">透過WebM</strong><span data-i18n="fd.formatWebmSubtitle">透明背景動画</span></span>
           </div>
+          <div class="fd-format-row">
+            <span class="fd-radio"></span>
+            <span class="fd-format-text"><strong>AVI</strong><span data-i18n="fd.formatAviSubtitle">互換性重視の動画形式（透過非対応）</span></span>
+          </div>
         </div>
         <button type="button" class="fd-export-btn" tabindex="-1">
           <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg>
@@ -626,7 +634,7 @@
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item1.title">解像度</h3><p data-i18n="featuresPage.export.item1.body">Full HDまでの解像度で書き出せます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item2.title">縦横比</h3><p data-i18n="featuresPage.export.item2.body">縦横比を自由に設定できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item3.title">動画書き出し</h3><p data-i18n="featuresPage.export.item3.body">制作した作品を動画ファイルとして書き出せます。</p></div>
-        <div class="spec-item"><h3 data-i18n="featuresPage.export.item4.title">書き出し形式</h3><p data-i18n="featuresPage.export.item4.body">MP4・WebM・GIFに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。</p></div>
+        <div class="spec-item"><h3 data-i18n="featuresPage.export.item4.title">書き出し形式</h3><p data-i18n="featuresPage.export.item4.body">MP4・WebM・GIF・AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。</p></div>
         <div class="spec-item"><h3 data-i18n="featuresPage.export.item5.title">制作・書き出し時間の上限</h3><p data-i18n="featuresPage.export.item5.body">キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで、プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。</p></div>
       </div>
     </section>
