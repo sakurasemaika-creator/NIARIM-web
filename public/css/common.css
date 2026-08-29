@@ -676,3 +676,92 @@ p {
   color: var(--color-text-muted);
   line-height: 1.8;
 }
+
+/* ---- 常時表示のダウンロード誘導バッジ（円形回転テキスト＋中央アイコン） ----
+   animations.js が生成・挿入する。ヒーローセクションを通過した後に表示し、
+   ホバー中は回転を止めて視認・クリックしやすくする。 */
+.spin-badge {
+  /* scroll-top-btn(右下 48px, right/bottom: var(--space-md))の真上に
+     隙間を空けて縦に積む。同じ右端に揃えて一体感を出す。 */
+  position: fixed;
+  right: var(--space-md);
+  bottom: calc(var(--space-md) + 48px + 14px);
+  width: 84px;
+  height: 84px;
+  z-index: 60;
+  color: var(--color-ink);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity var(--duration-base, 0.35s) var(--ease-out),
+    transform var(--duration-base, 0.35s) var(--ease-out);
+  pointer-events: none;
+}
+
+.spin-badge.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.spin-badge-ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: spin-badge-rotate 16s linear infinite;
+}
+
+.spin-badge:hover .spin-badge-ring,
+.spin-badge:focus-visible .spin-badge-ring {
+  animation-play-state: paused;
+}
+
+.spin-badge-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.spin-badge-core .ic {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+}
+
+@keyframes spin-badge-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-badge-ring {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .spin-badge {
+    width: 60px;
+    height: 60px;
+    bottom: calc(var(--space-md) + 48px + 10px);
+  }
+
+  .spin-badge-core {
+    width: 26px;
+    height: 26px;
+  }
+
+  .spin-badge-core .ic {
+    width: 13px;
+    height: 13px;
+  }
+}

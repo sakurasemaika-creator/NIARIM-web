@@ -22,6 +22,7 @@
     "nav.contact": "お問い合わせ",
     "nav.download": "ダウンロード",
     "lang.switch": "言語を切り替える",
+    "common.spinBadge": "無料ではじめる",
 
     "common.readMore": "詳しく見る",
     "common.backHome": "ホームへ戻る",
@@ -297,6 +298,7 @@
     "nav.contact": "Contact",
     "nav.download": "Download",
     "lang.switch": "Change language",
+    "common.spinBadge": "Start for free",
 
     "common.readMore": "Learn more",
     "common.backHome": "Back to home",

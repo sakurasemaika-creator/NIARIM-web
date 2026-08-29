@@ -13,6 +13,7 @@
     "nav.contact": "联系我们",
     "nav.download": "下载",
     "lang.switch": "切换语言",
+    "common.spinBadge": "免费开始",
 
     "common.readMore": "了解更多",
     "common.backHome": "返回首页",
@@ -266,6 +267,7 @@
     "nav.contact": "聯絡我們",
     "nav.download": "下載",
     "lang.switch": "切換語言",
+    "common.spinBadge": "免費開始",
 
     "common.readMore": "了解更多",
     "common.backHome": "返回首頁",
@@ -519,6 +521,7 @@
     "nav.contact": "문의하기",
     "nav.download": "다운로드",
     "lang.switch": "언어 변경",
+    "common.spinBadge": "무료로 시작하기",
 
     "common.readMore": "자세히 보기",
     "common.backHome": "홈으로 돌아가기",
@@ -772,6 +775,7 @@
     "nav.contact": "Contact",
     "nav.download": "Télécharger",
     "lang.switch": "Changer de langue",
+    "common.spinBadge": "Commencer gratuitement",
 
     "common.readMore": "En savoir plus",
     "common.backHome": "Retour à l'accueil",
@@ -1045,6 +1049,7 @@
     "nav.contact": "Contacto",
     "nav.download": "Descargar",
     "lang.switch": "Cambiar idioma",
+    "common.spinBadge": "Empieza gratis",
 
     "common.readMore": "Saber más",
     "common.backHome": "Volver al inicio",
