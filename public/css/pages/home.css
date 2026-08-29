@@ -219,14 +219,14 @@
   stroke: var(--color-brand);
   stroke-width: 6;
   stroke-linecap: round;
-  stroke-dasharray: 620;
-  stroke-dashoffset: 620;
+  stroke-dasharray: 390;
+  stroke-dashoffset: 390;
   animation: draw-stroke 2.6s var(--ease-out) 0.4s infinite;
 }
 
 @keyframes draw-stroke {
   0% {
-    stroke-dashoffset: 620;
+    stroke-dashoffset: 390;
   }
   55% {
     stroke-dashoffset: 0;
@@ -236,7 +236,7 @@
     opacity: 1;
   }
   100% {
-    stroke-dashoffset: -620;
+    stroke-dashoffset: -390;
     opacity: 0.4;
   }
 }
