@@ -160,6 +160,69 @@
   }
 
   /**
+   * ペン先を模したカーソルリング。OSのカーソルはそのまま残し、少し遅れて
+   * 追従する円を添えるだけの装飾（お絵かきアプリらしい「ペン先」の質感）。
+   * 実際にクリックできる要素（a[href]・button・role=buttonなど）の上に
+   * 来たときだけ大きく開く。それ以外の要素の上では一切変化させない
+   * （クリックできると誤認させないため）。
+   * マウス操作可能なPC環境かつreduced-motionでない場合のみ動作する。
+   */
+  function initCursorOrbit() {
+    if (prefersReducedMotion()) return;
+    if (
+      !window.matchMedia ||
+      !window.matchMedia("(any-hover: hover) and (any-pointer: fine)").matches
+    ) {
+      return;
+    }
+
+    var CLICKABLE =
+      "a[href], button:not([disabled]), [role='button'], input[type='submit'], input[type='button'], label[for]";
+
+    var ring = document.createElement("div");
+    ring.className = "cursor-orbit";
+    ring.setAttribute("aria-hidden", "true");
+    document.body.appendChild(ring);
+
+    var targetX = 0;
+    var targetY = 0;
+    var curX = 0;
+    var curY = 0;
+    var curScale = 1;
+    var shown = false;
+
+    function loop() {
+      curX += (targetX - curX) * 0.22;
+      curY += (targetY - curY) * 0.22;
+      var wantScale = ring.classList.contains("is-active") ? 1.6 : 1;
+      curScale += (wantScale - curScale) * 0.25;
+      ring.style.transform =
+        "translate3d(" + curX.toFixed(1) + "px, " + curY.toFixed(1) + "px, 0) scale(" +
+        curScale.toFixed(2) + ")";
+      requestAnimationFrame(loop);
+    }
+
+    document.addEventListener("mousemove", function (event) {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      if (!shown) {
+        shown = true;
+        curX = targetX;
+        curY = targetY;
+        ring.classList.add("is-visible");
+      }
+      var hit = event.target.closest && event.target.closest(CLICKABLE);
+      ring.classList.toggle("is-active", !!hit);
+    });
+
+    document.addEventListener("mouseleave", function () {
+      ring.classList.remove("is-visible");
+    });
+
+    requestAnimationFrame(loop);
+  }
+
+  /**
    * 機能紹介ページ: 画面内に入ったセクションに対応するタブへ
    * is-active を付与するスクロールスパイ（/features/ のみ動作）。
    */
@@ -197,6 +260,7 @@
     initParallaxTilt();
     initStaggerGrids();
     initMagneticButtons();
+    initCursorOrbit();
     initFeatureNavSpy();
   });
 })();

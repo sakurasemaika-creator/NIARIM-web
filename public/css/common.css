@@ -553,10 +553,27 @@ p {
   transform: translateY(0);
 }
 
+/* .reveal内の見出しは、ブロック全体のフェード＋スライドに加えて
+   左から右へワイプするような見え方にする（clip-pathで開いていく）。
+   ディセンダー(g/y等)が欠けないよう下側は少し余裕を持たせる。 */
+.reveal h2 {
+  clip-path: inset(0 100% -0.2em 0);
+  transition: clip-path var(--duration-slow) var(--ease-out) 0.12s;
+}
+
+.reveal.is-visible h2 {
+  clip-path: inset(0 0 -0.2em 0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .reveal h2 {
+    clip-path: none;
     transition: none;
   }
 }
@@ -696,6 +713,59 @@ p {
   .scroll-top-btn {
     transition: opacity var(--duration-fast) linear;
   }
+}
+
+/* ---- ペン先カーソルリング（animations.jsが生成、マウス操作可能なPC環境のみ） ----
+   OSのカーソル自体は隠さず、少し遅れて追従する「ペン先の円」を添えるだけの
+   純粋な装飾。実際にクリックできる要素の上に来たときだけ大きく開き、
+   お絵かきアプリらしい「ペン先が対象を捉えた」感覚を出す。
+   クリックできない要素の上では一切変化しない（誤ってクリック可能と
+   思わせないため）。 */
+.cursor-orbit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  /* transform（位置・拡大率）はanimations.jsが毎フレーム直接書き換えて
+     追従の遅れ(lerp)を作るため、ここではtransitionの対象に含めない。 */
+  transition: opacity var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.cursor-orbit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%);
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.cursor-orbit.is-active {
+  border-color: var(--color-ink);
+}
+
+.cursor-orbit.is-active::after {
+  opacity: 0;
+}
+
+.cursor-orbit.is-visible {
+  opacity: 0.55;
+}
+
+.cursor-orbit.is-visible.is-active {
+  opacity: 1;
 }
 
 /* ---- Visually hidden ---- */
