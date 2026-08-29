@@ -32,6 +32,11 @@
     border-color var(--duration-fast) var(--ease-out);
 }
 
+.community-tabs button:hover:not(.is-active) {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
 .community-tabs button.is-active {
   background: var(--color-ink);
   border-color: var(--color-ink);
