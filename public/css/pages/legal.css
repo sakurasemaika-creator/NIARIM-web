@@ -37,16 +37,14 @@
   margin-bottom: var(--space-lg);
 }
 
+/* section自体はクリックできる要素ではないため、ホバーで色が変わる
+   演出は付けない（クリックできると誤認させないため）。左の帯は常時
+   ブランドグラデーションで表示し、条文の区切りを視覚的に示す。 */
 .legal-body section::before {
   content: "";
   position: absolute;
   inset: var(--space-md) auto var(--space-lg) 0;
   width: 3px;
-  background: var(--color-border);
-  transition: background var(--duration-fast) var(--ease-out);
-}
-
-.legal-body section:hover::before {
   background: var(--grad-brand);
 }
 

@@ -145,8 +145,8 @@
 /* animations.js の initStaggerGrids() が画面内進入時に1枚ずつ間をおいて
    .is-visible を付与する。JSが動かない/prefers-reduced-motion環境では
    即座に is-visible が付与されるため、常時表示にフォールバックする。
-   transitionはカードのホバー演出（.spec-item側）とプロパティを共有する
-   必要があるため、ここでは初期状態のopacity/transformのみを設定する。 */
+   transitionは.spec-item側で定義し、ここでは初期状態のopacity/
+   transformのみを設定する。 */
 .stagger-grid > * {
   opacity: 0;
   transform: translateY(14px);
@@ -158,6 +158,9 @@
 }
 
 .spec-item {
+  /* クリックできる要素ではないため、ホバーで動く演出は付けない
+     （クリックできると誤認させないため）。表示自体の
+     フェードイン（.stagger-grid側）にのみtransitionを使う。 */
   position: relative;
   padding: var(--space-md) var(--space-md) var(--space-md) 1.3rem;
   border-radius: var(--radius-md);
@@ -165,15 +168,7 @@
   background: var(--color-white);
   overflow: hidden;
   transition: opacity var(--duration-base, 0.4s) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
-}
-
-.spec-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-accent);
+    transform var(--duration-base, 0.4s) var(--ease-out);
 }
 
 .spec-item::before {
