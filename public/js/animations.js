@@ -73,14 +73,15 @@
   }
 
   /**
-   * .spec-grid（Features/Premium/Community等で多用するカードグリッド）が
-   * 画面内に入ったら、カードを1枚ずつ少しずつ間をおいて表示する。
-   * グリッド全体を一括フェードインさせるより、実際に手が動いて並んで
-   * いくような質感を出す狙い。1グリッドあたりの遅延上限を設けて、
-   * カード数が多い場合でも待たされすぎないようにする。
+   * .spec-grid（Features/Premium/Community等で多用するカードグリッド）や
+   * .screenshot-scroller（トップページのアプリ画面紹介）が画面内に入ったら、
+   * カードを1枚ずつ少しずつ間をおいて表示する。グリッド全体を一括フェード
+   * インさせるより、実際に手が動いて並んでいくような質感を出す狙い。
+   * 1グリッドあたりの遅延上限を設けて、カード数が多い場合でも
+   * 待たされすぎないようにする。
    */
   function initStaggerGrids() {
-    var grids = document.querySelectorAll(".spec-grid");
+    var grids = document.querySelectorAll(".spec-grid, .screenshot-scroller");
     if (!grids.length) return;
 
     if (prefersReducedMotion() || !("IntersectionObserver" in window)) {

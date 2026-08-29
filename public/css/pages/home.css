@@ -527,6 +527,24 @@
   box-shadow: var(--shadow-md);
 }
 
+/* スクロールで画面に入ったとき、端末画面が1枚ずつ軽く傾きながら
+   置かれていくように表示する(animations.jsのstagger-grid機構を利用)。
+   機能図パネルの「電源が入る」演出、見出しの左右ワイプとも質感を変え、
+   横スクロールギャラリーらしい「カードが並んでいく」動きにしている。 */
+.screenshot-scroller.stagger-grid > .screenshot-card {
+  transform: translateY(20px) rotate(-3deg);
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.screenshot-scroller.stagger-grid > .screenshot-card:nth-child(even) {
+  transform: translateY(20px) rotate(3deg);
+}
+
+.screenshot-scroller.stagger-grid > .screenshot-card.is-visible {
+  transform: none;
+}
+
 .screenshot-card img {
   width: 100%;
   height: 100%;
