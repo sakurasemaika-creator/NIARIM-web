@@ -73,6 +73,93 @@
   }
 
   /**
+   * .spec-grid（Features/Premium/Community等で多用するカードグリッド）が
+   * 画面内に入ったら、カードを1枚ずつ少しずつ間をおいて表示する。
+   * グリッド全体を一括フェードインさせるより、実際に手が動いて並んで
+   * いくような質感を出す狙い。1グリッドあたりの遅延上限を設けて、
+   * カード数が多い場合でも待たされすぎないようにする。
+   */
+  function initStaggerGrids() {
+    var grids = document.querySelectorAll(".spec-grid");
+    if (!grids.length) return;
+
+    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      grids.forEach(function (grid) {
+        grid.querySelectorAll(":scope > *").forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      });
+      return;
+    }
+
+    var STEP_MS = 55;
+    var MAX_DELAY_MS = 420;
+
+    grids.forEach(function (grid) {
+      grid.classList.add("stagger-grid");
+    });
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var items = entry.target.querySelectorAll(":scope > *");
+          items.forEach(function (item, index) {
+            var delay = Math.min(index * STEP_MS, MAX_DELAY_MS);
+            item.style.transitionDelay = delay + "ms";
+            item.classList.add("is-visible");
+          });
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    grids.forEach(function (grid) {
+      observer.observe(grid);
+    });
+  }
+
+  /**
+   * 主要CTAボタン（btn-primary / btn-accent）に、カーソルへわずかに
+   * 吸い寄せられるような「マグネティックホバー」を付与する。
+   * タッチ端末・reduced-motion環境・ホバー不可環境では何もしない。
+   */
+  function initMagneticButtons() {
+    if (prefersReducedMotion()) return;
+    if (!window.matchMedia || !window.matchMedia("(any-hover: hover)").matches) {
+      return;
+    }
+
+    var buttons = document.querySelectorAll(".btn-primary, .btn-accent");
+    if (!buttons.length) return;
+
+    var PULL = 0.28;
+    var MAX_OFFSET = 8;
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("mouseenter", function () {
+        btn.style.transitionDuration = "0.12s";
+      });
+
+      btn.addEventListener("mousemove", function (event) {
+        var rect = btn.getBoundingClientRect();
+        var x = event.clientX - (rect.left + rect.width / 2);
+        var y = event.clientY - (rect.top + rect.height / 2);
+        var offsetX = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, x * PULL));
+        var offsetY = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, y * PULL));
+        btn.style.transform =
+          "translate(" + offsetX.toFixed(1) + "px, " + (offsetY - 2).toFixed(1) + "px)";
+      });
+
+      btn.addEventListener("mouseleave", function () {
+        btn.style.transitionDuration = "";
+        btn.style.transform = "";
+      });
+    });
+  }
+
+  /**
    * 機能紹介ページ: 画面内に入ったセクションに対応するタブへ
    * is-active を付与するスクロールスパイ（/features/ のみ動作）。
    */
@@ -108,6 +195,8 @@
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initParallaxTilt();
+    initStaggerGrids();
+    initMagneticButtons();
     initFeatureNavSpy();
   });
 })();

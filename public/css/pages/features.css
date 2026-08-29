@@ -142,6 +142,21 @@
   gap: var(--space-md);
 }
 
+/* animations.js の initStaggerGrids() が画面内進入時に1枚ずつ間をおいて
+   .is-visible を付与する。JSが動かない/prefers-reduced-motion環境では
+   即座に is-visible が付与されるため、常時表示にフォールバックする。 */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--duration-base, 0.4s) var(--ease-out),
+    transform var(--duration-base, 0.4s) var(--ease-out);
+}
+
+.stagger-grid > *.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 .spec-item {
   position: relative;
   padding: var(--space-md) var(--space-md) var(--space-md) 1.3rem;
