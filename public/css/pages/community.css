@@ -102,10 +102,6 @@
   color: var(--color-brand-dark);
 }
 
-.community-gallery .community-card:nth-child(1) .rank-badge::before {
-  content: "👑 ";
-}
-
 .community-gallery .community-card:nth-child(2) .rank-badge {
   background: linear-gradient(120deg, #e3e6ee, #b9c0cf);
   color: var(--color-ink);

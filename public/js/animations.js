@@ -37,7 +37,14 @@
           }
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+      // threshold は「対象要素自身の面積に対する交差率」であるため、
+      // ビューポートより何倍も背が高いセクション（機能紹介ページの
+      // 縦に長いセクションなど）では、画面いっぱいに表示されていても
+      // 対象全体からみた交差率が0.18を超えず、永久に表示されない
+      // 不具合があった。ここでは閾値を0にし、「少しでも入ったら」
+      // 判定にして、実際に見える量の調整はrootMargin（ビューポート
+      // 基準の割合なので対象の高さに影響されない）だけで行う。
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
     targets.forEach(function (el) {
@@ -115,7 +122,8 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+      // initRevealと同じ理由で、対象の高さに影響されないよう閾値は0にする。
+      { threshold: 0, rootMargin: "0px 0px -6% 0px" }
     );
 
     grids.forEach(function (grid) {

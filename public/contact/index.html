@@ -67,19 +67,20 @@
 
 <main id="main">
   <div class="container">
-    <div class="section-tint" style="border-radius: var(--radius-lg); padding: var(--space-2xl) var(--space-xl); margin-block: var(--space-xl);">
+    <div class="contact-panel">
     <div class="contact-layout">
       <div class="contact-intro reveal">
         <h1 data-i18n="contact.title">お問い合わせ</h1>
-        <p data-i18n="contact.lead">不具合報告・機能要望・使い方に関するご質問など、お気軽にお問い合わせください。</p>
+        <p data-i18n="contact.lead">不具合報告・機能要望・使い方に関するご質問は、まず公式Xへお気軽にご連絡ください。</p>
         <div class="contact-channel">
-          <h2 data-i18n="contact.channel.title">Xでも情報を発信しています</h2>
-          <p data-i18n="contact.channel.body">最新のお知らせは公式Xでも配信予定です。</p>
-          <a href="#" id="contact-x-link" data-i18n="contact.channel.link">公式Xを見る（準備中）</a>
+          <h2 data-i18n="contact.channel.title">まずは公式Xへ</h2>
+          <p data-i18n="contact.channel.body">不具合報告・機能要望・使い方のご質問は、公式Xへのリプライやダイレクトメッセージでお気軽にどうぞ。</p>
+          <a class="btn btn-accent" href="#" id="contact-x-link" data-i18n="contact.channel.link">公式Xでお問い合わせ</a>
         </div>
+        <p class="contact-personal-note" data-i18n="contact.personalNote">アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、下記のフォームからご連絡ください（フォームの内容はメールで受け付けます）。</p>
       </div>
 
-      <form class="contact-form reveal" id="contact-form" novalidate>
+      <form class="contact-form reveal" id="contact-form" novalidate enctype="multipart/form-data">
         <div class="form-row">
           <label for="type" data-i18n="contact.form.type">お問い合わせ種別</label>
           <select class="form-control" id="type" name="type" required>
@@ -108,6 +109,13 @@
           <textarea class="form-control" id="message" name="message" maxlength="1000" required data-i18n-attr="placeholder:contact.form.messagePlaceholder"></textarea>
           <p class="form-hint" data-i18n="contact.form.messageHint">1,000文字以内でご記入ください。</p>
           <p class="form-error" data-i18n="contact.error.tooLong">文字数が上限を超えています。</p>
+        </div>
+
+        <div class="form-row">
+          <label for="attachments" data-i18n="contact.form.attachments">画像を添付する（任意）</label>
+          <input class="form-control form-file" type="file" id="attachments" name="attachments" accept="image/png,image/jpeg,image/webp,image/gif" multiple />
+          <p class="form-hint" data-i18n="contact.form.attachmentsHint">1枚あたり5MBまで、最大3枚まで添付できます（PNG・JPEG・WebP・GIF）。</p>
+          <p class="form-error" data-i18n="contact.error.attachments">画像の枚数またはサイズが上限を超えています。</p>
         </div>
 
         <!-- honeypot: ボット対策。人間には見えない入力欄 -->

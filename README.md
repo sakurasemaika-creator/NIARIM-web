@@ -190,9 +190,10 @@ npx wrangler kv namespace create RATE_LIMIT_KV
 
 ## セキュリティ対策の概要（`/api/contact`）
 
-- HTTPメソッド・Content-Type検証
-- リクエストサイズ上限（10KB）
+- HTTPメソッド・Content-Type検証（`multipart/form-data`のみ受け付け）
+- リクエストサイズ上限（添付画像5MB×最大3枚＋テキスト分の余裕を見て約15MB）
 - 必須項目・文字数上限・メール形式のバリデーション
+- 添付画像のバリデーション（枚数上限3枚、1枚あたり5MB、PNG/JPEG/WebP/GIFのみ許可）
 - honeypotによる簡易Bot対策（ボットには成功したように見せかけ、実送信はしない）
 - KVベースのレート制限（同一IPにつき60秒に1回・1日20通まで）
 - メールヘッダ・本文への改行注入対策（ヘッダインジェクション・メールインジェクション対策）

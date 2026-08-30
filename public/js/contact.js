@@ -8,6 +8,14 @@
   var MESSAGE_MAX_LENGTH = 1000;
   var NAME_MAX_LENGTH = 100;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var MAX_ATTACHMENTS = 3;
+  var MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024; // 1枚あたり5MB
+  var ALLOWED_ATTACHMENT_TYPES = [
+    "image/png",
+    "image/jpeg",
+    "image/webp",
+    "image/gif",
+  ];
 
   function t(key) {
     var lang = document.documentElement.getAttribute("lang") || "ja";
@@ -63,6 +71,22 @@
       setFieldError(agreeRow, false);
     }
 
+    var attachments = form.elements.attachments;
+    if (attachments) {
+      var attachmentsRow = attachments.closest(".form-row");
+      var files = Array.prototype.slice.call(attachments.files || []);
+      var attachmentsInvalid =
+        files.length > MAX_ATTACHMENTS ||
+        files.some(function (file) {
+          return (
+            file.size > MAX_ATTACHMENT_BYTES ||
+            ALLOWED_ATTACHMENT_TYPES.indexOf(file.type) === -1
+          );
+        });
+      setFieldError(attachmentsRow, attachmentsInvalid);
+      if (attachmentsInvalid) valid = false;
+    }
+
     return valid;
   }
 
@@ -93,22 +117,27 @@
         return;
       }
 
-      var payload = {
-        type: form.elements.type.value,
-        name: form.elements.name.value.trim(),
-        email: form.elements.email.value.trim(),
-        message: form.elements.message.value.trim(),
-        agree: form.elements.agree.checked,
-        company: form.elements.company.value, // honeypot
-      };
+      var payload = new FormData();
+      payload.set("type", form.elements.type.value);
+      payload.set("name", form.elements.name.value.trim());
+      payload.set("email", form.elements.email.value.trim());
+      payload.set("message", form.elements.message.value.trim());
+      payload.set("agree", form.elements.agree.checked ? "true" : "false");
+      payload.set("company", form.elements.company.value); // honeypot
+      if (form.elements.attachments) {
+        Array.prototype.forEach.call(form.elements.attachments.files || [], function (file) {
+          payload.append("attachments", file, file.name);
+        });
+      }
 
       submitBtn.disabled = true;
       submitLabel.textContent = t("contact.form.submitting");
 
+      // Content-Typeは指定しない（ブラウザがmultipart/form-dataの
+      // boundaryを含めて自動設定するため、手動指定すると壊れる）。
       fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
       })
         .then(function (res) {
           return res

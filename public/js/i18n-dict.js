@@ -120,10 +120,13 @@
     "contact.eyebrow": "Contact",
     "contact.title": "お問い合わせ",
     "contact.lead":
-      "不具合報告・機能要望・使い方に関するご質問など、お気軽にお問い合わせください。",
-    "contact.channel.title": "Xでも情報を発信しています",
-    "contact.channel.body": "最新のお知らせは公式Xでも配信予定です。",
-    "contact.channel.link": "公式Xを見る（準備中）",
+      "不具合報告・機能要望・使い方に関するご質問は、まず公式Xへお気軽にご連絡ください。",
+    "contact.channel.title": "まずは公式Xへ",
+    "contact.channel.body":
+      "不具合報告・機能要望・使い方のご質問は、公式Xへのリプライやダイレクトメッセージでお気軽にどうぞ。",
+    "contact.channel.link": "公式Xでお問い合わせ",
+    "contact.personalNote":
+      "アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、下記のフォームからご連絡ください（フォームの内容はメールで受け付けます）。",
     "contact.form.type": "お問い合わせ種別",
     "contact.form.type.bug": "不具合報告",
     "contact.form.type.request": "機能要望",
@@ -137,6 +140,10 @@
     "contact.form.message": "お問い合わせ内容",
     "contact.form.messagePlaceholder": "できるだけ詳しくご記入ください",
     "contact.form.messageHint": "1,000文字以内でご記入ください。",
+    "contact.form.attachments": "画像を添付する（任意）",
+    "contact.form.attachmentsHint":
+      "1枚あたり5MBまで、最大3枚まで添付できます（PNG・JPEG・WebP・GIF）。",
+    "contact.error.attachments": "画像の枚数またはサイズが上限を超えています。",
     "contact.form.agree.pre": "",
     "contact.form.agree.link": "プライバシーポリシー",
     "contact.form.agree.post": "に同意のうえ送信する",
@@ -393,10 +400,13 @@
     "contact.eyebrow": "Contact",
     "contact.title": "Contact Us",
     "contact.lead":
-      "Feel free to reach out about bugs, feature requests, or how to use the app.",
-    "contact.channel.title": "We also post updates on X",
-    "contact.channel.body": "The latest announcements will also be shared on our official X account.",
-    "contact.channel.link": "View official X (coming soon)",
+      "For bug reports, feature requests, or questions about how to use the app, please reach out to us on X first.",
+    "contact.channel.title": "Start with official X",
+    "contact.channel.body":
+      "For bug reports, feature requests, or questions about how to use the app, feel free to reply or send a direct message to our official X account.",
+    "contact.channel.link": "Contact us on X",
+    "contact.personalNote":
+      "We can't handle inquiries involving personal information, such as your account or email address, on X. Please use the form below instead (submissions are received by email).",
     "contact.form.type": "Inquiry type",
     "contact.form.type.bug": "Bug report",
     "contact.form.type.request": "Feature request",
@@ -410,6 +420,10 @@
     "contact.form.message": "Message",
     "contact.form.messagePlaceholder": "Please share as much detail as you can.",
     "contact.form.messageHint": "Please keep it within 1,000 characters.",
+    "contact.form.attachments": "Attach images (optional)",
+    "contact.form.attachmentsHint":
+      "Up to 5MB per image, up to 3 images (PNG, JPEG, WebP, or GIF).",
+    "contact.error.attachments": "Too many images, or one exceeds the size limit.",
     "contact.form.agree.pre": "I agree to the",
     "contact.form.agree.link": "Privacy Policy",
     "contact.form.agree.post": "and consent to submit this form",

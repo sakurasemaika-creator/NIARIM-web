@@ -2,6 +2,17 @@
    NIARIM contact.css - お問い合わせページ専用スタイル
    ========================================================================== */
 
+/* 以前はページ側でインラインstyleを使ってpaddingを指定していたため、
+   スマートフォン幅でも横paddingが縮まらず、フォームの実質的な横幅が
+   極端に狭くなってしまっていた。クラス化してブレークポイントごとに
+   調整できるようにする。 */
+.contact-panel {
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  margin-block: var(--space-xl);
+  background: var(--color-bg-tint);
+}
+
 .contact-layout {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -32,12 +43,16 @@
 }
 
 .contact-channel a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: var(--space-xs);
-  font-weight: 600;
-  color: var(--color-brand);
+  margin-top: var(--space-sm);
+}
+
+.contact-personal-note {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
 }
 
 .contact-form {
@@ -69,11 +84,14 @@
   transform: none;
 }
 
-.contact-form.is-visible .form-row:nth-child(1) { transition-delay: 0.06s; }
-.contact-form.is-visible .form-row:nth-child(2) { transition-delay: 0.12s; }
-.contact-form.is-visible .form-row:nth-child(3) { transition-delay: 0.18s; }
-.contact-form.is-visible .form-row:nth-child(4) { transition-delay: 0.24s; }
-.contact-form.is-visible .form-row:nth-child(6) { transition-delay: 0.3s; }
+/* 子要素の並び: type(1) / name(2) / email(3) / message(4) /
+   attachments(5) / honeypot(6・非表示) / agree(7) / submit-button(8) */
+.contact-form.is-visible .form-row:nth-child(1) { transition-delay: 0.05s; }
+.contact-form.is-visible .form-row:nth-child(2) { transition-delay: 0.1s; }
+.contact-form.is-visible .form-row:nth-child(3) { transition-delay: 0.15s; }
+.contact-form.is-visible .form-row:nth-child(4) { transition-delay: 0.2s; }
+.contact-form.is-visible .form-row:nth-child(5) { transition-delay: 0.25s; }
+.contact-form.is-visible .form-row:nth-child(7) { transition-delay: 0.3s; }
 .contact-form.is-visible .form-submit { transition-delay: 0.36s; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -111,6 +129,11 @@
 .form-control:focus {
   border-color: var(--color-brand);
   box-shadow: 0 0 0 4px var(--color-sub-tint);
+}
+
+.form-control.form-file {
+  padding: 0.6rem 0.8rem;
+  font-size: var(--fs-small);
 }
 
 textarea.form-control {
@@ -208,5 +231,19 @@ textarea.form-control {
 
   .contact-form {
     padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  /* スマートフォン幅では、外枠のpaddingを大きく取ったままだと
+     フォームの実質的な横幅が極端に狭くなり読みにくくなるため縮小する。 */
+  .contact-panel {
+    padding: var(--space-lg) var(--space-sm);
+    margin-block: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-form {
+    padding: var(--space-md);
   }
 }

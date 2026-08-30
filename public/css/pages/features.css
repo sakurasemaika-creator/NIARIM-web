@@ -91,8 +91,10 @@
   flex-wrap: wrap;
 }
 
-.feature-section-head::before {
-  content: "";
+/* 各セクションの見出し左には、絵文字ではなくアプリ本体と同じアイコン
+   (sprite.svg)を白抜きで配置する(.feature-section-icon、HTML側で
+   #ic-*を指定)。 */
+.feature-section-icon {
   flex-shrink: 0;
   width: 52px;
   height: 52px;
@@ -102,27 +104,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   color: var(--color-white);
 }
 
-#drawing .feature-section-head::before {
-  content: "✎";
-}
-#animation .feature-section-head::before {
-  content: "▶";
-}
-#editing .feature-section-head::before {
-  content: "✂";
-}
-#advanced .feature-section-head::before {
-  content: "✨";
-}
-#audio .feature-section-head::before {
-  content: "♪";
-}
-#export .feature-section-head::before {
-  content: "⬇";
+.feature-section-icon .ic {
+  width: 26px;
+  height: 26px;
 }
 
 .feature-section-head h2 {

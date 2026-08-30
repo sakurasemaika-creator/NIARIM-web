@@ -12,11 +12,22 @@
  */
 import { jsonResponse } from "./utils.js";
 
-const MAX_BODY_BYTES = 10 * 1024; // リクエストサイズ上限（10KB）
 const NAME_MAX_LENGTH = 100;
 const MESSAGE_MAX_LENGTH = 1000;
 const EMAIL_MAX_LENGTH = 254;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const MAX_ATTACHMENTS = 3;
+const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024; // 添付画像1枚あたり5MB
+const ALLOWED_ATTACHMENT_TYPES = new Set([
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/gif",
+]);
+// 本文(テキスト)のサイズ上限＋添付画像の上限(5MB×3枚)を踏まえたリクエスト全体の上限。
+// multipartのオーバーヘッド分の余裕も持たせる。
+const MAX_BODY_BYTES = MAX_ATTACHMENTS * MAX_ATTACHMENT_BYTES + 256 * 1024;
 
 const INQUIRY_TYPES = new Set(["bug", "request", "usage", "account", "other"]);
 const INQUIRY_TYPE_LABELS = {
@@ -36,7 +47,7 @@ export async function handleContact(request, env, ctx) {
   }
 
   const contentType = request.headers.get("Content-Type") || "";
-  if (!contentType.toLowerCase().includes("application/json")) {
+  if (!contentType.toLowerCase().includes("multipart/form-data")) {
     return jsonResponse(415, { error: "unsupported_media_type" });
   }
 
@@ -45,27 +56,21 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(413, { error: "payload_too_large" });
   }
 
-  let raw;
+  let form;
   try {
-    raw = await request.text();
+    form = await request.formData();
   } catch {
     return jsonResponse(400, { error: "invalid_body" });
   }
 
-  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) {
-    return jsonResponse(413, { error: "payload_too_large" });
-  }
-
-  let body;
-  try {
-    body = JSON.parse(raw);
-  } catch {
-    return jsonResponse(400, { error: "malformed_json" });
-  }
-
-  if (!body || typeof body !== "object") {
-    return jsonResponse(400, { error: "malformed_json" });
-  }
+  const body = {
+    type: form.get("type"),
+    name: form.get("name"),
+    email: form.get("email"),
+    message: form.get("message"),
+    agree: form.get("agree") === "true",
+    company: form.get("company"),
+  };
 
   // honeypot: ボットは通常この隠しフィールドまで埋めてしまうため、
   // 値が入っていた場合はユーザーには成功したように見せかけ、実際の送信は行わない。
@@ -78,6 +83,31 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(400, { error: "validation_error", field: validation.field });
   }
   const data = validation.data;
+
+  const attachmentFiles = form.getAll("attachments").filter(
+    (entry) => typeof entry === "object" && typeof entry.arrayBuffer === "function" && entry.size > 0
+  );
+  if (attachmentFiles.length > MAX_ATTACHMENTS) {
+    return jsonResponse(400, { error: "validation_error", field: "attachments" });
+  }
+  for (const file of attachmentFiles) {
+    if (file.size > MAX_ATTACHMENT_BYTES || !ALLOWED_ATTACHMENT_TYPES.has(file.type)) {
+      return jsonResponse(400, { error: "validation_error", field: "attachments" });
+    }
+  }
+
+  let attachments;
+  try {
+    attachments = await Promise.all(
+      attachmentFiles.map(async (file) => ({
+        filename: sanitizeFilename(file.name) || "attachment",
+        content: arrayBufferToBase64(await file.arrayBuffer()),
+      }))
+    );
+  } catch (err) {
+    console.error("Failed to read attachments", err);
+    return jsonResponse(400, { error: "invalid_body" });
+  }
 
   const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
 
@@ -94,7 +124,7 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(500, { error: "internal_error" });
   }
 
-  const sent = await sendViaResend(env, data);
+  const sent = await sendViaResend(env, data, attachments);
   if (!sent.ok) {
     console.error("Resend send failed", sent.status, sent.detail);
     return jsonResponse(502, { error: "mail_send_failed" });
@@ -167,6 +197,27 @@ async function recordSubmission(kv, clientIp) {
   ]);
 }
 
+// パス区切り(../ 等)がメール本文へそのまま渡らないよう、パス部分を
+// 取り除く（日本語ファイル名やスペースはそのまま許可する）。
+function sanitizeFilename(name) {
+  if (typeof name !== "string") return "";
+  const base = name.split(/[\\/]/).pop() || "";
+  return base.trim().slice(-100);
+}
+
+// Workers環境にはNode.jsのBufferがないため、ArrayBufferを手動でbase64化する。
+// spread演算子で大きな配列を一度に展開するとスタックオーバーフローの
+// 危険があるため、chunk単位でString.fromCharCodeへ渡す。
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  const CHUNK_SIZE = 0x8000;
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK_SIZE));
+  }
+  return btoa(binary);
+}
+
 function escapeHtml(str) {
   return str
     .replace(/&/g, "&amp;")
@@ -176,7 +227,7 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-async function sendViaResend(env, data) {
+async function sendViaResend(env, data, attachments) {
   const typeLabel = INQUIRY_TYPE_LABELS[data.type] || data.type;
   const textBody = [
     `お問い合わせ種別: ${typeLabel}`,
@@ -211,6 +262,7 @@ async function sendViaResend(env, data) {
         subject: `【NIARIM お問い合わせ】${typeLabel}`,
         text: textBody,
         html: htmlBody,
+        attachments: attachments && attachments.length ? attachments : undefined,
       }),
     });
 
