@@ -46,6 +46,13 @@
   margin-top: var(--space-sm);
 }
 
+/* .contact-intro p { max-width: 42ch } の方が詳細度が高く(クラス+要素)、
+   .contact-personal-note単体(クラスのみ)のmax-width指定を上書きできて
+   いなかったため、詳細度を上げて確実に上書きする。 */
+.contact-intro .contact-personal-note {
+  max-width: none;
+}
+
 .contact-personal-note {
   margin-top: var(--space-md);
   padding: var(--space-md);

@@ -9,13 +9,18 @@
   var NAME_MAX_LENGTH = 100;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var MAX_ATTACHMENTS = 3;
-  var MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024; // 1枚あたり5MB
-  var ALLOWED_ATTACHMENT_TYPES = [
-    "image/png",
-    "image/jpeg",
-    "image/webp",
-    "image/gif",
-  ];
+  var MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
+  var MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
+  var MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024; // 添付合計の上限
+  var ATTACHMENT_MAX_BYTES_BY_TYPE = {
+    "image/png": MAX_IMAGE_BYTES,
+    "image/jpeg": MAX_IMAGE_BYTES,
+    "image/webp": MAX_IMAGE_BYTES,
+    "image/gif": MAX_IMAGE_BYTES,
+    "video/mp4": MAX_VIDEO_BYTES,
+    "video/quicktime": MAX_VIDEO_BYTES,
+    "video/webm": MAX_VIDEO_BYTES,
+  };
 
   function t(key) {
     var lang = document.documentElement.getAttribute("lang") || "ja";
@@ -75,14 +80,15 @@
     if (attachments) {
       var attachmentsRow = attachments.closest(".form-row");
       var files = Array.prototype.slice.call(attachments.files || []);
+      var totalBytes = 0;
       var attachmentsInvalid =
         files.length > MAX_ATTACHMENTS ||
         files.some(function (file) {
-          return (
-            file.size > MAX_ATTACHMENT_BYTES ||
-            ALLOWED_ATTACHMENT_TYPES.indexOf(file.type) === -1
-          );
-        });
+          var maxBytes = ATTACHMENT_MAX_BYTES_BY_TYPE[file.type];
+          totalBytes += file.size;
+          return !maxBytes || file.size > maxBytes;
+        }) ||
+        totalBytes > MAX_TOTAL_ATTACHMENT_BYTES;
       setFieldError(attachmentsRow, attachmentsInvalid);
       if (attachmentsInvalid) valid = false;
     }

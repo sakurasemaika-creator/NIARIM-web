@@ -91,8 +91,8 @@
   stroke: var(--color-accent);
   stroke-width: 3;
   stroke-linecap: round;
-  stroke-dasharray: 340;
-  stroke-dashoffset: 340;
+  stroke-dasharray: 296;
+  stroke-dashoffset: 296;
   animation: hero-underline-draw 0.9s var(--ease-out) 1.05s forwards;
 }
 
@@ -256,22 +256,19 @@
   height: auto;
 }
 
-/* まっすぐな1本線を描くアニメーション（以前は円弧で構成した円を
-   描いていたが、線がガタついて見えるとの指摘を受け、定規で引いた
-   ような直線に変更した）。 */
 .hero-visual .stroke-path {
   fill: none;
   stroke: var(--color-brand);
   stroke-width: 6;
   stroke-linecap: round;
-  stroke-dasharray: 234;
-  stroke-dashoffset: 234;
+  stroke-dasharray: 390;
+  stroke-dashoffset: 390;
   animation: draw-stroke 2.6s var(--ease-out) 0.4s infinite;
 }
 
 @keyframes draw-stroke {
   0% {
-    stroke-dashoffset: 234;
+    stroke-dashoffset: 390;
   }
   55% {
     stroke-dashoffset: 0;
@@ -281,7 +278,7 @@
     opacity: 1;
   }
   100% {
-    stroke-dashoffset: -234;
+    stroke-dashoffset: -390;
     opacity: 0.4;
   }
 }
@@ -367,16 +364,20 @@
   border-radius: var(--radius-md);
 }
 
+/* 角丸の四角をテーマカラー(グラデーション)で塗りつぶし、アイコンは
+   白抜きで重ねる(Features/Helpページの.feature-section-iconと
+   同じ考え方に統一)。 */
 .intro-card .icon {
   width: 48px;
   height: 48px;
   border-radius: var(--radius-sm);
-  background: var(--color-sub-tint);
+  background: var(--grad-brand);
+  box-shadow: var(--shadow-glow);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-md);
-  color: var(--color-brand);
+  color: var(--color-white);
 }
 
 /* 絵文字ではなく、アプリ本体と同じアイコン(sprite.svg)を使用する。 */

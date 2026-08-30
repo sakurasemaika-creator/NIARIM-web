@@ -18,16 +18,24 @@ const EMAIL_MAX_LENGTH = 254;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const MAX_ATTACHMENTS = 3;
-const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024; // 添付画像1枚あたり5MB
-const ALLOWED_ATTACHMENT_TYPES = new Set([
-  "image/png",
-  "image/jpeg",
-  "image/webp",
-  "image/gif",
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
+const MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
+// Resend(メール送信サービス)は1通あたりの合計サイズに上限があり、
+// 添付はメール送信時にbase64化されて約1.33倍に膨らむため、合計サイズにも
+// 別途上限を設ける（動画を1本含めても収まるよう、画像上限×3より大きい値にする）。
+const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
+const ALLOWED_ATTACHMENT_TYPES = new Map([
+  ["image/png", MAX_IMAGE_BYTES],
+  ["image/jpeg", MAX_IMAGE_BYTES],
+  ["image/webp", MAX_IMAGE_BYTES],
+  ["image/gif", MAX_IMAGE_BYTES],
+  ["video/mp4", MAX_VIDEO_BYTES],
+  ["video/quicktime", MAX_VIDEO_BYTES],
+  ["video/webm", MAX_VIDEO_BYTES],
 ]);
-// 本文(テキスト)のサイズ上限＋添付画像の上限(5MB×3枚)を踏まえたリクエスト全体の上限。
+// 本文(テキスト)のサイズ上限＋添付合計の上限を踏まえたリクエスト全体の上限。
 // multipartのオーバーヘッド分の余裕も持たせる。
-const MAX_BODY_BYTES = MAX_ATTACHMENTS * MAX_ATTACHMENT_BYTES + 256 * 1024;
+const MAX_BODY_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 256 * 1024;
 
 const INQUIRY_TYPES = new Set(["bug", "request", "usage", "account", "other"]);
 const INQUIRY_TYPE_LABELS = {
@@ -90,10 +98,16 @@ export async function handleContact(request, env, ctx) {
   if (attachmentFiles.length > MAX_ATTACHMENTS) {
     return jsonResponse(400, { error: "validation_error", field: "attachments" });
   }
+  let totalAttachmentBytes = 0;
   for (const file of attachmentFiles) {
-    if (file.size > MAX_ATTACHMENT_BYTES || !ALLOWED_ATTACHMENT_TYPES.has(file.type)) {
+    const maxBytes = ALLOWED_ATTACHMENT_TYPES.get(file.type);
+    if (!maxBytes || file.size > maxBytes) {
       return jsonResponse(400, { error: "validation_error", field: "attachments" });
     }
+    totalAttachmentBytes += file.size;
+  }
+  if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
+    return jsonResponse(400, { error: "validation_error", field: "attachments" });
   }
 
   let attachments;
