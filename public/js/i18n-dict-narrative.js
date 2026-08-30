@@ -88,7 +88,7 @@
     "narrative.save.6.heading": "作品を、別の端末へ。",
     "narrative.save.6.body": ".niashareでプロジェクトを共有。NIARIMのプロジェクトを.niashare形式で共有できます。自分の別端末へ移したり、ほかの人へプロジェクトを渡したりできます。書き出すときには、プロジェクト本体・画像や動画・音声などの素材・フォント・その他のデータを項目ごとに含めるか選択できます。必要なものだけを含めて、ファイルを軽くすることもできます。受け取った.niashareファイルは、自分のプロジェクトとして複製して利用できます。",
     "narrative.save.7.heading": "環境まるごと、引き継ぐ。",
-    "narrative.save.7.body": ".niatraでアプリ環境を移行。新しい端末へ乗り換えるときは、.niatra形式の引き継ぎ機能が使えます。設定や素材だけでなく、ブラシ・自動塗り設定・テーマ・フォント・その他のアプリ設定などをまとめて移行できます。引き継ぎたい項目はチェックボックスから個別に選択できます。",
+    "narrative.save.7.body": ".niatraでアプリ環境を移行。新しい端末へ乗り換えるときは、.niatra形式の引き継ぎ機能が使えます。設定や素材だけでなく、ブラシ・自動塗り設定・テーマ・フォント・パレットなどをまとめて移行できるほか、制作中のプロジェクトも任意で選んで含められます。引き継ぎたい項目はチェックボックスから個別に選択できます。",
     "narrative.save.8.heading": "",
     "narrative.save.8.body": "作品を渡すなら.niashare。制作環境を引き継ぐなら.niatra。用途に合わせて使い分けられます。",
 
@@ -202,7 +202,7 @@
     "narrative.save.6.heading": "Send your work to another device.",
     "narrative.save.6.body": "Share your project as a .niashare file. Move it to another device of your own, or hand a project over to someone else. When exporting, you can choose whether to include the project itself, materials like images/video/audio, fonts, and other data, item by item. Include only what you need to keep the file light. A received .niashare file can be duplicated and used as your own project.",
     "narrative.save.7.heading": "Carry your whole setup with you.",
-    "narrative.save.7.body": "Use .niatra to migrate your app environment. When switching to a new device, the .niatra transfer feature has you covered. Beyond settings and materials, you can migrate brushes, auto-fill settings, themes, fonts, and other app settings all together. Pick exactly which items to carry over using checkboxes.",
+    "narrative.save.7.body": "Use .niatra to migrate your app environment. When switching to a new device, the .niatra transfer feature has you covered. Beyond settings and materials, you can migrate brushes, auto-fill settings, themes, fonts, and palettes all together, and optionally include in-progress projects too. Pick exactly which items to carry over using checkboxes.",
     "narrative.save.8.heading": "",
     "narrative.save.8.body": "Use .niashare to hand off a piece of work; use .niatra to carry over your production environment. Pick whichever fits what you need.",
 
@@ -310,7 +310,7 @@
     "narrative.save.6.heading": "把作品发送到另一台设备。",
     "narrative.save.6.body": "通过.niashare分享项目。可以将NIARIM的项目以.niashare格式分享。既可以转移到自己的其他设备，也可以把项目交给他人。导出时，可以逐项选择是否包含项目本体、图像/视频/音频等素材、字体，以及其他数据。只包含需要的内容，也能让文件更轻量。收到的.niashare文件，可以复制为自己的项目使用。",
     "narrative.save.7.heading": "把整个环境，原样带走。",
-    "narrative.save.7.body": "通过.niatra迁移应用环境。更换新设备时，可以使用.niatra格式的迁移功能。不仅是设置和素材，还能将笔刷、自动上色设置、主题、字体及其他应用设置一并迁移。想要迁移的项目可以通过复选框逐一选择。",
+    "narrative.save.7.body": "通过.niatra迁移应用环境。更换新设备时，可以使用.niatra格式的迁移功能。不仅是设置和素材，还能将笔刷、自动上色设置、主题、字体及调色板一并迁移，还可以选择性地一并包含制作中的项目。想要迁移的项目可以通过复选框逐一选择。",
     "narrative.save.8.body": "要传递作品，就用.niashare；要迁移创作环境，就用.niatra。可根据用途灵活选用。",
 
     "narrative.workspace.1.heading": "打造属于自己的创作环境。",
@@ -415,7 +415,7 @@
     "narrative.save.6.heading": "把作品傳送到另一台裝置。",
     "narrative.save.6.body": "透過.niashare分享專案。可以將NIARIM的專案以.niashare格式分享。既可以轉移到自己的其他裝置，也可以把專案交給他人。匯出時，可以逐項選擇是否包含專案本體、圖像/影片/音訊等素材、字型，以及其他資料。只包含需要的內容，也能讓檔案更輕量。收到的.niashare檔案，可以複製為自己的專案使用。",
     "narrative.save.7.heading": "把整個環境，原封不動帶走。",
-    "narrative.save.7.body": "透過.niatra轉移應用程式環境。更換新裝置時，可以使用.niatra格式的轉移功能。不僅是設定和素材，還能將筆刷、自動上色設定、主題、字型及其他應用程式設定一併轉移。想要轉移的項目可以透過核取方塊逐一選擇。",
+    "narrative.save.7.body": "透過.niatra轉移應用程式環境。更換新裝置時，可以使用.niatra格式的轉移功能。不僅是設定和素材，還能將筆刷、自動上色設定、主題、字型及調色盤一併轉移，還可以選擇性地一併包含製作中的專案。想要轉移的項目可以透過核取方塊逐一選擇。",
     "narrative.save.8.body": "要傳遞作品，就用.niashare；要轉移創作環境，就用.niatra。可依用途靈活選用。",
 
     "narrative.workspace.1.heading": "打造屬於自己的創作環境。",
@@ -520,7 +520,7 @@
     "narrative.save.6.heading": "작품을, 다른 기기로.",
     "narrative.save.6.body": ".niashare로 프로젝트를 공유. NIARIM의 프로젝트를 .niashare 형식으로 공유할 수 있습니다. 자신의 다른 기기로 옮기거나, 다른 사람에게 프로젝트를 넘겨줄 수도 있습니다. 내보낼 때는 프로젝트 본체・이미지나 동영상・음성 등의 소재・폰트・기타 데이터를 항목별로 포함할지 선택할 수 있습니다. 필요한 것만 포함해 파일을 가볍게 만들 수도 있습니다. 받은 .niashare 파일은 자신의 프로젝트로 복제해 이용할 수 있습니다.",
     "narrative.save.7.heading": "환경을 통째로, 이어받는다.",
-    "narrative.save.7.body": ".niatra로 앱 환경을 이전. 새 기기로 바꿀 때는 .niatra 형식의 이전 기능을 사용할 수 있습니다. 설정이나 소재뿐 아니라 브러시・자동 채색 설정・테마・폰트・기타 앱 설정까지 한꺼번에 이전할 수 있습니다. 이어받고 싶은 항목은 체크박스에서 개별적으로 선택할 수 있습니다.",
+    "narrative.save.7.body": ".niatra로 앱 환경을 이전. 새 기기로 바꿀 때는 .niatra 형식의 이전 기능을 사용할 수 있습니다. 설정이나 소재뿐 아니라 브러시・자동 채색 설정・테마・폰트・팔레트까지 한꺼번에 이전할 수 있으며, 제작 중인 프로젝트도 선택해서 포함할 수 있습니다. 이어받고 싶은 항목은 체크박스에서 개별적으로 선택할 수 있습니다.",
     "narrative.save.8.body": "작품을 넘겨줄 때는 .niashare. 제작 환경을 이어받을 때는 .niatra. 용도에 맞춰 구분해 사용할 수 있습니다.",
 
     "narrative.workspace.1.heading": "나에게 맞는 제작 환경으로.",
@@ -625,7 +625,7 @@
     "narrative.save.6.heading": "Envoyez votre travail vers un autre appareil.",
     "narrative.save.6.body": "Partagez votre projet sous forme de fichier .niashare. Transférez-le vers un autre de vos appareils, ou remettez un projet à quelqu'un d'autre. Lors de l'export, vous pouvez choisir d'inclure le projet lui-même, des éléments comme images/vidéo/audio, les polices, et d'autres données, élément par élément. N'incluez que ce dont vous avez besoin pour garder le fichier léger. Un fichier .niashare reçu peut être dupliqué et utilisé comme votre propre projet.",
     "narrative.save.7.heading": "Emportez toute votre configuration avec vous.",
-    "narrative.save.7.body": "Utilisez .niatra pour migrer votre environnement d'application. Lors du passage à un nouvel appareil, la fonction de transfert .niatra s'en charge. Au-delà des réglages et des éléments, vous pouvez migrer pinceaux, réglages de remplissage automatique, thèmes, polices et autres réglages d'application, tous ensemble. Choisissez exactement quels éléments transférer à l'aide de cases à cocher.",
+    "narrative.save.7.body": "Utilisez .niatra pour migrer votre environnement d'application. Lors du passage à un nouvel appareil, la fonction de transfert .niatra s'en charge. Au-delà des réglages et des éléments, vous pouvez migrer pinceaux, réglages de remplissage automatique, thèmes, polices et palettes, tous ensemble, et inclure en option des projets en cours. Choisissez exactement quels éléments transférer à l'aide de cases à cocher.",
     "narrative.save.8.body": "Utilisez .niashare pour transmettre une œuvre ; utilisez .niatra pour transférer votre environnement de production. Choisissez celui qui correspond à votre besoin.",
 
     "narrative.workspace.1.heading": "Un espace de travail qui vous correspond.",
@@ -730,7 +730,7 @@
     "narrative.save.6.heading": "Envía tu trabajo a otro dispositivo.",
     "narrative.save.6.body": "Comparte tu proyecto como un archivo .niashare. Muévelo a otro dispositivo tuyo, o entrégale un proyecto a alguien más. Al exportar, puedes elegir si incluir el proyecto en sí, materiales como imágenes/video/audio, fuentes y otros datos, elemento por elemento. Incluye solo lo que necesitas para mantener el archivo ligero. Un archivo .niashare recibido se puede duplicar y usar como tu propio proyecto.",
     "narrative.save.7.heading": "Llévate toda tu configuración contigo.",
-    "narrative.save.7.body": "Usa .niatra para migrar tu entorno de aplicación. Al cambiar a un dispositivo nuevo, la función de transferencia .niatra te cubre. Más allá de ajustes y materiales, puedes migrar pinceles, ajustes de relleno automático, temas, fuentes y otros ajustes de la app, todo junto. Elige exactamente qué elementos transferir usando casillas de verificación.",
+    "narrative.save.7.body": "Usa .niatra para migrar tu entorno de aplicación. Al cambiar a un dispositivo nuevo, la función de transferencia .niatra te cubre. Más allá de ajustes y materiales, puedes migrar pinceles, ajustes de relleno automático, temas, fuentes y paletas, todo junto, e incluir opcionalmente proyectos en curso. Elige exactamente qué elementos transferir usando casillas de verificación.",
     "narrative.save.8.body": "Usa .niashare para entregar una obra; usa .niatra para transferir tu entorno de producción. Elige el que se ajuste a lo que necesitas.",
 
     "narrative.workspace.1.heading": "Un espacio de trabajo a tu medida.",
