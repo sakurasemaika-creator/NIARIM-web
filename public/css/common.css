@@ -51,6 +51,25 @@ p {
   text-wrap: pretty;
 }
 
+/* body側のoverflow-wrap: break-word（flex/gridアイテムの横はみ出し対策。
+   reset.cssのmin-width:0の説明を参照）と word-break: keep-all の組み
+   合わせは、明示的な幅(max-width: Nch)を持つ通常の段落テキストでは
+   2つの不具合を起こすことがあった。
+   (1) 「。」などの句読点が行頭に来る禁則処理違反。
+   (2) 見た目には正しく折り返されているのに、水平方向にスクロール
+       できてしまう(空白ページ分の余白が見える)謎のはみ出し。
+   どちらもkeep-allが定義する「分割禁止のかたまり」をoverflow-wrapの
+   フォールバックが処理する際の癖に起因する。
+   見出しの短いキャッチコピーや¥5,500のような価格表示は元々の狙い
+   通りkeep-allの恩恵を受けるべきだが、通常の長文段落は元々分かち書き
+   の概念がなく、文字単位で折り返しても不自然ではない日本語の性質上、
+   このパターンに該当する各所（.about-hero p、.hero-lead 等、
+   max-width: Nch を指定している段落）では overflow-wrap: normal と
+   word-break: normal の両方を個別に上書きしている。ただし
+   .spec-item 等グリッド/フレックスアイテム内の（明示的な幅を持たない）
+   縮小フィット系テキストからは外すこと。外すとreset.cssに記載の
+   横はみ出しが再発する。 */
+
 /* NIARIMアプリ本体と全く同じアイコン(Material Icons / Font Awesome Free)を
    使用する場合の共通スタイル。アイコン本体は /assets/icons/ui/sprite.svg
    （詳細は同ディレクトリのLICENSE.md参照）。 */
@@ -607,6 +626,8 @@ p {
   color: rgba(255, 255, 255, 0.66);
   font-size: var(--fs-small);
   max-width: 32ch;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .footer-col h3 {

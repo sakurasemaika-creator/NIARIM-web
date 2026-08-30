@@ -17,6 +17,8 @@
   color: var(--color-text-muted);
   max-width: 62ch;
   margin-inline: auto;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .about-name {
@@ -66,6 +68,8 @@
   color: var(--color-gray-700);
   max-width: 68ch;
   margin-inline: auto;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .about-not-supported {
@@ -83,6 +87,8 @@
 .about-not-supported p {
   color: var(--color-gray-700);
   max-width: 68ch;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .about-cta {

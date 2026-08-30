@@ -17,6 +17,8 @@
   color: var(--color-text-muted);
   max-width: 56ch;
   margin-inline: auto;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .help-search {
