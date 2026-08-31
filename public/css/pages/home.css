@@ -279,6 +279,8 @@
   height: 0;
   background: #fff;
   min-height: 0;
+  border-radius: 0;
+  margin-inline: 8%;
 }
 
 .hero-visual .stroke-path {
