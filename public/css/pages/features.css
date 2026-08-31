@@ -877,9 +877,7 @@
    各列并20px、行高36px。列数はviewBoxの幅で制御。 */
 .fd-tree-connector {
   flex-shrink: 0;
-  height: 36px;
   display: block;
-  overflow: visible;
 }
 
 .fd-tree-dot {
