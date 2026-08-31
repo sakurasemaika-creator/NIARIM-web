@@ -1,13 +1,1 @@
-{
-  "name": "niarim-web",
-  "version": "1.0.0",
-  "private": true,
-  "description": "NIARIM 公式サイト（Cloudflare Workers Static Assets + Worker）",
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
-  },
-  "devDependencies": {
-    "wrangler": "^4.126.0"
-  }
-}
+﻿{\n  "name": "niarim-web",\n  "version": "1.0.0",\n  "private": true,\n  "description": "NIARIM 公式サイト（Cloudflare Workers Static Assets + Worker）",\n  "scripts": {\n    "dev": "wrangler dev",\n    "deploy": "wrangler deploy"\n  },\n  "devDependencies": {\n    "wrangler": "^4.126.0"\n  }\n}\n

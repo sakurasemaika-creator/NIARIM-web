@@ -1,9 +1,1 @@
-/**
- * Worker共通ユーティリティ
- */
-export function jsonResponse(status, body) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-  });
-}
+﻿/**\n * Worker共通ユーティリティ\n */\nexport function jsonResponse(status, body) {\n  return new Response(JSON.stringify(body), {\n    status,\n    headers: { "Content-Type": "application/json; charset=utf-8" },\n  });\n}\n
