@@ -201,7 +201,7 @@ p {
   bottom: -2px;
   width: 0;
   height: 2px;
-  background: var(--color-brand);
+  background: var(--color-accent);
   transition: width var(--duration-fast) var(--ease-out);
 }
 
@@ -623,9 +623,10 @@ p {
   margin-bottom: var(--space-sm);
 }
 
-/* brand-iconは元からテーマカラー背景+白抜きのバッジ状態のため、
-   invertしてしまうと背景色ごと真っ白になり潰れる。ワードマーク
-   (brand-title)側だけを白へ反転する。 */
+/* brand-iconはフッター専用の app_logo_footer.svg
+   （テーマカラーではなくフッターの暗色に馴染む半透明の角丸正方形＋
+   白抜きモノグラム）を使っているため、invertするとその配色ごと
+   真っ白に潰れてしまう。ワードマーク(brand-title)側だけを白へ反転する。 */
 .footer-brand .brand-title {
   filter: brightness(0) invert(1);
 }
@@ -780,30 +781,15 @@ p {
   pointer-events: none;
   z-index: 999;
   /* transform（位置・拡大率）はanimations.jsが毎フレーム直接書き換えて
-     追従の遅れ(lerp)を作るため、ここではtransitionの対象に含めない。 */
+     追従の遅れ(lerp)を作るため、ここではtransitionの対象に含めない。
+     色は常にテーマカラーのまま変えず、クリック可能要素の上では
+     線の太さ(border-width)と大きさ(JS側のscale)だけ変化させる。 */
   transition: opacity var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
-}
-
-.cursor-orbit::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  transform: translate(-50%, -50%);
-  transition: opacity var(--duration-fast) var(--ease-out);
+    border-width var(--duration-fast) var(--ease-out);
 }
 
 .cursor-orbit.is-active {
-  border-color: var(--color-ink);
-}
-
-.cursor-orbit.is-active::after {
-  opacity: 0;
+  border-width: 2.5px;
 }
 
 .cursor-orbit.is-visible {

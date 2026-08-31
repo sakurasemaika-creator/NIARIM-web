@@ -37,7 +37,7 @@
     "hero.lead":
       "NIARIMは、スマートフォンから本格的な手描きアニメーションをつくれる制作アプリです。一枚ずつ絵を描いて動かす手描きアニメーションはもちろん、キーフレームを使ったモーションアニメーションや、画像を組み合わせたストップモーションまで。描画からアニメーション、編集、音入れ、書き出しまで、一つのアプリで作品を完成させられます。",
     "hero.bridge.html":
-      "そして、つくった作品は<a href=\"/community/\">「NIARIM作品広場」</a>へ。誰かの作品をみて、次の作品をつくる。人から作品へ。作品から人へ。",
+      "そして、つくった作品は<a href=\"/community/\">「作品広場」</a>へ。誰かの作品をみて、次の作品をつくる。人から作品へ。作品から人へ。",
     "hero.cta.primary": "アプリをダウンロード",
     "hero.cta.secondary": "機能を見る",
     "hero.note": "対応端末・提供状況は Google Play のページをご確認ください。",
@@ -70,7 +70,7 @@
       "塗りつぶしや許容値の調整、レイヤーで分けた管理で、納得のいくまで描き直せます。",
     "features.export.title": "作品を書き出し、届ける",
     "features.export.body":
-      "Full HDまでの解像度、自由な縦横比の設定に対応し、完成した作品を動画として書き出せます。",
+      "最大1920×1920までの解像度、自由な縦横比の設定に対応し、完成した作品を動画として書き出せます。",
     "features.linkAll": "すべての機能を見る",
 
     "screenshots.eyebrow": "App Preview",
@@ -90,13 +90,13 @@
       "NIARIMは、自分で描いた絵を自分の手で動かし、アニメーション作品として制作できるスマートフォン向けアプリです。",
     "faq.q2": "無料で使えますか？",
     "faq.a2":
-      "料金プランの詳細は、正式リリース時にGoogle Playのアプリページでご確認いただけます。",
+      "料金プランの詳細は、Google Playのアプリページでご確認いただけます。",
     "faq.q3": "対応端末を教えてください。",
     "faq.a3":
       "対応OS・対応端末の詳細は、Google Playのアプリページに記載の情報をご確認ください。",
     "faq.q4": "作った作品を書き出せますか？",
     "faq.a4":
-      "はい。Full HDまでの解像度、自由な縦横比で動画として書き出せます。",
+      "はい。最大1920×1920までの解像度、自由な縦横比で動画として書き出せます。",
     "faq.q5": "作った作品を共有できますか？",
     "faq.q6": "アカウント登録は必要ですか？",
     "faq.a6":
@@ -126,7 +126,8 @@
       "不具合報告・機能要望・使い方のご質問は、公式Xへのリプライやダイレクトメッセージでお気軽にどうぞ。",
     "contact.channel.link": "公式Xでお問い合わせ",
     "contact.personalNote":
-      "アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、下記のフォームからご連絡ください（フォームの内容はメールで受け付けます）。",
+      "アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、右記のフォームからご連絡ください。",
+    "contact.personalNote.formNote": "※フォームの内容はメールで受け付けます。",
     "contact.form.type": "お問い合わせ種別",
     "contact.form.type.bug": "不具合報告",
     "contact.form.type.request": "機能要望",
@@ -261,7 +262,7 @@
     "featuresPage.export.title": "Export｜書き出し",
     "featuresPage.export.lead": "完成した作品を、動画として届けます。",
     "featuresPage.export.item1.title": "解像度",
-    "featuresPage.export.item1.body": "Full HDまでの解像度で書き出せます。",
+    "featuresPage.export.item1.body": "最大1920×1920までの解像度で書き出せます。",
     "featuresPage.export.item2.title": "縦横比",
     "featuresPage.export.item2.body": "縦横比を自由に設定できます。",
     "featuresPage.export.item3.title": "動画書き出し",
@@ -319,7 +320,7 @@
     "hero.lead":
       "NIARIM is an app for creating full hand-drawn animation right from your smartphone. Draw and move one picture at a time, animate with keyframes, or even combine still images into stop motion. From drawing to animation, editing, sound, and export — finish your work in one single app.",
     "hero.bridge.html":
-      "And once it's made, bring it to <a href=\"/community/\">the “NIARIM Gallery.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
+      "And once it's made, bring it to <a href=\"/community/\">the “Gallery.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
     "hero.cta.primary": "Download the App",
     "hero.cta.secondary": "See the Features",
     "hero.note": "Please check the Google Play page for supported devices and availability.",
@@ -352,7 +353,7 @@
       "Fill with adjustable tolerance and layer-separated management let you keep refining until it's right.",
     "features.export.title": "Export and share your work",
     "features.export.body":
-      "Export up to Full HD resolution with a freely configurable aspect ratio.",
+      "Export at resolutions up to 1920×1920, with a freely configurable aspect ratio.",
     "features.linkAll": "See all features",
 
     "screenshots.eyebrow": "App Preview",
@@ -372,13 +373,13 @@
       "NIARIM is a mobile app for creating animation from artwork you draw and move yourself.",
     "faq.q2": "Is it free to use?",
     "faq.a2":
-      "Pricing details will be available on the Google Play listing at official launch.",
+      "Pricing details are available on the Google Play listing.",
     "faq.q3": "Which devices are supported?",
     "faq.a3":
       "Please check the Google Play listing for supported OS versions and devices.",
     "faq.q4": "Can I export what I've made?",
     "faq.a4":
-      "Yes. You can export your work as video, up to Full HD, with a freely configurable aspect ratio.",
+      "Yes. You can export your work as video, at resolutions up to 1920×1920, with a freely configurable aspect ratio.",
     "faq.q5": "Can I share what I've made?",
     "faq.q6": "Do I need to create an account?",
     "faq.a6": "Please check the official launch specification for this.",
@@ -406,7 +407,8 @@
       "For bug reports, feature requests, or questions about how to use the app, feel free to reply or send a direct message to our official X account.",
     "contact.channel.link": "Contact us on X",
     "contact.personalNote":
-      "We can't handle inquiries involving personal information, such as your account or email address, on X. Please use the form below instead (submissions are received by email).",
+      "We can't handle inquiries involving personal information, such as your account or email address, on X. Please use the form on the right instead.",
+    "contact.personalNote.formNote": "※ Submissions are received by email.",
     "contact.form.type": "Inquiry type",
     "contact.form.type.bug": "Bug report",
     "contact.form.type.request": "Feature request",
@@ -541,7 +543,7 @@
     "featuresPage.export.title": "Export",
     "featuresPage.export.lead": "Deliver your finished work as a video.",
     "featuresPage.export.item1.title": "Resolution",
-    "featuresPage.export.item1.body": "Export at resolutions up to Full HD.",
+    "featuresPage.export.item1.body": "Export at resolutions up to 1920×1920.",
     "featuresPage.export.item2.title": "Aspect ratio",
     "featuresPage.export.item2.body": "Set the aspect ratio freely.",
     "featuresPage.export.item3.title": "Video export",

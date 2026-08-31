@@ -23,7 +23,7 @@
       "home.tag.onionSkin": "オニオンスキン",
       "home.tag.tone": "トーン",
       "home.tag.stampRuler": "スタンプ・定規",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "最大1920×1920",
       "home.tag.aspectRatio": "縦横比自由設定",
       "home.tag.videoExport": "動画書き出し"
     },
@@ -41,7 +41,7 @@
       "home.tag.onionSkin": "Onion skin",
       "home.tag.tone": "Tone",
       "home.tag.stampRuler": "Stamps & ruler",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "Up to 1920×1920",
       "home.tag.aspectRatio": "Free aspect ratio",
       "home.tag.videoExport": "Video export"
     },
@@ -59,7 +59,7 @@
       "home.tag.onionSkin": "洋葱皮（Onion Skin）",
       "home.tag.tone": "网点纸（Tone）",
       "home.tag.stampRuler": "图章・标尺",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "最高1920×1920",
       "home.tag.aspectRatio": "自由设定画面比例",
       "home.tag.videoExport": "视频导出"
     },
@@ -77,7 +77,7 @@
       "home.tag.onionSkin": "洋蔥皮（Onion Skin）",
       "home.tag.tone": "網點紙（Tone）",
       "home.tag.stampRuler": "圖章・尺規",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "最高1920×1920",
       "home.tag.aspectRatio": "自由設定畫面比例",
       "home.tag.videoExport": "影片匯出"
     },
@@ -95,7 +95,7 @@
       "home.tag.onionSkin": "어니언 스킨",
       "home.tag.tone": "톤(스크린톤)",
       "home.tag.stampRuler": "스탬프・자",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "최대 1920×1920",
       "home.tag.aspectRatio": "화면 비율 자유 설정",
       "home.tag.videoExport": "영상 내보내기"
     },
@@ -113,7 +113,7 @@
       "home.tag.onionSkin": "Pelure d'oignon",
       "home.tag.tone": "Trames",
       "home.tag.stampRuler": "Tampons et règle",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "Jusqu'à 1920×1920",
       "home.tag.aspectRatio": "Format libre",
       "home.tag.videoExport": "Export vidéo"
     },
@@ -131,7 +131,7 @@
       "home.tag.onionSkin": "Piel de cebolla",
       "home.tag.tone": "Tramas",
       "home.tag.stampRuler": "Sellos y regla",
-      "home.tag.fullHD": "Full HD",
+      "home.tag.fullHD": "Hasta 1920×1920",
       "home.tag.aspectRatio": "Relación de aspecto libre",
       "home.tag.videoExport": "Exportación de video"
     }

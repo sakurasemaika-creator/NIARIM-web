@@ -203,14 +203,20 @@
     var shown = false;
 
     function loop() {
-      curX += (targetX - curX) * 0.22;
-      curY += (targetY - curY) * 0.22;
-      var wantScale = ring.classList.contains("is-active") ? 1.6 : 1;
-      curScale += (wantScale - curScale) * 0.25;
-      ring.style.transform =
-        "translate3d(" + curX.toFixed(1) + "px, " + curY.toFixed(1) + "px, 0) scale(" +
-        curScale.toFixed(2) + ")";
-      requestAnimationFrame(loop);
+      try {
+        curX += (targetX - curX) * 0.22;
+        curY += (targetY - curY) * 0.22;
+        var wantScale = ring.classList.contains("is-active") ? 1.6 : 1;
+        curScale += (wantScale - curScale) * 0.25;
+        ring.style.transform =
+          "translate3d(" + curX.toFixed(1) + "px, " + curY.toFixed(1) + "px, 0) scale(" +
+          curScale.toFixed(2) + ")";
+      } finally {
+        // 1フレームで例外が起きてもrAFの連鎖自体は止めない
+        // (タブ切り替え直後など不安定なタイミングでの想定外の例外で
+        // アニメーションが完全に停止してしまうのを防ぐ)。
+        requestAnimationFrame(loop);
+      }
     }
 
     document.addEventListener("mousemove", function (event) {
@@ -220,14 +226,24 @@
         shown = true;
         curX = targetX;
         curY = targetY;
-        ring.classList.add("is-visible");
       }
+      ring.classList.add("is-visible");
       var hit = event.target.closest && event.target.closest(CLICKABLE);
       ring.classList.toggle("is-active", !!hit);
     });
 
     document.addEventListener("mouseleave", function () {
       ring.classList.remove("is-visible");
+    });
+
+    // タブを切り替えて(または他アプリへ切り替えて)戻ってきたときに、
+    // マウスが動くまでリングが表示されないまま「消えたまま」に見える
+    // 問題への対策。一度でもマウス位置を取得済みなら、タブが再び
+    // 見える状態に戻った時点で表示状態を復元する。
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible" && shown) {
+        ring.classList.add("is-visible");
+      }
     });
 
     requestAnimationFrame(loop);

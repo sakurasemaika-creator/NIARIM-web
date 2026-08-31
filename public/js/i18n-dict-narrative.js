@@ -8,7 +8,7 @@
  * 例外（別途ご指示いただいた表現を優先し、原文から意図的に変更している箇所）：
  * - 「つくる人と、みる人の境界を曖昧に」系の表現 → 「クリエイターと視聴者の
  *   境界を曖昧に」系の表現に統一（hero.subtitle / about.name.body で対応済み）
- * - 「みんなの作品をみる」という名称 → 「NIARIM作品広場」に統一
+ * - 「みんなの作品をみる」という名称 → 「作品広場」に統一
  */
 (function () {
   "use strict";
@@ -16,7 +16,7 @@
   var DATA = {
   "ja": {
     "narrative.home.cta.heading": "実際にアニメーションを<br>つくってみよう！",
-    "narrative.home.cta.body": "描きたいと思ったら、すぐに始められる。一枚の絵からでも、何十枚ものフレームを使った作品でも。手描きで動かす。キーフレームで動かす。画像や音を組み合わせる。仕上げまでこだわって、自分だけの作品にする。そして完成したら、「NIARIM作品広場」へ。つくって、公開して、みつけよう。NIARIMで、アニメーションをつくってみよう！",
+    "narrative.home.cta.body": "描きたいと思ったら、すぐに始められる。一枚の絵からでも、何十枚ものフレームを使った作品でも。手描きで動かす。キーフレームで動かす。画像や音を組み合わせる。仕上げまでこだわって、自分だけの作品にする。そして完成したら、「作品広場」へ。つくって、公開して、みつけよう。NIARIMで、アニメーションをつくってみよう！",
 
     "narrative.drawing.1.heading": "描きたいものを、思い通りに。",
     "narrative.drawing.1.body": "ペンで描く。消す。塗る。選ぶ。変形する。必要な道具を使い分けながら、一枚の絵を仕上げていけます。",
@@ -109,7 +109,7 @@
     "narrative.premium.2.heading": "",
     "narrative.premium.2.body": "無料版では、書き出した作品の最後にNIARIMのエンドカードが追加されます。プレミアムなら、作品ごとにエンドカードを削除したり、アプリの共通設定からエンドカードを追加しないように設定できます。コミュニティへの投稿も、無料版の1日1作品から1日3作品へ。たくさんつくって、たくさん届けられます。",
 
-    "narrative.community.1.heading": "NIARIM作品広場",
+    "narrative.community.1.heading": "作品広場",
     "narrative.community.1.body": "NIARIMでつくられた作品を、誰でも気軽にみられる場所です。ログインしなくても作品を閲覧できます。",
     "narrative.community.2.heading": "新着順で、最新作をチェック",
     "narrative.community.2.body": "投稿されたばかりの作品を新着順でチェック。まだ知られていない作品の中から、あなた好みの作品が見つかるかもしれません。",
@@ -122,7 +122,7 @@
     "narrative.community.6.heading": "作者から探す",
     "narrative.community.6.body": "気になる作品を見つけたら、その作者が公開しているほかの作品もチェックできます。お気に入りの作者を見つけて、新しい作品を追いかけることもできます。",
     "narrative.community.7.heading": "あなたの作品を投稿しよう。",
-    "narrative.community.7.body": "完成した作品は、「NIARIM作品広場」に投稿できます。自分の作品を誰かにみてもらう。誰かが気に入ってブックマークしてくれるかもしれませんし、ランキングに入るかもしれません。無料会員は1日1作品まで。プレミアムなら1日3作品まで投稿できます。作品をつくったら、次は誰かに届けてみましょう。",
+    "narrative.community.7.body": "完成した作品は、「作品広場」に投稿できます。自分の作品を誰かにみてもらう。誰かが気に入ってブックマークしてくれるかもしれませんし、ランキングに入るかもしれません。無料会員は1日1作品まで。プレミアムなら1日3作品まで投稿できます。作品をつくったら、次は誰かに届けてみましょう。",
     "narrative.community.8.heading": "ログインもシンプルに。",
     "narrative.community.8.body": "NIARIM独自の会員登録は必要ありません。作品投稿、ブックマーク、通報・ブロックは、Googleアカウントでログインすると利用できます。作品をみるだけならログイン不要です。",
     "narrative.community.9.heading": "人から作品へ。作品から人へ。",
@@ -130,7 +130,7 @@
   },
   "en": {
     "narrative.home.cta.heading": "Let's actually make an animation!",
-    "narrative.home.cta.body": "The moment you feel like drawing, you can just start. Whether it's a single picture or a piece built from dozens of frames. Animate it by hand. Animate it with keyframes. Combine images and sound. Polish it all the way through and make it truly yours. And once it's done, take it to the NIARIM Gallery. Make it, publish it, discover it. Let's make an animation with NIARIM!",
+    "narrative.home.cta.body": "The moment you feel like drawing, you can just start. Whether it's a single picture or a piece built from dozens of frames. Animate it by hand. Animate it with keyframes. Combine images and sound. Polish it all the way through and make it truly yours. And once it's done, take it to the Gallery. Make it, publish it, discover it. Let's make an animation with NIARIM!",
 
     "narrative.drawing.1.heading": "Draw exactly what you have in mind.",
     "narrative.drawing.1.body": "Draw with a pen. Erase. Fill. Select. Transform. Switch between the tools you need to finish a single piece.",
@@ -223,7 +223,7 @@
     "narrative.premium.2.heading": "",
     "narrative.premium.2.body": "In the free version, the NIARIM end card is added to the end of every exported work. With Premium, you can remove the end card per piece, or set it in the app's shared settings so it's never added at all. Community posting also goes from 1 piece a day on the free plan to 3 a day. Make more, and share more.",
 
-    "narrative.community.1.heading": "NIARIM Gallery",
+    "narrative.community.1.heading": "Gallery",
     "narrative.community.1.body": "A place where anyone can casually browse work made with NIARIM. You can view work without logging in.",
     "narrative.community.2.heading": "Check the newest work, newest first",
     "narrative.community.2.body": "Check freshly posted work in order of newest first. You might find something you love among pieces nobody's discovered yet.",
@@ -236,7 +236,7 @@
     "narrative.community.6.heading": "Find work by creator",
     "narrative.community.6.body": "Find a piece you like, and you can check out the other work its creator has published, too. Find a favorite creator and follow along as they post new work.",
     "narrative.community.7.heading": "Post your own work.",
-    "narrative.community.7.body": "Finished work can be posted to the NIARIM Gallery. Let someone else see what you made. Someone might love it enough to bookmark it, and it might even land in the rankings. Free members can post up to 1 piece a day; Premium members up to 3. Once you've made something, it's time to share it with someone.",
+    "narrative.community.7.body": "Finished work can be posted to the Gallery. Let someone else see what you made. Someone might love it enough to bookmark it, and it might even land in the rankings. Free members can post up to 1 piece a day; Premium members up to 3. Once you've made something, it's time to share it with someone.",
     "narrative.community.8.heading": "Logging in stays simple, too.",
     "narrative.community.8.body": "There's no separate NIARIM account to register for. Posting work, bookmarking, and reporting/blocking are available once you log in with a Google account. You don't need to log in at all just to browse.",
     "narrative.community.9.heading": "From people to work. From work to people.",
@@ -244,7 +244,7 @@
   },
   "zh-Hans": {
     "narrative.home.cta.heading": "一起来做一部动画吧！",
-    "narrative.home.cta.body": "只要想画，随时都能开始。无论是一张画，还是由几十张帧组成的作品。用手绘让它动起来。用关键帧让它动起来。把图像和声音结合在一起。精心打磨到最后，做成真正属于你自己的作品。完成之后，把它带到「NIARIM作品广场」。去创作，去发布，去发现。用NIARIM，来做一部动画吧！",
+    "narrative.home.cta.body": "只要想画，随时都能开始。无论是一张画，还是由几十张帧组成的作品。用手绘让它动起来。用关键帧让它动起来。把图像和声音结合在一起。精心打磨到最后，做成真正属于你自己的作品。完成之后，把它带到「作品广场」。去创作，去发布，去发现。用NIARIM，来做一部动画吧！",
 
     "narrative.drawing.1.heading": "把心中所想，如实画出来。",
     "narrative.drawing.1.body": "用笔绘制。擦除。填色。选取。变形。灵活运用各种工具，完成一幅画作。",
@@ -328,7 +328,7 @@
     "narrative.premium.1.body": "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
     "narrative.premium.2.body": "免费版中，导出的作品结尾会自动添加NIARIM的片尾标志。开通高级会员后，可以针对每部作品单独删除片尾标志，也可以在应用的通用设置中设置为不再添加。发布到社区的作品数量，也会从免费版的每天1部提升到每天3部。多多创作，多多分享。",
 
-    "narrative.community.1.heading": "NIARIM作品广场",
+    "narrative.community.1.heading": "作品广场",
     "narrative.community.1.body": "一个任何人都可以轻松浏览NIARIM创作作品的地方。无需登录即可浏览作品。",
     "narrative.community.2.heading": "按最新顺序，查看最新作品",
     "narrative.community.2.body": "按最新发布顺序查看刚刚上传的作品。也许能在还未被大众发现的作品中，找到你喜欢的那一部。",
@@ -341,7 +341,7 @@
     "narrative.community.6.heading": "按作者查找",
     "narrative.community.6.body": "发现喜欢的作品后，还可以查看该作者发布的其他作品。找到喜欢的作者，追更他们的新作品。",
     "narrative.community.7.heading": "发布你自己的作品吧。",
-    "narrative.community.7.body": "完成的作品可以发布到「NIARIM作品广场」。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
+    "narrative.community.7.body": "完成的作品可以发布到「作品广场」。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
     "narrative.community.8.heading": "登录也很简单。",
     "narrative.community.8.body": "无需注册NIARIM专属账号。发布作品、收藏、举报・屏蔽等功能，只需使用Google账号登录即可使用。仅浏览作品则无需登录。",
     "narrative.community.9.heading": "从人到作品。从作品到人。",
@@ -349,7 +349,7 @@
   },
   "zh-Hant": {
     "narrative.home.cta.heading": "一起來做一部動畫吧！",
-    "narrative.home.cta.body": "只要想畫，隨時都能開始。無論是一張畫，還是由數十張影格組成的作品。用手繪讓它動起來。用關鍵影格讓它動起來。把圖像和聲音結合在一起。精心打磨到最後，做成真正屬於你自己的作品。完成之後，把它帶到「NIARIM作品廣場」。去創作，去發布，去發現。用NIARIM，來做一部動畫吧！",
+    "narrative.home.cta.body": "只要想畫，隨時都能開始。無論是一張畫，還是由數十張影格組成的作品。用手繪讓它動起來。用關鍵影格讓它動起來。把圖像和聲音結合在一起。精心打磨到最後，做成真正屬於你自己的作品。完成之後，把它帶到「作品廣場」。去創作，去發布，去發現。用NIARIM，來做一部動畫吧！",
 
     "narrative.drawing.1.heading": "把心中所想，如實畫出來。",
     "narrative.drawing.1.body": "用筆繪製。擦除。填色。選取。變形。靈活運用各種工具，完成一幅畫作。",
@@ -433,7 +433,7 @@
     "narrative.premium.1.body": "高級會員不僅能讓創作更舒適，發布作品也會更加輕鬆。",
     "narrative.premium.2.body": "免費版中，匯出的作品結尾會自動加上NIARIM的片尾標誌。開通高級會員後，可以針對每部作品單獨刪除片尾標誌，也可以在應用程式的通用設定中設定為不再加入。發布到社群的作品數量，也會從免費版的每天1部提升到每天3部。多多創作，多多分享。",
 
-    "narrative.community.1.heading": "NIARIM作品廣場",
+    "narrative.community.1.heading": "作品廣場",
     "narrative.community.1.body": "一個任何人都可以輕鬆瀏覽NIARIM創作作品的地方。不需要登入即可瀏覽作品。",
     "narrative.community.2.heading": "依最新順序，查看最新作品",
     "narrative.community.2.body": "依最新發布順序查看剛剛上傳的作品。也許能在還未被大眾發現的作品中，找到你喜歡的那一部。",
@@ -446,7 +446,7 @@
     "narrative.community.6.heading": "依作者尋找",
     "narrative.community.6.body": "發現喜歡的作品後，還可以查看該作者發布的其他作品。找到喜歡的作者，追蹤他們的新作品。",
     "narrative.community.7.heading": "發布你自己的作品吧。",
-    "narrative.community.7.body": "完成的作品可以發布到「NIARIM作品廣場」。讓別人看到你創作的作品。也許會有人喜歡並收藏它，甚至進入排行榜。免費會員每天最多可發布1部作品，高級會員每天最多可發布3部。創作完成後，不妨把它分享給某個人。",
+    "narrative.community.7.body": "完成的作品可以發布到「作品廣場」。讓別人看到你創作的作品。也許會有人喜歡並收藏它，甚至進入排行榜。免費會員每天最多可發布1部作品，高級會員每天最多可發布3部。創作完成後，不妨把它分享給某個人。",
     "narrative.community.8.heading": "登入也很簡單。",
     "narrative.community.8.body": "不需要註冊NIARIM專屬帳號。發布作品、收藏、檢舉・封鎖等功能，只需使用Google帳號登入即可使用。僅瀏覽作品則不需要登入。",
     "narrative.community.9.heading": "從人到作品。從作品到人。",
@@ -559,7 +559,7 @@
   },
   "fr": {
     "narrative.home.cta.heading": "Passons à la pratique, créons une animation !",
-    "narrative.home.cta.body": "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Galerie NIARIM. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
+    "narrative.home.cta.body": "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Galerie. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
 
     "narrative.drawing.1.heading": "Dessinez exactement ce que vous avez en tête.",
     "narrative.drawing.1.body": "Dessinez au stylo. Effacez. Remplissez. Sélectionnez. Transformez. Alternez entre les outils dont vous avez besoin pour finaliser une œuvre.",
@@ -643,7 +643,7 @@
     "narrative.premium.1.body": "Premium rend non seulement la création, mais aussi la publication de votre travail, encore plus confortable.",
     "narrative.premium.2.body": "Dans la version gratuite, le générique de fin NIARIM est ajouté à la fin de chaque œuvre exportée. Avec Premium, vous pouvez supprimer le générique de fin œuvre par œuvre, ou le régler dans les paramètres partagés de l'application pour qu'il ne soit jamais ajouté. La publication dans la communauté passe aussi de 1 œuvre par jour dans la version gratuite à 3 par jour. Créez plus, et partagez plus.",
 
-    "narrative.community.1.heading": "Galerie NIARIM",
+    "narrative.community.1.heading": "Galerie",
     "narrative.community.1.body": "Un endroit où tout le monde peut parcourir librement les œuvres créées avec NIARIM. Vous pouvez consulter les œuvres sans vous connecter.",
     "narrative.community.2.heading": "Découvrez les œuvres les plus récentes",
     "narrative.community.2.body": "Consultez les œuvres fraîchement publiées, des plus récentes aux plus anciennes. Vous pourriez trouver quelque chose que vous adorez parmi des œuvres que personne n'a encore découvertes.",
@@ -656,7 +656,7 @@
     "narrative.community.6.heading": "Trouver des œuvres par créateur",
     "narrative.community.6.body": "Trouvez une œuvre que vous aimez, et vous pouvez découvrir aussi les autres œuvres publiées par son créateur. Trouvez un créateur favori et suivez-le à mesure qu'il publie de nouvelles œuvres.",
     "narrative.community.7.heading": "Publiez votre propre œuvre.",
-    "narrative.community.7.body": "Une œuvre terminée peut être publiée dans la Galerie NIARIM. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
+    "narrative.community.7.body": "Une œuvre terminée peut être publiée dans la Galerie. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
     "narrative.community.8.heading": "La connexion reste simple, elle aussi.",
     "narrative.community.8.body": "Il n'y a pas de compte NIARIM séparé à créer. Publier des œuvres, les mettre en favori, et signaler/bloquer sont disponibles une fois connecté avec un compte Google. Vous n'avez pas besoin de vous connecter du tout pour simplement parcourir.",
     "narrative.community.9.heading": "Des personnes vers les œuvres. Des œuvres vers les personnes.",
@@ -664,7 +664,7 @@
   },
   "es": {
     "narrative.home.cta.heading": "¡Vamos a hacer una animación de verdad!",
-    "narrative.home.cta.body": "En cuanto te den ganas de dibujar, puedes empezar enseguida. Ya sea un solo dibujo o una obra hecha con decenas de fotogramas. Anímala a mano. Anímala con fotogramas clave. Combina imágenes y sonido. Púlela hasta el final y hazla verdaderamente tuya. Y una vez terminada, llévala a la Galería NIARIM. Crea, publica, descubre. ¡Hagamos una animación con NIARIM!",
+    "narrative.home.cta.body": "En cuanto te den ganas de dibujar, puedes empezar enseguida. Ya sea un solo dibujo o una obra hecha con decenas de fotogramas. Anímala a mano. Anímala con fotogramas clave. Combina imágenes y sonido. Púlela hasta el final y hazla verdaderamente tuya. Y una vez terminada, llévala a la Galería. Crea, publica, descubre. ¡Hagamos una animación con NIARIM!",
 
     "narrative.drawing.1.heading": "Dibuja exactamente lo que tienes en mente.",
     "narrative.drawing.1.body": "Dibuja con un lápiz. Borra. Rellena. Selecciona. Transforma. Alterna entre las herramientas que necesitas para terminar una obra.",
@@ -748,7 +748,7 @@
     "narrative.premium.1.body": "Premium hace que no solo crear, sino también publicar tu trabajo, sea aún más cómodo.",
     "narrative.premium.2.body": "En la versión gratuita, la placa de cierre de NIARIM se añade al final de cada obra exportada. Con Premium, puedes eliminar la placa de cierre obra por obra, o configurarla en los ajustes compartidos de la app para que nunca se añada. Publicar en la comunidad también pasa de 1 obra al día en el plan gratuito a 3 al día. Crea más, y comparte más.",
 
-    "narrative.community.1.heading": "Galería NIARIM",
+    "narrative.community.1.heading": "Galería",
     "narrative.community.1.body": "Un lugar donde cualquiera puede navegar tranquilamente las obras hechas con NIARIM. Puedes ver las obras sin iniciar sesión.",
     "narrative.community.2.heading": "Descubre lo más nuevo primero",
     "narrative.community.2.body": "Revisa las obras recién publicadas en orden de más recientes primero. Podrías encontrar algo que ames entre obras que nadie ha descubierto todavía.",
@@ -761,7 +761,7 @@
     "narrative.community.6.heading": "Encuentra obras por creador",
     "narrative.community.6.body": "Encuentra una obra que te guste, y podrás revisar también las demás obras que su creador ha publicado. Encuentra un creador favorito y síguelo a medida que publica nuevas obras.",
     "narrative.community.7.heading": "Publica tu propia obra.",
-    "narrative.community.7.body": "Una obra terminada se puede publicar en la Galería NIARIM. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
+    "narrative.community.7.body": "Una obra terminada se puede publicar en la Galería. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
     "narrative.community.8.heading": "Iniciar sesión también es simple.",
     "narrative.community.8.body": "No hay una cuenta NIARIM separada que crear. Publicar obras, guardar en favoritos y reportar/bloquear están disponibles una vez que inicias sesión con una cuenta de Google. No necesitas iniciar sesión en absoluto solo para explorar.",
     "narrative.community.9.heading": "De las personas a las obras. De las obras a las personas.",

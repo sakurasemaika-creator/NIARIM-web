@@ -46,6 +46,11 @@
   font-size: clamp(2.8rem, 7.5vw + 1rem, 6.4rem);
   line-height: 1.12;
   color: var(--color-ink);
+  /* body既定のoverflow-wrap:break-wordのフォールバックにより、
+     "Discover."のような短い単語+ピリオドの間で改行され、ピリオドだけが
+     次の行に取り残される問題があったため、見出しでは単語途中の改行を
+     許可しない。 */
+  overflow-wrap: normal;
   opacity: 0;
   animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.15s forwards;
 }
