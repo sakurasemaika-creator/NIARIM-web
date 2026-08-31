@@ -96,7 +96,13 @@
 /* 各セクションの見出し左には、絵文字ではなくアプリ本体と同じアイコン
    (sprite.svg)を白抜きで配置する(.feature-section-icon、HTML側で
    #ic-*を指定)。 */
-.feature-section-icon {
+/* .feature-section-head span(0-1-1)の display:block が
+   .feature-section-icon(0-1-0)のdisplay:flexより詳細度で勝ってしまい、
+   中のアイコンがボックス内で中央寄せされず左上に張り付いていた
+   (前述の見出しサブテキスト用ルールが、同じ.feature-section-head内の
+   アイコン用spanにも意図せず適用されていた)ため、詳細度を上げて
+   確実に上書きする。ついでにアイコンも少し拡大する。 */
+.feature-section-head .feature-section-icon {
   flex-shrink: 0;
   width: 52px;
   height: 52px;
@@ -110,8 +116,8 @@
 }
 
 .feature-section-icon .ic {
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
 }
 
 .feature-section-head h2 {
