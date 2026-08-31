@@ -536,30 +536,54 @@
           </div>
         </div>
         <div class="fd-diagram-label" data-i18n="fd.saveTreeLabel">セーブツリー（保存数の制限なし）</div>
-        <div class="fd-tree-list">
+        <!-- アプリの実装(save_tree_screen.dart _TreeView)と同じく
+             「下から上に伸びる木」として表示する。
+             ListView(reverse:true)でDFS順リストを逆表示することで
+             rootが最下部・子孫が上に積み上がる見た目を再現。
+             各行の左には_TreeConnectorPainterと同じ罫線を付ける。
+             DFS順: 配色A→配色B→線画修正→初稿
+             reverse後（画面上の表示順）: 初稿→線画修正→配色B→配色A -->
+        <div class="fd-tree-list fd-tree-list--bottom-up">
+          <!-- depth=1, continues=[true,true]: 配色A（兄弟が続く） -->
+          <div class="fd-tree-row2">
+            <!-- 祖先列(x=10)全高縦線、自分列(x=30)全高縦線＋中央から右へ横線 -->
+            <svg class="fd-tree-connector" viewBox="0 0 40 36" aria-hidden="true">
+              <line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="0" x2="30" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            </svg>
+            <span class="fd-tree-dot is-accent"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode3a">配色A</span>
+            <span class="fd-tree-date">08/22</span>
+          </div>
+          <!-- depth=1, continues=[true,false]: 配色B（兄弟なし） -->
+          <div class="fd-tree-row2">
+            <!-- 祖先列(x=10)全高縦線、自分列(x=30)上半分縦線＋中央から右へ横線 -->
+            <svg class="fd-tree-connector" viewBox="0 0 40 36" aria-hidden="true">
+              <line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="0" x2="30" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            </svg>
+            <span class="fd-tree-dot is-accent"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode3b">配色B</span>
+            <span class="fd-tree-date">08/22</span>
+          </div>
+          <!-- depth=0, continues=[false]: 線画修正（兄弟なし） -->
+          <div class="fd-tree-row2">
+            <!-- 自分列(x=10)上半分縦線＋中央から右へ横線 -->
+            <svg class="fd-tree-connector" viewBox="0 0 20 36" aria-hidden="true">
+              <line x1="10" y1="0" x2="10" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="10" y1="18" x2="20" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            </svg>
+            <span class="fd-tree-dot"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode2">線画修正</span>
+            <span class="fd-tree-date">08/21</span>
+          </div>
+          <!-- depth=0, root: 初稿（コネクタなし） -->
           <div class="fd-tree-row2">
             <span class="fd-tree-dot"></span>
             <span class="fd-tree-text" data-i18n="fd.treeNode1">初稿</span>
             <span class="fd-tree-date">08/20</span>
-          </div>
-          <div class="fd-tree-branch">
-            <div class="fd-tree-row2">
-              <span class="fd-tree-dot"></span>
-              <span class="fd-tree-text" data-i18n="fd.treeNode2">線画修正</span>
-              <span class="fd-tree-date">08/21</span>
-            </div>
-            <div class="fd-tree-branch">
-              <div class="fd-tree-row2">
-                <span class="fd-tree-dot is-accent"></span>
-                <span class="fd-tree-text" data-i18n="fd.treeNode3a">配色A</span>
-                <span class="fd-tree-date">08/22</span>
-              </div>
-              <div class="fd-tree-row2">
-                <span class="fd-tree-dot is-accent"></span>
-                <span class="fd-tree-text" data-i18n="fd.treeNode3b">配色B</span>
-                <span class="fd-tree-date">08/22</span>
-              </div>
-            </div>
           </div>
         </div>
         <div class="fd-share-formats">
