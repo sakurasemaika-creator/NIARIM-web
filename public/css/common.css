@@ -188,6 +188,12 @@ p {
   padding-block: 0.25rem;
 }
 
+/* .btn-accent(0-1-0)は.main-nav a(0-1-1)より詳細度が低く負けてしまい、
+   背景色付きボタンなのに文字がグレーで読みにくくなっていたための上書き。 */
+.main-nav a.btn-accent {
+  color: var(--color-white);
+}
+
 .main-nav a::after {
   content: "";
   position: absolute;
@@ -617,7 +623,9 @@ p {
   margin-bottom: var(--space-sm);
 }
 
-.footer-brand .brand-icon,
+/* brand-iconは元からテーマカラー背景+白抜きのバッジ状態のため、
+   invertしてしまうと背景色ごと真っ白になり潰れる。ワードマーク
+   (brand-title)側だけを白へ反転する。 */
 .footer-brand .brand-title {
   filter: brightness(0) invert(1);
 }

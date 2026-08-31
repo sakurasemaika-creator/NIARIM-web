@@ -266,6 +266,61 @@
     });
   }
 
+  /**
+   * トップページ hero-subtitle 直下の手描き風下線。
+   * 固定サイズのSVGを引き伸ばす方式だと、翻訳ごとに文言の長さが変わったり
+   * 2行以上に折り返す言語があると、下線の位置・幅が実際のテキストと
+   * 合わなくなる（1本のSVGは最後の行の下にしか出せない）。
+   * Range.getClientRects() で実際にレンダリングされた行ごとの矩形を計測し、
+   * 行の数だけ .hero-underline-line を生成して行ごとの実幅に合わせる。
+   */
+  function initHeroUnderline() {
+    var textEl = document.querySelector(".hero-subtitle-text");
+    if (!textEl) return;
+
+    var resizeTimer = null;
+
+    function rebuild() {
+      textEl.querySelectorAll(".hero-underline-line").forEach(function (el) {
+        el.remove();
+      });
+
+      var range = document.createRange();
+      range.selectNodeContents(textEl);
+      var rects = Array.prototype.slice.call(range.getClientRects());
+      if (!rects.length) return;
+
+      var containerRect = textEl.getBoundingClientRect();
+      rects.forEach(function (rect, i) {
+        if (rect.width < 1) return;
+        var line = document.createElement("span");
+        line.className = "hero-underline-line";
+        line.style.left = rect.left - containerRect.left + "px";
+        line.style.top = rect.bottom - containerRect.top + 3 + "px";
+        line.style.width = rect.width + "px";
+        line.style.animationDelay = 1.05 + i * 0.15 + "s";
+        textEl.appendChild(line);
+      });
+    }
+
+    rebuild();
+
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(rebuild, 150);
+    });
+
+    document.addEventListener("niarim:langchange", function () {
+      requestAnimationFrame(rebuild);
+    });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(rebuild).catch(function () {
+        /* フォント読み込み監視非対応環境は無視 */
+      });
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initParallaxTilt();
@@ -273,5 +328,6 @@
     initMagneticButtons();
     initCursorOrbit();
     initFeatureNavSpy();
+    initHeroUnderline();
   });
 })();
