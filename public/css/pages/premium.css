@@ -58,6 +58,7 @@
 .pricing-price .unit {
   font-size: var(--fs-small);
   color: var(--color-text-muted);
+  font-family: var(--font-serif);
   white-space: nowrap;
 }
 
@@ -77,6 +78,7 @@
 
 .pricing-price-compare .amount-strike {
   font-size: 1.3rem;
+  font-family: var(--font-serif);
   color: rgba(255, 255, 255, 0.55);
   text-decoration: line-through;
   text-decoration-color: var(--fd-mark, #ffb020);
@@ -110,7 +112,10 @@
   display: block;
   font-size: var(--fs-small);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-serif);
+  /* 以前はrgba(255,255,255,0.75)の半透明白だったが、年額プランの
+     強調に使っている金色(#ffd76a)と統一し、不透明度も1にする。 */
+  color: #ffd76a;
 }
 
 .pricing-plan-option-best {
@@ -121,15 +126,35 @@
 
 .pricing-plan-badge {
   position: absolute;
-  top: -0.9rem;
+  top: -1.3rem;
   right: var(--space-md);
-  padding: 0.35rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background: var(--grad-gold);
+  padding: 0.3rem 0.9rem 0.4rem;
+  border-radius: var(--radius-md);
+  /* 金色の背景に濃い文字だと目立ちにくかったため、白地に変更。 */
+  background: var(--color-white);
   color: var(--color-brand-dark);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: var(--font-serif);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
   white-space: nowrap;
+}
+
+.pricing-plan-badge-pre {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.pricing-plan-badge-main {
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--grad-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 @media (max-width: 520px) {
@@ -170,6 +195,7 @@
 
 .pricing-list li strong {
   display: block;
+  font-family: var(--font-serif);
 }
 
 .pricing-list li span {

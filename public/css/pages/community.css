@@ -85,10 +85,13 @@
   left: 0.5rem;
   background: var(--color-ink);
   color: var(--color-white);
-  font-size: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
   font-weight: 700;
-  padding: 0.2rem 0.6rem;
+  min-width: 1.9rem;
+  padding: 0.25rem 0.7rem;
   border-radius: var(--radius-pill);
+  text-align: center;
 }
 
 /* TOP3は金・銀・銅のメダルカラーで強調（ibisPaintのランキングページ等を参照） */
@@ -127,4 +130,31 @@
   margin-top: 0.25rem;
   font-size: var(--fs-small);
   color: var(--color-gray-300);
+}
+
+/* プレースホルダーの続き(9位以降)は実際の画面が用意でき次第置き換える。
+   それまでの間、サイト上ではこれ以上の順位を表示できないため、
+   アプリでの続きを促すCTAカードをギャラリー内に1枚差し込む。 */
+.community-card.is-more-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.community-card.is-more-cta .thumb {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--color-bg-tint);
+  color: var(--color-text-muted);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.community-card.is-more-cta .thumb p {
+  font-size: var(--fs-small);
+  font-weight: 600;
 }
