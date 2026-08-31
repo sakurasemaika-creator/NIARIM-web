@@ -100,29 +100,45 @@
             <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
             <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-home_outlined"></use></svg></span>
           </div>
-          <!-- toolbar_widget.dart: ツール類→色スウォッチ→tune→layers→loop→save_outlined→straighten→help_outline -->
+          <!-- toolbar_widget.dart: ツール類→色スウォッチ→tune→layers→loop→save_outlined→straighten→help_outline
+               BrushSizeSlider: キャンバスとツールバーの間に常時表示（折りたたみ式）
+               FrameStripWidget: ツールバーの下、height:64 -->
           <div class="fd-canvas">
             <svg viewBox="0 0 400 220">
               <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
             </svg>
-            <div class="fd-toolbar-overlay">
-              <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-transform"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-text_fields"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
-              <span class="fd-color-swatch"></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
-            </div>
+          </div>
+          <div class="fd-brush-slider">
+            <span class="fd-brush-dot"></span><span class="fd-brush-size">12</span>
+            <svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="/assets/icons/ui/sprite.svg#ic-opacity"></use></svg><span class="fd-brush-opacity">80%</span>
+            <span class="fd-spacer"></span><span class="fd-brush-toggle">▾</span>
+          </div>
+          <div class="fd-toolbar">
+            <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-transform"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-text_fields"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
+            <span class="fd-color-swatch"></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+          </div>
+          <div class="fd-frame-strip">
+            <span class="fd-frame-thumb"></span>
+            <span class="fd-frame-thumb"></span>
+            <span class="fd-frame-thumb is-current"></span>
+            <span class="fd-frame-thumb"></span>
+            <span class="fd-frame-thumb"></span>
+            <span class="fd-frame-add"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-add"></use></svg></span>
+            <span class="fd-frame-strip-mode" data-i18n="fd.frameListMode">フレーム一覧</span>
           </div>
         </div>
       </div>
@@ -442,32 +458,45 @@
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
               <span class="fd-spacer"></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
-              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-home_outlined"></use></svg></span>
             </div>
             <div class="fd-canvas">
               <svg viewBox="0 0 400 220">
                 <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
               </svg>
-              <div class="fd-toolbar-overlay">
-                <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-transform"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-text_fields"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
-                <span class="fd-color-swatch"></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
-                <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
-              </div>
+            </div>
+            <div class="fd-brush-slider">
+              <span class="fd-brush-dot"></span><span class="fd-brush-size">12</span>
+              <svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="/assets/icons/ui/sprite.svg#ic-opacity"></use></svg><span class="fd-brush-opacity">80%</span>
+              <span class="fd-spacer"></span><span class="fd-brush-toggle">▾</span>
+            </div>
+            <div class="fd-toolbar">
+              <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-eraser_fa"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-format_color_fill"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-colorize"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-pan_tool_alt"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-highlight_alt"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-transform"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-text_fields"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-category"></use></svg></span>
+              <span class="fd-color-swatch"></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+              <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+            </div>
+            <div class="fd-frame-strip">
+              <span class="fd-frame-thumb"></span>
+              <span class="fd-frame-thumb"></span>
+              <span class="fd-frame-thumb is-current"></span>
+              <span class="fd-frame-thumb"></span>
+              <span class="fd-frame-thumb"></span>
+              <span class="fd-frame-add"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-add"></use></svg></span>
+              <span class="fd-frame-strip-mode" data-i18n="fd.frameListMode">フレーム一覧</span>
             </div>
           </div>
         </div>

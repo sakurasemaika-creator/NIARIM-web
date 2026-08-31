@@ -249,12 +249,17 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 8px;
+  padding: 0;
   border-radius: 0;
   box-shadow: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
+}
+
+/* 上部バーだけ左右パディングを確保 */
+.hero-visual .fd-topbar {
+  padding: 2px 4px;
 }
 
 .hero-visual .fd-canvas {
@@ -744,4 +749,99 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* ---- ツールバー（画面下部の横並びバー、toolbar_widget.dart再現） ---- */
+/* fd-toolbar-overlay は features.css 側でキャンバスオーバーレイとして定義済み。
+   ヒーロー・screenshot-card 内では fd-toolbar として独立した横バーを使う。 */
+.fd-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 32px;
+  background: var(--fd-outside, #1a1a2e);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  gap: 1px;
+  padding: 0 2px;
+}
+.fd-toolbar::-webkit-scrollbar { display: none; }
+
+/* ---- BrushSizeSlider（ツールバー直上の折りたたみ帯） ---- */
+.fd-brush-slider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 20px;
+  background: var(--fd-outside, #1a1a2e);
+  padding: 0 6px;
+  gap: 3px;
+  flex-shrink: 0;
+  font-size: 9px;
+  color: rgba(255,255,255,0.85);
+}
+.fd-brush-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  flex-shrink: 0;
+}
+.fd-brush-size,
+.fd-brush-opacity { font-size: 9px; line-height: 1; }
+.fd-brush-opacity-ic { width: 10px; height: 10px; opacity: 0.8; }
+.fd-brush-toggle { font-size: 8px; opacity: 0.6; }
+
+/* ---- フレームストリップ（ツールバー直下、frame_strip_widget.dart再現） ---- */
+.fd-frame-strip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 52px;
+  background: var(--color-surface, #1e1e2e);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 4px 4px 4px;
+  gap: 2px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.fd-frame-thumb {
+  flex-shrink: 0;
+  width: 36px;
+  height: 44px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.fd-frame-thumb.is-current {
+  border: 2.5px solid var(--color-accent, #FF5C7A);
+}
+.fd-frame-add {
+  flex-shrink: 0;
+  width: 36px;
+  height: 44px;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+}
+.fd-frame-add .ic { width: 14px; height: 14px; }
+.fd-frame-strip-mode {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 8px;
+  color: rgba(255,255,255,0.5);
+  padding: 2px 4px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* screenshot-card 内の feature-diagram は上から順に積む（justify-content: flex-start） */
+.screenshot-card .feature-diagram {
+  justify-content: flex-start;
 }
