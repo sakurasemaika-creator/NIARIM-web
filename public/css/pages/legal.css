@@ -70,6 +70,18 @@
   line-height: 1.85;
 }
 
+/* 既定ではaはcolor:inheritのため、本文中の「こちら」等のリンクが
+   周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */
+.legal-body a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.legal-body a:hover {
+  color: var(--color-accent-dark);
+}
+
 .legal-body ul,
 .legal-body ol {
   padding-left: 1.4rem;
