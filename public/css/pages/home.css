@@ -241,14 +241,16 @@
   border-radius: var(--radius-md);
   /* kCanvasOutsideColor = #3A3A3A を再現。
      ツールバー・ブラシスライダー・フレームストリップの背景色と一致させる。 */
+  --fd-panel: #201f27;
+  --fd-text: #f5f1f0;
+  --fd-accent: #ff5c7a;
   background: #3a3a3a;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   overflow: hidden;
   /* アイコン・テキスト色を白系に統一 */
-  color: #f5f1f0;
+  color: var(--fd-text);
   display: flex;
   flex-direction: column;
-}
 }
 
 /* canvas_screen.dart再現のfeature-diagramをフレーム全体に収める */

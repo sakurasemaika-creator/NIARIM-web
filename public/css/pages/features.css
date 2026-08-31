@@ -235,8 +235,11 @@
 .fd-icon-btn .ic {
   width: var(--fd-icon-size);
   height: var(--fd-icon-size);
-  filter: drop-shadow(1px 0 0 var(--fd-panel)) drop-shadow(-1px 0 0 var(--fd-panel))
-    drop-shadow(0 1px 0 var(--fd-panel)) drop-shadow(0 -1px 0 var(--fd-panel));
+  filter:
+    drop-shadow(1px 0 0 var(--fd-panel)) drop-shadow(-1px 0 0 var(--fd-panel))
+    drop-shadow(0 1px 0 var(--fd-panel)) drop-shadow(0 -1px 0 var(--fd-panel))
+    drop-shadow(1px 1px 0 var(--fd-panel)) drop-shadow(-1px -1px 0 var(--fd-panel))
+    drop-shadow(1px -1px 0 var(--fd-panel)) drop-shadow(-1px 1px 0 var(--fd-panel));
 }
 
 .fd-icon-btn.is-active {
