@@ -246,6 +246,9 @@
   overflow: hidden;
   /* アイコン・テキスト色を白系に統一 */
   color: #f5f1f0;
+  display: flex;
+  flex-direction: column;
+}
 }
 
 /* canvas_screen.dart再現のfeature-diagramをフレーム全体に収める */
@@ -271,7 +274,7 @@
 /* 描画キャンバス部分のみ白背景 */
 .hero-visual .fd-canvas {
   flex: 1;
-  height: auto;
+  height: 0;
   background: #fff;
   min-height: 0;
 }
