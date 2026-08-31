@@ -108,12 +108,15 @@
         </div>
       </div>
       <div class="feature-diagram" aria-hidden="true">
-        <!-- toolbar_widget.dart / canvas_icon_button.dart で確認した
-             実際の見た目：ツールバーは背景を持たず、アイコン(20px)を
-             キャンバス下端(高さ40px)に直接重ねる。実ツール順序は
-             ペン=brush／消しゴム=Font Awesome eraser／バケツ=
-             format_color_fill／スポイト=colorize／選択=highlight_alt／
-             指ツール=pan_tool_alt／図形=category。 -->
+        <!-- canvas_screen.dart _buildTopBar(): Undo/Redo→Spacer→Settings/Home -->
+        <!-- toolbar_widget.dart: ツール類→色スウォッチ→tune→layers→loop→save_outlined→straighten→help_outline -->
+        <div class="fd-topbar">
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
+          <span class="fd-spacer"></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-home_outlined"></use></svg></span>
+        </div>
         <div class="fd-canvas">
           <svg viewBox="0 0 400 220">
             <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
@@ -133,6 +136,8 @@
             <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
             <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg></span>
             <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
+            <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
           </div>
         </div>
       </div>
@@ -392,9 +397,8 @@
           <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
           <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
           <span class="fd-spacer"></span>
-          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-straighten"></use></svg></span>
           <span class="fd-icon-btn is-active"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
-          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use></svg></span>
+          <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-home_outlined"></use></svg></span>
         </div>
         <div class="fd-canvas">
           <svg viewBox="0 0 400 190">
@@ -536,29 +540,24 @@
           </div>
         </div>
         <div class="fd-diagram-label" data-i18n="fd.saveTreeLabel">セーブツリー（保存数の制限なし）</div>
-        <!-- アプリの実装(save_tree_screen.dart _TreeView)と同じく
-             「下から上に伸びる木」として表示する。
-             ListView(reverse:true)でDFS順リストを逆表示することで
-             rootが最下部・子孫が上に積み上がる見た目を再現。
-             各行の左には_TreeConnectorPainterと同じ罫線を付ける。
-             DFS順: 配色A→配色B→線画修正→初稿
-             reverse後（画面上の表示順）: 初稿→線画修正→配色B→配色A -->
-        <div class="fd-tree-list fd-tree-list--bottom-up">
-          <!-- depth=1, continues=[true,true]: 配色A（兄弟が続く） -->
+      <!-- save_tree_screen.dart: ListView(reverse:true) = root最下部・子孫が上。
+           HTML正順（初稿→線画修正→配色B→配色A）で表示することで再現。 -->
+        <div class="fd-tree-list">
           <div class="fd-tree-row2">
-            <!-- 祖先列(x=10)全高縦線、自分列(x=30)全高縦線＋中央から右へ横線 -->
-            <svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true">
-              <line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-              <line x1="30" y1="0" x2="30" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-              <line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-            </svg>
-            <span class="fd-tree-dot is-accent"></span>
-            <span class="fd-tree-text" data-i18n="fd.treeNode3a">配色A</span>
-            <span class="fd-tree-date">08/22</span>
+            <span class="fd-tree-dot"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode1">初稿</span>
+            <span class="fd-tree-date">08/20</span>
           </div>
-          <!-- depth=1, continues=[true,false]: 配色B（兄弟なし） -->
           <div class="fd-tree-row2">
-            <!-- 祖先列(x=10)全高縦線、自分列(x=30)上半分縦線＋中央から右へ横線 -->
+            <svg class="fd-tree-connector" width="20" height="36" viewBox="0 0 20 36" aria-hidden="true">
+              <line x1="10" y1="0" x2="10" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="10" y1="18" x2="20" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            </svg>
+            <span class="fd-tree-dot"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode2">線画修正</span>
+            <span class="fd-tree-date">08/21</span>
+          </div>
+          <div class="fd-tree-row2">
             <svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true">
               <line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
               <line x1="30" y1="0" x2="30" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
@@ -568,22 +567,15 @@
             <span class="fd-tree-text" data-i18n="fd.treeNode3b">配色B</span>
             <span class="fd-tree-date">08/22</span>
           </div>
-          <!-- depth=0, continues=[false]: 線画修正（兄弟なし） -->
           <div class="fd-tree-row2">
-            <!-- 自分列(x=10)上半分縦線＋中央から右へ横線 -->
-            <svg class="fd-tree-connector" width="20" height="36" viewBox="0 0 20 36" aria-hidden="true">
-              <line x1="10" y1="0" x2="10" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-              <line x1="10" y1="18" x2="20" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true">
+              <line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="0" x2="30" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
             </svg>
-            <span class="fd-tree-dot"></span>
-            <span class="fd-tree-text" data-i18n="fd.treeNode2">線画修正</span>
-            <span class="fd-tree-date">08/21</span>
-          </div>
-          <!-- depth=0, root: 初稿（コネクタなし） -->
-          <div class="fd-tree-row2">
-            <span class="fd-tree-dot"></span>
-            <span class="fd-tree-text" data-i18n="fd.treeNode1">初稿</span>
-            <span class="fd-tree-date">08/20</span>
+            <span class="fd-tree-dot is-accent"></span>
+            <span class="fd-tree-text" data-i18n="fd.treeNode3a">配色A</span>
+            <span class="fd-tree-date">08/22</span>
           </div>
         </div>
         <div class="fd-share-formats">
