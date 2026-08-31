@@ -333,8 +333,22 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
   リリースのタイミングでREADME.mdの「[要確認]」セクションを参照して
   差し替えること。
 - Google Play URL・公式XアカウントURL（`public/js/config.js`）は未確定。
-- OGP画像・apple-touch-iconは単色プレースホルダーのまま
-  （6.2のアイコン反映作業と合わせて更新できると良い）。
+- [対応済み] apple-touch-icon（`public/assets/icons/apple-touch-icon.png`）と
+  favicon（`public/assets/icons/favicon.svg`）は、単色プレースホルダー
+  だったものを、Android/iOSアプリのランチャーアイコンと同じ意匠
+  （テーマカラー`#FF5C7A`のフルブリード正方形＋白抜きモノグラム、
+  角丸はOS側の自動マスキングに委ねて焼き込まない）に差し替え済み。
+  モノグラムの実寸バウンディングボックス（x:399–801, y:328.63–897,
+  `public/assets/images/logo/favicon.svg`旧内容のパス座標から算出）を
+  基準に、`tool/gen_app_icon.py`と同じ「フルブリード比率0.86」で
+  スケール・中央寄せしている（transform:
+  `translate(235.041 84.000) scale(1.815719) translate(-399 -328.63)`)。
+  1024pxでPlaywright(Chromium)経由でレンダリングし、180x180へ縮小して
+  apple-touch-icon.pngを生成した（favicon.svgはベクターのままバッジ化）。
+  今後アプリ側のグリフ比率がさらに変わった場合は、このバウンディング
+  ボックス計算からやり直すこと（PILは本環境に無いため、Playwrightの
+  Chromiumレンダリング＋手計算のtransformで対応した）。
+- OGP画像は単色プレースホルダーのまま（正式リリース前に差し替え要）。
 - Cloudflare Turnstileの導入要否（スパムが増えた場合に検討）。
 - 利用規約・プライバシーポリシーの専門家（弁護士）による法的最終確認は
   未実施。
