@@ -127,7 +127,7 @@
     "contact.channel.link": "公式Xでお問い合わせ",
     "contact.personalNote":
       "アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、右記のフォームからご連絡ください。",
-    "contact.personalNote.formNote": "※フォームの内容はメールで受け付けます。",
+    "contact.personalNote.formNote": "※⁠フォームの内容はメールで受け付けます。",
     "contact.form.type": "お問い合わせ種別",
     "contact.form.type.bug": "不具合報告",
     "contact.form.type.request": "機能要望",

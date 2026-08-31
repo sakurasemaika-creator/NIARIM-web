@@ -52,7 +52,7 @@
     "narrative.editing.4.heading": "共通レイヤー",
     "narrative.editing.4.body": "複数のフレームやシーンで同じ内容を表示できるレイヤーです。背景などの固定された要素を毎フレーム描き直す必要がありません。キャラクターを共通レイヤーにして、口だけを通常レイヤーに分けることもできます。キャラクター本体はそのまま表示しながら、口だけをフレームごとに描き替えて口パクさせることも可能です。",
     "narrative.editing.5.heading": "自動塗り",
-    "narrative.editing.5.body": "線画をもとに、あらかじめ設定したパーツごとの色やトーンを使って自動で塗り分けます。同じキャラクターを何度も描く手描きアニメーションでは、色塗りの負担を大きく減らせます。グラデーションや縁取り、線画になじませる色トレスにも対応しています。※自動塗りは生成AIを使用した機能ではありません。設定したルールに基づいて色を塗り分けます。",
+    "narrative.editing.5.body": "線画をもとに、あらかじめ設定したパーツごとの色やトーンを使って自動で塗り分けます。同じキャラクターを何度も描く手描きアニメーションでは、色塗りの負担を大きく減らせます。グラデーションや縁取り、線画になじませる色トレスにも対応しています。※⁠自動塗りは生成AIを使用した機能ではありません。設定したルールに基づいて色を塗り分けます。",
 
     "narrative.advanced.1.heading": "いつもの作業を、もっとスムーズに。",
     "narrative.advanced.1.body": "",
@@ -71,7 +71,7 @@
     "narrative.advanced.8.heading": "ピクセルモード",
     "narrative.advanced.8.body": "ブラシ・フォント・スタンプにピクセルモードを適用できます。アンチエイリアスを取り除き、くっきりとしたドット絵風の表現に。スタンプをピクセルモードで加工して、ドット絵風の素材として使うこともできます。",
     "narrative.advanced.9.heading": "描画フィルター",
-    "narrative.advanced.9.body": "レイヤーごとにフィルターを適用できます。ぼかし、シャープ、アンシャープマスク、トーンカーブ、レベル補正、周辺減光、ノイズ、レトロアニメ、ブラウン管、アニメ調、縁取り、ピクセレート、魚眼レンズ、オーロラホログラム、背景馴染ませなど。さらに、眼鏡断層フィルターでは、レンズの度数によってレンズ越しの景色がどのように歪んで見えるかを再現できます。",
+    "narrative.advanced.9.body": "レイヤーごとにフィルターを適用できます。ぼかし、シャープ、アンシャープマスク、トーンカーブ、レベル補正、周辺減光、ノイズ、レトロアニメ、ブラウン管、アニメ調、縁取り、ドット絵、魚眼レンズ、オーロラホログラム、背景馴染ませなど。さらに、眼鏡断層フィルターでは、レンズの度数によってレンズ越しの景色がどのように歪んで見えるかを再現できます。",
     "narrative.advanced.10.heading": "演出フィルター",
     "narrative.advanced.10.body": "こちらはフレームやシーンごとに適用できる映像効果です。複数フレームをまとめて処理できるので、作品全体や一つのシーンに同じ演出を加えることもできます。ノイズや雨、虹色の光沢をまとうオーロラホログラムなどの演出を重ねて、作品全体の雰囲気を仕上げられます。レイヤーを直接加工するなら描画フィルター。フレームやシーン全体を演出するなら演出フィルター。用途に合わせて使い分けられます。",
 
@@ -97,7 +97,7 @@
     "narrative.workspace.2.heading": "テーマ・外観設定",
     "narrative.workspace.2.body": "アプリ全体のテーマや差し色を自分好みにカスタマイズできます。毎日使うアプリだからこそ、自分が使いやすい見た目に。",
     "narrative.workspace.3.heading": "ワークスペース設定",
-    "narrative.workspace.3.body": "PC・DeXモードへの切り替えや、作業環境に合わせた設定を用意。左利きモードにも対応しています。※左利きモードはスマートフォンモードでは利用できません。",
+    "narrative.workspace.3.body": "PC・DeXモードへの切り替えや、作業環境に合わせた設定を用意。左利きモードにも対応しています。※⁠左利きモードはPC・DeXモードのみの機能です。",
     "narrative.workspace.4.heading": "ジェスチャー設定",
     "narrative.workspace.4.body": "2本指タップ、3本指タップ、スワイプ、長押しなどにUndo・Redo・フレーム移動・スポイトなどの操作を割り当てられます。よく使う操作を自分の手に合わせてカスタマイズできます。",
 
@@ -185,7 +185,7 @@
     "narrative.advanced.8.heading": "Pixel mode",
     "narrative.advanced.8.body": "Apply pixel mode to brushes, fonts, and stamps. It removes anti-aliasing for a crisp, pixel-art look. You can even process a stamp in pixel mode to use it as pixel-art-style material.",
     "narrative.advanced.9.heading": "Draw filters",
-    "narrative.advanced.9.body": "Apply a filter to each layer. Blur, sharpen, unsharp mask, tone curve, levels, vignette, noise, retro anime, CRT, anime-style, outline, pixelate, fisheye lens, aurora hologram, background blend, and more. A lens-prescription filter can even reproduce how a scene distorts when viewed through lenses of different strengths.",
+    "narrative.advanced.9.body": "Apply a filter to each layer. Blur, sharpen, unsharp mask, tone curve, levels, vignette, noise, retro anime, CRT, anime-style, outline, pixel art, fisheye lens, aurora hologram, background blend, and more. A lens-prescription filter can even reproduce how a scene distorts when viewed through lenses of different strengths.",
     "narrative.advanced.10.heading": "Effect filters",
     "narrative.advanced.10.body": "These are visual effects you can apply per frame or per scene. Since multiple frames can be processed together, you can add the same effect across an entire piece or a single scene. Layer on effects like noise, rain, or the iridescent aurora hologram to finish the mood of the whole piece. Use a draw filter when you want to work on a layer directly; use an effect filter when you want to direct a whole frame or scene. Pick whichever fits what you're doing.",
 
@@ -211,7 +211,7 @@
     "narrative.workspace.2.heading": "Theme & appearance settings",
     "narrative.workspace.2.body": "Customize the app's overall theme and accent color to your liking. It's an app you use every day, so make it look the way that works for you.",
     "narrative.workspace.3.heading": "Workspace settings",
-    "narrative.workspace.3.body": "Switch between PC/DeX mode and adjust settings to fit your working style. Left-handed mode is supported, too. Note: left-handed mode isn't available in Smartphone mode.",
+    "narrative.workspace.3.body": "Switch between PC/DeX mode and adjust settings to fit your working style. Left-handed mode is supported, too. Note: left-handed mode is a PC/DeX mode–only feature.",
     "narrative.workspace.4.heading": "Gesture settings",
     "narrative.workspace.4.body": "Assign actions like undo, redo, frame navigation, or the eyedropper to two-finger tap, three-finger tap, swipe, long-press, and more. Customize the gestures you use often to fit your own hand.",
 
@@ -276,7 +276,7 @@
     "narrative.editing.4.heading": "公共图层",
     "narrative.editing.4.body": "一种可以在多个帧或场景中显示相同内容的图层。背景等固定不变的元素，无需每帧重新绘制。也可以将角色设为公共图层，只把嘴部分到普通图层中。这样角色本体保持不变，只需逐帧重新绘制嘴部，即可实现对口型效果。",
     "narrative.editing.5.heading": "自动上色",
-    "narrative.editing.5.body": "基于线稿，使用预先为各部位设置好的颜色或网点纸自动分区上色。对于需要反复绘制同一角色的手绘动画来说，能大幅减轻上色负担。同时支持渐变、描边，以及让颜色融入线稿的色彩描边。※自动上色并非使用生成式AI的功能，而是根据您设置的规则进行区域上色。",
+    "narrative.editing.5.body": "基于线稿，使用预先为各部位设置好的颜色或网点纸自动分区上色。对于需要反复绘制同一角色的手绘动画来说，能大幅减轻上色负担。同时支持渐变、描边，以及让颜色融入线稿的色彩描边。※⁠自动上色并非使用生成式AI的功能，而是根据您设置的规则进行区域上色。",
 
     "narrative.advanced.1.heading": "让日常创作更顺畅。",
     "narrative.advanced.2.heading": "快速切换工具",
@@ -293,7 +293,7 @@
     "narrative.advanced.8.heading": "像素模式",
     "narrative.advanced.8.body": "可以为笔刷、字体、图章应用像素模式。去除抗锯齿，呈现出清晰的像素画风格。也可以用像素模式处理图章，将其作为像素风格的素材使用。",
     "narrative.advanced.9.heading": "描绘滤镜",
-    "narrative.advanced.9.body": "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动画、显像管、动画风、描边、马赛克、鱼眼镜头、极光全息、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
+    "narrative.advanced.9.body": "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动画、显像管、动画风、描边、像素画、鱼眼镜头、极光全息、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
     "narrative.advanced.10.heading": "演出滤镜",
     "narrative.advanced.10.body": "这是一种可按帧或按场景应用的影像效果。由于可以一次性处理多个帧，因此能为整部作品或某个场景统一添加相同的演出效果。叠加噪点、下雨、散发七彩光泽的极光全息等演出效果，来完成整部作品的氛围。想直接加工图层，就用描绘滤镜；想为整个帧或场景增添演出效果，就用演出滤镜。可根据用途灵活选用。",
 
@@ -317,7 +317,7 @@
     "narrative.workspace.2.heading": "主题・外观设置",
     "narrative.workspace.2.body": "可以将应用整体的主题和强调色自定义为自己喜欢的样子。正因为是每天都要用的应用，才更要打造成自己用起来顺手的样子。",
     "narrative.workspace.3.heading": "工作区设置",
-    "narrative.workspace.3.body": "提供PC・DeX模式切换等适合不同工作方式的设置。同时也支持左手模式。※在工具栏固定于屏幕下方的手机模式下，左手模式无法使用。",
+    "narrative.workspace.3.body": "提供PC・DeX模式切换等适合不同工作方式的设置。同时也支持左手模式。※⁠左手模式仅在 PC・DeX 模式下可用。",
     "narrative.workspace.4.heading": "手势设置",
     "narrative.workspace.4.body": "可以为双指点按、三指点按、滑动、长按等手势分配撤销、重做、帧移动、吸管等操作。可以根据自己的使用习惯，自定义常用操作。",
 
@@ -381,7 +381,7 @@
     "narrative.editing.4.heading": "共用圖層",
     "narrative.editing.4.body": "一種可以在多個影格或場景中顯示相同內容的圖層。背景等固定不變的元素，不需要每個影格重新繪製。也可以將角色設為共用圖層，只把嘴巴分到一般圖層中。這樣角色本體保持不變，只需逐格重新繪製嘴巴，即可實現對嘴型效果。",
     "narrative.editing.5.heading": "自動上色",
-    "narrative.editing.5.body": "根據線稿，使用預先為各部位設定好的顏色或網點紙自動分區上色。對於需要反覆繪製同一角色的手繪動畫來說，能大幅減輕上色負擔。同時支援漸層、描邊，以及讓顏色融入線稿的色彩描邊。※自動上色並非使用生成式AI的功能，而是根據您設定的規則進行區域上色。",
+    "narrative.editing.5.body": "根據線稿，使用預先為各部位設定好的顏色或網點紙自動分區上色。對於需要反覆繪製同一角色的手繪動畫來說，能大幅減輕上色負擔。同時支援漸層、描邊，以及讓顏色融入線稿的色彩描邊。※⁠自動上色並非使用生成式AI的功能，而是根據您設定的規則進行區域上色。",
 
     "narrative.advanced.1.heading": "讓日常創作更順暢。",
     "narrative.advanced.2.heading": "快速切換工具",
@@ -398,7 +398,7 @@
     "narrative.advanced.8.heading": "像素模式",
     "narrative.advanced.8.body": "可以為筆刷、字型、圖章套用像素模式。去除反鋸齒，呈現出清晰的像素畫風格。也可以用像素模式處理圖章，將其作為像素風格的素材使用。",
     "narrative.advanced.9.heading": "描繪濾鏡",
-    "narrative.advanced.9.body": "可以為每個圖層套用濾鏡。模糊、銳化、USM銳化、色調曲線、色階、暈影、雜訊、復古動畫、映像管、動畫風、描邊、馬賽克、魚眼鏡頭、極光全息、背景融入等等。此外，眼鏡斷層濾鏡還能重現透過不同度數鏡片觀察景物時產生的扭曲效果。",
+    "narrative.advanced.9.body": "可以為每個圖層套用濾鏡。模糊、銳化、USM銳化、色調曲線、色階、暈影、雜訊、復古動畫、映像管、動畫風、描邊、像素畫、魚眼鏡頭、極光全息、背景融入等等。此外，眼鏡斷層濾鏡還能重現透過不同度數鏡片觀察景物時產生的扭曲效果。",
     "narrative.advanced.10.heading": "演出濾鏡",
     "narrative.advanced.10.body": "這是一種可依影格或依場景套用的影像效果。由於可以一次處理多個影格，因此能為整部作品或某個場景統一加上相同的演出效果。疊加雜訊、下雨、散發七彩光澤的極光全息等演出效果，來完成整部作品的氛圍。想直接加工圖層，就用描繪濾鏡；想為整個影格或場景增添演出效果，就用演出濾鏡。可依用途靈活選用。",
 
@@ -422,7 +422,7 @@
     "narrative.workspace.2.heading": "主題・外觀設定",
     "narrative.workspace.2.body": "可以將應用程式整體的主題和強調色自訂為自己喜歡的樣子。正因為是每天都要用的應用程式，才更要打造成自己用起來順手的樣子。",
     "narrative.workspace.3.heading": "工作區設定",
-    "narrative.workspace.3.body": "提供PC・DeX模式切換等適合不同工作方式的設定。同時也支援左手模式。※在工具列固定於畫面下方的手機模式下，左手模式無法使用。",
+    "narrative.workspace.3.body": "提供PC・DeX模式切換等適合不同工作方式的設定。同時也支援左手模式。※⁠左手模式僅在 PC・DeX 模式下可用。",
     "narrative.workspace.4.heading": "手勢設定",
     "narrative.workspace.4.body": "可以為雙指點按、三指點按、滑動、長按等手勢指定復原、重做、影格移動、滴管等操作。可以依照自己的使用習慣，自訂常用操作。",
 
@@ -486,7 +486,7 @@
     "narrative.editing.4.heading": "공통 레이어",
     "narrative.editing.4.body": "여러 프레임이나 씬에서 같은 내용을 표시할 수 있는 레이어입니다. 배경 같은 고정된 요소를 매 프레임 다시 그릴 필요가 없습니다. 캐릭터를 공통 레이어로 하고, 입만 일반 레이어로 분리할 수도 있습니다. 캐릭터 본체는 그대로 표시하면서 입만 프레임마다 다시 그려 립싱크를 표현할 수도 있습니다.",
     "narrative.editing.5.heading": "자동 채색",
-    "narrative.editing.5.body": "선화를 바탕으로, 미리 설정한 부위별 색이나 톤을 사용해 자동으로 나누어 칠합니다. 같은 캐릭터를 몇 번이고 그리는 손그림 애니메이션에서는 채색 부담을 크게 줄일 수 있습니다. 그러데이션이나 테두리, 선화에 자연스럽게 스며드는 색 트레이스에도 대응합니다. ※자동 채색은 생성형 AI를 사용한 기능이 아닙니다. 설정한 규칙에 따라 색을 나누어 칠합니다.",
+    "narrative.editing.5.body": "선화를 바탕으로, 미리 설정한 부위별 색이나 톤을 사용해 자동으로 나누어 칠합니다. 같은 캐릭터를 몇 번이고 그리는 손그림 애니메이션에서는 채색 부담을 크게 줄일 수 있습니다. 그러데이션이나 테두리, 선화에 자연스럽게 스며드는 색 트레이스에도 대응합니다. ※⁠자동 채색은 생성형 AI를 사용한 기능이 아닙니다. 설정한 규칙에 따라 색을 나누어 칠합니다.",
 
     "narrative.advanced.1.heading": "평소 작업을 더 수월하게.",
     "narrative.advanced.2.heading": "빠른 전환 도구",
@@ -503,7 +503,7 @@
     "narrative.advanced.8.heading": "픽셀 모드",
     "narrative.advanced.8.body": "브러시・폰트・스탬프에 픽셀 모드를 적용할 수 있습니다. 안티에일리어싱을 제거해 또렷한 도트 그림풍 표현으로. 스탬프를 픽셀 모드로 가공해 도트 그림풍 소재로 사용할 수도 있습니다.",
     "narrative.advanced.9.heading": "드로잉 필터",
-    "narrative.advanced.9.body": "레이어별로 필터를 적용할 수 있습니다. 블러, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메풍, 테두리, 픽셀화, 어안 렌즈, 오로라 홀로그램, 배경 어우러짐 등. 게다가 안경 단면 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
+    "narrative.advanced.9.body": "레이어별로 필터를 적용할 수 있습니다. 블러, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메풍, 테두리, 픽셀 아트, 어안 렌즈, 오로라 홀로그램, 배경 어우러짐 등. 게다가 안경 단면 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
     "narrative.advanced.10.heading": "연출 필터",
     "narrative.advanced.10.body": "이쪽은 프레임이나 씬 단위로 적용할 수 있는 영상 효과입니다. 여러 프레임을 한 번에 처리할 수 있어, 작품 전체나 하나의 씬에 같은 연출을 더할 수도 있습니다. 노이즈나 비, 무지갯빛 광택을 두른 오로라 홀로그램 등의 연출을 겹쳐 작품 전체의 분위기를 완성할 수 있습니다. 레이어를 직접 가공하려면 드로잉 필터. 프레임이나 씬 전체를 연출하려면 연출 필터. 용도에 맞춰 구분해 사용할 수 있습니다.",
 
@@ -527,7 +527,7 @@
     "narrative.workspace.2.heading": "테마・외관 설정",
     "narrative.workspace.2.body": "앱 전체의 테마나 포인트 컬러를 취향대로 커스터마이즈할 수 있습니다. 매일 사용하는 앱이기에, 자신이 쓰기 편한 모습으로.",
     "narrative.workspace.3.heading": "워크스페이스 설정",
-    "narrative.workspace.3.body": "PC・DeX 모드 전환 등 작업 방식에 맞춘 설정을 준비했습니다. 왼손 모드에도 대응합니다. ※왼손 모드는 스마트폰 모드에서는 이용할 수 없습니다.",
+    "narrative.workspace.3.body": "PC・DeX 모드 전환 등 작업 방식에 맞춘 설정을 준비했습니다. 왼손 모드에도 대응합니다. ※⁠왼손 모드는 PC・DeX 모드 전용 기능입니다.",
     "narrative.workspace.4.heading": "제스처 설정",
     "narrative.workspace.4.body": "두 손가락 탭, 세 손가락 탭, 스와이프, 길게 누르기 등에 실행 취소・다시 실행・프레임 이동・스포이트 같은 조작을 할당할 수 있습니다. 자주 쓰는 조작을 자신의 손에 맞춰 커스터마이즈할 수 있습니다.",
 
@@ -608,7 +608,7 @@
     "narrative.advanced.8.heading": "Mode pixel",
     "narrative.advanced.8.body": "Appliquez le mode pixel aux pinceaux, polices et tampons. Il supprime l'anticrénelage pour un rendu pixel art net. Vous pouvez même traiter un tampon en mode pixel pour l'utiliser comme matériel de style pixel art.",
     "narrative.advanced.9.heading": "Filtres de dessin",
-    "narrative.advanced.9.body": "Appliquez un filtre à chaque calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixelisation, objectif fisheye, hologramme aurore, fondu avec l'arrière-plan, et plus. Un filtre de correction optique peut même reproduire la façon dont une scène se déforme lorsqu'elle est vue à travers des verres de différentes puissances.",
+    "narrative.advanced.9.body": "Appliquez un filtre à chaque calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixel art, objectif fisheye, hologramme aurore, fondu avec l'arrière-plan, et plus. Un filtre de correction optique peut même reproduire la façon dont une scène se déforme lorsqu'elle est vue à travers des verres de différentes puissances.",
     "narrative.advanced.10.heading": "Filtres d'effet",
     "narrative.advanced.10.body": "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l'hologramme aurore aux reflets irisés pour finaliser l'ambiance de toute l'œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d'effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
 
@@ -632,7 +632,7 @@
     "narrative.workspace.2.heading": "Réglages de thème et d'apparence",
     "narrative.workspace.2.body": "Personnalisez le thème général et la couleur d'accent de l'application à votre goût. C'est une application que vous utilisez tous les jours, alors donnez-lui l'apparence qui vous convient.",
     "narrative.workspace.3.heading": "Réglages de l'espace de travail",
-    "narrative.workspace.3.body": "Basculez entre le mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher n'est pas disponible en mode Smartphone.",
+    "narrative.workspace.3.body": "Basculez entre le mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher est une fonctionnalité exclusive au mode PC/DeX.",
     "narrative.workspace.4.heading": "Réglages de gestes",
     "narrative.workspace.4.body": "Assignez des actions comme annuler, rétablir, navigation d'image ou pipette au tap à deux doigts, tap à trois doigts, glissement, appui long, et plus. Personnalisez les gestes que vous utilisez souvent selon votre propre main.",
 
@@ -713,7 +713,7 @@
     "narrative.advanced.8.heading": "Modo píxel",
     "narrative.advanced.8.body": "Aplica el modo píxel a pinceles, fuentes y sellos. Elimina el suavizado para lograr un look de pixel art nítido. Incluso puedes procesar un sello en modo píxel para usarlo como material de estilo pixel art.",
     "narrative.advanced.9.heading": "Filtros de dibujo",
-    "narrative.advanced.9.body": "Aplica un filtro a cada capa. Desenfoque, nitidez, máscara de enfoque, curva de tonos, niveles, viñeta, ruido, anime retro, CRT, estilo anime, contorno, pixelado, lente ojo de pez, holograma aurora, fusión con el fondo, y más. Un filtro de graduación de lentes incluso puede reproducir cómo se distorsiona una escena al verla a través de lentes de distintas graduaciones.",
+    "narrative.advanced.9.body": "Aplica un filtro a cada capa. Desenfoque, nitidez, máscara de enfoque, curva de tonos, niveles, viñeta, ruido, anime retro, CRT, estilo anime, contorno, pixel art, lente ojo de pez, holograma aurora, fusión con el fondo, y más. Un filtro de graduación de lentes incluso puede reproducir cómo se distorsiona una escena al verla a través de lentes de distintas graduaciones.",
     "narrative.advanced.10.heading": "Filtros de efecto",
     "narrative.advanced.10.body": "Estos son efectos visuales que puedes aplicar por fotograma o por escena. Como se pueden procesar varios fotogramas juntos, puedes añadir el mismo efecto a toda una obra o a una sola escena. Superpón efectos como ruido, lluvia o el holograma aurora de reflejos iridiscentes para terminar el ambiente de toda la pieza. Usa un filtro de dibujo cuando quieras trabajar directamente sobre una capa; usa un filtro de efecto cuando quieras dirigir un fotograma o una escena completa. Elige el que se ajuste a lo que estás haciendo.",
 
@@ -737,7 +737,7 @@
     "narrative.workspace.2.heading": "Ajustes de tema y apariencia",
     "narrative.workspace.2.body": "Personaliza el tema general y el color de acento de la app a tu gusto. Es una app que usas todos los días, así que dale el aspecto que te funcione.",
     "narrative.workspace.3.heading": "Ajustes del espacio de trabajo",
-    "narrative.workspace.3.body": "Cambia entre el modo PC/DeX y ajusta la configuración según tu estilo de trabajo. El modo zurdo también es compatible. Nota: el modo zurdo no está disponible en el modo Smartphone.",
+    "narrative.workspace.3.body": "Cambia entre el modo PC/DeX y ajusta la configuración según tu estilo de trabajo. El modo zurdo también es compatible. Nota: el modo zurdo es una función exclusiva del modo PC/DeX.",
     "narrative.workspace.4.heading": "Ajustes de gestos",
     "narrative.workspace.4.body": "Asigna acciones como deshacer, rehacer, navegación de fotogramas o el cuentagotas al toque con dos dedos, toque con tres dedos, deslizar, mantener presionado, y más. Personaliza los gestos que usas a menudo según tu propia mano.",
 
