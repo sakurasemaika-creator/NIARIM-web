@@ -598,6 +598,8 @@
   flex: 1;
   height: auto;
   min-height: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 /* ---- Download CTA ---- */
@@ -724,4 +726,22 @@
   justify-content: center;
   animation: none;
   opacity: 1;
+}
+
+.fd-tree-list {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.fd-layer-panel-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 62%;
+  background: var(--color-surface, #1e1e2e);
+  border-left: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
