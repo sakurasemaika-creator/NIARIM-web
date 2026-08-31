@@ -237,6 +237,11 @@
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-more_vert"></use></svg></span>
             </div>
+            <div class="fd-canvas fd-preview-mini">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
+              </svg>
+            </div>
             <div class="fd-transport">
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-fast_rewind"></use></svg></span>
@@ -463,11 +468,6 @@
                再生コントロール)を再現。プレビュー欄の高さは可変(ドラッグ
                ハンドルで調整可能)だが、ここでは既定的な比率で表示。 -->
           <div class="feature-diagram" aria-hidden="true">
-            <div class="fd-canvas">
-              <svg viewBox="0 0 400 220">
-                <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
-              </svg>
-            </div>
             <div class="fd-topbar">
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-arrow_back"></use></svg></span>
               <span class="fd-timeline-title" data-i18n="fd.projectName">プロジェクト名</span>
@@ -475,6 +475,11 @@
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-undo"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-redo"></use></svg></span>
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-more_vert"></use></svg></span>
+            </div>
+            <div class="fd-canvas fd-preview-mini">
+              <svg viewBox="0 0 400 220">
+                <path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" />
+              </svg>
             </div>
             <div class="fd-transport">
               <span class="fd-icon-btn"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-skip_previous"></use></svg></span>
@@ -594,23 +599,58 @@
         </div>
         <div class="screenshot-card">
           <div class="feature-diagram" aria-hidden="true">
-            <div class="fd-slots">
-              <span class="fd-slot">1</span>
-              <span class="fd-slot">2</span>
-              <span class="fd-slot is-active">3</span>
-              <span class="fd-slot">4</span>
-              <span class="fd-slot">5</span>
-              <span class="fd-slot is-more">…</span>
-            </div>
             <div class="fd-diagram-label" data-i18n="fd.saveSlotsLabel">セーブスロット（最大10）</div>
-            <div class="fd-tree">
-              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>1</span></div>
-              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>├─ 2</span></div>
-              <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;├─ 3a</span></div>
-              <div class="fd-tree-row"><span class="fd-tree-node is-branch"></span><span>│&nbsp;&nbsp;└─ 3b</span></div>
-              <div class="fd-tree-row"><span class="fd-tree-node"></span><span>└─ 2'</span></div>
+            <div class="fd-slot-list">
+              <div class="fd-slot-row">
+                <span class="fd-slot-thumb"></span>
+                <span class="fd-slot-info">
+                  <span class="fd-slot-title" data-i18n="fd.slot1">スロット 1</span>
+                  <span class="fd-slot-date">2026/08/20 21:14</span>
+                </span>
+                <span class="fd-slot-actions">
+                  <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg>
+                  <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg>
+                </span>
+              </div>
+              <div class="fd-slot-row">
+                <span class="fd-slot-thumb"></span>
+                <span class="fd-slot-info">
+                  <span class="fd-slot-title" data-i18n="fd.slot2">スロット 2</span>
+                  <span class="fd-slot-date">2026/08/21 09:02</span>
+                </span>
+                <span class="fd-slot-actions">
+                  <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg>
+                  <svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-loop"></use></svg>
+                </span>
+              </div>
             </div>
             <div class="fd-diagram-label" data-i18n="fd.saveTreeLabel">セーブツリー（保存数の制限なし）</div>
+            <div class="fd-tree-list">
+              <div class="fd-tree-row2">
+                <span class="fd-tree-dot"></span>
+                <span class="fd-tree-text" data-i18n="fd.treeNode1">初稿</span>
+                <span class="fd-tree-date">08/20</span>
+              </div>
+              <div class="fd-tree-branch">
+                <div class="fd-tree-row2">
+                  <span class="fd-tree-dot"></span>
+                  <span class="fd-tree-text" data-i18n="fd.treeNode2">線画修正</span>
+                  <span class="fd-tree-date">08/21</span>
+                </div>
+                <div class="fd-tree-branch">
+                  <div class="fd-tree-row2">
+                    <span class="fd-tree-dot is-accent"></span>
+                    <span class="fd-tree-text" data-i18n="fd.treeNode3a">配色A</span>
+                    <span class="fd-tree-date">08/22</span>
+                  </div>
+                  <div class="fd-tree-row2">
+                    <span class="fd-tree-dot is-accent"></span>
+                    <span class="fd-tree-text" data-i18n="fd.treeNode3b">配色B</span>
+                    <span class="fd-tree-date">08/22</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="fd-share-formats">
               <span class="fd-format-chip">.niapro</span>
               <span class="fd-share-arrow">→</span>

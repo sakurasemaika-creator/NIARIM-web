@@ -37,7 +37,13 @@
       "fd.formatAviSubtitle": "互換性重視の動画形式（透過非対応）",
       "fd.exportStart": "書き出し開始",
       "fd.saveSlotsLabel": "セーブスロット（最大10）",
-      "fd.saveTreeLabel": "セーブツリー（保存数の制限なし）"
+      "fd.slot1": "スロット 1",
+      "fd.slot2": "スロット 2",
+      "fd.saveTreeLabel": "セーブツリー（保存数の制限なし）",
+      "fd.treeNode1": "初稿",
+      "fd.treeNode2": "線画修正",
+      "fd.treeNode3a": "配色A",
+      "fd.treeNode3b": "配色B"
     },
     "en": {
       "fd.projectName": "Project name",
@@ -67,7 +73,13 @@
       "fd.formatAviSubtitle": "Legacy-compatible video format (no transparency)",
       "fd.exportStart": "Start export",
       "fd.saveSlotsLabel": "Save slots (up to 10)",
-      "fd.saveTreeLabel": "Save tree (unlimited saves)"
+      "fd.slot1": "Slot 1",
+      "fd.slot2": "Slot 2",
+      "fd.saveTreeLabel": "Save tree (unlimited saves)",
+      "fd.treeNode1": "First draft",
+      "fd.treeNode2": "Line art fix",
+      "fd.treeNode3a": "Colors A",
+      "fd.treeNode3b": "Colors B"
     },
     "zh-Hans": {
       "fd.projectName": "项目名称",
@@ -97,7 +109,13 @@
       "fd.formatAviSubtitle": "兼容性优先的视频格式（不支持透明）",
       "fd.exportStart": "开始导出",
       "fd.saveSlotsLabel": "存档栏位（最多10个）",
-      "fd.saveTreeLabel": "存档树（保存次数不限）"
+      "fd.slot1": "栏位 1",
+      "fd.slot2": "栏位 2",
+      "fd.saveTreeLabel": "存档树（保存次数不限）",
+      "fd.treeNode1": "初稿",
+      "fd.treeNode2": "线稿修正",
+      "fd.treeNode3a": "配色A",
+      "fd.treeNode3b": "配色B"
     },
     "zh-Hant": {
       "fd.projectName": "專案名稱",
@@ -127,7 +145,13 @@
       "fd.formatAviSubtitle": "相容性優先的影片格式（不支援透明）",
       "fd.exportStart": "開始匯出",
       "fd.saveSlotsLabel": "存檔欄位（最多10個）",
-      "fd.saveTreeLabel": "存檔樹（保存次數不限）"
+      "fd.slot1": "欄位 1",
+      "fd.slot2": "欄位 2",
+      "fd.saveTreeLabel": "存檔樹（保存次數不限）",
+      "fd.treeNode1": "初稿",
+      "fd.treeNode2": "線稿修正",
+      "fd.treeNode3a": "配色A",
+      "fd.treeNode3b": "配色B"
     },
     "ko": {
       "fd.projectName": "프로젝트 이름",
@@ -157,7 +181,13 @@
       "fd.formatAviSubtitle": "호환성 중심의 동영상 형식(투명도 미지원)",
       "fd.exportStart": "내보내기 시작",
       "fd.saveSlotsLabel": "세이브 슬롯(최대 10개)",
-      "fd.saveTreeLabel": "세이브 트리(저장 횟수 제한 없음)"
+      "fd.slot1": "슬롯 1",
+      "fd.slot2": "슬롯 2",
+      "fd.saveTreeLabel": "세이브 트리(저장 횟수 제한 없음)",
+      "fd.treeNode1": "초안",
+      "fd.treeNode2": "선화 수정",
+      "fd.treeNode3a": "색상 A",
+      "fd.treeNode3b": "색상 B"
     },
     "fr": {
       "fd.projectName": "Nom du projet",
@@ -187,7 +217,13 @@
       "fd.formatAviSubtitle": "Format vidéo à compatibilité étendue (sans transparence)",
       "fd.exportStart": "Démarrer l'export",
       "fd.saveSlotsLabel": "Emplacements de sauvegarde (jusqu'à 10)",
-      "fd.saveTreeLabel": "Arbre de sauvegardes (illimité)"
+      "fd.slot1": "Emplacement 1",
+      "fd.slot2": "Emplacement 2",
+      "fd.saveTreeLabel": "Arbre de sauvegardes (illimité)",
+      "fd.treeNode1": "Premier jet",
+      "fd.treeNode2": "Retouche du trait",
+      "fd.treeNode3a": "Couleurs A",
+      "fd.treeNode3b": "Couleurs B"
     },
     "es": {
       "fd.projectName": "Nombre del proyecto",
@@ -217,7 +253,13 @@
       "fd.formatAviSubtitle": "Formato de video compatible con versiones antiguas (sin transparencia)",
       "fd.exportStart": "Iniciar exportación",
       "fd.saveSlotsLabel": "Ranuras de guardado (hasta 10)",
-      "fd.saveTreeLabel": "Árbol de guardado (ilimitado)"
+      "fd.slot1": "Ranura 1",
+      "fd.slot2": "Ranura 2",
+      "fd.saveTreeLabel": "Árbol de guardado (ilimitado)",
+      "fd.treeNode1": "Primer borrador",
+      "fd.treeNode2": "Ajuste de líneas",
+      "fd.treeNode3a": "Colores A",
+      "fd.treeNode3b": "Colores B"
     }
   };
   for (var lang in DATA) {

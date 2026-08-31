@@ -252,6 +252,21 @@
   overflow: hidden;
 }
 
+/* timeline_screen.dart _buildPreviewContent(): AppBar(戻る・undo等)の
+   直下にプレビュー本体が来る。タイムライン系モックアップでは
+   トップバーと再生コントロールの間にこの高さを抑えた版を挟む。 */
+.fd-canvas.fd-preview-mini {
+  height: 90px;
+  margin-top: var(--space-sm);
+}
+
+.fd-canvas.fd-preview-mini svg {
+  width: 60px;
+  height: 60px;
+  margin-inline: auto;
+  display: block;
+}
+
 .fd-canvas svg {
   width: 100%;
   height: 100%;
@@ -767,38 +782,6 @@
    特定の設定画面のピクセル再現ではなく、セーブスロット／セーブツリー／
    共有ファイル形式(.niashare)・引き継ぎファイル形式(.niatra)の考え方を
    示す概念図。 */
-.fd-slots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.fd-slot {
-  flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: var(--fd-panel);
-  color: var(--fd-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  border: 1px solid transparent;
-}
-
-.fd-slot.is-active {
-  border-color: var(--fd-accent);
-  color: var(--fd-accent);
-  font-weight: 700;
-}
-
-.fd-slot.is-more {
-  background: transparent;
-  color: var(--color-gray-500);
-}
-
 .fd-diagram-label {
   margin-top: var(--space-sm);
   font-size: var(--fs-small);
@@ -806,32 +789,109 @@
   opacity: 0.7;
 }
 
-.fd-tree {
+/* セーブスロット: 実際の画面(save_tree_screen.dart _SlotTile)は番号入りの
+   チップ(タイムラインのフレーム一覧と同じ見た目)ではなく、サムネイル+
+   スロット名+日時+保存/復元アイコンを横並びにしたリスト行(ListTile)。 */
+.fd-slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fd-slot-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: var(--fd-panel);
+}
+
+.fd-slot-thumb {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-gray-300);
+}
+
+.fd-slot-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fd-slot-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fd-text);
+}
+
+.fd-slot-date {
+  font-size: 0.7rem;
+  color: var(--color-gray-500);
+}
+
+.fd-slot-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  color: var(--fd-text);
+  opacity: 0.75;
+}
+
+.fd-slot-actions .ic {
+  width: 16px;
+  height: 16px;
+}
+
+/* セーブツリー: 実際の画面(_TreeConnectorPainter)は罫線を描画した
+   分岐グラフ(gitのコミットグラフに近い見た目)。├─└等の文字列ではなく、
+   ネストしたborder-leftで簡易的な分岐線を再現する。 */
+.fd-tree-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.8rem;
   color: var(--fd-text);
 }
 
-.fd-tree-row {
+.fd-tree-branch {
+  margin-left: 4px;
+  padding-left: 10px;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.18);
   display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: pre;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.fd-tree-node {
-  width: 9px;
-  height: 9px;
+.fd-tree-row2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fd-tree-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--fd-mark);
   flex-shrink: 0;
 }
 
-.fd-tree-node.is-branch {
+.fd-tree-dot.is-accent {
   background: var(--fd-accent);
+}
+
+.fd-tree-text {
+  flex: 1;
+}
+
+.fd-tree-date {
+  font-size: 0.7rem;
+  color: var(--color-gray-500);
 }
 
 .fd-share-formats {
