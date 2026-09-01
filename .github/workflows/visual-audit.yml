@@ -27,6 +27,9 @@ jobs:
           exit 1
       - name: Run autonomous section-by-section interaction audit
         run: node tests/autonomous-browser-audit.mjs
+      - name: Run deep per-section visual audit
+        if: always()
+        run: node tests/deep-section-audit.mjs
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
