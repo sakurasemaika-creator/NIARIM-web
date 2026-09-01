@@ -4,8 +4,28 @@
    共通のデザイン意図に揃える。
    ========================================================================== */
 
-/* Heroの画面再現図：BrushSizeSliderとツールバーは独立した暗い帯ではなく、
-   実アプリと同じくキャンバス上へ重ねて表示する。PC/SP共通。 */
+:root {
+  /* フッターで使う暗い赤茶をサイトの強い見出し色にも共有する。 */
+  --color-footer-brown: #3b2429;
+}
+
+/* Heroの画面再現図：外側の端末と内側画面を同じ9:16系で連動させる。 */
+.hero-visual {
+  aspect-ratio: 9 / 16;
+  max-width: 500px;
+  background: var(--color-footer-brown);
+}
+
+.hero-visual .frame-mock {
+  width: 88%;
+  height: 94%;
+  aspect-ratio: auto;
+  border-radius: 22px;
+  padding: 8px;
+  background: #201f27;
+  box-sizing: border-box;
+}
+
 .hero-visual .fd-brush-slider {
   position: relative;
   z-index: 2;
@@ -21,11 +41,15 @@
   box-shadow: none;
 }
 
+/* 内側UIはベゼルの内側いっぱいを使う。 */
+.hero-visual .fd-canvas {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 /* --------------------------------------------------------------------------
    Screen mock rendering
    8方向drop-shadowは使わず、SVG本体のstroke一回だけで縁取りする。
-   Material系24px viewBoxは1.65px、Font Awesome由来の消しゴムは576px
-   viewBoxなので同じ見た目になるよう専用値を使う。
    -------------------------------------------------------------------------- */
 .fd-icon-btn .ic,
 .fd-brush-opacity-ic {
@@ -37,13 +61,10 @@
   paint-order: stroke fill;
 }
 
-/* opacityアイコンはボタン外にあるため、上の共通縁取りを明示的に適用。 */
 .fd-brush-opacity-ic {
   stroke-width: 1.8px;
 }
 
-/* Font Awesome eraserはviewBoxが0 0 576 512で、24px系と同じstroke-widthでは
-   実表示時にほぼ見えない。表示サイズ換算で約1.6px相当になる値にする。 */
 .fd-icon-btn use[href$="#ic-eraser_fa"] {
   stroke: var(--fd-panel);
   stroke-width: 38px;
@@ -52,15 +73,17 @@
   paint-order: stroke fill;
 }
 
-/* 画面再現図はすべてスマートフォンを想起する9:16へ統一する。
-   個々のUI要素は変更せず、外形と収まりだけ統一。 */
+/* 画面再現図はスマートフォン型9:16へ統一し、中身も高さへ連動させる。
+   固定比率だけを付けて下側に空白を作らず、既存UIブロックを縦方向へ配分する。 */
 .feature-media {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.feature-media > .feature-diagram {
+.feature-media > .feature-diagram,
+.feature-section > .feature-diagram,
+.screenshot-card > .feature-diagram {
   width: min(100%, 360px);
   aspect-ratio: 9 / 16;
   min-height: 0;
@@ -68,16 +91,61 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-.hero-visual .frame-mock {
-  aspect-ratio: 9 / 16;
+/* キャンバスを持つ再現図は、余った縦方向を黒背景ではなくキャンバスへ渡す。 */
+.feature-diagram > .fd-canvas:not(.fd-preview-mini) {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 180px;
 }
 
-/* hero内部の.feature-diagramは9:16のframe-mockを100%埋めるため、
-   二重にaspect-ratioを指定しない。 */
+/* タイムライン等の短いプレビューも固定90pxのまま下に余白を残さず少し伸縮。 */
+.feature-diagram > .fd-preview-mini {
+  flex: 0 1 150px;
+  height: auto;
+  min-height: 90px;
+}
+
+/* 単独トラック中心の音声再現図はトラック面を縦方向へ広げる。 */
+.feature-diagram > .fd-audio-track:only-child {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* 保存・作業環境・書き出し等は要素間を画面高へ自然に配分する。 */
+.feature-diagram > .fd-slot-list,
+.feature-diagram > .fd-setting-list,
+.feature-diagram > .fd-export-options {
+  flex: 1 1 auto;
+}
+
+/* hero内部はframe-mockの高さを100%使うので二重aspect指定をしない。 */
 .hero-visual .feature-diagram {
+  width: 100%;
+  height: 100%;
   aspect-ratio: auto;
+  margin: 0;
+}
+
+/* アプリ画面紹介1枚目はヒーローと同じCanvas画面の見せ方へ揃える。 */
+.screenshot-scroller .screenshot-card:first-child .feature-diagram {
+  --fd-panel: #201f27;
+  --fd-text: #f5f1f0;
+  --fd-accent: #ff5c7a;
+  background: #201f27;
+  padding: 8px;
+  border-radius: 22px;
+}
+
+.screenshot-scroller .screenshot-card:first-child .fd-canvas {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  border-radius: 0;
 }
 
 /* 主要機能紹介パネルは背景色を交互にせず白で統一。 */
@@ -87,18 +155,20 @@
 }
 
 /* --------------------------------------------------------------------------
-   Typography hierarchy
-   Kuramubonはウェイト感が強いため、大見出しまで黒にすると圧が強い。
-   明るい面ではNIARIMロゴ由来のブラウンへ寄せ、本文との階層を色でも作る。
+   Footer + typography hierarchy
+   フッターはグラデーションを廃止して暗い赤茶一色。その色を明るい面の
+   大見出しにも使い、Kuramubonの太さを黒より柔らかく見せる。
    -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-footer-brown) !important;
+  background-image: none !important;
+}
+
 :where(h1, h2, h3, h4) {
-  color: var(--color-brand);
+  color: var(--color-footer-brown);
 }
 
-.hero-title {
-  color: var(--color-brand-dark);
-}
-
+.hero-title,
 .feature-copy h3,
 .section-head h2,
 .feature-section-head h2,
@@ -108,7 +178,7 @@
 .faq-header h1,
 .news-header h1,
 .legal-header h1 {
-  color: var(--color-brand);
+  color: var(--color-footer-brown);
 }
 
 /* 暗色面では可読性を優先して白を維持。 */
@@ -120,8 +190,7 @@
   color: var(--color-white);
 }
 
-/* SPでは1カラム化とボタン全幅化だけを行い、コピーの方向性やブランド色は
-   PC版から変えない。 */
+/* SPでは1カラム化とボタン全幅化だけを行い、コピーの方向性やブランド色はPC版から変えない。 */
 @media (max-width: 900px) {
   .hero-copy {
     text-align: left;
@@ -149,6 +218,11 @@
 
   .hero .btn-primary:hover {
     background: var(--color-accent-dark);
+  }
+
+  .hero-visual {
+    width: min(100%, 390px);
+    margin-inline: auto;
   }
 
   /* SPでも黒帯の機能名marqueeはPCと同様に流す。 */
