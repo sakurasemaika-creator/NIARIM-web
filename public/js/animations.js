@@ -1,6 +1,7 @@
 /**
  * NIARIM公式サイト アニメーション制御
  * 見た目は維持しつつ、常時rAF・mousemoveごとのlayout計測を避ける。
+ * アプリ画面の再現図は情報確認を優先し、スクロール演出を付けず常時表示する。
  */
 (function () {
   "use strict";
@@ -16,12 +17,40 @@
     return window.matchMedia && window.matchMedia("(any-hover: hover)").matches;
   }
 
+  /**
+   * アプリ画面の再現図を含むコンテナかどうかを判定する。
+   * 親要素に .reveal が付いている場合でも、画面図は最初から表示して
+   * スクロール時のfade/slide対象にしない。
+   */
+  function containsScreenMock(el) {
+    if (el.matches && el.matches(".screenshot-scroller")) return true;
+    return !!(
+      el.querySelector &&
+      el.querySelector(
+        ".feature-diagram, .frame-mock, [class*='-diagram'], [class*='-mock']"
+      )
+    );
+  }
+
   function initReveal() {
     var targets = document.querySelectorAll(".reveal");
     if (!targets.length) return;
 
+    var animatedTargets = [];
+
+    targets.forEach(function (el) {
+      if (containsScreenMock(el)) {
+        el.classList.add("is-visible");
+        el.style.transitionDelay = "";
+        return;
+      }
+      animatedTargets.push(el);
+    });
+
+    if (!animatedTargets.length) return;
+
     if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
-      targets.forEach(function (el) {
+      animatedTargets.forEach(function (el) {
         el.classList.add("is-visible");
       });
       return;
@@ -40,14 +69,14 @@
       { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
-    targets.forEach(function (el) {
+    animatedTargets.forEach(function (el) {
       observer.observe(el);
     });
   }
 
   function initStaggerGrids() {
     var grids = document.querySelectorAll(
-      ".spec-grid, .screenshot-scroller, .community-gallery, .faq-list, .pricing-list"
+      ".spec-grid, .community-gallery, .faq-list, .pricing-list"
     );
     if (!grids.length) return;
 
