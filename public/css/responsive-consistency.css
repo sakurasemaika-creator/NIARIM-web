@@ -47,6 +47,25 @@
   min-height: 0;
 }
 
+/* ヒーローから複製した再現図は、元と同一構造のまま各掲載枠へ収める。 */
+.hero-visual-reuse {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-inline: auto;
+  justify-self: center;
+}
+
+#features .feature-row:first-of-type .feature-media,
+.screenshot-scroller .screenshot-card:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenshot-scroller .screenshot-card:first-child .hero-visual-reuse {
+  width: 100%;
+}
+
 /* --------------------------------------------------------------------------
    Screen mock rendering
    8方向drop-shadowは使わず、SVG本体のstroke一回だけで縁取りする。
@@ -131,23 +150,6 @@
   margin: 0;
 }
 
-/* アプリ画面紹介1枚目はヒーローと同じCanvas画面の見せ方へ揃える。 */
-.screenshot-scroller .screenshot-card:first-child .feature-diagram {
-  --fd-panel: #201f27;
-  --fd-text: #f5f1f0;
-  --fd-accent: #ff5c7a;
-  background: #201f27;
-  padding: 8px;
-  border-radius: 22px;
-}
-
-.screenshot-scroller .screenshot-card:first-child .fd-canvas {
-  flex: 1 1 auto;
-  height: auto;
-  min-height: 0;
-  border-radius: 0;
-}
-
 /* 主要機能紹介パネルは背景色を交互にせず白で統一。 */
 .feature-row,
 .feature-row:nth-child(even) {
@@ -190,6 +192,16 @@
   color: var(--color-white);
 }
 
+/* ページ下部の「アプリをダウンロード」もヒーローと同じブランドCTA色に統一。 */
+.final-cta .btn-primary {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.final-cta .btn-primary:hover {
+  background: var(--color-accent-dark);
+}
+
 /* SPでは1カラム化とボタン全幅化だけを行い、コピーの方向性やブランド色はPC版から変えない。 */
 @media (max-width: 900px) {
   .hero-copy {
@@ -223,6 +235,10 @@
   .hero-visual {
     width: min(100%, 390px);
     margin-inline: auto;
+  }
+
+  .hero-visual-reuse {
+    width: min(100%, 340px);
   }
 
   /* SPでも黒帯の機能名marqueeはPCと同様に流す。 */
