@@ -43,9 +43,10 @@
 .pricing-price {
   margin-top: var(--space-sm);
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: baseline;
   gap: 0.4rem;
+  white-space: nowrap;
 }
 
 .pricing-price .amount {
@@ -60,12 +61,17 @@
   color: var(--color-text-muted);
   font-family: var(--font-serif);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し
-   数字の途中で改行されないようにする */
+   金額と単位を一まとまりのまま収める。 */
 .pricing-plan-option .pricing-price .amount {
-  font-size: clamp(1.35rem, 6vw, 1.9rem);
+  font-size: clamp(1.25rem, 4.6vw, 1.9rem);
+}
+
+.pricing-plan-option .pricing-price .unit {
+  font-size: clamp(0.68rem, 1.8vw, var(--fs-small));
 }
 
 /* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、
@@ -106,6 +112,7 @@
   padding: var(--space-md);
   border-radius: var(--radius-md);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
+  min-width: 0;
 }
 
 .pricing-plan-option-label {
