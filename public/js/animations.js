@@ -45,55 +45,6 @@
     });
   }
 
-  function initParallaxTilt() {
-    var el = document.querySelector("[data-parallax]");
-    if (!el || prefersReducedMotion() || !canHover()) return;
-
-    var maxTilt = 6;
-    var rect = null;
-    var pointerX = 0;
-    var pointerY = 0;
-    var rafId = 0;
-
-    function render() {
-      rafId = 0;
-      if (!rect) rect = el.getBoundingClientRect();
-      var x = (pointerX - rect.left) / rect.width - 0.5;
-      var y = (pointerY - rect.top) / rect.height - 0.5;
-      el.style.transform =
-        "perspective(1200px) rotateX(" +
-        (-y * maxTilt).toFixed(2) +
-        "deg) rotateY(" +
-        (x * maxTilt).toFixed(2) +
-        "deg)";
-    }
-
-    el.addEventListener("mouseenter", function () {
-      rect = el.getBoundingClientRect();
-    });
-
-    el.addEventListener("mousemove", function (event) {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      if (!rafId) rafId = requestAnimationFrame(render);
-    });
-
-    el.addEventListener("mouseleave", function () {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = 0;
-      rect = null;
-      el.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
-    });
-
-    window.addEventListener(
-      "resize",
-      function () {
-        rect = null;
-      },
-      { passive: true }
-    );
-  }
-
   function initStaggerGrids() {
     var grids = document.querySelectorAll(
       ".spec-grid, .screenshot-scroller, .community-gallery, .faq-list, .pricing-list"
@@ -183,8 +134,8 @@
   }
 
   /**
-   * ペン先カーソル。以前はページを開いている限りrAFを永久実行していた。
-   * 現在はマウス移動中と追従が収束するまでだけ描画し、静止時・非表示時は停止する。
+   * ペン先カーソル。マウス移動中と追従が収束するまでだけ描画し、
+   * 静止時・非表示時はrequestAnimationFrameを停止する。
    */
   function initCursorOrbit() {
     if (prefersReducedMotion()) return;
@@ -358,7 +309,6 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
-    initParallaxTilt();
     initStaggerGrids();
     initMagneticButtons();
     initCursorOrbit();
