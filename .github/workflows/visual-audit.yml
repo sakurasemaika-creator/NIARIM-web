@@ -1,0 +1,37 @@
+name: Visual interaction audit
+
+on:
+  push:
+    branches: [dev_branch]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
+          echo $! > /tmp/niarim-http.pid
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/niarim-http.log
+          exit 1
+      - name: Run interaction audit
+        run: node tests/visual-audit.mjs
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-audit
+          path: artifacts/visual-audit/
+          if-no-files-found: error
+          retention-days: 14
