@@ -1,296 +1,66 @@
 /* ========================================================================== 
-   NIARIM responsive consistency fixes
-   PC/SPでレイアウト上必要な差だけを残し、色・配置方針・画面再現図の見え方は
-   共通のデザイン意図に揃える。
+   NIARIM final responsive / brand-quality layer
+   - PC/SPで必要な差だけを残す
+   - NIARIMの色・Kuramubon・フレーム/タイムライン感を優先
+   - JSを増やさず、現代CSSで軽量に品質を上げる
    ========================================================================== */
 
 :root {
   --color-footer-brown: #3b2429;
-}
-
-.hero-visual {
-  aspect-ratio: 9 / 16;
-  max-width: 500px;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  overflow: visible;
-}
-
-.hero-visual::before {
-  content: none !important;
-  display: none !important;
-}
-
-.hero-visual .frame-mock {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
-  padding: 0;
-  border: 6px solid var(--color-ink);
-  border-radius: var(--radius-lg);
-  background: #201f27;
-  box-shadow: var(--shadow-md);
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.hero-visual .fd-brush-slider {
-  position: relative;
-  z-index: 2;
-  margin-top: -52px;
-  background: transparent;
-}
-
-.hero-visual .fd-toolbar {
-  position: relative;
-  z-index: 2;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
-
-.hero-visual .fd-canvas {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-.hero-visual-reuse {
-  width: min(100%, 360px);
-  max-width: 360px;
-  margin-inline: auto;
-  justify-self: center;
-}
-
-.feature-media:has(.hero-visual-reuse) {
-  aspect-ratio: auto;
-  background: var(--color-white);
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  overflow: visible;
-  opacity: 1;
-  clip-path: none;
-  transform: none;
-  transition: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#features .feature-row .feature-media,
-.screenshot-scroller .screenshot-card:first-child {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.screenshot-scroller .screenshot-card {
-  aspect-ratio: 9 / 16;
-}
-
-.screenshot-scroller .screenshot-card:first-child {
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.screenshot-scroller .screenshot-card:first-child .hero-visual-reuse {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-}
-
-.fd-icon-btn .ic,
-.fd-brush-opacity-ic {
-  filter: none !important;
-  stroke: var(--fd-panel);
-  stroke-width: 1.65px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  paint-order: stroke fill;
-}
-
-.fd-brush-opacity-ic {
-  stroke-width: 1.8px;
-}
-
-.fd-icon-btn use[href$="#ic-eraser_fa"] {
-  stroke: var(--fd-panel);
-  stroke-width: 38px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  paint-order: stroke fill;
-}
-
-.feature-media {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.feature-row .feature-media:has(.feature-diagram),
-.feature-row .feature-media:has(.hero-visual-reuse) {
-  background: var(--color-white) !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-}
-
-.feature-media > .feature-diagram,
-.feature-section > .feature-diagram,
-.screenshot-card > .feature-diagram {
-  width: min(100%, 360px);
-  aspect-ratio: 9 / 16;
-  min-height: 0;
-  margin-inline: auto;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background-clip: padding-box;
-}
-
-.feature-diagram > .fd-canvas:not(.fd-preview-mini) {
-  flex: 1 1 auto;
-  height: auto;
-  min-height: 180px;
-}
-
-.feature-diagram > .fd-preview-mini {
-  flex: 0 1 150px;
-  height: auto;
-  min-height: 90px;
-}
-
-.feature-diagram > .fd-audio-track:only-child {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-}
-
-.feature-diagram > .fd-slot-list,
-.feature-diagram > .fd-setting-list,
-.feature-diagram > .fd-export-options {
-  flex: 1 1 auto;
-}
-
-.hero-visual .feature-diagram {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
-  margin: 0;
-}
-
-.feature-row,
-.feature-row:nth-child(even) {
-  background: var(--color-white);
-}
-
-.site-footer {
-  background: var(--color-footer-brown) !important;
-  background-image: none !important;
-}
-
-:where(h1, h2, h3, h4) {
-  color: var(--color-footer-brown);
-}
-
-.hero-title,
-.feature-copy h3,
-.section-head h2,
-.feature-section-head h2,
-.about-hero h1,
-.features-header h1,
-.help-header h1,
-.faq-header h1,
-.news-header h1,
-.legal-header h1 {
-  color: var(--color-footer-brown);
-}
-
-.section-dark :where(h1, h2, h3, h4),
-.pricing-card.is-premium :where(h1, h2, h3, h4),
-.download-panel :where(h1, h2, h3, h4),
-.about-cta :where(h1, h2, h3, h4),
-.site-footer :where(h1, h2, h3, h4) {
-  color: var(--color-white);
-}
-
-.hero .btn-primary,
-.final-cta .btn-primary {
-  background: var(--color-accent);
-  color: var(--color-white);
-}
-
-.hero .btn-primary:hover,
-.final-cta .btn-primary:hover {
-  background: var(--color-accent-dark);
-}
-
-body .final-cta .hero-actions .btn.btn-primary {
-  background: var(--color-accent) !important;
-  color: var(--color-white) !important;
-}
-
-body .final-cta .hero-actions .btn.btn-primary:hover {
-  background: var(--color-accent-dark) !important;
-}
-
-@media (max-width: 900px) {
-  .hero-copy { text-align: left; }
-  .hero-title { margin-inline: 0; }
-  .hero-subtitle,
-  .hero-lead,
-  .hero-bridge { margin-left: 0; margin-right: 0; }
-  .hero-actions { justify-content: flex-start; }
-  .hero-visual { width: min(100%, 390px); margin-inline: auto; }
-  .hero-visual-reuse { width: min(100%, 340px); }
-  .screenshot-scroller .screenshot-card:first-child .hero-visual-reuse { width: 100%; height: 100%; }
-  .marquee-track { animation: marquee-scroll 32s linear infinite !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none !important; }
-}
-
-/* ========================================================================== 
-   NIARIM editorial system
-   外部サイトからは余白・情報階層・境界線・密度の「技術」だけを採用する。
-   配色・書体・モチーフ・選択表現はNIARIM固有のものを使う。
-   ========================================================================== */
-
-:root {
   --niarim-paper: #fffaf8;
   --niarim-surface: #fffdfc;
   --niarim-soft: #f8f3f1;
   --niarim-ink: #28242c;
   --niarim-muted: #746d71;
-  --niarim-line: rgba(59, 36, 41, 0.14);
-  --niarim-line-strong: rgba(59, 36, 41, 0.24);
-  --niarim-frame-tint: rgba(255, 92, 122, 0.08);
-  --niarim-radius: 16px;
+  --niarim-line: rgba(59, 36, 41, .14);
+  --niarim-line-strong: rgba(59, 36, 41, .24);
+  --niarim-accent-soft: rgba(255, 92, 122, .08);
+  --niarim-accent-faint: rgba(255, 92, 122, .045);
+  --niarim-radius: 18px;
+  --niarim-device-radius: 22px;
+  --niarim-shadow-soft: 0 16px 44px rgba(59, 36, 41, .075);
 }
 
-body,
-main {
-  background: var(--niarim-paper);
+/* --------------------------------------------------------------------------
+   Background depth
+   静的なCSSグラデーションのみ。画像・動画・WebGL・常時アニメーションなし。
+   -------------------------------------------------------------------------- */
+body {
+  background:
+    radial-gradient(circle at 7% 8%, rgba(255, 92, 122, .075), transparent 25rem),
+    radial-gradient(circle at 94% 25%, rgba(59, 36, 41, .052), transparent 31rem),
+    radial-gradient(circle at 14% 72%, rgba(255, 92, 122, .038), transparent 27rem),
+    var(--niarim-paper);
 }
 
-/* Header — 形は静かに、NIARIMのピンクを現在地として使う。 */
+main { background: transparent; }
+
+.section:not(.section-tint):not(.section-dark),
+.hero,
+.final-cta,
+:where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) {
+  background-color: transparent;
+}
+
+.section-tint {
+  background: rgba(248, 243, 241, .88);
+  border-block: 1px solid var(--niarim-line);
+}
+
+.section-dark { background: var(--niarim-ink); }
+
+/* --------------------------------------------------------------------------
+   Header / typography
+   -------------------------------------------------------------------------- */
 .site-header {
   border-bottom: 1px solid var(--niarim-line);
   box-shadow: none;
 }
 
 .site-header::before {
-  background: rgba(255, 250, 248, 0.95);
-  backdrop-filter: blur(14px) saturate(125%);
-  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  background: rgba(255, 250, 248, .965);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 @media (min-width: 1181px) {
@@ -306,7 +76,7 @@ main {
   .site-header::before { border-radius: 0; }
   .site-header.is-scrolled {
     border-color: var(--niarim-line-strong);
-    box-shadow: 0 8px 24px rgba(59, 36, 41, 0.04);
+    box-shadow: 0 8px 24px rgba(59, 36, 41, .045);
   }
   .site-header .container { width: min(calc(100% - 48px), 1320px); }
 }
@@ -317,57 +87,78 @@ main {
   background: var(--color-accent);
 }
 
-/* Typography — Kuramubonを抑え込まず、本文との落差でNIARIMらしさを出す。 */
 :where(h1, h2, h3, h4) {
-  letter-spacing: -0.018em;
+  color: var(--color-footer-brown);
+  letter-spacing: -.018em;
+  text-wrap: balance;
 }
 
 :where(p, li) {
   line-height: 1.82;
 }
 
+:where(p) { text-wrap: pretty; }
+
+.section-dark :where(h1, h2, h3, h4),
+.pricing-card.is-premium :where(h1, h2, h3, h4),
+.download-panel :where(h1, h2, h3, h4),
+.about-cta :where(h1, h2, h3, h4),
+.site-footer :where(h1, h2, h3, h4) {
+  color: #fff;
+}
+
 .section-head,
-.about-hero,
-.features-header,
-.help-header,
-.faq-header,
-.news-header,
-.legal-header {
-  max-width: 760px;
+.feature-section-head {
+  position: relative;
+  z-index: 0;
 }
 
-.eyebrow {
-  min-height: 0;
-  padding: 0.32rem 0.72rem;
-  border: 1px solid rgba(255, 92, 122, 0.2);
-  border-radius: 999px;
-  background: rgba(255, 92, 122, 0.065);
-  box-shadow: none;
-  color: var(--color-accent-dark);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-/* フレーム一覧を想起させるNIARIM固有の短い3コマ記号。 */
 .section-head::before,
 .feature-section-head::before {
   content: "";
   display: block;
   width: 42px;
   height: 8px;
-  margin-bottom: 0.9rem;
-  background:
-    linear-gradient(90deg,
-      var(--color-accent) 0 10px,
-      transparent 10px 15px,
-      rgba(255,92,122,.48) 15px 25px,
-      transparent 25px 30px,
-      rgba(59,36,41,.28) 30px 40px);
+  margin-bottom: .9rem;
   border-radius: 2px;
+  background: linear-gradient(90deg,
+    var(--color-accent) 0 10px,
+    transparent 10px 15px,
+    rgba(255, 92, 122, .48) 15px 25px,
+    transparent 25px 30px,
+    rgba(59, 36, 41, .28) 30px 40px);
 }
 
-/* Buttons — ピンクのCTAを主役にし、光沢エフェクトは使わない。 */
+.section-head::after,
+.feature-section-head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -1rem;
+  top: -.9rem;
+  width: min(21rem, 72vw);
+  height: 5.3rem;
+  border-radius: 1.2rem;
+  background: linear-gradient(115deg, rgba(255, 92, 122, .05), transparent 78%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  min-height: 0;
+  padding: .32rem .72rem;
+  border: 1px solid rgba(255, 92, 122, .2);
+  border-radius: 999px;
+  background: rgba(255, 92, 122, .065);
+  box-shadow: none;
+  color: var(--color-accent-dark);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
 .btn {
   min-height: 46px;
   padding-inline: 1.4rem;
@@ -380,7 +171,7 @@ main {
 
 .btn-primary,
 .btn-accent {
-  box-shadow: 0 7px 18px rgba(255, 92, 122, 0.16);
+  box-shadow: 0 7px 18px rgba(255, 92, 122, .16);
 }
 
 .btn-outline {
@@ -388,19 +179,34 @@ main {
   border-color: var(--niarim-line-strong);
 }
 
-/* Hero — 端末背面に装飾を置かず、コピー側にだけブランドの温度を残す。 */
+.hero .btn-primary,
+.final-cta .btn-primary,
+body .final-cta .hero-actions .btn.btn-primary,
+body .hero .hero-actions .btn.btn-primary {
+  background: var(--color-accent) !important;
+  color: #fff !important;
+}
+
+.hero .btn-primary:hover,
+.final-cta .btn-primary:hover,
+body .final-cta .hero-actions .btn.btn-primary:hover {
+  background: var(--color-accent-dark) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Hero / device
+   -------------------------------------------------------------------------- */
 .hero {
   min-height: auto;
-  padding-top: clamp(7.25rem, 11vw, 9.5rem);
-  padding-bottom: clamp(5rem, 8vw, 7.25rem);
-  background: var(--niarim-paper);
+  padding-top: clamp(7rem, 10vw, 9.2rem);
+  padding-bottom: clamp(4.8rem, 7vw, 6.8rem);
   border-bottom: 1px solid var(--niarim-line);
 }
 
 .hero::before { content: none; display: none; }
 
 .hero .container {
-  grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+  grid-template-columns: minmax(0, .92fr) minmax(390px, 1.08fr);
   gap: clamp(3rem, 7vw, 7rem);
 }
 
@@ -419,25 +225,90 @@ main {
 }
 
 .hero-lead,
-.hero-bridge {
-  color: var(--niarim-muted);
-}
+.hero-bridge { color: var(--niarim-muted); }
 
 .hero-bridge {
   max-width: 43ch;
   padding-left: .85rem;
-  border-left: 2px solid rgba(255,92,122,.28);
+  border-left: 2px solid rgba(255, 92, 122, .28);
 }
 
-.hero-visual,
+.hero-visual {
+  aspect-ratio: 9 / 16;
+  width: min(100%, 420px);
+  max-width: 420px;
+  margin-inline: auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  contain: layout style;
+}
+
+.hero-visual::before,
 .hero-visual::after {
+  content: none !important;
+  display: none !important;
+}
+
+.hero-visual .frame-mock {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  padding: 0;
+  border: 6px solid var(--color-ink);
+  border-radius: var(--niarim-device-radius);
+  background: #201f27;
+  box-shadow: 0 22px 55px rgba(40, 36, 44, .13);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-visual .fd-canvas {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.hero-visual .fd-brush-slider {
+  position: relative;
+  z-index: 2;
+  margin-top: -52px;
+  background: transparent;
+}
+
+.hero-visual .fd-toolbar {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 0;
   box-shadow: none;
 }
 
-.hero-visual::after { content: none; display: none; }
-.hero-visual .frame-mock { width: 100%; border-radius: 18px; box-shadow: 0 22px 55px rgba(40,36,44,.13); }
+.hero-visual-reuse {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-inline: auto;
+  justify-self: center;
+}
 
-/* 黒帯はNIARIMの強い区切りとして維持する。 */
+.feature-media:has(.hero-visual-reuse) {
+  aspect-ratio: auto;
+  padding: 0;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  opacity: 1;
+  clip-path: none;
+  transform: none;
+  transition: none;
+}
+
+/* --------------------------------------------------------------------------
+   Marquee
+   -------------------------------------------------------------------------- */
 .marquee-section {
   padding-block: .85rem;
   background: var(--niarim-ink);
@@ -450,19 +321,152 @@ main {
   letter-spacing: .055em;
 }
 
-/* Section surfaces */
-.section { padding-block: clamp(4.25rem, 7vw, 6.75rem); }
-.section-tint {
-  background: var(--niarim-soft);
-  border-block: 1px solid var(--niarim-line);
+.marquee-track { animation: marquee-scroll 32s linear infinite !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
 }
-.section-dark { background: var(--niarim-ink); }
-.section-head { margin-bottom: clamp(2rem, 4vw, 3.2rem); }
+
+/* --------------------------------------------------------------------------
+   Home major features
+   白統一は維持しつつ、左右の余白と独立した展示面を確保。
+   -------------------------------------------------------------------------- */
+.feature-row,
+.feature-row:nth-child(even) {
+  container-type: inline-size;
+  margin-block: clamp(.75rem, 1.6vw, 1.25rem);
+  padding-block: clamp(2.7rem, 5vw, 4.8rem);
+  padding-inline: clamp(1.75rem, 4.8vw, 4.5rem);
+  gap: clamp(2.5rem, 6.5vw, 6rem);
+  background: rgba(255, 255, 255, .94) !important;
+  border: 1px solid var(--niarim-line);
+  border-radius: clamp(20px, 2.2vw, 30px);
+  box-shadow: var(--niarim-shadow-soft);
+}
+
+.feature-row:first-child { border-top: 1px solid var(--niarim-line); }
+
+.feature-copy {
+  min-width: 0;
+  padding-inline: clamp(.1rem, .5vw, .45rem);
+}
+
+.feature-copy h3 {
+  font-size: clamp(1.85rem, 3vw, 2.8rem);
+  line-height: 1.08;
+}
+
+.feature-tags li {
+  background: var(--niarim-accent-soft);
+  border: 1px solid rgba(255, 92, 122, .14);
+  color: var(--color-footer-brown);
+}
+
+.feature-media {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-row .feature-media:has(.feature-diagram),
+.feature-row .feature-media:has(.hero-visual-reuse) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* --------------------------------------------------------------------------
+   App screen gallery
+   全カードを同じ9:16端末形状・同じ角丸・同じベゼル感に統一。
+   -------------------------------------------------------------------------- */
+.screenshot-scroller {
+  gap: clamp(.9rem, 2vw, 1.35rem);
+  scroll-padding-inline: var(--container-padding);
+  overscroll-behavior-inline: contain;
+}
+
+.screenshot-card {
+  aspect-ratio: 9 / 16 !important;
+  border: 5px solid var(--color-ink) !important;
+  border-radius: var(--niarim-device-radius) !important;
+  background: var(--color-ink);
+  overflow: hidden !important;
+  box-shadow: 0 16px 34px rgba(40, 36, 44, .11) !important;
+  contain: layout paint;
+  isolation: isolate;
+}
+
+.screenshot-card:first-child {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.screenshot-card:first-child .hero-visual-reuse {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+/* 3枚目以降を含むコード再現画面は、外カード内で二重ベゼルにしない。 */
+.screenshot-card > .feature-diagram,
+.screenshot-card > .fd-app-screen,
+.screenshot-card > .fd-route-screen,
+.screenshot-card.is-code-verified-mock > .feature-diagram {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: calc(var(--niarim-device-radius) - 5px) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  background-clip: padding-box;
+}
+
+.feature-media > .feature-diagram,
+.feature-section > .feature-diagram {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  min-height: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+
+.fd-icon-btn .ic,
+.fd-brush-opacity-ic {
+  filter: none !important;
+  stroke: var(--fd-panel);
+  stroke-width: 1.65px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+.fd-brush-opacity-ic { stroke-width: 1.8px; }
+
+.fd-icon-btn use[href$="#ic-eraser_fa"] {
+  stroke: var(--fd-panel);
+  stroke-width: 38px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+/* --------------------------------------------------------------------------
+   Secondary pages / cards
+   -------------------------------------------------------------------------- */
+.section { padding-block: clamp(4.25rem, 7vw, 6.75rem); }
+.section-head { max-width: 760px; margin-bottom: clamp(2rem, 4vw, 3.2rem); }
 .section-head h2 { font-size: clamp(2rem, 3.4vw, 3.05rem); line-height: 1.13; }
 
 :where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) {
+  max-width: 760px;
   padding-block: clamp(6.5rem, 10vw, 8rem) clamp(3rem, 5vw, 4.5rem);
-  background: transparent;
 }
 
 :where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) h1 {
@@ -470,7 +474,6 @@ main {
   line-height: 1.03;
 }
 
-/* Cards — 1px境界は技術として使い、角とアクセントはNIARIMに寄せる。 */
 .intro-card,
 .spec-item,
 .pricing-card,
@@ -484,7 +487,6 @@ main {
 .contact-personal-note {
   border-color: var(--niarim-line);
   border-radius: var(--niarim-radius);
-  box-shadow: none;
 }
 
 .intro-card,
@@ -493,7 +495,14 @@ main {
 .community-card,
 .faq-item,
 .news-card {
-  background: var(--niarim-surface);
+  background: rgba(255, 253, 252, .94);
+}
+
+.intro-card,
+.community-card,
+.news-card,
+.faq-item {
+  box-shadow: 0 10px 28px rgba(59, 36, 41, .045);
 }
 
 .intro-card {
@@ -513,42 +522,14 @@ main {
 .intro-card::after,
 .pricing-card.is-premium::after { content: none; display: none; }
 
-.intro-card .icon,
-.feature-section-head .feature-section-icon {
-  box-shadow: none;
-  border-radius: 11px;
-}
-
-/* Home feature showcase — 全て白。画面再現図を作品のように展示する。 */
-.feature-row,
-.feature-row:nth-child(even) {
-  margin-block: 0;
-  padding: clamp(2.6rem, 5vw, 4.8rem) 0;
-  background: #fff !important;
-  border: 0;
-  border-bottom: 1px solid var(--niarim-line);
-  border-radius: 0;
-  gap: clamp(2.5rem, 7vw, 6.5rem);
-}
-
-.feature-row:first-child { border-top: 1px solid var(--niarim-line); }
-.feature-copy h3 { font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.08; }
-
-.feature-tags li {
-  background: rgba(255,92,122,.055);
-  border: 1px solid rgba(255,92,122,.14);
-  color: var(--color-footer-brown);
-}
-
-/* ナビ・フィルタ類は軽くするが、activeはピンクで明確に。 */
 .feature-nav {
   top: calc(var(--header-height) + 10px);
   width: min(calc(100% - 24px), 1140px);
   padding: .55rem;
   border: 1px solid var(--niarim-line);
   border-radius: 12px;
-  background: rgba(255,250,248,.97);
-  box-shadow: 0 10px 28px rgba(59,36,41,.045);
+  background: rgba(255, 250, 248, .97);
+  box-shadow: 0 10px 28px rgba(59, 36, 41, .045);
 }
 
 .feature-nav a {
@@ -560,7 +541,7 @@ main {
 
 .feature-nav a:hover,
 .feature-nav a.is-active {
-  background: var(--niarim-frame-tint);
+  background: var(--niarim-accent-soft);
   color: var(--color-footer-brown);
 }
 
@@ -569,19 +550,22 @@ main {
   border-bottom: 1px solid var(--niarim-line);
 }
 
-.spec-grid { gap: .7rem; }
-.spec-item { padding: clamp(1.1rem, 2vw, 1.55rem); }
-.spec-item::before { width: 3px; border-radius: 999px; background: var(--color-accent); opacity: .7; }
-
-/* Premium — 濃色はNIARIMの黒、ピンクを選択色として使う。 */
-.pricing-card { border-radius: 17px; }
-.pricing-card.is-premium { background: var(--niarim-ink); box-shadow: none; }
-.pricing-plan-option {
-  background: rgba(255,255,255,.055);
-  border-color: rgba(255,255,255,.12);
+.spec-grid { gap: .8rem; }
+.spec-item { padding: clamp(1.15rem, 2vw, 1.6rem); }
+.spec-item::before {
+  width: 3px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  opacity: .7;
 }
 
-/* Community */
+.pricing-card { border-radius: 18px; }
+.pricing-card.is-premium { background: var(--niarim-ink); box-shadow: none; }
+.pricing-plan-option {
+  background: rgba(255, 255, 255, .055);
+  border-color: rgba(255, 255, 255, .12);
+}
+
 .community-tabs {
   justify-content: flex-start;
   gap: .4rem;
@@ -600,9 +584,7 @@ main {
 }
 
 .community-gallery { gap: .9rem; }
-.community-gallery .community-card:nth-child(1) { border-color: var(--niarim-line); box-shadow: none; }
 
-/* FAQ / News / Contact */
 .faq-list,
 .news-list { gap: .7rem; }
 .faq-question { min-height: 56px; }
@@ -620,44 +602,134 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(255,92,122,.1);
+  box-shadow: 0 0 0 3px rgba(255, 92, 122, .1);
 }
 
-.contact-panel { background: var(--niarim-soft); }
+.contact-panel { background: rgba(248, 243, 241, .9); }
 .about-cta { background: var(--niarim-ink); box-shadow: none; }
-
-.final-cta {
-  border-top: 1px solid var(--niarim-line);
-  background: var(--niarim-paper);
-}
-
-body .final-cta .hero-actions .btn.btn-primary,
-body .hero .hero-actions .btn.btn-primary {
-  background: var(--color-accent) !important;
-  color: #fff !important;
-}
+.final-cta { border-top: 1px solid var(--niarim-line); }
 
 .site-footer {
   background: var(--color-footer-brown) !important;
   background-image: none !important;
 }
 
+/* --------------------------------------------------------------------------
+   Modern CSS progressive enhancement
+   -------------------------------------------------------------------------- */
+
+/* color-mix(): 対応ブラウザだけ、より自然なブランド混色へ。 */
+@supports (color: color-mix(in srgb, white 50%, black)) {
+  .section-tint {
+    background: color-mix(in srgb, var(--niarim-paper) 76%, var(--color-footer-brown) 4%);
+  }
+  .feature-tags li,
+  .feature-nav a:hover,
+  .feature-nav a.is-active {
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+  .intro-card,
+  .community-card,
+  .faq-item,
+  .news-card {
+    border-color: color-mix(in srgb, var(--color-footer-brown) 14%, transparent);
+  }
+}
+
+/* Container Query: タイル自身の幅で再構成。ページ幅依存より堅牢。 */
+@supports (container-type: inline-size) {
+  .feature-row { container-type: inline-size; }
+  @container (max-width: 760px) {
+    .feature-copy { padding-inline: 0; }
+    .feature-media { width: 100%; }
+  }
+}
+
+/* 画面外の重量級セクションは必要になるまでレイアウト/描画を省略。 */
+@supports (content-visibility: auto) {
+  .feature-section,
+  .community-gallery,
+  .faq-list,
+  .news-list {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+}
+
+/* focus-visibleでキーボード操作時だけ明確なリング。 */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid rgba(255, 92, 122, .28);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
-  .hero { padding-top: 6.25rem; padding-bottom: 4.25rem; }
-  .hero .container { grid-template-columns: 1fr; gap: 3.25rem; }
-  .hero-title { font-size: clamp(3rem, 15vw, 4.65rem); }
+  .hero {
+    padding-top: 6.2rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+
+  .hero-copy { text-align: left; }
+  .hero-title {
+    margin-inline: 0;
+    font-size: clamp(3rem, 15vw, 4.65rem);
+  }
+  .hero-subtitle,
+  .hero-lead,
+  .hero-bridge { margin-left: 0; margin-right: 0; }
+  .hero-actions { justify-content: flex-start; }
   .hero-visual { width: min(100%, 360px); }
+  .hero-visual-reuse { width: min(100%, 340px); }
+
   .section { padding-block: 4rem; }
+
   .feature-row,
-  .feature-row:nth-child(even) { padding-block: 3.25rem; gap: 2.25rem; }
-  .feature-nav { border-radius: 10px; box-shadow: none; }
+  .feature-row:nth-child(even) {
+    padding: 2.6rem clamp(1.25rem, 5vw, 2rem);
+    gap: 2.25rem;
+    border-radius: 22px;
+  }
+
+  .feature-nav {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
   .community-tabs {
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: .25rem;
     scrollbar-width: none;
+    overscroll-behavior-inline: contain;
   }
   .community-tabs::-webkit-scrollbar { display: none; }
   .community-tabs button { flex: 0 0 auto; }
+}
+
+@media (max-width: 520px) {
+  .feature-row,
+  .feature-row:nth-child(even) {
+    padding-inline: 1.15rem;
+    margin-inline: -.1rem;
+  }
+
+  .screenshot-card {
+    width: min(76vw, 278px);
+    border-radius: 20px !important;
+  }
+
+  .screenshot-card > .feature-diagram,
+  .screenshot-card > .fd-app-screen,
+  .screenshot-card > .fd-route-screen,
+  .screenshot-card.is-code-verified-mock > .feature-diagram {
+    border-radius: 15px !important;
+  }
 }
