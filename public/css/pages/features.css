@@ -849,10 +849,13 @@
 
 /* セーブツリー: 実際の画面(_TreeConnectorPainter)は罫線を描画した
    分岐グラフ(gitのコミットグラフに近い見た目)。├─└等の文字列ではなく、
-   ネストしたborder-leftで簡易的な分岐線を再現する。 */
+   ネストしたborder-leftで簡易的な分岐線を再現する。save_tree_screen.dart
+   のTreeViewは逆順ListView(rootが一番下、新しい版ほど上に積み上がる)
+   なので、column-reverseで下から上に伸びる見た目にする(HTML上の記述順は
+   root→子→孫のまま。画面表示だけを反転させる)。 */
 .fd-tree-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 4px;
   font-size: 0.8rem;
   color: var(--fd-text);
@@ -863,7 +866,7 @@
   padding-left: 10px;
   border-left: 1.5px solid rgba(255, 255, 255, 0.18);
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 4px;
 }
 
