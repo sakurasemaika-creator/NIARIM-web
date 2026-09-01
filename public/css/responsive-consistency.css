@@ -21,6 +21,105 @@
   box-shadow: none;
 }
 
+/* --------------------------------------------------------------------------
+   Screen mock rendering
+   8方向drop-shadowは使わず、SVG本体のstroke一回だけで縁取りする。
+   Material系24px viewBoxは1.65px、Font Awesome由来の消しゴムは576px
+   viewBoxなので同じ見た目になるよう専用値を使う。
+   -------------------------------------------------------------------------- */
+.fd-icon-btn .ic,
+.fd-brush-opacity-ic {
+  filter: none !important;
+  stroke: var(--fd-panel);
+  stroke-width: 1.65px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+/* opacityアイコンはボタン外にあるため、上の共通縁取りを明示的に適用。 */
+.fd-brush-opacity-ic {
+  stroke-width: 1.8px;
+}
+
+/* Font Awesome eraserはviewBoxが0 0 576 512で、24px系と同じstroke-widthでは
+   実表示時にほぼ見えない。表示サイズ換算で約1.6px相当になる値にする。 */
+.fd-icon-btn use[href$="#ic-eraser_fa"] {
+  stroke: var(--fd-panel);
+  stroke-width: 38px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+/* 画面再現図はすべてスマートフォンを想起する9:16へ統一する。
+   個々のUI要素は変更せず、外形と収まりだけ統一。 */
+.feature-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-media > .feature-diagram {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  min-height: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-visual .frame-mock {
+  aspect-ratio: 9 / 16;
+}
+
+/* hero内部の.feature-diagramは9:16のframe-mockを100%埋めるため、
+   二重にaspect-ratioを指定しない。 */
+.hero-visual .feature-diagram {
+  aspect-ratio: auto;
+}
+
+/* 主要機能紹介パネルは背景色を交互にせず白で統一。 */
+.feature-row,
+.feature-row:nth-child(even) {
+  background: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   Typography hierarchy
+   Kuramubonはウェイト感が強いため、大見出しまで黒にすると圧が強い。
+   明るい面ではNIARIMロゴ由来のブラウンへ寄せ、本文との階層を色でも作る。
+   -------------------------------------------------------------------------- */
+:where(h1, h2, h3, h4) {
+  color: var(--color-brand);
+}
+
+.hero-title {
+  color: var(--color-brand-dark);
+}
+
+.feature-copy h3,
+.section-head h2,
+.feature-section-head h2,
+.about-hero h1,
+.features-header h1,
+.help-header h1,
+.faq-header h1,
+.news-header h1,
+.legal-header h1 {
+  color: var(--color-brand);
+}
+
+/* 暗色面では可読性を優先して白を維持。 */
+.section-dark :where(h1, h2, h3, h4),
+.pricing-card.is-premium :where(h1, h2, h3, h4),
+.download-panel :where(h1, h2, h3, h4),
+.about-cta :where(h1, h2, h3, h4),
+.site-footer :where(h1, h2, h3, h4) {
+  color: var(--color-white);
+}
+
 /* SPでは1カラム化とボタン全幅化だけを行い、コピーの方向性やブランド色は
    PC版から変えない。 */
 @media (max-width: 900px) {
@@ -50,5 +149,19 @@
 
   .hero .btn-primary:hover {
     background: var(--color-accent-dark);
+  }
+
+  /* SPでも黒帯の機能名marqueeはPCと同様に流す。 */
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite !important;
+    transform: none;
+  }
+}
+
+/* ユーザーがOSで動きを減らす設定をしている場合だけ停止する。 */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    transform: none;
   }
 }
