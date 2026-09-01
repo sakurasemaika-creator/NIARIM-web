@@ -4,6 +4,23 @@
 (function () {
   "use strict";
 
+  /**
+   * ページ固有CSSの後に、全体の視覚品質を揃える polish.css を読み込む。
+   * 各HTMLへ同じ<link>を重複追加せず、全ページで一貫して適用するため
+   * 共通main.jsから一度だけ注入する。JavaScriptが無効でも既存CSSだけで
+   * 問題なく閲覧できるため、これはprogressive enhancementとして扱う。
+   */
+  function loadDesignPolish() {
+    if (document.querySelector('link[data-niarim-polish]')) return;
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/polish.css";
+    link.setAttribute("data-niarim-polish", "true");
+    document.head.appendChild(link);
+  }
+
+  loadDesignPolish();
+
   function initHeaderScroll() {
     var header = document.querySelector(".site-header");
     if (!header) return;
