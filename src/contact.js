@@ -1,1 +1,291 @@
-﻿/**\n * /api/contact ハンドラー\n *\n * お問い合わせフォームの送信を受け取り、バリデーション・スパム対策・\n * レート制限を行ったうえで、Resend経由でメールを送信する。\n *\n * メール送信サービスについて（README.mdにも記載）:\n *   - サービス名: Resend\n *   - 無料枠: 3,000通/月、100通/日\n *   - Cloudflare Workers/Pages からのメール送信チュートリアルが公式に提供されている\n *   - RESEND_API_KEY は `wrangler secret put RESEND_API_KEY` で設定し、コードに直接記載しない\n */\nimport { jsonResponse } from "./utils.js";\n\nconst NAME_MAX_LENGTH = 100;\nconst MESSAGE_MAX_LENGTH = 1000;\nconst EMAIL_MAX_LENGTH = 254;\nconst EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;\n\nconst MAX_ATTACHMENTS = 3;\nconst MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB\nconst MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB\n// Resend(メール送信サービス)は1通あたりの合計サイズに上限があり、\n// 添付はメール送信時にbase64化されて約1.33倍に膨らむため、合計サイズにも\n// 別途上限を設ける（動画を1本含めても収まるよう、画像上限×3より大きい値にする）。\nconst MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;\nconst ALLOWED_ATTACHMENT_TYPES = new Map([\n  ["image/png", MAX_IMAGE_BYTES],\n  ["image/jpeg", MAX_IMAGE_BYTES],\n  ["image/webp", MAX_IMAGE_BYTES],\n  ["image/gif", MAX_IMAGE_BYTES],\n  ["video/mp4", MAX_VIDEO_BYTES],\n  ["video/quicktime", MAX_VIDEO_BYTES],\n  ["video/webm", MAX_VIDEO_BYTES],\n]);\n// 本文(テキスト)のサイズ上限＋添付合計の上限を踏まえたリクエスト全体の上限。\n// multipartのオーバーヘッド分の余裕も持たせる。\nconst MAX_BODY_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 256 * 1024;\n\nconst INQUIRY_TYPES = new Set(["bug", "request", "usage", "account", "other"]);\nconst INQUIRY_TYPE_LABELS = {\n  bug: "不具合報告",\n  request: "機能要望",\n  usage: "使い方について",\n  account: "アカウントについて",\n  other: "その他",\n};\n\nconst RATE_LIMIT_WINDOW_SECONDS = 60; // 同一IPにつき60秒に1回まで\nconst RATE_LIMIT_DAILY_MAX = 20; // 同一IPにつき1日20通まで\n\nexport async function handleContact(request, env, ctx) {\n  if (request.method !== "POST") {\n    return jsonResponse(405, { error: "method_not_allowed" });\n  }\n\n  const contentType = request.headers.get("Content-Type") || "";\n  if (!contentType.toLowerCase().includes("multipart/form-data")) {\n    return jsonResponse(415, { error: "unsupported_media_type" });\n  }\n\n  const contentLength = Number(request.headers.get("Content-Length") || 0);\n  if (contentLength && contentLength > MAX_BODY_BYTES) {\n    return jsonResponse(413, { error: "payload_too_large" });\n  }\n\n  let form;\n  try {\n    form = await request.formData();\n  } catch {\n    return jsonResponse(400, { error: "invalid_body" });\n  }\n\n  const body = {\n    type: form.get("type"),\n    name: form.get("name"),\n    email: form.get("email"),\n    message: form.get("message"),\n    agree: form.get("agree") === "true",\n    company: form.get("company"),\n  };\n\n  // honeypot: ボットは通常この隠しフィールドまで埋めてしまうため、\n  // 値が入っていた場合はユーザーには成功したように見せかけ、実際の送信は行わない。\n  if (typeof body.company === "string" && body.company.trim().length > 0) {\n    return jsonResponse(200, { ok: true });\n  }\n\n  const validation = validateInput(body);\n  if (!validation.ok) {\n    return jsonResponse(400, { error: "validation_error", field: validation.field });\n  }\n  const data = validation.data;\n\n  const attachmentFiles = form.getAll("attachments").filter(\n    (entry) => typeof entry === "object" && typeof entry.arrayBuffer === "function" && entry.size > 0\n  );\n  if (attachmentFiles.length > MAX_ATTACHMENTS) {\n    return jsonResponse(400, { error: "validation_error", field: "attachments" });\n  }\n  let totalAttachmentBytes = 0;\n  for (const file of attachmentFiles) {\n    const maxBytes = ALLOWED_ATTACHMENT_TYPES.get(file.type);\n    if (!maxBytes || file.size > maxBytes) {\n      return jsonResponse(400, { error: "validation_error", field: "attachments" });\n    }\n    totalAttachmentBytes += file.size;\n  }\n  if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {\n    return jsonResponse(400, { error: "validation_error", field: "attachments" });\n  }\n\n  let attachments;\n  try {\n    attachments = await Promise.all(\n      attachmentFiles.map(async (file) => ({\n        filename: sanitizeFilename(file.name) || "attachment",\n        content: arrayBufferToBase64(await file.arrayBuffer()),\n      }))\n    );\n  } catch (err) {\n    console.error("Failed to read attachments", err);\n    return jsonResponse(400, { error: "invalid_body" });\n  }\n\n  const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";\n\n  if (env.RATE_LIMIT_KV) {\n    const limited = await isRateLimited(env.RATE_LIMIT_KV, clientIp);\n    if (limited) {\n      return jsonResponse(429, { error: "rate_limited" });\n    }\n  }\n\n  if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {\n    // 秘密情報・宛先未設定時はユーザーには汎用エラーのみ返し、詳細はログにのみ記録する。\n    console.error("Contact API misconfigured: missing RESEND_API_KEY / CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL");\n    return jsonResponse(500, { error: "internal_error" });\n  }\n\n  const sent = await sendViaResend(env, data, attachments);\n  if (!sent.ok) {\n    console.error("Resend send failed", sent.status, sent.detail);\n    return jsonResponse(502, { error: "mail_send_failed" });\n  }\n\n  if (env.RATE_LIMIT_KV) {\n    ctx.waitUntil(recordSubmission(env.RATE_LIMIT_KV, clientIp));\n  }\n\n  return jsonResponse(200, { ok: true });\n}\n\nfunction validateInput(body) {\n  const type = typeof body.type === "string" ? body.type.trim() : "";\n  const name = typeof body.name === "string" ? body.name.trim() : "";\n  const email = typeof body.email === "string" ? body.email.trim() : "";\n  const message = typeof body.message === "string" ? body.message.trim() : "";\n  const agree = body.agree === true;\n\n  if (!INQUIRY_TYPES.has(type)) return { ok: false, field: "type" };\n  if (!name || name.length > NAME_MAX_LENGTH) return { ok: false, field: "name" };\n  if (!email || email.length > EMAIL_MAX_LENGTH || !EMAIL_RE.test(email)) {\n    return { ok: false, field: "email" };\n  }\n  if (!message || message.length > MESSAGE_MAX_LENGTH) {\n    return { ok: false, field: "message" };\n  }\n  if (!agree) return { ok: false, field: "agree" };\n\n  // メールヘッダ・本文への改行注入対策（ヘッダインジェクション対策）\n  if (/[\r\n]/.test(name) || /[\r\n]/.test(email) || /[\r\n]/.test(type)) {\n    return { ok: false, field: "invalid_characters" };\n  }\n\n  return { ok: true, data: { type, name, email, message, agree } };\n}\n\n// 既知の制約: KVには compare-and-swap がないため、ここでのチェックと\n// recordSubmission()での書き込みはアトミックではない。同一IPから\n// ほぼ同時に複数リクエストが届いた場合、レート制限をすり抜ける可能性がある\n// （honeypot・入力バリデーションと合わせた多層防御の一部として許容している）。\n// 厳密な制御が必要になった場合はDurable Objectsへの置き換えを検討すること。\nasync function isRateLimited(kv, clientIp) {\n  const shortKey = `contact:short:${clientIp}`;\n  const dailyKey = `contact:daily:${clientIp}`;\n\n  const [shortHit, dailyCountRaw] = await Promise.all([\n    kv.get(shortKey),\n    kv.get(dailyKey),\n  ]);\n\n  if (shortHit) return true;\n\n  const dailyCount = Number(dailyCountRaw || 0);\n  if (dailyCount >= RATE_LIMIT_DAILY_MAX) return true;\n\n  return false;\n}\n\nasync function recordSubmission(kv, clientIp) {\n  const shortKey = `contact:short:${clientIp}`;\n  const dailyKey = `contact:daily:${clientIp}`;\n\n  const dailyCountRaw = await kv.get(dailyKey);\n  const dailyCount = Number(dailyCountRaw || 0) + 1;\n\n  await Promise.all([\n    kv.put(shortKey, "1", { expirationTtl: RATE_LIMIT_WINDOW_SECONDS }),\n    kv.put(dailyKey, String(dailyCount), { expirationTtl: 60 * 60 * 24 }),\n  ]);\n}\n\n// パス区切り(../ 等)がメール本文へそのまま渡らないよう、パス部分を\n// 取り除く（日本語ファイル名やスペースはそのまま許可する）。\nfunction sanitizeFilename(name) {\n  if (typeof name !== "string") return "";\n  const base = name.split(/[\\/]/).pop() || "";\n  return base.trim().slice(-100);\n}\n\n// Workers環境にはNode.jsのBufferがないため、ArrayBufferを手動でbase64化する。\n// spread演算子で大きな配列を一度に展開するとスタックオーバーフローの\n// 危険があるため、chunk単位でString.fromCharCodeへ渡す。\nfunction arrayBufferToBase64(buffer) {\n  const bytes = new Uint8Array(buffer);\n  const CHUNK_SIZE = 0x8000;\n  let binary = "";\n  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {\n    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK_SIZE));\n  }\n  return btoa(binary);\n}\n\nfunction escapeHtml(str) {\n  return str\n    .replace(/&/g, "&amp;")\n    .replace(/</g, "&lt;")\n    .replace(/>/g, "&gt;")\n    .replace(/"/g, "&quot;")\n    .replace(/'/g, "&#39;");\n}\n\nasync function sendViaResend(env, data, attachments) {\n  const typeLabel = INQUIRY_TYPE_LABELS[data.type] || data.type;\n  const textBody = [\n    `お問い合わせ種別: ${typeLabel}`,\n    `お名前: ${data.name}`,\n    `メールアドレス: ${data.email}`,\n    "",\n    "お問い合わせ内容:",\n    data.message,\n  ].join("\n");\n\n  const htmlBody = `\n    <p><strong>お問い合わせ種別:</strong> ${escapeHtml(typeLabel)}</p>\n    <p><strong>お名前:</strong> ${escapeHtml(data.name)}</p>\n    <p><strong>メールアドレス:</strong> ${escapeHtml(data.email)}</p>\n    <p><strong>お問い合わせ内容:</strong></p>\n    <p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>\n  `;\n\n  try {\n    const res = await fetch("https://api.resend.com/emails", {\n      method: "POST",\n      headers: {\n        Authorization: `Bearer ${env.RESEND_API_KEY}`,\n        "Content-Type": "application/json",\n      },\n      body: JSON.stringify({\n        from: env.CONTACT_FROM_EMAIL,\n        to: env.CONTACT_TO_EMAIL,\n        // ユーザー入力のメールアドレスをreply-toに設定し、そのまま返信できるようにする。\n        // fromには使用しない（メールインジェクション・なりすまし対策）。\n        reply_to: data.email,\n        subject: `【NIARIM お問い合わせ】${typeLabel}`,\n        text: textBody,\n        html: htmlBody,\n        attachments: attachments && attachments.length ? attachments : undefined,\n      }),\n    });\n\n    if (!res.ok) {\n      const detail = await res.text().catch(() => "");\n      return { ok: false, status: res.status, detail };\n    }\n    return { ok: true };\n  } catch (err) {\n    return { ok: false, status: 0, detail: String(err) };\n  }\n}\n
+/**
+ * /api/contact ハンドラー
+ *
+ * お問い合わせフォームの送信を受け取り、バリデーション・スパム対策・
+ * レート制限を行ったうえで、Resend経由でメールを送信する。
+ *
+ * メール送信サービスについて（README.mdにも記載）:
+ *   - サービス名: Resend
+ *   - 無料枠: 3,000通/月、100通/日
+ *   - Cloudflare Workers/Pages からのメール送信チュートリアルが公式に提供されている
+ *   - RESEND_API_KEY は `wrangler secret put RESEND_API_KEY` で設定し、コードに直接記載しない
+ */
+import { jsonResponse } from "./utils.js";
+
+const NAME_MAX_LENGTH = 100;
+const MESSAGE_MAX_LENGTH = 1000;
+const EMAIL_MAX_LENGTH = 254;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const MAX_ATTACHMENTS = 3;
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
+const MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
+// Resend(メール送信サービス)は1通あたりの合計サイズに上限があり、
+// 添付はメール送信時にbase64化されて約1.33倍に膨らむため、合計サイズにも
+// 別途上限を設ける（動画を1本含めても収まるよう、画像上限×3より大きい値にする）。
+const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
+const ALLOWED_ATTACHMENT_TYPES = new Map([
+  ["image/png", MAX_IMAGE_BYTES],
+  ["image/jpeg", MAX_IMAGE_BYTES],
+  ["image/webp", MAX_IMAGE_BYTES],
+  ["image/gif", MAX_IMAGE_BYTES],
+  ["video/mp4", MAX_VIDEO_BYTES],
+  ["video/quicktime", MAX_VIDEO_BYTES],
+  ["video/webm", MAX_VIDEO_BYTES],
+]);
+// 本文(テキスト)のサイズ上限＋添付合計の上限を踏まえたリクエスト全体の上限。
+// multipartのオーバーヘッド分の余裕も持たせる。
+const MAX_BODY_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 256 * 1024;
+
+const INQUIRY_TYPES = new Set(["bug", "request", "usage", "account", "other"]);
+const INQUIRY_TYPE_LABELS = {
+  bug: "不具合報告",
+  request: "機能要望",
+  usage: "使い方について",
+  account: "アカウントについて",
+  other: "その他",
+};
+
+const RATE_LIMIT_WINDOW_SECONDS = 60; // 同一IPにつき60秒に1回まで
+const RATE_LIMIT_DAILY_MAX = 20; // 同一IPにつき1日20通まで
+
+export async function handleContact(request, env, ctx) {
+  if (request.method !== "POST") {
+    return jsonResponse(405, { error: "method_not_allowed" });
+  }
+
+  const contentType = request.headers.get("Content-Type") || "";
+  if (!contentType.toLowerCase().includes("multipart/form-data")) {
+    return jsonResponse(415, { error: "unsupported_media_type" });
+  }
+
+  const contentLength = Number(request.headers.get("Content-Length") || 0);
+  if (contentLength && contentLength > MAX_BODY_BYTES) {
+    return jsonResponse(413, { error: "payload_too_large" });
+  }
+
+  let form;
+  try {
+    form = await request.formData();
+  } catch {
+    return jsonResponse(400, { error: "invalid_body" });
+  }
+
+  const body = {
+    type: form.get("type"),
+    name: form.get("name"),
+    email: form.get("email"),
+    message: form.get("message"),
+    agree: form.get("agree") === "true",
+    company: form.get("company"),
+  };
+
+  // honeypot: ボットは通常この隠しフィールドまで埋めてしまうため、
+  // 値が入っていた場合はユーザーには成功したように見せかけ、実際の送信は行わない。
+  if (typeof body.company === "string" && body.company.trim().length > 0) {
+    return jsonResponse(200, { ok: true });
+  }
+
+  const validation = validateInput(body);
+  if (!validation.ok) {
+    return jsonResponse(400, { error: "validation_error", field: validation.field });
+  }
+  const data = validation.data;
+
+  const attachmentFiles = form.getAll("attachments").filter(
+    (entry) => typeof entry === "object" && typeof entry.arrayBuffer === "function" && entry.size > 0
+  );
+  if (attachmentFiles.length > MAX_ATTACHMENTS) {
+    return jsonResponse(400, { error: "validation_error", field: "attachments" });
+  }
+  let totalAttachmentBytes = 0;
+  for (const file of attachmentFiles) {
+    const maxBytes = ALLOWED_ATTACHMENT_TYPES.get(file.type);
+    if (!maxBytes || file.size > maxBytes) {
+      return jsonResponse(400, { error: "validation_error", field: "attachments" });
+    }
+    totalAttachmentBytes += file.size;
+  }
+  if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
+    return jsonResponse(400, { error: "validation_error", field: "attachments" });
+  }
+
+  let attachments;
+  try {
+    attachments = await Promise.all(
+      attachmentFiles.map(async (file) => ({
+        filename: sanitizeFilename(file.name) || "attachment",
+        content: arrayBufferToBase64(await file.arrayBuffer()),
+      }))
+    );
+  } catch (err) {
+    console.error("Failed to read attachments", err);
+    return jsonResponse(400, { error: "invalid_body" });
+  }
+
+  const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+
+  if (env.RATE_LIMIT_KV) {
+    const limited = await isRateLimited(env.RATE_LIMIT_KV, clientIp);
+    if (limited) {
+      return jsonResponse(429, { error: "rate_limited" });
+    }
+  }
+
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
+    // 秘密情報・宛先未設定時はユーザーには汎用エラーのみ返し、詳細はログにのみ記録する。
+    console.error("Contact API misconfigured: missing RESEND_API_KEY / CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL");
+    return jsonResponse(500, { error: "internal_error" });
+  }
+
+  const sent = await sendViaResend(env, data, attachments);
+  if (!sent.ok) {
+    console.error("Resend send failed", sent.status, sent.detail);
+    return jsonResponse(502, { error: "mail_send_failed" });
+  }
+
+  if (env.RATE_LIMIT_KV) {
+    ctx.waitUntil(recordSubmission(env.RATE_LIMIT_KV, clientIp));
+  }
+
+  return jsonResponse(200, { ok: true });
+}
+
+function validateInput(body) {
+  const type = typeof body.type === "string" ? body.type.trim() : "";
+  const name = typeof body.name === "string" ? body.name.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim() : "";
+  const message = typeof body.message === "string" ? body.message.trim() : "";
+  const agree = body.agree === true;
+
+  if (!INQUIRY_TYPES.has(type)) return { ok: false, field: "type" };
+  if (!name || name.length > NAME_MAX_LENGTH) return { ok: false, field: "name" };
+  if (!email || email.length > EMAIL_MAX_LENGTH || !EMAIL_RE.test(email)) {
+    return { ok: false, field: "email" };
+  }
+  if (!message || message.length > MESSAGE_MAX_LENGTH) {
+    return { ok: false, field: "message" };
+  }
+  if (!agree) return { ok: false, field: "agree" };
+
+  // メールヘッダ・本文への改行注入対策（ヘッダインジェクション対策）
+  if (/[\r\n]/.test(name) || /[\r\n]/.test(email) || /[\r\n]/.test(type)) {
+    return { ok: false, field: "invalid_characters" };
+  }
+
+  return { ok: true, data: { type, name, email, message, agree } };
+}
+
+// 既知の制約: KVには compare-and-swap がないため、ここでのチェックと
+// recordSubmission()での書き込みはアトミックではない。同一IPから
+// ほぼ同時に複数リクエストが届いた場合、レート制限をすり抜ける可能性がある
+// （honeypot・入力バリデーションと合わせた多層防御の一部として許容している）。
+// 厳密な制御が必要になった場合はDurable Objectsへの置き換えを検討すること。
+async function isRateLimited(kv, clientIp) {
+  const shortKey = `contact:short:${clientIp}`;
+  const dailyKey = `contact:daily:${clientIp}`;
+
+  const [shortHit, dailyCountRaw] = await Promise.all([
+    kv.get(shortKey),
+    kv.get(dailyKey),
+  ]);
+
+  if (shortHit) return true;
+
+  const dailyCount = Number(dailyCountRaw || 0);
+  if (dailyCount >= RATE_LIMIT_DAILY_MAX) return true;
+
+  return false;
+}
+
+async function recordSubmission(kv, clientIp) {
+  const shortKey = `contact:short:${clientIp}`;
+  const dailyKey = `contact:daily:${clientIp}`;
+
+  const dailyCountRaw = await kv.get(dailyKey);
+  const dailyCount = Number(dailyCountRaw || 0) + 1;
+
+  await Promise.all([
+    kv.put(shortKey, "1", { expirationTtl: RATE_LIMIT_WINDOW_SECONDS }),
+    kv.put(dailyKey, String(dailyCount), { expirationTtl: 60 * 60 * 24 }),
+  ]);
+}
+
+// パス区切り(../ 等)がメール本文へそのまま渡らないよう、パス部分を
+// 取り除く（日本語ファイル名やスペースはそのまま許可する）。
+function sanitizeFilename(name) {
+  if (typeof name !== "string") return "";
+  const base = name.split(/[\\/]/).pop() || "";
+  return base.trim().slice(-100);
+}
+
+// Workers環境にはNode.jsのBufferがないため、ArrayBufferを手動でbase64化する。
+// spread演算子で大きな配列を一度に展開するとスタックオーバーフローの
+// 危険があるため、chunk単位でString.fromCharCodeへ渡す。
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  const CHUNK_SIZE = 0x8000;
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK_SIZE));
+  }
+  return btoa(binary);
+}
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+async function sendViaResend(env, data, attachments) {
+  const typeLabel = INQUIRY_TYPE_LABELS[data.type] || data.type;
+  const textBody = [
+    `お問い合わせ種別: ${typeLabel}`,
+    `お名前: ${data.name}`,
+    `メールアドレス: ${data.email}`,
+    "",
+    "お問い合わせ内容:",
+    data.message,
+  ].join("\n");
+
+  const htmlBody = `
+    <p><strong>お問い合わせ種別:</strong> ${escapeHtml(typeLabel)}</p>
+    <p><strong>お名前:</strong> ${escapeHtml(data.name)}</p>
+    <p><strong>メールアドレス:</strong> ${escapeHtml(data.email)}</p>
+    <p><strong>お問い合わせ内容:</strong></p>
+    <p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>
+  `;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: env.CONTACT_FROM_EMAIL,
+        to: env.CONTACT_TO_EMAIL,
+        // ユーザー入力のメールアドレスをreply-toに設定し、そのまま返信できるようにする。
+        // fromには使用しない（メールインジェクション・なりすまし対策）。
+        reply_to: data.email,
+        subject: `【NIARIM お問い合わせ】${typeLabel}`,
+        text: textBody,
+        html: htmlBody,
+        attachments: attachments && attachments.length ? attachments : undefined,
+      }),
+    });
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      return { ok: false, status: res.status, detail };
+    }
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, status: 0, detail: String(err) };
+  }
+}

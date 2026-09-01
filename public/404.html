@@ -1,1 +1,96 @@
-﻿<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n<title>ページが見つかりません | NIARIM</title>\n<meta name="robots" content="noindex,follow" />\n\n<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />\n<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />\n\n<link rel="stylesheet" href="/css/reset.css" />\n<link rel="stylesheet" href="/css/variables.css" />\n<link rel="stylesheet" href="/css/common.css" />\n<style>\n  .error-page {\n    min-height: calc(100svh - var(--header-height));\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    text-align: center;\n    padding: var(--space-xl) var(--container-padding);\n  }\n  .error-page .eyebrow {\n    display: block;\n    font-family: var(--font-serif);\n    font-size: 5rem;\n    font-weight: 700;\n    color: var(--color-sub);\n    margin-bottom: var(--space-sm);\n  }\n  .error-page h1 {\n    font-size: var(--fs-h1);\n    margin-bottom: var(--space-sm);\n  }\n  .error-page p {\n    color: var(--color-text-muted);\n    max-width: 44ch;\n    margin-inline: auto;\n    margin-bottom: var(--space-lg);\n  }\n</style>\n</head>\n<body data-i18n-title="meta.404.title">\n<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>\n\n<header class="site-header">\n  <div class="container">\n    <a class="brand" href="/">\n      <img class="brand-icon" src="/assets/images/logo/app_logo.svg" alt="" width="32" height="32" />\n      <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />\n    </a>\n    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">\n      <ul>\n        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>\n        <li><a href="/features/" data-i18n="nav.features">機能</a></li>\n        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>\n        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>\n        <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>\n        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>\n        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>\n        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>\n      </ul>\n      <div class="lang-dropdown" data-lang-dropdown data-open="false">\n        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">\n          <span data-current-lang-label>日本語</span>\n        </button>\n        <ul class="lang-menu" data-lang-menu></ul>\n      </div>\n      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>\n    </nav>\n    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">\n      <span class="bar"></span>\n    </button>\n  </div>\n</header>\n\n<main id="main">\n  <div class="error-page">\n    <div>\n      <span class="eyebrow" data-i18n="error404.eyebrow">404</span>\n      <h1 data-i18n="error404.title">このフレームは見つかりませんでした。</h1>\n      <p data-i18n="error404.body">お探しのページは、移動または削除された可能性があります。URLをご確認いただくか、ホームからやり直してください。</p>\n      <a class="btn btn-primary" href="/" data-i18n="error404.cta">ホームへ戻る</a>\n    </div>\n  </div>\n</main>\n\n<script src="/js/config.js"></script>\n<script src="/js/i18n-dict.js"></script>\n<script src="/js/i18n-dict-intl.js"></script>\n<script src="/js/i18n-dict-nav-extra.js"></script>\n<script src="/js/i18n.js"></script>\n<script src="/js/main.js"></script>\n</body>\n</html>\n
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ページが見つかりません | NIARIM</title>
+<meta name="robots" content="noindex,follow" />
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<style>
+  .error-page {
+    min-height: calc(100svh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-xl) var(--container-padding);
+  }
+  .error-page .eyebrow {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-sub);
+    margin-bottom: var(--space-sm);
+  }
+  .error-page h1 {
+    font-size: var(--fs-h1);
+    margin-bottom: var(--space-sm);
+  }
+  .error-page p {
+    color: var(--color-text-muted);
+    max-width: 44ch;
+    margin-inline: auto;
+    margin-bottom: var(--space-lg);
+  }
+</style>
+</head>
+<body data-i18n-title="meta.404.title">
+<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img class="brand-icon" src="/assets/images/logo/app_logo.svg" alt="" width="32" height="32" />
+      <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+        <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>
+        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+      </ul>
+      <div class="lang-dropdown" data-lang-dropdown data-open="false">
+        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">
+          <span data-current-lang-label>日本語</span>
+        </button>
+        <ul class="lang-menu" data-lang-menu></ul>
+      </div>
+      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="error-page">
+    <div>
+      <span class="eyebrow" data-i18n="error404.eyebrow">404</span>
+      <h1 data-i18n="error404.title">このフレームは見つかりませんでした。</h1>
+      <p data-i18n="error404.body">お探しのページは、移動または削除された可能性があります。URLをご確認いただくか、ホームからやり直してください。</p>
+      <a class="btn btn-primary" href="/" data-i18n="error404.cta">ホームへ戻る</a>
+    </div>
+  </div>
+</main>
+
+<script src="/js/config.js"></script>
+<script src="/js/i18n-dict.js"></script>
+<script src="/js/i18n-dict-intl.js"></script>
+<script src="/js/i18n-dict-nav-extra.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

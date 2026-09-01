@@ -1,1 +1,24 @@
-﻿{\n  "$schema": "./node_modules/wrangler/config-schema.json",\n  "name": "niarim-web",\n  "main": "src/index.js",\n  "compatibility_date": "2026-08-25",\n  "assets": {\n    "directory": "./public",\n    "binding": "ASSETS",\n    "run_worker_first": ["/api/*"],\n    // 未一致パスは public/404.html を404ステータスで返す\n    // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)\n    "not_found_handling": "404-page"\n  },\n  // お問い合わせフォームのメール送信先・送信元。実際の値はデプロイ環境ごとに設定する。\n  "vars": {\n    "CONTACT_TO_EMAIL": "your-inbox@example.com",\n    "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>"\n  }\n  // RESEND_API_KEY は `npx wrangler secret put RESEND_API_KEY` で設定すること（本ファイルには書かない）。\n  // レート制限用のKV Namespaceを作成した場合は、以下のように kv_namespaces を追加する。\n  // "kv_namespaces": [\n  //   { "binding": "RATE_LIMIT_KV", "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" }\n  // ]\n}\n
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "niarim-web",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-25",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
+    // 未一致パスは public/404.html を404ステータスで返す
+    // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)
+    "not_found_handling": "404-page"
+  },
+  // お問い合わせフォームのメール送信先・送信元。実際の値はデプロイ環境ごとに設定する。
+  "vars": {
+    "CONTACT_TO_EMAIL": "your-inbox@example.com",
+    "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>"
+  }
+  // RESEND_API_KEY は `npx wrangler secret put RESEND_API_KEY` で設定すること（本ファイルには書かない）。
+  // レート制限用のKV Namespaceを作成した場合は、以下のように kv_namespaces を追加する。
+  // "kv_namespaces": [
+  //   { "binding": "RATE_LIMIT_KV", "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" }
+  // ]
+}

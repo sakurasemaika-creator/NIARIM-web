@@ -1,1 +1,99 @@
-﻿/* ==========================================================================\n   NIARIM reset.css\n   最小限のモダンリセット。ブラウザ間の初期スタイル差異を吸収する。\n   ========================================================================== */\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  /* SP幅でのカードグリッド等の横はみ出し対策。common.cssのbodyに\n     word-break: keep-all を指定しているため、日本語の文章は「1つの巨大な\n     単語」として扱われる。CSS Grid/Flexboxの子要素はデフォルトで\n     min-width: auto（＝中身のmin-content幅）が自動的な最小サイズとなり、\n     かつoverflow-wrap: break-wordはこのmin-content計算に反映されない仕様\n     のため、対策なしでは長い日本語文を含むgrid/flexアイテムがコンテナ幅\n     を超えてはみ出し、ページ全体が横スクロールしてしまう\n     （about/premium/faq/contact等、複数ページで発生していた表示崩れの\n     共通原因）。全要素の自動最小幅を0にリセットすることで、\n     overflow-wrap: break-wordが実際に効くようにする。\n     ※ white-space: nowrap を明示している価格表示（¥5,500等）や\n     バッジ文言はnowrap自体がその要素の最小内容幅を決めるため、この\n     リセットによる悪影響は受けない。 */\n  min-width: 0;\n}\n\nhtml {\n  -webkit-text-size-adjust: 100%;\n  text-size-adjust: 100%;\n  scroll-behavior: smooth;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  html {\n    scroll-behavior: auto;\n  }\n}\n\nbody {\n  min-height: 100svh;\n  line-height: 1.7;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n}\n\nimg,\npicture,\nsvg,\nvideo {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\ninput,\nbutton,\ntextarea,\nselect {\n  font: inherit;\n  color: inherit;\n}\n\nbutton {\n  cursor: pointer;\n  background: none;\n  border: none;\n}\n\na {\n  color: inherit;\n  text-decoration: none;\n}\n\nul,\nol {\n  list-style: none;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np {\n  overflow-wrap: break-word;\n}\n\n/* フォーカス表示（アクセシビリティ） */\n:focus-visible {\n  outline: 2px solid var(--color-brand, #4b4acf);\n  outline-offset: 3px;\n}\n
+/* ==========================================================================
+   NIARIM reset.css
+   最小限のモダンリセット。ブラウザ間の初期スタイル差異を吸収する。
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* SP幅でのカードグリッド等の横はみ出し対策。common.cssのbodyに
+     word-break: keep-all を指定しているため、日本語の文章は「1つの巨大な
+     単語」として扱われる。CSS Grid/Flexboxの子要素はデフォルトで
+     min-width: auto（＝中身のmin-content幅）が自動的な最小サイズとなり、
+     かつoverflow-wrap: break-wordはこのmin-content計算に反映されない仕様
+     のため、対策なしでは長い日本語文を含むgrid/flexアイテムがコンテナ幅
+     を超えてはみ出し、ページ全体が横スクロールしてしまう
+     （about/premium/faq/contact等、複数ページで発生していた表示崩れの
+     共通原因）。全要素の自動最小幅を0にリセットすることで、
+     overflow-wrap: break-wordが実際に効くようにする。
+     ※ white-space: nowrap を明示している価格表示（¥5,500等）や
+     バッジ文言はnowrap自体がその要素の最小内容幅を決めるため、この
+     リセットによる悪影響は受けない。 */
+  min-width: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100svh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word;
+}
+
+/* フォーカス表示（アクセシビリティ） */
+:focus-visible {
+  outline: 2px solid var(--color-brand, #4b4acf);
+  outline-offset: 3px;
+}

@@ -1,1 +1,214 @@
-﻿/* ==========================================================================\n   NIARIM premium.css - プレミアムプランページ専用スタイル\n   ========================================================================== */\n\n.pricing-notice {\n  border-radius: var(--radius-md);\n  padding: var(--space-md) var(--space-lg);\n  background: var(--color-gray-50);\n  border: 1px solid var(--color-border);\n  color: var(--color-gray-700);\n  font-size: var(--fs-small);\n  max-width: 760px;\n  margin-inline: auto;\n}\n\n.pricing-grid {\n  display: grid;\n  grid-template-columns: 1fr 1.2fr;\n  gap: var(--space-lg);\n  align-items: stretch;\n}\n\n.pricing-card {\n  border-radius: var(--radius-lg);\n  padding: var(--space-xl);\n  background: var(--color-white);\n  border: 1px solid var(--color-border);\n  display: flex;\n  flex-direction: column;\n}\n\n.pricing-card.is-premium {\n  background: linear-gradient(160deg, var(--color-ink), #2b2950);\n  color: var(--color-white);\n  border: none;\n  box-shadow: var(--shadow-lg);\n}\n\n.pricing-card h3 {\n  font-size: var(--fs-h3);\n}\n\n.pricing-price {\n  margin-top: var(--space-sm);\n  display: flex;\n  flex-wrap: wrap;\n  align-items: baseline;\n  gap: 0.4rem;\n}\n\n.pricing-price .amount {\n  font-size: 2.2rem;\n  font-weight: 700;\n  font-family: var(--font-serif);\n  white-space: nowrap;\n}\n\n.pricing-price .unit {\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n  font-family: var(--font-serif);\n  white-space: nowrap;\n}\n\n/* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し\n   数字の途中で改行されないようにする */\n.pricing-plan-option .pricing-price .amount {\n  font-size: clamp(1.35rem, 6vw, 1.9rem);\n}\n\n/* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、\n   実際の価格を大きく強調する。 */\n.pricing-price-compare {\n  display: flex;\n  flex-direction: column;\n  gap: 0.15rem;\n}\n\n.pricing-price-compare .amount-strike {\n  font-size: 1.3rem;\n  font-family: var(--font-serif);\n  color: rgba(255, 255, 255, 0.55);\n  text-decoration: line-through;\n  text-decoration-color: var(--fd-mark, #ffb020);\n  text-decoration-thickness: 2px;\n  white-space: nowrap;\n}\n\n.pricing-price-compare .pricing-price {\n  margin-top: 0;\n}\n\n.pricing-card.is-premium .pricing-price .unit {\n  color: rgba(255, 255, 255, 0.66);\n}\n\n.pricing-plan-compare {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 0.75rem;\n  margin-top: var(--space-md);\n}\n\n.pricing-plan-option {\n  position: relative;\n  padding: var(--space-md);\n  border-radius: var(--radius-md);\n  border: 1.5px solid rgba(255, 255, 255, 0.2);\n}\n\n.pricing-plan-option-label {\n  display: block;\n  font-size: var(--fs-small);\n  font-weight: 600;\n  font-family: var(--font-serif);\n  /* 以前はrgba(255,255,255,0.75)の半透明白だったが、年額プランの\n     強調に使っている金色(#ffd76a)と統一し、不透明度も1にする。 */\n  color: #ffd76a;\n}\n\n.pricing-plan-option-best {\n  border-color: #ffd76a;\n  background: rgba(255, 215, 106, 0.08);\n  box-shadow: 0 0 0 1px rgba(255, 215, 106, 0.35), 0 12px 32px rgba(255, 159, 92, 0.18);\n}\n\n.pricing-plan-badge {\n  position: absolute;\n  top: -1.3rem;\n  right: var(--space-md);\n  padding: 0.3rem 0.9rem 0.4rem;\n  border-radius: var(--radius-md);\n  /* 金色の背景に濃い文字だと目立ちにくかったため、白地に変更。 */\n  background: var(--color-white);\n  color: var(--color-brand-dark);\n  font-family: var(--font-serif);\n  box-shadow: var(--shadow-md);\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  line-height: 1.15;\n  white-space: nowrap;\n}\n\n.pricing-plan-badge-pre {\n  font-size: 0.7rem;\n  font-weight: 600;\n  color: var(--color-text-muted);\n}\n\n.pricing-plan-badge-main {\n  font-size: 1.1rem;\n  font-weight: 800;\n  background: var(--grad-gold);\n  background-clip: text;\n  -webkit-background-clip: text;\n  color: transparent;\n}\n\n@media (max-width: 520px) {\n  .pricing-plan-compare {\n    grid-template-columns: 1fr;\n  }\n}\n\n.pricing-list {\n  margin-top: var(--space-lg);\n  display: grid;\n  gap: 0.7rem;\n  font-size: var(--fs-small);\n}\n\n.pricing-list li {\n  display: flex;\n  align-items: flex-start;\n  gap: 0.5rem;\n  /* リストのフェード(.reveal)に加えて、項目を上から順に少しずつ\n     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */\n  transition: opacity var(--duration-base) var(--ease-out),\n    transform var(--duration-base) var(--ease-out);\n}\n\n.pricing-list li::before {\n  content: "✓";\n  flex-shrink: 0;\n  font-weight: 700;\n  color: var(--color-brand);\n}\n\n.pricing-list li > div {\n  display: flex;\n  flex-direction: column;\n  gap: 0.15rem;\n}\n\n.pricing-list li strong {\n  display: block;\n  font-family: var(--font-serif);\n}\n\n.pricing-list li span {\n  display: block;\n  color: var(--color-text-muted);\n}\n\n.pricing-card.is-premium .pricing-list li::before {\n  color: var(--color-sub);\n}\n\n@media (max-width: 860px) {\n  .pricing-grid {\n    grid-template-columns: 1fr;\n  }\n}\n
+/* ==========================================================================
+   NIARIM premium.css - プレミアムプランページ専用スタイル
+   ========================================================================== */
+
+.pricing-notice {
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+  color: var(--color-gray-700);
+  font-size: var(--fs-small);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.pricing-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.is-premium {
+  background: linear-gradient(160deg, var(--color-ink), #2b2950);
+  color: var(--color-white);
+  border: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-card h3 {
+  font-size: var(--fs-h3);
+}
+
+.pricing-price {
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.pricing-price .amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  white-space: nowrap;
+}
+
+.pricing-price .unit {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-family: var(--font-serif);
+  white-space: nowrap;
+}
+
+/* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し
+   数字の途中で改行されないようにする */
+.pricing-plan-option .pricing-price .amount {
+  font-size: clamp(1.35rem, 6vw, 1.9rem);
+}
+
+/* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、
+   実際の価格を大きく強調する。 */
+.pricing-price-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pricing-price-compare .amount-strike {
+  font-size: 1.3rem;
+  font-family: var(--font-serif);
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: line-through;
+  text-decoration-color: var(--fd-mark, #ffb020);
+  text-decoration-thickness: 2px;
+  white-space: nowrap;
+}
+
+.pricing-price-compare .pricing-price {
+  margin-top: 0;
+}
+
+.pricing-card.is-premium .pricing-price .unit {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.pricing-plan-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: var(--space-md);
+}
+
+.pricing-plan-option {
+  position: relative;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.pricing-plan-option-label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  font-family: var(--font-serif);
+  /* 以前はrgba(255,255,255,0.75)の半透明白だったが、年額プランの
+     強調に使っている金色(#ffd76a)と統一し、不透明度も1にする。 */
+  color: #ffd76a;
+}
+
+.pricing-plan-option-best {
+  border-color: #ffd76a;
+  background: rgba(255, 215, 106, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 215, 106, 0.35), 0 12px 32px rgba(255, 159, 92, 0.18);
+}
+
+.pricing-plan-badge {
+  position: absolute;
+  top: -1.3rem;
+  right: var(--space-md);
+  padding: 0.3rem 0.9rem 0.4rem;
+  border-radius: var(--radius-md);
+  /* 金色の背景に濃い文字だと目立ちにくかったため、白地に変更。 */
+  background: var(--color-white);
+  color: var(--color-brand-dark);
+  font-family: var(--font-serif);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.pricing-plan-badge-pre {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.pricing-plan-badge-main {
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--grad-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 520px) {
+  .pricing-plan-compare {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing-list {
+  margin-top: var(--space-lg);
+  display: grid;
+  gap: 0.7rem;
+  font-size: var(--fs-small);
+}
+
+.pricing-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  /* リストのフェード(.reveal)に加えて、項目を上から順に少しずつ
+     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
+  transition: opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.pricing-list li::before {
+  content: "✓";
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
+.pricing-list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pricing-list li strong {
+  display: block;
+  font-family: var(--font-serif);
+}
+
+.pricing-list li span {
+  display: block;
+  color: var(--color-text-muted);
+}
+
+.pricing-card.is-premium .pricing-list li::before {
+  color: var(--color-sub);
+}
+
+@media (max-width: 860px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}

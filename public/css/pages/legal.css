@@ -1,1 +1,124 @@
-﻿/* ==========================================================================\n   NIARIM legal.css - プライバシーポリシー / 利用規約 / FAQページ共通\n   ========================================================================== */\n\n.legal-header {\n  padding-block: var(--space-xl) var(--space-lg);\n  border-bottom: 1px solid var(--color-border);\n}\n\n.legal-header h1 {\n  font-size: var(--fs-h1);\n}\n\n.legal-header .updated-at {\n  margin-top: var(--space-xs);\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n}\n\n.legal-notice {\n  margin-top: var(--space-md);\n  padding: var(--space-md);\n  border-radius: var(--radius-sm);\n  background: var(--color-bg-tint);\n  color: var(--color-brand-dark);\n  font-size: var(--fs-small);\n}\n\n.legal-body {\n  padding-block: var(--space-xl);\n  max-width: 760px;\n}\n\n.legal-body section {\n  position: relative;\n  padding: var(--space-md) 0 var(--space-lg) var(--space-md);\n  margin-bottom: var(--space-lg);\n}\n\n/* section自体はクリックできる要素ではないため、ホバーで色が変わる\n   演出は付けない（クリックできると誤認させないため）。左の帯は常時\n   ブランドグラデーションで表示し、条文の区切りを視覚的に示す。 */\n.legal-body section::before {\n  content: "";\n  position: absolute;\n  inset: var(--space-md) auto var(--space-lg) 0;\n  width: 3px;\n  background: var(--grad-brand);\n}\n\n.legal-body section:not(:last-child) {\n  border-bottom: 1px solid var(--color-border);\n}\n\n.legal-body h2 {\n  font-size: var(--fs-h3);\n  margin-bottom: var(--space-sm);\n  color: var(--color-accent-dark);\n}\n\n.legal-body h3 {\n  font-size: 1rem;\n  margin-top: var(--space-md);\n  margin-bottom: var(--space-xs);\n}\n\n.legal-body p,\n.legal-body li {\n  color: var(--color-gray-700);\n  line-height: 1.85;\n}\n\n/* 既定ではaはcolor:inheritのため、本文中の「こちら」等のリンクが\n   周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */\n.legal-body a {\n  color: var(--color-accent);\n  text-decoration: underline;\n  text-underline-offset: 0.15em;\n}\n\n.legal-body a:hover {\n  color: var(--color-accent-dark);\n}\n\n.legal-body ul,\n.legal-body ol {\n  padding-left: 1.4rem;\n  margin-top: var(--space-xs);\n  display: grid;\n  gap: 0.4rem;\n}\n\n.legal-body ul {\n  list-style: disc;\n}\n\n.legal-body ol {\n  list-style: decimal;\n}\n\n.legal-body table {\n  width: 100%;\n  margin-top: var(--space-sm);\n  font-size: var(--fs-small);\n}\n\n.legal-body th,\n.legal-body td {\n  text-align: left;\n  padding: 0.6rem 0.8rem;\n  border-bottom: 1px solid var(--color-border);\n}\n\n.todo-flag {\n  display: inline-block;\n  padding: 0.15rem 0.5rem;\n  border-radius: var(--radius-sm);\n  background: rgba(255, 107, 74, 0.14);\n  color: var(--color-accent-dark);\n  font-size: 0.75rem;\n  font-weight: 700;\n  margin-left: 0.4rem;\n  vertical-align: middle;\n}\n
+/* ==========================================================================
+   NIARIM legal.css - プライバシーポリシー / 利用規約 / FAQページ共通
+   ========================================================================== */
+
+.legal-header {
+  padding-block: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-header h1 {
+  font-size: var(--fs-h1);
+}
+
+.legal-header .updated-at {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.legal-notice {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-tint);
+  color: var(--color-brand-dark);
+  font-size: var(--fs-small);
+}
+
+.legal-body {
+  padding-block: var(--space-xl);
+  max-width: 760px;
+}
+
+.legal-body section {
+  position: relative;
+  padding: var(--space-md) 0 var(--space-lg) var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+/* section自体はクリックできる要素ではないため、ホバーで色が変わる
+   演出は付けない（クリックできると誤認させないため）。左の帯は常時
+   ブランドグラデーションで表示し、条文の区切りを視覚的に示す。 */
+.legal-body section::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-md) auto var(--space-lg) 0;
+  width: 3px;
+  background: var(--grad-brand);
+}
+
+.legal-body section:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-body h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-sm);
+  color: var(--color-accent-dark);
+}
+
+.legal-body h3 {
+  font-size: 1rem;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.legal-body p,
+.legal-body li {
+  color: var(--color-gray-700);
+  line-height: 1.85;
+}
+
+/* 既定ではaはcolor:inheritのため、本文中の「こちら」等のリンクが
+   周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */
+.legal-body a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.legal-body a:hover {
+  color: var(--color-accent-dark);
+}
+
+.legal-body ul,
+.legal-body ol {
+  padding-left: 1.4rem;
+  margin-top: var(--space-xs);
+  display: grid;
+  gap: 0.4rem;
+}
+
+.legal-body ul {
+  list-style: disc;
+}
+
+.legal-body ol {
+  list-style: decimal;
+}
+
+.legal-body table {
+  width: 100%;
+  margin-top: var(--space-sm);
+  font-size: var(--fs-small);
+}
+
+.legal-body th,
+.legal-body td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.todo-flag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 107, 74, 0.14);
+  color: var(--color-accent-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}

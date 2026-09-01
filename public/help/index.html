@@ -1,1 +1,561 @@
-﻿<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n<title>使い方ガイド | NIARIM</title>\n<meta name="description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />\n<meta name="robots" content="index,follow" />\n<link rel="canonical" href="https://niarim.example.com/help/" />\n\n<meta property="og:type" content="website" />\n<meta property="og:title" content="使い方ガイド | NIARIM" />\n<meta property="og:description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />\n<meta property="og:url" content="https://niarim.example.com/help/" />\n<meta property="og:image" content="/assets/images/ogp-default.png" />\n<meta property="og:locale" content="ja_JP" />\n\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="使い方ガイド | NIARIM" />\n<meta name="twitter:description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />\n<meta name="twitter:image" content="/assets/images/ogp-default.png" />\n\n<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />\n<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />\n\n<link rel="preconnect" href="https://fonts.googleapis.com" />\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" />\n<link rel="stylesheet" href="/css/reset.css" />\n<link rel="stylesheet" href="/css/variables.css" />\n<link rel="stylesheet" href="/css/common.css" />\n<link rel="stylesheet" href="/css/pages/features.css" />\n<link rel="stylesheet" href="/css/pages/help.css" />\n</head>\n<body data-i18n-title="meta.help.title" data-i18n-description="meta.help.description">\n<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>\n\n<header class="site-header">\n  <div class="container">\n    <a class="brand" href="/">\n      <img class="brand-icon" src="/assets/images/logo/app_logo.svg" alt="" width="32" height="32" />\n      <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />\n    </a>\n    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">\n      <ul>\n        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>\n        <li><a href="/features/" data-i18n="nav.features">機能</a></li>\n        <li><a href="/help/" aria-current="page" data-i18n="nav.help">使い方ガイド</a></li>\n        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>\n        <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>\n        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>\n        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>\n        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>\n      </ul>\n      <div class="lang-dropdown" data-lang-dropdown data-open="false">\n        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">\n          <span data-current-lang-label>日本語</span>\n        </button>\n        <ul class="lang-menu" data-lang-menu></ul>\n      </div>\n      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>\n    </nav>\n    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">\n      <span class="bar"></span>\n    </button>\n  </div>\n</header>\n\n<main id="main">\n  <div class="container">\n    <div class="help-header reveal">\n      <span class="eyebrow">Guide</span>\n      <h1 data-i18n="nav.help">使い方ガイド</h1>\n      <p data-i18n="help.lead">アプリ内の「ヘルプ」画面とほぼ同じ内容を、ウェブからも検索・閲覧いただけます。気になるキーワードを入力してください。</p>\n    </div>\n\n    <div class="help-search reveal">\n      <label for="help-search-input" class="visually-hidden" data-i18n="help.searchHint">キーワードで検索</label>\n      <input type="search" id="help-search-input" data-i18n-attr="placeholder:help.searchHint" placeholder="キーワードで検索" />\n    </div>\n\n    <nav class="feature-nav reveal" aria-label="カテゴリ一覧">\n        <a href="#help-tool" data-i18n="help.category.tool">ツール</a>\n        <a href="#help-brush" data-i18n="help.category.brush">ブラシ</a>\n        <a href="#help-penInput" data-i18n="help.category.penInput">ペン入力</a>\n        <a href="#help-drawing" data-i18n="help.category.drawing">描画</a>\n        <a href="#help-layer" data-i18n="help.category.layer">レイヤー</a>\n        <a href="#help-animation" data-i18n="help.category.animation">アニメーション</a>\n        <a href="#help-save" data-i18n="help.category.save">保存</a>\n        <a href="#help-projectManagement" data-i18n="help.category.projectManagement">プロジェクト管理</a>\n        <a href="#help-export" data-i18n="help.category.export">書き出し</a>\n        <a href="#help-premium" data-i18n="help.category.premium">プレミアム</a>\n        <a href="#help-settings" data-i18n="help.category.settings">設定</a>    </nav>\n\n    <section class="feature-section" data-help-category id="help-tool">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg></span>\n        <h2 data-i18n="help.category.tool">ツール</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry0.title">ペンツール</h3>\n          <p data-i18n="help.entry0.desc">キャンバスに線を描くための基本ツールです。長押しでブラシの種類・太さ・色を変更できます（ダブルタップは簡易説明の表示）。板タブ・液晶タブレットの筆圧・傾きに対応しており、設定画面の「ペン入力」から筆圧カーブを調整すると筆圧の伝わり方（弱い力でどれだけ太さ・不透明度が変化するか）を細かくカスタマイズできます。ペンサブツールを切り替えると、同じペンツールからトーン貼り・スタンプ配置も行えます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry1.title">消しゴムツール</h3>\n          <p data-i18n="help.entry1.desc">ペンツールと対になる、描いた内容を消すためのツールです。ブラシと同様に太さ・不透明度を調整でき、フェードやストローク減衰などのブラシ設定も共通で反映されます。レイヤーの透明部分を「描き足す」のではなく既存の描画を「消す」処理を行うため、下のレイヤーが透けて見えるようになります。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry2.title">バケツツール</h3>\n          <p data-i18n="help.entry2.desc">囲まれた領域を一括で塗りつぶすツールです。線画で囲まれた範囲内をタップすると、その範囲全体が選択中の色（またはトーン）で塗られます。線画に隙間があると意図しない範囲まで塗り広がってしまうことがあるため、線画がきちんと閉じているか確認してから使うのがコツです。設定でベタ塗り／トーン塗りを切り替えられます。 詳細設定（許容誤差・拡張px・線の下まで潜る）は設定画面の「バケツ塗り」から調整できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry3.title">投げ縄塗り</h3>\n          <p data-i18n="help.entry3.desc">囲みたい範囲を指でなぞって多角形の範囲を作り、その内側をまとめて塗るツールです。バケツツールと違い、線画が閉じていない部分があっても自分で囲む範囲を指定できるため、複雑な形や線が途切れている部分の塗りに向いています。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry4.title">スポイトツール</h3>\n          <p data-i18n="help.entry4.desc">タップした位置の色を拾って、描画色として選択するツールです。画面に実際に表示されている全レイヤーを合成した見た目の色を拾うため、複数レイヤーが重なっている部分でも「見た目通りの色」を正確に取得できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry5.title">選択ツール</h3>\n          <p data-i18n="help.entry5.desc">キャンバスの一部分を範囲選択し、選択した範囲だけを移動・回転・拡大縮小できるツールです。長押しすると「矩形選択」「投げ縄選択（自由な形で囲む）」「自動選択（マジックワンド、似た色の範囲を自動でまとめて選択）」の3種類から選択方法を選べます。選択中は選択範囲を示す枠線がキャンバス上に表示され、選択を解除するまで全フレーム・全レイヤーで同じ範囲が固定表示されます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry6.title">指ツール（歪みツール）</h3>\n          <p data-i18n="help.entry6.desc">指でなぞった方向にピクセルを押し流すように歪ませる、液体絵の具を指でこすったような効果を作るツールです。細かい修正よりも、既に描いた線を有機的に歪ませて表情をつけたい時に使います。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry7.title">図形ツール</h3>\n          <p data-i18n="help.entry7.desc">直線・四角形・円といった正確な図形をワンタップで描くためのツールです。ドラッグで始点から終点まで動かすとその場でプレビューされ、指を離すと確定します。フリーハンドでは描きにくい直線や正円が必要な時に便利です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry8.title">テキストツール</h3>\n          <p data-i18n="help.entry8.desc">キャンバス上に文字を配置するツールです。フォント・サイズ・色・縦書き/横書きを選べます。縦書きでは半角英数字の自動回転・縦中横（数字を横向きのまま並べる表記）・ルビ（ふりがな）にも対応しています。配置したテキストは書き出し時にもピクセルとして焼き込まれます。 テキストツールで使えるフォントを追加・検索・削除できる画面です。初期同梱フォント以外の追加フリーフォントは、初期インストール容量を抑えるためここからオンデマンドでダウンロードする方式になっています。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry9.title">早替えツール</h3>\n          <p data-i18n="help.entry9.desc">よく使うブラシ・ツールの組み合わせをあらかじめ登録しておき、ボタン一つで順番に切り替えられる機能です。キャンバス上の↺ボタンを長押しまたは上スワイプすると、登録・並べ替え・削除ができる管理ポップアップが開きます。ドラッグで並び順を変更できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry10.title">スタンプツール</h3>\n          <p data-i18n="help.entry10.desc">あらかじめ登録した画像をブラシのようにキャンバスへ配置するツールです。効果線・背景パターン・小物などを毎回描き直さずに使い回せます。ピクセルモードをONにすると、貼り付けたスタンプをモザイク低解像度化＋色数削減でドット絵風に加工できます。 スタンプパネルでは配置するスタンプの回転角度・大きさを調整できます。同じスタンプでも向きやサイズを変えて配置すれば、単調にならず自然な効果線・小物の並びを作れます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry11.title">ペンサブツール</h3>\n          <p data-i18n="help.entry11.desc">ペンツールを長押しすると、通常の描画に加えてトーン貼り・スタンプ配置のサブツールへ切り替えられます。ツールをいちいち切り替えずに、同じペンから複数の作業を行き来できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry12.title">選択範囲の変形</h3>\n          <p data-i18n="help.entry12.desc">選択ツールで囲んだ範囲は、変形ツールで移動・回転・拡大縮小できます。誤って描いた部分の位置調整や、一部だけを拡大して強調したい時などに使います。 レイヤー全体を対象にしたい場合は、範囲選択を使わない「自由変形・メッシュ変形」（編集メニューから開く）を使うと、格子点を個別にドラッグしてより自由な変形ができます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry13.title">自由変形・メッシュ変形</h3>\n          <p data-i18n="help.entry13.desc">キャンバス右上の編集・設定メニューから開ける、レイヤー全体を対象にした変形ツールです。範囲選択の変形と異なり選択範囲は不要で、角や格子点を指で個別にドラッグして自由な形に変形できます。コントロールパネルの分割数スライダーでメッシュを最大10×10まで細かくでき、2本の指で別々の点を同時につまめば回転・拡大縮小のような操作も直感的に行えます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry14.title">カラーピッカー</h3>\n          <p data-i18n="help.entry14.desc">HSVとRGBを1つの画面で切り替えながら色を選べるカラーピッカーです。パレット機能で使用中のカラーセットを保存・呼び出しできます。パレットはファイル書き出しやQRコードで他の端末と共有することもできます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-brush">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>\n        <h2 data-i18n="help.category.brush">ブラシ</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry15.title">ブラシのお気に入り</h3>\n          <p data-i18n="help.entry15.desc">ブラシ一覧の各ブラシにある星アイコンをタップすると、お気に入り登録・解除ができます。（自動塗り設定・スタンプ・フォント・描画フィルターなど、アプリ内の他のお気に入り機能と同じ操作方法です。）一覧上部の星アイコンで、お気に入りのみ表示に絞り込むこともできます。誤って削除しないよう、お気に入り登録中のブラシは削除できません。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry25.title">フェード</h3>\n          <p data-i18n="help.entry25.desc">ブラシ設定の一つで、ストロークを描き進めるにつれて不透明度や太さが徐々に減少していく効果です。線の端をかすれさせたい時や、余韻を残すような描き味を作りたい時に使います。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry26.title">ストローク減衰</h3>\n          <p data-i18n="help.entry26.desc">フェードと似ていますが、こちらは「インクが減っていく」ような表現に近く、描き続けるほど色が薄くなったりかすれたりする効果です。筆やマーカーで描き続けた時のインク切れのような質感を再現します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry27.title">混色</h3>\n          <p data-i18n="help.entry27.desc">ブラシで塗る際、ブラシの直下にすでにある色と、これから塗ろうとしている選択色を混ぜ合わせながら描画する機能です。水彩や油彩のように、既存の色に新しい色をなじませたい時に使います。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry68.title">カスタムブラシ</h3>\n          <p data-i18n="help.entry68.desc">ブラシ一覧でプリインストールのブラシを長押しして「複製」すると、それを元にした自分専用のカスタムブラシが作成されます。複製したブラシは太さ・不透明度・硬さ・回転・密度・散布・ぼかし半径などのパラメータを自由に編集でき、不要になれば削除もできます。（プリインストールのブラシ自体は編集・削除できません。）フォルダで分類したり、星アイコンでお気に入り登録することもできます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-penInput">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>\n        <h2 data-i18n="help.category.penInput">ペン入力</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry28.title">筆圧カーブ</h3>\n          <p data-i18n="help.entry28.desc">ペン入力設定にある機能で、実際の筆圧の強さと、ブラシの太さ・不透明度への反映のされ方の関係をグラフで自由に調整できます。弱い筆圧でも太く出したい人、逆に強く押さないと太くならないようにしたい人など、手癖に合わせて描き心地を細かくカスタマイズできます。設定変更後はその場で試し書きしながら確認できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry62.title">ペン設定</h3>\n          <p data-i18n="help.entry62.desc">板タブ・液晶タブレットの筆圧カーブに加えて、ペン側面のボタン（対応スタイラス使用時）に消しゴム切替やスポイトなどの操作を割り当てられる設定画面です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry63.title">傾き検知</h3>\n          <p data-i18n="help.entry63.desc">対応スタイラスの傾き情報を使って、筆先を寝かせたときに線を太く・薄くするなど、実際の筆記具に近い描き心地を再現する設定です。パフォーマンス設定からON/OFFを切り替えられます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-drawing">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg></span>\n        <h2 data-i18n="help.category.drawing">描画</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry24.title">定規</h3>\n          <p data-i18n="help.entry24.desc">直線・円・楕円・パース定規（消失点を使った透視図法用の定規）など、フリーハンドでは描きにくい正確な線を補助するための機能です。配置した定規に沿ってペン先が自動でスナップするため、定規なしでは難しい奥行きのある構図も描きやすくなります。定規はハンドルを操作して移動・回転・サイズ変更ができます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry29.title">トーン塗り</h3>\n          <p data-i18n="help.entry29.desc">バケツツールの設定でベタ塗りからトーン塗りへ切り替えると、選択した網点・ライン柄などのトーンパターンで塗りつぶせます。ピクセルモード専用の市松模様・格子柄トーンも用意されており、ドット絵の質感を活かした塗りができます。フリルやニット、タイツなど、手描きでは手間のかかる細かい柄も簡単に描けます。オリジナルのトーンを自作して追加したり、ほかの人と共有したりすることも可能です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry30.title">ピクセルモード</h3>\n          <p data-i18n="help.entry30.desc">ブラシ・フォント・スタンプのそれぞれに用意されている設定で、ONにするとアンチエイリアスを取り除き、くっきりとしたドット絵風の輪郭で描画されます。あえて古いゲームのような質感を出したい時や、低解像度感を演出したい時に使います。配色方式は「色を指定しない」「色を指定する」「色数を指定する」「パレットから選ぶ」の4種類から選べ、ドット絵専用パレットを使った配色もできます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry31.title">描画領域</h3>\n          <p data-i18n="help.entry31.desc">書き出し範囲よりも広い範囲まで描いておける設定です。キャンバス上には書き出し範囲を示す赤枠が表示され、枠の外側にはみ出して描いた部分は書き出されませんが、パン・ズームなどのカメラワークで見せる範囲を後から調整する余地を残せます。新規プロジェクト作成時に倍率を設定します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry32.title">キャンバスの背景色</h3>\n          <p data-i18n="help.entry32.desc">プロジェクトのキャンバス背景色を設定できます。透過書き出し（透過WebM）を使う場合は背景色は書き出しに影響しませんが、作業中の見やすさのために好みの色に変更できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry41.title">描画フィルター</h3>\n          <p data-i18n="help.entry41.desc">選択中のレイヤーに直接適用するフィルターです（演出フィルターがタイムライン全体・シーン単位に適用されるのに対し、描画フィルターはレイヤー単位）。ぼかし・シャープ・アンシャープマスク・トーンカーブ・レベル補正・周辺減光・ノイズ・レトロアニメ・ブラウン管・アニメ調・縁取り・ドット絵・眼鏡断層フィルターなどが用意されています。縁取りは元のレイヤーを書き換えず、縁どった内容だけを新規レイヤーへ描画します。眼鏡断層フィルターは、選択レイヤーで塗った範囲だけに、度数の強い眼鏡レンズのような局所的な歪みをかけられます。ドット絵は配色方式（色を指定しない・色を指定する・色数を指定する・パレットから選ぶ）も選べます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-layer">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>\n        <h2 data-i18n="help.category.layer">レイヤー</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry16.title">レイヤー</h3>\n          <p data-i18n="help.entry16.desc">1枚のキャンバスを複数の透明な「層」に分けて描画できる仕組みです。線画・色塗り・背景などを別々のレイヤーに分けて描くことで、後から色だけをやり直したり、線画を消さずに背景を差し替えたりできます。画面上では上に重なっているレイヤーほど手前に表示されます。各レイヤー行のアイコンからワンタップで削除・下のレイヤーとの結合ができ、レイヤーパネル上部のアイコンから表示中の全レイヤーを一括結合することもできます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry69.title">レイヤーの複数選択・一括操作</h3>\n          <p data-i18n="help.entry69.desc">レイヤーパネルの選択モードを使うと、複数のレイヤーをチェックボックスでまとめて選び、結合や一括削除ができます。結合は通常・自動塗り用線画・自動塗りレイヤー同士でのみ可能です（共通レイヤー・フォルダ・タイムライン素材は結合対象外）。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry17.title">ブレンドモード</h3>\n          <p data-i18n="help.entry17.desc">レイヤーの合成方法を変更する機能です。トーンやカラー効果をレイヤーとして重ねる時によく使われます。\n通常：そのまま重ねます。\n乗算：下のレイヤーと掛け合わせて暗くします。影・陰影づけの定番です。\nスクリーン：明るさを足し合わせて明るくします。光の表現に向きます。\nオーバーレイ：暗い部分はより暗く、明るい部分はより明るくしてコントラストを強めます。\n加算：色を単純に足し合わせます。光の効果線などに向きます。\n減算：色を差し引き、暗く沈んだ効果になります。\n比較（暗）：上下のレイヤーで暗い方の色を採用します。\n比較（明）：上下のレイヤーで明るい方の色を採用します。\n焼き込みカラー：下の色を暗く沈めながら濃く発色させます。\n覆い焼きカラー：下の色を明るく飛ばしながら発色させます。\nハードライト：オーバーレイより強くコントラストが付きます。\nソフトライト：オーバーレイより穏やかにコントラストが付きます。柔らかい陰影に向きます。\n差の絶対値：上下の色の差を表示します。色のズレ確認などに使えます。\n色相・彩度・カラー・輝度：それぞれ色相・彩度・色味・明るさだけを下のレイヤーへ反映します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry18.title">クリッピング</h3>\n          <p data-i18n="help.entry18.desc">自分のすぐ下にあるレイヤーの、不透明なピクセルの範囲内にのみ描画されるようにする機能です。線画からはみ出さずに色を塗りたい時、線画レイヤーの上に色塗り用レイヤーを作ってクリッピングを有効にすると、線画の外側にうっかりはみ出して描いてしまう心配がなくなります。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry19.title">共通レイヤー</h3>\n          <p data-i18n="help.entry19.desc">通常のレイヤーは1フレームごとに独立していますが、共通レイヤーは複数のフレーム・シーンで同じ内容を共有するレイヤーです。背景などフレームが変わっても動かさない要素を、フレームごとに描き直す手間なく一度描くだけで済ませられます。タイムライン上では専用のトラックとして表示されます。 通常レイヤーを共通レイヤー（複数フレームに同じ内容を表示し続けるレイヤー）へ変換できる機能です。表示中のレイヤーを複製して1枚に統合してから共通化することもできます。背景など毎フレーム同じ内容を使い回したい場合に、描き直す手間を省けます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry20.title">レイヤーフォルダ</h3>\n          <p data-i18n="help.entry20.desc">複数のレイヤーをフォルダにまとめて整理できる機能です。パーツ数が多いイラストでもレイヤーパネルが見やすくなります。クリッピングはフォルダをまたいで適用できない仕様のため、クリッピングを使う場合は同じフォルダ内でまとめておくと安全です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry21.title">自動塗り</h3>\n          <p data-i18n="help.entry21.desc">自動塗り用線画レイヤーの下に自動塗りレイヤーを作り、あらかじめ作成した「自動塗り設定」（パーツごとの色・トーンの組み合わせ）に基づいて色を自動で塗る機能です。線画を描き終えた後に一括で色を塗れるため、同じキャラクターを何度も描く手描きアニメーションで色塗りの手間を大幅に減らせます。線画を描き直した場合はタイムライン・レイヤーパネルに更新マーク（❗）が表示され、自動塗りの再実行が必要なことを知らせます。 タイムライン画面の三点メニューから「自動塗り実行」を選ぶと、更新マーク（❗）が付いた自動塗りレイヤーをまとめて再計算できます。線画を描き直した後に1枚ずつレイヤーパネルで実行する手間を省けます。 自動塗り設定の各パーツには、線画の色をどう扱うかの設定（指定色・塗り色と同じ・色トレス）があります。色トレス（線画馴染ませ）を選ぶと、線画の色を塗り色に合わせてHSLシフトし、線が浮かずに馴染んだ仕上がりになります。 設定が増えてくると、パーツ割り当て時の一覧が長くなって選びにくくなります。プロジェクト設定（またはレイヤーパネルのパーツ割り当てダイアログ）から、このプロジェクトで使う設定だけに絞り込んでおくと、一覧がすっきりして選びやすくなります。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry22.title">グラデーション塗り（自動塗り設定）</h3>\n          <p data-i18n="help.entry22.desc">自動塗り設定の各パーツには単色だけでなくグラデーションも設定できます。ドラッグで移動できる対称ハンドルにより、直感的にグラデーションの範囲・角度を調整できます。 各パーツには「指定色で縁取り」も設定できます。チェックを入れると、塗り範囲の一番外側（線画に接する部分）に指定した色・太さのラインが引かれます。縁取り色はカラーピッカーで自由に選べ、太さはスライダー・±ボタン・数値タップでの直接入力のいずれでも調整できます。設定項目のすぐ上にプレビューが表示されるため、実際に自動塗りを実行する前に色と太さを確認できます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-animation">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>\n        <h2 data-i18n="help.category.animation">アニメーション</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry23.title">オニオンスキン</h3>\n          <p data-i18n="help.entry23.desc">現在編集中のフレームの前後のフレームを半透明で重ねて表示し、動きの繋がりを確認しながら描けるようにする機能です。パフォーマンス設定で表示する枚数（前後何枚まで）や色・透明度を調整できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry33.title">タイムライン</h3>\n          <p data-i18n="help.entry33.desc">アニメーションの時間軸を管理する画面です。フレーム（静止画1コマ）を並べてパラパラ漫画のように再生することでアニメーションになります。画像・動画・音声などの素材トラック、共通レイヤートラック、カメラキーフレームも同じタイムライン上で管理します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry34.title">シーン</h3>\n          <p data-i18n="help.entry34.desc">1つのプロジェクト（1本の動画）の中を、場面（カット）ごとに分割して管理する機能です。フォルダがプロジェクト単位の整理なのに対し、シーンは1本の動画の中の場面転換を表現するために使います。タイムラインのシーンタブでは、シーンの追加・複製・削除・名前変更・並び替えができます。複数選択モードにすると複数シーンをまとめて移動・複製・削除することも可能です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry35.title">フレーム操作</h3>\n          <p data-i18n="help.entry35.desc">フレーム一覧では新規追加・複製・削除に加えて、複数選択モードで複数フレームをまとめて移動・複製・削除できます。保持セル数を増やすと同じフレームを複数コマ分表示させ続けられる（いわゆる「止め」）ので、動きの少ないカットで枚数を節約できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry36.title">素材クリップ（画像・動画・音声）</h3>\n          <p data-i18n="help.entry36.desc">タイムラインの画像・動画・音声トラックに配置したクリップです。クリップ本体を長押しドラッグすると表示開始位置を移動でき、左右端のハンドルをドラッグすると使用範囲（長さ）を変更できます。タップすると開く詳細シートのコピーアイコンから複製、ゴミ箱アイコンから削除もできます。画像・動画は内部的にはレイヤーとして扱われており、音声はシーンに直接紐づくクリップとして管理されます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry37.title">素材一覧</h3>\n          <p data-i18n="help.entry37.desc">プロジェクトで使用している画像・動画・音声素材をまとめて確認できる画面です。タイムラインへ配置した素材の元ファイルがここに集約されます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry38.title">音声クリップの音量・フェード</h3>\n          <p data-i18n="help.entry38.desc">タイムラインに配置した音声クリップは、詳細シートから音量・フェードイン・フェードアウトの秒数を調整できます。効果音やBGMの音量バランスを整えたり、曲の始まり・終わりを滑らかにしたりできます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry39.title">カメラキーフレーム</h3>\n          <p data-i18n="help.entry39.desc">タイムライン上の特定の位置にカメラの位置・拡大率・回転を記録しておく機能です。キーフレーム間は自動で滑らかに補間されるため、パン（横移動）やズームイン・ズームアウトのようなカメラワークを簡単に付けられます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry40.title">演出フィルター</h3>\n          <p data-i18n="help.entry40.desc">シーンやフレームに適用できる映像効果（ぼかし・色調補正・グロー・ドット絵等）です。手描きの絵そのものを変えずに、演出として画面全体の見た目を調整したい時に使います。ドット絵は配色方式（色を指定しない・色を指定する・色数を指定する・パレットから選ぶ）も選べます。 演出フィルターは複数重ねて適用でき、その適用順はタイムライン上での並び順に従います。フィルター一覧をドラッグで並び替えると、実際に画面へ反映される順序も変わります。 フィルムの粒状感のようなノイズをフレームごとに変化させながら適用する演出フィルターです。強度・量（ノイズが乗る密度）・粒の大きさをスライダーで調整できます。同じフレームに戻ると同じ粒状になるため、スクラブ中にちらつかず、再生すると粒が動いて見えます。 画面に降る雨を表現する演出フィルターです。降り方（本数）・速さ・粒の大きさ・風向きの角度をスライダーで調整できます。各雨粒はフレームが進むごとに一定の速度で降り続けるため、自然な雨の動きになります。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry42.title">レイヤーキーフレーム（パーツ単位アニメーション）</h3>\n          <p data-i18n="help.entry42.desc">各レイヤーの位置・拡大縮小・回転をフレームごとに指定し、キーフレーム間を自動で補間する機能です。カメラキーフレームが画面全体を動かすのに対し、こちらは個々のレイヤーだけを動かします。自動塗りの各パーツはそれぞれ独立したレイヤーとして生成されるため、パーツ単位でのアニメーション（腕だけ動かす、口だけ開閉させる等）にそのまま使えます。レイヤーパネルの三点メニュー「アニメーション（キーフレーム）」から設定します。レイヤーの絵自体は変わらず、表示位置だけが変わる非破壊な変形です。この機能はタイムラインの表示（プレビュー・書き出し）にのみ影響し、キャンバスモードでの実際の作画には影響しません。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry43.title">レイヤーグループ（複数パーツをまとめて動かす）</h3>\n          <p data-i18n="help.entry43.desc">複数のレイヤーをまとめて1つのキーフレームストリームで動かす機能です。例えば「腕」が肌・袖の2枚の自動塗りパーツで構成されている場合、この2枚をグループ化しておけば、1回のキーフレーム操作でまとめて動かせます。レイヤーパネルで複数選択（チェックボックス）した状態で下部バーの「グループ化」アイコンから作成します。グループの動きは各レイヤー自身のキーフレーム（設定されていれば）に重ねて適用されるため、グループ全体の動き＋個別レイヤーの微調整、という組み合わせも可能です。1つのレイヤーは同時に1つのグループにのみ所属できます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-save">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>\n        <h2 data-i18n="help.category.save">保存</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry45.title">自動保存</h3>\n          <p data-i18n="help.entry45.desc">クラッシュやファイル破損が起きた時のための復元専用の保存です。描画などの変更があるたびに自動で保存され、最大3件まで古い順に上書きされます。手動保存（セーブスロット・セーブツリー）とは完全に別で管理されており、通常の保存の代わりにはなりません。アプリを異常終了した後の再起動時のみ、復元するかどうかを尋ねられます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry46.title">セーブスロット</h3>\n          <p data-i18n="help.entry46.desc">決まった数の保存枠（スロット）に、自分で保存先を選びながら保存する方式です。スロット数は設定（低品質5件・中品質10件）で決まります。上書きしたい枠を毎回自分で選ぶため、「このタイミングの状態は残しておきたい」という管理がしやすい方式です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry47.title">セーブツリー</h3>\n          <p data-i18n="help.entry47.desc">保存するたびに新しい保存地点が作られ、過去の保存地点から分岐して別の履歴を作れる（枝分かれする）保存方式です。件数の上限がなく、「あの時のバージョンに戻ってから別の展開を試したい」といった使い方に向いています。画面には保存地点が下から上へ伸びる樹形図として表示されます。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-projectManagement">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-folder"></use></svg></span>\n        <h2 data-i18n="help.category.projectManagement">プロジェクト管理</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry48.title">フォルダ</h3>\n          <p data-i18n="help.entry48.desc">プロジェクト（作品）をグループ化して整理する機能です。複数階層に対応しているので、同じ作品の複数話数やシリーズ物をまとめて管理する使い方もできます（例：「作品名」フォルダの中に「第1話」「第2話」…とプロジェクトを並べる）。1つの動画の中で場面を分けて作りたい場合は、フォルダではなくキャンバス画面の「シーン」機能をご利用ください。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry49.title">ゴミ箱</h3>\n          <p data-i18n="help.entry49.desc">削除したプロジェクトが一時的に移動する場所です。完全に削除するまではここから元に戻せます。設定で自動削除までの日数（OFF/30日/60日/90日）を指定できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry50.title">共有（.niashare）</h3>\n          <p data-i18n="help.entry50.desc">プロジェクトを他の人（または自分の他の端末）へ渡すための共有専用ファイル形式です。受け取った側がこのファイルを開くと、複製されて自分のプロジェクト一覧に追加されます。共有元の.niashare自体は変更されません。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry51.title">引き継ぎ（.niatra）</h3>\n          <p data-i18n="help.entry51.desc">設定・素材・ブラシ・自動塗り設定・テーマなど、アプリ全体の環境を別の端末へまとめて引き継ぐための機能です。引き継ぐ項目はチェックボックスで個別に選べます。個別のプロジェクトを渡したい場合は「共有（.niashare）」を使います。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry56.title">ホーム画面</h3>\n          <p data-i18n="help.entry56.desc">アプリを起動して最初に表示される画面で、プロジェクト・共有・作品一覧・ゴミ箱の各タブを切り替えて閲覧できます。右上の検索アイコンからプロジェクト名で絞り込み検索もできます。プロジェクトタブでは新規プロジェクト作成とフォルダ作成を画面右下の＋ボタンから選べます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry57.title">新規プロジェクト作成</h3>\n          <p data-i18n="help.entry57.desc">キャンバスサイズ・fps・長さ（秒数。あとからタイムラインでのフレーム増減にも連動）・描画領域（書き出し範囲より広く描いておける設定）・使用する自動塗り設定などをまとめて指定してからプロジェクトを作成します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry58.title">プロジェクト詳細画面</h3>\n          <p data-i18n="help.entry58.desc">プロジェクト名・サムネイル・お気に入り登録・使用する自動塗り設定の絞り込みなど、プロジェクト単位の設定をまとめて確認・編集できる画面です。セーブツリーへの入り口もここにあります。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-export">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg></span>\n        <h2 data-i18n="help.category.export">書き出し</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry44.title">エンドカード</h3>\n          <p data-i18n="help.entry44.desc">動画書き出し時、本編の終わりに自動で追加されるNIARIMロゴの短い動画（約5秒）です。無料版では非表示・削除ができませんが、プレミアム会員になると表示のON/OFF・長さ変更・差し替えができるようになります。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry52.title">動画書き出し（MP4・WebM・GIF・AVI）</h3>\n          <p data-i18n="help.entry52.desc">作品を汎用的なMP4動画として書き出します。無料版は書き出せる長さに上限（90秒）があり、動画の最後にエンドカード（アプリロゴ）が自動で追加されます。 アルファチャンネル（背景の透明部分）を保持したまま書き出せる動画形式です。対応する再生環境でのみ透過再生されます。他のアプリの素材として重ねて使いたい場合などに向いています。 アニメーションGIFとして書き出します。自動でループ再生される形式のため、SNSへの投稿など気軽に共有したい場面に向いています。 互換性を重視したい場合はAVI（Motion JPEG）としても書き出せます。特許・ライセンス面で安全なコーデックを採用していますが、アルファチャンネル（透過）には対応せず、端末によってはアプリ内プレビューが利用できない場合があります。（その場合も「共有」から外部プレイヤーで再生できます。）無料会員はプロジェクトの長さに90秒までの上限があります（プレミアム会員は2時間）。フレーム追加・複製によって上限を超えそうな場合は、ボタンをタップした時点で注意ダイアログが表示され、実際に90秒を超えることはありません。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry53.title">書き出し画面</h3>\n          <p data-i18n="help.entry53.desc">動画・画像の書き出し中は進捗状況が表示され、途中でキャンセルすることもできます。書き出しにかかる時間は端末の性能によって変わります。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-premium">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-branding_watermark"></use></svg></span>\n        <h2 data-i18n="help.category.premium">プレミアム</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry54.title">ウォーターマーク</h3>\n          <p data-i18n="help.entry54.desc">書き出した動画・画像に、自分の署名やロゴを透かしとして入れられるプレミアム限定機能です。位置・大きさ・不透明度を調整できます。タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry55.title">プレミアム</h3>\n          <p data-i18n="help.entry55.desc">プレミアム会員になると、無料版で90秒までに制限されている動画の尺が無制限になり、動画の最後に自動追加されるエンドカード（アプリロゴ）を削除できます。広告も非表示になり、ウォーターマーク・トーンカーブ・レベル補正機能も利用できるようになります。</p>\n        </div>\n      </div>\n    </section>\n\n    <section class="feature-section" data-help-category id="help-settings">\n      <div class="feature-section-head">\n        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>\n        <h2 data-i18n="help.category.settings">設定</h2>\n      </div>\n      <div class="spec-grid">\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry59.title">テーマ設定</h3>\n          <p data-i18n="help.entry59.desc">アプリ全体の配色をテーマ一覧から選んだり、差し色を自由にカスタマイズしたりできる画面です。見出し・項目名用フォントと説明文用フォントが分かれており、視認性を保ちながら着せ替えを楽しめます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry60.title">ワークスペース設定</h3>\n          <p data-i18n="help.entry60.desc">左利きモード（ドッキングパネルを左右反転）、PC/DeXモードの手動切替、手のひらツールの表示条件などをまとめて設定できる画面です。使用端末や利き手に合わせて作業しやすいレイアウトに調整できます。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry61.title">ジェスチャー設定</h3>\n          <p data-i18n="help.entry61.desc">2本指タップ・3本指タップ・2本指スワイプ・長押しに、Undo/Redo・フレーム移動・スポイトなどの操作を割り当てられる設定です。ペンボタン（対応スタイラス使用時）にも別途操作を割り当てられます。指を使わずワンタッチで頻用操作を呼び出したい場合に便利です。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry64.title">パフォーマンス設定</h3>\n          <p data-i18n="help.entry64.desc">端末の性能に応じて、低品質・中品質・高品質のプリセットから選ぶか、各項目を個別に設定（カスタム）できます。保存方式・動作の軽さ・オニオンスキン・傾き検知に加えて、Undo回数やゴミ箱の自動削除などアプリの容量・動作の重さに影響する設定もここにまとまっています。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry65.title">バケツ塗り詳細設定</h3>\n          <p data-i18n="help.entry65.desc">設定画面の「バケツ塗り」から、許容誤差（クリックした位置の色からどこまでの色差を同一領域とみなすか）・拡張px（塗った範囲を境界の外側へ広げて線画との隙間を埋める量）・線の下まで潜る（拡張分を線画の上から上書きせず、線の見た目を保ったまま背後へ塗り色を合成する）を調整できます。線画に細かい隙間がある場合や、塗り残しが気になる場合に調整すると仕上がりが安定します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry66.title">Undo（元に戻す）回数設定</h3>\n          <p data-i18n="help.entry66.desc">パフォーマンス設定から、Undoで遡れる操作回数を調整できます。回数を増やすほど安心して試行錯誤できますが、メモリ使用量も増えるため、動作を軽くしたい場合は回数を減らすとよいでしょう。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry67.title">フォントの読み込み</h3>\n          <p data-i18n="help.entry67.desc">端末内のフォントファイルを直接読み込んで使えるようにする機能です。設定画面のフォント管理「読み込み」タブから追加できます。配信されていない自作フォントや購入した商用フォントを使いたい場合に利用します。</p>\n        </div>\n        <div class="spec-item" data-help-card>\n          <h3 data-i18n="help.entry70.title">容量削減</h3>\n          <p data-i18n="help.entry70.desc">端末容量に対するNIARIMの使用量と、NIARIM内部（プロジェクト・素材・書き出し済みファイル・自作ブラシ/トーン/スタンプ/フォント・キャッシュ・ゴミ箱）の内訳を円グラフで確認できます。キャッシュの削除・未使用素材の一括削除（全プロジェクト）・ゴミ箱を空にする・プロジェクトの整理・全データ削除（初期化）が行えます。</p>\n        </div>\n      </div>\n    </section>\n    <p class="help-no-results" id="help-no-results" data-i18n="help.noResults">該当する項目が見つかりませんでした。</p>\n\n  </div>\n</main>\n\n<footer class="site-footer">\n  <div class="container">\n    <div class="footer-grid">\n      <div class="footer-brand">\n        <a class="brand" href="/">\n          <img class="brand-icon" src="/assets/images/logo/app_logo_footer.svg" alt="" width="32" height="32" />\n          <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />\n        </a>\n        <p data-i18n="footer.tagline">Animation made by your hands.</p>\n      </div>\n      <div class="footer-col">\n        <h3 data-i18n="footer.product">Product</h3>\n        <ul>\n          <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>\n          <li><a href="/features/" data-i18n="nav.features">機能</a></li>\n          <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>\n          <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>\n          <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>\n          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>\n        </ul>\n      </div>\n      <div class="footer-col">\n        <h3 data-i18n="footer.support">Support</h3>\n        <ul>\n          <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>\n          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>\n          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>\n        </ul>\n      </div>\n      <div class="footer-col">\n        <h3 data-i18n="footer.legal">Legal</h3>\n        <ul>\n          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>\n          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>\n        </ul>\n      </div>\n    </div>\n    <div class="footer-bottom">\n      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>\n      <div class="footer-social">\n        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>\n      </div>\n    </div>\n  </div>\n</footer>\n\n<script src="/js/config.js"></script>\n<script src="/js/i18n-dict.js"></script>\n<script src="/js/i18n-dict-intl.js"></script>\n<script src="/js/i18n-dict-nav-extra.js"></script>\n<script src="/js/i18n-dict-help.js"></script>\n<script src="/js/i18n.js"></script>\n<script src="/js/main.js"></script>\n<script src="/js/animations.js"></script>\n<script src="/js/help.js"></script>\n<script>\n  (function () {\n    var c = window.NIARIM_CONFIG || {};\n    ["footer-x-link", "footer-x-icon"].forEach(function (id) {\n      var el = document.getElementById(id);\n      if (el && c.X_URL) el.setAttribute("href", c.X_URL);\n    });\n  })();\n</script>\n</body>\n</html>\n
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使い方ガイド | NIARIM</title>
+<meta name="description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://niarim.example.com/help/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="使い方ガイド | NIARIM" />
+<meta property="og:description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />
+<meta property="og:url" content="https://niarim.example.com/help/" />
+<meta property="og:image" content="/assets/images/ogp-default.png" />
+<meta property="og:locale" content="ja_JP" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="使い方ガイド | NIARIM" />
+<meta name="twitter:description" content="NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。" />
+<meta name="twitter:image" content="/assets/images/ogp-default.png" />
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" />
+<link rel="stylesheet" href="/css/reset.css" />
+<link rel="stylesheet" href="/css/variables.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<link rel="stylesheet" href="/css/pages/features.css" />
+<link rel="stylesheet" href="/css/pages/help.css" />
+</head>
+<body data-i18n-title="meta.help.title" data-i18n-description="meta.help.description">
+<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img class="brand-icon" src="/assets/images/logo/app_logo.svg" alt="" width="32" height="32" />
+      <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />
+    </a>
+    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+        <li><a href="/help/" aria-current="page" data-i18n="nav.help">使い方ガイド</a></li>
+        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+        <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>
+        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+      </ul>
+      <div class="lang-dropdown" data-lang-dropdown data-open="false">
+        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">
+          <span data-current-lang-label>日本語</span>
+        </button>
+        <ul class="lang-menu" data-lang-menu></ul>
+      </div>
+      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <div class="help-header reveal">
+      <span class="eyebrow">Guide</span>
+      <h1 data-i18n="nav.help">使い方ガイド</h1>
+      <p data-i18n="help.lead">アプリ内の「ヘルプ」画面とほぼ同じ内容を、ウェブからも検索・閲覧いただけます。気になるキーワードを入力してください。</p>
+    </div>
+
+    <div class="help-search reveal">
+      <label for="help-search-input" class="visually-hidden" data-i18n="help.searchHint">キーワードで検索</label>
+      <input type="search" id="help-search-input" data-i18n-attr="placeholder:help.searchHint" placeholder="キーワードで検索" />
+    </div>
+
+    <nav class="feature-nav reveal" aria-label="カテゴリ一覧">
+        <a href="#help-tool" data-i18n="help.category.tool">ツール</a>
+        <a href="#help-brush" data-i18n="help.category.brush">ブラシ</a>
+        <a href="#help-penInput" data-i18n="help.category.penInput">ペン入力</a>
+        <a href="#help-drawing" data-i18n="help.category.drawing">描画</a>
+        <a href="#help-layer" data-i18n="help.category.layer">レイヤー</a>
+        <a href="#help-animation" data-i18n="help.category.animation">アニメーション</a>
+        <a href="#help-save" data-i18n="help.category.save">保存</a>
+        <a href="#help-projectManagement" data-i18n="help.category.projectManagement">プロジェクト管理</a>
+        <a href="#help-export" data-i18n="help.category.export">書き出し</a>
+        <a href="#help-premium" data-i18n="help.category.premium">プレミアム</a>
+        <a href="#help-settings" data-i18n="help.category.settings">設定</a>    </nav>
+
+    <section class="feature-section" data-help-category id="help-tool">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-edit"></use></svg></span>
+        <h2 data-i18n="help.category.tool">ツール</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry0.title">ペンツール</h3>
+          <p data-i18n="help.entry0.desc">キャンバスに線を描くための基本ツールです。長押しでブラシの種類・太さ・色を変更できます（ダブルタップは簡易説明の表示）。板タブ・液晶タブレットの筆圧・傾きに対応しており、設定画面の「ペン入力」から筆圧カーブを調整すると筆圧の伝わり方（弱い力でどれだけ太さ・不透明度が変化するか）を細かくカスタマイズできます。ペンサブツールを切り替えると、同じペンツールからトーン貼り・スタンプ配置も行えます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry1.title">消しゴムツール</h3>
+          <p data-i18n="help.entry1.desc">ペンツールと対になる、描いた内容を消すためのツールです。ブラシと同様に太さ・不透明度を調整でき、フェードやストローク減衰などのブラシ設定も共通で反映されます。レイヤーの透明部分を「描き足す」のではなく既存の描画を「消す」処理を行うため、下のレイヤーが透けて見えるようになります。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry2.title">バケツツール</h3>
+          <p data-i18n="help.entry2.desc">囲まれた領域を一括で塗りつぶすツールです。線画で囲まれた範囲内をタップすると、その範囲全体が選択中の色（またはトーン）で塗られます。線画に隙間があると意図しない範囲まで塗り広がってしまうことがあるため、線画がきちんと閉じているか確認してから使うのがコツです。設定でベタ塗り／トーン塗りを切り替えられます。 詳細設定（許容誤差・拡張px・線の下まで潜る）は設定画面の「バケツ塗り」から調整できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry3.title">投げ縄塗り</h3>
+          <p data-i18n="help.entry3.desc">囲みたい範囲を指でなぞって多角形の範囲を作り、その内側をまとめて塗るツールです。バケツツールと違い、線画が閉じていない部分があっても自分で囲む範囲を指定できるため、複雑な形や線が途切れている部分の塗りに向いています。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry4.title">スポイトツール</h3>
+          <p data-i18n="help.entry4.desc">タップした位置の色を拾って、描画色として選択するツールです。画面に実際に表示されている全レイヤーを合成した見た目の色を拾うため、複数レイヤーが重なっている部分でも「見た目通りの色」を正確に取得できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry5.title">選択ツール</h3>
+          <p data-i18n="help.entry5.desc">キャンバスの一部分を範囲選択し、選択した範囲だけを移動・回転・拡大縮小できるツールです。長押しすると「矩形選択」「投げ縄選択（自由な形で囲む）」「自動選択（マジックワンド、似た色の範囲を自動でまとめて選択）」の3種類から選択方法を選べます。選択中は選択範囲を示す枠線がキャンバス上に表示され、選択を解除するまで全フレーム・全レイヤーで同じ範囲が固定表示されます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry6.title">指ツール（歪みツール）</h3>
+          <p data-i18n="help.entry6.desc">指でなぞった方向にピクセルを押し流すように歪ませる、液体絵の具を指でこすったような効果を作るツールです。細かい修正よりも、既に描いた線を有機的に歪ませて表情をつけたい時に使います。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry7.title">図形ツール</h3>
+          <p data-i18n="help.entry7.desc">直線・四角形・円といった正確な図形をワンタップで描くためのツールです。ドラッグで始点から終点まで動かすとその場でプレビューされ、指を離すと確定します。フリーハンドでは描きにくい直線や正円が必要な時に便利です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry8.title">テキストツール</h3>
+          <p data-i18n="help.entry8.desc">キャンバス上に文字を配置するツールです。フォント・サイズ・色・縦書き/横書きを選べます。縦書きでは半角英数字の自動回転・縦中横（数字を横向きのまま並べる表記）・ルビ（ふりがな）にも対応しています。配置したテキストは書き出し時にもピクセルとして焼き込まれます。 テキストツールで使えるフォントを追加・検索・削除できる画面です。初期同梱フォント以外の追加フリーフォントは、初期インストール容量を抑えるためここからオンデマンドでダウンロードする方式になっています。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry9.title">早替えツール</h3>
+          <p data-i18n="help.entry9.desc">よく使うブラシ・ツールの組み合わせをあらかじめ登録しておき、ボタン一つで順番に切り替えられる機能です。キャンバス上の↺ボタンを長押しまたは上スワイプすると、登録・並べ替え・削除ができる管理ポップアップが開きます。ドラッグで並び順を変更できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry10.title">スタンプツール</h3>
+          <p data-i18n="help.entry10.desc">あらかじめ登録した画像をブラシのようにキャンバスへ配置するツールです。効果線・背景パターン・小物などを毎回描き直さずに使い回せます。ピクセルモードをONにすると、貼り付けたスタンプをモザイク低解像度化＋色数削減でドット絵風に加工できます。 スタンプパネルでは配置するスタンプの回転角度・大きさを調整できます。同じスタンプでも向きやサイズを変えて配置すれば、単調にならず自然な効果線・小物の並びを作れます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry11.title">ペンサブツール</h3>
+          <p data-i18n="help.entry11.desc">ペンツールを長押しすると、通常の描画に加えてトーン貼り・スタンプ配置のサブツールへ切り替えられます。ツールをいちいち切り替えずに、同じペンから複数の作業を行き来できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry12.title">選択範囲の変形</h3>
+          <p data-i18n="help.entry12.desc">選択ツールで囲んだ範囲は、変形ツールで移動・回転・拡大縮小できます。誤って描いた部分の位置調整や、一部だけを拡大して強調したい時などに使います。 レイヤー全体を対象にしたい場合は、範囲選択を使わない「自由変形・メッシュ変形」（編集メニューから開く）を使うと、格子点を個別にドラッグしてより自由な変形ができます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry13.title">自由変形・メッシュ変形</h3>
+          <p data-i18n="help.entry13.desc">キャンバス右上の編集・設定メニューから開ける、レイヤー全体を対象にした変形ツールです。範囲選択の変形と異なり選択範囲は不要で、角や格子点を指で個別にドラッグして自由な形に変形できます。コントロールパネルの分割数スライダーでメッシュを最大10×10まで細かくでき、2本の指で別々の点を同時につまめば回転・拡大縮小のような操作も直感的に行えます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry14.title">カラーピッカー</h3>
+          <p data-i18n="help.entry14.desc">HSVとRGBを1つの画面で切り替えながら色を選べるカラーピッカーです。パレット機能で使用中のカラーセットを保存・呼び出しできます。パレットはファイル書き出しやQRコードで他の端末と共有することもできます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-brush">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-brush"></use></svg></span>
+        <h2 data-i18n="help.category.brush">ブラシ</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry15.title">ブラシのお気に入り</h3>
+          <p data-i18n="help.entry15.desc">ブラシ一覧の各ブラシにある星アイコンをタップすると、お気に入り登録・解除ができます。（自動塗り設定・スタンプ・フォント・描画フィルターなど、アプリ内の他のお気に入り機能と同じ操作方法です。）一覧上部の星アイコンで、お気に入りのみ表示に絞り込むこともできます。誤って削除しないよう、お気に入り登録中のブラシは削除できません。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry25.title">フェード</h3>
+          <p data-i18n="help.entry25.desc">ブラシ設定の一つで、ストロークを描き進めるにつれて不透明度や太さが徐々に減少していく効果です。線の端をかすれさせたい時や、余韻を残すような描き味を作りたい時に使います。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry26.title">ストローク減衰</h3>
+          <p data-i18n="help.entry26.desc">フェードと似ていますが、こちらは「インクが減っていく」ような表現に近く、描き続けるほど色が薄くなったりかすれたりする効果です。筆やマーカーで描き続けた時のインク切れのような質感を再現します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry27.title">混色</h3>
+          <p data-i18n="help.entry27.desc">ブラシで塗る際、ブラシの直下にすでにある色と、これから塗ろうとしている選択色を混ぜ合わせながら描画する機能です。水彩や油彩のように、既存の色に新しい色をなじませたい時に使います。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry68.title">カスタムブラシ</h3>
+          <p data-i18n="help.entry68.desc">ブラシ一覧でプリインストールのブラシを長押しして「複製」すると、それを元にした自分専用のカスタムブラシが作成されます。複製したブラシは太さ・不透明度・硬さ・回転・密度・散布・ぼかし半径などのパラメータを自由に編集でき、不要になれば削除もできます。（プリインストールのブラシ自体は編集・削除できません。）フォルダで分類したり、星アイコンでお気に入り登録することもできます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-penInput">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-tune"></use></svg></span>
+        <h2 data-i18n="help.category.penInput">ペン入力</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry28.title">筆圧カーブ</h3>
+          <p data-i18n="help.entry28.desc">ペン入力設定にある機能で、実際の筆圧の強さと、ブラシの太さ・不透明度への反映のされ方の関係をグラフで自由に調整できます。弱い筆圧でも太く出したい人、逆に強く押さないと太くならないようにしたい人など、手癖に合わせて描き心地を細かくカスタマイズできます。設定変更後はその場で試し書きしながら確認できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry62.title">ペン設定</h3>
+          <p data-i18n="help.entry62.desc">板タブ・液晶タブレットの筆圧カーブに加えて、ペン側面のボタン（対応スタイラス使用時）に消しゴム切替やスポイトなどの操作を割り当てられる設定画面です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry63.title">傾き検知</h3>
+          <p data-i18n="help.entry63.desc">対応スタイラスの傾き情報を使って、筆先を寝かせたときに線を太く・薄くするなど、実際の筆記具に近い描き心地を再現する設定です。パフォーマンス設定からON/OFFを切り替えられます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-drawing">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-palette"></use></svg></span>
+        <h2 data-i18n="help.category.drawing">描画</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry24.title">定規</h3>
+          <p data-i18n="help.entry24.desc">直線・円・楕円・パース定規（消失点を使った透視図法用の定規）など、フリーハンドでは描きにくい正確な線を補助するための機能です。配置した定規に沿ってペン先が自動でスナップするため、定規なしでは難しい奥行きのある構図も描きやすくなります。定規はハンドルを操作して移動・回転・サイズ変更ができます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry29.title">トーン塗り</h3>
+          <p data-i18n="help.entry29.desc">バケツツールの設定でベタ塗りからトーン塗りへ切り替えると、選択した網点・ライン柄などのトーンパターンで塗りつぶせます。ピクセルモード専用の市松模様・格子柄トーンも用意されており、ドット絵の質感を活かした塗りができます。フリルやニット、タイツなど、手描きでは手間のかかる細かい柄も簡単に描けます。オリジナルのトーンを自作して追加したり、ほかの人と共有したりすることも可能です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry30.title">ピクセルモード</h3>
+          <p data-i18n="help.entry30.desc">ブラシ・フォント・スタンプのそれぞれに用意されている設定で、ONにするとアンチエイリアスを取り除き、くっきりとしたドット絵風の輪郭で描画されます。あえて古いゲームのような質感を出したい時や、低解像度感を演出したい時に使います。配色方式は「色を指定しない」「色を指定する」「色数を指定する」「パレットから選ぶ」の4種類から選べ、ドット絵専用パレットを使った配色もできます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry31.title">描画領域</h3>
+          <p data-i18n="help.entry31.desc">書き出し範囲よりも広い範囲まで描いておける設定です。キャンバス上には書き出し範囲を示す赤枠が表示され、枠の外側にはみ出して描いた部分は書き出されませんが、パン・ズームなどのカメラワークで見せる範囲を後から調整する余地を残せます。新規プロジェクト作成時に倍率を設定します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry32.title">キャンバスの背景色</h3>
+          <p data-i18n="help.entry32.desc">プロジェクトのキャンバス背景色を設定できます。透過書き出し（透過WebM）を使う場合は背景色は書き出しに影響しませんが、作業中の見やすさのために好みの色に変更できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry41.title">描画フィルター</h3>
+          <p data-i18n="help.entry41.desc">選択中のレイヤーに直接適用するフィルターです（演出フィルターがタイムライン全体・シーン単位に適用されるのに対し、描画フィルターはレイヤー単位）。ぼかし・シャープ・アンシャープマスク・トーンカーブ・レベル補正・周辺減光・ノイズ・レトロアニメ・ブラウン管・アニメ調・縁取り・ドット絵・眼鏡断層フィルターなどが用意されています。縁取りは元のレイヤーを書き換えず、縁どった内容だけを新規レイヤーへ描画します。眼鏡断層フィルターは、選択レイヤーで塗った範囲だけに、度数の強い眼鏡レンズのような局所的な歪みをかけられます。ドット絵は配色方式（色を指定しない・色を指定する・色数を指定する・パレットから選ぶ）も選べます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-layer">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-layers"></use></svg></span>
+        <h2 data-i18n="help.category.layer">レイヤー</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry16.title">レイヤー</h3>
+          <p data-i18n="help.entry16.desc">1枚のキャンバスを複数の透明な「層」に分けて描画できる仕組みです。線画・色塗り・背景などを別々のレイヤーに分けて描くことで、後から色だけをやり直したり、線画を消さずに背景を差し替えたりできます。画面上では上に重なっているレイヤーほど手前に表示されます。各レイヤー行のアイコンからワンタップで削除・下のレイヤーとの結合ができ、レイヤーパネル上部のアイコンから表示中の全レイヤーを一括結合することもできます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry69.title">レイヤーの複数選択・一括操作</h3>
+          <p data-i18n="help.entry69.desc">レイヤーパネルの選択モードを使うと、複数のレイヤーをチェックボックスでまとめて選び、結合や一括削除ができます。結合は通常・自動塗り用線画・自動塗りレイヤー同士でのみ可能です（共通レイヤー・フォルダ・タイムライン素材は結合対象外）。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry17.title">ブレンドモード</h3>
+          <p data-i18n="help.entry17.desc">レイヤーの合成方法を変更する機能です。トーンやカラー効果をレイヤーとして重ねる時によく使われます。
+通常：そのまま重ねます。
+乗算：下のレイヤーと掛け合わせて暗くします。影・陰影づけの定番です。
+スクリーン：明るさを足し合わせて明るくします。光の表現に向きます。
+オーバーレイ：暗い部分はより暗く、明るい部分はより明るくしてコントラストを強めます。
+加算：色を単純に足し合わせます。光の効果線などに向きます。
+減算：色を差し引き、暗く沈んだ効果になります。
+比較（暗）：上下のレイヤーで暗い方の色を採用します。
+比較（明）：上下のレイヤーで明るい方の色を採用します。
+焼き込みカラー：下の色を暗く沈めながら濃く発色させます。
+覆い焼きカラー：下の色を明るく飛ばしながら発色させます。
+ハードライト：オーバーレイより強くコントラストが付きます。
+ソフトライト：オーバーレイより穏やかにコントラストが付きます。柔らかい陰影に向きます。
+差の絶対値：上下の色の差を表示します。色のズレ確認などに使えます。
+色相・彩度・カラー・輝度：それぞれ色相・彩度・色味・明るさだけを下のレイヤーへ反映します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry18.title">クリッピング</h3>
+          <p data-i18n="help.entry18.desc">自分のすぐ下にあるレイヤーの、不透明なピクセルの範囲内にのみ描画されるようにする機能です。線画からはみ出さずに色を塗りたい時、線画レイヤーの上に色塗り用レイヤーを作ってクリッピングを有効にすると、線画の外側にうっかりはみ出して描いてしまう心配がなくなります。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry19.title">共通レイヤー</h3>
+          <p data-i18n="help.entry19.desc">通常のレイヤーは1フレームごとに独立していますが、共通レイヤーは複数のフレーム・シーンで同じ内容を共有するレイヤーです。背景などフレームが変わっても動かさない要素を、フレームごとに描き直す手間なく一度描くだけで済ませられます。タイムライン上では専用のトラックとして表示されます。 通常レイヤーを共通レイヤー（複数フレームに同じ内容を表示し続けるレイヤー）へ変換できる機能です。表示中のレイヤーを複製して1枚に統合してから共通化することもできます。背景など毎フレーム同じ内容を使い回したい場合に、描き直す手間を省けます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry20.title">レイヤーフォルダ</h3>
+          <p data-i18n="help.entry20.desc">複数のレイヤーをフォルダにまとめて整理できる機能です。パーツ数が多いイラストでもレイヤーパネルが見やすくなります。クリッピングはフォルダをまたいで適用できない仕様のため、クリッピングを使う場合は同じフォルダ内でまとめておくと安全です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry21.title">自動塗り</h3>
+          <p data-i18n="help.entry21.desc">自動塗り用線画レイヤーの下に自動塗りレイヤーを作り、あらかじめ作成した「自動塗り設定」（パーツごとの色・トーンの組み合わせ）に基づいて色を自動で塗る機能です。線画を描き終えた後に一括で色を塗れるため、同じキャラクターを何度も描く手描きアニメーションで色塗りの手間を大幅に減らせます。線画を描き直した場合はタイムライン・レイヤーパネルに更新マーク（❗）が表示され、自動塗りの再実行が必要なことを知らせます。 タイムライン画面の三点メニューから「自動塗り実行」を選ぶと、更新マーク（❗）が付いた自動塗りレイヤーをまとめて再計算できます。線画を描き直した後に1枚ずつレイヤーパネルで実行する手間を省けます。 自動塗り設定の各パーツには、線画の色をどう扱うかの設定（指定色・塗り色と同じ・色トレス）があります。色トレス（線画馴染ませ）を選ぶと、線画の色を塗り色に合わせてHSLシフトし、線が浮かずに馴染んだ仕上がりになります。 設定が増えてくると、パーツ割り当て時の一覧が長くなって選びにくくなります。プロジェクト設定（またはレイヤーパネルのパーツ割り当てダイアログ）から、このプロジェクトで使う設定だけに絞り込んでおくと、一覧がすっきりして選びやすくなります。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry22.title">グラデーション塗り（自動塗り設定）</h3>
+          <p data-i18n="help.entry22.desc">自動塗り設定の各パーツには単色だけでなくグラデーションも設定できます。ドラッグで移動できる対称ハンドルにより、直感的にグラデーションの範囲・角度を調整できます。 各パーツには「指定色で縁取り」も設定できます。チェックを入れると、塗り範囲の一番外側（線画に接する部分）に指定した色・太さのラインが引かれます。縁取り色はカラーピッカーで自由に選べ、太さはスライダー・±ボタン・数値タップでの直接入力のいずれでも調整できます。設定項目のすぐ上にプレビューが表示されるため、実際に自動塗りを実行する前に色と太さを確認できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-animation">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-play_arrow"></use></svg></span>
+        <h2 data-i18n="help.category.animation">アニメーション</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry23.title">オニオンスキン</h3>
+          <p data-i18n="help.entry23.desc">現在編集中のフレームの前後のフレームを半透明で重ねて表示し、動きの繋がりを確認しながら描けるようにする機能です。パフォーマンス設定で表示する枚数（前後何枚まで）や色・透明度を調整できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry33.title">タイムライン</h3>
+          <p data-i18n="help.entry33.desc">アニメーションの時間軸を管理する画面です。フレーム（静止画1コマ）を並べてパラパラ漫画のように再生することでアニメーションになります。画像・動画・音声などの素材トラック、共通レイヤートラック、カメラキーフレームも同じタイムライン上で管理します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry34.title">シーン</h3>
+          <p data-i18n="help.entry34.desc">1つのプロジェクト（1本の動画）の中を、場面（カット）ごとに分割して管理する機能です。フォルダがプロジェクト単位の整理なのに対し、シーンは1本の動画の中の場面転換を表現するために使います。タイムラインのシーンタブでは、シーンの追加・複製・削除・名前変更・並び替えができます。複数選択モードにすると複数シーンをまとめて移動・複製・削除することも可能です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry35.title">フレーム操作</h3>
+          <p data-i18n="help.entry35.desc">フレーム一覧では新規追加・複製・削除に加えて、複数選択モードで複数フレームをまとめて移動・複製・削除できます。保持セル数を増やすと同じフレームを複数コマ分表示させ続けられる（いわゆる「止め」）ので、動きの少ないカットで枚数を節約できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry36.title">素材クリップ（画像・動画・音声）</h3>
+          <p data-i18n="help.entry36.desc">タイムラインの画像・動画・音声トラックに配置したクリップです。クリップ本体を長押しドラッグすると表示開始位置を移動でき、左右端のハンドルをドラッグすると使用範囲（長さ）を変更できます。タップすると開く詳細シートのコピーアイコンから複製、ゴミ箱アイコンから削除もできます。画像・動画は内部的にはレイヤーとして扱われており、音声はシーンに直接紐づくクリップとして管理されます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry37.title">素材一覧</h3>
+          <p data-i18n="help.entry37.desc">プロジェクトで使用している画像・動画・音声素材をまとめて確認できる画面です。タイムラインへ配置した素材の元ファイルがここに集約されます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry38.title">音声クリップの音量・フェード</h3>
+          <p data-i18n="help.entry38.desc">タイムラインに配置した音声クリップは、詳細シートから音量・フェードイン・フェードアウトの秒数を調整できます。効果音やBGMの音量バランスを整えたり、曲の始まり・終わりを滑らかにしたりできます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry39.title">カメラキーフレーム</h3>
+          <p data-i18n="help.entry39.desc">タイムライン上の特定の位置にカメラの位置・拡大率・回転を記録しておく機能です。キーフレーム間は自動で滑らかに補間されるため、パン（横移動）やズームイン・ズームアウトのようなカメラワークを簡単に付けられます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry40.title">演出フィルター</h3>
+          <p data-i18n="help.entry40.desc">シーンやフレームに適用できる映像効果（ぼかし・色調補正・グロー・ドット絵等）です。手描きの絵そのものを変えずに、演出として画面全体の見た目を調整したい時に使います。ドット絵は配色方式（色を指定しない・色を指定する・色数を指定する・パレットから選ぶ）も選べます。 演出フィルターは複数重ねて適用でき、その適用順はタイムライン上での並び順に従います。フィルター一覧をドラッグで並び替えると、実際に画面へ反映される順序も変わります。 フィルムの粒状感のようなノイズをフレームごとに変化させながら適用する演出フィルターです。強度・量（ノイズが乗る密度）・粒の大きさをスライダーで調整できます。同じフレームに戻ると同じ粒状になるため、スクラブ中にちらつかず、再生すると粒が動いて見えます。 画面に降る雨を表現する演出フィルターです。降り方（本数）・速さ・粒の大きさ・風向きの角度をスライダーで調整できます。各雨粒はフレームが進むごとに一定の速度で降り続けるため、自然な雨の動きになります。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry42.title">レイヤーキーフレーム（パーツ単位アニメーション）</h3>
+          <p data-i18n="help.entry42.desc">各レイヤーの位置・拡大縮小・回転をフレームごとに指定し、キーフレーム間を自動で補間する機能です。カメラキーフレームが画面全体を動かすのに対し、こちらは個々のレイヤーだけを動かします。自動塗りの各パーツはそれぞれ独立したレイヤーとして生成されるため、パーツ単位でのアニメーション（腕だけ動かす、口だけ開閉させる等）にそのまま使えます。レイヤーパネルの三点メニュー「アニメーション（キーフレーム）」から設定します。レイヤーの絵自体は変わらず、表示位置だけが変わる非破壊な変形です。この機能はタイムラインの表示（プレビュー・書き出し）にのみ影響し、キャンバスモードでの実際の作画には影響しません。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry43.title">レイヤーグループ（複数パーツをまとめて動かす）</h3>
+          <p data-i18n="help.entry43.desc">複数のレイヤーをまとめて1つのキーフレームストリームで動かす機能です。例えば「腕」が肌・袖の2枚の自動塗りパーツで構成されている場合、この2枚をグループ化しておけば、1回のキーフレーム操作でまとめて動かせます。レイヤーパネルで複数選択（チェックボックス）した状態で下部バーの「グループ化」アイコンから作成します。グループの動きは各レイヤー自身のキーフレーム（設定されていれば）に重ねて適用されるため、グループ全体の動き＋個別レイヤーの微調整、という組み合わせも可能です。1つのレイヤーは同時に1つのグループにのみ所属できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-save">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-save_outlined"></use></svg></span>
+        <h2 data-i18n="help.category.save">保存</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry45.title">自動保存</h3>
+          <p data-i18n="help.entry45.desc">クラッシュやファイル破損が起きた時のための復元専用の保存です。描画などの変更があるたびに自動で保存され、最大3件まで古い順に上書きされます。手動保存（セーブスロット・セーブツリー）とは完全に別で管理されており、通常の保存の代わりにはなりません。アプリを異常終了した後の再起動時のみ、復元するかどうかを尋ねられます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry46.title">セーブスロット</h3>
+          <p data-i18n="help.entry46.desc">決まった数の保存枠（スロット）に、自分で保存先を選びながら保存する方式です。スロット数は設定（低品質5件・中品質10件）で決まります。上書きしたい枠を毎回自分で選ぶため、「このタイミングの状態は残しておきたい」という管理がしやすい方式です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry47.title">セーブツリー</h3>
+          <p data-i18n="help.entry47.desc">保存するたびに新しい保存地点が作られ、過去の保存地点から分岐して別の履歴を作れる（枝分かれする）保存方式です。件数の上限がなく、「あの時のバージョンに戻ってから別の展開を試したい」といった使い方に向いています。画面には保存地点が下から上へ伸びる樹形図として表示されます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-projectManagement">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-folder"></use></svg></span>
+        <h2 data-i18n="help.category.projectManagement">プロジェクト管理</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry48.title">フォルダ</h3>
+          <p data-i18n="help.entry48.desc">プロジェクト（作品）をグループ化して整理する機能です。複数階層に対応しているので、同じ作品の複数話数やシリーズ物をまとめて管理する使い方もできます（例：「作品名」フォルダの中に「第1話」「第2話」…とプロジェクトを並べる）。1つの動画の中で場面を分けて作りたい場合は、フォルダではなくキャンバス画面の「シーン」機能をご利用ください。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry49.title">ゴミ箱</h3>
+          <p data-i18n="help.entry49.desc">削除したプロジェクトが一時的に移動する場所です。完全に削除するまではここから元に戻せます。設定で自動削除までの日数（OFF/30日/60日/90日）を指定できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry50.title">共有（.niashare）</h3>
+          <p data-i18n="help.entry50.desc">プロジェクトを他の人（または自分の他の端末）へ渡すための共有専用ファイル形式です。受け取った側がこのファイルを開くと、複製されて自分のプロジェクト一覧に追加されます。共有元の.niashare自体は変更されません。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry51.title">引き継ぎ（.niatra）</h3>
+          <p data-i18n="help.entry51.desc">設定・素材・ブラシ・自動塗り設定・テーマなど、アプリ全体の環境を別の端末へまとめて引き継ぐための機能です。引き継ぐ項目はチェックボックスで個別に選べます。個別のプロジェクトを渡したい場合は「共有（.niashare）」を使います。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry56.title">ホーム画面</h3>
+          <p data-i18n="help.entry56.desc">アプリを起動して最初に表示される画面で、プロジェクト・共有・作品一覧・ゴミ箱の各タブを切り替えて閲覧できます。右上の検索アイコンからプロジェクト名で絞り込み検索もできます。プロジェクトタブでは新規プロジェクト作成とフォルダ作成を画面右下の＋ボタンから選べます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry57.title">新規プロジェクト作成</h3>
+          <p data-i18n="help.entry57.desc">キャンバスサイズ・fps・長さ（秒数。あとからタイムラインでのフレーム増減にも連動）・描画領域（書き出し範囲より広く描いておける設定）・使用する自動塗り設定などをまとめて指定してからプロジェクトを作成します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry58.title">プロジェクト詳細画面</h3>
+          <p data-i18n="help.entry58.desc">プロジェクト名・サムネイル・お気に入り登録・使用する自動塗り設定の絞り込みなど、プロジェクト単位の設定をまとめて確認・編集できる画面です。セーブツリーへの入り口もここにあります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-export">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-file_download"></use></svg></span>
+        <h2 data-i18n="help.category.export">書き出し</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry44.title">エンドカード</h3>
+          <p data-i18n="help.entry44.desc">動画書き出し時、本編の終わりに自動で追加されるNIARIMロゴの短い動画（約5秒）です。無料版では非表示・削除ができませんが、プレミアム会員になると表示のON/OFF・長さ変更・差し替えができるようになります。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry52.title">動画書き出し（MP4・WebM・GIF・AVI）</h3>
+          <p data-i18n="help.entry52.desc">作品を汎用的なMP4動画として書き出します。無料版は書き出せる長さに上限（90秒）があり、動画の最後にエンドカード（アプリロゴ）が自動で追加されます。 アルファチャンネル（背景の透明部分）を保持したまま書き出せる動画形式です。対応する再生環境でのみ透過再生されます。他のアプリの素材として重ねて使いたい場合などに向いています。 アニメーションGIFとして書き出します。自動でループ再生される形式のため、SNSへの投稿など気軽に共有したい場面に向いています。 互換性を重視したい場合はAVI（Motion JPEG）としても書き出せます。特許・ライセンス面で安全なコーデックを採用していますが、アルファチャンネル（透過）には対応せず、端末によってはアプリ内プレビューが利用できない場合があります。（その場合も「共有」から外部プレイヤーで再生できます。）無料会員はプロジェクトの長さに90秒までの上限があります（プレミアム会員は2時間）。フレーム追加・複製によって上限を超えそうな場合は、ボタンをタップした時点で注意ダイアログが表示され、実際に90秒を超えることはありません。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry53.title">書き出し画面</h3>
+          <p data-i18n="help.entry53.desc">動画・画像の書き出し中は進捗状況が表示され、途中でキャンセルすることもできます。書き出しにかかる時間は端末の性能によって変わります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-premium">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-branding_watermark"></use></svg></span>
+        <h2 data-i18n="help.category.premium">プレミアム</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry54.title">ウォーターマーク</h3>
+          <p data-i18n="help.entry54.desc">書き出した動画・画像に、自分の署名やロゴを透かしとして入れられるプレミアム限定機能です。位置・大きさ・不透明度を調整できます。タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry55.title">プレミアム</h3>
+          <p data-i18n="help.entry55.desc">プレミアム会員になると、無料版で90秒までに制限されている動画の尺が無制限になり、動画の最後に自動追加されるエンドカード（アプリロゴ）を削除できます。広告も非表示になり、ウォーターマーク・トーンカーブ・レベル補正機能も利用できるようになります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section" data-help-category id="help-settings">
+      <div class="feature-section-head">
+        <span class="feature-section-icon" aria-hidden="true"><svg class="ic"><use href="/assets/icons/ui/sprite.svg#ic-settings"></use></svg></span>
+        <h2 data-i18n="help.category.settings">設定</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry59.title">テーマ設定</h3>
+          <p data-i18n="help.entry59.desc">アプリ全体の配色をテーマ一覧から選んだり、差し色を自由にカスタマイズしたりできる画面です。見出し・項目名用フォントと説明文用フォントが分かれており、視認性を保ちながら着せ替えを楽しめます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry60.title">ワークスペース設定</h3>
+          <p data-i18n="help.entry60.desc">左利きモード（ドッキングパネルを左右反転）、PC/DeXモードの手動切替、手のひらツールの表示条件などをまとめて設定できる画面です。使用端末や利き手に合わせて作業しやすいレイアウトに調整できます。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry61.title">ジェスチャー設定</h3>
+          <p data-i18n="help.entry61.desc">2本指タップ・3本指タップ・2本指スワイプ・長押しに、Undo/Redo・フレーム移動・スポイトなどの操作を割り当てられる設定です。ペンボタン（対応スタイラス使用時）にも別途操作を割り当てられます。指を使わずワンタッチで頻用操作を呼び出したい場合に便利です。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry64.title">パフォーマンス設定</h3>
+          <p data-i18n="help.entry64.desc">端末の性能に応じて、低品質・中品質・高品質のプリセットから選ぶか、各項目を個別に設定（カスタム）できます。保存方式・動作の軽さ・オニオンスキン・傾き検知に加えて、Undo回数やゴミ箱の自動削除などアプリの容量・動作の重さに影響する設定もここにまとまっています。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry65.title">バケツ塗り詳細設定</h3>
+          <p data-i18n="help.entry65.desc">設定画面の「バケツ塗り」から、許容誤差（クリックした位置の色からどこまでの色差を同一領域とみなすか）・拡張px（塗った範囲を境界の外側へ広げて線画との隙間を埋める量）・線の下まで潜る（拡張分を線画の上から上書きせず、線の見た目を保ったまま背後へ塗り色を合成する）を調整できます。線画に細かい隙間がある場合や、塗り残しが気になる場合に調整すると仕上がりが安定します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry66.title">Undo（元に戻す）回数設定</h3>
+          <p data-i18n="help.entry66.desc">パフォーマンス設定から、Undoで遡れる操作回数を調整できます。回数を増やすほど安心して試行錯誤できますが、メモリ使用量も増えるため、動作を軽くしたい場合は回数を減らすとよいでしょう。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry67.title">フォントの読み込み</h3>
+          <p data-i18n="help.entry67.desc">端末内のフォントファイルを直接読み込んで使えるようにする機能です。設定画面のフォント管理「読み込み」タブから追加できます。配信されていない自作フォントや購入した商用フォントを使いたい場合に利用します。</p>
+        </div>
+        <div class="spec-item" data-help-card>
+          <h3 data-i18n="help.entry70.title">容量削減</h3>
+          <p data-i18n="help.entry70.desc">端末容量に対するNIARIMの使用量と、NIARIM内部（プロジェクト・素材・書き出し済みファイル・自作ブラシ/トーン/スタンプ/フォント・キャッシュ・ゴミ箱）の内訳を円グラフで確認できます。キャッシュの削除・未使用素材の一括削除（全プロジェクト）・ゴミ箱を空にする・プロジェクトの整理・全データ削除（初期化）が行えます。</p>
+        </div>
+      </div>
+    </section>
+    <p class="help-no-results" id="help-no-results" data-i18n="help.noResults">該当する項目が見つかりませんでした。</p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <img class="brand-icon" src="/assets/images/logo/app_logo_footer.svg" alt="" width="32" height="32" />
+          <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />
+        </a>
+        <p data-i18n="footer.tagline">Animation made by your hands.</p>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.product">Product</h3>
+        <ul>
+          <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+          <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+          <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+          <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>
+          <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.support">Support</h3>
+        <ul>
+          <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
+          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <ul>
+          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
+          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
+      <div class="footer-social">
+        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/config.js"></script>
+<script src="/js/i18n-dict.js"></script>
+<script src="/js/i18n-dict-intl.js"></script>
+<script src="/js/i18n-dict-nav-extra.js"></script>
+<script src="/js/i18n-dict-help.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/animations.js"></script>
+<script src="/js/help.js"></script>
+<script>
+  (function () {
+    var c = window.NIARIM_CONFIG || {};
+    ["footer-x-link", "footer-x-icon"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && c.X_URL) el.setAttribute("href", c.X_URL);
+    });
+  })();
+</script>
+</body>
+</html>

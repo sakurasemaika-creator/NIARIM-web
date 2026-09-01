@@ -1,1 +1,2 @@
-﻿node_modules/\n.wrangler/\n
+node_modules/
+.wrangler/
