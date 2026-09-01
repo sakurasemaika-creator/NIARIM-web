@@ -54,6 +54,7 @@
   font-weight: 700;
   font-family: var(--font-serif);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .pricing-price .unit {
@@ -62,6 +63,7 @@
   font-family: var(--font-serif);
   white-space: nowrap;
   flex-shrink: 0;
+  margin-left: 0.12rem;
 }
 
 /* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し
