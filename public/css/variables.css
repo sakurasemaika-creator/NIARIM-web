@@ -2,41 +2,54 @@
    NIARIM variables.css
    ブランドカラー・タイポグラフィ・余白などのデザイントークン。
    全ページで色とスペーシングの意味を統一するため、必ずここを参照する。
+
+   2026-09 design polish:
+   DESIGN.md型の「見た目をルールとして固定する」考え方を導入。
+   NIARIM固有の #FF5C7A・アプリ由来フォント・ロゴを軸に、
+   暖かい紙色のキャンバス / 白いサーフェス / hairline border /
+   控えめなelevationで、制作ツールらしい落ち着きと遊び心を両立する。
    ========================================================================== */
 
 :root {
   /* ---- Brand Colors ----
-     ベース: NIARIMロゴ（ペンの意匠）の配色（温かみのあるダークブラウン）
-     サブ  : アクセントより淡いコーラルトーン。背景の淡色演出や補助要素に使用
-     アクセント: NIARIMアプリの既定UIテーマ（レッド系プリセット）の差し色と統一
+     ベース: NIARIMロゴ由来の温かいダークブラウン
+     アクセント: NIARIMアプリの既定UIテーマ（レッド系プリセット）
                  (lib/models/app_theme_preset.dart の accentColor #FF5C7A)
-  */
+     アクセントはCTA・選択状態・小さな強調に絞り、ページ全体を
+     ピンク一色にしない。色は「情報の句読点」として使う。 */
   --color-brand: #4a4636;
   --color-brand-dark: #322f24;
   --color-sub: #ffc3ce;
-  --color-sub-tint: #fff2f4;
+  --color-sub-tint: #fff0f3;
   --color-accent: #ff5c7a;
   --color-accent-dark: #e8425f;
 
-  /* ---- Neutral ---- */
+  /* ---- Neutral ----
+     純粋な無彩色だけでなく少し暖色側へ寄せ、ロゴ・明朝体・
+     手描きアニメーションというプロダクトの質感と合わせる。 */
   --color-white: #ffffff;
   --color-black: #17161c;
-  --color-ink: #2b2730;
-  --color-gray-900: #2a2a33;
-  --color-gray-700: #4d4d59;
-  --color-gray-500: #7b7b88;
-  --color-gray-300: #c7c7d1;
-  --color-gray-100: #eeeef3;
-  --color-gray-50: #f8f8fb;
+  --color-ink: #28242c;
+  --color-gray-900: #302c34;
+  --color-gray-700: #55505a;
+  --color-gray-500: #7d7781;
+  --color-gray-300: #cbc5cc;
+  --color-gray-100: #e9e4e7;
+  --color-gray-50: #faf8f9;
 
-  /* ---- Surface / Background ---- */
-  --color-bg: var(--color-white);
+  /* ---- Surface / Background ----
+     ページ=暖かい紙色、カード=白、淡色セクション=ごく薄いピンク。
+     白一色で面を区切るよりも、surface hierarchyを明確にする。 */
+  --color-bg: #f7f4f3;
   --color-bg-tint: var(--color-sub-tint);
   --color-bg-dark: var(--color-black);
+  --color-surface: var(--color-white);
+  --color-surface-soft: #fbf9f8;
   --color-text: var(--color-ink);
   --color-text-muted: var(--color-gray-500);
   --color-text-on-dark: var(--color-gray-50);
-  --color-border: var(--color-gray-100);
+  --color-border: rgba(40, 36, 44, 0.09);
+  --color-border-strong: rgba(40, 36, 44, 0.16);
 
   /* ---- Feedback ---- */
   --color-success: #2f9e6e;
@@ -46,52 +59,65 @@
      アプリ本体と同じフォント（白光明朝＝本文／くらむぼん＝見出し）を使用。
      白光明朝はサブセットフォントのため、収録されていない文字は
      Noto Serif JP／Noto Serifで代用する（OSのシステムフォントに
-     依存せず、環境によらず同じ見た目のフォールバックにするため）。 */
+     依存せず、環境によらず同じ見た目のフォールバックにするため）。
+
+     大見出しは少し大胆に、本文は過度に大きくせず読みやすさを優先。
+     既存のclamp構成を維持し、全ページのレスポンシブ挙動を壊さない。 */
   --font-sans: "HakkouMincho", "Noto Serif JP", "Noto Serif",
     "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
     sans-serif;
 
-  --fs-hero: clamp(2.4rem, 6vw + 1rem, 5.2rem);
-  --fs-h1: clamp(2rem, 3.4vw + 1rem, 3.4rem);
-  --fs-h2: clamp(1.5rem, 2vw + 1rem, 2.4rem);
+  --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
+  --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
+  --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
   --fs-h3: clamp(1.2rem, 1.2vw + 1rem, 1.6rem);
-  --fs-body: clamp(1rem, 0.3vw + 0.9rem, 1.125rem);
+  --fs-body: clamp(1rem, 0.24vw + 0.94rem, 1.1rem);
   --fs-small: 0.875rem;
 
-  /* ---- Spacing ---- */
+  /* ---- Spacing ----
+     4px基準のリズムに寄せつつ、既存変数名は維持して全ページへ展開。 */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2.5rem;
   --space-xl: 4rem;
-  --space-2xl: 6.5rem;
-  --space-3xl: 9rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8.5rem;
 
-  /* ---- Layout ---- */
-  --container-width: 1180px;
-  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+  /* ---- Layout ----
+     コンテンツ幅をわずかに広げ、カードの角丸は以前より抑える。
+     「何でも大きく丸いAIテンプレ」感を避けるため、矩形カードは
+     14pxを基本、特別な大型ビジュアルのみ24pxまでとする。 */
+  --container-width: 1220px;
+  --container-padding: clamp(1.25rem, 4vw, 2.75rem);
   --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 28px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
   --radius-pill: 999px;
 
-  /* ---- Motion ---- */
+  /* ---- Motion ----
+     通常のUI反応は短く、ヒーローやスクロール演出だけゆったり。
+     springは装飾的な主役要素に限定する。 */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --duration-fast: 180ms;
-  --duration-base: 420ms;
-  --duration-slow: 800ms;
+  --duration-base: 360ms;
+  --duration-slow: 760ms;
 
-  /* ---- Elevation ---- */
-  --shadow-sm: 0 2px 8px rgba(26, 26, 34, 0.06);
-  --shadow-md: 0 12px 32px rgba(26, 26, 34, 0.1);
-  --shadow-lg: 0 24px 64px rgba(26, 26, 34, 0.16);
-  --shadow-glow: 0 8px 40px rgba(255, 92, 122, 0.35);
+  /* ---- Elevation ----
+     基本カードはborder主体。shadowはヘッダー・モック・CTAなど、
+     本当に前後関係を示したい場所だけで使う。 */
+  --shadow-sm: 0 1px 2px rgba(30, 26, 34, 0.035),
+    0 4px 14px rgba(30, 26, 34, 0.035);
+  --shadow-md: 0 10px 30px rgba(30, 26, 34, 0.08);
+  --shadow-lg: 0 24px 70px rgba(30, 26, 34, 0.14);
+  --shadow-glow: 0 10px 42px rgba(255, 92, 122, 0.24);
 
-  /* ---- Gradients（ブランドカラーを基調とした演出用グラデーション） ---- */
-  --grad-brand: linear-gradient(120deg, var(--color-accent) 0%, #ffb15c 100%);
-  --grad-ink: linear-gradient(160deg, var(--color-ink) 0%, #2b2950 60%, #1a1830 100%);
+  /* ---- Gradients ----
+     NIARIMのアクセント演出としてのみ使用。通常のカード面には使わない。 */
+  --grad-brand: linear-gradient(120deg, var(--color-accent) 0%, #ffad66 100%);
+  --grad-ink: linear-gradient(160deg, #25222b 0%, #302d48 58%, #1b1928 100%);
   --grad-gold: linear-gradient(120deg, #ffd76a 0%, #ff9f5c 100%);
 
   --header-height: 72px;
