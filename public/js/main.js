@@ -17,7 +17,29 @@
     document.head.appendChild(link);
   }
 
+  /**
+   * 画面再現図のツールアイコンは、従来8方向のdrop-shadowで縁取りを
+   * 近似していた。静的プレビューではGPUフィルタを8回重ねる必要がないため、
+   * SVG本来のstrokeを1回だけ使う。形状・色・サイズは変えない。
+   */
+  function installScreenMockIconOutline() {
+    if (document.getElementById("niarim-screen-mock-icon-outline")) return;
+    var style = document.createElement("style");
+    style.id = "niarim-screen-mock-icon-outline";
+    style.textContent =
+      ".fd-icon-btn .ic{" +
+      "filter:none;" +
+      "stroke:var(--fd-panel);" +
+      "stroke-width:1px;" +
+      "stroke-linejoin:round;" +
+      "stroke-linecap:round;" +
+      "paint-order:stroke fill;" +
+      "}";
+    document.head.appendChild(style);
+  }
+
   loadDesignPolish();
+  installScreenMockIconOutline();
 
   /**
    * ヘッダー状態とページトップボタンの表示判定を1本のscroll監視へ集約。
