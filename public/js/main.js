@@ -29,6 +29,9 @@
   function iconButton(name, extraClass) {
     return '<span class="fd-icon-btn' + (extraClass ? " " + extraClass : "") + '">' + icon(name) + '</span>';
   }
+  function uploadIconButton() {
+    return '<span class="fd-icon-btn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16h6v-5h4l-7-7-7 7h4v5zm-4 2h14v2H5z" fill="currentColor"/></svg></span>';
+  }
 
   function canvasTopBar() {
     return '<div class="fd-topbar">' +
@@ -135,8 +138,21 @@
 
   function timelineTopBar() {
     return '<div class="fd-timeline-topbar">' +
-      iconButton('ic-arrow_back') + iconButton('ic-palette') + iconButton('ic-home_outlined') +
-      '<span class="fd-spacer"></span>' + iconButton('ic-undo') + iconButton('ic-redo') + iconButton('ic-more_vert') + iconButton('ic-help_outline') +
+      '<span class="fd-back-canvas">' + icon('ic-arrow_back') + icon('ic-palette') + '</span>' +
+      '<span class="fd-timeline-title">プロジェクト名</span><span class="fd-spacer"></span>' +
+      iconButton('ic-home_outlined') + iconButton('ic-undo') + iconButton('ic-redo') + iconButton('ic-more_vert') + iconButton('ic-help_outline') +
+    '</div>';
+  }
+
+  function timelineToolbar() {
+    return '<div class="fd-timeline-toolbar">' +
+      iconButton('ic-videocam') +
+      iconButton('ic-audiotrack', 'is-active') +
+      '<span class="fd-watermark-tool">' + icon('ic-branding_watermark') + '<small>🔒</small></span>' +
+      iconButton('ic-movie_filter') +
+      iconButton('ic-camera') +
+      iconButton('ic-push_pin_outlined') +
+      uploadIconButton() +
     '</div>';
   }
 
@@ -148,7 +164,7 @@
       '<div class="fd-timeline-preview"><span class="fd-preview-loading"></span><span class="fd-fullscreen-mark">⌗</span></div>' +
       '<div class="fd-timeline-scrubber"><i></i></div>' +
       '<div class="fd-transport">' + iconButton('ic-skip_previous') + iconButton('ic-fast_rewind') + iconButton('ic-play_arrow') + iconButton('ic-fast_forward') + iconButton('ic-skip_next') + '<span class="fd-spacer"></span><span class="fd-loop-mark">↔</span></div>' +
-      '<div class="fd-timeline-toolbar">' + iconButton('ic-videocam') + iconButton('ic-audiotrack', 'is-active') + iconButton('ic-image') + iconButton('ic-photo_camera') + iconButton('ic-text_fields') + iconButton('ic-file_download') + '</div>' +
+      timelineToolbar() +
       '<div class="fd-scene-line"><small>選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
       '<div class="fd-timeline-row"><small>絵</small><div class="fd-timeline-frames">' + frames + '</div></div>' +
       '<div class="fd-timeline-row fd-end-card-row"><small>終</small><span>エンドカードトラック</span><span>🔒</span></div>' +
@@ -164,11 +180,11 @@
       '<div class="fd-sheet-row"><span>フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
       '<div class="fd-sheet-row"><span>フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
     '</div>';
-    return html.replace('</div>', '</div>').replace(/<\/div>$/, sheet + '</div>');
+    return html.replace(/<\/div>$/, sheet + '</div>');
   }
 
-  function appBar(title) {
-    return '<div class="fd-appbar">' + iconButton('ic-arrow_back') + '<strong>' + title + '</strong><span class="fd-spacer"></span>' + iconButton('ic-help_outline') + '</div>';
+  function appBar(title, treeMode) {
+    return '<div class="fd-appbar">' + iconButton('ic-arrow_back') + '<strong>' + title + '</strong><span class="fd-spacer"></span>' + iconButton('ic-help_outline') + (treeMode ? '<span class="fd-tree-save-btn">' + icon('ic-save_outlined') + '<b>保存</b></span>' : '') + '</div>';
   }
 
   function saveSlotsScreen() {
@@ -176,7 +192,16 @@
     for (var i = 1; i <= 5; i++) {
       slots += '<div class="fd-save-slot"><span class="fd-save-thumb">＋</span><span class="fd-save-copy"><strong>スロット' + i + '</strong><small>保存データなし</small></span><span class="fd-save-plus">＋</span></div>';
     }
-    return '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' + appBar('セーブスロット') + '<div class="fd-route-body fd-save-slots-body">' + slots + '</div></div>';
+    return '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' + appBar('セーブスロット', false) + '<div class="fd-route-body fd-save-slots-body">' + slots + '</div></div>';
+  }
+
+  function saveTreeScreen() {
+    return '<div class="feature-diagram fd-route-screen fd-save-tree-screen" aria-hidden="true">' + appBar('セーブツリー', true) +
+      '<div class="fd-route-body fd-save-tree-body"><div class="fd-real-tree">' +
+        '<div class="fd-real-tree-row depth-2"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 03</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+        '<div class="fd-real-tree-row depth-1"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 02</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+        '<div class="fd-real-tree-row depth-0"><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 01</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+      '</div></div></div>';
   }
 
   function workspaceScreen() {
@@ -184,7 +209,7 @@
     var rows = items.map(function (name) {
       return '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><strong>' + name + '</strong><span class="fd-spacer"></span><span class="fd-drag-mark">＝</span></div>';
     }).join('');
-    return '<div class="feature-diagram fd-route-screen fd-workspace-screen" aria-hidden="true">' + appBar('ワークスペース設定') +
+    return '<div class="feature-diagram fd-route-screen fd-workspace-screen" aria-hidden="true">' + appBar('ワークスペース設定', false) +
       '<div class="fd-route-body fd-workspace-body"><strong class="fd-route-section">ツールバー編集</strong>' +
       '<p class="fd-route-hint">表示するツールをチェックで選択し、ドラッグで並べ替えます。</p>' +
       '<div class="fd-toolbar-preview">' + iconButton('ic-brush', 'is-active') + iconButton('ic-eraser_fa') + iconButton('ic-format_color_fill') + iconButton('ic-colorize') + iconButton('ic-pan_tool_alt') + iconButton('ic-highlight_alt') + iconButton('ic-transform') + iconButton('ic-text_fields') + '</div>' +
@@ -192,7 +217,7 @@
   }
 
   function exportScreen() {
-    return '<div class="feature-diagram fd-route-screen fd-export-screen" aria-hidden="true">' + appBar('書き出し') +
+    return '<div class="feature-diagram fd-route-screen fd-export-screen" aria-hidden="true">' + appBar('書き出し', false) +
       '<div class="fd-route-body fd-export-body"><strong class="fd-route-section">プリセット</strong>' +
       '<div class="fd-segmented fd-export-segments"><span class="fd-segment is-active">標準</span><span class="fd-segment">高画質</span><span class="fd-segment">カスタム</span></div>' +
       '<strong class="fd-route-section fd-export-format-title">形式</strong>' +
@@ -261,13 +286,13 @@
       galleryCanvas.classList.add('is-code-verified-mock');
     }
 
-    /* Features page */
+    /* Features page: 保存は実Tree mode、Galleryは既定のセーブスロットを使い分ける。 */
     replaceFeatureDiagram('#drawing', canvasScreen(null));
     replaceFeatureDiagram('#animation', timelineScreen());
     replaceFeatureDiagram('#editing', canvasScreen('layer'));
     replaceFeatureDiagram('#advanced', canvasScreen('onion'));
     replaceFeatureDiagram('#audio', audioScreen());
-    replaceFeatureDiagram('#save', saveSlotsScreen());
+    replaceFeatureDiagram('#save', saveTreeScreen());
     replaceFeatureDiagram('#workspace', workspaceScreen());
     replaceFeatureDiagram('#export', exportScreen());
 
