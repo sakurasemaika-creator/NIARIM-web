@@ -1,0 +1,54 @@
+/* ==========================================================================
+   NIARIM responsive consistency fixes
+   PC/SPでレイアウト上必要な差だけを残し、色・配置方針・画面再現図の見え方は
+   共通のデザイン意図に揃える。
+   ========================================================================== */
+
+/* Heroの画面再現図：BrushSizeSliderとツールバーは独立した暗い帯ではなく、
+   実アプリと同じくキャンバス上へ重ねて表示する。PC/SP共通。 */
+.hero-visual .fd-brush-slider {
+  position: relative;
+  z-index: 2;
+  margin-top: -52px;
+  background: transparent;
+}
+
+.hero-visual .fd-toolbar {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* SPでは1カラム化とボタン全幅化だけを行い、コピーの方向性やブランド色は
+   PC版から変えない。 */
+@media (max-width: 900px) {
+  .hero-copy {
+    text-align: left;
+  }
+
+  .hero-title {
+    margin-inline: 0;
+  }
+
+  .hero-subtitle,
+  .hero-lead,
+  .hero-bridge {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+
+  .hero .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  .hero .btn-primary:hover {
+    background: var(--color-accent-dark);
+  }
+}
