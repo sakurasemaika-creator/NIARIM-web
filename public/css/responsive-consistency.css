@@ -306,3 +306,504 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
     animation: none !important;
   }
 }
+
+/* ========================================================================== 
+   Refero-inspired editorial refinement — 2026-09
+   実在プロダクトのデザイン言語を「装飾」ではなく「規律」として採用する。
+   NIARIMのブランド色と実アプリ準拠モックは維持し、情報階層・余白・境界・
+   表面処理だけをサイト全体で統一する。
+   ========================================================================== */
+
+:root {
+  --editorial-paper: #fffdfb;
+  --editorial-canvas: #f7f5f2;
+  --editorial-ink: #28242c;
+  --editorial-muted: #716c72;
+  --editorial-line: rgba(40, 36, 44, 0.12);
+  --editorial-line-strong: rgba(40, 36, 44, 0.2);
+  --editorial-radius: 14px;
+  --editorial-shadow: 0 12px 32px rgba(40, 36, 44, 0.06);
+}
+
+body {
+  background: var(--editorial-paper);
+}
+
+main {
+  background: var(--editorial-paper);
+}
+
+/* Header: floating glass cardから、静かなプロダクトナビへ。 */
+.site-header {
+  border-bottom: 1px solid var(--editorial-line);
+  box-shadow: none;
+}
+
+.site-header::before {
+  background: rgba(255, 253, 251, 0.94);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+}
+
+@media (min-width: 1181px) {
+  .site-header {
+    top: 0;
+    width: 100%;
+    height: 68px;
+    border: 0;
+    border-bottom: 1px solid var(--editorial-line);
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .site-header::before {
+    border-radius: 0;
+  }
+
+  .site-header.is-scrolled {
+    border-color: var(--editorial-line-strong);
+    box-shadow: 0 8px 24px rgba(40, 36, 44, 0.035);
+  }
+
+  .site-header .container {
+    width: min(calc(100% - 48px), 1320px);
+  }
+
+  .main-nav > ul {
+    gap: 1.15rem;
+  }
+
+  .main-nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Typography: 大きさより階層。長文は読みやすい幅に制限。 */
+:where(h1, h2, h3, h4) {
+  letter-spacing: -0.025em;
+}
+
+:where(p, li) {
+  line-height: 1.82;
+}
+
+.section-head,
+.about-hero,
+.features-header,
+.help-header,
+.faq-header,
+.news-header,
+.legal-header {
+  max-width: 760px;
+}
+
+.eyebrow {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-accent-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Buttons: 光沢アニメーションを外し、輪郭・余白・色で階層を作る。 */
+.btn {
+  min-height: 46px;
+  padding-inline: 1.35rem;
+  border-radius: 10px;
+  box-shadow: none;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.btn::before {
+  display: none !important;
+}
+
+.btn-primary,
+.btn-accent {
+  box-shadow: 0 6px 16px rgba(255, 92, 122, 0.14);
+}
+
+.btn-outline {
+  background: var(--editorial-paper);
+  border-color: var(--editorial-line-strong);
+}
+
+.btn-outline:hover {
+  border-color: rgba(40, 36, 44, 0.34);
+  background: #fff;
+}
+
+/* Hero: 背景演出を抑え、コピーと製品画面が主役になる構成。 */
+.hero {
+  min-height: auto;
+  padding-top: clamp(7.25rem, 11vw, 9.5rem);
+  padding-bottom: clamp(5rem, 8vw, 7.5rem);
+  background: var(--editorial-paper);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+.hero::before {
+  content: none;
+  display: none;
+}
+
+.hero .container {
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: clamp(3rem, 7vw, 7.5rem);
+}
+
+.hero-title {
+  max-width: 8ch;
+  font-size: clamp(3.4rem, 6.2vw, 6.6rem);
+  line-height: 0.99;
+}
+
+.hero-title .accent::after {
+  height: 0.08em;
+  bottom: -0.01em;
+  background: var(--color-accent);
+  opacity: 0.34;
+  transform: none;
+}
+
+.hero-subtitle {
+  margin-top: 1.5rem;
+  font-size: clamp(1.06rem, 1.25vw, 1.28rem);
+}
+
+.hero-lead {
+  max-width: 48ch;
+  color: var(--editorial-muted);
+}
+
+.hero-bridge {
+  max-width: 43ch;
+  padding-left: 0;
+  border-left: 0;
+  color: var(--editorial-muted);
+}
+
+.hero-visual {
+  box-shadow: none;
+}
+
+.hero-visual::after {
+  content: none;
+  display: none;
+}
+
+.hero-visual .frame-mock {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 22px 55px rgba(40, 36, 44, 0.13);
+}
+
+/* Marqueeは装飾ではなく区切りとして細く。動作は維持。 */
+.marquee-section {
+  padding-block: 0.78rem;
+  border: 0;
+  background: var(--editorial-ink);
+}
+
+.marquee-track span {
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+}
+
+/* Sections: 過剰な背景グラデーションを排除。 */
+.section {
+  padding-block: clamp(4.25rem, 7vw, 6.75rem);
+}
+
+.section-tint {
+  background: var(--editorial-canvas);
+  border-block: 1px solid var(--editorial-line);
+}
+
+.section-dark {
+  background: var(--editorial-ink);
+}
+
+.section-head {
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.section-head h2 {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.13;
+}
+
+/* Page hero: 巨大な色面ではなく、ページタイトルを明快に見せる。 */
+:where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) {
+  padding-block: clamp(6.5rem, 10vw, 8rem) clamp(3rem, 5vw, 4.5rem);
+  background: transparent;
+}
+
+:where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) h1 {
+  font-size: clamp(2.7rem, 5.2vw, 5rem);
+  line-height: 1.02;
+}
+
+/* Cards: 立体感ではなく1px境界と密度で品質を出す。 */
+.intro-card,
+.spec-item,
+.pricing-card,
+.community-card,
+.faq-item,
+.news-card,
+.contact-panel,
+.about-name,
+.about-not-supported,
+.pricing-notice,
+.contact-personal-note {
+  border-color: var(--editorial-line);
+  border-radius: var(--editorial-radius);
+  box-shadow: none;
+}
+
+.intro-card,
+.spec-item,
+.pricing-card,
+.community-card,
+.faq-item,
+.news-card {
+  background: #fff;
+}
+
+.intro-card::after,
+.pricing-card.is-premium::after {
+  content: none;
+  display: none;
+}
+
+.intro-card .icon,
+.feature-section-head .feature-section-icon {
+  box-shadow: none;
+  border-radius: 10px;
+}
+
+/* Home feature panels: 実アプリ画面が最も強く見える白い展示面。 */
+.feature-row,
+.feature-row:nth-child(even) {
+  margin-block: 0;
+  padding: clamp(2.5rem, 5vw, 4.75rem) 0;
+  background: #fff !important;
+  border: 0;
+  border-bottom: 1px solid var(--editorial-line);
+  border-radius: 0;
+  gap: clamp(2.5rem, 7vw, 6.5rem);
+}
+
+.feature-row:first-child {
+  border-top: 1px solid var(--editorial-line);
+}
+
+.feature-copy h3 {
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  line-height: 1.08;
+}
+
+.feature-tags li {
+  background: var(--editorial-canvas);
+  border: 1px solid var(--editorial-line);
+  color: var(--editorial-muted);
+}
+
+/* Feature / Help index: Referoの検索・フィルタUIのような薄いツールバー。 */
+.feature-nav {
+  top: calc(var(--header-height) + 10px);
+  width: min(calc(100% - 24px), 1140px);
+  padding: 0.55rem;
+  border: 1px solid var(--editorial-line);
+  border-radius: 12px;
+  background: rgba(255, 253, 251, 0.96);
+  box-shadow: 0 10px 28px rgba(40, 36, 44, 0.045);
+}
+
+.feature-nav a {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--editorial-muted);
+}
+
+.feature-nav a:hover,
+.feature-nav a.is-active {
+  background: var(--editorial-canvas);
+  color: var(--editorial-ink);
+}
+
+.feature-section {
+  padding-block: clamp(3.25rem, 5.5vw, 5rem);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+.spec-grid {
+  gap: 0.7rem;
+}
+
+.spec-item {
+  padding: clamp(1.1rem, 2vw, 1.55rem);
+}
+
+.spec-item::before {
+  width: 2px;
+  border-radius: 0;
+}
+
+/* Premium: premiumだけを濃色にしてコントラストを1箇所へ集約。 */
+.pricing-card {
+  border-radius: 16px;
+}
+
+.pricing-card.is-premium {
+  background: var(--editorial-ink);
+  box-shadow: none;
+}
+
+.pricing-plan-option {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Community: ギャラリーらしく、順位より作品面を主役に。 */
+.community-tabs {
+  justify-content: flex-start;
+  gap: 0.35rem;
+}
+
+.community-tabs button {
+  border-color: var(--editorial-line);
+  border-radius: 9px;
+  background: #fff;
+}
+
+.community-tabs button.is-active {
+  background: var(--editorial-ink);
+  border-color: var(--editorial-ink);
+}
+
+.community-gallery {
+  gap: 0.9rem;
+}
+
+.community-gallery .community-card:nth-child(1) {
+  border-color: var(--editorial-line);
+  box-shadow: none;
+}
+
+/* FAQ / News / Contact: 文書・フォームとしての読みやすさを優先。 */
+.faq-list,
+.news-list {
+  gap: 0.7rem;
+}
+
+.faq-question {
+  min-height: 56px;
+}
+
+input,
+textarea,
+select {
+  border-radius: 10px;
+  border-color: var(--editorial-line-strong);
+  background: #fff;
+  box-shadow: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(255, 92, 122, 0.1);
+}
+
+.contact-panel {
+  background: var(--editorial-canvas);
+}
+
+/* About CTA: dark surfaceは残すが、グラデーションは使わない。 */
+.about-cta {
+  background: var(--editorial-ink);
+  box-shadow: none;
+}
+
+/* Final CTA: 白地に大きな余白。主要ボタンだけブランド色。 */
+.final-cta {
+  border-top: 1px solid var(--editorial-line);
+  background: var(--editorial-paper);
+}
+
+body .final-cta .hero-actions .btn.btn-primary,
+body .hero .hero-actions .btn.btn-primary {
+  background: var(--color-accent) !important;
+  color: #fff !important;
+}
+
+/* Footerは既存のブランドブラウン単色を維持。 */
+.site-footer {
+  background: var(--color-footer-brown) !important;
+  background-image: none !important;
+  border-top: 0;
+}
+
+/* Mobile: PCの規律をそのまま縮小し、別デザインにしない。 */
+@media (max-width: 900px) {
+  .hero {
+    padding-top: 6.25rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 3.25rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 15vw, 4.65rem);
+  }
+
+  .hero-visual {
+    width: min(100%, 360px);
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+
+  .feature-row,
+  .feature-row:nth-child(even) {
+    padding-block: 3.25rem;
+    gap: 2.25rem;
+  }
+
+  .feature-nav {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .community-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+  }
+
+  .community-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .community-tabs button {
+    flex: 0 0 auto;
+  }
+}
