@@ -20,14 +20,21 @@
   /**
    * 画面再現図は最初から表示済みにする。
    * 対象クラスを明示し、広い部分一致セレクタを使わない。
-   * feature-diagram / frame-mock は既に overflow:hidden の静的な図なので、
-   * paint containment で再描画の影響範囲も図の内部に限定する。
+   * fd-app-screen / fd-route-screen は実アプリコードに照合してmain.jsが生成する
+   * 現行の画面再現図。旧来のfeature-diagram / frame-mockも互換のため残す。
    */
   function showScreenMocks() {
     document
-      .querySelectorAll(".screenshot-scroller, .feature-diagram, .frame-mock")
+      .querySelectorAll(
+        ".screenshot-scroller, .feature-diagram, .frame-mock, .fd-app-screen, .fd-route-screen"
+      )
       .forEach(function (mock) {
-        if (mock.classList.contains("feature-diagram") || mock.classList.contains("frame-mock")) {
+        if (
+          mock.classList.contains("feature-diagram") ||
+          mock.classList.contains("frame-mock") ||
+          mock.classList.contains("fd-app-screen") ||
+          mock.classList.contains("fd-route-screen")
+        ) {
           mock.style.contain = "paint";
           mock.style.userSelect = "none";
         }
