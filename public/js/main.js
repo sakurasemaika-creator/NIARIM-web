@@ -109,9 +109,29 @@
     });
   }
 
+  /**
+   * 作品広場のプレビューは3列にきれいに収まる9作品を表示する。
+   * 現在はプレースホルダーのため8位カードを複製し、順位だけ9位にする。
+   * 実データ接続時はこの補完処理を削除して9件をそのまま描画する。
+   */
+  function ensureNineCommunityTiles() {
+    var gallery = document.querySelector(".community-gallery");
+    if (!gallery) return;
+
+    var cards = gallery.querySelectorAll(".community-card:not(.is-more-cta)");
+    var more = gallery.querySelector(".community-card.is-more-cta");
+    if (cards.length !== 8 || !more) return;
+
+    var ninth = cards[cards.length - 1].cloneNode(true);
+    var badge = ninth.querySelector(".rank-badge");
+    if (badge) badge.textContent = "9";
+    gallery.insertBefore(ninth, more);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initScrollUi();
     initNavToggle();
     initFaqAccordion();
+    ensureNineCommunityTiles();
   });
 })();
