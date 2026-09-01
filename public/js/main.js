@@ -5,16 +5,26 @@
   "use strict";
 
   /**
-   * ページ固有CSSの後に、全体の視覚品質を揃える polish.css を読み込む。
-   * 既存HTMLを壊さず全ページへ適用するため共通main.jsから一度だけ注入する。
+   * ページ固有CSSの後に、全体の視覚品質を揃えるCSSレイヤーを読み込む。
+   * polish.cssの後へresponsive-consistency.cssを置き、PC/SP間の意図しない
+   * 差分だけを最終的に補正する。
    */
-  function loadDesignPolish() {
-    if (document.querySelector('link[data-niarim-polish]')) return;
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "/css/polish.css";
-    link.setAttribute("data-niarim-polish", "true");
-    document.head.appendChild(link);
+  function loadDesignLayers() {
+    if (!document.querySelector('link[data-niarim-polish]')) {
+      var polish = document.createElement("link");
+      polish.rel = "stylesheet";
+      polish.href = "/css/polish.css";
+      polish.setAttribute("data-niarim-polish", "true");
+      document.head.appendChild(polish);
+    }
+
+    if (!document.querySelector('link[data-niarim-responsive-consistency]')) {
+      var consistency = document.createElement("link");
+      consistency.rel = "stylesheet";
+      consistency.href = "/css/responsive-consistency.css";
+      consistency.setAttribute("data-niarim-responsive-consistency", "true");
+      document.head.appendChild(consistency);
+    }
   }
 
   /**
@@ -38,7 +48,7 @@
     document.head.appendChild(style);
   }
 
-  loadDesignPolish();
+  loadDesignLayers();
   installScreenMockIconOutline();
 
   /**
