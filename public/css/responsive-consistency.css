@@ -21,10 +21,6 @@
   --niarim-shadow-soft: 0 16px 44px rgba(59, 36, 41, .075);
 }
 
-/* --------------------------------------------------------------------------
-   Background depth
-   静的なCSSグラデーションのみ。画像・動画・WebGL・常時アニメーションなし。
-   -------------------------------------------------------------------------- */
 body {
   background:
     radial-gradient(circle at 7% 8%, rgba(255, 92, 122, .075), transparent 25rem),
@@ -49,9 +45,6 @@ main { background: transparent; }
 
 .section-dark { background: var(--niarim-ink); }
 
-/* --------------------------------------------------------------------------
-   Header / typography
-   -------------------------------------------------------------------------- */
 .site-header {
   border-bottom: 1px solid var(--niarim-line);
   box-shadow: none;
@@ -93,10 +86,7 @@ main { background: transparent; }
   text-wrap: balance;
 }
 
-:where(p, li) {
-  line-height: 1.82;
-}
-
+:where(p, li) { line-height: 1.82; }
 :where(p) { text-wrap: pretty; }
 
 .section-dark :where(h1, h2, h3, h4),
@@ -156,9 +146,6 @@ main { background: transparent; }
   letter-spacing: .12em;
 }
 
-/* --------------------------------------------------------------------------
-   Buttons
-   -------------------------------------------------------------------------- */
 .btn {
   min-height: 46px;
   padding-inline: 1.4rem;
@@ -168,12 +155,8 @@ main { background: transparent; }
 }
 
 .btn::before { display: none !important; }
-
 .btn-primary,
-.btn-accent {
-  box-shadow: 0 7px 18px rgba(255, 92, 122, .16);
-}
-
+.btn-accent { box-shadow: 0 7px 18px rgba(255, 92, 122, .16); }
 .btn-outline {
   background: var(--niarim-surface);
   border-color: var(--niarim-line-strong);
@@ -193,29 +176,22 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: var(--color-accent-dark) !important;
 }
 
-/* --------------------------------------------------------------------------
-   Hero / device
-   -------------------------------------------------------------------------- */
 .hero {
   min-height: auto;
   padding-top: clamp(7rem, 10vw, 9.2rem);
   padding-bottom: clamp(4.8rem, 7vw, 6.8rem);
   border-bottom: 1px solid var(--niarim-line);
 }
-
 .hero::before { content: none; display: none; }
-
 .hero .container {
   grid-template-columns: minmax(0, .92fr) minmax(390px, 1.08fr);
   gap: clamp(3rem, 7vw, 7rem);
 }
-
 .hero-title {
   max-width: 8ch;
   font-size: clamp(3.5rem, 6.3vw, 6.7rem);
   line-height: .99;
 }
-
 .hero-title .accent::after {
   height: .1em;
   bottom: -.015em;
@@ -223,10 +199,8 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   opacity: .34;
   transform: rotate(-1deg);
 }
-
 .hero-lead,
 .hero-bridge { color: var(--niarim-muted); }
-
 .hero-bridge {
   max-width: 43ch;
   padding-left: .85rem;
@@ -245,13 +219,11 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   overflow: visible;
   contain: layout style;
 }
-
 .hero-visual::before,
 .hero-visual::after {
   content: none !important;
   display: none !important;
 }
-
 .hero-visual .frame-mock {
   width: 100%;
   height: 100%;
@@ -264,19 +236,13 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   box-sizing: border-box;
   overflow: hidden;
 }
-
-.hero-visual .fd-canvas {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
+.hero-visual .fd-canvas { flex: 1 1 auto; min-height: 0; }
 .hero-visual .fd-brush-slider {
   position: relative;
   z-index: 2;
   margin-top: -52px;
   background: transparent;
 }
-
 .hero-visual .fd-toolbar {
   position: relative;
   z-index: 2;
@@ -284,14 +250,12 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   border: 0;
   box-shadow: none;
 }
-
 .hero-visual-reuse {
   width: min(100%, 360px);
   max-width: 360px;
   margin-inline: auto;
   justify-self: center;
 }
-
 .feature-media:has(.hero-visual-reuse) {
   aspect-ratio: auto;
   padding: 0;
@@ -306,31 +270,21 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   transition: none;
 }
 
-/* --------------------------------------------------------------------------
-   Marquee
-   -------------------------------------------------------------------------- */
 .marquee-section {
   padding-block: .85rem;
   background: var(--niarim-ink);
   border: 0;
 }
-
 .marquee-track span {
   font-size: .84rem;
   font-weight: 650;
   letter-spacing: .055em;
 }
-
 .marquee-track { animation: marquee-scroll 32s linear infinite !important; }
-
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none !important; }
 }
 
-/* --------------------------------------------------------------------------
-   Home major features
-   白統一は維持しつつ、左右の余白と独立した展示面を確保。
-   -------------------------------------------------------------------------- */
 .feature-row,
 .feature-row:nth-child(even) {
   container-type: inline-size;
@@ -338,37 +292,31 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   padding-block: clamp(2.7rem, 5vw, 4.8rem);
   padding-inline: clamp(1.75rem, 4.8vw, 4.5rem);
   gap: clamp(2.5rem, 6.5vw, 6rem);
-  background: rgba(255, 255, 255, .94) !important;
+  background: #fff !important;
   border: 1px solid var(--niarim-line);
   border-radius: clamp(20px, 2.2vw, 30px);
   box-shadow: var(--niarim-shadow-soft);
 }
-
 .feature-row:first-child { border-top: 1px solid var(--niarim-line); }
-
 .feature-copy {
   min-width: 0;
   padding-inline: clamp(.1rem, .5vw, .45rem);
 }
-
 .feature-copy h3 {
   font-size: clamp(1.85rem, 3vw, 2.8rem);
   line-height: 1.08;
 }
-
 .feature-tags li {
   background: var(--niarim-accent-soft);
   border: 1px solid rgba(255, 92, 122, .14);
   color: var(--color-footer-brown);
 }
-
 .feature-media {
   min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .feature-row .feature-media:has(.feature-diagram),
 .feature-row .feature-media:has(.hero-visual-reuse) {
   background: transparent !important;
@@ -378,16 +326,11 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   overflow: visible !important;
 }
 
-/* --------------------------------------------------------------------------
-   App screen gallery
-   全カードを同じ9:16端末形状・同じ角丸・同じベゼル感に統一。
-   -------------------------------------------------------------------------- */
 .screenshot-scroller {
   gap: clamp(.9rem, 2vw, 1.35rem);
   scroll-padding-inline: var(--container-padding);
   overscroll-behavior-inline: contain;
 }
-
 .screenshot-card {
   aspect-ratio: 9 / 16 !important;
   border: 5px solid var(--color-ink) !important;
@@ -398,20 +341,16 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   contain: layout paint;
   isolation: isolate;
 }
-
 .screenshot-card:first-child {
   border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
 }
-
 .screenshot-card:first-child .hero-visual-reuse {
   width: 100%;
   height: 100%;
   max-width: none;
 }
-
-/* 3枚目以降を含むコード再現画面は、外カード内で二重ベゼルにしない。 */
 .screenshot-card > .feature-diagram,
 .screenshot-card > .fd-app-screen,
 .screenshot-card > .fd-route-screen,
@@ -425,7 +364,6 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   overflow: hidden !important;
   background-clip: padding-box;
 }
-
 .feature-media > .feature-diagram,
 .feature-section > .feature-diagram {
   width: min(100%, 360px);
@@ -446,9 +384,7 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   stroke-linecap: round;
   paint-order: stroke fill;
 }
-
 .fd-brush-opacity-ic { stroke-width: 1.8px; }
-
 .fd-icon-btn use[href$="#ic-eraser_fa"] {
   stroke: var(--fd-panel);
   stroke-width: 38px;
@@ -457,18 +393,13 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   paint-order: stroke fill;
 }
 
-/* --------------------------------------------------------------------------
-   Secondary pages / cards
-   -------------------------------------------------------------------------- */
 .section { padding-block: clamp(4.25rem, 7vw, 6.75rem); }
 .section-head { max-width: 760px; margin-bottom: clamp(2rem, 4vw, 3.2rem); }
 .section-head h2 { font-size: clamp(2rem, 3.4vw, 3.05rem); line-height: 1.13; }
-
 :where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) {
   max-width: 760px;
   padding-block: clamp(6.5rem, 10vw, 8rem) clamp(3rem, 5vw, 4.5rem);
 }
-
 :where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header) h1 {
   font-size: clamp(2.75rem, 5.2vw, 5.05rem);
   line-height: 1.03;
@@ -488,7 +419,6 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   border-color: var(--niarim-line);
   border-radius: var(--niarim-radius);
 }
-
 .intro-card,
 .spec-item,
 .pricing-card,
@@ -497,19 +427,13 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
 .news-card {
   background: rgba(255, 253, 252, .94);
 }
-
 .intro-card,
 .community-card,
 .news-card,
 .faq-item {
   box-shadow: 0 10px 28px rgba(59, 36, 41, .045);
 }
-
-.intro-card {
-  position: relative;
-  overflow: hidden;
-}
-
+.intro-card { position: relative; overflow: hidden; }
 .intro-card::before {
   content: "";
   position: absolute;
@@ -518,7 +442,6 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: var(--color-accent);
   opacity: .72;
 }
-
 .intro-card::after,
 .pricing-card.is-premium::after { content: none; display: none; }
 
@@ -531,25 +454,21 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: rgba(255, 250, 248, .97);
   box-shadow: 0 10px 28px rgba(59, 36, 41, .045);
 }
-
 .feature-nav a {
   border: 0;
   border-radius: 8px;
   background: transparent;
   color: var(--niarim-muted);
 }
-
 .feature-nav a:hover,
 .feature-nav a.is-active {
   background: var(--niarim-accent-soft);
   color: var(--color-footer-brown);
 }
-
 .feature-section {
   padding-block: clamp(3.25rem, 5.5vw, 5rem);
   border-bottom: 1px solid var(--niarim-line);
 }
-
 .spec-grid { gap: .8rem; }
 .spec-item { padding: clamp(1.15rem, 2vw, 1.6rem); }
 .spec-item::before {
@@ -565,30 +484,25 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: rgba(255, 255, 255, .055);
   border-color: rgba(255, 255, 255, .12);
 }
-
 .community-tabs {
   justify-content: flex-start;
   gap: .4rem;
 }
-
 .community-tabs button {
   border-color: var(--niarim-line);
   border-radius: 10px;
   background: var(--niarim-surface);
 }
-
 .community-tabs button.is-active {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: #fff;
 }
-
 .community-gallery { gap: .9rem; }
 
 .faq-list,
 .news-list { gap: .7rem; }
 .faq-question { min-height: 56px; }
-
 input,
 textarea,
 select {
@@ -597,28 +511,20 @@ select {
   background: var(--niarim-surface);
   box-shadow: none;
 }
-
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(255, 92, 122, .1);
 }
-
 .contact-panel { background: rgba(248, 243, 241, .9); }
 .about-cta { background: var(--niarim-ink); box-shadow: none; }
 .final-cta { border-top: 1px solid var(--niarim-line); }
-
 .site-footer {
   background: var(--color-footer-brown) !important;
   background-image: none !important;
 }
 
-/* --------------------------------------------------------------------------
-   Modern CSS progressive enhancement
-   -------------------------------------------------------------------------- */
-
-/* color-mix(): 対応ブラウザだけ、より自然なブランド混色へ。 */
 @supports (color: color-mix(in srgb, white 50%, black)) {
   .section-tint {
     background: color-mix(in srgb, var(--niarim-paper) 76%, var(--color-footer-brown) 4%);
@@ -636,7 +542,6 @@ select:focus {
   }
 }
 
-/* Container Query: タイル自身の幅で再構成。ページ幅依存より堅牢。 */
 @supports (container-type: inline-size) {
   .feature-row { container-type: inline-size; }
   @container (max-width: 760px) {
@@ -645,7 +550,6 @@ select:focus {
   }
 }
 
-/* 画面外の重量級セクションは必要になるまでレイアウト/描画を省略。 */
 @supports (content-visibility: auto) {
   .feature-section,
   .community-gallery,
@@ -656,26 +560,20 @@ select:focus {
   }
 }
 
-/* focus-visibleでキーボード操作時だけ明確なリング。 */
 :where(a, button, input, textarea, select):focus-visible {
   outline: 3px solid rgba(255, 92, 122, .28);
   outline-offset: 3px;
 }
 
-/* --------------------------------------------------------------------------
-   Responsive
-   -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .hero {
     padding-top: 6.2rem;
     padding-bottom: 4.25rem;
   }
-
   .hero .container {
     grid-template-columns: 1fr;
     gap: 3.2rem;
   }
-
   .hero-copy { text-align: left; }
   .hero-title {
     margin-inline: 0;
@@ -687,21 +585,17 @@ select:focus {
   .hero-actions { justify-content: flex-start; }
   .hero-visual { width: min(100%, 360px); }
   .hero-visual-reuse { width: min(100%, 340px); }
-
   .section { padding-block: 4rem; }
-
   .feature-row,
   .feature-row:nth-child(even) {
     padding: 2.6rem clamp(1.25rem, 5vw, 2rem);
     gap: 2.25rem;
     border-radius: 22px;
   }
-
   .feature-nav {
     border-radius: 10px;
     box-shadow: none;
   }
-
   .community-tabs {
     justify-content: flex-start;
     overflow-x: auto;
@@ -720,12 +614,10 @@ select:focus {
     padding-inline: 1.15rem;
     margin-inline: -.1rem;
   }
-
   .screenshot-card {
     width: min(76vw, 278px);
     border-radius: 20px !important;
   }
-
   .screenshot-card > .feature-diagram,
   .screenshot-card > .fd-app-screen,
   .screenshot-card > .fd-route-screen,
