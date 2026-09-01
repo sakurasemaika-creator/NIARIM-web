@@ -250,6 +250,17 @@
   background: var(--color-accent-dark);
 }
 
+/* final-cta内ではhero-actions由来の高詳細度なボタン指定が重なるため、
+   サイト最終レイヤーとしてブランド色を確実に固定する。 */
+body .final-cta .hero-actions .btn.btn-primary {
+  background: var(--color-accent) !important;
+  color: var(--color-white) !important;
+}
+
+body .final-cta .hero-actions .btn.btn-primary:hover {
+  background: var(--color-accent-dark) !important;
+}
+
 @media (max-width: 900px) {
   .hero-copy {
     text-align: left;
