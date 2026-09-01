@@ -681,3 +681,96 @@ main {
     transform: none;
   }
 }
+
+/* ========================================================================
+   2026-09 corrective polish + performance pass
+   ユーザー確認後の違和感修正と、見た目を保ったままの描画コスト削減。
+   ======================================================================== */
+
+/* ヒーロー端末の背後に追加していた半透明プレートは、端末構造として不自然なため撤去。 */
+.hero-visual::after {
+  content: none;
+  display: none;
+}
+
+/* Premiumの機能名は「2か月分無料」と同じゴールドグラデーション、説明は完全な白。 */
+.pricing-card.is-premium .pricing-list li strong {
+  display: inline-block;
+  width: fit-content;
+  background: var(--grad-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-card.is-premium .pricing-list li span {
+  color: #fff;
+  opacity: 1;
+}
+
+/* FAQは質問・回答とも左右に呼吸できる余白を確保する。 */
+.faq-list {
+  width: min(100%, 980px);
+  margin-inline: auto;
+}
+
+.faq-question {
+  padding: clamp(1.2rem, 2.2vw, 1.6rem) clamp(1.25rem, 4vw, 2.6rem);
+}
+
+.faq-answer p {
+  max-width: none;
+  padding: 0 clamp(1.25rem, 4vw, 2.6rem) clamp(1.35rem, 3vw, 1.8rem);
+}
+
+/* ---- Performance: expensive always-on effectsを静的な奥行きへ置き換える ---- */
+.site-header::before,
+.feature-nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-header::before {
+  background: rgba(250, 248, 249, 0.96);
+}
+
+.feature-nav {
+  background: rgba(255, 255, 255, 0.97);
+}
+
+/* 大きなblurを回転させ続ける処理はGPU負荷が高いため、静的な淡いグローへ。 */
+.hero-visual::before {
+  animation: none !important;
+  filter: blur(34px);
+  opacity: 0.26;
+  transform: scale(1.01);
+}
+
+.hero-visual {
+  box-shadow:
+    0 24px 58px rgba(32, 27, 38, .15),
+    0 10px 28px rgba(255, 92, 122, .10),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.hero-visual .frame-mock {
+  box-shadow: 0 18px 42px rgba(0,0,0,.30);
+}
+
+/* 画面外の大きなセクションは必要になるまで描画を遅延。非対応ブラウザでは通常表示。 */
+@supports (content-visibility: auto) {
+  .section,
+  .feature-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+}
+
+/* スマホでは常時流れ続ける装飾marqueeを止め、描画と電池消費を抑える。 */
+@media (max-width: 900px) {
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
