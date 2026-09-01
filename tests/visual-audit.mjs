@@ -31,7 +31,10 @@ async function shot(page, vp, routeName, suffix, fullPage = false) {
 
 const browser = await chromium.launch({ headless: true });
 for (const vp of viewports) {
-  const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: 1 });
+  const context = await browser.newContext({
+    viewport: { width: vp.width, height: vp.height },
+    deviceScaleFactor: 1
+  });
   const page = await context.newPage();
   page.on('console', msg => {
     if (msg.type() === 'error') addFinding(vp.name, page.url(), 'console-error', msg.text());
@@ -42,7 +45,7 @@ for (const vp of viewports) {
     const routeName = slug(route);
     await page.goto(baseURL + route, { waitUntil: 'networkidle' });
     await page.evaluate(() => window.scrollTo(0, 0));
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(450);
     await shot(page, vp.name, routeName, '00-base', true);
 
     const metrics = await page.evaluate(() => {
@@ -80,12 +83,31 @@ for (const vp of viewports) {
         if (cs.textOverflow === 'ellipsis') return false;
         return el.scrollWidth > el.clientWidth + 3 && ['hidden','clip'].includes(cs.overflowX);
       }).map(el => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0,100), clientWidth: el.clientWidth, scrollWidth: el.scrollWidth })).slice(0,20);
+
+      const screenMocks = [...document.querySelectorAll('.fd-app-screen, .fd-route-screen')].map((el, i) => {
+        const r = el.getBoundingClientRect();
+        const cs = getComputedStyle(el);
+        const reveal = el.closest('.reveal');
+        return {
+          i,
+          cls: el.className,
+          width: Math.round(r.width),
+          height: Math.round(r.height),
+          ratio: r.height ? r.width / r.height : 0,
+          display: cs.display,
+          visibility: cs.visibility,
+          opacity: Number(cs.opacity),
+          revealClass: reveal?.className || null
+        };
+      });
+
       return {
         clientWidth: de.clientWidth,
         scrollWidth: Math.max(de.scrollWidth, body?.scrollWidth || 0),
         overflowers: bad.slice(0, 30),
         brokenImages,
         clippedText,
+        screenMocks,
         title: document.title,
         h1: document.querySelector('h1')?.textContent?.trim() || ''
       };
@@ -96,6 +118,19 @@ for (const vp of viewports) {
     if (metrics.clippedText.length) addFinding(vp.name, route, 'clipped-text', metrics.clippedText);
     if (!metrics.title) addFinding(vp.name, route, 'missing-title', 'document.title is empty');
     if (route !== '/404.html' && !metrics.h1) addFinding(vp.name, route, 'missing-h1', 'No h1 found');
+
+    for (const mock of metrics.screenMocks) {
+      if (mock.width < 1 || mock.height < 1 || mock.display === 'none' || mock.visibility === 'hidden' || mock.opacity < 0.99) {
+        addFinding(vp.name, route, 'hidden-screen-mock', mock);
+      }
+      const target = 9 / 16;
+      if (mock.width > 0 && Math.abs(mock.ratio - target) > 0.025) {
+        addFinding(vp.name, route, 'screen-mock-ratio', mock);
+      }
+      if (mock.revealClass && !mock.revealClass.split(/\s+/).includes('is-visible')) {
+        addFinding(vp.name, route, 'screen-mock-reveal', mock);
+      }
+    }
 
     // Header / mobile navigation. Wait until its transition is fully settled before capture.
     const navToggle = page.locator('.nav-toggle').first();
@@ -125,7 +160,7 @@ for (const vp of viewports) {
       if ((await navToggle.getAttribute('aria-expanded')) !== 'false') addFinding(vp.name, route, 'nav-escape-close', 'Escape did not close navigation');
     }
 
-    // Language dropdown: this site uses a button-driven custom menu, not a native select.
+    // Language dropdown: change once, capture, then restore the original language.
     const langTrigger = page.locator('.lang-trigger').first();
     if (await langTrigger.count() && await langTrigger.isVisible()) {
       await langTrigger.click();
@@ -134,22 +169,25 @@ for (const vp of viewports) {
       if (!await menu.isVisible()) addFinding(vp.name, route, 'language-menu', 'Language menu did not become visible');
       else {
         await shot(page, vp.name, routeName, '02-language-open');
+        const current = menu.locator('button[aria-pressed="true"]').first();
+        const currentLang = await current.getAttribute('data-lang');
         const choices = menu.locator('button');
-        if (await choices.count() > 1) {
-          const current = menu.locator('button[aria-pressed="true"]').first();
-          const currentLang = await current.getAttribute('data-lang');
-          const target = choices.filter({ hasNot: current }).first();
-          if (await target.count()) {
-            await target.click();
-            await page.waitForTimeout(250);
-            await shot(page, vp.name, routeName, '03-language-changed');
-            if (currentLang) {
-              await langTrigger.click();
-              await page.waitForTimeout(100);
-              const restore = page.locator(`.lang-menu button[data-lang="${currentLang}"]`).first();
-              if (await restore.count()) await restore.click();
-              await page.waitForTimeout(180);
-            }
+        const count = await choices.count();
+        let targetIndex = -1;
+        for (let i = 0; i < count; i++) {
+          const code = await choices.nth(i).getAttribute('data-lang');
+          if (code && code !== currentLang) { targetIndex = i; break; }
+        }
+        if (targetIndex >= 0) {
+          await choices.nth(targetIndex).click();
+          await page.waitForTimeout(250);
+          await shot(page, vp.name, routeName, '03-language-changed');
+          if (currentLang) {
+            await langTrigger.click();
+            await page.waitForTimeout(100);
+            const restore = page.locator(`.lang-menu button[data-lang="${currentLang}"]`).first();
+            if (await restore.count()) await restore.click();
+            await page.waitForTimeout(220);
           }
         }
       }
@@ -172,13 +210,17 @@ for (const vp of viewports) {
     if (route === '/help/') {
       const search = page.locator('#help-search-input').first();
       if (await search.count() && await search.isVisible()) {
-        await search.fill('レイヤー');
-        await page.waitForTimeout(220);
-        await shot(page, vp.name, routeName, 'help-search');
-        const visibleItems = await page.locator('[data-help-card]:visible').count();
-        if (visibleItems === 0) addFinding(vp.name, route, 'help-search-empty', 'Search for レイヤー yielded no visible help entries');
-        await search.fill('');
-        await page.waitForTimeout(100);
+        const firstTitle = (await page.locator('[data-help-card] h3').first().textContent() || '').trim();
+        const query = firstTitle.slice(0, Math.min(4, firstTitle.length));
+        if (query) {
+          await search.fill(query);
+          await page.waitForTimeout(220);
+          await shot(page, vp.name, routeName, 'help-search');
+          const visibleItems = await page.locator('[data-help-card]:visible').count();
+          if (visibleItems === 0) addFinding(vp.name, route, 'help-search-empty', { query, firstTitle });
+          await search.fill('');
+          await page.waitForTimeout(100);
+        }
       }
     }
 
@@ -195,6 +237,29 @@ for (const vp of viewports) {
           await shot(page, vp.name, routeName, 'contact-validation');
         }
       }
+    }
+
+    // Walk through the page as a user would. This triggers IntersectionObserver states and
+    // leaves one viewport screenshot at each meaningful scroll step.
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(160);
+    const scrollPlan = await page.evaluate(() => {
+      const maxY = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      if (!maxY) return [0];
+      const step = Math.max(320, Math.floor(innerHeight * 0.72));
+      const ys = [];
+      for (let y = 0; y < maxY; y += step) ys.push(y);
+      ys.push(maxY);
+      // Cap very long legal/help pages while still sampling the whole range.
+      if (ys.length <= 14) return ys;
+      const out = [];
+      for (let i = 0; i < 14; i++) out.push(Math.round(maxY * i / 13));
+      return [...new Set(out)];
+    });
+    for (let i = 0; i < scrollPlan.length; i++) {
+      await page.evaluate(y => window.scrollTo(0, y), scrollPlan[i]);
+      await page.waitForTimeout(360);
+      await shot(page, vp.name, routeName, `scroll-${String(i).padStart(2,'0')}`);
     }
 
     await page.evaluate(() => window.scrollTo(0, Math.max(0, document.documentElement.scrollHeight - innerHeight)));
@@ -227,4 +292,7 @@ console.log(JSON.stringify({
   byKind: Object.fromEntries(Object.entries(byKind).map(([k,v]) => [k, v.length])),
   screenshots: report.screenshots.length
 }, null, 2));
-if (report.findings.some(f => ['page-error','horizontal-overflow','broken-images','nav-toggle','nav-escape-close','nav-content-clipped'].includes(f.kind))) process.exitCode = 1;
+if (report.findings.some(f => [
+  'page-error','horizontal-overflow','broken-images','nav-toggle','nav-escape-close',
+  'nav-content-clipped','hidden-screen-mock','screen-mock-ratio','screen-mock-reveal'
+].includes(f.kind))) process.exitCode = 1;
