@@ -55,13 +55,15 @@ function normalizeLang(value) {
   return "ja";
 }
 
-function detectRequestLang(request, url) {
+function detectRequestLang(url) {
+  /*
+   * HTMLに直接書かれた辞書scriptは必ず日本語だけを返す。
+   * HTML本体の初期文言が日本語なので、Accept-Languageでここを変えると
+   * HTMLと辞書の言語が食い違い、部分的に翻訳キーが露出する原因になる。
+   * 別言語はi18n.jsがユーザー選択時に ?lang=XX を明示して取得する。
+   */
   const explicit = url.searchParams.get("lang");
-  if (explicit) return normalizeLang(explicit);
-
-  const accept = request.headers.get("Accept-Language") || "";
-  const first = accept.split(",")[0].split(";")[0];
-  return normalizeLang(first);
+  return explicit ? normalizeLang(explicit) : "ja";
 }
 
 function isI18nDictionaryPath(pathname) {
@@ -94,7 +96,6 @@ function buildSingleLanguageDictionary(source, lang) {
 }
 
 async function handleI18nDictionary(request, env, url) {
-  /* query付きURLはStatic Assets側に実ファイルが無いため、取得時だけqueryを外す。 */
   const assetUrl = new URL(url);
   assetUrl.search = "";
   const assetRequest = new Request(assetUrl.toString(), request);
@@ -102,14 +103,14 @@ async function handleI18nDictionary(request, env, url) {
   if (!assetResponse.ok) return assetResponse;
 
   const source = await assetResponse.text();
-  const lang = detectRequestLang(request, url);
+  const lang = detectRequestLang(url);
   const filtered = buildSingleLanguageDictionary(source, lang);
   if (!filtered) return assetResponse;
 
   const headers = new Headers(assetResponse.headers);
   headers.set("Content-Type", "text/javascript; charset=utf-8");
   headers.set("Cache-Control", "public, max-age=86400");
-  headers.set("Vary", "Accept-Language");
+  headers.delete("Vary");
   headers.delete("Content-Length");
 
   return new Response(filtered, {
@@ -142,7 +143,6 @@ export default {
       const assetResponse = await env.ASSETS.fetch(request);
       return withSecurityHeaders(assetResponse);
     } catch (err) {
-      // Worker内部のエラー詳細をユーザーへ返さない。ログにのみ記録する。
       console.error("Unhandled error", err);
       return withSecurityHeaders(
         jsonResponse(500, { error: "internal_error" })
