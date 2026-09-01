@@ -1,1 +1,267 @@
-/* ==========================================================================\n   NIARIM responsive consistency fixes\n   PC/SPでレイアウト上必要な差だけを残し、色・配置方針・画面再現図の見え方は\n   共通のデザイン意図に揃える。\n   ========================================================================== */\n\n:root {\n  --color-footer-brown: #3b2429;\n}\n\n/* Hero outer shellは装飾用の太い端末ベゼルにしない。\n   実際の端末枠はframe-mock側の細い黒枠1枚だけに統一する。 */\n.hero-visual {\n  aspect-ratio: 9 / 16;\n  max-width: 500px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n  overflow: visible;\n}\n\n.hero-visual .frame-mock {\n  width: 100%;\n  height: 100%;\n  aspect-ratio: auto;\n  padding: 0;\n  border: 6px solid var(--color-ink);\n  border-radius: var(--radius-lg);\n  background: #201f27;\n  box-shadow: var(--shadow-md);\n  box-sizing: border-box;\n}\n\n.hero-visual .fd-brush-slider {\n  position: relative;\n  z-index: 2;\n  margin-top: -52px;\n  background: transparent;\n}\n\n.hero-visual .fd-toolbar {\n  position: relative;\n  z-index: 2;\n  background: transparent;\n  border: 0;\n  box-shadow: none;\n}\n\n.hero-visual .fd-canvas {\n  flex: 1 1 auto;\n  min-height: 0;\n}\n\n/* ヒーローから複製した再現図も全く同じ細い黒枠を使う。 */\n.hero-visual-reuse {\n  width: min(100%, 360px);\n  max-width: 360px;\n  margin-inline: auto;\n  justify-self: center;\n}\n\n#features .feature-row .feature-media,\n.screenshot-scroller .screenshot-card:first-child {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n/* 既存screenshot-cardの枠と複製したframe-mockの枠が二重にならないよう、\n   1枚目だけカード側のベゼルを外す。 */\n.screenshot-scroller .screenshot-card:first-child {\n  border: 0;\n  background: transparent;\n  box-shadow: none;\n  border-radius: 0;\n}\n\n.screenshot-scroller .screenshot-card:first-child .hero-visual-reuse {\n  width: 100%;\n}\n\n/* --------------------------------------------------------------------------\n   Screen mock rendering\n   -------------------------------------------------------------------------- */\n.fd-icon-btn .ic,\n.fd-brush-opacity-ic {\n  filter: none !important;\n  stroke: var(--fd-panel);\n  stroke-width: 1.65px;\n  stroke-linejoin: round;\n  stroke-linecap: round;\n  paint-order: stroke fill;\n}\n\n.fd-brush-opacity-ic {\n  stroke-width: 1.8px;\n}\n\n.fd-icon-btn use[href$=\"#ic-eraser_fa\"] {\n  stroke: var(--fd-panel);\n  stroke-width: 38px;\n  stroke-linejoin: round;\n  stroke-linecap: round;\n  paint-order: stroke fill;\n}\n\n.feature-media {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.feature-media > .feature-diagram,\n.feature-section > .feature-diagram,\n.screenshot-card > .feature-diagram {\n  width: min(100%, 360px);\n  aspect-ratio: 9 / 16;\n  min-height: 0;\n  margin-inline: auto;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  box-sizing: border-box;\n}\n\n.feature-diagram > .fd-canvas:not(.fd-preview-mini) {\n  flex: 1 1 auto;\n  height: auto;\n  min-height: 180px;\n}\n\n.feature-diagram > .fd-preview-mini {\n  flex: 0 1 150px;\n  height: auto;\n  min-height: 90px;\n}\n\n.feature-diagram > .fd-audio-track:only-child {\n  flex: 1 1 auto;\n  display: flex;\n  align-items: center;\n}\n\n.feature-diagram > .fd-slot-list,\n.feature-diagram > .fd-setting-list,\n.feature-diagram > .fd-export-options {\n  flex: 1 1 auto;\n}\n\n.hero-visual .feature-diagram {\n  width: 100%;\n  height: 100%;\n  aspect-ratio: auto;\n  margin: 0;\n}\n\n.feature-row,\n.feature-row:nth-child(even) {\n  background: var(--color-white);\n}\n\n/* --------------------------------------------------------------------------\n   Footer + typography hierarchy\n   -------------------------------------------------------------------------- */\n.site-footer {\n  background: var(--color-footer-brown) !important;\n  background-image: none !important;\n}\n\n:where(h1, h2, h3, h4) {\n  color: var(--color-footer-brown);\n}\n\n.hero-title,\n.feature-copy h3,\n.section-head h2,\n.feature-section-head h2,\n.about-hero h1,\n.features-header h1,\n.help-header h1,\n.faq-header h1,\n.news-header h1,\n.legal-header h1 {\n  color: var(--color-footer-brown);\n}\n\n.section-dark :where(h1, h2, h3, h4),\n.pricing-card.is-premium :where(h1, h2, h3, h4),\n.download-panel :where(h1, h2, h3, h4),\n.about-cta :where(h1, h2, h3, h4),\n.site-footer :where(h1, h2, h3, h4) {\n  color: var(--color-white);\n}\n\n.final-cta .btn-primary {\n  background: var(--color-accent);\n  color: var(--color-white);\n}\n\n.final-cta .btn-primary:hover {\n  background: var(--color-accent-dark);\n}\n\n@media (max-width: 900px) {\n  .hero-copy {\n    text-align: left;\n  }\n\n  .hero-title {\n    margin-inline: 0;\n  }\n\n  .hero-subtitle,\n  .hero-lead,\n  .hero-bridge {\n    margin-left: 0;\n    margin-right: 0;\n  }\n\n  .hero-actions {\n    justify-content: flex-start;\n  }\n\n  .hero .btn-primary {\n    background: var(--color-accent);\n    color: var(--color-white);\n  }\n\n  .hero .btn-primary:hover {\n    background: var(--color-accent-dark);\n  }\n\n  .hero-visual {\n    width: min(100%, 390px);\n    margin-inline: auto;\n  }\n\n  .hero-visual-reuse {\n    width: min(100%, 340px);\n  }\n\n  .marquee-track {\n    animation: marquee-scroll 32s linear infinite !important;\n    transform: none;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .marquee-track {\n    animation: none !important;\n    transform: none;\n  }\n}\n
+/* ========================================================================== 
+   NIARIM responsive consistency fixes
+   PC/SPでレイアウト上必要な差だけを残し、色・配置方針・画面再現図の見え方は
+   共通のデザイン意図に揃える。
+   ========================================================================== */
+
+:root {
+  --color-footer-brown: #3b2429;
+}
+
+/* Hero outer shellは装飾用の太い端末ベゼルにしない。
+   実際の端末枠はframe-mock側の細い黒枠1枚だけに統一する。 */
+.hero-visual {
+  aspect-ratio: 9 / 16;
+  max-width: 500px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.hero-visual .frame-mock {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  padding: 0;
+  border: 6px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  background: #201f27;
+  box-shadow: var(--shadow-md);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-visual .fd-brush-slider {
+  position: relative;
+  z-index: 2;
+  margin-top: -52px;
+  background: transparent;
+}
+
+.hero-visual .fd-toolbar {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.hero-visual .fd-canvas {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* ヒーローから複製した再現図も同じ細い黒枠を使う。 */
+.hero-visual-reuse {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-inline: auto;
+  justify-self: center;
+}
+
+/* home.cssのfeature-mediaは通常16:11のプレゼン枠だが、ヒーロー画面を
+   流用する場合はその枠を外し、9:16端末そのものを表示する。 */
+.feature-media:has(.hero-visual-reuse) {
+  aspect-ratio: auto;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  opacity: 1;
+  clip-path: none;
+  transform: none;
+  transition: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#features .feature-row .feature-media,
+.screenshot-scroller .screenshot-card:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* アプリ画面紹介1枚目は外側のscreenshot-cardベゼルと複製したframe-mockが
+   二重にならないよう、カード側の枠を外して9:16へ合わせる。 */
+.screenshot-scroller .screenshot-card:first-child {
+  aspect-ratio: 9 / 16;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.screenshot-scroller .screenshot-card:first-child .hero-visual-reuse {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Screen mock rendering
+   -------------------------------------------------------------------------- */
+.fd-icon-btn .ic,
+.fd-brush-opacity-ic {
+  filter: none !important;
+  stroke: var(--fd-panel);
+  stroke-width: 1.65px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+.fd-brush-opacity-ic {
+  stroke-width: 1.8px;
+}
+
+.fd-icon-btn use[href$="#ic-eraser_fa"] {
+  stroke: var(--fd-panel);
+  stroke-width: 38px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  paint-order: stroke fill;
+}
+
+.feature-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-media > .feature-diagram,
+.feature-section > .feature-diagram,
+.screenshot-card > .feature-diagram {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  min-height: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.feature-diagram > .fd-canvas:not(.fd-preview-mini) {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 180px;
+}
+
+.feature-diagram > .fd-preview-mini {
+  flex: 0 1 150px;
+  height: auto;
+  min-height: 90px;
+}
+
+.feature-diagram > .fd-audio-track:only-child {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+.feature-diagram > .fd-slot-list,
+.feature-diagram > .fd-setting-list,
+.feature-diagram > .fd-export-options {
+  flex: 1 1 auto;
+}
+
+.hero-visual .feature-diagram {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  margin: 0;
+}
+
+/* 主要機能紹介パネルは交互色にせず白で統一。 */
+.feature-row,
+.feature-row:nth-child(even) {
+  background: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   Footer + typography hierarchy
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-footer-brown) !important;
+  background-image: none !important;
+}
+
+:where(h1, h2, h3, h4) {
+  color: var(--color-footer-brown);
+}
+
+.hero-title,
+.feature-copy h3,
+.section-head h2,
+.feature-section-head h2,
+.about-hero h1,
+.features-header h1,
+.help-header h1,
+.faq-header h1,
+.news-header h1,
+.legal-header h1 {
+  color: var(--color-footer-brown);
+}
+
+.section-dark :where(h1, h2, h3, h4),
+.pricing-card.is-premium :where(h1, h2, h3, h4),
+.download-panel :where(h1, h2, h3, h4),
+.about-cta :where(h1, h2, h3, h4),
+.site-footer :where(h1, h2, h3, h4) {
+  color: var(--color-white);
+}
+
+/* ヒーローとページ下部の主要ダウンロードCTAはブランドカラーに統一。 */
+.hero .btn-primary,
+.final-cta .btn-primary {
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+.hero .btn-primary:hover,
+.final-cta .btn-primary:hover {
+  background: var(--color-accent-dark);
+}
+
+@media (max-width: 900px) {
+  .hero-copy {
+    text-align: left;
+  }
+
+  .hero-title {
+    margin-inline: 0;
+  }
+
+  .hero-subtitle,
+  .hero-lead,
+  .hero-bridge {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+
+  .hero-visual {
+    width: min(100%, 390px);
+    margin-inline: auto;
+  }
+
+  .hero-visual-reuse {
+    width: min(100%, 340px);
+  }
+
+  /* SPでもPCと同様に機能名の黒帯を流す。 */
+  .marquee-track {
+    animation: marquee-scroll 32s linear infinite !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}
