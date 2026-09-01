@@ -6,9 +6,7 @@
 
   /**
    * ページ固有CSSの後に、全体の視覚品質を揃える polish.css を読み込む。
-   * 各HTMLへ同じ<link>を重複追加せず、全ページで一貫して適用するため
-   * 共通main.jsから一度だけ注入する。JavaScriptが無効でも既存CSSだけで
-   * 問題なく閲覧できるため、これはprogressive enhancementとして扱う。
+   * 既存HTMLを壊さず全ページへ適用するため共通main.jsから一度だけ注入する。
    */
   function loadDesignPolish() {
     if (document.querySelector('link[data-niarim-polish]')) return;
@@ -21,14 +19,49 @@
 
   loadDesignPolish();
 
-  function initHeaderScroll() {
+  /**
+   * ヘッダー状態とページトップボタンの表示判定を1本のscroll監視へ集約。
+   * scrollイベントのたびにDOMを書き換えず、1フレームにつき最大1回だけ反映する。
+   */
+  function initScrollUi() {
     var header = document.querySelector(".site-header");
-    if (!header) return;
-    var onScroll = function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    var btn = document.createElement("button");
+    var scheduled = false;
+
+    btn.type = "button";
+    btn.className = "scroll-top-btn";
+    btn.innerHTML =
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>';
+    document.body.appendChild(btn);
+
+    function applyLabel() {
+      var lang = document.documentElement.getAttribute("lang") || "ja";
+      var label =
+        window.NIARIM_I18N && window.NIARIM_I18N.translate(lang, "common.scrollTop");
+      btn.setAttribute("aria-label", label || "ページトップへ戻る");
+    }
+
+    function applyScrollState() {
+      scheduled = false;
+      var y = window.scrollY;
+      if (header) header.classList.toggle("is-scrolled", y > 8);
+      btn.classList.toggle("is-visible", y > 480);
+    }
+
+    function requestScrollState() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(applyScrollState);
+    }
+
+    applyLabel();
+    applyScrollState();
+    document.addEventListener("niarim:langchange", applyLabel);
+    window.addEventListener("scroll", requestScrollState, { passive: true });
+
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
   function initNavToggle() {
@@ -36,10 +69,10 @@
     var nav = document.querySelector(".main-nav");
     if (!toggle || !nav) return;
 
-    var close = function () {
+    function close() {
       toggle.setAttribute("aria-expanded", "false");
       nav.classList.remove("is-open");
-    };
+    }
 
     toggle.addEventListener("click", function () {
       var isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -47,8 +80,9 @@
       nav.classList.toggle("is-open", !isOpen);
     });
 
-    nav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", close);
+    // 各リンクへ個別listenerを付けず、nav内のクリックを1本で処理する。
+    nav.addEventListener("click", function (event) {
+      if (event.target.closest && event.target.closest("a")) close();
     });
 
     document.addEventListener("keydown", function (event) {
@@ -56,53 +90,28 @@
     });
   }
 
-  function initScrollTopButton() {
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "scroll-top-btn";
-    btn.innerHTML =
-      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>';
-    document.body.appendChild(btn);
-
-    var applyLabel = function () {
-      var lang = document.documentElement.getAttribute("lang") || "ja";
-      var label =
-        window.NIARIM_I18N && window.NIARIM_I18N.translate(lang, "common.scrollTop");
-      btn.setAttribute("aria-label", label || "ページトップへ戻る");
-    };
-    applyLabel();
-    document.addEventListener("niarim:langchange", applyLabel);
-
-    var toggle = function () {
-      btn.classList.toggle("is-visible", window.scrollY > 480);
-    };
-    toggle();
-    window.addEventListener("scroll", toggle, { passive: true });
-
-    btn.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
+  /** FAQは各項目へlistenerを量産せず、document上の1本で処理する。 */
   function initFaqAccordion() {
-    document.querySelectorAll(".faq-item").forEach(function (item) {
-      var question = item.querySelector(".faq-question");
-      var answer = item.querySelector(".faq-answer");
-      if (!question || !answer) return;
+    if (!document.querySelector(".faq-item")) return;
 
-      question.addEventListener("click", function () {
-        var isOpen = item.classList.contains("is-open");
-        item.classList.toggle("is-open", !isOpen);
-        question.setAttribute("aria-expanded", String(!isOpen));
-        answer.style.maxHeight = !isOpen ? answer.scrollHeight + "px" : "0px";
-      });
+    document.addEventListener("click", function (event) {
+      var question = event.target.closest && event.target.closest(".faq-question");
+      if (!question) return;
+
+      var item = question.closest(".faq-item");
+      var answer = item && item.querySelector(".faq-answer");
+      if (!item || !answer) return;
+
+      var isOpen = item.classList.contains("is-open");
+      item.classList.toggle("is-open", !isOpen);
+      question.setAttribute("aria-expanded", String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + "px" : "0px";
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initHeaderScroll();
+    initScrollUi();
     initNavToggle();
     initFaqAccordion();
-    initScrollTopButton();
   });
 })();
