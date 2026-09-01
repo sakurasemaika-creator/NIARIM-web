@@ -30,6 +30,34 @@
   loadDesignLayers();
 
   /**
+   * トップページ内で同じCanvas画面を3重管理しない。
+   * ヒーローの画面再現図を正本として、
+   * - 「思い通りに描ける、描画ツール」
+   * - 「アプリ画面紹介」1枚目
+   * に同一DOMを複製する。今後ヒーロー側を直せば3箇所が同じ見た目になる。
+   */
+  function reuseHeroScreenMock() {
+    var source = document.querySelector(".hero-visual");
+    if (!source) return;
+
+    var targets = [
+      document.querySelector("#features .feature-row:first-of-type .feature-media"),
+      document.querySelector(".screenshot-scroller .screenshot-card:first-child")
+    ];
+
+    targets.forEach(function (target) {
+      if (!target) return;
+
+      var clone = source.cloneNode(true);
+      clone.removeAttribute("data-parallax");
+      clone.classList.add("hero-visual-reuse");
+      clone.setAttribute("aria-hidden", "true");
+
+      target.replaceChildren(clone);
+    });
+  }
+
+  /**
    * ヘッダー状態とページトップボタンの表示判定を1本のscroll監視へ集約。
    * scrollイベントのたびにDOMを書き換えず、1フレームにつき最大1回だけ反映する。
    */
@@ -139,6 +167,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    reuseHeroScreenMock();
     initScrollUi();
     initNavToggle();
     initFaqAccordion();
