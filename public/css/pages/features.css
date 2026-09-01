@@ -869,6 +869,14 @@
   flex-direction: column-reverse;
 }
 
+/* column-reverseで積み上げ方向を反転すると、各行の隣接関係も反転する
+   （DOM上の前の兄弟＝親が、今度は下ではなく上に来てしまう）。
+   罫線SVGは「親は上」を前提に描いているため、上下反転(scaleY)して
+   「親は下」の向きに合わせる。ドット・文字は反転させない。 */
+.fd-tree-list--bottom-up .fd-tree-connector {
+  transform: scaleY(-1);
+}
+
 .fd-tree-row2 {
   display: flex;
   align-items: center;
