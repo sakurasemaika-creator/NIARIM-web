@@ -16,7 +16,8 @@ const report = { generatedAt: new Date().toISOString(), baseURL, findings: [], s
 const severeKinds = new Set([
   'page-error', 'console-error', 'horizontal-overflow', 'broken-image',
   'nav-open', 'nav-close', 'nav-clipped', 'language-menu', 'language-restore',
-  'faq-open', 'help-search', 'scroll-top', 'empty-viewport'
+  'faq-open', 'help-search', 'scroll-top', 'empty-viewport',
+  'screen-mock', 'design-invariant', 'community-tab', 'anchor-nav'
 ]);
 
 const clean = value => String(value || '').replace(/\s+/g, ' ').trim();
@@ -58,6 +59,101 @@ async function inspectViewport(page, vp, route, label) {
   if (state.scrollWidth > state.clientWidth + 2) finding(vp, route, 'horizontal-overflow', { label, ...state });
   state.broken.forEach(src => finding(vp, route, 'broken-image', { label, src }));
   if (state.substantiveCount === 0 && state.docHeight > state.height + 50) finding(vp, route, 'empty-viewport', { label, ...state });
+}
+
+async function auditDesignInvariants(page, vp, route) {
+  const state = await page.evaluate(() => {
+    function resolveColor(value) {
+      const el = document.createElement('i');
+      el.style.color = value;
+      el.style.display = 'none';
+      document.body.appendChild(el);
+      const result = getComputedStyle(el).color;
+      el.remove();
+      return result;
+    }
+
+    const mocks = [...document.querySelectorAll('.fd-app-screen, .fd-route-screen')].map((el, i) => {
+      const r = el.getBoundingClientRect();
+      const cs = getComputedStyle(el);
+      return {
+        i,
+        className: el.className,
+        width: Math.round(r.width),
+        height: Math.round(r.height),
+        ratio: r.height ? r.width / r.height : 0,
+        display: cs.display,
+        visibility: cs.visibility,
+        opacity: Number(cs.opacity),
+        revealVisible: !el.closest('.reveal') || el.closest('.reveal').classList.contains('is-visible')
+      };
+    });
+
+    const root = getComputedStyle(document.documentElement);
+    const accent = resolveColor(root.getPropertyValue('--color-accent').trim());
+    const footerBrown = resolveColor(root.getPropertyValue('--color-footer-brown').trim() || '#3b2429');
+    const heroCopy = document.querySelector('.hero-copy');
+    const primary = document.querySelector('.hero .btn-primary');
+    const finalPrimary = document.querySelector('.final-cta .btn-primary');
+    const marquee = document.querySelector('.marquee-track');
+    const footer = document.querySelector('.site-footer');
+    const rows = [...document.querySelectorAll('.feature-row')];
+    const communityCards = document.querySelectorAll('.community-gallery .community-card:not(.is-more-cta)').length;
+
+    return {
+      mocks,
+      accent,
+      footerBrown,
+      heroAlign: heroCopy ? getComputedStyle(heroCopy).textAlign : null,
+      primaryBg: primary ? getComputedStyle(primary).backgroundColor : null,
+      finalPrimaryBg: finalPrimary ? getComputedStyle(finalPrimary).backgroundColor : null,
+      marqueeAnimationName: marquee ? getComputedStyle(marquee).animationName : null,
+      marqueeAnimationDuration: marquee ? getComputedStyle(marquee).animationDuration : null,
+      footerBg: footer ? getComputedStyle(footer).backgroundColor : null,
+      footerImage: footer ? getComputedStyle(footer).backgroundImage : null,
+      rowBackgrounds: rows.map(el => getComputedStyle(el).backgroundColor),
+      communityCards
+    };
+  });
+
+  for (const mock of state.mocks) {
+    const target = 9 / 16;
+    if (mock.width < 1 || mock.height < 1 || mock.display === 'none' || mock.visibility === 'hidden' || mock.opacity < 0.99 || !mock.revealVisible) {
+      finding(vp, route, 'screen-mock', { reason: 'hidden-or-reveal', ...mock });
+    }
+    if (mock.width > 0 && Math.abs(mock.ratio - target) > 0.03) {
+      finding(vp, route, 'screen-mock', { reason: 'ratio', target, ...mock });
+    }
+  }
+
+  if (route === '/') {
+    if (vp === 'sp' && state.heroAlign !== 'left') {
+      finding(vp, route, 'design-invariant', { rule: 'SP hero must remain left aligned', actual: state.heroAlign });
+    }
+    if (state.primaryBg && state.primaryBg !== state.accent) {
+      finding(vp, route, 'design-invariant', { rule: 'Hero download CTA must use brand accent', expected: state.accent, actual: state.primaryBg });
+    }
+    if (state.finalPrimaryBg && state.finalPrimaryBg !== state.accent) {
+      finding(vp, route, 'design-invariant', { rule: 'Final download CTA must use brand accent', expected: state.accent, actual: state.finalPrimaryBg });
+    }
+    if (state.marqueeAnimationName !== 'marquee-scroll' || state.marqueeAnimationDuration === '0s') {
+      finding(vp, route, 'design-invariant', { rule: 'Feature marquee must animate', animationName: state.marqueeAnimationName, duration: state.marqueeAnimationDuration });
+    }
+    const nonWhite = state.rowBackgrounds.map((color, i) => ({ color, i })).filter(x => x.color !== 'rgb(255, 255, 255)');
+    if (nonWhite.length) {
+      finding(vp, route, 'design-invariant', { rule: 'Main feature panels must all be white', nonWhite });
+    }
+  }
+
+  if (state.footerImage && state.footerImage !== 'none') {
+    finding(vp, route, 'design-invariant', { rule: 'Footer must not use a gradient/image', actual: state.footerImage });
+  }
+  if (state.footerBg && state.footerBg !== state.footerBrown) {
+    finding(vp, route, 'design-invariant', { rule: 'Footer must use footer brown', expected: state.footerBrown, actual: state.footerBg });
+  }
+  if (route === '/community/' && state.communityCards !== 9) {
+    finding(vp, route, 'design-invariant', { rule: 'Community preview must show nine ranked tiles', actual: state.communityCards });
+  }
 }
 
 async function exerciseLanguage(page, vp, route, routeName, navToggle) {
@@ -116,6 +212,46 @@ async function exerciseLanguage(page, vp, route, routeName, navToggle) {
   }
 }
 
+async function exerciseCommunityTabs(page, vp, route, routeName) {
+  if (route !== '/community/') return;
+  const tabs = page.locator('[data-community-tab]');
+  const count = await tabs.count();
+  for (let i = 0; i < count; i++) {
+    const tab = tabs.nth(i);
+    await tab.scrollIntoViewIfNeeded();
+    await tab.click();
+    await page.waitForTimeout(160);
+    const state = await page.locator('[data-community-tab]').evaluateAll((els, clicked) => ({
+      activeCount: els.filter(el => el.classList.contains('is-active')).length,
+      clickedActive: els[clicked]?.classList.contains('is-active') || false,
+      activeKey: els.find(el => el.classList.contains('is-active'))?.getAttribute('data-community-tab') || null
+    }), i);
+    await screenshot(page, vp, routeName, `community-tab-${String(i + 1).padStart(2, '0')}`);
+    if (state.activeCount !== 1 || !state.clickedActive) {
+      finding(vp, route, 'community-tab', { clickedIndex: i, ...state });
+    }
+  }
+}
+
+async function exerciseAnchorNav(page, vp, route, routeName) {
+  if (!['/features/', '/help/'].includes(route)) return;
+  const anchors = page.locator('.feature-nav a[href^="#"]');
+  const count = await anchors.count();
+  for (let i = 0; i < count; i++) {
+    const anchor = anchors.nth(i);
+    const href = await anchor.getAttribute('href');
+    if (!href || href === '#') continue;
+    await anchor.click();
+    await page.waitForTimeout(180);
+    const state = await page.evaluate(expected => ({
+      hash: location.hash,
+      targetExists: !!document.querySelector(expected)
+    }), href);
+    await screenshot(page, vp, routeName, `anchor-${String(i + 1).padStart(2, '0')}`);
+    if (!state.targetExists || state.hash !== href) finding(vp, route, 'anchor-nav', { href, ...state });
+  }
+}
+
 const browser = await chromium.launch({ headless: true });
 for (const vp of viewports) {
   const context = await browser.newContext({
@@ -135,10 +271,18 @@ for (const vp of viewports) {
     currentRoute = route;
     const routeName = slug(route);
     await page.goto(baseURL + route, { waitUntil: 'networkidle' });
-    await page.evaluate(() => scrollTo(0, 0));
+    // The production site intentionally uses smooth scrolling. During visual auditing we
+    // disable it only inside the test browser so each screenshot is taken at a deterministic
+    // settled position rather than halfway through an animation.
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.scrollBehavior = 'auto';
+      scrollTo(0, 0);
+    });
     await page.waitForTimeout(450);
     await screenshot(page, vp.name, routeName, '00-top');
     await inspectViewport(page, vp.name, route, 'top');
+    await auditDesignInvariants(page, vp.name, route);
 
     const navToggle = page.locator('.nav-toggle').first();
     if (await navToggle.count() && await navToggle.isVisible()) {
@@ -160,6 +304,8 @@ for (const vp of viewports) {
     }
 
     await exerciseLanguage(page, vp.name, route, routeName, navToggle);
+    await exerciseCommunityTabs(page, vp.name, route, routeName);
+    await exerciseAnchorNav(page, vp.name, route, routeName);
 
     // FAQ interaction: open each of the first six questions independently.
     const faqs = page.locator('.faq-question');
@@ -208,6 +354,8 @@ for (const vp of viewports) {
 
     // Walk through the page as a user would. This triggers IntersectionObserver reveals and
     // catches sections that become blank/clipped only during real scrolling.
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.waitForTimeout(120);
     const scrollStops = await page.evaluate(() => {
       const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
       const step = Math.max(320, Math.round(innerHeight * 0.72));
@@ -217,15 +365,15 @@ for (const vp of viewports) {
       return [...new Set(values)].slice(0, 24);
     });
     for (let i = 0; i < scrollStops.length; i++) {
-      await page.evaluate(y => scrollTo({ top: y, behavior: 'auto' }), scrollStops[i]);
-      await page.waitForTimeout(360);
+      await page.evaluate(y => scrollTo(0, y), scrollStops[i]);
+      await page.waitForTimeout(240);
       await inspectViewport(page, vp.name, route, `scroll-${i + 1}`);
       await screenshot(page, vp.name, routeName, `scroll-${String(i + 1).padStart(2, '0')}`);
     }
 
     // Recalculate true bottom after reveal/injected layout has settled.
-    await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight, behavior: 'auto' }));
-    await page.waitForTimeout(400);
+    await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+    await page.waitForTimeout(300);
     await screenshot(page, vp.name, routeName, '90-bottom');
     await inspectViewport(page, vp.name, route, 'bottom');
 
