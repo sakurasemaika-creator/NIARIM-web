@@ -43,7 +43,8 @@
       "fd.treeNode1": "初稿",
       "fd.treeNode2": "線画修正",
       "fd.treeNode3a": "配色A",
-      "fd.treeNode3b": "配色B"
+      "fd.treeNode3b": "配色B",
+      "fd.frameListMode": "フレーム一覧"
     },
     "en": {
       "fd.projectName": "Project name",
@@ -79,7 +80,8 @@
       "fd.treeNode1": "First draft",
       "fd.treeNode2": "Line art fix",
       "fd.treeNode3a": "Colors A",
-      "fd.treeNode3b": "Colors B"
+      "fd.treeNode3b": "Colors B",
+      "fd.frameListMode": "Frames"
     },
     "zh-Hans": {
       "fd.projectName": "项目名称",
@@ -115,7 +117,8 @@
       "fd.treeNode1": "初稿",
       "fd.treeNode2": "线稿修正",
       "fd.treeNode3a": "配色A",
-      "fd.treeNode3b": "配色B"
+      "fd.treeNode3b": "配色B",
+      "fd.frameListMode": "帧列表"
     },
     "zh-Hant": {
       "fd.projectName": "專案名稱",
@@ -151,7 +154,8 @@
       "fd.treeNode1": "初稿",
       "fd.treeNode2": "線稿修正",
       "fd.treeNode3a": "配色A",
-      "fd.treeNode3b": "配色B"
+      "fd.treeNode3b": "配色B",
+      "fd.frameListMode": "影格清單"
     },
     "ko": {
       "fd.projectName": "프로젝트 이름",
@@ -187,7 +191,8 @@
       "fd.treeNode1": "초안",
       "fd.treeNode2": "선화 수정",
       "fd.treeNode3a": "색상 A",
-      "fd.treeNode3b": "색상 B"
+      "fd.treeNode3b": "색상 B",
+      "fd.frameListMode": "프레임 목록"
     },
     "fr": {
       "fd.projectName": "Nom du projet",
@@ -223,7 +228,8 @@
       "fd.treeNode1": "Premier jet",
       "fd.treeNode2": "Retouche du trait",
       "fd.treeNode3a": "Couleurs A",
-      "fd.treeNode3b": "Couleurs B"
+      "fd.treeNode3b": "Couleurs B",
+      "fd.frameListMode": "Images"
     },
     "es": {
       "fd.projectName": "Nombre del proyecto",
@@ -259,7 +265,8 @@
       "fd.treeNode1": "Primer borrador",
       "fd.treeNode2": "Ajuste de líneas",
       "fd.treeNode3a": "Colores A",
-      "fd.treeNode3b": "Colores B"
+      "fd.treeNode3b": "Colores B",
+      "fd.frameListMode": "Fotogramas"
     }
   };
   for (var lang in DATA) {
