@@ -8,7 +8,7 @@ on:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,13 +25,13 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-http.log
           exit 1
-      - name: Run interaction audit
-        run: node tests/visual-audit.mjs
+      - name: Run autonomous section-by-section interaction audit
+        run: node tests/autonomous-browser-audit.mjs
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: visual-audit
-          path: artifacts/visual-audit/
+          name: autonomous-browser-audit
+          path: artifacts/autonomous-browser-audit/
           if-no-files-found: error
           retention-days: 14
