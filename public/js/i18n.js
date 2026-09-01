@@ -5,10 +5,8 @@
  * data-i18n-attr="attr1:key1|attr2:key2" で属性値(placeholder, aria-label等)を置き換える。
  * data-i18n-html="key" はリンク等のインラインタグを含む簡易HTMLを許可する（辞書側で用途を限定）。
  *
- * 初期表示ではHTML内の辞書scriptから日本語だけを同期的に受け取る。
- * 別言語へ切り替える場合だけ、そのページで使用中の辞書scriptを ?lang=XX 付きで
- * 追加取得する。辞書が一部存在するだけで「読込済み」と誤判定しないよう、
- * 言語単位の完了状態を明示的に管理する。
+ * 対応言語: 日本語(ja) / 英語(en) / 簡体字中国語(zh-Hans) / 繁体字中国語(zh-Hant) /
+ *           韓国語(ko) / フランス語(fr) / スペイン語(es)
  */
 (function () {
   "use strict";
@@ -24,9 +22,7 @@
   ];
 
   var STORAGE_KEY = "niarim_lang";
-  var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
-  var languageLoads = {};
-  var loadedLanguages = { ja: true };
+  var DICT = window.NIARIM_I18N_DICT || {};
 
   function normalizeLang(value) {
     if (!value) return "ja";
@@ -46,9 +42,7 @@
 
     var short = lower.split("-")[0];
     for (var j = 0; j < LANGS.length; j += 1) {
-      if (LANGS[j].code.toLowerCase().indexOf(short) === 0) {
-        return LANGS[j].code;
-      }
+      if (LANGS[j].code.toLowerCase().indexOf(short) === 0) return LANGS[j].code;
     }
     return "ja";
   }
@@ -56,83 +50,24 @@
   function detectLang() {
     try {
       var saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved) return normalizeLang(saved);
+      if (saved && DICT[normalizeLang(saved)]) return normalizeLang(saved);
     } catch (_) {}
-    return normalizeLang(navigator.language || "ja");
+
+    var detected = normalizeLang(navigator.language || "ja");
+    return DICT[detected] ? detected : "ja";
   }
 
   function t(lang, key) {
-    var table = DICT[lang] || {};
+    var table = DICT[lang] || DICT.ja || {};
     var fallback = DICT.ja || {};
     return Object.prototype.hasOwnProperty.call(table, key)
       ? table[key]
-      : Object.prototype.hasOwnProperty.call(fallback, key)
-        ? fallback[key]
-        : key;
+      : fallback[key] || key;
   }
 
-  function getDictionarySources() {
-    var seen = {};
-    var sources = [];
-    document.querySelectorAll('script[src*="/js/i18n-dict"]').forEach(function (script) {
-      var src = script.getAttribute("src");
-      if (!src) return;
-      var url = new URL(src, window.location.href);
-      url.search = "";
-      var normalized = url.pathname;
-      if (seen[normalized]) return;
-      seen[normalized] = true;
-      sources.push(normalized);
-    });
-    return sources;
-  }
-
-  function loadScript(src, lang) {
-    return new Promise(function (resolve, reject) {
-      var script = document.createElement("script");
-      script.src = src + "?lang=" + encodeURIComponent(lang);
-      script.async = true;
-      script.onload = function () {
-        script.remove();
-        resolve();
-      };
-      script.onerror = function () {
-        script.remove();
-        reject(new Error("Failed to load translation dictionary: " + src));
-      };
-      document.head.appendChild(script);
-    });
-  }
-
-  function loadLanguage(lang) {
+  function applyLang(lang) {
     lang = normalizeLang(lang);
-
-    if (loadedLanguages[lang]) return Promise.resolve(lang);
-    if (languageLoads[lang]) return languageLoads[lang];
-
-    var sources = getDictionarySources();
-    if (!sources.length) return Promise.resolve("ja");
-
-    languageLoads[lang] = Promise.all(
-      sources.map(function (src) {
-        return loadScript(src, lang);
-      })
-    ).then(function () {
-      loadedLanguages[lang] = true;
-      delete languageLoads[lang];
-      return lang;
-    }).catch(function (err) {
-      delete languageLoads[lang];
-      console.error(err);
-      return "ja";
-    });
-
-    return languageLoads[lang];
-  }
-
-  function applyLangNow(lang) {
-    lang = normalizeLang(lang);
-    if (!DICT[lang] || !Object.keys(DICT[lang]).length) lang = "ja";
+    if (!DICT[lang]) lang = "ja";
 
     document.documentElement.setAttribute("lang", lang);
 
@@ -193,11 +128,6 @@
     return lang;
   }
 
-  function applyLang(lang) {
-    lang = normalizeLang(lang);
-    return loadLanguage(lang).then(applyLangNow);
-  }
-
   function buildLangMenu() {
     var mount = document.querySelector("[data-lang-menu]");
     if (!mount) return;
@@ -210,12 +140,9 @@
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
       button.addEventListener("click", function () {
-        button.disabled = true;
-        applyLang(lang.code).finally(function () {
-          button.disabled = false;
-          var dropdown = mount.closest("[data-lang-dropdown]");
-          if (dropdown) dropdown.setAttribute("data-open", "false");
-        });
+        applyLang(lang.code);
+        var dropdown = mount.closest("[data-lang-dropdown]");
+        if (dropdown) dropdown.setAttribute("data-open", "false");
       });
       li.appendChild(button);
       mount.appendChild(li);
@@ -254,6 +181,5 @@
     languages: LANGS,
     translate: t,
     applyLang: applyLang,
-    loadLanguage: loadLanguage,
   };
 })();
