@@ -19,13 +19,19 @@
 
   /**
    * 画面再現図は最初から表示済みにする。
-   * 以前は全.reveal要素ごとに子孫をquerySelectorして画面図の有無を判定していたが、
-   * 画面図側を一度だけ直接取得し、最寄りの.revealを静止扱いにする方が単純で軽い。
+   * 対象クラスを明示し、広い部分一致セレクタを使わない。
+   * feature-diagram / frame-mock は既に overflow:hidden の静的な図なので、
+   * paint containment で再描画の影響範囲も図の内部に限定する。
    */
   function showScreenMocks() {
     document
-      .querySelectorAll(".screenshot-scroller, [class*='-diagram'], [class*='-mock']")
+      .querySelectorAll(".screenshot-scroller, .feature-diagram, .frame-mock")
       .forEach(function (mock) {
+        if (mock.classList.contains("feature-diagram") || mock.classList.contains("frame-mock")) {
+          mock.style.contain = "paint";
+          mock.style.userSelect = "none";
+        }
+
         var reveal = mock.classList.contains("reveal") ? mock : mock.closest(".reveal");
         if (!reveal) return;
         reveal.classList.add("is-visible");
