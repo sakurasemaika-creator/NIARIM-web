@@ -1,7 +1,7 @@
 /**
  * NIARIM公式サイト アニメーション制御
  * 見た目は維持しつつ、常時rAF・mousemoveごとのlayout計測を避ける。
- * アプリ画面の再現図は情報確認を優先し、スクロール演出を付けず常時表示する。
+ * アプリ画面の再現図はスクロール演出を付けず、最初から静止表示する。
  */
 (function () {
   "use strict";
@@ -18,39 +18,29 @@
   }
 
   /**
-   * アプリ画面の再現図を含むコンテナかどうかを判定する。
-   * 親要素に .reveal が付いている場合でも、画面図は最初から表示して
-   * スクロール時のfade/slide対象にしない。
+   * 画面再現図は最初から表示済みにする。
+   * 以前は全.reveal要素ごとに子孫をquerySelectorして画面図の有無を判定していたが、
+   * 画面図側を一度だけ直接取得し、最寄りの.revealを静止扱いにする方が単純で軽い。
    */
-  function containsScreenMock(el) {
-    if (el.matches && el.matches(".screenshot-scroller")) return true;
-    return !!(
-      el.querySelector &&
-      el.querySelector(
-        ".feature-diagram, .frame-mock, [class*='-diagram'], [class*='-mock']"
-      )
-    );
+  function showScreenMocks() {
+    document
+      .querySelectorAll(".screenshot-scroller, [class*='-diagram'], [class*='-mock']")
+      .forEach(function (mock) {
+        var reveal = mock.classList.contains("reveal") ? mock : mock.closest(".reveal");
+        if (!reveal) return;
+        reveal.classList.add("is-visible");
+        reveal.style.transitionDelay = "";
+      });
   }
 
   function initReveal() {
-    var targets = document.querySelectorAll(".reveal");
+    showScreenMocks();
+
+    var targets = document.querySelectorAll(".reveal:not(.is-visible)");
     if (!targets.length) return;
 
-    var animatedTargets = [];
-
-    targets.forEach(function (el) {
-      if (containsScreenMock(el)) {
-        el.classList.add("is-visible");
-        el.style.transitionDelay = "";
-        return;
-      }
-      animatedTargets.push(el);
-    });
-
-    if (!animatedTargets.length) return;
-
     if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
-      animatedTargets.forEach(function (el) {
+      targets.forEach(function (el) {
         el.classList.add("is-visible");
       });
       return;
@@ -69,7 +59,7 @@
       { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
-    animatedTargets.forEach(function (el) {
+    targets.forEach(function (el) {
       observer.observe(el);
     });
   }
