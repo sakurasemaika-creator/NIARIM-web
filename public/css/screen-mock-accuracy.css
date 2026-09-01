@@ -1,0 +1,576 @@
+/* ========================================================================== 
+   NIARIM screen mock accuracy layer
+   実アプリの画面構成・遷移に照合した画面再現図専用。
+   ========================================================================== */
+
+.fd-app-screen,
+.fd-route-screen {
+  --fd-bg: #17161c;
+  --fd-panel: #201f27;
+  --fd-accent: #ff5c7a;
+  --fd-text: #f5f1f0;
+  position: relative;
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  margin-inline: auto;
+  padding: 0;
+  border: 6px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  background: #3a3a3a;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  box-sizing: border-box;
+  color: var(--fd-text);
+}
+
+/* CanvasScreen：上部バー→キャンバス→BrushSizeSlider→折り畳みハンドル→
+   ToolbarWidget→フレーム一覧ハンドル→FrameStripWidget の順。 */
+.fd-canvas-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+
+.fd-canvas-screen > .fd-topbar {
+  flex: 0 0 40px;
+  padding: 4px 8px;
+  background: #3a3a3a;
+}
+
+.fd-app-canvas-stage {
+  position: relative;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin-inline: 8%;
+  border-radius: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.fd-canvas-screen > .fd-brush-slider {
+  flex: 0 0 auto;
+  margin-top: 0 !important;
+  background: #3a3a3a;
+  min-height: 34px;
+}
+
+.fd-canvas-screen > .fd-toolbar {
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding-inline: 4px;
+  overflow-x: hidden;
+  background: #3a3a3a !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+}
+
+.fd-collapse-handle {
+  flex: 0 0 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.7);
+  background: #3a3a3a;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.fd-frame-collapse {
+  background: #3a3a3a;
+}
+
+.fd-canvas-screen > .fd-frame-strip {
+  flex: 0 0 64px;
+  margin: 0;
+  border-radius: 0;
+  background: #3a3a3a;
+}
+
+/* CanvasScreenのモバイルオーバーレイはColumnより手前に出る。 */
+.fd-app-overlay-panel {
+  position: absolute;
+  z-index: 20;
+  color: var(--fd-text);
+}
+
+.fd-app-layer-panel {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(250px, 72%);
+  background: var(--fd-panel);
+  box-shadow: -8px 0 24px rgba(0,0,0,.26);
+  overflow: hidden;
+}
+
+.fd-app-layer-panel .fd-layers {
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fd-app-layer-panel .fd-layer-row {
+  flex: 0 0 48px;
+}
+
+.fd-panel-close-bar {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fd-panel-close-bar > span {
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.35);
+}
+
+/* OnionSkinPanel：設定メニューを閉じた後、CanvasScreen右上へ浮くCard。 */
+.fd-app-onion-panel {
+  top: 56px;
+  right: 16px;
+  width: min(280px, calc(100% - 32px));
+  padding: 10px 12px 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: var(--fd-panel);
+  box-shadow: 0 10px 28px rgba(0,0,0,.34);
+  font-size: 11px;
+}
+
+.fd-onion-title,
+.fd-onion-side-head,
+.fd-onion-control,
+.fd-onion-fade {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fd-onion-title {
+  min-height: 28px;
+}
+
+.fd-onion-title strong,
+.fd-onion-side-head strong {
+  font-family: var(--font-serif);
+}
+
+.fd-onion-title .fd-mini-switch,
+.fd-onion-side-head .fd-mini-switch,
+.fd-onion-fade .fd-mini-switch {
+  margin-left: auto;
+}
+
+.fd-panel-divider {
+  height: 1px;
+  margin-block: 7px;
+  background: rgba(255,255,255,.1);
+}
+
+.fd-onion-side {
+  display: grid;
+  gap: 6px;
+}
+
+.fd-onion-control > span:first-child:not(.fd-onion-color) {
+  min-width: 44px;
+}
+
+.fd-onion-control > b {
+  width: 30px;
+  text-align: right;
+  font-size: 10px;
+}
+
+.fd-onion-color {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 50%;
+  background: var(--onion-color);
+}
+
+.fd-mini-slider {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  overflow: hidden;
+}
+
+.fd-mini-slider > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  max-width: 100%;
+  border-radius: inherit;
+  background: var(--fd-accent);
+}
+
+.fd-mini-switch {
+  position: relative;
+  width: 27px;
+  height: 15px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: rgba(255,255,255,.2);
+}
+
+.fd-mini-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.fd-mini-switch.is-on {
+  background: var(--fd-accent);
+}
+
+.fd-mini-switch.is-on::after {
+  left: 14px;
+}
+
+.fd-onion-common {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fd-onion-common div {
+  display: flex;
+  gap: 4px;
+}
+
+.fd-onion-common b {
+  min-width: 24px;
+  padding: 3px 6px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  text-align: center;
+}
+
+.fd-onion-common b.is-selected {
+  background: var(--fd-accent);
+  border-color: var(--fd-accent);
+}
+
+/* TimelineScreen上で音声トラックを選択するとbottom sheetで編集する。 */
+.fd-audio-context-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+.fd-audio-lane {
+  margin: 6px 8px;
+}
+
+.fd-audio-lane .fd-audio-track {
+  height: 42px;
+  border-radius: 6px;
+}
+
+.fd-clip-detail-sheet {
+  position: absolute;
+  z-index: 25;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 7px 12px 12px;
+  border-radius: 16px 16px 0 0;
+  background: #2a2931;
+  box-shadow: 0 -10px 28px rgba(0,0,0,.35);
+  color: var(--fd-text);
+  font-size: 11px;
+}
+
+.fd-sheet-handle {
+  width: 34px;
+  height: 3px;
+  margin: 0 auto 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.35);
+}
+
+.fd-sheet-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+}
+
+.fd-sheet-row > span:first-child {
+  min-width: 72px;
+}
+
+.fd-sheet-row > span:last-child:not(.fd-mini-slider) {
+  margin-left: auto;
+}
+
+/* Scaffold + AppBarを持つ独立画面（保存・ワークスペース・書き出し）。 */
+.fd-route-screen {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  background: var(--fd-bg);
+}
+
+.fd-appbar {
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  background: var(--fd-panel);
+  color: var(--fd-text);
+}
+
+.fd-appbar strong {
+  font-family: var(--font-serif);
+  font-size: 13px;
+}
+
+.fd-appbar-back {
+  width: 24px;
+  font-size: 28px;
+  line-height: 1;
+  text-align: center;
+}
+
+.fd-route-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 12px;
+  overflow: hidden;
+  color: var(--fd-text);
+}
+
+/* SaveTreeScreen: Tree/Slotは同時表示しない。 */
+.fd-save-tree-screen .fd-route-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 28px;
+}
+
+.fd-tree-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 54px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+}
+
+.fd-tree-node > div {
+  display: grid;
+  gap: 2px;
+}
+
+.fd-tree-node strong {
+  font-size: 11px;
+}
+
+.fd-tree-node small {
+  color: rgba(255,255,255,.52);
+  font-size: 9px;
+}
+
+.fd-tree-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border: 2px solid var(--fd-accent);
+  border-radius: 50%;
+  background: var(--fd-bg);
+}
+
+.fd-tree-node.is-root .fd-tree-dot {
+  background: var(--fd-accent);
+}
+
+.fd-tree-line {
+  width: 2px;
+  height: 18px;
+  margin-left: 24px;
+  background: rgba(255,255,255,.18);
+}
+
+.fd-tree-branch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* WorkspaceSettingsScreen */
+.fd-workspace-body {
+  overflow: hidden;
+}
+
+.fd-route-section {
+  display: block;
+  margin: 8px 0 5px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+}
+
+.fd-route-hint {
+  margin: 0 0 7px;
+  color: rgba(255,255,255,.55);
+  font-size: 9px;
+}
+
+.fd-toolbar-preview {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 38px;
+  padding-inline: 6px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 9px;
+  background: #3a3a3a;
+}
+
+.fd-workspace-card {
+  margin-top: 7px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.fd-workspace-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding-inline: 9px;
+  font-size: 10px;
+}
+
+.fd-workspace-row + .fd-workspace-row {
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.fd-workspace-row .ic {
+  width: 15px;
+  height: 15px;
+  opacity: .65;
+}
+
+.fd-check {
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.fd-check.is-on {
+  background: var(--fd-accent);
+  border-color: var(--fd-accent);
+}
+
+.fd-radio {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 50%;
+}
+
+.fd-radio.is-on {
+  box-shadow: inset 0 0 0 4px var(--fd-accent);
+}
+
+/* ExportScreen: AppBarを足し、既存の実装準拠フォームを本文として収める。 */
+.fd-export-screen {
+  padding: 0 !important;
+}
+
+.fd-export-body {
+  display: block;
+  overflow: hidden;
+}
+
+.fd-export-body .fd-section-label:first-child {
+  margin-top: 0;
+}
+
+/* ホームのギャラリーでも新しい実画面比率をそのまま使う。 */
+.screenshot-card.is-code-verified-mock,
+.screenshot-card:has(.fd-route-screen),
+.screenshot-card:has(.fd-canvas-screen) {
+  aspect-ratio: 9 / 16;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.screenshot-card > .fd-app-screen,
+.screenshot-card > .fd-route-screen {
+  width: 100%;
+  height: 100%;
+}
+
+/* 画面再現図を含む主要機能枠は外側に別色を見せない。 */
+.feature-media:has(.fd-app-screen),
+.feature-media:has(.fd-route-screen) {
+  aspect-ratio: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  opacity: 1;
+  clip-path: none;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .fd-app-screen,
+  .fd-route-screen {
+    width: min(100%, 340px);
+  }
+
+  .fd-app-onion-panel {
+    right: 10px;
+    width: min(250px, calc(100% - 20px));
+  }
+}
+
+.fd-appbar-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding-inline: 10px;
+  border-radius: 999px;
+  background: var(--fd-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
