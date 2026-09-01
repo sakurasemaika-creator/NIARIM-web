@@ -1,5 +1,5 @@
 /**
- * NIARIM公式サイト 共通UIロジック（ヘッダー・メニュー・FAQ等）
+ * NIARIM公式サイト 共通UIロジック（ヘッダー・メニュー・FAQ・画面再現図）
  */
 (function () {
   "use strict";
@@ -14,84 +14,357 @@
       var href = entry[0], marker = entry[1];
       if (document.querySelector("link[" + marker + "]")) return;
       var link = document.createElement("link");
-      link.rel = "stylesheet"; link.href = href; link.setAttribute(marker, "true");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.setAttribute(marker, "true");
       document.head.appendChild(link);
     });
   }
   loadDesignLayers();
 
   var ICON_SPRITE = "/assets/icons/ui/sprite.svg#";
-  function icon(name, extraClass) { return '<svg class="ic' + (extraClass ? " " + extraClass : "") + '" aria-hidden="true"><use href="' + ICON_SPRITE + name + '"></use></svg>'; }
-  function iconButton(name, extraClass) { return '<span class="fd-icon-btn' + (extraClass ? " " + extraClass : "") + '">' + icon(name) + '</span>'; }
-  function canvasTopBar() { return '<div class="fd-topbar">' + iconButton("ic-undo") + iconButton("ic-redo") + '<span class="fd-spacer"></span>' + iconButton("ic-settings") + iconButton("ic-home_outlined") + '</div>'; }
-  function canvasDrawingSvg(onion) {
-    if (onion) return '<svg viewBox="0 0 400 220" aria-hidden="true"><path class="fd-stroke-prev" d="M103 100 A62 62 0 1 0 227 100 A62 62 0 1 0 103 100" /><path class="fd-stroke-next" d="M133 91 A62 62 0 1 0 257 91 A62 62 0 1 0 133 91" /><path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" /></svg>';
-    return '<svg viewBox="0 0 400 220" aria-hidden="true"><path class="fd-stroke" d="M118 95 A62 62 0 1 0 242 95 A62 62 0 1 0 118 95" /></svg>';
+  function icon(name, extraClass) {
+    return '<svg class="ic' + (extraClass ? " " + extraClass : "") + '" aria-hidden="true"><use href="' + ICON_SPRITE + name + '"></use></svg>';
   }
-  function brushSlider() { return '<div class="fd-brush-slider"><span class="fd-brush-dot"></span><span class="fd-brush-size">12</span><svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="' + ICON_SPRITE + 'ic-opacity"></use></svg><span class="fd-brush-opacity">80%</span><span class="fd-spacer"></span><span class="fd-brush-toggle">▾</span></div>'; }
+  function iconButton(name, extraClass) {
+    return '<span class="fd-icon-btn' + (extraClass ? " " + extraClass : "") + '">' + icon(name) + '</span>';
+  }
+
+  function canvasTopBar() {
+    return '<div class="fd-topbar">' +
+      iconButton("ic-undo") + iconButton("ic-redo") +
+      '<span class="fd-spacer"></span>' +
+      iconButton("ic-settings") + iconButton("ic-home_outlined") +
+    '</div>';
+  }
+
+  function brushSlider() {
+    return '<div class="fd-brush-slider">' +
+      '<span class="fd-brush-dot"></span><span class="fd-brush-size">5</span>' +
+      '<svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="' + ICON_SPRITE + 'ic-opacity"></use></svg>' +
+      '<span class="fd-brush-opacity">100%</span><span class="fd-spacer"></span><span class="fd-brush-toggle">▾</span>' +
+    '</div>';
+  }
+
   function canvasToolbar() {
-    var tools = [["ic-brush","is-active"],["ic-eraser_fa",""],["ic-format_color_fill",""],["ic-colorize",""],["ic-pan_tool_alt",""],["ic-highlight_alt",""],["ic-transform",""],["ic-text_fields",""],["ic-category",""]];
-    var actions = ["ic-tune","ic-layers","ic-loop","ic-save_outlined","ic-straighten","ic-help_outline"], html = '<div class="fd-toolbar">';
-    tools.forEach(function (tool) { html += iconButton(tool[0], tool[1]); }); html += '<span class="fd-color-swatch"></span>'; actions.forEach(function (name) { html += iconButton(name); }); return html + '</div>';
+    var tools = [
+      ["ic-brush", "is-active"], ["ic-eraser_fa", ""], ["ic-format_color_fill", ""],
+      ["ic-colorize", ""], ["ic-pan_tool_alt", ""], ["ic-highlight_alt", ""],
+      ["ic-transform", ""], ["ic-text_fields", ""], ["ic-category", ""]
+    ];
+    var actions = ["ic-tune", "ic-layers", "ic-loop", "ic-save_outlined", "ic-straighten", "ic-help_outline"];
+    var html = '<div class="fd-toolbar">';
+    tools.forEach(function (tool) { html += iconButton(tool[0], tool[1]); });
+    html += '<span class="fd-color-swatch"></span>';
+    actions.forEach(function (name) { html += iconButton(name); });
+    return html + '</div>';
   }
+
   function frameStrip() {
-    var thumb = '<span class="fd-frame-thumb"><svg viewBox="0 0 36 44" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="44" fill="#fff"/><circle cx="18" cy="22" r="10" fill="none" stroke="#333" stroke-width="2"/></svg></span>';
-    return '<div class="fd-frame-strip"><div class="fd-frame-strip-scroll">' + thumb.repeat(5) + '<span class="fd-frame-add">' + icon("ic-add") + '</span></div><span class="fd-frame-strip-mode" data-i18n="fd.frameListMode">フレーム一覧</span></div>';
-  }
-  function panelCloseBar() { return '<div class="fd-panel-close-bar"><span></span></div>'; }
-  function buildLayerPanelFromExisting(existingPanel) {
-    if (existingPanel) { var clone = existingPanel.cloneNode(true); clone.classList.add("fd-app-overlay-panel", "fd-app-layer-panel"); return clone.outerHTML; }
-    return '<div class="fd-layer-panel-overlay fd-app-overlay-panel fd-app-layer-panel"><div class="fd-layers">' + panelCloseBar() + '<div class="fd-layer-header"><span>レイヤー</span><span class="fd-spacer"></span>' + iconButton("ic-merge_type") + iconButton("ic-help_outline") + iconButton("ic-search") + '</div><div class="fd-layer-shortcuts"><span class="fd-shortcut-btn">' + icon("ic-add") + '<span>新規</span></span><span class="fd-shortcut-btn">' + icon("ic-folder") + '<span>フォルダ</span></span><span class="fd-shortcut-btn">' + icon("ic-library_add") + '<span>追加</span></span><span class="fd-shortcut-btn">' + icon("ic-image") + '<span>画像</span></span></div><div class="fd-layer-row is-active">' + icon("ic-visibility","ic-eye") + '<span class="ic-type"></span><span class="fd-layer-thumb"></span><span class="fd-layer-name">線画</span>' + icon("ic-drag_handle","ic-drag") + '</div><div class="fd-layer-row">' + icon("ic-visibility","ic-eye") + '<span class="ic-type"></span><span class="fd-layer-thumb"></span><span class="fd-layer-name">色</span>' + icon("ic-drag_handle","ic-drag") + '</div><div class="fd-layer-row">' + icon("ic-visibility","ic-eye") + '<span class="ic-type"></span><span class="fd-layer-thumb"></span><span class="fd-layer-name">背景</span>' + icon("ic-drag_handle","ic-drag") + '</div></div></div>';
-  }
-  function onionSide(label,color,opacity,frames) { return '<div class="fd-onion-side"><div class="fd-onion-side-head"><strong>' + label + '</strong><span class="fd-mini-switch is-on"></span></div><div class="fd-onion-control"><span class="fd-onion-color" style="--onion-color:' + color + '"></span><span>色</span></div><div class="fd-onion-control"><span>不透明度</span><span class="fd-mini-slider"><i style="width:' + Math.round(opacity*100) + '%"></i></span><b>' + Math.round(opacity*100) + '%</b></div><div class="fd-onion-control"><span>枚数</span><span class="fd-mini-slider"><i style="width:' + (frames*28) + '%"></i></span><b>' + frames + '</b></div></div>'; }
-  function onionPanel() { return '<div class="fd-app-overlay-panel fd-app-onion-panel">' + panelCloseBar() + '<div class="fd-onion-title"><strong>オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div><div class="fd-panel-divider"></div>' + onionSide('前フレーム','#ff0000',.35,1) + '<div class="fd-panel-divider"></div>' + onionSide('後フレーム','#0000ff',.35,1) + '<div class="fd-panel-divider"></div><div class="fd-onion-common"><span>フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div><div class="fd-onion-fade"><span>距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div></div>'; }
-  function buildCanvasMock(options) {
-    options = options || {}; var panelHtml = options.panel === 'layer' ? buildLayerPanelFromExisting(options.existingPanel) : options.panel === 'onion' ? onionPanel() : '';
-    return '<div class="feature-diagram fd-canvas-screen fd-app-screen" aria-hidden="true">' + canvasTopBar() + '<div class="fd-canvas fd-app-canvas-stage">' + canvasDrawingSvg(options.panel === 'onion') + '</div>' + brushSlider() + '<div class="fd-collapse-handle">⌄</div>' + canvasToolbar() + '<div class="fd-collapse-handle fd-frame-collapse">⌄</div>' + frameStrip() + panelHtml + '</div>';
-  }
-  function replaceFeatureCanvas(sectionId,panel) { var section=document.querySelector(sectionId); if(!section)return; var old=section.querySelector(":scope > .feature-diagram"); if(!old)return; var existingPanel=panel==='layer'?old.querySelector('.fd-layer-panel-overlay'):null,wrap=document.createElement('div'); wrap.innerHTML=buildCanvasMock({panel:panel,existingPanel:existingPanel}); old.replaceWith(wrap.firstElementChild); }
-  function findScreenshotCard(selector) { var cards=document.querySelectorAll('.screenshot-scroller .screenshot-card'); for(var i=0;i<cards.length;i++) if(cards[i].querySelector(selector)) return cards[i]; return null; }
-  function replaceHomeCanvasCard(selector,panel) { var card=findScreenshotCard(selector); if(!card)return; var existing=panel==='layer'?card.querySelector('.fd-layer-panel-overlay'):null,wrap=document.createElement('div'); wrap.innerHTML=buildCanvasMock({panel:panel,existingPanel:existing}); card.replaceChildren(wrap.firstElementChild); card.classList.add('is-code-verified-mock'); }
-
-  function normalizeCanvasScreenMocks() {
-    replaceFeatureCanvas('#drawing',null); replaceFeatureCanvas('#editing','layer'); replaceFeatureCanvas('#advanced','onion');
-    replaceHomeCanvasCard('.fd-layer-panel-overlay','layer'); replaceHomeCanvasCard('.fd-onion-legend','onion');
+    var frames = '';
+    for (var i = 0; i < 4; i++) {
+      frames += '<span class="fd-frame-thumb' + (i === 0 ? ' is-current' : '') + '"><span class="fd-frame-paper"></span></span>';
+    }
+    return '<div class="fd-frame-strip">' +
+      '<div class="fd-frame-strip-scroll">' + frames + '<span class="fd-frame-add">' + icon("ic-add") + '</span></div>' +
+      '<span class="fd-frame-mode"><span class="is-selected">フレーム一覧</span><span>タイムライン</span></span>' +
+    '</div>';
   }
 
-  function reuseHeroScreenMock() {
-    var source=document.querySelector('.hero-visual'); if(!source)return;
-    var targets=[document.querySelector('#features .feature-row .feature-media'),document.querySelector('.screenshot-scroller .screenshot-card:first-child')];
-    targets.forEach(function(target){if(!target)return;var clone=source.cloneNode(true);clone.removeAttribute('data-parallax');clone.classList.add('hero-visual-reuse');clone.setAttribute('aria-hidden','true');target.replaceChildren(clone);});
+  function canvasDrawing(onion) {
+    var drawing = onion
+      ? '<svg viewBox="0 0 320 180" aria-hidden="true"><path class="fd-stroke-prev" d="M105 91c16-43 88-43 107 0"/><path class="fd-stroke-next" d="M118 88c17-35 74-35 93 0"/></svg>'
+      : '';
+    return '<div class="fd-canvas-zone"><div class="fd-canvas fd-app-canvas-stage">' + drawing + '</div></div>';
   }
 
-  function appendAudioTrack(diagram) {
-    var lane=document.createElement('div'); lane.className='fd-audio-lane'; lane.innerHTML='<div class="fd-audio-track"><span class="fd-waveform"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>'+icon('ic-audiotrack')+'<span>音声クリップ</span></div>';
-    var frames=diagram.querySelector('.fd-frames'); if(frames)frames.insertAdjacentElement('afterend',lane); else diagram.appendChild(lane);
-    var sheet=document.createElement('div'); sheet.className='fd-clip-detail-sheet'; sheet.innerHTML='<div class="fd-sheet-handle"></div><strong>音声クリップ</strong><div class="fd-sheet-row"><span>音量</span><span class="fd-mini-slider"><i style="width:72%"></i></span><b>72%</b></div><div class="fd-sheet-row"><span>フェードイン</span><span>0.0 s</span></div><div class="fd-sheet-row"><span>フェードアウト</span><span>0.0 s</span></div>'; diagram.appendChild(sheet);
-  }
-  function normalizeAudioMocks() {
-    var featureTimeline=document.querySelector('#animation > .feature-diagram'),audioTarget=document.querySelector('#audio > .feature-diagram'); if(featureTimeline&&audioTarget){var clone=featureTimeline.cloneNode(true);clone.classList.add('fd-audio-context-screen');appendAudioTrack(clone);audioTarget.replaceWith(clone);}
-    var homeTimelineCard=findScreenshotCard('.fd-timeline-title'),homeAudioCard=findScreenshotCard('.fd-audio-track'); if(homeTimelineCard&&homeAudioCard&&homeTimelineCard!==homeAudioCard){var timelineDiagram=homeTimelineCard.querySelector('.feature-diagram');if(timelineDiagram){var homeClone=timelineDiagram.cloneNode(true);homeClone.classList.add('fd-audio-context-screen');appendAudioTrack(homeClone);homeAudioCard.replaceChildren(homeClone);homeAudioCard.classList.add('is-code-verified-mock');}}
-  }
-  function appBar(title,help){return '<div class="fd-appbar"><span class="fd-appbar-back">‹</span><strong>'+title+'</strong><span class="fd-spacer"></span>'+(help?iconButton('ic-help_outline'):'')+'</div>';}
-  function saveTreeScreen(){return '<div class="feature-diagram fd-route-screen fd-save-tree-screen" aria-hidden="true"><div class="fd-appbar"><span class="fd-appbar-back">‹</span><strong>セーブツリー</strong><span class="fd-spacer"></span>'+iconButton('ic-help_outline')+'<span class="fd-appbar-save">保存</span></div><div class="fd-route-body"><div class="fd-tree-node is-root"><span class="fd-tree-dot"></span><div><strong>現在の編集</strong><small>最新</small></div></div><div class="fd-tree-line"></div><div class="fd-tree-node"><span class="fd-tree-dot"></span><div><strong>保存 03</strong><small>12:48</small></div></div><div class="fd-tree-line"></div><div class="fd-tree-branch"><div class="fd-tree-node"><span class="fd-tree-dot"></span><div><strong>保存 02</strong><small>12:31</small></div></div><div class="fd-tree-node"><span class="fd-tree-dot"></span><div><strong>別案</strong><small>12:36</small></div></div></div><div class="fd-tree-line"></div><div class="fd-tree-node"><span class="fd-tree-dot"></span><div><strong>保存 01</strong><small>12:05</small></div></div></div></div>';}
-  function workspaceScreen(){var items=['ペン','消しゴム','バケツ','スポイト'];var rows=items.map(function(name){return '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><span>'+name+'</span><span class="fd-spacer"></span>'+icon('ic-drag_handle')+'</div>';}).join('');return '<div class="feature-diagram fd-route-screen fd-workspace-screen" aria-hidden="true">'+appBar('ワークスペース設定',true)+'<div class="fd-route-body fd-workspace-body"><strong class="fd-route-section">ツールバー編集</strong><p class="fd-route-hint">表示するツールと並び順を変更できます</p><div class="fd-toolbar-preview">'+iconButton('ic-brush','is-active')+iconButton('ic-eraser_fa')+iconButton('ic-format_color_fill')+iconButton('ic-colorize')+'</div><div class="fd-workspace-card">'+rows+'</div><strong class="fd-route-section">パネル配置</strong><div class="fd-workspace-card"><div class="fd-workspace-row"><span>左利きモード</span><span class="fd-spacer"></span><span class="fd-mini-switch"></span></div></div><strong class="fd-route-section">PC / DeXモード</strong><div class="fd-workspace-card"><div class="fd-workspace-row"><span class="fd-radio is-on"></span><span>自動</span></div><div class="fd-workspace-row"><span class="fd-radio"></span><span>PC固定</span></div></div></div></div>';}
-  function addRouteScreenChrome(){var save=document.querySelector('#save > .feature-diagram');if(save){var wrap=document.createElement('div');wrap.innerHTML=saveTreeScreen();save.replaceWith(wrap.firstElementChild);}var workspace=document.querySelector('#workspace > .feature-diagram');if(workspace){var ww=document.createElement('div');ww.innerHTML=workspaceScreen();workspace.replaceWith(ww.firstElementChild);}var exportDiagram=document.querySelector('#export > .feature-diagram');if(exportDiagram&&!exportDiagram.querySelector('.fd-appbar')){exportDiagram.classList.add('fd-route-screen','fd-export-screen');exportDiagram.insertAdjacentHTML('afterbegin',appBar('書き出し',true));var children=Array.prototype.slice.call(exportDiagram.children,1),body=document.createElement('div');body.className='fd-route-body fd-export-body';children.forEach(function(child){body.appendChild(child);});exportDiagram.appendChild(body);}var homeSave=findScreenshotCard('.fd-slot-list');if(homeSave){homeSave.innerHTML=saveTreeScreen();homeSave.classList.add('is-code-verified-mock');}var homeWorkspace=findScreenshotCard('.fd-setting-row');if(homeWorkspace){homeWorkspace.innerHTML=workspaceScreen();homeWorkspace.classList.add('is-code-verified-mock');}var homeExport=findScreenshotCard('.fd-segmented');if(homeExport){var d=homeExport.querySelector('.feature-diagram');if(d&&!d.querySelector('.fd-appbar')){d.classList.add('fd-route-screen','fd-export-screen');d.insertAdjacentHTML('afterbegin',appBar('書き出し',true));}homeExport.classList.add('is-code-verified-mock');}}
-
-  function normalizeHomeFeatureCanvasMocks() {
-    var rows=document.querySelectorAll('#features .feature-row');
-    [[2,'layer'],[3,'onion']].forEach(function(pair){var row=rows[pair[0]];if(!row)return;var media=row.querySelector('.feature-media');if(!media)return;var existing=pair[1]==='layer'?media.querySelector('.fd-layer-panel-overlay'):null,wrap=document.createElement('div');wrap.innerHTML=buildCanvasMock({panel:pair[1],existingPanel:existing});media.replaceChildren(wrap.firstElementChild);});
+  function panelCloseBar() {
+    return '<div class="fd-panel-close-bar"><span class="fd-panel-close">×</span></div>';
   }
 
-  function normalizeHomeTimelinePreview() {
-    var card=findScreenshotCard('.fd-timeline-title'); if(!card)return; var diagram=card.querySelector('.feature-diagram'); if(!diagram)return; diagram.classList.add('fd-home-timeline-screen');
+  function layerPanel() {
+    return '<div class="fd-app-overlay-panel fd-app-layer-panel">' +
+      '<div class="fd-layers">' + panelCloseBar() +
+        '<div class="fd-layer-header"><strong>レイヤー</strong><span class="fd-spacer"></span>' +
+          iconButton("ic-merge_type") + iconButton("ic-help_outline") + iconButton("ic-search") +
+        '</div>' +
+        '<div class="fd-layer-shortcuts">' +
+          '<span class="fd-shortcut-btn">' + icon("ic-add") + '<span>新規レイヤー</span></span>' +
+          '<span class="fd-shortcut-btn">' + icon("ic-folder") + '<span>新規フォルダ</span></span>' +
+          '<span class="fd-shortcut-btn">' + icon("ic-library_add") + '<span>追加</span></span>' +
+          '<span class="fd-shortcut-btn">' + icon("ic-image") + '<span>画像読み込み</span></span>' +
+        '</div>' +
+        '<div class="fd-layer-row is-active">' +
+          icon("ic-visibility", "ic-eye") + '<span class="fd-layer-pencil">⌁</span><span class="fd-layer-thumb"></span>' +
+          '<strong class="fd-layer-name">レイヤー1</strong><span class="fd-layer-menu">⋮</span>' + icon("ic-drag_handle", "ic-drag") +
+        '</div>' +
+      '</div>' +
+    '</div>';
   }
 
-  function normalizeScreenMocks(){normalizeCanvasScreenMocks();reuseHeroScreenMock();normalizeHomeFeatureCanvasMocks();normalizeHomeTimelinePreview();normalizeAudioMocks();addRouteScreenChrome();}
+  function onionSide(label, color, opacity) {
+    return '<div class="fd-onion-side">' +
+      '<div class="fd-onion-side-head"><strong>' + label + '</strong><span class="fd-mini-switch is-on"></span></div>' +
+      '<div class="fd-onion-control"><span class="fd-onion-color" style="--onion-color:' + color + '"></span><span>色</span></div>' +
+      '<div class="fd-onion-control"><span>不透明度</span><span class="fd-mini-slider"><i style="width:' + opacity + '%"></i></span><b>' + opacity + '%</b></div>' +
+      '<div class="fd-onion-control"><span>枚数</span><span class="fd-mini-slider"><i style="width:28%"></i></span><b>1</b></div>' +
+    '</div>';
+  }
 
-  function initScrollUi(){var header=document.querySelector('.site-header'),btn=document.createElement('button'),scheduled=false;btn.type='button';btn.className='scroll-top-btn';btn.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>';document.body.appendChild(btn);function applyLabel(){var lang=document.documentElement.getAttribute('lang')||'ja',label=window.NIARIM_I18N&&window.NIARIM_I18N.translate(lang,'common.scrollTop');btn.setAttribute('aria-label',label||'ページトップへ戻る');}function applyScrollState(){scheduled=false;var y=window.scrollY;if(header)header.classList.toggle('is-scrolled',y>8);btn.classList.toggle('is-visible',y>480);}function requestScrollState(){if(scheduled)return;scheduled=true;requestAnimationFrame(applyScrollState);}applyLabel();applyScrollState();document.addEventListener('niarim:langchange',applyLabel);window.addEventListener('scroll',requestScrollState,{passive:true});btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});}
-  function initNavToggle(){var toggle=document.querySelector('.nav-toggle'),nav=document.querySelector('.main-nav');if(!toggle||!nav)return;function close(){toggle.setAttribute('aria-expanded','false');nav.classList.remove('is-open');}toggle.addEventListener('click',function(){var isOpen=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!isOpen));nav.classList.toggle('is-open',!isOpen);});nav.addEventListener('click',function(event){if(event.target.closest&&event.target.closest('a'))close();});document.addEventListener('keydown',function(event){if(event.key==='Escape')close();});}
-  function initFaqAccordion(){if(!document.querySelector('.faq-item'))return;document.addEventListener('click',function(event){var question=event.target.closest&&event.target.closest('.faq-question');if(!question)return;var item=question.closest('.faq-item'),answer=item&&item.querySelector('.faq-answer');if(!item||!answer)return;var isOpen=item.classList.contains('is-open');item.classList.toggle('is-open',!isOpen);question.setAttribute('aria-expanded',String(!isOpen));answer.style.maxHeight=!isOpen?answer.scrollHeight+'px':'0px';});}
-  function ensureNineCommunityTiles(){var gallery=document.querySelector('.community-gallery');if(!gallery)return;var cards=gallery.querySelectorAll('.community-card:not(.is-more-cta)'),more=gallery.querySelector('.community-card.is-more-cta');if(cards.length!==8||!more)return;var ninth=cards[cards.length-1].cloneNode(true),badge=ninth.querySelector('.rank-badge');if(badge)badge.textContent='9';gallery.insertBefore(ninth,more);}
-  document.addEventListener('DOMContentLoaded',function(){normalizeScreenMocks();initScrollUi();initNavToggle();initFaqAccordion();ensureNineCommunityTiles();});
+  function onionPanel() {
+    return '<div class="fd-app-overlay-panel fd-app-onion-panel">' + panelCloseBar() +
+      '<div class="fd-onion-title"><strong>オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div>' +
+      '<div class="fd-panel-divider"></div>' + onionSide('前フレーム', '#ff5c7a', 35) +
+      '<div class="fd-panel-divider"></div>' + onionSide('後フレーム', '#5374ff', 35) +
+      '<div class="fd-panel-divider"></div>' +
+      '<div class="fd-onion-common"><span>フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div>' +
+      '<div class="fd-onion-fade"><span>距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div>' +
+    '</div>';
+  }
+
+  function canvasContents(panel) {
+    return canvasTopBar() + canvasDrawing(panel === 'onion') + brushSlider() +
+      '<div class="fd-collapse-handle">⌄</div>' + canvasToolbar() +
+      '<div class="fd-collapse-handle fd-frame-collapse">⌄</div>' + frameStrip() +
+      (panel === 'layer' ? layerPanel() : panel === 'onion' ? onionPanel() : '');
+  }
+
+  function canvasScreen(panel) {
+    return '<div class="feature-diagram fd-canvas-screen fd-app-screen" aria-hidden="true">' + canvasContents(panel) + '</div>';
+  }
+
+  function timelineTopBar() {
+    return '<div class="fd-timeline-topbar">' +
+      iconButton('ic-arrow_back') + iconButton('ic-palette') + iconButton('ic-home_outlined') +
+      '<span class="fd-spacer"></span>' + iconButton('ic-undo') + iconButton('ic-redo') + iconButton('ic-more_vert') + iconButton('ic-help_outline') +
+    '</div>';
+  }
+
+  function timelineScreen() {
+    var frames = '';
+    for (var i = 1; i <= 6; i++) frames += '<span class="fd-tl-frame' + (i === 4 ? ' is-current' : '') + '">' + i + '</span>';
+    return '<div class="feature-diagram fd-timeline-screen fd-app-screen" aria-hidden="true">' +
+      timelineTopBar() +
+      '<div class="fd-timeline-preview"><span class="fd-preview-loading"></span><span class="fd-fullscreen-mark">⌗</span></div>' +
+      '<div class="fd-timeline-scrubber"><i></i></div>' +
+      '<div class="fd-transport">' + iconButton('ic-skip_previous') + iconButton('ic-fast_rewind') + iconButton('ic-play_arrow') + iconButton('ic-fast_forward') + iconButton('ic-skip_next') + '<span class="fd-spacer"></span><span class="fd-loop-mark">↔</span></div>' +
+      '<div class="fd-timeline-toolbar">' + iconButton('ic-videocam') + iconButton('ic-audiotrack', 'is-active') + iconButton('ic-image') + iconButton('ic-photo_camera') + iconButton('ic-text_fields') + iconButton('ic-file_download') + '</div>' +
+      '<div class="fd-scene-line"><small>選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
+      '<div class="fd-timeline-row"><small>絵</small><div class="fd-timeline-frames">' + frames + '</div></div>' +
+      '<div class="fd-timeline-row fd-end-card-row"><small>終</small><span>エンドカードトラック</span><span>🔒</span></div>' +
+      '<span class="fd-playhead"></span>' +
+    '</div>';
+  }
+
+  function audioScreen() {
+    var html = timelineScreen().replace('fd-timeline-screen fd-app-screen', 'fd-timeline-screen fd-app-screen fd-audio-context-screen');
+    var sheet = '<div class="fd-audio-dim"></div><div class="fd-clip-detail-sheet">' +
+      '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong>音声クリップ</strong><span>' + icon('ic-content_copy') + '</span><span class="fd-delete-mark">▮</span></div>' +
+      '<div class="fd-sheet-row"><span>音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>＋</button><b>72%</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span>フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span>フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
+    '</div>';
+    return html.replace('</div>', '</div>').replace(/<\/div>$/, sheet + '</div>');
+  }
+
+  function appBar(title) {
+    return '<div class="fd-appbar">' + iconButton('ic-arrow_back') + '<strong>' + title + '</strong><span class="fd-spacer"></span>' + iconButton('ic-help_outline') + '</div>';
+  }
+
+  function saveSlotsScreen() {
+    var slots = '';
+    for (var i = 1; i <= 5; i++) {
+      slots += '<div class="fd-save-slot"><span class="fd-save-thumb">＋</span><span class="fd-save-copy"><strong>スロット' + i + '</strong><small>保存データなし</small></span><span class="fd-save-plus">＋</span></div>';
+    }
+    return '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' + appBar('セーブスロット') + '<div class="fd-route-body fd-save-slots-body">' + slots + '</div></div>';
+  }
+
+  function workspaceScreen() {
+    var items = ['Gペン', '消しゴム', 'バケツ', 'スポイト', '指', '手のひら', '選択'];
+    var rows = items.map(function (name) {
+      return '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><strong>' + name + '</strong><span class="fd-spacer"></span><span class="fd-drag-mark">＝</span></div>';
+    }).join('');
+    return '<div class="feature-diagram fd-route-screen fd-workspace-screen" aria-hidden="true">' + appBar('ワークスペース設定') +
+      '<div class="fd-route-body fd-workspace-body"><strong class="fd-route-section">ツールバー編集</strong>' +
+      '<p class="fd-route-hint">表示するツールをチェックで選択し、ドラッグで並べ替えます。</p>' +
+      '<div class="fd-toolbar-preview">' + iconButton('ic-brush', 'is-active') + iconButton('ic-eraser_fa') + iconButton('ic-format_color_fill') + iconButton('ic-colorize') + iconButton('ic-pan_tool_alt') + iconButton('ic-highlight_alt') + iconButton('ic-transform') + iconButton('ic-text_fields') + '</div>' +
+      '<div class="fd-workspace-card">' + rows + '</div></div></div>';
+  }
+
+  function exportScreen() {
+    return '<div class="feature-diagram fd-route-screen fd-export-screen" aria-hidden="true">' + appBar('書き出し') +
+      '<div class="fd-route-body fd-export-body"><strong class="fd-route-section">プリセット</strong>' +
+      '<div class="fd-segmented fd-export-segments"><span class="fd-segment is-active">標準</span><span class="fd-segment">高画質</span><span class="fd-segment">カスタム</span></div>' +
+      '<strong class="fd-route-section fd-export-format-title">形式</strong>' +
+      '<div class="fd-format-list">' +
+        '<div class="fd-format-row"><span class="fd-radio is-active"></span><span><strong>MP4</strong><small>汎用動画形式</small></span></div>' +
+        '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>GIF</strong><small>アニメーションGIF</small></span></div>' +
+        '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>透過WebM</strong><small>透明背景動画</small></span></div>' +
+        '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>AVI</strong><small>互換性重視の動画形式</small></span></div>' +
+      '</div><div class="fd-export-start">' + icon('ic-file_download') + '<span>書き出し開始</span></div></div></div>';
+  }
+
+  function htmlToElement(html) {
+    var wrap = document.createElement('div');
+    wrap.innerHTML = html;
+    return wrap.firstElementChild;
+  }
+
+  function replaceFeatureDiagram(sectionSelector, html) {
+    var section = document.querySelector(sectionSelector);
+    if (!section) return;
+    var old = section.querySelector(':scope > .feature-diagram');
+    if (old) old.replaceWith(htmlToElement(html));
+  }
+
+  function findScreenshotCard(selector) {
+    var cards = document.querySelectorAll('.screenshot-scroller .screenshot-card');
+    for (var i = 0; i < cards.length; i++) if (cards[i].querySelector(selector)) return cards[i];
+    return null;
+  }
+
+  function replaceCard(card, html) {
+    if (!card) return;
+    card.replaceChildren(htmlToElement(html));
+    card.classList.add('is-code-verified-mock');
+  }
+
+  function normalizeScreenMocks() {
+    /* capture the original gallery targets before replacing any DOM */
+    var galleryCanvas = document.querySelector('.screenshot-scroller .screenshot-card:first-child');
+    var galleryTimeline = findScreenshotCard('.fd-timeline-title');
+    var galleryLayer = findScreenshotCard('.fd-layer-panel-overlay');
+    var galleryOnion = findScreenshotCard('.fd-onion-legend');
+    var galleryAudio = findScreenshotCard('.fd-audio-track');
+    var gallerySave = findScreenshotCard('.fd-slot-list');
+    var galleryWorkspace = findScreenshotCard('.fd-setting-row');
+    var galleryExport = findScreenshotCard('.fd-segmented');
+
+    /* hero = actual CanvasScreen baseline; first feature and first app preview reuse it exactly */
+    var hero = document.querySelector('.hero-visual');
+    if (hero) {
+      hero.className = 'hero-visual fd-canvas-screen fd-app-screen';
+      hero.removeAttribute('data-parallax');
+      hero.innerHTML = canvasContents(null);
+    }
+    var heroSource = document.querySelector('.hero-visual');
+    var firstFeatureMedia = document.querySelector('#features .feature-row .feature-media');
+    if (heroSource && firstFeatureMedia) {
+      var featureClone = heroSource.cloneNode(true);
+      featureClone.classList.add('hero-visual-reuse');
+      firstFeatureMedia.replaceChildren(featureClone);
+    }
+    if (heroSource && galleryCanvas) {
+      var galleryClone = heroSource.cloneNode(true);
+      galleryClone.classList.add('hero-visual-reuse');
+      galleryCanvas.replaceChildren(galleryClone);
+      galleryCanvas.classList.add('is-code-verified-mock');
+    }
+
+    /* Features page */
+    replaceFeatureDiagram('#drawing', canvasScreen(null));
+    replaceFeatureDiagram('#animation', timelineScreen());
+    replaceFeatureDiagram('#editing', canvasScreen('layer'));
+    replaceFeatureDiagram('#advanced', canvasScreen('onion'));
+    replaceFeatureDiagram('#audio', audioScreen());
+    replaceFeatureDiagram('#save', saveSlotsScreen());
+    replaceFeatureDiagram('#workspace', workspaceScreen());
+    replaceFeatureDiagram('#export', exportScreen());
+
+    /* Home main-feature rows */
+    var rows = document.querySelectorAll('#features .feature-row');
+    if (rows[1]) { var m1 = rows[1].querySelector('.feature-media'); if (m1) m1.replaceChildren(htmlToElement(timelineScreen())); }
+    if (rows[2]) { var m2 = rows[2].querySelector('.feature-media'); if (m2) m2.replaceChildren(htmlToElement(canvasScreen('layer'))); }
+    if (rows[3]) { var m3 = rows[3].querySelector('.feature-media'); if (m3) m3.replaceChildren(htmlToElement(canvasScreen('onion'))); }
+    if (rows[4]) { var m4 = rows[4].querySelector('.feature-media'); if (m4) m4.replaceChildren(htmlToElement(exportScreen())); }
+
+    /* Home app-preview gallery */
+    replaceCard(galleryTimeline, timelineScreen());
+    replaceCard(galleryLayer, canvasScreen('layer'));
+    replaceCard(galleryOnion, canvasScreen('onion'));
+    replaceCard(galleryAudio, audioScreen());
+    replaceCard(gallerySave, saveSlotsScreen());
+    replaceCard(galleryWorkspace, workspaceScreen());
+    replaceCard(galleryExport, exportScreen());
+  }
+
+  function initScrollUi() {
+    var header = document.querySelector('.site-header');
+    var btn = document.createElement('button');
+    var scheduled = false;
+    btn.type = 'button';
+    btn.className = 'scroll-top-btn';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>';
+    document.body.appendChild(btn);
+    function applyLabel() {
+      var lang = document.documentElement.getAttribute('lang') || 'ja';
+      var label = window.NIARIM_I18N && window.NIARIM_I18N.translate(lang, 'common.scrollTop');
+      btn.setAttribute('aria-label', label || 'ページトップへ戻る');
+    }
+    function applyScrollState() {
+      scheduled = false;
+      var y = window.scrollY;
+      if (header) header.classList.toggle('is-scrolled', y > 8);
+      btn.classList.toggle('is-visible', y > 480);
+    }
+    function requestScrollState() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(applyScrollState);
+    }
+    applyLabel();
+    applyScrollState();
+    document.addEventListener('niarim:langchange', applyLabel);
+    window.addEventListener('scroll', requestScrollState, { passive: true });
+    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+
+  function initNavToggle() {
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.querySelector('.main-nav');
+    if (!toggle || !nav) return;
+    function close() { toggle.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); }
+    toggle.addEventListener('click', function () {
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      nav.classList.toggle('is-open', !isOpen);
+    });
+    nav.addEventListener('click', function (event) { if (event.target.closest && event.target.closest('a')) close(); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') close(); });
+  }
+
+  function initFaqAccordion() {
+    if (!document.querySelector('.faq-item')) return;
+    document.addEventListener('click', function (event) {
+      var question = event.target.closest && event.target.closest('.faq-question');
+      if (!question) return;
+      var item = question.closest('.faq-item');
+      var answer = item && item.querySelector('.faq-answer');
+      if (!item || !answer) return;
+      var isOpen = item.classList.contains('is-open');
+      item.classList.toggle('is-open', !isOpen);
+      question.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : '0px';
+    });
+  }
+
+  function ensureNineCommunityTiles() {
+    var gallery = document.querySelector('.community-gallery');
+    if (!gallery) return;
+    var cards = gallery.querySelectorAll('.community-card:not(.is-more-cta)');
+    var more = gallery.querySelector('.community-card.is-more-cta');
+    if (cards.length !== 8 || !more) return;
+    var ninth = cards[cards.length - 1].cloneNode(true);
+    var badge = ninth.querySelector('.rank-badge');
+    if (badge) badge.textContent = '9';
+    gallery.insertBefore(ninth, more);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    normalizeScreenMocks();
+    initScrollUi();
+    initNavToggle();
+    initFaqAccordion();
+    ensureNineCommunityTiles();
+  });
 })();
