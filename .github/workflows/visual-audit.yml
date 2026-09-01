@@ -30,6 +30,9 @@ jobs:
       - name: Run deep per-section visual audit
         if: always()
         run: node tests/deep-section-audit.mjs
+      - name: Capture each app screen mock as isolated PNG
+        if: always()
+        run: node tests/screen-mock-capture.mjs
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
