@@ -41,7 +41,7 @@
     if (!source) return;
 
     var targets = [
-      document.querySelector("#features .feature-row:first-of-type .feature-media"),
+      document.querySelector("#features .feature-row .feature-media"),
       document.querySelector(".screenshot-scroller .screenshot-card:first-child")
     ];
 
@@ -118,7 +118,6 @@
       nav.classList.toggle("is-open", !isOpen);
     });
 
-    // 各リンクへ個別listenerを付けず、nav内のクリックを1本で処理する。
     nav.addEventListener("click", function (event) {
       if (event.target.closest && event.target.closest("a")) close();
     });
@@ -149,8 +148,6 @@
 
   /**
    * 作品広場のプレビューは3列にきれいに収まる9作品を表示する。
-   * 現在はプレースホルダーのため8位カードを複製し、順位だけ9位にする。
-   * 実データ接続時はこの補完処理を削除して9件をそのまま描画する。
    */
   function ensureNineCommunityTiles() {
     var gallery = document.querySelector(".community-gallery");
