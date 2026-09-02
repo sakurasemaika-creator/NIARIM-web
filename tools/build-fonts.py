@@ -93,10 +93,22 @@ def menu_chars():
 
 
 def coverage(path):
+    """フォントが収録している「Unicodeコードポイント」の集合を返す。
+
+    注意: cmapの全サブテーブルを合算してはいけない。
+    OpenTypeにはMacintosh用のレガシーサブテーブル(platformID=1, format=2)が
+    含まれることがあり、そこに入っているのはUnicodeではなく旧来の
+    マルチバイト文字コードである。これをUnicodeとして数えると、
+    「入っていない字が入っている」と誤判定する
+    （実例: くらむぼんの U+89C1 见 はレガシー表にしか無いのに収録扱いになり、
+     本来Noto Serif SCで補うべき字がどのフォントからも欠落していた）。
+    isUnicode() が真のサブテーブルだけを見る。
+    """
     f = TTFont(path, fontNumber=0)
     cps = set()
     for t in f["cmap"].tables:
-        cps |= set(t.cmap.keys())
+        if t.isUnicode():
+            cps |= set(t.cmap.keys())
     return cps
 
 def unicode_ranges(path):
@@ -113,7 +125,14 @@ def build():
     want = site_chars()
     print(f"サイトで使う文字: {len(want)}")
     menu = menu_chars()
-    covered_by_primary = set()     # primaryのいずれかが持っている文字
+    # primary同士は「本文用」「見出し用」で別々のfont-familyスタックに入るため、
+    # 片方が持っていればもう片方も安心、という関係ではない。
+    # 例: くらむぼん(見出し)は簡体字を持つが白光明朝(本文)は持たないので、
+    #     「どちらかが持っている」を基準にすると簡体字の本文が字抜けする。
+    # したがってfallbackが埋めるべきなのは「全primaryが揃って持っている文字」
+    # 以外＝どれか1つでも欠けている文字、とする（＝カバーの積集合を基準にする）。
+    primary_covs = []
+    covered_by_primary = None      # 全primaryが共通して持つ文字（積集合）
     covered_by_menu = set()        # メニュー用極小フォントが持っている文字
     remaining = set(want)          # fallbackがまだ埋めていない文字
     blocks, report = [], []
@@ -124,17 +143,22 @@ def build():
         if kind == "primary":
             # 本文用・見出し用はそれぞれ全文字ぶん必要（役割が違うため）
             take = {c for c in want if ord(c) in cov}
-            covered_by_primary |= take
-        elif kind == "menu":
-            # 言語メニューの文字のうち、primaryに無いものだけ。全ページで読み込む。
-            take = {c for c in (menu & want) - covered_by_primary - covered_by_menu
-                    if ord(c) in cov}
-            covered_by_menu |= take
+            primary_covs.append(take)
         else:
-            # primary・メニュー用のどれも持っていない文字だけを埋める
-            take = {c for c in remaining - covered_by_primary - covered_by_menu
-                    if ord(c) in cov}
-            remaining -= take
+            # 最初のfallback/menuに来た時点で、primaryの積集合を確定させる
+            if covered_by_primary is None:
+                covered_by_primary = (set.intersection(*primary_covs)
+                                      if primary_covs else set())
+            if kind == "menu":
+                # 言語メニューの文字のうち、primaryが揃って持ってはいないものだけ。
+                # 全ページに出るため常時読み込みになる。
+                take = {c for c in (menu & want) - covered_by_primary - covered_by_menu
+                        if ord(c) in cov}
+                covered_by_menu |= take
+            else:
+                take = {c for c in remaining - covered_by_primary - covered_by_menu
+                        if ord(c) in cov}
+                remaining -= take
         if not take:
             print(f"  {family}: 担当文字なし（スキップ）"); continue
         dst = os.path.join(OUT, outname)
@@ -155,6 +179,8 @@ def build():
         rule.append("}")
         blocks.append("\n".join(rule))
     print("\n".join(report))
+    if covered_by_primary is None:
+        covered_by_primary = set.intersection(*primary_covs) if primary_covs else set()
     remaining -= covered_by_primary | covered_by_menu
     if remaining:
         print(f"  どのフォントにも無い文字 {len(remaining)}字 -> OSのフォントに任せる: "
