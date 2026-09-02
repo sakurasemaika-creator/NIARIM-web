@@ -25,6 +25,8 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-http.log
           exit 1
+      - name: Audit browser language detection
+        run: node tests/i18n-browser-detection-audit.mjs
       - name: Run autonomous section-by-section interaction audit
         run: node tests/autonomous-browser-audit.mjs || node tests/validate-rendered-audit.mjs
       - name: Run complete scroll and full-page audit
