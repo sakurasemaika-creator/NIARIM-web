@@ -139,6 +139,11 @@
   color: var(--color-ink);
 }
 
+/* Community: keep the explanatory copy connected to the ranking it introduces. */
+section.section:has(.community-tabs) {
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+
 /* Community ranking: top cards should feel special without looking like ads. */
 .community-card {
   box-shadow: 0 10px 32px rgba(40,36,44,.045);
