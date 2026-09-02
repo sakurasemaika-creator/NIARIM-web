@@ -19,9 +19,7 @@ import { jsonResponse } from "./utils.js";
  * style属性を使っている箇所と、404ページのインライン<style>があるため。
  * スタイルの注入はスクリプト実行に比べ影響が限定的なため許容する。
  *
- * fonts.googleapis.com / fonts.gstatic.com は、サブセット同梱フォント
- * (HakkouMincho/Kuramubon)に収録されていない文字のフォールバックとして
- * Noto Serif JP等を読み込むために必要。
+ * フォントは全て自前配信のため、外部ホストは一切許可しない（'self'のみ）。
  */
 const CSP = [
   "default-src 'self'",
@@ -30,8 +28,8 @@ const CSP = [
   "frame-ancestors 'none'",
   "object-src 'none'",
   "script-src 'self'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data:",
   "connect-src 'self'",
   "manifest-src 'self'",

@@ -24,9 +24,10 @@
   # サイト内のJavaScriptはすべて同一オリジンの外部ファイル(/js/*.js)に集約して
   # あるため、script-srcに'unsafe-inline'を許可しない（XSS混入時の実行を防ぐ）。
   # style-srcのみ、本文中のstyle属性と404ページのインライン<style>のために
-  # 'unsafe-inline'を許可する。Google Fontsはサブセット同梱フォントに未収録の
-  # 文字のフォールバック(Noto Serif JP等)として必要。
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
+  # 'unsafe-inline'を許可する。
+  # フォントは全て自前配信にしたため、外部ホストの許可は一切不要
+  # （'self'のみ）。閲覧者のIPが第三者へ渡らないことをCSPでも担保する。
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
 
 # フォント・アイコン・画像は内容が変わることがほとんどなく、変わるときは
 # ファイル名ごと差し替える運用のため、既定の「毎回再検証」より長めに

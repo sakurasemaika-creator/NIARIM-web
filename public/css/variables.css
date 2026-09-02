@@ -51,8 +51,17 @@
   --color-border-strong: rgba(40, 36, 44, 0.16);
   --color-success: #2f9e6e;
   --color-error: #e5484d;
-  --font-sans: "HakkouMincho", "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+  /* 自前配信のフォントのみで完結させ、外部CDN(Google Fonts)へのリクエストを
+     一切発生させない（閲覧者のIPを第三者に送信しないため）。
+     NotoSerifKR / NotoSerifSC は、白光明朝・くらむぼんに収録が無い
+     ハングルと簡体字だけを埋めるための自前サブセット。unicode-rangeを
+     付けてあるので、その言語の本文が出ないページでは転送されない。
+     NotoSerifMenu* は、言語切替メニューに常時出る「한국어」「简体中文」の
+     4文字だけを持つ極小フォント(計3KB)。これを分けておかないと、
+     日本語しか読まない利用者にも上記KR/SC(計134KB)が毎回転送されてしまう。
+     末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
+  --font-sans: "HakkouMincho", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif: "Kuramubon", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
