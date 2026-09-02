@@ -158,8 +158,10 @@
     margin-bottom: 1.8rem;
   }
 
+  /* Keep the original sticky behavior; the pseudo-element is only a visual
+     cue that more horizontal tabs are available. */
   .feature-nav {
-    position: relative;
+    position: sticky;
   }
 
   .feature-nav::after {
