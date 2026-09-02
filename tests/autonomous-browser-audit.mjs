@@ -14,7 +14,7 @@ const viewports = [
 await fs.mkdir(outDir, { recursive: true });
 const report = { generatedAt: new Date().toISOString(), baseURL, findings: [], screenshots: [] };
 const severeKinds = new Set([
-  'page-error', 'console-error', 'horizontal-overflow', 'broken-image',
+  'page-error', 'console-error', 'horizontal-overflow', 'broken-image', 'missing-svg-symbol',
   'nav-open', 'nav-close', 'nav-clipped', 'language-menu', 'language-restore',
   'faq-open', 'help-search', 'scroll-top', 'empty-viewport',
   'screen-mock', 'design-invariant', 'community-tab', 'anchor-nav'
@@ -30,7 +30,7 @@ async function screenshot(page, vp, routeName, suffix, fullPage = false) {
 }
 
 async function inspectViewport(page, vp, route, label) {
-  const state = await page.evaluate(() => {
+  const state = await page.evaluate(async () => {
     const de = document.documentElement;
     const broken = [...document.images]
       .filter(img => img.complete && img.naturalWidth === 0)
@@ -46,10 +46,41 @@ async function inspectViewport(page, vp, route, label) {
       if (el.matches('html,body,header,main,footer,section,div,span')) return false;
       return (el.textContent || '').trim().length > 0 || el.matches('img,svg,canvas,video,input,textarea,button,a');
     });
+
+    // External SVG <use> references fail silently in Chromium: the page can look as if an
+    // icon were intentionally omitted while image/error checks remain green. Resolve every
+    // same-origin sprite reference and verify that the requested symbol id actually exists.
+    const useRefs = [...document.querySelectorAll('svg use')]
+      .map(use => use.getAttribute('href') || use.getAttribute('xlink:href') || '')
+      .filter(ref => ref.includes('#'));
+    const spriteCache = new Map();
+    const missingSvgSymbols = [];
+    for (const ref of new Set(useRefs)) {
+      const [url, id] = ref.split('#');
+      if (!url || !id || !url.startsWith('/')) continue;
+      if (!spriteCache.has(url)) {
+        try {
+          const response = await fetch(url, { cache: 'no-store' });
+          spriteCache.set(url, response.ok ? await response.text() : null);
+        } catch {
+          spriteCache.set(url, null);
+        }
+      }
+      const source = spriteCache.get(url);
+      if (!source) {
+        missingSvgSymbols.push({ ref, reason: 'sprite-unavailable' });
+        continue;
+      }
+      const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const symbolPattern = new RegExp(`<symbol\\s[^>]*id=["']${escaped}["']`, 'i');
+      if (!symbolPattern.test(source)) missingSvgSymbols.push({ ref, reason: 'symbol-not-found' });
+    }
+
     return {
       scrollWidth: Math.max(de.scrollWidth, document.body?.scrollWidth || 0),
       clientWidth: de.clientWidth,
       broken,
+      missingSvgSymbols,
       substantiveCount: substantive.length,
       y: Math.round(scrollY),
       height: innerHeight,
@@ -58,6 +89,7 @@ async function inspectViewport(page, vp, route, label) {
   });
   if (state.scrollWidth > state.clientWidth + 2) finding(vp, route, 'horizontal-overflow', { label, ...state });
   state.broken.forEach(src => finding(vp, route, 'broken-image', { label, src }));
+  state.missingSvgSymbols.forEach(detail => finding(vp, route, 'missing-svg-symbol', { label, ...detail }));
   if (state.substantiveCount === 0 && state.docHeight > state.height + 50) finding(vp, route, 'empty-viewport', { label, ...state });
 }
 
@@ -404,6 +436,9 @@ for (const vp of viewports) {
 await browser.close();
 
 await fs.writeFile(path.join(outDir, 'report.json'), JSON.stringify(report, null, 2));
-const counts = report.findings.reduce((acc, item) => ((acc[item.kind] = (acc[item.kind] || 0) + 1), acc, {}));
+const counts = report.findings.reduce((acc, item) => {
+  acc[item.kind] = (acc[item.kind] || 0) + 1;
+  return acc;
+}, {});
 console.log(JSON.stringify({ totalFindings: report.findings.length, byKind: counts, screenshots: report.screenshots.length }, null, 2));
 if (report.findings.some(item => severeKinds.has(item.kind))) process.exitCode = 1;
