@@ -7,7 +7,7 @@
 .fd-playhead{width:3px!important;right:0!important;background:#bd0018!important;box-shadow:none!important}
 
 /* SaveTree: the real 320px AppBar truncates its title before the help/save controls. */
-.fd-save-tree-screen .fd-appbar strong{max-width:64px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.fd-save-tree-screen .fd-appbar strong{max-width:52px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
 
 /* ExportScreen — calibrated from webref_exact_07_export.png. */
 .fd-export-screen .fd-export-body{display:flex!important;flex-direction:column!important;padding:16px 16px 8px!important;overflow:hidden!important}
@@ -25,9 +25,10 @@
 .fd-export-screen .fd-export-start{height:48px!important;min-height:48px!important;margin-top:auto!important;margin-bottom:0!important;border-radius:16px!important;font-size:10px!important;background:#ff5877!important}
 .fd-export-screen .fd-export-start .ic{width:16px!important;height:16px!important}
 
-/* Audio bottom sheet — app capture starts slightly higher and has a taller clear white sheet. */
+/* Audio bottom sheet — app capture starts slightly higher and uses a compact fixed slider track. */
 .fd-audio-context-screen .fd-clip-detail-sheet{height:244px!important;padding-top:6px!important;border-radius:20px 20px 0 0!important}
-.fd-audio-context-screen .fd-sheet-row{min-height:54px!important}
+.fd-audio-context-screen .fd-sheet-row{min-height:54px!important;grid-template-columns:76px 24px 76px 24px 35px 12px!important;column-gap:5px!important}
+.fd-audio-context-screen .fd-sheet-slider{width:76px!important;max-width:76px!important;flex:none!important}
 
 /* Onion panel: align the production panel a few pixels upward; keep the heavy product outline. */
 .fd-app-onion-panel{top:52px!important;box-shadow:none!important}
@@ -41,3 +42,6 @@
 .fd-timeline-screen>.fd-transport{height:56px!important;flex-basis:56px!important}
 .fd-timeline-screen .fd-scene-line{height:40px!important;flex-basis:40px!important}
 .fd-timeline-screen .fd-timeline-row{height:51px!important;flex-basis:51px!important}
+
+/* Workspace rows match the real narrow-screen list density. */
+.fd-workspace-screen .fd-workspace-row{height:56px!important;min-height:56px!important}
