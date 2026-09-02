@@ -81,6 +81,42 @@ for (const vp of viewports) {
   }
   if (state.pageOverflow > 2) findings.push({ viewport: vp.name, kind: 'horizontal-overflow', amount: state.pageOverflow });
 
+  // The feature index is a persistent orientation aid. A later polish layer must not
+  // accidentally downgrade it from sticky to relative/static just to position decoration.
+  await page.goto(baseURL + '/features/', { waitUntil: 'networkidle' });
+  const featureNav = await page.evaluate(() => {
+    const nav = document.querySelector('.feature-nav');
+    if (!nav) return null;
+    const cs = getComputedStyle(nav);
+    const after = getComputedStyle(nav, '::after');
+    return {
+      position: cs.position,
+      top: cs.top,
+      overflowX: cs.overflowX,
+      fadeContent: after.content,
+      fadePointerEvents: after.pointerEvents
+    };
+  });
+
+  if (!featureNav) {
+    findings.push({ viewport: vp.name, kind: 'feature-nav-missing' });
+  } else {
+    if (featureNav.position !== 'sticky') {
+      findings.push({ viewport: vp.name, kind: 'feature-nav-not-sticky', actual: featureNav.position });
+    }
+    if (vp.name === 'sp') {
+      if (!['auto', 'scroll'].includes(featureNav.overflowX)) {
+        findings.push({ viewport: vp.name, kind: 'feature-nav-not-scrollable', actual: featureNav.overflowX });
+      }
+      if (featureNav.fadeContent === 'none' || featureNav.fadeContent === 'normal') {
+        findings.push({ viewport: vp.name, kind: 'feature-nav-scroll-cue-missing' });
+      }
+      if (featureNav.fadePointerEvents !== 'none') {
+        findings.push({ viewport: vp.name, kind: 'feature-nav-scroll-cue-blocks-input', actual: featureNav.fadePointerEvents });
+      }
+    }
+  }
+
   await context.close();
 }
 
