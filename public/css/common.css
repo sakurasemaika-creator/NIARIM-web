@@ -483,14 +483,16 @@ p {
   box-shadow: var(--shadow-md);
 }
 
+/* 白文字を載せるため、装飾用の --color-accent(#ff5c7a、白文字だと2.97:1)
+   ではなくコントラスト確保用の --color-accent-strong を背景に使う。 */
 .btn-accent {
-  background: var(--color-accent);
+  background: var(--color-accent-strong);
   color: var(--color-white);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-accent:hover {
-  background: var(--color-accent-dark);
+  background: var(--color-accent-strong-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -509,6 +511,16 @@ p {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
+}
+
+/* config.js のURLが未設定（正式リリース前）のリンク。config-links.js が
+   href を外したうえでこのクラスを付ける。押しても何も起きないリンクを
+   「押せそうな見た目」のまま置かないための状態表示。 */
+.is-unavailable {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none;
 }
 
 /* ---- Section utilities ---- */
@@ -538,7 +550,9 @@ p {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent-dark);
+  /* 淡色背景に載る小さな太字テキストのため、4.5:1を満たす濃さを使う
+     （旧 --color-accent-dark #e8425f は淡色背景上で 3.58:1 だった）。 */
+  color: var(--color-accent-strong);
   background: linear-gradient(120deg, var(--color-sub-tint), transparent 85%);
   border: 1px solid rgba(255, 92, 122, 0.25);
   padding: 0.3rem 0.9rem;
@@ -639,7 +653,9 @@ p {
   word-break: normal;
 }
 
-.footer-col h3 {
+/* フッター各列の見出し。ページ本文に h2 が無い場合（/news/ 等）に
+   h1 から h3 へ飛ぶ見出し階層になってしまっていたため h2 にした。 */
+.footer-col h2 {
   font-family: var(--font-serif);
   font-size: var(--fs-small);
   font-weight: 700;
@@ -821,6 +837,11 @@ p {
   gap: var(--space-md);
 }
 
+/* 読み物ブロックの見出しは、そのページでの階層に応じて h2 / h3 を
+   使い分ける（h1直下に置く /premium/・/community/ の先頭ブロックは h2、
+   セクション見出し(h2)の下に入る /features/ 等は h3）。
+   見出しレベルが変わっても見た目は同じになるよう、両方に同じ指定をする。 */
+.feature-narrative-block h2,
 .feature-narrative-block h3 {
   font-size: var(--fs-h4, 1.1rem);
   margin-bottom: 0.4rem;

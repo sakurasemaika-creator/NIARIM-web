@@ -1,0 +1,36 @@
+# ==========================================================================
+# NIARIM公式サイト 静的アセットのレスポンスヘッダー
+#
+# 重要:
+#   wrangler.jsonc の assets.run_worker_first は ["/api/*"] に限定している。
+#   つまり /api/* 以外のリクエスト（＝すべてのHTML・CSS・JS・フォント）は
+#   Workers Static Assetsが直接返し、Workerのコードは一切実行されない。
+#   そのため src/index.js の withSecurityHeaders() はAPI応答にしか効かず、
+#   ページ本体にはセキュリティヘッダーが1つも付いていない状態だった。
+#   静的アセット側のヘッダーはこのファイルで指定する必要がある。
+#   （Workerが生成する /api/* の応答には引き続き src/index.js 側で付与する。
+#     _headers はWorkerが生成した応答には適用されないため、両方に必要。）
+#
+#   参照: https://developers.cloudflare.com/workers/static-assets/headers/
+# ==========================================================================
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  # サイト内のJavaScriptはすべて同一オリジンの外部ファイル(/js/*.js)に集約して
+  # あるため、script-srcに'unsafe-inline'を許可しない（XSS混入時の実行を防ぐ）。
+  # style-srcのみ、本文中のstyle属性と404ページのインライン<style>のために
+  # 'unsafe-inline'を許可する。Google Fontsはサブセット同梱フォントに未収録の
+  # 文字のフォールバック(Noto Serif JP等)として必要。
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
+
+# フォント・アイコン・画像は内容が変わることがほとんどなく、変わるときは
+# ファイル名ごと差し替える運用のため、既定の「毎回再検証」より長めに
+# キャッシュしてよい。CSS/JSはファイル名にハッシュを付けていないので
+# 既定(must-revalidate)のままにし、デプロイ後すぐ反映されるようにする。
+/assets/*
+  Cache-Control: public, max-age=2592000

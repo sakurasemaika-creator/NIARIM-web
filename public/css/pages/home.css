@@ -715,10 +715,25 @@
   transform: translate(-50%, -50%) rotate(90deg) scale(0);
 }
 
+/* max-height:0 + overflow:hidden だけでは「見えていないのに存在はしている」
+   状態のままで、閉じているアコーディオンの中のリンクにもTabキーで
+   フォーカスが移り、スクリーンリーダーからも読み上げられてしまっていた
+   （実際に /faq/ で3件のリンクが該当）。visibility:hidden を併用して
+   アクセシビリティツリーとタブ順から確実に外す。開くときは即座に
+   visibleへ戻し、閉じるときは高さのアニメーションが終わってから
+   hiddenにする（transition-delay）ことで、見た目の動きは維持する。 */
 .faq-answer {
   overflow: hidden;
   max-height: 0;
-  transition: max-height var(--duration-base) var(--ease-out);
+  visibility: hidden;
+  transition: max-height var(--duration-base) var(--ease-out),
+    visibility 0s linear var(--duration-base);
+}
+
+.faq-item.is-open .faq-answer {
+  visibility: visible;
+  transition: max-height var(--duration-base) var(--ease-out),
+    visibility 0s linear 0s;
 }
 
 .faq-answer p {

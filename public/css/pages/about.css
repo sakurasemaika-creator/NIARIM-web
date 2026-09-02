@@ -111,3 +111,12 @@
 .about-cta .btn {
   margin-top: var(--space-lg);
 }
+
+/* 「NEAR + RIM = NIARIM」の結論部分。大きな文字とはいえ
+   --color-accent(#ff5c7a)では白背景に対し2.8:1で、大きな文字に必要な
+   3:1をわずかに下回るため、コントラスト確保用の濃色を使う。
+   以前はHTML側のstyle属性で色を指定していたが、CSPでstyle属性を
+   減らす方針とあわせてCSSへ移した。 */
+.about-name-result {
+  color: var(--color-accent-strong);
+}

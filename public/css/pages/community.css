@@ -74,7 +74,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-gray-300);
+  color: var(--color-text-muted);
   font-size: var(--fs-small);
   position: relative;
 }
@@ -123,13 +123,16 @@
   font-family: var(--font-serif);
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--color-gray-300);
+  /* 実際の作品が入るまでの仮テキスト。「薄いプレースホルダー」に
+     見せたいとはいえ --color-gray-300 では白背景に対し1.7:1程度しかなく
+     読めないため、読める範囲で控えめな色にする。 */
+  color: var(--color-text-muted);
 }
 
 .community-card .meta p {
   margin-top: 0.25rem;
   font-size: var(--fs-small);
-  color: var(--color-gray-300);
+  color: var(--color-text-muted);
 }
 
 /* プレースホルダーの続き(9位以降)は実際の画面が用意でき次第置き換える。

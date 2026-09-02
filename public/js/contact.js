@@ -28,8 +28,29 @@
     return key;
   }
 
-  function setFieldError(row, show) {
+  // エラー表示はCSSのクラス切り替えだけでなく、支援技術にも伝える。
+  // 以前は .has-error を付けるだけで、入力欄自体が「エラー状態である」
+  // ことも「どのメッセージが対応するのか」もスクリーンリーダーからは
+  // 分からなかった。aria-invalid と aria-describedby で結び付ける。
+  function setFieldError(row, show, field) {
     row.classList.toggle("has-error", !!show);
+
+    var errorEl = row.querySelector(".form-error");
+    if (errorEl && !errorEl.id) {
+      errorEl.id =
+        "form-error-" + (field && (field.name || field.id) ? field.name || field.id : Math.random().toString(36).slice(2));
+    }
+
+    var target = field || row.querySelector(".form-control, input, select, textarea");
+    if (!target) return;
+
+    if (show) {
+      target.setAttribute("aria-invalid", "true");
+      if (errorEl) target.setAttribute("aria-describedby", errorEl.id);
+    } else {
+      target.removeAttribute("aria-invalid");
+      target.removeAttribute("aria-describedby");
+    }
   }
 
   function validate(form) {
@@ -53,27 +74,27 @@
 
       if (isEmpty) {
         errorEl.textContent = t("contact.error.required");
-        setFieldError(row, true);
+        setFieldError(row, true, field);
         valid = false;
       } else if (tooLong) {
         errorEl.textContent = t("contact.error.tooLong");
-        setFieldError(row, true);
+        setFieldError(row, true, field);
         valid = false;
       } else if (badEmail) {
         errorEl.textContent = t("contact.error.email");
-        setFieldError(row, true);
+        setFieldError(row, true, field);
         valid = false;
       } else {
-        setFieldError(row, false);
+        setFieldError(row, false, field);
       }
     });
 
     var agreeRow = agree.closest(".form-row");
     if (!agree.checked) {
-      setFieldError(agreeRow, true);
+      setFieldError(agreeRow, true, agree);
       valid = false;
     } else {
-      setFieldError(agreeRow, false);
+      setFieldError(agreeRow, false, agree);
     }
 
     var attachments = form.elements.attachments;
@@ -89,7 +110,7 @@
           return !maxBytes || file.size > maxBytes;
         }) ||
         totalBytes > MAX_TOTAL_ATTACHMENT_BYTES;
-      setFieldError(attachmentsRow, attachmentsInvalid);
+      setFieldError(attachmentsRow, attachmentsInvalid, attachments);
       if (attachmentsInvalid) valid = false;
     }
 

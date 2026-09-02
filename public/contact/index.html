@@ -30,6 +30,17 @@
 <link rel="stylesheet" href="/css/variables.css" />
 <link rel="stylesheet" href="/css/common.css" />
 <link rel="stylesheet" href="/css/pages/contact.css" />
+<noscript>
+  <!-- .reveal / .stagger-grid はJavaScriptで画面内に入った時点で表示する仕組みのため、
+       JSが無効・読み込み失敗の場合は初期状態(opacity:0)のまま本文が一切見えなくなる。
+       その環境では演出を諦めて常に表示する。 -->
+  <style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .reveal h2 { clip-path: none !important; }
+    .stagger-grid > * { opacity: 1 !important; transform: none !important; }
+    .faq-answer { visibility: visible !important; max-height: none !important; }
+  </style>
+</noscript>
 </head>
 <body data-i18n-title="meta.contact.title" data-i18n-description="meta.contact.description">
 <a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
@@ -162,7 +173,7 @@
         <p data-i18n="footer.tagline">Animation made by your hands.</p>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.product">Product</h3>
+        <h2 data-i18n="footer.product">Product</h2>
         <ul>
           <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
           <li><a href="/features/" data-i18n="nav.features">機能</a></li>
@@ -173,7 +184,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.support">Support</h3>
+        <h2 data-i18n="footer.support">Support</h2>
         <ul>
           <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
           <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
@@ -181,7 +192,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.legal">Legal</h3>
+        <h2 data-i18n="footer.legal">Legal</h2>
         <ul>
           <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
           <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
@@ -191,7 +202,7 @@
     <div class="footer-bottom">
       <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
       <div class="footer-social">
-        <a href="#" id="footer-x-icon" aria-label="X">𝕏</a>
+        <a href="#" id="footer-x-icon" aria-label="X"><svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-x_fa"></use></svg></a>
       </div>
     </div>
   </div>
@@ -205,14 +216,6 @@
 <script src="/js/main.js"></script>
 <script src="/js/animations.js"></script>
 <script src="/js/contact.js"></script>
-<script>
-  (function () {
-    var c = window.NIARIM_CONFIG || {};
-    ["footer-x-link", "footer-x-icon", "contact-x-link"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el && c.X_URL) el.setAttribute("href", c.X_URL);
-    });
-  })();
-</script>
+<script src="/js/config-links.js"></script>
 </body>
 </html>

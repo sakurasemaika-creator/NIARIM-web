@@ -55,7 +55,9 @@
 .legal-body h2 {
   font-size: var(--fs-h3);
   margin-bottom: var(--space-sm);
-  color: var(--color-accent-dark);
+  /* 見出しとはいえ font-weight:600 / 約19pxで「大きな文字」の扱いには
+     ならないため、4.5:1を満たす濃さを使う。 */
+  color: var(--color-accent-strong);
 }
 
 .legal-body h3 {
@@ -73,13 +75,15 @@
 /* 既定ではaはcolor:inheritのため、本文中の「こちら」等のリンクが
    周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */
 .legal-body a {
-  color: var(--color-accent);
+  /* 本文サイズのリンクなので装飾用アクセントではなく濃色を使う
+     （#ff5c7a は白背景で2.97:1しかない）。 */
+  color: var(--color-accent-strong);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
 .legal-body a:hover {
-  color: var(--color-accent-dark);
+  color: var(--color-accent-strong-dark);
 }
 
 .legal-body ul,
@@ -116,7 +120,7 @@
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
   background: rgba(255, 107, 74, 0.14);
-  color: var(--color-accent-dark);
+  color: var(--color-accent-strong);
   font-size: 0.75rem;
   font-weight: 700;
   margin-left: 0.4rem;

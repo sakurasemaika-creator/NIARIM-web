@@ -53,6 +53,15 @@ video {
   height: auto;
 }
 
+/* hidden属性はUAスタイルシートの display: none で効いているだけなので、
+   .footer-social a { display: inline-flex } のように display を明示した
+   ルールがあると詳細度で負けて要素が消えない（実際に、未設定の公式X
+   アイコンを config-links.js が hidden にしても表示され続けていた）。
+   属性セレクタで確実に打ち消す。 */
+[hidden] {
+  display: none !important;
+}
+
 input,
 button,
 textarea,
@@ -92,8 +101,19 @@ p {
   overflow-wrap: break-word;
 }
 
-/* フォーカス表示（アクセシビリティ） */
+/* フォーカス表示（アクセシビリティ）
+   以前は --color-brand（#4a4636 のダークブラウン）を使っていたため、
+   フッターやダークセクション（--color-ink 背景）の上ではリングが背景に
+   埋もれてほとんど見えなかった（WCAG 2.2 の 1.4.11 非テキストコントラスト
+   3:1 を満たせない）。明るい面ではアクセント濃色（白背景で5.44:1）、
+   暗い面ではサブカラーの淡いピンク（--color-ink 上で9.72:1）へ切り替える。 */
 :focus-visible {
-  outline: 2px solid var(--color-brand, #4b4acf);
+  outline: 3px solid var(--color-accent-strong, #c42e51);
   outline-offset: 3px;
+}
+
+.section-dark :focus-visible,
+.site-footer :focus-visible,
+.feature-diagram :focus-visible {
+  outline-color: var(--color-sub, #ffc3ce);
 }

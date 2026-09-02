@@ -126,7 +126,8 @@
 }
 
 .form-row .required {
-  color: var(--color-accent);
+  /* 必須を示す記号なので、装飾ではなく可読性を優先した濃色にする。 */
+  color: var(--color-accent-strong);
   margin-left: 0.25rem;
 }
 

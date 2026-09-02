@@ -17,12 +17,25 @@
   --color-sub-tint: #fff0f3;
   --color-accent: #ff5c7a;
   --color-accent-dark: #e8425f;
+  /* テキスト・ボタン背景など「文字のコントラスト比が要求される箇所」専用の
+     濃いアクセント。アプリ本体と揃えた --color-accent (#ff5c7a) は、
+     白文字を載せても白背景に文字として置いても 2.97:1 しかなく、
+     WCAG 2.1 AA の 4.5:1 を満たせない（ダウンロード等の主要CTAが該当）。
+     --color-accent は境界線・ドット・グロー等の装飾用にそのまま残し、
+     文字が絡む箇所だけこちらを使う。#c42e51 はこのパレットの全サーフェス
+     （#ffffff / #f7f4f3 / #fbf9f8 / #fff0f3 / #faf8f9）で 4.9:1 以上、
+     この色を背景にした白文字で 5.44:1 を確保している。 */
+  --color-accent-strong: #c42e51;
+  --color-accent-strong-dark: #a82545;
   --color-white: #ffffff;
   --color-black: #17161c;
   --color-ink: #28242c;
   --color-gray-900: #302c34;
   --color-gray-700: #55505a;
-  --color-gray-500: #7d7781;
+  /* 本文の補助テキスト(--color-text-muted)として多用するため、
+     このパレットの全サーフェス上で WCAG 2.1 AA の 4.5:1 を満たす濃さにする。
+     #7d7781 では白背景で4.35:1、紙色の地(#f7f4f3)で3.97:1と基準未達だった。 */
+  --color-gray-500: #6e6873;
   --color-gray-300: #cbc5cc;
   --color-gray-100: #e9e4e7;
   --color-gray-50: #faf8f9;
@@ -44,6 +57,9 @@
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
   --fs-h3: clamp(1.2rem, 1.2vw + 1rem, 1.6rem);
+  /* common.css の .feature-narrative-block が参照していたが未定義で、
+     常にフォールバック値にしか解決されていなかったため実体を追加する。 */
+  --fs-h4: 1.1rem;
   --fs-body: clamp(1rem, 0.24vw + 0.94rem, 1.1rem);
   --fs-small: 0.875rem;
   --space-xs: 0.5rem;
@@ -75,14 +91,15 @@
 }
 
 .final-cta .btn.btn-primary {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
+  /* 白文字を載せるため装飾用アクセントではなくコントラスト確保用を使う。 */
+  background: var(--color-accent-strong) !important;
+  border-color: var(--color-accent-strong) !important;
   color: var(--color-white) !important;
   box-shadow: var(--shadow-glow);
 }
 .final-cta .btn.btn-primary:hover {
-  background: var(--color-accent-dark) !important;
-  border-color: var(--color-accent-dark) !important;
+  background: var(--color-accent-strong-dark) !important;
+  border-color: var(--color-accent-strong-dark) !important;
 }
 
 /* 320 logical px 実アプリ Visual Smoke との最終照合補正 */

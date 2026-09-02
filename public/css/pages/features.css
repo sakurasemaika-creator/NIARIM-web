@@ -67,7 +67,8 @@
 
 .feature-nav a:hover {
   border-color: var(--color-accent);
-  color: var(--color-accent);
+  /* 枠線は装飾用アクセントのまま、文字だけコントラストを満たす濃色にする。 */
+  color: var(--color-accent-strong);
 }
 
 .feature-nav a.is-active {
@@ -207,6 +208,11 @@
   --fd-accent: #ff5c7a; /* AppThemePreset.defaultDark.accentColor */
   --fd-text: #f5f1f0; /* AppThemePreset.defaultDark.textColor */
   --fd-mark: #ffb020; /* AppThemePreset.defaultDark.updateMarkColor */
+  /* 図解内の補助テキスト(日時・区切り記号など)用。
+     図解の地色は暗色(--fd-bg #17161c)なので、白背景の本文向けに
+     濃くしてある --color-gray-500 をそのまま使うと逆に読みにくくなる。
+     暗色地に対して十分な明るさを持つ専用の淡色を用意する。 */
+  --fd-text-muted: #9c9caa;
   position: relative;
   margin-bottom: var(--space-lg);
   padding: var(--space-md);
@@ -834,7 +840,7 @@
 
 .fd-slot-date {
   font-size: 0.7rem;
-  color: var(--color-gray-500);
+  color: var(--fd-text-muted);
 }
 
 .fd-slot-actions {
@@ -909,7 +915,7 @@
 
 .fd-tree-date {
   font-size: 0.7rem;
-  color: var(--color-gray-500);
+  color: var(--fd-text-muted);
 }
 
 .fd-share-formats {
@@ -932,7 +938,7 @@
 }
 
 .fd-share-arrow {
-  color: var(--color-gray-500);
+  color: var(--fd-text-muted);
 }
 
 /* ---- 作業環境設定 ----
@@ -986,7 +992,7 @@
 }
 
 .fd-gesture-map {
-  color: var(--color-gray-500);
+  color: var(--fd-text-muted);
 }
 
 .fd-gesture-map strong {

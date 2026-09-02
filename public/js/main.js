@@ -348,18 +348,43 @@
     var toggle = document.querySelector('.nav-toggle');
     var nav = document.querySelector('.main-nav');
     if (!toggle || !nav) return;
-    function close() { toggle.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); }
+    // Escapeで閉じたときにフォーカスが画面外の（非表示になった）メニュー項目に
+    // 残ると、キーボード操作の現在地を見失うため、開閉ボタンへ明示的に戻す。
+    function close(returnFocus) {
+      var wasOpen = nav.classList.contains('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
+      if (returnFocus && wasOpen) toggle.focus();
+    }
     toggle.addEventListener('click', function () {
       var isOpen = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!isOpen));
       nav.classList.toggle('is-open', !isOpen);
     });
-    nav.addEventListener('click', function (event) { if (event.target.closest && event.target.closest('a')) close(); });
-    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') close(); });
+    nav.addEventListener('click', function (event) { if (event.target.closest && event.target.closest('a')) close(false); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') close(true); });
   }
 
   function initFaqAccordion() {
-    if (!document.querySelector('.faq-item')) return;
+    var items = document.querySelectorAll('.faq-item');
+    if (!items.length) return;
+
+    // 開閉ボタンと中身を aria-controls / aria-labelledby で結び付ける。
+    // 以前は aria-expanded のみで、支援技術からは「このボタンがどの領域を
+    // 開くのか」が辿れなかった。
+    items.forEach(function (item, index) {
+      var question = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+      if (!question || !answer) return;
+      if (!answer.id) answer.id = 'faq-answer-' + index;
+      if (!question.id) question.id = 'faq-question-' + index;
+      question.setAttribute('aria-controls', answer.id);
+      question.setAttribute('aria-expanded', String(item.classList.contains('is-open')));
+      answer.setAttribute('role', 'region');
+      answer.setAttribute('aria-labelledby', question.id);
+    });
+
+    // 開閉はイベント委譲で扱う（後から差し込まれた項目にも効くため）。
     document.addEventListener('click', function (event) {
       var question = event.target.closest && event.target.closest('.faq-question');
       if (!question) return;
@@ -370,6 +395,24 @@
       item.classList.toggle('is-open', !isOpen);
       question.setAttribute('aria-expanded', String(!isOpen));
       answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : '0px';
+    });
+
+    // 開いたまま画面幅が変わったり言語を切り替えたりすると、px固定の
+    // max-heightが実際の内容の高さと合わなくなり、答えが途中で切れる
+    // （逆に余白が余る）ため、開いている項目の高さを測り直す。
+    function remeasure() {
+      document.querySelectorAll('.faq-item.is-open .faq-answer').forEach(function (answer) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    }
+
+    var resizeTimer = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(remeasure, 150);
+    });
+    document.addEventListener("niarim:langchange", function () {
+      requestAnimationFrame(remeasure);
     });
   }
 
