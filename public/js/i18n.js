@@ -24,8 +24,8 @@
   var STORAGE_KEY = "niarim_lang";
   var DICT = window.NIARIM_I18N_DICT || {};
 
-  function normalizeLang(value) {
-    if (!value) return "ja";
+  function matchSupportedLang(value) {
+    if (!value) return null;
     var raw = String(value);
     for (var i = 0; i < LANGS.length; i += 1) {
       if (LANGS[i].code === raw) return LANGS[i].code;
@@ -43,16 +43,20 @@
 
     var short = lower.split("-")[0];
     for (var j = 0; j < LANGS.length; j += 1) {
-      if (LANGS[j].code.toLowerCase().indexOf(short) === 0) return LANGS[j].code;
+      if (LANGS[j].code.toLowerCase().split("-")[0] === short) return LANGS[j].code;
     }
-    return "ja";
+    return null;
+  }
+
+  function normalizeLang(value) {
+    return matchSupportedLang(value) || "ja";
   }
 
   function getSavedLang() {
     try {
       var saved = window.localStorage.getItem(STORAGE_KEY);
-      var normalized = normalizeLang(saved);
-      return saved && DICT[normalized] ? normalized : null;
+      var matched = matchSupportedLang(saved);
+      return matched && DICT[matched] ? matched : null;
     } catch (_) {
       return null;
     }
@@ -68,8 +72,8 @@
     }
 
     for (var i = 0; i < candidates.length; i += 1) {
-      var normalized = normalizeLang(candidates[i]);
-      if (DICT[normalized]) return normalized;
+      var matched = matchSupportedLang(candidates[i]);
+      if (matched && DICT[matched]) return matched;
     }
 
     return "ja";
