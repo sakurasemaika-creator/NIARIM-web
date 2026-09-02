@@ -15,6 +15,61 @@ const findings = [];
 let screenshots = 0;
 const slug = s => s.replace(/^\//, '').replace(/[^a-zA-Z0-9_-]+/g, '-') || 'home';
 
+async function verifyRevealObservers(page) {
+  // A coarse 70%-viewport sweep can jump completely over a short reveal/grid. Real users
+  // continuously scroll, so after the screenshot sweep directly bring any still-pending
+  // layout-visible targets into view and only report them if IntersectionObserver still
+  // fails to reveal them. This keeps the audit strict without treating synthetic jumps as
+  // production bugs.
+  const revealTargets = page.locator('.reveal:not(.is-visible)').filter({ visible: true });
+  const revealCount = await revealTargets.count();
+  for (let i = 0; i < revealCount; i++) {
+    const target = revealTargets.nth(i);
+    if (!(await target.count())) continue;
+    await target.scrollIntoViewIfNeeded().catch(() => {});
+    await page.waitForTimeout(180);
+  }
+
+  const staggerGrids = page.locator('.stagger-grid').filter({ visible: true });
+  const gridCount = await staggerGrids.count();
+  for (let i = 0; i < gridCount; i++) {
+    const grid = staggerGrids.nth(i);
+    const hiddenChildren = grid.locator(':scope > :not(.is-visible)');
+    if (!(await hiddenChildren.count())) continue;
+    await grid.scrollIntoViewIfNeeded().catch(() => {});
+    await page.waitForTimeout(180);
+  }
+
+  return page.evaluate(() => {
+    const layoutVisible = el => {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 1 && r.height > 1;
+    };
+
+    const unrevealed = [...document.querySelectorAll('.reveal:not(.is-visible)')]
+      .filter(layoutVisible)
+      .map(el => ({
+        tag: el.tagName.toLowerCase(),
+        className: el.className,
+        text: (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+      }));
+
+    const unrevealedStagger = [...document.querySelectorAll('.stagger-grid')]
+      .filter(layoutVisible)
+      .flatMap(grid => [...grid.children]
+        .filter(child => !child.classList.contains('is-visible') && layoutVisible(child))
+        .map(child => ({
+          gridClassName: grid.className,
+          childClassName: child.className,
+          text: (child.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+        })));
+
+    return { unrevealed, unrevealedStagger };
+  });
+}
+
 const browser = await chromium.launch({ headless: true });
 for (const vp of viewports) {
   const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, locale: 'ja-JP' });
@@ -40,6 +95,11 @@ for (const vp of viewports) {
       await page.waitForTimeout(300);
       const state = await page.evaluate(() => {
         const de = document.documentElement;
+        const main = document.querySelector('main');
+        const mainRect = main?.getBoundingClientRect();
+        const mainVisibleHeight = mainRect
+          ? Math.max(0, Math.min(innerHeight, mainRect.bottom) - Math.max(0, mainRect.top))
+          : 0;
         const candidates = [...document.querySelectorAll('main h1,main h2,main h3,main h4,main p,main a,main button,main img,main svg,main input,main textarea')];
         const visible = candidates.filter(el => {
           const cs = getComputedStyle(el);
@@ -53,19 +113,44 @@ for (const vp of viewports) {
           viewportHeight: innerHeight,
           scrollWidth: de.scrollWidth,
           clientWidth: de.clientWidth,
-          visibleCount: visible.length
+          visibleCount: visible.length,
+          mainVisibleHeight: Math.round(mainVisibleHeight)
         };
       });
       if (state.scrollWidth > state.clientWidth + 2) findings.push({ viewport: vp.name, route, kind: 'horizontal-overflow', step: i, state });
-      if (state.visibleCount === 0 && state.docHeight > state.viewportHeight + 50) findings.push({ viewport: vp.name, route, kind: 'empty-main-viewport', step: i, state });
+      // Do not report the normal footer-only tail of a page as an empty main viewport. Only
+      // treat it as a gap when main itself occupies a substantial part of the viewport.
+      if (
+        state.visibleCount === 0 &&
+        state.docHeight > state.viewportHeight + 50 &&
+        state.mainVisibleHeight > state.viewportHeight * 0.35
+      ) {
+        findings.push({ viewport: vp.name, route, kind: 'empty-main-viewport', step: i, state });
+      }
       const file = path.join(outDir, `${vp.name}__${name}__${String(i).padStart(3, '0')}.png`);
       await page.screenshot({ path: file });
       screenshots++;
     }
-    const hiddenReveals = await page.locator('.reveal:not(.is-visible)').count();
-    const hiddenStaggerItems = await page.locator('.stagger-grid > :not(.is-visible)').count();
-    if (hiddenReveals) findings.push({ viewport: vp.name, route, kind: 'unrevealed-elements', count: hiddenReveals });
-    if (hiddenStaggerItems) findings.push({ viewport: vp.name, route, kind: 'unrevealed-stagger-items', count: hiddenStaggerItems });
+
+    const observerState = await verifyRevealObservers(page);
+    if (observerState.unrevealed.length) {
+      findings.push({
+        viewport: vp.name,
+        route,
+        kind: 'unrevealed-elements',
+        count: observerState.unrevealed.length,
+        elements: observerState.unrevealed
+      });
+    }
+    if (observerState.unrevealedStagger.length) {
+      findings.push({
+        viewport: vp.name,
+        route,
+        kind: 'unrevealed-stagger-items',
+        count: observerState.unrevealedStagger.length,
+        elements: observerState.unrevealedStagger
+      });
+    }
 
     // Playwright's fullPage capture can rasterize off-viewport reveal elements from their
     // pre-animation state even after the page has been walked. Keep the interaction audit
