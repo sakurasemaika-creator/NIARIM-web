@@ -124,17 +124,125 @@
 }
 
 /* Visual audit invariant: ホーム最下部の主要ダウンロードCTAは、
-   ヘッダーや汎用primaryの濃色ではなくNIARIMのアクセント色を使う。
-   variables.cssは全ページ共通で最初に読み込まれるため、既存の
-   .btn-primary定義より優先する必要があるこの限定箇所のみ!importantで固定する。 */
+   ヘッダーや汎用primaryの濃色ではなくNIARIMのアクセント色を使う。 */
 .final-cta .btn.btn-primary {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
   color: var(--color-white) !important;
   box-shadow: var(--shadow-glow);
 }
-
 .final-cta .btn.btn-primary:hover {
   background: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
+}
+
+/* --------------------------------------------------------------------------
+   320 logical px 実アプリ Visual Smoke との最終照合補正
+   screen-mock-accuracy.css より先に読み込まれるが、ここはより高い詳細度の
+   セレクタ + !important で「実キャプチャで確認した差分」のみ固定する。
+   -------------------------------------------------------------------------- */
+
+/* OnionSkin: 初期値 enabled=false の実画面では詳細設定はまだ表示されない。
+   280px CardをsidedPanelに載せるため、端末左右ほぼいっぱいの白い小パネルになる。 */
+html body .fd-canvas-screen .fd-app-onion-panel {
+  left: 8px !important;
+  right: 8px !important;
+  top: 56px !important;
+  width: auto !important;
+  padding: 0 12px 10px !important;
+  background: #ffffff !important;
+  border-color: rgba(40, 36, 44, 0.12) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 5px 16px rgba(40, 36, 44, 0.10) !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-panel-close-bar {
+  height: 38px !important;
+  flex-basis: 38px !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title {
+  min-height: 58px !important;
+  padding: 0 4px 8px !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title strong {
+  font-size: 13px !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel > .fd-panel-divider,
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-side,
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-common,
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-fade {
+  display: none !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch,
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on {
+  width: 50px !important;
+  height: 30px !important;
+  flex-basis: 50px !important;
+  background: #ead9dd !important;
+  border: 1.5px solid #8d7e82 !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch::after,
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on::after {
+  left: 5px !important;
+  top: 5px !important;
+  width: 18px !important;
+  height: 18px !important;
+  background: #8b7479 !important;
+}
+html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-prev,
+html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-next {
+  display: none !important;
+}
+
+/* Timeline 320px reference: 実アプリではタイトル領域がほぼ潰れ、
+   フレームセルには連番文字を描かない。 */
+html body .fd-timeline-screen .fd-timeline-title {
+  max-width: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+html body .fd-timeline-screen .fd-tl-frame {
+  font-size: 0 !important;
+}
+
+/* Audio editor: 実キャプチャではシート上端が約259/569px。
+   端末下端まで約310pxを占有する。 */
+html body .fd-audio-context-screen .fd-clip-detail-sheet {
+  height: 310px !important;
+}
+html body .fd-audio-context-screen .fd-audio-sheet-head {
+  height: 45px !important;
+}
+
+/* SaveTree: 実画面はツリーをさらに下へ寄せ、AppBarの保存ボタンを
+   スマホでも十分なタップ領域を持つFilledButtonとして表示する。 */
+html body .fd-save-tree-screen .fd-real-tree {
+  padding-bottom: 0 !important;
+}
+html body .fd-save-tree-screen .fd-appbar {
+  height: 54px !important;
+  flex-basis: 54px !important;
+}
+html body .fd-save-tree-screen .fd-appbar > strong {
+  max-width: 78px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+html body .fd-save-tree-screen .fd-tree-save-btn {
+  height: 44px !important;
+  padding: 0 14px !important;
+  border-radius: 22px !important;
+  gap: 5px !important;
+}
+html body .fd-save-tree-screen .fd-tree-save-btn b {
+  font-size: 10px !important;
+}
+
+/* Workspace: 実アプリでは1行が約55pxで、320×569では6項目前後まで見える。 */
+html body .fd-workspace-screen .fd-workspace-row {
+  height: 55px !important;
+}
+html body .fd-workspace-screen .fd-workspace-card {
+  border-radius: 10px !important;
 }
