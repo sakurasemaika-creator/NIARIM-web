@@ -100,3 +100,30 @@
   .fd-frame-mode{flex-basis:112px!important;font-size:8px!important}
   .fd-frame-thumb,.fd-frame-add{width:41px!important;flex-basis:41px!important}
 }
+
+/* ── Visual Smoke 320x569 calibration pass ─────────────────────────────
+   実アプリとWeb再現図を同じ320x569で並べ、座標差が確認できた部分のみ補正。
+   既に一致しているSaveTree/Workspace/Audio sheetの構造には触れない。
+   ---------------------------------------------------------------------- */
+.fd-app-screen.fd-canvas-screen .fd-app-layer-panel .fd-layer-shortcuts{
+  height:120px!important;
+  flex-basis:120px!important;
+}
+.fd-app-screen.fd-canvas-screen .fd-app-layer-panel .fd-layer-row{
+  height:56px!important;
+  flex-basis:56px!important;
+}
+.fd-app-screen.fd-canvas-screen .fd-app-onion-panel{
+  top:50px!important;
+}
+.fd-app-screen.fd-canvas-screen>.fd-frame-strip .fd-frame-mode{
+  flex-basis:135px!important;
+}
+.fd-app-screen.fd-timeline-screen .fd-timeline-scrubber{
+  height:55px!important;
+  flex-basis:55px!important;
+}
+.fd-app-screen.fd-timeline-screen>.fd-transport{
+  height:78px!important;
+  flex-basis:78px!important;
+}
