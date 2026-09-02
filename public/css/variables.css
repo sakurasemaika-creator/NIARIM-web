@@ -1,4 +1,4 @@
-/* ==========================================================================
+/* ========================================================================== 
    NIARIM variables.css
    ブランドカラー・タイポグラフィ・余白などのデザイントークン。
    全ページで色とスペーシングの意味を統一するため、必ずここを参照する。
@@ -245,4 +245,30 @@ html body .fd-workspace-screen .fd-workspace-card {
 html body .fd-workspace-screen .fd-workspace-row { height: 55px !important; }
 html body .fd-workspace-screen .fd-toolbar-preview .is-active {
   color: #817b7f !important;
+}
+
+/* Home closing flow: FAQ→読み物→最終CTAで通常sectionの上下余白が二重に積み上がり、
+   PC/SPとも内容のない空白が長く続いて見えていた。各セクション自体の余白感は
+   保ちつつ、連続する終盤3ブロックだけリズムを詰めて視線を次のCTAへつなぐ。 */
+body[data-i18n-title="meta.home.title"] #faq {
+  padding-bottom: var(--space-xl);
+}
+body[data-i18n-title="meta.home.title"] #faq + .section {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
+  padding-top: var(--space-xl);
+}
+
+@media (max-width: 860px) {
+  body[data-i18n-title="meta.home.title"] #faq {
+    padding-bottom: var(--space-lg);
+  }
+  body[data-i18n-title="meta.home.title"] #faq + .section {
+    padding-block: var(--space-md);
+  }
+  body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
+    padding-top: var(--space-lg);
+  }
 }
