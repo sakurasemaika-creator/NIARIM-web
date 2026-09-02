@@ -55,14 +55,15 @@ for (const vp of viewports) {
   const state = await cta.evaluate(el => {
     const root = getComputedStyle(document.documentElement);
     const probe = document.createElement('i');
-    probe.style.color = root.getPropertyValue('--color-accent').trim();
+    const accentStrong = root.getPropertyValue('--color-accent-strong').trim();
+    probe.style.color = accentStrong || root.getPropertyValue('--color-accent').trim();
     probe.style.display = 'none';
     document.body.appendChild(probe);
-    const accent = getComputedStyle(probe).color;
+    const expected = getComputedStyle(probe).color;
     probe.remove();
     return {
       actual: getComputedStyle(el).backgroundColor,
-      expected: accent,
+      expected,
       rect: el.getBoundingClientRect().toJSON()
     };
   });
@@ -84,5 +85,5 @@ if (renderedFindings.length) {
 console.log(JSON.stringify({
   validated: true,
   deferredInitialFindingsIgnored: report.findings.length,
-  renderedFinalCta: 'brand accent on sp/tablet/pc'
+  renderedFinalCta: 'contrast-safe CTA accent on sp/tablet/pc'
 }, null, 2));
