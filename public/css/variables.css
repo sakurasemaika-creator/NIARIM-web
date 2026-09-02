@@ -59,9 +59,14 @@
      NotoSerifMenu* は、言語切替メニューに常時出る「한국어」「简体中文」の
      4文字だけを持つ極小フォント(計3KB)。これを分けておかないと、
      日本語しか読まない利用者にも上記KR/SC(計134KB)が毎回転送されてしまう。
+     見出し(--font-serif)には NotoSansHead* を明朝の補完より前に置く。
+     くらむぼんは超極太ゴシックのため、未収録のハングル・簡体字を明朝で
+     補うと「550엔」のように同じ単語内で極太の数字と細い明朝が並んで
+     明らかに浮く。太さの近い Noto Sans Black で先に受けることで、
+     見出しらしい太さと、見出し／本文のメリハリを保つ。
      末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
   --font-sans: "HakkouMincho", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-serif: "Kuramubon", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-serif: "Kuramubon", "NotoSansHeadKR", "NotoSansHeadSC", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);

@@ -33,6 +33,16 @@
 - CSSで `unicode-range` を指定しているため、ハングルが出ないページでは
   ダウンロードされません。
 
+### NotoSansHeadKR-subset.woff2 / NotoSansHeadSC-subset.woff2 — 見出しの補完
+**Noto Sans KR / Noto Sans SC**（Google、いずれもWeight 900 Black）
+- 見出し用のくらむぼんは超極太ゴシックのため、未収録のハングル・簡体字を
+  明朝(Noto Serif KR/SC)で補うと、「550엔」のように同じ単語の中で
+  極太の数字と細い明朝が並び、明らかに浮いてしまう（実際にそうなっていた）。
+- 太さと骨格の印象が近い Black(900) のゴシックで補うことで、
+  見出しらしい太さと「ゴシック見出し／明朝本文」のメリハリを保つ。
+- 見出しに出る文字だけのサブセット（計47KB）で、`unicode-range` 指定により
+  その言語のページ以外では転送されない。
+
 ### NotoSerifSC-subset.woff2 — 簡体字中国語の補完
 **Noto Serif SC**（Google / Source Han Serif ベース）
 - 簡体字固有の字形（专・业・东 等）は白光明朝・くらむぼんに収録が無いため補完します。
@@ -50,8 +60,15 @@
 #   $NIARIM_FONT_SRC/kuramubon/KuramubonFont/Kuramubon.otf
 #   $NIARIM_FONT_SRC/noto/NotoSerifKR.woff2
 #   $NIARIM_FONT_SRC/noto/NotoSerifSC.woff2
+#   $NIARIM_FONT_SRC/noto/NotoSansKR900.woff2
+#   $NIARIM_FONT_SRC/noto/NotoSansSC900.woff2
 pip install fonttools brotli
-python3 tools/build-fonts.py
+
+# 見出しで実際に使われる文字を実測してから生成する
+# （--measure は wrangler dev の起動が必要。省略すると前回の実測結果を使い、
+#   文言が変わっていた場合は安全側=全文字収録へ倒れる）
+npx wrangler dev --port 8788 &
+python3 tools/build-fonts.py --measure
 ```
 
 common.css の `@font-face` ブロック（BEGIN/ENDマーカーの間）も自動更新されます。

@@ -32,12 +32,13 @@ common.css の @font-face ブロック（マーカーで囲んだ範囲）を書
   1. 原本フォントを SRC のパスに置く（リポジトリには含めない。配布元から取得）
   2. python3 tools/build-fonts.py
 """
-import re, glob, subprocess, sys, os
+import re, glob, subprocess, sys, os, json, hashlib
 from fontTools.ttLib import TTFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "public/assets/fonts")
 CSS = os.path.join(ROOT, "public/css/common.css")
+SERIF_CHARS = os.path.join(ROOT, "tools/serif-chars.txt")
 BEGIN = "/* === BEGIN generated font-face (tools/build-fonts.py) === */"
 END = "/* === END generated font-face === */"
 
@@ -53,7 +54,16 @@ FONTS = [
     ("HakkouMincho", f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
      "HakkouMincho-subset.woff2", "本文用（白光明朝／lavsic氏・Noto Serif JP派生）", "primary"),
     ("Kuramubon", f"{SRCDIR}/kuramubon/KuramubonFont/Kuramubon.otf",
-     "Kuramubon-subset.woff2", "見出し用（くらむぼん／フロップデザイン・Dela Gothic派生）", "primary"),
+     "Kuramubon-subset.woff2", "見出し用（くらむぼん／フロップデザイン・Dela Gothic派生）", "heading"),
+    # 見出し(--font-serif)専用の補完。くらむぼんは超極太ゴシックなので、
+    # 未収録のハングル・簡体字を明朝(Noto Serif KR/SC)で補うと、
+    # 「550엔」のように同じ単語の中で極太ゴシックの数字と細い明朝が
+    # 並んで明らかに浮く（実際にそうなっていた）。太さと骨格の印象が
+    # 近い Noto Sans KR/SC の Black(900) で補い、見出しらしさを保つ。
+    ("NotoSansHeadKR", f"{SRCDIR}/noto/NotoSansKR900.woff2",
+     "NotoSansHeadKR-subset.woff2", "見出しのハングル補完（Noto Sans KR Black）", "heading-fallback"),
+    ("NotoSansHeadSC", f"{SRCDIR}/noto/NotoSansSC900.woff2",
+     "NotoSansHeadSC-subset.woff2", "見出しの簡体字補完（Noto Sans SC Black）", "heading-fallback"),
     ("NotoSerifMenuKR", f"{SRCDIR}/noto/NotoSerifKR.woff2",
      "NotoSerifMenuKR-subset.woff2", "言語切替メニューの「한국어」用（全ページで表示）", "menu"),
     ("NotoSerifMenuSC", f"{SRCDIR}/noto/NotoSerifSC.woff2",
@@ -92,6 +102,65 @@ def menu_chars():
     return {c for lab in labels for c in lab}
 
 
+def content_fingerprint():
+    """サブセット対象になるテキストの指紋。見出し実測結果の鮮度判定に使う。"""
+    h = hashlib.sha256()
+    for pattern in ("public/js/i18n-dict*.js", "public/**/*.html", "public/css/**/*.css"):
+        for path in sorted(glob.glob(os.path.join(ROOT, pattern), recursive=True)):
+            h.update(open(path, "rb").read())
+    return h.hexdigest()[:16]
+
+
+def load_serif_chars(want):
+    """見出し用フォントが担当する文字を返す。
+
+    tools/serif-chars.txt は `--measure` で実測して生成する
+    （--font-serif が実際に当たったテキストノードの文字）。
+    サイトの文言を変えると内容がずれるため、生成時の指紋を先頭に記録し、
+    食い違ったら「安全側（全文字を収録）」へ倒して警告する。
+    容量は増えるが字が抜けることはない、という失敗の仕方にしておく。
+    """
+    if not os.path.exists(SERIF_CHARS):
+        print("  ! tools/serif-chars.txt が無いため、見出し用も全文字を収録します"
+              "（容量が増えます）。`python3 tools/build-fonts.py --measure` で実測できます。")
+        return set(want)
+    lines = open(SERIF_CHARS, encoding="utf-8").read().split("\n")
+    stamped = ""
+    if lines and lines[0].startswith("# fingerprint:"):
+        stamped = lines[0].split(":", 1)[1].strip()
+    chars = set("\n".join(lines[1:]))
+    if stamped != content_fingerprint():
+        print("  ! サイトの文言が変わっており tools/serif-chars.txt が古いため、"
+              "見出し用も全文字を収録します（容量が増えます）。")
+        print("    `python3 tools/build-fonts.py --measure` で再実測してください。")
+        return set(want)
+    return {c for c in chars if c.isprintable() and not c.isspace()}
+
+
+def measure_serif_chars():
+    """ブラウザで実測して tools/serif-chars.txt を更新する（--measure）。"""
+    print("見出しフォントで描画される文字を実測中（wrangler devが必要）...")
+    out = subprocess.run(["node", os.path.join(ROOT, "tools/measure-serif-chars.js")],
+                         capture_output=True, text=True, cwd=ROOT)
+    if out.returncode != 0:
+        print(out.stderr[-2000:]); sys.exit("実測に失敗しました（wrangler devは起動していますか？）")
+    data = json.loads(out.stdout)
+    chars = set(data["chars"])
+    # 実測時に画面へ出ていなかった文言（送信後のメッセージ等）も拾えるよう、
+    # 見出し要素に付いていたi18nキーの値を全7言語ぶん足しておく。
+    for path in glob.glob(os.path.join(ROOT, "public/js/i18n-dict*.js")):
+        src = open(path, encoding="utf-8").read()
+        for k in data["keys"]:
+            for m in re.finditer(r'"%s"\s*:\s*"((?:[^"\\]|\\.)*)"' % re.escape(k), src):
+                chars |= set(m.group(1))
+    chars |= {chr(c) for c in range(0x20, 0x7F)}   # 半角英数記号は安いので全部入れる
+    chars = {c for c in chars if c.isprintable() and not c.isspace()}
+    with open(SERIF_CHARS, "w", encoding="utf-8") as f:
+        f.write(f"# fingerprint: {content_fingerprint()}\n")
+        f.write("".join(sorted(chars)))
+    print(f"  実測完了: {len(chars)}字 -> tools/serif-chars.txt")
+
+
 def coverage(path):
     """フォントが収録している「Unicodeコードポイント」の集合を返す。
 
@@ -125,6 +194,9 @@ def build():
     want = site_chars()
     print(f"サイトで使う文字: {len(want)}")
     menu = menu_chars()
+    serif_want = load_serif_chars(want)
+    heading_cov = set()            # 見出し用フォント本体が持つ文字
+    heading_filled = set()         # 見出し用の補完フォントが埋めた文字
     # primary同士は「本文用」「見出し用」で別々のfont-familyスタックに入るため、
     # 片方が持っていればもう片方も安心、という関係ではない。
     # 例: くらむぼん(見出し)は簡体字を持つが白光明朝(本文)は持たないので、
@@ -141,9 +213,20 @@ def build():
             print(f"  !! 原本が見つかりません: {src}"); sys.exit(1)
         cov = coverage(src)
         if kind == "primary":
-            # 本文用・見出し用はそれぞれ全文字ぶん必要（役割が違うため）
+            # 本文用は全文字ぶん必要
             take = {c for c in want if ord(c) in cov}
             primary_covs.append(take)
+        elif kind == "heading":
+            # 見出し用は --font-serif が実際に当たる文字だけでよい
+            take = {c for c in serif_want if ord(c) in cov}
+            heading_cov = take
+            primary_covs.append({c for c in want if ord(c) in cov})
+        elif kind == "heading-fallback":
+            # 見出しで使う文字のうち、見出し用フォントに無いものを引き受ける。
+            # 本文側のカバー判定(covered_by_primary)には影響させない。
+            take = {c for c in serif_want - heading_cov - heading_filled
+                    if ord(c) in cov}
+            heading_filled |= take
         else:
             # 最初のfallback/menuに来た時点で、primaryの積集合を確定させる
             if covered_by_primary is None:
@@ -166,7 +249,12 @@ def build():
         subprocess.run([
             "pyftsubset", src, "--output-file=" + dst, "--flavor=woff2",
             "--unicodes=" + ",".join(f"U+{ord(c):04X}" for c in sorted(take)),
-            "--layout-features=*", "--no-hinting", "--desubroutinize",
+            # '*'（全feature保持）は使わない。既定の必要最小セットに対して、
+            # サイトで実際に使っている縦書き(writing-mode: vertical-rl)と
+            # 等幅数字(font-variant-numeric: tabular-nums)ぶんだけ足す。
+            # '*'のままだと未使用featureで白光明朝+87KB／くらむぼん+100KB膨らむ。
+            # --desubroutinize はこのフォント群では容量に影響しなかったため外す。
+            "--layout-features+=vert,vrt2,tnum", "--no-hinting",
             "--name-IDs=*", "--notdef-outline",
         ], check=True)
         size = os.path.getsize(dst)
@@ -174,7 +262,7 @@ def build():
         rule = [f"/* {role} */", "@font-face {",
                 f'  font-family: "{family}";', "  font-display: swap;",
                 f'  src: url("/assets/fonts/{outname}") format("woff2");']
-        if kind in ("fallback", "menu"):
+        if kind in ("fallback", "menu", "heading-fallback"):
             rule.append(f"  unicode-range: {unicode_ranges(dst)};")
         rule.append("}")
         blocks.append("\n".join(rule))
@@ -205,4 +293,6 @@ def build():
     print(f"  common.css の @font-face を更新")
 
 if __name__ == "__main__":
+    if "--measure" in sys.argv:
+        measure_serif_chars()
     build()
