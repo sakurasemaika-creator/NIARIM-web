@@ -57,7 +57,7 @@
     "communityPage.advanced.preview.title": "フローティングプレビュー・作品詳細",
     "communityPage.advanced.preview.body": "作品カードをタップしても、いきなり別の画面に切り替わりません。画面の隅に小さなプレビューウィンドウが表示され、動画を再生したままほかの画面を見て回れます。ドラッグで移動、リサイズも自由。「詳細へ」をタップすると、投稿日・投稿者・タグ・ブックマーク数などをまとめた作品詳細画面を確認できます。",
     "communityPage.advanced.shorts.title": "縦画面モード",
-    "communityPage.advanced.shorts.body": "縦長（縦画面）で投稿された作品は、ボタン1つで全画面縦スクロール再生に切り替えられます。次々に作品を見ていけるので、スキマ時間にもぴったりです。",
+    "communityPage.advanced.shorts.body": "作品一覧は「総合」「縦画面のみ」「横画面のみ」で絞り込めます。縦長（縦画面）の作品は、ボタン1つで全画面縦スクロール再生に切り替えられます。",
     "communityPage.cta.title": "あなたの作品も、ここに。",
     "communityPage.cta.body": "NIARIMで手描きアニメーションを制作して、いつか、作品広場に投稿してみませんか。",
     "communityPage.cta.link": "アプリをダウンロード"
@@ -104,7 +104,7 @@
     "communityPage.advanced.preview.title": "Floating preview & work details",
     "communityPage.advanced.preview.body": "Tapping a work card doesn't jump straight to another screen. A small preview window appears in the corner, letting the video keep playing while you browse elsewhere. Drag it around or resize it freely. Tap \"Details\" to see the full work-detail screen with post date, author, tags, and bookmark count.",
     "communityPage.advanced.shorts.title": "Vertical mode",
-    "communityPage.advanced.shorts.body": "Works posted in a vertical (portrait) format can switch to a full-screen, vertically-scrolling viewer with one tap. Perfect for browsing one work after another in your spare moments.",
+    "communityPage.advanced.shorts.body": "Filter the gallery by All, Portrait only, or Landscape only. Portrait works can switch to a full-screen, vertically scrolling viewer with one tap.",
     "communityPage.cta.title": "Your work could be here too.",
     "communityPage.cta.body": "Create a hand-drawn animation with NIARIM, and one day, why not post it to the Gallery for everyone to see?",
     "communityPage.cta.link": "Download the App"
@@ -151,7 +151,7 @@
     "communityPage.advanced.preview.title": "悬浮预览与作品详情",
     "communityPage.advanced.preview.body": "点击作品卡片不会立即跳转到其他画面。屏幕角落会出现一个小型预览窗口，让视频继续播放的同时可以浏览其他画面。可自由拖动、调整大小。点击「查看详情」即可看到汇总了投稿日期、投稿者、标签、收藏数等信息的作品详情画面。",
     "communityPage.advanced.shorts.title": "竖屏模式",
-    "communityPage.advanced.shorts.body": "以竖屏（纵向）投稿的作品，只需点击一个按钮即可切换为全屏纵向连续播放模式。可以接连不断地浏览作品，非常适合利用零碎时间。",
+    "communityPage.advanced.shorts.body": "作品列表可按“全部”“仅竖屏”“仅横屏”筛选。竖屏作品只需点击一个按钮，即可切换为全屏纵向连续播放模式。",
     "communityPage.cta.title": "你的作品，也能在这里展示。",
     "communityPage.cta.body": "用 NIARIM 创作手绘动画，未来不妨投稿到 作品广场，与大家分享。",
     "communityPage.cta.link": "下载应用"
@@ -198,7 +198,7 @@
     "communityPage.advanced.preview.title": "浮動預覽與作品詳情",
     "communityPage.advanced.preview.body": "點擊作品卡片不會立即跳轉到其他畫面。螢幕角落會出現一個小型預覽視窗，讓影片繼續播放的同時可以瀏覽其他畫面。可自由拖曳、調整大小。點擊「查看詳情」即可看到彙整了投稿日期、投稿者、標籤、收藏數等資訊的作品詳情畫面。",
     "communityPage.advanced.shorts.title": "直式模式",
-    "communityPage.advanced.shorts.body": "以直式（縱向）投稿的作品，只需點擊一個按鈕即可切換為全螢幕縱向連續播放模式。可以接連不斷地瀏覽作品，非常適合利用零碎時間。",
+    "communityPage.advanced.shorts.body": "作品清單可依「全部」「僅直式」「僅橫式」篩選。直式作品只需點擊一個按鈕，即可切換為全螢幕縱向連續播放模式。",
     "communityPage.cta.title": "你的作品，也能在這裡展示。",
     "communityPage.cta.body": "用 NIARIM 創作手繪動畫，未來不妨投稿到 作品廣場，與大家分享。",
     "communityPage.cta.link": "下載應用程式"
@@ -245,7 +245,7 @@
     "communityPage.advanced.preview.title": "플로팅 미리보기・작품 상세",
     "communityPage.advanced.preview.body": "작품 카드를 탭해도 바로 다른 화면으로 전환되지 않습니다. 화면 구석에 작은 미리보기 창이 표시되어, 영상을 재생한 채로 다른 화면을 둘러볼 수 있습니다. 드래그로 이동하거나 자유롭게 크기를 조절할 수 있습니다. 「상세보기」를 탭하면 게시일・작가・태그・북마크 수 등을 정리한 작품 상세 화면을 확인할 수 있습니다.",
     "communityPage.advanced.shorts.title": "세로 화면 모드",
-    "communityPage.advanced.shorts.body": "세로(세로 화면)로 투고된 작품은 버튼 하나로 전체 화면 세로 스크롤 재생으로 전환할 수 있습니다. 작품을 연달아 볼 수 있어 자투리 시간에도 안성맞춤입니다.",
+    "communityPage.advanced.shorts.body": "작품 목록을 전체・세로 화면만・가로 화면만으로 필터링할 수 있습니다. 세로 화면 작품은 버튼 하나로 전체 화면 세로 스크롤 재생으로 전환할 수 있습니다.",
     "communityPage.cta.title": "당신의 작품도, 이곳에.",
     "communityPage.cta.body": "NIARIM으로 손그림 애니메이션을 제작해, 언젠가 작품광장에 투고해 보지 않으시겠어요?",
     "communityPage.cta.link": "앱 다운로드"
@@ -292,7 +292,7 @@
     "communityPage.advanced.preview.title": "Aperçu flottant et détails de l'œuvre",
     "communityPage.advanced.preview.body": "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d'aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d'autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l'écran complet avec la date de publication, l'auteur, les tags et le nombre de favoris.",
     "communityPage.advanced.shorts.title": "Mode portrait",
-    "communityPage.advanced.shorts.body": "Les œuvres publiées au format vertical (portrait) peuvent basculer d'un simple geste vers un lecteur plein écran à défilement vertical. Idéal pour enchaîner les œuvres pendant vos moments libres.",
+    "communityPage.advanced.shorts.body": "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d'un geste vers un lecteur plein écran à défilement vertical.",
     "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
     "communityPage.cta.body": "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Galerie pour que tout le monde la voie ?",
     "communityPage.cta.link": "Télécharger l'application"
@@ -339,7 +339,7 @@
     "communityPage.advanced.preview.title": "Vista previa flotante y detalles de la obra",
     "communityPage.advanced.preview.body": "Tocar la tarjeta de una obra no te lleva de inmediato a otra pantalla. Aparece una pequeña ventana de vista previa en una esquina, dejando que el video siga reproduciéndose mientras navegas por otras pantallas. Puedes arrastrarla o cambiar su tamaño libremente. Toca «Detalles» para ver la pantalla completa con la fecha de publicación, el autor, las etiquetas y el número de marcadores.",
     "communityPage.advanced.shorts.title": "Modo vertical",
-    "communityPage.advanced.shorts.body": "Las obras publicadas en formato vertical (retrato) pueden pasar, con un solo toque, a un visor de pantalla completa con desplazamiento vertical continuo. Perfecto para ver obra tras obra en tus ratos libres.",
+    "communityPage.advanced.shorts.body": "Filtra la galería por Todo, Solo vertical o Solo horizontal. Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",
     "communityPage.cta.title": "Tu obra también podría estar aquí.",
     "communityPage.cta.body": "Crea una animación dibujada a mano con NIARIM y, algún día, publícala en la Galería para que todos la vean.",
     "communityPage.cta.link": "Descargar la app"

@@ -20,7 +20,7 @@
   作業は必ず `dev_branch` 上で行い、`git fetch origin dev_branch && git rebase
   origin/dev_branch` してから push すること（他セッションが同時に触っている
   可能性がある）。
-- **アプリ本体リポジトリ**: `sakurasemaika-creator/NIARIM`（Flutter製、private）。
+- **アプリ本体リポジトリ**: `sakurasemaika-creator/MIRANIMA`（Flutter製、private）。
   このサイトの内容（機能紹介・FAQ・ヘルプ・ロゴ・配色）は、すべてこのアプリ
   リポジトリの実データに基づいて作成しており、**憶測で機能を書き足さない**
   方針を一貫して守っている。アプリ側のdev_branchで新機能が実装されるたびに、
@@ -28,7 +28,7 @@
   （後述「6. 残タスク」参照）。
   - このセッション環境では `add_repo` ツールが使えない場合でも、GitHub MCP
     ツール（`mcp__github__get_file_contents` / `list_commits` / `search_code` 等）
-    で `owner: sakurasemaika-creator, repo: NIARIM` を直接指定すれば、
+    で `owner: sakurasemaika-creator, repo: MIRANIMA` を直接指定すれば、
     ローカルにcloneしなくても内容確認・コミット履歴の調査が可能。
   - アプリ側の `dev_branch` はコミット頻度が非常に高い（1日に何本もマージ
     される）。差分確認は `list_commits`（`sha: "dev_branch"`）で新しい順に
@@ -97,6 +97,17 @@ ic-push_pin_outlined）、既存の視覚表現だけで十分なら装飾アイ
 s/#4a4636/#FF5C7A/g' <file>` で一括置換できる）。フッターの方は
 `filter: brightness(0) invert(1)` で強制的に白にしているため、
 色そのものは影響しない。
+
+### 2.5 アプリ画面の図解はFlutter実装を正としてレイヤー構造まで合わせる
+
+Web内のアプリ画面再現（`.feature-diagram`・`.frame-mock`・
+`.screenshot-card`）は、見た目だけを推測して組み立てず、アプリ本体の
+`lib/screens/`以下にある実際のWidget構成・寸法・アイコン・表示順を確認して
+反映する。このセッション環境ではアプリ本体の作業ツリーが
+`C:\Users\user\Downloads\MIRANIMA`にあるため、コミット済みの内容だけでなく
+未コミットの最新UI変更も読み取り対象とする（ただしアプリ側のファイルは
+依頼なしに編集しない）。特にキャンバス画面は、キャンバスを下層、操作ボタン・
+ツールバー・フレーム一覧を上層として扱い、一部が重なるレイヤー構造を維持する。
 
 ## 3. CSSの既知の罠（再発させないための記録）
 
@@ -281,7 +292,7 @@ spec-item＋長い説明文でページ内最長）がこのバグで表示さ�
     （既に`help.entry14.desc`に反映済み）: 優先度は低いが、Help/Featuresの
     該当項目の説明文が実装の粒度に見合っているか、時間があれば確認。
 - **確認方法**: `mcp__github__list_commits`（`owner:
-  sakurasemaika-creator, repo: NIARIM, sha: "dev_branch"`）で新しい順に
+  sakurasemaika-creator, repo: MIRANIMA, sha: "dev_branch"`）で新しい順に
   コミット一覧を取得し、コミットメッセージ本文（日本語で詳細に書かれて
   いることが多い）から機能追加・仕様変更を洗い出す→該当する
   `lib/l10n/app_ja.arb` 等の実データを`get_file_contents`で確認→
@@ -301,7 +312,7 @@ spec-item＋長い説明文でページ内最長）がこのバグで表示さ�
 ### 6.1.2 [確認済み・対応不要] アプリアイコンのグリフ拡大は既に反映済み（複数回再確認済み）
 
 このサイトの `public/assets/images/logo/app_logo.svg` / `title_logo.svg` は
-`sakurasemaika-creator/NIARIM` の `assets/logo/app_logo.svg` /
+`sakurasemaika-creator/MIRANIMA` の `assets/logo/app_logo.svg` /
 `title_logo.svg`（モノグラムSVG本体）と、塗り色（テーマカラーへの変更、
 2.4節参照）以外は常にバイトレベルで同一である。**2026/08/31時点で
 `tool/gen_app_icon.py`のグリフ比率が0.58→0.74→0.86へ2段階目の拡大を
