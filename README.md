@@ -12,11 +12,11 @@ NIARIMは、AIが自動で作品を生成するアプリではありません。
 
 ## アプリ本体（NIARIMリポジトリ）との整合について
 
-本サイトのロゴ・プライバシーポリシー・利用規約・機能紹介は、NIARIMアプリ本体リポジトリ（`sakurasemaika-creator/MIRANIMA`、`dev_branch`）の実データを確認したうえで反映しています。
+本サイトのロゴ・プライバシーポリシー・利用規約・機能紹介は、NIARIMアプリ本体リポジトリ（`sakurasemaika-creator/NIARIM`、`dev_branch`）の実データを確認したうえで反映しています。
 
 - **ロゴ**: `public/assets/images/logo/app_logo.svg` は、アプリリポジトリの `assets/logo/app_logo.svg` をそのまま使用しています（favicon も同一データ）。
 - **配色**: `public/css/variables.css` のブランドカラーは、アプリのデフォルトUIテーマ（`lib/models/app_theme_preset.dart` の `accentColor #FF5C7A`）およびロゴの配色（`#4A4636`）に合わせています。
-- **プライバシーポリシー・利用規約**: `public/js/i18n-dict-legal.js` に、アプリ本体の `lib/l10n/app_*.arb`（7言語）に定義されている実際の条文をそのまま転記しています。アプリ側で既にAI翻訳・逆翻訳照合を経ていますが、専門家（弁護士等）による正式な法的確認は経ていない点はアプリ側と同様です。プライバシーポリシー第8条（お問い合わせ）のみ、アプリ側では連絡先未確定のプレースホルダーのままですが、本サイトには実際に機能するお問い合わせフォームがあるため、そちらへ案内する文言に差し替えています。
+- **プライバシーポリシー・利用規約**: `public/js/i18n-dict-legal.js` に、アプリ本体の `lib/l10n/app_*.arb`（7言語）に定義されている実際の条文をそのまま転記しています。アプリ側で既にAI翻訳・逆翻訳照合を経ていますが、専門家（弁護士等）による正式な法的確認は経ていない点はアプリ側と同様です。プライバシーポリシー第9条（お問い合わせ）のみ、アプリ側では連絡先未確定のプレースホルダーのままですが、本サイトには実際に機能するお問い合わせフォームがあるため、そちらへ案内する文言に差し替えています。
 - **機能紹介**: `public/js/i18n-dict-advanced.js` に、アプリの `lib/engine/`・`lib/models/` に実装が確認できる機能（オニオンスキン・トーン・スタンプ・定規・テキスト・フィルター・フォント管理・ウォーターマーク）を追加しています。逆に、コミュニティ（作品共有）機能はUI・ダミーデータのみでバックエンド未実装であることを確認したため、既存の通り「[要確認]」のままとし、実装済みと断定していません。
 - **FAQの訂正**: `public/js/i18n-dict-faq-fix.js` にて、当初「[要確認]」としていた2項目を、アプリの実データに基づき確定情報へ更新しました。
   - 対応端末: `pubspec.yaml`（`description: Hand-drawn animation creation app for Android`）および利用規約第2条により、Android向け提供であることを確認済み
@@ -50,6 +50,9 @@ NIARIM-web/
 │   ├── contact/index.html
 │   ├── news/index.html
 │   ├── features/index.html
+│   ├── robots.txt             # 全ページをクロール許可 + サイトマップの所在
+│   ├── sitemap.xml            # 全11ページ（canonicalと同一URL）
+│   ├── _headers               # 静的アセットのセキュリティヘッダー（下記参照）
 │   ├── assets/
 │   │   ├── images/
 │   │   │   ├── logo/app_logo.svg                   # NIARIMアプリ本体と共通の正式ロゴ
@@ -79,6 +82,11 @@ NIARIM-web/
 │   ├── index.js            # Workerエントリポイント（ルーティング）
 │   ├── contact.js          # /api/contact の処理ロジック（Resend連携）
 │   └── utils.js            # Worker共通ユーティリティ
+├── tools/                  # 開発用スクリプト（本番配信には含まれない）
+│   ├── build-fonts.py      # フォントのサブセット生成 + common.cssの@font-face更新
+│   ├── measure-serif-chars.js  # 見出しフォントで実際に使う文字の実測（Playwright）
+│   ├── serif-chars.txt     # 上の実測結果（先頭行が対象ファイルの指紋）
+│   └── audit-site.js       # 全ページの回帰チェック（`npm run audit`）
 ├── wrangler.jsonc
 └── package.json
 ```
@@ -93,6 +101,29 @@ npx wrangler dev
 ```
 
 ブラウザで `http://localhost:8787/` を開いて確認してください。
+
+### 回帰チェック
+
+`wrangler dev` を起動したまま、別ターミナルで実行します。
+
+```bash
+npm run audit
+```
+
+全12ページを1280/1024/768/375/320pxで開き、次を機械的に確認します。
+問題が1件でもあれば終了コード1で落ちるので、そのままCIに載せられます。
+
+- JSエラー・失敗したリクエスト・**同一オリジン以外への通信**（フォントを
+  自前配信に切り替えた効果が消えていないかの見張り）
+- アクセシブル名の無いリンク／ボタン、ラベルの無い入力欄
+- 表示されているのに行き先の無いリンク（未設定のSNSリンクは隠す運用）
+- 畳んだFAQの中身がタブ順に残っていないか（実際に `focus()` を試して判定）
+- 見出しレベルの飛び、h1の個数、lang / title / description / canonical
+- 各幅での横スクロールの発生
+
+判定の実装上の注意は `tools/audit-site.js` の冒頭コメントに書いてあります
+（「見えない」を `display:none` だけで判定しない、リンク名を最初の `img` の
+`alt` だけで判定しない、など、過去に誤検出を出した箇所）。
 
 ## デプロイ
 
@@ -181,7 +212,7 @@ npx wrangler kv namespace create RATE_LIMIT_KV
 
 - `public/js/config.js` の `GOOGLE_PLAY_URL`：Google Play公開URL確定後に差し替え
 - `public/js/config.js` の `X_URL`：公式Xアカウント確定後に差し替え
-- 本番ドメイン確定後、全ページの `og:url` / `canonical` 内の `https://niarim.example.com` を本番ドメインへ置換
+- 本番ドメイン確定後、全ページの `og:url` / `canonical`、`public/sitemap.xml` の `<loc>`、`public/robots.txt` の `Sitemap:` 行に含まれる `https://niarim.example.com` を本番ドメインへ一括置換（`grep -rl niarim.example.com public/` で対象を確認できる）
 - `public/assets/images/screenshots/` 配下：実際のアプリ画面キャプチャに差し替え（現在はプレースホルダ構造のみ）
 - `public/assets/images/ogp-default.png`：現在は単色のプレースホルダー画像。正式公開前に1200×630pxのブランドOGP画像へ差し替え、各ページの `og:image` / `twitter:image` を確認すること
 - `public/assets/icons/apple-touch-icon.png`：現在は単色のプレースホルダー画像。正式なアプリアイコンへ差し替え

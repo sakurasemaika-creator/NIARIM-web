@@ -5,9 +5,11 @@
   "description": "NIARIM 公式サイト（Cloudflare Workers Static Assets + Worker）",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "audit": "node tools/audit-site.js"
   },
   "devDependencies": {
+    "playwright": "^1.62.1",
     "wrangler": "^4.126.0"
   }
 }

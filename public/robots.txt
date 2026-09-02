@@ -1,0 +1,8 @@
+# NIARIM公式サイト
+# 全ページを検索エンジンに開放する。非公開領域は存在しない。
+User-agent: *
+Allow: /
+
+# [要確認] 本番ドメイン確定後、README.mdの手順に従って
+# https://niarim.example.com を本番ドメインへ置換すること。
+Sitemap: https://niarim.example.com/sitemap.xml
