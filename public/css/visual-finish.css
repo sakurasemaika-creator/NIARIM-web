@@ -215,6 +215,14 @@ section.section:has(.community-tabs) {
     box-shadow: inset 3px 0 0 rgba(255,92,122,.48);
   }
 
+  /* Keep the persistent shortcut useful without covering small-screen content. */
+  .scroll-top-btn {
+    width: 42px;
+    height: 42px;
+    right: 12px;
+    bottom: 12px;
+  }
+
   .site-footer::before {
     width: calc(100% - 2rem);
   }
