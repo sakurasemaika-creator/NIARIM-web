@@ -35,7 +35,8 @@
     if (lower.indexOf("zh") === 0) {
       return lower.indexOf("hant") > -1 ||
         lower.indexOf("tw") > -1 ||
-        lower.indexOf("hk") > -1
+        lower.indexOf("hk") > -1 ||
+        lower.indexOf("mo") > -1
         ? "zh-Hant"
         : "zh-Hans";
     }
@@ -47,14 +48,42 @@
     return "ja";
   }
 
-  function detectLang() {
+  function getSavedLang() {
     try {
       var saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved && DICT[normalizeLang(saved)]) return normalizeLang(saved);
-    } catch (_) {}
+      var normalized = normalizeLang(saved);
+      return saved && DICT[normalized] ? normalized : null;
+    } catch (_) {
+      return null;
+    }
+  }
 
-    var detected = normalizeLang(navigator.language || "ja");
-    return DICT[detected] ? detected : "ja";
+  function detectBrowserLang() {
+    var candidates = [];
+
+    if (navigator.languages && navigator.languages.length) {
+      candidates = Array.prototype.slice.call(navigator.languages);
+    } else if (navigator.language) {
+      candidates = [navigator.language];
+    }
+
+    for (var i = 0; i < candidates.length; i += 1) {
+      var normalized = normalizeLang(candidates[i]);
+      if (DICT[normalized]) return normalized;
+    }
+
+    return "ja";
+  }
+
+  function detectLang() {
+    // ユーザーが既存の言語切替メニューで明示的に選んだ言語を最優先する。
+    var saved = getSavedLang();
+    if (saved) return saved;
+
+    // 手動選択がまだない場合だけ、ブラウザ/端末の優先言語一覧を上から確認する。
+    // 自動判定結果は保存しないため、端末側の言語設定を後から変更した場合にも
+    // 次回アクセス時から自然に追従できる。
+    return detectBrowserLang();
   }
 
   function t(lang, key) {
@@ -65,9 +94,10 @@
       : fallback[key] || key;
   }
 
-  function applyLang(lang) {
+  function applyLang(lang, options) {
     lang = normalizeLang(lang);
     if (!DICT[lang]) lang = "ja";
+    options = options || {};
 
     document.documentElement.setAttribute("lang", lang);
 
@@ -117,9 +147,12 @@
       }
     }
 
-    try {
-      window.localStorage.setItem(STORAGE_KEY, lang);
-    } catch (_) {}
+    // 自動検出時は保存せず、既存メニュー等からの明示的な切替だけ記憶する。
+    if (options.persist !== false) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, lang);
+      } catch (_) {}
+    }
 
     document.dispatchEvent(
       new CustomEvent("niarim:langchange", { detail: { lang: lang } })
@@ -140,7 +173,7 @@
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
       button.addEventListener("click", function () {
-        applyLang(lang.code);
+        applyLang(lang.code, { persist: true });
         var dropdown = mount.closest("[data-lang-dropdown]");
         if (dropdown) dropdown.setAttribute("data-open", "false");
       });
@@ -174,7 +207,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     buildLangMenu();
     initLangDropdownToggle();
-    applyLang(detectLang());
+    applyLang(detectLang(), { persist: false });
   });
 
   window.NIARIM_I18N = {
