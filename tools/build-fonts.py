@@ -103,11 +103,25 @@ def menu_chars():
 
 
 def content_fingerprint():
-    """サブセット対象になるテキストの指紋。見出し実測結果の鮮度判定に使う。"""
+    """サブセット対象になるテキストの指紋。見出し実測結果の鮮度判定に使う。
+
+    common.css の生成ブロック（@font-face）はこのスクリプト自身の出力なので
+    指紋から除外する。含めてしまうと、ビルドするたびに自分が書き換えた
+    common.css で指紋がずれ、次回必ず「実測結果が古い」と誤判定して
+    安全側（全文字収録）へ倒れてしまう（＝毎回600KB以上太る）。
+    指紋が見るべきなのは「どの文字が必要か」を決める入力だけ。
+    """
     h = hashlib.sha256()
     for pattern in ("public/js/i18n-dict*.js", "public/**/*.html", "public/css/**/*.css"):
         for path in sorted(glob.glob(os.path.join(ROOT, pattern), recursive=True)):
-            h.update(open(path, "rb").read())
+            data = open(path, "rb").read()
+            if os.path.abspath(path) == os.path.abspath(CSS):
+                text = data.decode("utf-8")
+                i, j = text.find(BEGIN), text.find(END)
+                if i != -1 and j != -1:
+                    text = text[:i] + text[j + len(END):]
+                data = text.encode("utf-8")
+            h.update(data)
     return h.hexdigest()[:16]
 
 
