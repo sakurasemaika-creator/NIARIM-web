@@ -166,7 +166,9 @@ main { background: transparent; }
 .final-cta .btn-primary,
 body .final-cta .hero-actions .btn.btn-primary,
 body .hero .hero-actions .btn.btn-primary {
-  background: var(--color-accent) !important;
+  /* 白文字を載せるので、装飾用の --color-accent(白文字で2.97:1)ではなく
+     コントラスト確保用の --color-accent-strong を使う。 */
+  background: var(--color-accent-strong) !important;
   color: #fff !important;
 }
 
@@ -494,8 +496,9 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: var(--niarim-surface);
 }
 .community-tabs button.is-active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  /* 選択中タブは白文字なのでコントラスト確保用のアクセントを使う。 */
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
   color: #fff;
 }
 .community-gallery { gap: .9rem; }
