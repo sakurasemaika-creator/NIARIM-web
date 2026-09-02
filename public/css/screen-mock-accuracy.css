@@ -48,13 +48,9 @@
 
 /* ==========================================================================\n   Paint / layout cost reductions — intentionally no visual redesign\n   ========================================================================== */
 
-/* Do not paint below-the-fold feature rows or offscreen carousel cards until
-   the browser is close to showing them. Intrinsic sizes keep layout stable. */
+/* Carousel cards have a fixed 9:16 footprint, so deferring their offscreen
+   paint does not alter document flow or cause a reveal-time layout shift. */
 @supports (content-visibility: auto) {
-  .feature-row {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 720px;
-  }
   .screenshot-card {
     content-visibility: auto;
     contain-intrinsic-size: 320px 569px;
