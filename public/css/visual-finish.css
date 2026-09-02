@@ -1,0 +1,199 @@
+/* NIARIM final visual refinement layer */
+
+/* Keep the finish quiet: stronger hierarchy, cleaner surfaces, and tactile states. */
+:root {
+  --finish-hairline: rgba(40, 36, 44, .095);
+  --finish-shadow: 0 18px 50px rgba(40, 36, 44, .075);
+  --finish-shadow-hover: 0 22px 58px rgba(40, 36, 44, .115);
+}
+
+/* Typography and reading rhythm */
+:where(.section-head, .feature-section-head) > p {
+  max-width: 62ch;
+  line-height: 1.85;
+}
+
+:where(.section-head, .feature-section-head) h2 {
+  text-wrap: balance;
+}
+
+:where(.intro-card, .spec-item, .news-card, .help-category, .help-item, .faq-item, .pricing-card, .contact-form) {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
+}
+
+/* Navigation: current location should read before hover decoration. */
+.main-nav a[aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.lang-trigger {
+  background: rgba(255,255,255,.64);
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-trigger:hover {
+  background: #fff;
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+
+/* Buttons: make the primary action feel intentional without becoming flashy. */
+.btn {
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Cards: consistent elevation language across the whole site. */
+@media (hover: hover) and (pointer: fine) {
+  :where(.intro-card, .news-card, .help-category, .help-item, .community-card, .pricing-card:not(.is-premium)) {
+    transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), border-color 220ms var(--ease-out);
+  }
+
+  :where(.intro-card, .news-card, .help-category, .help-item, .community-card, .pricing-card:not(.is-premium)):hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,92,122,.18);
+    box-shadow: var(--finish-shadow-hover);
+  }
+}
+
+/* Home feature blocks: reduce the boxed-in feeling and sharpen composition. */
+.feature-row {
+  box-shadow: 0 14px 44px rgba(40,36,44,.045), inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.feature-row .feature-copy h3 {
+  letter-spacing: -.012em;
+}
+
+/* Shared inner-page hero gets a subtle bottom transition instead of ending abruptly. */
+:where(.about-hero, .features-header, .help-header, .faq-header, .news-header, .legal-header)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(40,36,44,.12) 16%, rgba(255,92,122,.16) 50%, rgba(40,36,44,.12) 84%, transparent);
+  pointer-events: none;
+}
+
+/* Features index: clearer horizontal affordance on compact screens. */
+.feature-nav {
+  isolation: isolate;
+}
+
+.feature-nav a {
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.feature-nav a:hover {
+  background: rgba(255,92,122,.075);
+  color: var(--color-ink);
+}
+
+/* FAQ: make open state visually legible even before reading the answer. */
+.faq-item {
+  transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background 200ms var(--ease-out);
+}
+
+.faq-item.is-open {
+  border-color: rgba(255,92,122,.22);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 14px 42px rgba(40,36,44,.06), inset 3px 0 0 rgba(255,92,122,.48);
+}
+
+.faq-question:hover {
+  color: var(--color-ink);
+}
+
+/* Community ranking: top cards should feel special without looking like ads. */
+.community-card {
+  box-shadow: 0 10px 32px rgba(40,36,44,.045);
+}
+
+.community-gallery .community-card:nth-child(1) {
+  box-shadow: 0 0 0 1px #ffd76a, 0 18px 48px rgba(40,36,44,.09);
+}
+
+.community-card .thumb {
+  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(247,244,243,.92));
+}
+
+/* Forms: clearer focus and quieter default surface. */
+.form-control:hover:not(:focus) {
+  border-color: rgba(40,36,44,.22);
+}
+
+.form-control::placeholder {
+  color: rgba(74,70,54,.52);
+}
+
+/* Footer: small separator improves the handoff from page content. */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1180px, calc(100% - 3rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: 4rem;
+  }
+
+  .section-head {
+    margin-bottom: 1.8rem;
+  }
+
+  .feature-nav {
+    position: relative;
+  }
+
+  .feature-nav::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 34px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.97) 82%);
+    pointer-events: none;
+  }
+
+  .feature-nav a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .faq-item.is-open {
+    box-shadow: inset 3px 0 0 rgba(255,92,122,.48);
+  }
+
+  .site-footer::before {
+    width: calc(100% - 2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lang-trigger,
+  :where(.intro-card, .news-card, .help-category, .help-item, .community-card, .pricing-card) {
+    transition: none !important;
+    transform: none !important;
+  }
+}
