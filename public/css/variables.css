@@ -122,3 +122,19 @@
 
   --header-height: 72px;
 }
+
+/* Visual audit invariant: ホーム最下部の主要ダウンロードCTAは、
+   ヘッダーや汎用primaryの濃色ではなくNIARIMのアクセント色を使う。
+   variables.cssは全ページ共通で最初に読み込まれるため、既存の
+   .btn-primary定義より優先する必要があるこの限定箇所のみ!importantで固定する。 */
+.final-cta .btn.btn-primary {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-white) !important;
+  box-shadow: var(--shadow-glow);
+}
+
+.final-cta .btn.btn-primary:hover {
+  background: var(--color-accent-dark) !important;
+  border-color: var(--color-accent-dark) !important;
+}
