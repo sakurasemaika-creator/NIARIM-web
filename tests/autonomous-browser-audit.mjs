@@ -91,6 +91,8 @@ async function auditDesignInvariants(page, vp, route) {
 
     const root = getComputedStyle(document.documentElement);
     const accent = resolveColor(root.getPropertyValue('--color-accent').trim());
+    const accentStrongRaw = root.getPropertyValue('--color-accent-strong').trim();
+    const ctaAccent = resolveColor(accentStrongRaw || root.getPropertyValue('--color-accent').trim());
     const footerBrown = resolveColor(root.getPropertyValue('--color-footer-brown').trim() || '#3b2429');
     const heroCopy = document.querySelector('.hero-copy');
     const primary = document.querySelector('.hero .btn-primary');
@@ -103,6 +105,7 @@ async function auditDesignInvariants(page, vp, route) {
     return {
       mocks,
       accent,
+      ctaAccent,
       footerBrown,
       heroAlign: heroCopy ? getComputedStyle(heroCopy).textAlign : null,
       primaryBg: primary ? getComputedStyle(primary).backgroundColor : null,
@@ -130,11 +133,11 @@ async function auditDesignInvariants(page, vp, route) {
     if (vp === 'sp' && state.heroAlign !== 'left') {
       finding(vp, route, 'design-invariant', { rule: 'SP hero must remain left aligned', actual: state.heroAlign });
     }
-    if (state.primaryBg && state.primaryBg !== state.accent) {
-      finding(vp, route, 'design-invariant', { rule: 'Hero download CTA must use brand accent', expected: state.accent, actual: state.primaryBg });
+    if (state.primaryBg && state.primaryBg !== state.ctaAccent) {
+      finding(vp, route, 'design-invariant', { rule: 'Hero download CTA must use CTA accent token', expected: state.ctaAccent, actual: state.primaryBg });
     }
-    if (state.finalPrimaryBg && state.finalPrimaryBg !== state.accent) {
-      finding(vp, route, 'design-invariant', { rule: 'Final download CTA must use brand accent', expected: state.accent, actual: state.finalPrimaryBg });
+    if (state.finalPrimaryBg && state.finalPrimaryBg !== state.ctaAccent) {
+      finding(vp, route, 'design-invariant', { rule: 'Final download CTA must use CTA accent token', expected: state.ctaAccent, actual: state.finalPrimaryBg });
     }
     if (state.marqueeAnimationName !== 'marquee-scroll' || state.marqueeAnimationDuration === '0s') {
       finding(vp, route, 'design-invariant', { rule: 'Feature marquee must animate', animationName: state.marqueeAnimationName, duration: state.marqueeAnimationDuration });
@@ -401,6 +404,6 @@ for (const vp of viewports) {
 await browser.close();
 
 await fs.writeFile(path.join(outDir, 'report.json'), JSON.stringify(report, null, 2));
-const counts = report.findings.reduce((acc, item) => ((acc[item.kind] = (acc[item.kind] || 0) + 1), acc), {});
+const counts = report.findings.reduce((acc, item) => ((acc[item.kind] = (acc[item.kind] || 0) + 1), acc, {}));
 console.log(JSON.stringify({ totalFindings: report.findings.length, byKind: counts, screenshots: report.screenshots.length }, null, 2));
 if (report.findings.some(item => severeKinds.has(item.kind))) process.exitCode = 1;
