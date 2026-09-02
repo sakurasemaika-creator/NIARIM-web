@@ -22,6 +22,10 @@ for (const vp of viewports) {
   for (const route of routes) {
     const name = slug(route);
     await page.goto(baseURL + route, { waitUntil: 'networkidle' });
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.style.scrollBehavior = 'auto';
+    });
     await page.waitForTimeout(350);
     const positions = await page.evaluate(() => {
       const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
@@ -62,8 +66,30 @@ for (const vp of viewports) {
     const hiddenStaggerItems = await page.locator('.stagger-grid > :not(.is-visible)').count();
     if (hiddenReveals) findings.push({ viewport: vp.name, route, kind: 'unrevealed-elements', count: hiddenReveals });
     if (hiddenStaggerItems) findings.push({ viewport: vp.name, route, kind: 'unrevealed-stagger-items', count: hiddenStaggerItems });
-    await page.evaluate(() => scrollTo(0, 0));
-    await page.waitForTimeout(120);
+
+    // Playwright's fullPage capture can rasterize off-viewport reveal elements from their
+    // pre-animation state even after the page has been walked. Keep the interaction audit
+    // above faithful to production, then freeze every reveal/stagger item only for this
+    // final evidence shot so the artifact is a trustworthy whole-page visual reference.
+    await page.evaluate(() => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      document.querySelectorAll('.stagger-grid > *').forEach(el => el.classList.add('is-visible'));
+      const style = document.createElement('style');
+      style.setAttribute('data-audit-fullpage-freeze', '');
+      style.textContent = `
+        .reveal,
+        .stagger-grid > * {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+          animation-delay: 0s !important;
+        }
+        .reveal h2 { clip-path: none !important; }
+      `;
+      document.head.appendChild(style);
+      scrollTo(0, 0);
+    });
+    await page.waitForTimeout(180);
     const full = path.join(outDir, `${vp.name}__${name}__full.png`);
     await page.screenshot({ path: full, fullPage: true });
     screenshots++;
