@@ -53,7 +53,11 @@ for (const vp of viewports) {
     for (let i = 0; i < count; i++) {
       const section = sections.nth(i);
       const id = (await section.getAttribute('id')) || `section-${String(i + 1).padStart(2, '0')}`;
-      await section.scrollIntoViewIfNeeded();
+
+      // Match normal in-page anchor navigation instead of Playwright's
+      // scrollIntoViewIfNeeded(), whose centering heuristics can place the section behind
+      // a sticky header even when the site's scroll-padding-top is correct.
+      await section.evaluate(el => el.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' }));
       await page.waitForTimeout(320);
 
       const state = await section.evaluate(el => {
