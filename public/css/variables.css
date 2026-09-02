@@ -11,22 +11,12 @@
    ========================================================================== */
 
 :root {
-  /* ---- Brand Colors ----
-     ベース: NIARIMロゴ由来の温かいダークブラウン
-     アクセント: NIARIMアプリの既定UIテーマ（レッド系プリセット）
-                 (lib/models/app_theme_preset.dart の accentColor #FF5C7A)
-     アクセントはCTA・選択状態・小さな強調に絞り、ページ全体を
-     ピンク一色にしない。色は「情報の句読点」として使う。 */
   --color-brand: #4a4636;
   --color-brand-dark: #322f24;
   --color-sub: #ffc3ce;
   --color-sub-tint: #fff0f3;
   --color-accent: #ff5c7a;
   --color-accent-dark: #e8425f;
-
-  /* ---- Neutral ----
-     純粋な無彩色だけでなく少し暖色側へ寄せ、ロゴ・明朝体・
-     手描きアニメーションというプロダクトの質感と合わせる。 */
   --color-white: #ffffff;
   --color-black: #17161c;
   --color-ink: #28242c;
@@ -36,10 +26,6 @@
   --color-gray-300: #cbc5cc;
   --color-gray-100: #e9e4e7;
   --color-gray-50: #faf8f9;
-
-  /* ---- Surface / Background ----
-     ページ=暖かい紙色、カード=白、淡色セクション=ごく薄いピンク。
-     白一色で面を区切るよりも、surface hierarchyを明確にする。 */
   --color-bg: #f7f4f3;
   --color-bg-tint: var(--color-sub-tint);
   --color-bg-dark: var(--color-black);
@@ -50,33 +36,16 @@
   --color-text-on-dark: var(--color-gray-50);
   --color-border: rgba(40, 36, 44, 0.09);
   --color-border-strong: rgba(40, 36, 44, 0.16);
-
-  /* ---- Feedback ---- */
   --color-success: #2f9e6e;
   --color-error: #e5484d;
-
-  /* ---- Typography ----
-     アプリ本体と同じフォント（白光明朝＝本文／くらむぼん＝見出し）を使用。
-     白光明朝はサブセットフォントのため、収録されていない文字は
-     Noto Serif JP／Noto Serifで代用する（OSのシステムフォントに
-     依存せず、環境によらず同じ見た目のフォールバックにするため）。
-
-     大見出しは少し大胆に、本文は過度に大きくせず読みやすさを優先。
-     既存のclamp構成を維持し、全ページのレスポンシブ挙動を壊さない。 */
-  --font-sans: "HakkouMincho", "Noto Serif JP", "Noto Serif",
-    "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
-    sans-serif;
-
+  --font-sans: "HakkouMincho", "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif: "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
   --fs-h3: clamp(1.2rem, 1.2vw + 1rem, 1.6rem);
   --fs-body: clamp(1rem, 0.24vw + 0.94rem, 1.1rem);
   --fs-small: 0.875rem;
-
-  /* ---- Spacing ----
-     4px基準のリズムに寄せつつ、既存変数名は維持して全ページへ展開。 */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
@@ -84,47 +53,27 @@
   --space-xl: 4rem;
   --space-2xl: 6rem;
   --space-3xl: 8.5rem;
-
-  /* ---- Layout ----
-     コンテンツ幅をわずかに広げ、カードの角丸は以前より抑える。
-     「何でも大きく丸いAIテンプレ」感を避けるため、矩形カードは
-     14pxを基本、特別な大型ビジュアルのみ24pxまでとする。 */
   --container-width: 1220px;
   --container-padding: clamp(1.25rem, 4vw, 2.75rem);
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
   --radius-pill: 999px;
-
-  /* ---- Motion ----
-     通常のUI反応は短く、ヒーローやスクロール演出だけゆったり。
-     springは装飾的な主役要素に限定する。 */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --duration-fast: 180ms;
   --duration-base: 360ms;
   --duration-slow: 760ms;
-
-  /* ---- Elevation ----
-     基本カードはborder主体。shadowはヘッダー・モック・CTAなど、
-     本当に前後関係を示したい場所だけで使う。 */
-  --shadow-sm: 0 1px 2px rgba(30, 26, 34, 0.035),
-    0 4px 14px rgba(30, 26, 34, 0.035);
+  --shadow-sm: 0 1px 2px rgba(30, 26, 34, 0.035), 0 4px 14px rgba(30, 26, 34, 0.035);
   --shadow-md: 0 10px 30px rgba(30, 26, 34, 0.08);
   --shadow-lg: 0 24px 70px rgba(30, 26, 34, 0.14);
   --shadow-glow: 0 10px 42px rgba(255, 92, 122, 0.24);
-
-  /* ---- Gradients ----
-     NIARIMのアクセント演出としてのみ使用。通常のカード面には使わない。 */
   --grad-brand: linear-gradient(120deg, var(--color-accent) 0%, #ffad66 100%);
   --grad-ink: linear-gradient(160deg, #25222b 0%, #302d48 58%, #1b1928 100%);
   --grad-gold: linear-gradient(120deg, #ffd76a 0%, #ff9f5c 100%);
-
   --header-height: 72px;
 }
 
-/* Visual audit invariant: ホーム最下部の主要ダウンロードCTAは、
-   ヘッダーや汎用primaryの濃色ではなくNIARIMのアクセント色を使う。 */
 .final-cta .btn.btn-primary {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
@@ -136,18 +85,11 @@
   border-color: var(--color-accent-dark) !important;
 }
 
-/* --------------------------------------------------------------------------
-   320 logical px 実アプリ Visual Smoke との最終照合補正
-   screen-mock-accuracy.css より先に読み込まれるが、ここはより高い詳細度の
-   セレクタ + !important で「実キャプチャで確認した差分」のみ固定する。
-   -------------------------------------------------------------------------- */
-
-/* OnionSkin: 初期値 enabled=false の実画面では詳細設定はまだ表示されない。
-   実キャプチャでは280px Cardの濃い外周と約128pxの高さが明確に見える。 */
+/* 320 logical px 実アプリ Visual Smoke との最終照合補正 */
 html body .fd-canvas-screen .fd-app-onion-panel {
-  left: 8px !important;
-  right: 8px !important;
-  top: 56px !important;
+  left: 4px !important;
+  right: 12px !important;
+  top: 50px !important;
   width: auto !important;
   min-height: 128px !important;
   padding: 0 10px 8px !important;
@@ -164,15 +106,11 @@ html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title {
   min-height: 70px !important;
   padding: 0 4px 8px !important;
 }
-html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title strong {
-  font-size: 13px !important;
-}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title strong { font-size: 13px !important; }
 html body .fd-canvas-screen .fd-app-onion-panel > .fd-panel-divider,
 html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-side,
 html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-common,
-html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-fade {
-  display: none !important;
-}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-fade { display: none !important; }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch,
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on {
   width: 50px !important;
@@ -190,35 +128,67 @@ html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on::after {
   background: #8b7479 !important;
 }
 html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-prev,
-html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-next {
-  display: none !important;
+html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-next { display: none !important; }
+
+/* Canvas: 実キャプチャではフレーム一覧の左側に約60pxの空きがあり、
+   320pxでは選択中+次フレーム+3枚目の一部だけが見える。 */
+html body .fd-canvas-screen .fd-frame-strip-scroll {
+  margin-left: 56px !important;
 }
 
-/* Timeline 320px reference: 実アプリではタイトル領域がほぼ潰れ、
-   フレームセルには連番文字を描かない。 */
+/* Layer: 実アプリのショートカット領域は約120px高く、その下からレイヤー行が始まる。 */
+html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-shortcuts {
+  height: 122px !important;
+  flex-basis: 122px !important;
+}
+html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-row.is-active {
+  background: transparent !important;
+}
+html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-name {
+  color: var(--color-accent) !important;
+  max-width: 32px !important;
+  line-height: .95 !important;
+  white-space: normal !important;
+  word-break: break-all !important;
+}
+
+/* Timeline: 実キャプチャではプレビュー下のスクラバー領域と再生列がWebより高い。 */
 html body .fd-timeline-screen .fd-timeline-title {
   max-width: 0 !important;
   width: 0 !important;
   opacity: 0 !important;
   overflow: hidden !important;
 }
-html body .fd-timeline-screen .fd-tl-frame {
-  font-size: 0 !important;
+html body .fd-timeline-screen .fd-tl-frame { font-size: 0 !important; }
+html body .fd-timeline-screen .fd-timeline-scrubber {
+  height: 64px !important;
+  flex-basis: 64px !important;
+}
+html body .fd-timeline-screen .fd-timeline-scrubber::before { top: 47px !important; }
+html body .fd-timeline-screen .fd-timeline-scrubber i { top: 43px !important; }
+html body .fd-timeline-screen > .fd-transport {
+  height: 70px !important;
+  flex-basis: 70px !important;
 }
 
-/* Audio editor: 実キャプチャではシート上端が約259/569px。
-   端末下端まで約310pxを占有する。 */
-html body .fd-audio-context-screen .fd-clip-detail-sheet {
-  height: 310px !important;
+/* Audio editor: 実キャプチャではシート上端が約259/569px、ヘッダーが厚い。 */
+html body .fd-audio-context-screen .fd-clip-detail-sheet { height: 310px !important; }
+html body .fd-audio-context-screen .fd-audio-sheet-head { height: 63px !important; }
+html body .fd-audio-context-screen .fd-audio-sheet-head > span:first-of-type::after {
+  content: "▣";
+  display: inline-block;
+  color: #777176;
+  font-size: 22px;
+  line-height: 1;
 }
-html body .fd-audio-context-screen .fd-audio-sheet-head {
-  height: 45px !important;
+html body .fd-audio-context-screen .fd-audio-sheet-head > span:first-of-type .ic {
+  display: none !important;
 }
 
-/* SaveTree: 実画面はツリーをさらに下へ寄せ、AppBarの保存ボタンを
-   スマホでも十分なタップ領域を持つFilledButtonとして表示する。 */
+/* SaveTree: 実画面のノード列を約10px上へ寄せ、接続点は四角ではなく丸。 */
 html body .fd-save-tree-screen .fd-real-tree {
   padding-bottom: 0 !important;
+  transform: translateY(-10px) !important;
 }
 html body .fd-save-tree-screen .fd-appbar {
   height: 54px !important;
@@ -236,14 +206,26 @@ html body .fd-save-tree-screen .fd-tree-save-btn {
   border-radius: 22px !important;
   gap: 5px !important;
 }
-html body .fd-save-tree-screen .fd-tree-save-btn b {
-  font-size: 10px !important;
+html body .fd-save-tree-screen .fd-tree-save-btn b { font-size: 10px !important; }
+html body .fd-save-tree-screen .fd-tree-commit {
+  width: 8px !important;
+  height: 8px !important;
+  border: 2px solid var(--color-accent) !important;
+  border-radius: 50% !important;
+  background: #fff !important;
 }
 
-/* Workspace: 実アプリでは1行が約55pxで、320×569では6項目前後まで見える。 */
-html body .fd-workspace-screen .fd-workspace-row {
-  height: 55px !important;
+/* Workspace: 実アプリは本文左右16px、カードだけさらに7px内側。 */
+html body .fd-workspace-screen .fd-workspace-body {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 html body .fd-workspace-screen .fd-workspace-card {
+  margin-left: 7px !important;
+  margin-right: 7px !important;
   border-radius: 10px !important;
+}
+html body .fd-workspace-screen .fd-workspace-row { height: 55px !important; }
+html body .fd-workspace-screen .fd-toolbar-preview .is-active {
+  color: #817b7f !important;
 }
