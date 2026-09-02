@@ -143,24 +143,25 @@
    -------------------------------------------------------------------------- */
 
 /* OnionSkin: 初期値 enabled=false の実画面では詳細設定はまだ表示されない。
-   280px CardをsidedPanelに載せるため、端末左右ほぼいっぱいの白い小パネルになる。 */
+   実キャプチャでは280px Cardの濃い外周と約128pxの高さが明確に見える。 */
 html body .fd-canvas-screen .fd-app-onion-panel {
   left: 8px !important;
   right: 8px !important;
   top: 56px !important;
   width: auto !important;
-  padding: 0 12px 10px !important;
+  min-height: 128px !important;
+  padding: 0 10px 8px !important;
   background: #ffffff !important;
-  border-color: rgba(40, 36, 44, 0.12) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 5px 16px rgba(40, 36, 44, 0.10) !important;
+  border: 6px solid #17161c !important;
+  border-radius: 22px !important;
+  box-shadow: none !important;
 }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-panel-close-bar {
   height: 38px !important;
   flex-basis: 38px !important;
 }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title {
-  min-height: 58px !important;
+  min-height: 70px !important;
   padding: 0 4px 8px !important;
 }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title strong {
