@@ -1,7 +1,9 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import pngjs from 'pngjs';
 
+const { PNG } = pngjs;
 const baseURL = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8787';
 const outDir = 'artifacts/autonomous-browser-audit/complete-scroll';
 const routes = ['/', '/about/', '/features/', '/premium/', '/community/', '/help/', '/faq/', '/news/', '/contact/', '/privacy/', '/terms/', '/404.html'];
@@ -66,6 +68,72 @@ async function verifyRevealObservers(page) {
 
     return { unrevealed, unrevealedStagger };
   });
+}
+
+async function stitchFullPage(page, vp, routeName) {
+  // Chromium/Playwright can leave large off-viewport areas blank in one-shot fullPage
+  // screenshots even after those regions rendered correctly during a real scroll. Build the
+  // overview from ordinary viewport screenshots taken while every slice is genuinely in the
+  // viewport. This makes the full-page artifact evidence of the same rendering users see.
+  const metrics = await page.evaluate(() => ({
+    docHeight: document.documentElement.scrollHeight,
+    viewportHeight: innerHeight
+  }));
+  const max = Math.max(0, metrics.docHeight - metrics.viewportHeight);
+  const positions = [];
+  for (let y = 0; y < max; y += metrics.viewportHeight) positions.push(y);
+  if (!positions.length || positions[positions.length - 1] !== max) positions.push(max);
+
+  await page.evaluate(() => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+    document.querySelectorAll('.stagger-grid > *').forEach(el => el.classList.add('is-visible'));
+    let style = document.querySelector('style[data-audit-fullpage-freeze]');
+    if (!style) {
+      style = document.createElement('style');
+      style.setAttribute('data-audit-fullpage-freeze', '');
+      document.head.appendChild(style);
+    }
+    style.textContent = `
+      .reveal,
+      .stagger-grid > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation-delay: 0s !important;
+      }
+      .reveal h2 { clip-path: none !important; }
+      html.audit-stitch-tail .site-header,
+      html.audit-stitch-tail .scroll-top,
+      html.audit-stitch-tail .cursor-orbit {
+        visibility: hidden !important;
+      }
+    `;
+  });
+
+  let output = null;
+  for (let i = 0; i < positions.length; i++) {
+    const y = positions[i];
+    await page.evaluate(({ y, hideChrome }) => {
+      document.documentElement.classList.toggle('audit-stitch-tail', hideChrome);
+      scrollTo({ top: y, behavior: 'auto' });
+    }, { y, hideChrome: i > 0 });
+    await page.waitForTimeout(120);
+
+    const buffer = await page.screenshot({ fullPage: false, animations: 'disabled' });
+    const slice = PNG.sync.read(buffer);
+    if (!output) output = new PNG({ width: slice.width, height: metrics.docHeight });
+    const copyHeight = Math.max(0, Math.min(slice.height, metrics.docHeight - y));
+    if (copyHeight > 0) PNG.bitblt(slice, output, 0, 0, slice.width, copyHeight, 0, y);
+  }
+
+  await page.evaluate(() => {
+    document.documentElement.classList.remove('audit-stitch-tail');
+    scrollTo(0, 0);
+  });
+
+  const full = path.join(outDir, `${vp}__${routeName}__full.png`);
+  await fs.writeFile(full, PNG.sync.write(output));
+  screenshots++;
 }
 
 const browser = await chromium.launch({ headless: true });
@@ -150,32 +218,7 @@ for (const vp of viewports) {
       });
     }
 
-    // Playwright's fullPage capture can rasterize off-viewport reveal elements from their
-    // pre-animation state even after the page has been walked. Keep the interaction audit
-    // above faithful to production, then freeze every reveal/stagger item only for this
-    // final evidence shot so the artifact is a trustworthy whole-page visual reference.
-    await page.evaluate(() => {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
-      document.querySelectorAll('.stagger-grid > *').forEach(el => el.classList.add('is-visible'));
-      const style = document.createElement('style');
-      style.setAttribute('data-audit-fullpage-freeze', '');
-      style.textContent = `
-        .reveal,
-        .stagger-grid > * {
-          opacity: 1 !important;
-          transform: none !important;
-          transition: none !important;
-          animation-delay: 0s !important;
-        }
-        .reveal h2 { clip-path: none !important; }
-      `;
-      document.head.appendChild(style);
-      scrollTo(0, 0);
-    });
-    await page.waitForTimeout(180);
-    const full = path.join(outDir, `${vp.name}__${name}__full.png`);
-    await page.screenshot({ path: full, fullPage: true });
-    screenshots++;
+    await stitchFullPage(page, vp.name, name);
   }
   await context.close();
 }
