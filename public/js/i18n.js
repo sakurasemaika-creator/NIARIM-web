@@ -76,7 +76,9 @@
       if (matched && DICT[matched]) return matched;
     }
 
-    return "ja";
+    // ブラウザ/端末の優先言語に対応言語が1つもない場合は、
+    // 国際的に理解されやすい英語をサイトの既定言語として使用する。
+    return DICT.en ? "en" : "ja";
   }
 
   function detectLang() {
