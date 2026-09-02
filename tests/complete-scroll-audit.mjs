@@ -103,8 +103,9 @@ async function stitchFullPage(page, vp, routeName) {
       }
       .reveal h2 { clip-path: none !important; }
       html.audit-stitch-tail .site-header,
-      html.audit-stitch-tail .scroll-top,
-      html.audit-stitch-tail .cursor-orbit {
+      html.audit-stitch-tail .scroll-top-btn,
+      html.audit-stitch-tail .cursor-orbit,
+      html.audit-stitch-tail .feature-nav {
         visibility: hidden !important;
       }
     `;
