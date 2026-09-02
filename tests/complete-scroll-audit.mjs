@@ -21,21 +21,19 @@ async function verifyRevealObservers(page) {
   // layout-visible targets into view and only report them if IntersectionObserver still
   // fails to reveal them. This keeps the audit strict without treating synthetic jumps as
   // production bugs.
-  const revealTargets = page.locator('.reveal:not(.is-visible)').filter({ visible: true });
-  const revealCount = await revealTargets.count();
-  for (let i = 0; i < revealCount; i++) {
-    const target = revealTargets.nth(i);
-    if (!(await target.count())) continue;
+  // Element handles are snapshotted first because successful reveals immediately disappear
+  // from the `.reveal:not(.is-visible)` locator; iterating a live locator by index could skip
+  // every other target as that result set shrinks.
+  const revealTargets = await page.locator('.reveal:not(.is-visible)').filter({ visible: true }).elementHandles();
+  for (const target of revealTargets) {
     await target.scrollIntoViewIfNeeded().catch(() => {});
     await page.waitForTimeout(180);
   }
 
-  const staggerGrids = page.locator('.stagger-grid').filter({ visible: true });
-  const gridCount = await staggerGrids.count();
-  for (let i = 0; i < gridCount; i++) {
-    const grid = staggerGrids.nth(i);
-    const hiddenChildren = grid.locator(':scope > :not(.is-visible)');
-    if (!(await hiddenChildren.count())) continue;
+  const staggerGrids = await page.locator('.stagger-grid').filter({ visible: true }).elementHandles();
+  for (const grid of staggerGrids) {
+    const hiddenChildren = await grid.evaluate(el => [...el.children].filter(child => !child.classList.contains('is-visible')).length);
+    if (!hiddenChildren) continue;
     await grid.scrollIntoViewIfNeeded().catch(() => {});
     await page.waitForTimeout(180);
   }
