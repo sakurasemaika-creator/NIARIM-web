@@ -1,51 +1,163 @@
-@import url('/css/screen-mock-accuracy-base.css');
-@import url('/css/visual-finish.css');
+@import url("/css/screen-mock-accuracy-base.css");
+@import url("/css/visual-finish.css");
 
 /* ==========================================================================\n   Final capture calibration — real NIARIM Visual Smoke 320x569\n   Keep this layer small: only differences confirmed from app-vs-web PNGs.\n   ========================================================================== */
 
 /* Flutter debug overflow stripes are not product UI. Never imitate them. */
-.fd-playhead::before,.fd-playhead::after{content:none!important;display:none!important}
-.fd-playhead{width:3px!important;right:0!important;background:#bd0018!important;box-shadow:none!important}
+.fd-playhead::before,
+.fd-playhead::after {
+  content: none !important;
+  display: none !important;
+}
+.fd-playhead {
+  width: 3px !important;
+  right: 0 !important;
+  background: #bd0018 !important;
+  box-shadow: none !important;
+}
 
 /* SaveTree: the real 320px AppBar truncates its title before the help/save controls. */
-.fd-save-tree-screen .fd-appbar strong{max-width:52px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.fd-save-tree-screen .fd-appbar strong {
+  max-width: 52px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
 
 /* ExportScreen — calibrated from webref_exact_07_export.png. */
-.fd-export-screen .fd-export-body{display:flex!important;flex-direction:column!important;padding:16px 16px 8px!important;overflow:hidden!important}
-.fd-export-screen .fd-route-section{margin:4px 0 10px!important;font-size:11px!important}
-.fd-export-screen .fd-export-segments{height:41px!important;flex:0 0 41px!important;border:1px solid #9d8f93!important;border-radius:22px!important;overflow:hidden!important;background:#fff!important}
-.fd-export-screen .fd-export-segments .fd-segment{font-size:9px!important;color:#62595c!important;background:#fff!important;border-color:#aa9da1!important}
-.fd-export-screen .fd-export-segments .fd-segment.is-active{background:#ffd8de!important;color:#554b4e!important}
-.fd-export-screen .fd-export-format-title{margin:27px 0 7px!important}
-.fd-export-screen .fd-format-list{display:grid!important;gap:0!important;border:0!important}
-.fd-export-screen .fd-format-row{min-height:72px!important;height:72px!important;padding:8px 22px!important;border:0!important;background:transparent!important}
-.fd-export-screen .fd-format-row .fd-radio{width:18px!important;height:18px!important;flex:0 0 18px!important;border:2px solid #777174!important}
-.fd-export-screen .fd-format-row .fd-radio.is-active{border:2px solid #ff5877!important;box-shadow:inset 0 0 0 4px #fff!important;background:#ff5877!important}
-.fd-export-screen .fd-format-row strong{font-size:12px!important;color:#312d31!important}
-.fd-export-screen .fd-format-row small{font-size:8px!important;color:#8e8589!important;line-height:1.35!important}
-.fd-export-screen .fd-export-start{height:48px!important;min-height:48px!important;margin-top:auto!important;margin-bottom:0!important;border-radius:16px!important;font-size:10px!important;background:#ff5877!important}
-.fd-export-screen .fd-export-start .ic{width:16px!important;height:16px!important}
+.fd-export-screen .fd-export-body {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 16px 16px 8px !important;
+  overflow: hidden !important;
+}
+.fd-export-screen .fd-route-section {
+  margin: 4px 0 10px !important;
+  font-size: 11px !important;
+}
+.fd-export-screen .fd-export-segments {
+  height: 41px !important;
+  flex: 0 0 41px !important;
+  border: 1px solid #9d8f93 !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+}
+.fd-export-screen .fd-export-segments .fd-segment {
+  font-size: 9px !important;
+  color: #62595c !important;
+  background: #fff !important;
+  border-color: #aa9da1 !important;
+}
+.fd-export-screen .fd-export-segments .fd-segment.is-active {
+  background: #ffd8de !important;
+  color: #554b4e !important;
+}
+.fd-export-screen .fd-export-format-title {
+  margin: 27px 0 7px !important;
+}
+.fd-export-screen .fd-format-list {
+  display: grid !important;
+  gap: 0 !important;
+  border: 0 !important;
+}
+.fd-export-screen .fd-format-row {
+  min-height: 72px !important;
+  height: 72px !important;
+  padding: 8px 22px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.fd-export-screen .fd-format-row .fd-radio {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+  border: 2px solid #777174 !important;
+}
+.fd-export-screen .fd-format-row .fd-radio.is-active {
+  border: 2px solid #ff5877 !important;
+  box-shadow: inset 0 0 0 4px #fff !important;
+  background: #ff5877 !important;
+}
+.fd-export-screen .fd-format-row strong {
+  font-size: 12px !important;
+  color: #312d31 !important;
+}
+.fd-export-screen .fd-format-row small {
+  font-size: 8px !important;
+  color: #8e8589 !important;
+  line-height: 1.35 !important;
+}
+.fd-export-screen .fd-export-start {
+  height: 48px !important;
+  min-height: 48px !important;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+  border-radius: 16px !important;
+  font-size: 10px !important;
+  background: #ff5877 !important;
+}
+.fd-export-screen .fd-export-start .ic {
+  width: 16px !important;
+  height: 16px !important;
+}
 
 /* Audio bottom sheet — app capture starts slightly higher and uses a compact fixed slider track. */
-.fd-audio-context-screen .fd-clip-detail-sheet{height:244px!important;padding-top:6px!important;border-radius:20px 20px 0 0!important}
-.fd-audio-context-screen .fd-sheet-row{min-height:54px!important;grid-template-columns:76px 24px 76px 24px 35px 12px!important;column-gap:5px!important}
-.fd-audio-context-screen .fd-sheet-slider{width:76px!important;max-width:76px!important;flex:none!important}
+.fd-audio-context-screen .fd-clip-detail-sheet {
+  height: 244px !important;
+  padding-top: 6px !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+.fd-audio-context-screen .fd-sheet-row {
+  min-height: 54px !important;
+  grid-template-columns: 76px 24px 76px 24px 35px 12px !important;
+  column-gap: 5px !important;
+}
+.fd-audio-context-screen .fd-sheet-slider {
+  width: 76px !important;
+  max-width: 76px !important;
+  flex: none !important;
+}
 
 /* Onion panel: align the production panel a few pixels upward; keep the heavy product outline. */
-.fd-app-onion-panel{top:52px!important;box-shadow:none!important}
+.fd-app-onion-panel {
+  top: 52px !important;
+  box-shadow: none !important;
+}
 
 /* Layer panel capture: preserve full shortcut band and first layer row height. */
-.fd-app-layer-panel .fd-layer-shortcuts{min-height:92px!important;flex-basis:92px!important}
-.fd-app-layer-panel .fd-layer-row{min-height:54px!important;flex-basis:54px!important}
+.fd-app-layer-panel .fd-layer-shortcuts {
+  min-height: 92px !important;
+  flex-basis: 92px !important;
+}
+.fd-app-layer-panel .fd-layer-row {
+  min-height: 54px !important;
+  flex-basis: 54px !important;
+}
 
 /* Timeline calibration. Product UI keeps the same vertical rhythm but does not reproduce Flutter debug stripes. */
-.fd-timeline-screen .fd-timeline-preview{flex-basis:180px!important;min-height:180px!important}
-.fd-timeline-screen>.fd-transport{height:56px!important;flex-basis:56px!important}
-.fd-timeline-screen .fd-scene-line{height:40px!important;flex-basis:40px!important}
-.fd-timeline-screen .fd-timeline-row{height:51px!important;flex-basis:51px!important}
+.fd-timeline-screen .fd-timeline-preview {
+  flex-basis: 180px !important;
+  min-height: 180px !important;
+}
+.fd-timeline-screen > .fd-transport {
+  height: 56px !important;
+  flex-basis: 56px !important;
+}
+.fd-timeline-screen .fd-scene-line {
+  height: 40px !important;
+  flex-basis: 40px !important;
+}
+.fd-timeline-screen .fd-timeline-row {
+  height: 51px !important;
+  flex-basis: 51px !important;
+}
 
 /* Workspace rows match the real narrow-screen list density. */
-.fd-workspace-screen .fd-workspace-row{height:56px!important;min-height:56px!important}
+.fd-workspace-screen .fd-workspace-row {
+  height: 56px !important;
+  min-height: 56px !important;
+}
 
 /* ==========================================================================\n   Paint / layout cost reductions — intentionally no visual redesign\n   ========================================================================== */
 
@@ -73,11 +185,11 @@
    avoiding an extra blurred paint pass. */
 .fd-app-layer-panel {
   box-shadow: none !important;
-  border-left: 1px solid rgba(40,36,44,.08) !important;
+  border-left: 1px solid rgba(40, 36, 44, 0.08) !important;
 }
 .fd-audio-context-screen .fd-clip-detail-sheet {
   box-shadow: none !important;
-  border-top: 1px solid rgba(40,36,44,.13) !important;
+  border-top: 1px solid rgba(40, 36, 44, 0.13) !important;
 }
 .fd-save-slot {
   box-shadow: none !important;

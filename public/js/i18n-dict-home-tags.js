@@ -9,7 +9,7 @@
   "use strict";
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
-    "ja": {
+    ja: {
       "home.tag.gpen": "Gペン",
       "home.tag.airbrush": "エアブラシ",
       "home.tag.opacity": "不透明度",
@@ -25,9 +25,9 @@
       "home.tag.stampRuler": "スタンプ・定規",
       "home.tag.fullHD": "最大1920×1920",
       "home.tag.aspectRatio": "縦横比自由設定",
-      "home.tag.videoExport": "動画書き出し"
+      "home.tag.videoExport": "動画書き出し",
     },
-    "en": {
+    en: {
       "home.tag.gpen": "G-Pen",
       "home.tag.airbrush": "Airbrush",
       "home.tag.opacity": "Opacity",
@@ -43,7 +43,7 @@
       "home.tag.stampRuler": "Stamps & ruler",
       "home.tag.fullHD": "Up to 1920×1920",
       "home.tag.aspectRatio": "Free aspect ratio",
-      "home.tag.videoExport": "Video export"
+      "home.tag.videoExport": "Video export",
     },
     "zh-Hans": {
       "home.tag.gpen": "G 笔",
@@ -61,7 +61,7 @@
       "home.tag.stampRuler": "图章・标尺",
       "home.tag.fullHD": "最高1920×1920",
       "home.tag.aspectRatio": "自由设定画面比例",
-      "home.tag.videoExport": "视频导出"
+      "home.tag.videoExport": "视频导出",
     },
     "zh-Hant": {
       "home.tag.gpen": "G 筆",
@@ -79,9 +79,9 @@
       "home.tag.stampRuler": "圖章・尺規",
       "home.tag.fullHD": "最高1920×1920",
       "home.tag.aspectRatio": "自由設定畫面比例",
-      "home.tag.videoExport": "影片匯出"
+      "home.tag.videoExport": "影片匯出",
     },
-    "ko": {
+    ko: {
       "home.tag.gpen": "G펜",
       "home.tag.airbrush": "에어브러시",
       "home.tag.opacity": "불투명도",
@@ -97,9 +97,9 @@
       "home.tag.stampRuler": "스탬프・자",
       "home.tag.fullHD": "최대 1920×1920",
       "home.tag.aspectRatio": "화면 비율 자유 설정",
-      "home.tag.videoExport": "영상 내보내기"
+      "home.tag.videoExport": "영상 내보내기",
     },
-    "fr": {
+    fr: {
       "home.tag.gpen": "Stylo G",
       "home.tag.airbrush": "Aérographe",
       "home.tag.opacity": "Opacité",
@@ -115,9 +115,9 @@
       "home.tag.stampRuler": "Tampons et règle",
       "home.tag.fullHD": "Jusqu'à 1920×1920",
       "home.tag.aspectRatio": "Format libre",
-      "home.tag.videoExport": "Export vidéo"
+      "home.tag.videoExport": "Export vidéo",
     },
-    "es": {
+    es: {
       "home.tag.gpen": "Lápiz G",
       "home.tag.airbrush": "Aerógrafo",
       "home.tag.opacity": "Opacidad",
@@ -133,8 +133,8 @@
       "home.tag.stampRuler": "Sellos y regla",
       "home.tag.fullHD": "Hasta 1920×1920",
       "home.tag.aspectRatio": "Relación de aspecto libre",
-      "home.tag.videoExport": "Exportación de video"
-    }
+      "home.tag.videoExport": "Exportación de video",
+    },
   };
   for (var lang in DATA) {
     if (!DICT[lang]) DICT[lang] = {};

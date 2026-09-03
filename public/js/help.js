@@ -10,7 +10,7 @@
     var input = document.getElementById("help-search-input");
     var noResults = document.getElementById("help-no-results");
     var categories = Array.prototype.slice.call(
-      document.querySelectorAll("[data-help-category]")
+      document.querySelectorAll("[data-help-category]"),
     );
     if (!input || !categories.length) return;
 
@@ -20,7 +20,7 @@
 
       categories.forEach(function (category) {
         var cards = Array.prototype.slice.call(
-          category.querySelectorAll("[data-help-card]")
+          category.querySelectorAll("[data-help-card]"),
         );
         var categoryHasVisible = false;
 

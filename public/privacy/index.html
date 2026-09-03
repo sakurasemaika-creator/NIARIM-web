@@ -1,207 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>プライバシーポリシー | NIARIM</title>
-<meta name="description" content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。" />
-<meta name="robots" content="index,follow" />
-<link rel="canonical" href="https://niarim.example.com/privacy/" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>プライバシーポリシー | NIARIM</title>
+    <meta
+      name="description"
+      content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。"
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://niarim.example.com/privacy/" />
 
-<meta property="og:type" content="website" />
-<meta property="og:title" content="プライバシーポリシー | NIARIM" />
-<meta property="og:description" content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。" />
-<meta property="og:url" content="https://niarim.example.com/privacy/" />
-<meta property="og:image" content="/assets/images/ogp-default.png" />
-<meta property="og:locale" content="ja_JP" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="プライバシーポリシー | NIARIM" />
+    <meta
+      property="og:description"
+      content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。"
+    />
+    <meta property="og:url" content="https://niarim.example.com/privacy/" />
+    <meta property="og:image" content="/assets/images/ogp-default.png" />
+    <meta property="og:locale" content="ja_JP" />
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="プライバシーポリシー | NIARIM" />
-<meta name="twitter:description" content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。" />
-<meta name="twitter:image" content="/assets/images/ogp-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="プライバシーポリシー | NIARIM" />
+    <meta
+      name="twitter:description"
+      content="NIARIM公式サイトおよびアプリのプライバシーポリシーです。"
+    />
+    <meta name="twitter:image" content="/assets/images/ogp-default.png" />
 
-<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
 
-<link rel="stylesheet" href="/css/reset.css" />
-<link rel="stylesheet" href="/css/variables.css" />
-<link rel="stylesheet" href="/css/common.css" />
-<link rel="stylesheet" href="/css/pages/legal.css" />
-<noscript>
-  <!-- .reveal / .stagger-grid はJavaScriptで画面内に入った時点で表示する仕組みのため、
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/pages/legal.css" />
+    <noscript>
+      <!-- .reveal / .stagger-grid はJavaScriptで画面内に入った時点で表示する仕組みのため、
        JSが無効・読み込み失敗の場合は初期状態(opacity:0)のまま本文が一切見えなくなる。
        その環境では演出を諦めて常に表示する。 -->
-  <style>
-    .reveal { opacity: 1 !important; transform: none !important; }
-    .reveal h2 { clip-path: none !important; }
-    .stagger-grid > * { opacity: 1 !important; transform: none !important; }
-    .faq-answer { visibility: visible !important; max-height: none !important; }
-  </style>
-</noscript>
-</head>
-<body data-i18n-title="meta.privacy.title" data-i18n-description="meta.privacy.description">
-<a class="skip-link" href="#main" data-i18n="a11y.skipToMain">本文へスキップ</a>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .reveal h2 {
+          clip-path: none !important;
+        }
+        .stagger-grid > * {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .faq-answer {
+          visibility: visible !important;
+          max-height: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body
+    data-i18n-title="meta.privacy.title"
+    data-i18n-description="meta.privacy.description"
+  >
+    <a class="skip-link" href="#main" data-i18n="a11y.skipToMain"
+      >本文へスキップ</a
+    >
 
-<header class="site-header">
-  <div class="container">
-    <a class="brand" href="/">
-      <img class="brand-icon" src="/assets/images/logo/app_logo.svg" alt="" width="32" height="32" />
-      <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />
-    </a>
-    <nav id="main-nav" class="main-nav" aria-label="グローバルナビゲーション">
-      <ul>
-        <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
-        <li><a href="/features/" data-i18n="nav.features">機能</a></li>
-        <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
-        <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
-        <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>
-        <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
-        <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
-        <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
-      </ul>
-      <div class="lang-dropdown" data-lang-dropdown data-open="false">
-        <button type="button" class="lang-trigger" data-lang-trigger data-i18n-attr="aria-label:lang.switch">
-          <span data-current-lang-label>日本語</span>
-        </button>
-        <ul class="lang-menu" data-lang-menu></ul>
-      </div>
-      <a class="btn btn-accent" href="/#download" data-i18n="nav.download">ダウンロード</a>
-    </nav>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">
-      <span class="bar"></span>
-    </button>
-  </div>
-</header>
-
-<main id="main">
-  <div class="container">
-    <div class="legal-header">
-      <h1 data-i18n="footer.privacy">プライバシーポリシー</h1>
-      <p class="updated-at" data-i18n="legal.updated">最終更新日：2026年8月31日</p>
-      <p class="legal-notice" data-i18n="legal.notice.privacy">
-        本文はNIARIMアプリの正式なプライバシーポリシーと共通の内容です。
-      </p>
-    </div>
-
-    <div class="legal-body">
-      <section>
-        <h2 data-i18n="legal.privacy.art1.title">第1条（本ポリシーの位置づけ）</h2>
-        <p data-i18n="legal.privacy.art1.body">このプライバシーポリシー（以下「本ポリシー」といいます。）は、本アプリ「NIARIM」（以下「本アプリ」といいます。）における情報の取扱いについて定めるものです。本アプリの利用条件全般については別途「利用規約・ライセンス」画面をご確認ください。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art2.title">第2条（本アプリが取得しないデータ）</h2>
-        <p data-i18n="legal.privacy.art2.body">本アプリは、ユーザーが作成したイラスト・アニメーション等のコンテンツ（プロジェクトデータ・書き出し画像・動画等を含みます。以下同じです。）を、開発者のサーバーへ送信・収集・保存する機能を提供していません。これらのデータは、原則としてユーザーの端末内にのみ保存されます。（クラウド同期機能は搭載していません。）開発者はこれらのコンテンツを自ら保存する機能を持たないため、開発者側での保存期間という概念自体がありません。端末内に保存されたデータは、本アプリの削除機能により随時削除できるほか、アプリをアンインストールした場合はプロジェクト・設定・追加したフォント等のデータも併せて削除されます。（ただし、ユーザーが自らの意思で作品広場機能を利用して作品を投稿する場合の情報の取扱いについては、第7条によります。）</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art3.title">第3条（第三者サービスによる情報の取得）</h2>
-        <p data-i18n="legal.privacy.art3.body" style="white-space: pre-line;">本アプリは、以下の第三者サービスを組み込んでおり、それぞれのサービス提供者が、サービス提供に必要な範囲で情報を取得する場合があります。本アプリの開発者は、これらの情報を独自に取得・保存する機能を実装していません。（各サービスが取得した情報の管理は、それぞれのサービス提供者のプライバシーポリシーに従います。）
-
-【広告配信（Google AdMob）】
-無料版では、Google AdMobを通じて広告を配信しています。広告の配信、効果測定、不正防止等の目的で、広告識別子（Advertising ID）その他の端末情報が、Googleまたはその関連事業者によって取得・利用される場合があります。取得・利用の詳細は、Googleのプライバシーポリシー（https://policies.google.com/privacy）をご確認ください。端末の設定（Android設定アプリの「プライバシー」等）から、広告識別子のリセットや、パーソナライズ広告の無効化が可能です。欧州経済領域（EEA）・英国・スイスにお住まいの場合は、起動時等に表示される同意フォームで、広告のパーソナライズに関する同意設定を選択できます。設定はいつでも本画面下部の「広告の同意設定を変更」ボタンから変更できます。
-
-【アプリ内課金（Google Play Billing）】
-プレミアム機能の購入は、Google Playの決済システムを通じて行われます。クレジットカード番号等の決済情報は、開発者側が直接取得・保持することはありません。決済に関する情報の取扱いは、Google Playの規定に従います。
-
-【クラッシュ解析・利用状況分析】
-本アプリは、現時点でクラッシュ解析・利用状況分析を目的としたSDKを組み込んでいません。将来これらのサービスを導入する場合は、本ポリシーを更新し、本アプリ内で告知します。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art4.title">第4条（Cookie等のトラッキング技術について）</h2>
-        <p data-i18n="legal.privacy.art4.body">本アプリ自体はCookieを使用しませんが、第3条記載の広告配信サービス（Google AdMob）が、広告の配信・効果測定のために、これに類する識別技術（広告識別子等）を使用する場合があります。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art5.title">第5条（お子様の個人情報について）</h2>
-        <p data-i18n="legal.privacy.art5.body">本アプリは、13歳未満のお子様を主な対象として意図的に情報を収集するものではありません。保護者の方は、お子様が本アプリを利用する際、必要に応じて端末の設定からパーソナライズ広告の無効化等をご検討ください。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art6.title">第6条（情報の越境移転について）</h2>
-        <p data-i18n="legal.privacy.art6.body">第3条記載の第三者サービス（Google AdMob、Google Play Billing）は、Google社が世界各地で運用するサーバー上で処理される場合があります。これらの取扱いについては、各サービスのプライバシーポリシーが適用されます。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art7.title">第7条（作品広場：コミュニティ投稿機能における情報の取扱い）</h2>
-        <p data-i18n="legal.privacy.art7.body" style="white-space: pre-line;">1. 本アプリは、ユーザーが自らの意思で「作品広場」機能（利用規約第12条）を利用して作品を投稿する場合に限り、当該投稿に関する以下の情報を開発者のサーバーで管理します。
-・投稿作品を識別・表示するための情報（YouTube動画ID、タイトル、統計情報等）
-・投稿・通報・ブロック機能の利用にあたり発行するNIARIM User ID（Googleアカウントとは別に本アプリ内部で発行する識別子）
-・通報機能を利用した場合の通報内容および通報者のNIARIM User ID
-2. 投稿された動画ファイル本体はYouTube上に保存され、開発者のサーバーには保存されません。
-3. 前2項の情報は、本コミュニティ機能の提供（作品の一覧表示、通報への対応、投稿上限の管理等）の目的の範囲内でのみ利用します。
-4. 本コミュニティ機能を利用しない場合、本条に基づく情報の取扱いは発生しません。（第2条の原則どおり、開発者のサーバーへの送信は行われません。）</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art8.title">第8条（本ポリシーの変更）</h2>
-        <p data-i18n="legal.privacy.art8.body">開発者は、法令の改正、本アプリの内容の変更その他必要と判断した場合、本ポリシーを変更することがあります。本ポリシーを変更する場合、変更内容および効力発生日を、本アプリ内その他適切な方法により、事前に周知します。</p>
-      </section>
-
-      <section>
-        <h2 data-i18n="legal.privacy.art9.title">第9条（お問い合わせ）</h2>
-        <p data-i18n-html="legal.privacy.art9.body.html">本ポリシーに関するお問い合わせは、本サイトの<a href="/contact/">お問い合わせフォーム</a>よりご連絡ください。</p>
-      </section>
-
-    </div>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
+    <header class="site-header">
+      <div class="container">
         <a class="brand" href="/">
-          <img class="brand-icon" src="/assets/images/logo/app_logo_footer.svg" alt="" width="32" height="32" />
-          <img class="brand-title" src="/assets/images/logo/title_logo.svg" alt="NIARIM" width="121" height="24" />
+          <img
+            class="brand-icon"
+            src="/assets/images/logo/app_logo.svg"
+            alt=""
+            width="32"
+            height="32"
+          />
+          <img
+            class="brand-title"
+            src="/assets/images/logo/title_logo.svg"
+            alt="NIARIM"
+            width="121"
+            height="24"
+          />
         </a>
-        <p data-i18n="footer.tagline">Animation made by your hands.</p>
+        <nav
+          id="main-nav"
+          class="main-nav"
+          aria-label="グローバルナビゲーション"
+        >
+          <ul>
+            <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+            <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+            <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+            <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
+            <li>
+              <a href="/community/" data-i18n="nav.community">作品広場</a>
+            </li>
+            <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+            <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+            <li>
+              <a href="/contact/" data-i18n="nav.contact">お問い合わせ</a>
+            </li>
+          </ul>
+          <div class="lang-dropdown" data-lang-dropdown data-open="false">
+            <button
+              type="button"
+              class="lang-trigger"
+              data-lang-trigger
+              data-i18n-attr="aria-label:lang.switch"
+            >
+              <span data-current-lang-label>日本語</span>
+            </button>
+            <ul class="lang-menu" data-lang-menu></ul>
+          </div>
+          <a class="btn btn-accent" href="/#download" data-i18n="nav.download"
+            >ダウンロード</a
+          >
+        </nav>
+        <button
+          class="nav-toggle"
+          aria-label="メニューを開く"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span class="bar"></span>
+        </button>
       </div>
-      <div class="footer-col">
-        <h2 data-i18n="footer.product">Product</h2>
-        <ul>
-          <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
-          <li><a href="/features/" data-i18n="nav.features">機能</a></li>
-          <li><a href="/premium/" data-i18n="nav.premium">プレミアム</a></li>
-          <li><a href="/community/" data-i18n="nav.community">作品広場</a></li>
-          <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
-          <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2 data-i18n="footer.support">Support</h2>
-        <ul>
-          <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
-          <li><a href="/contact/" data-i18n="nav.contact">お問い合わせ</a></li>
-          <li><a href="#" id="footer-x-link" data-i18n="footer.x">X（旧Twitter）</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2 data-i18n="footer.legal">Legal</h2>
-        <ul>
-          <li><a href="/privacy/" data-i18n="footer.privacy">プライバシーポリシー</a></li>
-          <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; NIARIM <span data-i18n="footer.rights">All Rights Reserved.</span></span>
-      <div class="footer-social">
-        <a href="#" id="footer-x-icon" aria-label="X"><svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-x_fa"></use></svg></a>
-      </div>
-    </div>
-  </div>
-</footer>
+    </header>
 
-<script src="/js/config.js"></script>
-<script src="/js/i18n-dict.js"></script>
-<script src="/js/i18n-dict-intl.js"></script>
-<script src="/js/i18n-dict-nav-extra.js"></script>
-<script src="/js/i18n-dict-legal.js"></script>
-<script src="/js/i18n.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/animations.js"></script>
-<script src="/js/config-links.js"></script>
-</body>
+    <main id="main">
+      <div class="container">
+        <div class="legal-header">
+          <h1 data-i18n="footer.privacy">プライバシーポリシー</h1>
+          <p class="updated-at" data-i18n="legal.updated">
+            最終更新日：2026年8月31日
+          </p>
+          <p class="legal-notice" data-i18n="legal.notice.privacy">
+            本文はNIARIMアプリの正式なプライバシーポリシーと共通の内容です。
+          </p>
+        </div>
+
+        <div class="legal-body">
+          <section>
+            <h2 data-i18n="legal.privacy.art1.title">
+              第1条（本ポリシーの位置づけ）
+            </h2>
+            <p data-i18n="legal.privacy.art1.body">
+              このプライバシーポリシー（以下「本ポリシー」といいます。）は、本アプリ「NIARIM」（以下「本アプリ」といいます。）における情報の取扱いについて定めるものです。本アプリの利用条件全般については別途「利用規約・ライセンス」画面をご確認ください。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art2.title">
+              第2条（本アプリが取得しないデータ）
+            </h2>
+            <p data-i18n="legal.privacy.art2.body">
+              本アプリは、ユーザーが作成したイラスト・アニメーション等のコンテンツ（プロジェクトデータ・書き出し画像・動画等を含みます。以下同じです。）を、開発者のサーバーへ送信・収集・保存する機能を提供していません。これらのデータは、原則としてユーザーの端末内にのみ保存されます。（クラウド同期機能は搭載していません。）開発者はこれらのコンテンツを自ら保存する機能を持たないため、開発者側での保存期間という概念自体がありません。端末内に保存されたデータは、本アプリの削除機能により随時削除できるほか、アプリをアンインストールした場合はプロジェクト・設定・追加したフォント等のデータも併せて削除されます。（ただし、ユーザーが自らの意思で作品広場機能を利用して作品を投稿する場合の情報の取扱いについては、第7条によります。）
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art3.title">
+              第3条（第三者サービスによる情報の取得）
+            </h2>
+            <p
+              data-i18n="legal.privacy.art3.body"
+              style="white-space: pre-line"
+            >
+              本アプリは、以下の第三者サービスを組み込んでおり、それぞれのサービス提供者が、サービス提供に必要な範囲で情報を取得する場合があります。本アプリの開発者は、これらの情報を独自に取得・保存する機能を実装していません。（各サービスが取得した情報の管理は、それぞれのサービス提供者のプライバシーポリシーに従います。）
+              【広告配信（Google AdMob）】 無料版では、Google
+              AdMobを通じて広告を配信しています。広告の配信、効果測定、不正防止等の目的で、広告識別子（Advertising
+              ID）その他の端末情報が、Googleまたはその関連事業者によって取得・利用される場合があります。取得・利用の詳細は、Googleのプライバシーポリシー（https://policies.google.com/privacy）をご確認ください。端末の設定（Android設定アプリの「プライバシー」等）から、広告識別子のリセットや、パーソナライズ広告の無効化が可能です。欧州経済領域（EEA）・英国・スイスにお住まいの場合は、起動時等に表示される同意フォームで、広告のパーソナライズに関する同意設定を選択できます。設定はいつでも本画面下部の「広告の同意設定を変更」ボタンから変更できます。
+              【アプリ内課金（Google Play Billing）】
+              プレミアム機能の購入は、Google
+              Playの決済システムを通じて行われます。クレジットカード番号等の決済情報は、開発者側が直接取得・保持することはありません。決済に関する情報の取扱いは、Google
+              Playの規定に従います。 【クラッシュ解析・利用状況分析】
+              本アプリは、現時点でクラッシュ解析・利用状況分析を目的としたSDKを組み込んでいません。将来これらのサービスを導入する場合は、本ポリシーを更新し、本アプリ内で告知します。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art4.title">
+              第4条（Cookie等のトラッキング技術について）
+            </h2>
+            <p data-i18n="legal.privacy.art4.body">
+              本アプリ自体はCookieを使用しませんが、第3条記載の広告配信サービス（Google
+              AdMob）が、広告の配信・効果測定のために、これに類する識別技術（広告識別子等）を使用する場合があります。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art5.title">
+              第5条（お子様の個人情報について）
+            </h2>
+            <p data-i18n="legal.privacy.art5.body">
+              本アプリは、13歳未満のお子様を主な対象として意図的に情報を収集するものではありません。保護者の方は、お子様が本アプリを利用する際、必要に応じて端末の設定からパーソナライズ広告の無効化等をご検討ください。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art6.title">
+              第6条（情報の越境移転について）
+            </h2>
+            <p data-i18n="legal.privacy.art6.body">
+              第3条記載の第三者サービス（Google AdMob、Google Play
+              Billing）は、Google社が世界各地で運用するサーバー上で処理される場合があります。これらの取扱いについては、各サービスのプライバシーポリシーが適用されます。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art7.title">
+              第7条（作品広場：コミュニティ投稿機能における情報の取扱い）
+            </h2>
+            <p
+              data-i18n="legal.privacy.art7.body"
+              style="white-space: pre-line"
+            >
+              1.
+              本アプリは、ユーザーが自らの意思で「作品広場」機能（利用規約第12条）を利用して作品を投稿する場合に限り、当該投稿に関する以下の情報を開発者のサーバーで管理します。
+              ・投稿作品を識別・表示するための情報（YouTube動画ID、タイトル、統計情報等）
+              ・投稿・通報・ブロック機能の利用にあたり発行するNIARIM User
+              ID（Googleアカウントとは別に本アプリ内部で発行する識別子）
+              ・通報機能を利用した場合の通報内容および通報者のNIARIM User ID 2.
+              投稿された動画ファイル本体はYouTube上に保存され、開発者のサーバーには保存されません。
+              3.
+              前2項の情報は、本コミュニティ機能の提供（作品の一覧表示、通報への対応、投稿上限の管理等）の目的の範囲内でのみ利用します。
+              4.
+              本コミュニティ機能を利用しない場合、本条に基づく情報の取扱いは発生しません。（第2条の原則どおり、開発者のサーバーへの送信は行われません。）
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art8.title">
+              第8条（本ポリシーの変更）
+            </h2>
+            <p data-i18n="legal.privacy.art8.body">
+              開発者は、法令の改正、本アプリの内容の変更その他必要と判断した場合、本ポリシーを変更することがあります。本ポリシーを変更する場合、変更内容および効力発生日を、本アプリ内その他適切な方法により、事前に周知します。
+            </p>
+          </section>
+
+          <section>
+            <h2 data-i18n="legal.privacy.art9.title">第9条（お問い合わせ）</h2>
+            <p data-i18n-html="legal.privacy.art9.body.html">
+              本ポリシーに関するお問い合わせは、本サイトの<a href="/contact/"
+                >お問い合わせフォーム</a
+              >よりご連絡ください。
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="/">
+              <img
+                class="brand-icon"
+                src="/assets/images/logo/app_logo_footer.svg"
+                alt=""
+                width="32"
+                height="32"
+              />
+              <img
+                class="brand-title"
+                src="/assets/images/logo/title_logo.svg"
+                alt="NIARIM"
+                width="121"
+                height="24"
+              />
+            </a>
+            <p data-i18n="footer.tagline">Animation made by your hands.</p>
+          </div>
+          <div class="footer-col">
+            <h2 data-i18n="footer.product">Product</h2>
+            <ul>
+              <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
+              <li><a href="/features/" data-i18n="nav.features">機能</a></li>
+              <li>
+                <a href="/premium/" data-i18n="nav.premium">プレミアム</a>
+              </li>
+              <li>
+                <a href="/community/" data-i18n="nav.community">作品広場</a>
+              </li>
+              <li><a href="/faq/" data-i18n="nav.faq">よくある質問</a></li>
+              <li><a href="/news/" data-i18n="nav.news">お知らせ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2 data-i18n="footer.support">Support</h2>
+            <ul>
+              <li><a href="/help/" data-i18n="nav.help">使い方ガイド</a></li>
+              <li>
+                <a href="/contact/" data-i18n="nav.contact">お問い合わせ</a>
+              </li>
+              <li>
+                <a href="#" id="footer-x-link" data-i18n="footer.x"
+                  >X（旧Twitter）</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h2 data-i18n="footer.legal">Legal</h2>
+            <ul>
+              <li>
+                <a href="/privacy/" data-i18n="footer.privacy"
+                  >プライバシーポリシー</a
+                >
+              </li>
+              <li><a href="/terms/" data-i18n="footer.terms">利用規約</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >&copy; NIARIM
+            <span data-i18n="footer.rights">All Rights Reserved.</span></span
+          >
+          <div class="footer-social">
+            <a href="#" id="footer-x-icon" aria-label="X"
+              ><svg class="ic" aria-hidden="true">
+                <use href="/assets/icons/ui/sprite.svg#ic-x_fa"></use></svg
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/i18n-dict.js"></script>
+    <script src="/js/i18n-dict-intl.js"></script>
+    <script src="/js/i18n-dict-nav-extra.js"></script>
+    <script src="/js/i18n-dict-legal.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/animations.js"></script>
+    <script src="/js/config-links.js"></script>
+  </body>
 </html>

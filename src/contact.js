@@ -88,26 +88,43 @@ export async function handleContact(request, env, ctx) {
 
   const validation = validateInput(body);
   if (!validation.ok) {
-    return jsonResponse(400, { error: "validation_error", field: validation.field });
+    return jsonResponse(400, {
+      error: "validation_error",
+      field: validation.field,
+    });
   }
   const data = validation.data;
 
-  const attachmentFiles = form.getAll("attachments").filter(
-    (entry) => typeof entry === "object" && typeof entry.arrayBuffer === "function" && entry.size > 0
-  );
+  const attachmentFiles = form
+    .getAll("attachments")
+    .filter(
+      (entry) =>
+        typeof entry === "object" &&
+        typeof entry.arrayBuffer === "function" &&
+        entry.size > 0,
+    );
   if (attachmentFiles.length > MAX_ATTACHMENTS) {
-    return jsonResponse(400, { error: "validation_error", field: "attachments" });
+    return jsonResponse(400, {
+      error: "validation_error",
+      field: "attachments",
+    });
   }
   let totalAttachmentBytes = 0;
   for (const file of attachmentFiles) {
     const maxBytes = ALLOWED_ATTACHMENT_TYPES.get(file.type);
     if (!maxBytes || file.size > maxBytes) {
-      return jsonResponse(400, { error: "validation_error", field: "attachments" });
+      return jsonResponse(400, {
+        error: "validation_error",
+        field: "attachments",
+      });
     }
     totalAttachmentBytes += file.size;
   }
   if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
-    return jsonResponse(400, { error: "validation_error", field: "attachments" });
+    return jsonResponse(400, {
+      error: "validation_error",
+      field: "attachments",
+    });
   }
 
   let attachments;
@@ -116,7 +133,7 @@ export async function handleContact(request, env, ctx) {
       attachmentFiles.map(async (file) => ({
         filename: sanitizeFilename(file.name) || "attachment",
         content: arrayBufferToBase64(await file.arrayBuffer()),
-      }))
+      })),
     );
   } catch (err) {
     console.error("Failed to read attachments", err);
@@ -134,7 +151,9 @@ export async function handleContact(request, env, ctx) {
 
   if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
     // 秘密情報・宛先未設定時はユーザーには汎用エラーのみ返し、詳細はログにのみ記録する。
-    console.error("Contact API misconfigured: missing RESEND_API_KEY / CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL");
+    console.error(
+      "Contact API misconfigured: missing RESEND_API_KEY / CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL",
+    );
     return jsonResponse(500, { error: "internal_error" });
   }
 
@@ -159,7 +178,8 @@ function validateInput(body) {
   const agree = body.agree === true;
 
   if (!INQUIRY_TYPES.has(type)) return { ok: false, field: "type" };
-  if (!name || name.length > NAME_MAX_LENGTH) return { ok: false, field: "name" };
+  if (!name || name.length > NAME_MAX_LENGTH)
+    return { ok: false, field: "name" };
   if (!email || email.length > EMAIL_MAX_LENGTH || !EMAIL_RE.test(email)) {
     return { ok: false, field: "email" };
   }
@@ -227,7 +247,10 @@ function arrayBufferToBase64(buffer) {
   const CHUNK_SIZE = 0x8000;
   let binary = "";
   for (let i = 0; i < bytes.length; i += CHUNK_SIZE) {
-    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK_SIZE));
+    binary += String.fromCharCode.apply(
+      null,
+      bytes.subarray(i, i + CHUNK_SIZE),
+    );
   }
   return btoa(binary);
 }
@@ -276,7 +299,8 @@ async function sendViaResend(env, data, attachments) {
         subject: `【NIARIM お問い合わせ】${typeLabel}`,
         text: textBody,
         html: htmlBody,
-        attachments: attachments && attachments.length ? attachments : undefined,
+        attachments:
+          attachments && attachments.length ? attachments : undefined,
       }),
     });
 

@@ -7,7 +7,12 @@
   padding-block: var(--space-2xl) var(--space-xl);
   text-align: center;
   overflow: hidden;
-  background: radial-gradient(80% 120% at 50% -20%, rgba(255, 92, 122, 0.14) 0%, transparent 60%),
+  background:
+    radial-gradient(
+      80% 120% at 50% -20%,
+      rgba(255, 92, 122, 0.14) 0%,
+      transparent 60%
+    ),
     var(--color-bg);
 }
 
@@ -60,7 +65,8 @@
   font-size: var(--fs-small);
   font-weight: 600;
   white-space: nowrap;
-  transition: background var(--duration-fast) var(--ease-out),
+  transition:
+    background var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out);
 }
@@ -148,7 +154,8 @@
   border: 1px solid var(--color-border);
   background: var(--color-white);
   overflow: hidden;
-  transition: opacity var(--duration-base, 0.4s) var(--ease-out),
+  transition:
+    opacity var(--duration-base, 0.4s) var(--ease-out),
     transform var(--duration-base, 0.4s) var(--ease-out);
 }
 
@@ -241,11 +248,12 @@
 .fd-icon-btn .ic {
   width: var(--fd-icon-size);
   height: var(--fd-icon-size);
-  filter:
-    drop-shadow(1px 0 0 var(--fd-panel)) drop-shadow(-1px 0 0 var(--fd-panel))
-    drop-shadow(0 1px 0 var(--fd-panel)) drop-shadow(0 -1px 0 var(--fd-panel))
-    drop-shadow(1px 1px 0 var(--fd-panel)) drop-shadow(-1px -1px 0 var(--fd-panel))
-    drop-shadow(1px -1px 0 var(--fd-panel)) drop-shadow(-1px 1px 0 var(--fd-panel));
+  filter: drop-shadow(1px 0 0 var(--fd-panel))
+    drop-shadow(-1px 0 0 var(--fd-panel)) drop-shadow(0 1px 0 var(--fd-panel))
+    drop-shadow(0 -1px 0 var(--fd-panel)) drop-shadow(1px 1px 0 var(--fd-panel))
+    drop-shadow(-1px -1px 0 var(--fd-panel))
+    drop-shadow(1px -1px 0 var(--fd-panel))
+    drop-shadow(-1px 1px 0 var(--fd-panel));
 }
 
 .fd-icon-btn.is-active {
@@ -779,7 +787,6 @@
   background: var(--fd-accent);
   border-radius: var(--radius-pill);
 }
-
 
 @media (max-width: 640px) {
   .fd-canvas {

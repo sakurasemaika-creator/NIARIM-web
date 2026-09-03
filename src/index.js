@@ -80,9 +80,7 @@ export default {
       }
 
       if (url.pathname.startsWith("/api/")) {
-        return withSecurityHeaders(
-          jsonResponse(404, { error: "not_found" })
-        );
+        return withSecurityHeaders(jsonResponse(404, { error: "not_found" }));
       }
 
       const assetResponse = await env.ASSETS.fetch(request);
@@ -90,7 +88,7 @@ export default {
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(
-        jsonResponse(500, { error: "internal_error" })
+        jsonResponse(500, { error: "internal_error" }),
       );
     }
   },

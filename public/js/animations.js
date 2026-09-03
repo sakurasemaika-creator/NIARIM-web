@@ -26,7 +26,7 @@
   function showScreenMocks() {
     document
       .querySelectorAll(
-        ".screenshot-scroller, .feature-diagram, .frame-mock, .fd-app-screen, .fd-route-screen"
+        ".screenshot-scroller, .feature-diagram, .frame-mock, .fd-app-screen, .fd-route-screen",
       )
       .forEach(function (mock) {
         if (
@@ -39,7 +39,9 @@
           mock.style.userSelect = "none";
         }
 
-        var reveal = mock.classList.contains("reveal") ? mock : mock.closest(".reveal");
+        var reveal = mock.classList.contains("reveal")
+          ? mock
+          : mock.closest(".reveal");
         if (!reveal) return;
         reveal.classList.add("is-visible");
         reveal.style.transitionDelay = "";
@@ -69,7 +71,7 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
 
     targets.forEach(function (el) {
@@ -79,7 +81,7 @@
 
   function initStaggerGrids() {
     var grids = document.querySelectorAll(
-      ".spec-grid, .community-gallery, .faq-list, .pricing-list"
+      ".spec-grid, .community-gallery, .faq-list, .pricing-list",
     );
     if (!grids.length) return;
 
@@ -103,14 +105,17 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          entry.target.querySelectorAll(":scope > *").forEach(function (item, index) {
-            item.style.transitionDelay = Math.min(index * STEP_MS, MAX_DELAY_MS) + "ms";
-            item.classList.add("is-visible");
-          });
+          entry.target
+            .querySelectorAll(":scope > *")
+            .forEach(function (item, index) {
+              item.style.transitionDelay =
+                Math.min(index * STEP_MS, MAX_DELAY_MS) + "ms";
+              item.classList.add("is-visible");
+            });
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -6% 0px" },
     );
 
     grids.forEach(function (grid) {
@@ -141,7 +146,11 @@
         var offsetX = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, x * PULL));
         var offsetY = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, y * PULL));
         btn.style.transform =
-          "translate(" + offsetX.toFixed(1) + "px, " + (offsetY - 2).toFixed(1) + "px)";
+          "translate(" +
+          offsetX.toFixed(1) +
+          "px, " +
+          (offsetY - 2).toFixed(1) +
+          "px)";
       }
 
       btn.addEventListener("mouseenter", function () {
@@ -271,7 +280,10 @@
       if (id === currentId) return;
       currentId = id;
       links.forEach(function (link) {
-        link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+        link.classList.toggle(
+          "is-active",
+          link.getAttribute("href") === "#" + id,
+        );
       });
     }
 
@@ -281,7 +293,7 @@
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
-      { rootMargin: "-45% 0px -50% 0px" }
+      { rootMargin: "-45% 0px -50% 0px" },
     );
 
     sections.forEach(function (section) {

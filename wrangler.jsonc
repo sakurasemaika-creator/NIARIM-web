@@ -9,13 +9,13 @@
     "run_worker_first": ["/api/*"],
     // 未一致パスは public/404.html を404ステータスで返す
     // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
   },
   // お問い合わせフォームのメール送信先・送信元。実際の値はデプロイ環境ごとに設定する。
   "vars": {
     "CONTACT_TO_EMAIL": "your-inbox@example.com",
-    "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>"
-  }
+    "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>",
+  },
   // RESEND_API_KEY は `npx wrangler secret put RESEND_API_KEY` で設定すること（本ファイルには書かない）。
   // レート制限用のKV Namespaceを作成した場合は、以下のように kv_namespaces を追加する。
   // "kv_namespaces": [

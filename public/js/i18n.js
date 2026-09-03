@@ -43,7 +43,8 @@
 
     var short = lower.split("-")[0];
     for (var j = 0; j < LANGS.length; j += 1) {
-      if (LANGS[j].code.toLowerCase().split("-")[0] === short) return LANGS[j].code;
+      if (LANGS[j].code.toLowerCase().split("-")[0] === short)
+        return LANGS[j].code;
     }
     return null;
   }
@@ -116,10 +117,13 @@
     });
 
     document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
-      el.getAttribute("data-i18n-attr").split("|").forEach(function (pair) {
-        var parts = pair.split(":");
-        if (parts[0] && parts[1]) el.setAttribute(parts[0], t(lang, parts[1]));
-      });
+      el.getAttribute("data-i18n-attr")
+        .split("|")
+        .forEach(function (pair) {
+          var parts = pair.split(":");
+          if (parts[0] && parts[1])
+            el.setAttribute(parts[0], t(lang, parts[1]));
+        });
     });
 
     var titleKey = document.body.getAttribute("data-i18n-title");
@@ -139,7 +143,7 @@
     document.querySelectorAll("[data-lang-switch]").forEach(function (button) {
       button.setAttribute(
         "aria-pressed",
-        String(button.getAttribute("data-lang-switch") === lang)
+        String(button.getAttribute("data-lang-switch") === lang),
       );
     });
 
@@ -161,7 +165,7 @@
     }
 
     document.dispatchEvent(
-      new CustomEvent("niarim:langchange", { detail: { lang: lang } })
+      new CustomEvent("niarim:langchange", { detail: { lang: lang } }),
     );
 
     return lang;
@@ -197,12 +201,13 @@
     trigger.addEventListener("click", function () {
       dropdown.setAttribute(
         "data-open",
-        String(dropdown.getAttribute("data-open") !== "true")
+        String(dropdown.getAttribute("data-open") !== "true"),
       );
     });
 
     document.addEventListener("click", function (event) {
-      if (!dropdown.contains(event.target)) dropdown.setAttribute("data-open", "false");
+      if (!dropdown.contains(event.target))
+        dropdown.setAttribute("data-open", "false");
     });
 
     document.addEventListener("keydown", function (event) {

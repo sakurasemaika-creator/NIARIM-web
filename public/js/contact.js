@@ -38,10 +38,14 @@
     var errorEl = row.querySelector(".form-error");
     if (errorEl && !errorEl.id) {
       errorEl.id =
-        "form-error-" + (field && (field.name || field.id) ? field.name || field.id : Math.random().toString(36).slice(2));
+        "form-error-" +
+        (field && (field.name || field.id)
+          ? field.name || field.id
+          : Math.random().toString(36).slice(2));
     }
 
-    var target = field || row.querySelector(".form-control, input, select, textarea");
+    var target =
+      field || row.querySelector(".form-control, input, select, textarea");
     if (!target) return;
 
     if (show) {
@@ -68,9 +72,10 @@
         field === message
           ? field.value.length > MESSAGE_MAX_LENGTH
           : field === name
-          ? field.value.length > NAME_MAX_LENGTH
-          : false;
-      var badEmail = field === email && !isEmpty && !EMAIL_RE.test(field.value.trim());
+            ? field.value.length > NAME_MAX_LENGTH
+            : false;
+      var badEmail =
+        field === email && !isEmpty && !EMAIL_RE.test(field.value.trim());
 
       if (isEmpty) {
         errorEl.textContent = t("contact.error.required");
@@ -139,7 +144,9 @@
       statusEl.className = "form-status";
 
       if (!validate(form)) {
-        var firstError = form.querySelector(".form-row.has-error .form-control");
+        var firstError = form.querySelector(
+          ".form-row.has-error .form-control",
+        );
         if (firstError) firstError.focus();
         return;
       }
@@ -152,9 +159,12 @@
       payload.set("agree", form.elements.agree.checked ? "true" : "false");
       payload.set("company", form.elements.company.value); // honeypot
       if (form.elements.attachments) {
-        Array.prototype.forEach.call(form.elements.attachments.files || [], function (file) {
-          payload.append("attachments", file, file.name);
-        });
+        Array.prototype.forEach.call(
+          form.elements.attachments.files || [],
+          function (file) {
+            payload.append("attachments", file, file.name);
+          },
+        );
       }
 
       submitBtn.disabled = true;
@@ -183,21 +193,21 @@
               statusEl,
               "success",
               "contact.status.successTitle",
-              "contact.status.successBody"
+              "contact.status.successBody",
             );
           } else if (result.status === 429) {
             showStatus(
               statusEl,
               "error",
               "contact.status.errorTitle",
-              "contact.status.rateLimitBody"
+              "contact.status.rateLimitBody",
             );
           } else {
             showStatus(
               statusEl,
               "error",
               "contact.status.errorTitle",
-              "contact.status.errorBody"
+              "contact.status.errorBody",
             );
           }
         })
@@ -206,7 +216,7 @@
             statusEl,
             "error",
             "contact.status.errorTitle",
-            "contact.status.errorBody"
+            "contact.status.errorBody",
           );
         })
         .finally(function () {

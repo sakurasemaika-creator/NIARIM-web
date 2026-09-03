@@ -11,9 +11,22 @@
   padding-top: clamp(3.5rem, 10vw, 7.5rem);
   padding-bottom: var(--space-3xl);
   overflow: hidden;
-  background: radial-gradient(120% 90% at 88% -12%, rgba(255, 92, 122, 0.16) 0%, transparent 55%),
-    radial-gradient(90% 80% at 8% 108%, rgba(255, 177, 92, 0.14) 0%, transparent 60%),
-    radial-gradient(60% 60% at 50% 40%, var(--color-sub-tint) 0%, transparent 70%),
+  background:
+    radial-gradient(
+      120% 90% at 88% -12%,
+      rgba(255, 92, 122, 0.16) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 80% at 8% 108%,
+      rgba(255, 177, 92, 0.14) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      60% 60% at 50% 40%,
+      var(--color-sub-tint) 0%,
+      transparent 70%
+    ),
     var(--color-bg);
 }
 
@@ -22,7 +35,10 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: radial-gradient(rgba(74, 70, 54, 0.09) 1.4px, transparent 1.4px);
+  background-image: radial-gradient(
+    rgba(74, 70, 54, 0.09) 1.4px,
+    transparent 1.4px
+  );
   background-size: 28px 28px;
   mask-image: radial-gradient(80% 70% at 50% 20%, black 0%, transparent 75%);
   pointer-events: none;
@@ -219,7 +235,10 @@
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   background: var(--grad-ink);
-  box-shadow: var(--shadow-lg), var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow:
+    var(--shadow-lg),
+    var(--shadow-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -476,7 +495,8 @@
   opacity: 0;
   clip-path: inset(8% round var(--radius-md));
   transform: scale(0.94);
-  transition: opacity var(--duration-slow) var(--ease-out) 0.1s,
+  transition:
+    opacity var(--duration-slow) var(--ease-out) 0.1s,
     clip-path var(--duration-slow) var(--ease-out) 0.1s,
     transform var(--duration-slow) var(--ease-out) 0.1s;
 }
@@ -570,7 +590,8 @@
    横スクロールギャラリーらしい「カードが並んでいく」動きにしている。 */
 .screenshot-scroller.stagger-grid > .screenshot-card {
   transform: translateY(20px) rotate(-3deg);
-  transition: opacity var(--duration-base) var(--ease-out),
+  transition:
+    opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
 }
 
@@ -666,7 +687,8 @@
   border-bottom: 1px solid var(--color-border);
   /* リスト全体のフェード(.reveal)に加えて、質問を上から順に少しずつ
      間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
-  transition: opacity var(--duration-base) var(--ease-out),
+  transition:
+    opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
 }
 
@@ -726,13 +748,15 @@
   overflow: hidden;
   max-height: 0;
   visibility: hidden;
-  transition: max-height var(--duration-base) var(--ease-out),
+  transition:
+    max-height var(--duration-base) var(--ease-out),
     visibility 0s linear var(--duration-base);
 }
 
 .faq-item.is-open .faq-answer {
   visibility: visible;
-  transition: max-height var(--duration-base) var(--ease-out),
+  transition:
+    max-height var(--duration-base) var(--ease-out),
     visibility 0s linear 0s;
 }
 
@@ -775,8 +799,8 @@
   right: 0;
   bottom: 0;
   width: 62%;
-  background: rgba(0,0,0,0.15);
-  border-left: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0, 0, 0, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -798,7 +822,9 @@
   gap: 1px;
   padding: 0 2px;
 }
-.fd-toolbar::-webkit-scrollbar { display: none; }
+.fd-toolbar::-webkit-scrollbar {
+  display: none;
+}
 
 /* ---- BrushSizeSlider（ツールバー直上の折りたたみ帯） ---- */
 .fd-brush-slider {
@@ -811,19 +837,29 @@
   gap: 3px;
   flex-shrink: 0;
   font-size: 9px;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 .fd-brush-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   flex-shrink: 0;
 }
 .fd-brush-size,
-.fd-brush-opacity { font-size: 9px; line-height: 1; }
-.fd-brush-opacity-ic { width: 10px; height: 10px; opacity: 0.8; }
-.fd-brush-toggle { font-size: 8px; opacity: 0.6; }
+.fd-brush-opacity {
+  font-size: 9px;
+  line-height: 1;
+}
+.fd-brush-opacity-ic {
+  width: 10px;
+  height: 10px;
+  opacity: 0.8;
+}
+.fd-brush-toggle {
+  font-size: 8px;
+  opacity: 0.6;
+}
 
 /* ---- フレームストリップ（ツールバー直下、frame_strip_widget.dart再現） ---- */
 .fd-frame-strip {
@@ -831,8 +867,8 @@
   flex-direction: row;
   align-items: center;
   height: 52px;
-  background: rgba(0,0,0,0.15);
-  border-top: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 4px;
   gap: 0;
   flex-shrink: 0;
@@ -841,7 +877,7 @@
 }
 /* 中央固定枠（現在フレームを示す。常に左右中央に表示） */
 .fd-frame-strip::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 4px;
@@ -868,8 +904,8 @@
   width: 36px;
   height: 44px;
   border-radius: 3px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
 }
 .fd-frame-add {
@@ -877,20 +913,23 @@
   width: 36px;
   height: 44px;
   border-radius: 3px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
-.fd-frame-add .ic { width: 14px; height: 14px; }
+.fd-frame-add .ic {
+  width: 14px;
+  height: 14px;
+}
 .fd-frame-strip-mode {
   margin-left: auto;
   flex-shrink: 0;
   font-size: 8px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   padding: 2px 4px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 3px;
   white-space: nowrap;
 }

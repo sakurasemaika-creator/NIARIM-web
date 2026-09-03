@@ -25,8 +25,10 @@
     "hero.title.line1": "绘制。让画面动起来。",
     "hero.title.line2": "遇见。",
     "hero.subtitle": "让创作者与观众之间的界限变得模糊。",
-    "hero.lead": "NIARIM 是一款可以在智能手机上制作正式手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
-    "hero.bridge.html": "完成的作品，可以发布到<a href=\"/community/\">「作品广场」</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。",
+    "hero.lead":
+      "NIARIM 是一款可以在智能手机上制作正式手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
+    "hero.bridge.html":
+      '完成的作品，可以发布到<a href="/community/">「作品广场」</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。',
     "hero.cta.primary": "下载应用",
     "hero.cta.secondary": "查看功能",
     "hero.note": "支持的设备与上架情况，请以 Google Play 页面信息为准。",
@@ -36,7 +38,8 @@
     "intro.lead":
       "为你亲手绘制的每一张画注入生命——从下笔的那一刻，到让它动起来、完成作品，全部由你亲手完成。",
     "intro.card1.title": "Drawing 绘画",
-    "intro.card1.body": "多种画笔，配合颜色、透明度、缩放等设置，精心打磨每一个绘制环节。",
+    "intro.card1.body":
+      "多种画笔，配合颜色、透明度、缩放等设置，精心打磨每一个绘制环节。",
     "intro.card2.title": "Animation 动画",
     "intro.card2.body": "叠加帧画面，在时间轴上编辑，并可随时预览动作效果。",
     "intro.card3.title": "Export 导出",
@@ -49,12 +52,14 @@
     "features.drawing.body":
       "可在 G 笔、钢笔、喷枪、自定义画笔间自由切换，并调整颜色、透明色与不透明度，配合缩放与平移绘制细节。",
     "features.animation.title": "叠加帧画面，构建动作",
-    "features.animation.body": "在时间轴上添加与编辑帧画面，并可一边预览动画效果一边制作。",
+    "features.animation.body":
+      "在时间轴上添加与编辑帧画面，并可一边预览动画效果一边制作。",
     "features.editing.title": "可以反复修改的自由度",
     "features.editing.body":
       "配合填充与容差调整、分图层管理，可以反复调整直到满意为止。",
     "features.export.title": "导出作品，分享给大家",
-    "features.export.body": "支持最高1920×1920分辨率，并可自由设置画面比例导出视频。",
+    "features.export.body":
+      "支持最高1920×1920分辨率，并可自由设置画面比例导出视频。",
     "features.linkAll": "查看全部功能",
 
     "screenshots.eyebrow": "App Preview",
@@ -62,7 +67,8 @@
     "screenshots.placeholder": "截图准备中",
 
     "download.title": "现在就开始使用 NIARIM。",
-    "download.body": "将你亲手绘制的画面变成动画。立即下载 NIARIM，让你的故事动起来。",
+    "download.body":
+      "将你亲手绘制的画面变成动画。立即下载 NIARIM，让你的故事动起来。",
     "download.cta.googlePlay": "前往 Google Play 下载",
     "download.cta.notReady": "即将上线",
 
@@ -97,11 +103,14 @@
 
     "contact.eyebrow": "Contact",
     "contact.title": "联系我们",
-    "contact.lead": "关于故障报告、功能需求或使用方法等问题，请先通过官方 X 与我们联系。",
+    "contact.lead":
+      "关于故障报告、功能需求或使用方法等问题，请先通过官方 X 与我们联系。",
     "contact.channel.title": "请先通过官方 X 联系我们",
-    "contact.channel.body": "关于故障报告、功能需求或使用方法等问题，欢迎随时回复或私信官方 X 账号。",
+    "contact.channel.body":
+      "关于故障报告、功能需求或使用方法等问题，欢迎随时回复或私信官方 X 账号。",
     "contact.channel.link": "通过 X 联系我们",
-    "contact.personalNote": "涉及账号、邮箱地址等个人信息的咨询，我们无法在 X 上处理。请通过右侧的表单与我们联系。",
+    "contact.personalNote":
+      "涉及账号、邮箱地址等个人信息的咨询，我们无法在 X 上处理。请通过右侧的表单与我们联系。",
     "contact.personalNote.formNote": "※⁠表单内容将以邮件方式接收。",
     "contact.form.type": "咨询类型",
     "contact.form.type.bug": "故障报告",
@@ -117,7 +126,8 @@
     "contact.form.messagePlaceholder": "请尽量详细地填写",
     "contact.form.messageHint": "请在 1000 字以内填写。",
     "contact.form.attachments": "添加图片・视频（可选）",
-    "contact.form.attachmentsHint": "图片每张最大 5MB，视频每个最大 15MB，总计最多 20MB、最多 3 个文件（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
+    "contact.form.attachmentsHint":
+      "图片每张最大 5MB，视频每个最大 15MB，总计最多 20MB、最多 3 个文件（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
     "contact.error.attachments": "附件数量或大小超出限制。",
     "contact.form.agree.pre": "我已阅读并同意",
     "contact.form.agree.link": "隐私政策",
@@ -129,19 +139,23 @@
     "contact.error.tooLong": "已超出字数上限。",
     "contact.error.agree": "请先同意隐私政策。",
     "contact.status.successTitle": "您的咨询已收到。",
-    "contact.status.successBody": "感谢您的联系。我们会确认内容，并在需要时回复您。",
+    "contact.status.successBody":
+      "感谢您的联系。我们会确认内容，并在需要时回复您。",
     "contact.status.errorTitle": "提交失败。",
     "contact.status.errorBody": "请稍后再试一次。",
     "contact.status.rateLimitBody": "短时间内提交次数过多，请稍后再试。",
 
     "meta.contact.title": "联系我们 | NIARIM",
-    "meta.contact.description": "欢迎联系 NIARIM 团队，反馈故障、提出功能需求或咨询使用方法。",
+    "meta.contact.description":
+      "欢迎联系 NIARIM 团队，反馈故障、提出功能需求或咨询使用方法。",
 
     "meta.features.title": "功能介绍 | NIARIM",
-    "meta.features.description": "了解 NIARIM 的绘画、动画、编辑、音频与导出功能。",
+    "meta.features.description":
+      "了解 NIARIM 的绘画、动画、编辑、音频与导出功能。",
     "featuresPage.eyebrow": "Features",
     "featuresPage.title": "NIARIM 能做什么",
-    "featuresPage.lead": "从绘画到制作动作，再到导出成片，NIARIM 支持创作的每一个环节。",
+    "featuresPage.lead":
+      "从绘画到制作动作，再到导出成片，NIARIM 支持创作的每一个环节。",
     "featuresPage.nav.drawing": "绘画",
     "featuresPage.nav.animation": "动画",
     "featuresPage.nav.editing": "编辑",
@@ -159,45 +173,55 @@
     "featuresPage.drawing.item4.title": "自定义画笔",
     "featuresPage.drawing.item4.body": "可调整为符合自己习惯的笔触。",
     "featuresPage.drawing.item5.title": "颜色选择・透明色",
-    "featuresPage.drawing.item5.body": "支持自由选色，以及类似橡皮擦的透明色绘制。",
+    "featuresPage.drawing.item5.body":
+      "支持自由选色，以及类似橡皮擦的透明色绘制。",
     "featuresPage.drawing.item6.title": "不透明度",
     "featuresPage.drawing.item6.body": "可精细调整画笔的不透明度。",
     "featuresPage.drawing.item7.title": "缩放・平移",
     "featuresPage.drawing.item7.body": "可放大画面，绘制细节部分。",
     "featuresPage.drawing.item8.title": "橡皮擦",
-    "featuresPage.drawing.item8.body": "可局部擦除已绘制的线条，是标准的橡皮擦工具。",
+    "featuresPage.drawing.item8.body":
+      "可局部擦除已绘制的线条，是标准的橡皮擦工具。",
     "featuresPage.drawing.item9.title": "油漆桶・套索填色",
-    "featuresPage.drawing.item9.body": "支持填满被线条围住区域的「油漆桶」，以及为套索圈选区域上色的「套索填色」。",
+    "featuresPage.drawing.item9.body":
+      "支持填满被线条围住区域的「油漆桶」，以及为套索圈选区域上色的「套索填色」。",
     "featuresPage.drawing.item10.title": "吸管",
     "featuresPage.drawing.item10.body": "可吸取画布上的颜色，直接设为绘图色。",
     "featuresPage.drawing.item11.title": "选择工具",
-    "featuresPage.drawing.item11.body": "用矩形或套索选择范围，进行移动、变形、删除等编辑。",
+    "featuresPage.drawing.item11.body":
+      "用矩形或套索选择范围，进行移动、变形、删除等编辑。",
     "featuresPage.drawing.item12.title": "手指工具",
-    "featuresPage.drawing.item12.body": "除了像用手指涂抹一样扭曲画面外，还可直接绘制高斯模糊或马赛克效果。长按或向上滑动即可切换子工具。",
+    "featuresPage.drawing.item12.body":
+      "除了像用手指涂抹一样扭曲画面外，还可直接绘制高斯模糊或马赛克效果。长按或向上滑动即可切换子工具。",
     "featuresPage.drawing.item13.title": "图形工具",
     "featuresPage.drawing.item13.body": "一键绘制直线、圆形、矩形等规整图形。",
     "featuresPage.drawing.item14.title": "画笔详细设置",
-    "featuresPage.drawing.item14.body": "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
+    "featuresPage.drawing.item14.body":
+      "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
 
     "featuresPage.animation.title": "Animation｜动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
     "featuresPage.animation.item1.title": "帧画面",
     "featuresPage.animation.item1.body": "逐帧添加画面，累积构成动作。",
     "featuresPage.animation.item2.title": "时间轴",
-    "featuresPage.animation.item2.body": "不仅是帧画面，图片、视频、音频、共用图层、摄像机关键帧等，都可以在同一条时间轴上统一管理。还可以将作品拆分为多个场景来整理。",
+    "featuresPage.animation.item2.body":
+      "不仅是帧画面，图片、视频、音频、共用图层、摄像机关键帧等，都可以在同一条时间轴上统一管理。还可以将作品拆分为多个场景来整理。",
     "featuresPage.animation.item3.title": "帧编辑",
     "featuresPage.animation.item3.body": "选择任意一帧，重新绘制。",
     "featuresPage.animation.item4.title": "动画预览",
     "featuresPage.animation.item4.body": "随时确认制作中的动作效果。",
     "featuresPage.animation.item5.title": "运镜（关键帧动画）",
-    "featuresPage.animation.item5.body": "只需为位置、缩放、旋转设置关键帧，应用就会自动平滑插值生成运镜效果，无需重新绘制图层本身。",
+    "featuresPage.animation.item5.body":
+      "只需为位置、缩放、旋转设置关键帧，应用就会自动平滑插值生成运镜效果，无需重新绘制图层本身。",
     "featuresPage.animation.item6.title": "图层组",
-    "featuresPage.animation.item6.body": "将多个图层编成一组后，用一个关键帧即可将它们一起移动。",
+    "featuresPage.animation.item6.body":
+      "将多个图层编成一组后，用一个关键帧即可将它们一起移动。",
 
     "featuresPage.editing.title": "Editing｜编辑",
     "featuresPage.editing.lead": "可以反复修改，直到满意为止的编辑自由度。",
     "featuresPage.editing.item1.title": "分图层，随时重新绘制",
-    "featuresPage.editing.item1.body": "把线稿、颜色、背景等分在不同图层，即使只想重新上色，也无需改动线稿。",
+    "featuresPage.editing.item1.body":
+      "把线稿、颜色、背景等分在不同图层，即使只想重新上色，也无需改动线稿。",
     "featuresPage.editing.item2.title": "填充",
     "featuresPage.editing.item2.body": "快速填充封闭区域。",
     "featuresPage.editing.item3.title": "容差",
@@ -205,13 +229,17 @@
     "featuresPage.editing.item4.title": "图层",
     "featuresPage.editing.item4.body": "按元素分图层进行管理。",
     "featuresPage.editing.item5.title": "共用图层",
-    "featuresPage.editing.item5.body": "将想在多个帧中重复使用的图（如背景）整合到一张图层中，修改后会自动反映到所有帧。",
+    "featuresPage.editing.item5.body":
+      "将想在多个帧中重复使用的图（如背景）整合到一张图层中，修改后会自动反映到所有帧。",
     "featuresPage.editing.item6.title": "混合模式",
-    "featuresPage.editing.item6.body": "通过正片叠底、滤色等混合模式，改变图层的叠加方式，拓展表现的可能性。",
+    "featuresPage.editing.item6.body":
+      "通过正片叠底、滤色等混合模式，改变图层的叠加方式，拓展表现的可能性。",
     "featuresPage.editing.item7.title": "剪贴蒙版",
-    "featuresPage.editing.item7.body": "可让上方图层的绘制内容，仅限于下方图层的形状范围内。",
+    "featuresPage.editing.item7.body":
+      "可让上方图层的绘制内容，仅限于下方图层的形状范围内。",
     "featuresPage.editing.item8.title": "自由变形・网格变形",
-    "featuresPage.editing.item8.body": "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。网格变形最多可使用10×10的网格，自由地变形图层。",
+    "featuresPage.editing.item8.body":
+      "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。网格变形最多可使用10×10的网格，自由地变形图层。",
 
     "featuresPage.audio.title": "Audio｜音频",
     "featuresPage.audio.lead": "为作品配上声音的基础音频功能。",
@@ -224,9 +252,11 @@
     "featuresPage.audio.item4.title": "淡入・淡出",
     "featuresPage.audio.item4.body": "可以让音频的开头和结尾变得平滑。",
     "featuresPage.audio.item5.title": "时间戳",
-    "featuresPage.audio.item5.body": "可以在特定帧上打上带注释的标记，作为对口型或动作时机的参考点。",
+    "featuresPage.audio.item5.body":
+      "可以在特定帧上打上带注释的标记，作为对口型或动作时机的参考点。",
     "featuresPage.audio.item6.title": "波形显示",
-    "featuresPage.audio.item6.body": "音频片段上会淡淡地叠加显示波形，方便一边查看声音强弱一边调整在时间轴上的位置。",
+    "featuresPage.audio.item6.body":
+      "音频片段上会淡淡地叠加显示波形，方便一边查看声音强弱一边调整在时间轴上的位置。",
 
     "featuresPage.export.title": "Export｜导出",
     "featuresPage.export.lead": "将完成的作品导出为视频。",
@@ -237,11 +267,14 @@
     "featuresPage.export.item3.title": "视频导出",
     "featuresPage.export.item3.body": "将制作好的作品导出为视频文件。",
     "featuresPage.export.item4.title": "导出格式",
-    "featuresPage.export.item4.body": "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
+    "featuresPage.export.item4.body":
+      "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
     "featuresPage.export.item5.title": "制作・导出时长上限",
-    "featuresPage.export.item5.body": "画布尺寸有上限，但在此范围内可根据作品自由设置尺寸与纵横比。免费版每部作品最长90秒，高级版每部作品最长可达2小时进行制作与导出。作品数量本身没有限制。",
+    "featuresPage.export.item5.body":
+      "画布尺寸有上限，但在此范围内可根据作品自由设置尺寸与纵横比。免费版每部作品最长90秒，高级版每部作品最长可达2小时进行制作与导出。作品数量本身没有限制。",
     "featuresPage.export.item6.title": "静态图片导出",
-    "featuresPage.export.item6.body": "可从时间轴将当前显示的一帧保存为PNG或JPEG图片。",
+    "featuresPage.export.item6.body":
+      "可从时间轴将当前显示的一帧保存为PNG或JPEG图片。",
 
     "meta.news.title": "最新消息 | NIARIM",
     "meta.news.description": "NIARIM 正式上线、更新与维护信息公告。",
@@ -253,8 +286,10 @@
     "meta.privacy.title": "隐私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方网站及应用程序的隐私政策。",
     "legal.updated": "最后更新日期：2026年8月31日",
-    "legal.notice.privacy": "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
-    "legal.notice.terms": "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
+    "legal.notice.privacy":
+      "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
+    "legal.notice.terms":
+      "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
 
     "meta.terms.title": "使用条款 | NIARIM",
     "meta.terms.description": "NIARIM 官方网站及应用程序的使用条款。",
@@ -262,7 +297,8 @@
     "meta.404.title": "页面未找到 | NIARIM",
     "error404.eyebrow": "404",
     "error404.title": "未能找到这一帧画面。",
-    "error404.body": "您访问的页面可能已被移动或删除。请确认网址，或从首页重新开始。",
+    "error404.body":
+      "您访问的页面可能已被移动或删除。请确认网址，或从首页重新开始。",
     "error404.cta": "返回首页",
   };
 
@@ -285,8 +321,10 @@
     "hero.title.line1": "繪製。讓畫面動起來。",
     "hero.title.line2": "遇見。",
     "hero.subtitle": "讓創作者與觀眾之間的界線變得模糊。",
-    "hero.lead": "NIARIM 是一款可以在智慧型手機上製作正式手繪動畫的創作應用程式。既能一張張地畫圖並讓它動起來，製作手繪動畫，也能使用關鍵影格製作動態動畫，甚至可以將圖片組合成定格動畫。從繪圖、動畫、編輯、配音到匯出，一個應用程式就能完成作品。",
-    "hero.bridge.html": "完成的作品，可以發布到<a href=\"/community/\">「作品廣場」</a>。看看別人的作品，再創作下一個作品。從人到作品，從作品到人。",
+    "hero.lead":
+      "NIARIM 是一款可以在智慧型手機上製作正式手繪動畫的創作應用程式。既能一張張地畫圖並讓它動起來，製作手繪動畫，也能使用關鍵影格製作動態動畫，甚至可以將圖片組合成定格動畫。從繪圖、動畫、編輯、配音到匯出，一個應用程式就能完成作品。",
+    "hero.bridge.html":
+      '完成的作品，可以發布到<a href="/community/">「作品廣場」</a>。看看別人的作品，再創作下一個作品。從人到作品，從作品到人。',
     "hero.cta.primary": "下載應用程式",
     "hero.cta.secondary": "查看功能",
     "hero.note": "支援的裝置與上架狀況，請以 Google Play 頁面資訊為準。",
@@ -296,7 +334,8 @@
     "intro.lead":
       "為你親手繪製的每一張畫注入生命——從下筆的那一刻，到讓它動起來、完成作品，全部由你親手完成。",
     "intro.card1.title": "Drawing 繪畫",
-    "intro.card1.body": "多種畫筆，搭配顏色、透明度、縮放等設定，用心打磨每一個繪製環節。",
+    "intro.card1.body":
+      "多種畫筆，搭配顏色、透明度、縮放等設定，用心打磨每一個繪製環節。",
     "intro.card2.title": "Animation 動畫",
     "intro.card2.body": "疊加影格，在時間軸上編輯，並可隨時預覽動作效果。",
     "intro.card3.title": "Export 匯出",
@@ -309,12 +348,14 @@
     "features.drawing.body":
       "可在 G 筆、鋼筆、噴槍、自訂畫筆間自由切換，並調整顏色、透明色與不透明度，搭配縮放與平移繪製細節。",
     "features.animation.title": "疊加影格，構築動作",
-    "features.animation.body": "在時間軸上新增與編輯影格，並可一邊預覽動畫效果一邊製作。",
+    "features.animation.body":
+      "在時間軸上新增與編輯影格，並可一邊預覽動畫效果一邊製作。",
     "features.editing.title": "可以反覆修改的自由度",
     "features.editing.body":
       "搭配填色與容許值調整、分圖層管理，可以反覆調整直到滿意為止。",
     "features.export.title": "匯出作品，分享給大家",
-    "features.export.body": "支援最高1920×1920解析度，並可自由設定畫面比例匯出影片。",
+    "features.export.body":
+      "支援最高1920×1920解析度，並可自由設定畫面比例匯出影片。",
     "features.linkAll": "查看全部功能",
 
     "screenshots.eyebrow": "App Preview",
@@ -322,7 +363,8 @@
     "screenshots.placeholder": "截圖準備中",
 
     "download.title": "現在就開始使用 NIARIM。",
-    "download.body": "將你親手繪製的畫面變成動畫。立即下載 NIARIM，讓你的故事動起來。",
+    "download.body":
+      "將你親手繪製的畫面變成動畫。立即下載 NIARIM，讓你的故事動起來。",
     "download.cta.googlePlay": "前往 Google Play 下載",
     "download.cta.notReady": "即將上線",
 
@@ -357,11 +399,14 @@
 
     "contact.eyebrow": "Contact",
     "contact.title": "聯絡我們",
-    "contact.lead": "關於問題回報、功能需求或使用方法等，請先透過官方 X 與我們聯絡。",
+    "contact.lead":
+      "關於問題回報、功能需求或使用方法等，請先透過官方 X 與我們聯絡。",
     "contact.channel.title": "請先透過官方 X 聯絡我們",
-    "contact.channel.body": "關於問題回報、功能需求或使用方法等，歡迎隨時回覆或私訊官方 X 帳號。",
+    "contact.channel.body":
+      "關於問題回報、功能需求或使用方法等，歡迎隨時回覆或私訊官方 X 帳號。",
     "contact.channel.link": "透過 X 聯絡我們",
-    "contact.personalNote": "涉及帳號、電子郵件地址等個人資訊的諮詢，我們無法在 X 上處理。請透過右側的表單與我們聯絡。",
+    "contact.personalNote":
+      "涉及帳號、電子郵件地址等個人資訊的諮詢，我們無法在 X 上處理。請透過右側的表單與我們聯絡。",
     "contact.personalNote.formNote": "※⁠表單內容將以電子郵件方式接收。",
     "contact.form.type": "諮詢類型",
     "contact.form.type.bug": "問題回報",
@@ -377,7 +422,8 @@
     "contact.form.messagePlaceholder": "請盡量詳細填寫",
     "contact.form.messageHint": "請於 1000 字以內填寫。",
     "contact.form.attachments": "新增圖片・影片（選填）",
-    "contact.form.attachmentsHint": "圖片每張最大 5MB，影片每個最大 15MB，總計最多 20MB、最多 3 個檔案（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
+    "contact.form.attachmentsHint":
+      "圖片每張最大 5MB，影片每個最大 15MB，總計最多 20MB、最多 3 個檔案（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
     "contact.error.attachments": "附件數量或大小超出上限。",
     "contact.form.agree.pre": "我已閱讀並同意",
     "contact.form.agree.link": "隱私政策",
@@ -389,19 +435,23 @@
     "contact.error.tooLong": "已超出字數上限。",
     "contact.error.agree": "請先同意隱私政策。",
     "contact.status.successTitle": "您的諮詢已收到。",
-    "contact.status.successBody": "感謝您的聯絡。我們會確認內容，並於必要時回覆您。",
+    "contact.status.successBody":
+      "感謝您的聯絡。我們會確認內容，並於必要時回覆您。",
     "contact.status.errorTitle": "傳送失敗。",
     "contact.status.errorBody": "請稍後再試一次。",
     "contact.status.rateLimitBody": "短時間內傳送次數過多，請稍後再試。",
 
     "meta.contact.title": "聯絡我們 | NIARIM",
-    "meta.contact.description": "歡迎聯絡 NIARIM 團隊，回報問題、提出功能需求或詢問使用方法。",
+    "meta.contact.description":
+      "歡迎聯絡 NIARIM 團隊，回報問題、提出功能需求或詢問使用方法。",
 
     "meta.features.title": "功能介紹 | NIARIM",
-    "meta.features.description": "了解 NIARIM 的繪畫、動畫、編輯、音訊與匯出功能。",
+    "meta.features.description":
+      "了解 NIARIM 的繪畫、動畫、編輯、音訊與匯出功能。",
     "featuresPage.eyebrow": "Features",
     "featuresPage.title": "NIARIM 能做什麼",
-    "featuresPage.lead": "從繪畫到製作動作，再到匯出成片，NIARIM 支援創作的每一個環節。",
+    "featuresPage.lead":
+      "從繪畫到製作動作，再到匯出成片，NIARIM 支援創作的每一個環節。",
     "featuresPage.nav.drawing": "繪畫",
     "featuresPage.nav.animation": "動畫",
     "featuresPage.nav.editing": "編輯",
@@ -419,45 +469,55 @@
     "featuresPage.drawing.item4.title": "自訂畫筆",
     "featuresPage.drawing.item4.body": "可調整為符合自己習慣的筆觸。",
     "featuresPage.drawing.item5.title": "顏色選擇・透明色",
-    "featuresPage.drawing.item5.body": "支援自由選色，以及類似橡皮擦的透明色繪製。",
+    "featuresPage.drawing.item5.body":
+      "支援自由選色，以及類似橡皮擦的透明色繪製。",
     "featuresPage.drawing.item6.title": "不透明度",
     "featuresPage.drawing.item6.body": "可精細調整畫筆的不透明度。",
     "featuresPage.drawing.item7.title": "縮放・平移",
     "featuresPage.drawing.item7.body": "可放大畫面，繪製細節部分。",
     "featuresPage.drawing.item8.title": "橡皮擦",
-    "featuresPage.drawing.item8.body": "可局部擦除已繪製的線條，是標準的橡皮擦工具。",
+    "featuresPage.drawing.item8.body":
+      "可局部擦除已繪製的線條，是標準的橡皮擦工具。",
     "featuresPage.drawing.item9.title": "油漆桶・套索填色",
-    "featuresPage.drawing.item9.body": "支援填滿被線條圍住區域的「油漆桶」，以及為套索圈選區域上色的「套索填色」。",
+    "featuresPage.drawing.item9.body":
+      "支援填滿被線條圍住區域的「油漆桶」，以及為套索圈選區域上色的「套索填色」。",
     "featuresPage.drawing.item10.title": "吸管",
     "featuresPage.drawing.item10.body": "可吸取畫布上的顏色，直接設為繪圖色。",
     "featuresPage.drawing.item11.title": "選擇工具",
-    "featuresPage.drawing.item11.body": "用矩形或套索選擇範圍，進行移動、變形、刪除等編輯。",
+    "featuresPage.drawing.item11.body":
+      "用矩形或套索選擇範圍，進行移動、變形、刪除等編輯。",
     "featuresPage.drawing.item12.title": "手指工具",
-    "featuresPage.drawing.item12.body": "除了像用手指塗抹一樣扭曲畫面外，還可直接繪製高斯模糊或馬賽克效果。長按或向上滑動即可切換子工具。",
+    "featuresPage.drawing.item12.body":
+      "除了像用手指塗抹一樣扭曲畫面外，還可直接繪製高斯模糊或馬賽克效果。長按或向上滑動即可切換子工具。",
     "featuresPage.drawing.item13.title": "圖形工具",
     "featuresPage.drawing.item13.body": "一鍵繪製直線、圓形、矩形等規整圖形。",
     "featuresPage.drawing.item14.title": "筆刷詳細設定",
-    "featuresPage.drawing.item14.body": "淡出、筆畫衰減、混色、筆壓曲線等，可細緻調整筆刷的繪畫手感。",
+    "featuresPage.drawing.item14.body":
+      "淡出、筆畫衰減、混色、筆壓曲線等，可細緻調整筆刷的繪畫手感。",
 
     "featuresPage.animation.title": "Animation｜動畫",
     "featuresPage.animation.lead": "疊加影格，在時間軸上構築動作。",
     "featuresPage.animation.item1.title": "影格",
     "featuresPage.animation.item1.body": "逐格新增畫面，累積構成動作。",
     "featuresPage.animation.item2.title": "時間軸",
-    "featuresPage.animation.item2.body": "不僅是影格，圖片、影片、音訊、共用圖層、攝影機關鍵影格等，都可以在同一條時間軸上統一管理。也可以將作品拆分為多個場景來整理。",
+    "featuresPage.animation.item2.body":
+      "不僅是影格，圖片、影片、音訊、共用圖層、攝影機關鍵影格等，都可以在同一條時間軸上統一管理。也可以將作品拆分為多個場景來整理。",
     "featuresPage.animation.item3.title": "影格編輯",
     "featuresPage.animation.item3.body": "選擇任意一格，重新繪製。",
     "featuresPage.animation.item4.title": "動畫預覽",
     "featuresPage.animation.item4.body": "隨時確認製作中的動作效果。",
     "featuresPage.animation.item5.title": "運鏡（關鍵影格動畫）",
-    "featuresPage.animation.item5.body": "只需為位置、縮放、旋轉設定關鍵影格，應用程式就會自動平滑內插產生運鏡效果，不需要重新繪製圖層本身。",
+    "featuresPage.animation.item5.body":
+      "只需為位置、縮放、旋轉設定關鍵影格，應用程式就會自動平滑內插產生運鏡效果，不需要重新繪製圖層本身。",
     "featuresPage.animation.item6.title": "圖層群組",
-    "featuresPage.animation.item6.body": "將多個圖層編成一組後，用一個關鍵影格即可將它們一起移動。",
+    "featuresPage.animation.item6.body":
+      "將多個圖層編成一組後，用一個關鍵影格即可將它們一起移動。",
 
     "featuresPage.editing.title": "Editing｜編輯",
     "featuresPage.editing.lead": "可以反覆修改，直到滿意為止的編輯自由度。",
     "featuresPage.editing.item1.title": "分圖層，隨時重新繪製",
-    "featuresPage.editing.item1.body": "把線稿、顏色、背景等分在不同圖層，即使只想重新上色，也不需要改動線稿。",
+    "featuresPage.editing.item1.body":
+      "把線稿、顏色、背景等分在不同圖層，即使只想重新上色，也不需要改動線稿。",
     "featuresPage.editing.item2.title": "填色",
     "featuresPage.editing.item2.body": "快速填滿封閉區域。",
     "featuresPage.editing.item3.title": "容許值",
@@ -465,13 +525,17 @@
     "featuresPage.editing.item4.title": "圖層",
     "featuresPage.editing.item4.body": "依元素分圖層進行管理。",
     "featuresPage.editing.item5.title": "共用圖層",
-    "featuresPage.editing.item5.body": "將想在多個影格中重複使用的圖（如背景）整合到一張圖層中，修改後會自動反映到所有影格。",
+    "featuresPage.editing.item5.body":
+      "將想在多個影格中重複使用的圖（如背景）整合到一張圖層中，修改後會自動反映到所有影格。",
     "featuresPage.editing.item6.title": "混合模式",
-    "featuresPage.editing.item6.body": "透過色彩增值、濾色等混合模式，改變圖層的疊加方式，拓展表現的可能性。",
+    "featuresPage.editing.item6.body":
+      "透過色彩增值、濾色等混合模式，改變圖層的疊加方式，拓展表現的可能性。",
     "featuresPage.editing.item7.title": "剪裁遮罩",
-    "featuresPage.editing.item7.body": "可讓上方圖層的繪製內容，僅限於下方圖層的形狀範圍內。",
+    "featuresPage.editing.item7.body":
+      "可讓上方圖層的繪製內容，僅限於下方圖層的形狀範圍內。",
     "featuresPage.editing.item8.title": "自由變形・網格變形",
-    "featuresPage.editing.item8.body": "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。網格變形最多可使用10×10的網格，自由地變形圖層。",
+    "featuresPage.editing.item8.body":
+      "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。網格變形最多可使用10×10的網格，自由地變形圖層。",
 
     "featuresPage.audio.title": "Audio｜音訊",
     "featuresPage.audio.lead": "為作品配上聲音的基礎音訊功能。",
@@ -484,9 +548,11 @@
     "featuresPage.audio.item4.title": "淡入・淡出",
     "featuresPage.audio.item4.body": "可以讓音訊的開頭和結尾變得平滑。",
     "featuresPage.audio.item5.title": "時間戳記",
-    "featuresPage.audio.item5.body": "可以在特定影格上打上帶註解的標記，作為對嘴型或動作時機的參考點。",
+    "featuresPage.audio.item5.body":
+      "可以在特定影格上打上帶註解的標記，作為對嘴型或動作時機的參考點。",
     "featuresPage.audio.item6.title": "波形顯示",
-    "featuresPage.audio.item6.body": "音訊片段上會淡淡地疊加顯示波形，方便一邊查看聲音強弱一邊調整在時間軸上的位置。",
+    "featuresPage.audio.item6.body":
+      "音訊片段上會淡淡地疊加顯示波形，方便一邊查看聲音強弱一邊調整在時間軸上的位置。",
 
     "featuresPage.export.title": "Export｜匯出",
     "featuresPage.export.lead": "將完成的作品匯出為影片。",
@@ -497,11 +563,14 @@
     "featuresPage.export.item3.title": "影片匯出",
     "featuresPage.export.item3.body": "將製作好的作品匯出為影片檔案。",
     "featuresPage.export.item4.title": "匯出格式",
-    "featuresPage.export.item4.body": "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
+    "featuresPage.export.item4.body":
+      "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
     "featuresPage.export.item5.title": "製作・匯出時長上限",
-    "featuresPage.export.item5.body": "畫布尺寸有上限，但在此範圍內可依作品自由設定尺寸與長寬比。免費版每部作品最長90秒，付費進階版每部作品最長可達2小時進行製作與匯出。作品數量本身沒有限制。",
+    "featuresPage.export.item5.body":
+      "畫布尺寸有上限，但在此範圍內可依作品自由設定尺寸與長寬比。免費版每部作品最長90秒，付費進階版每部作品最長可達2小時進行製作與匯出。作品數量本身沒有限制。",
     "featuresPage.export.item6.title": "靜態圖片匯出",
-    "featuresPage.export.item6.body": "可從時間軸將目前顯示的一個影格儲存為PNG或JPEG圖片。",
+    "featuresPage.export.item6.body":
+      "可從時間軸將目前顯示的一個影格儲存為PNG或JPEG圖片。",
 
     "meta.news.title": "最新消息 | NIARIM",
     "meta.news.description": "NIARIM 正式上線、更新與維護資訊公告。",
@@ -513,8 +582,10 @@
     "meta.privacy.title": "隱私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私政策。",
     "legal.updated": "最後更新日期：2026年8月31日",
-    "legal.notice.privacy": "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
-    "legal.notice.terms": "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
+    "legal.notice.privacy":
+      "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
+    "legal.notice.terms":
+      "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
 
     "meta.terms.title": "使用條款 | NIARIM",
     "meta.terms.description": "NIARIM 官方網站及應用程式的使用條款。",
@@ -522,7 +593,8 @@
     "meta.404.title": "找不到頁面 | NIARIM",
     "error404.eyebrow": "404",
     "error404.title": "未能找到這一格畫面。",
-    "error404.body": "您造訪的頁面可能已被移動或刪除。請確認網址，或從首頁重新開始。",
+    "error404.body":
+      "您造訪的頁面可能已被移動或刪除。請確認網址，或從首頁重新開始。",
     "error404.cta": "返回首頁",
   };
 
@@ -537,7 +609,8 @@
     "common.readMore": "자세히 보기",
     "common.backHome": "홈으로 돌아가기",
 
-    "meta.home.title": "NIARIM | 그리고, 움직이고, 이야기로 만드는 애니메이션 제작 앱",
+    "meta.home.title":
+      "NIARIM | 그리고, 움직이고, 이야기로 만드는 애니메이션 제작 앱",
     "meta.home.description":
       "NIARIM은 한 장 한 장 직접 그린 그림을 애니메이션 작품으로 만들어 내보낼 수 있는 제작 앱입니다. 펜, 타임라인, 레이어로 당신의 이야기를 움직여 보세요.",
 
@@ -545,8 +618,10 @@
     "hero.title.line1": "그린다. 움직인다.",
     "hero.title.line2": "발견한다.",
     "hero.subtitle": "크리에이터와 시청자의 경계를 흐리게.",
-    "hero.lead": "NIARIM은 스마트폰만으로 본격적인 손그림 애니메이션을 만들 수 있는 제작 앱입니다. 한 장씩 그림을 그려 움직이는 손그림 애니메이션은 물론, 키프레임을 활용한 모션 애니메이션, 이미지를 조합한 스톱모션까지. 그리기부터 애니메이션, 편집, 사운드, 내보내기까지 앱 하나로 작품을 완성할 수 있습니다.",
-    "hero.bridge.html": "그리고 완성한 작품은 <a href=\"/community/\">「작품광장」</a>으로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.",
+    "hero.lead":
+      "NIARIM은 스마트폰만으로 본격적인 손그림 애니메이션을 만들 수 있는 제작 앱입니다. 한 장씩 그림을 그려 움직이는 손그림 애니메이션은 물론, 키프레임을 활용한 모션 애니메이션, 이미지를 조합한 스톱모션까지. 그리기부터 애니메이션, 편집, 사운드, 내보내기까지 앱 하나로 작품을 완성할 수 있습니다.",
+    "hero.bridge.html":
+      '그리고 완성한 작품은 <a href="/community/">「작품광장」</a>으로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.',
     "hero.cta.primary": "앱 다운로드",
     "hero.cta.secondary": "기능 살펴보기",
     "hero.note": "지원 기기 및 제공 현황은 Google Play 페이지를 확인해 주세요.",
@@ -556,25 +631,31 @@
     "intro.lead":
       "당신이 그린 그림 한 장 한 장에 직접 생명을 불어넣으세요. 선을 긋는 순간부터 움직이고 완성하기까지, 모든 과정을 당신의 손으로 완결하는 제작 앱입니다.",
     "intro.card1.title": "Drawing 드로잉",
-    "intro.card1.body": "다양한 브러시와 색상, 투명도, 확대·축소까지, 그리는 과정을 세심하게 다듬었습니다.",
+    "intro.card1.body":
+      "다양한 브러시와 색상, 투명도, 확대·축소까지, 그리는 과정을 세심하게 다듬었습니다.",
     "intro.card2.title": "Animation 애니메이션",
-    "intro.card2.body": "프레임을 쌓아 타임라인에서 편집하고, 미리보기로 움직임을 확인하며 만들 수 있습니다.",
+    "intro.card2.body":
+      "프레임을 쌓아 타임라인에서 편집하고, 미리보기로 움직임을 확인하며 만들 수 있습니다.",
     "intro.card3.title": "Export 내보내기",
-    "intro.card3.body": "그린 작품을 영상으로 내보내, 직접 완성하고 공유할 수 있습니다.",
+    "intro.card3.body":
+      "그린 작품을 영상으로 내보내, 직접 완성하고 공유할 수 있습니다.",
 
     "features.eyebrow": "Core Features",
     "features.title": "주요 기능",
-    "features.lead": "「있으면 편리할 것 같은」 기능을, 타협 없이 전부 담았습니다.",
+    "features.lead":
+      "「있으면 편리할 것 같은」 기능을, 타협 없이 전부 담았습니다.",
     "features.drawing.title": "원하는 대로 그릴 수 있는 드로잉 도구",
     "features.drawing.body":
       "G펜·펜·에어브러시·사용자 펜 등 목적에 맞게 브러시를 사용할 수 있습니다. 색상 선택, 투명색, 불투명도 조절, 확대·이동으로 세부까지 그릴 수 있습니다.",
     "features.animation.title": "프레임을 쌓아 움직임을 만들기",
-    "features.animation.body": "타임라인에서 프레임을 추가·편집하고, 애니메이션 미리보기로 움직임을 확인하며 제작할 수 있습니다.",
+    "features.animation.body":
+      "타임라인에서 프레임을 추가·편집하고, 애니메이션 미리보기로 움직임을 확인하며 제작할 수 있습니다.",
     "features.editing.title": "몇 번이든 다시 그릴 수 있는 자유로움",
     "features.editing.body":
       "채우기와 허용값 조절, 레이어로 나눈 관리를 통해 만족할 때까지 다시 그릴 수 있습니다.",
     "features.export.title": "작품을 내보내고 전달하기",
-    "features.export.body": "최대 1920×1920까지의 해상도, 자유로운 화면 비율 설정으로 완성한 작품을 영상으로 내보낼 수 있습니다.",
+    "features.export.body":
+      "최대 1920×1920까지의 해상도, 자유로운 화면 비율 설정으로 완성한 작품을 영상으로 내보낼 수 있습니다.",
     "features.linkAll": "모든 기능 보기",
 
     "screenshots.eyebrow": "App Preview",
@@ -582,7 +663,8 @@
     "screenshots.placeholder": "화면 캡처 준비 중",
 
     "download.title": "지금 NIARIM을 시작하세요.",
-    "download.body": "직접 그린 그림을 직접 애니메이션으로. 지금 바로 NIARIM을 다운로드하고 이야기를 움직여 보세요.",
+    "download.body":
+      "직접 그린 그림을 직접 애니메이션으로. 지금 바로 NIARIM을 다운로드하고 이야기를 움직여 보세요.",
     "download.cta.googlePlay": "Google Play에서 받기",
     "download.cta.notReady": "출시 예정",
 
@@ -592,16 +674,20 @@
     "faq.a1":
       "NIARIM은 직접 그린 그림을 스스로 움직여 애니메이션 작품으로 만들 수 있는 스마트폰 앱입니다.",
     "faq.q2": "무료로 사용할 수 있나요?",
-    "faq.a2": "요금 플랜에 대한 자세한 내용은 정식 출시 시 Google Play 앱 페이지에서 확인하실 수 있습니다.",
+    "faq.a2":
+      "요금 플랜에 대한 자세한 내용은 정식 출시 시 Google Play 앱 페이지에서 확인하실 수 있습니다.",
     "faq.q3": "지원 기기를 알려주세요.",
-    "faq.a3": "지원 OS 및 기기에 대한 자세한 내용은 Google Play 앱 페이지의 정보를 확인해 주세요.",
+    "faq.a3":
+      "지원 OS 및 기기에 대한 자세한 내용은 Google Play 앱 페이지의 정보를 확인해 주세요.",
     "faq.q4": "제작한 작품을 내보낼 수 있나요?",
-    "faq.a4": "네. 최대 1920×1920까지의 해상도, 자유로운 화면 비율로 영상으로 내보낼 수 있습니다.",
+    "faq.a4":
+      "네. 최대 1920×1920까지의 해상도, 자유로운 화면 비율로 영상으로 내보낼 수 있습니다.",
     "faq.q5": "제작한 작품을 공유할 수 있나요?",
     "faq.q6": "계정 등록이 필요한가요?",
     "faq.a6": "계정 필요 여부는 정식 출시 시 사양을 확인해 주세요.",
     "faq.q7": "오류나 요청 사항은 어디로 연락하면 되나요?",
-    "faq.a7": "이 사이트의 문의 양식을 통해 오류 신고나 기능 요청 등을 보내 주세요.",
+    "faq.a7":
+      "이 사이트의 문의 양식을 통해 오류 신고나 기능 요청 등을 보내 주세요.",
 
     "cta.title": "당신의 이야기를 움직여 보세요.",
     "cta.body": "NIARIM으로 다음 애니메이션 작품을 시작해 보세요.",
@@ -617,11 +703,14 @@
 
     "contact.eyebrow": "Contact",
     "contact.title": "문의하기",
-    "contact.lead": "오류 신고, 기능 요청, 사용법에 관한 질문은 먼저 공식 X로 편하게 문의해 주세요.",
+    "contact.lead":
+      "오류 신고, 기능 요청, 사용법에 관한 질문은 먼저 공식 X로 편하게 문의해 주세요.",
     "contact.channel.title": "먼저 공식 X로 문의해 주세요",
-    "contact.channel.body": "오류 신고, 기능 요청, 사용법에 관한 질문은 공식 X 계정으로 답글이나 다이렉트 메시지를 보내주세요.",
+    "contact.channel.body":
+      "오류 신고, 기능 요청, 사용법에 관한 질문은 공식 X 계정으로 답글이나 다이렉트 메시지를 보내주세요.",
     "contact.channel.link": "X로 문의하기",
-    "contact.personalNote": "계정, 이메일 주소 등 개인정보가 포함된 문의는 X에서 답변드릴 수 없습니다. 오른쪽 양식을 통해 문의해 주세요.",
+    "contact.personalNote":
+      "계정, 이메일 주소 등 개인정보가 포함된 문의는 X에서 답변드릴 수 없습니다. 오른쪽 양식을 통해 문의해 주세요.",
     "contact.personalNote.formNote": "※⁠양식 내용은 이메일로 접수됩니다.",
     "contact.form.type": "문의 유형",
     "contact.form.type.bug": "오류 신고",
@@ -637,8 +726,10 @@
     "contact.form.messagePlaceholder": "가능한 한 자세히 작성해 주세요",
     "contact.form.messageHint": "1,000자 이내로 작성해 주세요.",
     "contact.form.attachments": "이미지・동영상 첨부(선택)",
-    "contact.form.attachmentsHint": "이미지는 1장당 최대 5MB, 동영상은 1개당 최대 15MB, 합계 최대 20MB・최대 3개까지 첨부할 수 있습니다(PNG, JPEG, WebP, GIF, MP4, MOV, WebM).",
-    "contact.error.attachments": "첨부 파일의 개수 또는 용량이 제한을 초과했습니다.",
+    "contact.form.attachmentsHint":
+      "이미지는 1장당 최대 5MB, 동영상은 1개당 최대 15MB, 합계 최대 20MB・최대 3개까지 첨부할 수 있습니다(PNG, JPEG, WebP, GIF, MP4, MOV, WebM).",
+    "contact.error.attachments":
+      "첨부 파일의 개수 또는 용량이 제한을 초과했습니다.",
     "contact.form.agree.pre": "",
     "contact.form.agree.link": "개인정보처리방침",
     "contact.form.agree.post": "에 동의하고 제출합니다",
@@ -649,19 +740,24 @@
     "contact.error.tooLong": "글자 수 제한을 초과했습니다.",
     "contact.error.agree": "개인정보처리방침에 동의해 주세요.",
     "contact.status.successTitle": "문의가 접수되었습니다.",
-    "contact.status.successBody": "연락 주셔서 감사합니다. 내용을 확인한 후 필요 시 답변드리겠습니다.",
+    "contact.status.successBody":
+      "연락 주셔서 감사합니다. 내용을 확인한 후 필요 시 답변드리겠습니다.",
     "contact.status.errorTitle": "전송에 실패했습니다.",
     "contact.status.errorBody": "잠시 후 다시 시도해 주세요.",
-    "contact.status.rateLimitBody": "짧은 시간에 전송이 집중되었습니다. 잠시 후 다시 시도해 주세요.",
+    "contact.status.rateLimitBody":
+      "짧은 시간에 전송이 집중되었습니다. 잠시 후 다시 시도해 주세요.",
 
     "meta.contact.title": "문의하기 | NIARIM",
-    "meta.contact.description": "NIARIM 팀에 오류 신고, 기능 요청, 사용법 문의를 남겨 주세요.",
+    "meta.contact.description":
+      "NIARIM 팀에 오류 신고, 기능 요청, 사용법 문의를 남겨 주세요.",
 
     "meta.features.title": "기능 소개 | NIARIM",
-    "meta.features.description": "NIARIM의 드로잉, 애니메이션, 편집, 오디오, 내보내기 기능을 소개합니다.",
+    "meta.features.description":
+      "NIARIM의 드로잉, 애니메이션, 편집, 오디오, 내보내기 기능을 소개합니다.",
     "featuresPage.eyebrow": "Features",
     "featuresPage.title": "NIARIM으로 할 수 있는 것",
-    "featuresPage.lead": "그리는 과정부터 움직이고 내보내는 과정까지, NIARIM이 제작의 모든 과정을 지원합니다.",
+    "featuresPage.lead":
+      "그리는 과정부터 움직이고 내보내는 과정까지, NIARIM이 제작의 모든 과정을 지원합니다.",
     "featuresPage.nav.drawing": "드로잉",
     "featuresPage.nav.animation": "애니메이션",
     "featuresPage.nav.editing": "편집",
@@ -669,69 +765,98 @@
     "featuresPage.nav.export": "내보내기",
 
     "featuresPage.drawing.title": "Drawing｜드로잉",
-    "featuresPage.drawing.lead": "목적에 맞게 선택할 수 있는 다양한 브러시와 드로잉 설정.",
+    "featuresPage.drawing.lead":
+      "목적에 맞게 선택할 수 있는 다양한 브러시와 드로잉 설정.",
     "featuresPage.drawing.item1.title": "G펜",
     "featuresPage.drawing.item1.body": "강약이 있는, 윤곽선에 적합한 펜입니다.",
     "featuresPage.drawing.item2.title": "펜",
-    "featuresPage.drawing.item2.body": "균일한 선을 그릴 수 있는 표준 펜입니다.",
+    "featuresPage.drawing.item2.body":
+      "균일한 선을 그릴 수 있는 표준 펜입니다.",
     "featuresPage.drawing.item3.title": "에어브러시",
-    "featuresPage.drawing.item3.body": "부드러운 그러데이션을 표현할 수 있습니다.",
+    "featuresPage.drawing.item3.body":
+      "부드러운 그러데이션을 표현할 수 있습니다.",
     "featuresPage.drawing.item4.title": "사용자 펜",
-    "featuresPage.drawing.item4.body": "자신에게 맞는 필기감으로 조정할 수 있습니다.",
+    "featuresPage.drawing.item4.body":
+      "자신에게 맞는 필기감으로 조정할 수 있습니다.",
     "featuresPage.drawing.item5.title": "색상 선택・투명색",
-    "featuresPage.drawing.item5.body": "자유로운 색상 선택과, 지우개처럼 사용할 수 있는 투명색을 지원합니다.",
+    "featuresPage.drawing.item5.body":
+      "자유로운 색상 선택과, 지우개처럼 사용할 수 있는 투명색을 지원합니다.",
     "featuresPage.drawing.item6.title": "불투명도",
-    "featuresPage.drawing.item6.body": "브러시의 불투명도를 세밀하게 조절할 수 있습니다.",
+    "featuresPage.drawing.item6.body":
+      "브러시의 불투명도를 세밀하게 조절할 수 있습니다.",
     "featuresPage.drawing.item7.title": "확대・이동",
     "featuresPage.drawing.item7.body": "세부까지 확대하여 그릴 수 있습니다.",
     "featuresPage.drawing.item8.title": "지우개",
-    "featuresPage.drawing.item8.body": "그린 선을 부분적으로 지울 수 있는 표준 지우개입니다.",
+    "featuresPage.drawing.item8.body":
+      "그린 선을 부분적으로 지울 수 있는 표준 지우개입니다.",
     "featuresPage.drawing.item9.title": "페인트통・올가미 채우기",
-    "featuresPage.drawing.item9.body": "둘러싸인 영역을 채우는 「페인트통」과, 올가미로 둘러싼 영역을 채우는 「올가미 채우기」를 지원합니다.",
+    "featuresPage.drawing.item9.body":
+      "둘러싸인 영역을 채우는 「페인트통」과, 올가미로 둘러싼 영역을 채우는 「올가미 채우기」를 지원합니다.",
     "featuresPage.drawing.item10.title": "스포이드",
-    "featuresPage.drawing.item10.body": "캔버스 위의 색을 추출해 곧바로 그리기 색으로 설정할 수 있습니다.",
+    "featuresPage.drawing.item10.body":
+      "캔버스 위의 색을 추출해 곧바로 그리기 색으로 설정할 수 있습니다.",
     "featuresPage.drawing.item11.title": "선택 도구",
-    "featuresPage.drawing.item11.body": "사각형이나 올가미로 범위를 선택해 이동・변형・삭제 등의 편집을 할 수 있습니다.",
+    "featuresPage.drawing.item11.body":
+      "사각형이나 올가미로 범위를 선택해 이동・변형・삭제 등의 편집을 할 수 있습니다.",
     "featuresPage.drawing.item12.title": "손가락 도구",
-    "featuresPage.drawing.item12.body": "손가락으로 문지르듯 그림을 왜곡하거나 가우시안 블러와 모자이크 효과를 직접 그릴 수 있습니다. 길게 누르거나 위로 스와이프해 하위 도구를 전환합니다.",
+    "featuresPage.drawing.item12.body":
+      "손가락으로 문지르듯 그림을 왜곡하거나 가우시안 블러와 모자이크 효과를 직접 그릴 수 있습니다. 길게 누르거나 위로 스와이프해 하위 도구를 전환합니다.",
     "featuresPage.drawing.item13.title": "도형 도구",
-    "featuresPage.drawing.item13.body": "직선・원・사각형 등 깔끔한 도형을 한 번에 그릴 수 있습니다.",
+    "featuresPage.drawing.item13.body":
+      "직선・원・사각형 등 깔끔한 도형을 한 번에 그릴 수 있습니다.",
     "featuresPage.drawing.item14.title": "브러시 세부 설정",
-    "featuresPage.drawing.item14.body": "페이드・스트로크 감쇠・혼색・필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
+    "featuresPage.drawing.item14.body":
+      "페이드・스트로크 감쇠・혼색・필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
 
     "featuresPage.animation.title": "Animation｜애니메이션",
-    "featuresPage.animation.lead": "프레임을 쌓아 타임라인에서 움직임을 구성합니다.",
+    "featuresPage.animation.lead":
+      "프레임을 쌓아 타임라인에서 움직임을 구성합니다.",
     "featuresPage.animation.item1.title": "프레임",
-    "featuresPage.animation.item1.body": "한 장씩 프레임을 추가해 그림을 쌓아갑니다.",
+    "featuresPage.animation.item1.body":
+      "한 장씩 프레임을 추가해 그림을 쌓아갑니다.",
     "featuresPage.animation.item2.title": "타임라인",
-    "featuresPage.animation.item2.body": "프레임뿐 아니라 이미지・동영상・음성・공통 레이어・카메라 키프레임 등을 하나의 타임라인에서 관리할 수 있습니다. 장면(씬)을 나누어 작품을 정리할 수도 있습니다.",
+    "featuresPage.animation.item2.body":
+      "프레임뿐 아니라 이미지・동영상・음성・공통 레이어・카메라 키프레임 등을 하나의 타임라인에서 관리할 수 있습니다. 장면(씬)을 나누어 작품을 정리할 수도 있습니다.",
     "featuresPage.animation.item3.title": "프레임 편집",
-    "featuresPage.animation.item3.body": "원하는 프레임을 선택해 다시 그릴 수 있습니다.",
+    "featuresPage.animation.item3.body":
+      "원하는 프레임을 선택해 다시 그릴 수 있습니다.",
     "featuresPage.animation.item4.title": "애니메이션 미리보기",
-    "featuresPage.animation.item4.body": "제작 중인 움직임을 언제든지 확인할 수 있습니다.",
+    "featuresPage.animation.item4.body":
+      "제작 중인 움직임을 언제든지 확인할 수 있습니다.",
     "featuresPage.animation.item5.title": "카메라 워크(키프레임 애니메이션)",
-    "featuresPage.animation.item5.body": "위치・확대・회전을 키프레임으로 지정하면, 부드러운 카메라 워크를 자동으로 보간해 줍니다. 레이어 자체를 다시 그릴 필요가 없습니다.",
+    "featuresPage.animation.item5.body":
+      "위치・확대・회전을 키프레임으로 지정하면, 부드러운 카메라 워크를 자동으로 보간해 줍니다. 레이어 자체를 다시 그릴 필요가 없습니다.",
     "featuresPage.animation.item6.title": "레이어 그룹",
-    "featuresPage.animation.item6.body": "여러 레이어를 그룹으로 묶으면, 하나의 키프레임으로 한꺼번에 움직일 수 있습니다.",
+    "featuresPage.animation.item6.body":
+      "여러 레이어를 그룹으로 묶으면, 하나의 키프레임으로 한꺼번에 움직일 수 있습니다.",
 
     "featuresPage.editing.title": "Editing｜편집",
-    "featuresPage.editing.lead": "만족할 때까지 다시 그릴 수 있는 편집의 자유로움.",
-    "featuresPage.editing.item1.title": "레이어를 나누면 언제든 다시 그릴 수 있어요",
-    "featuresPage.editing.item1.body": "선화・색・배경 등을 레이어로 나눠두면, 색만 다시 칠하고 싶을 때도 선화를 건드리지 않고 조정할 수 있습니다.",
+    "featuresPage.editing.lead":
+      "만족할 때까지 다시 그릴 수 있는 편집의 자유로움.",
+    "featuresPage.editing.item1.title":
+      "레이어를 나누면 언제든 다시 그릴 수 있어요",
+    "featuresPage.editing.item1.body":
+      "선화・색・배경 등을 레이어로 나눠두면, 색만 다시 칠하고 싶을 때도 선화를 건드리지 않고 조정할 수 있습니다.",
     "featuresPage.editing.item2.title": "채우기",
     "featuresPage.editing.item2.body": "닫힌 영역을 빠르게 채울 수 있습니다.",
     "featuresPage.editing.item3.title": "허용값",
-    "featuresPage.editing.item3.body": "채우기 범위의 허용값을 조절할 수 있습니다.",
+    "featuresPage.editing.item3.body":
+      "채우기 범위의 허용값을 조절할 수 있습니다.",
     "featuresPage.editing.item4.title": "레이어",
-    "featuresPage.editing.item4.body": "요소별로 레이어를 나누어 관리할 수 있습니다.",
+    "featuresPage.editing.item4.body":
+      "요소별로 레이어를 나누어 관리할 수 있습니다.",
     "featuresPage.editing.item5.title": "공통 레이어",
-    "featuresPage.editing.item5.body": "배경 등 여러 프레임에서 재사용하고 싶은 그림을 한 장으로 모아두면, 변경 사항이 모든 프레임에 자동으로 반영됩니다.",
+    "featuresPage.editing.item5.body":
+      "배경 등 여러 프레임에서 재사용하고 싶은 그림을 한 장으로 모아두면, 변경 사항이 모든 프레임에 자동으로 반영됩니다.",
     "featuresPage.editing.item6.title": "블렌드 모드",
-    "featuresPage.editing.item6.body": "곱하기・스크린 등 레이어끼리 겹치는 방식을 바꿔 표현의 폭을 넓힐 수 있습니다.",
+    "featuresPage.editing.item6.body":
+      "곱하기・스크린 등 레이어끼리 겹치는 방식을 바꿔 표현의 폭을 넓힐 수 있습니다.",
     "featuresPage.editing.item7.title": "클리핑",
-    "featuresPage.editing.item7.body": "아래 레이어의 형태에 맞춰, 위 레이어의 그리기를 그 범위로만 제한할 수 있습니다.",
+    "featuresPage.editing.item7.body":
+      "아래 레이어의 형태에 맞춰, 위 레이어의 그리기를 그 범위로만 제한할 수 있습니다.",
     "featuresPage.editing.item8.title": "자유 변형・메시 변형",
-    "featuresPage.editing.item8.body": "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다. 메시 변형은 최대 10×10 격자를 사용해 레이어를 자유롭게 변형합니다.",
+    "featuresPage.editing.item8.body":
+      "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다. 메시 변형은 최대 10×10 격자를 사용해 레이어를 자유롭게 변형합니다.",
 
     "featuresPage.audio.title": "Audio｜오디오",
     "featuresPage.audio.lead": "작품에 소리를 더하는 기본적인 오디오 기능.",
@@ -740,41 +865,57 @@
     "featuresPage.audio.item2.title": "음량",
     "featuresPage.audio.item2.body": "음량을 조절할 수 있습니다.",
     "featuresPage.audio.item3.title": "시작 프레임",
-    "featuresPage.audio.item3.body": "오디오 재생을 시작할 프레임을 지정할 수 있습니다.",
+    "featuresPage.audio.item3.body":
+      "오디오 재생을 시작할 프레임을 지정할 수 있습니다.",
     "featuresPage.audio.item4.title": "페이드 인・페이드 아웃",
-    "featuresPage.audio.item4.body": "음성의 시작과 끝을 부드럽게 조정할 수 있습니다.",
+    "featuresPage.audio.item4.body":
+      "음성의 시작과 끝을 부드럽게 조정할 수 있습니다.",
     "featuresPage.audio.item5.title": "타임스탬프",
-    "featuresPage.audio.item5.body": "특정 프레임에 코멘트가 달린 표시를 남길 수 있습니다. 소리에 맞춘 입 모양이나 동작 타이밍을 확인하는 표시로 사용할 수 있습니다.",
+    "featuresPage.audio.item5.body":
+      "특정 프레임에 코멘트가 달린 표시를 남길 수 있습니다. 소리에 맞춘 입 모양이나 동작 타이밍을 확인하는 표시로 사용할 수 있습니다.",
     "featuresPage.audio.item6.title": "파형 표시",
-    "featuresPage.audio.item6.body": "음성 클립에는 파형이 옅게 겹쳐 표시되어, 소리의 강약을 보면서 타임라인 상의 배치를 조정할 수 있습니다.",
+    "featuresPage.audio.item6.body":
+      "음성 클립에는 파형이 옅게 겹쳐 표시되어, 소리의 강약을 보면서 타임라인 상의 배치를 조정할 수 있습니다.",
 
     "featuresPage.export.title": "Export｜내보내기",
     "featuresPage.export.lead": "완성한 작품을 영상으로 전달합니다.",
     "featuresPage.export.item1.title": "해상도",
-    "featuresPage.export.item1.body": "최대 1920×1920까지의 해상도로 내보낼 수 있습니다.",
+    "featuresPage.export.item1.body":
+      "최대 1920×1920까지의 해상도로 내보낼 수 있습니다.",
     "featuresPage.export.item2.title": "화면 비율",
-    "featuresPage.export.item2.body": "화면 비율을 자유롭게 설정할 수 있습니다.",
+    "featuresPage.export.item2.body":
+      "화면 비율을 자유롭게 설정할 수 있습니다.",
     "featuresPage.export.item3.title": "영상 내보내기",
-    "featuresPage.export.item3.body": "제작한 작품을 영상 파일로 내보낼 수 있습니다.",
+    "featuresPage.export.item3.body":
+      "제작한 작품을 영상 파일로 내보낼 수 있습니다.",
     "featuresPage.export.item4.title": "내보내기 형식",
-    "featuresPage.export.item4.body": "MP4・WebM・GIF・AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
+    "featuresPage.export.item4.body":
+      "MP4・WebM・GIF・AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
     "featuresPage.export.item5.title": "제작・내보내기 시간 상한",
-    "featuresPage.export.item5.body": "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작・내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
+    "featuresPage.export.item5.body":
+      "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작・내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
     "featuresPage.export.item6.title": "스틸 이미지 내보내기",
-    "featuresPage.export.item6.body": "타임라인에 현재 표시된 프레임 한 장을 PNG 또는 JPEG 이미지로 저장할 수 있습니다.",
+    "featuresPage.export.item6.body":
+      "타임라인에 현재 표시된 프레임 한 장을 PNG 또는 JPEG 이미지로 저장할 수 있습니다.",
 
     "meta.news.title": "소식 | NIARIM",
-    "meta.news.description": "NIARIM의 정식 출시, 업데이트, 점검 정보를 안내합니다.",
+    "meta.news.description":
+      "NIARIM의 정식 출시, 업데이트, 점검 정보를 안내합니다.",
     "newsPage.eyebrow": "News",
     "newsPage.title": "소식",
-    "newsPage.lead": "정식 출시, 업데이트, 점검 등의 정보를 이곳에서 안내합니다.",
-    "newsPage.empty": "현재 공개된 소식이 없습니다. 새로운 정보가 있으면 이곳에 게시됩니다.",
+    "newsPage.lead":
+      "정식 출시, 업데이트, 점검 등의 정보를 이곳에서 안내합니다.",
+    "newsPage.empty":
+      "현재 공개된 소식이 없습니다. 새로운 정보가 있으면 이곳에 게시됩니다.",
 
     "meta.privacy.title": "개인정보처리방침 | NIARIM",
-    "meta.privacy.description": "NIARIM 공식 사이트 및 앱의 개인정보처리방침입니다.",
+    "meta.privacy.description":
+      "NIARIM 공식 사이트 및 앱의 개인정보처리방침입니다.",
     "legal.updated": "최종 업데이트: 2026년 8월 31일",
-    "legal.notice.privacy": "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
-    "legal.notice.terms": "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
+    "legal.notice.privacy":
+      "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
+    "legal.notice.terms":
+      "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
 
     "meta.terms.title": "이용약관 | NIARIM",
     "meta.terms.description": "NIARIM 공식 사이트 및 앱의 이용약관입니다.",
@@ -782,7 +923,8 @@
     "meta.404.title": "페이지를 찾을 수 없습니다 | NIARIM",
     "error404.eyebrow": "404",
     "error404.title": "이 프레임을 찾을 수 없습니다.",
-    "error404.body": "찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다. URL을 확인하시거나 홈에서 다시 시작해 주세요.",
+    "error404.body":
+      "찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다. URL을 확인하시거나 홈에서 다시 시작해 주세요.",
     "error404.cta": "홈으로 돌아가기",
   };
 
@@ -797,7 +939,8 @@
     "common.readMore": "En savoir plus",
     "common.backHome": "Retour à l'accueil",
 
-    "meta.home.title": "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
+    "meta.home.title":
+      "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
     "meta.home.description":
       "NIARIM est une application de création qui transforme les images que vous dessinez, image par image, en une animation que vous exportez vous-même. Dessin, timeline et calques donnent vie à votre histoire.",
 
@@ -811,7 +954,8 @@
       "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Galerie »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
     "hero.cta.primary": "Télécharger l'application",
     "hero.cta.secondary": "Voir les fonctionnalités",
-    "hero.note": "Veuillez consulter la page Google Play pour les appareils compatibles et la disponibilité.",
+    "hero.note":
+      "Veuillez consulter la page Google Play pour les appareils compatibles et la disponibilité.",
 
     "intro.eyebrow": "About NIARIM",
     "intro.title": "Qu'est-ce que NIARIM",
@@ -824,18 +968,22 @@
     "intro.card2.body":
       "Empilez des images, modifiez-les sur une timeline et prévisualisez le mouvement au fur et à mesure.",
     "intro.card3.title": "Export",
-    "intro.card3.body": "Exportez vos dessins en vidéo, finalisez-les vous-même et partagez-les.",
+    "intro.card3.body":
+      "Exportez vos dessins en vidéo, finalisez-les vous-même et partagez-les.",
 
     "features.eyebrow": "Core Features",
     "features.title": "Fonctionnalités principales",
-    "features.lead": "Toute fonctionnalité qui nous semblait utile, on l'a ajoutée sans compromis.",
+    "features.lead":
+      "Toute fonctionnalité qui nous semblait utile, on l'a ajoutée sans compromis.",
     "features.drawing.title": "Dessinez exactement comme vous le souhaitez",
     "features.drawing.body":
       "Passez du stylo G au stylo, à l'aérographe et à un pinceau personnalisable. Ajustez la couleur, la transparence et l'opacité, et zoomez ou déplacez-vous pour les détails.",
-    "features.animation.title": "Construisez le mouvement en empilant des images",
+    "features.animation.title":
+      "Construisez le mouvement en empilant des images",
     "features.animation.body":
       "Ajoutez et modifiez des images sur une timeline, et prévisualisez l'animation pendant que vous travaillez.",
-    "features.editing.title": "La liberté de recommencer autant de fois que vous le souhaitez",
+    "features.editing.title":
+      "La liberté de recommencer autant de fois que vous le souhaitez",
     "features.editing.body":
       "Le remplissage avec tolérance réglable et la gestion par calques séparés vous permettent d'affiner jusqu'à ce que ce soit parfait.",
     "features.export.title": "Exportez et partagez votre travail",
@@ -869,7 +1017,8 @@
       "Oui. Vous pouvez exporter votre travail en vidéo, jusqu'à une résolution de 1920×1920, avec un rapport d'aspect librement configurable.",
     "faq.q5": "Puis-je partager ce que j'ai créé ?",
     "faq.q6": "Dois-je créer un compte ?",
-    "faq.a6": "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
+    "faq.a6":
+      "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
     "faq.q7": "Où puis-je signaler un bug ou demander une fonctionnalité ?",
     "faq.a7":
       "Veuillez utiliser le formulaire de contact de ce site pour envoyer un signalement de bug ou une demande de fonctionnalité.",
@@ -896,7 +1045,8 @@
     "contact.channel.link": "Nous contacter sur X",
     "contact.personalNote":
       "Nous ne pouvons pas traiter sur X les demandes impliquant des informations personnelles (compte, adresse e-mail, etc.). Merci d'utiliser le formulaire à droite.",
-    "contact.personalNote.formNote": "※ Les messages envoyés via ce formulaire sont reçus par e-mail.",
+    "contact.personalNote.formNote":
+      "※ Les messages envoyés via ce formulaire sont reçus par e-mail.",
     "contact.form.type": "Type de demande",
     "contact.form.type.bug": "Signalement de bug",
     "contact.form.type.request": "Demande de fonctionnalité",
@@ -908,12 +1058,15 @@
     "contact.form.email": "Adresse e-mail",
     "contact.form.emailPlaceholder": "ex. example@niarim.com",
     "contact.form.message": "Message",
-    "contact.form.messagePlaceholder": "Merci de préciser autant de détails que possible.",
-    "contact.form.messageHint": "Veuillez rester dans la limite de 1 000 caractères.",
+    "contact.form.messagePlaceholder":
+      "Merci de préciser autant de détails que possible.",
+    "contact.form.messageHint":
+      "Veuillez rester dans la limite de 1 000 caractères.",
     "contact.form.attachments": "Joindre des images ou vidéos (facultatif)",
     "contact.form.attachmentsHint":
       "5 Mo maximum par image, 15 Mo maximum par vidéo, 20 Mo au total, jusqu'à 3 fichiers (PNG, JPEG, WebP, GIF, MP4, MOV ou WebM).",
-    "contact.error.attachments": "Trop de fichiers, ou la taille totale dépasse la limite.",
+    "contact.error.attachments":
+      "Trop de fichiers, ou la taille totale dépasse la limite.",
     "contact.form.agree.pre": "J'accepte la",
     "contact.form.agree.link": "politique de confidentialité",
     "contact.form.agree.post": "et consens à l'envoi de ce formulaire",
@@ -922,7 +1075,8 @@
     "contact.error.required": "Ce champ est obligatoire.",
     "contact.error.email": "Veuillez saisir une adresse e-mail valide.",
     "contact.error.tooLong": "Cela dépasse la limite de caractères.",
-    "contact.error.agree": "Vous devez accepter la politique de confidentialité.",
+    "contact.error.agree":
+      "Vous devez accepter la politique de confidentialité.",
     "contact.status.successTitle": "Votre message a bien été reçu.",
     "contact.status.successBody":
       "Merci de nous avoir contactés. Nous examinerons votre message et vous répondrons si nécessaire.",
@@ -949,109 +1103,156 @@
     "featuresPage.nav.export": "Export",
 
     "featuresPage.drawing.title": "Drawing｜Dessin",
-    "featuresPage.drawing.lead": "Plusieurs pinceaux et réglages de dessin pour chaque usage.",
+    "featuresPage.drawing.lead":
+      "Plusieurs pinceaux et réglages de dessin pour chaque usage.",
     "featuresPage.drawing.item1.title": "Stylo G",
-    "featuresPage.drawing.item1.body": "Un stylo sensible à la pression, adapté aux contours.",
+    "featuresPage.drawing.item1.body":
+      "Un stylo sensible à la pression, adapté aux contours.",
     "featuresPage.drawing.item2.title": "Stylo",
-    "featuresPage.drawing.item2.body": "Un stylo standard qui trace des lignes régulières.",
+    "featuresPage.drawing.item2.body":
+      "Un stylo standard qui trace des lignes régulières.",
     "featuresPage.drawing.item3.title": "Aérographe",
     "featuresPage.drawing.item3.body": "Créez des dégradés doux.",
     "featuresPage.drawing.item4.title": "Pinceau personnalisé",
-    "featuresPage.drawing.item4.body": "Ajustez la sensation de trait selon votre style.",
+    "featuresPage.drawing.item4.body":
+      "Ajustez la sensation de trait selon votre style.",
     "featuresPage.drawing.item5.title": "Couleur et couleur transparente",
-    "featuresPage.drawing.item5.body": "Choix de couleur libre, plus une couleur transparente façon gomme.",
+    "featuresPage.drawing.item5.body":
+      "Choix de couleur libre, plus une couleur transparente façon gomme.",
     "featuresPage.drawing.item6.title": "Opacité",
     "featuresPage.drawing.item6.body": "Ajustez finement l'opacité du pinceau.",
     "featuresPage.drawing.item7.title": "Zoom et panoramique",
     "featuresPage.drawing.item7.body": "Zoomez pour travailler les détails.",
     "featuresPage.drawing.item8.title": "Gomme",
-    "featuresPage.drawing.item8.body": "Une gomme standard pour effacer une partie de votre dessin.",
-    "featuresPage.drawing.item9.title": "Pot de peinture et remplissage au lasso",
-    "featuresPage.drawing.item9.body": "Remplissez une zone fermée avec le « pot de peinture », ou une zone entourée au lasso avec le « remplissage au lasso ».",
+    "featuresPage.drawing.item8.body":
+      "Une gomme standard pour effacer une partie de votre dessin.",
+    "featuresPage.drawing.item9.title":
+      "Pot de peinture et remplissage au lasso",
+    "featuresPage.drawing.item9.body":
+      "Remplissez une zone fermée avec le « pot de peinture », ou une zone entourée au lasso avec le « remplissage au lasso ».",
     "featuresPage.drawing.item10.title": "Pipette",
-    "featuresPage.drawing.item10.body": "Prélevez une couleur sur le canevas et définissez-la aussitôt comme couleur de dessin.",
+    "featuresPage.drawing.item10.body":
+      "Prélevez une couleur sur le canevas et définissez-la aussitôt comme couleur de dessin.",
     "featuresPage.drawing.item11.title": "Outil de sélection",
-    "featuresPage.drawing.item11.body": "Sélectionnez une zone au rectangle ou au lasso, puis déplacez-la, transformez-la ou supprimez-la.",
+    "featuresPage.drawing.item11.body":
+      "Sélectionnez une zone au rectangle ou au lasso, puis déplacez-la, transformez-la ou supprimez-la.",
     "featuresPage.drawing.item12.title": "Outil doigt",
-    "featuresPage.drawing.item12.body": "Déformez le dessin comme avec le doigt, ou peignez directement des effets de flou gaussien et de mosaïque. Maintenez ou balayez vers le haut pour changer de sous-outil.",
+    "featuresPage.drawing.item12.body":
+      "Déformez le dessin comme avec le doigt, ou peignez directement des effets de flou gaussien et de mosaïque. Maintenez ou balayez vers le haut pour changer de sous-outil.",
     "featuresPage.drawing.item13.title": "Outil formes",
-    "featuresPage.drawing.item13.body": "Tracez lignes droites, cercles et rectangles nets d'un simple geste.",
+    "featuresPage.drawing.item13.body":
+      "Tracez lignes droites, cercles et rectangles nets d'un simple geste.",
     "featuresPage.drawing.item14.title": "Réglages détaillés du pinceau",
-    "featuresPage.drawing.item14.body": "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
+    "featuresPage.drawing.item14.body":
+      "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
 
     "featuresPage.animation.title": "Animation",
-    "featuresPage.animation.lead": "Empilez des images et construisez le mouvement sur une timeline.",
+    "featuresPage.animation.lead":
+      "Empilez des images et construisez le mouvement sur une timeline.",
     "featuresPage.animation.item1.title": "Images",
-    "featuresPage.animation.item1.body": "Ajoutez les images une à une pour construire le dessin.",
+    "featuresPage.animation.item1.body":
+      "Ajoutez les images une à une pour construire le dessin.",
     "featuresPage.animation.item2.title": "Timeline",
-    "featuresPage.animation.item2.body": "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l'organiser.",
+    "featuresPage.animation.item2.body":
+      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l'organiser.",
     "featuresPage.animation.item3.title": "Édition d'image",
-    "featuresPage.animation.item3.body": "Sélectionnez n'importe quelle image et redessinez-la.",
+    "featuresPage.animation.item3.body":
+      "Sélectionnez n'importe quelle image et redessinez-la.",
     "featuresPage.animation.item4.title": "Aperçu de l'animation",
-    "featuresPage.animation.item4.body": "Vérifiez le mouvement à tout moment pendant le travail.",
-    "featuresPage.animation.item5.title": "Mouvement de caméra (animation par images clés)",
-    "featuresPage.animation.item5.body": "Définissez la position, le zoom et la rotation sous forme d'images clés : l'application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
+    "featuresPage.animation.item4.body":
+      "Vérifiez le mouvement à tout moment pendant le travail.",
+    "featuresPage.animation.item5.title":
+      "Mouvement de caméra (animation par images clés)",
+    "featuresPage.animation.item5.body":
+      "Définissez la position, le zoom et la rotation sous forme d'images clés : l'application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
     "featuresPage.animation.item6.title": "Groupes de calques",
-    "featuresPage.animation.item6.body": "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
+    "featuresPage.animation.item6.body":
+      "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
 
     "featuresPage.editing.title": "Editing｜Édition",
-    "featuresPage.editing.lead": "La liberté de recommencer jusqu'à ce que ce soit parfait.",
-    "featuresPage.editing.item1.title": "Redessinez librement grâce aux calques séparés",
-    "featuresPage.editing.item1.body": "Gardez le trait, la couleur et les arrière-plans sur des calques séparés, pour pouvoir refaire juste la coloration sans toucher au trait.",
+    "featuresPage.editing.lead":
+      "La liberté de recommencer jusqu'à ce que ce soit parfait.",
+    "featuresPage.editing.item1.title":
+      "Redessinez librement grâce aux calques séparés",
+    "featuresPage.editing.item1.body":
+      "Gardez le trait, la couleur et les arrière-plans sur des calques séparés, pour pouvoir refaire juste la coloration sans toucher au trait.",
     "featuresPage.editing.item2.title": "Remplissage",
-    "featuresPage.editing.item2.body": "Remplissez rapidement les zones fermées.",
+    "featuresPage.editing.item2.body":
+      "Remplissez rapidement les zones fermées.",
     "featuresPage.editing.item3.title": "Tolérance",
-    "featuresPage.editing.item3.body": "Ajustez la tolérance utilisée pour le remplissage.",
+    "featuresPage.editing.item3.body":
+      "Ajustez la tolérance utilisée pour le remplissage.",
     "featuresPage.editing.item4.title": "Calques",
-    "featuresPage.editing.item4.body": "Gérez les éléments séparément grâce aux calques.",
+    "featuresPage.editing.item4.body":
+      "Gérez les éléments séparément grâce aux calques.",
     "featuresPage.editing.item5.title": "Calques communs",
-    "featuresPage.editing.item5.body": "Regroupez sur un seul calque ce que vous réutilisez d'une image à l'autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
+    "featuresPage.editing.item5.body":
+      "Regroupez sur un seul calque ce que vous réutilisez d'une image à l'autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
     "featuresPage.editing.item6.title": "Modes de fusion",
-    "featuresPage.editing.item6.body": "Changez la façon dont les calques se superposent (produit, écran, etc.) pour élargir vos possibilités d'expression.",
+    "featuresPage.editing.item6.body":
+      "Changez la façon dont les calques se superposent (produit, écran, etc.) pour élargir vos possibilités d'expression.",
     "featuresPage.editing.item7.title": "Écrêtage (clipping)",
-    "featuresPage.editing.item7.body": "Limitez le dessin d'un calque à la forme du calque situé en dessous.",
+    "featuresPage.editing.item7.body":
+      "Limitez le dessin d'un calque à la forme du calque situé en dessous.",
     "featuresPage.editing.item8.title": "Transformation libre et par maillage",
-    "featuresPage.editing.item8.body": "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage. Celle-ci utilise une grille pouvant aller jusqu'à 10×10 pour déformer librement un calque.",
+    "featuresPage.editing.item8.body":
+      "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage. Celle-ci utilise une grille pouvant aller jusqu'à 10×10 pour déformer librement un calque.",
 
     "featuresPage.audio.title": "Audio",
-    "featuresPage.audio.lead": "Des fonctions audio de base pour sonoriser votre œuvre.",
+    "featuresPage.audio.lead":
+      "Des fonctions audio de base pour sonoriser votre œuvre.",
     "featuresPage.audio.item1.title": "Ajouter un son",
     "featuresPage.audio.item1.body": "Ajoutez un fichier audio à votre projet.",
     "featuresPage.audio.item2.title": "Volume",
     "featuresPage.audio.item2.body": "Ajustez le volume.",
     "featuresPage.audio.item3.title": "Image de départ",
-    "featuresPage.audio.item3.body": "Indiquez à partir de quelle image l'audio commence à jouer.",
+    "featuresPage.audio.item3.body":
+      "Indiquez à partir de quelle image l'audio commence à jouer.",
     "featuresPage.audio.item4.title": "Fondu d'entrée et de sortie",
-    "featuresPage.audio.item4.body": "Adoucissez le début et la fin de votre piste audio.",
+    "featuresPage.audio.item4.body":
+      "Adoucissez le début et la fin de votre piste audio.",
     "featuresPage.audio.item5.title": "Horodatages",
-    "featuresPage.audio.item5.body": "Placez un repère commenté sur une image précise — pratique pour synchroniser un mouvement de bouche ou une action avec le son.",
+    "featuresPage.audio.item5.body":
+      "Placez un repère commenté sur une image précise — pratique pour synchroniser un mouvement de bouche ou une action avec le son.",
     "featuresPage.audio.item6.title": "Affichage de la forme d'onde",
-    "featuresPage.audio.item6.body": "Les clips audio affichent une forme d'onde en surimpression légère, pour ajuster leur placement sur la timeline tout en voyant l'intensité du son.",
+    "featuresPage.audio.item6.body":
+      "Les clips audio affichent une forme d'onde en surimpression légère, pour ajuster leur placement sur la timeline tout en voyant l'intensité du son.",
 
     "featuresPage.export.title": "Export",
-    "featuresPage.export.lead": "Livrez votre travail terminé sous forme de vidéo.",
+    "featuresPage.export.lead":
+      "Livrez votre travail terminé sous forme de vidéo.",
     "featuresPage.export.item1.title": "Résolution",
-    "featuresPage.export.item1.body": "Exportez jusqu'à une résolution de 1920×1920.",
+    "featuresPage.export.item1.body":
+      "Exportez jusqu'à une résolution de 1920×1920.",
     "featuresPage.export.item2.title": "Rapport d'aspect",
-    "featuresPage.export.item2.body": "Définissez librement le rapport d'aspect.",
+    "featuresPage.export.item2.body":
+      "Définissez librement le rapport d'aspect.",
     "featuresPage.export.item3.title": "Export vidéo",
-    "featuresPage.export.item3.body": "Exportez votre travail terminé sous forme de fichier vidéo.",
+    "featuresPage.export.item3.body":
+      "Exportez votre travail terminé sous forme de fichier vidéo.",
     "featuresPage.export.item4.title": "Formats d'export",
-    "featuresPage.export.item4.body": "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
+    "featuresPage.export.item4.body":
+      "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
     "featuresPage.export.item5.title": "Limite de durée par œuvre",
-    "featuresPage.export.item5.body": "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
+    "featuresPage.export.item5.body":
+      "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
     "featuresPage.export.item6.title": "Export d'image fixe",
-    "featuresPage.export.item6.body": "Enregistrez l'image actuellement affichée dans la timeline au format PNG ou JPEG.",
+    "featuresPage.export.item6.body":
+      "Enregistrez l'image actuellement affichée dans la timeline au format PNG ou JPEG.",
 
     "meta.news.title": "Actualités | NIARIM",
-    "meta.news.description": "Annonces de lancement officiel, mises à jour et maintenance de NIARIM.",
+    "meta.news.description":
+      "Annonces de lancement officiel, mises à jour et maintenance de NIARIM.",
     "newsPage.eyebrow": "News",
     "newsPage.title": "Actualités",
-    "newsPage.lead": "Les annonces de lancement officiel, mises à jour et maintenance seront publiées ici.",
-    "newsPage.empty": "Aucune annonce pour le moment. Les nouvelles informations seront publiées ici.",
+    "newsPage.lead":
+      "Les annonces de lancement officiel, mises à jour et maintenance seront publiées ici.",
+    "newsPage.empty":
+      "Aucune annonce pour le moment. Les nouvelles informations seront publiées ici.",
 
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
-    "meta.privacy.description": "La politique de confidentialité du site officiel et de l'application NIARIM.",
+    "meta.privacy.description":
+      "La politique de confidentialité du site officiel et de l'application NIARIM.",
     "legal.updated": "Dernière mise à jour : 31 août 2026",
     "legal.notice.privacy":
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
@@ -1059,7 +1260,8 @@
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
 
     "meta.terms.title": "Conditions d'utilisation | NIARIM",
-    "meta.terms.description": "Les conditions d'utilisation du site officiel et de l'application NIARIM.",
+    "meta.terms.description":
+      "Les conditions d'utilisation du site officiel et de l'application NIARIM.",
 
     "meta.404.title": "Page introuvable | NIARIM",
     "error404.eyebrow": "404",
@@ -1080,7 +1282,8 @@
     "common.readMore": "Saber más",
     "common.backHome": "Volver al inicio",
 
-    "meta.home.title": "NIARIM | Una app de animación para dibujar, mover y contar historias",
+    "meta.home.title":
+      "NIARIM | Una app de animación para dibujar, mover y contar historias",
     "meta.home.description":
       "NIARIM es una app de creación que convierte los dibujos que haces, cuadro a cuadro, en una animación que exportas tú mismo. El dibujo, la línea de tiempo y las capas le dan vida a tu historia.",
 
@@ -1091,10 +1294,11 @@
     "hero.lead":
       "NIARIM es una app que te permite crear animación dibujada a mano de verdad, directamente desde tu smartphone. Dibuja y anima dibujo a dibujo, crea animación por fotogramas clave, o combina imágenes fijas en stop motion. Desde el dibujo hasta la animación, la edición, el sonido y la exportación: termina tu obra en una sola app.",
     "hero.bridge.html":
-      "Y una vez terminada, llévala a <a href=\"/community/\">la «Galería»</a>. Mira la obra de otra persona, y crea la siguiente. De las personas a las obras. De las obras a las personas.",
+      'Y una vez terminada, llévala a <a href="/community/">la «Galería»</a>. Mira la obra de otra persona, y crea la siguiente. De las personas a las obras. De las obras a las personas.',
     "hero.cta.primary": "Descargar la app",
     "hero.cta.secondary": "Ver funciones",
-    "hero.note": "Consulta la página de Google Play para conocer los dispositivos compatibles y la disponibilidad.",
+    "hero.note":
+      "Consulta la página de Google Play para conocer los dispositivos compatibles y la disponibilidad.",
 
     "intro.eyebrow": "About NIARIM",
     "intro.title": "Qué es NIARIM",
@@ -1107,11 +1311,13 @@
     "intro.card2.body":
       "Apila cuadros, edítalos en una línea de tiempo y previsualiza el movimiento mientras trabajas.",
     "intro.card3.title": "Export (Exportar)",
-    "intro.card3.body": "Exporta lo que has dibujado como video, termínalo con tus propias manos y compártelo.",
+    "intro.card3.body":
+      "Exporta lo que has dibujado como video, termínalo con tus propias manos y compártelo.",
 
     "features.eyebrow": "Core Features",
     "features.title": "Funciones principales",
-    "features.lead": "Toda función que pensamos que sería útil, la incluimos sin concesiones.",
+    "features.lead":
+      "Toda función que pensamos que sería útil, la incluimos sin concesiones.",
     "features.drawing.title": "Dibuja exactamente como quieras",
     "features.drawing.body":
       "Cambia entre el lápiz G, el lápiz, el aerógrafo y un pincel personalizable. Ajusta color, transparencia y opacidad, y haz zoom o desplázate para los detalles.",
@@ -1152,7 +1358,8 @@
       "Sí. Puedes exportar tu trabajo como video, hasta una resolución de 1920×1920, con una relación de aspecto configurable libremente.",
     "faq.q5": "¿Puedo compartir lo que he creado?",
     "faq.q6": "¿Necesito crear una cuenta?",
-    "faq.a6": "Consulta las especificaciones del lanzamiento oficial al respecto.",
+    "faq.a6":
+      "Consulta las especificaciones del lanzamiento oficial al respecto.",
     "faq.q7": "¿Dónde puedo reportar un error o solicitar una función?",
     "faq.a7":
       "Utiliza el formulario de contacto de este sitio para enviar reportes de errores o solicitudes de funciones.",
@@ -1179,7 +1386,8 @@
     "contact.channel.link": "Contactar por X",
     "contact.personalNote":
       "No podemos atender por X las consultas que impliquen datos personales (cuenta, correo electrónico, etc.). Usa el formulario de la derecha.",
-    "contact.personalNote.formNote": "※ Los envíos se reciben por correo electrónico.",
+    "contact.personalNote.formNote":
+      "※ Los envíos se reciben por correo electrónico.",
     "contact.form.type": "Tipo de consulta",
     "contact.form.type.bug": "Reporte de error",
     "contact.form.type.request": "Solicitud de función",
@@ -1191,12 +1399,14 @@
     "contact.form.email": "Correo electrónico",
     "contact.form.emailPlaceholder": "ej. example@niarim.com",
     "contact.form.message": "Mensaje",
-    "contact.form.messagePlaceholder": "Por favor, incluye todos los detalles posibles.",
+    "contact.form.messagePlaceholder":
+      "Por favor, incluye todos los detalles posibles.",
     "contact.form.messageHint": "Máximo 1000 caracteres.",
     "contact.form.attachments": "Adjuntar imágenes o vídeos (opcional)",
     "contact.form.attachmentsHint":
       "Hasta 5 MB por imagen, hasta 15 MB por vídeo, 20 MB en total y un máximo de 3 archivos (PNG, JPEG, WebP, GIF, MP4, MOV o WebM).",
-    "contact.error.attachments": "Demasiados archivos, o el tamaño total supera el límite.",
+    "contact.error.attachments":
+      "Demasiados archivos, o el tamaño total supera el límite.",
     "contact.form.agree.pre": "Acepto la",
     "contact.form.agree.link": "política de privacidad",
     "contact.form.agree.post": "y consiento el envío de este formulario",
@@ -1232,109 +1442,154 @@
     "featuresPage.nav.export": "Exportar",
 
     "featuresPage.drawing.title": "Drawing｜Dibujo",
-    "featuresPage.drawing.lead": "Varios pinceles y ajustes de dibujo para cada propósito.",
+    "featuresPage.drawing.lead":
+      "Varios pinceles y ajustes de dibujo para cada propósito.",
     "featuresPage.drawing.item1.title": "Lápiz G",
-    "featuresPage.drawing.item1.body": "Un lápiz sensible a la presión, ideal para contornos.",
+    "featuresPage.drawing.item1.body":
+      "Un lápiz sensible a la presión, ideal para contornos.",
     "featuresPage.drawing.item2.title": "Lápiz",
-    "featuresPage.drawing.item2.body": "Un lápiz estándar que dibuja líneas uniformes.",
+    "featuresPage.drawing.item2.body":
+      "Un lápiz estándar que dibuja líneas uniformes.",
     "featuresPage.drawing.item3.title": "Aerógrafo",
     "featuresPage.drawing.item3.body": "Crea degradados suaves.",
     "featuresPage.drawing.item4.title": "Pincel personalizado",
-    "featuresPage.drawing.item4.body": "Ajusta la sensación del trazo a tu propio estilo.",
+    "featuresPage.drawing.item4.body":
+      "Ajusta la sensación del trazo a tu propio estilo.",
     "featuresPage.drawing.item5.title": "Color y color transparente",
-    "featuresPage.drawing.item5.body": "Selección de color libre, además de un color transparente tipo goma de borrar.",
+    "featuresPage.drawing.item5.body":
+      "Selección de color libre, además de un color transparente tipo goma de borrar.",
     "featuresPage.drawing.item6.title": "Opacidad",
-    "featuresPage.drawing.item6.body": "Ajusta con precisión la opacidad del pincel.",
+    "featuresPage.drawing.item6.body":
+      "Ajusta con precisión la opacidad del pincel.",
     "featuresPage.drawing.item7.title": "Zoom y desplazamiento",
     "featuresPage.drawing.item7.body": "Haz zoom para trabajar los detalles.",
     "featuresPage.drawing.item8.title": "Goma de borrar",
-    "featuresPage.drawing.item8.body": "Una goma estándar para borrar partes de lo que has dibujado.",
+    "featuresPage.drawing.item8.body":
+      "Una goma estándar para borrar partes de lo que has dibujado.",
     "featuresPage.drawing.item9.title": "Cubo de pintura y relleno por lazo",
-    "featuresPage.drawing.item9.body": "Rellena un área cerrada con el «cubo de pintura», o un área rodeada con el lazo mediante el «relleno por lazo».",
+    "featuresPage.drawing.item9.body":
+      "Rellena un área cerrada con el «cubo de pintura», o un área rodeada con el lazo mediante el «relleno por lazo».",
     "featuresPage.drawing.item10.title": "Cuentagotas",
-    "featuresPage.drawing.item10.body": "Toma un color del lienzo y ajústalo al instante como tu color de dibujo.",
+    "featuresPage.drawing.item10.body":
+      "Toma un color del lienzo y ajústalo al instante como tu color de dibujo.",
     "featuresPage.drawing.item11.title": "Herramienta de selección",
-    "featuresPage.drawing.item11.body": "Selecciona un área con un rectángulo o un lazo, y luego muévela, transfórmala o elimínala.",
+    "featuresPage.drawing.item11.body":
+      "Selecciona un área con un rectángulo o un lazo, y luego muévela, transfórmala o elimínala.",
     "featuresPage.drawing.item12.title": "Herramienta de dedo",
-    "featuresPage.drawing.item12.body": "Deforma el dibujo como si lo arrastraras con el dedo, o pinta directamente efectos de desenfoque gaussiano y mosaico. Mantén pulsado o desliza hacia arriba para cambiar de subherramienta.",
+    "featuresPage.drawing.item12.body":
+      "Deforma el dibujo como si lo arrastraras con el dedo, o pinta directamente efectos de desenfoque gaussiano y mosaico. Mantén pulsado o desliza hacia arriba para cambiar de subherramienta.",
     "featuresPage.drawing.item13.title": "Herramienta de formas",
-    "featuresPage.drawing.item13.body": "Dibuja líneas rectas, círculos y rectángulos limpios de un solo toque.",
+    "featuresPage.drawing.item13.body":
+      "Dibuja líneas rectas, círculos y rectángulos limpios de un solo toque.",
     "featuresPage.drawing.item14.title": "Ajustes detallados del pincel",
-    "featuresPage.drawing.item14.body": "Afina la sensación de tu pincel con desvanecido, atenuación del trazo, mezcla de color, curva de presión y más.",
+    "featuresPage.drawing.item14.body":
+      "Afina la sensación de tu pincel con desvanecido, atenuación del trazo, mezcla de color, curva de presión y más.",
 
     "featuresPage.animation.title": "Animation｜Animación",
-    "featuresPage.animation.lead": "Apila cuadros y construye el movimiento en una línea de tiempo.",
+    "featuresPage.animation.lead":
+      "Apila cuadros y construye el movimiento en una línea de tiempo.",
     "featuresPage.animation.item1.title": "Cuadros",
-    "featuresPage.animation.item1.body": "Añade cuadros uno a uno, construyendo tu dibujo.",
+    "featuresPage.animation.item1.body":
+      "Añade cuadros uno a uno, construyendo tu dibujo.",
     "featuresPage.animation.item2.title": "Línea de tiempo",
-    "featuresPage.animation.item2.body": "Gestiona en una sola línea de tiempo mucho más que cuadros: imágenes, vídeo, audio, capas comunes y fotogramas clave de cámara también tienen su lugar ahí. También puedes dividir tu obra en escenas para organizarla.",
+    "featuresPage.animation.item2.body":
+      "Gestiona en una sola línea de tiempo mucho más que cuadros: imágenes, vídeo, audio, capas comunes y fotogramas clave de cámara también tienen su lugar ahí. También puedes dividir tu obra en escenas para organizarla.",
     "featuresPage.animation.item3.title": "Edición de cuadros",
-    "featuresPage.animation.item3.body": "Selecciona cualquier cuadro y vuelve a dibujarlo.",
+    "featuresPage.animation.item3.body":
+      "Selecciona cualquier cuadro y vuelve a dibujarlo.",
     "featuresPage.animation.item4.title": "Vista previa de animación",
-    "featuresPage.animation.item4.body": "Comprueba el movimiento en cualquier momento mientras trabajas.",
-    "featuresPage.animation.item5.title": "Movimiento de cámara (animación por fotogramas clave)",
-    "featuresPage.animation.item5.body": "Define posición, zoom y rotación como fotogramas clave, y la app interpola suavemente el movimiento de cámara por ti, sin necesidad de volver a dibujar la capa.",
+    "featuresPage.animation.item4.body":
+      "Comprueba el movimiento en cualquier momento mientras trabajas.",
+    "featuresPage.animation.item5.title":
+      "Movimiento de cámara (animación por fotogramas clave)",
+    "featuresPage.animation.item5.body":
+      "Define posición, zoom y rotación como fotogramas clave, y la app interpola suavemente el movimiento de cámara por ti, sin necesidad de volver a dibujar la capa.",
     "featuresPage.animation.item6.title": "Grupos de capas",
-    "featuresPage.animation.item6.body": "Agrupa varias capas para moverlas todas juntas con un solo fotograma clave.",
+    "featuresPage.animation.item6.body":
+      "Agrupa varias capas para moverlas todas juntas con un solo fotograma clave.",
 
     "featuresPage.editing.title": "Editing｜Edición",
-    "featuresPage.editing.lead": "La libertad de rehacer tu trabajo hasta que quede como quieres.",
-    "featuresPage.editing.item1.title": "Redibuja con libertad gracias a las capas separadas",
-    "featuresPage.editing.item1.body": "Mantén el dibujo lineal, el color y los fondos en capas separadas, para poder rehacer solo el coloreado sin tocar el dibujo lineal.",
+    "featuresPage.editing.lead":
+      "La libertad de rehacer tu trabajo hasta que quede como quieres.",
+    "featuresPage.editing.item1.title":
+      "Redibuja con libertad gracias a las capas separadas",
+    "featuresPage.editing.item1.body":
+      "Mantén el dibujo lineal, el color y los fondos en capas separadas, para poder rehacer solo el coloreado sin tocar el dibujo lineal.",
     "featuresPage.editing.item2.title": "Relleno",
     "featuresPage.editing.item2.body": "Rellena rápidamente áreas cerradas.",
     "featuresPage.editing.item3.title": "Tolerancia",
-    "featuresPage.editing.item3.body": "Ajusta la tolerancia utilizada para el relleno.",
+    "featuresPage.editing.item3.body":
+      "Ajusta la tolerancia utilizada para el relleno.",
     "featuresPage.editing.item4.title": "Capas",
-    "featuresPage.editing.item4.body": "Gestiona los elementos por separado con capas.",
+    "featuresPage.editing.item4.body":
+      "Gestiona los elementos por separado con capas.",
     "featuresPage.editing.item5.title": "Capas comunes",
-    "featuresPage.editing.item5.body": "Reúne en una sola capa lo que reutilizas en varios fotogramas, como un fondo, y cualquier cambio se refleja automáticamente en todos ellos.",
+    "featuresPage.editing.item5.body":
+      "Reúne en una sola capa lo que reutilizas en varios fotogramas, como un fondo, y cualquier cambio se refleja automáticamente en todos ellos.",
     "featuresPage.editing.item6.title": "Modos de fusión",
-    "featuresPage.editing.item6.body": "Cambia cómo se combinan las capas con modos como multiplicar o trama, para ampliar tus posibilidades de expresión.",
+    "featuresPage.editing.item6.body":
+      "Cambia cómo se combinan las capas con modos como multiplicar o trama, para ampliar tus posibilidades de expresión.",
     "featuresPage.editing.item7.title": "Recorte (clipping)",
-    "featuresPage.editing.item7.body": "Limita el dibujo de una capa a la forma de la capa que tiene debajo.",
+    "featuresPage.editing.item7.body":
+      "Limita el dibujo de una capa a la forma de la capa que tiene debajo.",
     "featuresPage.editing.item8.title": "Transformación libre y por malla",
-    "featuresPage.editing.item8.body": "Ajusta con precisión la forma de tu dibujo con la transformación libre y la transformación por malla. Esta última usa una cuadrícula de hasta 10×10 para deformar libremente una capa.",
+    "featuresPage.editing.item8.body":
+      "Ajusta con precisión la forma de tu dibujo con la transformación libre y la transformación por malla. Esta última usa una cuadrícula de hasta 10×10 para deformar libremente una capa.",
 
     "featuresPage.audio.title": "Audio",
-    "featuresPage.audio.lead": "Funciones básicas de audio para sonorizar tu obra.",
+    "featuresPage.audio.lead":
+      "Funciones básicas de audio para sonorizar tu obra.",
     "featuresPage.audio.item1.title": "Añadir audio",
     "featuresPage.audio.item1.body": "Añade un archivo de audio a tu proyecto.",
     "featuresPage.audio.item2.title": "Volumen",
     "featuresPage.audio.item2.body": "Ajusta el volumen.",
     "featuresPage.audio.item3.title": "Cuadro de inicio",
-    "featuresPage.audio.item3.body": "Especifica desde qué cuadro empieza a reproducirse el audio.",
+    "featuresPage.audio.item3.body":
+      "Especifica desde qué cuadro empieza a reproducirse el audio.",
     "featuresPage.audio.item4.title": "Fundido de entrada y salida",
-    "featuresPage.audio.item4.body": "Suaviza el inicio y el final de tu audio.",
+    "featuresPage.audio.item4.body":
+      "Suaviza el inicio y el final de tu audio.",
     "featuresPage.audio.item5.title": "Marcas de tiempo",
-    "featuresPage.audio.item5.body": "Coloca una marca con comentario en un fotograma concreto: útil como referencia para sincronizar labios o movimientos con el sonido.",
+    "featuresPage.audio.item5.body":
+      "Coloca una marca con comentario en un fotograma concreto: útil como referencia para sincronizar labios o movimientos con el sonido.",
     "featuresPage.audio.item6.title": "Visualización de forma de onda",
-    "featuresPage.audio.item6.body": "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
+    "featuresPage.audio.item6.body":
+      "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
 
     "featuresPage.export.title": "Export｜Exportar",
     "featuresPage.export.lead": "Entrega tu trabajo terminado como video.",
     "featuresPage.export.item1.title": "Resolución",
-    "featuresPage.export.item1.body": "Exporta hasta una resolución de 1920×1920.",
+    "featuresPage.export.item1.body":
+      "Exporta hasta una resolución de 1920×1920.",
     "featuresPage.export.item2.title": "Relación de aspecto",
-    "featuresPage.export.item2.body": "Define la relación de aspecto libremente.",
+    "featuresPage.export.item2.body":
+      "Define la relación de aspecto libremente.",
     "featuresPage.export.item3.title": "Exportación de video",
-    "featuresPage.export.item3.body": "Exporta tu trabajo terminado como archivo de video.",
+    "featuresPage.export.item3.body":
+      "Exporta tu trabajo terminado como archivo de video.",
     "featuresPage.export.item4.title": "Formatos de exportación",
-    "featuresPage.export.item4.body": "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",
+    "featuresPage.export.item4.body":
+      "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",
     "featuresPage.export.item5.title": "Límite de duración por obra",
-    "featuresPage.export.item5.body": "El tamaño del lienzo tiene un límite superior, pero dentro de él puedes ajustar el tamaño y la proporción según tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium, hasta 2 horas por obra. No hay límite en la cantidad de obras.",
+    "featuresPage.export.item5.body":
+      "El tamaño del lienzo tiene un límite superior, pero dentro de él puedes ajustar el tamaño y la proporción según tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium, hasta 2 horas por obra. No hay límite en la cantidad de obras.",
     "featuresPage.export.item6.title": "Exportación de imagen fija",
-    "featuresPage.export.item6.body": "Guarda el fotograma mostrado actualmente en la línea de tiempo como imagen PNG o JPEG.",
+    "featuresPage.export.item6.body":
+      "Guarda el fotograma mostrado actualmente en la línea de tiempo como imagen PNG o JPEG.",
 
     "meta.news.title": "Noticias | NIARIM",
-    "meta.news.description": "Anuncios de lanzamiento oficial, actualizaciones y mantenimiento de NIARIM.",
+    "meta.news.description":
+      "Anuncios de lanzamiento oficial, actualizaciones y mantenimiento de NIARIM.",
     "newsPage.eyebrow": "News",
     "newsPage.title": "Noticias",
-    "newsPage.lead": "Los anuncios de lanzamiento oficial, actualizaciones y mantenimiento se publicarán aquí.",
-    "newsPage.empty": "Por el momento no hay anuncios. Las nuevas novedades se publicarán aquí.",
+    "newsPage.lead":
+      "Los anuncios de lanzamiento oficial, actualizaciones y mantenimiento se publicarán aquí.",
+    "newsPage.empty":
+      "Por el momento no hay anuncios. Las nuevas novedades se publicarán aquí.",
 
     "meta.privacy.title": "Política de privacidad | NIARIM",
-    "meta.privacy.description": "La política de privacidad del sitio oficial y la app de NIARIM.",
+    "meta.privacy.description":
+      "La política de privacidad del sitio oficial y la app de NIARIM.",
     "legal.updated": "Última actualización: 31 de agosto de 2026",
     "legal.notice.privacy":
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
@@ -1342,7 +1597,8 @@
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
 
     "meta.terms.title": "Términos de servicio | NIARIM",
-    "meta.terms.description": "Los términos de servicio del sitio oficial y la app de NIARIM.",
+    "meta.terms.description":
+      "Los términos de servicio del sitio oficial y la app de NIARIM.",
 
     "meta.404.title": "Página no encontrada | NIARIM",
     "error404.eyebrow": "404",

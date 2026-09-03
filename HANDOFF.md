@@ -18,7 +18,7 @@
 - **このリポジトリ**: `sakurasemaika-creator/NIARIM-web`（公開サイト、Cloudflare
   Workers Static Assets）。**`dev_branch` が実際にデプロイされているブランチ**。
   作業は必ず `dev_branch` 上で行い、`git fetch origin dev_branch && git rebase
-  origin/dev_branch` してから push すること（他セッションが同時に触っている
+origin/dev_branch` してから push すること（他セッションが同時に触っている
   可能性がある）。
 - **アプリ本体リポジトリ**: `sakurasemaika-creator/NIARIM`（Flutter製、private）。
   このサイトの内容（機能紹介・FAQ・ヘルプ・ロゴ・配色）は、すべてこのアプリ
@@ -135,10 +135,12 @@ Web内のアプリ画面再現（`.feature-diagram`・`.frame-mock`・
 `.features-header p`・`.help-header p`・`.about-name p`・
 `.about-not-supported p`・`.download-panel p`・`.faq-answer p`・
 `.footer-brand p` など）には、個別に
+
 ```css
 overflow-wrap: normal;
 word-break: normal;
 ```
+
 を上書きしている（`public/css/common.css` の該当コメント、および
 `about.css` / `contact.css` / `features.css` / `help.css` / `home.css`
 の各セレクタを参照）。**新しく同じパターンの段落（センタリングされた
@@ -229,7 +231,7 @@ spec-item＋長い説明文でページ内最長）がこのバグで表示さ�
   （`public/js/contact.js` と `src/contact.js` の両方で二重にチェックして
   いる。片方だけ変更すると齟齬が出るので、上限を変える場合は必ず両方
   揃えること）。許可MIMEタイプ: `image/png, image/jpeg, image/webp,
-  image/gif, video/mp4, video/quicktime, video/webm`。
+image/gif, video/mp4, video/quicktime, video/webm`。
 - バックエンド（`src/contact.js`）はCloudflare Workersなので
   Node.jsの`Buffer`が使えず、base64化は自前の`arrayBufferToBase64()`
   （chunk単位で`String.fromCharCode`）で行っている。
@@ -292,7 +294,7 @@ spec-item＋長い説明文でページ内最長）がこのバグで表示さ�
     （既に`help.entry14.desc`に反映済み）: 優先度は低いが、Help/Featuresの
     該当項目の説明文が実装の粒度に見合っているか、時間があれば確認。
 - **確認方法**: `mcp__github__list_commits`（`owner:
-  sakurasemaika-creator, repo: NIARIM, sha: "dev_branch"`）で新しい順に
+sakurasemaika-creator, repo: NIARIM, sha: "dev_branch"`）で新しい順に
   コミット一覧を取得し、コミットメッセージ本文（日本語で詳細に書かれて
   いることが多い）から機能追加・仕様変更を洗い出す→該当する
   `lib/l10n/app_ja.arb` 等の実データを`get_file_contents`で確認→

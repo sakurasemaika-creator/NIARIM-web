@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "audit": "node tools/audit-site.js"
+    "audit": "node tools/audit-site.js",
+    "format": "prettier --write . --ignore-unknown",
+    "format:check": "prettier --check . --ignore-unknown"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
+    "prettier": "3.6.2",
     "wrangler": "^4.126.0"
   }
 }

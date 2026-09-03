@@ -9,7 +9,7 @@
   "use strict";
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
-    "ja": {
+    ja: {
       "fd.projectName": "プロジェクト名",
       "fd.layerPanelTitle": "レイヤー",
       "fd.newLayer": "新規レイヤー",
@@ -44,9 +44,9 @@
       "fd.treeNode2": "線画修正",
       "fd.treeNode3a": "配色A",
       "fd.treeNode3b": "配色B",
-      "fd.frameListMode": "フレーム一覧"
+      "fd.frameListMode": "フレーム一覧",
     },
-    "en": {
+    en: {
       "fd.projectName": "Project name",
       "fd.layerPanelTitle": "Layers",
       "fd.newLayer": "New layer",
@@ -71,7 +71,8 @@
       "fd.formatGifSubtitle": "Animated GIF",
       "fd.formatWebm": "Transparent WebM",
       "fd.formatWebmSubtitle": "Transparent-background video",
-      "fd.formatAviSubtitle": "Legacy-compatible video format (no transparency)",
+      "fd.formatAviSubtitle":
+        "Legacy-compatible video format (no transparency)",
       "fd.exportStart": "Start export",
       "fd.saveSlotsLabel": "Save slots (up to 10)",
       "fd.slot1": "Slot 1",
@@ -81,7 +82,7 @@
       "fd.treeNode2": "Line art fix",
       "fd.treeNode3a": "Colors A",
       "fd.treeNode3b": "Colors B",
-      "fd.frameListMode": "Frames"
+      "fd.frameListMode": "Frames",
     },
     "zh-Hans": {
       "fd.projectName": "项目名称",
@@ -118,7 +119,7 @@
       "fd.treeNode2": "线稿修正",
       "fd.treeNode3a": "配色A",
       "fd.treeNode3b": "配色B",
-      "fd.frameListMode": "帧列表"
+      "fd.frameListMode": "帧列表",
     },
     "zh-Hant": {
       "fd.projectName": "專案名稱",
@@ -155,9 +156,9 @@
       "fd.treeNode2": "線稿修正",
       "fd.treeNode3a": "配色A",
       "fd.treeNode3b": "配色B",
-      "fd.frameListMode": "影格清單"
+      "fd.frameListMode": "影格清單",
     },
-    "ko": {
+    ko: {
       "fd.projectName": "프로젝트 이름",
       "fd.layerPanelTitle": "레이어",
       "fd.newLayer": "새 레이어",
@@ -192,9 +193,9 @@
       "fd.treeNode2": "선화 수정",
       "fd.treeNode3a": "색상 A",
       "fd.treeNode3b": "색상 B",
-      "fd.frameListMode": "프레임 목록"
+      "fd.frameListMode": "프레임 목록",
     },
-    "fr": {
+    fr: {
       "fd.projectName": "Nom du projet",
       "fd.layerPanelTitle": "Calques",
       "fd.newLayer": "Nouveau calque",
@@ -219,7 +220,8 @@
       "fd.formatGifSubtitle": "GIF animé",
       "fd.formatWebm": "WebM transparent",
       "fd.formatWebmSubtitle": "Vidéo à fond transparent",
-      "fd.formatAviSubtitle": "Format vidéo à compatibilité étendue (sans transparence)",
+      "fd.formatAviSubtitle":
+        "Format vidéo à compatibilité étendue (sans transparence)",
       "fd.exportStart": "Démarrer l'export",
       "fd.saveSlotsLabel": "Emplacements de sauvegarde (jusqu'à 10)",
       "fd.slot1": "Emplacement 1",
@@ -229,9 +231,9 @@
       "fd.treeNode2": "Retouche du trait",
       "fd.treeNode3a": "Couleurs A",
       "fd.treeNode3b": "Couleurs B",
-      "fd.frameListMode": "Images"
+      "fd.frameListMode": "Images",
     },
-    "es": {
+    es: {
       "fd.projectName": "Nombre del proyecto",
       "fd.layerPanelTitle": "Capas",
       "fd.newLayer": "Nueva capa",
@@ -256,7 +258,8 @@
       "fd.formatGifSubtitle": "GIF animado",
       "fd.formatWebm": "WebM transparente",
       "fd.formatWebmSubtitle": "Video con fondo transparente",
-      "fd.formatAviSubtitle": "Formato de video compatible con versiones antiguas (sin transparencia)",
+      "fd.formatAviSubtitle":
+        "Formato de video compatible con versiones antiguas (sin transparencia)",
       "fd.exportStart": "Iniciar exportación",
       "fd.saveSlotsLabel": "Ranuras de guardado (hasta 10)",
       "fd.slot1": "Ranura 1",
@@ -266,8 +269,8 @@
       "fd.treeNode2": "Ajuste de líneas",
       "fd.treeNode3a": "Colores A",
       "fd.treeNode3b": "Colores B",
-      "fd.frameListMode": "Fotogramas"
-    }
+      "fd.frameListMode": "Fotogramas",
+    },
   };
   for (var lang in DATA) {
     if (!DICT[lang]) DICT[lang] = {};
