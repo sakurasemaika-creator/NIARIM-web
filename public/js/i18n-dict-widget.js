@@ -15,7 +15,8 @@
  *  - 起動画面ウィジェットに背景色の指定は無い（常にテーマに追従）。
  *    作品そのものを表示するため、色を選ぶ余地がない。
  *  - 作品をつくる／作品広場ウィジェットのみ、背景色を
- *    「テーマに合わせる」「色を指定する」の2択（ラジオボタン）で選ぶ。
+ *    「テーマに合わせる」「色を指定する」の2択で選ぶ（実装はラジオボタン
+ *    だが、利用者が読む文にUI部品の名前は書かない）。
  *  - 背景色は種類ごとに独立して保持される（3種を並べて置いたときに
  *    色で見分けられるようにするため）。
  *  - ウィジェットの追加自体はホーム画面の長押しから行う（アプリからは
@@ -39,7 +40,7 @@
         "作品を選び、シーンを選び、その中の1フレームを選ぶ——という流れで表示内容を決めます。フレーム選択画面には実際に合成したプレビューが並ぶので、書き出さなくても仕上がりのまま選べます。",
       "narrative.widget.3.heading": "色は、種類ごとに自由に",
       "narrative.widget.3.body":
-        "「作品をつくる」「作品広場」の2種類は、背景色をアプリのテーマに合わせるか、カラーピッカーで自由に指定するかを選べます。色は種類ごとに独立しているので、3種を並べて置いても一目で見分けられます。",
+        "「作品をつくる」「作品広場」の2種類は、背景色をアプリのテーマに合わせるか、好きな色を自分で決めるかを選べます。色は種類ごとに独立しているので、3種を並べて置いても一目で見分けられます。",
       "featuresPage.widget.item1.title": "起動画面ウィジェット",
       "featuresPage.widget.item1.body":
         "選んだ作品のフレーム1枚を表示します。タップするとNIARIMが起動します。",
@@ -73,7 +74,7 @@
         "Pick a work, pick a scene, then pick a single frame inside it. The frame picker shows fully composited previews, so you can choose the finished look without exporting anything first.",
       "narrative.widget.3.heading": "Colour each one however you like",
       "narrative.widget.3.body":
-        'For the "Create" and "Work Plaza" widgets you can either follow the app theme or set any colour you want with the colour picker. Colours are kept separately per widget, so all three can sit side by side and still be told apart at a glance.',
+        'For the "Create" and "Work Plaza" widgets the background can either follow the app theme or use any colour you choose. Colours are kept separately per widget, so all three can sit side by side and still be told apart at a glance.',
       "featuresPage.widget.item1.title": "Launch screen widget",
       "featuresPage.widget.item1.body":
         "Shows one frame from the work you pick. Tapping it opens NIARIM.",
@@ -105,7 +106,7 @@
         "先选作品，再选场景，然后选其中的一帧。帧选择界面会排列实际合成后的预览，无需导出即可按成品效果挑选。",
       "narrative.widget.3.heading": "颜色按种类自由设定",
       "narrative.widget.3.body":
-        "「创作」与「作品广场」两种小组件，背景色可以跟随应用主题，也可以用取色器自由指定。颜色按种类独立保存，因此三种并排摆放也能一眼分辨。",
+        "「创作」与「作品广场」两种小组件，背景色可以跟随应用主题，也可以自由指定喜欢的颜色。颜色按种类独立保存，因此三种并排摆放也能一眼分辨。",
       "featuresPage.widget.item1.title": "启动页小组件",
       "featuresPage.widget.item1.body":
         "显示所选作品的一帧画面。点按即可打开 NIARIM。",
@@ -137,7 +138,7 @@
         "先選作品，再選場景，然後選其中的一格。選格畫面會排列實際合成後的預覽，不必先匯出就能依成品效果挑選。",
       "narrative.widget.3.heading": "顏色依種類自由設定",
       "narrative.widget.3.body":
-        "「創作」與「作品廣場」兩種小工具，背景色可以跟隨應用程式主題，也可以用選色器自由指定。顏色依種類獨立保存，因此三種並排擺放也能一眼分辨。",
+        "「創作」與「作品廣場」兩種小工具，背景色可以跟隨應用程式主題，也可以自由指定喜歡的顏色。顏色依種類獨立保存，因此三種並排擺放也能一眼分辨。",
       "featuresPage.widget.item1.title": "啟動頁小工具",
       "featuresPage.widget.item1.body":
         "顯示所選作品的一格畫面。點按即可開啟 NIARIM。",
@@ -170,7 +171,7 @@
         "작품을 고르고, 장면을 고르고, 그 안의 한 컷을 고르는 흐름으로 표시할 내용을 정합니다. 컷 선택 화면에는 실제로 합성한 미리보기가 나열되므로, 내보내지 않아도 완성된 모습 그대로 고를 수 있습니다.",
       "narrative.widget.3.heading": "색은 종류별로 자유롭게",
       "narrative.widget.3.body":
-        "「작품 만들기」와 「작품 광장」 두 종류는 배경색을 앱 테마에 맞추거나 색 선택기로 자유롭게 지정할 수 있습니다. 색은 종류별로 따로 저장되므로 세 가지를 나란히 두어도 한눈에 구별됩니다.",
+        "「작품 만들기」와 「작품 광장」 두 종류는 배경색을 앱 테마에 맞추거나 원하는 색을 직접 정할 수 있습니다. 색은 종류별로 따로 저장되므로 세 가지를 나란히 두어도 한눈에 구별됩니다.",
       "featuresPage.widget.item1.title": "시작 화면 위젯",
       "featuresPage.widget.item1.body":
         "선택한 작품의 한 컷을 표시합니다. 누르면 NIARIM이 실행됩니다.",
@@ -204,7 +205,7 @@
         "Choisissez une œuvre, puis une scène, puis une seule image à l'intérieur. Le sélecteur affiche des aperçus réellement composités : vous choisissez le rendu final sans rien exporter au préalable.",
       "narrative.widget.3.heading": "Une couleur par type, à votre goût",
       "narrative.widget.3.body":
-        "Pour les widgets « Créer » et « Place des œuvres », le fond suit le thème de l'application ou prend la couleur de votre choix via le sélecteur. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d'un coup d'œil.",
+        "Pour les widgets « Créer » et « Place des œuvres », le fond suit le thème de l'application ou prend la couleur de votre choix. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d'un coup d'œil.",
       "featuresPage.widget.item1.title": "Widget d'écran de démarrage",
       "featuresPage.widget.item1.body":
         "Affiche une image de l'œuvre que vous choisissez. Un appui ouvre NIARIM.",
@@ -238,7 +239,7 @@
         "Eliges una obra, luego una escena y después un solo fotograma dentro de ella. El selector muestra vistas previas realmente compuestas, así que eliges el resultado final sin exportar nada antes.",
       "narrative.widget.3.heading": "Un color por tipo, a tu gusto",
       "narrative.widget.3.body":
-        "En los widgets «Crear» y «Plaza de Obras» el fondo puede seguir el tema de la aplicación o tomar el color que quieras con el selector. Los colores se guardan por separado para cada tipo, así que los tres pueden convivir y distinguirse de un vistazo.",
+        "En los widgets «Crear» y «Plaza de Obras» el fondo puede seguir el tema de la aplicación o tomar el color que prefieras. Los colores se guardan por separado para cada tipo, así que los tres pueden convivir y distinguirse de un vistazo.",
       "featuresPage.widget.item1.title": "Widget de arranque",
       "featuresPage.widget.item1.body":
         "Muestra un fotograma de la obra que elijas. Al tocarlo se abre NIARIM.",

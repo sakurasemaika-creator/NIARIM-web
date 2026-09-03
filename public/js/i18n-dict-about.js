@@ -62,7 +62,7 @@
       "about.unique.item2.title":
         "アクセントカラーからパネル背景まで、全部好きな色に",
       "about.unique.item2.body":
-        "虹の7色やパステル調・くすみカラーなど、多彩なプリセットを収録していますが、それはあくまで出発点。アクセントカラー・文字色・パネル背景・メニュー背景・選択色・更新マークまで、アプリで使われるほぼすべての色を、カラーピッカーで自由に組み合わせて自分だけのテーマに編集できます。作ったテーマは名前を付けて保存・複製・エクスポートも可能です。",
+        "パステル調やくすみカラーなど、多彩なプリセットを収録していますが、それはあくまで出発点。アクセントカラー・文字色・パネル背景・メニュー背景・選択色・更新マークまで、アプリで使われるほぼすべての色を、カラーピッカーで自由に組み合わせて自分だけのテーマに編集できます。作ったテーマは名前を付けて保存・複製・エクスポートも可能です。",
       "about.unique.item3.title": "活用Tips",
       "about.unique.item3.body":
         "アプリ内で、実践的な使い方のコツやテクニックをキーワード検索しながら学べます。",
@@ -139,7 +139,7 @@
       "about.unique.item2.title":
         "From accent color to panel background — every color, your choice",
       "about.unique.item2.body":
-        "A wide range of presets is included, from rainbow-based palettes to pastel and muted tones, but they're just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
+        "A wide range of presets is included, from pastel to muted tones, but they're just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
       "about.unique.item3.title": "In-app Tips",
       "about.unique.item3.body":
         "Search and learn practical tips and techniques right inside the app.",
@@ -212,7 +212,7 @@
         "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※⁠自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
       "about.unique.item2.title": "从主题色到面板背景，颜色全部由你决定",
       "about.unique.item2.body":
-        "应用内置了彩虹七色、马卡龙色调、莫兰迪色系等多种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
+        "应用内置了马卡龙色调、莫兰迪色系等多种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
       "about.unique.item3.title": "活用 Tips",
       "about.unique.item3.body":
         "可在应用内通过关键词搜索，学习实用的使用技巧与窍门。",
@@ -286,7 +286,7 @@
         "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※⁠自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
       "about.unique.item2.title": "從主題色到面板背景，顏色全部由你決定",
       "about.unique.item2.body":
-        "應用內建了彩虹七色、粉彩色調、莫蘭迪色系等多種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
+        "應用內建了粉彩色調、莫蘭迪色系等多種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
       "about.unique.item3.title": "活用 Tips",
       "about.unique.item3.body":
         "可在應用程式內透過關鍵字搜尋，學習實用的使用技巧與訣竅。",
@@ -361,7 +361,7 @@
       "about.unique.item2.title":
         "포인트 컬러부터 패널 배경까지, 색은 전부 당신 마음대로",
       "about.unique.item2.body":
-        "무지개 7색, 파스텔 톤, 뮤트 톤 등 다양한 프리셋을 기본 제공하지만, 이는 어디까지나 출발점입니다. 포인트 컬러・글자색・패널 배경・메뉴 배경・선택색, 그리고 업데이트 표시 색까지 앱에서 사용하는 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 편집할 수 있습니다. 만든 테마는 이름을 붙여 저장・복제・내보내기도 가능합니다.",
+        "파스텔 톤이나 뮤트 톤 등 다양한 프리셋을 기본 제공하지만, 이는 어디까지나 출발점입니다. 포인트 컬러・글자색・패널 배경・메뉴 배경・선택색, 그리고 업데이트 표시 색까지 앱에서 사용하는 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 편집할 수 있습니다. 만든 테마는 이름을 붙여 저장・복제・내보내기도 가능합니다.",
       "about.unique.item3.title": "활용 Tips",
       "about.unique.item3.body":
         "앱 내에서 키워드로 검색하며 실전적인 사용 요령과 테크닉을 배울 수 있습니다.",
@@ -440,7 +440,7 @@
       "about.unique.item2.title":
         "De la couleur d'accent au fond des panneaux, chaque couleur est votre choix",
       "about.unique.item2.body":
-        "De nombreux préréglages sont inclus, des palettes arc-en-ciel aux tons pastel et sourds, mais ce n'est qu'un point de départ. Couleur d'accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
+        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds, mais ce n'est qu'un point de départ. Couleur d'accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
       "about.unique.item3.title": "Astuces intégrées",
       "about.unique.item3.body":
         "Recherchez et apprenez des astuces et techniques pratiques directement dans l'application.",
@@ -518,7 +518,7 @@
       "about.unique.item2.title":
         "Del color de acento al fondo de los paneles, cada color a tu elección",
       "about.unique.item2.body":
-        "Se incluye una amplia variedad de ajustes preestablecidos, desde paletas arcoíris hasta tonos pastel y apagados, pero son solo un punto de partida. Color de acento, color de texto, fondo de paneles, fondo de menús, color de selección e incluso el color de la marca de actualización: casi todos los colores usados en la app se pueden combinar libremente con un selector de color para crear tu propio tema. Tus temas personalizados se pueden nombrar, guardar, duplicar y exportar.",
+        "Se incluye una amplia variedad de ajustes preestablecidos, de tonos pastel a tonos apagados, pero son solo un punto de partida. Color de acento, color de texto, fondo de paneles, fondo de menús, color de selección e incluso el color de la marca de actualización: casi todos los colores usados en la app se pueden combinar libremente con un selector de color para crear tu propio tema. Tus temas personalizados se pueden nombrar, guardar, duplicar y exportar.",
       "about.unique.item3.title": "Consejos integrados",
       "about.unique.item3.body":
         "Busca y aprende consejos y técnicas prácticas directamente dentro de la app.",

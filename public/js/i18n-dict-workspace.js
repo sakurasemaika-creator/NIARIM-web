@@ -4,8 +4,7 @@
  * settings_service.dart（左手モード）・gesture_settings_screen.dart
  * （ジェスチャー割り当て、既定値：二本指タップ=undo／三本指タップ=redo／
  * 二本指スワイプ=フレーム移動／長押し=スポイト）・workspace_preset_service.dart
- * （ワークスペースプリセットの保存・切替）・theme_service.dart の _builtInPresets（組み込みテーマ、
- * 虹の7色ベースのプリセットを含む）の実装に基づく。
+ * （ワークスペースプリセットの保存・切替）・theme_service.dart の _builtInPresets（組み込みテーマ）の実装に基づく。
  */
 (function () {
   "use strict";
@@ -27,7 +26,7 @@
         "二本指タップ・三本指タップ・二本指スワイプ・長押しなどに、元に戻す・やり直す・フレーム移動・スポイトといった操作を割り当てられます。",
       "featuresPage.workspace.item4.title": "テーマ・外観",
       "featuresPage.workspace.item4.body":
-        "虹の7色やパステル調・くすみカラーなど、多彩なプリセットを収録。それだけでなく、アクセントカラーから文字色・パネル背景・選択色・更新マークまで、アプリのほぼすべての色をカラーピッカーで自由に組み合わせ、自分だけのテーマに編集できます。",
+        "パステル調やくすみカラーなど、多彩なプリセットを収録。それだけでなく、アクセントカラーから文字色・パネル背景・選択色・更新マークまで、アプリのほぼすべての色をカラーピッカーで自由に組み合わせ、自分だけのテーマに編集できます。",
       "fd.leftHandedMode": "左手モード",
       "fd.gestureTwoTap": "二本指タップ",
       "fd.gestureThreeTap": "三本指タップ",
@@ -54,7 +53,7 @@
         "Assign actions like undo, redo, frame move, and eyedropper to gestures such as a two-finger tap, three-finger tap, two-finger swipe, or long press.",
       "featuresPage.workspace.item4.title": "Themes & appearance",
       "featuresPage.workspace.item4.body":
-        "A wide range of presets is included, from rainbow-based palettes to pastel and muted tones. But you can go further: accent color, text color, panel background, selection color, even the update-mark color — almost every color in the app can be freely combined with a color picker to build your own theme.",
+        "A wide range of presets is included, from pastel to muted tones. But you can go further: accent color, text color, panel background, selection color, even the update-mark color — almost every color in the app can be freely combined with a color picker to build your own theme.",
       "fd.leftHandedMode": "Left-handed mode",
       "fd.gestureTwoTap": "Two-finger tap",
       "fd.gestureThreeTap": "Three-finger tap",
@@ -80,7 +79,7 @@
         "可为双指点击、三指点击、双指滑动、长按等手势，分配撤销、重做、切换帧、吸管等操作。",
       "featuresPage.workspace.item4.title": "主题与外观",
       "featuresPage.workspace.item4.body":
-        "内置彩虹七色、马卡龙色调、莫兰迪色系等多种预设主题。不仅如此，主题色、文字颜色、面板背景、选中色，甚至更新标记颜色，几乎所有颜色都能用取色器自由组合，打造专属主题。",
+        "内置马卡龙色调、莫兰迪色系等多种预设主题。不仅如此，主题色、文字颜色、面板背景、选中色，甚至更新标记颜色，几乎所有颜色都能用取色器自由组合，打造专属主题。",
       "fd.leftHandedMode": "左手模式",
       "fd.gestureTwoTap": "双指点击",
       "fd.gestureThreeTap": "三指点击",
@@ -106,7 +105,7 @@
         "可為雙指點擊、三指點擊、雙指滑動、長按等手勢，指定復原、重做、切換影格、吸管等操作。",
       "featuresPage.workspace.item4.title": "主題與外觀",
       "featuresPage.workspace.item4.body":
-        "內建彩虹七色、粉彩色調、莫蘭迪色系等多種預設主題。不僅如此，主題色、文字顏色、面板背景、選取色，甚至更新標記顏色，幾乎所有顏色都能用取色器自由組合，打造專屬主題。",
+        "內建粉彩色調、莫蘭迪色系等多種預設主題。不僅如此，主題色、文字顏色、面板背景、選取色，甚至更新標記顏色，幾乎所有顏色都能用取色器自由組合，打造專屬主題。",
       "fd.leftHandedMode": "左手模式",
       "fd.gestureTwoTap": "雙指點擊",
       "fd.gestureThreeTap": "三指點擊",
@@ -133,7 +132,7 @@
         "두 손가락 탭・세 손가락 탭・두 손가락 스와이프・길게 누르기 등에 실행 취소・다시 실행・프레임 이동・스포이드 같은 동작을 할당할 수 있습니다.",
       "featuresPage.workspace.item4.title": "테마・외관",
       "featuresPage.workspace.item4.body":
-        "무지개 7색, 파스텔 톤, 뮤트 톤 등 다양한 프리셋을 기본 제공합니다. 그뿐 아니라 포인트 컬러・글자색・패널 배경・선택색, 업데이트 표시 색까지 앱의 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 만들 수 있습니다.",
+        "파스텔 톤이나 뮤트 톤 등 다양한 프리셋을 기본 제공합니다. 그뿐 아니라 포인트 컬러・글자색・패널 배경・선택색, 업데이트 표시 색까지 앱의 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 만들 수 있습니다.",
       "fd.leftHandedMode": "왼손 모드",
       "fd.gestureTwoTap": "두 손가락 탭",
       "fd.gestureThreeTap": "세 손가락 탭",
@@ -161,7 +160,7 @@
         "Associez des actions comme annuler, rétablir, changer d'image ou la pipette à des gestes tels que le tap à deux doigts, à trois doigts, le balayage à deux doigts ou l'appui long.",
       "featuresPage.workspace.item4.title": "Thèmes et apparence",
       "featuresPage.workspace.item4.body":
-        "De nombreux préréglages sont inclus, des palettes arc-en-ciel aux tons pastel et sourds. Mais vous pouvez aller plus loin : couleur d'accent, couleur du texte, fond des panneaux, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs de l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème.",
+        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds. Mais vous pouvez aller plus loin : couleur d'accent, couleur du texte, fond des panneaux, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs de l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème.",
       "fd.leftHandedMode": "Mode gaucher",
       "fd.gestureTwoTap": "Tap à deux doigts",
       "fd.gestureThreeTap": "Tap à trois doigts",
@@ -188,7 +187,7 @@
         "Asigna acciones como deshacer, rehacer, mover de fotograma o el cuentagotas a gestos como el toque con dos dedos, con tres dedos, el deslizamiento con dos dedos o la pulsación larga.",
       "featuresPage.workspace.item4.title": "Temas y apariencia",
       "featuresPage.workspace.item4.body":
-        "Se incluye una amplia variedad de ajustes preestablecidos, desde paletas arcoíris hasta tonos pastel y apagados. Pero puedes ir más allá: color de acento, color de texto, fondo de paneles, color de selección e incluso el color de la marca de actualización, casi todos los colores de la app se pueden combinar libremente con un selector de color para crear tu propio tema.",
+        "Se incluye una amplia variedad de ajustes preestablecidos, de tonos pastel a tonos apagados. Pero puedes ir más allá: color de acento, color de texto, fondo de paneles, color de selección e incluso el color de la marca de actualización, casi todos los colores de la app se pueden combinar libremente con un selector de color para crear tu propio tema.",
       "fd.leftHandedMode": "Modo zurdo",
       "fd.gestureTwoTap": "Toque con dos dedos",
       "fd.gestureThreeTap": "Toque con tres dedos",
