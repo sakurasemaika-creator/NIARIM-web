@@ -225,6 +225,9 @@
       "featuresPage.drawing.item14.title": "ブラシの詳細設定",
       "featuresPage.drawing.item14.body":
         "フェード・ストローク減衰・混色・筆圧カーブなど、ブラシの描き味を細部までカスタマイズできます。",
+      "featuresPage.drawing.item15.title": "素材のタグ検索",
+      "featuresPage.drawing.item15.body":
+        "ブラシ・トーン・スタンプ・フォントなどの素材には「線画」「塗り」「ぼかし」「アナログ風」「ドット絵」「網点」といったタグが付いており、名前を覚えていなくてもタグで絞り込んで探せます。キーワード検索とタグ検索はワンタップで切り替えられ、自作素材には自分でタグを付けられます。",
 
       "featuresPage.animation.title": "Animation｜アニメーション",
       "featuresPage.animation.lead":
@@ -553,6 +556,9 @@
       "featuresPage.drawing.item14.title": "Detailed brush settings",
       "featuresPage.drawing.item14.body":
         "Fine-tune your brush feel with fade, stroke decay, color mixing, pressure curves, and more.",
+      "featuresPage.drawing.item15.title": "Tag search for assets",
+      "featuresPage.drawing.item15.body":
+        "Brushes, tones, stamps and fonts carry tags such as line art, fill, blur, analogue, pixel art and halftone, so you can narrow things down by tag even when you can't remember a name. One tap switches between keyword and tag search, and you can tag your own assets yourself.",
 
       "featuresPage.animation.title": "Animation",
       "featuresPage.animation.lead":

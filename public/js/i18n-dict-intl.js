@@ -1,4 +1,13 @@
 /**
+ * 注意: 各言語は DICT[lang] = Object.assign(DICT[lang] || {}, {...}) で
+ * マージしている。以前は DICT["zh-Hans"] = {...} と代入していたため、
+ * このファイルより前に読み込まれた辞書（ページ固有の辞書など）の
+ * 内容が5言語ぶん丸ごと消えてしまう状態だった。全ページで実際には
+ * このファイルを2番目に読み込んでいたため表面化していなかったが、
+ * 読み込み順を1つ変えるだけで壊れるため、他の辞書ファイルと同じ
+ * マージ方式へ揃えてある。
+ */
+/**
  * NIARIM公式サイト 翻訳辞書（中国語簡体字・繁体字／韓国語／フランス語／スペイン語）
  * i18n-dict.js (ja/en) の後に読み込むこと。日本語(ja)の意味を保つよう翻訳している。
  */
@@ -6,7 +15,7 @@
   "use strict";
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
 
-  DICT["zh-Hans"] = {
+  DICT["zh-Hans"] = Object.assign(DICT["zh-Hans"] || {}, {
     "nav.features": "功能",
     "nav.news": "最新消息",
     "nav.faq": "常见问题",
@@ -198,6 +207,9 @@
     "featuresPage.drawing.item14.title": "画笔详细设置",
     "featuresPage.drawing.item14.body":
       "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
+    "featuresPage.drawing.item15.title": "素材标签搜索",
+    "featuresPage.drawing.item15.body":
+      "笔刷、网点、印章、字体等素材都带有「线稿」「上色」「模糊」「仿手绘」「像素画」「网点」等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
     "featuresPage.animation.title": "Animation｜动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
@@ -300,9 +312,9 @@
     "error404.body":
       "您访问的页面可能已被移动或删除。请确认网址，或从首页重新开始。",
     "error404.cta": "返回首页",
-  };
+  });
 
-  DICT["zh-Hant"] = {
+  DICT["zh-Hant"] = Object.assign(DICT["zh-Hant"] || {}, {
     "nav.features": "功能",
     "nav.news": "最新消息",
     "nav.faq": "常見問題",
@@ -494,6 +506,9 @@
     "featuresPage.drawing.item14.title": "筆刷詳細設定",
     "featuresPage.drawing.item14.body":
       "淡出、筆畫衰減、混色、筆壓曲線等，可細緻調整筆刷的繪畫手感。",
+    "featuresPage.drawing.item15.title": "素材標籤搜尋",
+    "featuresPage.drawing.item15.body":
+      "筆刷、網點、印章、字型等素材都帶有「線稿」「上色」「模糊」「仿手繪」「像素畫」「網點」等標籤，即使記不住名稱也能依標籤篩選尋找。關鍵字搜尋與標籤搜尋可一鍵切換，自製素材還能自行加上標籤。",
 
     "featuresPage.animation.title": "Animation｜動畫",
     "featuresPage.animation.lead": "疊加影格，在時間軸上構築動作。",
@@ -596,9 +611,9 @@
     "error404.body":
       "您造訪的頁面可能已被移動或刪除。請確認網址，或從首頁重新開始。",
     "error404.cta": "返回首頁",
-  };
+  });
 
-  DICT.ko = {
+  DICT["ko"] = Object.assign(DICT["ko"] || {}, {
     "nav.features": "기능",
     "nav.news": "소식",
     "nav.faq": "자주 묻는 질문",
@@ -807,6 +822,9 @@
     "featuresPage.drawing.item14.title": "브러시 세부 설정",
     "featuresPage.drawing.item14.body":
       "페이드・스트로크 감쇠・혼색・필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
+    "featuresPage.drawing.item15.title": "소재 태그 검색",
+    "featuresPage.drawing.item15.body":
+      "브러시・톤・스탬프・폰트 등의 소재에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
 
     "featuresPage.animation.title": "Animation｜애니메이션",
     "featuresPage.animation.lead":
@@ -926,9 +944,9 @@
     "error404.body":
       "찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다. URL을 확인하시거나 홈에서 다시 시작해 주세요.",
     "error404.cta": "홈으로 돌아가기",
-  };
+  });
 
-  DICT.fr = {
+  DICT["fr"] = Object.assign(DICT["fr"] || {}, {
     "nav.features": "Fonctionnalités",
     "nav.news": "Actualités",
     "nav.faq": "FAQ",
@@ -1145,6 +1163,9 @@
     "featuresPage.drawing.item14.title": "Réglages détaillés du pinceau",
     "featuresPage.drawing.item14.body":
       "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
+    "featuresPage.drawing.item15.title": "Recherche par étiquette",
+    "featuresPage.drawing.item15.body":
+      "Les pinceaux, trames, tampons et polices portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
 
     "featuresPage.animation.title": "Animation",
     "featuresPage.animation.lead":
@@ -1269,9 +1290,9 @@
     "error404.body":
       "La page que vous recherchez a peut-être été déplacée ou supprimée. Veuillez vérifier l'URL ou recommencer depuis la page d'accueil.",
     "error404.cta": "Retour à l'accueil",
-  };
+  });
 
-  DICT.es = {
+  DICT["es"] = Object.assign(DICT["es"] || {}, {
     "nav.features": "Funciones",
     "nav.news": "Noticias",
     "nav.faq": "Preguntas frecuentes",
@@ -1484,6 +1505,9 @@
     "featuresPage.drawing.item14.title": "Ajustes detallados del pincel",
     "featuresPage.drawing.item14.body":
       "Afina la sensación de tu pincel con desvanecido, atenuación del trazo, mezcla de color, curva de presión y más.",
+    "featuresPage.drawing.item15.title": "Búsqueda por etiquetas",
+    "featuresPage.drawing.item15.body":
+      "Los pinceles, tramas, sellos y fuentes llevan etiquetas como línea, relleno, desenfoque, analógico, pixel art o semitono, así que puedes filtrar por etiqueta aunque no recuerdes un nombre. Un toque alterna entre búsqueda por palabra clave y por etiqueta, y puedes etiquetar tú mismo tus recursos.",
 
     "featuresPage.animation.title": "Animation｜Animación",
     "featuresPage.animation.lead":
@@ -1606,5 +1630,5 @@
     "error404.body":
       "Es posible que la página que buscas haya sido movida o eliminada. Comprueba la URL o vuelve a empezar desde la página de inicio.",
     "error404.cta": "Volver al inicio",
-  };
+  });
 })();

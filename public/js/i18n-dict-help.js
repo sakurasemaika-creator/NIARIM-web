@@ -72,7 +72,7 @@
         "HSVとRGBを1つの画面で切り替えながら色を選べるカラーピッカーです。パレット機能で使用中のカラーセットを保存・呼び出しできます。パレットはファイル書き出しやQRコードで他の端末と共有することもできます。",
       "help.entry15.title": "ブラシのお気に入り",
       "help.entry15.desc":
-        "ブラシ一覧の各ブラシにある星アイコンをタップすると、お気に入り登録・解除ができます。（自動塗り設定・スタンプ・フォント・描画フィルターなど、アプリ内の他のお気に入り機能と同じ操作方法です。）一覧上部の星アイコンで、お気に入りのみ表示に絞り込むこともできます。誤って削除しないよう、お気に入り登録中のブラシは削除できません。",
+        "ブラシ一覧の各ブラシにある星アイコンをタップすると、お気に入り登録・解除ができます（自動塗り設定・スタンプ・フォント・描画フィルターなど、アプリ内の他のお気に入り機能と同じ操作方法です）。一覧上部の星アイコンで、お気に入りのみ表示に絞り込むこともできます。誤って削除しないよう、お気に入り登録中のブラシは削除できません。",
       "help.entry16.title": "レイヤー",
       "help.entry16.desc":
         "1枚のキャンバスを複数の透明な「層」に分けて描画できる仕組みです。線画・色塗り・背景などを別々のレイヤーに分けて描くことで、後から色だけをやり直したり、線画を消さずに背景を差し替えたりできます。画面上では上に重なっているレイヤーほど手前に表示されます。各レイヤー行のアイコンからワンタップで削除・下のレイヤーとの結合ができ、レイヤーパネル上部のアイコンから表示中の全レイヤーを一括結合することもできます。",
@@ -153,7 +153,7 @@
         "選択中のレイヤーに直接適用するフィルターです（演出フィルターがタイムライン全体・シーン単位に適用されるのに対し、描画フィルターはレイヤー単位）。ぼかし・シャープ・アンシャープマスク・トーンカーブ・レベル補正・周辺減光・ノイズ・レトロアニメ・ブラウン管・アニメ調・縁取り・ドット絵・眼鏡断層フィルターなどが用意されています。縁取りは元のレイヤーを書き換えず、縁どった内容だけを新規レイヤーへ描画します。眼鏡断層フィルターは、選択レイヤーで塗った範囲だけに、度数の強い眼鏡レンズのような局所的な歪みをかけられます。ドット絵は配色方式（色を指定しない・色を指定する・色数を指定する・パレットから選ぶ）も選べます。",
       "help.entry42.title": "レイヤーキーフレーム（パーツ単位アニメーション）",
       "help.entry42.desc":
-        "各レイヤーの位置・拡大縮小・回転をフレームごとに指定し、キーフレーム間を自動で補間する機能です。カメラキーフレームが画面全体を動かすのに対し、こちらは個々のレイヤーだけを動かします。自動塗りの各パーツはそれぞれ独立したレイヤーとして生成されるため、パーツ単位でのアニメーション（腕だけ動かす、口だけ開閉させる等）にそのまま使えます。レイヤーパネルの三点メニュー「アニメーション（キーフレーム）」から設定します。レイヤーの絵自体は変わらず、表示位置だけが変わる非破壊な変形です。この機能はタイムラインの表示（プレビュー・書き出し）にのみ影響し、キャンバスモードでの実際の作画には影響しません。",
+        "各レイヤーの位置・拡大縮小・回転をフレームごとに指定し、キーフレーム間を自動で補間する機能です。カメラキーフレームが画面全体を動かすのに対し、こちらは個々のレイヤーだけを動かします。自動塗りの各パーツはそれぞれ独立したレイヤーとして生成されるため、パーツ単位でのアニメーション（腕だけ動かす、口だけ開閉させる等）にそのまま使えます。各キーフレームには「等速」「ゆっくり始まる」「ゆっくり終わる」「ゆっくり始まって終わる」「弾む」というイージング（次のキーフレームへのつなぎ方）を個別に設定でき、単調な等速移動だけでなく弾むような動きも表現できます。レイヤーパネルの三点メニュー「アニメーション（キーフレーム）」から設定します。レイヤーの絵自体は変わらず、表示位置だけが変わる非破壊な変形です。この機能はタイムラインの表示（プレビュー・書き出し）にのみ影響し、キャンバスモードでの実際の作画には影響しません。",
       "help.entry43.title": "レイヤーグループ（複数パーツをまとめて動かす）",
       "help.entry43.desc":
         "複数のレイヤーをまとめて1つのキーフレームストリームで動かす機能です。例えば「腕」が肌・袖の2枚の自動塗りパーツで構成されている場合、この2枚をグループ化しておけば、1回のキーフレーム操作でまとめて動かせます。レイヤーパネルで複数選択（チェックボックス）した状態で下部バーの「グループ化」アイコンから作成します。グループの動きは各レイヤー自身のキーフレーム（設定されていれば）に重ねて適用されるため、グループ全体の動き＋個別レイヤーの微調整、という組み合わせも可能です。1つのレイヤーは同時に1つのグループにのみ所属できます。",
@@ -183,7 +183,7 @@
         "設定・素材・ブラシ・自動塗り設定・テーマ・パレット（カラーピッカー・ドット絵専用）など、アプリ全体の環境を別の端末へまとめて引き継ぐための機能です。引き継ぐ項目はチェックボックスで個別に選べるほか、制作中のプロジェクトも任意で選んで含められます（選択したプロジェクトは素材・フォントも含めて丸ごと引き継がれます）。個別のプロジェクトだけを渡したい場合は「共有（.niashare）」も使えます。",
       "help.entry52.title": "動画書き出し（MP4・WebM・GIF・AVI）",
       "help.entry52.desc":
-        "作品を汎用的なMP4動画として書き出します。無料版は書き出せる長さに上限（90秒）があり、動画の最後にエンドカード（アプリロゴ）が自動で追加されます。 アルファチャンネル（背景の透明部分）を保持したまま書き出せる動画形式です。対応する再生環境でのみ透過再生されます。他のアプリの素材として重ねて使いたい場合などに向いています。 アニメーションGIFとして書き出します。自動でループ再生される形式のため、SNSへの投稿など気軽に共有したい場面に向いています。 互換性を重視したい場合はAVI（Motion JPEG）としても書き出せます。特許・ライセンス面で安全なコーデックを採用していますが、アルファチャンネル（透過）には対応せず、端末によってはアプリ内プレビューが利用できない場合があります。（その場合も「共有」から外部プレイヤーで再生できます。）無料会員はプロジェクトの長さに90秒までの上限があります（プレミアム会員は2時間）。フレーム追加・複製によって上限を超えそうな場合は、ボタンをタップした時点で注意ダイアログが表示され、実際に90秒を超えることはありません。",
+        "作品を汎用的なMP4動画として書き出します。無料版は書き出せる長さに上限（90秒）があり、動画の最後にエンドカード（アプリロゴ）が自動で追加されます。 アルファチャンネル（背景の透明部分）を保持したまま書き出せる動画形式です。対応する再生環境でのみ透過再生されます。他のアプリの素材として重ねて使いたい場合などに向いています。 アニメーションGIFとして書き出します。自動でループ再生される形式のため、SNSへの投稿など気軽に共有したい場面に向いています。 互換性を重視したい場合はAVI（Motion JPEG）としても書き出せます。特許・ライセンス面で安全なコーデックを採用していますが、アルファチャンネル（透過）には対応せず、端末によってはアプリ内プレビューが利用できない場合があります（その場合も「共有」から外部プレイヤーで再生できます）。 無料会員はプロジェクトの長さに90秒までの上限があります（プレミアム会員は2時間）。フレーム追加・複製によって上限を超えそうな場合は、ボタンをタップした時点で注意ダイアログが表示され、実際に90秒を超えることはありません。",
       "help.entry53.title": "書き出し画面",
       "help.entry53.desc":
         "動画・画像の書き出し中は進捗状況が表示され、途中でキャンセルすることもできます。書き出しにかかる時間は端末の性能によって変わります。",
@@ -192,7 +192,7 @@
         "書き出した動画・画像に、自分の署名やロゴを透かしとして入れられるプレミアム限定機能です。位置・大きさ・不透明度を調整できます。タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。",
       "help.entry55.title": "プレミアム",
       "help.entry55.desc":
-        "プレミアム会員になると、無料版で90秒までに制限されている動画の尺が無制限になり、動画の最後に自動追加されるエンドカード（アプリロゴ）を削除できます。広告も非表示になり、ウォーターマーク・トーンカーブ・レベル補正機能も利用できるようになります。",
+        "プレミアム会員になると、無料版で90秒までに制限されている動画の尺が最大2時間まで拡大され、動画の最後に自動追加されるエンドカード（アプリロゴ）を削除できます。広告も非表示になり、ウォーターマーク・トーンカーブ・レベル補正機能も利用できるようになります。",
       "help.entry56.title": "ホーム画面",
       "help.entry56.desc":
         "アプリを起動して最初に表示される画面で、プロジェクト・共有・作品一覧・ゴミ箱の各タブを切り替えて閲覧できます。右上の検索アイコンからプロジェクト名で絞り込み検索もできます。プロジェクトタブでは新規プロジェクト作成とフォルダ作成を画面右下の＋ボタンから選べます。",
@@ -225,19 +225,35 @@
         "設定画面の「バケツ塗り」から、許容誤差（クリックした位置の色からどこまでの色差を同一領域とみなすか）・拡張px（塗った範囲を境界の外側へ広げて線画との隙間を埋める量）・線の下まで潜る（拡張分を線画の上から上書きせず、線の見た目を保ったまま背後へ塗り色を合成する）を調整できます。線画に細かい隙間がある場合や、塗り残しが気になる場合に調整すると仕上がりが安定します。",
       "help.entry66.title": "Undo（元に戻す）回数設定",
       "help.entry66.desc":
-        "パフォーマンス設定から、Undoで遡れる操作回数を調整できます。回数を増やすほど安心して試行錯誤できますが、メモリ使用量も増えるため、動作を軽くしたい場合は回数を減らすとよいでしょう。",
+        "パフォーマンス設定から、Undoで遡れる操作回数を調整できます。回数を増やすほど安心して試行錯誤できますが、メモリ使用量も増えるため、低スペック端末では回数を抑えると動作が軽くなります。",
       "help.entry67.title": "フォントの読み込み",
       "help.entry67.desc":
         "端末内のフォントファイルを直接読み込んで使えるようにする機能です。設定画面のフォント管理「読み込み」タブから追加できます。配信されていない自作フォントや購入した商用フォントを使いたい場合に利用します。",
       "help.entry68.title": "カスタムブラシ",
       "help.entry68.desc":
-        "ブラシ一覧でプリインストールのブラシを長押しして「複製」すると、それを元にした自分専用のカスタムブラシが作成されます。複製したブラシは太さ・不透明度・硬さ・回転・密度・散布・ぼかし半径などのパラメータを自由に編集でき、不要になれば削除もできます。（プリインストールのブラシ自体は編集・削除できません。）フォルダで分類したり、星アイコンでお気に入り登録することもできます。",
+        "ブラシ一覧でプリインストールのブラシを長押しして「複製」すると、それを元にした自分専用のカスタムブラシが作成されます。複製したブラシは太さ・不透明度・硬さ・回転・密度・散布・ぼかし半径などのパラメータを自由に編集でき、不要になれば削除もできます（プリインストールのブラシ自体は編集・削除できません）。フォルダで分類したり、星アイコンでお気に入り登録することもできます。",
       "help.entry69.title": "レイヤーの複数選択・一括操作",
       "help.entry69.desc":
         "レイヤーパネルの選択モードを使うと、複数のレイヤーをチェックボックスでまとめて選び、結合や一括削除ができます。結合は通常・自動塗り用線画・自動塗りレイヤー同士でのみ可能です（共通レイヤー・フォルダ・タイムライン素材は結合対象外）。",
       "help.entry70.title": "容量削減",
       "help.entry70.desc":
         "端末容量に対するNIARIMの使用量と、NIARIM内部（プロジェクト・素材・書き出し済みファイル・自作ブラシ/トーン/スタンプ/フォント・キャッシュ・ゴミ箱）の内訳を円グラフで確認できます。キャッシュの削除・未使用素材の一括削除（全プロジェクト）・ゴミ箱を空にする・プロジェクトの整理・全データ削除（初期化）が行えます。",
+      "help.category.community": "コミュニティ",
+      "help.entry71.title": "基本の操作（タップ・長押し・スワイプ）",
+      "help.entry71.desc":
+        "ツールバーのアイコンはシングルタップでそのツールに切り替わります。同じアイコンを長押し、または上にスワイプすると詳細設定が開きます。ペンならブラシ・トーン・スタンプ・投げ縄塗りの切り替え、バケツならベタ塗りとトーン塗りの切り替え、選択ツールなら矩形・投げ縄・自動選択の切り替え、指ツールならぼかしとモザイクの切り替え、早替えツールなら登録内容の編集が、それぞれ長押し・上スワイプの先にあります。アイコンのダブルタップでは、そのツールの短い説明が画面下に出ます。 キャンバスでは、2本指でつまむと拡大縮小、2本指でなぞると移動、2本指のタップで元に戻す、3本指のタップでやり直しです。画面の左右の端をダブルタップすると、前後のフレームへ移動します。 マウスやペンタブレットを繋いでいる場合は、ホイールで拡大縮小、中ボタンのドラッグで移動できます。",
+      "help.entry72.title": "早替えツール管理",
+      "help.entry72.desc":
+        "よく使うツールの組み合わせを登録し、タップひとつで順番に切り替えられる機能です。長押しまたは上スワイプで管理ポップアップを開き、登録内容や並び順を編集できます。",
+      "help.entry73.title": "シーン操作",
+      "help.entry73.desc":
+        "タイムラインのシーンタブでは、シーンの追加・複製・削除・名前変更・並び替えができます。複数選択モードにすると複数シーンをまとめて移動・複製・削除することも可能です。",
+      "help.entry74.title": "作品広場",
+      "help.entry74.desc":
+        "アニメ・イラスト作品をYouTube動画としてコミュニティに投稿し、他のユーザーの作品を閲覧できる機能です。「新着」「ランキング」「フォロー中」の3タブで一覧を切り替えられ、作品タイトルまたは投稿者名で検索できるほか、タグ検索モードに切り替えるとタグから作品を絞り込めます。タグは投稿者以外のユーザーも自由に追加・削除でき（投稿者がロックしたタグは投稿者本人にしか外せません）、タグをタップするだけでも同じタグの作品に絞り込めます。作品カードをタップするとドラッグ・リサイズできるフローティングプレビューウィンドウが開き、他の画面を操作しながら視聴を続けられます。「詳細へ」ボタンで作品の詳細画面（投稿者・投稿日・タグ編集・ブックマーク・リポストなど）を開けます。作者名の横の「フォロー」ボタンでフォローすると、「フォロー中」タブでその作者の投稿だけを新着順にまとめて追いかけられます。フォローされると画面右上のベルアイコンの通知一覧に届きます。自分のフォロー中/フォロワー一覧を全体公開するかどうかも設定でき（既定は非公開）、公開設定にしている他のユーザーの一覧も閲覧できます。他者の作品（自分の投稿を除く）は「リポスト」ボタンで再投稿でき、フォロー中の作者が誰かの作品をリポストすると、その作品も「投稿日時」と「リポスト日時」のうちより新しい方を基準に「フォロー中」タブへ混ざって表示されます（カードに「○○さんがリポスト」と表示）。ブックマークした作品はホーム画面の「ブクマ済み」タブにまとめて表示されるほか、投稿者別の作品一覧画面の「ブックマーク」タブでも確認できます。自分のブックマーク一覧はユーザー全体へ公開するかどうかを設定でき（既定は非公開）、公開設定にしている他のユーザーのブックマーク一覧も閲覧できます。不適切な作品は理由を添えて通報でき、送信後にはその投稿者をブロックするか選べます。縦長の動画は「縦画面モード」でTikTok風に連続再生して視聴できます。投稿できる本数には1日あたりの上限があり、無料会員は1日1本、プレミアム会員は1日3本までです。",
+      "help.entry75.title": "ウォーターマークの再編集",
+      "help.entry75.desc":
+        "タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。",
     },
     en: {
       "help.title": "Help",
@@ -382,7 +398,7 @@
         "Filters applied directly to the selected layer (as opposed to effect filters, which apply across the whole timeline or a scene, draw filters work per layer). Includes blur, sharpen, unsharp mask, tone curve, levels, vignette, noise, retro anime, CRT, anime style, outline, pixel art, and a lens-distortion filter. Outline doesn't rewrite the original layer — it draws just the outlined result onto a new layer. The lens-distortion filter applies a localized warp, like looking through a strong eyeglass lens, only to the area painted on the selection layer. Pixel art also lets you choose a color mode (no limit, specify colors, specify color count, or choose from a palette).",
       "help.entry42.title": "Layer keyframes (per-part animation)",
       "help.entry42.desc":
-        "Set each layer's position, scale, and rotation per frame, with the keyframes interpolated automatically. Where camera keyframes move the whole screen, this moves an individual layer only. Since each autofill part is generated as its own separate layer, this works directly for per-part animation — moving just an arm, opening and closing just a mouth, and so on. Set it up from the \"Animation (keyframes)\" entry in each layer's three-dot menu in the layer panel. The layer's artwork itself doesn't change — it's a non-destructive transform of where it's displayed. This only affects the timeline's display (preview / export) and has no effect on actual drawing in canvas mode.",
+        "Set each layer's position, scale, and rotation per frame, with the keyframes interpolated automatically. Where camera keyframes move the whole screen, this moves an individual layer only. Since each autofill part is generated as its own separate layer, this works directly for per-part animation — moving just an arm, opening and closing just a mouth, and so on. Each keyframe can also be given its own easing — Linear, Ease in, Ease out, Ease in and out, or Bounce — controlling how it transitions into the next keyframe, so motion doesn't have to stay at a flat, constant speed. Set it up from the \"Animation (keyframes)\" entry in each layer's three-dot menu in the layer panel. The layer's artwork itself doesn't change — it's a non-destructive transform of where it's displayed. This only affects the timeline's display (preview / export) and has no effect on actual drawing in canvas mode.",
       "help.entry43.title": "Layer groups (moving multiple parts together)",
       "help.entry43.desc":
         'Moves several layers together with a single keyframe stream. For example, if an "arm" is made up of two autofill parts — skin and sleeve — grouping them lets you move both with one keyframe operation. Create a group by multi-selecting layers (checkboxes) in the layer panel and tapping the "Group" icon in the bottom bar. A group\'s motion is layered on top of each member layer\'s own keyframes (if set), so you can combine the group\'s overall movement with per-layer fine adjustments. A layer can belong to only one group at a time.',
@@ -421,7 +437,7 @@
         "A premium-only feature that lets you add your own signature or logo as a watermark on exported videos and images. You can adjust its position, size, and opacity. Tap the watermark placed on the common-layer track in the timeline to re-edit its angle, size, opacity, and visible range (looping) at any time — not just when you first register it, but whenever you use it in a project.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "Premium membership removes the 90-second video length limit of the free version and lets you remove the end card (app logo) automatically added at the end of every video. Ads are also hidden, and you gain access to the watermark, tone curve, and level correction features.",
+        "Premium membership extends the 90-second video length limit of the free version up to 2 hours and lets you remove the end card (app logo) automatically added at the end of every video. Ads are also hidden, and you gain access to the watermark, tone curve, and level correction features.",
       "help.entry56.title": "Home screen",
       "help.entry56.desc":
         "The first screen shown when you launch the app, with Projects, Shared, Works, and Trash tabs. The search icon at the top right lets you filter projects by name. On the Projects tab, the + button in the bottom right lets you choose between creating a new project or a new folder.",
@@ -454,19 +470,35 @@
         'From the "Bucket Fill" section in settings, you can adjust tolerance (how much color difference from the clicked pixel still counts as the same region), expand px (how far the filled area extends past the boundary to cover gaps in the lineart), and fill under line (composites the expanded fill behind existing pixels instead of painting over the lineart, keeping the line\'s look intact). Adjusting these helps when the lineart has small gaps or fills feel incomplete.',
       "help.entry66.title": "Undo history length",
       "help.entry66.desc":
-        "In performance settings, you can adjust how many actions undo can step back through. A larger number gives you more freedom to experiment, but also uses more memory — lower it if you want to keep things running lighter.",
+        "In performance settings, you can adjust how many actions undo can step back through. A larger number gives you more freedom to experiment, but also uses more memory — lower it on low-spec devices to keep things running smoothly.",
       "help.entry67.title": "Font import",
       "help.entry67.desc":
         "Lets you load a font file straight from your device's storage. Add it from the \"Import\" tab in font management, in settings. Handy when you want to use a custom-made font that isn't distributed anywhere, or a commercial font you've purchased.",
-      "help.entry68.title": "Custom brushes",
+      "help.entry68.title": "Custom Brushes",
       "help.entry68.desc":
-        'Long-press a pre-installed brush in the brush list and choose "Duplicate" to create your own custom brush based on it. Duplicated brushes can be freely edited — thickness, opacity, hardness, rotation, density, scatter, blur radius, and more — and deleted once you no longer need them (the pre-installed brushes themselves can\'t be edited or deleted). You can also sort them into folders and mark favorites with the star icon.',
+        "Long-press a pre-installed brush in the brush list and choose “Duplicate” to create your own custom brush based on it. Duplicated brushes can be freely edited — thickness, opacity, hardness, rotation, density, scatter, blur radius, and more — and deleted once you no longer need them (the pre-installed brushes themselves can’t be edited or deleted). You can also sort them into folders and mark favorites with the star icon.",
       "help.entry69.title": "Multi-selecting and bulk layer actions",
       "help.entry69.desc":
         "Selection mode in the layer panel lets you check off several layers at once to merge or bulk-delete them. Merging only works between normal, autofill-lineart, and autofill layers (common layers, folders, and timeline materials can't be merged).",
       "help.entry70.title": "Free up space",
       "help.entry70.desc":
         "See how much storage NIARIM is using on your device, and a breakdown of what's inside NIARIM (projects, materials, exported files, custom brushes/tones/stamps/fonts, cache, and trash) as pie charts. Clear the cache, bulk-remove unused materials across all projects, empty the trash, organize projects, or erase all data (reset).",
+      "help.category.community": "Community",
+      "help.entry71.title": "Basic controls (tap, long-press, swipe)",
+      "help.entry71.desc":
+        "A single tap on a toolbar icon switches to that tool. Long-press the same icon, or swipe up on it, to open its detailed settings. Behind that long-press or swipe you will find: brush / halftone / stamp / lasso fill for the pen, solid vs. halftone for the bucket, rectangle / lasso / magic wand for the selection tool, blur vs. mosaic for the finger tool, and the registered tool list for the quick-swap tool. Double-tapping an icon shows a short description at the bottom of the screen. On the canvas, pinch with two fingers to zoom, drag with two fingers to pan, tap with two fingers to undo and with three fingers to redo. Double-tap the left or right edge of the screen to move to the previous or next frame. With a mouse or pen tablet connected, the wheel zooms and dragging with the middle button pans.",
+      "help.entry72.title": "Quick tool management",
+      "help.entry72.desc":
+        "Register a set of frequently used tools to cycle through with a single tap. Open the management popup with a long press or an upward swipe to edit the registered tools and their order.",
+      "help.entry73.title": "Scene operations",
+      "help.entry73.desc":
+        "The timeline's scene tab lets you add, duplicate, delete, rename, and reorder scenes. Multi-select mode lets you move, duplicate, or delete several scenes at once.",
+      "help.entry74.title": "Work Plaza",
+      "help.entry74.desc":
+        "Post your animations and illustrations to the community as YouTube videos, and browse works by other users. Switch between the “New”, “Ranking”, and “Following” tabs, and search by work title or creator name. Switch to tag search mode to filter works by tag — anyone (not just the creator) can add or remove tags, though a tag the creator has locked can only be removed by the creator, and tapping a tag instantly filters to matching works. Tapping a work card opens a draggable, resizable floating preview window, so you can keep browsing other screens while it plays. The “View Details” button opens the work's detail screen (creator, post date, tag editing, bookmarking, reposting, and more). Tap the “Follow” button next to a creator's name to follow them — the “Following” tab then gathers just that creator's posts in chronological order. When someone follows you, it shows up in the notification list under the bell icon at the top of the screen. You can choose whether your own following/followers lists are visible to other users (private by default), and view other users' lists if they've made theirs public. You can repost anyone else's work (except your own) with the “Repost” button; when a creator you follow reposts someone else's work, that work also appears in your “Following” tab, sorted by whichever is more recent — its original post date or its repost date (the card shows “Reposted by …”). Bookmarked works appear together under the “Bookmarked” tab on the Home screen, and also under the “Bookmarks” tab on a creator's work list screen. You can choose whether your own bookmark list is visible to other users (private by default), and you can view other users' bookmark lists if they've made theirs public. You can report a work with a reason, and after submitting you'll be asked whether to block that creator. Portrait videos can be watched in “Portrait mode”, which plays them back-to-back like a short-form video feed. There is a daily limit on how many works you can post: 1 per day for free members, 3 per day for Premium members.",
+      "help.entry75.title": "Re-editing a watermark",
+      "help.entry75.desc":
+        "Tapping a watermark placed on the timeline's common-layer track lets you re-edit its angle, size, opacity, and display range (loop) at any time. You can fine-tune it not just when registering it, but whenever you're actually using it in a project.",
     },
     "zh-Hans": {
       "help.title": "帮助",
@@ -611,7 +643,7 @@
         "直接应用于所选图层的滤镜（与应用于整条时间轴或整个场景的演出滤镜不同，绘图滤镜按图层生效）。包含模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动画、显像管、动画风、描边、像素画、眼镜断层滤镜等。描边不会改写原图层，只会把描边后的结果绘制到一个新图层上。眼镜断层滤镜可以只对选区图层中涂抹的范围，施加类似高度数眼镜镜片那样的局部扭曲效果。像素画也可以选择配色方式（不指定颜色・指定颜色・指定颜色数・从调色板选择）。",
       "help.entry42.title": "图层关键帧（分部件动画）",
       "help.entry42.desc":
-        "按帧设置每个图层的位置・缩放・旋转，关键帧之间会自动插值。摄像机关键帧移动的是整个画面，而这个功能只移动单个图层。由于自动上色的每个部件都会生成为独立的图层，因此可以直接用它来做分部件动画（只动一只手臂、只让嘴巴开合等）。在图层面板的三点菜单「动画（关键帧）」中设置。图层本身的画面内容不会改变，只是显示位置发生变化的非破坏性变形。此功能只影响时间轴的显示（预览・导出），不会影响画布模式下的实际作画。",
+        "按帧设置每个图层的位置・缩放・旋转，关键帧之间会自动插值。摄像机关键帧移动的是整个画面，而这个功能只移动单个图层。由于自动上色的每个部件都会生成为独立的图层，因此可以直接用它来做分部件动画（只动一只手臂、只让嘴巴开合等）。每个关键帧还可以单独设置「匀速」「缓入」「缓出」「缓入缓出」「弹跳」这类缓动（与下一个关键帧的衔接方式），不仅限于单调的匀速移动，还能表现出弹跳般的动作。在图层面板的三点菜单「动画（关键帧）」中设置。图层本身的画面内容不会改变，只是显示位置发生变化的非破坏性变形。此功能只影响时间轴的显示（预览・导出），不会影响画布模式下的实际作画。",
       "help.entry43.title": "图层分组（把多个部件一起移动）",
       "help.entry43.desc":
         "用同一组关键帧把多个图层一起移动的功能。例如「手臂」由皮肤、袖子两个自动上色部件组成时，把这两个图层分到同一组后，只需一次关键帧操作就能让它们一起移动。在图层面板中多选（勾选框）图层，再点击底部工具栏的「分组」图标即可创建。分组的运动会叠加在每个成员图层自身的关键帧（如果设置了的话）之上，因此可以把分组整体的运动和单个图层的微调结合起来使用。一个图层同一时间只能属于一个分组。",
@@ -650,7 +682,7 @@
         "可以在导出的视频・图片上加入自己签名或Logo作为水印的高级会员专属功能。可以调整位置、大小、不透明度。点击时间轴共通图层轨道上放置的水印，随时都能重新编辑其角度、大小、不透明度、显示范围（循环显示）——不仅是首次设置时，在项目中实际使用时也能随时细致调整。",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "成为高级会员后，免费版限制的90秒视频时长将不再受限，并可移除每个视频结尾自动添加的片尾卡（应用Logo）。同时广告也会隐藏，还可使用水印、色调曲线、色阶校正功能。",
+        "成为高级会员后，免费版限制的90秒视频时长将延长至最长2小时，并可移除每个视频结尾自动添加的片尾卡（应用Logo）。同时广告也会隐藏，还可使用水印、色调曲线、色阶校正功能。",
       "help.entry56.title": "主页",
       "help.entry56.desc":
         "启动应用后最先显示的画面，可在项目、共享、作品列表、回收站各标签间切换查看。右上角的搜索图标可按项目名称筛选。在项目标签页中，可通过悬浮按钮选择新建项目或新建文件夹。",
@@ -683,7 +715,7 @@
         "在设置画面的“填充工具”中可以调整容差（点击位置的颜色相差多少仍视为同一区域）、扩展px（填充区域向边界外扩展多少以填补线稿的缝隙）以及潜入线条下方（不覆盖线稿本身，而是把扩展部分合成到已有像素的背后，从而保持线条外观不变）。当线稿有细小缝隙或填色感觉不完整时，调整这些设置能让效果更稳定。",
       "help.entry66.title": "撤销次数设置",
       "help.entry66.desc":
-        "在性能设置中可以调整撤销能回溯的操作次数。次数越多越能放心地反复尝试，但也会占用更多内存；如果想让运行更轻快，可以减少次数。",
+        "在性能设置中可以调整撤销能回溯的操作次数。次数越多越能放心地反复尝试，但也会占用更多内存；在低性能设备上减少次数可以让运行更轻快。",
       "help.entry67.title": "字体读取",
       "help.entry67.desc":
         "可以直接读取设备内的字体文件来使用的功能。可在设置画面字体管理的「读取」标签页中添加。想使用未公开发布的自制字体或已购买的商用字体时可以使用此功能。",
@@ -696,6 +728,22 @@
       "help.entry70.title": "释放空间",
       "help.entry70.desc":
         "以饼图查看NIARIM在设备上占用的容量，以及NIARIM内部（项目、素材、已导出文件、自制画笔/网点/图章/字体、缓存、回收站）的详细占比。可以清除缓存、批量删除所有项目中的未使用素材、清空回收站、整理项目，或删除全部数据（初始化）。",
+      "help.category.community": "社区",
+      "help.entry71.title": "基本操作（点击・长按・上滑）",
+      "help.entry71.desc":
+        "单击工具栏图标即可切换到该工具。长按同一图标或向上滑动，可打开详细设置。钢笔可切换笔刷・网点・图章・套索填充，油漆桶可切换纯色填充与网点填充，选择工具可切换矩形・套索・自动选择，手指工具可切换模糊与马赛克，快速切换工具可编辑已登记的内容，这些都在长按或上滑之后。双击图标时，画面下方会显示该工具的简短说明。 在画布上，双指捏合可缩放，双指拖动可平移，双指点击撤销，三指点击重做。双击画面左右边缘可移动到前后一帧。 连接鼠标或数位板时，可用滚轮缩放、按住中键拖动平移。",
+      "help.entry72.title": "快捷工具管理",
+      "help.entry72.desc":
+        "登记一组常用工具组合，只需一次点击即可依次切换。长按或向上滑动可打开管理弹窗，编辑已登记的内容和顺序。",
+      "help.entry73.title": "场景操作",
+      "help.entry73.desc":
+        "在时间轴的场景标签页中，可以新增、复制、删除、重命名、重新排序场景。切换到多选模式后，还可以一次性移动、复制、删除多个场景。",
+      "help.entry74.title": "作品广场",
+      "help.entry74.desc":
+        "可以将动画・插画作品以YouTube视频的形式发布到社区，并浏览其他用户的作品。可以切换「最新」「排行榜」「关注」三个标签页，也可以按作品标题或投稿者名称搜索。切换到标签搜索模式后可按标签筛选作品，标签不仅投稿者本人，其他用户也可以自由添加或删除（投稿者锁定的标签只能由投稿者本人解锁），点击标签即可筛选出相同标签的作品。点击作品卡片会打开可拖动、可调整大小的悬浮预览窗口，可以在继续操作其他画面的同时观看。点击「查看详情」按钮可打开作品详情画面（投稿者、发布日期、标签编辑、收藏、转发等）。点击投稿者名称旁的「关注」按钮即可将其加入关注列表，「关注」标签页会按时间顺序汇总显示该作者的作品。有人关注你时，会显示在画面右上角铃铛图标的通知列表中。你可以分别设置自己的关注列表/粉丝列表是否对所有用户公开（默认非公开），也可以查看已公开的其他用户的列表。除自己发布的作品外，都可以用「转发」按钮转发；当关注的作者转发了他人的作品时，该作品也会以「发布日期」和「转发日期」中较新的一方为基准，混入「关注」标签页中显示（卡片上会显示「○○转发了」）。收藏的作品会汇总显示在主页的「已收藏」标签页中，也可以在投稿者作品列表画面的「收藏」标签页中查看。可以设置自己的收藏列表是否对其他用户公开（默认不公开），也可以查看已设为公开的其他用户的收藏列表。对不当作品可以附上理由进行举报，举报提交后会询问你是否要屏蔽该投稿者。竖屏视频可以在「竖屏模式」中连续播放观看。每日可发布的作品数量有上限，免费会员每天1个，高级会员每天3个。",
+      "help.entry75.title": "重新编辑水印",
+      "help.entry75.desc":
+        "点击放置在时间轴共同图层轨道上的水印，随时可以重新编辑其角度、大小、不透明度、显示范围（循环显示）。不仅在登记时，在项目中实际使用时也能随时细致调整。",
     },
     "zh-Hant": {
       "help.title": "說明",
@@ -840,7 +888,7 @@
         "直接套用於所選圖層的濾鏡（與套用於整條時間軸或整個場景的演出濾鏡不同，繪圖濾鏡按圖層生效）。包含模糊、銳化、USM銳化、色調曲線、色階、暗角、雜訊、復古動畫、映像管、動畫風、外框、像素畫、眼鏡斷層濾鏡等。外框不會改寫原圖層，只會把外框後的結果繪製到一個新圖層上。眼鏡斷層濾鏡可以只對選取圖層中塗抹的範圍，套用類似高度數眼鏡鏡片那樣的局部扭曲效果。像素畫也可以選擇配色方式（不指定顏色・指定顏色・指定顏色數・從調色盤選擇）。",
       "help.entry42.title": "圖層關鍵影格（分部件動畫）",
       "help.entry42.desc":
-        "依影格設定每個圖層的位置・縮放・旋轉，關鍵影格之間會自動內插。攝影機關鍵影格移動的是整個畫面，而這個功能只移動單一圖層。由於自動上色的每個部件都會生成為獨立的圖層，因此可以直接用它來做分部件動畫（只動一隻手臂、只讓嘴巴開合等）。在圖層面板的三點選單「動畫（關鍵影格）」中設定。圖層本身的畫面內容不會改變，只是顯示位置改變的非破壞性變形。這個功能只影響時間軸的顯示（預覽・匯出），不會影響畫布模式下的實際作畫。",
+        "依影格設定每個圖層的位置・縮放・旋轉，關鍵影格之間會自動內插。攝影機關鍵影格移動的是整個畫面，而這個功能只移動單一圖層。由於自動上色的每個部件都會生成為獨立的圖層，因此可以直接用它來做分部件動畫（只動一隻手臂、只讓嘴巴開合等）。每個關鍵影格還可以單獨設定「等速」「緩入」「緩出」「緩入緩出」「彈跳」這類緩動（與下一個關鍵影格的銜接方式），不僅限於單調的等速移動，還能表現出彈跳般的動作。在圖層面板的三點選單「動畫（關鍵影格）」中設定。圖層本身的畫面內容不會改變，只是顯示位置改變的非破壞性變形。這個功能只影響時間軸的顯示（預覽・匯出），不會影響畫布模式下的實際作畫。",
       "help.entry43.title": "圖層群組（把多個部件一起移動）",
       "help.entry43.desc":
         "用同一組關鍵影格把多個圖層一起移動的功能。例如「手臂」由皮膚、袖子兩個自動上色部件組成時，把這兩個圖層分到同一群組後，只需一次關鍵影格操作就能讓它們一起移動。在圖層面板中多選（勾選框）圖層，再點擊底部工具列的「群組化」圖示即可建立。群組的運動會疊加在每個成員圖層自身的關鍵影格（如果設定了的話）之上，因此可以把群組整體的運動和單一圖層的微調結合起來使用。一個圖層同時只能屬於一個群組。",
@@ -879,7 +927,7 @@
         "可以在匯出的影片・圖片上加入自己簽名或Logo作為浮水印的進階會員專屬功能。可以調整位置、大小、不透明度。點擊時間軸共用圖層軌道上放置的浮水印，隨時都能重新編輯其角度、大小、不透明度、顯示範圍（循環顯示）——不僅是首次設定時，在專案中實際使用時也能隨時細緻調整。",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "成為進階會員後，免費版限制的90秒影片長度將不再受限，並可移除每支影片結尾自動加入的片尾卡（應用程式Logo）。同時廣告也會隱藏，還可使用浮水印、色調曲線、色階校正功能。",
+        "成為進階會員後，免費版限制的90秒影片長度將延長至最長2小時，並可移除每支影片結尾自動加入的片尾卡（應用程式Logo）。同時廣告也會隱藏，還可使用浮水印、色調曲線、色階校正功能。",
       "help.entry56.title": "首頁",
       "help.entry56.desc":
         "啟動App後最先顯示的畫面，可在專案、共用、作品清單、垃圾桶各標籤間切換檢視。右上角的搜尋圖示可依專案名稱篩選。在專案標籤頁中，可透過懸浮按鈕選擇新增專案或新增資料夾。",
@@ -912,7 +960,7 @@
         "在設定畫面的「填色工具」中可以調整容許誤差（點擊位置的顏色相差多少仍視為同一區域）、擴充px（填色區域向邊界外擴展多少以填補線稿的縫隙）以及潛入線條下方（不覆蓋線稿本身，而是把擴充部分合成到既有像素的背後，藉此保持線條外觀不變）。當線稿有細小縫隙或填色感覺不完整時，調整這些設定能讓效果更穩定。",
       "help.entry66.title": "復原次數設定",
       "help.entry66.desc":
-        "在效能設定中可以調整復原能回溯的操作次數。次數越多越能放心地反覆嘗試，但也會佔用更多記憶體；如果想讓運作更輕快，可以減少次數。",
+        "在效能設定中可以調整復原能回溯的操作次數。次數越多越能放心地反覆嘗試，但也會佔用更多記憶體；在低效能裝置上減少次數可以讓運作更輕快。",
       "help.entry67.title": "字型讀取",
       "help.entry67.desc":
         "可以直接讀取裝置內的字型檔案來使用的功能。可在設定畫面字型管理的「讀取」標籤頁中新增。想使用未公開發布的自製字型或已購買的商用字型時可以使用此功能。",
@@ -925,6 +973,22 @@
       "help.entry70.title": "釋放空間",
       "help.entry70.desc":
         "以圓餅圖查看NIARIM在裝置上占用的容量，以及NIARIM內部（專案、素材、已匯出檔案、自製筆刷/網點/圖章/字型、快取、垃圾桶）的詳細佔比。可以清除快取、批次刪除所有專案中的未使用素材、清空垃圾桶、整理專案，或刪除全部資料（初始化）。",
+      "help.category.community": "社群",
+      "help.entry71.title": "基本操作（點擊・長按・上滑）",
+      "help.entry71.desc":
+        "單擊工具列圖示即可切換到該工具。長按同一圖示或向上滑動，可開啟詳細設定。鋼筆可切換筆刷・網點・印章・套索填色，油漆桶可切換純色填色與網點填色，選取工具可切換矩形・套索・自動選取，手指工具可切換模糊與馬賽克，快速切換工具可編輯已登記的內容，這些都在長按或上滑之後。雙擊圖示時，畫面下方會顯示該工具的簡短說明。 在畫布上，雙指捏合可縮放，雙指拖曳可平移，雙指點擊復原，三指點擊重做。雙擊畫面左右邊緣可移動到前後一格。 連接滑鼠或繪圖板時，可用滾輪縮放、按住中鍵拖曳平移。",
+      "help.entry72.title": "快捷工具管理",
+      "help.entry72.desc":
+        "登記一組常用工具組合，只需點一下即可依序切換。長按或向上滑動可開啟管理彈出視窗，編輯已登記的內容和順序。",
+      "help.entry73.title": "場景操作",
+      "help.entry73.desc":
+        "在時間軸的場景標籤頁中，可以新增、複製、刪除、重新命名、重新排序場景。切換到多選模式後，還可以一次移動、複製、刪除多個場景。",
+      "help.entry74.title": "作品廣場",
+      "help.entry74.desc":
+        "可以將動畫・插畫作品以YouTube影片的形式發佈到社群，並瀏覽其他使用者的作品。可以切換「最新」「排行榜」「追蹤」三個分頁，也可以依作品標題或投稿者名稱搜尋。切換到標籤搜尋模式後可依標籤篩選作品，標籤不僅投稿者本人，其他使用者也可以自由新增或刪除（投稿者鎖定的標籤只能由投稿者本人解鎖），點擊標籤即可篩選出相同標籤的作品。點擊作品卡片會開啟可拖曳、可調整大小的浮動預覽視窗，可以在繼續操作其他畫面的同時觀看。點擊「查看詳情」按鈕可開啟作品詳情畫面（投稿者、發佈日期、標籤編輯、收藏、轉發等）。點擊投稿者名稱旁的「追蹤」按鈕即可將其加入追蹤清單，「追蹤」分頁會依時間順序彙整顯示該作者的作品。有人追蹤你時，會顯示在畫面右上角鈴鐺圖示的通知清單中。你可以分別設定自己的追蹤清單/粉絲清單是否對所有使用者公開（預設為非公開），也可以查看已公開的其他使用者的清單。除自己發佈的作品外，都可以用「轉發」按鈕轉發；當追蹤的作者轉發了他人的作品時，該作品也會以「發佈日期」和「轉發日期」中較新的一方為基準，混入「追蹤」分頁中顯示（卡片上會顯示「○○轉發了」）。收藏的作品會彙整顯示在主畫面的「已收藏」分頁中，也可以在投稿者作品清單畫面的「收藏」分頁中查看。可以設定自己的收藏清單是否對其他使用者公開（預設不公開），也可以查看已設為公開的其他使用者的收藏清單。對不當作品可以附上理由進行檢舉，檢舉送出後會詢問你是否要封鎖該投稿者。直向影片可以在「直向模式」中連續播放觀看。每日可發佈的作品數量有上限，免費會員每天1個，進階會員每天3個。",
+      "help.entry75.title": "重新編輯浮水印",
+      "help.entry75.desc":
+        "點擊放置在時間軸共用圖層軌道上的浮水印，隨時可以重新編輯其角度、大小、不透明度、顯示範圍（循環顯示）。不僅在登記時，在專案中實際使用時也能隨時細部調整。",
     },
     ko: {
       "help.title": "도움말",
@@ -1069,7 +1133,7 @@
         "선택 중인 레이어에 직접 적용하는 필터입니다（연출 필터가 타임라인 전체・장면 단위로 적용되는 것과 달리, 그리기 필터는 레이어 단위입니다）. 흐림・샤프・언샤프 마스크・톤 커브・레벨 보정・비네트・노이즈・레트로 애니메이션・브라운관・애니메이션풍・윤곽선・픽셀 아트・안경 단면 필터 등이 준비되어 있습니다. 윤곽선은 원본 레이어를 다시 쓰지 않고, 윤곽선을 두른 내용만 새 레이어에 그립니다. 안경 단면 필터는 선택 레이어에 칠한 범위에만, 도수가 강한 안경 렌즈처럼 국소적으로 왜곡을 줄 수 있습니다. 픽셀 아트는 배색 방식（색을 지정하지 않음・색을 지정함・색 수를 지정함・팔레트에서 선택）도 고를 수 있습니다.",
       "help.entry42.title": "레이어 키프레임（파츠 단위 애니메이션）",
       "help.entry42.desc":
-        "각 레이어의 위치・확대축소・회전을 프레임마다 지정하면 키프레임 사이가 자동으로 보간되는 기능입니다. 카메라 키프레임이 화면 전체를 움직이는 것과 달리, 이것은 개별 레이어만 움직입니다. 자동 채색의 각 파츠는 각각 독립된 레이어로 생성되므로, 파츠 단위 애니메이션（팔만 움직이기, 입만 여닫기 등）에 그대로 사용할 수 있습니다. 레이어 패널의 점 3개 메뉴 「애니메이션（키프레임）」에서 설정합니다. 레이어의 그림 자체는 바뀌지 않고 표시 위치만 바뀌는 비파괴적인 변형입니다. 이 기능은 타임라인의 표시（미리보기・내보내기）에만 영향을 주며, 캔버스 모드에서의 실제 작화에는 영향을 주지 않습니다.",
+        "각 레이어의 위치・확대축소・회전을 프레임마다 지정하면 키프레임 사이가 자동으로 보간되는 기능입니다. 카메라 키프레임이 화면 전체를 움직이는 것과 달리, 이것은 개별 레이어만 움직입니다. 자동 채색의 각 파츠는 각각 독립된 레이어로 생성되므로, 파츠 단위 애니메이션（팔만 움직이기, 입만 여닫기 등）에 그대로 사용할 수 있습니다. 각 키프레임에는 「등속」「천천히 시작」「천천히 종료」「천천히 시작하고 종료」「튕김」이라는 이징（다음 키프레임으로의 연결 방식）을 개별적으로 설정할 수 있어, 단조로운 등속 이동뿐 아니라 튕기는 듯한 움직임도 표현할 수 있습니다. 레이어 패널의 점 3개 메뉴 「애니메이션（키프레임）」에서 설정합니다. 레이어의 그림 자체는 바뀌지 않고 표시 위치만 바뀌는 비파괴적인 변형입니다. 이 기능은 타임라인의 표시（미리보기・내보내기）에만 영향을 주며, 캔버스 모드에서의 실제 작화에는 영향을 주지 않습니다.",
       "help.entry43.title": "레이어 그룹（여러 파츠를 한꺼번에 움직이기）",
       "help.entry43.desc":
         "여러 레이어를 하나의 키프레임 흐름으로 한꺼번에 움직이는 기능입니다. 예를 들어 「팔」이 피부・소매 2장의 자동 채색 파츠로 이루어져 있다면, 이 2장을 그룹화해두면 한 번의 키프레임 조작으로 함께 움직일 수 있습니다. 레이어 패널에서 여러 개를 선택（체크박스）한 상태로 하단 바의 「그룹화」 아이콘에서 만듭니다. 그룹의 움직임은 각 레이어 자체의 키프레임（설정되어 있다면）에 겹쳐서 적용되므로, 그룹 전체의 움직임과 개별 레이어의 미세 조정을 함께 사용할 수도 있습니다. 하나의 레이어는 동시에 하나의 그룹에만 속할 수 있습니다.",
@@ -1108,7 +1172,7 @@
         "내보낸 동영상・이미지에 자신의 서명이나 로고를 워터마크로 넣을 수 있는 프리미엄 전용 기능입니다. 위치・크기・불투명도를 조정할 수 있습니다. 타임라인의 공통 레이어 트랙에 배치한 워터마크를 탭하면 각도・크기・불투명도・표시 범위（루프 표시）를 언제든지 다시 편집할 수 있습니다. 등록할 때뿐 아니라 실제로 프로젝트에서 사용할 때도 세세하게 조정할 수 있습니다.",
       "help.entry55.title": "프리미엄",
       "help.entry55.desc":
-        "프리미엄 회원이 되면 무료 버전에서 90초로 제한된 동영상 길이가 무제한이 되고, 모든 동영상 끝에 자동 추가되는 엔드카드(앱 로고)를 삭제할 수 있습니다. 광고도 숨겨지며, 워터마크, 톤 커브, 레벨 보정 기능도 사용할 수 있게 됩니다.",
+        "프리미엄 회원이 되면 무료 버전에서 90초로 제한된 동영상 길이가 최대 2시간까지 늘어나고, 모든 동영상 끝에 자동 추가되는 엔드카드(앱 로고)를 삭제할 수 있습니다. 광고도 숨겨지며, 워터마크, 톤 커브, 레벨 보정 기능도 사용할 수 있게 됩니다.",
       "help.entry56.title": "홈 화면",
       "help.entry56.desc":
         "앱을 실행하면 처음 표시되는 화면으로, 프로젝트・공유・작품 목록・휴지통 각 탭을 전환하며 볼 수 있습니다. 오른쪽 위 검색 아이콘으로 프로젝트 이름으로 좁혀 검색할 수도 있습니다. 프로젝트 탭에서는 화면 오른쪽 아래의 ＋ 버튼으로 새 프로젝트 만들기와 새 폴더 만들기를 선택할 수 있습니다.",
@@ -1141,7 +1205,7 @@
         "설정 화면의 「버킷 채우기」에서 허용 오차（클릭한 위치의 색에서 어디까지의 색 차이를 같은 영역으로 볼지）・확장 px（채운 영역을 경계 바깥쪽으로 넓혀 선화와의 틈을 메우는 정도）・선 아래까지 파고들기（확장분을 선화 위에 덮어쓰지 않고, 선의 모양은 유지한 채 뒤쪽으로 채우기 색을 합성）를 조정할 수 있습니다. 선화에 작은 틈이 있거나 덜 칠해진 부분이 신경 쓰일 때 조정하면 마무리가 안정됩니다.",
       "help.entry66.title": "실행 취소 횟수 설정",
       "help.entry66.desc":
-        "성능 설정에서 실행 취소로 되돌릴 수 있는 동작 횟수를 조정할 수 있습니다. 횟수를 늘릴수록 안심하고 시행착오를 할 수 있지만 메모리 사용량도 늘어나므로, 동작을 가볍게 하고 싶다면 횟수를 줄이는 것이 좋습니다.",
+        "성능 설정에서 실행 취소로 되돌릴 수 있는 동작 횟수를 조정할 수 있습니다. 횟수를 늘릴수록 안심하고 시행착오를 할 수 있지만 메모리 사용량도 늘어나므로, 저사양 기기에서는 횟수를 줄이면 동작이 가벼워집니다.",
       "help.entry67.title": "폰트 가져오기",
       "help.entry67.desc":
         "기기 내의 폰트 파일을 직접 불러와 사용할 수 있게 하는 기능입니다. 설정 화면의 폰트 관리 「가져오기」 탭에서 추가할 수 있습니다. 배포되지 않은 자작 폰트나 구매한 상업용 폰트를 사용하고 싶을 때 이용합니다.",
@@ -1154,6 +1218,22 @@
       "help.entry70.title": "용량 확보",
       "help.entry70.desc":
         "기기에서 NIARIM이 사용하는 용량과, NIARIM 내부(프로젝트, 소재, 내보낸 파일, 커스텀 브러시/톤/스탬프/폰트, 캐시, 휴지통)의 세부 내역을 원 그래프로 확인할 수 있습니다. 캐시 삭제, 모든 프로젝트의 미사용 소재 일괄 삭제, 휴지통 비우기, 프로젝트 정리, 모든 데이터 삭제(초기화)를 수행할 수 있습니다.",
+      "help.category.community": "커뮤니티",
+      "help.entry71.title": "기본 조작(탭・길게 누르기・쓸어올리기)",
+      "help.entry71.desc":
+        "도구 모음의 아이콘은 한 번 탭하면 해당 도구로 전환됩니다. 같은 아이콘을 길게 누르거나 위로 쓸어올리면 세부 설정이 열립니다. 펜은 브러시・톤・스탬프・올가미 채우기 전환, 페인트통은 단색과 톤 채우기 전환, 선택 도구는 사각형・올가미・자동 선택 전환, 손가락 도구는 흐리기와 모자이크 전환, 빠른 전환 도구는 등록 내용 편집이 각각 길게 누르기・위로 쓸어올리기 뒤에 있습니다. 아이콘을 두 번 탭하면 그 도구의 간단한 설명이 화면 아래에 표시됩니다. 캔버스에서는 두 손가락으로 오므리면 확대・축소, 두 손가락으로 끌면 이동, 두 손가락 탭으로 실행 취소, 세 손가락 탭으로 다시 실행입니다. 화면 좌우 끝을 두 번 탭하면 앞뒤 프레임으로 이동합니다. 마우스나 펜 태블릿을 연결한 경우에는 휠로 확대・축소, 가운데 버튼 드래그로 이동할 수 있습니다.",
+      "help.entry72.title": "빠른 도구 관리",
+      "help.entry72.desc":
+        "자주 쓰는 도구 조합을 등록해두고 탭 한 번으로 순서대로 전환할 수 있는 기능입니다. 길게 누르거나 위로 스와이프하면 관리 팝업이 열려 등록 내용과 순서를 편집할 수 있습니다.",
+      "help.entry73.title": "장면 조작",
+      "help.entry73.desc":
+        "타임라인의 장면 탭에서는 장면 추가・복제・삭제・이름 변경・순서 바꾸기를 할 수 있습니다. 다중 선택 모드로 하면 여러 장면을 한꺼번에 이동・복제・삭제하는 것도 가능합니다.",
+      "help.entry74.title": "작품 광장",
+      "help.entry74.desc":
+        "애니메이션・일러스트 작품을 YouTube 동영상으로 커뮤니티에 게시하고, 다른 사용자의 작품을 둘러볼 수 있는 기능입니다. 「신작」・「랭킹」・「팔로잉」 탭을 전환할 수 있으며, 작품 제목 또는 게시자 이름으로 검색할 수 있습니다. 태그 검색 모드로 전환하면 태그로 작품을 좁혀볼 수 있으며, 태그는 게시자 외의 사용자도 자유롭게 추가・삭제할 수 있습니다（게시자가 잠근 태그는 게시자 본인만 해제할 수 있습니다）. 태그를 탭하기만 해도 같은 태그의 작품으로 좁혀집니다. 작품 카드를 탭하면 드래그・크기 조절이 가능한 플로팅 미리보기 창이 열려 다른 화면을 조작하면서도 계속 시청할 수 있습니다. 「상세보기」 버튼으로 작품의 상세 화면（게시자・게시일・태그 편집・북마크・리포스트 등）을 열 수 있습니다. 게시자 이름 옆의 「팔로우」 버튼을 누르면 팔로우가 되어, 「팔로잉」 탭에서 그 작가의 게시물만 최신순으로 모아 볼 수 있습니다. 누군가 나를 팔로우하면 화면 오른쪽 위 종 모양 아이콘의 알림 목록에 표시됩니다. 자신의 팔로잉/팔로워 목록을 다른 사용자에게 공개할지 여부를 설정할 수 있으며（기본값은 비공개）, 공개로 설정한 다른 사용자의 목록도 볼 수 있습니다. 다른 사람의 작품（자신의 게시물은 제외）은 「리포스트」 버튼으로 재게시할 수 있으며, 팔로우 중인 작가가 누군가의 작품을 리포스트하면 그 작품도 「게시일」과 「리포스트한 날짜」 중 더 최근인 쪽을 기준으로 「팔로잉」 탭에 섞여 표시됩니다（카드에 「○○님이 리포스트함」이라고 표시）. 북마크한 작품은 홈 화면의 「북마크됨」 탭에 모아서 표시되며, 게시자별 작품 목록 화면의 「북마크」 탭에서도 확인할 수 있습니다. 자신의 북마크 목록을 다른 사용자에게 공개할지 여부를 설정할 수 있으며（기본값은 비공개）, 공개로 설정한 다른 사용자의 북마크 목록도 볼 수 있습니다. 부적절한 작품은 사유를 첨부해 신고할 수 있으며, 신고 후에는 해당 게시자를 차단할지 선택할 수 있습니다. 세로로 긴 동영상은 「세로 화면 모드」에서 연속 재생으로 시청할 수 있습니다. 하루에 게시할 수 있는 작품 수에는 상한이 있으며, 무료 회원은 하루 1개, 프리미엄 회원은 하루 3개까지입니다.",
+      "help.entry75.title": "워터마크 재편집",
+      "help.entry75.desc":
+        "타임라인의 공통 레이어 트랙에 배치한 워터마크를 탭하면 각도・크기・불투명도・표시 범위（루프 표시）를 언제든지 다시 편집할 수 있습니다. 등록할 때뿐 아니라 실제로 프로젝트 안에서 사용할 때 세밀하게 조정할 수 있습니다.",
     },
     fr: {
       "help.title": "Aide",
@@ -1299,7 +1379,7 @@
         "Filtres appliqués directement au calque sélectionné (contrairement aux filtres d'effet, qui s'appliquent à toute la timeline ou à une scène, les filtres de dessin agissent par calque). Comprend flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, tube cathodique, style anime, contour, un filtre pixel art et un filtre de distorsion optique. Le contour ne réécrit pas le calque d'origine : il dessine seulement le résultat contourné sur un nouveau calque. Le filtre de distorsion optique applique une déformation localisée, comme à travers un verre de lunettes à forte correction, uniquement sur la zone peinte sur le calque de sélection. Le filtre pixel art permet aussi de choisir un mode de couleur (sans limite, couleurs spécifiées, nombre de couleurs spécifié, ou choix depuis une palette).",
       "help.entry42.title": "Images clés de calque (animation par partie)",
       "help.entry42.desc":
-        "Définissez la position, l'échelle et la rotation de chaque calque par image ; les images clés sont interpolées automatiquement. Là où les images clés de caméra déplacent tout l'écran, celles-ci ne déplacent qu'un seul calque. Comme chaque partie du remplissage automatique est générée comme un calque distinct, cela fonctionne directement pour l'animation par partie — bouger seulement un bras, ouvrir et fermer seulement une bouche, etc. Se configure depuis « Animation (images clés) » dans le menu à trois points de chaque calque, dans le panneau des calques. Le dessin du calque lui-même ne change pas : c'est une transformation non destructive de son emplacement d'affichage. Cela n'affecte que l'affichage de la timeline (aperçu / export) et n'a aucun effet sur le dessin réel en mode canevas.",
+        "Définissez la position, l'échelle et la rotation de chaque calque par image ; les images clés sont interpolées automatiquement. Là où les images clés de caméra déplacent tout l'écran, celles-ci ne déplacent qu'un seul calque. Comme chaque partie du remplissage automatique est générée comme un calque distinct, cela fonctionne directement pour l'animation par partie — bouger seulement un bras, ouvrir et fermer seulement une bouche, etc. Chaque image clé peut aussi avoir son propre easing (uniforme, entrée douce, sortie douce, entrée et sortie douces, ou rebond) qui détermine comment elle se raccorde à l'image clé suivante, pour que le mouvement ne soit pas toujours à vitesse constante. Se configure depuis « Animation (images clés) » dans le menu à trois points de chaque calque, dans le panneau des calques. Le dessin du calque lui-même ne change pas : c'est une transformation non destructive de son emplacement d'affichage. Cela n'affecte que l'affichage de la timeline (aperçu / export) et n'a aucun effet sur le dessin réel en mode canevas.",
       "help.entry43.title":
         "Groupes de calques (déplacer plusieurs parties ensemble)",
       "help.entry43.desc":
@@ -1339,7 +1419,7 @@
         "Une fonctionnalité réservée aux membres premium qui permet d'ajouter votre propre signature ou logo en filigrane sur les vidéos et images exportées. Vous pouvez ajuster sa position, sa taille et son opacité. Touchez le filigrane placé sur la piste de calque commun de la timeline pour modifier à tout moment son angle, sa taille, son opacité et sa plage d'affichage (bouclage) — pas seulement lors de son enregistrement, mais chaque fois que vous l'utilisez dans un projet.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "L'abonnement premium supprime la limite de 90 secondes de la version gratuite et permet de retirer la carte de fin (logo de l'application) ajoutee automatiquement a la fin de chaque video. Les publicites sont egalement masquees, et vous accedez au filigrane, a la courbe de tons et a la correction des niveaux.",
+        "L'abonnement premium porte a 2 heures maximum la limite de 90 secondes de la version gratuite et permet de retirer la carte de fin (logo de l'application) ajoutee automatiquement a la fin de chaque video. Les publicites sont egalement masquees, et vous accedez au filigrane, a la courbe de tons et a la correction des niveaux.",
       "help.entry56.title": "Écran d'accueil",
       "help.entry56.desc":
         "Le premier écran affiché au lancement de l'app, avec les onglets Projets, Partagés, Œuvres et Corbeille. L'icône de recherche en haut à droite permet de filtrer les projets par nom. Sur l'onglet Projets, le bouton flottant permet de choisir entre créer un nouveau projet ou un nouveau dossier.",
@@ -1372,13 +1452,13 @@
         "Depuis la section « Seau de peinture » des réglages, vous pouvez ajuster la tolérance (quelle différence de couleur par rapport au pixel cliqué compte encore comme la même zone), l'extension en px (de combien la zone remplie dépasse la bordure pour combler les écarts du trait) et le remplissage sous le trait (compose le remplissage étendu derrière les pixels existants au lieu de peindre par-dessus le trait, préservant son apparence). Les ajuster aide quand le trait a de petits écarts ou que le remplissage semble incomplet.",
       "help.entry66.title": "Longueur de l'historique d'annulation",
       "help.entry66.desc":
-        "Dans les réglages de performance, vous pouvez ajuster le nombre d'actions que l'annulation peut remonter. Un nombre plus élevé donne plus de liberté pour expérimenter, mais utilise aussi plus de mémoire — réduisez-le si vous voulez que l'application reste plus légère.",
+        "Dans les réglages de performance, vous pouvez ajuster le nombre d'actions que l'annulation peut remonter. Un nombre plus élevé donne plus de liberté pour expérimenter, mais utilise aussi plus de mémoire — réduisez-le sur les appareils bas de gamme pour rester fluide.",
       "help.entry67.title": "Import de polices",
       "help.entry67.desc":
         "Permet de charger un fichier de police directement depuis le stockage de l'appareil. Ajoutez-le depuis l'onglet « Importer » de la gestion des polices, dans les réglages. Pratique pour utiliser une police personnalisée non distribuée, ou une police commerciale achetée.",
       "help.entry68.title": "Pinceaux personnalisés",
       "help.entry68.desc":
-        "Appuyez longuement sur un pinceau préinstallé dans la liste et choisissez « Dupliquer » pour créer votre propre pinceau personnalisé à partir de celui-ci. Les pinceaux dupliqués peuvent être librement modifiés (épaisseur, opacité, dureté, rotation, densité, dispersion, rayon de flou, etc.) et supprimés lorsqu'ils ne sont plus utiles (les pinceaux préinstallés eux-mêmes ne peuvent être ni modifiés ni supprimés). Vous pouvez aussi les classer dans des dossiers et les marquer comme favoris avec l'icône étoile.",
+        "Appuyez longuement sur un pinceau préinstallé dans la liste et choisissez « Dupliquer » pour créer votre propre pinceau personnalisé à partir de celui-ci. Les pinceaux dupliqués peuvent être librement modifiés (épaisseur, opacité, dureté, rotation, densité, dispersion, rayon de flou, etc.) et supprimés lorsqu’ils ne sont plus utiles (les pinceaux préinstallés eux-mêmes ne peuvent être ni modifiés ni supprimés). Vous pouvez aussi les classer dans des dossiers et les marquer comme favoris avec l’icône étoile.",
       "help.entry69.title":
         "Sélection multiple et actions groupées sur les calques",
       "help.entry69.desc":
@@ -1386,6 +1466,22 @@
       "help.entry70.title": "Libérer de l'espace",
       "help.entry70.desc":
         "Consultez l'espace utilisé par NIARIM sur votre appareil, ainsi qu'une répartition de son contenu (projets, matériaux, fichiers exportés, brosses/tons/tampons/polices personnalisés, cache et corbeille) sous forme de graphiques circulaires. Vous pouvez vider le cache, supprimer les matériaux inutilisés dans tous les projets, vider la corbeille, organiser vos projets ou effacer toutes les données (réinitialiser).",
+      "help.category.community": "Communauté",
+      "help.entry71.title": "Commandes de base (appui, appui long, balayage)",
+      "help.entry71.desc":
+        "Une simple pression sur une icône de la barre d’outils bascule vers cet outil. Appuyez longuement sur cette icône, ou faites-la glisser vers le haut, pour ouvrir ses réglages détaillés. Derrière cet appui long ou ce balayage se trouvent : pinceau, trame, tampon ou remplissage au lasso pour le stylo ; remplissage uni ou tramé pour le pot ; rectangle, lasso ou sélection automatique pour l’outil de sélection ; flou ou mosaïque pour l’outil doigt ; et la liste des outils enregistrés pour le changement rapide. Un double appui sur une icône affiche une brève description en bas de l’écran. Sur le canevas, pincez à deux doigts pour zoomer, faites glisser à deux doigts pour vous déplacer, touchez à deux doigts pour annuler et à trois doigts pour rétablir. Appuyez deux fois sur le bord gauche ou droit de l’écran pour passer à l’image précédente ou suivante. Avec une souris ou une tablette graphique, la molette zoome et le glissement avec le bouton central déplace la vue.",
+      "help.entry72.title": "Gestion des outils rapides",
+      "help.entry72.desc":
+        "Enregistrez un ensemble d'outils fréquemment utilisés pour les faire défiler d'un seul appui. Ouvrez le popup de gestion par un appui long ou un glissement vers le haut pour modifier les outils enregistrés et leur ordre.",
+      "help.entry73.title": "Opérations sur les scènes",
+      "help.entry73.desc":
+        "L'onglet scènes de la timeline permet d'ajouter, dupliquer, supprimer, renommer et réorganiser les scènes. Le mode sélection multiple permet de déplacer, dupliquer ou supprimer plusieurs scènes à la fois.",
+      "help.entry74.title": "Place des œuvres",
+      "help.entry74.desc":
+        "Publiez vos animations et illustrations dans la communauté sous forme de vidéos YouTube, et parcourez les œuvres des autres utilisateurs. Basculez entre les onglets « Nouveautés », « Classement » et « Abonnements », et effectuez une recherche par titre d’œuvre ou nom du créateur. Passez en mode recherche par tag pour filtrer les œuvres par tag : n’importe quel utilisateur (pas seulement le créateur) peut ajouter ou retirer des tags, mais un tag verrouillé par le créateur ne peut être retiré que par lui, et toucher un tag filtre instantanément les œuvres correspondantes. Toucher une carte d’œuvre ouvre une fenêtre d’aperçu flottante déplaçable et redimensionnable, pour continuer à naviguer sur d’autres écrans pendant la lecture. Le bouton « Voir les détails » ouvre l’écran de détails de l’œuvre (créateur, date de publication, modification des tags, mise en favori, republication, etc.). Toucher le bouton « Suivre » à côté du nom d’un créateur l’ajoute à vos abonnements : l’onglet « Abonnements » regroupe alors uniquement les publications de ce créateur, triées par date. Lorsque quelqu’un vous suit, cela apparaît dans la liste de notifications sous l’icône de cloche en haut de l’écran. Vous pouvez choisir si vos listes d’abonnements/abonnés sont visibles par les autres utilisateurs (privées par défaut), et consulter les listes des autres utilisateurs si elles sont publiques. Vous pouvez repartager l’œuvre de n’importe qui d’autre (sauf la vôtre) avec le bouton « Repartager » ; lorsqu’un créateur que vous suivez repartage l’œuvre de quelqu’un d’autre, cette œuvre apparaît aussi dans votre onglet « Abonnements », triée selon la date la plus récente — sa date de publication d’origine ou sa date de republication (la carte affiche « Repartagé par… »). Les œuvres mises en favori apparaissent regroupées dans l’onglet « Favoris » de l’écran d’accueil, ainsi que dans l’onglet « Favoris » de l’écran des œuvres d’un créateur. Vous pouvez choisir si votre propre liste de favoris est visible par les autres utilisateurs (privée par défaut), et consulter la liste de favoris des autres utilisateurs si elle est rendue publique. Vous pouvez signaler une œuvre en indiquant un motif, et après l’envoi, il vous sera demandé si vous souhaitez bloquer ce créateur. Les vidéos verticales peuvent être visionnées en « mode vertical », qui les enchaîne comme un flux de vidéos courtes. Le nombre de publications par jour est limité : 1 par jour pour les membres gratuits, 3 par jour pour les membres Premium.",
+      "help.entry75.title": "Rééditer un filigrane",
+      "help.entry75.desc":
+        "Toucher un filigrane placé sur la piste de calque commun de la timeline permet de rééditer à tout moment son angle, sa taille, son opacité et sa plage d'affichage (boucle). Vous pouvez l'ajuster finement non seulement à l'enregistrement, mais chaque fois que vous l'utilisez réellement dans un projet.",
     },
     es: {
       "help.title": "Ayuda",
@@ -1530,7 +1626,7 @@
         "Filtros aplicados directamente a la capa seleccionada (a diferencia de los filtros de efecto, que se aplican a toda la línea de tiempo o a una escena, los filtros de dibujo actúan por capa). Incluyen desenfoque, nitidez, máscara de enfoque, curva de tonos, niveles, viñeteado, ruido, anime retro, TRC, estilo anime, contorno, un filtro de pixel art y un filtro de distorsión óptica. El contorno no reescribe la capa original: dibuja solo el resultado contorneado en una capa nueva. El filtro de distorsión óptica aplica una deformación localizada, como a través de un cristal de gafas de gran graduación, únicamente al área pintada en la capa de selección. El filtro de pixel art también permite elegir un modo de color (sin límite, especificar colores, especificar el número de colores o elegir desde una paleta).",
       "help.entry42.title": "Fotogramas clave de capa (animación por partes)",
       "help.entry42.desc":
-        'Define la posición, escala y rotación de cada capa por fotograma; los fotogramas clave se interpolan automáticamente. Mientras los fotogramas clave de cámara mueven toda la pantalla, esto mueve una sola capa. Como cada parte del relleno automático se genera como una capa independiente, esto funciona directamente para animar por partes: mover solo un brazo, abrir y cerrar solo una boca, etc. Se configura desde "Animación (fotogramas clave)" en el menú de tres puntos de cada capa, en el panel de capas. El dibujo de la capa en sí no cambia: es una transformación no destructiva de dónde se muestra. Esto solo afecta a la visualización de la línea de tiempo (vista previa / exportación) y no afecta al dibujo real en el modo lienzo.',
+        'Define la posición, escala y rotación de cada capa por fotograma; los fotogramas clave se interpolan automáticamente. Mientras los fotogramas clave de cámara mueven toda la pantalla, esto mueve una sola capa. Como cada parte del relleno automático se genera como una capa independiente, esto funciona directamente para animar por partes: mover solo un brazo, abrir y cerrar solo una boca, etc. Cada fotograma clave también puede tener su propia interpolación (uniforme, entrada suave, salida suave, entrada y salida suaves, o rebote) que controla cómo se conecta con el siguiente fotograma clave, de modo que el movimiento no tiene por qué ser siempre a velocidad constante. Se configura desde "Animación (fotogramas clave)" en el menú de tres puntos de cada capa, en el panel de capas. El dibujo de la capa en sí no cambia: es una transformación no destructiva de dónde se muestra. Esto solo afecta a la visualización de la línea de tiempo (vista previa / exportación) y no afecta al dibujo real en el modo lienzo.',
       "help.entry43.title": "Grupos de capas (mover varias partes juntas)",
       "help.entry43.desc":
         'Mueve varias capas juntas con un único flujo de fotogramas clave. Por ejemplo, si un "brazo" está formado por dos partes de relleno automático —piel y manga—, agruparlas permite mover ambas con una sola operación de fotograma clave. Crea un grupo seleccionando varias capas (casillas) en el panel de capas y tocando el icono "Agrupar" en la barra inferior. El movimiento del grupo se superpone a los fotogramas clave propios de cada capa miembro (si los tiene), por lo que puedes combinar el movimiento general del grupo con ajustes finos por capa. Una capa solo puede pertenecer a un grupo a la vez.',
@@ -1569,7 +1665,7 @@
         "Una función exclusiva de la versión premium que te permite añadir tu propia firma o logotipo como marca de agua en los vídeos e imágenes exportados. Puedes ajustar su posición, tamaño y opacidad. Toca la marca de agua colocada en la pista de capa común de la línea de tiempo para reeditar en cualquier momento su ángulo, tamaño, opacidad y rango visible (bucle), no solo al registrarla, sino cada vez que la uses en un proyecto.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "La membresia premium elimina el limite de 90 segundos de duracion de video de la version gratuita y te permite quitar la tarjeta final (logotipo de la app) que se anade automaticamente al final de cada video. Tambien se ocultan los anuncios y obtienes acceso a la marca de agua, la curva de tonos y la correccion de niveles.",
+        "La membresia premium amplia hasta 2 horas el limite de 90 segundos de duracion de video de la version gratuita y te permite quitar la tarjeta final (logotipo de la app) que se anade automaticamente al final de cada video. Tambien se ocultan los anuncios y obtienes acceso a la marca de agua, la curva de tonos y la correccion de niveles.",
       "help.entry56.title": "Pantalla de inicio",
       "help.entry56.desc":
         "La primera pantalla que se muestra al abrir la app, con las pestañas Proyectos, Compartidos, Obras y Papelera. El icono de búsqueda arriba a la derecha permite filtrar proyectos por nombre. En la pestaña Proyectos, el botón flotante permite elegir entre crear un nuevo proyecto o una nueva carpeta.",
@@ -1602,7 +1698,7 @@
         'Desde la sección "Relleno con cubo" de los ajustes puedes ajustar la tolerancia (cuánta diferencia de color respecto al píxel pulsado sigue contando como la misma zona), la expansión en px (cuánto se extiende el área rellenada más allá del borde para cubrir huecos en la línea) y rellenar bajo la línea (compone el relleno expandido detrás de los píxeles existentes en lugar de pintar sobre la línea, manteniendo su aspecto intacto). Ajustarlos ayuda cuando la línea tiene pequeños huecos o el relleno queda incompleto.',
       "help.entry66.title": "Longitud del historial de deshacer",
       "help.entry66.desc":
-        "En los ajustes de rendimiento puedes ajustar cuántas acciones puede retroceder deshacer. Un número mayor da más libertad para experimentar, pero también usa más memoria; redúcelo si quieres que la aplicación vaya más ligera.",
+        "En los ajustes de rendimiento puedes ajustar cuántas acciones puede retroceder deshacer. Un número mayor da más libertad para experimentar, pero también usa más memoria; redúcelo en dispositivos de gama baja para que todo vaya más fluido.",
       "help.entry67.title": "Importar fuentes",
       "help.entry67.desc":
         'Permite cargar un archivo de fuente directamente desde el almacenamiento del dispositivo. Añádela desde la pestaña "Importar" en la gestión de fuentes, en ajustes. Útil cuando quieres usar una fuente personalizada que no se distribuye en ningún sitio, o una fuente comercial que has comprado.',
@@ -1615,6 +1711,23 @@
       "help.entry70.title": "Liberar espacio",
       "help.entry70.desc":
         "Consulta cuánto espacio usa NIARIM en tu dispositivo y un desglose de su contenido interno (proyectos, materiales, archivos exportados, pinceles/tonos/sellos/fuentes personalizados, caché y papelera) en gráficos circulares. Puedes borrar la caché, eliminar materiales sin usar en todos los proyectos, vaciar la papelera, organizar proyectos o borrar todos los datos (restablecer).",
+      "help.category.community": "Comunidad",
+      "help.entry71.title":
+        "Controles básicos (toque, pulsación larga, deslizamiento)",
+      "help.entry71.desc":
+        "Un toque simple en un icono de la barra de herramientas cambia a esa herramienta. Mantén pulsado ese icono, o deslízalo hacia arriba, para abrir sus ajustes detallados. Tras esa pulsación larga o ese deslizamiento encontrarás: pincel, trama, sello o relleno con lazo para la pluma; relleno sólido o con trama para el bote; rectángulo, lazo o selección automática para la herramienta de selección; desenfoque o mosaico para la herramienta de dedo; y la lista de herramientas registradas para el cambio rápido. Al tocar dos veces un icono aparece una breve descripción en la parte inferior de la pantalla. En el lienzo, pellizca con dos dedos para ampliar o reducir, arrastra con dos dedos para desplazar, toca con dos dedos para deshacer y con tres para rehacer. Toca dos veces el borde izquierdo o derecho de la pantalla para ir al fotograma anterior o siguiente. Si tienes conectado un ratón o una tableta gráfica, la rueda amplía y el arrastre con el botón central desplaza.",
+      "help.entry72.title": "Gestión de herramientas rápidas",
+      "help.entry72.desc":
+        "Registra un conjunto de herramientas usadas con frecuencia para alternar entre ellas con un solo toque. Abre el popup de gestión con una pulsación larga o un deslizamiento hacia arriba para editar las herramientas registradas y su orden.",
+      "help.entry73.title": "Operaciones con escenas",
+      "help.entry73.desc":
+        "La pestaña de escenas de la línea de tiempo permite añadir, duplicar, eliminar, renombrar y reordenar escenas. El modo de selección múltiple permite mover, duplicar o eliminar varias escenas a la vez.",
+      "help.entry74.title": "Plaza de Obras",
+      "help.entry74.desc":
+        "Publica tus animaciones e ilustraciones en la comunidad como vídeos de YouTube y explora las obras de otros usuarios. Cambia entre las pestañas «Nuevas», «Ranking» y «Siguiendo», y busca por título de la obra o nombre del creador. Cambia al modo de búsqueda por etiquetas para filtrar obras por etiqueta: cualquier usuario (no solo el creador) puede añadir o quitar etiquetas, aunque las etiquetas bloqueadas por el creador solo él puede quitarlas, y tocar una etiqueta filtra al instante las obras con la misma etiqueta. Al tocar una tarjeta de obra se abre una ventana de vista previa flotante que se puede arrastrar y redimensionar, para seguir explorando otras pantallas mientras se reproduce. El botón «Ver detalles» abre la pantalla de detalles de la obra (creador, fecha de publicación, edición de etiquetas, marcador, republicación y más). Toca el botón «Seguir» junto al nombre de un creador para añadirlo a tus seguidos: la pestaña «Siguiendo» reúne entonces solo las publicaciones de ese creador, ordenadas por fecha. Cuando alguien te sigue, aparece en la lista de notificaciones bajo el icono de la campana en la parte superior de la pantalla. Puedes elegir si tus listas de seguidos/seguidores son visibles para otros usuarios (privadas por defecto), y puedes ver las listas de otros usuarios si las han hecho públicas. Puedes republicar la obra de cualquier otra persona (excepto la tuya propia) con el botón «Republicar»; cuando un creador al que sigues republica la obra de otra persona, esa obra también aparece en tu pestaña «Siguiendo», ordenada según lo que sea más reciente —su fecha de publicación original o su fecha de republicación— (la tarjeta muestra «Republicado por…»). Las obras marcadas aparecen juntas en la pestaña «Guardadas» de la pantalla de inicio, y también en la pestaña «Marcadores» de la pantalla de obras de un creador. Puedes elegir si tu propia lista de marcadores es visible para otros usuarios (privada de forma predeterminada), y puedes ver las listas de marcadores de otros usuarios si las han hecho públicas. Puedes denunciar una obra indicando un motivo, y tras enviarla se te preguntará si quieres bloquear a ese creador. Los vídeos verticales se pueden ver en «modo vertical», que los reproduce uno tras otro como un feed de vídeos cortos. Hay un límite diario de publicaciones: 1 al día para miembros gratuitos y 3 al día para miembros Premium.",
+      "help.entry75.title": "Reeditar una marca de agua",
+      "help.entry75.desc":
+        "Tocar una marca de agua colocada en la pista de capa común de la línea de tiempo permite reeditar en cualquier momento su ángulo, tamaño, opacidad y rango de visualización (bucle). Puedes ajustarla con precisión no solo al registrarla, sino siempre que la estés usando en un proyecto.",
     },
   };
   for (var lang in HELP) {

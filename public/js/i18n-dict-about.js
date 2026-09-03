@@ -62,7 +62,7 @@
       "about.unique.item2.title":
         "アクセントカラーからパネル背景まで、全部好きな色に",
       "about.unique.item2.body":
-        "虹の7色やパステル調など26種類のプリセットを収録していますが、それはあくまで出発点。アクセントカラー・文字色・パネル背景・メニュー背景・選択色・更新マークまで、アプリで使われるほぼすべての色を、カラーピッカーで自由に組み合わせて自分だけのテーマに編集できます。作ったテーマは名前を付けて保存・複製・エクスポートも可能です。",
+        "虹の7色やパステル調・くすみカラーなど、多彩なプリセットを収録していますが、それはあくまで出発点。アクセントカラー・文字色・パネル背景・メニュー背景・選択色・更新マークまで、アプリで使われるほぼすべての色を、カラーピッカーで自由に組み合わせて自分だけのテーマに編集できます。作ったテーマは名前を付けて保存・複製・エクスポートも可能です。",
       "about.unique.item3.title": "活用Tips",
       "about.unique.item3.body":
         "アプリ内で、実践的な使い方のコツやテクニックをキーワード検索しながら学べます。",
@@ -78,6 +78,9 @@
       "about.unique.item8.title": "設定・ブラシ・プロジェクトの引き継ぎ",
       "about.unique.item8.body":
         "テーマやワークスペース、ブラシ設定からプロジェクトデータまで、環境のほとんどをファイルとして書き出し・読み込みできます。端末を機種変更しても、使い慣れた環境ですぐに作業を再開できます。",
+      "about.unique.item9.title": "ウィジェットまで自分好みに",
+      "about.unique.item9.body":
+        "ホーム画面ウィジェットは3種類。起動画面ウィジェットには自分の作品の中から表示するフレームを1枚選べ、「作品をつくる」「作品広場」の2種類は背景色をテーマ追従か任意の色かで指定できます。色は種類ごとに独立しているので、3種を並べて置いても見分けられます。",
       "about.unique.item7.title": "作品広場",
       "about.unique.item7.body":
         "投稿された作品を新着・ランキングから発見できるコミュニティ機能です。閲覧はログイン不要で、誰でも気軽に楽しめます。",
@@ -136,7 +139,7 @@
       "about.unique.item2.title":
         "From accent color to panel background — every color, your choice",
       "about.unique.item2.body":
-        "26 presets are included, from rainbow-based palettes to pastel tones, but they're just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
+        "A wide range of presets is included, from rainbow-based palettes to pastel and muted tones, but they're just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
       "about.unique.item3.title": "In-app Tips",
       "about.unique.item3.body":
         "Search and learn practical tips and techniques right inside the app.",
@@ -152,6 +155,9 @@
       "about.unique.item8.title": "Carry your setup anywhere",
       "about.unique.item8.body":
         "Export and import almost your entire setup as files — themes, workspace layout, brush settings, even project data. Switch to a new device and pick up right where you left off, in the environment you're used to.",
+      "about.unique.item9.title": "Even the widgets are yours to style",
+      "about.unique.item9.body":
+        "There are three home screen widgets. The launch screen widget shows a single frame you pick from your own work, and the “Create” and “Work Plaza” widgets let you either follow the app theme or set any background colour you like. Colours are kept per widget, so all three can sit side by side and still be told apart.",
       "about.unique.item7.title": "Gallery",
       "about.unique.item7.body":
         "Discover posted works through new arrivals and rankings. Browsing requires no login, so anyone can enjoy it casually.",
@@ -206,7 +212,7 @@
         "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※⁠自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
       "about.unique.item2.title": "从主题色到面板背景，颜色全部由你决定",
       "about.unique.item2.body":
-        "应用内置了彩虹七色、马卡龙色调等26种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
+        "应用内置了彩虹七色、马卡龙色调、莫兰迪色系等多种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
       "about.unique.item3.title": "活用 Tips",
       "about.unique.item3.body":
         "可在应用内通过关键词搜索，学习实用的使用技巧与窍门。",
@@ -222,6 +228,9 @@
       "about.unique.item8.title": "环境与项目可随身携带",
       "about.unique.item8.body":
         "主题、工作区、笔刷设置乃至项目数据，几乎所有环境都能作为文件导出、导入。即使更换设备，也能立刻在熟悉的环境中继续创作。",
+      "about.unique.item9.title": "连小组件也能随心定制",
+      "about.unique.item9.body":
+        "主屏幕小组件共有三种。启动页小组件可以从自己的作品中挑选要显示的一帧，「创作」与「作品广场」两种则可将背景色设为跟随主题或任意指定。颜色按种类独立保存，三种并排摆放也能分辨。",
       "about.unique.item7.title": "作品广场",
       "about.unique.item7.body":
         "可通过新作与排行榜发现其他人投稿的作品。浏览无需登录，任何人都能轻松享受。",
@@ -277,7 +286,7 @@
         "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※⁠自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
       "about.unique.item2.title": "從主題色到面板背景，顏色全部由你決定",
       "about.unique.item2.body":
-        "應用內建了彩虹七色、粉彩色調等26種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
+        "應用內建了彩虹七色、粉彩色調、莫蘭迪色系等多種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
       "about.unique.item3.title": "活用 Tips",
       "about.unique.item3.body":
         "可在應用程式內透過關鍵字搜尋，學習實用的使用技巧與訣竅。",
@@ -293,6 +302,9 @@
       "about.unique.item8.title": "環境與專案可隨身攜帶",
       "about.unique.item8.body":
         "主題、工作區、筆刷設定乃至專案資料，幾乎所有環境都能作為檔案匯出、匯入。即使更換裝置，也能立刻在熟悉的環境中繼續創作。",
+      "about.unique.item9.title": "連小工具也能隨心定製",
+      "about.unique.item9.body":
+        "主畫面小工具共有三種。啟動頁小工具可以從自己的作品中挑選要顯示的一格，「創作」與「作品廣場」兩種則可將背景色設為跟隨主題或任意指定。顏色依種類獨立保存，三種並排擺放也能分辨。",
       "about.unique.item7.title": "作品廣場",
       "about.unique.item7.body":
         "可透過新作與排行榜發現其他人投稿的作品。瀏覽無需登入，任何人都能輕鬆享受。",
@@ -349,7 +361,7 @@
       "about.unique.item2.title":
         "포인트 컬러부터 패널 배경까지, 색은 전부 당신 마음대로",
       "about.unique.item2.body":
-        "무지개 7색이나 파스텔 톤 등 26종의 프리셋을 기본 제공하지만, 이는 어디까지나 출발점입니다. 포인트 컬러・글자색・패널 배경・메뉴 배경・선택색, 그리고 업데이트 표시 색까지 앱에서 사용하는 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 편집할 수 있습니다. 만든 테마는 이름을 붙여 저장・복제・내보내기도 가능합니다.",
+        "무지개 7색, 파스텔 톤, 뮤트 톤 등 다양한 프리셋을 기본 제공하지만, 이는 어디까지나 출발점입니다. 포인트 컬러・글자색・패널 배경・메뉴 배경・선택색, 그리고 업데이트 표시 색까지 앱에서 사용하는 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 편집할 수 있습니다. 만든 테마는 이름을 붙여 저장・복제・내보내기도 가능합니다.",
       "about.unique.item3.title": "활용 Tips",
       "about.unique.item3.body":
         "앱 내에서 키워드로 검색하며 실전적인 사용 요령과 테크닉을 배울 수 있습니다.",
@@ -365,6 +377,9 @@
       "about.unique.item8.title": "설정도 작업 환경도 그대로 이어서",
       "about.unique.item8.body":
         "테마, 작업 공간, 브러시 설정부터 프로젝트 데이터까지, 거의 모든 환경을 파일로 내보내고 불러올 수 있습니다. 기기를 바꿔도 익숙한 환경에서 바로 작업을 이어갈 수 있습니다.",
+      "about.unique.item9.title": "위젯까지 내 취향대로",
+      "about.unique.item9.body":
+        "홈 화면 위젯은 세 종류입니다. 시작 화면 위젯은 내 작품 중에서 표시할 컷을 한 장 고를 수 있고, 「작품 만들기」와 「작품 광장」 두 종류는 배경색을 테마 연동 또는 원하는 색으로 지정할 수 있습니다. 색은 종류별로 따로 저장되므로 세 가지를 나란히 두어도 구별됩니다.",
       "about.unique.item7.title": "작품광장",
       "about.unique.item7.body":
         "게시된 작품을 신작・랭킹에서 발견할 수 있는 커뮤니티 기능입니다. 열람은 로그인 없이 가능해 누구나 부담 없이 즐길 수 있습니다.",
@@ -425,7 +440,7 @@
       "about.unique.item2.title":
         "De la couleur d'accent au fond des panneaux, chaque couleur est votre choix",
       "about.unique.item2.body":
-        "26 préréglages sont inclus, des palettes arc-en-ciel aux tons pastel, mais ce n'est qu'un point de départ. Couleur d'accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
+        "De nombreux préréglages sont inclus, des palettes arc-en-ciel aux tons pastel et sourds, mais ce n'est qu'un point de départ. Couleur d'accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
       "about.unique.item3.title": "Astuces intégrées",
       "about.unique.item3.body":
         "Recherchez et apprenez des astuces et techniques pratiques directement dans l'application.",
@@ -441,6 +456,9 @@
       "about.unique.item8.title": "Emportez votre environnement partout",
       "about.unique.item8.body":
         "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l'espace de travail, réglages de pinceaux, et même les données de projet. Changez d'appareil et reprenez immédiatement dans l'environnement que vous connaissez.",
+      "about.unique.item9.title": "Jusqu'aux widgets, tout vous appartient",
+      "about.unique.item9.body":
+        "Il existe trois widgets d'écran d'accueil. Le widget d'écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l'application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
       "about.unique.item7.title": "Galerie",
       "about.unique.item7.body":
         "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
@@ -500,7 +518,7 @@
       "about.unique.item2.title":
         "Del color de acento al fondo de los paneles, cada color a tu elección",
       "about.unique.item2.body":
-        "Se incluyen 26 ajustes preestablecidos, desde paletas arcoíris hasta tonos pastel, pero son solo un punto de partida. Color de acento, color de texto, fondo de paneles, fondo de menús, color de selección e incluso el color de la marca de actualización: casi todos los colores usados en la app se pueden combinar libremente con un selector de color para crear tu propio tema. Tus temas personalizados se pueden nombrar, guardar, duplicar y exportar.",
+        "Se incluye una amplia variedad de ajustes preestablecidos, desde paletas arcoíris hasta tonos pastel y apagados, pero son solo un punto de partida. Color de acento, color de texto, fondo de paneles, fondo de menús, color de selección e incluso el color de la marca de actualización: casi todos los colores usados en la app se pueden combinar libremente con un selector de color para crear tu propio tema. Tus temas personalizados se pueden nombrar, guardar, duplicar y exportar.",
       "about.unique.item3.title": "Consejos integrados",
       "about.unique.item3.body":
         "Busca y aprende consejos y técnicas prácticas directamente dentro de la app.",
@@ -516,6 +534,9 @@
       "about.unique.item8.title": "Lleva tu entorno a cualquier dispositivo",
       "about.unique.item8.body":
         "Exporta e importa casi todo tu entorno como archivos: temas, diseño del espacio de trabajo, ajustes de pinceles e incluso datos de proyecto. Cambia de dispositivo y retoma el trabajo de inmediato en el entorno al que estás acostumbrado.",
+      "about.unique.item9.title": "Hasta los widgets son tuyos",
+      "about.unique.item9.body":
+        "Hay tres widgets de pantalla de inicio. El widget de arranque muestra un fotograma que eliges entre tus propias obras, y los widgets «Crear» y «Plaza de Obras» pueden seguir el tema de la aplicación o usar el color de fondo que prefieras. Los colores se guardan por tipo, así que los tres pueden convivir sin confundirse.",
       "about.unique.item7.title": "Galería",
       "about.unique.item7.body":
         "Descubre las obras publicadas mediante novedades y clasificaciones. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",

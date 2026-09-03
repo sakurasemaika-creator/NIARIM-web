@@ -155,6 +155,7 @@
           <a href="#workspace" data-i18n="featuresPage.nav.workspace"
             >作業環境</a
           >
+          <a href="#widget" data-i18n="featuresPage.nav.widget">ウィジェット</a>
           <a href="#export" data-i18n="featuresPage.nav.export">書き出し</a>
         </nav>
 
@@ -412,6 +413,14 @@
               </h3>
               <p data-i18n="featuresPage.drawing.item14.body">
                 フェード・ストローク減衰・混色・筆圧カーブなど、ブラシの描き味を細部までカスタマイズできます。
+              </p>
+            </div>
+            <div class="spec-item">
+              <h3 data-i18n="featuresPage.drawing.item15.title">
+                素材のタグ検索
+              </h3>
+              <p data-i18n="featuresPage.drawing.item15.body">
+                ブラシ・トーン・スタンプ・フォントなどの素材には「線画」「塗り」「ぼかし」「アナログ風」「ドット絵」「網点」といったタグが付いており、名前を覚えていなくてもタグで絞り込んで探せます。キーワード検索とタグ検索はワンタップで切り替えられ、自作素材には自分でタグを付けられます。
               </p>
             </div>
           </div>
@@ -1640,7 +1649,114 @@
                 テーマ・外観
               </h3>
               <p data-i18n="featuresPage.workspace.item4.body">
-                虹の7色やパステル調など26種類のプリセットを収録。それだけでなく、アクセントカラーから文字色・パネル背景・選択色・更新マークまで、アプリのほぼすべての色をカラーピッカーで自由に組み合わせ、自分だけのテーマに編集できます。
+                虹の7色やパステル調・くすみカラーなど、多彩なプリセットを収録。それだけでなく、アクセントカラーから文字色・パネル背景・選択色・更新マークまで、アプリのほぼすべての色をカラーピッカーで自由に組み合わせ、自分だけのテーマに編集できます。
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-section reveal" id="widget">
+          <div class="feature-section-head">
+            <span class="feature-section-icon" aria-hidden="true"
+              ><svg class="ic">
+                <use href="/assets/icons/ui/sprite.svg#ic-image"></use></svg
+            ></span>
+            <h2 data-i18n="featuresPage.widget.title">
+              Widget｜ホーム画面ウィジェット
+            </h2>
+            <span data-i18n="featuresPage.widget.lead"
+              >自分の作品を、スマホのホーム画面に置いておけます。</span
+            >
+          </div>
+          <div class="feature-narrative">
+            <div class="feature-narrative-block">
+              <h3 data-i18n="narrative.widget.1.heading">
+                ホーム画面が、自分の作品の置き場所になる。
+              </h3>
+              <p data-i18n="narrative.widget.1.body">
+                多くのアプリのウィジェットは、決まった見た目のものを置くだけです。NIARIMのウィジェットは、表示する作品もフレームも背景色も自分で決められます。自分の描いた1コマがホーム画面にあること自体が、続きを描く理由になります。
+              </p>
+            </div>
+            <div class="feature-narrative-block">
+              <h3 data-i18n="narrative.widget.2.heading">
+                表示するフレームまで自分で選ぶ
+              </h3>
+              <p data-i18n="narrative.widget.2.body">
+                作品を選び、シーンを選び、その中の1フレームを選ぶ——という流れで表示内容を決めます。フレーム選択画面には実際に合成したプレビューが並ぶので、書き出さなくても仕上がりのまま選べます。
+              </p>
+            </div>
+            <div class="feature-narrative-block">
+              <h3 data-i18n="narrative.widget.3.heading">
+                色は、種類ごとに自由に
+              </h3>
+              <p data-i18n="narrative.widget.3.body">
+                「作品をつくる」「作品広場」の2種類は、背景色をアプリのテーマに合わせるか、カラーピッカーで自由に指定するかを選べます。色は種類ごとに独立しているので、3種を並べて置いても一目で見分けられます。
+              </p>
+            </div>
+          </div>
+          <!-- widget_settings_screen.dart の実構成に基づく概念図。
+           起動画面ウィジェットは「表示するフレーム」だけを選び背景色の
+           指定は無い（作品そのものを表示するため）。作品をつくる／作品広場
+           の2種類だけが「テーマに合わせる／色を選ぶ」のラジオボタンを持つ。
+           背景色は種類ごとに独立して保存される。 -->
+          <div class="feature-diagram fd-widget-grid" aria-hidden="true">
+            <div class="fd-widget-tile fd-widget-tile--art">
+              <span class="fd-widget-frame"></span>
+              <span class="fd-widget-name" data-i18n="fd.widgetLaunch"
+                >起動画面</span
+              >
+              <span class="fd-widget-sub" data-i18n="fd.widgetFrameLabel"
+                >3枚目のフレーム</span
+              >
+            </div>
+            <div class="fd-widget-tile fd-widget-tile--create">
+              <span class="fd-widget-name" data-i18n="fd.widgetCreate"
+                >作品をつくる</span
+              >
+              <span class="fd-radio is-active"></span>
+              <span class="fd-widget-sub" data-i18n="fd.widgetColorTheme"
+                >テーマに合わせる</span
+              >
+            </div>
+            <div class="fd-widget-tile fd-widget-tile--plaza">
+              <span class="fd-widget-name" data-i18n="fd.widgetPlaza"
+                >作品広場</span
+              >
+              <span class="fd-radio is-active"></span>
+              <span class="fd-widget-sub" data-i18n="fd.widgetColorCustom"
+                >色を選ぶ</span
+              >
+            </div>
+          </div>
+          <div class="spec-grid">
+            <div class="spec-item">
+              <h3 data-i18n="featuresPage.widget.item1.title">
+                起動画面ウィジェット
+              </h3>
+              <p data-i18n="featuresPage.widget.item1.body">
+                選んだ作品のフレーム1枚を表示します。タップするとNIARIMが起動します。
+              </p>
+            </div>
+            <div class="spec-item">
+              <h3 data-i18n="featuresPage.widget.item2.title">
+                作品をつくるウィジェット
+              </h3>
+              <p data-i18n="featuresPage.widget.item2.body">
+                タップすると「作品をつくる」画面が開きます。背景色はテーマ追従か、指定した色かを選べます。
+              </p>
+            </div>
+            <div class="spec-item">
+              <h3 data-i18n="featuresPage.widget.item3.title">
+                作品広場ウィジェット
+              </h3>
+              <p data-i18n="featuresPage.widget.item3.body">
+                タップすると「作品広場」が開きます。背景色はテーマ追従か、指定した色かを選べます。
+              </p>
+            </div>
+            <div class="spec-item">
+              <h3 data-i18n="featuresPage.widget.item4.title">静止画で表示</h3>
+              <p data-i18n="featuresPage.widget.item4.body">
+                ホーム画面ウィジェットは動画を再生できないため、選んだ作品の1コマを静止画として表示します。ウィジェットの追加自体はホーム画面の長押しから行ってください。
               </p>
             </div>
           </div>
@@ -1868,6 +1984,7 @@
     <script src="/js/i18n-dict-save.js"></script>
     <script src="/js/i18n-dict-workspace.js"></script>
     <script src="/js/i18n-dict-features-diagram.js"></script>
+    <script src="/js/i18n-dict-widget.js"></script>
     <script src="/js/i18n-dict-narrative.js"></script>
     <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
