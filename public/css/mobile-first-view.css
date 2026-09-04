@@ -1,0 +1,126 @@
+/* Mobile first-view composition: show NIARIM's product UI immediately instead of a text-only opening. */
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .hero .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) clamp(118px, 34vw, 144px) !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    column-gap: 0.85rem !important;
+    row-gap: 0.45rem !important;
+    align-items: start !important;
+  }
+
+  /* Let individual hero elements participate in the compact grid. */
+  .hero-copy {
+    display: contents !important;
+  }
+
+  .hero-copy .eyebrow {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 0.1rem;
+    font-size: 0.72rem;
+  }
+
+  .hero-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    font-size: clamp(2.25rem, 11vw, 3.15rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .hero-subtitle {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 0.45rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55;
+  }
+
+  .hero-lead {
+    grid-column: 1;
+    grid-row: 4;
+    margin-top: 0.2rem !important;
+    font-size: 0.84rem !important;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+
+  /* The full explanation appears again below; first view prioritizes the product itself. */
+  .hero-bridge,
+  .hero-note {
+    display: none !important;
+  }
+
+  .hero-visual {
+    grid-column: 2;
+    grid-row: 3 / span 2;
+    align-self: center;
+    width: 100% !important;
+    max-width: 144px !important;
+    margin: 0 !important;
+    border-radius: 16px !important;
+    box-shadow:
+      0 16px 34px rgba(40, 36, 44, 0.2),
+      0 0 0 1px rgba(255, 92, 122, 0.08) !important;
+    transform: rotate(1.4deg) !important;
+  }
+
+  .hero-visual::before {
+    inset: -12% !important;
+    filter: blur(30px) !important;
+    opacity: 0.28 !important;
+  }
+
+  .hero-actions {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: 0.55rem !important;
+    gap: 0.55rem !important;
+  }
+
+  .hero-actions .btn {
+    min-height: 42px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.86rem;
+  }
+
+  /* Keep the black moving feature band in the opening viewport on common phones. */
+  .marquee-section {
+    padding-block: 0.62rem !important;
+  }
+
+  .marquee-track span {
+    padding-inline: 1.25rem !important;
+    font-size: 0.92rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) 112px !important;
+    column-gap: 0.65rem !important;
+  }
+
+  .hero-title {
+    font-size: 2.15rem !important;
+  }
+
+  .hero-lead {
+    -webkit-line-clamp: 3;
+    font-size: 0.8rem !important;
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 0;
+    padding-inline: 0.65rem;
+  }
+}
