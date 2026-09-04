@@ -255,7 +255,7 @@ main {
 
 .hero-lead {
   margin-top: 1.35rem;
-  max-width: 49ch;
+  max-width: calc(49 * var(--measure-ch));
   font-size: clamp(1rem, 0.55vw + 0.86rem, 1.12rem);
   line-height: 1.9;
 }
@@ -633,7 +633,7 @@ main {
   }
 
   .hero-bridge {
-    max-width: 48ch;
+    max-width: calc(48 * var(--measure-ch));
     padding-left: 0;
     border-left: 0;
   }

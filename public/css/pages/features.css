@@ -27,7 +27,7 @@
 .features-header p {
   margin-top: var(--space-sm);
   color: var(--color-text-muted);
-  max-width: 56ch;
+  max-width: calc(56 * var(--measure-ch));
   margin-inline: auto;
   overflow-wrap: normal;
   word-break: normal;

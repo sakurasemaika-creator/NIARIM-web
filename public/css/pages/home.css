@@ -83,7 +83,7 @@
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-ink);
-  max-width: 42ch;
+  max-width: calc(42 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
   opacity: 0;
@@ -131,7 +131,7 @@
   margin-top: var(--space-md);
   font-size: 1.1rem;
   color: var(--color-text-muted);
-  max-width: 52ch;
+  max-width: calc(52 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
   opacity: 0;
@@ -151,7 +151,7 @@
   margin-top: var(--space-md);
   font-size: var(--fs-small);
   color: var(--color-text-muted);
-  max-width: 46ch;
+  max-width: calc(46 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
   opacity: 0;
@@ -664,7 +664,7 @@
 .download-panel p {
   margin-top: var(--space-sm);
   color: rgba(255, 255, 255, 0.72);
-  max-width: 52ch;
+  max-width: calc(52 * var(--measure-ch));
   margin-inline: auto;
   overflow-wrap: normal;
   word-break: normal;
@@ -772,7 +772,7 @@
 .faq-answer p {
   padding-bottom: var(--space-md);
   color: var(--color-text-muted);
-  max-width: 62ch;
+  max-width: calc(62 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
 }

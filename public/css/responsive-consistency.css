@@ -285,7 +285,7 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   color: var(--niarim-muted);
 }
 .hero-bridge {
-  max-width: 43ch;
+  max-width: calc(43 * var(--measure-ch));
   padding-left: 0.85rem;
   border-left: 2px solid rgba(255, 92, 122, 0.28);
 }

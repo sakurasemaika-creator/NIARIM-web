@@ -27,6 +27,13 @@
      この色を背景にした白文字で 5.44:1 を確保している。 */
   --color-accent-strong: #c42e51;
   --color-accent-strong-dark: #a82545;
+  /* 本文の行長を決める単位。
+     ch はフォントの「0」の幅なので、全角の日本語・中国語・韓国語では
+     実際の1文字よりずっと狭く、ラテン語基準の文字数をそのまま使うと
+     器の半分ほどしか使わない痩せた段組みになっていた。
+     全角1文字はおおよそ1emなので、読みやすい行長（35〜40字前後）に
+     なる係数を言語ごとに切り替える。 */
+  --measure-ch: 1ch;
   --color-white: #ffffff;
   --color-black: #17161c;
   --color-ink: #28242c;
@@ -327,4 +334,12 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
   body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
     padding-top: var(--space-lg);
   }
+}
+
+/* 全角言語では ch ではなく em 基準で行長を決める。 */
+:root:lang(ja),
+:root:lang(zh-Hans),
+:root:lang(zh-Hant),
+:root:lang(ko) {
+  --measure-ch: 0.62em;
 }

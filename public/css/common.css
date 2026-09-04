@@ -873,7 +873,7 @@ p {
 .footer-brand p {
   color: rgba(255, 255, 255, 0.66);
   font-size: var(--fs-small);
-  max-width: 32ch;
+  max-width: calc(32 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
 }

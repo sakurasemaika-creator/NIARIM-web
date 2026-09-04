@@ -27,7 +27,7 @@
 .contact-intro p {
   margin-top: var(--space-sm);
   color: var(--color-text-muted);
-  max-width: 42ch;
+  max-width: calc(42 * var(--measure-ch));
   overflow-wrap: normal;
   word-break: normal;
 }
