@@ -27,6 +27,8 @@
 .screenshot-card:nth-child(4) { --fd-bezel:#934638; --fd-accent:#e34434; --fd-bg:#fff6f3; --fd-panel:#f7d8d1; --fd-text:#452720; }
 .screenshot-card:nth-child(5) { --fd-bezel:#4058a0; --fd-accent:#3154d2; --fd-bg:#f5f7ff; --fd-panel:#dce2f8; --fd-text:#202b49; }
 .screenshot-card:nth-child(6) { --fd-bezel:#7e5a29; --fd-accent:#b96c0d; --fd-bg:#fff9ef; --fd-panel:#f2e1c4; --fd-text:#3c2d1b; }
+.screenshot-card:nth-child(7) { --fd-bezel:#315f54; --fd-accent:#008f75; --fd-bg:#f1fff9; --fd-panel:#cfeee5; --fd-text:#173b32; }
+.screenshot-card:nth-child(8) { --fd-bezel:#693c8b; --fd-accent:#8f45d4; --fd-bg:#faf3ff; --fd-panel:#e8d6f5; --fd-text:#352044; }
 .screenshot-card,
 .screenshot-card:first-child {
   border: 6px solid var(--fd-bezel, #4a3b41) !important;
