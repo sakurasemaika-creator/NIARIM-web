@@ -317,3 +317,30 @@ section.section:has(.community-tabs) {
     transform: none !important;
   }
 }
+
+/* Restore the public-facing CTA treatment to NIARIM's actual brand accent.
+   The darker accessibility fallback had visually drifted from the rest of the site. */
+body .hero .hero-actions .btn.btn-primary,
+.download-actions .btn.btn-accent,
+.final-cta .hero-actions .btn.btn-primary {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #fff !important;
+}
+
+body .hero .hero-actions .btn.btn-primary:hover,
+.download-actions .btn.btn-accent:hover,
+.final-cta .hero-actions .btn.btn-primary:hover {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* HakkouMincho's web subset predates the newly added AI-training copy, so a
+   missing Japanese glyph can fall back noticeably thinner inside FAQ headings.
+   Give this injected question a tiny synthetic stroke so the fallback glyphs
+   visually match the surrounding 600-weight heading without changing copy. */
+html[lang="ja"] [data-ai-training-q] {
+  font-weight: 600;
+  -webkit-text-stroke: 0.18px currentColor;
+  paint-order: stroke fill;
+}
