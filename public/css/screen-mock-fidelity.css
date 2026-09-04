@@ -70,6 +70,11 @@
   position: relative !important;
   min-height: 180px !important;
   background: var(--fd-outside) !important;
+  /* 親が align-items: center の縦フレックスだと、この帯は内容幅に縮む。
+     中身の描画面は width:100% + aspect-ratio なので参照先が定まらず、
+     幅0＝キャンバスが消えた状態になっていた。必ず枠いっぱいに広げる。 */
+  align-self: stretch !important;
+  width: 100% !important;
 }
 .fd-app-canvas-stage {
   display: block !important;

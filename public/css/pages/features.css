@@ -17,7 +17,11 @@
 }
 
 .features-header h1 {
-  font-size: clamp(2.4rem, 4vw + 1rem, 4rem);
+  /* 折り返しで最終行に1文字だけ取り残されるのを防ぐ。
+     日本語の「NIARIMでできること」が狭い画面で「と」だけ次行に
+     落ちていたため、下限を少し下げて1行に収まるようにしている。 */
+  font-size: clamp(2rem, 4vw + 1rem, 4rem);
+  text-wrap: balance;
 }
 
 .features-header p {

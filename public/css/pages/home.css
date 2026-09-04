@@ -705,6 +705,15 @@
   font-size: 1.05rem;
 }
 
+/* スマホ幅では、質問文が1行に収まりきらず「？」だけが次の行に
+   取り残されることがあった。少しだけ文字を小さくして、文節の
+   切れ目で自然に折り返せる余裕を持たせる。 */
+@media (max-width: 480px) {
+  .faq-question {
+    font-size: 1rem;
+  }
+}
+
 .faq-question .icon {
   flex-shrink: 0;
   width: 24px;

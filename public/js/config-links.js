@@ -29,7 +29,7 @@
     });
   }
   function loadAiTrustCopy() {
-    if (document.querySelector('script[data-niarim-ai-trust]')) return;
+    if (document.querySelector("script[data-niarim-ai-trust]")) return;
     var script = document.createElement("script");
     script.src = "/js/i18n-dict-ai-trust.js";
     script.defer = true;
@@ -37,6 +37,7 @@
     document.head.appendChild(script);
   }
   loadAiTrustCopy();
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", apply);
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", apply);
   else apply();
 })();

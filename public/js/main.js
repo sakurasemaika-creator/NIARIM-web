@@ -9,6 +9,8 @@
       ["/css/polish.css", "data-niarim-polish"],
       ["/css/responsive-consistency.css", "data-niarim-responsive-consistency"],
       ["/css/screen-mock-accuracy.css", "data-niarim-screen-mock-accuracy"],
+      // 改行位置の調整は各ページCSSの word-break 指定より後に効かせたいので最後。
+      ["/css/line-break.css", "data-niarim-line-break"],
     ];
     styles.forEach(function (entry) {
       var href = entry[0],

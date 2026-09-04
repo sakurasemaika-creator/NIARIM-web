@@ -1,0 +1,50 @@
+/* ---- 単語の途中での改行を防ぐ ----
+   日本語・中国語は文字単位で折り返せてしまうため、既定のままだと
+   「NIARIMでできるこ／と」「ダウン／ロードする」のように語の途中で
+   行が変わる。Chromiumは word-break: auto-phrase で文節の切れ目を
+   見て折り返してくれるので、これを本文まで含めて適用する。
+   韓国語は単語間に空白があるので keep-all で単語を割らせない。
+   未対応ブラウザでは従来どおりの折り返しに戻るだけで、崩れはしない。
+
+   このファイルは main.js の loadDesignLayers() から最後に読み込む。
+   common.css に置くと、各ページCSSが（禁則違反と横スクロールを避ける
+   ために）個別指定している word-break: normal に負けてしまうため、
+   読み込み順を最後にしたうえで !important で上書きしている。
+   なお auto-phrase は keep-all と違って「分割禁止のかたまり」を
+   作らないので、common.css の注記にある2つの不具合は再発しない。
+   実際に全12ページ×7言語ではみ出しと監査を通して確認している。 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+dt,
+dd,
+label,
+.btn,
+.eyebrow,
+a {
+  word-break: auto-phrase !important;
+  /* 「？」「ー」など行頭に来てはいけない文字の禁則を厳しめに扱う。 */
+  line-break: strict;
+}
+
+/* 韓国語は分かち書きがあるので、単語の内部で割らせないほうが読みやすい。
+   はみ出しそうなときだけ overflow-wrap で逃がす。 */
+:root:lang(ko) h1,
+:root:lang(ko) h2,
+:root:lang(ko) h3,
+:root:lang(ko) h4,
+:root:lang(ko) h5,
+:root:lang(ko) h6,
+:root:lang(ko) p,
+:root:lang(ko) li,
+:root:lang(ko) label,
+:root:lang(ko) .btn,
+:root:lang(ko) a {
+  word-break: keep-all !important;
+  overflow-wrap: break-word;
+}
