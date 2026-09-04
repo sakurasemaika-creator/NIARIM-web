@@ -106,6 +106,24 @@ html body .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-scree
   box-sizing: border-box !important;
 }
 
+/* Parent-level containment: long translations and side sheets must shrink inside
+   the device reconstruction rather than increasing the page scroll width. */
+html body :is(.feature-section,.feature-section-head,.feature-media,.feature-diagram,.screenshot-card),
+html body :is(.feature-section,.screenshot-card) :is(
+  .fd-app-screen,
+  .fd-route-screen,
+  .fd-settings-card,
+  .fd-layer-menu,
+  .fd-bottom-sheet,
+  .fd-export-screen,
+  .fd-save-tree-screen,
+  .fd-workspace-screen
+) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 /* Brand buttons use the visible theme accent. The darker accent remains reserved
    for text/focus states where extra contrast is required, not button surfaces. */
 html body .btn.btn-primary,
