@@ -967,7 +967,7 @@
     "common.backHome": "Retour à l'accueil",
 
     "meta.home.title":
-      "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
+      "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
     "meta.home.description":
       "NIARIM est une application de création qui transforme les images que vous dessinez, image par image, en une animation que vous exportez vous-même. Dessin, timeline et calques donnent vie à votre histoire.",
 
@@ -976,9 +976,9 @@
     "hero.title.line2": "Découvrez.",
     "hero.subtitle": "Estomper la frontière entre créateurs et spectateurs.",
     "hero.lead":
-      "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
+      "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
     "hero.bridge.html":
-      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Galerie »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
+      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Galerie »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
     "hero.cta.primary": "Télécharger l'application",
     "hero.cta.secondary": "Voir les fonctionnalités",
     "hero.note":
@@ -990,7 +990,7 @@
       "Donnez vie, de vos propres mains, à chaque image que vous dessinez. Du premier trait jusqu'à l'animation finale, tout se fait avec vos mains.",
     "intro.card1.title": "Drawing (Dessin)",
     "intro.card1.body":
-      "Plusieurs pinceaux, ainsi que la couleur, l'opacité, le zoom et le panoramique : chaque étape du dessin est soignée.",
+      "Plusieurs pinceaux, ainsi que la couleur, l'opacité, le zoom et le panoramique : chaque étape du dessin est soignée.",
     "intro.card2.title": "Animation",
     "intro.card2.body":
       "Empilez des images, modifiez-les sur une timeline et prévisualisez le mouvement au fur et à mesure.",
@@ -1030,23 +1030,23 @@
 
     "faq.eyebrow": "FAQ",
     "faq.title": "Questions fréquentes",
-    "faq.q1": "Quel type d'application est NIARIM ?",
+    "faq.q1": "Quel type d'application est NIARIM ?",
     "faq.a1":
       "NIARIM est une application mobile permettant de créer une animation à partir de dessins que vous réalisez et animez vous-même.",
-    "faq.q2": "Est-ce gratuit ?",
+    "faq.q2": "Est-ce gratuit ?",
     "faq.a2":
       "Les détails tarifaires seront disponibles sur la fiche Google Play lors du lancement officiel.",
-    "faq.q3": "Quels appareils sont compatibles ?",
+    "faq.q3": "Quels appareils sont compatibles ?",
     "faq.a3":
       "Veuillez consulter la fiche Google Play pour connaître les systèmes et appareils compatibles.",
-    "faq.q4": "Puis-je exporter ce que j'ai créé ?",
+    "faq.q4": "Puis-je exporter ce que j'ai créé ?",
     "faq.a4":
       "Oui. Vous pouvez exporter votre travail en vidéo, jusqu'à une résolution de 1920×1920, avec un rapport d'aspect librement configurable.",
-    "faq.q5": "Puis-je partager ce que j'ai créé ?",
-    "faq.q6": "Dois-je créer un compte ?",
+    "faq.q5": "Puis-je partager ce que j'ai créé ?",
+    "faq.q6": "Dois-je créer un compte ?",
     "faq.a6":
       "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
-    "faq.q7": "Où puis-je signaler un bug ou demander une fonctionnalité ?",
+    "faq.q7": "Où puis-je signaler un bug ou demander une fonctionnalité ?",
     "faq.a7":
       "Veuillez utiliser le formulaire de contact de ce site pour envoyer un signalement de bug ou une demande de fonctionnalité.",
 
@@ -1125,7 +1125,7 @@
     "featuresPage.eyebrow": "Features",
     "featuresPage.title": "Ce que vous pouvez faire avec NIARIM",
     "featuresPage.lead":
-      "Du dessin à l'animation jusqu'à l'export : NIARIM accompagne chaque étape de la création.",
+      "Du dessin à l'animation jusqu'à l'export : NIARIM accompagne chaque étape de la création.",
     "featuresPage.nav.drawing": "Dessin",
     "featuresPage.nav.animation": "Animation",
     "featuresPage.nav.editing": "Édition",
@@ -1177,7 +1177,7 @@
       "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
     "featuresPage.drawing.item15.title": "Recherche par étiquette",
     "featuresPage.drawing.item15.body":
-      "Les pinceaux, trames, tampons et polices portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
+      "Les pinceaux, trames, tampons et polices portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
 
     "featuresPage.animation.title": "Animation",
     "featuresPage.animation.lead":
@@ -1187,7 +1187,7 @@
       "Ajoutez les images une à une pour construire le dessin.",
     "featuresPage.animation.item2.title": "Timeline",
     "featuresPage.animation.item2.body":
-      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l'organiser.",
+      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l'organiser.",
     "featuresPage.animation.item3.title": "Édition d'image",
     "featuresPage.animation.item3.body":
       "Sélectionnez n'importe quelle image et redessinez-la.",
@@ -1197,7 +1197,7 @@
     "featuresPage.animation.item5.title":
       "Mouvement de caméra (animation par images clés)",
     "featuresPage.animation.item5.body":
-      "Définissez la position, le zoom et la rotation sous forme d'images clés : l'application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
+      "Définissez la position, le zoom et la rotation sous forme d'images clés : l'application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
     "featuresPage.animation.item6.title": "Groupes de calques",
     "featuresPage.animation.item6.body":
       "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
@@ -1220,7 +1220,7 @@
       "Gérez les éléments séparément grâce aux calques.",
     "featuresPage.editing.item5.title": "Calques communs",
     "featuresPage.editing.item5.body":
-      "Regroupez sur un seul calque ce que vous réutilisez d'une image à l'autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
+      "Regroupez sur un seul calque ce que vous réutilisez d'une image à l'autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
     "featuresPage.editing.item6.title": "Modes de fusion",
     "featuresPage.editing.item6.body":
       "Changez la façon dont les calques se superposent (produit, écran, etc.) pour élargir vos possibilités d'expression.",
@@ -1268,7 +1268,7 @@
       "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
     "featuresPage.export.item5.title": "Limite de durée par œuvre",
     "featuresPage.export.item5.body":
-      "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
+      "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
     "featuresPage.export.item6.title": "Export d'image fixe",
     "featuresPage.export.item6.body":
       "Enregistrez l'image actuellement affichée dans la timeline au format PNG ou JPEG.",
@@ -1286,7 +1286,7 @@
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
     "meta.privacy.description":
       "La politique de confidentialité du site officiel et de l'application NIARIM.",
-    "legal.updated": "Dernière mise à jour : 31 août 2026",
+    "legal.updated": "Dernière mise à jour : 31 août 2026",
     "legal.notice.privacy":
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
     "legal.notice.terms":

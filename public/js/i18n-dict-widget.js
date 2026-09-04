@@ -202,22 +202,22 @@
         "La plupart des widgets se contentent d'afficher ce que l'application a décidé. Avec NIARIM, vous choisissez l'œuvre, l'image et la couleur de fond. Avoir sous les yeux une image que vous avez dessinée est déjà une raison de dessiner la suivante.",
       "narrative.widget.2.heading": "Choisissez jusqu'à l'image près",
       "narrative.widget.2.body":
-        "Choisissez une œuvre, puis une scène, puis une seule image à l'intérieur. Le sélecteur affiche des aperçus réellement composités : vous choisissez le rendu final sans rien exporter au préalable.",
+        "Choisissez une œuvre, puis une scène, puis une seule image à l'intérieur. Le sélecteur affiche des aperçus réellement composités : vous choisissez le rendu final sans rien exporter au préalable.",
       "narrative.widget.3.heading": "Une couleur par type, à votre goût",
       "narrative.widget.3.body":
-        "Pour les widgets « Créer » et « Place des œuvres », le fond suit le thème de l'application ou prend la couleur de votre choix. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d'un coup d'œil.",
+        "Pour les widgets « Créer » et « Place des œuvres », le fond suit le thème de l'application ou prend la couleur de votre choix. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d'un coup d'œil.",
       "featuresPage.widget.item1.title": "Widget d'écran de démarrage",
       "featuresPage.widget.item1.body":
         "Affiche une image de l'œuvre que vous choisissez. Un appui ouvre NIARIM.",
-      "featuresPage.widget.item2.title": "Widget « Créer »",
+      "featuresPage.widget.item2.title": "Widget « Créer »",
       "featuresPage.widget.item2.body":
-        "Un appui ouvre l'écran « Créer ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
-      "featuresPage.widget.item3.title": "Widget « Place des œuvres »",
+        "Un appui ouvre l'écran « Créer ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
+      "featuresPage.widget.item3.title": "Widget « Place des œuvres »",
       "featuresPage.widget.item3.body":
         "Un appui ouvre la Place des œuvres. Le fond suit le thème ou utilise la couleur que vous choisissez.",
       "featuresPage.widget.item4.title": "Affiché en image fixe",
       "featuresPage.widget.item4.body":
-        "Les widgets de l'écran d'accueil ne peuvent pas lire de vidéo : une image de l'œuvre choisie est affichée en fixe. L'ajout du widget lui-même se fait par un appui long sur l'écran d'accueil.",
+        "Les widgets de l'écran d'accueil ne peuvent pas lire de vidéo : une image de l'œuvre choisie est affichée en fixe. L'ajout du widget lui-même se fait par un appui long sur l'écran d'accueil.",
       "fd.widgetLaunch": "Démarrage",
       "fd.widgetCreate": "Créer",
       "fd.widgetPlaza": "Place des œuvres",

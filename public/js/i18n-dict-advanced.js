@@ -239,7 +239,7 @@
         "Un cran au-dessus pour le dessin et la finition.",
       "featuresPage.advanced.item1.title": "Pelure d'oignon (onion skin)",
       "featuresPage.advanced.item1.body":
-        "Affichez les images précédentes et suivantes en semi-transparence : vérifiez-les tout en dessinant pour garder la continuité du mouvement. Réglez le nombre d'images affichées, ainsi que leur couleur et leur opacité.",
+        "Affichez les images précédentes et suivantes en semi-transparence : vérifiez-les tout en dessinant pour garder la continuité du mouvement. Réglez le nombre d'images affichées, ainsi que leur couleur et leur opacité.",
       "featuresPage.advanced.item2.title": "Trames (tone)",
       "featuresPage.advanced.item2.body":
         "Appliquez des trames façon manga, qui rendent ombres et dégradés avec des motifs de points — un rôle différent des tampons, qui placent l'illustration elle-même.",
@@ -274,11 +274,11 @@
       "featuresPage.advanced.item12.title":
         "Filtres de dessin et filtres d'effet",
       "featuresPage.advanced.item12.body":
-        "Deux types de filtres : les « filtres de dessin », appliqués directement à un calque, et les « filtres d'effet », que vous pouvez caler sur une image de début et de fin — sur une scène entière ou sur un lot d'images sélectionnées. Superposez des touches cinématographiques : flou, correction des couleurs, lueur, pluie, grain façon pellicule, et plus encore.",
+        "Deux types de filtres : les « filtres de dessin », appliqués directement à un calque, et les « filtres d'effet », que vous pouvez caler sur une image de début et de fin — sur une scène entière ou sur un lot d'images sélectionnées. Superposez des touches cinématographiques : flou, correction des couleurs, lueur, pluie, grain façon pellicule, et plus encore.",
       "features.advanced.title":
         "Des outils qui vont plus loin pour la finition",
       "features.advanced.body":
-        "Pelure d'oignon, trames, tampons, règles, texte : des outils pensés jusqu'à la finition.",
+        "Pelure d'oignon, trames, tampons, règles, texte : des outils pensés jusqu'à la finition.",
     },
     es: {
       "featuresPage.nav.advanced": "Herramientas pro",

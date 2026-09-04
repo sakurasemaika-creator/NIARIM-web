@@ -84,14 +84,14 @@
       "meta.faq.description":
         "Questions fréquentes et réponses à propos de NIARIM.",
       "faq.a5.html":
-        "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d'autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Galerie »</a> en la postant directement sur YouTube depuis l'application NIARIM.",
-      "faq.q8": "Que puis-je faire avec l'offre Premium ?",
+        "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d'autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Galerie »</a> en la postant directement sur YouTube depuis l'application NIARIM.",
+      "faq.q8": "Que puis-je faire avec l'offre Premium ?",
       "faq.a8.html":
         'Premium supprime les publicités et ajoute l\'édition/suppression du générique de fin, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
       "faq.q9":
-        "Si je publie mon œuvre dans la Galerie, tout le monde peut-il la voir aussi sur YouTube ?",
+        "Si je publie mon œuvre dans la Galerie, tout le monde peut-il la voir aussi sur YouTube ?",
       "faq.a9":
-        "La publication dans la Galerie se fait en mettant en ligne une vidéo sur YouTube depuis l'application NIARIM, mais le réglage public/privé de la Galerie elle-même est indépendant du réglage de visibilité de YouTube. Même si la vidéo YouTube est définie sur « Non répertoriée », elle continue de s'afficher et de se lire normalement dans la Galerie, tout en restant largement invisible dans la recherche et les recommandations de YouTube (seules les personnes disposant du lien direct peuvent la visionner là-bas). À l'inverse, si la vidéo YouTube est définie sur « Privée » ou supprimée, son URL de lecture cesse de fonctionner, donc l'affichage dans la Galerie est automatiquement suspendu quel que soit votre réglage côté NIARIM (votre réglage NIARIM lui-même est conservé, donc l'affichage reprend automatiquement si le statut YouTube est rétabli). Si vous ne voulez pas de commentaires de la part des personnes ayant le lien, vous pouvez désactiver les commentaires côté YouTube par précaution.",
+        "La publication dans la Galerie se fait en mettant en ligne une vidéo sur YouTube depuis l'application NIARIM, mais le réglage public/privé de la Galerie elle-même est indépendant du réglage de visibilité de YouTube. Même si la vidéo YouTube est définie sur « Non répertoriée », elle continue de s'afficher et de se lire normalement dans la Galerie, tout en restant largement invisible dans la recherche et les recommandations de YouTube (seules les personnes disposant du lien direct peuvent la visionner là-bas). À l'inverse, si la vidéo YouTube est définie sur « Privée » ou supprimée, son URL de lecture cesse de fonctionner, donc l'affichage dans la Galerie est automatiquement suspendu quel que soit votre réglage côté NIARIM (votre réglage NIARIM lui-même est conservé, donc l'affichage reprend automatiquement si le statut YouTube est rétabli). Si vous ne voulez pas de commentaires de la part des personnes ayant le lien, vous pouvez désactiver les commentaires côté YouTube par précaution.",
     },
     es: {
       "meta.faq.title": "Preguntas frecuentes | NIARIM",

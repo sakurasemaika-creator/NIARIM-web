@@ -48,13 +48,13 @@
       updated: "최종 업데이트: 2026년 9월 4일",
     },
     fr: {
-      q: "Mes œuvres sont-elles utilisées pour entraîner une IA ?",
-      a: "Non. NIARIM n'utilise pas les illustrations, animations, données de projet ou autres œuvres créées ou publiées par les utilisateurs comme données d'entraînement de modèles d'IA générative. Les données de création et les fichiers vidéo ne sont pas envoyés ni stockés sur les serveurs du développeur. Lorsqu'une œuvre est publiée dans la Galerie, le fichier vidéo est stocké sur YouTube ; NIARIM ne gère que les informations nécessaires à son affichage, telles que l'identifiant de la vidéo YouTube et son titre.",
+      q: "Mes œuvres sont-elles utilisées pour entraîner une IA ?",
+      a: "Non. NIARIM n'utilise pas les illustrations, animations, données de projet ou autres œuvres créées ou publiées par les utilisateurs comme données d'entraînement de modèles d'IA générative. Les données de création et les fichiers vidéo ne sont pas envoyés ni stockés sur les serveurs du développeur. Lorsqu'une œuvre est publiée dans la Galerie, le fichier vidéo est stocké sur YouTube ; NIARIM ne gère que les informations nécessaires à son affichage, telles que l'identifiant de la vidéo YouTube et son titre.",
       about:
         "NIARIM n'intègre aucune fonctionnalité d'IA générative et n'utilise pas les œuvres ou données de projet créées ou publiées par les utilisateurs pour entraîner des modèles d'IA générative.",
       privacy:
         "Le développeur n'utilise pas les contenus créés ou publiés par les utilisateurs, les données de projet ni les autres données de création comme données d'entraînement pour des modèles d'IA générative ou d'autres modèles d'apprentissage automatique.",
-      updated: "Dernière mise à jour : 4 septembre 2026",
+      updated: "Dernière mise à jour : 4 septembre 2026",
     },
     es: {
       q: "¿Se usan mis obras para entrenar IA?",

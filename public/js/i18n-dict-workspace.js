@@ -151,16 +151,16 @@
         "Personnalisez l'interface elle-même selon votre main directrice et votre façon de travailler.",
       "featuresPage.workspace.item1.title": "Espaces de travail",
       "featuresPage.workspace.item1.body":
-        "Enregistrez sous un nom des réglages comme le mode gaucher ou le mode PC/DeX, puis passez de l'un à l'autre selon l'usage : animation, trait, décor, etc.",
+        "Enregistrez sous un nom des réglages comme le mode gaucher ou le mode PC/DeX, puis passez de l'un à l'autre selon l'usage : animation, trait, décor, etc.",
       "featuresPage.workspace.item2.title": "Mode gaucher",
       "featuresPage.workspace.item2.body":
-        "Inversez la disposition de l'interface pour une utilisation tout aussi confortable si vous êtes gaucher. Remarque : ce réglage n'est pas disponible en mode Smartphone, où la barre d'outils reste fixée en bas de l'écran.",
+        "Inversez la disposition de l'interface pour une utilisation tout aussi confortable si vous êtes gaucher. Remarque : ce réglage n'est pas disponible en mode Smartphone, où la barre d'outils reste fixée en bas de l'écran.",
       "featuresPage.workspace.item3.title": "Réglages de gestes",
       "featuresPage.workspace.item3.body":
         "Associez des actions comme annuler, rétablir, changer d'image ou la pipette à des gestes tels que le tap à deux doigts, à trois doigts, le balayage à deux doigts ou l'appui long.",
       "featuresPage.workspace.item4.title": "Thèmes et apparence",
       "featuresPage.workspace.item4.body":
-        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds. Mais vous pouvez aller plus loin : couleur d'accent, couleur du texte, fond des panneaux, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs de l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème.",
+        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds. Mais vous pouvez aller plus loin : couleur d'accent, couleur du texte, fond des panneaux, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs de l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème.",
       "fd.leftHandedMode": "Mode gaucher",
       "fd.gestureTwoTap": "Tap à deux doigts",
       "fd.gestureThreeTap": "Tap à trois doigts",

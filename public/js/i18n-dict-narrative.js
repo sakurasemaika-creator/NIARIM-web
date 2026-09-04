@@ -784,9 +784,9 @@
     },
     fr: {
       "narrative.home.cta.heading":
-        "Passons à la pratique, créons une animation !",
+        "Passons à la pratique, créons une animation !",
       "narrative.home.cta.body":
-        "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Galerie. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
+        "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Galerie. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
 
       "narrative.drawing.1.heading":
         "Dessinez exactement ce que vous avez en tête.",
@@ -805,7 +805,7 @@
         "Les tablettes graphiques et écrans-tablettes permettent d'utiliser la pression et l'inclinaison. Ajustez la courbe de pression pour qu'un trait léger puisse quand même produire une ligne épaisse, en adaptant le ressenti du dessin à vos propres habitudes. Vous pouvez aussi assigner des actions comme la gomme ou la pipette aux boutons de votre stylet.",
 
       "narrative.animation.1.heading":
-        "Créons une animation dessinée à la main !",
+        "Créons une animation dessinée à la main !",
       "narrative.animation.1.body":
         "Dessinez une image à la fois et empilez les images. Vérifiez la pelure d'oignon pour voir les images précédentes et suivantes, et affinez la façon dont le mouvement s'enchaîne. Organisez images et scènes sur la timeline, et synchronisez les dessins avec le son. Du premier trait jusqu'au moment où ça bouge, tout se fait dans NIARIM.",
       "narrative.animation.3.heading":
@@ -829,14 +829,14 @@
         "Les ajustements après le dessin se font aussi directement dans NIARIM.",
       "narrative.editing.2.heading": "Calques",
       "narrative.editing.2.body":
-        "Gérez le trait, la couleur et les arrière-plans comme des calques séparés. Organisez-les en dossiers de calques, ou utilisez le masque d'écrêtage pour éviter les débordements. Un large éventail de modes de fusion est disponible aussi : utilisez produit, superposition, incrustation, addition, soustraction et plus pour créer lumière et ombre.",
+        "Gérez le trait, la couleur et les arrière-plans comme des calques séparés. Organisez-les en dossiers de calques, ou utilisez le masque d'écrêtage pour éviter les débordements. Un large éventail de modes de fusion est disponible aussi : utilisez produit, superposition, incrustation, addition, soustraction et plus pour créer lumière et ombre.",
       "narrative.editing.3.heading": "Rendez l'animation plus efficace.",
       "narrative.editing.4.heading": "Calques communs",
       "narrative.editing.4.body":
         "Un calque qui affiche le même contenu sur plusieurs images ou scènes. Vous n'avez pas besoin de redessiner des éléments fixes comme les arrière-plans à chaque image. Vous pouvez même transformer un personnage en calque commun tout en gardant juste la bouche sur un calque normal — le personnage reste en place pendant que seule la bouche est redessinée image par image, ce qui donne une synchro labiale.",
       "narrative.editing.5.heading": "Remplissage automatique",
       "narrative.editing.5.body":
-        "Colorie automatiquement chaque partie en utilisant les couleurs et tons que vous avez définis à l'avance, à partir du trait. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et le calque de couleur qui se fond dans le trait. Remarque : le remplissage automatique n'est pas une fonctionnalité d'IA générative. Il colorie selon des règles que vous définissez.",
+        "Colorie automatiquement chaque partie en utilisant les couleurs et tons que vous avez définis à l'avance, à partir du trait. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et le calque de couleur qui se fond dans le trait. Remarque : le remplissage automatique n'est pas une fonctionnalité d'IA générative. Il colorie selon des règles que vous définissez.",
 
       "narrative.advanced.1.heading":
         "Rendez votre travail quotidien plus fluide.",
@@ -865,7 +865,7 @@
         "Appliquez un filtre à chaque calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixel art, objectif fisheye, hologramme aurore, fondu avec l'arrière-plan, et plus. Un filtre de correction optique peut même reproduire la façon dont une scène se déforme lorsqu'elle est vue à travers des verres de différentes puissances.",
       "narrative.advanced.10.heading": "Filtres d'effet",
       "narrative.advanced.10.body":
-        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l'hologramme aurore aux reflets irisés pour finaliser l'ambiance de toute l'œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d'effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
+        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l'hologramme aurore aux reflets irisés pour finaliser l'ambiance de toute l'œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d'effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
 
       "narrative.save.1.heading":
         "Gardez votre travail léger. Continuez à créer confortablement.",
@@ -882,7 +882,7 @@
         "Choisissez vous-même les états importants et enregistrez-les.",
       "narrative.save.5.heading": "Arbre de sauvegardes",
       "narrative.save.5.body":
-        "Ramifiez-vous à partir d'un état sauvegardé pour essayer une direction créative différente. C'est pratique chaque fois que vous pensez : « je veux revenir à ce point et essayer autre chose ».",
+        "Ramifiez-vous à partir d'un état sauvegardé pour essayer une direction créative différente. C'est pratique chaque fois que vous pensez : « je veux revenir à ce point et essayer autre chose ».",
       "narrative.save.6.heading":
         "Envoyez votre travail vers un autre appareil.",
       "narrative.save.6.body":
@@ -892,7 +892,7 @@
       "narrative.save.7.body":
         "Utilisez .niatra pour migrer votre environnement d'application. Lors du passage à un nouvel appareil, la fonction de transfert .niatra s'en charge. Au-delà des réglages et des éléments, vous pouvez migrer pinceaux, réglages de remplissage automatique, thèmes, polices et palettes, tous ensemble, et inclure en option des projets en cours. Choisissez exactement quels éléments transférer à l'aide de cases à cocher.",
       "narrative.save.8.body":
-        "Utilisez .niashare pour transmettre une œuvre ; utilisez .niatra pour transférer votre environnement de production. Choisissez celui qui correspond à votre besoin.",
+        "Utilisez .niashare pour transmettre une œuvre ; utilisez .niatra pour transférer votre environnement de production. Choisissez celui qui correspond à votre besoin.",
 
       "narrative.workspace.1.heading":
         "Un espace de travail qui vous correspond.",
@@ -901,7 +901,7 @@
         "Personnalisez le thème général et la couleur d'accent de l'application à votre goût. C'est une application que vous utilisez tous les jours, alors donnez-lui l'apparence qui vous convient.",
       "narrative.workspace.3.heading": "Réglages de l'espace de travail",
       "narrative.workspace.3.body":
-        "Basculez entre le mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher est une fonctionnalité exclusive au mode PC/DeX.",
+        "Basculez entre le mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher est une fonctionnalité exclusive au mode PC/DeX.",
       "narrative.workspace.4.heading": "Réglages de gestes",
       "narrative.workspace.4.body":
         "Assignez des actions comme annuler, rétablir, navigation d'image ou pipette au tap à deux doigts, tap à trois doigts, glissement, appui long, et plus. Personnalisez les gestes que vous utilisez souvent selon votre propre main.",
@@ -909,7 +909,7 @@
       "narrative.export.1.heading":
         "Partagez votre travail avec plus de monde.",
       "narrative.export.1.body":
-        "Exportez votre travail terminé en vidéo. MP4, WebM, GIF et AVI sont pris en charge. Le WebM transparent permet d'exporter du matériel d'animation avec un fond transparent. Il existe une limite supérieure de taille de canevas, mais dans cette limite, vous pouvez définir une taille et un rapport d'aspect adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium permet de créer et d'exporter jusqu'à 2 heures par œuvre. Il n'y a pas de limite au nombre d'œuvres que vous pouvez créer.",
+        "Exportez votre travail terminé en vidéo. MP4, WebM, GIF et AVI sont pris en charge. Le WebM transparent permet d'exporter du matériel d'animation avec un fond transparent. Il existe une limite supérieure de taille de canevas, mais dans cette limite, vous pouvez définir une taille et un rapport d'aspect adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium permet de créer et d'exporter jusqu'à 2 heures par œuvre. Il n'y a pas de limite au nombre d'œuvres que vous pouvez créer.",
 
       "narrative.premium.1.heading": "Plus de liberté avec Premium.",
       "narrative.premium.1.body":
@@ -938,14 +938,14 @@
         "Trouvez une œuvre que vous aimez, et vous pouvez découvrir aussi les autres œuvres publiées par son créateur. Trouvez un créateur favori et suivez-le à mesure qu'il publie de nouvelles œuvres.",
       "narrative.community.7.heading": "Publiez votre propre œuvre.",
       "narrative.community.7.body":
-        "Une œuvre terminée peut être publiée dans la Galerie. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
+        "Une œuvre terminée peut être publiée dans la Galerie. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
       "narrative.community.8.heading": "La connexion reste simple, elle aussi.",
       "narrative.community.8.body":
         "Il n'y a pas de compte NIARIM séparé à créer. Publier des œuvres, les mettre en favori, et signaler/bloquer sont disponibles une fois connecté avec un compte Google. Vous n'avez pas besoin de vous connecter du tout pour simplement parcourir.",
       "narrative.community.9.heading":
         "Des personnes vers les œuvres. Des œuvres vers les personnes.",
       "narrative.community.9.body":
-        "Voyez l'œuvre de quelqu'un, et une nouvelle idée naît. Publiez ce que vous avez créé, et quelqu'un d'autre le voit à son tour. Ce sentiment de « j'ai envie d'essayer de créer aussi » se prolonge dans l'œuvre suivante. Votre œuvre devient le favori de quelqu'un. Et celui qui l'a vue va à son tour créer quelque chose de nouveau.",
+        "Voyez l'œuvre de quelqu'un, et une nouvelle idée naît. Publiez ce que vous avez créé, et quelqu'un d'autre le voit à son tour. Ce sentiment de « j'ai envie d'essayer de créer aussi » se prolonge dans l'œuvre suivante. Votre œuvre devient le favori de quelqu'un. Et celui qui l'a vue va à son tour créer quelque chose de nouveau.",
     },
     es: {
       "narrative.home.cta.heading": "¡Vamos a hacer una animación de verdad!",

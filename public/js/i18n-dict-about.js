@@ -395,12 +395,12 @@
       "about.lead":
         "Créer de l'animation, facilement, pour tous. Faire de chacun un créateur. NIARIM est une application de création d'animation dessinée à la main, pensée pour que chacun, quel que soit son âge, puisse profiter facilement de la création d'animation. Nous mettons l'accent sur une prise en main intuitive, tout en offrant une grande liberté créative pour peaufiner chaque détail.",
       "about.name.eyebrow": "The Name",
-      "about.name.title": "Que signifie « NIARIM » ?",
+      "about.name.title": "Que signifie « NIARIM » ?",
       "about.name.body":
         "Rapprocher l'animation de tout le monde. Estomper la frontière entre créateurs et spectateurs. Chacun, à tout moment, peut être à la fois créateur et spectateur.",
       "about.modes.title": "Mode Canevas et Mode Chronologie",
       "about.modes.body":
-        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Chronologie » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
+        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Chronologie » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Ce à quoi NIARIM tient",
       "about.philosophy.item1.title": "L'animation, facile pour tous.",
@@ -436,7 +436,7 @@
         "Des fonctionnalités rarement présentes dans les applications de dessin classiques.",
       "about.unique.item1.title": "Remplissage automatique et en dégradé",
       "about.unique.item1.body":
-        "Détectez automatiquement le trait et colorez-le. Appliquez un remplissage en dégradé en un geste, réduisant nettement le travail de coloriage. Remarque : le remplissage automatique n'utilise pas d'IA générative, il colorie selon des règles que vous définissez.",
+        "Détectez automatiquement le trait et colorez-le. Appliquez un remplissage en dégradé en un geste, réduisant nettement le travail de coloriage. Remarque : le remplissage automatique n'utilise pas d'IA générative, il colorie selon des règles que vous définissez.",
       "about.unique.item2.title":
         "De la couleur d'accent au fond des panneaux, chaque couleur est votre choix",
       "about.unique.item2.body":
@@ -455,16 +455,16 @@
         "Activez le mode pixel dans la personnalisation des pinceaux pour créer des œuvres avec une expression façon pixel art. Combinez-le avec la fonction de trame pour un dithering facile.",
       "about.unique.item8.title": "Emportez votre environnement partout",
       "about.unique.item8.body":
-        "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l'espace de travail, réglages de pinceaux, et même les données de projet. Changez d'appareil et reprenez immédiatement dans l'environnement que vous connaissez.",
+        "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l'espace de travail, réglages de pinceaux, et même les données de projet. Changez d'appareil et reprenez immédiatement dans l'environnement que vous connaissez.",
       "about.unique.item9.title": "Jusqu'aux widgets, tout vous appartient",
       "about.unique.item9.body":
-        "Il existe trois widgets d'écran d'accueil. Le widget d'écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l'application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
+        "Il existe trois widgets d'écran d'accueil. Le widget d'écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l'application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
       "about.unique.item7.title": "Galerie",
       "about.unique.item7.body":
         "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
       "about.unique.item7.link": "Voir la Galerie",
       "about.cta.title":
-        "Vous voulez en savoir plus sur l'utilisation de NIARIM ?",
+        "Vous voulez en savoir plus sur l'utilisation de NIARIM ?",
       "about.cta.body":
         "Retrouvez ici, sur le web, le même contenu que l'écran d'aide intégré à l'application.",
       "about.cta.link": "Voir le guide",

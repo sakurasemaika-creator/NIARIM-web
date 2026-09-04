@@ -374,7 +374,7 @@
         "Recherchez un mot qui vous intéresse pour trouver des œuvres correspondantes.",
       "communityPage.search.tag.title": "Parcourir par tag",
       "communityPage.search.tag.body":
-        "Trouvez des œuvres via des tags de genres ou de thèmes qui vous intéressent : suivez les tendances ou approfondissez votre genre préféré.",
+        "Trouvez des œuvres via des tags de genres ou de thèmes qui vous intéressent : suivez les tendances ou approfondissez votre genre préféré.",
       "communityPage.search.author.title": "Rechercher par auteur",
       "communityPage.search.author.body":
         "Vous avez trouvé une œuvre qui vous plaît\u00a0? Consultez les autres œuvres publiées par cet auteur. Repérez vos créateurs préférés et suivez leurs nouvelles publications.",
@@ -398,20 +398,20 @@
       "communityPage.advanced.tags.title":
         "Des tags entretenus par tout le monde",
       "communityPage.advanced.tags.body":
-        "Les tags ne sont pas réservés à l'auteur : tout le monde peut en ajouter ou en supprimer. L'auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
+        "Les tags ne sont pas réservés à l'auteur : tout le monde peut en ajouter ou en supprimer. L'auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
       "communityPage.advanced.follow.title": "Abonnements et republications",
       "communityPage.advanced.follow.body":
-        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. Quand quelqu’un vous suit, l’information arrive dans la liste de notifications derrière l’icône de cloche, en haut à droite. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vos listes d’abonnements/abonnés et votre liste de favoris sont publiques ou non selon votre choix (privées par défaut).",
+        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. Quand quelqu’un vous suit, l’information arrive dans la liste de notifications derrière l’icône de cloche, en haut à droite. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vos listes d’abonnements/abonnés et votre liste de favoris sont publiques ou non selon votre choix (privées par défaut).",
       "communityPage.advanced.preview.title":
         "Aperçu flottant et détails de l'œuvre",
       "communityPage.advanced.preview.body":
-        "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d'aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d'autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l'écran complet avec la date de publication, l'auteur, les tags et le nombre de favoris.",
+        "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d'aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d'autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l'écran complet avec la date de publication, l'auteur, les tags et le nombre de favoris.",
       "communityPage.advanced.shorts.title": "Mode portrait",
       "communityPage.advanced.shorts.body":
         "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d'un geste vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
-        "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Galerie pour que tout le monde la voie ?",
+        "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Galerie pour que tout le monde la voie ?",
       "communityPage.cta.link": "Télécharger l'application",
     },
     es: {

@@ -317,7 +317,7 @@
       "premiumPage.lead":
         "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. L'offre Premium supprime les publicités et ajoute des outils supplémentaires pour la finition.",
       "premiumPage.priceNote":
-        "Les prix indiqués sont des prix prévisionnels actuels et pourront changer au lancement officiel ; cette page sera alors mise à jour. Consultez la fiche Google Play pour les tarifs les plus récents.",
+        "Les prix indiqués sont des prix prévisionnels actuels et pourront changer au lancement officiel ; cette page sera alors mise à jour. Consultez la fiche Google Play pour les tarifs les plus récents.",
       "premiumPage.free.title": "Gratuit",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
@@ -368,7 +368,7 @@
         "Les droits d'auteur des œuvres créées (illustrations, animations, etc.) appartiennent à l'utilisateur titulaire des droits, que ce soit avec la version gratuite ou Premium.",
       "premiumPage.cta.title": "Commencez avec NIARIM",
       "premiumPage.cta.body":
-        "Pourquoi ne pas commencer à animer de vos propres mains, dès la version gratuite ?",
+        "Pourquoi ne pas commencer à animer de vos propres mains, dès la version gratuite ?",
       "premiumPage.cta.link": "Télécharger l'application",
     },
     es: {
