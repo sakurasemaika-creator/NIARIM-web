@@ -20,9 +20,13 @@
     0 16px 34px rgba(25,20,28,.15) !important;
 }
 
-/* Legacy feature-diagram mocks use these tokens. */
+/* Legacy feature-diagram mocks use --fd-bg/--fd-text while the rebuilt
+   app screens use --fd-surface/--fd-ink. Bridge both token sets so the
+   section preset reaches every reconstruction, old and new. */
 .feature-section > .feature-diagram,
 .screenshot-card > .feature-diagram {
+  --fd-bg: var(--fd-surface, #fff8fa);
+  --fd-text: var(--fd-ink, #30262d);
   background: var(--fd-surface, #fff8fa) !important;
   color: var(--fd-ink, #30262d) !important;
 }
