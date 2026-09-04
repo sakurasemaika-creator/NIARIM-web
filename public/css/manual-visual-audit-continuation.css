@@ -23,8 +23,10 @@ html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
   max-height: 40px !important;
 }
 
-/* The first static gallery reconstruction predates is-current markup.
-   Treat its first frame as the current frame so the location marker is visible. */
+/* 以前は1枚目のカードのマークアップに is-current が無く、現在地の枠が
+   どこにも出なかったため、暫定で先頭のコマを現在地として塗っていた。
+   いまは main.js が中央のコマに is-current を付けるので、この指定を
+   残すと現在地の枠が2つ表示されてしまう。サイズ調整だけ残す。 */
 html
   body
   .screenshot-scroller
@@ -33,7 +35,6 @@ html
   > .fd-frame-thumb:first-child {
   width: 50px !important;
   height: 50px !important;
-  border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
   box-sizing: border-box !important;
 }
