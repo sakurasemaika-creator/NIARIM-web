@@ -1,0 +1,105 @@
+/* Stronger visual separation between reconstructed app appearance presets.
+   Loaded after the base palette so each screen reads as a genuinely different preset,
+   not merely a nearby pastel hue. Canvas/paper surfaces remain white by design. */
+
+/* Home gallery: six deliberately different appearance families. */
+html body [data-mock-theme="shot1"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot1"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#28d7ff; --fd-bg:#101c25; --fd-surface:#101c25; --fd-panel:#17303e;
+  --fd-panel-2:#21495b; --fd-text:#edfaff; --fd-ink:#edfaff; --fd-muted:#9fc9d7;
+  --fd-bezel:#245d72; --fd-outside:#173d4d;
+}
+html body [data-mock-theme="shot2"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot2"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#3157d9; --fd-bg:#f2f5ff; --fd-surface:#f2f5ff; --fd-panel:#dce4ff;
+  --fd-panel-2:#c4d1ff; --fd-text:#18234d; --fd-ink:#18234d; --fd-muted:#6673a3;
+  --fd-bezel:#354d9c; --fd-outside:#263a78;
+}
+html body [data-mock-theme="shot3"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot3"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#b56cff; --fd-bg:#1c1228; --fd-surface:#1c1228; --fd-panel:#302043;
+  --fd-panel-2:#493061; --fd-text:#fbf2ff; --fd-ink:#fbf2ff; --fd-muted:#c2a8d2;
+  --fd-bezel:#704499; --fd-outside:#4b2e68;
+}
+html body [data-mock-theme="shot4"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot4"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#ef5ac8; --fd-bg:#fff1fa; --fd-surface:#fff1fa; --fd-panel:#f8d7ec;
+  --fd-panel-2:#efbddf; --fd-text:#52213f; --fd-ink:#52213f; --fd-muted:#95647f;
+  --fd-bezel:#a64d83; --fd-outside:#74345c;
+}
+html body [data-mock-theme="shot5"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot5"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#ff9f2f; --fd-bg:#25170d; --fd-surface:#25170d; --fd-panel:#3c2818;
+  --fd-panel-2:#573a20; --fd-text:#fff7ed; --fd-ink:#fff7ed; --fd-muted:#d8b99c;
+  --fd-bezel:#8c592b; --fd-outside:#5f3b1e;
+}
+html body [data-mock-theme="shot6"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="shot6"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#df344d; --fd-bg:#fff2f3; --fd-surface:#fff2f3; --fd-panel:#f7d9dd;
+  --fd-panel-2:#edbcc4; --fd-text:#541f28; --fd-ink:#541f28; --fd-muted:#97636d;
+  --fd-bezel:#a94759; --fd-outside:#73313e;
+}
+html body [data-mock-theme="shot1"]{--fd-bezel:#245d72}
+html body [data-mock-theme="shot2"]{--fd-bezel:#354d9c}
+html body [data-mock-theme="shot3"]{--fd-bezel:#704499}
+html body [data-mock-theme="shot4"]{--fd-bezel:#a64d83}
+html body [data-mock-theme="shot5"]{--fd-bezel:#8c592b}
+html body [data-mock-theme="shot6"]{--fd-bezel:#a94759}
+
+/* Features page: alternate dark/light presets and widely separated hues. */
+html body #drawing :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#27d37f; --fd-bg:#10241b; --fd-surface:#10241b; --fd-panel:#183728;
+  --fd-panel-2:#24503b; --fd-text:#edfff5; --fd-ink:#edfff5; --fd-muted:#9ecbb3;
+  --fd-bezel:#2f7652; --fd-outside:#204f38;
+}
+html body #animation :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#8756e8; --fd-bg:#f5f1ff; --fd-surface:#f5f1ff; --fd-panel:#e2d8fa;
+  --fd-panel-2:#cdbcf2; --fd-text:#321f59; --fd-ink:#321f59; --fd-muted:#7b69a0;
+  --fd-bezel:#62439d; --fd-outside:#432e6c;
+}
+html body #editing :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#ffb42b; --fd-bg:#2a210e; --fd-surface:#2a210e; --fd-panel:#433718;
+  --fd-panel-2:#604e20; --fd-text:#fff9e9; --fd-ink:#fff9e9; --fd-muted:#d7c79c;
+  --fd-bezel:#8f702c; --fd-outside:#624d20;
+}
+html body #advanced :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#278be8; --fd-bg:#eff8ff; --fd-surface:#eff8ff; --fd-panel:#d4eafa;
+  --fd-panel-2:#b9daf2; --fd-text:#163b59; --fd-ink:#163b59; --fd-muted:#5e829e;
+  --fd-bezel:#39769f; --fd-outside:#28516e;
+}
+html body #audio :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#20d8d0; --fd-bg:#0f2727; --fd-surface:#0f2727; --fd-panel:#183d3d;
+  --fd-panel-2:#225757; --fd-text:#ecffff; --fd-ink:#ecffff; --fd-muted:#9bcaca;
+  --fd-bezel:#2d7471; --fd-outside:#20504e;
+}
+html body #save :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#e34c8b; --fd-bg:#fff1f7; --fd-surface:#fff1f7; --fd-panel:#f5d5e3;
+  --fd-panel-2:#eab9cf; --fd-text:#542039; --fd-ink:#542039; --fd-muted:#98647b;
+  --fd-bezel:#a74770; --fd-outside:#74304d;
+}
+html body #workspace :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#536dff; --fd-bg:#11162d; --fd-surface:#11162d; --fd-panel:#1c2749;
+  --fd-panel-2:#2a3967; --fd-text:#f1f4ff; --fd-ink:#f1f4ff; --fd-muted:#a7b0d5;
+  --fd-bezel:#405598; --fd-outside:#2c3a69;
+}
+html body #widget :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#f06a2f; --fd-bg:#fff4ef; --fd-surface:#fff4ef; --fd-panel:#f5ddd1;
+  --fd-panel-2:#eac3b0; --fd-text:#552b1b; --fd-ink:#552b1b; --fd-muted:#986f60;
+  --fd-bezel:#a95636; --fd-outside:#743b27;
+}
+html body #export :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#20b6d8; --fd-bg:#0f2229; --fd-surface:#0f2229; --fd-panel:#183640;
+  --fd-panel-2:#234d5a; --fd-text:#ecfbff; --fd-ink:#ecfbff; --fd-muted:#9cc4cf;
+  --fd-bezel:#2c6d7d; --fd-outside:#1f4b57;
+}
+
+/* Ensure the device border always adopts the preset even when older accuracy rules win. */
+html body :is(#drawing,#animation,#editing,#advanced,#audio,#save,#workspace,#widget,#export) > .feature-diagram {
+  border-color:var(--fd-bezel)!important;
+  background:var(--fd-bg)!important;
+  color:var(--fd-text)!important;
+}
+html body .screenshot-card {
+  border-color:var(--fd-bezel,#4a3b41)!important;
+  background:var(--fd-bezel,#4a3b41)!important;
+}
