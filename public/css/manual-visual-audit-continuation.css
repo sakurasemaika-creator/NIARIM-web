@@ -1,0 +1,121 @@
+/* Continuation of manual visual audit: targeted fixes only. */
+
+/* Frame cells are 50x50 UI slots, while artwork may keep its own aspect ratio.
+   Center legacy inline SVG previews inside the square cell instead of stretching them. */
+html body .fd-frame-thumb.fd-frame-thumb {
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb > svg {
+  display: block !important;
+  width: auto !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  margin: auto !important;
+  flex: none !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+}
+
+/* Keep paper-based previews centered too. */
+html body .fd-frame-thumb.fd-frame-thumb .fd-frame-paper {
+  position: absolute !important;
+  inset: 3px !important;
+  margin: auto !important;
+}
+
+/* Theme-aware surfaces that were still commonly hard-coded by accuracy layers. */
+html body .feature-section > .feature-diagram :is(
+  .fd-settings-card,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-workspace-row,
+  .fd-scene-line,
+  .fd-timeline-row
+),
+html body .screenshot-card > .feature-diagram :is(
+  .fd-settings-card,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-workspace-row,
+  .fd-scene-line,
+  .fd-timeline-row
+) {
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+  border-color: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 18%, transparent) !important;
+}
+
+/* Preserve true white only for the drawing paper/canvas itself. */
+html body .feature-section > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage),
+html body .screenshot-card > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage) {
+  background: #fff !important;
+}
+
+/* Internal horizontal tool rows must scroll/clip inside the mock, never clip the phone bezel. */
+html body .screenshot-card > .feature-diagram :is(
+  .fd-toolbar,
+  .fd-timeline-toolbar,
+  .fd-layer-shortcuts,
+  .fd-export-segments,
+  .fd-frame-strip-scroll
+),
+html body .feature-section > .feature-diagram :is(
+  .fd-toolbar,
+  .fd-timeline-toolbar,
+  .fd-layer-shortcuts,
+  .fd-export-segments,
+  .fd-frame-strip-scroll
+) {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+html body .screenshot-card > .feature-diagram :is(.fd-toolbar,.fd-timeline-toolbar,.fd-layer-shortcuts),
+html body .feature-section > .feature-diagram :is(.fd-toolbar,.fd-timeline-toolbar,.fd-layer-shortcuts) {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+}
+
+/* Ensure the card's inner reconstruction always fits its bezel exactly. */
+html body .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  inset: auto !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* SP: prevent long translated labels from forcing mock or page overflow. */
+@media (max-width: 640px) {
+  html body .feature-section > .feature-diagram :is(
+    .fd-setting-row,
+    .fd-sheet-row,
+    .fd-format-row,
+    .fd-workspace-row,
+    .fd-layer-row,
+    .fd-scene-line,
+    .fd-timeline-row
+  ),
+  html body .screenshot-card > .feature-diagram :is(
+    .fd-setting-row,
+    .fd-sheet-row,
+    .fd-format-row,
+    .fd-workspace-row,
+    .fd-layer-row,
+    .fd-scene-line,
+    .fd-timeline-row
+  ) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html body .feature-section > .feature-diagram :is(strong,small,.fd-layer-name,.fd-setting-row span,.fd-format-row span),
+  html body .screenshot-card > .feature-diagram :is(strong,small,.fd-layer-name,.fd-setting-row span,.fd-format-row span) {
+    min-width: 0 !important;
+  }
+}
