@@ -1,0 +1,59 @@
+/* Final visual-audit tail: must load after all legacy accuracy layers. */
+
+/* Frame strip: current frame is a real 50x50 cell centered in the viewport.
+   This intentionally cancels the legacy 56px left offset from variables.css. */
+html body .fd-canvas-screen.fd-canvas-screen .fd-frame-strip-scroll,
+html body .feature-diagram.feature-diagram .fd-frame-strip-scroll {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: calc(50% - 25px) !important;
+  padding-right: calc(50% - 25px) !important;
+  scroll-padding-left: calc(50% - 25px) !important;
+  scroll-padding-right: calc(50% - 25px) !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+}
+html body .fd-frame.fd-frame,
+html body .fd-frame-thumb.fd-frame-thumb,
+html body .fd-frame-add.fd-frame-add {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  flex: 0 0 50px !important;
+  aspect-ratio: 1 / 1 !important;
+  box-sizing: border-box !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb.is-current {
+  width: 50px !important;
+  height: 50px !important;
+  border: 3px solid #ffad00 !important;
+  border-radius: 4px !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb > svg {
+  display: block !important;
+  width: auto !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  margin: auto !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+}
+
+/* App Preview: preserve a real trailing scroll area so the last bezel never hugs/crops at the viewport edge. */
+html body .screenshot-scroller.screenshot-scroller {
+  padding-right: calc(var(--container-padding) + 28px) !important;
+  scroll-padding-right: calc(var(--container-padding) + 28px) !important;
+}
+html body .screenshot-scroller.screenshot-scroller::after {
+  content: "" !important;
+  display: block !important;
+  flex: 0 0 calc(var(--container-padding) + 28px) !important;
+}
+html body .screenshot-scroller.screenshot-scroller > .screenshot-card:last-of-type {
+  margin-right: 28px !important;
+}
