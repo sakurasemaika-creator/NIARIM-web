@@ -248,8 +248,10 @@ html
   box-sizing: border-box !important;
 }
 
-/* Brand buttons use the visible theme accent. The darker accent remains reserved
-   for text/focus states where extra contrast is required, not button surfaces. */
+/* 赤系のボタンは、不透明のテーマカラーを敷いて白文字にする。
+   使う色は --color-accent-strong (#c42e51)。装飾用の --color-accent
+   (#ff5c7a) に白文字を載せると 2.97:1 しかなく読めないため、
+   同じ赤系で文字が載る濃さのこちらを面に使う（白文字で5.44:1）。 */
 html body .btn.btn-primary,
 html body .btn.btn-accent,
 html body .hero .hero-actions .btn.btn-primary,
@@ -257,9 +259,10 @@ html body .final-cta .hero-actions .btn.btn-primary,
 html body .download-actions .btn.btn-primary,
 html body .download-actions .btn.btn-accent,
 html body .scroll-top-btn {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: var(--color-ink) !important;
+  background: var(--color-accent-strong) !important;
+  border-color: var(--color-accent-strong) !important;
+  color: #fff !important;
+  opacity: 1 !important;
 }
 html body .btn.btn-primary:hover,
 html body .btn.btn-accent:hover,
@@ -268,9 +271,15 @@ html body .final-cta .hero-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-accent:hover,
 html body .scroll-top-btn:hover {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: var(--color-ink) !important;
+  background: var(--color-accent-strong-dark) !important;
+  border-color: var(--color-accent-strong-dark) !important;
+  color: #fff !important;
+}
+
+/* 配信URLが未設定のボタンも、面は不透明のまま。押せないことは
+   cursor と aria-disabled で伝える（薄く塗ると色が濁るため）。 */
+html body .btn.is-unavailable {
+  opacity: 1 !important;
 }
 
 /* SP: prevent long translated labels from forcing mock or page overflow. */

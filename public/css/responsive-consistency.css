@@ -146,6 +146,11 @@ main {
   width: 42px;
   height: 8px;
   margin-bottom: 0.9rem;
+  /* .feature-section-head は display:flex なので、この飾りも横並びの
+     1要素になってしまい、機能ページ・使い方ガイドだけ見出しが飾りの
+     右に並んでいた。トップと同じく飾りの下で改行させる。
+     箱は1行ぶん占めるが、塗りは42pxで止める。 */
+  flex: 0 0 100%;
   border-radius: 2px;
   background: linear-gradient(
     90deg,
@@ -155,6 +160,11 @@ main {
     transparent 25px 30px,
     rgba(59, 36, 41, 0.28) 30px 40px
   );
+  /* 箱は1行ぶん占めるが、塗りは42pxで止める。
+     background ショートハンドが size/repeat を初期化するため、
+     この2行は必ずショートハンドより後ろに置く。 */
+  background-repeat: no-repeat;
+  background-size: 42px 8px;
 }
 
 .section-head::after,

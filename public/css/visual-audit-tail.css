@@ -54,6 +54,9 @@ html body .screenshot-scroller.screenshot-scroller::after {
   display: block !important;
   flex: 0 0 calc(var(--container-padding) + 28px) !important;
 }
-html body .screenshot-scroller.screenshot-scroller > .screenshot-card:last-of-type {
+html
+  body
+  .screenshot-scroller.screenshot-scroller
+  > .screenshot-card:last-of-type {
   margin-right: 28px !important;
 }
