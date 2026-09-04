@@ -81,7 +81,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   color: var(--fd-text) !important;
 }
 
-/* One visual language for every mock slider. */
+/* One visual language for every mock slider, including sheet sliders whose fill is an <i>. */
 :is(.fd-slider,.fd-sheet-slider) {
   position: relative !important;
   height: 5px !important;
@@ -91,7 +91,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   background: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 22%, transparent) !important;
   overflow: visible !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > span {
+:is(.fd-slider,.fd-sheet-slider) > :is(span,i) {
   position: absolute !important;
   inset: 0 auto 0 0 !important;
   width: 64% !important;
@@ -99,7 +99,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > span::after {
+:is(.fd-slider,.fd-sheet-slider) > :is(span,i)::after {
   content: "" !important;
   position: absolute !important;
   right: -6px !important;
