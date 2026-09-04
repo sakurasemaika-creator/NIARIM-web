@@ -1,4 +1,4 @@
-/** NIARIM AI/privacy reassurance shared by Home, FAQ and About. */
+/** NIARIM AI/privacy reassurance shared by Home, FAQ, About and Privacy. */
 (function () {
   "use strict";
   var COPY = {
@@ -30,8 +30,19 @@
     item.innerHTML = '<button class="faq-question" aria-expanded="false"><span data-ai-training-q></span><span class="icon" aria-hidden="true"></span></button><div class="faq-answer"><p data-ai-training-a></p></div>';
     list.appendChild(item);
   }
+  function ensurePrivacyClause() {
+    var art2 = document.querySelector('[data-i18n="legal.privacy.art2.body"]');
+    if (!art2 || document.querySelector("[data-ai-training-privacy]")) return;
+    var clause = document.createElement("p");
+    clause.setAttribute("data-ai-training-privacy", "true");
+    clause.textContent = "開発者は、ユーザーが作成または投稿したコンテンツ、プロジェクトデータその他の制作データを、生成AIモデルその他の機械学習モデルの学習データとして利用しません。";
+    art2.insertAdjacentElement("afterend", clause);
+    var updated = document.querySelector(".updated-at");
+    if (updated) updated.textContent = "最終更新日：2026年9月4日";
+  }
   function apply() {
     ensureFaq();
+    ensurePrivacyClause();
     var text = current();
     document.querySelectorAll("[data-ai-training-q]").forEach(function (el) { el.textContent = text.q; });
     document.querySelectorAll("[data-ai-training-a]").forEach(function (el) { el.textContent = text.a; });
