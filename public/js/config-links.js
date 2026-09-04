@@ -79,6 +79,28 @@
     });
   }
 
+  /* 50x50セルのcurrentを実際のスクローラ中央へ合わせる。
+     visual-audit-tail.css の左右paddingだけでは先頭セルが中央になるため、
+     3枚目をcurrentにした現在のDOMでは約100pxずれる。offsetLeftから計算し、
+     SP/PC・モック幅に依存せず中央へ揃える。 */
+  function centerCurrentFrames() {
+    document.querySelectorAll(".fd-frame-strip-scroll").forEach(function (strip) {
+      var current = strip.querySelector(".fd-frame-thumb.is-current, .fd-frame.is-current");
+      if (!current || !strip.clientWidth) return;
+      var target =
+        current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
+      var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
+      strip.scrollLeft = Math.max(0, Math.min(max, target));
+    });
+  }
+
+  function scheduleFrameCentering() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(centerCurrentFrames);
+    });
+    setTimeout(centerCurrentFrames, 240);
+  }
+
   function loadAiTrustCopy() {
     if (document.querySelector("script[data-niarim-ai-trust]")) return;
     var script = document.createElement("script");
@@ -93,10 +115,25 @@
     apply();
     watchHeroAspect();
     scheduleHeroAspectRestore();
-    window.addEventListener("load", scheduleHeroAspectRestore);
-    window.addEventListener("resize", scheduleHeroAspectRestore, { passive: true });
+    scheduleFrameCentering();
+    window.addEventListener("load", function () {
+      scheduleHeroAspectRestore();
+      scheduleFrameCentering();
+    });
+    window.addEventListener(
+      "resize",
+      function () {
+        scheduleHeroAspectRestore();
+        scheduleFrameCentering();
+      },
+      { passive: true },
+    );
+    document.addEventListener("niarim:langchange", scheduleFrameCentering);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(scheduleHeroAspectRestore);
+      document.fonts.ready.then(function () {
+        scheduleHeroAspectRestore();
+        scheduleFrameCentering();
+      });
     }
   }
 
