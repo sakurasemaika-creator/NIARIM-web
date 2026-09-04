@@ -1,5 +1,6 @@
 @import url("/css/screen-mock-accuracy-base.css");
 @import url("/css/visual-finish.css");
+@import url("/css/screen-mock-fidelity.css");
 
 /* ==========================================================================\n   Final capture calibration — real NIARIM Visual Smoke 320x569\n   Keep this layer small: only differences confirmed from app-vs-web PNGs.\n   ========================================================================== */
 
