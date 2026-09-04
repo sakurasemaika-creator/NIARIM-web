@@ -189,7 +189,10 @@ html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-row.is-active {
   background: transparent !important;
 }
 html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-name {
-  color: var(--color-accent) !important;
+  /* サイト共通のピンク(--color-accent)を直に使っていたため、
+     どの配色のモックでも現在のレイヤー名だけピンクのままだった。
+     画面ごとのアクセント色に合わせる。 */
+  color: var(--fd-accent, var(--color-accent)) !important;
   max-width: 32px !important;
   line-height: 0.95 !important;
   white-space: normal !important;
@@ -272,12 +275,15 @@ html body .fd-save-tree-screen .fd-tree-save-btn {
 html body .fd-save-tree-screen .fd-tree-save-btn b {
   font-size: 10px !important;
 }
+/* ノードの印は screen-mock-accuracy-base.css で Icons.commit
+   （横線が貫く丸）として描いている。ここで別の丸を重ねると
+   印が2つに見えるため、寸法だけ合わせて塗りは持たせない。 */
 html body .fd-save-tree-screen .fd-tree-commit {
-  width: 8px !important;
-  height: 8px !important;
-  border: 2px solid var(--color-accent) !important;
-  border-radius: 50% !important;
-  background: #fff !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
 }
 
 /* Workspace: 実アプリは本文左右16px、カードだけさらに7px内側。 */

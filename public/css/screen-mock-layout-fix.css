@@ -74,19 +74,22 @@
 .fd-frame-strip-scroll {
   flex: 1 1 auto !important;
   min-width: 0 !important;
+  /* 実機は一覧の左右に余白を入れ、現在のコマが中央の枠に収まる位置まで
+     スクロールしている。再現図は静止画なので、コマ4枚＋追加ボタンの
+     計5マスを中央寄せにして、真ん中のマス（3枚目のコマ）を枠に合わせる。 */
   justify-content: center !important;
-  /* テーマ側で中央マーカー用に入れていた左右パディングは、
-     中央寄せにしたことで不要（かつ一覧を右へずらしてしまう）。 */
   padding-left: 0 !important;
   padding-right: 0 !important;
   overflow: hidden !important;
 }
 
-/* 中央マーカーは .fd-frame-thumb.is-current の枠だけを使う。
-   擬似要素で重ねると二重に見えるため止める。 */
+/* 旧テーマ側の中央マーカー用擬似要素は使わない（.fd-frame-cursor が担う）。 */
 .fd-frame-strip-scroll::after {
   content: none !important;
   display: none !important;
+}
+.fd-frame-strip-scroll {
+  position: relative !important;
 }
 
 .fd-frame-mode {
@@ -153,13 +156,47 @@
   opacity: 0.55 !important;
 }
 
-/* 再生位置の線は下部のトラック段だけに掛ける。以前は高さ固定 134px で
-   再生ボタンの列や書き出しツールの列まで縦に貫いていた。 */
-.fd-timeline-screen > .fd-playhead {
-  top: auto !important;
-  bottom: 0 !important;
-  height: 21% !important;
-  max-height: none !important;
+/* ---- コマ一覧の現在位置 ----
+   実機は「一覧に重ねた中央固定の枠」で現在位置を示す。コマ側に枠を
+   付ける作りだと、一覧の左端に枠が出たり、赤い縦棒が別に走ったりして
+   実機と違う見え方になっていた。
+   キャンバス画面は更新マーク色（橙）の枠、タイムライン画面はエラー色
+   （赤）の枠。どちらも 50x50・3px・角丸4px。 */
+.fd-frame-cursor {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  transform: translate(-50%, -50%) !important;
+  border: 3px solid var(--fd-mark, #ffb020) !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  z-index: 8 !important;
+}
+
+.fd-frame-cursor.is-error {
+  border-color: #d32f2f !important;
+}
+
+/* コマ側には現在位置の枠を描かない（中央固定の枠が担う）。
+   選択中のコマは実機同様わずかに濃い面と細い枠だけにする。 */
+.fd-frame-thumb.is-current,
+.fd-frame-thumb.is-selected {
+  border: 2px solid var(--fd-accent, #ff5c7a) !important;
+}
+
+.fd-timeline-frames {
+  position: relative !important;
+  justify-content: center !important;
+}
+
+/* タイムラインのコマは37x42なので、中央固定の枠もそれに合わせる。 */
+.fd-timeline-frames > .fd-frame-cursor {
+  width: 37px !important;
+  height: 42px !important;
+  border-radius: 3px !important;
 }
 
 /* ---- 7. 画面全体を枠に合わせて縮める ----
@@ -222,4 +259,14 @@
   border: 1.5px solid #ff392f !important;
   border-top: 0 !important;
   border-radius: 0 0 2px 2px !important;
+}
+
+/* ---- 10. セーブツリー右上の保存ボタン ----
+   塗りつぶしボタンなのに、輪郭系チップ用の指定で文字色まで地色と
+   同じアクセント色になり、無地の丸い塊に見えていた。白抜きに戻す。 */
+.fd-tree-save-btn,
+.fd-tree-save-btn .ic,
+.fd-tree-save-btn b {
+  color: #fff !important;
+  border-color: transparent !important;
 }

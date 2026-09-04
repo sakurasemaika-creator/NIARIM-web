@@ -108,12 +108,16 @@
 
   function frameStrip() {
     var frames = "";
-    // 実機では編集中のフレームが一覧の中央に来る。5枚並べて真ん中を
-    // 現在地にすることで、静止画の再現図でも同じ見え方になる。
-    for (var i = 0; i < 5; i++) {
+    // 実機のFrameStripWidgetは、コマ一覧を横スクロールさせて編集中の
+    // コマを「画面中央に固定表示された枠」へ合わせる（枠はコマ側では
+    // なく一覧に重ねて描く）。再現図でも同じ作りにし、5枚並べた真ん中が
+    // 枠に入るようにする。
+    // コマ4枚＋末尾の追加ボタンで計5マス。中央寄せにすると真ん中の
+    // マス＝3枚目のコマがちょうど中央の枠に入る。
+    for (var i = 0; i < 4; i++) {
       frames +=
         '<span class="fd-frame-thumb' +
-        (i === 2 ? " is-current" : "") +
+        (i === 2 ? " is-selected" : "") +
         '"><span class="fd-frame-paper"></span></span>';
     }
     return (
@@ -122,7 +126,10 @@
       frames +
       '<span class="fd-frame-add">' +
       icon("ic-add") +
-      "</span></div>" +
+      "</span>" +
+      // 画面中央に固定表示するコマ枠。色はテーマの更新マーク色。
+      '<span class="fd-frame-cursor" aria-hidden="true"></span>' +
+      "</div>" +
       '<span class="fd-frame-mode"><span class="is-selected" data-i18n="fd.frameListMode">フレーム一覧</span><span data-i18n="fd.timelineMode">タイムライン</span></span>' +
       "</div>"
     );
@@ -270,10 +277,12 @@
 
   function timelineScreen() {
     var frames = "";
-    for (var i = 1; i <= 6; i++)
+    // 5マスを中央寄せにして、真ん中のコマが中央固定の赤枠に入るようにする
+    // （実機のTimelineScreenと同じ見え方）。
+    for (var i = 1; i <= 5; i++)
       frames +=
         '<span class="fd-tl-frame' +
-        (i === 4 ? " is-current" : "") +
+        (i === 3 ? " is-current" : "") +
         '">' +
         i +
         "</span>";
@@ -293,9 +302,11 @@
       '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
       '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
       frames +
+      // 実機のTimelineScreenは、コマ一覧の中央に固定した赤枠で現在位置を
+      // 示す（再生位置を貫く縦線は存在しない）。
+      '<span class="fd-frame-cursor is-error" aria-hidden="true"></span>' +
       "</div></div>" +
       '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span><span>🔒</span></div>' +
-      '<span class="fd-playhead"></span>' +
       "</div>"
     );
   }
@@ -351,14 +362,41 @@
     );
   }
 
+  // SaveTreeScreen の再現。アプリ側 _TreeConnectorPainter と同じ規則で線を引く。
+  //  ・接続線の欄は深さ1つにつき20px。線は各20px欄の中央(10px)を通る。
+  //  ・祖先の欄は、そこからまだ枝分かれが続く場合だけ全高の縦線。
+  //  ・自分の欄は上半分が必ず縦線。下に続く兄弟がいる場合だけ下半分も引く。
+  //  ・自分の欄の中央から右のタイルへ横線。
+  //  ・深さ0の行には接続線の欄そのものが無い。
+  function treeRow(depth, ancestorContinues, hasNextSibling, num) {
+    var cols = "";
+    for (var i = 0; i < depth; i++) {
+      var isSelf = i === depth - 1;
+      var cls = "fd-tree-col";
+      if (isSelf) cls += " is-self" + (hasNextSibling ? " is-continue" : "");
+      else if (ancestorContinues[i]) cls += " is-through";
+      cols += '<i class="' + cls + '"></i>';
+    }
+    return (
+      '<div class="fd-tree-row">' +
+      (depth ? '<span class="fd-tree-lines">' + cols + "</span>" : "") +
+      '<span class="fd-tree-commit" aria-hidden="true"></span>' +
+      '<span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> ' +
+      num +
+      "</strong><small>2026/09/01 23:34</small></span>" +
+      '<span class="fd-tree-more">⋮</span></div>'
+    );
+  }
+
   function saveTreeScreen() {
     return (
       '<div class="feature-diagram fd-route-screen fd-save-tree-screen" aria-hidden="true">' +
       appBar("セーブツリー", true, "fd.saveTreeTitle") +
       '<div class="fd-route-body fd-save-tree-body"><div class="fd-real-tree">' +
-      '<div class="fd-real-tree-row depth-2"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 03</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
-      '<div class="fd-real-tree-row depth-1"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 02</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
-      '<div class="fd-real-tree-row depth-0"><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 01</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+      // 親が上、子が下。アプリの _flattenTreeRows と同じ深さ優先の並び。
+      treeRow(0, [], false, "01") +
+      treeRow(1, [], false, "02") +
+      treeRow(2, [false], false, "03") +
       "</div></div></div>"
     );
   }
