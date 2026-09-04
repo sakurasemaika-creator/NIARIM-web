@@ -9,17 +9,18 @@
   margin-right: 18px !important;
 }
 
-/* Remove old Visual Smoke offset that pushed the frame strip off-center. */
-html body .fd-canvas-screen .fd-frame-strip-scroll,
-.fd-frame-strip-scroll {
+/* Remove old Visual Smoke offset that pushed the frame strip off-center.
+   Duplicate the screen class to outrank the later legacy selector in variables.css. */
+html body .fd-canvas-screen.fd-canvas-screen .fd-frame-strip-scroll,
+html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
 /* Product decision: every frame representation is 50 x 50, including legacy Features mocks. */
-.fd-frame,
-.fd-frame-thumb,
-.fd-frame-add {
+.fd-frame.fd-frame,
+.fd-frame-thumb.fd-frame-thumb,
+.fd-frame-add.fd-frame-add {
   width: 50px !important;
   height: 50px !important;
   min-width: 50px !important;
@@ -36,7 +37,7 @@ html body .fd-canvas-screen .fd-frame-strip-scroll,
 }
 
 /* Center the selected/current frame inside the frame-scroll viewport itself. */
-.fd-frame-strip-scroll {
+html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   display: flex !important;
   align-items: center !important;
   padding-left: calc(50% - 25px) !important;
@@ -67,7 +68,7 @@ html body .fd-canvas-screen .fd-frame-strip-scroll,
 #save > .feature-diagram { --fd-bg:#fff0f6; --fd-text:#432332; --fd-panel:#f0cddd; --fd-accent:#d83d7d; --fd-bezel:#7c3957; }
 #workspace > .feature-diagram { --fd-bg:#f2f2ff; --fd-text:#26264a; --fd-panel:#d5d6f5; --fd-accent:#5652df; --fd-bezel:#49498f; }
 #widget > .feature-diagram { --fd-bg:#fff2e8; --fd-text:#472a19; --fd-panel:#f4d3bd; --fd-accent:#ee6721; --fd-bezel:#8b4828; }
-#export > .feature-diagram { --fd-bg:#eefaFD; --fd-text:#153640; --fd-panel:#cae9ef; --fd-accent:#1087a7; --fd-bezel:#2a7081; }
+#export > .feature-diagram { --fd-bg:#eefafd; --fd-text:#153640; --fd-panel:#cae9ef; --fd-accent:#1087a7; --fd-bezel:#2a7081; }
 
 .feature-section > .feature-diagram {
   background: var(--fd-bg) !important;
