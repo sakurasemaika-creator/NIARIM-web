@@ -8,7 +8,7 @@
   .hero .container {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) clamp(164px, 43vw, 196px) !important;
-    grid-template-rows: auto auto auto auto auto !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
     column-gap: 0.85rem !important;
     row-gap: 0.38rem !important;
     align-items: start !important;
@@ -16,26 +16,18 @@
 
   .hero-copy { display: contents !important; }
 
-  .hero-copy .eyebrow {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    margin-bottom: 0.08rem;
-    font-size: 0.72rem;
-  }
-
   .hero-title {
     grid-column: 1 / -1;
-    grid-row: 2;
+    grid-row: 1;
     margin: 0;
     font-size: clamp(2.85rem, 13.2vw, 3.9rem) !important;
     line-height: 0.96 !important;
     letter-spacing: -0.03em;
   }
 
-  /* Use the full SP width. Natural wrapping remains available for longer translations. */
   .hero-subtitle {
     grid-column: 1 / -1;
-    grid-row: 3;
+    grid-row: 2;
     width: 100% !important;
     max-width: none !important;
     margin-top: 0.46rem !important;
@@ -46,14 +38,25 @@
     overflow: visible !important;
   }
 
-  .hero-subtitle-text {
-    white-space: normal !important;
+  .hero-subtitle-text { white-space: normal !important; }
+
+  /* Compact label placed between subtitle and body copy. */
+  .hero-copy .eyebrow {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: start;
+    margin: 0.05rem 0 0.02rem !important;
+    font-size: 0.68rem !important;
+    line-height: 1.1 !important;
+    transform: scaleX(0.52);
+    transform-origin: left center;
+    white-space: nowrap;
   }
 
   .hero-lead {
     grid-column: 1;
     grid-row: 4;
-    margin-top: 0.12rem !important;
+    margin-top: 0.08rem !important;
     font-size: 0.82rem !important;
     line-height: 1.62;
     display: block !important;
@@ -117,6 +120,10 @@
     font-size: 0.98rem !important;
     line-height: 1.28 !important;
     letter-spacing: -0.015em;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.64rem !important;
   }
 
   .hero-lead {
