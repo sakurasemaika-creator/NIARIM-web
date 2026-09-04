@@ -1,0 +1,136 @@
+/* Manual visual-audit corrections. This layer is intentionally last. */
+
+/* App screen gallery: every card bezel follows that card's appearance preset. */
+.screenshot-scroller {
+  padding-inline: max(0px, var(--container-padding)) !important;
+  padding-bottom: 0.9rem !important;
+  scroll-padding-inline: max(0px, var(--container-padding)) !important;
+}
+.screenshot-scroller::after {
+  content: "";
+  flex: 0 0 max(0px, var(--container-padding));
+}
+.screenshot-card {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  scroll-snap-align: start;
+}
+.screenshot-card:nth-child(1) { --fd-bezel:#287184; }
+.screenshot-card:nth-child(2) { --fd-bezel:#823a72; }
+.screenshot-card:nth-child(3) { --fd-bezel:#61753a; }
+.screenshot-card:nth-child(4) { --fd-bezel:#934638; }
+.screenshot-card:nth-child(5) { --fd-bezel:#4058a0; }
+.screenshot-card:nth-child(6) { --fd-bezel:#7e5a29; }
+.screenshot-card,
+.screenshot-card:first-child {
+  border: 6px solid var(--fd-bezel, #4a3b41) !important;
+  border-radius: 22px !important;
+  background: var(--fd-bezel, #4a3b41) !important;
+  box-shadow: 0 16px 34px rgba(25,20,28,.14) !important;
+}
+.screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+.screenshot-card:first-child .hero-visual-reuse {
+  border: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Legacy home feature diagrams also need a visible themed bezel. */
+#features .feature-row:nth-child(1) .feature-diagram { --fd-bezel:#287055; }
+#features .feature-row:nth-child(2) .feature-diagram { --fd-bezel:#63478c; }
+#features .feature-row:nth-child(3) .feature-diagram { --fd-bezel:#80682d; }
+#features .feature-row:nth-child(4) .feature-diagram { --fd-bezel:#326f9d; }
+#features .feature-row:nth-child(5) .feature-diagram { --fd-bezel:#934638; }
+#features .feature-row .feature-diagram,
+.hero-visual .frame-mock {
+  border: 6px solid var(--fd-bezel, var(--fd-outside, #4a3b41)) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Frame strip: current frame itself is the 50x50 marker. No detached overlay. */
+.fd-frame-strip::after,
+.fd-frame-strip-scroll::after {
+  content: none !important;
+  display: none !important;
+}
+.fd-frame-strip-scroll {
+  display: flex !important;
+  align-items: center !important;
+  padding-left: calc(50% - 25px) !important;
+  padding-right: calc(50% - 25px) !important;
+  gap: 0 !important;
+}
+.fd-frame-thumb,
+.fd-frame-add {
+  width: 50px !important;
+  height: 50px !important;
+  flex: 0 0 50px !important;
+  aspect-ratio: 1 / 1 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+.fd-frame-thumb.is-current {
+  width: 50px !important;
+  height: 50px !important;
+  border: 3px solid #ffad00 !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+}
+.fd-frame-thumb.is-current .fd-frame-paper {
+  inset: 3px !important;
+}
+
+/* Features page: enforce visible palette differences on legacy diagrams too. */
+#drawing > .feature-diagram { --fd-bg:#f3fff9; --fd-text:#17372b; --fd-panel:#d8f1e5; --fd-accent:#00a86b; --fd-bezel:#287055; }
+#animation > .feature-diagram { --fd-bg:#faf6ff; --fd-text:#30243f; --fd-panel:#eadcf7; --fd-accent:#7848dc; --fd-bezel:#65468f; }
+#editing > .feature-diagram { --fd-bg:#fff9eb; --fd-text:#3e321a; --fd-panel:#f4e3b9; --fd-accent:#e39b00; --fd-bezel:#85672b; }
+#advanced > .feature-diagram { --fd-bg:#f2faff; --fd-text:#1b3145; --fd-panel:#d5eafb; --fd-accent:#1688dd; --fd-bezel:#3272a1; }
+#audio > .feature-diagram { --fd-bg:#f1fffb; --fd-text:#173832; --fd-panel:#d4f0e9; --fd-accent:#00a894; --fd-bezel:#267465; }
+#save > .feature-diagram { --fd-bg:#fff5f9; --fd-text:#402431; --fd-panel:#f3d8e3; --fd-accent:#d84580; --fd-bezel:#803f5b; }
+#workspace > .feature-diagram { --fd-bg:#f7f7ff; --fd-text:#272647; --fd-panel:#dedff7; --fd-accent:#5b59dc; --fd-bezel:#4f4f93; }
+#widget > .feature-diagram { --fd-bg:#fff7f1; --fd-text:#452b1e; --fd-panel:#f7dfcf; --fd-accent:#ef6a23; --fd-bezel:#914f2e; }
+#export > .feature-diagram { --fd-bg:#f2fbfd; --fd-text:#18343c; --fd-panel:#d5edf2; --fd-accent:#1588a8; --fd-bezel:#2f7385; }
+.feature-section > .feature-diagram {
+  border-color: var(--fd-bezel) !important;
+  background: var(--fd-bg) !important;
+  color: var(--fd-text) !important;
+}
+
+/* One slider language across all reconstructions. */
+:is(.fd-slider,.fd-sheet-slider) {
+  position: relative !important;
+  height: 5px !important;
+  min-height: 5px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 22%, transparent) !important;
+  overflow: visible !important;
+}
+:is(.fd-slider,.fd-sheet-slider) > span {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 64% !important;
+  height: 5px !important;
+  border-radius: 999px !important;
+  background: var(--fd-accent, #ff5c7a) !important;
+}
+:is(.fd-slider,.fd-sheet-slider) > span::after {
+  content: "" !important;
+  position: absolute !important;
+  right: -6px !important;
+  top: 50% !important;
+  width: 12px !important;
+  height: 12px !important;
+  transform: translateY(-50%) !important;
+  border-radius: 50% !important;
+  background: var(--fd-accent, #ff5c7a) !important;
+  box-shadow: 0 0 0 2px var(--fd-bg, var(--fd-surface, #fff)) !important;
+}
