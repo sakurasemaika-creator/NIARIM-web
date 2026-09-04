@@ -73,13 +73,13 @@
      見出しらしい太さと、見出し／本文のメリハリを保つ。
      末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
   --font-sans:
-    "HakkouMincho", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR",
-    "NotoSerifSC", "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN",
-    "Yu Mincho", serif;
+    "HakkouMincho", "HakkouMinchoCJK", "NotoSerifMenuKR", "NotoSerifMenuSC",
+    "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-serif:
-    "Kuramubon", "NotoSansHeadKR", "NotoSansHeadSC", "NotoSerifMenuKR",
-    "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC", "Zen Kaku Gothic New",
-    "Hiragino Kaku Gothic ProN", sans-serif;
+    "Kuramubon", "KuramubonCJK", "NotoSansHeadKR", "NotoSansHeadSC",
+    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC",
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
@@ -116,6 +116,23 @@
   --grad-ink: linear-gradient(160deg, #25222b 0%, #302d48 58%, #1b1928 100%);
   --grad-gold: linear-gradient(120deg, #ffd76a 0%, #ff9f5c 100%);
   --header-height: 72px;
+}
+
+/* ラテン系の言語（英語・フランス語・スペイン語）を選んでいる閲覧者向け。
+
+   HTMLには初期表示用の日本語がそのまま書かれており、i18nがそれを置き換える
+   のはDOMContentLoadedの後になる。それまでの一瞬だけ日本語が描画されるため、
+   font-familyにCJKサブセットが載っていると、英語のページでも漢字フォント
+   (合計845KB)が必ず転送されてしまう（実測：DOMContentLoadedの約380ms前に要求）。
+   CJK側は *CJK という別のfamily名にしてあるので、ここでスタックから外す。
+   置き換わるまでのごく短い間、その日本語はOS標準の明朝/ゴシックで描かれる。
+   ページの言語がCJKのときはこの指定は当たらないので、表示は従来どおり。
+   属性は <head> のインラインスクリプトが第一描画より前に付ける。 */
+:root[data-latin-only] {
+  --font-sans:
+    "HakkouMincho", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif:
+    "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
 }
 
 .final-cta .btn.btn-primary {

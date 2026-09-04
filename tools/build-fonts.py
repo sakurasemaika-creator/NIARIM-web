@@ -85,6 +85,18 @@ FONTS = [
         "見出しの簡体字補完（Noto Sans SC Black）",
         "heading-fallback",
     ),
+    # 言語切替メニューの「日本語」「繁體中文」も、放っておくと本文用・見出し用の
+    # 大きいCJKサブセット（合計800KB超）でしか描けない。メニューは全ページの
+    # ヘッダーに出るため、英語だけを読む利用者にもその800KBが必ず転送されていた。
+    # 白光明朝から該当の数文字だけを切り出した極小フォントを用意し、
+    # メニューのfont-familyはこの極小フォント群だけを指す（common.css参照）。
+    (
+        "NotoSerifMenuJP",
+        f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
+        "NotoSerifMenuJP-subset.woff2",
+        "言語切替メニューの「日本語」「繁體中文」用（全ページで表示）",
+        "menu",
+    ),
     (
         "NotoSerifMenuKR",
         f"{SRCDIR}/noto/NotoSerifKR.woff2",
@@ -266,6 +278,28 @@ def unicode_ranges(path):
     return ", ".join(f"U+{a:04X}" if a == b else f"U+{a:04X}-{b:04X}" for a, b in out)
 
 
+# 見出し・本文用の日本語フォントは1ファイル約300〜630KBある。ラテン文字も
+# 同じファイルに入っているため、日本語を1文字も含まない英語・フランス語などの
+# ページでも全量が落ちてきていた（1ページあたり約950KB）。
+# そこで各フォントを「ラテン等の1バイト圏」と「それ以外（かな・漢字・全角約物）」
+# の2つに割り、それぞれに unicode-range を付ける。
+# こうすると英語のページはラテン側の数十KBだけで済み、日本語のページは
+# 従来どおり両方を読む（合計サイズは変わらない）。
+def split_latin(chars):
+    """フォントを2分割する際の「ラテン側」に入れる文字を返す。
+
+    境界は U+2E80（CJK部首補助の直前）。ラテン文字・キリル文字だけでなく、
+    ダッシュ(—)・三点リーダ(…)・矢印(→)・チェック(✓)といった一般記号も
+    ラテン側に含める。これらは英語・フランス語・スペイン語のページにも
+    普通に出てくるため、CJK側へ回すと「記号が1文字あるだけで
+    数百KBの漢字サブセットを読み込む」ことになり、分割の意味が消える。
+    全角約物（U+FF01〜）・かな・漢字・ハングルは反対側に回る。
+    """
+    latin = {c for c in chars if ord(c) < 0x2E80}
+    rest = set(chars) - latin
+    return latin, rest
+
+
 def build():
     want = site_chars()
     print(f"サイトで使う文字: {len(want)}")
@@ -314,10 +348,12 @@ def build():
             if kind == "menu":
                 # 言語メニューの文字のうち、primaryが揃って持ってはいないものだけ。
                 # 全ページに出るため常時読み込みになる。
+                # primaryが持っているかどうかは見ない。メニューの文字は
+                # 「大きいサブセットを読ませないため」に切り出すのが目的なので、
+                # primaryにも入っている文字（日・本・語など日本語本文にも出る字）
+                # こそ、ここで極小フォント側にも持たせる必要がある。
                 take = {
-                    c
-                    for c in (menu & want) - covered_by_primary - covered_by_menu
-                    if ord(c) in cov
+                    c for c in (menu & want) - covered_by_menu if ord(c) in cov
                 }
                 covered_by_menu |= take
             else:
@@ -330,6 +366,68 @@ def build():
         if not take:
             print(f"  {family}: 担当文字なし（スキップ）")
             continue
+        def run_subset(dst, chars):
+            subprocess.run(
+                [
+                    "pyftsubset",
+                    src,
+                    "--output-file=" + dst,
+                    "--flavor=woff2",
+                    "--unicodes=" + ",".join(f"U+{ord(c):04X}" for c in sorted(chars)),
+                    "--layout-features+=vert,vrt2,tnum",
+                    "--no-hinting",
+                    "--name-IDs=*",
+                    "--notdef-outline",
+                ],
+                check=True,
+            )
+            return os.path.getsize(dst)
+
+        # 日本語の本体フォントだけ、ラテン側とそれ以外に割る。
+        if kind in ("primary", "heading"):
+            latin_take, rest_take = split_latin(take)
+            if latin_take and rest_take:
+                latin_out = outname.replace("-subset.woff2", "-latin.woff2")
+                latin_dst = os.path.join(OUT, latin_out)
+                rest_dst = os.path.join(OUT, outname)
+                before_l = (
+                    os.path.getsize(latin_dst) if os.path.exists(latin_dst) else 0
+                )
+                before_r = os.path.getsize(rest_dst) if os.path.exists(rest_dst) else 0
+                size_l = run_subset(latin_dst, latin_take)
+                size_r = run_subset(rest_dst, rest_take)
+                report.append(
+                    f"  {family}: ラテン {len(latin_take)}字 "
+                    f"{before_l / 1024:.0f}KB -> {size_l / 1024:.0f}KB / "
+                    f"それ以外 {len(rest_take)}字 "
+                    f"{before_r / 1024:.0f}KB -> {size_r / 1024:.0f}KB"
+                )
+                # CJK側だけ別のfamily名にする。
+                # 日本語以外の言語を選んでいる閲覧者にも、i18nが走るまでの
+                # 一瞬だけHTML内の日本語（初期表示用の文言）が描かれるため、
+                # 同じfamily名のままだと unicode-range に関係なくCJK側が
+                # 必ず転送されてしまう（実測でDOMContentLoadedの約380ms前）。
+                # family名を分けておけば、ラテン系の言語のときだけ
+                # font-familyのスタックからCJK側を外せる（variables.css参照）。
+                for out_name, out_dst, out_family in (
+                    (latin_out, latin_dst, family),
+                    (outname, rest_dst, family + "CJK"),
+                ):
+                    blocks.append(
+                        "\n".join(
+                            [
+                                f"/* {role} */",
+                                "@font-face {",
+                                f'  font-family: "{out_family}";',
+                                "  font-display: swap;",
+                                f'  src: url("/assets/fonts/{out_name}") format("woff2");',
+                                f"  unicode-range: {unicode_ranges(out_dst)};",
+                                "}",
+                            ]
+                        )
+                    )
+                continue
+
         dst = os.path.join(OUT, outname)
         before = os.path.getsize(dst) if os.path.exists(dst) else 0
         subprocess.run(

@@ -112,7 +112,7 @@
     // コマを「画面中央に固定表示された枠」へ合わせる（枠はコマ側では
     // なく一覧に重ねて描く）。再現図でも同じ作りにし、5枚並べた真ん中が
     // 枠に入るようにする。
-    // コマ4枚＋末尾の追加ボタンで計5マス。中央寄せにすると真ん中の
+    // コマ4枚+末尾の追加ボタンで計5マス。中央寄せにすると真ん中の
     // マス＝3枚目のコマがちょうど中央の枠に入る。
     for (var i = 0; i < 4; i++) {
       frames +=
@@ -299,7 +299,7 @@
       iconButton("ic-skip_next") +
       '<span class="fd-spacer"></span><span class="fd-loop-mark">↔</span></div>' +
       timelineToolbar() +
-      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
+      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>+</span></div>' +
       '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
       frames +
       // 実機のTimelineScreenは、コマ一覧の中央に固定した赤枠で現在位置を
@@ -321,9 +321,9 @@
       '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong data-i18n="fd.audioClip">音声クリップ</strong><span>' +
       icon("ic-content_copy") +
       '</span><span class="fd-delete-mark">▮</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>＋</button><b>72%</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>+</button><b>72%</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
       "</div>";
     return html.replace(/<\/div>$/, sheet + "</div>");
   }
@@ -349,9 +349,9 @@
     var slots = "";
     for (var i = 1; i <= 5; i++) {
       slots +=
-        '<div class="fd-save-slot"><span class="fd-save-thumb">＋</span><span class="fd-save-copy"><strong><span data-i18n="fd.slotPrefix">スロット</span>' +
+        '<div class="fd-save-slot"><span class="fd-save-thumb">+</span><span class="fd-save-copy"><strong><span data-i18n="fd.slotPrefix">スロット</span>' +
         i +
-        '</strong><small data-i18n="fd.slotEmpty">保存データなし</small></span><span class="fd-save-plus">＋</span></div>';
+        '</strong><small data-i18n="fd.slotEmpty">保存データなし</small></span><span class="fd-save-plus">+</span></div>';
     }
     return (
       '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' +
@@ -419,7 +419,7 @@
           item[1] +
           '">' +
           name +
-          '</strong><span class="fd-spacer"></span><span class="fd-drag-mark">＝</span></div>'
+          '</strong><span class="fd-spacer"></span><span class="fd-drag-mark" aria-hidden="true"></span></div>'
         );
       })
       .join("");

@@ -108,6 +108,16 @@
 
     document.documentElement.setAttribute("lang", lang);
 
+    // ラテン系の言語のときは、font-familyからCJKサブセットを外す印を付ける
+    // （lang-flag.js が第一描画前に付けるのと同じ属性）。ページを開いたまま
+    // 言語を切り替えたときは、ここで付け直さないと「英語で開いてから日本語に
+    // 切り替えた」場合に日本語がOSのフォントで描かれたままになる。
+    if (lang === "en" || lang === "fr" || lang === "es") {
+      document.documentElement.setAttribute("data-latin-only", "");
+    } else {
+      document.documentElement.removeAttribute("data-latin-only");
+    }
+
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       el.textContent = t(lang, el.getAttribute("data-i18n"));
     });

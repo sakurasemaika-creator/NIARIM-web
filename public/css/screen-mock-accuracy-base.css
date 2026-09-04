@@ -1169,9 +1169,17 @@
 .fd-check.is-on {
   background: var(--fd-accent) !important;
 }
+/* アプリ側は Icons.drag_handle（横2本線）。以前は全角の「＝」を文字として
+   置いていたが、全角記号はCJKサブセット側にしか無いため、英語・仏語・
+   西語のページでも数百KBの漢字フォントを読み込ませる原因になっていた。
+   見た目もアイコンのほうが忠実なので、CSSで2本線を描く。 */
 .fd-drag-mark {
-  color: var(--fd-accent, #ef7991) !important;
-  font-weight: 700 !important;
+  width: 14px !important;
+  height: 10px !important;
+  flex: 0 0 14px !important;
+  border-top: 2px solid var(--fd-accent, #ef7991) !important;
+  border-bottom: 2px solid var(--fd-accent, #ef7991) !important;
+  box-sizing: border-box !important;
 }
 
 /* ExportScreen: source-confirmed layout */
