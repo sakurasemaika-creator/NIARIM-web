@@ -66,6 +66,51 @@ html body .screenshot-card > .feature-diagram :is(
   border-color: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 18%, transparent) !important;
 }
 
+/* Make theme changes visible across the whole reconstructed UI, not only the bezel.
+   Paper/canvas remains true white below. */
+html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
+  .fd-topbar,
+  .fd-timeline-topbar,
+  .fd-toolbar,
+  .fd-timeline-toolbar,
+  .fd-frame-strip,
+  .fd-app-overlay-panel,
+  .fd-app-layer-panel,
+  .fd-app-onion-panel,
+  .fd-clip-detail-sheet,
+  .fd-settings-card,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-workspace-row,
+  .fd-scene-line,
+  .fd-timeline-row,
+  .fd-export-segments
+) {
+  background-color: var(--fd-panel, transparent) !important;
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+}
+html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
+  .fd-icon-btn.is-active,
+  .fd-shortcut-btn.is-active,
+  .fd-segment.is-selected,
+  .fd-mini-switch.is-on,
+  .fd-tree-save-btn,
+  .fd-export-btn,
+  .fd-color-swatch
+) {
+  color: var(--fd-accent, var(--color-accent)) !important;
+  border-color: var(--fd-accent, var(--color-accent)) !important;
+}
+html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
+  .fd-sheet-slider > span,
+  .fd-sheet-slider > i,
+  .fd-mini-slider > span,
+  .fd-mini-slider > i,
+  .fd-timeline-scrubber > i
+) {
+  background: var(--fd-accent, var(--color-accent)) !important;
+}
+
 /* Preserve true white only for the drawing paper/canvas itself. */
 html body .feature-section > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage),
 html body .screenshot-card > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage) {
@@ -104,6 +149,11 @@ html body .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-scree
   max-width: 100% !important;
   max-height: 100% !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
+  border-radius: inherit !important;
+}
+html body .screenshot-card {
+  overflow: hidden !important;
 }
 
 /* Parent-level containment: long translations and side sheets must shrink inside
