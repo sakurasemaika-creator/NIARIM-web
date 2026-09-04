@@ -199,10 +199,19 @@
     if (!trigger) return;
 
     trigger.addEventListener("click", function () {
-      dropdown.setAttribute(
-        "data-open",
-        String(dropdown.getAttribute("data-open") !== "true"),
-      );
+      var willOpen = dropdown.getAttribute("data-open") !== "true";
+      dropdown.setAttribute("data-open", String(willOpen));
+      // スマホではこの切替がメニューパネルの下端付近にあり、開いた一覧が
+      // 画面外へ出て「言語が3つしか無い」ように見えていた。パネルは
+      // スクロールできるので、開いたら一覧が見える位置まで送ってやる。
+      if (!willOpen) return;
+      var menu = dropdown.querySelector("[data-lang-menu]");
+      if (!menu || !menu.scrollIntoView) return;
+      requestAnimationFrame(function () {
+        var rect = menu.getBoundingClientRect();
+        if (rect.bottom <= window.innerHeight) return;
+        menu.scrollIntoView({ block: "end", behavior: "smooth" });
+      });
     });
 
     document.addEventListener("click", function (event) {

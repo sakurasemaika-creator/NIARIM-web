@@ -1078,3 +1078,16 @@ p {
   color: var(--color-text-muted);
   line-height: 1.8;
 }
+
+/* スマホのメニュー内では言語一覧は絶対配置ではなく流し込みで並ぶ。
+   切替ボタンがパネル下端付近にあるため、開いた直後は一覧の大半が
+   画面の外にあり「言語が3つしかない」ように見えていた。
+   パネル自体はスクロールできるので、開いたら見える位置まで送る処理を
+   i18n.js に入れてある。ここでは一覧が伸びすぎないよう上限だけ設ける。 */
+@media (max-width: 1180px) {
+  .main-nav .lang-menu {
+    max-height: min(60vh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
