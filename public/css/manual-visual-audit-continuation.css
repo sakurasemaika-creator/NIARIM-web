@@ -91,46 +91,58 @@ html
 
 /* Make theme changes visible across the whole reconstructed UI, not only the bezel.
    Paper/canvas remains true white below. */
-html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
-  .fd-topbar,
-  .fd-timeline-topbar,
-  .fd-toolbar,
-  .fd-timeline-toolbar,
-  .fd-frame-strip,
-  .fd-app-overlay-panel,
-  .fd-app-layer-panel,
-  .fd-app-onion-panel,
-  .fd-clip-detail-sheet,
-  .fd-settings-card,
-  .fd-route-card,
-  .fd-save-slot,
-  .fd-workspace-row,
-  .fd-scene-line,
-  .fd-timeline-row,
-  .fd-export-segments
-) {
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  :is(
+    .fd-topbar,
+    .fd-timeline-topbar,
+    .fd-toolbar,
+    .fd-timeline-toolbar,
+    .fd-frame-strip,
+    .fd-app-overlay-panel,
+    .fd-app-layer-panel,
+    .fd-app-onion-panel,
+    .fd-clip-detail-sheet,
+    .fd-settings-card,
+    .fd-route-card,
+    .fd-save-slot,
+    .fd-workspace-row,
+    .fd-scene-line,
+    .fd-timeline-row,
+    .fd-export-segments
+  ) {
   background-color: var(--fd-panel, transparent) !important;
   color: var(--fd-text, var(--fd-ink, #28242c)) !important;
 }
-html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
-  .fd-icon-btn.is-active,
-  .fd-shortcut-btn.is-active,
-  .fd-segment.is-selected,
-  .fd-mini-switch.is-on,
-  .fd-tree-save-btn,
-  .fd-export-btn,
-  .fd-color-swatch
-) {
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  :is(
+    .fd-icon-btn.is-active,
+    .fd-shortcut-btn.is-active,
+    .fd-segment.is-selected,
+    .fd-mini-switch.is-on,
+    .fd-tree-save-btn,
+    .fd-export-btn,
+    .fd-color-swatch
+  ) {
   color: var(--fd-accent, var(--color-accent)) !important;
   border-color: var(--fd-accent, var(--color-accent)) !important;
 }
-html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
-  .fd-sheet-slider > span,
-  .fd-sheet-slider > i,
-  .fd-mini-slider > span,
-  .fd-mini-slider > i,
-  .fd-timeline-scrubber > i
-) {
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  :is(
+    .fd-sheet-slider > span,
+    .fd-sheet-slider > i,
+    .fd-mini-slider > span,
+    .fd-mini-slider > i,
+    .fd-timeline-scrubber > i
+  ) {
   background: var(--fd-accent, var(--color-accent)) !important;
 }
 
@@ -208,17 +220,28 @@ html body .screenshot-card {
 
 /* Parent-level containment: long translations and side sheets must shrink inside
    the device reconstruction rather than increasing the page scroll width. */
-html body :is(.feature-section,.feature-section-head,.feature-media,.feature-diagram,.screenshot-card),
-html body :is(.feature-section,.screenshot-card) :is(
-  .fd-app-screen,
-  .fd-route-screen,
-  .fd-settings-card,
-  .fd-layer-menu,
-  .fd-bottom-sheet,
-  .fd-export-screen,
-  .fd-save-tree-screen,
-  .fd-workspace-screen
-) {
+html
+  body
+  :is(
+    .feature-section,
+    .feature-section-head,
+    .feature-media,
+    .feature-diagram,
+    .screenshot-card
+  ),
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  :is(
+    .fd-app-screen,
+    .fd-route-screen,
+    .fd-settings-card,
+    .fd-layer-menu,
+    .fd-bottom-sheet,
+    .fd-export-screen,
+    .fd-save-tree-screen,
+    .fd-workspace-screen
+  ) {
   min-width: 0 !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
