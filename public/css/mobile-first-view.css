@@ -79,8 +79,12 @@
     align-self: start;
     width: 100% !important;
     max-width: 196px !important;
+    height: auto !important;
+    aspect-ratio: 320 / 569 !important;
     margin: 0.28rem 0 0 !important;
     border-radius: 20px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
     box-shadow:
       0 20px 42px rgba(40, 36, 44, 0.23),
       0 0 0 1px rgba(255, 92, 122, 0.08) !important;
@@ -159,6 +163,8 @@
 
   .hero-visual {
     max-width: 146px !important;
+    height: auto !important;
+    aspect-ratio: 320 / 569 !important;
     margin-top: 0.24rem !important;
   }
 
