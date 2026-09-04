@@ -26,12 +26,20 @@
         font-family: var(--font-serif);
         font-size: 5rem;
         font-weight: 700;
-        color: var(--color-sub);
+        /* --color-sub は淡いピンクで、同じく淡いピンクの地に載せると
+           ほとんど読めなかった。大きな飾り文字でも数字は情報なので、
+           文字が載る濃さのアクセント色を使う。 */
+        color: var(--color-accent-strong);
         margin-bottom: var(--space-sm);
       }
       .error-page h1 {
-        font-size: var(--fs-h1);
+        /* 狭い画面で「た。」だけが3行目に取り残されていた。
+           1行あたりの文字数が足りていなかったため、狭い幅では
+           見出しを少し小さくして2行に収める。 */
+        font-size: clamp(1.7rem, 7.2vw, var(--fs-h1));
         margin-bottom: var(--space-sm);
+        margin-inline: auto;
+        text-wrap: balance;
       }
       .error-page p {
         color: var(--color-text-muted);
