@@ -1086,6 +1086,10 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-sm);
+  /* 行を内容の高さで止める。図解の枠いっぱいに引き伸ばされて、
+     ウィジェットが縦に極端に細長く見えていた。 */
+  align-content: start;
+  grid-auto-rows: min-content;
 }
 
 .fd-widget-tile {
@@ -1095,6 +1099,10 @@
   gap: 6px;
   padding: 10px;
   min-height: 104px;
+  /* 内容の高さだけ使う。図解側の「行を縦いっぱいに伸ばす」指定を受けて
+     1枚が極端に縦長になっていたため。 */
+  align-self: start;
+  height: auto;
   border-radius: var(--radius-md);
   background: var(--fd-panel);
   /* 種類ごとに色を変えられることを示すため、2枚目・3枚目で色味を変える。
@@ -1102,12 +1110,24 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 2枚目・3枚目は「色を自分で選べる」ことを示す濃色。地の色に関係なく
+   濃いので、この2枚の中の文字だけは明るい色に固定する。 */
 .fd-widget-tile--create {
   background: #1f2a33;
 }
 
 .fd-widget-tile--plaza {
   background: #2b2233;
+}
+
+.fd-widget-tile--create .fd-widget-name,
+.fd-widget-tile--plaza .fd-widget-name {
+  color: #f6f2f4;
+}
+
+.fd-widget-tile--create .fd-widget-sub,
+.fd-widget-tile--plaza .fd-widget-sub {
+  color: rgba(246, 242, 244, 0.72);
 }
 
 /* 起動画面ウィジェットが表示する「選んだフレーム」。実際の作品の代わりに

@@ -39,20 +39,20 @@
 .fd-export-screen .fd-export-segments {
   height: 41px !important;
   flex: 0 0 41px !important;
-  border: 1px solid #9d8f93 !important;
+  border: 1px solid var(--fd-muted, #9d8f93) !important;
   border-radius: 22px !important;
   overflow: hidden !important;
   background: #fff !important;
 }
 .fd-export-screen .fd-export-segments .fd-segment {
   font-size: 9px !important;
-  color: #62595c !important;
+  color: var(--fd-muted, #62595c) !important;
   background: #fff !important;
-  border-color: #aa9da1 !important;
+  border-color: var(--fd-muted, #aa9da1) !important;
 }
 .fd-export-screen .fd-export-segments .fd-segment.is-active {
-  background: #ffd8de !important;
-  color: #554b4e !important;
+  background: var(--fd-panel, #ffd8de) !important;
+  color: var(--fd-ink, #554b4e) !important;
 }
 .fd-export-screen .fd-export-format-title {
   margin: 27px 0 7px !important;
@@ -73,20 +73,20 @@
   width: 18px !important;
   height: 18px !important;
   flex: 0 0 18px !important;
-  border: 2px solid #777174 !important;
+  border: 2px solid var(--fd-muted, #777174) !important;
 }
 .fd-export-screen .fd-format-row .fd-radio.is-active {
-  border: 2px solid #ff5877 !important;
+  border: 2px solid var(--fd-accent, #ff5877) !important;
   box-shadow: inset 0 0 0 4px #fff !important;
-  background: #ff5877 !important;
+  background: var(--fd-accent, #ff5877) !important;
 }
 .fd-export-screen .fd-format-row strong {
   font-size: 12px !important;
-  color: #312d31 !important;
+  color: var(--fd-ink, #312d31) !important;
 }
 .fd-export-screen .fd-format-row small {
   font-size: 8px !important;
-  color: #8e8589 !important;
+  color: var(--fd-muted, #8e8589) !important;
   line-height: 1.35 !important;
 }
 .fd-export-screen .fd-export-start {
@@ -96,7 +96,7 @@
   margin-bottom: 0 !important;
   border-radius: 16px !important;
   font-size: 10px !important;
-  background: #ff5877 !important;
+  background: var(--fd-accent, #ff5877) !important;
 }
 .fd-export-screen .fd-export-start .ic {
   width: 16px !important;
