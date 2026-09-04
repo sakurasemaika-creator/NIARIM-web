@@ -71,9 +71,21 @@ async function inspect(page, viewport, language, route) {
         left: r.left,
         right: r.right,
         bottom: r.bottom,
+        centerX: r.left + r.width / 2,
       };
     };
+    const resolveColor = (value) => {
+      const probe = document.createElement("i");
+      probe.style.color = value;
+      probe.style.display = "none";
+      document.body.appendChild(probe);
+      const result = getComputedStyle(probe).color;
+      probe.remove();
+      return result;
+    };
 
+    const root = getComputedStyle(document.documentElement);
+    const brandAccent = resolveColor(root.getPropertyValue("--color-accent").trim());
     const hero = document.querySelector(".hero-visual");
     const heroTitle = document.querySelector(".hero-title");
     const heroSubtitle = document.querySelector(".hero-subtitle");
@@ -83,6 +95,7 @@ async function inspect(page, viewport, language, route) {
         rect: ratio(el),
         background: getComputedStyle(el).backgroundColor,
         color: getComputedStyle(el).color,
+        primary: el.classList.contains("btn-primary"),
       }),
     );
 
@@ -101,6 +114,21 @@ async function inspect(page, viewport, language, route) {
       }),
     );
 
+    const frameStrips = [...document.querySelectorAll(".fd-frame-strip-scroll")].map(
+      (strip) => {
+        const sr = strip.getBoundingClientRect();
+        const current = strip.querySelector(
+          ".fd-frame-thumb.is-current, .fd-frame.is-current",
+        );
+        const cr = current?.getBoundingClientRect();
+        return {
+          stripCenter: sr.left + sr.width / 2,
+          currentCenter: cr ? cr.left + cr.width / 2 : null,
+          delta: cr ? cr.left + cr.width / 2 - (sr.left + sr.width / 2) : null,
+        };
+      },
+    );
+
     const sliders = [...document.querySelectorAll(".fd-sheet-slider, .fd-mini-slider")].map(
       (el) => {
         const r = el.getBoundingClientRect();
@@ -111,8 +139,28 @@ async function inspect(page, viewport, language, route) {
           width: r.width,
           height: r.height,
           fillHeight: fr?.height || 0,
+          fillColor: fill ? getComputedStyle(fill).backgroundColor : null,
         };
       },
+    );
+
+    const palette = (selector) =>
+      [...document.querySelectorAll(selector)].map((el) => {
+        const cs = getComputedStyle(el);
+        return {
+          id: el.id || el.getAttribute("data-mock-theme") || el.className,
+          accent: cs.getPropertyValue("--fd-accent").trim(),
+          bezel: cs.getPropertyValue("--fd-bezel").trim(),
+          bg: cs.getPropertyValue("--fd-bg").trim(),
+        };
+      });
+
+    const homeFeaturePalettes = palette(
+      '[data-mock-theme="row1"],[data-mock-theme="row2"],[data-mock-theme="row3"],[data-mock-theme="row4"],[data-mock-theme="row5"]',
+    );
+    const galleryPalettes = palette(".screenshot-card[data-mock-theme]");
+    const featurePalettes = palette(
+      "#drawing,#animation,#editing,#advanced,#audio,#save,#workspace,#widget,#export",
     );
 
     const screenshotScroller = document.querySelector(".screenshot-scroller");
@@ -135,13 +183,18 @@ async function inspect(page, viewport, language, route) {
       viewportWidth: innerWidth,
       documentClientWidth: de.clientWidth,
       documentScrollWidth: Math.max(de.scrollWidth, document.body?.scrollWidth || 0),
+      brandAccent,
       hero: ratio(hero),
       heroTitle: ratio(heroTitle),
       heroSubtitle: ratio(heroSubtitle),
       heroButtons,
       mocks,
       frameThumbs,
+      frameStrips,
       sliders,
+      homeFeaturePalettes,
+      galleryPalettes,
+      featurePalettes,
       gallery,
     };
   });
@@ -198,10 +251,50 @@ async function inspect(page, viewport, language, route) {
     }
   }
 
+  for (const strip of state.frameStrips) {
+    if (strip.currentCenter !== null && Math.abs(strip.delta) > 2) {
+      finding(viewport, language, route, "current-frame-not-centered", strip);
+    }
+  }
+
+  for (const slider of state.sliders) {
+    if (slider.height > 0 && Math.abs(slider.height - 4) > 1) {
+      finding(viewport, language, route, "slider-track-height", slider);
+    }
+    if (slider.fillHeight > 0 && Math.abs(slider.fillHeight - slider.height) > 1) {
+      finding(viewport, language, route, "slider-fill-height", slider);
+    }
+  }
+
   for (const button of state.heroButtons) {
     if (button.rect?.right > state.viewportWidth + 1 || button.rect?.left < -1) {
       finding(viewport, language, route, "hero-button-clipped", button);
     }
+    if (button.primary && button.background !== state.brandAccent) {
+      finding(viewport, language, route, "primary-button-not-theme-accent", {
+        expected: state.brandAccent,
+        actual: button.background,
+        text: button.text,
+      });
+    }
+  }
+
+  const assertDistinct = (items, kind) => {
+    const populated = items.filter((item) => item.accent && item.bezel && item.bg);
+    if (populated.length < 2) return;
+    const accents = new Set(populated.map((item) => item.accent));
+    const bezels = new Set(populated.map((item) => item.bezel));
+    if (accents.size !== populated.length || bezels.size !== populated.length) {
+      finding(viewport, language, route, kind, populated);
+    }
+  };
+
+  if (route === "/") {
+    assertDistinct(state.homeFeaturePalettes, "home-feature-palette-duplicate");
+    assertDistinct(state.galleryPalettes, "gallery-palette-duplicate");
+  }
+  if (route === "/features/") {
+    assertDistinct(state.featurePalettes, "features-palette-duplicate");
   }
 
   if (route === "/" && state.gallery?.cardCount) {
