@@ -23,6 +23,21 @@ html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
   max-height: 40px !important;
 }
 
+/* The first static gallery reconstruction predates is-current markup.
+   Treat its first frame as the current frame so the location marker is visible. */
+html body .screenshot-scroller .screenshot-card:first-child .fd-frame-strip-scroll > .fd-frame-thumb:first-child {
+  width: 50px !important;
+  height: 50px !important;
+  border: 3px solid #ffad00 !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+}
+html body .screenshot-scroller .screenshot-card:first-child .fd-frame-strip-scroll > .fd-frame-thumb:first-child > svg {
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+}
+
 /* Keep paper-based previews centered too. */
 html body .fd-frame-thumb.fd-frame-thumb .fd-frame-paper {
   position: absolute !important;
