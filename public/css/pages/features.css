@@ -144,7 +144,10 @@
 
 .spec-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* 200pxだと広い画面で5〜6列になり、全角の説明文が1行13文字ほどで
+     折り返して読みにくかった。1行あたり16〜18文字を確保できる幅を
+     下限にする。 */
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
   gap: var(--space-md);
 }
 
