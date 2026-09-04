@@ -106,6 +106,31 @@ html body .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-scree
   box-sizing: border-box !important;
 }
 
+/* Brand buttons use the visible theme accent. The darker accent remains reserved
+   for text/focus states where extra contrast is required, not button surfaces. */
+html body .btn.btn-primary,
+html body .btn.btn-accent,
+html body .hero .hero-actions .btn.btn-primary,
+html body .final-cta .hero-actions .btn.btn-primary,
+html body .download-actions .btn.btn-primary,
+html body .download-actions .btn.btn-accent,
+html body .scroll-top-btn {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-ink) !important;
+}
+html body .btn.btn-primary:hover,
+html body .btn.btn-accent:hover,
+html body .hero .hero-actions .btn.btn-primary:hover,
+html body .final-cta .hero-actions .btn.btn-primary:hover,
+html body .download-actions .btn.btn-primary:hover,
+html body .download-actions .btn.btn-accent:hover,
+html body .scroll-top-btn:hover {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-ink) !important;
+}
+
 /* SP: prevent long translated labels from forcing mock or page overflow. */
 @media (max-width: 640px) {
   html body .feature-section > .feature-diagram :is(
