@@ -659,17 +659,43 @@
       var isOpen = item.classList.contains("is-open");
       item.classList.toggle("is-open", !isOpen);
       question.setAttribute("aria-expanded", String(!isOpen));
-      answer.style.maxHeight = !isOpen ? answer.scrollHeight + "px" : "0px";
+      if (isOpen) {
+        // 閉じるときは、いまの高さをpxに戻してから0へ動かす。
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        void answer.offsetHeight;
+        answer.style.maxHeight = "0px";
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
     });
+
+    // 開き切ったら高さの上限を外す。px固定のままだと、測った値と実際の
+    // 高さが数px食い違って最終行の下が切れることがある（フォントの
+    // 読み込み完了や行の丸めで生じる）。
+    document.addEventListener(
+      "transitionend",
+      function (event) {
+        if (event.propertyName !== "max-height") return;
+        var answer = event.target;
+        if (!answer.classList || !answer.classList.contains("faq-answer"))
+          return;
+        var item = answer.closest(".faq-item");
+        if (item && item.classList.contains("is-open"))
+          answer.style.maxHeight = "none";
+      },
+      true,
+    );
 
     // 開いたまま画面幅が変わったり言語を切り替えたりすると、px固定の
     // max-heightが実際の内容の高さと合わなくなり、答えが途中で切れる
     // （逆に余白が余る）ため、開いている項目の高さを測り直す。
     function remeasure() {
+      // 開いている項目は上限を外しておけば、幅の変化や言語切り替えで
+      // 中身の高さが変わっても勝手に追従する（px固定だと合わなくなる）。
       document
         .querySelectorAll(".faq-item.is-open .faq-answer")
         .forEach(function (answer) {
-          answer.style.maxHeight = answer.scrollHeight + "px";
+          answer.style.maxHeight = "none";
         });
     }
 
