@@ -129,6 +129,35 @@
     statusEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
+  // 添付ファイル欄。ブラウザ標準のボタン表記はサイトの言語に追随しないため、
+  // 入力自体は視覚的に隠し、押しやすいボタンと選択状況のテキストを用意する。
+  // 言語切り替え時は data-i18n が効くよう、選択が無いときは属性を戻す。
+  function initFileField() {
+    var input = document.getElementById("attachments");
+    var trigger = document.getElementById("attachments-trigger");
+    var status = document.getElementById("attachments-status");
+    if (!input || !trigger || !status) return;
+
+    trigger.addEventListener("click", function () {
+      input.click();
+    });
+
+    input.addEventListener("change", function () {
+      var files = Array.prototype.slice.call(input.files || []);
+      if (!files.length) {
+        status.setAttribute("data-i18n", "contact.form.attachmentsEmpty");
+        status.textContent = t("contact.form.attachmentsEmpty");
+        return;
+      }
+      // 選択後はファイル名そのものを出したいので data-i18n の対象から外す。
+      status.removeAttribute("data-i18n");
+      status.textContent =
+        files.length === 1
+          ? files[0].name
+          : t("contact.form.attachmentsCount").replace("%d", files.length);
+    });
+  }
+
   function initContactForm() {
     var form = document.getElementById("contact-form");
     if (!form) return;
@@ -226,5 +255,8 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initContactForm);
+  document.addEventListener("DOMContentLoaded", function () {
+    initContactForm();
+    initFileField();
+  });
 })();

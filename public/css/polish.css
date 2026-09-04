@@ -813,8 +813,10 @@ main {
   background: rgba(250, 248, 249, 0.96);
 }
 
+/* backdrop-filter を切っている以上、半透明のままだと下の文字が
+   ぼけずに透けてしまう。ヘッダーと同じく不透明で塗る。 */
 .feature-nav {
-  background: rgba(255, 255, 255, 0.97);
+  background: #ffffff;
 }
 
 /* 大きなblurを回転させ続ける処理はGPU負荷が高いため、静的な淡いグローへ。 */

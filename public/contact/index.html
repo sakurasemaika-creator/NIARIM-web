@@ -89,6 +89,7 @@
           id="main-nav"
           class="main-nav"
           aria-label="グローバルナビゲーション"
+          data-i18n-attr="aria-label:a11y.globalNav"
         >
           <ul>
             <li><a href="/about/" data-i18n="nav.about">NIARIMとは</a></li>
@@ -124,6 +125,7 @@
         <button
           class="nav-toggle"
           aria-label="メニューを開く"
+          data-i18n-attr="aria-label:a11y.openMenu"
           aria-expanded="false"
           aria-controls="main-nav"
         >
@@ -257,14 +259,31 @@
                 <label for="attachments" data-i18n="contact.form.attachments"
                   >画像・動画を添付する（任意）</label
                 >
-                <input
-                  class="form-control form-file"
-                  type="file"
-                  id="attachments"
-                  name="attachments"
-                  accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime,video/webm"
-                  multiple
-                />
+                <div class="form-file">
+                  <input
+                    class="form-file-input"
+                    type="file"
+                    id="attachments"
+                    name="attachments"
+                    accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime,video/webm"
+                    multiple
+                  />
+                  <button
+                    class="form-file-button"
+                    type="button"
+                    id="attachments-trigger"
+                    data-i18n="contact.form.attachmentsButton"
+                  >
+                    ファイルを選ぶ
+                  </button>
+                  <span
+                    class="form-file-status"
+                    id="attachments-status"
+                    data-i18n="contact.form.attachmentsEmpty"
+                    aria-live="polite"
+                    >ファイルは選択されていません</span
+                  >
+                </div>
                 <p class="form-hint" data-i18n="contact.form.attachmentsHint">
                   画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。
                 </p>

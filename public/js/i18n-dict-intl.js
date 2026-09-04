@@ -137,6 +137,9 @@
     "contact.form.attachments": "添加图片・视频（可选）",
     "contact.form.attachmentsHint":
       "图片每张最大 5MB，视频每个最大 15MB，总计最多 20MB、最多 3 个文件（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
+    "contact.form.attachmentsButton": "选择文件",
+    "contact.form.attachmentsEmpty": "尚未选择文件",
+    "contact.form.attachmentsCount": "已选择 %d 个文件",
     "contact.error.attachments": "附件数量或大小超出限制。",
     "contact.form.agree.pre": "我已阅读并同意",
     "contact.form.agree.link": "隐私政策",
@@ -436,6 +439,9 @@
     "contact.form.attachments": "新增圖片・影片（選填）",
     "contact.form.attachmentsHint":
       "圖片每張最大 5MB，影片每個最大 15MB，總計最多 20MB、最多 3 個檔案（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
+    "contact.form.attachmentsButton": "選擇檔案",
+    "contact.form.attachmentsEmpty": "尚未選擇檔案",
+    "contact.form.attachmentsCount": "已選擇 %d 個檔案",
     "contact.error.attachments": "附件數量或大小超出上限。",
     "contact.form.agree.pre": "我已閱讀並同意",
     "contact.form.agree.link": "隱私政策",
@@ -743,6 +749,9 @@
     "contact.form.attachments": "이미지・동영상 첨부(선택)",
     "contact.form.attachmentsHint":
       "이미지는 1장당 최대 5MB, 동영상은 1개당 최대 15MB, 합계 최대 20MB・최대 3개까지 첨부할 수 있습니다(PNG, JPEG, WebP, GIF, MP4, MOV, WebM).",
+    "contact.form.attachmentsButton": "파일 선택",
+    "contact.form.attachmentsEmpty": "선택된 파일이 없습니다",
+    "contact.form.attachmentsCount": "%d개의 파일을 선택했습니다",
     "contact.error.attachments":
       "첨부 파일의 개수 또는 용량이 제한을 초과했습니다.",
     "contact.form.agree.pre": "",
@@ -1083,6 +1092,9 @@
     "contact.form.attachments": "Joindre des images ou vidéos (facultatif)",
     "contact.form.attachmentsHint":
       "5 Mo maximum par image, 15 Mo maximum par vidéo, 20 Mo au total, jusqu'à 3 fichiers (PNG, JPEG, WebP, GIF, MP4, MOV ou WebM).",
+    "contact.form.attachmentsButton": "Choisir des fichiers",
+    "contact.form.attachmentsEmpty": "Aucun fichier sélectionné",
+    "contact.form.attachmentsCount": "%d fichier(s) sélectionné(s)",
     "contact.error.attachments":
       "Trop de fichiers, ou la taille totale dépasse la limite.",
     "contact.form.agree.pre": "J'accepte la",
@@ -1426,6 +1438,9 @@
     "contact.form.attachments": "Adjuntar imágenes o vídeos (opcional)",
     "contact.form.attachmentsHint":
       "Hasta 5 MB por imagen, hasta 15 MB por vídeo, 20 MB en total y un máximo de 3 archivos (PNG, JPEG, WebP, GIF, MP4, MOV o WebM).",
+    "contact.form.attachmentsButton": "Elegir archivos",
+    "contact.form.attachmentsEmpty": "Ningún archivo seleccionado",
+    "contact.form.attachmentsCount": "%d archivo(s) seleccionado(s)",
     "contact.error.attachments":
       "Demasiados archivos, o el tamaño total supera el límite.",
     "contact.form.agree.pre": "Acepto la",

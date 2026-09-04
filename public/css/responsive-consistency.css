@@ -73,8 +73,13 @@ main {
   box-shadow: none;
 }
 
+/* ヘッダーは不透明にする。
+   backdrop-filter（すりガラス）は負荷が高いため polish.css で無効にしてある。
+   ぼかしが無いまま半透明にすると、背後の本文やボタンがそのまま薄く透けて
+   帯が汚れて見えるだけで、意匠上の利点が無い（スクロール時に
+   ヒーローのボタンや画面図がヘッダーへ滲んで見えていた）。 */
 .site-header::before {
-  background: rgba(255, 250, 248, 0.965);
+  background: #fffaf8;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -234,9 +239,29 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   gap: clamp(3rem, 7vw, 7rem);
 }
 .hero-title {
-  max-width: 8ch;
+  /* 8ch は「0」の幅が基準なので、全角の中国語・日本語では8文字ぶんの
+     幅にまるで足りず、見出しが枠外へはみ出していた（簡体字の
+     「让画面动起来。」がスマホで画面右端で切れていた）。
+     行の収まりは ch で決めつつ、実際の桁は親の幅を超えないようにする。 */
+  max-width: min(8ch, 100%);
   font-size: clamp(3.5rem, 6.3vw, 6.7rem);
   line-height: 0.99;
+}
+
+/* フランス語は1語が長い（"Découvrez." で10文字）ため、英語と同じ級数だと
+   単語1つが桁幅に収まらず溢れる。見出しは単語の途中で折り返さない方針
+   （overflow-wrap: normal）なので、級数側を一段落として収める。 */
+:root:lang(fr) .hero-title {
+  font-size: clamp(3rem, 5.5vw, 5.8rem);
+}
+
+/* 全角の言語は1文字あたりの幅がラテン文字の約2倍あるため、同じ級数だと
+   1行が入りきらない。CJKのときだけ見出しを一段小さくする。 */
+:root:lang(ja) .hero-title,
+:root:lang(zh-Hans) .hero-title,
+:root:lang(zh-Hant) .hero-title {
+  max-width: min(14ch, 100%);
+  font-size: clamp(2.6rem, 4.6vw, 5rem);
 }
 .hero-title .accent::after {
   height: 0.1em;
@@ -539,7 +564,7 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   padding: 0.55rem;
   border: 1px solid var(--niarim-line);
   border-radius: 12px;
-  background: rgba(255, 250, 248, 0.97);
+  background: #fffaf8;
   box-shadow: 0 10px 28px rgba(59, 36, 41, 0.045);
 }
 .feature-nav a {

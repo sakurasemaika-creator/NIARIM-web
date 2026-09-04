@@ -148,6 +148,9 @@
       "contact.form.attachments": "画像・動画を添付する（任意）",
       "contact.form.attachmentsHint":
         "画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。",
+      "contact.form.attachmentsButton": "ファイルを選ぶ",
+      "contact.form.attachmentsEmpty": "ファイルは選択されていません",
+      "contact.form.attachmentsCount": "%d件のファイルを選択中",
       "contact.error.attachments":
         "添付ファイルの件数またはサイズが上限を超えています。",
       "contact.form.agree.pre": "",
@@ -478,6 +481,9 @@
       "contact.form.attachments": "Attach images or videos (optional)",
       "contact.form.attachmentsHint":
         "Up to 5MB per image, up to 15MB per video, 20MB total, and up to 3 files (PNG, JPEG, WebP, GIF, MP4, MOV, or WebM).",
+      "contact.form.attachmentsButton": "Choose files",
+      "contact.form.attachmentsEmpty": "No file selected",
+      "contact.form.attachmentsCount": "%d file(s) selected",
       "contact.error.attachments":
         "Too many files, or the total size exceeds the limit.",
       "contact.form.agree.pre": "I agree to the",

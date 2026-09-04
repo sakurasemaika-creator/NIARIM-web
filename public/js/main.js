@@ -117,7 +117,7 @@
       '<span class="fd-frame-add">' +
       icon("ic-add") +
       "</span></div>" +
-      '<span class="fd-frame-mode"><span class="is-selected">フレーム一覧</span><span>タイムライン</span></span>' +
+      '<span class="fd-frame-mode"><span class="is-selected" data-i18n="fd.frameListMode">フレーム一覧</span><span data-i18n="fd.timelineMode">タイムライン</span></span>' +
       "</div>"
     );
   }
@@ -142,7 +142,7 @@
       '<div class="fd-app-overlay-panel fd-app-layer-panel">' +
       '<div class="fd-layers">' +
       panelCloseBar() +
-      '<div class="fd-layer-header"><strong>レイヤー</strong><span class="fd-spacer"></span>' +
+      '<div class="fd-layer-header"><strong data-i18n="fd.layerPanelTitle">レイヤー</strong><span class="fd-spacer"></span>' +
       iconButton("ic-merge_type") +
       iconButton("ic-help_outline") +
       iconButton("ic-search") +
@@ -150,21 +150,21 @@
       '<div class="fd-layer-shortcuts">' +
       '<span class="fd-shortcut-btn">' +
       icon("ic-add") +
-      "<span>新規レイヤー</span></span>" +
+      '<span data-i18n="fd.newLayer">新規レイヤー</span></span>' +
       '<span class="fd-shortcut-btn">' +
       icon("ic-folder") +
-      "<span>新規フォルダ</span></span>" +
+      '<span data-i18n="fd.newFolder">新規フォルダ</span></span>' +
       '<span class="fd-shortcut-btn">' +
       icon("ic-library_add") +
-      "<span>追加</span></span>" +
+      '<span data-i18n="fd.addLayer">追加</span></span>' +
       '<span class="fd-shortcut-btn">' +
       icon("ic-image") +
-      "<span>画像読み込み</span></span>" +
+      '<span data-i18n="fd.importImage">画像読み込み</span></span>' +
       "</div>" +
       '<div class="fd-layer-row is-active">' +
       icon("ic-visibility", "ic-eye") +
       '<span class="fd-layer-pencil">⌁</span><span class="fd-layer-thumb"></span>' +
-      '<strong class="fd-layer-name">レイヤー1</strong><span class="fd-layer-menu">⋮</span>' +
+      '<strong class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</strong><span class="fd-layer-menu">⋮</span>' +
       icon("ic-drag_handle", "ic-drag") +
       "</div>" +
       "</div>" +
@@ -172,21 +172,22 @@
     );
   }
 
-  function onionSide(label, color, opacity) {
+  function onionSide(label, color, opacity, key) {
     return (
       '<div class="fd-onion-side">' +
-      '<div class="fd-onion-side-head"><strong>' +
+      '<div class="fd-onion-side-head">' +
+      (key ? '<strong data-i18n="' + key + '">' : "<strong>") +
       label +
       '</strong><span class="fd-mini-switch is-on"></span></div>' +
       '<div class="fd-onion-control"><span class="fd-onion-color" style="--onion-color:' +
       color +
-      '"></span><span>色</span></div>' +
-      '<div class="fd-onion-control"><span>不透明度</span><span class="fd-mini-slider"><i style="width:' +
+      '"></span><span data-i18n="fd.onionColor">色</span></div>' +
+      '<div class="fd-onion-control"><span data-i18n="fd.onionOpacity">不透明度</span><span class="fd-mini-slider"><i style="width:' +
       opacity +
       '%"></i></span><b>' +
       opacity +
       "%</b></div>" +
-      '<div class="fd-onion-control"><span>枚数</span><span class="fd-mini-slider"><i style="width:28%"></i></span><b>1</b></div>' +
+      '<div class="fd-onion-control"><span data-i18n="fd.onionCount">枚数</span><span class="fd-mini-slider"><i style="width:28%"></i></span><b>1</b></div>' +
       "</div>"
     );
   }
@@ -195,14 +196,14 @@
     return (
       '<div class="fd-app-overlay-panel fd-app-onion-panel">' +
       panelCloseBar() +
-      '<div class="fd-onion-title"><strong>オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div>' +
+      '<div class="fd-onion-title"><strong data-i18n="fd.onionSkin">オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div>' +
       '<div class="fd-panel-divider"></div>' +
-      onionSide("前フレーム", "#ff5c7a", 35) +
+      onionSide("前フレーム", "#ff5c7a", 35, "fd.prevFrame") +
       '<div class="fd-panel-divider"></div>' +
-      onionSide("後フレーム", "#5374ff", 35) +
+      onionSide("後フレーム", "#5374ff", 35, "fd.onionNext") +
       '<div class="fd-panel-divider"></div>' +
-      '<div class="fd-onion-common"><span>フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div>' +
-      '<div class="fd-onion-fade"><span>距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div>' +
+      '<div class="fd-onion-common"><span data-i18n="fd.onionInterval">フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div>' +
+      '<div class="fd-onion-fade"><span data-i18n="fd.onionFade">距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div>' +
       "</div>"
     );
   }
@@ -235,7 +236,7 @@
       icon("ic-arrow_back") +
       icon("ic-palette") +
       "</span>" +
-      '<span class="fd-timeline-title">プロジェクト名</span><span class="fd-spacer"></span>' +
+      '<span class="fd-timeline-title" data-i18n="fd.projectName">プロジェクト名</span><span class="fd-spacer"></span>' +
       iconButton("ic-home_outlined") +
       iconButton("ic-undo") +
       iconButton("ic-redo") +
@@ -283,11 +284,11 @@
       iconButton("ic-skip_next") +
       '<span class="fd-spacer"></span><span class="fd-loop-mark">↔</span></div>' +
       timelineToolbar() +
-      '<div class="fd-scene-line"><small>選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
-      '<div class="fd-timeline-row"><small>絵</small><div class="fd-timeline-frames">' +
+      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>＋</span></div>' +
+      '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
       frames +
       "</div></div>" +
-      '<div class="fd-timeline-row fd-end-card-row"><small>終</small><span>エンドカードトラック</span><span>🔒</span></div>' +
+      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span><span>🔒</span></div>' +
       '<span class="fd-playhead"></span>' +
       "</div>"
     );
@@ -300,28 +301,28 @@
     );
     var sheet =
       '<div class="fd-audio-dim"></div><div class="fd-clip-detail-sheet">' +
-      '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong>音声クリップ</strong><span>' +
+      '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong data-i18n="fd.audioClip">音声クリップ</strong><span>' +
       icon("ic-content_copy") +
       '</span><span class="fd-delete-mark">▮</span></div>' +
-      '<div class="fd-sheet-row"><span>音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>＋</button><b>72%</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span>フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span>フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>＋</button><b>72%</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>＋</button><b>0.0s</b><span>⌄</span></div>' +
       "</div>";
     return html.replace(/<\/div>$/, sheet + "</div>");
   }
 
-  function appBar(title, treeMode) {
+  function appBar(title, treeMode, key) {
     return (
       '<div class="fd-appbar">' +
       iconButton("ic-arrow_back") +
-      "<strong>" +
+      (key ? '<strong data-i18n="' + key + '">' : "<strong>") +
       title +
       '</strong><span class="fd-spacer"></span>' +
       iconButton("ic-help_outline") +
       (treeMode
         ? '<span class="fd-tree-save-btn">' +
           icon("ic-save_outlined") +
-          "<b>保存</b></span>"
+          '<b data-i18n="fd.saveButton">保存</b></span>'
         : "") +
       "</div>"
     );
@@ -331,13 +332,13 @@
     var slots = "";
     for (var i = 1; i <= 5; i++) {
       slots +=
-        '<div class="fd-save-slot"><span class="fd-save-thumb">＋</span><span class="fd-save-copy"><strong>スロット' +
+        '<div class="fd-save-slot"><span class="fd-save-thumb">＋</span><span class="fd-save-copy"><strong><span data-i18n="fd.slotPrefix">スロット</span>' +
         i +
-        '</strong><small>保存データなし</small></span><span class="fd-save-plus">＋</span></div>';
+        '</strong><small data-i18n="fd.slotEmpty">保存データなし</small></span><span class="fd-save-plus">＋</span></div>';
     }
     return (
       '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' +
-      appBar("セーブスロット", false) +
+      appBar("セーブスロット", false, "fd.saveSlotsTitle") +
       '<div class="fd-route-body fd-save-slots-body">' +
       slots +
       "</div></div>"
@@ -347,29 +348,32 @@
   function saveTreeScreen() {
     return (
       '<div class="feature-diagram fd-route-screen fd-save-tree-screen" aria-hidden="true">' +
-      appBar("セーブツリー", true) +
+      appBar("セーブツリー", true, "fd.saveTreeTitle") +
       '<div class="fd-route-body fd-save-tree-body"><div class="fd-real-tree">' +
-      '<div class="fd-real-tree-row depth-2"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 03</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
-      '<div class="fd-real-tree-row depth-1"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 02</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
-      '<div class="fd-real-tree-row depth-0"><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong>保存 01</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+      '<div class="fd-real-tree-row depth-2"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 03</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+      '<div class="fd-real-tree-row depth-1"><span class="fd-tree-connect"></span><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 02</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
+      '<div class="fd-real-tree-row depth-0"><span class="fd-tree-commit"></span><span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> 01</strong><small>2026/09/01 23:34</small></span><span class="fd-tree-more">⋮</span></div>' +
       "</div></div></div>"
     );
   }
 
   function workspaceScreen() {
     var items = [
-      "Gペン",
-      "消しゴム",
-      "バケツ",
-      "スポイト",
-      "指",
-      "手のひら",
-      "選択",
+      ["Gペン", "fd.toolPen"],
+      ["消しゴム", "fd.toolEraser"],
+      ["バケツ", "fd.toolBucket"],
+      ["スポイト", "fd.toolEyedropper"],
+      ["指", "fd.toolFinger"],
+      ["手のひら", "fd.toolHand"],
+      ["選択", "fd.toolSelect"],
     ];
     var rows = items
-      .map(function (name) {
+      .map(function (item) {
+        var name = item[0];
         return (
-          '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><strong>' +
+          '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><strong data-i18n="' +
+          item[1] +
+          '">' +
           name +
           '</strong><span class="fd-spacer"></span><span class="fd-drag-mark">＝</span></div>'
         );
@@ -377,9 +381,9 @@
       .join("");
     return (
       '<div class="feature-diagram fd-route-screen fd-workspace-screen" aria-hidden="true">' +
-      appBar("ワークスペース設定", false) +
-      '<div class="fd-route-body fd-workspace-body"><strong class="fd-route-section">ツールバー編集</strong>' +
-      '<p class="fd-route-hint">表示するツールをチェックで選択し、ドラッグで並べ替えます。</p>' +
+      appBar("ワークスペース設定", false, "fd.workspaceSettingsTitle") +
+      '<div class="fd-route-body fd-workspace-body"><strong class="fd-route-section" data-i18n="fd.toolbarEdit">ツールバー編集</strong>' +
+      '<p class="fd-route-hint" data-i18n="fd.toolbarEditHint">表示するツールをチェックで選択し、ドラッグで並べ替えます。</p>' +
       '<div class="fd-toolbar-preview">' +
       iconButton("ic-brush", "is-active") +
       iconButton("ic-eraser_fa") +
@@ -399,18 +403,18 @@
   function exportScreen() {
     return (
       '<div class="feature-diagram fd-route-screen fd-export-screen" aria-hidden="true">' +
-      appBar("書き出し", false) +
-      '<div class="fd-route-body fd-export-body"><strong class="fd-route-section">プリセット</strong>' +
-      '<div class="fd-segmented fd-export-segments"><span class="fd-segment is-active">標準</span><span class="fd-segment">高画質</span><span class="fd-segment">カスタム</span></div>' +
-      '<strong class="fd-route-section fd-export-format-title">形式</strong>' +
+      appBar("書き出し", false, "fd.exportTitle") +
+      '<div class="fd-route-body fd-export-body"><strong class="fd-route-section" data-i18n="fd.sectionPreset">プリセット</strong>' +
+      '<div class="fd-segmented fd-export-segments"><span class="fd-segment is-active" data-i18n="fd.presetStandard">標準</span><span class="fd-segment" data-i18n="fd.presetHighQuality">高画質</span><span class="fd-segment" data-i18n="fd.presetCustom">カスタム</span></div>' +
+      '<strong class="fd-route-section fd-export-format-title" data-i18n="fd.sectionFormat">形式</strong>' +
       '<div class="fd-format-list">' +
-      '<div class="fd-format-row"><span class="fd-radio is-active"></span><span><strong>MP4</strong><small>汎用動画形式</small></span></div>' +
-      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>GIF</strong><small>アニメーションGIF</small></span></div>' +
-      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>透過WebM</strong><small>透明背景動画</small></span></div>' +
-      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>AVI</strong><small>互換性重視の動画形式</small></span></div>' +
+      '<div class="fd-format-row"><span class="fd-radio is-active"></span><span><strong>MP4</strong><small data-i18n="fd.formatMp4Subtitle">汎用動画形式</small></span></div>' +
+      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>GIF</strong><small data-i18n="fd.formatGifSubtitle">アニメーションGIF</small></span></div>' +
+      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong data-i18n="fd.formatWebm">透過WebM</strong><small data-i18n="fd.formatWebmSubtitle">透明背景動画</small></span></div>' +
+      '<div class="fd-format-row"><span class="fd-radio"></span><span><strong>AVI</strong><small data-i18n="fd.formatAviShort">互換性重視の動画形式</small></span></div>' +
       '</div><div class="fd-export-start">' +
       icon("ic-file_download") +
-      "<span>書き出し開始</span></div></div></div>"
+      '<span data-i18n="fd.exportStart">書き出し開始</span></div></div></div>'
     );
   }
 
@@ -653,5 +657,17 @@
     initNavToggle();
     initFaqAccordion();
     ensureNineCommunityTiles();
+    // 画面図はこのファイルがJavaScriptで組み立てているため、i18n.jsが
+    // 最初に翻訳を当てた時点ではまだDOMに存在しない。そのままだと図の中の
+    // ラベルだけ日本語のまま残る（実際に英語表示でも「フレーム一覧」等が
+    // 出ていた）。組み立て後に現在の言語で翻訳し直す。
+    // 以後の言語切り替えは i18n.js が [data-i18n] を都度走査するため、
+    // この一度の再適用だけで足りる。
+    if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
+      window.NIARIM_I18N.applyLang(
+        document.documentElement.getAttribute("lang") || "ja",
+        { persist: false },
+      );
+    }
   });
 })();

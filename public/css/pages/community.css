@@ -123,6 +123,31 @@
   padding: var(--space-sm) var(--space-md);
 }
 
+/* スマホ幅では1列になり、カードが縦に長く連なって中身の薄い画面に
+   なってしまうため、ランキングらしく2列で並べる。 */
+@media (max-width: 600px) {
+  .community-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .community-card .thumb {
+    font-size: 0.75rem;
+  }
+
+  .community-card .rank-badge {
+    top: 0.35rem;
+    left: 0.35rem;
+    font-size: 0.95rem;
+    min-width: 1.5rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .community-card .meta {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
 .community-card .meta h3 {
   font-family: var(--font-serif);
   font-size: 0.95rem;
@@ -164,4 +189,13 @@
 .community-card.is-more-cta .thumb p {
   font-size: var(--fs-small);
   font-weight: 600;
+}
+
+/* 文言が長い言語やスマホの2列表示でも、ボタンがカードの内側に収まるようにする。 */
+.community-card.is-more-cta .btn {
+  max-width: 100%;
+  padding-inline: var(--space-sm);
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.35;
 }

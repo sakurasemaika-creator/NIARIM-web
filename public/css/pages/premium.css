@@ -40,13 +40,19 @@
   font-size: var(--fs-h3);
 }
 
+/* 金額そのもの（¥5,500）は途中で折り返させたくないが、単位の
+   「／年（税込）」は言語によってかなり長くなる（例: スペイン語の
+   "/año (impuestos incluidos)"、英語の "/month (tax included)"）。
+   以前は行全体を nowrap + flex-shrink:0 にしていたため、単位が縮みも
+   折り返しもできずカードの外へはみ出していた。金額は固定、単位だけ
+   折り返せるようにする。 */
 .pricing-price {
   margin-top: var(--space-sm);
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 0.4rem;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .pricing-price .amount {
@@ -59,10 +65,11 @@
 
 .pricing-price .unit {
   font-size: var(--fs-small);
+  min-width: 0;
   color: var(--color-text-muted);
   font-family: var(--font-serif);
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: normal;
+  flex-shrink: 1;
   margin-left: 0.12rem;
 }
 

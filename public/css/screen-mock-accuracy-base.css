@@ -1082,10 +1082,19 @@
   border: 0 !important;
   border-radius: 8px !important;
   background: #f3e1e4 !important;
+  /* 実機同様、ツールバーは横スクロールする。狭い画面でアイコンが枠から
+     はみ出さないよう、スクロールバーは隠したまま横方向のみ送れるようにする。 */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+}
+.fd-toolbar-preview::-webkit-scrollbar {
+  display: none !important;
 }
 .fd-toolbar-preview .fd-icon-btn {
   width: 29px !important;
   height: 29px !important;
+  flex-shrink: 0 !important;
   color: #6c6365 !important;
 }
 .fd-toolbar-preview .is-active {
