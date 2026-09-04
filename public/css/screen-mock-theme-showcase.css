@@ -1,117 +1,118 @@
 /*
  * Screen-mock theme showcase
- * Each reconstructed app screen intentionally uses a different preset palette
- * so the website communicates NIARIM's appearance customisation at a glance.
- * Structural/layout fidelity stays unchanged; only preset color tokens vary.
+ * 20 reconstructed screens use deliberately different preset palettes so
+ * NIARIM's appearance customisation reads immediately in the website itself.
+ * Every mock also receives a visible device bezel whose colour belongs to the
+ * same preset family. Structural UI fidelity remains untouched.
  */
 
-/* Hero: warm rose */
-.hero-visual.fd-app-screen,
-.hero-visual .fd-app-screen {
+/* Shared bezel: every reconstructed screen must visibly read as a device. */
+.fd-app-screen,
+.fd-route-screen {
+  --fd-bezel: var(--fd-outside);
+  border: 6px solid var(--fd-bezel) !important;
+  border-radius: 22px !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fd-bezel) 72%, #000 28%),
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
+}
+
+/* Frame strip: product and web mock target is 50 x 50. */
+.fd-canvas-screen > .fd-frame-strip {
+  height: 60px !important;
+  flex: 0 0 60px !important;
+  padding-block: 5px !important;
+}
+.fd-frame-thumb,
+.fd-frame-add {
+  width: 50px !important;
+  height: 50px !important;
+  flex: 0 0 50px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+.fd-frame-thumb.is-current {
+  border-width: 3px !important;
+}
+.fd-frame-paper {
+  inset: 3px !important;
+}
+
+/* 01 — Home hero: rose */
+body:has(.hero) .hero-visual .fd-app-screen {
   --fd-accent: #ff5c7a;
-  --fd-ink: #30262d;
-  --fd-outside: #493d43;
-  --fd-surface: #fff8fa;
-  --fd-panel: #f8dfe5;
-  --fd-panel-2: #f1cfd8;
+  --fd-ink: #33242c;
+  --fd-outside: #513841;
+  --fd-bezel: #6d4452;
+  --fd-surface: #fff7fa;
+  --fd-panel: #f8dce5;
+  --fd-panel-2: #efc9d5;
 }
 
-/* Plain canvas: cool mint */
-.feature-row:nth-of-type(6n + 1) .fd-app-screen,
-.feature-row:nth-of-type(6n + 1) .fd-route-screen {
-  --fd-accent: #1aa981;
-  --fd-ink: #20332e;
-  --fd-outside: #354844;
-  --fd-surface: #f4fffb;
-  --fd-panel: #dcefe8;
-  --fd-panel-2: #cde6dd;
+/* Home feature rows — five intentionally separated presets. */
+body:has(.hero) #features .feature-row:nth-of-type(1) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #16a37c; --fd-ink: #20342e; --fd-outside: #284b42; --fd-bezel: #2e6e5d; --fd-surface: #f3fff9; --fd-panel: #d9f1e8; --fd-panel-2: #c4e5d9;
+}
+body:has(.hero) #features .feature-row:nth-of-type(2) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #7457d5; --fd-ink: #302742; --fd-outside: #403453; --fd-bezel: #5b4780; --fd-surface: #faf7ff; --fd-panel: #e7def8; --fd-panel-2: #d8caf1;
+}
+body:has(.hero) #features .feature-row:nth-of-type(3) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #e09218; --fd-ink: #3d301c; --fd-outside: #56462c; --fd-bezel: #806531; --fd-surface: #fffaf0; --fd-panel: #f5e6c5; --fd-panel-2: #ead5a8;
+}
+body:has(.hero) #features .feature-row:nth-of-type(4) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #2478dc; --fd-ink: #203249; --fd-outside: #2e4965; --fd-bezel: #376b9b; --fd-surface: #f4f9ff; --fd-panel: #dbe9f9; --fd-panel-2: #c5dcf3;
+}
+body:has(.hero) #features .feature-row:nth-of-type(5) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #db6247; --fd-ink: #3f2923; --fd-outside: #5b3c34; --fd-bezel: #8a5141; --fd-surface: #fff7f3; --fd-panel: #f6ded5; --fd-panel-2: #edc9bc;
 }
 
-/* Second preset: lavender */
-.feature-row:nth-of-type(6n + 2) .fd-app-screen,
-.feature-row:nth-of-type(6n + 2) .fd-route-screen {
-  --fd-accent: #8067d8;
-  --fd-ink: #302b3e;
-  --fd-outside: #423d50;
-  --fd-surface: #faf8ff;
-  --fd-panel: #e8e1f7;
-  --fd-panel-2: #dcd2f0;
+/* Home screenshot gallery — six more unique presets. */
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(1) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #00a0b5; --fd-ink: #17343a; --fd-outside: #24474e; --fd-bezel: #287184; --fd-surface: #f1fcfe; --fd-panel: #d3eef2; --fd-panel-2: #bee4e9;
+}
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(2) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #c13aa7; --fd-ink: #42233c; --fd-outside: #59334f; --fd-bezel: #823a72; --fd-surface: #fff5fc; --fd-panel: #f1d8eb; --fd-panel-2: #e7c2de;
+}
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(3) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #6f8d19; --fd-ink: #30381f; --fd-outside: #46512e; --fd-bezel: #61753a; --fd-surface: #fbfff2; --fd-panel: #e6efd0; --fd-panel-2: #d6e4b5;
+}
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(4) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #e34b36; --fd-ink: #452720; --fd-outside: #60382f; --fd-bezel: #934638; --fd-surface: #fff6f3; --fd-panel: #f7d8d1; --fd-panel-2: #edc0b6;
+}
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(5) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #2b54c7; --fd-ink: #202b49; --fd-outside: #2f3a61; --fd-bezel: #4058a0; --fd-surface: #f5f7ff; --fd-panel: #dce2f8; --fd-panel-2: #c9d3f1;
+}
+body:has(.hero) .screenshot-scroller .screenshot-card:nth-child(6) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #b76a10; --fd-ink: #3c2d1b; --fd-outside: #55412c; --fd-bezel: #7e5a29; --fd-surface: #fff9ef; --fd-panel: #f2e1c4; --fd-panel-2: #e7ceb0;
 }
 
-/* Third preset: amber */
-.feature-row:nth-of-type(6n + 3) .fd-app-screen,
-.feature-row:nth-of-type(6n + 3) .fd-route-screen {
-  --fd-accent: #dc8a17;
-  --fd-ink: #3a3023;
-  --fd-outside: #4b4438;
-  --fd-surface: #fffaf1;
-  --fd-panel: #f4e5c9;
-  --fd-panel-2: #ead7b4;
+/* Features page — eight different presets, no six-colour repetition. */
+body:has(.features-header) .feature-row:nth-of-type(1) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #00a86b; --fd-ink: #17372b; --fd-outside: #214c3b; --fd-bezel: #287055; --fd-surface: #f3fff9; --fd-panel: #d8f1e5; --fd-panel-2: #c1e4d4;
+}
+body:has(.features-header) .feature-row:nth-of-type(2) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #7b4dd1; --fd-ink: #30243f; --fd-outside: #443457; --fd-bezel: #63478c; --fd-surface: #faf6ff; --fd-panel: #eadcf7; --fd-panel-2: #d9c4ef;
+}
+body:has(.features-header) .feature-row:nth-of-type(3) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #e0a000; --fd-ink: #3d321b; --fd-outside: #55482b; --fd-bezel: #80682d; --fd-surface: #fffaed; --fd-panel: #f3e6bf; --fd-panel-2: #e7d49d;
+}
+body:has(.features-header) .feature-row:nth-of-type(4) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #1686d9; --fd-ink: #1c3144; --fd-outside: #284a63; --fd-bezel: #326f9d; --fd-surface: #f3faff; --fd-panel: #d7eaf8; --fd-panel-2: #beddf2;
+}
+body:has(.features-header) .feature-row:nth-of-type(5) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #00a58f; --fd-ink: #173832; --fd-outside: #214d45; --fd-bezel: #267465; --fd-surface: #f1fffb; --fd-panel: #d4f0e9; --fd-panel-2: #bde3da;
+}
+body:has(.features-header) .feature-row:nth-of-type(6) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #d64c83; --fd-ink: #402431; --fd-outside: #573342; --fd-bezel: #803f5b; --fd-surface: #fff5f9; --fd-panel: #f3d8e3; --fd-panel-2: #e7bfd0;
+}
+body:has(.features-header) .feature-row:nth-of-type(7) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #6158d8; --fd-ink: #272647; --fd-outside: #37375e; --fd-bezel: #4f4f93; --fd-surface: #f7f7ff; --fd-panel: #dedff7; --fd-panel-2: #cacbf0;
+}
+body:has(.features-header) .feature-row:nth-of-type(8) :is(.fd-app-screen,.fd-route-screen) {
+  --fd-accent: #ef6a23; --fd-ink: #452b1e; --fd-outside: #603d2b; --fd-bezel: #914f2e; --fd-surface: #fff7f1; --fd-panel: #f7dfcf; --fd-panel-2: #edc7ae;
 }
 
-/* Fourth preset: blue */
-.feature-row:nth-of-type(6n + 4) .fd-app-screen,
-.feature-row:nth-of-type(6n + 4) .fd-route-screen {
-  --fd-accent: #3d79d8;
-  --fd-ink: #243143;
-  --fd-outside: #364452;
-  --fd-surface: #f6faff;
-  --fd-panel: #dde9f7;
-  --fd-panel-2: #cfdef0;
-}
-
-/* Fifth preset: coral */
-.feature-row:nth-of-type(6n + 5) .fd-app-screen,
-.feature-row:nth-of-type(6n + 5) .fd-route-screen {
-  --fd-accent: #e66f50;
-  --fd-ink: #3c2c28;
-  --fd-outside: #4e403c;
-  --fd-surface: #fff8f5;
-  --fd-panel: #f6dfd7;
-  --fd-panel-2: #edcfc5;
-}
-
-/* Sixth preset: graphite / cyan, useful for timeline-heavy screens. */
-.feature-row:nth-of-type(6n) .fd-app-screen,
-.feature-row:nth-of-type(6n) .fd-route-screen {
-  --fd-accent: #39a9c8;
-  --fd-ink: #e9f1f3;
-  --fd-outside: #202a2f;
-  --fd-surface: #2a353a;
-  --fd-panel: #344248;
-  --fd-panel-2: #3d4d54;
-}
-
-/* Distinguish canvas variants even when several appear in the same section. */
-.fd-canvas-screen:has(.fd-app-layer-panel) {
-  --fd-accent: #9b65c7;
-  --fd-ink: #30283a;
-  --fd-outside: #443b4b;
-  --fd-surface: #fcf8ff;
-  --fd-panel: #ecdef4;
-  --fd-panel-2: #dfcee9;
-}
-
-.fd-canvas-screen:has(.fd-app-onion-panel) {
-  --fd-accent: #d28618;
-  --fd-ink: #382f21;
-  --fd-outside: #4c4437;
-  --fd-surface: #fffbf2;
-  --fd-panel: #f2e5ca;
-  --fd-panel-2: #e9d8b7;
-}
-
-.fd-audio-context-screen {
-  --fd-accent: #38a98e;
-  --fd-ink: #e8f4f1;
-  --fd-outside: #1f2d2a;
-  --fd-surface: #293936;
-  --fd-panel: #334943;
-  --fd-panel-2: #3c574f;
-}
-
-/* Keep artwork/canvas paper neutral across every preset. */
+/* Keep the actual artwork/canvas paper neutral regardless of appearance preset. */
 .fd-app-canvas-stage,
 .fd-timeline-preview {
-  --fd-paper: #ffffff;
+  --fd-paper: #fff;
 }
