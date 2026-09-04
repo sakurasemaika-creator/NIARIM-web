@@ -1,0 +1,86 @@
+/* Canvas-screen fidelity corrections against NIARIM app dev_branch.
+   The Flutter implementation is the source of truth. */
+
+/* CanvasScreen _buildTopBar(): Padding + Row only; no opaque bar surface. */
+.fd-canvas-screen > .fd-topbar {
+  background: transparent !important;
+}
+
+/* BrushSizeSlider and ToolbarWidget are explicitly transparent in Flutter. */
+.fd-canvas-screen > .fd-brush-slider,
+.fd-canvas-screen > .fd-toolbar {
+  background: transparent !important;
+  color: var(--fd-ink) !important;
+}
+
+.fd-canvas-screen > .fd-brush-slider {
+  padding-inline: 12px !important;
+}
+
+.fd-canvas-screen > .fd-brush-slider .fd-brush-dot,
+.fd-canvas-screen > .fd-brush-slider .fd-brush-opacity-ic {
+  color: var(--fd-ink) !important;
+}
+
+.fd-canvas-screen > .fd-brush-slider .fd-brush-dot {
+  background: var(--fd-ink) !important;
+}
+
+.fd-canvas-screen > .fd-brush-slider .fd-brush-opacity-ic,
+.fd-canvas-screen > .fd-brush-slider .fd-brush-toggle {
+  opacity: 0.72;
+}
+
+/* ToolbarWidget has no band background. Keep only the individual controls. */
+.fd-canvas-screen > .fd-toolbar .fd-icon-btn {
+  color: var(--fd-ink) !important;
+  background: transparent !important;
+}
+.fd-canvas-screen > .fd-toolbar .fd-icon-btn.is-active {
+  color: var(--fd-accent) !important;
+}
+
+/* Frame-strip collapse handle and FrameStripWidget are transparent in app. */
+.fd-canvas-screen > .fd-frame-collapse,
+.fd-canvas-screen > .fd-frame-strip {
+  background: transparent !important;
+}
+
+/* Flutter FrameStripWidget uses 48px cells in a 64px strip. The selected
+   outline is a centered 48x56 overlay; match that geometry rather than the
+   older 43x56 web approximation. */
+.fd-frame-thumb,
+.fd-frame-add {
+  width: 48px !important;
+  height: 56px !important;
+  flex: 0 0 48px !important;
+  margin-block: 4px !important;
+}
+.fd-frame-strip-scroll {
+  gap: 0 !important;
+}
+
+/* The drawing canvas must always remain visibly present. CanvasArea sits on
+   the fixed dark outside area, while the 16:9 drawing rect itself is white. */
+.fd-canvas-zone {
+  position: relative !important;
+  min-height: 180px !important;
+  background: var(--fd-outside) !important;
+}
+.fd-app-canvas-stage {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* App's frame-mode SegmentedButton is transparent too. */
+.fd-frame-mode {
+  background: transparent !important;
+}
+.fd-frame-mode .is-selected {
+  background: transparent !important;
+}
