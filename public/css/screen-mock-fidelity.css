@@ -1,5 +1,6 @@
 @import url("/css/mobile-first-view.css");
 @import url("/css/screen-mock-theme-showcase.css");
+@import url("/css/manual-visual-audit-fixes.css");
 
 /* Canvas-screen fidelity corrections against NIARIM app dev_branch.
    The Flutter implementation is the source of truth. */
