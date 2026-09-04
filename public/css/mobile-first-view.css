@@ -14,9 +14,7 @@
     align-items: start !important;
   }
 
-  .hero-copy {
-    display: contents !important;
-  }
+  .hero-copy { display: contents !important; }
 
   .hero-copy .eyebrow {
     grid-column: 1 / -1;
@@ -29,27 +27,29 @@
     grid-column: 1 / -1;
     grid-row: 2;
     margin: 0;
-    font-size: clamp(2.55rem, 12.1vw, 3.55rem) !important;
-    line-height: 0.98 !important;
-    letter-spacing: -0.025em;
+    font-size: clamp(2.85rem, 13.2vw, 3.9rem) !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.03em;
   }
 
+  /* Use the full SP width. Natural wrapping remains available for longer translations. */
   .hero-subtitle {
     grid-column: 1 / -1;
     grid-row: 3;
-    margin-top: 0.42rem !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 0.46rem !important;
     margin-bottom: 0 !important;
-    font-size: clamp(0.82rem, 3.55vw, 0.94rem) !important;
-    line-height: 1.35;
-    white-space: nowrap !important;
+    font-size: clamp(1.02rem, 4.35vw, 1.22rem) !important;
+    line-height: 1.3;
+    white-space: normal !important;
     overflow: visible !important;
   }
 
   .hero-subtitle-text {
-    white-space: nowrap !important;
+    white-space: normal !important;
   }
 
-  /* Do not clamp the product description on SP. The full copy must remain readable. */
   .hero-lead {
     grid-column: 1;
     grid-row: 4;
@@ -63,11 +63,8 @@
   }
 
   .hero-bridge,
-  .hero-note {
-    display: none !important;
-  }
+  .hero-note { display: none !important; }
 
-  /* Sit the mock between subtitle and body-copy start, a little higher than before. */
   .hero-visual {
     grid-column: 2;
     grid-row: 4;
@@ -101,14 +98,8 @@
     font-size: 0.86rem;
   }
 
-  .marquee-section {
-    padding-block: 0.62rem !important;
-  }
-
-  .marquee-track span {
-    padding-inline: 1.25rem !important;
-    font-size: 0.92rem !important;
-  }
+  .marquee-section { padding-block: 0.62rem !important; }
+  .marquee-track span { padding-inline: 1.25rem !important; font-size: 0.92rem !important; }
 }
 
 @media (max-width: 360px) {
@@ -118,13 +109,14 @@
   }
 
   .hero-title {
-    font-size: 2.35rem !important;
-    line-height: 0.99 !important;
+    font-size: 2.62rem !important;
+    line-height: 0.97 !important;
   }
 
   .hero-subtitle {
-    font-size: 0.76rem !important;
-    letter-spacing: -0.02em;
+    font-size: 0.98rem !important;
+    line-height: 1.28 !important;
+    letter-spacing: -0.015em;
   }
 
   .hero-lead {
