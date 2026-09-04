@@ -44,7 +44,7 @@
     grid-column: 1 / -1;
     grid-row: 3;
     justify-self: start;
-    margin: 0.16rem 0 0.02rem !important;
+    margin: 0.48rem 0 0.02rem !important;
     font-size: 0.68rem !important;
     line-height: 1.1 !important;
     transform: scaleX(0.52);
@@ -73,7 +73,7 @@
     align-self: start;
     width: 100% !important;
     max-width: 196px !important;
-    margin: 0.16rem 0 0 !important;
+    margin: 0.48rem 0 0 !important;
     border-radius: 20px !important;
     box-shadow:
       0 20px 42px rgba(40, 36, 44, 0.23),
@@ -87,7 +87,6 @@
     opacity: 0.3 !important;
   }
 
-  /* Keep both primary hero CTAs on one row on SP. */
   .hero-actions {
     grid-column: 1 / -1;
     grid-row: 5;
@@ -132,7 +131,7 @@
   }
 
   .hero-copy .eyebrow {
-    margin-top: 0.14rem !important;
+    margin-top: 0.42rem !important;
     font-size: 0.64rem !important;
   }
 
@@ -143,7 +142,7 @@
 
   .hero-visual {
     max-width: 146px !important;
-    margin-top: 0.14rem !important;
+    margin-top: 0.42rem !important;
   }
 
   .hero-actions {
