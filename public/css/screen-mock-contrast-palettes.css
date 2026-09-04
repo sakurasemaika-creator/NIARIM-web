@@ -93,6 +93,33 @@ html body #export :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
   --fd-bezel:#2c6d7d; --fd-outside:#1f4b57;
 }
 
+/* Widget uses its own static settings reconstruction, so push the preset into
+   those tiles explicitly instead of leaving the old fixed navy backgrounds. */
+html body #widget .fd-widget-grid {
+  background:var(--fd-bg)!important;
+  color:var(--fd-text)!important;
+}
+html body #widget .fd-widget-tile {
+  color:var(--fd-text)!important;
+  border-color:color-mix(in srgb,var(--fd-text) 18%,transparent)!important;
+}
+html body #widget .fd-widget-tile--art {
+  background:var(--fd-panel)!important;
+}
+html body #widget .fd-widget-tile--create {
+  background:var(--fd-panel-2)!important;
+}
+html body #widget .fd-widget-tile--plaza {
+  background:color-mix(in srgb,var(--fd-accent) 16%,var(--fd-panel))!important;
+}
+html body #widget .fd-widget-name { color:var(--fd-text)!important; }
+html body #widget .fd-widget-sub { color:var(--fd-muted)!important; }
+html body #widget .fd-radio.is-active {
+  border-color:var(--fd-accent)!important;
+  background:var(--fd-accent)!important;
+  box-shadow:inset 0 0 0 3px var(--fd-bg)!important;
+}
+
 /* Ensure the device border always adopts the preset even when older accuracy rules win. */
 html body :is(#drawing,#animation,#editing,#advanced,#audio,#save,#workspace,#widget,#export) > .feature-diagram {
   border-color:var(--fd-bezel)!important;
