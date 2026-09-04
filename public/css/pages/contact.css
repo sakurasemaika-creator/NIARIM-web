@@ -246,9 +246,10 @@ textarea.form-control {
 }
 
 .form-checkbox input {
-  width: 20px;
-  height: 20px;
-  margin-top: 0.1rem;
+  /* WCAG 2.2 の最小ターゲットサイズ(24x24)に合わせる。 */
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
   accent-color: var(--color-brand);
   flex-shrink: 0;
 }
@@ -256,6 +257,9 @@ textarea.form-control {
 .form-checkbox a {
   color: var(--color-brand);
   text-decoration: underline;
+  /* 行内リンクだが単独の導線でもあるので、指で押せる高さを確保する。 */
+  display: inline-block;
+  padding-block: 0.3rem;
 }
 
 /* honeypot: 通常ユーザーには見えない位置に隠す */

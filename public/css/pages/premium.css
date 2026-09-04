@@ -73,14 +73,23 @@
   margin-left: 0.12rem;
 }
 
-/* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小し
-   金額と単位を一まとまりのまま収める。 */
+/* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小する。 */
 .pricing-plan-option .pricing-price .amount {
   font-size: clamp(1.25rem, 4.6vw, 1.9rem);
 }
 
+/* 単位は必ず金額の下の行に置く。桁数や言語によって、片方だけ横並び・
+   片方だけ折り返しになり2枚のカードで揃わなかったため、どちらも
+   同じ組み方にする。長い訳語（/año (impuestos incluidos) 等）でも崩れない。 */
+.pricing-plan-option .pricing-price {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
 .pricing-plan-option .pricing-price .unit {
   font-size: clamp(0.68rem, 1.8vw, var(--fs-small));
+  margin-left: 0;
 }
 
 /* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、
