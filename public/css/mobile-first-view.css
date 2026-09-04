@@ -1,8 +1,8 @@
 /* Mobile first-view composition: show NIARIM's product UI immediately instead of a text-only opening. */
 @media (max-width: 640px) {
   .hero {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+    padding-top: 1.35rem !important;
+    padding-bottom: 1.15rem !important;
   }
 
   .hero .container {
@@ -10,7 +10,7 @@
     grid-template-columns: minmax(0, 1fr) clamp(164px, 43vw, 196px) !important;
     grid-template-rows: auto auto auto auto auto auto !important;
     column-gap: 0.85rem !important;
-    row-gap: 0.38rem !important;
+    row-gap: 0 !important;
     align-items: start !important;
   }
 
@@ -19,7 +19,7 @@
   .hero-title {
     grid-column: 1 / -1;
     grid-row: 1;
-    margin: 0;
+    margin: 0 0 0.9rem !important;
     font-size: clamp(3.05rem, 14.2vw, 4.2rem) !important;
     line-height: 0.94 !important;
     letter-spacing: -0.035em;
@@ -30,8 +30,8 @@
     grid-row: 2;
     width: 100% !important;
     max-width: none !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 0 !important;
+    margin: 0 0 0.78rem !important;
+    padding-block: 0.12rem !important;
     font-size: clamp(1.12rem, 4.8vw, 1.34rem) !important;
     line-height: 1.28;
     white-space: normal !important;
@@ -44,7 +44,7 @@
     grid-column: 1 / -1;
     grid-row: 3;
     justify-self: start;
-    margin: 0.48rem 0 0.02rem !important;
+    margin: 0.28rem 0 0.02rem !important;
     font-size: 0.68rem !important;
     line-height: 1.1 !important;
     transform: scaleX(0.52);
@@ -73,7 +73,7 @@
     align-self: start;
     width: 100% !important;
     max-width: 196px !important;
-    margin: 0.48rem 0 0 !important;
+    margin: 0.28rem 0 0 !important;
     border-radius: 20px !important;
     box-shadow:
       0 20px 42px rgba(40, 36, 44, 0.23),
@@ -93,7 +93,7 @@
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     align-items: stretch !important;
-    margin-top: 0.62rem !important;
+    margin-top: 0.72rem !important;
     gap: 0.5rem !important;
     width: 100% !important;
   }
@@ -114,24 +114,30 @@
 }
 
 @media (max-width: 360px) {
+  .hero {
+    padding-top: 1.2rem !important;
+  }
+
   .hero .container {
     grid-template-columns: minmax(0, 1fr) 146px !important;
     column-gap: 0.58rem !important;
   }
 
   .hero-title {
+    margin-bottom: 0.78rem !important;
     font-size: 2.8rem !important;
     line-height: 0.95 !important;
   }
 
   .hero-subtitle {
+    margin-bottom: 0.68rem !important;
     font-size: 1.04rem !important;
     line-height: 1.26 !important;
     letter-spacing: -0.015em;
   }
 
   .hero-copy .eyebrow {
-    margin-top: 0.42rem !important;
+    margin-top: 0.24rem !important;
     font-size: 0.64rem !important;
   }
 
@@ -142,7 +148,7 @@
 
   .hero-visual {
     max-width: 146px !important;
-    margin-top: 0.42rem !important;
+    margin-top: 0.24rem !important;
   }
 
   .hero-actions {
