@@ -29,13 +29,18 @@
     });
   }
 
-  /* main.js の fitMockScreens() は全 .fd-app-screen を対象にするため、
-     hero が内容高の都合で fit 対象になると width/height の inline !important が入り、
-     SP用 aspect-ratio を壊す。Hero は端末外枠そのものなので、fit 後に inline 寸法を
-     解除して CSS の 320:569 比率へ戻す。 */
+  /* main.js の fitMockScreens() は .fd-app-screen 全体へ inline !important の
+     width / height / transform を設定する。hero も fd-app-screen なので、
+     リサイズ後の再計測が mobile-first-view.css の端末比率を壊し得る。
+     Hero は「縮小対象の中身」ではなく端末外枠そのものなので、外枠には
+     fit用inline寸法を一切残さず、CSSの320:569を常に唯一の寸法基準にする。 */
+  var restoringHeroAspect = false;
+  var heroAspectObserver = null;
+
   function restoreHeroAspect() {
     var hero = document.querySelector(".hero-visual");
-    if (!hero) return;
+    if (!hero || restoringHeroAspect) return;
+    restoringHeroAspect = true;
     hero.style.removeProperty("--fd-fit");
     hero.style.removeProperty("width");
     hero.style.removeProperty("height");
@@ -44,11 +49,33 @@
     hero.style.removeProperty("transform");
     hero.style.removeProperty("transform-origin");
     hero.classList.remove("is-fit-scaled");
+    restoringHeroAspect = false;
   }
 
   function scheduleHeroAspectRestore() {
     requestAnimationFrame(function () {
       requestAnimationFrame(restoreHeroAspect);
+    });
+    /* main.js の resize debounce(150ms)より後にも必ず復元する。 */
+    setTimeout(restoreHeroAspect, 220);
+  }
+
+  function watchHeroAspect() {
+    var hero = document.querySelector(".hero-visual");
+    if (!hero || typeof MutationObserver === "undefined") return;
+    if (heroAspectObserver) heroAspectObserver.disconnect();
+    heroAspectObserver = new MutationObserver(function (mutations) {
+      if (restoringHeroAspect) return;
+      for (var i = 0; i < mutations.length; i++) {
+        if (mutations[i].attributeName === "style") {
+          scheduleHeroAspectRestore();
+          break;
+        }
+      }
+    });
+    heroAspectObserver.observe(hero, {
+      attributes: true,
+      attributeFilter: ["style"],
     });
   }
 
@@ -64,6 +91,7 @@
 
   function init() {
     apply();
+    watchHeroAspect();
     scheduleHeroAspectRestore();
     window.addEventListener("load", scheduleHeroAspectRestore);
     window.addEventListener("resize", scheduleHeroAspectRestore, { passive: true });
