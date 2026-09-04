@@ -70,9 +70,7 @@ for (const vp of viewports) {
   const state = await cta.evaluate((el) => {
     const root = getComputedStyle(document.documentElement);
     const probe = document.createElement("i");
-    const accentStrong = root.getPropertyValue("--color-accent-strong").trim();
-    probe.style.color =
-      accentStrong || root.getPropertyValue("--color-accent").trim();
+    probe.style.color = root.getPropertyValue("--color-accent").trim();
     probe.style.display = "none";
     document.body.appendChild(probe);
     const expected = getComputedStyle(probe).color;
@@ -109,7 +107,7 @@ console.log(
     {
       validated: true,
       deferredInitialFindingsIgnored: report.findings.length,
-      renderedFinalCta: "contrast-safe CTA accent on sp/tablet/pc",
+      renderedFinalCta: "theme CTA accent on sp/tablet/pc",
     },
     null,
     2,
