@@ -86,6 +86,21 @@ html body [data-mock-theme="shot4"]{--fd-bezel:#a64d83}
 html body [data-mock-theme="shot5"]{--fd-bezel:#8c592b}
 html body [data-mock-theme="shot6"]{--fd-bezel:#a94759}
 
+/* main.js reuses the hero DOM for the first feature row and first gallery card.
+   The clone keeps data-mock-theme="hero" on itself, which would otherwise beat the
+   row1/shot1 variables inherited from the parent. Force the destination preset onto
+   those reused hero screens so the first card no longer looks like the hero. */
+html body [data-mock-theme="row1"] [data-mock-theme="hero"].hero-visual-reuse {
+  --fd-accent:#ff7b39; --fd-bg:#25150f; --fd-surface:#25150f; --fd-panel:#3c2419;
+  --fd-panel-2:#593522; --fd-text:#fff5ee; --fd-ink:#fff5ee; --fd-muted:#d8b09d;
+  --fd-bezel:#94502f; --fd-outside:#63351f;
+}
+html body [data-mock-theme="shot1"] [data-mock-theme="hero"].hero-visual-reuse {
+  --fd-accent:#28d7ff; --fd-bg:#101c25; --fd-surface:#101c25; --fd-panel:#17303e;
+  --fd-panel-2:#21495b; --fd-text:#edfaff; --fd-ink:#edfaff; --fd-muted:#9fc9d7;
+  --fd-bezel:#245d72; --fd-outside:#173d4d;
+}
+
 /* Features page: alternate dark/light presets and widely separated hues. */
 html body #drawing :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
   --fd-accent:#27d37f; --fd-bg:#10241b; --fd-surface:#10241b; --fd-panel:#183728;
