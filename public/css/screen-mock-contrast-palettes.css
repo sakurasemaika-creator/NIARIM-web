@@ -2,6 +2,46 @@
    Loaded after the base palette so each screen reads as a genuinely different preset,
    not merely a nearby pastel hue. Canvas/paper surfaces remain white by design. */
 
+/* Home main-feature rows: deliberately alternate dark/light and widely separated hues.
+   These rows previously stepped orange -> yellow -> green -> green -> teal, which still
+   read as variations of one pastel family. Each row now demonstrates a clearly different
+   appearance preset, including bezel and internal UI surfaces. */
+html body [data-mock-theme="row1"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="row1"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#ff7b39; --fd-bg:#25150f; --fd-surface:#25150f; --fd-panel:#3c2419;
+  --fd-panel-2:#593522; --fd-text:#fff5ee; --fd-ink:#fff5ee; --fd-muted:#d8b09d;
+  --fd-bezel:#94502f; --fd-outside:#63351f;
+}
+html body [data-mock-theme="row2"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="row2"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#7651e8; --fd-bg:#f4f0ff; --fd-surface:#f4f0ff; --fd-panel:#e0d7fa;
+  --fd-panel-2:#c9baf1; --fd-text:#302052; --fd-ink:#302052; --fd-muted:#78699a;
+  --fd-bezel:#60429c; --fd-outside:#412d6b;
+}
+html body [data-mock-theme="row3"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="row3"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#ffd34a; --fd-bg:#29230f; --fd-surface:#29230f; --fd-panel:#42391a;
+  --fd-panel-2:#5f5223; --fd-text:#fffbe9; --fd-ink:#fffbe9; --fd-muted:#d7c99e;
+  --fd-bezel:#8d762d; --fd-outside:#604f20;
+}
+html body [data-mock-theme="row4"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="row4"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#2f8eea; --fd-bg:#eff8ff; --fd-surface:#eff8ff; --fd-panel:#d4eafa;
+  --fd-panel-2:#b9d9f1; --fd-text:#173a58; --fd-ink:#173a58; --fd-muted:#60819b;
+  --fd-bezel:#3b76a0; --fd-outside:#29516d;
+}
+html body [data-mock-theme="row5"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+html body [data-mock-theme="row5"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  --fd-accent:#27d489; --fd-bg:#0f251b; --fd-surface:#0f251b; --fd-panel:#18382a;
+  --fd-panel-2:#24513c; --fd-text:#edfff5; --fd-ink:#edfff5; --fd-muted:#9ccbb3;
+  --fd-bezel:#307653; --fd-outside:#205039;
+}
+html body [data-mock-theme="row1"]{--fd-bezel:#94502f}
+html body [data-mock-theme="row2"]{--fd-bezel:#60429c}
+html body [data-mock-theme="row3"]{--fd-bezel:#8d762d}
+html body [data-mock-theme="row4"]{--fd-bezel:#3b76a0}
+html body [data-mock-theme="row5"]{--fd-bezel:#307653}
+
 /* Home gallery: six deliberately different appearance families. */
 html body [data-mock-theme="shot1"] :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
 html body [data-mock-theme="shot1"]:is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
