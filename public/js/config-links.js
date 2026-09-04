@@ -84,14 +84,18 @@
      3枚目をcurrentにした現在のDOMでは約100pxずれる。offsetLeftから計算し、
      SP/PC・モック幅に依存せず中央へ揃える。 */
   function centerCurrentFrames() {
-    document.querySelectorAll(".fd-frame-strip-scroll").forEach(function (strip) {
-      var current = strip.querySelector(".fd-frame-thumb.is-current, .fd-frame.is-current");
-      if (!current || !strip.clientWidth) return;
-      var target =
-        current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
-      var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
-      strip.scrollLeft = Math.max(0, Math.min(max, target));
-    });
+    document
+      .querySelectorAll(".fd-frame-strip-scroll")
+      .forEach(function (strip) {
+        var current = strip.querySelector(
+          ".fd-frame-thumb.is-current, .fd-frame.is-current",
+        );
+        if (!current || !strip.clientWidth) return;
+        var target =
+          current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
+        var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
+        strip.scrollLeft = Math.max(0, Math.min(max, target));
+      });
   }
 
   function scheduleFrameCentering() {

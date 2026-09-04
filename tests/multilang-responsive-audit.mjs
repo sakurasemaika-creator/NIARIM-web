@@ -85,64 +85,66 @@ async function inspect(page, viewport, language, route) {
     };
 
     const root = getComputedStyle(document.documentElement);
-    const brandAccent = resolveColor(root.getPropertyValue("--color-accent").trim());
+    const brandAccent = resolveColor(
+      root.getPropertyValue("--color-accent").trim(),
+    );
     const hero = document.querySelector(".hero-visual");
     const heroTitle = document.querySelector(".hero-title");
     const heroSubtitle = document.querySelector(".hero-subtitle");
-    const heroButtons = [...document.querySelectorAll(".hero .hero-actions .btn")].map(
-      (el) => ({
-        text: (el.textContent || "").trim(),
-        rect: ratio(el),
-        background: getComputedStyle(el).backgroundColor,
-        color: getComputedStyle(el).color,
-        primary: el.classList.contains("btn-primary"),
-      }),
-    );
+    const heroButtons = [
+      ...document.querySelectorAll(".hero .hero-actions .btn"),
+    ].map((el) => ({
+      text: (el.textContent || "").trim(),
+      rect: ratio(el),
+      background: getComputedStyle(el).backgroundColor,
+      color: getComputedStyle(el).color,
+      primary: el.classList.contains("btn-primary"),
+    }));
 
-    const mocks = [...document.querySelectorAll(".fd-app-screen, .fd-route-screen")].map(
-      (el) => ({
+    const mocks = [
+      ...document.querySelectorAll(".fd-app-screen, .fd-route-screen"),
+    ].map((el) => ({
+      className: el.className,
+      ...ratio(el),
+    }));
+
+    const frameThumbs = [
+      ...document.querySelectorAll(".fd-frame-thumb, .fd-frame"),
+    ].map((el) => ({
+      className: el.className,
+      width: el.getBoundingClientRect().width,
+      height: el.getBoundingClientRect().height,
+    }));
+
+    const frameStrips = [
+      ...document.querySelectorAll(".fd-frame-strip-scroll"),
+    ].map((strip) => {
+      const sr = strip.getBoundingClientRect();
+      const current = strip.querySelector(
+        ".fd-frame-thumb.is-current, .fd-frame.is-current",
+      );
+      const cr = current?.getBoundingClientRect();
+      return {
+        stripCenter: sr.left + sr.width / 2,
+        currentCenter: cr ? cr.left + cr.width / 2 : null,
+        delta: cr ? cr.left + cr.width / 2 - (sr.left + sr.width / 2) : null,
+      };
+    });
+
+    const sliders = [
+      ...document.querySelectorAll(".fd-sheet-slider, .fd-mini-slider"),
+    ].map((el) => {
+      const r = el.getBoundingClientRect();
+      const fill = el.querySelector("i,span");
+      const fr = fill?.getBoundingClientRect();
+      return {
         className: el.className,
-        ...ratio(el),
-      }),
-    );
-
-    const frameThumbs = [...document.querySelectorAll(".fd-frame-thumb, .fd-frame")].map(
-      (el) => ({
-        className: el.className,
-        width: el.getBoundingClientRect().width,
-        height: el.getBoundingClientRect().height,
-      }),
-    );
-
-    const frameStrips = [...document.querySelectorAll(".fd-frame-strip-scroll")].map(
-      (strip) => {
-        const sr = strip.getBoundingClientRect();
-        const current = strip.querySelector(
-          ".fd-frame-thumb.is-current, .fd-frame.is-current",
-        );
-        const cr = current?.getBoundingClientRect();
-        return {
-          stripCenter: sr.left + sr.width / 2,
-          currentCenter: cr ? cr.left + cr.width / 2 : null,
-          delta: cr ? cr.left + cr.width / 2 - (sr.left + sr.width / 2) : null,
-        };
-      },
-    );
-
-    const sliders = [...document.querySelectorAll(".fd-sheet-slider, .fd-mini-slider")].map(
-      (el) => {
-        const r = el.getBoundingClientRect();
-        const fill = el.querySelector("i,span");
-        const fr = fill?.getBoundingClientRect();
-        return {
-          className: el.className,
-          width: r.width,
-          height: r.height,
-          fillHeight: fr?.height || 0,
-          fillColor: fill ? getComputedStyle(fill).backgroundColor : null,
-        };
-      },
-    );
+        width: r.width,
+        height: r.height,
+        fillHeight: fr?.height || 0,
+        fillColor: fill ? getComputedStyle(fill).backgroundColor : null,
+      };
+    });
 
     const palette = (selector) =>
       [...document.querySelectorAll(selector)].map((el) => {
@@ -166,7 +168,9 @@ async function inspect(page, viewport, language, route) {
     const screenshotScroller = document.querySelector(".screenshot-scroller");
     let gallery = null;
     if (screenshotScroller) {
-      const cards = [...screenshotScroller.querySelectorAll(".screenshot-card")];
+      const cards = [
+        ...screenshotScroller.querySelectorAll(".screenshot-card"),
+      ];
       gallery = {
         cardCount: cards.length,
         clientWidth: screenshotScroller.clientWidth,
@@ -182,7 +186,10 @@ async function inspect(page, viewport, language, route) {
       lang: document.documentElement.lang,
       viewportWidth: innerWidth,
       documentClientWidth: de.clientWidth,
-      documentScrollWidth: Math.max(de.scrollWidth, document.body?.scrollWidth || 0),
+      documentScrollWidth: Math.max(
+        de.scrollWidth,
+        document.body?.scrollWidth || 0,
+      ),
       brandAccent,
       hero: ratio(hero),
       heroTitle: ratio(heroTitle),
@@ -232,7 +239,11 @@ async function inspect(page, viewport, language, route) {
 
   for (const mock of state.mocks) {
     const target = 320 / 569;
-    if (mock.width > 0 && mock.height > 0 && Math.abs(mock.ratio - target) > 0.035) {
+    if (
+      mock.width > 0 &&
+      mock.height > 0 &&
+      Math.abs(mock.ratio - target) > 0.035
+    ) {
       finding(viewport, language, route, "mock-ratio", {
         className: mock.className,
         expected: target,
@@ -261,13 +272,19 @@ async function inspect(page, viewport, language, route) {
     if (slider.height > 0 && Math.abs(slider.height - 4) > 1) {
       finding(viewport, language, route, "slider-track-height", slider);
     }
-    if (slider.fillHeight > 0 && Math.abs(slider.fillHeight - slider.height) > 1) {
+    if (
+      slider.fillHeight > 0 &&
+      Math.abs(slider.fillHeight - slider.height) > 1
+    ) {
       finding(viewport, language, route, "slider-fill-height", slider);
     }
   }
 
   for (const button of state.heroButtons) {
-    if (button.rect?.right > state.viewportWidth + 1 || button.rect?.left < -1) {
+    if (
+      button.rect?.right > state.viewportWidth + 1 ||
+      button.rect?.left < -1
+    ) {
       finding(viewport, language, route, "hero-button-clipped", button);
     }
     if (button.primary && button.background !== state.brandAccent) {
@@ -280,7 +297,9 @@ async function inspect(page, viewport, language, route) {
   }
 
   const assertDistinct = (items, kind) => {
-    const populated = items.filter((item) => item.accent && item.bezel && item.bg);
+    const populated = items.filter(
+      (item) => item.accent && item.bezel && item.bg,
+    );
     if (populated.length < 2) return;
     const accents = new Set(populated.map((item) => item.accent));
     const bezels = new Set(populated.map((item) => item.bezel));
@@ -323,13 +342,25 @@ async function inspect(page, viewport, language, route) {
     });
     if (endState) {
       if (Math.abs(endState.scrollLeft - endState.maxScrollLeft) > 2) {
-        finding(viewport, language, route, "gallery-cannot-reach-end", endState);
+        finding(
+          viewport,
+          language,
+          route,
+          "gallery-cannot-reach-end",
+          endState,
+        );
       }
       if (
         endState.lastRight > endState.scrollerRight + 2 ||
         endState.lastLeft < endState.scrollerLeft - 2
       ) {
-        finding(viewport, language, route, "gallery-last-card-clipped", endState);
+        finding(
+          viewport,
+          language,
+          route,
+          "gallery-last-card-clipped",
+          endState,
+        );
       }
     }
   }
