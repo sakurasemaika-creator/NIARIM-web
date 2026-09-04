@@ -22,9 +22,33 @@
     grid-column: 1 / -1;
     grid-row: 1;
     margin: 0 0 0.9rem !important;
-    font-size: clamp(3.05rem, 14.2vw, 4.2rem) !important;
+    /* Keep the title visually large without forcing the first translated line
+       into an accidental extra line around common 390px Android widths. */
+    font-size: clamp(2.8rem, 12.4vw, 3.2rem) !important;
     line-height: 0.94 !important;
     letter-spacing: -0.035em;
+  }
+
+  /* CJK translations have many full-width glyphs in line 1. A single global
+     hero size made zh-Hans/zh-Hant four lines tall on 390px screens. */
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title {
+    font-size: clamp(2.05rem, 8.6vw, 2.35rem) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  /* French line 1 ("Dessiner. Animer.") is substantially wider than the
+     Japanese/English equivalents. Keep two intended title lines, not three. */
+  :root:lang(fr) .hero-title {
+    font-size: clamp(2.55rem, 10.8vw, 2.9rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  /* Korean sits between CJK and Latin in practical line width. */
+  :root:lang(ko) .hero-title {
+    font-size: clamp(2.65rem, 11.2vw, 3rem) !important;
+    line-height: 0.96 !important;
   }
 
   .hero-subtitle {
@@ -142,6 +166,20 @@
     margin-bottom: 0.78rem !important;
     font-size: 2.8rem !important;
     line-height: 0.95 !important;
+  }
+
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title {
+    font-size: 2.05rem !important;
+    line-height: 0.98 !important;
+  }
+
+  :root:lang(fr) .hero-title {
+    font-size: 2.5rem !important;
+  }
+
+  :root:lang(ko) .hero-title {
+    font-size: 2.6rem !important;
   }
 
   .hero-subtitle {
