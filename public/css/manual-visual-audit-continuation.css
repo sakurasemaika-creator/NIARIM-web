@@ -158,4 +158,40 @@ html body .scroll-top-btn:hover {
   html body .screenshot-card > .feature-diagram :is(strong,small,.fd-layer-name,.fd-setting-row span,.fd-format-row span) {
     min-width: 0 !important;
   }
+
+  /* CTA translations may be considerably longer than Japanese. Keep the button
+     inside the viewport and allow the label to wrap instead of widening the page. */
+  html body .btn {
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Feature tabs intentionally remain one-line pills and scroll horizontally.
+     Add inner edge room so the first/last tab never looks clipped against the viewport. */
+  html body .feature-nav {
+    max-width: 100vw !important;
+    padding-inline: var(--container-padding) !important;
+    scroll-padding-inline: var(--container-padding) !important;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+  html body .feature-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  /* The premium recommendation badge used nowrap, which can escape the card in
+     languages with longer labels. The one-column SP layout has room to wrap it. */
+  html body .pricing-plan-badge {
+    max-width: calc(100% - (var(--space-md) * 2)) !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+  html body .pricing-plan-badge :is(.pricing-plan-badge-pre,.pricing-plan-badge-main) {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
 }
