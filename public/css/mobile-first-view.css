@@ -40,12 +40,12 @@
 
   .hero-subtitle-text { white-space: normal !important; }
 
-  /* Compact label placed between subtitle and body copy. */
+  /* Compact label placed between subtitle and body copy, with a little breathing room above. */
   .hero-copy .eyebrow {
     grid-column: 1 / -1;
     grid-row: 3;
     justify-self: start;
-    margin: 0.05rem 0 0.02rem !important;
+    margin: 0.16rem 0 0.02rem !important;
     font-size: 0.68rem !important;
     line-height: 1.1 !important;
     transform: scaleX(0.52);
@@ -68,13 +68,14 @@
   .hero-bridge,
   .hero-note { display: none !important; }
 
+  /* Raise the mock so its top aligns with the Animation Creation App label row. */
   .hero-visual {
     grid-column: 2;
-    grid-row: 4;
+    grid-row: 3 / span 2;
     align-self: start;
     width: 100% !important;
     max-width: 196px !important;
-    margin: -0.55rem 0 0 !important;
+    margin: 0.16rem 0 0 !important;
     border-radius: 20px !important;
     box-shadow:
       0 20px 42px rgba(40, 36, 44, 0.23),
@@ -123,6 +124,7 @@
   }
 
   .hero-copy .eyebrow {
+    margin-top: 0.14rem !important;
     font-size: 0.64rem !important;
   }
 
@@ -133,7 +135,7 @@
 
   .hero-visual {
     max-width: 146px !important;
-    margin-top: -0.45rem !important;
+    margin-top: 0.14rem !important;
   }
 
   .hero-actions .btn {
