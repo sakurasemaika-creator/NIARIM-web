@@ -53,3 +53,41 @@ a {
   word-break: keep-all !important;
   overflow-wrap: break-word;
 }
+
+/* Desktop hero multilingual balance.
+   responsive-consistency.css used max-width:8ch for every Latin/Korean locale.
+   With the current large hero type that made EN/KO/FR/ES grow to 3–4 visual lines,
+   even though the markup intentionally contains exactly two title lines.
+   Keep the copy column available, then tune only locales whose glyph width needs it. */
+@media (min-width: 861px) {
+  .hero-title {
+    max-width: 100% !important;
+  }
+
+  :root:lang(ja) .hero-title {
+    font-size: clamp(3.5rem, 4.3vw, 4rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title {
+    font-size: clamp(2.8rem, 3.45vw, 3.2rem) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  :root:lang(ko) .hero-title {
+    font-size: clamp(3.2rem, 3.9vw, 3.7rem) !important;
+    line-height: 0.99 !important;
+  }
+
+  :root:lang(fr) .hero-title {
+    font-size: clamp(3.5rem, 4.45vw, 4rem) !important;
+    line-height: 0.99 !important;
+  }
+
+  :root:lang(es) .hero-title {
+    font-size: clamp(3.7rem, 4.85vw, 4.4rem) !important;
+    line-height: 0.99 !important;
+  }
+}
