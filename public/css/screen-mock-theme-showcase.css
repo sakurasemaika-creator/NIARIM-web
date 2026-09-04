@@ -1,0 +1,117 @@
+/*
+ * Screen-mock theme showcase
+ * Each reconstructed app screen intentionally uses a different preset palette
+ * so the website communicates NIARIM's appearance customisation at a glance.
+ * Structural/layout fidelity stays unchanged; only preset color tokens vary.
+ */
+
+/* Hero: warm rose */
+.hero-visual.fd-app-screen,
+.hero-visual .fd-app-screen {
+  --fd-accent: #ff5c7a;
+  --fd-ink: #30262d;
+  --fd-outside: #493d43;
+  --fd-surface: #fff8fa;
+  --fd-panel: #f8dfe5;
+  --fd-panel-2: #f1cfd8;
+}
+
+/* Plain canvas: cool mint */
+.feature-row:nth-of-type(6n + 1) .fd-app-screen,
+.feature-row:nth-of-type(6n + 1) .fd-route-screen {
+  --fd-accent: #1aa981;
+  --fd-ink: #20332e;
+  --fd-outside: #354844;
+  --fd-surface: #f4fffb;
+  --fd-panel: #dcefe8;
+  --fd-panel-2: #cde6dd;
+}
+
+/* Second preset: lavender */
+.feature-row:nth-of-type(6n + 2) .fd-app-screen,
+.feature-row:nth-of-type(6n + 2) .fd-route-screen {
+  --fd-accent: #8067d8;
+  --fd-ink: #302b3e;
+  --fd-outside: #423d50;
+  --fd-surface: #faf8ff;
+  --fd-panel: #e8e1f7;
+  --fd-panel-2: #dcd2f0;
+}
+
+/* Third preset: amber */
+.feature-row:nth-of-type(6n + 3) .fd-app-screen,
+.feature-row:nth-of-type(6n + 3) .fd-route-screen {
+  --fd-accent: #dc8a17;
+  --fd-ink: #3a3023;
+  --fd-outside: #4b4438;
+  --fd-surface: #fffaf1;
+  --fd-panel: #f4e5c9;
+  --fd-panel-2: #ead7b4;
+}
+
+/* Fourth preset: blue */
+.feature-row:nth-of-type(6n + 4) .fd-app-screen,
+.feature-row:nth-of-type(6n + 4) .fd-route-screen {
+  --fd-accent: #3d79d8;
+  --fd-ink: #243143;
+  --fd-outside: #364452;
+  --fd-surface: #f6faff;
+  --fd-panel: #dde9f7;
+  --fd-panel-2: #cfdef0;
+}
+
+/* Fifth preset: coral */
+.feature-row:nth-of-type(6n + 5) .fd-app-screen,
+.feature-row:nth-of-type(6n + 5) .fd-route-screen {
+  --fd-accent: #e66f50;
+  --fd-ink: #3c2c28;
+  --fd-outside: #4e403c;
+  --fd-surface: #fff8f5;
+  --fd-panel: #f6dfd7;
+  --fd-panel-2: #edcfc5;
+}
+
+/* Sixth preset: graphite / cyan, useful for timeline-heavy screens. */
+.feature-row:nth-of-type(6n) .fd-app-screen,
+.feature-row:nth-of-type(6n) .fd-route-screen {
+  --fd-accent: #39a9c8;
+  --fd-ink: #e9f1f3;
+  --fd-outside: #202a2f;
+  --fd-surface: #2a353a;
+  --fd-panel: #344248;
+  --fd-panel-2: #3d4d54;
+}
+
+/* Distinguish canvas variants even when several appear in the same section. */
+.fd-canvas-screen:has(.fd-app-layer-panel) {
+  --fd-accent: #9b65c7;
+  --fd-ink: #30283a;
+  --fd-outside: #443b4b;
+  --fd-surface: #fcf8ff;
+  --fd-panel: #ecdef4;
+  --fd-panel-2: #dfcee9;
+}
+
+.fd-canvas-screen:has(.fd-app-onion-panel) {
+  --fd-accent: #d28618;
+  --fd-ink: #382f21;
+  --fd-outside: #4c4437;
+  --fd-surface: #fffbf2;
+  --fd-panel: #f2e5ca;
+  --fd-panel-2: #e9d8b7;
+}
+
+.fd-audio-context-screen {
+  --fd-accent: #38a98e;
+  --fd-ink: #e8f4f1;
+  --fd-outside: #1f2d2a;
+  --fd-surface: #293936;
+  --fd-panel: #334943;
+  --fd-panel-2: #3c574f;
+}
+
+/* Keep artwork/canvas paper neutral across every preset. */
+.fd-app-canvas-stage,
+.fd-timeline-preview {
+  --fd-paper: #ffffff;
+}
