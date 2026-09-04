@@ -20,6 +20,10 @@
   box-sizing: border-box !important;
   overflow: hidden !important;
   scroll-snap-align: start;
+  /* Keep every gallery card painted from the start so horizontal inspection
+     never encounters a late-paint blank/partial mock. */
+  content-visibility: visible !important;
+  contain-intrinsic-size: none !important;
 }
 .screenshot-card:nth-child(1) { --fd-bezel:#287184; --fd-accent:#009fb3; --fd-bg:#f1fcfe; --fd-panel:#d3eef2; --fd-text:#17343a; }
 .screenshot-card:nth-child(2) { --fd-bezel:#823a72; --fd-accent:#c13aa7; --fd-bg:#fff5fc; --fd-panel:#f1d8eb; --fd-text:#42233c; }
@@ -48,6 +52,18 @@
   overflow: hidden !important;
   background: var(--fd-bg, var(--fd-surface, #fff)) !important;
   color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+}
+
+/* Push each gallery preset into the common reconstructed surfaces too. */
+.screenshot-card > .feature-diagram :is(.fd-topbar,.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row,.fd-settings-card,.fd-route-card) {
+  color: var(--fd-text) !important;
+}
+.screenshot-card > .feature-diagram :is(.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row,.fd-settings-card,.fd-route-card) {
+  background-color: var(--fd-panel) !important;
+}
+.screenshot-card > .feature-diagram :is(.fd-icon-btn.is-active,.fd-segment.is-active,.fd-radio.is-active,.fd-frame.is-active) {
+  color: var(--fd-accent) !important;
+  border-color: var(--fd-accent) !important;
 }
 
 /* Legacy home feature diagrams also need a visible themed bezel. */
@@ -138,6 +154,44 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
 .feature-section > .feature-diagram .fd-segment.is-active {
   background: var(--fd-accent) !important;
   color: #fff !important;
+}
+
+/* Export capture geometry remains exact, but its colors must follow the assigned preset. */
+.feature-section > .fd-export-screen .fd-export-segments,
+.screenshot-card > .fd-export-screen .fd-export-segments {
+  background: var(--fd-bg) !important;
+  border-color: color-mix(in srgb, var(--fd-text) 40%, transparent) !important;
+}
+.feature-section > .fd-export-screen .fd-export-segments .fd-segment,
+.screenshot-card > .fd-export-screen .fd-export-segments .fd-segment {
+  color: var(--fd-text) !important;
+  background: var(--fd-bg) !important;
+  border-color: color-mix(in srgb, var(--fd-text) 30%, transparent) !important;
+}
+.feature-section > .fd-export-screen .fd-export-segments .fd-segment.is-active,
+.screenshot-card > .fd-export-screen .fd-export-segments .fd-segment.is-active,
+.feature-section > .fd-export-screen .fd-export-start,
+.screenshot-card > .fd-export-screen .fd-export-start {
+  background: var(--fd-accent) !important;
+  color: #fff !important;
+}
+.feature-section > .fd-export-screen .fd-format-row .fd-radio,
+.screenshot-card > .fd-export-screen .fd-format-row .fd-radio {
+  border-color: color-mix(in srgb, var(--fd-text) 58%, transparent) !important;
+}
+.feature-section > .fd-export-screen .fd-format-row .fd-radio.is-active,
+.screenshot-card > .fd-export-screen .fd-format-row .fd-radio.is-active {
+  border-color: var(--fd-accent) !important;
+  background: var(--fd-accent) !important;
+  box-shadow: inset 0 0 0 4px var(--fd-bg) !important;
+}
+.feature-section > .fd-export-screen .fd-format-row strong,
+.screenshot-card > .fd-export-screen .fd-format-row strong {
+  color: var(--fd-text) !important;
+}
+.feature-section > .fd-export-screen .fd-format-row small,
+.screenshot-card > .fd-export-screen .fd-format-row small {
+  color: color-mix(in srgb, var(--fd-text) 64%, transparent) !important;
 }
 
 /* One slider language across every reconstruction, including sheet sliders whose fill is an <i>. */
