@@ -1,4 +1,5 @@
 @import url("/css/manual-visual-audit-continuation.css");
+@import url("/css/screen-mock-contrast-palettes.css");
 
 /* ---- 単語の途中での改行を防ぐ ----
    日本語・中国語は文字単位で折り返せてしまうため、既定のままだと
