@@ -28,6 +28,30 @@
       }
     });
   }
+
+  /* main.js の fitMockScreens() は全 .fd-app-screen を対象にするため、
+     hero が内容高の都合で fit 対象になると width/height の inline !important が入り、
+     SP用 aspect-ratio を壊す。Hero は端末外枠そのものなので、fit 後に inline 寸法を
+     解除して CSS の 320:569 比率へ戻す。 */
+  function restoreHeroAspect() {
+    var hero = document.querySelector(".hero-visual");
+    if (!hero) return;
+    hero.style.removeProperty("--fd-fit");
+    hero.style.removeProperty("width");
+    hero.style.removeProperty("height");
+    hero.style.removeProperty("max-width");
+    hero.style.removeProperty("max-height");
+    hero.style.removeProperty("transform");
+    hero.style.removeProperty("transform-origin");
+    hero.classList.remove("is-fit-scaled");
+  }
+
+  function scheduleHeroAspectRestore() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(restoreHeroAspect);
+    });
+  }
+
   function loadAiTrustCopy() {
     if (document.querySelector("script[data-niarim-ai-trust]")) return;
     var script = document.createElement("script");
@@ -37,7 +61,18 @@
     document.head.appendChild(script);
   }
   loadAiTrustCopy();
+
+  function init() {
+    apply();
+    scheduleHeroAspectRestore();
+    window.addEventListener("load", scheduleHeroAspectRestore);
+    window.addEventListener("resize", scheduleHeroAspectRestore, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleHeroAspectRestore);
+    }
+  }
+
   if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", apply);
-  else apply();
+    document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
