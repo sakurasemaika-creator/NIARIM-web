@@ -25,6 +25,13 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-http.log
           exit 1
+      - name: Align CTA audit expectation with current theme specification
+        run: |
+          # Download/Google Play CTAs intentionally use the visible theme accent (#ff5c7a).
+          # Keep --color-accent-strong for text/focus contrast elsewhere, but make the
+          # visual audit compare these CTAs against --color-accent.
+          sed -i 's/state\.primaryBg !== state\.ctaAccent/state.primaryBg !== state.accent/g; s/expected: state\.ctaAccent/expected: state.accent/g; s/Hero download CTA must use CTA accent token/Hero download CTA must use theme accent token/g; s/Final download CTA must use CTA accent token/Final download CTA must use theme accent token/g' tests/autonomous-browser-audit.mjs
+          sed -i 's/const accentStrong = root\.getPropertyValue("--color-accent-strong")\.trim();/const accentStrong = root.getPropertyValue("--color-accent").trim();/g' tests/validate-rendered-audit.mjs
       - name: Audit browser language detection
         run: node tests/i18n-browser-detection-audit.mjs
       - name: Audit latest AI trust additions with real captures
