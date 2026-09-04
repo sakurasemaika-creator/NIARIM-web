@@ -9,6 +9,8 @@
       ["/css/polish.css", "data-niarim-polish"],
       ["/css/responsive-consistency.css", "data-niarim-responsive-consistency"],
       ["/css/screen-mock-accuracy.css", "data-niarim-screen-mock-accuracy"],
+      ["/css/screen-mock-palette.css", "data-niarim-mock-palette"],
+      ["/css/screen-mock-layout-fix.css", "data-niarim-mock-layout"],
       // 改行位置の調整は各ページCSSの word-break 指定より後に効かせたいので最後。
       ["/css/line-break.css", "data-niarim-line-break"],
     ];
@@ -106,10 +108,12 @@
 
   function frameStrip() {
     var frames = "";
-    for (var i = 0; i < 4; i++) {
+    // 実機では編集中のフレームが一覧の中央に来る。5枚並べて真ん中を
+    // 現在地にすることで、静止画の再現図でも同じ見え方になる。
+    for (var i = 0; i < 5; i++) {
       frames +=
         '<span class="fd-frame-thumb' +
-        (i === 0 ? " is-current" : "") +
+        (i === 2 ? " is-current" : "") +
         '"><span class="fd-frame-paper"></span></span>';
     }
     return (
@@ -665,6 +669,55 @@
     // 出ていた）。組み立て後に現在の言語で翻訳し直す。
     // 以後の言語切り替えは i18n.js が [data-i18n] を都度走査するため、
     // この一度の再適用だけで足りる。
+    // 画面再現図は実機と同じ寸法のUIを、実機より小さい枠に積んでいる。
+    // 枠に収まりきらない画面は、下の段が切れたまま表示されてしまうので、
+    // 収まる倍率を測って縮める（レイアウトは等倍のまま見た目だけ縮小）。
+    function fitMockScreens() {
+      var mocks = document.querySelectorAll(
+        ".fd-app-screen, .fd-route-screen, .feature-section > .feature-diagram",
+      );
+      Array.prototype.forEach.call(mocks, function (m) {
+        m.style.removeProperty("--fd-fit");
+        m.style.removeProperty("transform");
+        m.style.removeProperty("transform-origin");
+        m.style.removeProperty("width");
+        m.style.removeProperty("height");
+        m.style.removeProperty("max-width");
+        m.style.removeProperty("max-height");
+        m.classList.remove("is-fit-scaled");
+        var need = m.scrollHeight;
+        var have = m.clientHeight;
+        if (!have || need <= have + 1) return;
+        // 極端に縮むと文字が読めないので下限を設ける。
+        var scale = Math.max(0.62, have / need);
+        var z = Math.round(scale * 1000) / 1000;
+        // 幅・高さは他のレイヤーが !important で 100% に固定しているため、
+        // インラインの !important で上書きする必要がある。
+        m.style.setProperty("--fd-fit", String(z));
+        m.style.setProperty("transform", "scale(" + z + ")", "important");
+        m.style.setProperty("transform-origin", "top left", "important");
+        m.style.setProperty("width", 100 / z + "%", "important");
+        m.style.setProperty("height", 100 / z + "%", "important");
+        // 他のレイヤーが max-width/max-height を 100% で固定しているため、
+        // 広げた分が clamp されないよう外す。
+        m.style.setProperty("max-width", "none", "important");
+        m.style.setProperty("max-height", "none", "important");
+        m.classList.add("is-fit-scaled");
+      });
+    }
+    // 初期表示直後はまだ高さが確定していないことがあるので、
+    // レイアウト後・フォント読み込み後にも測り直す。
+    requestAnimationFrame(fitMockScreens);
+    window.addEventListener("load", fitMockScreens);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitMockScreens);
+    }
+    var fitTimer = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(fitTimer);
+      fitTimer = setTimeout(fitMockScreens, 150);
+    });
+
     if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
       window.NIARIM_I18N.applyLang(
         document.documentElement.getAttribute("lang") || "ja",

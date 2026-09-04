@@ -6,7 +6,9 @@
   padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
   padding-bottom: 0.9rem !important;
   scroll-padding-inline: max(0px, var(--container-padding)) !important;
-  scroll-padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
+  scroll-padding-right: calc(
+    max(0px, var(--container-padding)) + 18px
+  ) !important;
   overscroll-behavior-inline: contain !important;
 }
 .screenshot-scroller::after {
@@ -25,22 +27,14 @@
   content-visibility: visible !important;
   contain-intrinsic-size: none !important;
 }
-.screenshot-card:nth-child(1) { --fd-bezel:#287184; --fd-accent:#009fb3; --fd-bg:#f1fcfe; --fd-panel:#d3eef2; --fd-text:#17343a; }
-.screenshot-card:nth-child(2) { --fd-bezel:#823a72; --fd-accent:#c13aa7; --fd-bg:#fff5fc; --fd-panel:#f1d8eb; --fd-text:#42233c; }
-.screenshot-card:nth-child(3) { --fd-bezel:#61753a; --fd-accent:#6e941a; --fd-bg:#fbfff2; --fd-panel:#e6efd0; --fd-text:#30381f; }
-.screenshot-card:nth-child(4) { --fd-bezel:#934638; --fd-accent:#e34434; --fd-bg:#fff6f3; --fd-panel:#f7d8d1; --fd-text:#452720; }
-.screenshot-card:nth-child(5) { --fd-bezel:#4058a0; --fd-accent:#3154d2; --fd-bg:#f5f7ff; --fd-panel:#dce2f8; --fd-text:#202b49; }
-.screenshot-card:nth-child(6) { --fd-bezel:#7e5a29; --fd-accent:#b96c0d; --fd-bg:#fff9ef; --fd-panel:#f2e1c4; --fd-text:#3c2d1b; }
-.screenshot-card:nth-child(7) { --fd-bezel:#315f54; --fd-accent:#008f75; --fd-bg:#f1fff9; --fd-panel:#cfeee5; --fd-text:#173b32; }
-.screenshot-card:nth-child(8) { --fd-bezel:#693c8b; --fd-accent:#8f45d4; --fd-bg:#faf3ff; --fd-panel:#e8d6f5; --fd-text:#352044; }
 .screenshot-card,
 .screenshot-card:first-child {
   border: 6px solid var(--fd-bezel, #4a3b41) !important;
   border-radius: 22px !important;
   background: var(--fd-bezel, #4a3b41) !important;
-  box-shadow: 0 16px 34px rgba(25,20,28,.14) !important;
+  box-shadow: 0 16px 34px rgba(25, 20, 28, 0.14) !important;
 }
-.screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-screen),
+.screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 .screenshot-card:first-child .hero-visual-reuse {
   border: 0 !important;
   border-radius: 16px !important;
@@ -55,23 +49,50 @@
 }
 
 /* Push each gallery preset into the common reconstructed surfaces too. */
-.screenshot-card > .feature-diagram :is(.fd-topbar,.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row,.fd-settings-card,.fd-route-card) {
+.screenshot-card
+  > .feature-diagram
+  :is(
+    .fd-topbar,
+    .fd-timeline-toolbar,
+    .fd-frames,
+    .fd-layers,
+    .fd-audio-track,
+    .fd-clip-detail-sheet,
+    .fd-audio-sheet-head,
+    .fd-sheet-row,
+    .fd-settings-card,
+    .fd-route-card
+  ) {
   color: var(--fd-text) !important;
 }
-.screenshot-card > .feature-diagram :is(.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row,.fd-settings-card,.fd-route-card) {
+.screenshot-card
+  > .feature-diagram
+  :is(
+    .fd-timeline-toolbar,
+    .fd-frames,
+    .fd-layers,
+    .fd-audio-track,
+    .fd-clip-detail-sheet,
+    .fd-audio-sheet-head,
+    .fd-sheet-row,
+    .fd-settings-card,
+    .fd-route-card
+  ) {
   background-color: var(--fd-panel) !important;
 }
-.screenshot-card > .feature-diagram :is(.fd-icon-btn.is-active,.fd-segment.is-active,.fd-radio.is-active,.fd-frame.is-active) {
+.screenshot-card
+  > .feature-diagram
+  :is(
+    .fd-icon-btn.is-active,
+    .fd-segment.is-active,
+    .fd-radio.is-active,
+    .fd-frame.is-active
+  ) {
   color: var(--fd-accent) !important;
   border-color: var(--fd-accent) !important;
 }
 
-/* Legacy home feature diagrams also need a visible themed bezel. */
-#features .feature-row:nth-child(1) .feature-diagram { --fd-bezel:#287055; }
-#features .feature-row:nth-child(2) .feature-diagram { --fd-bezel:#63478c; }
-#features .feature-row:nth-child(3) .feature-diagram { --fd-bezel:#80682d; }
-#features .feature-row:nth-child(4) .feature-diagram { --fd-bezel:#326f9d; }
-#features .feature-row:nth-child(5) .feature-diagram { --fd-bezel:#934638; }
+/* 色の定義は screen-mock-palette.css に一本化した（位置ずれで重複していたため）。 */
 #features .feature-row .feature-diagram,
 .hero-visual .frame-mock {
   border: 6px solid var(--fd-bezel, var(--fd-outside, #4a3b41)) !important;
@@ -124,16 +145,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   inset: 3px !important;
 }
 
-/* Features page: enforce visibly different presets on the entire reconstructed screen. */
-#drawing > .feature-diagram { --fd-bg:#f3fff9; --fd-text:#17372b; --fd-panel:#d8f1e5; --fd-accent:#00a86b; --fd-bezel:#287055; }
-#animation > .feature-diagram { --fd-bg:#f8f1ff; --fd-text:#30213f; --fd-panel:#e5d1f6; --fd-accent:#7a3ee8; --fd-bezel:#5f3b90; }
-#editing > .feature-diagram { --fd-bg:#fff5df; --fd-text:#433319; --fd-panel:#f1d79d; --fd-accent:#e29a00; --fd-bezel:#806324; }
-#advanced > .feature-diagram { --fd-bg:#edf8ff; --fd-text:#153247; --fd-panel:#cce5f8; --fd-accent:#1283d6; --fd-bezel:#2d6c9c; }
-#audio > .feature-diagram { --fd-bg:#effff9; --fd-text:#173b32; --fd-panel:#cceee3; --fd-accent:#00a58b; --fd-bezel:#226c5e; }
-#save > .feature-diagram { --fd-bg:#fff0f6; --fd-text:#432332; --fd-panel:#f0cddd; --fd-accent:#d83d7d; --fd-bezel:#7c3957; }
-#workspace > .feature-diagram { --fd-bg:#f2f2ff; --fd-text:#26264a; --fd-panel:#d5d6f5; --fd-accent:#5652df; --fd-bezel:#49498f; }
-#widget > .feature-diagram { --fd-bg:#fff2e8; --fd-text:#472a19; --fd-panel:#f4d3bd; --fd-accent:#ee6721; --fd-bezel:#8b4828; }
-#export > .feature-diagram { --fd-bg:#eefafd; --fd-text:#153640; --fd-panel:#cae9ef; --fd-accent:#1087a7; --fd-bezel:#2a7081; }
+/* 節ごとの配色は screen-mock-palette.css に一本化した。 */
 .feature-section > .feature-diagram {
   border: 6px solid var(--fd-bezel) !important;
   border-radius: 22px !important;
@@ -141,13 +153,43 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   background: var(--fd-bg) !important;
   color: var(--fd-text) !important;
 }
-.feature-section > .feature-diagram :is(.fd-topbar,.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-panel,.fd-sheet,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row) {
+.feature-section
+  > .feature-diagram
+  :is(
+    .fd-topbar,
+    .fd-timeline-toolbar,
+    .fd-frames,
+    .fd-layers,
+    .fd-audio-track,
+    .fd-panel,
+    .fd-sheet,
+    .fd-clip-detail-sheet,
+    .fd-audio-sheet-head,
+    .fd-sheet-row
+  ) {
   color: var(--fd-text) !important;
 }
-.feature-section > .feature-diagram :is(.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row) {
+.feature-section
+  > .feature-diagram
+  :is(
+    .fd-timeline-toolbar,
+    .fd-frames,
+    .fd-layers,
+    .fd-audio-track,
+    .fd-clip-detail-sheet,
+    .fd-audio-sheet-head,
+    .fd-sheet-row
+  ) {
   background-color: var(--fd-panel) !important;
 }
-.feature-section > .feature-diagram :is(.fd-icon-btn.is-active,.fd-segment.is-active,.fd-radio.is-active,.fd-frame.is-active) {
+.feature-section
+  > .feature-diagram
+  :is(
+    .fd-icon-btn.is-active,
+    .fd-segment.is-active,
+    .fd-radio.is-active,
+    .fd-frame.is-active
+  ) {
   color: var(--fd-accent) !important;
   border-color: var(--fd-accent) !important;
 }
@@ -195,23 +237,27 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
 }
 
 /* One slider language across every reconstruction, including sheet sliders whose fill is an <i>. */
-:is(.fd-slider,.fd-sheet-slider) {
+:is(.fd-slider, .fd-sheet-slider) {
   position: relative !important;
   height: 5px !important;
   min-height: 5px !important;
   border: 0 !important;
   border-radius: 999px !important;
-  background: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 22%, transparent) !important;
+  background: color-mix(
+    in srgb,
+    var(--fd-text, var(--fd-ink, #28242c)) 22%,
+    transparent
+  ) !important;
   overflow: visible !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > :is(span,i) {
+:is(.fd-slider, .fd-sheet-slider) > :is(span, i) {
   position: absolute !important;
   inset: 0 auto 0 0 !important;
   height: 5px !important;
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > :is(span,i)::after {
+:is(.fd-slider, .fd-sheet-slider) > :is(span, i)::after {
   content: "" !important;
   position: absolute !important;
   right: -6px !important;
@@ -233,10 +279,24 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
     min-width: 0 !important;
     max-width: 100% !important;
   }
-  .feature-section > .feature-diagram :is(.fd-sheet-row,.fd-setting-row,.fd-format-row,.fd-layer-row,.fd-audio-track) {
+  .feature-section
+    > .feature-diagram
+    :is(
+      .fd-sheet-row,
+      .fd-setting-row,
+      .fd-format-row,
+      .fd-layer-row,
+      .fd-audio-track
+    ) {
     min-width: 0 !important;
   }
-  .feature-section > .feature-diagram :is(.fd-layer-name,.fd-setting-row > span:first-child,.fd-format-row > span:first-child) {
+  .feature-section
+    > .feature-diagram
+    :is(
+      .fd-layer-name,
+      .fd-setting-row > span:first-child,
+      .fd-format-row > span:first-child
+    ) {
     min-width: 0 !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;

@@ -792,3 +792,11 @@ select:focus {
     border-radius: 15px !important;
   }
 }
+
+/* メニューを開いているあいだは、ヘッダーとメニューを一続きの面として
+   見せる。境界線が残っていると、同じ色にしても細い隙間のように見える。 */
+@media (max-width: 860px) {
+  .site-header:has(.main-nav.is-open) {
+    border-bottom-color: transparent;
+  }
+}

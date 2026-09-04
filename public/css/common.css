@@ -589,7 +589,10 @@ p {
        多い等）は内部スクロールできるようにしておく。 */
     height: calc(100dvh - var(--header-height));
     overflow-y: auto;
-    background: var(--color-white);
+    /* ヘッダーの面と同じ色にする。純白のままだと、ヘッダー
+       （#fffaf8）との境目に色の段差ができ、メニューとヘッダーの
+       あいだに細い隙間が空いているように見えていた。 */
+    background: #fffaf8;
     flex-direction: column;
     align-items: stretch;
     padding: var(--space-lg) var(--container-padding);

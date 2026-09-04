@@ -1,0 +1,435 @@
+/*
+ * 画面再現図のテーマ配色（唯一の定義場所）
+ *
+ * 1画面につき1色。端末のベゼル（外枠）も同じ色相に揃えている。
+ * 色相は21等分し、ホームと機能ページで交互に取っているので、
+ * 同じページ内はもちろんページをまたいでも同じ色にはならない。
+ *
+ * 以前は theme-showcase / manual-visual-audit-fixes / -final の3か所に
+ * 別々のパレットがあり、しかも位置指定が実際のDOMとずれていた
+ * （#features の先頭の子は .section-head で1つずれる、ヒーローと
+ * 画面紹介のモックは要素自身が .hero-visual）。当たらない指定が残った
+ * 結果、既定色 #ff5c7a のままの画面が複数あり色が重複していた。
+ * 定義をこのファイルへ集約し、位置ではなく data-mock-theme と節IDで
+ * 名指ししている。
+ *
+ * 変数はモック要素そのものに載せる。既定値が .fd-app-screen などの
+ * 要素側にあるため、祖先へ載せても継承では勝てないため。
+ * ヒーローのように枠と画面が同じ要素のものがあるので、子孫セレクタと
+ * 複合セレクタの両方を書いている。
+ */
+
+/* ヒーロー (色相 345) */
+[data-mock-theme="hero"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="hero"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #af1d41;
+  --fd-ink: #381e25;
+  --fd-outside: #502f37;
+  --fd-bezel: #783b4a;
+  --fd-surface: #fcf3f5;
+  --fd-panel: #f0d6dc;
+  --fd-panel-2: #e4bec7;
+  --fd-bg: #fcf3f5;
+  --fd-text: #381e25;
+}
+[data-mock-theme="hero"] {
+  --fd-bezel: #783b4a;
+}
+/* 機能行1 (色相 20) */
+[data-mock-theme="row1"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="row1"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #af4e1d;
+  --fd-ink: #38271e;
+  --fd-outside: #503a2f;
+  --fd-bezel: #784f3b;
+  --fd-surface: #fcf6f3;
+  --fd-panel: #f0dfd6;
+  --fd-panel-2: #e4cbbe;
+  --fd-bg: #fcf6f3;
+  --fd-text: #38271e;
+}
+[data-mock-theme="row1"] {
+  --fd-bezel: #784f3b;
+}
+/* 機能行2 (色相 55) */
+[data-mock-theme="row2"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="row2"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #afa31d;
+  --fd-ink: #38361e;
+  --fd-outside: #504e2f;
+  --fd-bezel: #78733b;
+  --fd-surface: #fcfbf3;
+  --fd-panel: #f0eed6;
+  --fd-panel-2: #e4e1be;
+  --fd-bg: #fcfbf3;
+  --fd-text: #38361e;
+}
+[data-mock-theme="row2"] {
+  --fd-bezel: #78733b;
+}
+/* 機能行3 (色相 90) */
+[data-mock-theme="row3"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="row3"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #66af1d;
+  --fd-ink: #2b381e;
+  --fd-outside: #40502f;
+  --fd-bezel: #59783b;
+  --fd-surface: #f7fcf3;
+  --fd-panel: #e3f0d6;
+  --fd-panel-2: #d1e4be;
+  --fd-bg: #f7fcf3;
+  --fd-text: #2b381e;
+}
+[data-mock-theme="row3"] {
+  --fd-bezel: #59783b;
+}
+/* 機能行4 (色相 125) */
+[data-mock-theme="row4"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="row4"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #1daf29;
+  --fd-ink: #1e3821;
+  --fd-outside: #2f5032;
+  --fd-bezel: #3b7840;
+  --fd-surface: #f3fcf3;
+  --fd-panel: #d6f0d8;
+  --fd-panel-2: #bee4c1;
+  --fd-bg: #f3fcf3;
+  --fd-text: #1e3821;
+}
+[data-mock-theme="row4"] {
+  --fd-bezel: #3b7840;
+}
+/* 機能行5 (色相 160) */
+[data-mock-theme="row5"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="row5"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #1daf7e;
+  --fd-ink: #1e3830;
+  --fd-outside: #2f5045;
+  --fd-bezel: #3b7863;
+  --fd-surface: #f3fcf9;
+  --fd-panel: #d6f0e7;
+  --fd-panel-2: #bee4d8;
+  --fd-bg: #f3fcf9;
+  --fd-text: #1e3830;
+}
+[data-mock-theme="row5"] {
+  --fd-bezel: #3b7863;
+}
+/* 画面紹介1 (色相 195) */
+[data-mock-theme="shot1"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot1"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #1d8baf;
+  --fd-ink: #1e3238;
+  --fd-outside: #2f4850;
+  --fd-bezel: #3b6878;
+  --fd-surface: #f3fafc;
+  --fd-panel: #d6e9f0;
+  --fd-panel-2: #bedbe4;
+  --fd-bg: #f3fafc;
+  --fd-text: #1e3238;
+}
+[data-mock-theme="shot1"] {
+  --fd-bezel: #3b6878;
+}
+/* 画面紹介2 (色相 228) */
+[data-mock-theme="shot2"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot2"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #1d3aaf;
+  --fd-ink: #1e2438;
+  --fd-outside: #2f3650;
+  --fd-bezel: #3b4778;
+  --fd-surface: #f3f5fc;
+  --fd-panel: #d6dbf0;
+  --fd-panel-2: #bec6e4;
+  --fd-bg: #f3f5fc;
+  --fd-text: #1e2438;
+}
+[data-mock-theme="shot2"] {
+  --fd-bezel: #3b4778;
+}
+/* 画面紹介3 (色相 258) */
+[data-mock-theme="shot3"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot3"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #491daf;
+  --fd-ink: #261e38;
+  --fd-outside: #392f50;
+  --fd-bezel: #4d3b78;
+  --fd-surface: #f5f3fc;
+  --fd-panel: #ded6f0;
+  --fd-panel-2: #c9bee4;
+  --fd-bg: #f5f3fc;
+  --fd-text: #261e38;
+}
+[data-mock-theme="shot3"] {
+  --fd-bezel: #4d3b78;
+}
+/* 画面紹介4 (色相 285) */
+[data-mock-theme="shot4"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot4"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #8b1daf;
+  --fd-ink: #321e38;
+  --fd-outside: #482f50;
+  --fd-bezel: #683b78;
+  --fd-surface: #faf3fc;
+  --fd-panel: #e9d6f0;
+  --fd-panel-2: #dbbee4;
+  --fd-bg: #faf3fc;
+  --fd-text: #321e38;
+}
+[data-mock-theme="shot4"] {
+  --fd-bezel: #683b78;
+}
+/* 画面紹介5 (色相 310) */
+[data-mock-theme="shot5"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot5"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #af1d97;
+  --fd-ink: #381e34;
+  --fd-outside: #502f4b;
+  --fd-bezel: #783b6d;
+  --fd-surface: #fcf3fb;
+  --fd-panel: #f0d6ec;
+  --fd-panel-2: #e4bede;
+  --fd-bg: #fcf3fb;
+  --fd-text: #381e34;
+}
+[data-mock-theme="shot5"] {
+  --fd-bezel: #783b6d;
+}
+/* 画面紹介6 (色相 330) */
+[data-mock-theme="shot6"]
+  :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+[data-mock-theme="shot6"]:is(
+  .feature-diagram,
+  .fd-app-screen,
+  .fd-route-screen
+) {
+  --fd-accent: #af1d66;
+  --fd-ink: #381e2b;
+  --fd-outside: #502f40;
+  --fd-bezel: #783b59;
+  --fd-surface: #fcf3f7;
+  --fd-panel: #f0d6e3;
+  --fd-panel-2: #e4bed1;
+  --fd-bg: #fcf3f7;
+  --fd-text: #381e2b;
+}
+[data-mock-theme="shot6"] {
+  --fd-bezel: #783b59;
+}
+
+/* 描画 (色相 150) */
+#drawing :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#drawing:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1daf66;
+  --fd-ink: #1e382b;
+  --fd-outside: #2f5040;
+  --fd-bezel: #3b7859;
+  --fd-surface: #f3fcf7;
+  --fd-panel: #d6f0e3;
+  --fd-panel-2: #bee4d1;
+  --fd-bg: #f3fcf7;
+  --fd-text: #1e382b;
+}
+/* アニメーション (色相 265) */
+#animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#animation:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #5a1daf;
+  --fd-ink: #291e38;
+  --fd-outside: #3d2f50;
+  --fd-bezel: #543b78;
+  --fd-surface: #f7f3fc;
+  --fd-panel: #e1d6f0;
+  --fd-panel-2: #cebee4;
+  --fd-bg: #f7f3fc;
+  --fd-text: #291e38;
+}
+/* 編集 (色相 38) */
+#editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#editing:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af7a1d;
+  --fd-ink: #382f1e;
+  --fd-outside: #50442f;
+  --fd-bezel: #78613b;
+  --fd-surface: #fcf9f3;
+  --fd-panel: #f0e6d6;
+  --fd-panel-2: #e4d6be;
+  --fd-bg: #fcf9f3;
+  --fd-text: #382f1e;
+}
+/* 作画支援 (色相 205) */
+#advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#advanced:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1d72af;
+  --fd-ink: #1e2e38;
+  --fd-outside: #2f4350;
+  --fd-bezel: #3b5e78;
+  --fd-surface: #f3f8fc;
+  --fd-panel: #d6e5f0;
+  --fd-panel-2: #bed4e4;
+  --fd-bg: #f3f8fc;
+  --fd-text: #1e2e38;
+}
+/* 音声 (色相 172) */
+#audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#audio:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1daf9c;
+  --fd-ink: #1e3835;
+  --fd-outside: #2f504c;
+  --fd-bezel: #3b7870;
+  --fd-surface: #f3fcfb;
+  --fd-panel: #d6f0ec;
+  --fd-panel-2: #bee4df;
+  --fd-bg: #f3fcfb;
+  --fd-text: #1e3835;
+}
+/* 保存 (色相 325) */
+#save :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#save:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af1d72;
+  --fd-ink: #381e2e;
+  --fd-outside: #502f43;
+  --fd-bezel: #783b5e;
+  --fd-surface: #fcf3f8;
+  --fd-panel: #f0d6e5;
+  --fd-panel-2: #e4bed4;
+  --fd-bg: #fcf3f8;
+  --fd-text: #381e2e;
+}
+/* ワークスペース (色相 245) */
+#workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#workspace:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #291daf;
+  --fd-ink: #211e38;
+  --fd-outside: #322f50;
+  --fd-bezel: #403b78;
+  --fd-surface: #f3f3fc;
+  --fd-panel: #d8d6f0;
+  --fd-panel-2: #c1bee4;
+  --fd-bg: #f3f3fc;
+  --fd-text: #211e38;
+}
+/* ウィジェット (色相 15) */
+#widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#widget:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af411d;
+  --fd-ink: #38251e;
+  --fd-outside: #50372f;
+  --fd-bezel: #784a3b;
+  --fd-surface: #fcf5f3;
+  --fd-panel: #f0dcd6;
+  --fd-panel-2: #e4c7be;
+  --fd-bg: #fcf5f3;
+  --fd-text: #38251e;
+}
+/* 書き出し (色相 190) */
+#export :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
+#export:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1d97af;
+  --fd-ink: #1e3438;
+  --fd-outside: #2f4b50;
+  --fd-bezel: #3b6d78;
+  --fd-surface: #f3fbfc;
+  --fd-panel: #d6ecf0;
+  --fd-panel-2: #bedee4;
+  --fd-bg: #f3fbfc;
+  --fd-text: #1e3438;
+}
+
+/* ---- ベゼル（端末の外枠）----
+   モック自身が枠を描くものと、画面紹介のようにカード側が枠を描くものが
+   あるので、両方を同じ --fd-bezel で塗る。以前は画面紹介のカードだけ
+   共通の濃い色のままで、中身のテーマ色と揃っていなかった。 */
+.fd-app-screen,
+.fd-route-screen,
+.feature-section > .feature-diagram,
+.feature-row .feature-diagram {
+  border: 6px solid var(--fd-bezel, #4a3b41) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fd-bezel, #4a3b41) 72%, #000 28%),
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
+}
+
+/* 画面紹介はカード自身が端末の外枠。中のモックは枠を持たない。
+
+   screen-mock-accuracy-base.css には
+   `.screenshot-card:has(.fd-app-screen) { border: 0 !important }` があり、
+   これは詳細度 (0,2,0) なので `.screenshot-card` (0,1,0) の !important
+   では勝てない。その結果1枚目以外のカードから外枠が消えていた。
+   同じ形のセレクタで詳細度を揃え、読み込み順で確実に上書きする。 */
+.screenshot-card,
+.screenshot-card.is-code-verified-mock,
+.screenshot-card:has(.fd-app-screen),
+.screenshot-card:has(.fd-route-screen),
+.screenshot-card:has(.feature-diagram) {
+  border: 6px solid var(--fd-bezel, #4a3b41) !important;
+  border-radius: 22px !important;
+  background: var(--fd-bezel, #4a3b41) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fd-bezel, #4a3b41) 72%, #000 28%),
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
+  overflow: hidden !important;
+}
+
+.screenshot-card
+  > :is(.feature-diagram, .fd-app-screen, .fd-route-screen, .hero-visual) {
+  border: 0 !important;
+  box-shadow: none !important;
+}

@@ -7,7 +7,7 @@
  */
 
 /* ---------- shared device treatment ---------- */
-:is(.fd-app-screen,.fd-route-screen),
+:is(.fd-app-screen, .fd-route-screen),
 .feature-section > .feature-diagram,
 .screenshot-card > .feature-diagram {
   --fd-bezel: var(--fd-outside, #4a3b41);
@@ -17,7 +17,7 @@
   overflow: hidden !important;
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--fd-bezel) 72%, #000 28%),
-    0 16px 34px rgba(25,20,28,.15) !important;
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
 }
 
 /* Legacy feature-diagram mocks use --fd-bg/--fd-text while the rebuilt
@@ -45,10 +45,14 @@
   aspect-ratio: 1 / 1 !important;
   margin: 0 !important;
 }
-.fd-frame-paper { inset: 3px !important; }
+.fd-frame-paper {
+  inset: 3px !important;
+}
 
 /* Old marker was centered against the entire strip, including the mode control. */
-.fd-frame-strip::after { display: none !important; }
+.fd-frame-strip::after {
+  display: none !important;
+}
 .fd-frame-strip-scroll {
   position: relative !important;
   margin-left: 0 !important;
@@ -65,7 +69,7 @@
   top: 50% !important;
   width: 50px !important;
   height: 50px !important;
-  transform: translate(-50%,-50%) !important;
+  transform: translate(-50%, -50%) !important;
   border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
   box-sizing: border-box !important;
@@ -83,7 +87,11 @@
   height: 5px !important;
   min-height: 5px !important;
   border-radius: 999px !important;
-  background: color-mix(in srgb, var(--fd-ink, #28242c) 22%, transparent) !important;
+  background: color-mix(
+    in srgb,
+    var(--fd-ink, #28242c) 22%,
+    transparent
+  ) !important;
   overflow: visible !important;
 }
 .fd-slider > span,
@@ -109,77 +117,38 @@
   box-shadow: 0 0 0 2px var(--fd-surface, #fff) !important;
 }
 
-/* ---------- home hero ---------- */
-.hero-visual :is(.fd-app-screen,.fd-route-screen),
-.hero-visual.frame-mock,
-.hero-visual .frame-mock {
-  --fd-accent:#ff4f79; --fd-ink:#30232b; --fd-outside:#513741; --fd-bezel:#784557;
-  --fd-surface:#fff7fa; --fd-panel:#f8dce5; --fd-panel-2:#efc6d4;
-}
-
-/* ---------- home feature rows ---------- */
-#features .feature-row:nth-child(1) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#00a86b; --fd-ink:#17372b; --fd-outside:#214c3b; --fd-bezel:#287055; --fd-surface:#f3fff9; --fd-panel:#d8f1e5; --fd-panel-2:#c1e4d4;
-}
-#features .feature-row:nth-child(2) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#7048d9; --fd-ink:#30243f; --fd-outside:#443457; --fd-bezel:#63478c; --fd-surface:#faf6ff; --fd-panel:#eadcf7; --fd-panel-2:#d9c4ef;
-}
-#features .feature-row:nth-child(3) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#e5a000; --fd-ink:#3d321b; --fd-outside:#55482b; --fd-bezel:#80682d; --fd-surface:#fffaed; --fd-panel:#f3e6bf; --fd-panel-2:#e7d49d;
-}
-#features .feature-row:nth-child(4) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#1686d9; --fd-ink:#1c3144; --fd-outside:#284a63; --fd-bezel:#326f9d; --fd-surface:#f3faff; --fd-panel:#d7eaf8; --fd-panel-2:#beddf2;
-}
-#features .feature-row:nth-child(5) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#e35b42; --fd-ink:#452820; --fd-outside:#60382f; --fd-bezel:#934638; --fd-surface:#fff6f3; --fd-panel:#f7d8d1; --fd-panel-2:#edc0b6;
-}
-
-/* ---------- home screenshot gallery ---------- */
-.screenshot-scroller .screenshot-card:nth-child(1) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#009fb3; --fd-ink:#17343a; --fd-outside:#24474e; --fd-bezel:#287184; --fd-surface:#f1fcfe; --fd-panel:#d3eef2; --fd-panel-2:#bee4e9; }
-.screenshot-scroller .screenshot-card:nth-child(2) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#c13aa7; --fd-ink:#42233c; --fd-outside:#59334f; --fd-bezel:#823a72; --fd-surface:#fff5fc; --fd-panel:#f1d8eb; --fd-panel-2:#e7c2de; }
-.screenshot-scroller .screenshot-card:nth-child(3) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#6e941a; --fd-ink:#30381f; --fd-outside:#46512e; --fd-bezel:#61753a; --fd-surface:#fbfff2; --fd-panel:#e6efd0; --fd-panel-2:#d6e4b5; }
-.screenshot-scroller .screenshot-card:nth-child(4) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#e34434; --fd-ink:#452720; --fd-outside:#60382f; --fd-bezel:#934638; --fd-surface:#fff6f3; --fd-panel:#f7d8d1; --fd-panel-2:#edc0b6; }
-.screenshot-scroller .screenshot-card:nth-child(5) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#3154d2; --fd-ink:#202b49; --fd-outside:#2f3a61; --fd-bezel:#4058a0; --fd-surface:#f5f7ff; --fd-panel:#dce2f8; --fd-panel-2:#c9d3f1; }
-.screenshot-scroller .screenshot-card:nth-child(6) :is(.fd-app-screen,.fd-route-screen,.feature-diagram) { --fd-accent:#b96c0d; --fd-ink:#3c2d1b; --fd-outside:#55412c; --fd-bezel:#7e5a29; --fd-surface:#fff9ef; --fd-panel:#f2e1c4; --fd-panel-2:#e7ceb0; }
-
-/* ---------- Features page: explicit section IDs, not feature-row ---------- */
-#drawing :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#00a86b; --fd-ink:#17372b; --fd-outside:#214c3b; --fd-bezel:#287055; --fd-surface:#f3fff9; --fd-panel:#d8f1e5; --fd-panel-2:#c1e4d4;
-}
-#animation :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#7848dc; --fd-ink:#30243f; --fd-outside:#443457; --fd-bezel:#65468f; --fd-surface:#faf6ff; --fd-panel:#eadcf7; --fd-panel-2:#d9c4ef;
-}
-#editing :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#e39b00; --fd-ink:#3e321a; --fd-outside:#594829; --fd-bezel:#85672b; --fd-surface:#fff9eb; --fd-panel:#f4e3b9; --fd-panel-2:#e9cf92;
-}
-#advanced :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#1688dd; --fd-ink:#1b3145; --fd-outside:#294b65; --fd-bezel:#3272a1; --fd-surface:#f2faff; --fd-panel:#d5eafb; --fd-panel-2:#bbdcf4;
-}
-#audio :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#00a894; --fd-ink:#173832; --fd-outside:#214d45; --fd-bezel:#267465; --fd-surface:#f1fffb; --fd-panel:#d4f0e9; --fd-panel-2:#bde3da;
-}
-#save :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#d84580; --fd-ink:#402431; --fd-outside:#573342; --fd-bezel:#803f5b; --fd-surface:#fff5f9; --fd-panel:#f3d8e3; --fd-panel-2:#e7bfd0;
-}
-#workspace :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#5b59dc; --fd-ink:#272647; --fd-outside:#37375e; --fd-bezel:#4f4f93; --fd-surface:#f7f7ff; --fd-panel:#dedff7; --fd-panel-2:#cacbf0;
-}
-#widget :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#ef6a23; --fd-ink:#452b1e; --fd-outside:#603d2b; --fd-bezel:#914f2e; --fd-surface:#fff7f1; --fd-panel:#f7dfcf; --fd-panel-2:#edc7ae;
-}
-#export :is(.fd-app-screen,.fd-route-screen,.feature-diagram) {
-  --fd-accent:#1588a8; --fd-ink:#18343c; --fd-outside:#234852; --fd-bezel:#2f7385; --fd-surface:#f2fbfd; --fd-panel:#d5edf2; --fd-panel-2:#bfdee6;
-}
+/* ---------- 配色は screen-mock-palette.css に一本化 ----------
+   以前はこのファイルにも画面ごとのパレットがあったが、位置ベースの
+   セレクタが実際のDOMとずれていて（#features の先頭が .section-head、
+   ヒーローのモックは要素自身が .hero-visual）、当たらない指定が残り
+   一部の画面が既定色のまま重複していた。
+   色の定義は data-mock-theme と節IDで名指しする palette 側だけに置き、
+   このファイルは端末の見た目（枠・フレーム一覧・スライダー）に専念する。 */
 
 /* Accent-colour propagation for legacy feature diagrams. */
-.feature-section :is(.fd-icon-btn.is-active,.fd-segment.is-active,.fd-format-row .fd-radio.is-active) {
+.feature-section
+  :is(
+    .fd-icon-btn.is-active,
+    .fd-segment.is-active,
+    .fd-format-row .fd-radio.is-active
+  ) {
   color: var(--fd-accent) !important;
   border-color: var(--fd-accent) !important;
 }
-.feature-section .fd-segment.is-active { background: var(--fd-accent) !important; color:#fff !important; }
-.feature-section .fd-layer-row.is-active { background: color-mix(in srgb, var(--fd-accent) 16%, transparent) !important; }
-.feature-section .fd-audio-track { background: var(--fd-panel) !important; color: var(--fd-ink) !important; }
+.feature-section .fd-segment.is-active {
+  background: var(--fd-accent) !important;
+  color: #fff !important;
+}
+.feature-section .fd-layer-row.is-active {
+  background: color-mix(in srgb, var(--fd-accent) 16%, transparent) !important;
+}
+.feature-section .fd-audio-track {
+  background: var(--fd-panel) !important;
+  color: var(--fd-ink) !important;
+}
 
 /* Keep artwork paper neutral. */
 .fd-app-canvas-stage,
-.fd-timeline-preview { --fd-paper:#fff; }
+.fd-timeline-preview {
+  --fd-paper: #fff;
+}

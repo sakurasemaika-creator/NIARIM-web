@@ -1,0 +1,225 @@
+/*
+ * 画面再現図の表示崩れ修正
+ *
+ * ここで直しているのは、モック1枚ごとの飾りではなく「端末の画面として
+ * 成立していない」箇所。
+ *  - 各行が画面幅いっぱいに広がらず中央に寄っていた（元に戻す／進むが
+ *    左上ではなく中央にあるように見えていた原因）
+ *  - 端末のベゼルが描かれていないモックがあった
+ *  - フレーム一覧の現在地枠が画面の中央に来ていなかった
+ *  - はみ出して文字やアイコンが途切れていた
+ */
+
+/* ---- 1. 画面の各行を必ず横いっぱいに ----
+   ヒーローのモックは .hero-visual 自身が画面本体を兼ねており、
+   home.css の .hero-visual { align-items: center } を受けてしまう。
+   その結果アプリバーやツールバーが内容幅に縮み、中央寄せに見えていた。 */
+.fd-app-screen,
+.fd-route-screen,
+.feature-diagram {
+  align-items: stretch !important;
+}
+
+.fd-app-screen > *,
+.fd-route-screen > *,
+.feature-diagram > * {
+  align-self: stretch !important;
+  max-width: 100% !important;
+}
+
+/* ---- 2. 画面内の横並びは、はみ出す代わりに縮める ----
+   ツールバーやフレーム一覧は実機同様に横スクロールするが、
+   その中のアイコンまで潰れないよう最小幅は保つ。 */
+.fd-topbar,
+.fd-appbar,
+.fd-timeline-topbar,
+.fd-transport,
+.fd-sheet-row,
+.fd-layer-shortcuts {
+  min-width: 0 !important;
+}
+
+.fd-topbar > *,
+.fd-appbar > *,
+.fd-timeline-topbar > * {
+  flex-shrink: 0 !important;
+}
+
+/* 画面内のテキストは切り落とさず、収まらなければ折り返す。 */
+.fd-app-screen :is(strong, span, p, h3),
+.fd-route-screen :is(strong, span, p, h3) {
+  min-width: 0 !important;
+}
+
+/* ---- 3. スライダーのつまみが枠を割らないように ----
+   つまみは中身の右端から6pxはみ出す作りなので、帯の側に余白を確保する。 */
+.fd-slider,
+.fd-sheet-slider {
+  margin-inline: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* ---- 4. フレーム一覧 ----
+   現在地の枠が左端に付いたままで、右側の「フレーム一覧／タイムライン」の
+   切り替えが枠外へ押し出されて文字が切れていた。
+   一覧側を可変・切り替え側を固定にしたうえで、一覧を中央寄せにして
+   実機と同じく編集中のフレームが真ん中に来るようにする。 */
+.fd-frame-strip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+}
+
+.fd-frame-strip-scroll {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  justify-content: center !important;
+  /* テーマ側で中央マーカー用に入れていた左右パディングは、
+     中央寄せにしたことで不要（かつ一覧を右へずらしてしまう）。 */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 中央マーカーは .fd-frame-thumb.is-current の枠だけを使う。
+   擬似要素で重ねると二重に見えるため止める。 */
+.fd-frame-strip-scroll::after {
+  content: none !important;
+  display: none !important;
+}
+
+.fd-frame-mode {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+/* ---- 5. 狭いモックでの切れ対策 ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを並べているため、
+   幅の足りない画面では右端で要素が半分だけ切れて壊れて見えていた。 */
+.fd-app-screen,
+.fd-route-screen {
+  container-type: inline-size;
+}
+
+/* フレーム一覧の右にある表示切り替えは幅を135px使う。狭い画面では
+   サムネイルを優先し、切り替えは省く（実機でも副次的な操作）。 */
+@container (max-width: 420px) {
+  .fd-frame-mode {
+    display: none !important;
+  }
+}
+
+/* ツールバーは実機でも横スクロールする。ただし端でアイコンが
+   ちょうど半分切れると壊れて見えるので、端をぼかして
+   「まだ続く」ことが分かる見え方にする。 */
+.fd-canvas-screen > .fd-toolbar {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - 28px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - 28px),
+    transparent 100%
+  );
+}
+
+/* ---- 6. タイムライン画面の細かい崩れ ---- */
+
+/* 再生位置の赤い線が画面の右端に貼り付いていて、端末の縁から
+   はみ出した赤い帯のように見えていた。編集中フレーム（4枚目）の
+   位置に合わせる。 */
+.fd-timeline-screen > .fd-playhead {
+  right: auto !important;
+  left: 51% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* プレビューの読み込み中スピナーは、静止した再現図では
+   「読み込みが終わっていない画面」に見えてしまうので出さない。 */
+.fd-preview-loading {
+  display: none !important;
+}
+
+/* 鍵マークが絵文字のまま色付きで浮いていたので、
+   画面内の他のアイコンと同じ単色の見え方に揃える。 */
+.fd-watermark-tool small,
+.fd-end-card-row span:last-child {
+  filter: grayscale(1) !important;
+  opacity: 0.55 !important;
+}
+
+/* 再生位置の線は下部のトラック段だけに掛ける。以前は高さ固定 134px で
+   再生ボタンの列や書き出しツールの列まで縦に貫いていた。 */
+.fd-timeline-screen > .fd-playhead {
+  top: auto !important;
+  bottom: 0 !important;
+  height: 21% !important;
+  max-height: none !important;
+}
+
+/* ---- 7. 画面全体を枠に合わせて縮める ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを積んでいるため、
+   枠が低いとタイムラインの段などが下にはみ出して切れていた。
+   main.js の fitMockScreens() が収まらない画面だけを測って縮める。
+   幅・高さ・transform は他レイヤーの !important に勝つ必要があるため
+   JS側からインラインで指定している。ここでは目印のクラスだけ。 */
+.is-fit-scaled {
+  transform-origin: top left;
+}
+
+/* ---- 8. 縦にスクロールする画面の下端 ----
+   書き出し画面のように一覧が続く画面は、枠の下端で行がちょうど半分
+   切れて壊れて見えることがある。実機でもスクロールする箇所なので、
+   下端をぼかして「まだ続く」ことが分かる見え方にする。 */
+.fd-route-screen > .fd-route-body {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(100% - 26px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0,
+    #000 calc(100% - 26px),
+    transparent 100%
+  );
+}
+
+/* ---- 9. 削除ボタンが赤い塊に見えていた ----
+   アイコンスプライトにゴミ箱が無く、代用の「▮」を赤くしていたため
+   ただの赤い四角が浮いて見えていた。CSSでゴミ箱の形に描く。 */
+.fd-delete-mark {
+  position: relative !important;
+  display: inline-block !important;
+  width: 13px !important;
+  height: 15px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+.fd-delete-mark::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 1px !important;
+  width: 13px !important;
+  height: 2px !important;
+  border-radius: 1px !important;
+  background: #ff392f !important;
+}
+.fd-delete-mark::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 1.5px !important;
+  top: 4px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border: 1.5px solid #ff392f !important;
+  border-top: 0 !important;
+  border-radius: 0 0 2px 2px !important;
+}

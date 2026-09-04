@@ -25,14 +25,25 @@ html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
 
 /* The first static gallery reconstruction predates is-current markup.
    Treat its first frame as the current frame so the location marker is visible. */
-html body .screenshot-scroller .screenshot-card:first-child .fd-frame-strip-scroll > .fd-frame-thumb:first-child {
+html
+  body
+  .screenshot-scroller
+  .screenshot-card:first-child
+  .fd-frame-strip-scroll
+  > .fd-frame-thumb:first-child {
   width: 50px !important;
   height: 50px !important;
   border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
   box-sizing: border-box !important;
 }
-html body .screenshot-scroller .screenshot-card:first-child .fd-frame-strip-scroll > .fd-frame-thumb:first-child > svg {
+html
+  body
+  .screenshot-scroller
+  .screenshot-card:first-child
+  .fd-frame-strip-scroll
+  > .fd-frame-thumb:first-child
+  > svg {
   height: 40px !important;
   max-width: 40px !important;
   max-height: 40px !important;
@@ -46,24 +57,36 @@ html body .fd-frame-thumb.fd-frame-thumb .fd-frame-paper {
 }
 
 /* Theme-aware surfaces that were still commonly hard-coded by accuracy layers. */
-html body .feature-section > .feature-diagram :is(
-  .fd-settings-card,
-  .fd-route-card,
-  .fd-save-slot,
-  .fd-workspace-row,
-  .fd-scene-line,
-  .fd-timeline-row
-),
-html body .screenshot-card > .feature-diagram :is(
-  .fd-settings-card,
-  .fd-route-card,
-  .fd-save-slot,
-  .fd-workspace-row,
-  .fd-scene-line,
-  .fd-timeline-row
-) {
+html
+  body
+  .feature-section
+  > .feature-diagram
+  :is(
+    .fd-settings-card,
+    .fd-route-card,
+    .fd-save-slot,
+    .fd-workspace-row,
+    .fd-scene-line,
+    .fd-timeline-row
+  ),
+html
+  body
+  .screenshot-card
+  > .feature-diagram
+  :is(
+    .fd-settings-card,
+    .fd-route-card,
+    .fd-save-slot,
+    .fd-workspace-row,
+    .fd-scene-line,
+    .fd-timeline-row
+  ) {
   color: var(--fd-text, var(--fd-ink, #28242c)) !important;
-  border-color: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 18%, transparent) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--fd-text, var(--fd-ink, #28242c)) 18%,
+    transparent
+  ) !important;
 }
 
 /* Make theme changes visible across the whole reconstructed UI, not only the bezel.
@@ -112,38 +135,65 @@ html body :is(.feature-section,.screenshot-card) .feature-diagram :is(
 }
 
 /* Preserve true white only for the drawing paper/canvas itself. */
-html body .feature-section > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage),
-html body .screenshot-card > .feature-diagram :is(.fd-canvas,.fd-app-canvas-stage) {
+html
+  body
+  .feature-section
+  > .feature-diagram
+  :is(.fd-canvas, .fd-app-canvas-stage),
+html
+  body
+  .screenshot-card
+  > .feature-diagram
+  :is(.fd-canvas, .fd-app-canvas-stage) {
   background: #fff !important;
 }
 
 /* Internal horizontal tool rows must scroll/clip inside the mock, never clip the phone bezel. */
-html body .screenshot-card > .feature-diagram :is(
-  .fd-toolbar,
-  .fd-timeline-toolbar,
-  .fd-layer-shortcuts,
-  .fd-export-segments,
-  .fd-frame-strip-scroll
-),
-html body .feature-section > .feature-diagram :is(
-  .fd-toolbar,
-  .fd-timeline-toolbar,
-  .fd-layer-shortcuts,
-  .fd-export-segments,
-  .fd-frame-strip-scroll
-) {
+html
+  body
+  .screenshot-card
+  > .feature-diagram
+  :is(
+    .fd-toolbar,
+    .fd-timeline-toolbar,
+    .fd-layer-shortcuts,
+    .fd-export-segments,
+    .fd-frame-strip-scroll
+  ),
+html
+  body
+  .feature-section
+  > .feature-diagram
+  :is(
+    .fd-toolbar,
+    .fd-timeline-toolbar,
+    .fd-layer-shortcuts,
+    .fd-export-segments,
+    .fd-frame-strip-scroll
+  ) {
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
-html body .screenshot-card > .feature-diagram :is(.fd-toolbar,.fd-timeline-toolbar,.fd-layer-shortcuts),
-html body .feature-section > .feature-diagram :is(.fd-toolbar,.fd-timeline-toolbar,.fd-layer-shortcuts) {
+html
+  body
+  .screenshot-card
+  > .feature-diagram
+  :is(.fd-toolbar, .fd-timeline-toolbar, .fd-layer-shortcuts),
+html
+  body
+  .feature-section
+  > .feature-diagram
+  :is(.fd-toolbar, .fd-timeline-toolbar, .fd-layer-shortcuts) {
   overflow-x: auto !important;
   overflow-y: hidden !important;
   scrollbar-width: none !important;
 }
 
 /* Ensure the card's inner reconstruction always fits its bezel exactly. */
-html body .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+html
+  body
+  .screenshot-card
+  > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   inset: auto !important;
   margin: 0 !important;
   max-width: 100% !important;
@@ -201,29 +251,57 @@ html body .scroll-top-btn:hover {
 
 /* SP: prevent long translated labels from forcing mock or page overflow. */
 @media (max-width: 640px) {
-  html body .feature-section > .feature-diagram :is(
-    .fd-setting-row,
-    .fd-sheet-row,
-    .fd-format-row,
-    .fd-workspace-row,
-    .fd-layer-row,
-    .fd-scene-line,
-    .fd-timeline-row
-  ),
-  html body .screenshot-card > .feature-diagram :is(
-    .fd-setting-row,
-    .fd-sheet-row,
-    .fd-format-row,
-    .fd-workspace-row,
-    .fd-layer-row,
-    .fd-scene-line,
-    .fd-timeline-row
-  ) {
+  html
+    body
+    .feature-section
+    > .feature-diagram
+    :is(
+      .fd-setting-row,
+      .fd-sheet-row,
+      .fd-format-row,
+      .fd-workspace-row,
+      .fd-layer-row,
+      .fd-scene-line,
+      .fd-timeline-row
+    ),
+  html
+    body
+    .screenshot-card
+    > .feature-diagram
+    :is(
+      .fd-setting-row,
+      .fd-sheet-row,
+      .fd-format-row,
+      .fd-workspace-row,
+      .fd-layer-row,
+      .fd-scene-line,
+      .fd-timeline-row
+    ) {
     min-width: 0 !important;
     max-width: 100% !important;
   }
-  html body .feature-section > .feature-diagram :is(strong,small,.fd-layer-name,.fd-setting-row span,.fd-format-row span),
-  html body .screenshot-card > .feature-diagram :is(strong,small,.fd-layer-name,.fd-setting-row span,.fd-format-row span) {
+  html
+    body
+    .feature-section
+    > .feature-diagram
+    :is(
+      strong,
+      small,
+      .fd-layer-name,
+      .fd-setting-row span,
+      .fd-format-row span
+    ),
+  html
+    body
+    .screenshot-card
+    > .feature-diagram
+    :is(
+      strong,
+      small,
+      .fd-layer-name,
+      .fd-setting-row span,
+      .fd-format-row span
+    ) {
     min-width: 0 !important;
   }
 
@@ -258,7 +336,10 @@ html body .scroll-top-btn:hover {
     white-space: normal !important;
     text-align: center !important;
   }
-  html body .pricing-plan-badge :is(.pricing-plan-badge-pre,.pricing-plan-badge-main) {
+  html
+    body
+    .pricing-plan-badge
+    :is(.pricing-plan-badge-pre, .pricing-plan-badge-main) {
     max-width: 100% !important;
     overflow-wrap: anywhere !important;
   }

@@ -3,7 +3,9 @@
 /* App screen gallery: guarantee a real end gutter so the last card is never clipped. */
 .screenshot-scroller {
   padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
-  scroll-padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
+  scroll-padding-right: calc(
+    max(0px, var(--container-padding)) + 18px
+  ) !important;
 }
 .screenshot-scroller > .screenshot-card:last-of-type {
   margin-right: 18px !important;
@@ -59,16 +61,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   inset: 3px !important;
 }
 
-/* Features: make each section visibly distinct as a complete preset, not just by bezel. */
-#drawing > .feature-diagram { --fd-bg:#f3fff9; --fd-text:#17372b; --fd-panel:#d8f1e5; --fd-accent:#00a86b; --fd-bezel:#287055; }
-#animation > .feature-diagram { --fd-bg:#f8f1ff; --fd-text:#30213f; --fd-panel:#e5d1f6; --fd-accent:#7a3ee8; --fd-bezel:#5f3b90; }
-#editing > .feature-diagram { --fd-bg:#fff5df; --fd-text:#433319; --fd-panel:#f1d79d; --fd-accent:#e29a00; --fd-bezel:#806324; }
-#advanced > .feature-diagram { --fd-bg:#edf8ff; --fd-text:#153247; --fd-panel:#cce5f8; --fd-accent:#1283d6; --fd-bezel:#2d6c9c; }
-#audio > .feature-diagram { --fd-bg:#effff9; --fd-text:#173b32; --fd-panel:#cceee3; --fd-accent:#00a58b; --fd-bezel:#226c5e; }
-#save > .feature-diagram { --fd-bg:#fff0f6; --fd-text:#432332; --fd-panel:#f0cddd; --fd-accent:#d83d7d; --fd-bezel:#7c3957; }
-#workspace > .feature-diagram { --fd-bg:#f2f2ff; --fd-text:#26264a; --fd-panel:#d5d6f5; --fd-accent:#5652df; --fd-bezel:#49498f; }
-#widget > .feature-diagram { --fd-bg:#fff2e8; --fd-text:#472a19; --fd-panel:#f4d3bd; --fd-accent:#ee6721; --fd-bezel:#8b4828; }
-#export > .feature-diagram { --fd-bg:#eefafd; --fd-text:#153640; --fd-panel:#cae9ef; --fd-accent:#1087a7; --fd-bezel:#2a7081; }
+/* 節ごとの配色は screen-mock-palette.css に一本化した。 */
 
 .feature-section > .feature-diagram {
   background: var(--fd-bg) !important;
@@ -77,21 +70,35 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   border-radius: 22px !important;
   box-sizing: border-box !important;
 }
-.feature-section > .feature-diagram :is(.fd-topbar,.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-panel,.fd-sheet) {
+.feature-section
+  > .feature-diagram
+  :is(
+    .fd-topbar,
+    .fd-timeline-toolbar,
+    .fd-frames,
+    .fd-layers,
+    .fd-audio-track,
+    .fd-panel,
+    .fd-sheet
+  ) {
   color: var(--fd-text) !important;
 }
 
 /* One visual language for every mock slider, including sheet sliders whose fill is an <i>. */
-:is(.fd-slider,.fd-sheet-slider) {
+:is(.fd-slider, .fd-sheet-slider) {
   position: relative !important;
   height: 5px !important;
   min-height: 5px !important;
   border: 0 !important;
   border-radius: 999px !important;
-  background: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 22%, transparent) !important;
+  background: color-mix(
+    in srgb,
+    var(--fd-text, var(--fd-ink, #28242c)) 22%,
+    transparent
+  ) !important;
   overflow: visible !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > :is(span,i) {
+:is(.fd-slider, .fd-sheet-slider) > :is(span, i) {
   position: absolute !important;
   inset: 0 auto 0 0 !important;
   width: 64% !important;
@@ -99,7 +106,7 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > :is(span,i)::after {
+:is(.fd-slider, .fd-sheet-slider) > :is(span, i)::after {
   content: "" !important;
   position: absolute !important;
   right: -6px !important;
