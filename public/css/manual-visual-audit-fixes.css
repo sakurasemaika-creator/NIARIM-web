@@ -3,24 +3,30 @@
 /* App screen gallery: every card bezel follows that card's appearance preset. */
 .screenshot-scroller {
   padding-inline: max(0px, var(--container-padding)) !important;
+  padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
   padding-bottom: 0.9rem !important;
   scroll-padding-inline: max(0px, var(--container-padding)) !important;
+  scroll-padding-right: calc(max(0px, var(--container-padding)) + 18px) !important;
+  overscroll-behavior-inline: contain !important;
 }
 .screenshot-scroller::after {
   content: "";
-  flex: 0 0 max(0px, var(--container-padding));
+  flex: 0 0 calc(max(0px, var(--container-padding)) + 18px);
+}
+.screenshot-scroller > .screenshot-card:last-of-type {
+  margin-right: 18px !important;
 }
 .screenshot-card {
   box-sizing: border-box !important;
   overflow: hidden !important;
   scroll-snap-align: start;
 }
-.screenshot-card:nth-child(1) { --fd-bezel:#287184; }
-.screenshot-card:nth-child(2) { --fd-bezel:#823a72; }
-.screenshot-card:nth-child(3) { --fd-bezel:#61753a; }
-.screenshot-card:nth-child(4) { --fd-bezel:#934638; }
-.screenshot-card:nth-child(5) { --fd-bezel:#4058a0; }
-.screenshot-card:nth-child(6) { --fd-bezel:#7e5a29; }
+.screenshot-card:nth-child(1) { --fd-bezel:#287184; --fd-accent:#009fb3; --fd-bg:#f1fcfe; --fd-panel:#d3eef2; --fd-text:#17343a; }
+.screenshot-card:nth-child(2) { --fd-bezel:#823a72; --fd-accent:#c13aa7; --fd-bg:#fff5fc; --fd-panel:#f1d8eb; --fd-text:#42233c; }
+.screenshot-card:nth-child(3) { --fd-bezel:#61753a; --fd-accent:#6e941a; --fd-bg:#fbfff2; --fd-panel:#e6efd0; --fd-text:#30381f; }
+.screenshot-card:nth-child(4) { --fd-bezel:#934638; --fd-accent:#e34434; --fd-bg:#fff6f3; --fd-panel:#f7d8d1; --fd-text:#452720; }
+.screenshot-card:nth-child(5) { --fd-bezel:#4058a0; --fd-accent:#3154d2; --fd-bg:#f5f7ff; --fd-panel:#dce2f8; --fd-text:#202b49; }
+.screenshot-card:nth-child(6) { --fd-bezel:#7e5a29; --fd-accent:#b96c0d; --fd-bg:#fff9ef; --fd-panel:#f2e1c4; --fd-text:#3c2d1b; }
 .screenshot-card,
 .screenshot-card:first-child {
   border: 6px solid var(--fd-bezel, #4a3b41) !important;
@@ -38,6 +44,8 @@
   min-width: 0 !important;
   min-height: 0 !important;
   overflow: hidden !important;
+  background: var(--fd-bg, var(--fd-surface, #fff)) !important;
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
 }
 
 /* Legacy home feature diagrams also need a visible themed bezel. */
@@ -60,50 +68,77 @@
   content: none !important;
   display: none !important;
 }
-.fd-frame-strip-scroll {
+html body .fd-canvas-screen.fd-canvas-screen .fd-frame-strip-scroll,
+html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   display: flex !important;
   align-items: center !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   padding-left: calc(50% - 25px) !important;
   padding-right: calc(50% - 25px) !important;
+  scroll-padding-left: calc(50% - 25px) !important;
+  scroll-padding-right: calc(50% - 25px) !important;
   gap: 0 !important;
 }
-.fd-frame-thumb,
-.fd-frame-add {
+.fd-frame.fd-frame,
+.fd-frame-thumb.fd-frame-thumb,
+.fd-frame-add.fd-frame-add {
   width: 50px !important;
   height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
   flex: 0 0 50px !important;
   aspect-ratio: 1 / 1 !important;
   margin: 0 !important;
   box-sizing: border-box !important;
 }
+.fd-frame.is-active,
 .fd-frame-thumb.is-current {
   width: 50px !important;
   height: 50px !important;
+  box-sizing: border-box !important;
+}
+.fd-frame-thumb.is-current {
   border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
-  box-sizing: border-box !important;
 }
 .fd-frame-thumb.is-current .fd-frame-paper {
   inset: 3px !important;
 }
 
-/* Features page: enforce visible palette differences on legacy diagrams too. */
+/* Features page: enforce visibly different presets on the entire reconstructed screen. */
 #drawing > .feature-diagram { --fd-bg:#f3fff9; --fd-text:#17372b; --fd-panel:#d8f1e5; --fd-accent:#00a86b; --fd-bezel:#287055; }
-#animation > .feature-diagram { --fd-bg:#faf6ff; --fd-text:#30243f; --fd-panel:#eadcf7; --fd-accent:#7848dc; --fd-bezel:#65468f; }
-#editing > .feature-diagram { --fd-bg:#fff9eb; --fd-text:#3e321a; --fd-panel:#f4e3b9; --fd-accent:#e39b00; --fd-bezel:#85672b; }
-#advanced > .feature-diagram { --fd-bg:#f2faff; --fd-text:#1b3145; --fd-panel:#d5eafb; --fd-accent:#1688dd; --fd-bezel:#3272a1; }
-#audio > .feature-diagram { --fd-bg:#f1fffb; --fd-text:#173832; --fd-panel:#d4f0e9; --fd-accent:#00a894; --fd-bezel:#267465; }
-#save > .feature-diagram { --fd-bg:#fff5f9; --fd-text:#402431; --fd-panel:#f3d8e3; --fd-accent:#d84580; --fd-bezel:#803f5b; }
-#workspace > .feature-diagram { --fd-bg:#f7f7ff; --fd-text:#272647; --fd-panel:#dedff7; --fd-accent:#5b59dc; --fd-bezel:#4f4f93; }
-#widget > .feature-diagram { --fd-bg:#fff7f1; --fd-text:#452b1e; --fd-panel:#f7dfcf; --fd-accent:#ef6a23; --fd-bezel:#914f2e; }
-#export > .feature-diagram { --fd-bg:#f2fbfd; --fd-text:#18343c; --fd-panel:#d5edf2; --fd-accent:#1588a8; --fd-bezel:#2f7385; }
+#animation > .feature-diagram { --fd-bg:#f8f1ff; --fd-text:#30213f; --fd-panel:#e5d1f6; --fd-accent:#7a3ee8; --fd-bezel:#5f3b90; }
+#editing > .feature-diagram { --fd-bg:#fff5df; --fd-text:#433319; --fd-panel:#f1d79d; --fd-accent:#e29a00; --fd-bezel:#806324; }
+#advanced > .feature-diagram { --fd-bg:#edf8ff; --fd-text:#153247; --fd-panel:#cce5f8; --fd-accent:#1283d6; --fd-bezel:#2d6c9c; }
+#audio > .feature-diagram { --fd-bg:#effff9; --fd-text:#173b32; --fd-panel:#cceee3; --fd-accent:#00a58b; --fd-bezel:#226c5e; }
+#save > .feature-diagram { --fd-bg:#fff0f6; --fd-text:#432332; --fd-panel:#f0cddd; --fd-accent:#d83d7d; --fd-bezel:#7c3957; }
+#workspace > .feature-diagram { --fd-bg:#f2f2ff; --fd-text:#26264a; --fd-panel:#d5d6f5; --fd-accent:#5652df; --fd-bezel:#49498f; }
+#widget > .feature-diagram { --fd-bg:#fff2e8; --fd-text:#472a19; --fd-panel:#f4d3bd; --fd-accent:#ee6721; --fd-bezel:#8b4828; }
+#export > .feature-diagram { --fd-bg:#eefafd; --fd-text:#153640; --fd-panel:#cae9ef; --fd-accent:#1087a7; --fd-bezel:#2a7081; }
 .feature-section > .feature-diagram {
-  border-color: var(--fd-bezel) !important;
+  border: 6px solid var(--fd-bezel) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
   background: var(--fd-bg) !important;
   color: var(--fd-text) !important;
 }
+.feature-section > .feature-diagram :is(.fd-topbar,.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-panel,.fd-sheet,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row) {
+  color: var(--fd-text) !important;
+}
+.feature-section > .feature-diagram :is(.fd-timeline-toolbar,.fd-frames,.fd-layers,.fd-audio-track,.fd-clip-detail-sheet,.fd-audio-sheet-head,.fd-sheet-row) {
+  background-color: var(--fd-panel) !important;
+}
+.feature-section > .feature-diagram :is(.fd-icon-btn.is-active,.fd-segment.is-active,.fd-radio.is-active,.fd-frame.is-active) {
+  color: var(--fd-accent) !important;
+  border-color: var(--fd-accent) !important;
+}
+.feature-section > .feature-diagram .fd-segment.is-active {
+  background: var(--fd-accent) !important;
+  color: #fff !important;
+}
 
-/* One slider language across all reconstructions. */
+/* One slider language across every reconstruction, including sheet sliders whose fill is an <i>. */
 :is(.fd-slider,.fd-sheet-slider) {
   position: relative !important;
   height: 5px !important;
@@ -113,16 +148,14 @@
   background: color-mix(in srgb, var(--fd-text, var(--fd-ink, #28242c)) 22%, transparent) !important;
   overflow: visible !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > span {
+:is(.fd-slider,.fd-sheet-slider) > :is(span,i) {
   position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  width: 64% !important;
+  inset: 0 auto 0 0 !important;
   height: 5px !important;
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;
 }
-:is(.fd-slider,.fd-sheet-slider) > span::after {
+:is(.fd-slider,.fd-sheet-slider) > :is(span,i)::after {
   content: "" !important;
   position: absolute !important;
   right: -6px !important;
@@ -133,4 +166,23 @@
   border-radius: 50% !important;
   background: var(--fd-accent, #ff5c7a) !important;
   box-shadow: 0 0 0 2px var(--fd-bg, var(--fd-surface, #fff)) !important;
+}
+
+/* SP safety: prevent reconstructed screens and their inner rows from causing page-level horizontal clipping. */
+@media (max-width: 640px) {
+  .feature-section,
+  .feature-section > .feature-diagram,
+  .screenshot-card,
+  .screenshot-card > .feature-diagram {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .feature-section > .feature-diagram :is(.fd-sheet-row,.fd-setting-row,.fd-format-row,.fd-layer-row,.fd-audio-track) {
+    min-width: 0 !important;
+  }
+  .feature-section > .feature-diagram :is(.fd-layer-name,.fd-setting-row > span:first-child,.fd-format-row > span:first-child) {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
 }
