@@ -565,24 +565,58 @@
     );
   }
 
-  function themePresetRow(key, fallback, current) {
+  /* テーマ一覧の行をタップしても、その行が「選択中」になるわけではない。
+     タップはそのテーマの色の組み合わせを上の「カラーカスタマイズ」へ
+     流し込むだけで、以後そこで色を変えても元のテーマは変わらない。
+     だからチェックも選択中の面も付かない。テーマそのものを触るのは
+     三点メニューの中（編集・名前変更・複製・書き出し・削除）。 */
+  function themePresetRow(key, fallback, opt) {
+    var o = opt || {};
     return (
       '<div class="fd-theme-preset' +
-      (current ? " is-current" : "") +
+      (o.menuOpen ? " has-menu" : "") +
       '">' +
       '<span class="fd-theme-preset-name" data-i18n="' +
       key +
       '">' +
       fallback +
       "</span>" +
-      (current ? '<span class="fd-theme-check"></span>' : "") +
       '<span class="fd-spacer"></span>' +
       '<span class="fd-theme-star' +
-      (current ? " is-on" : "") +
+      (o.favorite ? " is-on" : "") +
       '">' +
-      (current ? "★" : "☆") +
+      (o.favorite ? "★" : "☆") +
       "</span>" +
       '<span class="fd-layer-menu">⋮</span>' +
+      icon("ic-drag_handle", "fd-theme-drag") +
+      (o.menuOpen ? themePresetMenu() : "") +
+      "</div>"
+    );
+  }
+
+  function themePresetMenu() {
+    var items = [
+      ["fd.themeMenuEdit", "編集", " is-lead"],
+      ["fd.themeMenuRename", "名前変更", ""],
+      ["fd.themeMenuDuplicate", "複製", ""],
+      ["fd.themeMenuExport", "書き出し (.niatheme)", ""],
+      ["fd.themeMenuDelete", "削除", " is-danger"],
+    ];
+    return (
+      '<div class="fd-theme-menu">' +
+      items
+        .map(function (it) {
+          return (
+            '<span class="fd-theme-menu-item' +
+            it[2] +
+            '" data-i18n="' +
+            it[0] +
+            '">' +
+            it[1] +
+            "</span>"
+          );
+        })
+        .join("") +
       "</div>"
     );
   }
@@ -601,12 +635,17 @@
       themeColorRow("fd.themeUpdateMark", "更新マーク色", "#ffb020") +
       '<div class="fd-panel-divider"></div>' +
       '<strong class="fd-route-section" data-i18n="fd.themePresetSection">テーマ一覧</strong>' +
-      themePresetRow("fd.themePresetRedLight", "レッド（ライト）", true) +
-      themePresetRow("fd.themePresetRedDark", "レッド（ダーク）", false) +
-      themePresetRow("fd.themePresetOrangeLight", "オレンジ（ライト）", false) +
-      themePresetRow("fd.themePresetOrangeDark", "オレンジ（ダーク）", false) +
-      themePresetRow("fd.themePresetYellowLight", "イエロー（ライト）", false) +
-      themePresetRow("fd.themePresetYellowDark", "イエロー（ダーク）", false) +
+      '<p class="fd-route-hint" data-i18n="fd.themePresetHint">タップすると、その配色が上のカラーカスタマイズに入ります</p>' +
+      themePresetRow("fd.themePresetRedLight", "レッド（ライト）", {
+        favorite: true,
+      }) +
+      themePresetRow("fd.themePresetRedDark", "レッド（ダーク）", {
+        menuOpen: true,
+      }) +
+      themePresetRow("fd.themePresetOrangeLight", "オレンジ（ライト）") +
+      themePresetRow("fd.themePresetOrangeDark", "オレンジ（ダーク）") +
+      themePresetRow("fd.themePresetYellowLight", "イエロー（ライト）") +
+      themePresetRow("fd.themePresetYellowDark", "イエロー（ダーク）") +
       '<div class="fd-theme-actions">' +
       '<span class="fd-theme-save-btn" data-i18n="fd.themeSaveAsNew">現在の設定を新しいテーマとして保存</span>' +
       '<span class="fd-theme-import-btn" data-i18n="fd.themeImport">テーマを読み込む</span>' +

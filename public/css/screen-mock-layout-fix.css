@@ -533,7 +533,7 @@ html
   align-items: center !important;
   gap: 9px !important;
   min-width: 0 !important;
-  height: 26px !important;
+  height: 24px !important;
   font-size: 9px !important;
   color: var(--fd-text, var(--fd-ink)) !important;
 }
@@ -554,35 +554,22 @@ html
   box-sizing: border-box !important;
 }
 .fd-theme-preset {
+  position: relative !important;
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
   min-width: 0 !important;
-  height: 26px !important;
+  height: 24px !important;
   padding: 0 7px !important;
   border-radius: 7px !important;
   font-size: 9px !important;
   color: var(--fd-text, var(--fd-ink)) !important;
-}
-.fd-theme-preset.is-current {
-  background: var(--fd-panel) !important;
 }
 .fd-theme-preset-name {
   min-width: 0 !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
-}
-/* チェックはスプライトに該当アイコンが無く、"✓" の字形は明朝側の
-   フォントに落ちて数学の根号のように見えてしまうため、罫線で描く。 */
-.fd-theme-check {
-  flex: 0 0 auto !important;
-  width: 9px !important;
-  height: 6px !important;
-  margin-bottom: 2px !important;
-  border-left: 1.6px solid var(--fd-accent) !important;
-  border-bottom: 1.6px solid var(--fd-accent) !important;
-  transform: rotate(-45deg) !important;
 }
 .fd-theme-star {
   flex: 0 0 auto !important;
@@ -598,8 +585,44 @@ html
   margin-left: 0 !important;
   color: color-mix(in srgb, var(--fd-text) 62%, transparent) !important;
 }
-/* 実機ではテーマ一覧が縦にスクロールし、2つのボタンは画面下端に
-   固定されている。図でも同じ位置関係になるよう下端へ寄せる。 */
+.fd-theme-preset .fd-theme-drag {
+  flex: 0 0 auto !important;
+  width: 11px !important;
+  height: 11px !important;
+  color: color-mix(in srgb, var(--fd-text) 50%, transparent) !important;
+}
+/* 三点メニューを1行だけ開いた状態で描く。テーマそのものを触る操作
+   （編集・名前変更・複製・書き出し・削除）はすべてこの中にあり、
+   一覧の行をタップしても上のカラーカスタマイズにその配色が入るだけ、
+   という関係を図で見せる。だから行に選択中の印は付かない。 */
+.fd-theme-preset.has-menu > .fd-layer-menu {
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
+.fd-theme-menu {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 19px !important;
+  right: 16px !important;
+  display: grid !important;
+  min-width: 92px !important;
+  padding: 4px 0 !important;
+  border-radius: 8px !important;
+  background: var(--fd-panel) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28) !important;
+}
+.fd-theme-menu-item {
+  padding: 4px 10px !important;
+  font-size: 8px !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
+.fd-theme-menu-item.is-lead {
+  font-weight: 700 !important;
+}
+.fd-theme-menu-item.is-danger {
+  color: #ff6f60 !important;
+}
 .fd-theme-actions {
   display: grid !important;
   gap: 6px !important;

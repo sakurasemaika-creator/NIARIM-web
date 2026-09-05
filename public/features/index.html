@@ -1703,18 +1703,23 @@
               <strong class="fd-route-section" data-i18n="fd.themePresetSection"
                 >テーマ一覧</strong
               >
-              <div class="fd-theme-preset is-current">
+              <p class="fd-route-hint" data-i18n="fd.themePresetHint">
+                タップすると、その配色が上のカラーカスタマイズに入ります
+              </p>
+              <div class="fd-theme-preset">
                 <span
                   class="fd-theme-preset-name"
                   data-i18n="fd.themePresetRedLight"
                   >レッド（ライト）</span
                 >
-                <span class="fd-theme-check"></span>
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star is-on">★</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
               </div>
-              <div class="fd-theme-preset">
+              <div class="fd-theme-preset has-menu">
                 <span
                   class="fd-theme-preset-name"
                   data-i18n="fd.themePresetRedDark"
@@ -1723,6 +1728,36 @@
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star">☆</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
+                <div class="fd-theme-menu">
+                  <span
+                    class="fd-theme-menu-item is-lead"
+                    data-i18n="fd.themeMenuEdit"
+                    >編集</span
+                  >
+                  <span
+                    class="fd-theme-menu-item"
+                    data-i18n="fd.themeMenuRename"
+                    >名前変更</span
+                  >
+                  <span
+                    class="fd-theme-menu-item"
+                    data-i18n="fd.themeMenuDuplicate"
+                    >複製</span
+                  >
+                  <span
+                    class="fd-theme-menu-item"
+                    data-i18n="fd.themeMenuExport"
+                    >書き出し (.niatheme)</span
+                  >
+                  <span
+                    class="fd-theme-menu-item is-danger"
+                    data-i18n="fd.themeMenuDelete"
+                    >削除</span
+                  >
+                </div>
               </div>
               <div class="fd-theme-preset">
                 <span
@@ -1733,6 +1768,9 @@
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star">☆</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
               </div>
               <div class="fd-theme-preset">
                 <span
@@ -1743,6 +1781,9 @@
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star">☆</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
               </div>
               <div class="fd-theme-preset">
                 <span
@@ -1753,6 +1794,9 @@
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star">☆</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
               </div>
               <div class="fd-theme-preset">
                 <span
@@ -1763,6 +1807,9 @@
                 <span class="fd-spacer"></span>
                 <span class="fd-theme-star">☆</span>
                 <span class="fd-layer-menu">⋮</span>
+                <svg class="ic fd-theme-drag">
+                  <use href="/assets/icons/ui/sprite.svg#ic-drag_handle"></use>
+                </svg>
               </div>
               <div class="fd-theme-actions">
                 <span class="fd-theme-save-btn" data-i18n="fd.themeSaveAsNew"
