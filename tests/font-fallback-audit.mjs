@@ -111,33 +111,47 @@ for (const lang of LANGS) {
 
       const { object } = await cdp.send("DOM.resolveNode", { nodeId });
 
-      // 画面外の文字（横に流れるマーキーの右側など）は、まだ実フォントで
-      // 組まれていないため代替フォントを返すことがある。誤検出になるので、
-      // 画面外にあるものだけ一度画面内へ入れて問い直し、それでも代替
-      // フォントのままのものを報告する。画面内にあるものはその場の判定が
-      // そのまま答えなので、余計な往復をしない。
-      const onScreen = await cdp.send("Runtime.callFunctionOn", {
+      // 画面外にある文字（横に流れるマーキーの右側など）は、まだ実フォントで
+      // 組まれておらず代替フォントを返すことがある。スクロールで画面内へ
+      // 入れても、動き続ける帯では位置が定まらず判定が安定しない。
+      // そこで、同じ文字を同じ書体指定のまま画面左上の検証用要素へ複製して
+      // 問い直す。ここで同梱フォントが返るなら、元の判定は「まだ組まれて
+      // いなかった」だけで、実際の表示は正しい。
+      const probe = await cdp.send("Runtime.callFunctionOn", {
         objectId: object.objectId,
         returnByValue: true,
         functionDeclaration:
-          "function(){const r=this.getBoundingClientRect();" +
-          "if(r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight)return true;" +
-          "this.scrollIntoView({block:'center',inline:'center'});return false;}",
+          "function(){let p=document.getElementById('__fontprobe');" +
+          "if(!p){p=document.createElement('span');p.id='__fontprobe';" +
+          "p.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;opacity:0.01';" +
+          "document.body.appendChild(p);}" +
+          "const cs=getComputedStyle(this);" +
+          "p.style.fontFamily=cs.fontFamily;p.style.fontWeight=cs.fontWeight;" +
+          "p.style.fontStyle=cs.fontStyle;p.style.fontSize=cs.fontSize;" +
+          "p.textContent=this.textContent;return true;}",
+      });
+      if (!probe.result.value) continue;
+      const { nodeId: probeId } = await cdp.send("DOM.querySelector", {
+        nodeId: root.nodeId,
+        selector: "#__fontprobe",
       });
       let confirmed = family;
-      if (!onScreen.result.value) {
-        await page.waitForTimeout(30);
+      if (probeId) {
         let recheck;
         try {
-          recheck = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
+          recheck = await cdp.send("CSS.getPlatformFontsForNode", {
+            nodeId: probeId,
+          });
         } catch {
-          continue;
+          recheck = null;
         }
-        if (!recheck.fonts.length) continue;
-        confirmed = recheck.fonts[0].familyName;
-        if (BUNDLED.test(confirmed) || EXPECTED_FALLBACK.test(confirmed))
-          continue;
+        if (recheck && recheck.fonts.length) {
+          confirmed = recheck.fonts[0].familyName;
+          if (BUNDLED.test(confirmed) || EXPECTED_FALLBACK.test(confirmed))
+            continue;
+        }
       }
+
       const ctxRes = await cdp.send("Runtime.callFunctionOn", {
         objectId: object.objectId,
         returnByValue: true,
