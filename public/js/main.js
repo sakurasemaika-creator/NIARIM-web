@@ -108,7 +108,7 @@
       '<svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="' +
       ICON_SPRITE +
       'ic-opacity"></use></svg>' +
-      '<span class="fd-brush-opacity">100%</span><span class="fd-spacer"></span><span class="fd-brush-toggle">▾</span>' +
+      '<span class="fd-brush-opacity">100%</span><span class="fd-spacer"></span><span class="fd-brush-toggle"></span>' +
       "</div>"
     );
   }
@@ -254,7 +254,9 @@
           "</small>"
         : "") +
       "</span>" +
-      '<span class="fd-layer-menu">⋮</span>' +
+      '<span class="fd-layer-menu">' +
+      icon("ic-more_vert") +
+      "</span>" +
       icon("ic-drag_handle", "ic-drag") +
       "</div>"
     );
@@ -357,9 +359,9 @@
       canvasTopBar() +
       canvasDrawing(panel === "onion") +
       brushSlider() +
-      '<div class="fd-collapse-handle">⌄</div>' +
+      '<div class="fd-collapse-handle"></div>' +
       canvasToolbar() +
-      '<div class="fd-collapse-handle fd-frame-collapse">⌄</div>' +
+      '<div class="fd-collapse-handle fd-frame-collapse"></div>' +
       frameStrip() +
       (panel === "layer" ? layerPanel() : panel === "onion" ? onionPanel() : "")
     );
@@ -424,7 +426,7 @@
       // 何を映しているのか分からないので、編集中のコマと同じ絵を出す。
       '<div class="fd-timeline-preview">' +
       frameArtwork(2) +
-      '<span class="fd-preview-loading"></span><span class="fd-fullscreen-mark">⌗</span></div>' +
+      '<span class="fd-preview-loading"></span><span class="fd-fullscreen-mark"></span></div>' +
       '<div class="fd-timeline-scrubber"><i></i></div>' +
       '<div class="fd-transport">' +
       iconButton("ic-skip_previous") +
@@ -441,7 +443,9 @@
       iconButton("ic-loop", "fd-loop-btn is-active") +
       "</div>" +
       timelineToolbar() +
-      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>+</span></div>' +
+      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span class="fd-scene-more">' +
+      icon("ic-more_vert") +
+      "</span><span>+</span></div>" +
       '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
       frames +
       // 実機のTimelineScreenは、コマ一覧の中央に固定した赤枠で現在位置を
@@ -462,7 +466,7 @@
       '<div class="fd-audio-dim"></div><div class="fd-clip-detail-sheet">' +
       '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong data-i18n="fd.audioClip">音声クリップ</strong><span>' +
       icon("ic-content_copy") +
-      '</span><span class="fd-delete-mark">▮</span></div>' +
+      '</span><span class="fd-delete-mark"></span></div>' +
       '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:72%;width:72%"></i></span><button>+</button><b>72%</b><span>⌄</span></div>' +
       '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
       '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
@@ -526,7 +530,9 @@
       '<span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> ' +
       num +
       "</strong><small>2026/09/01 23:34</small></span>" +
-      '<span class="fd-tree-more">⋮</span></div>'
+      '<span class="fd-tree-more">' +
+      icon("ic-more_vert") +
+      "</span></div>"
     );
   }
 
@@ -587,7 +593,9 @@
       '">' +
       (o.favorite ? "★" : "☆") +
       "</span>" +
-      '<span class="fd-layer-menu">⋮</span>' +
+      '<span class="fd-layer-menu">' +
+      icon("ic-more_vert") +
+      "</span>" +
       icon("ic-drag_handle", "fd-theme-drag") +
       (o.menuOpen ? themePresetMenu() : "") +
       "</div>"

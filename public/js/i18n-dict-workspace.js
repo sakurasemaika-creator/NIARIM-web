@@ -39,7 +39,7 @@
     },
     en: {
       "featuresPage.nav.workspace": "Workspace",
-      "featuresPage.workspace.title": "Workspace｜Make It Yours",
+      "featuresPage.workspace.title": "Workspace | Make It Yours",
       "featuresPage.workspace.lead":
         "Customize the UI itself to match your dominant hand and your way of working.",
       "featuresPage.workspace.item1.title": "Workspaces",
@@ -146,7 +146,7 @@
     fr: {
       "featuresPage.nav.workspace": "Espace de travail",
       "featuresPage.workspace.title":
-        "Workspace｜Un environnement à votre image",
+        "Workspace | Un environnement à votre image",
       "featuresPage.workspace.lead":
         "Personnalisez l'interface elle-même selon votre main directrice et votre façon de travailler.",
       "featuresPage.workspace.item1.title": "Espaces de travail",
@@ -173,7 +173,7 @@
     },
     es: {
       "featuresPage.nav.workspace": "Espacio de trabajo",
-      "featuresPage.workspace.title": "Workspace｜Un entorno a tu medida",
+      "featuresPage.workspace.title": "Workspace | Un entorno a tu medida",
       "featuresPage.workspace.lead":
         "Personaliza la propia interfaz según tu mano dominante y tu forma de trabajar.",
       "featuresPage.workspace.item1.title": "Espacios de trabajo",

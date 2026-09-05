@@ -34,7 +34,7 @@
     },
     en: {
       "featuresPage.nav.save": "Save & Share",
-      "featuresPage.save.title": "Save & Share｜Data Management",
+      "featuresPage.save.title": "Save & Share | Data Management",
       "featuresPage.save.lead":
         "Protect your work, grow it over time, and bring it to another device — a flexible way to save.",
       "featuresPage.save.item1.title": "Autosave",
@@ -118,7 +118,7 @@
     },
     fr: {
       "featuresPage.nav.save": "Enregistrer et partager",
-      "featuresPage.save.title": "Save & Share｜Gestion des données",
+      "featuresPage.save.title": "Save & Share | Gestion des données",
       "featuresPage.save.lead":
         "Protégez votre travail, faites-le grandir, et emportez-le sur un autre appareil — un système d'enregistrement flexible.",
       "featuresPage.save.item1.title": "Sauvegarde automatique",
@@ -140,7 +140,7 @@
     },
     es: {
       "featuresPage.nav.save": "Guardar y compartir",
-      "featuresPage.save.title": "Save & Share｜Gestión de datos",
+      "featuresPage.save.title": "Save & Share | Gestión de datos",
       "featuresPage.save.lead":
         "Protege tu obra, hazla crecer y llévala a otro dispositivo: un sistema de guardado flexible.",
       "featuresPage.save.item1.title": "Guardado automático",

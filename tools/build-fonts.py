@@ -33,7 +33,7 @@ common.css の @font-face ブロック（マーカーで囲んだ範囲）を書
   2. python3 tools/build-fonts.py
 """
 
-import re, glob, subprocess, sys, os, json, hashlib
+import re, glob, subprocess, sys, os, json, hashlib, html
 from fontTools.ttLib import TTFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -131,12 +131,18 @@ FONTS = [
 def site_chars():
     """サイトが表示しうる全文字（7言語の辞書＋HTML直書き＋CSSのcontent）。"""
     chars = set()
-    for path in glob.glob(os.path.join(ROOT, "public/js/i18n-dict*.js")):
+    # 画面再現図の記号（★ ☆ ✓ ▾ ⌄ など）は辞書ではなく main.js が直接
+    # 書き出している。ここを見ていなかったため、それらの字だけサブセットから
+    # 漏れて閲覧環境のフォントに落ち、図の中でそこだけ書体が変わっていた。
+    for path in glob.glob(os.path.join(ROOT, "public/js/*.js")):
         chars |= set(open(path, encoding="utf-8").read())
     for path in glob.glob(os.path.join(ROOT, "public/**/*.html"), recursive=True):
         s = open(path, encoding="utf-8").read()
         s = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", s, flags=re.S)
-        chars |= set(re.sub(r"<[^>]+>", " ", s))
+        # &copy; などの実体参照は展開しないと文字として数えられない。
+        # フッターの © がどのサブセットにも入らず、明朝の本文の中で
+        # そこだけ別のフォントで描かれていた。
+        chars |= set(html.unescape(re.sub(r"<[^>]+>", " ", s)))
     for path in glob.glob(os.path.join(ROOT, "public/css/**/*.css"), recursive=True):
         for m in re.finditer(
             r'content:\s*"([^"]*)"', open(path, encoding="utf-8").read()

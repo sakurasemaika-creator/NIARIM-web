@@ -1132,7 +1132,7 @@
     "featuresPage.nav.audio": "Audio",
     "featuresPage.nav.export": "Export",
 
-    "featuresPage.drawing.title": "Drawing｜Dessin",
+    "featuresPage.drawing.title": "Drawing | Dessin",
     "featuresPage.drawing.lead":
       "Plusieurs pinceaux et réglages de dessin pour chaque usage.",
     "featuresPage.drawing.item1.title": "Stylo G",
@@ -1202,7 +1202,7 @@
     "featuresPage.animation.item6.body":
       "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
 
-    "featuresPage.editing.title": "Editing｜Édition",
+    "featuresPage.editing.title": "Editing | Édition",
     "featuresPage.editing.lead":
       "La liberté de recommencer jusqu'à ce que ce soit parfait.",
     "featuresPage.editing.item1.title":
@@ -1477,7 +1477,7 @@
     "featuresPage.nav.audio": "Audio",
     "featuresPage.nav.export": "Exportar",
 
-    "featuresPage.drawing.title": "Drawing｜Dibujo",
+    "featuresPage.drawing.title": "Drawing | Dibujo",
     "featuresPage.drawing.lead":
       "Varios pinceles y ajustes de dibujo para cada propósito.",
     "featuresPage.drawing.item1.title": "Lápiz G",
@@ -1524,7 +1524,7 @@
     "featuresPage.drawing.item15.body":
       "Los pinceles, tramas, sellos y fuentes llevan etiquetas como línea, relleno, desenfoque, analógico, pixel art o semitono, así que puedes filtrar por etiqueta aunque no recuerdes un nombre. Un toque alterna entre búsqueda por palabra clave y por etiqueta, y puedes etiquetar tú mismo tus recursos.",
 
-    "featuresPage.animation.title": "Animation｜Animación",
+    "featuresPage.animation.title": "Animation | Animación",
     "featuresPage.animation.lead":
       "Apila cuadros y construye el movimiento en una línea de tiempo.",
     "featuresPage.animation.item1.title": "Cuadros",
@@ -1547,7 +1547,7 @@
     "featuresPage.animation.item6.body":
       "Agrupa varias capas para moverlas todas juntas con un solo fotograma clave.",
 
-    "featuresPage.editing.title": "Editing｜Edición",
+    "featuresPage.editing.title": "Editing | Edición",
     "featuresPage.editing.lead":
       "La libertad de rehacer tu trabajo hasta que quede como quieres.",
     "featuresPage.editing.item1.title":
@@ -1595,7 +1595,7 @@
     "featuresPage.audio.item6.body":
       "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
 
-    "featuresPage.export.title": "Export｜Exportar",
+    "featuresPage.export.title": "Export | Exportar",
     "featuresPage.export.lead": "Entrega tu trabajo terminado como video.",
     "featuresPage.export.item1.title": "Resolución",
     "featuresPage.export.item1.body":

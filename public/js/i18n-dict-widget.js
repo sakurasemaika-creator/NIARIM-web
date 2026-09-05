@@ -62,7 +62,7 @@
     },
     en: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget｜Home screen widgets",
+      "featuresPage.widget.title": "Widget | Home screen widgets",
       "featuresPage.widget.lead":
         "Keep your own work on your phone's home screen.",
       "narrative.widget.1.heading":
@@ -193,7 +193,7 @@
     },
     fr: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget｜Widgets d'écran d'accueil",
+      "featuresPage.widget.title": "Widget | Widgets d'écran d'accueil",
       "featuresPage.widget.lead":
         "Gardez vos propres œuvres sur l'écran d'accueil de votre téléphone.",
       "narrative.widget.1.heading":
@@ -227,7 +227,7 @@
     },
     es: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget｜Widgets de pantalla de inicio",
+      "featuresPage.widget.title": "Widget | Widgets de pantalla de inicio",
       "featuresPage.widget.lead":
         "Ten tus propias obras en la pantalla de inicio del móvil.",
       "narrative.widget.1.heading":
