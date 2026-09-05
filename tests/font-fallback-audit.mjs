@@ -32,6 +32,11 @@ const ROUTES = [
   "/download/",
 ];
 const LANGS = (process.argv[2] || "ja,en,zh-Hans,zh-Hant,ko,fr,es").split(",");
+// 1文字ずつ問い合わせる作りなので全ページだと時間がかかる。特定のページ
+// だけ確かめたいときは AUDIT_ROUTES="/,/features/" のように絞れる。
+const ROUTES_USED = process.env.AUDIT_ROUTES
+  ? process.env.AUDIT_ROUTES.split(",")
+  : ROUTES;
 
 // 同梱しているフォント。これ以外で描かれた文字が「落ちた」文字。
 const BUNDLED = /^(Kuramubon|HakkouMincho|Noto Serif|Noto Sans)/;
@@ -51,7 +56,7 @@ for (const lang of LANGS) {
   await cdp.send("CSS.enable");
   await page.addInitScript((l) => localStorage.setItem("niarim_lang", l), lang);
 
-  for (const route of ROUTES) {
+  for (const route of ROUTES_USED) {
     const res = await page
       .goto(BASE + route, { waitUntil: "networkidle" })
       .catch(() => null);
@@ -128,7 +133,12 @@ for (const lang of LANGS) {
           "const cs=getComputedStyle(this);" +
           "p.style.fontFamily=cs.fontFamily;p.style.fontWeight=cs.fontWeight;" +
           "p.style.fontStyle=cs.fontStyle;p.style.fontSize=cs.fontSize;" +
-          "p.textContent=this.textContent;return true;}",
+          "p.textContent=this.textContent;" +
+          // 文字と書体を差し替えた直後に問い合わせると、まだ描き直されて
+          // おらず前の内容のフォントが返る。2フレーム待って確実に描かせる。
+          "return new Promise(r=>requestAnimationFrame(" +
+          "()=>requestAnimationFrame(()=>r(true))));}",
+        awaitPromise: true,
       });
       if (!probe.result.value) continue;
       const { nodeId: probeId } = await cdp.send("DOM.querySelector", {
@@ -198,7 +208,7 @@ console.log(
     {
       ok: findings.size === 0,
       languages: LANGS.length,
-      routes: ROUTES.length,
+      routes: ROUTES_USED.length,
       fallbackGroups: findings.size,
     },
     null,
