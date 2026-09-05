@@ -25,6 +25,19 @@
   box-sizing: border-box;
 }
 
+/* The fixed .fd-frame-cursor is the only current-position outline. Legacy
+   layout layers once added a 2px outline directly to selected/current thumbs;
+   cancel that here as part of the canonical geometry, not only in the tail. */
+.fd-app-screen .fd-frame-thumb.is-current,
+.fd-app-screen .fd-frame-thumb.is-selected,
+.feature-diagram .fd-frame-thumb.is-current,
+.feature-diagram .fd-frame-thumb.is-selected {
+  border-width: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
 /* Mock phone bezels must contain every internal panel without changing device ratio. */
 .feature-diagram :is(.fd-app-screen, .fd-route-screen),
 .screenshot-card :is(.fd-app-screen, .fd-route-screen) {
@@ -65,6 +78,9 @@
   .fd-segment.is-selected
 ) {
   background: var(--fd-accent-fill, var(--fd-accent, var(--color-accent))) !important;
+  color: var(--fd-on-accent, #fff) !important;
+}
+.feature-diagram .fd-tree-save-btn :is(.ic, b) {
   color: var(--fd-on-accent, #fff) !important;
 }
 
