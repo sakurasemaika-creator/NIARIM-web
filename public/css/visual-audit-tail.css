@@ -1,14 +1,12 @@
 /* Final visual-audit tail: must load after all legacy accuracy layers. */
 
-/* Frame strip: current frame is a real 50x50 cell centered in the viewport. */
+/* Frame strip cells are 50x50. Generated CanvasScreen strips contain four
+   frames plus the add cell (five equal cells), so centering the five-cell row
+   naturally puts the third/selected frame under the single fixed cursor. */
 html body .fd-canvas-screen.fd-canvas-screen .fd-frame-strip-scroll,
 html body .feature-diagram.feature-diagram .fd-frame-strip-scroll {
   margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: calc(50% - 25px) !important;
-  padding-right: calc(50% - 25px) !important;
-  scroll-padding-left: calc(50% - 25px) !important;
-  scroll-padding-right: calc(50% - 25px) !important;
   gap: 0 !important;
   box-sizing: border-box !important;
 }
@@ -27,9 +25,7 @@ html body .fd-frame-add.fd-frame-add {
   box-sizing: border-box !important;
 }
 
-/* The fixed .fd-frame-cursor is the only current-position outline.
-   Remove the selected/current thumb's own outline entirely so there is no
-   second rectangle underneath the 50x50 cursor. */
+/* The fixed .fd-frame-cursor is the only current-position outline. */
 html body .fd-frame-thumb.fd-frame-thumb.is-current,
 html body .fd-frame-thumb.fd-frame-thumb.is-selected {
   width: 50px !important;
@@ -64,11 +60,15 @@ html body .fd-frame-thumb.fd-frame-thumb > svg {
   margin: auto !important;
 }
 
-/* main.js generates four frames plus an add cell and marks the third frame
-   with is-selected. Center that third 50px cell under the single fixed cursor. */
+/* main.js marks the third cell is-selected in a five-cell strip. Do not use
+   asymmetric padding/scroll offsets: center the row itself. This avoids the
+   previous offset fighting with justify-content and producing misalignment. */
 html body .fd-frame-strip-scroll:has(> .fd-frame-thumb.is-selected) {
-  padding-left: calc(50% - 125px) !important;
-  scroll-padding-left: calc(50% - 125px) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  scroll-padding-left: 0 !important;
+  scroll-padding-right: 0 !important;
+  justify-content: center !important;
 }
 
 /* App Preview: every reconstructed phone keeps its device ratio and may never
