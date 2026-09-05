@@ -527,11 +527,11 @@ html
    kCanvasOutsideColor を一枚敷いている）。上部バー・ツールバー・
    コマ一覧は自前の背景を持たず透過なので、下地をテーマ背景色に
    しておくと、そこだけ色が変わって帯のように見えてしまう。 */
+html body .fd-canvas-screen.fd-canvas-screen,
 html
   body
   :is(#drawing, #editing, #advanced)
-  > .feature-diagram.fd-canvas-screen,
-html body .screenshot-card > .feature-diagram.fd-canvas-screen {
+  > .feature-diagram.fd-canvas-screen {
   background: var(--fd-outside) !important;
 }
 html body .screenshot-card {

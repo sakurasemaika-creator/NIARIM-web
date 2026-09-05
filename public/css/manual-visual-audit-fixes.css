@@ -47,6 +47,14 @@
   background: var(--fd-bg, var(--fd-surface, #fff)) !important;
   color: var(--fd-text, var(--fd-ink, #28242c)) !important;
 }
+/* キャンバス画面だけは用紙の外側が画面全体に広がる（アプリ側も
+   kCanvasOutsideColor を一枚敷いている）。上のルールでテーマ背景色を
+   塗ってしまうと、透過の上部バー・ツールバー・コマ一覧の位置だけ色が
+   変わって帯に見えるため、ここで外周色へ戻す。 */
+.screenshot-card > .fd-canvas-screen,
+.screenshot-card:first-child .hero-visual-reuse.fd-canvas-screen {
+  background: var(--fd-outside) !important;
+}
 
 /* Push each gallery preset into the common reconstructed surfaces too. */
 .screenshot-card
