@@ -501,3 +501,16 @@ html
   small {
   color: color-mix(in srgb, var(--fd-text) 82%, transparent) !important;
 }
+
+/* ---- 20. ホーム画面ウィジェットの図 ----
+   図解の枠は端末の形（9:16）で揃えているが、ここに並ぶのは端末の
+   1画面ではなくホーム画面に置くウィジェット3種。端末比のままだと
+   中身が上から22%しか埋まらず、下に500pxの空白が残っていた。
+   この図だけ内容の高さに合わせる。 */
+.feature-section > .feature-diagram.fd-widget-grid,
+.feature-media > .feature-diagram.fd-widget-grid {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 16px 14px !important;
+}
