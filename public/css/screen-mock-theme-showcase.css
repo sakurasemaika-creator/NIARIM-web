@@ -8,8 +8,7 @@
 
 /* ---------- shared device treatment ---------- */
 :is(.fd-app-screen, .fd-route-screen),
-.feature-section > .feature-diagram,
-.screenshot-card > .feature-diagram {
+.feature-section > .feature-diagram {
   --fd-bezel: var(--fd-outside, #4a3b41);
   border: 6px solid var(--fd-bezel) !important;
   border-radius: 22px !important;
@@ -18,6 +17,19 @@
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--fd-bezel) 72%, #000 28%),
     0 16px 34px rgba(25, 20, 28, 0.15) !important;
+}
+
+/* App Preview cards themselves are the phone bezel. Never draw a second bezel
+   on the reconstructed screen inside the card. */
+.screenshot-card {
+  border-color: var(--fd-bezel, var(--fd-outside, #4a3b41)) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+.screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  border: 0 !important;
+  border-radius: inherit !important;
+  box-shadow: none !important;
 }
 
 /* Legacy feature-diagram mocks use --fd-bg/--fd-text while the rebuilt
