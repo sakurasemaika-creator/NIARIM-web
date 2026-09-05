@@ -349,19 +349,30 @@
   border-bottom: 1px solid rgba(40, 36, 44, 0.08) !important;
   background: transparent !important;
 }
+/* アプリ側は TextButton.icon の横並び（アイコン→ラベル）で、幅が足りない
+   ときは折り返さず省略記号で止める（layer_panel.dart に明示のコメントと
+   テストがある）。以前ここに writing-mode: vertical-rl が入っていたため、
+   ラベルが90度回転した縦書きになり、しかもアイコンの前に出ていた。 */
 .fd-shortcut-btn {
   min-width: 0 !important;
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 5px !important;
+  gap: 3px !important;
   padding: 4px 2px !important;
   color: var(--fd-accent) !important;
   font-size: 8px !important;
   line-height: 1.15 !important;
   text-align: center !important;
-  writing-mode: vertical-rl !important;
+  writing-mode: horizontal-tb !important;
+  overflow: hidden !important;
+}
+.fd-shortcut-btn > span {
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 .fd-shortcut-btn .ic {
   width: 15px !important;
@@ -391,12 +402,14 @@
   color: var(--fd-accent) !important;
   font-size: 14px !important;
 }
+/* アプリ側は surfaceContainerHighest の24pxの正方形。--fd-panel だと
+   行の地色と近すぎて、暗いテーマでサムネイルが見えなくなっていた。 */
 .fd-layer-thumb {
   width: 24px !important;
   height: 24px !important;
   flex: 0 0 24px !important;
   border-radius: 2px !important;
-  background: var(--fd-panel, #f3dfe2) !important;
+  background: var(--fd-outside, #f3dfe2) !important;
 }
 .fd-layer-name {
   min-width: 0 !important;

@@ -296,3 +296,18 @@
   background: var(--fd-bg, var(--fd-surface)) !important;
   color: var(--fd-text, var(--fd-ink)) !important;
 }
+
+/* ---- 12. レイヤー行の名前 ----
+   アプリ側は ListTile の title で、サムネイルのすぐ右から左寄せで始まる。
+   パネル側の中央寄せを受け継いでいたため、サムネイルとの間が不自然に
+   空いて見えていた。器の形（.fd-canvas-screen の中かどうか）に関係なく
+   当たるよう、モックの中であることだけを条件にする。 */
+:is(.feature-diagram, .fd-app-screen, .fd-route-screen)
+  .fd-layer-row
+  .fd-layer-name {
+  text-align: left !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

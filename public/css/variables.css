@@ -93,8 +93,12 @@
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2.5rem;
-  --space-xl: 4rem;
-  --space-2xl: 6rem;
+  /* 大きい余白の2つだけは画面幅に追従させる。固定の64px/96pxのままだと、
+     390px幅の端末で左右に64pxずつ＝画面の3分の1が余白になり、見出しが
+     不自然に折り返していた（例: ダウンロード導線の見出しが4行になる）。
+     大きい画面での見え方は変えたくないので、上限は従来値のまま。 */
+  --space-xl: clamp(2rem, 8vw, 4rem);
+  --space-2xl: clamp(3rem, 12vw, 6rem);
   --space-3xl: 8.5rem;
   --container-width: 1220px;
   --container-padding: clamp(1.25rem, 4vw, 2.75rem);
@@ -217,10 +221,17 @@ html body .fd-canvas-screen .fd-app-layer-panel .fd-layer-name {
      どの配色のモックでも現在のレイヤー名だけピンクのままだった。
      画面ごとのアクセント色に合わせる。 */
   color: var(--fd-accent, var(--color-accent)) !important;
-  max-width: 32px !important;
-  line-height: 0.95 !important;
-  white-space: normal !important;
-  word-break: break-all !important;
+  /* アプリ側は ListTile の title（普通の1行テキスト）。以前は32px幅で
+     word-break: break-all を掛けていたため、レイヤー名が細い縦の塊に
+     なっていた。幅が足りないときは省略記号で止める。 */
+  min-width: 0 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  /* ListTile の title と同じく左寄せ。パネル側の中央寄せを受け継いで
+     サムネイルとの間が不自然に空いていた。 */
+  text-align: left !important;
 }
 
 /* Timeline: 実キャプチャではプレビュー下のスクラバー領域と再生列がWebより高い。 */
