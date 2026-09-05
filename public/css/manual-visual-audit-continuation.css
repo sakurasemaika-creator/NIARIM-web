@@ -87,16 +87,18 @@ html
   ) !important;
 }
 
+/* 上部バー・ツールバー・コマ一覧はここから外した。アプリ側では
+   これらは kCanvasOutsideColor（＝surfaceContainerHighest）で、
+   キャンバスの外周と地続きに見えるよう同じ色で塗られている
+   （canvas_screen.dart のコメントに明記、タイムラインの
+   _buildToolbar も同じ surfaceContainerHighest）。パネル背景色
+   （panelBgColor）で塗ると、実機には無い帯が画面を横切って見える。
+   下に別ルールで --fd-outside を当てている。 */
 html
   body
   :is(.feature-section, .screenshot-card)
   .feature-diagram
   :is(
-    .fd-topbar,
-    .fd-timeline-topbar,
-    .fd-toolbar,
-    .fd-timeline-toolbar,
-    .fd-frame-strip,
     .fd-app-overlay-panel,
     .fd-app-layer-panel,
     .fd-app-onion-panel,
@@ -110,6 +112,46 @@ html
     .fd-export-segments
   ) {
   background-color: var(--fd-panel, transparent) !important;
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+}
+
+/* キャンバス画面の上部バー・ツールバー・コマ一覧・折りたたみハンドルは
+   実機ではどれも自前の背景を持たない（ToolbarWidget の根は
+   Colors.transparent）。用紙の外側は画面全体が kCanvasOutsideColor
+   なので、これらは地続きに見える。図でも同じく透過にして、下地
+   （.fd-canvas-screen の --fd-outside）を透かす。
+   タイムラインのツールバーだけは実機に帯がある
+   （_buildToolbar の decoration が surfaceContainerHighest）ので、
+   同じ色＝--fd-outside を明示的に敷く。
+   タイムラインの上部バーは素の Padding なので画面の地色のまま。 */
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  :is(.fd-topbar, .fd-toolbar, .fd-frame-strip, .fd-collapse-handle) {
+  background-color: transparent !important;
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+}
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  .fd-timeline-toolbar {
+  background-color: var(--fd-outside) !important;
+  color: var(--fd-text, var(--fd-ink, #28242c)) !important;
+}
+
+/* 用紙の外側は画面全体が同じ色。以前は画面の下地だけテーマ背景色に
+   していたため、透過のバーやハンドルの位置だけ色が変わって見えていた。 */
+html body :is(.feature-section, .screenshot-card) .fd-canvas-screen {
+  background-color: var(--fd-outside) !important;
+}
+html
+  body
+  :is(.feature-section, .screenshot-card)
+  .feature-diagram
+  .fd-timeline-topbar {
+  background-color: transparent !important;
   color: var(--fd-text, var(--fd-ink, #28242c)) !important;
 }
 html

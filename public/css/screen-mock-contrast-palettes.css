@@ -523,6 +523,17 @@ html
   background: var(--fd-bg) !important;
   color: var(--fd-text) !important;
 }
+/* キャンバス画面だけは用紙の外側が画面全体に広がる（アプリ側も
+   kCanvasOutsideColor を一枚敷いている）。上部バー・ツールバー・
+   コマ一覧は自前の背景を持たず透過なので、下地をテーマ背景色に
+   しておくと、そこだけ色が変わって帯のように見えてしまう。 */
+html
+  body
+  :is(#drawing, #editing, #advanced)
+  > .feature-diagram.fd-canvas-screen,
+html body .screenshot-card > .feature-diagram.fd-canvas-screen {
+  background: var(--fd-outside) !important;
+}
 html body .screenshot-card {
   border-color: var(--fd-bezel, #4a3b41) !important;
   background: var(--fd-bezel, #4a3b41) !important;

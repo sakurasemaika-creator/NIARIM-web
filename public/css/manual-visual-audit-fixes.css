@@ -169,10 +169,12 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   ) {
   color: var(--fd-text) !important;
 }
+/* .fd-timeline-toolbar はここから外した。アプリ側は
+   surfaceContainerHighest（キャンバス外周と同じ色）で、
+   パネル背景色ではない。 */
 .feature-section
   > .feature-diagram
   :is(
-    .fd-timeline-toolbar,
     .fd-frames,
     .fd-layers,
     .fd-audio-track,
