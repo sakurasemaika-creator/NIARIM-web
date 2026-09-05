@@ -432,10 +432,13 @@
       iconButton("ic-play_arrow") +
       iconButton("ic-fast_forward") +
       iconButton("ic-skip_next") +
-      // アプリ側は6つのボタンを中央に寄せて並べる（Row の
-      // MainAxisAlignment.center）。以前は右端にリピートの印だけを
-      // 離して置いていたため、何のための記号か分からない見た目だった。
-      // ここでは再生ボタンがちょうど中央に来る5つに絞る。
+      // ループ再生の切り替え（アプリの Icons.repeat / _loopEnabled）。
+      // 以前は「↔」という双方向の矢印を置いていたため何の記号か
+      // 分からなかったので、ぐるっと一周する矢印のアイコンにした。
+      // 位置は右端。送り戻しの5つは中央のまま（再生ボタンがちょうど
+      // 真ん中に来る）で、これだけCSSで右へ寄せている。
+      // 既定でループONなのでアクセント色。
+      iconButton("ic-loop", "fd-loop-btn is-active") +
       "</div>" +
       timelineToolbar() +
       '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>+</span></div>' +

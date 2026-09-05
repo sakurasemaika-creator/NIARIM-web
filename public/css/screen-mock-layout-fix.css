@@ -431,3 +431,19 @@ html
   min-height: 74px !important;
   flex-basis: 74px !important;
 }
+
+/* ---- 18. タイムラインのループ再生ボタン ----
+   アプリ側は送り戻しと同じ並びの6つ目だが、ここでは「再生ボタンが
+   左右のちょうど中央に来る」ことを優先し、ループだけ右端へ寄せる。
+   行を relative にして、5つのボタンの中央寄せに影響しない形で置く。
+   既定はループONなのでアクセント色（アプリの _loopEnabled と同じ）。 */
+.fd-timeline-screen > .fd-transport {
+  position: relative !important;
+}
+.fd-timeline-screen > .fd-transport .fd-loop-btn {
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: var(--fd-accent) !important;
+}
