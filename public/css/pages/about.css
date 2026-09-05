@@ -44,6 +44,12 @@
   font-family: var(--font-serif);
 }
 
+.about-name-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
 .about-name-word {
   font-size: var(--fs-h3);
   font-weight: 700;
@@ -54,7 +60,8 @@
 .about-name-plus,
 .about-name-equals {
   font-size: var(--fs-h3);
-  color: var(--color-gray-300);
+  /* gray-300 は白地でほぼ見えず、式の記号だけが消えて見えていた。 */
+  color: var(--color-gray-500);
 }
 
 .about-name-result {

@@ -769,13 +769,31 @@ select:focus {
     border-radius: 10px;
     box-shadow: none;
   }
+  /* 期間タブは横スクロールにしているが、右端でちょうど文字が半分
+     切れると「壊れている」ように見える。端をぼかして「まだ続く」ことが
+     分かる見え方にする（機能ページのタブや画面再現図のツールバーと同じ
+     考え方）。スクロールし切ったときに端が消えないよう、右端に少しだけ
+     余白も足す。 */
   .community-tabs {
     justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
     padding-bottom: 0.25rem;
+    padding-inline-end: 0.75rem;
     scrollbar-width: none;
     overscroll-behavior-inline: contain;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 28px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 28px),
+      transparent 100%
+    );
   }
   .community-tabs::-webkit-scrollbar {
     display: none;

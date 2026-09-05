@@ -155,12 +155,19 @@
           <div class="about-name reveal">
             <span class="eyebrow" data-i18n="about.name.eyebrow">The Name</span>
             <h2 data-i18n="about.name.title">NIARIMってどんな意味？</h2>
+            <!-- 「＝」と「NIARIM」は1つの塊にしておく。折り返しの位置が
+                 その間に来ると、狭い画面で「NEAR + RIM =」で行が終わり、
+                 式が途中で切れたように見えるため。 -->
             <div class="about-name-formula" aria-hidden="true">
-              <span class="about-name-word">NEAR</span>
-              <span class="about-name-plus">+</span>
-              <span class="about-name-word">RIM</span>
-              <span class="about-name-equals">=</span>
-              <span class="about-name-result">NIARIM</span>
+              <span class="about-name-group">
+                <span class="about-name-word">NEAR</span>
+                <span class="about-name-plus">+</span>
+                <span class="about-name-word">RIM</span>
+              </span>
+              <span class="about-name-group">
+                <span class="about-name-equals">=</span>
+                <span class="about-name-result">NIARIM</span>
+              </span>
             </div>
             <p data-i18n="about.name.body">
               アニメ制作をもっと身近に。クリエイターと視聴者の境界を曖昧に。誰でもいつでも、つくる人にもみる人にもなれる。
