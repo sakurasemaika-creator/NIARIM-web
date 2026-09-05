@@ -27,9 +27,9 @@ html body .fd-frame-add.fd-frame-add {
   box-sizing: border-box !important;
 }
 
-/* A single fixed .fd-frame-cursor is the current-position indicator.
-   The selected/current cell itself must keep only the normal thin cell border;
-   otherwise the cursor and cell outline render as a double frame. */
+/* The fixed .fd-frame-cursor is the only current-position outline.
+   Remove the selected/current thumb's own outline entirely so there is no
+   second rectangle underneath the 50x50 cursor. */
 html body .fd-frame-thumb.fd-frame-thumb.is-current,
 html body .fd-frame-thumb.fd-frame-thumb.is-selected {
   width: 50px !important;
@@ -38,7 +38,8 @@ html body .fd-frame-thumb.fd-frame-thumb.is-selected {
   min-height: 50px !important;
   max-width: 50px !important;
   max-height: 50px !important;
-  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
   border-radius: 4px !important;
   box-sizing: border-box !important;
 }
