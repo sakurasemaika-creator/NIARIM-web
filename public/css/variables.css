@@ -17,16 +17,11 @@
   --color-sub-tint: #fff0f3;
   --color-accent: #ff5c7a;
   --color-accent-dark: #e8425f;
-  /* テキスト・ボタン背景など「文字のコントラスト比が要求される箇所」専用の
-     濃いアクセント。アプリ本体と揃えた --color-accent (#ff5c7a) は、
-     白文字を載せても白背景に文字として置いても 2.97:1 しかなく、
-     WCAG 2.1 AA の 4.5:1 を満たせない（ダウンロード等の主要CTAが該当）。
-     --color-accent は境界線・ドット・グロー等の装飾用にそのまま残し、
-     文字が絡む箇所だけこちらを使う。#c42e51 はこのパレットの全サーフェス
-     （#ffffff / #f7f4f3 / #fbf9f8 / #fff0f3 / #faf8f9）で 4.9:1 以上、
-     この色を背景にした白文字で 5.44:1 を確保している。 */
-  --color-accent-strong: #c42e51;
-  --color-accent-strong-dark: #a82545;
+  /* Legacy strong-accent names remain only as compatibility aliases.
+     They intentionally resolve to the active theme palette so no separate
+     dark-red surface can reappear in buttons or other interactive controls. */
+  --color-accent-strong: var(--color-accent);
+  --color-accent-strong-dark: var(--color-accent-dark);
   /* 本文の行長を決める単位。
      ch はフォントの「0」の幅なので、全角の日本語・中国語・韓国語では
      実際の1文字よりずっと狭く、ラテン語基準の文字数をそのまま使うと
@@ -140,15 +135,14 @@
 }
 
 .final-cta .btn.btn-primary {
-  /* 白文字を載せるため装飾用アクセントではなくコントラスト確保用を使う。 */
-  background: var(--color-accent-strong) !important;
-  border-color: var(--color-accent-strong) !important;
-  color: var(--color-white) !important;
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-ink) !important;
   box-shadow: var(--shadow-glow);
 }
 .final-cta .btn.btn-primary:hover {
-  background: var(--color-accent-strong-dark) !important;
-  border-color: var(--color-accent-strong-dark) !important;
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
 }
 
 /* 320 logical px 実アプリ Visual Smoke との最終照合補正 */
@@ -202,10 +196,10 @@ html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-next {
   display: none !important;
 }
 
-/* Canvas: 実キャプチャではフレーム一覧の左側に約60pxの空きがあり、
-   320pxでは選択中+次フレーム+3枚目の一部だけが見える。 */
+/* Frame strip is centered by the final 50x50 audit layer; do not preserve the old
+   capture-specific 56px left offset here. */
 html body .fd-canvas-screen .fd-frame-strip-scroll {
-  margin-left: 56px !important;
+  margin-left: 0 !important;
 }
 
 /* Layer: 実アプリのショートカット領域は約120px高く、その下からレイヤー行が始まる。 */
