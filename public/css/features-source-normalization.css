@@ -68,9 +68,8 @@
   color: var(--fd-on-accent, #fff) !important;
 }
 
-/* Multilingual labels: preserve the app's intentional single-line truncation only
-   for compact app-bar/timeline titles. Body labels and settings rows must be able
-   to shrink inside the phone instead of pushing past the bezel. */
+/* Shared row containment: never let translated content push controls or panels
+   beyond the device bezel. Geometry itself remains source-calibrated. */
 .feature-diagram :is(
   .fd-workspace-row,
   .fd-format-row,
@@ -97,31 +96,60 @@
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
+
+/* Native one-line rows: Workspace, Layer, Audio and compact timeline items are
+   fixed-height app controls. Keep them single-line and use an ellipsis rather
+   than allowing a translated label to wrap vertically out of the calibrated row. */
 .feature-diagram :is(
   .fd-workspace-row,
-  .fd-format-row,
   .fd-layer-row,
   .fd-sheet-row,
-  .fd-setting-row,
-  .fd-route-card,
-  .fd-save-slot,
   .fd-scene-line,
-  .fd-timeline-row
+  .fd-timeline-row,
+  .fd-save-slot
 ) :is(strong, small, span, b, p),
 .screenshot-card :is(
   .fd-workspace-row,
-  .fd-format-row,
   .fd-layer-row,
   .fd-sheet-row,
-  .fd-setting-row,
-  .fd-route-card,
-  .fd-save-slot,
   .fd-scene-line,
-  .fd-timeline-row
+  .fd-timeline-row,
+  .fd-save-slot
 ) :is(strong, small, span, b, p) {
   min-width: 0 !important;
   max-width: 100% !important;
-  overflow-wrap: anywhere;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Export body copy may legitimately use two lines inside a 72px native row.
+   Keep the title on one line and allow only the explanatory text to wrap to
+   two lines; anything longer is clipped cleanly instead of changing row height. */
+.feature-diagram .fd-export-screen .fd-format-row > span:last-child,
+.screenshot-card .fd-export-screen .fd-format-row > span:last-child {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+.feature-diagram .fd-export-screen .fd-format-row strong,
+.screenshot-card .fd-export-screen .fd-format-row strong {
+  display: block !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.feature-diagram .fd-export-screen .fd-format-row small,
+.screenshot-card .fd-export-screen .fd-format-row small {
+  display: -webkit-box !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2;
 }
 
 /* Export's three compact segmented labels may not grow the screen. If a locale
@@ -136,19 +164,20 @@
   padding-inline: 3px !important;
 }
 
-/* Workspace and layer rows are list items, not app-bar titles. Give translated
-   labels the flexible middle column and keep icons/controls fixed. */
+/* Workspace and layer rows are list items. Give translated labels the flexible
+   middle column while keeping icons, checkboxes and drag controls fixed. */
 .feature-diagram :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name),
 .screenshot-card :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name) {
   flex: 1 1 auto !important;
   min-width: 0 !important;
 }
 
-/* Audio sheet uses a dense grid. Its labels should compress/ellipsis before the
-   slider and value controls are pushed outside the phone. */
+/* Audio sheet uses a dense grid. Labels ellipsize before the slider and value
+   controls are pushed outside the phone. */
 .feature-diagram .fd-sheet-row > :is(span, strong, b),
 .screenshot-card .fd-sheet-row > :is(span, strong, b) {
   min-width: 0 !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
