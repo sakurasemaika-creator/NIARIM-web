@@ -11,7 +11,7 @@ const viewports = [
 const routes = ["/", "/features/"];
 const failures = [];
 
-const browser = await chromium.launch({ headless: true, ...launchOptions });
+const browser = await chromium.launch(launchOptions());
 
 for (const viewport of viewports) {
   for (const language of languages) {
