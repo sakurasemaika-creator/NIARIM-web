@@ -2,7 +2,8 @@ import { chromium } from "playwright";
 import fs from "node:fs/promises";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const outFile = process.env.I18N_AUDIT_OUT || "artifacts/i18n-completeness-report.json";
+const outFile =
+  process.env.I18N_AUDIT_OUT || "artifacts/i18n-completeness-report.json";
 
 const routes = [
   "/",
@@ -21,7 +22,9 @@ const routes = [
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 
 const browser = await chromium.launch({ headless: true });
-const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+const context = await browser.newContext({
+  viewport: { width: 1280, height: 900 },
+});
 const page = await context.newPage();
 const findings = [];
 
@@ -86,7 +89,8 @@ for (const route of routes) {
       });
     }
     for (const key of state.missing) add(route, language, "missing-key", key);
-    for (const key of state.empty) add(route, language, "empty-translation", key);
+    for (const key of state.empty)
+      add(route, language, "empty-translation", key);
   }
 }
 
@@ -104,9 +108,15 @@ const report = {
   }, {}),
 };
 await fs.writeFile(outFile, JSON.stringify(report, null, 2));
-console.log(JSON.stringify({
-  checkedCombinations: report.checkedCombinations,
-  findings: findings.length,
-  byKind: report.byKind,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      checkedCombinations: report.checkedCombinations,
+      findings: findings.length,
+      byKind: report.byKind,
+    },
+    null,
+    2,
+  ),
+);
 if (findings.length) process.exitCode = 1;
