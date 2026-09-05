@@ -51,7 +51,11 @@ for (const viewport of viewports) {
 
       const state = await page.evaluate(() => {
         const de = document.documentElement;
-        const clipped = [...document.querySelectorAll(".hero-visual, .screenshot-card, .feature-diagram, .fd-app-screen, .fd-route-screen")]
+        const clipped = [
+          ...document.querySelectorAll(
+            ".hero-visual, .feature-section > .feature-diagram, .feature-section > .fd-app-screen, .feature-section > .fd-route-screen",
+          ),
+        ]
           .map((el) => {
             const r = el.getBoundingClientRect();
             return {
@@ -102,6 +106,32 @@ for (const viewport of viewports) {
           const endPath = path.join(outDir, `${baseName}__gallery-end.png`);
           await scroller.screenshot({ path: endPath });
           manifest.push(endPath);
+
+          const endState = await scroller.evaluate((el) => {
+            const last = el.querySelector(".screenshot-card:last-of-type");
+            if (!last) return null;
+            const sr = el.getBoundingClientRect();
+            const lr = last.getBoundingClientRect();
+            return {
+              scrollerLeft: sr.left,
+              scrollerRight: sr.right,
+              lastLeft: lr.left,
+              lastRight: lr.right,
+            };
+          });
+          if (
+            endState &&
+            (endState.lastLeft < endState.scrollerLeft - 2 ||
+              endState.lastRight > endState.scrollerRight + 2)
+          ) {
+            failures.push({
+              viewport: viewport.name,
+              language,
+              route: route.path,
+              kind: "gallery-last-card-clipped",
+              endState,
+            });
+          }
         }
       }
     }
