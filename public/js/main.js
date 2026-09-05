@@ -399,7 +399,8 @@
       iconButton("ic-audiotrack", "is-active") +
       '<span class="fd-watermark-tool">' +
       icon("ic-branding_watermark") +
-      "<small>🔒</small></span>" +
+      icon("ic-lock", "fd-lock-mark") +
+      "</span>" +
       iconButton("ic-movie_filter") +
       iconButton("ic-camera") +
       iconButton("ic-push_pin_outlined") +
@@ -443,7 +444,7 @@
       iconButton("ic-loop", "fd-loop-btn is-active") +
       "</div>" +
       timelineToolbar() +
-      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span class="fd-scene-more">' +
+      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill"><i class="fd-tick"></i>Scene1</span><span class="fd-scene-more">' +
       icon("ic-more_vert") +
       "</span><span>+</span></div>" +
       '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
@@ -452,7 +453,9 @@
       // 示す（再生位置を貫く縦線は存在しない）。
       '<span class="fd-frame-cursor is-error" aria-hidden="true"></span>' +
       "</div></div>" +
-      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span><span>🔒</span></div>' +
+      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span>' +
+      icon("ic-lock", "fd-lock-mark") +
+      "</div>" +
       "</div>"
     );
   }
@@ -591,7 +594,7 @@
       '<span class="fd-theme-star' +
       (o.favorite ? " is-on" : "") +
       '">' +
-      (o.favorite ? "★" : "☆") +
+      icon(o.favorite ? "ic-star" : "ic-star_outline") +
       "</span>" +
       '<span class="fd-layer-menu">' +
       icon("ic-more_vert") +
@@ -676,7 +679,7 @@
       .map(function (item) {
         var name = item[0];
         return (
-          '<div class="fd-workspace-row"><span class="fd-check is-on">✓</span><strong data-i18n="' +
+          '<div class="fd-workspace-row"><span class="fd-check is-on"><i class="fd-tick"></i></span><strong data-i18n="' +
           item[1] +
           '">' +
           name +

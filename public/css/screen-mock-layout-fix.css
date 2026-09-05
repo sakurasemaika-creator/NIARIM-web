@@ -148,12 +148,24 @@
   display: none !important;
 }
 
-/* 鍵マークが絵文字のまま色付きで浮いていたので、
-   画面内の他のアイコンと同じ単色の見え方に揃える。 */
-.fd-watermark-tool small,
-.fd-end-card-row span:last-child {
-  filter: grayscale(1) !important;
-  opacity: 0.55 !important;
+/* プレミアム限定を示す鍵は、以前は絵文字の 🔒 を置いていた。絵文字は
+   同梱フォントに無く閲覧環境のカラー絵文字で描かれるため、単色の
+   アイコンが並ぶ中でそこだけ色付きで浮いていた。アプリ本体と同じ
+   Icons.lock をスプライトへ足して、他のアイコンと同じ扱いにする。 */
+.fd-lock-mark {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 2px !important;
+  width: 9px !important;
+  height: 9px !important;
+  color: var(--fd-muted, #8d8588) !important;
+}
+.fd-end-card-row .fd-lock-mark {
+  position: static !important;
+  margin-left: auto !important;
+  width: 11px !important;
+  height: 11px !important;
+  flex: 0 0 11px !important;
 }
 
 /* ---- コマ一覧の現在位置 ----
@@ -571,11 +583,18 @@ html
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+/* お気に入りの星は、以前は文字の ★ ☆ を置いていた。アプリ本体は
+   Icons.star / Icons.star_outline なので、同じ意匠をスプライトへ足して
+   他のアイコンと同じ扱いにする（字形が閲覧環境に左右されない）。 */
 .fd-theme-star {
   flex: 0 0 auto !important;
-  font-size: 10px !important;
-  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
   color: color-mix(in srgb, var(--fd-text) 62%, transparent) !important;
+}
+.fd-theme-star > .ic {
+  width: 11px !important;
+  height: 11px !important;
 }
 .fd-theme-star.is-on {
   color: #e0a100 !important;
@@ -727,4 +746,22 @@ html
   bottom: 0 !important;
   border-right: 1.5px solid currentColor !important;
   border-bottom: 1.5px solid currentColor !important;
+}
+
+/* ---- 24. チェックは文字ではなく罫線で描く ----
+   "✓"(U+2713) は同梱の白光明朝には入っているが、明朝の字形は左払いが
+   長く、9px前後まで小さくすると数学の根号（√）に見えてしまう。
+   アプリ側は Icons.check（等幅の線2本）なので、字形の印象を合わせる
+   ため罫線で描く。フォントの有無にも字形の違いにも左右されない。 */
+.fd-tick {
+  display: inline-block !important;
+  width: 7px !important;
+  height: 4px !important;
+  margin-bottom: 2px !important;
+  border-left: 1.5px solid currentColor !important;
+  border-bottom: 1.5px solid currentColor !important;
+  transform: rotate(-45deg) !important;
+}
+.fd-scene-pill > .fd-tick {
+  margin-right: 6px !important;
 }
