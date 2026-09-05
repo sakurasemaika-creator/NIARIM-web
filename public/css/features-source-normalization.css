@@ -67,3 +67,88 @@
   background: var(--fd-accent-fill, var(--fd-accent, var(--color-accent))) !important;
   color: var(--fd-on-accent, #fff) !important;
 }
+
+/* Multilingual labels: preserve the app's intentional single-line truncation only
+   for compact app-bar/timeline titles. Body labels and settings rows must be able
+   to shrink inside the phone instead of pushing past the bezel. */
+.feature-diagram :is(
+  .fd-workspace-row,
+  .fd-format-row,
+  .fd-layer-row,
+  .fd-sheet-row,
+  .fd-setting-row,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-scene-line,
+  .fd-timeline-row
+),
+.screenshot-card :is(
+  .fd-workspace-row,
+  .fd-format-row,
+  .fd-layer-row,
+  .fd-sheet-row,
+  .fd-setting-row,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-scene-line,
+  .fd-timeline-row
+) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.feature-diagram :is(
+  .fd-workspace-row,
+  .fd-format-row,
+  .fd-layer-row,
+  .fd-sheet-row,
+  .fd-setting-row,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-scene-line,
+  .fd-timeline-row
+) :is(strong, small, span, b, p),
+.screenshot-card :is(
+  .fd-workspace-row,
+  .fd-format-row,
+  .fd-layer-row,
+  .fd-sheet-row,
+  .fd-setting-row,
+  .fd-route-card,
+  .fd-save-slot,
+  .fd-scene-line,
+  .fd-timeline-row
+) :is(strong, small, span, b, p) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere;
+}
+
+/* Export's three compact segmented labels may not grow the screen. If a locale
+   is longer than the app control can show, use a single ellipsis just like a
+   native segmented control instead of clipping half a glyph. */
+.feature-diagram .fd-export-segments .fd-segment,
+.screenshot-card .fd-export-segments .fd-segment {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  padding-inline: 3px !important;
+}
+
+/* Workspace and layer rows are list items, not app-bar titles. Give translated
+   labels the flexible middle column and keep icons/controls fixed. */
+.feature-diagram :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name),
+.screenshot-card :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* Audio sheet uses a dense grid. Its labels should compress/ellipsis before the
+   slider and value controls are pushed outside the phone. */
+.feature-diagram .fd-sheet-row > :is(span, strong, b),
+.screenshot-card .fd-sheet-row > :is(span, strong, b) {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
