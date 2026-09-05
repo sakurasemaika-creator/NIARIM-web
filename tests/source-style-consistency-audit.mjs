@@ -12,11 +12,21 @@ function stripComments(text) {
   return text.replace(/\/\*[\s\S]*?\*\//g, "");
 }
 
+async function listCssFiles(dir) {
+  const absolute = path.join(root, dir);
+  const entries = await fs.readdir(absolute, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const rel = path.join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...(await listCssFiles(rel)));
+    else if (entry.isFile() && entry.name.endsWith(".css")) files.push(rel);
+  }
+  return files;
+}
+
 const lineBreak = await read("public/css/line-break.css");
 const themeGuard = await read("public/css/theme-accent-only.css");
 const visualTail = await read("public/css/visual-audit-tail.css");
-const variables = await read("public/css/variables.css");
-const manual = await read("public/css/manual-visual-audit-continuation.css");
 
 const imports = [...lineBreak.matchAll(/@import\s+url\(["']([^"']+)["']\)/g)].map(
   (m) => m[1],
@@ -30,8 +40,8 @@ if (guardIndex < 0) {
 
 const guardClean = stripComments(themeGuard);
 for (const token of ["--color-accent-strong", "--color-accent-strong-dark"]) {
-  const pattern = new RegExp(`${token.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*:\\s*var\\(--color-accent\\)`);
-  if (!pattern.test(guardClean)) {
+  const required = `${token}: var(--color-accent)`;
+  if (!guardClean.includes(required)) {
     failures.push(`${token} must resolve directly to --color-accent in final guard`);
   }
 }
@@ -55,10 +65,13 @@ if (!/border-color:\s*var\(--color-accent\)\s*!important/.test(guardClean)) {
   failures.push("final theme guard must force theme accent border");
 }
 
-const mergedStyle = stripComments([variables, manual, themeGuard].join("\n"));
-for (const forbidden of ["#c42e51", "#a82545"]) {
-  if (mergedStyle.toLowerCase().includes(forbidden)) {
-    failures.push(`legacy dark-red literal remains active: ${forbidden}`);
+const cssFiles = await listCssFiles("public/css");
+for (const rel of cssFiles) {
+  const clean = stripComments(await read(rel)).toLowerCase();
+  for (const forbidden of ["#c42e51", "#a82545"]) {
+    if (clean.includes(forbidden)) {
+      failures.push(`legacy dark-red literal remains active in ${rel}: ${forbidden}`);
+    }
   }
 }
 
@@ -87,11 +100,12 @@ console.log(
   JSON.stringify(
     {
       ok: true,
+      cssFilesChecked: cssFiles.length,
       checks: [
         "theme guard is final import",
         "legacy strong aliases resolve to theme accent",
         "interactive selectors are guarded",
-        "no active legacy dark-red literals",
+        "no active legacy dark-red literals in any CSS file",
         "50x50 frame invariants exist",
         "gallery trailing space invariant exists",
       ],
