@@ -50,6 +50,15 @@ jobs:
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
+      - name: Audit SP360/SP390/PC across all 7 languages
+        if: always()
+        run: AUDIT_OUT_DIR=artifacts/autonomous-browser-audit/multilang-responsive node tests/multilang-responsive-audit-v2.mjs
+      - name: Audit final Home and Features visual invariants
+        if: always()
+        run: node tests/final-visual-invariants-audit.mjs
+      - name: Audit app preview and feature mock details
+        if: always()
+        run: node tests/mock-detail-audit.mjs
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
