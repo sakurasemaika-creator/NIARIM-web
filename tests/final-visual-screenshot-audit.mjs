@@ -4,7 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const outDir = process.env.AUDIT_SCREENSHOT_DIR || "artifacts/final-visual-screenshots";
+const outDir =
+  process.env.AUDIT_SCREENSHOT_DIR || "artifacts/final-visual-screenshots";
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const viewports = [
   { name: "sp360", width: 360, height: 800 },
@@ -70,19 +71,40 @@ for (const viewport of viewports) {
         return {
           lang: document.documentElement.lang,
           clientWidth: de.clientWidth,
-          scrollWidth: Math.max(de.scrollWidth, document.body?.scrollWidth || 0),
+          scrollWidth: Math.max(
+            de.scrollWidth,
+            document.body?.scrollWidth || 0,
+          ),
           clipped,
         };
       });
 
       if (state.lang !== language) {
-        failures.push({ viewport: viewport.name, language, route: route.path, kind: "language-not-applied", state });
+        failures.push({
+          viewport: viewport.name,
+          language,
+          route: route.path,
+          kind: "language-not-applied",
+          state,
+        });
       }
       if (state.scrollWidth > state.clientWidth + 2) {
-        failures.push({ viewport: viewport.name, language, route: route.path, kind: "horizontal-overflow", state });
+        failures.push({
+          viewport: viewport.name,
+          language,
+          route: route.path,
+          kind: "horizontal-overflow",
+          state,
+        });
       }
       if (state.clipped.length) {
-        failures.push({ viewport: viewport.name, language, route: route.path, kind: "mock-or-hero-clipped", clipped: state.clipped });
+        failures.push({
+          viewport: viewport.name,
+          language,
+          route: route.path,
+          kind: "mock-or-hero-clipped",
+          clipped: state.clipped,
+        });
       }
 
       if (route.path === "/") {
@@ -95,13 +117,17 @@ for (const viewport of viewports) {
 
         const scroller = page.locator(".screenshot-scroller").first();
         if (await scroller.count()) {
-          await scroller.evaluate((el) => { el.scrollLeft = 0; });
+          await scroller.evaluate((el) => {
+            el.scrollLeft = 0;
+          });
           await page.waitForTimeout(120);
           const startPath = path.join(outDir, `${baseName}__gallery-start.png`);
           await scroller.screenshot({ path: startPath });
           manifest.push(startPath);
 
-          await scroller.evaluate((el) => { el.scrollLeft = el.scrollWidth; });
+          await scroller.evaluate((el) => {
+            el.scrollLeft = el.scrollWidth;
+          });
           await page.waitForTimeout(180);
           const endPath = path.join(outDir, `${baseName}__gallery-end.png`);
           await scroller.screenshot({ path: endPath });
@@ -143,8 +169,23 @@ for (const viewport of viewports) {
 await browser.close();
 await fs.writeFile(
   path.join(outDir, "manifest.json"),
-  JSON.stringify({ generatedAt: new Date().toISOString(), baseURL, screenshots: manifest, failures }, null, 2),
+  JSON.stringify(
+    {
+      generatedAt: new Date().toISOString(),
+      baseURL,
+      screenshots: manifest,
+      failures,
+    },
+    null,
+    2,
+  ),
 );
 
-console.log(JSON.stringify({ screenshots: manifest.length, failures: failures.length, outDir }, null, 2));
+console.log(
+  JSON.stringify(
+    { screenshots: manifest.length, failures: failures.length, outDir },
+    null,
+    2,
+  ),
+);
 if (failures.length) process.exitCode = 1;

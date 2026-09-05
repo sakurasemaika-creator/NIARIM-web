@@ -16,21 +16,25 @@ const lineBreak = await read("public/css/line-break.css");
 const themeGuard = await read("public/css/theme-accent-only.css");
 const visualTail = await read("public/css/visual-audit-tail.css");
 
-const imports = [...lineBreak.matchAll(/@import\s+url\(["']([^"']+)["']\)/g)].map(
-  (m) => m[1],
-);
+const imports = [
+  ...lineBreak.matchAll(/@import\s+url\(["']([^"']+)["']\)/g),
+].map((m) => m[1]);
 const guardIndex = imports.indexOf("/css/theme-accent-only.css");
 if (guardIndex < 0) {
   failures.push("theme-accent-only.css is not imported by line-break.css");
 } else if (guardIndex !== imports.length - 1) {
-  failures.push("theme-accent-only.css must be the final imported design layer");
+  failures.push(
+    "theme-accent-only.css must be the final imported design layer",
+  );
 }
 
 const guardClean = stripComments(themeGuard);
 for (const token of ["--color-accent-strong", "--color-accent-strong-dark"]) {
   const required = `${token}: var(--color-accent)`;
   if (!guardClean.includes(required)) {
-    failures.push(`${token} must resolve directly to --color-accent in final guard`);
+    failures.push(
+      `${token} must resolve directly to --color-accent in final guard`,
+    );
   }
 }
 
@@ -47,7 +51,9 @@ for (const selector of [
 }
 
 if (!/background:\s*var\(--color-accent\)\s*!important/.test(guardClean)) {
-  failures.push("final theme guard must force the active theme accent background");
+  failures.push(
+    "final theme guard must force the active theme accent background",
+  );
 }
 if (!/border-color:\s*var\(--color-accent\)\s*!important/.test(guardClean)) {
   failures.push("final theme guard must force the active theme accent border");
@@ -73,7 +79,9 @@ for (const required of [
 }
 
 if (!visualTail.includes(".screenshot-card:last-of-type")) {
-  failures.push("visual-audit-tail.css must preserve explicit trailing gallery space");
+  failures.push(
+    "visual-audit-tail.css must preserve explicit trailing gallery space",
+  );
 }
 
 if (failures.length) {

@@ -96,7 +96,8 @@ for (const viewport of viewports) {
         ].map((el) => {
           const host = el.closest(".fd-app-screen, .fd-route-screen");
           const fit = host
-            ? parseFloat(getComputedStyle(host).getPropertyValue("--fd-fit")) || 1
+            ? parseFloat(getComputedStyle(host).getPropertyValue("--fd-fit")) ||
+              1
             : 1;
           const r = el.getBoundingClientRect();
           return {
@@ -116,7 +117,9 @@ for (const viewport of viewports) {
           return {
             stripCenter: sr.left + sr.width / 2,
             currentCenter: cr ? cr.left + cr.width / 2 : null,
-            delta: cr ? cr.left + cr.width / 2 - (sr.left + sr.width / 2) : null,
+            delta: cr
+              ? cr.left + cr.width / 2 - (sr.left + sr.width / 2)
+              : null,
           };
         });
         const hero = rect(document.querySelector(".hero-visual"));
@@ -178,12 +181,23 @@ for (const viewport of viewports) {
         });
       }
       for (const button of state.buttons) {
-        if (button.background !== state.accent || button.border !== state.accent) {
-          failures.push({ id, kind: "button-not-theme-accent", button, accent: state.accent });
+        if (
+          button.background !== state.accent ||
+          button.border !== state.accent
+        ) {
+          failures.push({
+            id,
+            kind: "button-not-theme-accent",
+            button,
+            accent: state.accent,
+          });
         }
       }
       for (const frame of state.frames) {
-        if (Math.abs(frame.width - 50) > 1.5 || Math.abs(frame.height - 50) > 1.5) {
+        if (
+          Math.abs(frame.width - 50) > 1.5 ||
+          Math.abs(frame.height - 50) > 1.5
+        ) {
           failures.push({ id, kind: "frame-not-50x50", frame });
         }
       }
@@ -200,7 +214,11 @@ for (const viewport of viewports) {
       }
       if (route === "/" && state.gallery) {
         if (state.gallery.count !== 6) {
-          failures.push({ id, kind: "gallery-card-count", gallery: state.gallery });
+          failures.push({
+            id,
+            kind: "gallery-card-count",
+            gallery: state.gallery,
+          });
         }
         const target = 320 / 569;
         for (const card of state.gallery.cards) {
@@ -212,12 +230,20 @@ for (const viewport of viewports) {
           (card) => card.theme && card.accent && card.bezel,
         );
         if (populated.length !== 6) {
-          failures.push({ id, kind: "gallery-theme-missing", cards: state.gallery.cards });
+          failures.push({
+            id,
+            kind: "gallery-theme-missing",
+            cards: state.gallery.cards,
+          });
         } else {
           const accents = new Set(populated.map((card) => card.accent));
           const bezels = new Set(populated.map((card) => card.bezel));
           if (accents.size !== 6 || bezels.size !== 6) {
-            failures.push({ id, kind: "gallery-theme-duplicate", cards: populated });
+            failures.push({
+              id,
+              kind: "gallery-theme-duplicate",
+              cards: populated,
+            });
           }
         }
 
@@ -240,7 +266,8 @@ for (const viewport of viewports) {
         });
         if (
           end &&
-          (end.lastLeft < end.scrollerLeft - 2 || end.lastRight > end.scrollerRight + 2)
+          (end.lastLeft < end.scrollerLeft - 2 ||
+            end.lastRight > end.scrollerRight + 2)
         ) {
           failures.push({ id, kind: "gallery-last-card-clipped", end });
         }
@@ -248,18 +275,30 @@ for (const viewport of viewports) {
 
       if (route === "/features/" && state.featureThemes.length) {
         if (state.featureThemes.length !== 9) {
-          failures.push({ id, kind: "features-theme-count", themes: state.featureThemes });
+          failures.push({
+            id,
+            kind: "features-theme-count",
+            themes: state.featureThemes,
+          });
         }
         const populated = state.featureThemes.filter(
           (theme) => theme.id && theme.accent && theme.bezel && theme.bg,
         );
         if (populated.length !== 9) {
-          failures.push({ id, kind: "features-theme-missing", themes: state.featureThemes });
+          failures.push({
+            id,
+            kind: "features-theme-missing",
+            themes: state.featureThemes,
+          });
         } else {
           const accents = new Set(populated.map((theme) => theme.accent));
           const bezels = new Set(populated.map((theme) => theme.bezel));
           if (accents.size !== 9 || bezels.size !== 9) {
-            failures.push({ id, kind: "features-theme-duplicate", themes: populated });
+            failures.push({
+              id,
+              kind: "features-theme-duplicate",
+              themes: populated,
+            });
           }
         }
       }
@@ -270,9 +309,17 @@ for (const viewport of viewports) {
         const target = hoverTargets.nth(i);
         if (!(await target.isVisible())) continue;
         await target.hover();
-        const bg = await target.evaluate((el) => getComputedStyle(el).backgroundColor);
+        const bg = await target.evaluate(
+          (el) => getComputedStyle(el).backgroundColor,
+        );
         if (bg !== state.accent) {
-          failures.push({ id, kind: "button-hover-not-theme-accent", index: i, bg, accent: state.accent });
+          failures.push({
+            id,
+            kind: "button-hover-not-theme-accent",
+            index: i,
+            bg,
+            accent: state.accent,
+          });
         }
       }
     }
