@@ -75,6 +75,10 @@ for (const lang of LANGS) {
         for (const ch of t.textContent) {
           const s = document.createElement("span");
           s.setAttribute("data-ch", ch);
+          // 空白はどのフォントで描かれても見た目に差が出ない。印を付けて
+          // 問い合わせ対象から外す。ページの文字の3割近くが空白なので、
+          // ここを外すだけで監査にかかる時間が大きく変わる。
+          if (!ch.trim()) s.setAttribute("data-ws", "1");
           s.textContent = ch;
           frag.appendChild(s);
         }
@@ -86,7 +90,7 @@ for (const lang of LANGS) {
     const { root } = await cdp.send("DOM.getDocument", { depth: -1 });
     const { nodeIds } = await cdp.send("DOM.querySelectorAll", {
       nodeId: root.nodeId,
-      selector: "span[data-ch]",
+      selector: "span[data-ch]:not([data-ws])",
     });
 
     for (const nodeId of nodeIds) {
@@ -109,24 +113,31 @@ for (const lang of LANGS) {
 
       // 画面外の文字（横に流れるマーキーの右側など）は、まだ実フォントで
       // 組まれていないため代替フォントを返すことがある。誤検出になるので、
-      // 一度画面内へ入れてから同じ文字をもう一度問い直し、それでも
-      // 代替フォントのままのものだけを報告する。
-      await cdp.send("Runtime.callFunctionOn", {
+      // 画面外にあるものだけ一度画面内へ入れて問い直し、それでも代替
+      // フォントのままのものを報告する。画面内にあるものはその場の判定が
+      // そのまま答えなので、余計な往復をしない。
+      const onScreen = await cdp.send("Runtime.callFunctionOn", {
         objectId: object.objectId,
+        returnByValue: true,
         functionDeclaration:
-          "function(){this.scrollIntoView({block:'center',inline:'center'});}",
+          "function(){const r=this.getBoundingClientRect();" +
+          "if(r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight)return true;" +
+          "this.scrollIntoView({block:'center',inline:'center'});return false;}",
       });
-      await page.waitForTimeout(30);
-      let recheck;
-      try {
-        recheck = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
-      } catch {
-        continue;
+      let confirmed = family;
+      if (!onScreen.result.value) {
+        await page.waitForTimeout(30);
+        let recheck;
+        try {
+          recheck = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
+        } catch {
+          continue;
+        }
+        if (!recheck.fonts.length) continue;
+        confirmed = recheck.fonts[0].familyName;
+        if (BUNDLED.test(confirmed) || EXPECTED_FALLBACK.test(confirmed))
+          continue;
       }
-      if (!recheck.fonts.length) continue;
-      const confirmed = recheck.fonts[0].familyName;
-      if (BUNDLED.test(confirmed) || EXPECTED_FALLBACK.test(confirmed))
-        continue;
       const ctxRes = await cdp.send("Runtime.callFunctionOn", {
         objectId: object.objectId,
         returnByValue: true,
