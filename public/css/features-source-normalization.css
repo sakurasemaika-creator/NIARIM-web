@@ -1,0 +1,48 @@
+/* Features source normalization: canonical frame, bezel and slider geometry.
+   This layer updates legacy feature-diagram base values to the current NIARIM UI contract. */
+
+/* Frame strip cells are 50 x 50 everywhere. */
+.feature-diagram .fd-frames {
+  min-height: 64px;
+  align-items: center;
+}
+.feature-diagram .fd-frame,
+.feature-diagram .fd-frame-thumb,
+.feature-diagram .fd-frame-add {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  flex: 0 0 50px;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+}
+
+/* Mock phone bezels must contain every internal panel without changing device ratio. */
+.feature-diagram :is(.fd-app-screen, .fd-route-screen),
+.screenshot-card :is(.fd-app-screen, .fd-route-screen) {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.feature-diagram :is(.fd-app-screen, .fd-route-screen) > *,
+.screenshot-card :is(.fd-app-screen, .fd-route-screen) > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Reconstructed sliders use one geometry: 4px track and full-height theme fill. */
+.feature-diagram :is(.fd-slider, .fd-sheet-slider, .fd-mini-slider) {
+  height: 4px;
+  min-height: 4px;
+  max-height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.feature-diagram :is(.fd-slider, .fd-sheet-slider, .fd-mini-slider) > :is(span, i) {
+  height: 100%;
+  max-height: 100%;
+  background: var(--fd-accent, var(--color-accent));
+  border-radius: inherit;
+}
