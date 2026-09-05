@@ -38,8 +38,9 @@ html body .fd-frame.fd-frame.is-current {
   max-height: 50px !important;
   box-sizing: border-box !important;
 }
-html body .fd-frame-thumb.fd-frame-thumb.is-current,
-html body .fd-frame-thumb.fd-frame-thumb.is-selected {
+/* The generated canvas mock already draws a single fixed .fd-frame-cursor over
+   the center of the strip. Do not add a second border to .is-selected. */
+html body .fd-frame-thumb.fd-frame-thumb.is-current {
   border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
 }
@@ -51,8 +52,7 @@ html body .fd-frame-thumb.fd-frame-thumb > svg {
   max-height: 44px !important;
   margin: auto !important;
 }
-html body .fd-frame-thumb.fd-frame-thumb.is-current > svg,
-html body .fd-frame-thumb.fd-frame-thumb.is-selected > svg {
+html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
   height: 40px !important;
   max-width: 40px !important;
   max-height: 40px !important;
@@ -60,7 +60,7 @@ html body .fd-frame-thumb.fd-frame-thumb.is-selected > svg {
 
 /* main.js generates four frames plus an add cell and marks the third frame
    with is-selected. Offset that known selected index so its 50px cell is
-   centered without depending on browser scroll restoration. */
+   centered beneath the single fixed cursor without depending on scroll restoration. */
 html body .fd-frame-strip-scroll:has(> .fd-frame-thumb.is-selected) {
   padding-left: calc(50% - 125px) !important;
   scroll-padding-left: calc(50% - 125px) !important;
