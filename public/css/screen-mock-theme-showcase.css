@@ -1,7 +1,7 @@
 /*
  * Screen-mock theme showcase
  * Every reconstructed NIARIM screen gets an explicit preset palette.
- * This file also normalises the device bezel, frame-strip current marker,
+ * This file normalises the device bezel, frame-strip geometry,
  * and slider appearance so the screenshots communicate customisability
  * without drifting from one mock implementation to another.
  */
@@ -31,7 +31,7 @@
   color: var(--fd-ink, #30262d) !important;
 }
 
-/* ---------- frame strip: 50 x 50, marker centered in scroll area ---------- */
+/* ---------- frame strip: 50 x 50, one current-position marker only ---------- */
 .fd-canvas-screen > .fd-frame-strip {
   height: 60px !important;
   flex: 0 0 60px !important;
@@ -49,8 +49,11 @@
   inset: 3px !important;
 }
 
-/* Old marker was centered against the entire strip, including the mode control. */
-.fd-frame-strip::after {
+/* The product mock has a real .fd-frame-cursor element. Legacy pseudo-element
+   markers are disabled permanently so the center frame can never render twice. */
+.fd-frame-strip::after,
+.fd-frame-strip-scroll::after {
+  content: none !important;
   display: none !important;
 }
 .fd-frame-strip-scroll {
@@ -61,31 +64,20 @@
   gap: 0 !important;
   overflow: hidden !important;
 }
-.fd-frame-strip-scroll::after {
-  content: "" !important;
-  position: absolute !important;
-  z-index: 8 !important;
-  left: 50% !important;
-  top: 50% !important;
-  width: 50px !important;
-  height: 50px !important;
-  transform: translate(-50%, -50%) !important;
-  border: 3px solid #ffad00 !important;
-  border-radius: 4px !important;
-  box-sizing: border-box !important;
-  pointer-events: none !important;
-}
-.fd-frame-thumb.is-current {
+.fd-frame-thumb.is-current,
+.fd-frame-thumb.is-selected {
   border-width: 1px !important;
-  border-color: #4a4749 !important;
+  border-color: var(--fd-panel-2, #4a4749) !important;
 }
 
 /* ---------- slider visual language ---------- */
 .fd-slider,
-.fd-sheet-slider {
+.fd-sheet-slider,
+.fd-mini-slider {
   position: relative !important;
-  height: 5px !important;
-  min-height: 5px !important;
+  height: 4px !important;
+  min-height: 4px !important;
+  max-height: 4px !important;
   border-radius: 999px !important;
   background: color-mix(
     in srgb,
@@ -95,16 +87,25 @@
   overflow: visible !important;
 }
 .fd-slider > span,
-.fd-sheet-slider > span {
+.fd-sheet-slider > span,
+.fd-mini-slider > span,
+.fd-slider > i,
+.fd-sheet-slider > i,
+.fd-mini-slider > i {
   position: absolute !important;
   inset: 0 auto 0 0 !important;
   width: 64% !important;
-  height: 5px !important;
+  height: 4px !important;
+  max-height: 4px !important;
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;
 }
 .fd-slider > span::after,
-.fd-sheet-slider > span::after {
+.fd-sheet-slider > span::after,
+.fd-mini-slider > span::after,
+.fd-slider > i::after,
+.fd-sheet-slider > i::after,
+.fd-mini-slider > i::after {
   content: "" !important;
   position: absolute !important;
   right: -6px !important;
@@ -117,13 +118,8 @@
   box-shadow: 0 0 0 2px var(--fd-surface, #fff) !important;
 }
 
-/* ---------- 配色は screen-mock-palette.css に一本化 ----------
-   以前はこのファイルにも画面ごとのパレットがあったが、位置ベースの
-   セレクタが実際のDOMとずれていて（#features の先頭が .section-head、
-   ヒーローのモックは要素自身が .hero-visual）、当たらない指定が残り
-   一部の画面が既定色のまま重複していた。
-   色の定義は data-mock-theme と節IDで名指しする palette 側だけに置き、
-   このファイルは端末の見た目（枠・フレーム一覧・スライダー）に専念する。 */
+/* ---------- 配色は screen-mock-palette.css / contrast-palettes.css に一本化 ----------
+   This file owns geometry only. */
 
 /* Accent-colour propagation for legacy feature diagrams. */
 .feature-section
@@ -137,7 +133,7 @@
 }
 .feature-section .fd-segment.is-active {
   background: var(--fd-accent) !important;
-  color: #fff !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
 .feature-section .fd-layer-row.is-active {
   background: color-mix(in srgb, var(--fd-accent) 16%, transparent) !important;
