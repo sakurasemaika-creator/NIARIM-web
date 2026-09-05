@@ -71,14 +71,17 @@ html body .fd-frame-strip-scroll:has(> .fd-frame-thumb.is-selected) {
   justify-content: center !important;
 }
 
-/* App Preview: every reconstructed phone keeps its device ratio and may never
-   flex-shrink just because translated content or the viewport is narrow. */
+/* App Preview: the outer screenshot card is the device bezel. Use the preset's
+   own bezel token instead of the global ink color, and keep every reconstructed
+   phone at the exact device ratio without flex shrinking. */
 html body .screenshot-scroller.screenshot-scroller > .screenshot-card {
   flex-shrink: 0 !important;
   aspect-ratio: 320 / 569 !important;
   min-width: 0;
   box-sizing: border-box !important;
   scroll-snap-stop: always;
+  border-color: var(--fd-bezel, var(--color-ink)) !important;
+  background: var(--fd-bezel, var(--color-ink)) !important;
 }
 html body .screenshot-scroller.screenshot-scroller > .screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   width: 100% !important;
