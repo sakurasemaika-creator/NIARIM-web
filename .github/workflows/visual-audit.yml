@@ -40,7 +40,7 @@ jobs:
         run: node tests/autonomous-browser-audit.mjs || node tests/validate-rendered-audit.mjs
       - name: Run complete scroll and full-page audit
         if: always()
-        run: node tests/complete-scroll-audit.mjs
+        run: node tests/complete-scroll-audit-v2.mjs
       - name: Run deep per-section visual audit
         if: always()
         run: node tests/deep-section-audit.mjs
@@ -79,13 +79,13 @@ jobs:
           cat /tmp/niarim-http.log
           exit 1
       - name: Audit SP360/SP390/PC across all 7 languages
-        run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v3.mjs
+        run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v4.mjs
       - name: Audit normalized frame, theme and gallery invariants
         if: always()
         run: node tests/final-visual-invariants-audit.mjs
       - name: Capture and inspect final Home/Features matrix
         if: always()
-        run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit-v2.mjs
+        run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit-v3.mjs
       - name: Upload final matrix evidence
         if: always()
         uses: actions/upload-artifact@v4
