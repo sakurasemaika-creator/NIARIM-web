@@ -1,1 +1,328 @@
-/* ==========================================================================\n   NIARIM contact.css - お問い合わせページ専用スタイル\n   ========================================================================== */\n\n/* 以前はページ側でインラインstyleを使ってpaddingを指定していたため、\n   スマートフォン幅でも横paddingが縮まらず、フォームの実質的な横幅が\n   極端に狭くなってしまっていた。クラス化してブレークポイントごとに\n   調整できるようにする。 */\n.contact-panel {\n  border-radius: var(--radius-lg);\n  padding: var(--space-2xl) var(--space-xl);\n  margin-block: var(--space-xl);\n  background: var(--color-bg-tint);\n}\n\n.contact-layout {\n  display: grid;\n  grid-template-columns: 0.85fr 1.15fr;\n  gap: var(--space-xl);\n  align-items: start;\n}\n\n.contact-intro h1 {\n  font-size: var(--fs-h1);\n}\n\n.contact-intro p {\n  margin-top: var(--space-sm);\n  color: var(--color-text-muted);\n  max-width: calc(42 * var(--measure-ch));\n  overflow-wrap: normal;\n  word-break: normal;\n}\n\n.contact-channel {\n  margin-top: var(--space-xl);\n  padding: var(--space-md);\n  border-radius: var(--radius-md);\n  background: var(--color-bg-tint);\n}\n\n.contact-channel h2 {\n  font-size: var(--fs-h3);\n  margin-bottom: var(--space-xs);\n}\n\n.contact-channel a {\n  margin-top: var(--space-sm);\n}\n\n/* .contact-intro p { max-width: 42ch } の方が詳細度が高く(クラス+要素)、\n   .contact-personal-note単体(クラスのみ)のmax-width指定を上書きできて\n   いなかったため、詳細度を上げて確実に上書きする。 */\n.contact-intro .contact-personal-note {\n  max-width: none;\n}\n\n.contact-personal-note {\n  margin-top: var(--space-md);\n  padding: var(--space-md);\n  border-radius: var(--radius-md);\n  border: 1px solid var(--color-border);\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n}\n\n.contact-form-note {\n  margin-top: var(--space-xs);\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n}\n\n.contact-form {\n  background: var(--color-white);\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-lg);\n  padding: var(--space-xl);\n  box-shadow: var(--shadow-sm);\n}\n\n.form-row {\n  margin-bottom: var(--space-md);\n}\n\n/* フォーム全体のフェード(.reveal)に加えて、各入力欄を上から順に\n   少し遅れて浮かび上がらせる。フォームへ実際に入力していく順番を\n   なぞるような見え方を意図している。 */\n.contact-form .form-row,\n.contact-form .form-submit {\n  opacity: 0;\n  transform: translateY(12px);\n  transition:\n    opacity var(--duration-base) var(--ease-out),\n    transform var(--duration-base) var(--ease-out);\n}\n\n.contact-form.is-visible .form-row,\n.contact-form.is-visible .form-submit {\n  opacity: 1;\n  transform: none;\n}\n\n/* 子要素の並び: type(1) / name(2) / email(3) / message(4) /\n   attachments(5) / honeypot(6・非表示) / agree(7) / submit-button(8) */\n.contact-form.is-visible .form-row:nth-child(1) {\n  transition-delay: 0.05s;\n}\n.contact-form.is-visible .form-row:nth-child(2) {\n  transition-delay: 0.1s;\n}\n.contact-form.is-visible .form-row:nth-child(3) {\n  transition-delay: 0.15s;\n}\n.contact-form.is-visible .form-row:nth-child(4) {\n  transition-delay: 0.2s;\n}\n.contact-form.is-visible .form-row:nth-child(5) {\n  transition-delay: 0.25s;\n}\n.contact-form.is-visible .form-row:nth-child(7) {\n  transition-delay: 0.3s;\n}\n.contact-form.is-visible .form-submit {\n  transition-delay: 0.36s;\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .contact-form .form-row,\n  .contact-form .form-submit {\n    opacity: 1;\n    transform: none;\n    transition: none;\n  }\n}\n\n.form-row label {\n  display: block;\n  font-weight: 600;\n  font-size: var(--fs-small);\n  margin-bottom: 0.5rem;\n}\n\n.form-row .required {\n  color: var(--color-accent);\n  margin-left: 0.25rem;\n}\n\n.form-control {\n  width: 100%;\n  padding: 0.85rem 1rem;\n  border-radius: var(--radius-sm);\n  border: 1.5px solid var(--color-gray-300);\n  background: var(--color-white);\n  font-size: 1rem;\n  transition:\n    border-color var(--duration-fast) var(--ease-out),\n    box-shadow var(--duration-fast) var(--ease-out);\n}\n\n.form-control:focus {\n  border-color: var(--color-brand);\n  box-shadow: 0 0 0 4px var(--color-sub-tint);\n}\n\n/* 添付ファイル欄。\n   ブラウザ標準の file 入力は「Choose Files / No file chosen」という\n   ブラウザ言語のラベルが出てしまい、サイトの言語ともデザインとも合わない。\n   そのため入力自体は視覚的に隠し（フォーカスは保つ）、見た目と文言は\n   こちらのボタンと状態テキストで用意している。 */\n.form-file {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  flex-wrap: wrap;\n}\n\n.form-file-button {\n  flex-shrink: 0;\n  padding: 0.6rem 1.1rem;\n  border: 1px solid var(--color-gray-300);\n  border-radius: var(--radius-pill);\n  background: var(--color-bg);\n  color: var(--color-text);\n  font-family: inherit;\n  font-size: var(--fs-small);\n  cursor: pointer;\n  transition:\n    border-color var(--duration-fast) var(--ease-out),\n    background-color var(--duration-fast) var(--ease-out);\n}\n\n.form-file-button:hover {\n  border-color: var(--color-brand);\n  background: var(--color-sub-tint);\n}\n\n.form-file-input:focus-visible + .form-file-button,\n.form-file-button:focus-visible {\n  outline: 2px solid var(--color-brand);\n  outline-offset: 2px;\n}\n\n.form-file-status {\n  min-width: 0;\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n  overflow-wrap: anywhere;\n}\n\n.form-row.has-error .form-file-button {\n  border-color: var(--color-error);\n}\n\ntextarea.form-control {\n  min-height: 160px;\n  resize: vertical;\n}\n\n.form-hint {\n  margin-top: 0.4rem;\n  font-size: var(--fs-small);\n  color: var(--color-text-muted);\n}\n\n.form-error {\n  margin-top: 0.4rem;\n  font-size: var(--fs-small);\n  color: var(--color-error);\n  display: none;\n}\n\n.form-row.has-error .form-control {\n  border-color: var(--color-error);\n}\n\n.form-row.has-error .form-error {\n  display: block;\n}\n\n.form-checkbox {\n  display: flex;\n  align-items: flex-start;\n  gap: 0.6rem;\n  font-size: var(--fs-small);\n}\n\n.form-checkbox input {\n  /* WCAG 2.2 の最小ターゲットサイズ(24x24)に合わせる。 */\n  width: 24px;\n  height: 24px;\n  margin-top: 0;\n  accent-color: var(--color-brand);\n  flex-shrink: 0;\n}\n\n.form-checkbox a {\n  color: var(--color-brand);\n  text-decoration: underline;\n  /* 行内リンクだが単独の導線でもあるので、指で押せる高さを確保する。 */\n  display: inline-block;\n  padding-block: 0.3rem;\n}\n\n/* honeypot: 通常ユーザーには見えない位置に隠す */\n.form-honeypot {\n  position: absolute;\n  left: -9999px;\n  width: 1px;\n  height: 1px;\n  overflow: hidden;\n}\n\n.form-submit {\n  width: 100%;\n  margin-top: var(--space-sm);\n}\n\n.form-status {\n  margin-top: var(--space-md);\n  padding: var(--space-md);\n  border-radius: var(--radius-sm);\n  font-size: var(--fs-small);\n  display: none;\n}\n\n.form-status.is-visible {\n  display: block;\n}\n\n.form-status.is-success {\n  background: rgba(47, 158, 110, 0.1);\n  color: var(--color-success);\n}\n\n.form-status.is-error {\n  background: rgba(229, 72, 77, 0.1);\n  color: var(--color-error);\n}\n\n.form-status h2 {\n  font-family: var(--font-serif);\n  font-size: 1rem;\n  margin-bottom: 0.25rem;\n}\n\n@media (max-width: 900px) {\n  .contact-layout {\n    grid-template-columns: 1fr;\n  }\n\n  .contact-form {\n    padding: var(--space-lg);\n  }\n}\n\n@media (max-width: 640px) {\n  /* スマートフォン幅では、外枠のpaddingを大きく取ったままだと\n     フォームの実質的な横幅が極端に狭くなり読みにくくなるため縮小する。 */\n  .contact-panel {\n    padding: var(--space-lg) var(--space-sm);\n    margin-block: var(--space-md);\n    border-radius: var(--radius-md);\n  }\n\n  .contact-form {\n    padding: var(--space-md);\n  }\n}\n
+/* ==========================================================================
+   NIARIM contact.css - お問い合わせページ専用スタイル
+   ========================================================================== */
+
+/* 以前はページ側でインラインstyleを使ってpaddingを指定していたため、
+   スマートフォン幅でも横paddingが縮まらず、フォームの実質的な横幅が
+   極端に狭くなってしまっていた。クラス化してブレークポイントごとに
+   調整できるようにする。 */
+.contact-panel {
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  margin-block: var(--space-xl);
+  background: var(--color-bg-tint);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.contact-intro h1 {
+  font-size: var(--fs-h1);
+}
+
+.contact-intro p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: calc(42 * var(--measure-ch));
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.contact-channel {
+  margin-top: var(--space-xl);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tint);
+}
+
+.contact-channel h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-xs);
+}
+
+.contact-channel a {
+  margin-top: var(--space-sm);
+}
+
+/* .contact-intro p { max-width: 42ch } の方が詳細度が高く(クラス+要素)、
+   .contact-personal-note単体(クラスのみ)のmax-width指定を上書きできて
+   いなかったため、詳細度を上げて確実に上書きする。 */
+.contact-intro .contact-personal-note {
+  max-width: none;
+}
+
+.contact-personal-note {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.contact-form-note {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.contact-form {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-row {
+  margin-bottom: var(--space-md);
+}
+
+/* フォーム全体のフェード(.reveal)に加えて、各入力欄を上から順に
+   少し遅れて浮かび上がらせる。フォームへ実際に入力していく順番を
+   なぞるような見え方を意図している。 */
+.contact-form .form-row,
+.contact-form .form-submit {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.contact-form.is-visible .form-row,
+.contact-form.is-visible .form-submit {
+  opacity: 1;
+  transform: none;
+}
+
+/* 子要素の並び: type(1) / name(2) / email(3) / message(4) /
+   attachments(5) / honeypot(6・非表示) / agree(7) / submit-button(8) */
+.contact-form.is-visible .form-row:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.contact-form.is-visible .form-row:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.contact-form.is-visible .form-row:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.contact-form.is-visible .form-row:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.contact-form.is-visible .form-row:nth-child(5) {
+  transition-delay: 0.25s;
+}
+.contact-form.is-visible .form-row:nth-child(7) {
+  transition-delay: 0.3s;
+}
+.contact-form.is-visible .form-submit {
+  transition-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form .form-row,
+  .contact-form .form-submit {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.form-row label {
+  display: block;
+  font-weight: 600;
+  font-size: var(--fs-small);
+  margin-bottom: 0.5rem;
+}
+
+.form-row .required {
+  color: var(--color-accent);
+  margin-left: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-gray-300);
+  background: var(--color-white);
+  font-size: 1rem;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.form-control:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 4px var(--color-sub-tint);
+}
+
+/* 添付ファイル欄。
+   ブラウザ標準の file 入力は「Choose Files / No file chosen」という
+   ブラウザ言語のラベルが出てしまい、サイトの言語ともデザインとも合わない。
+   そのため入力自体は視覚的に隠し（フォーカスは保つ）、見た目と文言は
+   こちらのボタンと状態テキストで用意している。 */
+.form-file {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.form-file-button {
+  flex-shrink: 0;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--fs-small);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.form-file-button:hover {
+  border-color: var(--color-brand);
+  background: var(--color-sub-tint);
+}
+
+.form-file-input:focus-visible + .form-file-button,
+.form-file-button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.form-file-status {
+  min-width: 0;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.form-row.has-error .form-file-button {
+  border-color: var(--color-error);
+}
+
+textarea.form-control {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.form-hint {
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.form-error {
+  margin-top: 0.4rem;
+  font-size: var(--fs-small);
+  color: var(--color-error);
+  display: none;
+}
+
+.form-row.has-error .form-control {
+  border-color: var(--color-error);
+}
+
+.form-row.has-error .form-error {
+  display: block;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: var(--fs-small);
+}
+
+.form-checkbox input {
+  /* WCAG 2.2 の最小ターゲットサイズ(24x24)に合わせる。 */
+  width: 24px;
+  height: 24px;
+  margin-top: 0;
+  accent-color: var(--color-brand);
+  flex-shrink: 0;
+}
+
+.form-checkbox a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  /* 行内リンクだが単独の導線でもあるので、指で押せる高さを確保する。 */
+  display: inline-block;
+  padding-block: 0.3rem;
+}
+
+/* honeypot: 通常ユーザーには見えない位置に隠す */
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+.form-status {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  display: none;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.is-success {
+  background: rgba(47, 158, 110, 0.1);
+  color: var(--color-success);
+}
+
+.form-status.is-error {
+  background: rgba(229, 72, 77, 0.1);
+  color: var(--color-error);
+}
+
+.form-status h2 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  /* スマートフォン幅では、外枠のpaddingを大きく取ったままだと
+     フォームの実質的な横幅が極端に狭くなり読みにくくなるため縮小する。 */
+  .contact-panel {
+    padding: var(--space-lg) var(--space-sm);
+    margin-block: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-form {
+    padding: var(--space-md);
+  }
+}
