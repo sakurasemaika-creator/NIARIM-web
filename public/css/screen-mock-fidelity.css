@@ -93,3 +93,27 @@
 .fd-frame-mode .is-selected {
   background: transparent !important;
 }
+
+/* App Preview uses a narrower 9:16 card than the full Features mock.
+   Keep the full-size Features calibration untouched, but compact the two
+   vertically dense route screens so their real controls remain inside the
+   bezel instead of being clipped below it. */
+.screenshot-card .fd-export-screen .fd-export-body {
+  padding: 10px 12px 6px !important;
+}
+.screenshot-card .fd-export-screen .fd-export-format-title {
+  margin: 12px 0 5px !important;
+}
+.screenshot-card .fd-export-screen .fd-format-row {
+  height: 52px !important;
+  min-height: 52px !important;
+  padding: 5px 18px !important;
+}
+.screenshot-card .fd-export-screen .fd-export-start {
+  flex: 0 0 48px !important;
+}
+
+.screenshot-card .fd-workspace-screen .fd-workspace-row {
+  height: 42px !important;
+  min-height: 42px !important;
+}
