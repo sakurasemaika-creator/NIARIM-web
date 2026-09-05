@@ -8,6 +8,7 @@
     "deploy": "wrangler deploy",
     "audit": "node tools/audit-site.js",
     "audit:multilang": "node tests/multilang-responsive-audit.mjs",
+    "audit:i18n": "node tests/i18n-completeness-audit.mjs",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown"
   },
