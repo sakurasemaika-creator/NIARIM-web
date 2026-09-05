@@ -218,6 +218,48 @@
     return '<div class="fd-panel-close-bar"><span class="fd-panel-close">×</span></div>';
   }
 
+  /* レイヤーの1行。アプリ側は種別ごとに小さなアイコンを添え、共通
+     レイヤーには表示範囲、クリッピング中のレイヤーにはその旨を
+     副題として出す（layer_panel.dart の _layerTypeIcon / subtitle）。
+     通常レイヤーだけを1枚出していたときは、レイヤーの種類が豊富なこと
+     も、ブレンドモードを選べることも図から伝わらなかった。 */
+  function layerRow(opt) {
+    return (
+      '<div class="fd-layer-row' +
+      (opt.active ? " is-active" : "") +
+      '">' +
+      icon("ic-visibility", "ic-eye") +
+      (opt.type
+        ? icon(opt.type, "ic-layer-type " + (opt.typeClass || ""))
+        : '<span class="fd-layer-pencil" aria-hidden="true"></span>') +
+      // サムネイルにはそのレイヤーの絵が出る。空の四角のままだと
+      // 何のレイヤーなのか分からないので、紙の白に絵を載せて見せる。
+      // 24px角なので、コマ一覧と同じ画角では線が細くなりすぎる。
+      // ここだけ絵に寄った画角にする。
+      '<span class="fd-layer-thumb">' +
+      '<svg class="fd-art" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
+      '<circle class="fd-art-ball" cx="50" cy="50" r="28" stroke-width="11"/>' +
+      "</svg></span>" +
+      '<span class="fd-layer-copy">' +
+      '<strong class="fd-layer-name" data-i18n="' +
+      opt.key +
+      '">' +
+      opt.fallback +
+      "</strong>" +
+      (opt.badge
+        ? '<small class="fd-layer-badge" data-i18n="' +
+          opt.badge +
+          '">' +
+          opt.badgeText +
+          "</small>"
+        : "") +
+      "</span>" +
+      '<span class="fd-layer-menu">⋮</span>' +
+      icon("ic-drag_handle", "ic-drag") +
+      "</div>"
+    );
+  }
+
   function layerPanel() {
     return (
       '<div class="fd-app-overlay-panel fd-app-layer-panel">' +
@@ -242,12 +284,33 @@
       icon("ic-image") +
       '<span data-i18n="fd.importImage">画像読み込み</span></span>' +
       "</div>" +
-      '<div class="fd-layer-row is-active">' +
-      icon("ic-visibility", "ic-eye") +
-      '<span class="fd-layer-pencil">⌁</span><span class="fd-layer-thumb"></span>' +
-      '<strong class="fd-layer-name" data-i18n="fd.layer1">レイヤー1</strong><span class="fd-layer-menu">⋮</span>' +
-      icon("ic-drag_handle", "ic-drag") +
-      "</div>" +
+      layerRow({
+        key: "fd.layer4",
+        fallback: "レイヤー4（自動塗り・下書き）",
+        type: "ic-edit",
+        typeClass: "is-lineart",
+      }) +
+      layerRow({
+        key: "fd.layer3",
+        fallback: "レイヤー3（自動塗り）",
+        type: "ic-palette",
+        typeClass: "is-autofill",
+        badge: "fd.blendMultiply",
+        badgeText: "乗算",
+      }) +
+      layerRow({
+        key: "fd.layer2",
+        fallback: "レイヤー2（共通レイヤー）",
+        type: "ic-link",
+        typeClass: "is-common",
+        badge: "fd.layerClipping",
+        badgeText: "クリッピング",
+      }) +
+      layerRow({
+        key: "fd.layer1",
+        fallback: "レイヤー1",
+        active: true,
+      }) +
       "</div>" +
       "</div>"
     );
@@ -369,7 +432,11 @@
       iconButton("ic-play_arrow") +
       iconButton("ic-fast_forward") +
       iconButton("ic-skip_next") +
-      '<span class="fd-spacer"></span><span class="fd-loop-mark">↔</span></div>' +
+      // アプリ側は6つのボタンを中央に寄せて並べる（Row の
+      // MainAxisAlignment.center）。以前は右端にリピートの印だけを
+      // 離して置いていたため、何のための記号か分からない見た目だった。
+      // ここでは再生ボタンがちょうど中央に来る5つに絞る。
+      "</div>" +
       timelineToolbar() +
       '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill">✓ Scene1</span><span>⋮</span><span>+</span></div>' +
       '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +

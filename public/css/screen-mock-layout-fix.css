@@ -331,13 +331,103 @@
 }
 .fd-art-ground {
   fill: none;
-  stroke: color-mix(in srgb, var(--fd-ink, #28242c) 20%, transparent);
+  stroke: rgba(40, 36, 44, 0.2);
   stroke-width: 4;
   stroke-linecap: round;
 }
+/* 絵は必ず白い用紙の上に載るので、線の色はテーマに追従させず濃い墨色で
+   固定する（テーマの文字色に合わせると、暗いテーマでは文字色が明るい
+   ため、白い紙の上で線が見えなくなる）。アプリでも描いた線の色は
+   UIのテーマとは無関係。 */
 .fd-art-ball {
   fill: none;
-  stroke: var(--fd-ink, #28242c);
+  stroke: #2c2830;
   stroke-width: 7;
   stroke-linecap: round;
+}
+
+/* ---- 15. オニオンスキンのスライダーのつまみ ----
+   Material の Slider は、塗られた部分の先端に丸いつまみが付く。
+   .fd-slider / .fd-sheet-slider にはこのつまみの指定があったが、
+   オニオンスキンで使っている .fd-mini-slider が抜けており、
+   不透明度・枚数のスライダーだけつまみの無い棒になっていた。 */
+.fd-mini-slider > i::after {
+  content: "" !important;
+  position: absolute !important;
+  right: -6px !important;
+  top: 50% !important;
+  width: 12px !important;
+  height: 12px !important;
+  transform: translateY(-50%) !important;
+  border-radius: 50% !important;
+  background: var(--fd-accent, #ff5c7a) !important;
+  box-shadow: 0 0 0 2px var(--fd-bg, var(--fd-surface, #fff)) !important;
+}
+
+/* ---- 16. レイヤーパレット ----
+   アプリ側は種別ごとに小さなアイコンを添え、共通レイヤーには表示範囲、
+   クリッピング中のレイヤーにはその旨を副題として出す。
+   （layer_panel.dart の _layerTypeIcon / ListTile の subtitle） */
+.fd-layer-row .ic-layer-type {
+  width: 12px !important;
+  height: 12px !important;
+  flex: 0 0 12px !important;
+}
+.fd-layer-row .ic-layer-type.is-common {
+  color: var(--fd-accent) !important;
+}
+.fd-layer-row .ic-layer-type.is-autofill,
+.fd-layer-row .ic-layer-type.is-lineart {
+  color: var(--fd-muted) !important;
+}
+.fd-layer-copy {
+  display: grid !important;
+  gap: 1px !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+.fd-layer-badge {
+  font-size: 7px !important;
+  line-height: 1.2 !important;
+  color: var(--fd-accent) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+/* 種別アイコンが無い行のための、幅だけ揃える空き。 */
+.fd-layer-row .fd-layer-pencil:empty {
+  width: 12px !important;
+  flex: 0 0 12px !important;
+}
+/* 行が4枚になったぶん高さを詰める（枠からはみ出さないように）。 */
+:is(.feature-diagram, .fd-app-screen) .fd-app-layer-panel .fd-layer-row {
+  height: 42px !important;
+  min-height: 42px !important;
+  flex-basis: 42px !important;
+}
+
+/* ---- 17. キャンバスの白は「用紙」だけ ----
+   用紙（.fd-canvas）は白、その外側（.fd-canvas-zone＝レターボックス）は
+   テーマの色のまま、という切り分けにする。一時期レイヤーパレットを開いた
+   画面だけ外側も白くしていたが、キャンバスモードの地の色は変えない。 */
+
+/* レイヤーのサムネイルは紙の白に絵を載せて見せる（アプリでは
+   そのレイヤーの内容が出る場所）。 */
+.fd-layer-row .fd-layer-thumb {
+  background: #fff !important;
+  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.2)) !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+/* レイヤー行が4枚になったので、ショートカット帯の高さを詰めて
+   一覧に場所を譲る（他の層に 120px / 122px の指定があるため、
+   それらより強い形で書く）。 */
+html
+  body
+  .fd-app-screen.fd-canvas-screen
+  .fd-app-layer-panel
+  .fd-layer-shortcuts {
+  height: 74px !important;
+  min-height: 74px !important;
+  flex-basis: 74px !important;
 }

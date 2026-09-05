@@ -238,7 +238,10 @@ html
   box-sizing: border-box !important;
 }
 
-/* Primary interactive surfaces always use the active theme color. */
+/* 赤系のボタンは、ロゴでも使っているテーマカラーの明るいピンク
+   (--color-accent = #ff5c7a) を不透明で敷き、文字は白（利用者の指示）。
+   ロゴ（favicon.svg）も同じ #FF5C7A の面に白抜きなので、面と文字の
+   組み合わせはロゴと揃う。 */
 html body .btn.btn-primary,
 html body .btn.btn-accent,
 html body .hero .hero-actions .btn.btn-primary,
@@ -250,7 +253,7 @@ html body .community-tabs button.is-active,
 html body .feature-nav a.is-active {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
-  color: var(--color-ink) !important;
+  color: #fff !important;
   opacity: 1 !important;
 }
 html body .btn.btn-primary:hover,
@@ -262,9 +265,9 @@ html body .download-actions .btn.btn-accent:hover,
 html body .scroll-top-btn:hover,
 html body .community-tabs button.is-active:hover,
 html body .feature-nav a.is-active:hover {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: var(--color-ink) !important;
+  background: var(--color-accent-dark) !important;
+  border-color: var(--color-accent-dark) !important;
+  color: #fff !important;
 }
 
 html body .btn.is-unavailable {

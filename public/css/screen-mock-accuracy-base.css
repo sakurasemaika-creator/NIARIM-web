@@ -689,10 +689,6 @@
   width: 32px !important;
   color: var(--fd-muted, #8d8789) !important;
 }
-.fd-loop-mark {
-  color: var(--fd-accent) !important;
-  font-size: 18px !important;
-}
 .fd-timeline-toolbar {
   height: 40px !important;
   flex: 0 0 40px !important;
