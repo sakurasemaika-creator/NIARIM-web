@@ -113,7 +113,31 @@
   flex: 0 0 48px !important;
 }
 
+/* Seven workspace rows were still 5-13px taller than the App Preview bezel
+   at 360/390px viewports. Two pixels per row recovers 14px without changing
+   the control geometry or the full-size Features mock. */
 .screenshot-card .fd-workspace-screen .fd-workspace-row {
-  height: 42px !important;
-  min-height: 42px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+/* The Home feature-row Export mock is narrower than the Features-page mock.
+   Only the 360px layout needed a little more vertical compression: the start
+   button previously began 2-3px above the bezel bottom and extended below it. */
+@media (max-width: 374px) {
+  #features .feature-media .fd-export-screen .fd-export-body {
+    padding: 8px 12px 5px !important;
+  }
+  #features .feature-media .fd-export-screen .fd-export-format-title {
+    margin: 8px 0 4px !important;
+  }
+  #features .feature-media .fd-export-screen .fd-format-row {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 4px 18px !important;
+  }
+  #features .feature-media .fd-export-screen .fd-export-start {
+    flex: 0 0 46px !important;
+    min-height: 46px !important;
+  }
 }
