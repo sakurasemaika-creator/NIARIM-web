@@ -314,11 +314,34 @@
   justify-content: center !important;
   background: transparent !important;
 }
+/* 閉じる印の × は system-ui 指定だったため、この1文字だけ閲覧環境の
+   フォントで描かれ、周りと書体が変わっていた。かといって本文の明朝で
+   描くと、20pxでは線が細くて閉じるボタンに見えない。文字をやめて
+   2本の線で描き、どの環境でも同じ形・同じ太さになるようにする。 */
 .fd-panel-close {
-  font:
-    400 20px/1 system-ui,
-    sans-serif !important;
+  position: relative !important;
+  display: block !important;
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 0 !important;
   color: var(--fd-muted, #665b5f) !important;
+}
+.fd-panel-close::before,
+.fd-panel-close::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  width: 16px !important;
+  height: 1.6px !important;
+  border-radius: 1px !important;
+  background: currentColor !important;
+}
+.fd-panel-close::before {
+  transform: translateY(-50%) rotate(45deg) !important;
+}
+.fd-panel-close::after {
+  transform: translateY(-50%) rotate(-45deg) !important;
 }
 .fd-layer-header {
   height: 48px !important;

@@ -148,7 +148,14 @@ def site_chars():
             r'content:\s*"([^"]*)"', open(path, encoding="utf-8").read()
         ):
             chars |= set(m.group(1))
-    return {c for c in chars if c.isprintable() and not c.isspace()}
+    # 空白は「見えないから要らない」ではない。字送り（アドバンス幅）は
+    # 空白を持つフォントのものが使われるため、サブセットから外すと
+    # 全ページの単語間だけ別フォントの幅になり、欧文の組みが崩れる。
+    # 実測でも半角空白がすべて Liberation Serif で描かれていた。
+    # 通常の空白とノーブレークスペースだけは必ず収録する。
+    keep = {c for c in chars if c.isprintable() and not c.isspace()}
+    keep |= {"\u0020", "\u00a0"}
+    return keep
 
 
 def menu_chars():
@@ -219,7 +226,14 @@ def load_serif_chars(want):
         )
         print("    `python3 tools/build-fonts.py --measure` で再実測してください。")
         return set(want)
-    return {c for c in chars if c.isprintable() and not c.isspace()}
+    # 空白は「見えないから要らない」ではない。字送り（アドバンス幅）は
+    # 空白を持つフォントのものが使われるため、サブセットから外すと
+    # 全ページの単語間だけ別フォントの幅になり、欧文の組みが崩れる。
+    # 実測でも半角空白がすべて Liberation Serif で描かれていた。
+    # 通常の空白とノーブレークスペースだけは必ず収録する。
+    keep = {c for c in chars if c.isprintable() and not c.isspace()}
+    keep |= {"\u0020", "\u00a0"}
+    return keep
 
 
 def measure_serif_chars():

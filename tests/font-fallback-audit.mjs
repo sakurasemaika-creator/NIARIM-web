@@ -106,6 +106,27 @@ for (const lang of LANGS) {
       if (!ch || !ch.trim()) continue;
 
       const { object } = await cdp.send("DOM.resolveNode", { nodeId });
+
+      // 画面外の文字（横に流れるマーキーの右側など）は、まだ実フォントで
+      // 組まれていないため代替フォントを返すことがある。誤検出になるので、
+      // 一度画面内へ入れてから同じ文字をもう一度問い直し、それでも
+      // 代替フォントのままのものだけを報告する。
+      await cdp.send("Runtime.callFunctionOn", {
+        objectId: object.objectId,
+        functionDeclaration:
+          "function(){this.scrollIntoView({block:'center',inline:'center'});}",
+      });
+      await page.waitForTimeout(30);
+      let recheck;
+      try {
+        recheck = await cdp.send("CSS.getPlatformFontsForNode", { nodeId });
+      } catch {
+        continue;
+      }
+      if (!recheck.fonts.length) continue;
+      const confirmed = recheck.fonts[0].familyName;
+      if (BUNDLED.test(confirmed) || EXPECTED_FALLBACK.test(confirmed))
+        continue;
       const ctxRes = await cdp.send("Runtime.callFunctionOn", {
         objectId: object.objectId,
         returnByValue: true,
@@ -115,7 +136,7 @@ for (const lang of LANGS) {
           "+' || '+getComputedStyle(this).fontFamily.slice(0,80);}",
       });
 
-      const key = family + "\t" + ctxRes.result.value;
+      const key = confirmed + "\t" + ctxRes.result.value;
       if (!findings.has(key)) {
         findings.set(key, {
           family,
