@@ -144,6 +144,33 @@
     return html + "</div>";
   }
 
+  /* コマごとの絵。ボールが弾む簡単なアニメーションにしてある。
+     キャンバスもコマも真っ白のままだと「何も描けていないアプリ」に
+     見えてしまうため、図だけで「描いた絵がコマごとに動く」ことが
+     伝わるようにする（JavaScriptを切ったときに出る静的なHTML側には
+     元々このような絵が入っていた）。 */
+  var FRAME_POSES = [
+    [62, 116],
+    [108, 72],
+    [160, 50],
+    [212, 72],
+    [258, 116],
+  ];
+
+  function frameArtwork(index) {
+    var pose = FRAME_POSES[index % FRAME_POSES.length];
+    return (
+      '<svg class="fd-art" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
+      '<path class="fd-art-ground" d="M34 150H286"/>' +
+      '<circle class="fd-art-ball" cx="' +
+      pose[0] +
+      '" cy="' +
+      pose[1] +
+      '" r="21"/>' +
+      "</svg>"
+    );
+  }
+
   function frameStrip() {
     var frames = "";
     // 実機のFrameStripWidgetは、コマ一覧を横スクロールさせて編集中の
@@ -156,7 +183,9 @@
       frames +=
         '<span class="fd-frame-thumb' +
         (i === 2 ? " is-selected" : "") +
-        '"><span class="fd-frame-paper"></span></span>';
+        '"><span class="fd-frame-paper">' +
+        frameArtwork(i) +
+        "</span></span>";
     }
     return (
       '<div class="fd-frame-strip">' +
@@ -174,9 +203,10 @@
   }
 
   function canvasDrawing(onion) {
+    // 編集中のコマ（コマ一覧の3枚目）と同じ絵をキャンバスにも描く。
     var drawing = onion
       ? '<svg viewBox="0 0 320 180" aria-hidden="true"><path class="fd-stroke-prev" d="M105 91c16-43 88-43 107 0"/><path class="fd-stroke-next" d="M118 88c17-35 74-35 93 0"/></svg>'
-      : "";
+      : frameArtwork(2);
     return (
       '<div class="fd-canvas-zone"><div class="fd-canvas fd-app-canvas-stage">' +
       drawing +
@@ -322,12 +352,16 @@
         '<span class="fd-tl-frame' +
         (i === 3 ? " is-current" : "") +
         '">' +
-        i +
+        frameArtwork(i - 1) +
         "</span>";
     return (
       '<div class="feature-diagram fd-timeline-screen fd-app-screen" aria-hidden="true">' +
       timelineTopBar() +
-      '<div class="fd-timeline-preview"><span class="fd-preview-loading"></span><span class="fd-fullscreen-mark">⌗</span></div>' +
+      // プレビュー欄は再生中のコマが出る場所。真っ白のままだと
+      // 何を映しているのか分からないので、編集中のコマと同じ絵を出す。
+      '<div class="fd-timeline-preview">' +
+      frameArtwork(2) +
+      '<span class="fd-preview-loading"></span><span class="fd-fullscreen-mark">⌗</span></div>' +
       '<div class="fd-timeline-scrubber"><i></i></div>' +
       '<div class="fd-transport">' +
       iconButton("ic-skip_previous") +

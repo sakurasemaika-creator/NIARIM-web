@@ -319,3 +319,25 @@
 .is-fit-scaled {
   transition: none !important;
 }
+
+/* ---- 14. コマに描かれた絵 ----
+   キャンバスとコマのサムネイルに入れている、ボールが弾む簡単な絵。
+   線の色はテーマの文字色に合わせる（アプリでは利用者が描いた絵が
+   そのまま出る場所なので、どの配色でも「紙に描いた線」に見えるように）。 */
+.fd-art {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.fd-art-ground {
+  fill: none;
+  stroke: color-mix(in srgb, var(--fd-ink, #28242c) 20%, transparent);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.fd-art-ball {
+  fill: none;
+  stroke: var(--fd-ink, #28242c);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
