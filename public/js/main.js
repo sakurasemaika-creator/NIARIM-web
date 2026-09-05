@@ -101,15 +101,38 @@
     );
   }
 
+  /* ブラシの太さ・不透明度スライダー（brush_size_slider.dart）。
+     実機は既定で1行の要約に畳まれているが、この図は「キャンバスで
+     絵を描いている画面」の紹介なので、開いた状態を描く。
+     開いているときは要約行の矢印が上向きになり、下に
+     「スライダー＋数値」の行が太さ・不透明度の2本並ぶ。 */
   function brushSlider() {
     return (
-      '<div class="fd-brush-slider">' +
+      '<div class="fd-brush-slider is-expanded">' +
+      '<div class="fd-brush-summary">' +
       '<span class="fd-brush-dot"></span><span class="fd-brush-size">5</span>' +
       '<svg class="ic fd-brush-opacity-ic" viewBox="0 0 24 24"><use href="' +
       ICON_SPRITE +
       'ic-opacity"></use></svg>' +
-      '<span class="fd-brush-opacity">100%</span><span class="fd-spacer"></span><span class="fd-brush-toggle"></span>' +
+      '<span class="fd-brush-opacity">100%</span><span class="fd-spacer"></span>' +
+      '<small class="fd-brush-detail" data-i18n="fd.brushDetails">詳細</small>' +
+      '<span class="fd-brush-toggle"></span>' +
+      "</div>" +
+      brushSliderRow("--fd-fill:12%", "5") +
+      brushSliderRow("--fd-fill:100%", "100%") +
       "</div>"
+    );
+  }
+
+  function brushSliderRow(fill, value) {
+    return (
+      '<div class="fd-brush-row">' +
+      '<span class="fd-slider" style="' +
+      fill +
+      '"><span></span></span>' +
+      '<span class="fd-brush-value">' +
+      value +
+      "</span></div>"
     );
   }
 

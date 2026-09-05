@@ -765,3 +765,60 @@ html
 .fd-scene-pill > .fd-tick {
   margin-right: 6px !important;
 }
+
+/* ---- 25. ブラシの太さ・不透明度スライダーを開いた状態で描く ----
+   実機（brush_size_slider.dart）は描画領域を広く取るため既定で1行の
+   要約に畳まれているが、この図は「キャンバスで絵を描いている画面」の
+   紹介なので、開いた状態のほうが何を調整できるか伝わる。
+   開いているときは要約行の矢印が上向きになり、その下に
+   「スライダー＋右端の数値」の行が太さ・不透明度の2本並ぶ
+   （実機も1行28px、数値欄は36px幅）。 */
+.fd-brush-slider.is-expanded {
+  display: block !important;
+  height: auto !important;
+  flex: 0 0 auto !important;
+  padding: 2px 12px !important;
+}
+.fd-brush-summary {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 4px 0 !important;
+}
+.fd-brush-detail {
+  margin-right: 3px !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  color: color-mix(
+    in srgb,
+    var(--fd-text, var(--fd-ink)) 66%,
+    transparent
+  ) !important;
+}
+/* 開いているので矢印は上向き。 */
+.fd-brush-slider.is-expanded .fd-brush-toggle {
+  width: 7px !important;
+  height: 7px !important;
+  border: 0 !important;
+  border-left: 1.4px solid currentColor !important;
+  border-top: 1.4px solid currentColor !important;
+  transform: rotate(45deg) !important;
+  margin-bottom: -3px !important;
+}
+.fd-brush-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 20px !important;
+}
+.fd-brush-row > .fd-slider {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+.fd-brush-value {
+  flex: 0 0 28px !important;
+  text-align: center !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
