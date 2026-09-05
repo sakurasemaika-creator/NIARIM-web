@@ -5,7 +5,10 @@
    to the active theme colors so all interactive surfaces stay on-brand. */
 :root {
   --color-accent-strong: var(--color-accent) !important;
-  --color-accent-strong-dark: var(--color-accent-dark, var(--color-accent)) !important;
+  --color-accent-strong-dark: var(
+    --color-accent-dark,
+    var(--color-accent)
+  ) !important;
 }
 
 /* Frame cells are 50x50 UI slots, while artwork may keep its own aspect ratio.
