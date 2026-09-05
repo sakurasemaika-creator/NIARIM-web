@@ -180,10 +180,45 @@
   padding-inline: 3px !important;
 }
 
-/* Workspace and layer rows are list items. Give translated labels the flexible
-   middle column while keeping icons, checkboxes and drag controls fixed. */
-.feature-diagram :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name),
-.screenshot-card :is(.fd-workspace-row, .fd-layer-row) > :is(span, strong, .fd-layer-name) {
+/* Workspace/Layer labels own the flexible middle column. Do not apply flex-grow
+   to utility spans such as the 15x15 checkbox, spacer or 14x10 drag handle. */
+.feature-diagram .fd-workspace-row > strong,
+.screenshot-card .fd-workspace-row > strong,
+.feature-diagram .fd-layer-row > :is(strong, .fd-layer-name),
+.screenshot-card .fd-layer-row > :is(strong, .fd-layer-name) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* Workspace controls are fixed-size product UI. Broad multilingual span rules
+   must never stretch these into horizontal pills. */
+.feature-diagram .fd-workspace-row > .fd-check,
+.screenshot-card .fd-workspace-row > .fd-check {
+  width: 15px !important;
+  height: 15px !important;
+  min-width: 15px !important;
+  min-height: 15px !important;
+  max-width: 15px !important;
+  max-height: 15px !important;
+  flex: 0 0 15px !important;
+  aspect-ratio: 1 / 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+.feature-diagram .fd-workspace-row > .fd-drag-mark,
+.screenshot-card .fd-workspace-row > .fd-drag-mark {
+  width: 14px !important;
+  height: 10px !important;
+  min-width: 14px !important;
+  min-height: 10px !important;
+  max-width: 14px !important;
+  max-height: 10px !important;
+  flex: 0 0 14px !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+.feature-diagram .fd-workspace-row > .fd-spacer,
+.screenshot-card .fd-workspace-row > .fd-spacer {
   flex: 1 1 auto !important;
   min-width: 0 !important;
 }
