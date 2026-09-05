@@ -1,14 +1,19 @@
 /* Features source normalization: canonical frame, bezel and slider geometry.
    This layer updates legacy feature-diagram base values to the current NIARIM UI contract. */
 
-/* Frame strip cells are 50 x 50 everywhere. */
+/* Frame strip cells are 50 x 50 everywhere, including the legacy mobile rules
+   that still attempted to shrink them to 41px. */
 .feature-diagram .fd-frames {
   min-height: 64px;
   align-items: center;
 }
 .feature-diagram .fd-frame,
 .feature-diagram .fd-frame-thumb,
-.feature-diagram .fd-frame-add {
+.feature-diagram .fd-frame-add,
+.fd-app-screen .fd-frame-thumb,
+.fd-app-screen .fd-frame-add,
+.fd-route-screen .fd-frame-thumb,
+.fd-route-screen .fd-frame-add {
   width: 50px;
   height: 50px;
   min-width: 50px;
@@ -48,4 +53,17 @@
   max-height: 100%;
   background: var(--fd-accent, var(--color-accent));
   border-radius: inherit;
+}
+
+/* Accent-filled controls must use the preset's matching on-accent color.
+   White is not readable enough on yellow/mint presets. */
+.feature-diagram :is(
+  .fd-export-segments .fd-segment.is-active,
+  .fd-export-start,
+  .fd-export-btn,
+  .fd-tree-save-btn,
+  .fd-segment.is-selected
+) {
+  background: var(--fd-accent-fill, var(--fd-accent, var(--color-accent))) !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
