@@ -141,7 +141,9 @@
 }
 
 .form-row .required {
-  color: var(--color-accent);
+  /* 必須を示す印なので、装飾ではなく読み取れる必要がある。
+     明るいテーマカラーは白地で2.97:1しかないため、文字用の濃い赤。 */
+  color: var(--color-accent-text);
   margin-left: 0.25rem;
 }
 

@@ -447,3 +447,57 @@ html
   transform: translateY(-50%) !important;
   color: var(--fd-accent) !important;
 }
+
+/* ---- 19. 画面再現図に残っていた読みにくい文字・記号 ----
+   実測でコントラストが4.5:1を下回っていた箇所をまとめて直す。 */
+
+/* 全画面マークは白い用紙（プレビュー）の上に載るので、テーマの副次色
+   （暗いテーマでは明るい色）だと 1.8:1 まで落ちる。用紙の上に置く記号は
+   紙に描いた線と同じ考え方で、濃い墨色に固定する。 */
+:is(.feature-diagram, .fd-app-screen) .fd-timeline-preview .fd-fullscreen-mark {
+  color: #5f5b66 !important;
+}
+
+/* 音声クリップの＋／−はアプリでは面を持たないアイコンボタン。
+   ブラウザ標準のボタン（白い面）のままだったため、暗いシートの上に
+   白いチップが並び、その上の文字も 1.8:1 しかなかった。 */
+:is(.feature-diagram, .fd-app-screen) .fd-sheet-row > button {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  min-width: 14px !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+  font: inherit !important;
+  line-height: 1 !important;
+}
+
+/* 削除アイコンの赤は、暗いシートの上では 3.3:1 しかなかった。
+   テーマの文字色を混ぜて、明るいテーマでは濃く、暗いテーマでは明るく
+   なるようにする（Material の error / onErrorContainer と同じ考え方）。 */
+:is(.feature-diagram, .fd-app-screen) .fd-delete-mark {
+  color: color-mix(
+    in srgb,
+    #ff5449 62%,
+    var(--fd-text, var(--fd-ink))
+  ) !important;
+}
+
+/* セーブツリーの「保存」ボタンは面がアクセント色。白文字固定だと
+   明るいアクセントのテーマで 3.7:1 まで落ちるため、テーマごとに
+   読めるほうの文字色を使う。 */
+:is(.feature-diagram, .fd-route-screen) .fd-tree-save-btn {
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+}
+:is(.feature-diagram, .fd-route-screen) .fd-tree-save-btn,
+:is(.feature-diagram, .fd-route-screen) .fd-tree-save-btn .ic,
+:is(.feature-diagram, .fd-route-screen) .fd-tree-save-btn b {
+  color: var(--fd-on-accent, #fff) !important;
+}
+
+/* 書き出し形式の補足文は 64% だと 4.1:1 で、8pxの小さな文字には足りない。 */
+:is(.feature-section, .screenshot-card)
+  > .fd-export-screen
+  .fd-format-row
+  small {
+  color: color-mix(in srgb, var(--fd-text) 82%, transparent) !important;
+}

@@ -101,7 +101,10 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
 :is(.fd-slider, .fd-sheet-slider) > :is(span, i) {
   position: absolute !important;
   inset: 0 auto 0 0 !important;
-  width: 64% !important;
+  /* 値ごとに塗る幅が変わる。固定の64%を !important で当てていたため、
+     「音量72%」「フェードイン0.0s」がどれも同じ位置に見えていた。
+     マークアップ側から --fd-fill で渡す（既定は64%）。 */
+  width: var(--fd-fill, 64%) !important;
   height: 5px !important;
   border-radius: 999px !important;
   background: var(--fd-accent, #ff5c7a) !important;

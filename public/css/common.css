@@ -1040,9 +1040,11 @@ p {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  /* 淡色背景に載る小さな太字テキストのため、4.5:1を満たす濃さを使う
-     （旧 --color-accent-dark #e8425f は淡色背景上で 3.58:1 だった）。 */
-  color: var(--color-accent-strong);
+  /* 淡色背景に載る小さな太字テキストのため、4.5:1を満たす濃さを使う。
+     --color-accent-strong はボタンの面と同じ明るいテーマカラーへ
+     揃えてあり、この大きさの文字には薄すぎる（淡色背景上で3.2〜3.6:1）。
+     文字専用の濃い赤を使う。 */
+  color: var(--color-accent-text);
   background: linear-gradient(120deg, var(--color-sub-tint), transparent 85%);
   border: 1px solid rgba(255, 92, 122, 0.25);
   padding: 0.3rem 0.9rem;

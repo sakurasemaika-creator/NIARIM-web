@@ -463,9 +463,9 @@
       '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong data-i18n="fd.audioClip">音声クリップ</strong><span>' +
       icon("ic-content_copy") +
       '</span><span class="fd-delete-mark">▮</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="width:72%"></i></span><button>+</button><b>72%</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="width:18%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:72%;width:72%"></i></span><button>+</button><b>72%</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
       "</div>";
     return html.replace(/<\/div>$/, sheet + "</div>");
   }

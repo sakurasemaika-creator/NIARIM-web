@@ -494,7 +494,9 @@ html body #widget .fd-widget-name {
   color: var(--fd-text) !important;
 }
 html body #widget .fd-widget-sub {
-  color: var(--fd-muted) !important;
+  /* タイルはテーマの面色ではなく彩度の高い独自色なので、--fd-muted だと
+     3.8:1 にしか届かない。タイルの上では本文色に近い濃さにする。 */
+  color: color-mix(in srgb, var(--fd-text) 88%, transparent) !important;
 }
 html body #widget .fd-radio.is-active {
   border-color: var(--fd-accent) !important;

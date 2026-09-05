@@ -192,7 +192,9 @@ main {
   border-radius: 999px;
   background: rgba(255, 92, 122, 0.065);
   box-shadow: none;
-  color: var(--color-accent-dark);
+  /* 11.5pxの太字が淡い地に載るので、装飾用の赤（--color-accent-dark は
+     3.2〜3.6:1）では読めない。文字専用の濃い赤を使う。 */
+  color: var(--color-accent-text);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
