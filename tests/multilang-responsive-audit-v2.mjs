@@ -45,11 +45,17 @@ for (const vp of viewports) {
         };
         const de = document.documentElement;
         const root = getComputedStyle(de);
-        const accentProbe = document.createElement("i");
-        accentProbe.style.color = root.getPropertyValue("--color-accent").trim();
-        document.body.appendChild(accentProbe);
-        const accent = getComputedStyle(accentProbe).color;
-        accentProbe.remove();
+        const resolveColor = (value) => {
+          if (!value) return "";
+          const probe = document.createElement("i");
+          probe.style.color = value;
+          probe.style.display = "none";
+          document.body.appendChild(probe);
+          const color = getComputedStyle(probe).color;
+          probe.remove();
+          return color;
+        };
+        const accent = resolveColor(root.getPropertyValue("--color-accent").trim());
 
         const textOverflows = [...document.querySelectorAll("main h1, main h2, main h3, main p, main li, main .btn, main label")]
           .filter((el) => {
@@ -94,12 +100,31 @@ for (const vp of viewports) {
           return { height: r?.height || 0, fillHeight: fr?.height || 0 };
         });
 
-        const cards = [...document.querySelectorAll(".screenshot-scroller > .screenshot-card")].map((el) => ({
-          theme: el.getAttribute("data-mock-theme"),
-          borderColor: getComputedStyle(el).borderColor,
-          bezel: getComputedStyle(el).getPropertyValue("--fd-bezel").trim(),
-          rect: rect(el),
-        }));
+        const cards = [...document.querySelectorAll(".screenshot-scroller > .screenshot-card")].map((el) => {
+          const cs = getComputedStyle(el);
+          return {
+            theme: el.getAttribute("data-mock-theme"),
+            borderColor: cs.borderColor,
+            bezel: cs.getPropertyValue("--fd-bezel").trim(),
+            bezelColor: resolveColor(cs.getPropertyValue("--fd-bezel").trim()),
+            rect: rect(el),
+          };
+        });
+
+        const verticalScreens = [...document.querySelectorAll(".fd-app-screen, .fd-route-screen")].map((host) => {
+          const hr = rect(host);
+          const targets = [
+            ["export-start", host.querySelector(".fd-export-start")],
+            ["audio-sheet", host.querySelector(".fd-clip-detail-sheet")],
+            ["workspace-last-row", [...host.querySelectorAll(".fd-workspace-row")].at(-1)],
+            ["layer-last-row", [...host.querySelectorAll(".fd-layer-row")].at(-1)],
+          ].filter(([, el]) => el);
+          return {
+            className: host.className,
+            host: hr,
+            targets: targets.map(([name, el]) => ({ name, rect: rect(el), display: getComputedStyle(el).display, visibility: getComputedStyle(el).visibility })),
+          };
+        });
 
         return {
           lang: de.lang,
@@ -112,6 +137,7 @@ for (const vp of viewports) {
           strips,
           sliders,
           cards,
+          verticalScreens,
         };
       });
 
@@ -147,10 +173,21 @@ for (const vp of viewports) {
         if (slider.fillHeight && Math.abs(slider.fillHeight - slider.height) > 1) add(id, "slider-fill-height", slider);
       }
 
+      for (const screen of state.verticalScreens) {
+        if (!screen.host) continue;
+        for (const target of screen.targets) {
+          if (!target.rect || target.display === "none" || target.visibility === "hidden") continue;
+          if (target.rect.bottom > screen.host.bottom + 2 || target.rect.top < screen.host.top - 2) {
+            add(id, "mock-vertical-control-clipped", { screen: screen.className, host: screen.host, target });
+          }
+        }
+      }
+
       if (route === "/") {
         if (state.cards.length !== 6) add(id, "app-preview-card-count", { actual: state.cards.length });
         for (const card of state.cards) {
           if (!card.bezel) add(id, "app-preview-bezel-token-missing", card);
+          if (card.bezelColor && card.borderColor !== card.bezelColor) add(id, "app-preview-bezel-color-mismatch", card);
         }
         const scroller = page.locator(".screenshot-scroller");
         if (await scroller.count()) {
