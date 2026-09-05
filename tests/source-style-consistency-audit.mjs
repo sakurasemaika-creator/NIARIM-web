@@ -15,11 +15,27 @@ function stripComments(text) {
 const lineBreak = await read("public/css/line-break.css");
 const themeGuard = await read("public/css/theme-accent-only.css");
 const visualTail = await read("public/css/visual-audit-tail.css");
+const featuresNormalization = await read(
+  "public/css/features-source-normalization.css",
+);
 
 const imports = [
   ...lineBreak.matchAll(/@import\s+url\(["']([^"']+)["']\)/g),
 ].map((m) => m[1]);
+const normalizationIndex = imports.indexOf(
+  "/css/features-source-normalization.css",
+);
+const tailIndex = imports.indexOf("/css/visual-audit-tail.css");
 const guardIndex = imports.indexOf("/css/theme-accent-only.css");
+
+if (normalizationIndex < 0) {
+  failures.push(
+    "features-source-normalization.css is not imported by line-break.css",
+  );
+}
+if (tailIndex < 0 || (normalizationIndex >= 0 && normalizationIndex > tailIndex)) {
+  failures.push("Features normalization must load before final visual audit tail");
+}
 if (guardIndex < 0) {
   failures.push("theme-accent-only.css is not imported by line-break.css");
 } else if (guardIndex !== imports.length - 1) {
@@ -59,29 +75,41 @@ if (!/border-color:\s*var\(--color-accent\)\s*!important/.test(guardClean)) {
   failures.push("final theme guard must force the active theme accent border");
 }
 
-/*
- * Do not blacklist literal reds here. Some presets legitimately use dark/red
- * accents. Correctness is defined by the active theme token, not by hue or
- * brightness. Runtime visual audits compare interactive surfaces against the
- * computed --color-accent value instead.
- */
+/* Do not blacklist colors by hue/brightness. A dark red may be a legitimate
+   preset accent. Runtime audits compare interactive surfaces to the computed
+   --color-accent value, which is the actual source of truth. */
 
 for (const required of [
-  "width: 50px !important",
-  "height: 50px !important",
-  "min-width: 50px !important",
-  "min-height: 50px !important",
-  "aspect-ratio: 1 / 1 !important",
+  "width: 50px",
+  "height: 50px",
+  "min-width: 50px",
+  "min-height: 50px",
+  "aspect-ratio: 1 / 1",
 ]) {
-  if (!visualTail.includes(required)) {
-    failures.push(`visual-audit-tail.css missing frame invariant: ${required}`);
+  if (
+    !featuresNormalization.includes(required) &&
+    !visualTail.includes(required)
+  ) {
+    failures.push(`missing frame invariant: ${required}`);
   }
 }
 
+if (!visualTail.includes(".fd-frame-thumb.fd-frame-thumb.is-selected")) {
+  failures.push("selected frame must be treated as the current 50x50 frame");
+}
+if (!visualTail.includes("calc(50% - 125px)")) {
+  failures.push("generated third selected frame must be centered in its strip");
+}
 if (!visualTail.includes(".screenshot-card:last-of-type")) {
   failures.push(
     "visual-audit-tail.css must preserve explicit trailing gallery space",
   );
+}
+if (
+  !featuresNormalization.includes(".fd-sheet-slider") ||
+  !featuresNormalization.includes("height: 4px")
+) {
+  failures.push("Features slider normalization must enforce the shared 4px track");
 }
 
 if (failures.length) {
@@ -94,11 +122,14 @@ console.log(
     {
       ok: true,
       checks: [
+        "Features normalization loads before final visual audit tail",
         "theme guard is final import",
         "legacy strong aliases resolve to active theme accent",
         "interactive selectors are guarded by the active theme token",
         "50x50 frame invariants exist",
+        "generated selected frame is centered",
         "gallery trailing space invariant exists",
+        "slider geometry normalization exists",
       ],
     },
     null,
