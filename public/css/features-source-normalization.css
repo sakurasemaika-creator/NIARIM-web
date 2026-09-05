@@ -32,13 +32,16 @@
   box-sizing: border-box;
 }
 
-/* Reconstructed sliders use one geometry: 4px track and full-height theme fill. */
+/* Reconstructed sliders use one geometry: 4px track and full-height theme fill.
+   The 12px thumb is intentionally larger than the track, so the track may not
+   clip overflow or the knob disappears in some mocks. */
 .feature-diagram :is(.fd-slider, .fd-sheet-slider, .fd-mini-slider) {
+  position: relative;
   height: 4px;
   min-height: 4px;
   max-height: 4px;
   border-radius: 999px;
-  overflow: hidden;
+  overflow: visible;
 }
 .feature-diagram :is(.fd-slider, .fd-sheet-slider, .fd-mini-slider) > :is(span, i) {
   height: 100%;
