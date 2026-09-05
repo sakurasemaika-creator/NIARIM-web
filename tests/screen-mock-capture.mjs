@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -6,7 +7,7 @@ const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const outDir = "artifacts/autonomous-browser-audit/mock-captures";
 await fs.mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({
   viewport: { width: 390, height: 844 },
   deviceScaleFactor: 1,

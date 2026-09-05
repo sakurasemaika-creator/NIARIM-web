@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -449,7 +450,7 @@ async function exerciseAnchorNav(page, vp, route, routeName) {
   }
 }
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 for (const vp of viewports) {
   const context = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },

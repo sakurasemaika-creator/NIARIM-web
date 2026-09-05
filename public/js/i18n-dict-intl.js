@@ -1097,9 +1097,9 @@
     "contact.form.attachmentsCount": "%d fichier(s) sélectionné(s)",
     "contact.error.attachments":
       "Trop de fichiers, ou la taille totale dépasse la limite.",
-    "contact.form.agree.pre": "J'accepte la",
+    "contact.form.agree.pre": "J'accepte la ",
     "contact.form.agree.link": "politique de confidentialité",
-    "contact.form.agree.post": "et consens à l'envoi de ce formulaire",
+    "contact.form.agree.post": " et consens à l'envoi de ce formulaire",
     "contact.form.submit": "Envoyer",
     "contact.form.submitting": "Envoi en cours...",
     "contact.error.required": "Ce champ est obligatoire.",
@@ -1443,9 +1443,9 @@
     "contact.form.attachmentsCount": "%d archivo(s) seleccionado(s)",
     "contact.error.attachments":
       "Demasiados archivos, o el tamaño total supera el límite.",
-    "contact.form.agree.pre": "Acepto la",
+    "contact.form.agree.pre": "Acepto la ",
     "contact.form.agree.link": "política de privacidad",
-    "contact.form.agree.post": "y consiento el envío de este formulario",
+    "contact.form.agree.post": " y consiento el envío de este formulario",
     "contact.form.submit": "Enviar",
     "contact.form.submitting": "Enviando...",
     "contact.error.required": "Este campo es obligatorio.",

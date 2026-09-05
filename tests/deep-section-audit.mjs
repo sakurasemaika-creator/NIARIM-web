@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -18,7 +19,7 @@ const targets = [
 
 await fs.mkdir(outDir, { recursive: true });
 const report = { findings: [], screenshots: [] };
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 
 function add(viewport, route, kind, detail) {
   report.findings.push({ viewport, route, kind, detail });

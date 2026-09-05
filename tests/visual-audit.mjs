@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -44,7 +45,7 @@ async function shot(page, vp, routeName, suffix, fullPage = false) {
   report.screenshots.push(p);
 }
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 for (const vp of viewports) {
   const context = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },

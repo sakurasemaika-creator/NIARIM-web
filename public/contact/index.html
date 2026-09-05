@@ -308,15 +308,19 @@
               <div class="form-row">
                 <label class="form-checkbox">
                   <input type="checkbox" id="agree" name="agree" required />
-                  <span>
-                    <span data-i18n="contact.form.agree.pre"></span>
-                    <a href="/privacy/" data-i18n="contact.form.agree.link"
+                  <!-- 3つの断片の間に改行（＝空白1つ）を入れないこと。
+                       日本語・韓国語・中国語は語の間に空白を置かないため、
+                       「プライバシーポリシー に同意のうえ送信する」のように
+                       不自然な隙間が空いてしまう。空白が要る言語では、
+                       翻訳文の側に空白を含めてある。 -->
+                  <span
+                    ><span data-i18n="contact.form.agree.pre"></span
+                    ><a href="/privacy/" data-i18n="contact.form.agree.link"
                       >プライバシーポリシー</a
-                    >
-                    <span data-i18n="contact.form.agree.post"
+                    ><span data-i18n="contact.form.agree.post"
                       >に同意のうえ送信する</span
-                    >
-                  </span>
+                    ></span
+                  >
                 </label>
                 <p class="form-error" data-i18n="contact.error.agree">
                   プライバシーポリシーへの同意が必要です。

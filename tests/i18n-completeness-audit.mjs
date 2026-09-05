@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
@@ -21,7 +22,7 @@ const routes = [
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({
   viewport: { width: 1280, height: 900 },
 });

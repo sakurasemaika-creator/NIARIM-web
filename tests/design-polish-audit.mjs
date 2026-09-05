@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const viewports = [
@@ -8,7 +9,7 @@ const viewports = [
 ];
 
 const findings = [];
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 
 for (const vp of viewports) {
   const context = await browser.newContext({

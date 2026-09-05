@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -125,13 +126,28 @@ async function inspect(page, viewport, language, route) {
       ...ratio(el),
     }));
 
+    // コマは50x50のCSS指定だが、端末の再現図そのものが枠に収まらない
+    // 幅では main.js の fitMockScreens() が transform: scale() で全体を
+    // 縮める（--fd-fit にその倍率が入る）。見た目の実測値をそのまま
+    // 50と比べると、縮めている画面幅では必ず外れてしまうので、
+    // 倍率で割り戻して「CSS上の大きさ」で判定する。
     const frameThumbs = [
       ...document.querySelectorAll(".fd-frame-thumb, .fd-frame"),
-    ].map((el) => ({
-      className: el.className,
-      width: el.getBoundingClientRect().width,
-      height: el.getBoundingClientRect().height,
-    }));
+    ].map((el) => {
+      const host = el.closest(".fd-app-screen, .fd-route-screen");
+      const fit = host
+        ? parseFloat(getComputedStyle(host).getPropertyValue("--fd-fit")) || 1
+        : 1;
+      const r = el.getBoundingClientRect();
+      return {
+        className: el.className,
+        width: r.width / fit,
+        height: r.height / fit,
+        renderedWidth: r.width,
+        renderedHeight: r.height,
+        fit,
+      };
+    });
 
     const frameStrips = [
       ...document.querySelectorAll(".fd-frame-strip-scroll"),
@@ -384,7 +400,17 @@ async function inspect(page, viewport, language, route) {
       };
     });
     if (endState) {
-      if (Math.abs(endState.scrollLeft - endState.maxScrollLeft) > 2) {
+      // scroll-snap が効いているスクローラーでは、末尾までスクロールしても
+      // 最後のカードの「吸着位置」で止まるため、scrollLeft は必ず
+      // maxScrollLeft より手前になる（実測で42px手前）。それ自体は不具合
+      // ではないので、最後のカードが本当に見切れているときだけ報告する。
+      const lastCardHidden =
+        endState.lastRight > endState.scrollerRight + 2 ||
+        endState.lastLeft < endState.scrollerLeft - 2;
+      if (
+        lastCardHidden &&
+        Math.abs(endState.scrollLeft - endState.maxScrollLeft) > 2
+      ) {
         finding(
           viewport,
           language,
@@ -409,7 +435,7 @@ async function inspect(page, viewport, language, route) {
   }
 }
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 
 for (const vp of viewports) {
   const context = await browser.newContext({

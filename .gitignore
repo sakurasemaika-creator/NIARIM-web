@@ -3,3 +3,6 @@ node_modules/
 
 # Pythonのキャッシュ（tools/build-fonts.py 実行時に生成される）
 __pycache__/
+
+# 監査スクリプトの出力（npm run audit:multilang / audit:i18n）
+artifacts/

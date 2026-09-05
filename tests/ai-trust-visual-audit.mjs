@@ -1,11 +1,12 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 
 const base = "http://127.0.0.1:8787";
 const out = "artifacts/autonomous-browser-audit/ai-trust";
 await fs.mkdir(out, { recursive: true });
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({
   viewport: { width: 1440, height: 1000 },
 });

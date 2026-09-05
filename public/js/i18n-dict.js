@@ -486,9 +486,9 @@
       "contact.form.attachmentsCount": "%d file(s) selected",
       "contact.error.attachments":
         "Too many files, or the total size exceeds the limit.",
-      "contact.form.agree.pre": "I agree to the",
+      "contact.form.agree.pre": "I agree to the ",
       "contact.form.agree.link": "Privacy Policy",
-      "contact.form.agree.post": "and consent to submit this form",
+      "contact.form.agree.post": " and consent to submit this form",
       "contact.form.submit": "Send",
       "contact.form.submitting": "Sending...",
       "contact.error.required": "This field is required.",
