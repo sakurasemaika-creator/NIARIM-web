@@ -101,14 +101,10 @@ p {
   overflow-wrap: break-word;
 }
 
-/* フォーカス表示（アクセシビリティ）
-   以前は --color-brand（#4a4636 のダークブラウン）を使っていたため、
-   フッターやダークセクション（--color-ink 背景）の上ではリングが背景に
-   埋もれてほとんど見えなかった（WCAG 2.2 の 1.4.11 非テキストコントラスト
-   3:1 を満たせない）。明るい面ではアクセント濃色（白背景で5.44:1）、
-   暗い面ではサブカラーの淡いピンク（--color-ink 上で9.72:1）へ切り替える。 */
+/* フォーカス表示もブランドのテーマカラーへ統一する。
+   ダーク面では既存の淡いサブカラーへ切り替えて視認性を保つ。 */
 :focus-visible {
-  outline: 3px solid var(--color-accent-strong, #c42e51);
+  outline: 3px solid var(--color-accent, #ff5c7a);
   outline-offset: 3px;
 }
 
