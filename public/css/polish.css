@@ -845,6 +845,15 @@ main {
     content-visibility: auto;
     contain-intrinsic-size: auto 720px;
   }
+
+  /* ページ内リンクを押した時点で見積りをやめ、実寸で並べ直す
+     （main.js の initAnchorNav が is-anchor-nav を付ける）。
+     見積りのままだと目的の見出しより手前で止まってしまうため。 */
+  html.is-anchor-nav .section,
+  html.is-anchor-nav .feature-section {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
+  }
 }
 
 /* スマホでは常時流れ続ける装飾marqueeを止め、描画と電池消費を抑える。 */

@@ -89,7 +89,11 @@
 
 .feature-section {
   padding-block: var(--space-xl);
-  scroll-margin-top: calc(var(--header-height) + 4.5rem);
+  /* ヘッダーぶんの余白は html の scroll-padding-top が既に見ている。
+     ここでさらに --header-height を足していたため二重に効き、タブを
+     押すと節の上に110pxの空白が残っていた。ここで足すのは、ヘッダーの
+     下に貼り付く節タブの高さぶんだけでよい。 */
+  scroll-margin-top: 3.4rem;
 }
 
 .feature-section:not(:last-child) {

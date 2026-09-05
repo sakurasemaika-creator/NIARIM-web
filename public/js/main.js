@@ -721,11 +721,72 @@
     gallery.insertBefore(ninth, more);
   }
 
+  /**
+   * ページ内リンクの着地点がずれるのを防ぐ。
+   *
+   * 画面外のセクションは content-visibility: auto で描画を遅らせているが、
+   * まだ描画していないセクションの高さはブラウザが見積り値（720px）で
+   * 扱う。実際の機能セクションはこれよりずっと高いため、ページを開いた
+   * 直後に機能ページのタブを押すと、目的の見出しより手前で止まってしまう
+   * （実測で最大1155pxのずれ。押した直後に is-active が1つ前の節を指す
+   * のもこれが原因）。
+   *
+   * リンクを押した時点で見積りをやめ、実寸で並べ直してからスクロールさせる。
+   * 一度きりの切り替えなので、初回表示の描画を軽くする効果は保たれる。
+   */
+  function settleLayoutForAnchor() {
+    var root = document.documentElement;
+    if (root.classList.contains("is-anchor-nav")) return;
+    root.classList.add("is-anchor-nav");
+    // ここで一度レイアウトを確定させておかないと、ブラウザは見積りの
+    // ままスクロール位置を決めてしまう。
+    void document.body.offsetHeight;
+  }
+
+  function initAnchorNav() {
+    document.addEventListener(
+      "click",
+      function (event) {
+        var link = event.target.closest && event.target.closest('a[href^="#"]');
+        if (!link) return;
+        var hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
+        var target = null;
+        try {
+          target = document.querySelector(hash);
+        } catch (_) {
+          return;
+        }
+        if (target) settleLayoutForAnchor();
+      },
+      // ブラウザ既定のスクロールより前に走らせる必要があるため捕捉フェーズ。
+      true,
+    );
+
+    // /features/#export のようにハッシュ付きで開かれた場合も同じ理由で
+    // ずれるため、並べ直したうえで目的地へ入れ直す。
+    if (window.location.hash && window.location.hash.length > 1) {
+      var initial = null;
+      try {
+        initial = document.querySelector(window.location.hash);
+      } catch (_) {
+        initial = null;
+      }
+      if (initial) {
+        settleLayoutForAnchor();
+        requestAnimationFrame(function () {
+          initial.scrollIntoView();
+        });
+      }
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     normalizeScreenMocks();
     initScrollUi();
     initNavToggle();
     initFaqAccordion();
+    initAnchorNav();
     ensureNineCommunityTiles();
     // 画面図はこのファイルがJavaScriptで組み立てているため、i18n.jsが
     // 最初に翻訳を当てた時点ではまだDOMに存在しない。そのままだと図の中の
