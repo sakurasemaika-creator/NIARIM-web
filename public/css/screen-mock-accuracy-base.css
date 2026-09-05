@@ -552,9 +552,9 @@
   text-align: center !important;
 }
 .fd-onion-common b.is-selected {
-  background: var(--fd-accent) !important;
-  border-color: var(--fd-accent) !important;
-  color: #fff !important;
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  border-color: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
 
 /* ── TimelineScreen ─────────────────────────────────────────────────── */

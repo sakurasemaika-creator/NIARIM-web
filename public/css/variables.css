@@ -153,10 +153,17 @@ html body .fd-canvas-screen .fd-app-onion-panel {
   width: auto !important;
   min-height: 128px !important;
   padding: 0 10px 8px !important;
-  background: #ffffff !important;
-  border: 6px solid #17161c !important;
-  border-radius: 22px !important;
-  box-shadow: none !important;
+  /* アプリ側は Card(elevation: 8) の普通の面（Material 3 の
+     surfaceContainerLow に薄い影）。以前ここに白地＋6pxの黒枠を
+     置いていたため、端末のベゼルが画面の中にもう一枚あるように見え、
+     どの配色のモックでもこのパネルだけ浮いていた。 */
+  background: var(--fd-panel, #fff) !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+  border: 1px solid color-mix(in srgb, var(--fd-text, #28242c) 12%, transparent) !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 6px 16px color-mix(in srgb, var(--fd-ink, #28242c) 18%, transparent),
+    0 2px 5px color-mix(in srgb, var(--fd-ink, #28242c) 12%, transparent) !important;
 }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-panel-close-bar {
   height: 38px !important;
@@ -169,19 +176,25 @@ html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title {
 html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-title strong {
   font-size: 13px !important;
 }
-html body .fd-canvas-screen .fd-app-onion-panel > .fd-panel-divider,
-html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-side,
-html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-common,
-html body .fd-canvas-screen .fd-app-onion-panel .fd-onion-fade {
-  display: none !important;
+/* アプリ側は「オニオンスキン」のスイッチが入っているときだけ、前後の
+   コマの設定・共通レイヤー・フェードの各行を出す（onion_skin_panel.dart
+   の `if (_settings.enabled)`）。ここはスイッチをONにした状態を見せて
+   いるのに、以前は各行を display:none で隠していたため、ONなのに中身が
+   何も無い空のパネルになっていた。機能を説明する図としても情報が無い。 */
+html body .fd-canvas-screen .fd-app-onion-panel {
+  min-height: 0 !important;
 }
+/* スイッチの色はテーマに追従させる。以前はピンク寄りの固定色で、
+   どの配色のモックでもここだけ元のピンクが残っていた。
+   また ON でも OFF と同じ見た目（つまみが左のまま）だったので、
+   ON はアプリ側と同じくつまみを右へ寄せてアクセント色の面にする。 */
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch,
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on {
   width: 50px !important;
   height: 30px !important;
   flex-basis: 50px !important;
-  background: #ead9dd !important;
-  border: 1.5px solid #8d7e82 !important;
+  background: var(--fd-panel-2, #ead9dd) !important;
+  border: 1.5px solid var(--fd-muted, #8d7e82) !important;
 }
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch::after,
 html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on::after {
@@ -189,7 +202,16 @@ html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on::after {
   top: 5px !important;
   width: 18px !important;
   height: 18px !important;
-  background: #8b7479 !important;
+  background: var(--fd-muted, #8b7479) !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on {
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  border-color: var(--fd-accent-fill, var(--fd-accent)) !important;
+}
+html body .fd-canvas-screen .fd-app-onion-panel .fd-mini-switch.is-on::after {
+  left: auto !important;
+  right: 5px !important;
+  background: var(--fd-on-accent, #fff) !important;
 }
 html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-prev,
 html body .fd-canvas-screen:has(.fd-app-onion-panel) .fd-stroke-next {
