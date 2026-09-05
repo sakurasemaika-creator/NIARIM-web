@@ -4,32 +4,36 @@
   --color-accent-strong-dark: var(--color-accent);
 }
 
-html body :is(
-  .btn.btn-primary,
-  .btn.btn-accent,
-  .hero .hero-actions .btn.btn-primary,
-  .final-cta .hero-actions .btn.btn-primary,
-  .download-actions .btn.btn-primary,
-  .download-actions .btn.btn-accent,
-  .scroll-top-btn,
-  .community-tabs button.is-active,
-  .feature-nav a.is-active
-) {
+html
+  body
+  :is(
+    .btn.btn-primary,
+    .btn.btn-accent,
+    .hero .hero-actions .btn.btn-primary,
+    .final-cta .hero-actions .btn.btn-primary,
+    .download-actions .btn.btn-primary,
+    .download-actions .btn.btn-accent,
+    .scroll-top-btn,
+    .community-tabs button.is-active,
+    .feature-nav a.is-active
+  ) {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
 }
 
-html body :is(
-  .btn.btn-primary,
-  .btn.btn-accent,
-  .hero .hero-actions .btn.btn-primary,
-  .final-cta .hero-actions .btn.btn-primary,
-  .download-actions .btn.btn-primary,
-  .download-actions .btn.btn-accent,
-  .scroll-top-btn,
-  .community-tabs button.is-active,
-  .feature-nav a.is-active
-):hover {
+html
+  body
+  :is(
+    .btn.btn-primary,
+    .btn.btn-accent,
+    .hero .hero-actions .btn.btn-primary,
+    .final-cta .hero-actions .btn.btn-primary,
+    .download-actions .btn.btn-primary,
+    .download-actions .btn.btn-accent,
+    .scroll-top-btn,
+    .community-tabs button.is-active,
+    .feature-nav a.is-active
+  ):hover {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
 }
