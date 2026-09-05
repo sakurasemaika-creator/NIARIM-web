@@ -29,55 +29,16 @@
     });
   }
 
-  /* main.js の fitMockScreens() は .fd-app-screen 全体へ inline !important の
-     width / height / transform を設定する。hero も fd-app-screen なので、
-     リサイズ後の再計測が mobile-first-view.css の端末比率を壊し得る。
-     Hero は「縮小対象の中身」ではなく端末外枠そのものなので、外枠には
-     fit用inline寸法を一切残さず、CSSの320:569を常に唯一の寸法基準にする。 */
-  var restoringHeroAspect = false;
-  var heroAspectObserver = null;
-
-  function restoreHeroAspect() {
-    var hero = document.querySelector(".hero-visual");
-    if (!hero || restoringHeroAspect) return;
-    restoringHeroAspect = true;
-    hero.style.removeProperty("--fd-fit");
-    hero.style.removeProperty("width");
-    hero.style.removeProperty("height");
-    hero.style.removeProperty("max-width");
-    hero.style.removeProperty("max-height");
-    hero.style.removeProperty("transform");
-    hero.style.removeProperty("transform-origin");
-    hero.classList.remove("is-fit-scaled");
-    restoringHeroAspect = false;
-  }
-
-  function scheduleHeroAspectRestore() {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(restoreHeroAspect);
-    });
-    /* main.js の resize debounce(150ms)より後にも必ず復元する。 */
-    setTimeout(restoreHeroAspect, 220);
-  }
-
-  function watchHeroAspect() {
-    var hero = document.querySelector(".hero-visual");
-    if (!hero || typeof MutationObserver === "undefined") return;
-    if (heroAspectObserver) heroAspectObserver.disconnect();
-    heroAspectObserver = new MutationObserver(function (mutations) {
-      if (restoringHeroAspect) return;
-      for (var i = 0; i < mutations.length; i++) {
-        if (mutations[i].attributeName === "style") {
-          scheduleHeroAspectRestore();
-          break;
-        }
-      }
-    });
-    heroAspectObserver.observe(hero, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-  }
+  /* かつてここでは、main.js の fitMockScreens() がヒーローの端末枠へ
+     付けた inline の width / height / transform を毎回消していた。
+     当時の fitMockScreens は width も height も「100/倍率 %」で広げて
+     いたため、端末の縦横比が崩れることがあったからである。
+     いまは倍率を掛けたあとの見た目の大きさが元の枠とぴったり同じに
+     なるよう（width = 元の幅/倍率、height = 必要な高さ、はみ出したぶんは
+     負のマージンで打ち消す）作り直したので、比率は崩れない。
+     消し続けると逆に、スマホでツールバーとコマ一覧が枠の下からはみ出して
+     ベゼルに切られたままになる（実測で106pxはみ出していた）ため、
+     この打ち消しはやめる。 */
 
   /* 50x50セルのcurrentを実際のスクローラ中央へ合わせる。
      visual-audit-tail.css の左右paddingだけでは先頭セルが中央になるため、
@@ -117,27 +78,14 @@
 
   function init() {
     apply();
-    watchHeroAspect();
-    scheduleHeroAspectRestore();
     scheduleFrameCentering();
-    window.addEventListener("load", function () {
-      scheduleHeroAspectRestore();
-      scheduleFrameCentering();
+    window.addEventListener("load", scheduleFrameCentering);
+    window.addEventListener("resize", scheduleFrameCentering, {
+      passive: true,
     });
-    window.addEventListener(
-      "resize",
-      function () {
-        scheduleHeroAspectRestore();
-        scheduleFrameCentering();
-      },
-      { passive: true },
-    );
     document.addEventListener("niarim:langchange", scheduleFrameCentering);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () {
-        scheduleHeroAspectRestore();
-        scheduleFrameCentering();
-      });
+      document.fonts.ready.then(scheduleFrameCentering);
     }
   }
 

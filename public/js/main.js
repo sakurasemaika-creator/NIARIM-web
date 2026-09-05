@@ -22,9 +22,47 @@
       link.rel = "stylesheet";
       link.href = href;
       link.setAttribute(marker, "true");
+      designLayersPending += 1;
+      link.addEventListener("load", onDesignLayerSettled);
+      // 読み込みに失敗しても、待ち続けて何も起きないより先へ進める。
+      link.addEventListener("error", onDesignLayerSettled);
       document.head.appendChild(link);
     });
+    if (!designLayersPending) markDesignLayersReady();
   }
+
+  /* これらのCSSは後から足すので、適用された時点でレイアウトが変わる。
+     画面再現図の「枠に収まる倍率」を測る処理は、変わり切る前に走ると
+     空振りする（実際、スマホのヒーローでツールバーとコマ一覧が枠の下から
+     はみ出したまま＝ベゼルで切れたまま表示されていた）。
+     全部読み終わったことを知らせて、測り直せるようにしておく。 */
+  var designLayersPending = 0;
+  var designLayersReady = false;
+  var designLayersWaiting = [];
+
+  function markDesignLayersReady() {
+    if (designLayersReady) return;
+    designLayersReady = true;
+    var queue = designLayersWaiting;
+    designLayersWaiting = [];
+    queue.forEach(function (fn) {
+      fn();
+    });
+  }
+
+  function onDesignLayerSettled() {
+    designLayersPending -= 1;
+    if (designLayersPending <= 0) markDesignLayersReady();
+  }
+
+  function whenDesignLayersReady(fn) {
+    if (designLayersReady) {
+      fn();
+      return;
+    }
+    designLayersWaiting.push(fn);
+  }
+
   loadDesignLayers();
 
   var ICON_SPRITE = "/assets/icons/ui/sprite.svg#";
@@ -797,7 +835,7 @@
     // 画面再現図は実機と同じ寸法のUIを、実機より小さい枠に積んでいる。
     // 枠に収まりきらない画面は、下の段が切れたまま表示されてしまうので、
     // 収まる倍率を測って縮める（レイアウトは等倍のまま見た目だけ縮小）。
-    function fitMockScreens() {
+    function fitMockScreens(force) {
       var mocks = document.querySelectorAll(
         ".fd-app-screen, .fd-route-screen, .feature-section > .feature-diagram",
       );
@@ -807,41 +845,113 @@
         m.style.removeProperty("transform-origin");
         m.style.removeProperty("width");
         m.style.removeProperty("height");
+        m.style.removeProperty("margin-bottom");
+        m.style.removeProperty("margin-right");
         m.style.removeProperty("max-width");
         m.style.removeProperty("max-height");
         m.classList.remove("is-fit-scaled");
         var need = m.scrollHeight;
         var have = m.clientHeight;
         if (!have || need <= have + 1) return;
-        // 極端に縮むと文字が読めないので下限を設ける。
-        var scale = Math.max(0.62, have / need);
+        // 極端に縮むと文字が読めないので下限を設ける。320px幅の端末では
+        // 枠自体が小さく、0.62では収まりきらずコマ一覧の下端が数px
+        // 切れていたため、0.56まで許容する。
+        var scale = Math.max(0.56, have / need);
         var z = Math.round(scale * 1000) / 1000;
         // 幅・高さは他のレイヤーが !important で 100% に固定しているため、
         // インラインの !important で上書きする必要がある。
         m.style.setProperty("--fd-fit", String(z));
         m.style.setProperty("transform", "scale(" + z + ")", "important");
         m.style.setProperty("transform-origin", "top left", "important");
-        m.style.setProperty("width", 100 / z + "%", "important");
-        m.style.setProperty("height", 100 / z + "%", "important");
+        var cw = m.clientWidth;
+        m.style.setProperty("width", cw / z + "px", "important");
+        m.style.setProperty("margin-right", -(cw / z - cw) + "px", "important");
+        // 高さは % ではなく実測のpxで持たせ、広げたぶんを負のマージンで
+        // 取り消す。transform はレイアウト上の大きさを変えないため、
+        // % で広げると「枠が伸びる→親の行が伸びる→また測り直す」の
+        // 堂々巡りになり、スマホのヒーローで倍率が付いたり消えたりしていた。
+        // 見た目の高さ（need * z = have）とレイアウト上の高さを一致させる。
+        m.style.setProperty("height", need + "px", "important");
+        m.style.setProperty(
+          "margin-bottom",
+          -(need - have) + "px",
+          "important",
+        );
         // 他のレイヤーが max-width/max-height を 100% で固定しているため、
         // 広げた分が clamp されないよう外す。
         m.style.setProperty("max-width", "none", "important");
         m.style.setProperty("max-height", "none", "important");
         m.classList.add("is-fit-scaled");
+
+        // 幅を広げたぶん行の折り返しが変わり、縮めたあとでも数pxだけ
+        // はみ出しが残ることがある。残っていたら、その実測でもう一度だけ
+        // 詰める（何度も繰り返すと文字が読めない大きさになるので3回まで）。
+        for (var pass = 0; pass < 3; pass += 1) {
+          var rest = m.scrollHeight - m.clientHeight;
+          if (rest <= 1) break;
+          z = Math.max(
+            0.56,
+            Math.round(((z * have) / (have + rest)) * 1000) / 1000,
+          );
+          m.style.setProperty("--fd-fit", String(z));
+          m.style.setProperty("transform", "scale(" + z + ")", "important");
+          m.style.setProperty("width", cw / z + "px", "important");
+          m.style.setProperty(
+            "margin-right",
+            -(cw / z - cw) + "px",
+            "important",
+          );
+          m.style.setProperty("height", have / z + "px", "important");
+          m.style.setProperty(
+            "margin-bottom",
+            -(have / z - have) + "px",
+            "important",
+          );
+        }
       });
     }
     // 初期表示直後はまだ高さが確定していないことがあるので、
     // レイアウト後・フォント読み込み後にも測り直す。
-    requestAnimationFrame(fitMockScreens);
-    window.addEventListener("load", fitMockScreens);
+    // レイアウトが確定していく途中の測定は当てにならないので、節目ごとに
+    // キャッシュを無視して測り直す（force）。以降のリサイズは幅が
+    // 変わったときだけで足りる。
+    function refitNow() {
+      fitMockScreens(true);
+    }
+    requestAnimationFrame(refitNow);
+    window.addEventListener("load", refitNow);
+    // 後から足しているデザイン用CSSが当たると枠の大きさが変わるため、
+    // それが出揃ってから必ず測り直す。
+    whenDesignLayersReady(function () {
+      requestAnimationFrame(refitNow);
+    });
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(fitMockScreens);
+      document.fonts.ready.then(refitNow);
     }
     var fitTimer = null;
-    window.addEventListener("resize", function () {
+    function scheduleFit() {
       clearTimeout(fitTimer);
-      fitTimer = setTimeout(fitMockScreens, 150);
-    });
+      fitTimer = setTimeout(fitMockScreens, 120);
+    }
+    window.addEventListener("resize", scheduleFit);
+
+    // 画面幅ではなく「枠そのものの大きさ」が変わることでも収まりは崩れる。
+    // スマホのヒーローでは枠の幅がレイアウト確定後に決まるため、
+    // 初回の測定が空振りして、ツールバーやコマ一覧が枠の下からはみ出した
+    // まま（＝ベゼルで切れたまま）表示されていた。
+    // 枠自身は倍率調整でwidth/heightを書き換えるので、監視するのは
+    // 「こちらが触らない親要素」にして、自分の書き換えで再発火しないようにする。
+    if (window.ResizeObserver) {
+      var fitObserver = new ResizeObserver(scheduleFit);
+      Array.prototype.forEach.call(
+        document.querySelectorAll(
+          ".fd-app-screen, .fd-route-screen, .feature-section > .feature-diagram",
+        ),
+        function (m) {
+          if (m.parentElement) fitObserver.observe(m.parentElement);
+        },
+      );
+    }
 
     if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
       window.NIARIM_I18N.applyLang(

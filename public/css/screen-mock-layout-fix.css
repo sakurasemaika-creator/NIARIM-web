@@ -311,3 +311,11 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
+
+/* ---- 13. 枠に収める倍率はアニメーションさせない ----
+   モックには transform のトランジションが掛かっている。収まる倍率を
+   当てるときにこれが効くと、0.36秒かけて大きさが動き、その間の寸法で
+   測り直しが走って倍率が付いたり消えたりする。倍率の適用だけは即時に。 */
+.is-fit-scaled {
+  transition: none !important;
+}
