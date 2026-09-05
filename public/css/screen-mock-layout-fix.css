@@ -270,3 +270,29 @@
   color: #fff !important;
   border-color: transparent !important;
 }
+
+/* ---- 11. アクセント色で塗った面に載る文字 ----
+   選択中のセグメントや書き出しボタンのように、面をアクセント色で塗って
+   その上に文字を置く箇所がある。ここを白文字で固定していたため、明るい
+   アクセント（黄・橙・ミント等）のテーマでは 2:1 前後まで落ちて読めなく
+   なっていた。テーマごとに「白」か「テーマの暗い地の色」かの読めるほうを
+   選んだ --fd-on-accent と、必要なら明度を詰めた --fd-accent-fill を使う
+   （Material の onPrimary と同じ考え方。値はパレット側で算出済み）。
+   祖先の形（.feature-section の直下か .feature-media の中か）で当たり外れ
+   が出ないよう、モックの中であることだけを条件にしている。 */
+:is(.feature-diagram, .fd-app-screen, .fd-route-screen)
+  :is(.fd-segment.is-active, .fd-segment.is-selected, .fd-export-start) {
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
+}
+:is(.feature-diagram, .fd-app-screen, .fd-route-screen) .fd-check.is-on {
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
+}
+/* 選択されていないセグメントは面がテーマの地色。文字色もテーマの本文色に
+   揃える（薄いアクセント色のままだと地色に溶けて読めない）。 */
+:is(.feature-diagram, .fd-app-screen, .fd-route-screen)
+  .fd-segment:not(.is-active):not(.is-selected) {
+  background: var(--fd-bg, var(--fd-surface)) !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}

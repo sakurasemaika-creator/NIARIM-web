@@ -24,9 +24,11 @@ html
   --fd-panel-2: #593522;
   --fd-text: #fff5ee;
   --fd-ink: #fff5ee;
-  --fd-muted: #d8b09d;
+  --fd-muted: #c4b6ae;
   --fd-bezel: #94502f;
-  --fd-outside: #63351f;
+  --fd-outside: #3b2b25;
+  --fd-accent-fill: #ff7b39;
+  --fd-on-accent: #25150f;
 }
 html
   body
@@ -46,9 +48,11 @@ html
   --fd-panel-2: #c9baf1;
   --fd-text: #302052;
   --fd-ink: #302052;
-  --fd-muted: #78699a;
+  --fd-muted: #655784;
   --fd-bezel: #60429c;
-  --fd-outside: #412d6b;
+  --fd-outside: #e0dbee;
+  --fd-accent-fill: #7651e8;
+  --fd-on-accent: #ffffff;
 }
 html
   body
@@ -68,9 +72,11 @@ html
   --fd-panel-2: #5f5223;
   --fd-text: #fffbe9;
   --fd-ink: #fffbe9;
-  --fd-muted: #d7c99e;
+  --fd-muted: #c6c1ab;
   --fd-bezel: #8d762d;
-  --fd-outside: #604f20;
+  --fd-outside: #3e3925;
+  --fd-accent-fill: #ffd34a;
+  --fd-on-accent: #29230f;
 }
 html
   body
@@ -90,9 +96,11 @@ html
   --fd-panel-2: #b9d9f1;
   --fd-text: #173a58;
   --fd-ink: #173a58;
-  --fd-muted: #60819b;
+  --fd-muted: #486882;
   --fd-bezel: #3b76a0;
-  --fd-outside: #29516d;
+  --fd-outside: #d9e5ee;
+  --fd-accent-fill: #1677d6;
+  --fd-on-accent: #ffffff;
 }
 html
   body
@@ -112,9 +120,11 @@ html
   --fd-panel-2: #24513c;
   --fd-text: #edfff5;
   --fd-ink: #edfff5;
-  --fd-muted: #9ccbb3;
+  --fd-muted: #adc3b8;
   --fd-bezel: #307653;
-  --fd-outside: #205039;
+  --fd-outside: #253b31;
+  --fd-accent-fill: #27d489;
+  --fd-on-accent: #0f251b;
 }
 html body [data-mock-theme="row1"] {
   --fd-bezel: #94502f;
@@ -151,9 +161,11 @@ html
   --fd-panel-2: #21495b;
   --fd-text: #edfaff;
   --fd-ink: #edfaff;
-  --fd-muted: #9fc9d7;
+  --fd-muted: #adbdc5;
   --fd-bezel: #245d72;
-  --fd-outside: #173d4d;
+  --fd-outside: #26323b;
+  --fd-accent-fill: #28d7ff;
+  --fd-on-accent: #101c25;
 }
 html
   body
@@ -173,9 +185,11 @@ html
   --fd-panel-2: #c4d1ff;
   --fd-text: #18234d;
   --fd-ink: #18234d;
-  --fd-muted: #6673a3;
+  --fd-muted: #535d82;
   --fd-bezel: #354d9c;
-  --fd-outside: #263a78;
+  --fd-outside: #dce0ed;
+  --fd-accent-fill: #3157d9;
+  --fd-on-accent: #ffffff;
 }
 html
   body
@@ -195,9 +209,11 @@ html
   --fd-panel-2: #493061;
   --fd-text: #fbf2ff;
   --fd-ink: #fbf2ff;
-  --fd-muted: #c2a8d2;
+  --fd-muted: #beb3c7;
   --fd-bezel: #704499;
-  --fd-outside: #4b2e68;
+  --fd-outside: #32283e;
+  --fd-accent-fill: #b56cff;
+  --fd-on-accent: #1c1228;
 }
 html
   body
@@ -217,9 +233,11 @@ html
   --fd-panel-2: #efbddf;
   --fd-text: #52213f;
   --fd-ink: #52213f;
-  --fd-muted: #95647f;
+  --fd-muted: #80546f;
   --fd-bezel: #a64d83;
-  --fd-outside: #74345c;
+  --fd-outside: #eedce7;
+  --fd-accent-fill: #d815a5;
+  --fd-on-accent: #ffffff;
 }
 html
   body
@@ -239,9 +257,11 @@ html
   --fd-panel-2: #573a20;
   --fd-text: #fff7ed;
   --fd-ink: #fff7ed;
-  --fd-muted: #d8b99c;
+  --fd-muted: #c4b9ad;
   --fd-bezel: #8c592b;
-  --fd-outside: #5f3b1e;
+  --fd-outside: #3b2d23;
+  --fd-accent-fill: #ff9f2f;
+  --fd-on-accent: #25170d;
 }
 html
   body
@@ -261,9 +281,11 @@ html
   --fd-panel-2: #edbcc4;
   --fd-text: #541f28;
   --fd-ink: #541f28;
-  --fd-muted: #97636d;
+  --fd-muted: #85575e;
   --fd-bezel: #a94759;
-  --fd-outside: #73313e;
+  --fd-outside: #eedddf;
+  --fd-accent-fill: #de3049;
+  --fd-on-accent: #ffffff;
 }
 html body [data-mock-theme="shot1"] {
   --fd-bezel: #245d72;
@@ -296,9 +318,11 @@ html body [data-mock-theme="row1"] [data-mock-theme="hero"].hero-visual-reuse {
   --fd-panel-2: #593522;
   --fd-text: #fff5ee;
   --fd-ink: #fff5ee;
-  --fd-muted: #d8b09d;
+  --fd-muted: #c4b6ae;
   --fd-bezel: #94502f;
-  --fd-outside: #63351f;
+  --fd-outside: #3b2b25;
+  --fd-accent-fill: #ff7b39;
+  --fd-on-accent: #25150f;
 }
 html body [data-mock-theme="shot1"] [data-mock-theme="hero"].hero-visual-reuse {
   --fd-accent: #28d7ff;
@@ -308,9 +332,11 @@ html body [data-mock-theme="shot1"] [data-mock-theme="hero"].hero-visual-reuse {
   --fd-panel-2: #21495b;
   --fd-text: #edfaff;
   --fd-ink: #edfaff;
-  --fd-muted: #9fc9d7;
+  --fd-muted: #adbdc5;
   --fd-bezel: #245d72;
-  --fd-outside: #173d4d;
+  --fd-outside: #26323b;
+  --fd-accent-fill: #28d7ff;
+  --fd-on-accent: #101c25;
 }
 
 /* Features page: alternate dark/light presets and widely separated hues. */
@@ -322,9 +348,11 @@ html body #drawing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #24503b;
   --fd-text: #edfff5;
   --fd-ink: #edfff5;
-  --fd-muted: #9ecbb3;
+  --fd-muted: #adc3b8;
   --fd-bezel: #2f7652;
-  --fd-outside: #204f38;
+  --fd-outside: #263a31;
+  --fd-accent-fill: #27d37f;
+  --fd-on-accent: #10241b;
 }
 html body #animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #8756e8;
@@ -334,9 +362,11 @@ html body #animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #cdbcf2;
   --fd-text: #321f59;
   --fd-ink: #321f59;
-  --fd-muted: #7b69a0;
+  --fd-muted: #675789;
   --fd-bezel: #62439d;
-  --fd-outside: #432e6c;
+  --fd-outside: #e2dcee;
+  --fd-accent-fill: #8756e8;
+  --fd-on-accent: #ffffff;
 }
 html body #editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #ffb42b;
@@ -346,9 +376,11 @@ html body #editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #604e20;
   --fd-text: #fff9e9;
   --fd-ink: #fff9e9;
-  --fd-muted: #d7c79c;
+  --fd-muted: #c7bfaa;
   --fd-bezel: #8f702c;
-  --fd-outside: #624d20;
+  --fd-outside: #3f3724;
+  --fd-accent-fill: #ffb42b;
+  --fd-on-accent: #2a210e;
 }
 html body #advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #278be8;
@@ -358,9 +390,11 @@ html body #advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #b9daf2;
   --fd-text: #163b59;
   --fd-ink: #163b59;
-  --fd-muted: #5e829e;
+  --fd-muted: #476883;
   --fd-bezel: #39769f;
-  --fd-outside: #28516e;
+  --fd-outside: #d9e5ee;
+  --fd-accent-fill: #1676d0;
+  --fd-on-accent: #ffffff;
 }
 html body #audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #20d8d0;
@@ -370,9 +404,11 @@ html body #audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #225757;
   --fd-text: #ecffff;
   --fd-ink: #ecffff;
-  --fd-muted: #9bcaca;
+  --fd-muted: #acc5c5;
   --fd-bezel: #2d7471;
-  --fd-outside: #20504e;
+  --fd-outside: #253d3d;
+  --fd-accent-fill: #20d8d0;
+  --fd-on-accent: #0f2727;
 }
 html body #save :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #e34c8b;
@@ -382,9 +418,11 @@ html body #save :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #eab9cf;
   --fd-text: #542039;
   --fd-ink: #542039;
-  --fd-muted: #98647b;
+  --fd-muted: #815369;
   --fd-bezel: #a74770;
-  --fd-outside: #74304d;
+  --fd-outside: #eedce4;
+  --fd-accent-fill: #dd2974;
+  --fd-on-accent: #ffffff;
 }
 html body #workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #536dff;
@@ -394,9 +432,11 @@ html body #workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #2a3967;
   --fd-text: #f1f4ff;
   --fd-ink: #f1f4ff;
-  --fd-muted: #a7b0d5;
+  --fd-muted: #b1b6c8;
   --fd-bezel: #405598;
-  --fd-outside: #2c3a69;
+  --fd-outside: #272c42;
+  --fd-accent-fill: #5d76ff;
+  --fd-on-accent: #11162d;
 }
 html body #widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #f06a2f;
@@ -406,9 +446,11 @@ html body #widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #eac3b0;
   --fd-text: #552b1b;
   --fd-ink: #552b1b;
-  --fd-muted: #986f60;
+  --fd-muted: #7f594a;
   --fd-bezel: #a95636;
-  --fd-outside: #743b27;
+  --fd-outside: #eee0da;
+  --fd-accent-fill: #ce490f;
+  --fd-on-accent: #ffffff;
 }
 html body #export :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #20b6d8;
@@ -418,9 +460,11 @@ html body #export :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-panel-2: #234d5a;
   --fd-text: #ecfbff;
   --fd-ink: #ecfbff;
-  --fd-muted: #9cc4cf;
+  --fd-muted: #acc0c6;
   --fd-bezel: #2c6d7d;
-  --fd-outside: #1f4b57;
+  --fd-outside: #25383e;
+  --fd-accent-fill: #20b6d8;
+  --fd-on-accent: #0f2229;
 }
 
 /* Widget uses its own static settings reconstruction, so push the preset into

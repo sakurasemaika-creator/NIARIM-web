@@ -58,11 +58,14 @@
 }
 
 /* ── CanvasScreen ─────────────────────────────────────────────────────── */
+/* 画面全体の下地はテーマの背景色。用紙の外側（レターボックス）だけが
+   --fd-outside で、アプリ側も kCanvasOutsideColor を敷いているのは
+   キャンバス領域とツールバー折りたたみハンドルだけである。 */
 .fd-canvas-screen {
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
-  background: var(--fd-outside) !important;
+  background: var(--fd-bg, var(--fd-surface)) !important;
 }
 .fd-canvas-screen > .fd-topbar {
   height: 40px !important;
@@ -124,7 +127,7 @@
   padding: 0 10px !important;
   margin: 0 !important;
   background: var(--fd-outside) !important;
-  color: rgba(255, 255, 255, 0.72) !important;
+  color: var(--fd-ink) !important;
   font-size: 9px !important;
   border: 0 !important;
 }
@@ -132,12 +135,12 @@
   width: 8px !important;
   height: 8px !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.8) !important;
+  background: var(--fd-ink) !important;
 }
 .fd-brush-opacity-ic {
   width: 11px !important;
   height: 11px !important;
-  color: rgba(255, 255, 255, 0.62) !important;
+  color: var(--fd-muted) !important;
 }
 .fd-brush-toggle {
   font-size: 9px !important;
@@ -150,7 +153,7 @@
   justify-content: center !important;
   margin: 0 !important;
   background: var(--fd-outside) !important;
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--fd-muted) !important;
   font-size: 16px !important;
   line-height: 1 !important;
 }
@@ -193,7 +196,9 @@
   height: 20px !important;
   flex-basis: 20px !important;
   background: var(--fd-surface) !important;
-  color: rgba(40, 36, 44, 0.58) !important;
+  /* 暗いテーマのモックでは固定の暗い文字色が背景に埋もれるため、
+     アプリ側と同じくテーマの文字色に連動させる。 */
+  color: var(--fd-muted) !important;
 }
 .fd-canvas-screen > .fd-frame-strip {
   height: 64px !important;
@@ -223,18 +228,24 @@
   height: 56px !important;
   flex: 0 0 43px !important;
   margin: 0 !important;
-  border: 1px solid #4a4749 !important;
+  /* アプリ側は surfaceContainerHigh（未選択）/ surfaceContainerHighest（選択）
+     の面に outlineVariant の枠。以前はここが黒に近く、明るい画面の中で
+     コマだけが黒い箱に見えていた。 */
+  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
   border-radius: 4px !important;
-  background: var(--fd-outside, #303030) !important;
+  background: var(--fd-panel, #f1eaea) !important;
   overflow: hidden !important;
 }
 .fd-frame-thumb.is-current {
   border: 3px solid #ffad00 !important;
 }
+/* コマのサムネイルに映るのは、そのコマの絵と用紙（プロジェクトの背景色。
+   既定は白）。以前は暗い画面に合わせて #333 を敷いていたため、明るい
+   画面の中でコマだけが黒い箱に見えていた。 */
 .fd-frame-paper {
   position: absolute;
   inset: 3px;
-  background: #333;
+  background: #fff;
 }
 .fd-frame-add {
   display: flex !important;
@@ -398,10 +409,13 @@
   margin-left: auto;
   color: var(--fd-accent);
 }
+/* アプリ側の並べ替えハンドル（Icons.drag_handle）はアクセント色ではなく
+   onSurfaceVariant 相当の控えめな色。アクセント色のままだと暗いテーマの
+   パネル上で 2.6:1 まで落ちて見えなくなる。 */
 .fd-layer-row .ic-drag {
   width: 15px !important;
   height: 15px !important;
-  color: var(--fd-accent, #cf7889) !important;
+  color: var(--fd-muted, #8a7a7e) !important;
 }
 
 /* ── OnionSkin overlay（CanvasScreen上の実パネル構造） ─────────── */
@@ -617,7 +631,9 @@
   position: absolute !important;
   right: 6px !important;
   top: 6px !important;
-  color: #777 !important;
+  /* 固定のグレーだと明るい紙の上でも暗い画面の上でも読みにくいので、
+     テーマの副次文字色に合わせる。 */
+  color: var(--fd-muted, #6a6a6a) !important;
   font-size: 12px !important;
 }
 .fd-timeline-scrubber {
@@ -1167,7 +1183,8 @@
   font-size: 9px !important;
 }
 .fd-check.is-on {
-  background: var(--fd-accent) !important;
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
 /* アプリ側は Icons.drag_handle（横2本線）。以前は全角の「＝」を文字として
    置いていたが、全角記号はCJKサブセット側にしか無いため、英語・仏語・
@@ -1306,7 +1323,7 @@
   max-width: 320px !important;
   min-height: 0 !important;
   transform: none !important;
-  background: var(--fd-outside) !important;
+  background: var(--fd-bg, var(--fd-surface)) !important;
 }
 .hero-visual.fd-app-screen::before,
 .hero-visual.fd-app-screen::after {

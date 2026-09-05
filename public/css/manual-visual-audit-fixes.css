@@ -193,9 +193,12 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
   color: var(--fd-accent) !important;
   border-color: var(--fd-accent) !important;
 }
+/* 面をアクセント色で塗る箇所は、白固定ではなくテーマごとに読める側の
+   文字色を使う（Material の onPrimary と同じ考え方）。明るいアクセント
+   （黄・橙など）に白文字を載せると 2:1 前後まで落ちて読めないため。 */
 .feature-section > .feature-diagram .fd-segment.is-active {
-  background: var(--fd-accent) !important;
-  color: #fff !important;
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
 
 /* Export capture geometry remains exact, but its colors must follow the assigned preset. */
@@ -214,8 +217,8 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
 .screenshot-card > .fd-export-screen .fd-export-segments .fd-segment.is-active,
 .feature-section > .fd-export-screen .fd-export-start,
 .screenshot-card > .fd-export-screen .fd-export-start {
-  background: var(--fd-accent) !important;
-  color: #fff !important;
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
 }
 .feature-section > .fd-export-screen .fd-format-row .fd-radio,
 .screenshot-card > .fd-export-screen .fd-format-row .fd-radio {

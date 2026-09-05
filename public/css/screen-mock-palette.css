@@ -13,6 +13,13 @@
  * 定義をこのファイルへ集約し、位置ではなく data-mock-theme と節IDで
  * 名指ししている。
  *
+ * --fd-outside は「キャンバスの用紙の外側（レターボックス）」の色。
+ * アプリ側は kCanvasOutsideColor = ColorScheme.surfaceContainerHighest で、
+ * 既定テーマ（defaultLight）ではごく淡い色である。以前はここを暗い色に
+ * していたため、描画画面のモックだけがサイト内で唯一の暗い面になり、
+ * その上に載る文字・アイコンも読みにくくなっていた。各テーマの色相の
+ * まま Material 3 の tone 90 相当の淡さに揃える。
+ *
  * 変数はモック要素そのものに載せる。既定値が .fd-app-screen などの
  * 要素側にあるため、祖先へ載せても継承では勝てないため。
  * ヒーローのように枠と画面が同じ要素のものがあるので、子孫セレクタと
@@ -29,14 +36,16 @@
 ) {
   --fd-accent: #af1d41;
   --fd-ink: #381e25;
-  --fd-muted: #91787f;
-  --fd-outside: #502f37;
+  --fd-muted: #6f555c;
+  --fd-outside: #ebdde1;
   --fd-bezel: #783b4a;
   --fd-surface: #fcf3f5;
   --fd-panel: #f0d6dc;
   --fd-panel-2: #e4bec7;
   --fd-bg: #fcf3f5;
   --fd-text: #381e25;
+  --fd-accent-fill: #af1d41;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="hero"] {
   --fd-bezel: #783b4a;
@@ -51,14 +60,16 @@
 ) {
   --fd-accent: #af4e1d;
   --fd-ink: #38271e;
-  --fd-muted: #918178;
-  --fd-outside: #503a2f;
+  --fd-muted: #6f5e55;
+  --fd-outside: #ebe2dd;
   --fd-bezel: #784f3b;
   --fd-surface: #fcf6f3;
   --fd-panel: #f0dfd6;
   --fd-panel-2: #e4cbbe;
   --fd-bg: #fcf6f3;
   --fd-text: #38271e;
+  --fd-accent-fill: #af4e1d;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="row1"] {
   --fd-bezel: #784f3b;
@@ -73,14 +84,16 @@
 ) {
   --fd-accent: #afa31d;
   --fd-ink: #38361e;
-  --fd-muted: #918f78;
-  --fd-outside: #504e2f;
+  --fd-muted: #6c6a52;
+  --fd-outside: #ebeadd;
   --fd-bezel: #78733b;
   --fd-surface: #fcfbf3;
   --fd-panel: #f0eed6;
   --fd-panel-2: #e4e1be;
   --fd-bg: #fcfbf3;
   --fd-text: #38361e;
+  --fd-accent-fill: #7f7615;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="row2"] {
   --fd-bezel: #78733b;
@@ -95,14 +108,16 @@
 ) {
   --fd-accent: #66af1d;
   --fd-ink: #2b381e;
-  --fd-muted: #859178;
-  --fd-outside: #40502f;
+  --fd-muted: #5f6c52;
+  --fd-outside: #e4ebdd;
   --fd-bezel: #59783b;
   --fd-surface: #f7fcf3;
   --fd-panel: #e3f0d6;
   --fd-panel-2: #d1e4be;
   --fd-bg: #f7fcf3;
   --fd-text: #2b381e;
+  --fd-accent-fill: #4d8316;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="row3"] {
   --fd-bezel: #59783b;
@@ -117,14 +132,16 @@
 ) {
   --fd-accent: #1daf29;
   --fd-ink: #1e3821;
-  --fd-muted: #78917b;
-  --fd-outside: #2f5032;
+  --fd-muted: #526c54;
+  --fd-outside: #ddebde;
   --fd-bezel: #3b7840;
   --fd-surface: #f3fcf3;
   --fd-panel: #d6f0d8;
   --fd-panel-2: #bee4c1;
   --fd-bg: #f3fcf3;
   --fd-text: #1e3821;
+  --fd-accent-fill: #168820;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="row4"] {
   --fd-bezel: #3b7840;
@@ -139,14 +156,16 @@
 ) {
   --fd-accent: #1daf7e;
   --fd-ink: #1e3830;
-  --fd-muted: #789189;
-  --fd-outside: #2f5045;
+  --fd-muted: #526c63;
+  --fd-outside: #ddebe7;
   --fd-bezel: #3b7863;
   --fd-surface: #f3fcf9;
   --fd-panel: #d6f0e7;
   --fd-panel-2: #bee4d8;
   --fd-bg: #f3fcf9;
   --fd-text: #1e3830;
+  --fd-accent-fill: #16835e;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="row5"] {
   --fd-bezel: #3b7863;
@@ -161,14 +180,16 @@
 ) {
   --fd-accent: #1d8baf;
   --fd-ink: #1e3238;
-  --fd-muted: #788b91;
-  --fd-outside: #2f4850;
+  --fd-muted: #55696f;
+  --fd-outside: #dde8eb;
   --fd-bezel: #3b6878;
   --fd-surface: #f3fafc;
   --fd-panel: #d6e9f0;
   --fd-panel-2: #bedbe4;
   --fd-bg: #f3fafc;
   --fd-text: #1e3238;
+  --fd-accent-fill: #1a7d9d;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot1"] {
   --fd-bezel: #3b6878;
@@ -183,14 +204,16 @@
 ) {
   --fd-accent: #1d3aaf;
   --fd-ink: #1e2438;
-  --fd-muted: #787e91;
-  --fd-outside: #2f3650;
+  --fd-muted: #555b6f;
+  --fd-outside: #dde0eb;
   --fd-bezel: #3b4778;
   --fd-surface: #f3f5fc;
   --fd-panel: #d6dbf0;
   --fd-panel-2: #bec6e4;
   --fd-bg: #f3f5fc;
   --fd-text: #1e2438;
+  --fd-accent-fill: #1d3aaf;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot2"] {
   --fd-bezel: #3b4778;
@@ -205,14 +228,16 @@
 ) {
   --fd-accent: #491daf;
   --fd-ink: #261e38;
-  --fd-muted: #807891;
-  --fd-outside: #392f50;
+  --fd-muted: #5d556f;
+  --fd-outside: #e1ddeb;
   --fd-bezel: #4d3b78;
   --fd-surface: #f5f3fc;
   --fd-panel: #ded6f0;
   --fd-panel-2: #c9bee4;
   --fd-bg: #f5f3fc;
   --fd-text: #261e38;
+  --fd-accent-fill: #491daf;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot3"] {
   --fd-bezel: #4d3b78;
@@ -227,14 +252,16 @@
 ) {
   --fd-accent: #8b1daf;
   --fd-ink: #321e38;
-  --fd-muted: #8b7891;
-  --fd-outside: #482f50;
+  --fd-muted: #69556f;
+  --fd-outside: #e8ddeb;
   --fd-bezel: #683b78;
   --fd-surface: #faf3fc;
   --fd-panel: #e9d6f0;
   --fd-panel-2: #dbbee4;
   --fd-bg: #faf3fc;
   --fd-text: #321e38;
+  --fd-accent-fill: #8b1daf;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot4"] {
   --fd-bezel: #683b78;
@@ -249,14 +276,16 @@
 ) {
   --fd-accent: #af1d97;
   --fd-ink: #381e34;
-  --fd-muted: #91788d;
-  --fd-outside: #502f4b;
+  --fd-muted: #6f556b;
+  --fd-outside: #ebdde9;
   --fd-bezel: #783b6d;
   --fd-surface: #fcf3fb;
   --fd-panel: #f0d6ec;
   --fd-panel-2: #e4bede;
   --fd-bg: #fcf3fb;
   --fd-text: #381e34;
+  --fd-accent-fill: #af1d97;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot5"] {
   --fd-bezel: #783b6d;
@@ -271,14 +300,16 @@
 ) {
   --fd-accent: #af1d66;
   --fd-ink: #381e2b;
-  --fd-muted: #917885;
-  --fd-outside: #502f40;
+  --fd-muted: #6f5562;
+  --fd-outside: #ebdde4;
   --fd-bezel: #783b59;
   --fd-surface: #fcf3f7;
   --fd-panel: #f0d6e3;
   --fd-panel-2: #e4bed1;
   --fd-bg: #fcf3f7;
   --fd-text: #381e2b;
+  --fd-accent-fill: #af1d66;
+  --fd-on-accent: #ffffff;
 }
 [data-mock-theme="shot6"] {
   --fd-bezel: #783b59;
@@ -289,126 +320,144 @@
 #drawing:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #1daf66;
   --fd-ink: #1e382b;
-  --fd-muted: #789185;
-  --fd-outside: #2f5040;
+  --fd-muted: #526c5f;
+  --fd-outside: #ddebe4;
   --fd-bezel: #3b7859;
   --fd-surface: #f3fcf7;
   --fd-panel: #d6f0e3;
   --fd-panel-2: #bee4d1;
   --fd-bg: #f3fcf7;
   --fd-text: #1e382b;
+  --fd-accent-fill: #16884f;
+  --fd-on-accent: #ffffff;
 }
 /* アニメーション (色相 265) */
 #animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #animation:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #5a1daf;
   --fd-ink: #291e38;
-  --fd-muted: #837891;
-  --fd-outside: #3d2f50;
+  --fd-muted: #60556f;
+  --fd-outside: #e3ddeb;
   --fd-bezel: #543b78;
   --fd-surface: #f7f3fc;
   --fd-panel: #e1d6f0;
   --fd-panel-2: #cebee4;
   --fd-bg: #f7f3fc;
   --fd-text: #291e38;
+  --fd-accent-fill: #5a1daf;
+  --fd-on-accent: #ffffff;
 }
 /* 編集 (色相 38) */
 #editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #editing:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #af7a1d;
   --fd-ink: #382f1e;
-  --fd-muted: #918878;
-  --fd-outside: #50442f;
+  --fd-muted: #6f6655;
+  --fd-outside: #ebe6dd;
   --fd-bezel: #78613b;
   --fd-surface: #fcf9f3;
   --fd-panel: #f0e6d6;
   --fd-panel-2: #e4d6be;
   --fd-bg: #fcf9f3;
   --fd-text: #382f1e;
+  --fd-accent-fill: #996b19;
+  --fd-on-accent: #ffffff;
 }
 /* 作画支援 (色相 205) */
 #advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #advanced:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #1d72af;
   --fd-ink: #1e2e38;
-  --fd-muted: #788791;
-  --fd-outside: #2f4350;
+  --fd-muted: #55656f;
+  --fd-outside: #dde5eb;
   --fd-bezel: #3b5e78;
   --fd-surface: #f3f8fc;
   --fd-panel: #d6e5f0;
   --fd-panel-2: #bed4e4;
   --fd-bg: #f3f8fc;
   --fd-text: #1e2e38;
+  --fd-accent-fill: #1d72af;
+  --fd-on-accent: #ffffff;
 }
 /* 音声 (色相 172) */
 #audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #audio:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #1daf9c;
   --fd-ink: #1e3835;
-  --fd-muted: #78918e;
-  --fd-outside: #2f504c;
+  --fd-muted: #526c68;
+  --fd-outside: #ddebe9;
   --fd-bezel: #3b7870;
   --fd-surface: #f3fcfb;
   --fd-panel: #d6f0ec;
   --fd-panel-2: #bee4df;
   --fd-bg: #f3fcfb;
   --fd-text: #1e3835;
+  --fd-accent-fill: #168375;
+  --fd-on-accent: #ffffff;
 }
 /* 保存 (色相 325) */
 #save :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #save:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #af1d72;
   --fd-ink: #381e2e;
-  --fd-muted: #917887;
-  --fd-outside: #502f43;
+  --fd-muted: #6f5565;
+  --fd-outside: #ebdde5;
   --fd-bezel: #783b5e;
   --fd-surface: #fcf3f8;
   --fd-panel: #f0d6e5;
   --fd-panel-2: #e4bed4;
   --fd-bg: #fcf3f8;
   --fd-text: #381e2e;
+  --fd-accent-fill: #af1d72;
+  --fd-on-accent: #ffffff;
 }
 /* ワークスペース (色相 245) */
 #workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #workspace:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #291daf;
   --fd-ink: #211e38;
-  --fd-muted: #7b7891;
-  --fd-outside: #322f50;
+  --fd-muted: #58556f;
+  --fd-outside: #deddeb;
   --fd-bezel: #403b78;
   --fd-surface: #f3f3fc;
   --fd-panel: #d8d6f0;
   --fd-panel-2: #c1bee4;
   --fd-bg: #f3f3fc;
   --fd-text: #211e38;
+  --fd-accent-fill: #291daf;
+  --fd-on-accent: #ffffff;
 }
 /* ウィジェット (色相 15) */
 #widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #widget:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #af411d;
   --fd-ink: #38251e;
-  --fd-muted: #917f78;
-  --fd-outside: #50372f;
+  --fd-muted: #6f5c55;
+  --fd-outside: #ebe1dd;
   --fd-bezel: #784a3b;
   --fd-surface: #fcf5f3;
   --fd-panel: #f0dcd6;
   --fd-panel-2: #e4c7be;
   --fd-bg: #fcf5f3;
   --fd-text: #38251e;
+  --fd-accent-fill: #af411d;
+  --fd-on-accent: #ffffff;
 }
 /* 書き出し (色相 190) */
 #export :is(.feature-diagram, .fd-app-screen, .fd-route-screen),
 #export:is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   --fd-accent: #1d97af;
   --fd-ink: #1e3438;
-  --fd-muted: #788d91;
-  --fd-outside: #2f4b50;
+  --fd-muted: #556b6f;
+  --fd-outside: #dde9eb;
   --fd-bezel: #3b6d78;
   --fd-surface: #f3fbfc;
   --fd-panel: #d6ecf0;
   --fd-panel-2: #bedee4;
   --fd-bg: #f3fbfc;
   --fd-text: #1e3438;
+  --fd-accent-fill: #198095;
+  --fd-on-accent: #ffffff;
 }
 
 /* ---- ベゼル（端末の外枠）----
