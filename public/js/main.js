@@ -543,6 +543,78 @@
     );
   }
 
+  /* テーマ・外観の設定画面（theme_settings_screen.dart）。
+     「カラーカスタマイズ」の6つの色と「テーマ一覧」からなる。
+     色見本にはその図が使っているテーマの色をそのまま出しているので、
+     図ごとに違う配色になっていること自体が説明になる。
+     更新マーク色だけはアプリ側でどのプリセットも #FFB020 固定。
+
+     テーマ名（レッド（ライト）等）はアプリ側では日本語のまま持っている
+     が、ここは説明のための図なので、閲覧している言語で出す。 */
+  function themeColorRow(key, fallback, swatch) {
+    return (
+      '<div class="fd-theme-color-row">' +
+      '<span class="fd-theme-swatch" style="background:' +
+      swatch +
+      '"></span>' +
+      '<span data-i18n="' +
+      key +
+      '">' +
+      fallback +
+      "</span></div>"
+    );
+  }
+
+  function themePresetRow(key, fallback, current) {
+    return (
+      '<div class="fd-theme-preset' +
+      (current ? " is-current" : "") +
+      '">' +
+      '<span class="fd-theme-preset-name" data-i18n="' +
+      key +
+      '">' +
+      fallback +
+      "</span>" +
+      (current ? '<span class="fd-theme-check"></span>' : "") +
+      '<span class="fd-spacer"></span>' +
+      '<span class="fd-theme-star' +
+      (current ? " is-on" : "") +
+      '">' +
+      (current ? "★" : "☆") +
+      "</span>" +
+      '<span class="fd-layer-menu">⋮</span>' +
+      "</div>"
+    );
+  }
+
+  function themeScreen() {
+    return (
+      '<div class="feature-diagram fd-route-screen fd-theme-screen" data-mock-screen="theme" aria-hidden="true">' +
+      appBar("テーマ・外観", false, "fd.themeTitle") +
+      '<div class="fd-route-body fd-theme-body">' +
+      '<strong class="fd-route-section" data-i18n="fd.themeColorSection">カラーカスタマイズ</strong>' +
+      themeColorRow("fd.themeAccent", "アクセントカラー", "var(--fd-accent)") +
+      themeColorRow("fd.themeText", "文字色", "var(--fd-ink)") +
+      themeColorRow("fd.themePanelBg", "パネル背景色", "var(--fd-panel)") +
+      themeColorRow("fd.themeMenuBg", "メニュー背景色", "var(--fd-surface)") +
+      themeColorRow("fd.themeSelection", "選択色", "var(--fd-accent)") +
+      themeColorRow("fd.themeUpdateMark", "更新マーク色", "#ffb020") +
+      '<div class="fd-panel-divider"></div>' +
+      '<strong class="fd-route-section" data-i18n="fd.themePresetSection">テーマ一覧</strong>' +
+      themePresetRow("fd.themePresetRedLight", "レッド（ライト）", true) +
+      themePresetRow("fd.themePresetRedDark", "レッド（ダーク）", false) +
+      themePresetRow("fd.themePresetOrangeLight", "オレンジ（ライト）", false) +
+      themePresetRow("fd.themePresetOrangeDark", "オレンジ（ダーク）", false) +
+      themePresetRow("fd.themePresetYellowLight", "イエロー（ライト）", false) +
+      themePresetRow("fd.themePresetYellowDark", "イエロー（ダーク）", false) +
+      '<div class="fd-theme-actions">' +
+      '<span class="fd-theme-save-btn" data-i18n="fd.themeSaveAsNew">現在の設定を新しいテーマとして保存</span>' +
+      '<span class="fd-theme-import-btn" data-i18n="fd.themeImport">テーマを読み込む</span>' +
+      "</div>" +
+      "</div></div>"
+    );
+  }
+
   function workspaceScreen() {
     var items = [
       ["Gペン", "fd.toolPen"],
@@ -608,6 +680,13 @@
     var wrap = document.createElement("div");
     wrap.innerHTML = html;
     return wrap.firstElementChild;
+  }
+
+  /* 節の2つ目以降の再現図は :scope > .feature-diagram では取れないので、
+     図そのものを指すセレクタで直接差し替える。 */
+  function replaceDiagramNode(selector, html) {
+    var old = document.querySelector(selector);
+    if (old) old.replaceWith(htmlToElement(html));
   }
 
   function replaceFeatureDiagram(sectionSelector, html) {
@@ -676,6 +755,7 @@
     replaceFeatureDiagram("#audio", audioScreen());
     replaceFeatureDiagram("#save", saveTreeScreen());
     replaceFeatureDiagram("#workspace", workspaceScreen());
+    replaceDiagramNode('#workspace [data-mock-screen="theme"]', themeScreen());
     replaceFeatureDiagram("#export", exportScreen());
 
     /* Home main-feature rows */

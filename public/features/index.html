@@ -1628,6 +1628,152 @@
               >
             </div>
           </div>
+          <!-- theme_settings_screen.dart に基づく概念図。「カラーカスタマイズ」
+           の6色（アクセント／文字／パネル背景／メニュー背景／選択／更新マーク）
+           と「テーマ一覧」からなる。色見本にはこの節の配色をそのまま出して
+           いる。更新マーク色だけはアプリ側でどのプリセットも #FFB020 固定。
+           テーマ名はアプリ内では日本語固定だが、ここは説明のための図なので
+           閲覧中の言語で表示する。 -->
+          <div
+            class="feature-diagram fd-route-screen fd-theme-screen"
+            data-mock-screen="theme"
+            aria-hidden="true"
+          >
+            <div class="fd-appbar">
+              <span class="fd-icon-btn"
+                ><svg class="ic">
+                  <use href="/assets/icons/ui/sprite.svg#ic-arrow_back"></use>
+                </svg>
+              </span>
+              <strong data-i18n="fd.themeTitle">テーマ・外観</strong>
+              <span class="fd-spacer"></span>
+              <span class="fd-icon-btn"
+                ><svg class="ic">
+                  <use href="/assets/icons/ui/sprite.svg#ic-help_outline"></use>
+                </svg>
+              </span>
+            </div>
+            <div class="fd-route-body fd-theme-body">
+              <strong class="fd-route-section" data-i18n="fd.themeColorSection"
+                >カラーカスタマイズ</strong
+              >
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: var(--fd-accent)"
+                ></span>
+                <span data-i18n="fd.themeAccent">アクセントカラー</span>
+              </div>
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: var(--fd-ink)"
+                ></span>
+                <span data-i18n="fd.themeText">文字色</span>
+              </div>
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: var(--fd-panel)"
+                ></span>
+                <span data-i18n="fd.themePanelBg">パネル背景色</span>
+              </div>
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: var(--fd-surface)"
+                ></span>
+                <span data-i18n="fd.themeMenuBg">メニュー背景色</span>
+              </div>
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: var(--fd-accent)"
+                ></span>
+                <span data-i18n="fd.themeSelection">選択色</span>
+              </div>
+              <div class="fd-theme-color-row">
+                <span
+                  class="fd-theme-swatch"
+                  style="background: #ffb020"
+                ></span>
+                <span data-i18n="fd.themeUpdateMark">更新マーク色</span>
+              </div>
+              <div class="fd-panel-divider"></div>
+              <strong class="fd-route-section" data-i18n="fd.themePresetSection"
+                >テーマ一覧</strong
+              >
+              <div class="fd-theme-preset is-current">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetRedLight"
+                  >レッド（ライト）</span
+                >
+                <span class="fd-theme-check"></span>
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star is-on">★</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-preset">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetRedDark"
+                  >レッド（ダーク）</span
+                >
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star">☆</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-preset">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetOrangeLight"
+                  >オレンジ（ライト）</span
+                >
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star">☆</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-preset">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetOrangeDark"
+                  >オレンジ（ダーク）</span
+                >
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star">☆</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-preset">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetYellowLight"
+                  >イエロー（ライト）</span
+                >
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star">☆</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-preset">
+                <span
+                  class="fd-theme-preset-name"
+                  data-i18n="fd.themePresetYellowDark"
+                  >イエロー（ダーク）</span
+                >
+                <span class="fd-spacer"></span>
+                <span class="fd-theme-star">☆</span>
+                <span class="fd-layer-menu">⋮</span>
+              </div>
+              <div class="fd-theme-actions">
+                <span class="fd-theme-save-btn" data-i18n="fd.themeSaveAsNew"
+                  >現在の設定を新しいテーマとして保存</span
+                >
+                <span class="fd-theme-import-btn" data-i18n="fd.themeImport"
+                  >テーマを読み込む</span
+                >
+              </div>
+            </div>
+          </div>
           <div class="spec-grid">
             <div class="spec-item">
               <h3 data-i18n="featuresPage.workspace.item1.title">

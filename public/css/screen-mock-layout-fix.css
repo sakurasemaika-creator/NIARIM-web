@@ -514,3 +514,118 @@ html
   min-height: 0 !important;
   padding: 16px 14px !important;
 }
+
+/* ---- 21. テーマ・外観の画面再現図 ----
+   theme_settings_screen.dart の構成に合わせる。上半分が
+   「カラーカスタマイズ」の6行（32px相当の丸い色見本＋項目名）、
+   区切り線をはさんで下半分が「テーマ一覧」。現在選択中の1行だけ
+   primaryContainer 相当の面に載り、チェックと塗りつぶしの星が付く。
+   色見本にはこの節に割り当てた配色の変数をそのまま流し込んでいるので、
+   図ごとに中身の色が変わること自体が「全部変えられる」の説明になる。 */
+.fd-theme-body {
+  display: grid !important;
+  align-content: start !important;
+  gap: 2px !important;
+  padding: 10px 12px !important;
+}
+.fd-theme-color-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  font-size: 9px !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
+.fd-theme-color-row > span:last-child {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+.fd-theme-swatch {
+  flex: 0 0 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  /* 見本が地色に近い色（メニュー背景色など）でも輪郭が分かるよう、
+     どのテーマでも文字色から起こした細い輪郭を必ず付ける。 */
+  border: 1px solid color-mix(in srgb, var(--fd-text) 34%, transparent) !important;
+  box-sizing: border-box !important;
+}
+.fd-theme-preset {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  padding: 0 7px !important;
+  border-radius: 7px !important;
+  font-size: 9px !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
+.fd-theme-preset.is-current {
+  background: var(--fd-panel) !important;
+}
+.fd-theme-preset-name {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+/* チェックはスプライトに該当アイコンが無く、"✓" の字形は明朝側の
+   フォントに落ちて数学の根号のように見えてしまうため、罫線で描く。 */
+.fd-theme-check {
+  flex: 0 0 auto !important;
+  width: 9px !important;
+  height: 6px !important;
+  margin-bottom: 2px !important;
+  border-left: 1.6px solid var(--fd-accent) !important;
+  border-bottom: 1.6px solid var(--fd-accent) !important;
+  transform: rotate(-45deg) !important;
+}
+.fd-theme-star {
+  flex: 0 0 auto !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  color: color-mix(in srgb, var(--fd-text) 62%, transparent) !important;
+}
+.fd-theme-star.is-on {
+  color: #e0a100 !important;
+}
+.fd-theme-preset .fd-layer-menu {
+  flex: 0 0 auto !important;
+  margin-left: 0 !important;
+  color: color-mix(in srgb, var(--fd-text) 62%, transparent) !important;
+}
+/* 実機ではテーマ一覧が縦にスクロールし、2つのボタンは画面下端に
+   固定されている。図でも同じ位置関係になるよう下端へ寄せる。 */
+.fd-theme-actions {
+  display: grid !important;
+  gap: 6px !important;
+  margin-top: auto !important;
+  padding-top: 10px !important;
+}
+.fd-theme-save-btn,
+.fd-theme-import-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 24px !important;
+  padding: 4px 8px !important;
+  border-radius: 999px !important;
+  font-size: 9px !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+}
+.fd-theme-save-btn {
+  background: var(--fd-accent-fill, var(--fd-accent)) !important;
+  color: var(--fd-on-accent, #fff) !important;
+}
+/* 副ボタンの枠だけをアクセント色にし、文字は本文色のままにする。
+   8pxの小さな文字をアクセント色で置くと、暗いテーマの図で
+   4.3:1まで落ちて読めなくなるため。 */
+.fd-theme-import-btn {
+  border: 1px solid var(--fd-accent) !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
