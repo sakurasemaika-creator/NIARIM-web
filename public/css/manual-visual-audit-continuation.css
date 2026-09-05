@@ -1,10 +1,7 @@
 /* Continuation of manual visual audit: targeted fixes only. */
 
-/* かつてここで --color-accent-strong を --color-accent (#ff5c7a) へ
-   潰していたが、それだと白文字が 2.97:1 になり読めない。
-   利用者の指示は「赤系のボタンは全て不透明度100のテーマカラー背景に
-   白文字」なので、同じ色相のまま濃くした --color-accent-strong を
-   variables.css 側で定義し直し、その上に白文字を載せる（5.44:1）。 */
+/* Interactive surfaces use the active theme accent directly. Legacy strong-accent
+   token names are compatibility aliases only and must not create a separate dark-red palette. */
 
 /* Frame cells are 50x50 UI slots, while artwork may keep its own aspect ratio.
    Center legacy inline SVG previews inside the square cell instead of stretching them. */
@@ -254,21 +251,18 @@ html
   box-sizing: border-box !important;
 }
 
-/* 赤系のボタンは、不透明のテーマカラーを敷いて白文字にする（利用者の指示）。
-   面に使うのは同じ色相の濃い側 --color-accent-strong (#c42e51)。装飾用の
-   --color-accent (#ff5c7a) に白文字を載せると 2.97:1 しかなく読めないため、
-   「白文字」という指示を満たせるこちらを面に使う（白文字で5.44:1）。
-   逆に面を #ff5c7a のまま文字を暗くする案は、白文字という指示から外れる。 */
+/* Primary interactive surfaces always use the active theme color. */
 html body .btn.btn-primary,
 html body .btn.btn-accent,
 html body .hero .hero-actions .btn.btn-primary,
 html body .final-cta .hero-actions .btn.btn-primary,
 html body .download-actions .btn.btn-primary,
 html body .download-actions .btn.btn-accent,
-html body .scroll-top-btn {
-  background: var(--color-accent-strong) !important;
-  border-color: var(--color-accent-strong) !important;
-  color: #fff !important;
+html body .scroll-top-btn,
+html body .community-tabs button.is-active {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-ink) !important;
   opacity: 1 !important;
 }
 html body .btn.btn-primary:hover,
@@ -277,10 +271,11 @@ html body .hero .hero-actions .btn.btn-primary:hover,
 html body .final-cta .hero-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-accent:hover,
-html body .scroll-top-btn:hover {
-  background: var(--color-accent-strong-dark) !important;
-  border-color: var(--color-accent-strong-dark) !important;
-  color: #fff !important;
+html body .scroll-top-btn:hover,
+html body .community-tabs button.is-active:hover {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-ink) !important;
 }
 
 /* 配信URLが未設定のボタンも、面は不透明のまま。押せないことは
