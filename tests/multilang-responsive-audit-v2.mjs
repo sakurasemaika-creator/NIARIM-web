@@ -126,6 +126,11 @@ for (const vp of viewports) {
           };
         });
 
+        const workspaceControls = [...document.querySelectorAll(".fd-workspace-row")].map((row) => ({
+          check: rect(row.querySelector(".fd-check")),
+          drag: rect(row.querySelector(".fd-drag-mark")),
+        }));
+
         return {
           lang: de.lang,
           clientWidth: de.clientWidth,
@@ -138,6 +143,7 @@ for (const vp of viewports) {
           sliders,
           cards,
           verticalScreens,
+          workspaceControls,
         };
       });
 
@@ -180,6 +186,15 @@ for (const vp of viewports) {
           if (target.rect.bottom > screen.host.bottom + 2 || target.rect.top < screen.host.top - 2) {
             add(id, "mock-vertical-control-clipped", { screen: screen.className, host: screen.host, target });
           }
+        }
+      }
+
+      for (const controls of state.workspaceControls) {
+        if (controls.check && (Math.abs(controls.check.width - 15) > 1 || Math.abs(controls.check.height - 15) > 1)) {
+          add(id, "workspace-checkbox-geometry", controls.check);
+        }
+        if (controls.drag && (Math.abs(controls.drag.width - 14) > 1 || Math.abs(controls.drag.height - 10) > 1)) {
+          add(id, "workspace-drag-handle-geometry", controls.drag);
         }
       }
 
