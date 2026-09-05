@@ -8,7 +8,7 @@
     "deploy": "wrangler deploy",
     "audit": "node tools/audit-site.js",
     "audit:browser": "node tests/autonomous-browser-audit.mjs",
-    "audit:multilang": "node tests/multilang-responsive-audit.mjs",
+    "audit:multilang": "node tests/multilang-responsive-audit-v2.mjs",
     "audit:i18n": "node tests/i18n-completeness-audit.mjs",
     "audit:visual-final": "node tests/final-visual-invariants-audit.mjs",
     "audit:visual-screenshots": "node tests/final-visual-screenshot-audit.mjs",
