@@ -4,7 +4,8 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const viewports = [
-  { name: "sp", width: 390, height: 844 },
+  { name: "sp360", width: 360, height: 800 },
+  { name: "sp390", width: 390, height: 844 },
   { name: "pc", width: 1440, height: 1000 },
 ];
 const routes = ["/", "/features/"];
@@ -30,7 +31,7 @@ for (const viewport of viewports) {
           document.documentElement.lang = lang;
         }
       }, language);
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(220);
 
       const state = await page.evaluate(() => {
         const resolve = (value) => {
@@ -61,6 +62,7 @@ for (const viewport of viewports) {
             top: r.top,
             bottom: r.bottom,
             ratio: r.height ? r.width / r.height : null,
+            centerX: r.left + r.width / 2,
           };
         };
         const buttons = [
@@ -85,17 +87,49 @@ for (const viewport of viewports) {
             height: r.height / fit,
           };
         });
+        const frameStrips = [
+          ...document.querySelectorAll(".fd-frame-strip-scroll"),
+        ].map((strip) => {
+          const sr = strip.getBoundingClientRect();
+          const current = strip.querySelector(
+            ".fd-frame-thumb.is-current, .fd-frame.is-current",
+          );
+          const cr = current?.getBoundingClientRect();
+          return {
+            stripCenter: sr.left + sr.width / 2,
+            currentCenter: cr ? cr.left + cr.width / 2 : null,
+            delta: cr ? cr.left + cr.width / 2 - (sr.left + sr.width / 2) : null,
+          };
+        });
         const hero = rect(document.querySelector(".hero-visual"));
         const scroller = document.querySelector(".screenshot-scroller");
         const cards = scroller
           ? [...scroller.querySelectorAll(".screenshot-card")]
           : [];
+        const galleryCards = cards.map((card, index) => ({
+          index,
+          theme: card.getAttribute("data-mock-theme") || "",
+          accent: getComputedStyle(card).getPropertyValue("--fd-accent").trim(),
+          bezel: getComputedStyle(card).getPropertyValue("--fd-bezel").trim(),
+          rect: rect(card),
+        }));
+        const featureThemes = [
+          ...document.querySelectorAll(
+            "#drawing,#animation,#editing,#advanced,#audio,#save,#workspace,#widget,#export",
+          ),
+        ].map((el) => ({
+          id: el.id,
+          accent: getComputedStyle(el).getPropertyValue("--fd-accent").trim(),
+          bezel: getComputedStyle(el).getPropertyValue("--fd-bezel").trim(),
+          bg: getComputedStyle(el).getPropertyValue("--fd-bg").trim(),
+        }));
         return {
           accent,
           accentStrong,
           accentStrongDark,
           buttons: buttons.map(({ el, ...rest }) => rest),
           frames,
+          frameStrips,
           hero,
           scrollWidth: Math.max(
             document.documentElement.scrollWidth,
@@ -105,10 +139,10 @@ for (const viewport of viewports) {
           gallery: scroller
             ? {
                 count: cards.length,
-                first: rect(cards[0]),
-                last: rect(cards[cards.length - 1]),
+                cards: galleryCards,
               }
             : null,
+          featureThemes,
         };
       });
 
@@ -138,6 +172,11 @@ for (const viewport of viewports) {
           failures.push({ id, kind: "frame-not-50x50", frame });
         }
       }
+      for (const strip of state.frameStrips) {
+        if (strip.currentCenter !== null && Math.abs(strip.delta) > 2) {
+          failures.push({ id, kind: "current-frame-not-centered", strip });
+        }
+      }
       if (route === "/" && state.hero) {
         const target = 320 / 569;
         if (Math.abs(state.hero.ratio - target) > 0.018) {
@@ -148,17 +187,29 @@ for (const viewport of viewports) {
         if (state.gallery.count !== 6) {
           failures.push({ id, kind: "gallery-card-count", gallery: state.gallery });
         }
-        for (const card of [state.gallery.first, state.gallery.last]) {
-          if (!card) continue;
-          const target = 320 / 569;
-          if (Math.abs(card.ratio - target) > 0.025) {
+        const target = 320 / 569;
+        for (const card of state.gallery.cards) {
+          if (!card.rect || Math.abs(card.rect.ratio - target) > 0.025) {
             failures.push({ id, kind: "gallery-card-ratio", card, target });
           }
         }
+        const populated = state.gallery.cards.filter(
+          (card) => card.theme && card.accent && card.bezel,
+        );
+        if (populated.length !== 6) {
+          failures.push({ id, kind: "gallery-theme-missing", cards: state.gallery.cards });
+        } else {
+          const accents = new Set(populated.map((card) => card.accent));
+          const bezels = new Set(populated.map((card) => card.bezel));
+          if (accents.size !== 6 || bezels.size !== 6) {
+            failures.push({ id, kind: "gallery-theme-duplicate", cards: populated });
+          }
+        }
+
         await page.locator(".screenshot-scroller").evaluate((el) => {
           el.scrollLeft = el.scrollWidth;
         });
-        await page.waitForTimeout(120);
+        await page.waitForTimeout(160);
         const end = await page.evaluate(() => {
           const scroller = document.querySelector(".screenshot-scroller");
           const last = scroller?.querySelector(".screenshot-card:last-of-type");
@@ -177,6 +228,24 @@ for (const viewport of viewports) {
           (end.lastLeft < end.scrollerLeft - 2 || end.lastRight > end.scrollerRight + 2)
         ) {
           failures.push({ id, kind: "gallery-last-card-clipped", end });
+        }
+      }
+
+      if (route === "/features/" && state.featureThemes.length) {
+        if (state.featureThemes.length !== 9) {
+          failures.push({ id, kind: "features-theme-count", themes: state.featureThemes });
+        }
+        const populated = state.featureThemes.filter(
+          (theme) => theme.id && theme.accent && theme.bezel && theme.bg,
+        );
+        if (populated.length !== 9) {
+          failures.push({ id, kind: "features-theme-missing", themes: state.featureThemes });
+        } else {
+          const accents = new Set(populated.map((theme) => theme.accent));
+          const bezels = new Set(populated.map((theme) => theme.bezel));
+          if (accents.size !== 9 || bezels.size !== 9) {
+            failures.push({ id, kind: "features-theme-duplicate", themes: populated });
+          }
         }
       }
 
@@ -214,8 +283,11 @@ console.log(
         "theme-accent-only normal/hover",
         "legacy accent aliases",
         "50x50 frames",
+        "current frame centered",
         "hero 320:569 ratio",
-        "six-card app preview",
+        "all six app-preview ratios",
+        "six distinct app-preview themes",
+        "nine distinct features themes",
         "app preview end visibility",
         "horizontal overflow",
       ],
