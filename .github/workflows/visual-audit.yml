@@ -79,16 +79,13 @@ jobs:
           cat /tmp/niarim-http.log
           exit 1
       - name: Audit SP360/SP390/PC across all 7 languages
-        run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v2.mjs
-      - name: Audit final Home and Features visual invariants
+        run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v3.mjs
+      - name: Audit normalized frame, theme and gallery invariants
         if: always()
         run: node tests/final-visual-invariants-audit.mjs
-      - name: Audit app preview and feature mock details
-        if: always()
-        run: node tests/mock-detail-audit.mjs
       - name: Capture and inspect final Home/Features matrix
         if: always()
-        run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit.mjs
+        run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit-v2.mjs
       - name: Upload final matrix evidence
         if: always()
         uses: actions/upload-artifact@v4
