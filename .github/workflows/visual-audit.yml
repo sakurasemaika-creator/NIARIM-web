@@ -50,20 +50,50 @@ jobs:
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
-      - name: Audit SP360/SP390/PC across all 7 languages
-        if: always()
-        run: AUDIT_OUT_DIR=artifacts/autonomous-browser-audit/multilang-responsive node tests/multilang-responsive-audit-v2.mjs
-      - name: Audit final Home and Features visual invariants
-        if: always()
-        run: node tests/final-visual-invariants-audit.mjs
-      - name: Audit app preview and feature mock details
-        if: always()
-        run: node tests/mock-detail-audit.mjs
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: autonomous-browser-audit
           path: artifacts/autonomous-browser-audit/
+          if-no-files-found: error
+          retention-days: 14
+
+  final-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
+          echo $! > /tmp/niarim-http.pid
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/niarim-http.log
+          exit 1
+      - name: Audit SP360/SP390/PC across all 7 languages
+        run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v2.mjs
+      - name: Audit final Home and Features visual invariants
+        if: always()
+        run: node tests/final-visual-invariants-audit.mjs
+      - name: Audit app preview and feature mock details
+        if: always()
+        run: node tests/mock-detail-audit.mjs
+      - name: Capture and inspect final Home/Features matrix
+        if: always()
+        run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit.mjs
+      - name: Upload final matrix evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-visual-matrix
+          path: artifacts/final-matrix/
           if-no-files-found: error
           retention-days: 14
