@@ -725,6 +725,33 @@ select:focus {
   outline-offset: 3px;
 }
 
+/* タブレット帯では機能タブが折り返して、2行目が1個だけの「孤児」に
+   なりやすい（834pxで8個＋1個）。ピルの左右の余白と間隔をわずかに
+   詰めて、この帯でも1行に収まるようにする。収まらない言語では従来
+   どおり折り返す。 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .feature-nav {
+    gap: 0.35rem;
+  }
+  .feature-nav a {
+    padding: 0.5rem 0.78rem;
+  }
+}
+
+/* タブレット帯（641〜900px）。ヒーローは1カラムに畳まれるが、本文は
+   読みやすい行長で止めているため、左寄せのままだと画面の右半分が
+   まるごと空いて「置き忘れ」のように見える。文章そのものは左寄せの
+   まま、カラムごと中央に置く（引用ブロックの左罫線の意味も保てる）。
+   640px以下は別途モバイル専用の構成があるため対象外。 */
+@media (min-width: 641px) and (max-width: 900px) {
+  .hero .container {
+    justify-items: center;
+  }
+  .hero-copy {
+    width: min(100%, 34rem);
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     padding-top: 6.2rem;
