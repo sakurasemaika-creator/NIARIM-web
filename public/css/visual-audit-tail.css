@@ -73,15 +73,19 @@ html body .fd-frame-strip-scroll:has(> .fd-frame-thumb.is-selected) {
 
 /* App Preview: the outer screenshot card is the device bezel. Use the preset's
    own bezel token instead of the global ink color, and keep every reconstructed
-   phone at the exact device ratio without flex shrinking. */
+   phone at the exact device ratio without flex shrinking. Legacy responsive CSS
+   removed the first card's border entirely, so restore width/style as well as color
+   for all six cards here. */
 html body .screenshot-scroller.screenshot-scroller > .screenshot-card {
   flex-shrink: 0 !important;
   aspect-ratio: 320 / 569 !important;
   min-width: 0;
   box-sizing: border-box !important;
   scroll-snap-stop: always;
-  border-color: var(--fd-bezel, var(--color-ink)) !important;
+  border: 6px solid var(--fd-bezel, var(--color-ink)) !important;
+  border-radius: 22px !important;
   background: var(--fd-bezel, var(--color-ink)) !important;
+  overflow: hidden !important;
 }
 html body .screenshot-scroller.screenshot-scroller > .screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   width: 100% !important;
@@ -90,6 +94,8 @@ html body .screenshot-scroller.screenshot-scroller > .screenshot-card > :is(.fea
   max-height: 100% !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 16px !important;
 }
 
 /* Preserve a real trailing scroll area so the last bezel never hugs/crops at the viewport edge. */
