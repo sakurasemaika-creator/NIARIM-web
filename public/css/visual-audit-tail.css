@@ -20,13 +20,24 @@ html body .fd-frame-add.fd-frame-add {
   height: 50px !important;
   min-width: 50px !important;
   min-height: 50px !important;
+  max-width: 50px !important;
+  max-height: 50px !important;
   flex: 0 0 50px !important;
   aspect-ratio: 1 / 1 !important;
   box-sizing: border-box !important;
 }
-html body .fd-frame-thumb.fd-frame-thumb.is-current {
+html body .fd-frame-thumb.fd-frame-thumb.is-current,
+html body .fd-frame.fd-frame.is-active,
+html body .fd-frame.fd-frame.is-current {
   width: 50px !important;
   height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  max-width: 50px !important;
+  max-height: 50px !important;
+  box-sizing: border-box !important;
+}
+html body .fd-frame-thumb.fd-frame-thumb.is-current {
   border: 3px solid #ffad00 !important;
   border-radius: 4px !important;
 }
@@ -44,7 +55,25 @@ html body .fd-frame-thumb.fd-frame-thumb.is-current > svg {
   max-height: 40px !important;
 }
 
-/* App Preview: preserve a real trailing scroll area so the last bezel never hugs/crops at the viewport edge. */
+/* App Preview: every reconstructed phone keeps its device ratio and may never
+   flex-shrink just because translated content or the viewport is narrow. */
+html body .screenshot-scroller.screenshot-scroller > .screenshot-card {
+  flex-shrink: 0 !important;
+  aspect-ratio: 320 / 569 !important;
+  min-width: 0;
+  box-sizing: border-box !important;
+  scroll-snap-stop: always;
+}
+html body .screenshot-scroller.screenshot-scroller > .screenshot-card > :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Preserve a real trailing scroll area so the last bezel never hugs/crops at the viewport edge. */
 html body .screenshot-scroller.screenshot-scroller {
   padding-right: calc(var(--container-padding) + 28px) !important;
   scroll-padding-right: calc(var(--container-padding) + 28px) !important;
