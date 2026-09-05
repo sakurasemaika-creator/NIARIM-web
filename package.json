@@ -12,8 +12,9 @@
     "audit:i18n": "node tests/i18n-completeness-audit.mjs",
     "audit:visual-final": "node tests/final-visual-invariants-audit.mjs",
     "audit:visual-screenshots": "node tests/final-visual-screenshot-audit.mjs",
+    "audit:mock-detail": "node tests/mock-detail-audit.mjs",
     "audit:style-source": "node tests/source-style-consistency-audit.mjs",
-    "audit:all": "npm run audit && npm run audit:browser && npm run audit:multilang && npm run audit:i18n && npm run audit:visual-final && npm run audit:visual-screenshots && npm run audit:style-source",
+    "audit:all": "npm run audit && npm run audit:browser && npm run audit:multilang && npm run audit:i18n && npm run audit:visual-final && npm run audit:visual-screenshots && npm run audit:mock-detail && npm run audit:style-source",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown"
   },
