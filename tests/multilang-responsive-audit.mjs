@@ -88,6 +88,13 @@ async function inspect(page, viewport, language, route) {
     const brandAccent = resolveColor(
       root.getPropertyValue("--color-accent").trim(),
     );
+    const strongAccent = resolveColor(
+      root.getPropertyValue("--color-accent-strong").trim(),
+    );
+    const strongAccentDark = resolveColor(
+      root.getPropertyValue("--color-accent-strong-dark").trim(),
+    );
+
     const hero = document.querySelector(".hero-visual");
     const heroTitle = document.querySelector(".hero-title");
     const heroSubtitle = document.querySelector(".hero-subtitle");
@@ -99,6 +106,16 @@ async function inspect(page, viewport, language, route) {
       background: getComputedStyle(el).backgroundColor,
       color: getComputedStyle(el).color,
       primary: el.classList.contains("btn-primary"),
+    }));
+
+    const themedButtons = [
+      ...document.querySelectorAll(".btn-primary, .btn-accent"),
+    ].map((el) => ({
+      text: (el.textContent || "").trim(),
+      className: el.className,
+      background: getComputedStyle(el).backgroundColor,
+      borderColor: getComputedStyle(el).borderColor,
+      disabled: el.matches(":disabled,[aria-disabled='true']"),
     }));
 
     const mocks = [
@@ -191,10 +208,13 @@ async function inspect(page, viewport, language, route) {
         document.body?.scrollWidth || 0,
       ),
       brandAccent,
+      strongAccent,
+      strongAccentDark,
       hero: ratio(hero),
       heroTitle: ratio(heroTitle),
       heroSubtitle: ratio(heroSubtitle),
       heroButtons,
+      themedButtons,
       mocks,
       frameThumbs,
       frameStrips,
@@ -220,6 +240,29 @@ async function inspect(page, viewport, language, route) {
       clientWidth: state.documentClientWidth,
       scrollWidth: state.documentScrollWidth,
     });
+  }
+
+  if (
+    state.strongAccent !== state.brandAccent ||
+    state.strongAccentDark === "rgb(196, 46, 81)" ||
+    state.strongAccent === "rgb(196, 46, 81)"
+  ) {
+    finding(viewport, language, route, "dark-red-token-active", {
+      brandAccent: state.brandAccent,
+      strongAccent: state.strongAccent,
+      strongAccentDark: state.strongAccentDark,
+    });
+  }
+
+  for (const button of state.themedButtons) {
+    if (button.background !== state.brandAccent) {
+      finding(viewport, language, route, "themed-button-not-theme-accent", {
+        expected: state.brandAccent,
+        actual: button.background,
+        text: button.text,
+        className: button.className,
+      });
+    }
   }
 
   if (route === "/" && state.hero) {
