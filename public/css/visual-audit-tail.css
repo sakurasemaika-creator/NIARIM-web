@@ -87,7 +87,11 @@ html body .screenshot-scroller.screenshot-scroller > .screenshot-card {
   background: var(--fd-bezel, var(--color-ink)) !important;
   overflow: hidden !important;
 }
-html body .screenshot-scroller.screenshot-scroller > .screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+html
+  body
+  .screenshot-scroller.screenshot-scroller
+  > .screenshot-card
+  > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
   width: 100% !important;
   height: 100% !important;
   max-width: 100% !important;
@@ -108,6 +112,9 @@ html body .screenshot-scroller.screenshot-scroller::after {
   display: block !important;
   flex: 0 0 calc(var(--container-padding) + 28px) !important;
 }
-html body .screenshot-scroller.screenshot-scroller > .screenshot-card:last-of-type {
+html
+  body
+  .screenshot-scroller.screenshot-scroller
+  > .screenshot-card:last-of-type {
   margin-right: 28px !important;
 }

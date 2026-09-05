@@ -72,14 +72,18 @@
 
 /* Accent-filled controls must use the preset's matching on-accent color.
    White is not readable enough on yellow/mint presets. */
-.feature-diagram :is(
-  .fd-export-segments .fd-segment.is-active,
-  .fd-export-start,
-  .fd-export-btn,
-  .fd-tree-save-btn,
-  .fd-segment.is-selected
-) {
-  background: var(--fd-accent-fill, var(--fd-accent, var(--color-accent))) !important;
+.feature-diagram
+  :is(
+    .fd-export-segments .fd-segment.is-active,
+    .fd-export-start,
+    .fd-export-btn,
+    .fd-tree-save-btn,
+    .fd-segment.is-selected
+  ) {
+  background: var(
+    --fd-accent-fill,
+    var(--fd-accent, var(--color-accent))
+  ) !important;
   color: var(--fd-on-accent, #fff) !important;
 }
 .feature-diagram .fd-tree-save-btn :is(.ic, b) {
@@ -88,28 +92,30 @@
 
 /* Shared row containment: never let translated content push controls or panels
    beyond the device bezel. Geometry itself remains source-calibrated. */
-.feature-diagram :is(
-  .fd-workspace-row,
-  .fd-format-row,
-  .fd-layer-row,
-  .fd-sheet-row,
-  .fd-setting-row,
-  .fd-route-card,
-  .fd-save-slot,
-  .fd-scene-line,
-  .fd-timeline-row
-),
-.screenshot-card :is(
-  .fd-workspace-row,
-  .fd-format-row,
-  .fd-layer-row,
-  .fd-sheet-row,
-  .fd-setting-row,
-  .fd-route-card,
-  .fd-save-slot,
-  .fd-scene-line,
-  .fd-timeline-row
-) {
+.feature-diagram
+  :is(
+    .fd-workspace-row,
+    .fd-format-row,
+    .fd-layer-row,
+    .fd-sheet-row,
+    .fd-setting-row,
+    .fd-route-card,
+    .fd-save-slot,
+    .fd-scene-line,
+    .fd-timeline-row
+  ),
+.screenshot-card
+  :is(
+    .fd-workspace-row,
+    .fd-format-row,
+    .fd-layer-row,
+    .fd-sheet-row,
+    .fd-setting-row,
+    .fd-route-card,
+    .fd-save-slot,
+    .fd-scene-line,
+    .fd-timeline-row
+  ) {
   min-width: 0 !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
@@ -118,22 +124,26 @@
 /* Native one-line rows: Workspace, Layer, Audio and compact timeline items are
    fixed-height app controls. Keep them single-line and use an ellipsis rather
    than allowing a translated label to wrap vertically out of the calibrated row. */
-.feature-diagram :is(
-  .fd-workspace-row,
-  .fd-layer-row,
-  .fd-sheet-row,
-  .fd-scene-line,
-  .fd-timeline-row,
-  .fd-save-slot
-) :is(strong, small, span, b, p),
-.screenshot-card :is(
-  .fd-workspace-row,
-  .fd-layer-row,
-  .fd-sheet-row,
-  .fd-scene-line,
-  .fd-timeline-row,
-  .fd-save-slot
-) :is(strong, small, span, b, p) {
+.feature-diagram
+  :is(
+    .fd-workspace-row,
+    .fd-layer-row,
+    .fd-sheet-row,
+    .fd-scene-line,
+    .fd-timeline-row,
+    .fd-save-slot
+  )
+  :is(strong, small, span, b, p),
+.screenshot-card
+  :is(
+    .fd-workspace-row,
+    .fd-layer-row,
+    .fd-sheet-row,
+    .fd-scene-line,
+    .fd-timeline-row,
+    .fd-save-slot
+  )
+  :is(strong, small, span, b, p) {
   min-width: 0 !important;
   max-width: 100% !important;
   overflow: hidden !important;

@@ -33,8 +33,13 @@ if (normalizationIndex < 0) {
     "features-source-normalization.css is not imported by line-break.css",
   );
 }
-if (tailIndex < 0 || (normalizationIndex >= 0 && normalizationIndex > tailIndex)) {
-  failures.push("Features normalization must load before final visual audit tail");
+if (
+  tailIndex < 0 ||
+  (normalizationIndex >= 0 && normalizationIndex > tailIndex)
+) {
+  failures.push(
+    "Features normalization must load before final visual audit tail",
+  );
 }
 if (guardIndex < 0) {
   failures.push("theme-accent-only.css is not imported by line-break.css");
@@ -109,7 +114,9 @@ if (
   !featuresNormalization.includes(".fd-sheet-slider") ||
   !featuresNormalization.includes("height: 4px")
 ) {
-  failures.push("Features slider normalization must enforce the shared 4px track");
+  failures.push(
+    "Features slider normalization must enforce the shared 4px track",
+  );
 }
 
 if (failures.length) {
