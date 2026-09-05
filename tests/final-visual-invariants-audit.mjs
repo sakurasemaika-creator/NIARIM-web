@@ -65,6 +65,24 @@ for (const viewport of viewports) {
             centerX: r.left + r.width / 2,
           };
         };
+        const themeSurface = (rootEl) =>
+          rootEl?.querySelector?.(
+            ".feature-diagram, .fd-app-screen, .fd-route-screen",
+          ) || rootEl;
+        const themeValues = (rootEl) => {
+          const surface = themeSurface(rootEl);
+          if (!surface) return { accent: "", bezel: "", bg: "" };
+          const surfaceStyle = getComputedStyle(surface);
+          const rootStyle = rootEl ? getComputedStyle(rootEl) : null;
+          return {
+            accent: surfaceStyle.getPropertyValue("--fd-accent").trim(),
+            bezel:
+              surfaceStyle.getPropertyValue("--fd-bezel").trim() ||
+              rootStyle?.getPropertyValue("--fd-bezel").trim() ||
+              "",
+            bg: surfaceStyle.getPropertyValue("--fd-bg").trim(),
+          };
+        };
         const buttons = [
           ...document.querySelectorAll(".btn-primary, .btn-accent"),
         ].map((el) => ({
@@ -109,8 +127,7 @@ for (const viewport of viewports) {
         const galleryCards = cards.map((card, index) => ({
           index,
           theme: card.getAttribute("data-mock-theme") || "",
-          accent: getComputedStyle(card).getPropertyValue("--fd-accent").trim(),
-          bezel: getComputedStyle(card).getPropertyValue("--fd-bezel").trim(),
+          ...themeValues(card),
           rect: rect(card),
         }));
         const featureThemes = [
@@ -119,9 +136,7 @@ for (const viewport of viewports) {
           ),
         ].map((el) => ({
           id: el.id,
-          accent: getComputedStyle(el).getPropertyValue("--fd-accent").trim(),
-          bezel: getComputedStyle(el).getPropertyValue("--fd-bezel").trim(),
-          bg: getComputedStyle(el).getPropertyValue("--fd-bg").trim(),
+          ...themeValues(el),
         }));
         return {
           accent,
@@ -249,7 +264,6 @@ for (const viewport of viewports) {
         }
       }
 
-      // Hover must stay on the same theme accent; no darker red variant is allowed.
       const hoverTargets = page.locator(".btn-primary, .btn-accent");
       const count = await hoverTargets.count();
       for (let i = 0; i < count; i++) {
