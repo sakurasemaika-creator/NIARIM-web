@@ -957,34 +957,49 @@
         var need = m.scrollHeight;
         var have = m.clientHeight;
         if (!have || need <= have + 1) return;
+        // 枠の外側の大きさ（ベゼルの線も含む）。倍率を掛けたあとの
+        // 見た目がこの大きさとぴったり同じになるようにする。
+        // 以前は内側（clientWidth/clientHeight）を基準にしていたため、
+        // 6pxのベゼル2本ぶん（12px）だけ小さく描かれ、しかもその12pxは
+        // 幅に対しては高さに対してよりずっと大きな割合なので、端末の
+        // 縦横比が 320:569 から 3.9% ずれていた（360px幅で実測）。
+        var boxW = m.offsetWidth;
+        var boxH = m.offsetHeight;
         // 極端に縮むと文字が読めないので下限を設ける。320px幅の端末では
         // 枠自体が小さく、0.62では収まりきらずコマ一覧の下端が数px
         // 切れていたため、0.56まで許容する。
         var scale = Math.max(0.56, have / need);
         var z = Math.round(scale * 1000) / 1000;
-        // 幅・高さは他のレイヤーが !important で 100% に固定しているため、
-        // インラインの !important で上書きする必要がある。
-        m.style.setProperty("--fd-fit", String(z));
-        m.style.setProperty("transform", "scale(" + z + ")", "important");
-        m.style.setProperty("transform-origin", "top left", "important");
-        var cw = m.clientWidth;
-        m.style.setProperty("width", cw / z + "px", "important");
-        m.style.setProperty("margin-right", -(cw / z - cw) + "px", "important");
-        // 高さは % ではなく実測のpxで持たせ、広げたぶんを負のマージンで
-        // 取り消す。transform はレイアウト上の大きさを変えないため、
-        // % で広げると「枠が伸びる→親の行が伸びる→また測り直す」の
-        // 堂々巡りになり、スマホのヒーローで倍率が付いたり消えたりしていた。
-        // 見た目の高さ（need * z = have）とレイアウト上の高さを一致させる。
-        m.style.setProperty("height", need + "px", "important");
-        m.style.setProperty(
-          "margin-bottom",
-          -(need - have) + "px",
-          "important",
-        );
-        // 他のレイヤーが max-width/max-height を 100% で固定しているため、
-        // 広げた分が clamp されないよう外す。
-        m.style.setProperty("max-width", "none", "important");
-        m.style.setProperty("max-height", "none", "important");
+
+        function applyFit(zoom) {
+          // 幅・高さは他のレイヤーが !important で 100% に固定しているため、
+          // インラインの !important で上書きする必要がある。
+          // 大きさは % ではなく実測のpxで持たせ、広げたぶんを負のマージンで
+          // 取り消す。transform はレイアウト上の大きさを変えないため、
+          // % で広げると「枠が伸びる→親の行が伸びる→また測り直す」の
+          // 堂々巡りになり、スマホのヒーローで倍率が付いたり消えたりしていた。
+          m.style.setProperty("--fd-fit", String(zoom));
+          m.style.setProperty("transform", "scale(" + zoom + ")", "important");
+          m.style.setProperty("transform-origin", "top left", "important");
+          m.style.setProperty("width", boxW / zoom + "px", "important");
+          m.style.setProperty("height", boxH / zoom + "px", "important");
+          m.style.setProperty(
+            "margin-right",
+            -(boxW / zoom - boxW) + "px",
+            "important",
+          );
+          m.style.setProperty(
+            "margin-bottom",
+            -(boxH / zoom - boxH) + "px",
+            "important",
+          );
+          // 他のレイヤーが max-width/max-height を 100% で固定しているため、
+          // 広げた分が clamp されないよう外す。
+          m.style.setProperty("max-width", "none", "important");
+          m.style.setProperty("max-height", "none", "important");
+        }
+
+        applyFit(z);
         m.classList.add("is-fit-scaled");
 
         // 幅を広げたぶん行の折り返しが変わり、縮めたあとでも数pxだけ
@@ -993,24 +1008,13 @@
         for (var pass = 0; pass < 3; pass += 1) {
           var rest = m.scrollHeight - m.clientHeight;
           if (rest <= 1) break;
-          z = Math.max(
+          var next = Math.max(
             0.56,
             Math.round(((z * have) / (have + rest)) * 1000) / 1000,
           );
-          m.style.setProperty("--fd-fit", String(z));
-          m.style.setProperty("transform", "scale(" + z + ")", "important");
-          m.style.setProperty("width", cw / z + "px", "important");
-          m.style.setProperty(
-            "margin-right",
-            -(cw / z - cw) + "px",
-            "important",
-          );
-          m.style.setProperty("height", have / z + "px", "important");
-          m.style.setProperty(
-            "margin-bottom",
-            -(have / z - have) + "px",
-            "important",
-          );
+          if (next >= z) break;
+          z = next;
+          applyFit(z);
         }
       });
     }
