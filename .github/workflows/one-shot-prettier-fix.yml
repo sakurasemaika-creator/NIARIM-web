@@ -1,0 +1,37 @@
+name: One-shot Prettier Fix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev_branch]
+    paths:
+      - .github/workflows/one-shot-prettier-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx prettier@3.6.2 --write .github/workflows/visual-audit.yml tests/timeline-current-frame-audit.mjs
+      - run: npm run format:check
+      - name: Commit formatting
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/visual-audit.yml tests/timeline-current-frame-audit.mjs
+          if git diff --cached --quiet; then
+            echo "No formatting changes needed"
+          else
+            git commit -m "style: format visual audit files"
+            git push origin HEAD:dev_branch
+          fi
