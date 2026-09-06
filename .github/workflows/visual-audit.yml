@@ -17,6 +17,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Print Prettier-formatted capture script
+        run: npx prettier tests/fullpage-multilang-capture.mjs
       - name: Check formatting
         run: npm run format:check
 
