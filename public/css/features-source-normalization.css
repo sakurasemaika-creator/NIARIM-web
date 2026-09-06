@@ -244,3 +244,69 @@
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+
+/* timeline_screen.dart _buildClipResizeHandle(): audio/video/image clips use an
+   8px full-height handle at both edges. The handle overlays the clip; it does
+   not change the clip's existing 12px content padding. */
+.feature-diagram .fd-clip-resize-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: rgba(245, 241, 240, 0.25);
+  z-index: 3;
+}
+.feature-diagram .fd-clip-resize-handle.is-left {
+  left: 0;
+}
+.feature-diagram .fd-clip-resize-handle.is-right {
+  right: 0;
+}
+
+/* widget_settings_screen.dart uses a 44x44 ArtworkFrameThumbnail inside a
+   ListTile-style summary. Preserve the existing translated labels, but match
+   the native thumbnail and trailing-chevron geometry. */
+.feature-diagram .fd-widget-tile--art.is-settings-summary {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 18px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 10px;
+  min-height: 64px;
+}
+.feature-diagram
+  .fd-widget-tile--art.is-settings-summary
+  .fd-widget-frame {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 6px;
+}
+.feature-diagram
+  .fd-widget-tile--art.is-settings-summary
+  .fd-widget-name {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  min-width: 0;
+}
+.feature-diagram
+  .fd-widget-tile--art.is-settings-summary
+  .fd-widget-sub {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  min-width: 0;
+}
+.feature-diagram .fd-widget-chevron {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--fd-text-muted);
+}
