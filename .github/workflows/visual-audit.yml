@@ -6,6 +6,20 @@ on:
   workflow_dispatch:
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check formatting
+        run: npm run format:check
+
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 30
