@@ -66,70 +66,19 @@
     setTimeout(centerCurrentFrames, 240);
   }
 
-  /* Features の再現図だけに適用する実装同期補正。
-     大きな features/index.html を置換せず、本体 dev_branch で確認した
-     UI寸法・接続規則を小さなDOM補正として反映する。 */
-  function syncFeatureMockFidelity() {
+  function loadFeatureFidelity() {
     if (
       !document.getElementById("audio") &&
       !document.getElementById("widget")
     )
       return;
+    if (document.querySelector("script[data-niarim-feature-fidelity]")) return;
 
-    if (!document.getElementById("niarim-feature-fidelity-style")) {
-      var style = document.createElement("style");
-      style.id = "niarim-feature-fidelity-style";
-      style.textContent =
-        ".fd-clip-resize-handle{position:absolute;top:0;bottom:0;width:8px;background:rgba(245,241,240,.25);z-index:3}" +
-        ".fd-clip-resize-handle.is-left{left:0}.fd-clip-resize-handle.is-right{right:0}" +
-        ".fd-widget-tile--art.is-settings-summary{display:grid;grid-template-columns:44px minmax(0,1fr) 18px;grid-template-rows:auto auto;align-items:center;column-gap:10px;min-height:64px}" +
-        ".fd-widget-tile--art.is-settings-summary .fd-widget-frame{grid-column:1;grid-row:1/3;width:44px;height:44px;margin:0;border-radius:6px}" +
-        ".fd-widget-tile--art.is-settings-summary .fd-widget-name{grid-column:2;grid-row:1;align-self:end}" +
-        ".fd-widget-tile--art.is-settings-summary .fd-widget-sub{grid-column:2;grid-row:2;align-self:start}" +
-        ".fd-widget-chevron{grid-column:3;grid-row:1/3;font-size:22px;line-height:1;color:var(--fd-text-muted)}";
-      document.head.appendChild(style);
-    }
-
-    document.querySelectorAll(".fd-audio-track").forEach(function (track) {
-      if (track.querySelector(".fd-clip-resize-handle")) return;
-      var left = document.createElement("span");
-      left.className = "fd-clip-resize-handle is-left";
-      var right = document.createElement("span");
-      right.className = "fd-clip-resize-handle is-right";
-      track.appendChild(left);
-      track.appendChild(right);
-    });
-
-    var treeRows = document.querySelectorAll(
-      ".fd-tree-list--bottom-up .fd-tree-row2",
-    );
-    if (treeRows.length >= 4) {
-      var connectors = [
-        "",
-        '<svg class="fd-tree-connector" width="20" height="36" viewBox="0 0 20 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="10" y1="18" x2="20" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
-        '<svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="0" x2="30" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
-        '<svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="0" x2="30" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
-      ];
-      Array.prototype.forEach.call(treeRows, function (row, index) {
-        var old = row.querySelector(".fd-tree-connector");
-        if (old) old.remove();
-        if (connectors[index])
-          row.insertAdjacentHTML("afterbegin", connectors[index]);
-      });
-    }
-
-    document
-      .querySelectorAll(".fd-widget-tile--art")
-      .forEach(function (tile) {
-        tile.classList.add("is-settings-summary");
-        if (!tile.querySelector(".fd-widget-chevron")) {
-          var chevron = document.createElement("span");
-          chevron.className = "fd-widget-chevron";
-          chevron.setAttribute("aria-hidden", "true");
-          chevron.textContent = "›";
-          tile.appendChild(chevron);
-        }
-      });
+    var script = document.createElement("script");
+    script.src = "/js/features-fidelity.js";
+    script.defer = true;
+    script.setAttribute("data-niarim-feature-fidelity", "true");
+    document.head.appendChild(script);
   }
 
   function loadAiTrustCopy() {
@@ -144,19 +93,13 @@
 
   function init() {
     apply();
-    syncFeatureMockFidelity();
+    loadFeatureFidelity();
     scheduleFrameCentering();
-    window.addEventListener("load", function () {
-      syncFeatureMockFidelity();
-      scheduleFrameCentering();
-    });
+    window.addEventListener("load", scheduleFrameCentering);
     window.addEventListener("resize", scheduleFrameCentering, {
       passive: true,
     });
-    document.addEventListener("niarim:langchange", function () {
-      syncFeatureMockFidelity();
-      scheduleFrameCentering();
-    });
+    document.addEventListener("niarim:langchange", scheduleFrameCentering);
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(scheduleFrameCentering);
     }
