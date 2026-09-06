@@ -1,10 +1,13 @@
 import { chromium } from "playwright";
 import fs from "node:fs/promises";
 import path from "node:path";
+import pngjs from "pngjs";
 import { launchOptions } from "./browser-launch.mjs";
 
+const { PNG } = pngjs;
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const outDir = process.env.AUDIT_FULLPAGE_DIR || "artifacts/fullpage-multilang";
+const outDir =
+  process.env.AUDIT_FULLPAGE_DIR || "artifacts/fullpage-multilang";
 const routes = [
   "/",
   "/about/",
@@ -33,12 +36,103 @@ const requestedViewports = (process.env.AUDIT_VIEWPORTS || "sp,pc")
   .map((value) => value.trim())
   .filter(Boolean);
 const langs = allLangs.filter((lang) => requestedLangs.includes(lang));
-const viewports = allViewports.filter((vp) => requestedViewports.includes(vp.name));
+const viewports = allViewports.filter((vp) =>
+  requestedViewports.includes(vp.name),
+);
 const slug = (route) =>
   route.replace(/^\//, "").replace(/[^a-zA-Z0-9_-]+/g, "-") || "home";
 
 if (!langs.length || !viewports.length) {
   throw new Error("No valid language or viewport selected");
+}
+
+async function stitchFullPage(page, file) {
+  const metrics = await page.evaluate(() => ({
+    docHeight: document.documentElement.scrollHeight,
+    viewportHeight: innerHeight,
+  }));
+  const max = Math.max(0, metrics.docHeight - metrics.viewportHeight);
+  const positions = [];
+  for (let y = 0; y < max; y += metrics.viewportHeight) positions.push(y);
+  if (!positions.length || positions.at(-1) !== max) positions.push(max);
+
+  await page.evaluate(() => {
+    document
+      .querySelectorAll(".reveal")
+      .forEach((el) => el.classList.add("is-visible"));
+    document
+      .querySelectorAll(".stagger-grid > *")
+      .forEach((el) => el.classList.add("is-visible"));
+    let style = document.querySelector("style[data-fullpage-eye-review]");
+    if (!style) {
+      style = document.createElement("style");
+      style.setAttribute("data-fullpage-eye-review", "");
+      document.head.appendChild(style);
+    }
+    style.textContent = `
+      .reveal,
+      .stagger-grid > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation-delay: 0s !important;
+      }
+      .reveal h2 { clip-path: none !important; }
+      html.eye-review-tail .site-header,
+      html.eye-review-tail .scroll-top-btn,
+      html.eye-review-tail .cursor-orbit,
+      html.eye-review-tail .feature-nav {
+        visibility: hidden !important;
+      }
+    `;
+  });
+
+  let output = null;
+  for (let i = 0; i < positions.length; i++) {
+    const y = positions[i];
+    await page.evaluate(
+      ({ top, hideChrome }) => {
+        document.documentElement.classList.toggle(
+          "eye-review-tail",
+          hideChrome,
+        );
+        scrollTo({ top, behavior: "auto" });
+      },
+      { top: y, hideChrome: i > 0 },
+    );
+    await page.waitForTimeout(120);
+
+    const buffer = await page.screenshot({
+      fullPage: false,
+      animations: "disabled",
+    });
+    const slice = PNG.sync.read(buffer);
+    if (!output) {
+      output = new PNG({ width: slice.width, height: metrics.docHeight });
+    }
+    const copyHeight = Math.max(
+      0,
+      Math.min(slice.height, metrics.docHeight - y),
+    );
+    if (copyHeight > 0) {
+      PNG.bitblt(
+        slice,
+        output,
+        0,
+        0,
+        slice.width,
+        copyHeight,
+        0,
+        y,
+      );
+    }
+  }
+
+  await page.evaluate(() => {
+    document.documentElement.classList.remove("eye-review-tail");
+    scrollTo(0, 0);
+  });
+  await fs.writeFile(file, PNG.sync.write(output));
 }
 
 await fs.mkdir(outDir, { recursive: true });
@@ -61,39 +155,11 @@ for (const vp of viewports) {
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(900);
 
-      const max = await page.evaluate(() =>
-        Math.max(0, document.documentElement.scrollHeight - innerHeight),
-      );
-      for (
-        let y = 0;
-        y < max;
-        y += Math.max(300, Math.round(vp.height * 0.65))
-      ) {
-        await page.evaluate((top) => scrollTo({ top, behavior: "auto" }), y);
-        await page.waitForTimeout(80);
-      }
-      await page.evaluate((top) => scrollTo({ top, behavior: "auto" }), max);
-      await page.waitForTimeout(250);
-      await page.evaluate(() => {
-        document
-          .querySelectorAll(".reveal")
-          .forEach((el) => el.classList.add("is-visible"));
-        document
-          .querySelectorAll(".stagger-grid > *")
-          .forEach((el) => el.classList.add("is-visible"));
-        scrollTo(0, 0);
-      });
-      await page.waitForTimeout(180);
-
       const file = path.join(
         outDir,
         `${lang}__${vp.name}__${slug(route)}.png`,
       );
-      await page.screenshot({
-        path: file,
-        fullPage: true,
-        animations: "disabled",
-      });
+      await stitchFullPage(page, file);
       const metrics = await page.evaluate(() => ({
         width: document.documentElement.scrollWidth,
         clientWidth: document.documentElement.clientWidth,
