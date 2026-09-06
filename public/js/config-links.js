@@ -83,7 +83,6 @@
         ".fd-audio-track{overflow:hidden;padding-inline:8px}" +
         ".fd-clip-resize-handle{position:absolute;top:0;bottom:0;width:8px;background:rgba(245,241,240,.25);z-index:3}" +
         ".fd-clip-resize-handle.is-left{left:0}.fd-clip-resize-handle.is-right{right:0}" +
-        ".fd-tree-list--bottom-up .fd-tree-connector[data-niarim-fidelity-connector]{transform:none}" +
         ".fd-tree-row2[data-niarim-leaf] .fd-tree-dot{box-shadow:0 0 0 2px rgba(255,92,122,.18)}" +
         ".fd-widget-tile--art.is-settings-summary{display:grid;grid-template-columns:44px minmax(0,1fr) 18px;grid-template-rows:auto auto;align-items:center;column-gap:10px;min-height:64px}" +
         ".fd-widget-tile--art.is-settings-summary .fd-widget-frame{grid-column:1;grid-row:1/3;width:44px;height:44px;margin:0;border-radius:6px}" +
@@ -109,9 +108,9 @@
     if (treeRows.length >= 4) {
       var connectors = [
         "",
-        '<svg class="fd-tree-connector" data-niarim-fidelity-connector width="20" height="36" viewBox="0 0 20 36" aria-hidden="true"><path d="M10 0V36M10 18H20" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/></svg>',
-        '<svg class="fd-tree-connector" data-niarim-fidelity-connector width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><path d="M10 0V36M10 18H40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/></svg>',
-        '<svg class="fd-tree-connector" data-niarim-fidelity-connector width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><path d="M10 18V36M10 18H40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/></svg>',
+        '<svg class="fd-tree-connector" width="20" height="36" viewBox="0 0 20 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="10" y1="18" x2="20" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
+        '<svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="0" x2="30" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
+        '<svg class="fd-tree-connector" width="40" height="36" viewBox="0 0 40 36" aria-hidden="true"><line x1="10" y1="0" x2="10" y2="36" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="0" x2="30" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><line x1="30" y1="18" x2="40" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/></svg>',
       ];
       Array.prototype.forEach.call(treeRows, function (row, index) {
         var old = row.querySelector(".fd-tree-connector");
