@@ -29,3 +29,27 @@
 .fd-frame-cursor {
   left: 50% !important;
 }
+
+/*
+ * タイムラインモードも同じ考え方にする。
+ * .fd-timeline-frames 自体の中央ではなく、画面幅いっぱいの
+ * .fd-timeline-row を現在地枠の基準にする。
+ */
+.fd-timeline-row {
+  position: relative !important;
+}
+
+.fd-timeline-frames {
+  position: static !important;
+  flex: 1 1 auto !important;
+  justify-content: flex-start !important;
+  /* 行左端からフレーム列までに padding 5px + ラベル18px + gap 5px = 28px。
+     37px幅×5枚の3枚目中心は列先頭から92.5pxなので、合計120.5pxを
+     画面中央から引いた位置を列先頭にする。 */
+  padding-left: calc(50% - 120.5px) !important;
+  padding-right: 0 !important;
+}
+
+.fd-timeline-frames > .fd-frame-cursor {
+  left: 50% !important;
+}
