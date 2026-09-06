@@ -24,7 +24,11 @@ export const SERVER_CANDIDATES = [
 
 async function alive(base) {
   try {
+    // 本文は不要なので HEAD だけ送る。GET の本文を未消費のまま返すと、
+    // Node 22 系の undici で接続終了時に Parser.finish の assert に当たる環境が
+    // あるため、サーバー生存確認ではレスポンスボディを作らせない。
     const res = await fetch(base + "/", {
+      method: "HEAD",
       signal: AbortSignal.timeout(2500),
       redirect: "follow",
     });
