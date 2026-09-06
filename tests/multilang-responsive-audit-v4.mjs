@@ -27,8 +27,7 @@ report.findings = report.findings.filter((finding) => {
 
 await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
 const byKind = report.findings.reduce(
-  (acc, finding) =>
-    ((acc[finding.kind] = (acc[finding.kind] || 0) + 1), acc),
+  (acc, finding) => ((acc[finding.kind] = (acc[finding.kind] || 0) + 1), acc),
   {},
 );
 console.log(
