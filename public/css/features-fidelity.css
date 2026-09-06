@@ -1,0 +1,36 @@
+/* Features-only fidelity details that need their own final visual layer. */
+
+/* Audio volume slider: show the 12px draggable thumb at the end of the fill. */
+.feature-diagram .fd-slider > span {
+  position: relative;
+}
+.feature-diagram .fd-slider > span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--fd-accent, var(--color-accent));
+  box-shadow: 0 0 0 2px var(--fd-surface, #fff);
+}
+
+/* widget_settings_screen.dart uses a real frame composite thumbnail. The web
+   mock has no user project to render, so use the app's image-placeholder state
+   rather than a featureless color slab. */
+.feature-diagram .fd-widget-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--fd-panel, #f7e3e6);
+  border: 1px solid var(--fd-outline, rgba(255, 255, 255, 0.35));
+}
+.feature-diagram .fd-widget-frame .fd-widget-frame-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--fd-text-muted, #8c8386);
+  opacity: 0.8;
+}
