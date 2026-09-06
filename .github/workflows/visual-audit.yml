@@ -86,6 +86,21 @@ jobs:
       - name: Capture and inspect final Home/Features matrix
         if: always()
         run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit-v3.mjs
+      # AI-VERIFICATION.md の手順で使う撮影スクリプトも、ここで同じ対象を
+      # 撮ってアーティファクトに残す。手元でブラウザを起動できない環境でも、
+      # このワークフローを回して成果物を落とせば生成PNGの目視まで到達できる。
+      - name: Capture mocks with tools/shot.mjs (AI-VERIFICATION.md)
+        if: always()
+        run: |
+          for vp in pc sp; do
+            node tools/shot.mjs "#drawing .feature-diagram" --vp $vp \
+              --langs ja,en,fr --dir artifacts/final-matrix/shots
+            node tools/shot.mjs "#animation .feature-diagram" --vp $vp \
+              --langs ja,en,fr --dir artifacts/final-matrix/shots
+            node tools/shot.mjs "#workspace [data-mock-screen='theme']" --vp $vp \
+              --langs ja,en,fr --dir artifacts/final-matrix/shots
+          done
+
       - name: Upload final matrix evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -10,10 +10,15 @@
  *   毎回その場でスクリプトを書き捨てると、待ち時間や言語の入れ方といった
  *   間違えやすい部分を取りこぼすため、ここに固定した。
  *
- * 前提: `npx wrangler dev --port 8788` が起動していること。
- *   file:// で直接開くのではなく必ず配信する。_headers のCSP、
- *   @font-face の unicode-range、/assets/ のパス解決が本番と同じ条件に
- *   ならないと、確認の意味がないため。
+ * 前提: 配信サーバーが起動していること。次のどちらでもよい。
+ *     npx wrangler dev --port 8788                      本番と同じ（推奨）
+ *     python3 -m http.server 8787 --directory public    wrangler が使えない環境
+ *   立っているほうを自動で見つける（tools/dev-server.mjs）。
+ *   file:// で直接開くのではなく必ず配信する。@font-face の unicode-range、
+ *   /assets/ のパス解決が本番と同じ条件にならないと、確認の意味がないため。
+ *   （_headers のCSPは wrangler 経由のときだけ適用される。）
+ *
+ *   足りないものがあるかどうかは `node tools/verify-env.mjs` で分かる。
  *
  * 使い方:
  *   node tools/shot.mjs "<CSSセレクタ>" [オプション]
@@ -35,12 +40,17 @@
  *   --wait <ms>      描画待ちの追加時間（既定 1500）
  *   --out <name>     出力ファイル名の基本部分（既定はセレクタから生成）
  *   --dir <path>     出力先（既定 artifacts/shots、.gitignore 済み）
- *   --base <url>     既定 http://localhost:8788
+ *   --base <url>     配信サーバー（未指定なら 8788→8787 の順に自動検出）
  */
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
-import { launchOptions } from "../tests/browser-launch.mjs";
+import {
+  launchOptions,
+  findChromium,
+  chromiumHelp,
+} from "../tests/browser-launch.mjs";
+import { requireServer } from "./dev-server.mjs";
 
 const VIEWPORTS = { pc: [1280, 1000], sp: [390, 844] };
 
@@ -55,7 +65,7 @@ function parseArgs(argv) {
     wait: 1500,
     out: null,
     dir: "artifacts/shots",
-    base: process.env.AUDIT_BASE_URL || "http://localhost:8788",
+    base: null, // 未指定なら立っている配信サーバーを自動で探す
   };
   const rest = [];
   for (let i = 0; i < argv.length; i += 1) {
@@ -102,6 +112,23 @@ if (!opt.selector) {
 const [width, height] = viewportOf(opt.vp);
 fs.mkdirSync(opt.dir, { recursive: true });
 
+// 前提が欠けているときは、Playwright の分かりにくいエラーや
+// ERR_CONNECTION_REFUSED ではなく、直し方を出して止まる。
+if (!findChromium()) {
+  console.error(chromiumHelp());
+  process.exit(2);
+}
+if (!opt.base) {
+  try {
+    const server = await requireServer();
+    opt.base = server.base;
+    console.error(`配信サーバー: ${server.base}（${server.kind}）`);
+  } catch (e) {
+    console.error(e.message);
+    process.exit(2);
+  }
+}
+
 const browser = await chromium.launch(launchOptions());
 let missing = 0;
 
@@ -122,7 +149,17 @@ for (const lang of opt.langs) {
     }
   }, lang);
 
-  await page.goto(opt.base + opt.page, { waitUntil: "networkidle" });
+  try {
+    await page.goto(opt.base + opt.page, { waitUntil: "networkidle" });
+  } catch (e) {
+    console.error(
+      `${opt.base + opt.page} を開けませんでした。配信サーバーが途中で落ちて` +
+        `いないか確認してください（撮影中に落ちると、修正が効いていないように` +
+        `見える誤診につながります）。\n  ${e.message}`,
+    );
+    await browser.close();
+    process.exit(2);
+  }
 
   // networkidle だけでは足りない。main.js はデザインレイヤーのCSSを
   // 読み終えてから画面再現図を差し替え、document.fonts.ready のあとに
