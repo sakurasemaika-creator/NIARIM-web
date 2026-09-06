@@ -2,7 +2,7 @@
  * 見た目の確認を始める前に、必要なものが揃っているかを1つずつ確かめる。
  *
  * なぜ必要か:
- *   AI-VERIFICATION.md の手順は、途中でどれか1つでも欠けると
+ *   引き継ぎガイド（AI開発者向け）.md の手順は、途中でどれか1つでも欠けると
  *   「修正が効かない」「撮れない」という別の症状に化けて現れる。
  *   実際に別のモデルがこの手順を実行したとき、次の3点で止まった。
  *     - Chromium が Playwright の既定の場所に無い環境だった
@@ -93,7 +93,7 @@ if (server) {
     "npx wrangler dev --port 8788        # 本番と同じ配信（推奨）\n" +
       "        # wrangler が使えない環境（ネットワーク制限など）では:\n" +
       "        python3 -m http.server 8787 --directory public\n" +
-      "        # ただし _headers のCSPは適用されない。詳細は AI-VERIFICATION.md",
+      "        # ただし _headers のCSPは適用されない。詳細は 引き継ぎガイド（AI開発者向け）.md",
   );
 }
 
