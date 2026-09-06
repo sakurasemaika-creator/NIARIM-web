@@ -108,7 +108,9 @@ async function stitchFullPage(page, file) {
     await page.waitForTimeout(80);
     const actualY = await page.evaluate(() => Math.round(scrollY));
     if (Math.abs(actualY - y) > 2) {
-      throw new Error(`scroll position mismatch: wanted ${y}, got ${actualY}`);
+      throw new Error(
+        `scroll position mismatch: wanted ${y}, got ${actualY}`,
+      );
     }
 
     const buffer = await page.screenshot({
