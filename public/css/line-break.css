@@ -4,6 +4,7 @@
 @import url("/css/visual-audit-tail.css");
 @import url("/css/mobile-first-view.css");
 @import url("/css/theme-accent-only.css");
+@import url("/css/screen-mock-frame-alignment.css");
 
 /* ---- 単語の途中での改行を防ぐ ----
    日本語・中国語は文字単位で折り返せてしまうため、既定のままだと
