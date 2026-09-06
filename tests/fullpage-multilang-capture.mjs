@@ -46,6 +46,31 @@ if (!langs.length || !viewports.length) {
   throw new Error("No valid language or viewport selected");
 }
 
+async function settleOffscreenLayout(page) {
+  let previousHeight = -1;
+  for (let round = 0; round < 3; round++) {
+    const state = await page.evaluate(() => ({
+      height: document.documentElement.scrollHeight,
+      viewportHeight: innerHeight,
+    }));
+    const max = Math.max(0, state.height - state.viewportHeight);
+    const step = Math.max(300, Math.round(state.viewportHeight * 0.65));
+    for (let y = 0; y < max; y += step) {
+      await page.evaluate((top) => scrollTo(0, top), y);
+      await page.waitForTimeout(70);
+    }
+    await page.evaluate((top) => scrollTo(0, top), max);
+    await page.waitForTimeout(120);
+    const currentHeight = await page.evaluate(
+      () => document.documentElement.scrollHeight,
+    );
+    if (currentHeight === previousHeight) break;
+    previousHeight = currentHeight;
+  }
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.waitForTimeout(120);
+}
+
 async function stitchFullPage(page, file) {
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
@@ -87,6 +112,7 @@ async function stitchFullPage(page, file) {
     scrollTo(0, 0);
   });
   await page.waitForTimeout(120);
+  await settleOffscreenLayout(page);
 
   const metrics = await page.evaluate(() => ({
     docHeight: document.documentElement.scrollHeight,
