@@ -3,27 +3,20 @@
  *
  * Keep the website's reconstructed UI aligned with the Flutter implementation
  * without rebuilding the large Features page at runtime. Geometry belongs in
- * features-source-normalization.css; this file only supplies DOM elements whose
+ * the Features fidelity CSS layers; this file only supplies DOM elements whose
  * shape cannot be expressed from the existing static markup alone.
  */
 (function () {
   "use strict";
 
-  function addAudioResizeHandles() {
-    document.querySelectorAll(".fd-audio-track").forEach(function (track) {
-      if (track.querySelector(".fd-clip-resize-handle")) return;
+  function ensureFidelityStyles() {
+    if (document.querySelector("link[data-niarim-feature-fidelity-style]")) return;
 
-      var left = document.createElement("span");
-      left.className = "fd-clip-resize-handle is-left";
-      left.setAttribute("aria-hidden", "true");
-
-      var right = document.createElement("span");
-      right.className = "fd-clip-resize-handle is-right";
-      right.setAttribute("aria-hidden", "true");
-
-      track.appendChild(left);
-      track.appendChild(right);
-    });
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/features-fidelity.css";
+    link.setAttribute("data-niarim-feature-fidelity-style", "true");
+    document.head.appendChild(link);
   }
 
   function syncSaveTreeConnectors() {
@@ -60,8 +53,16 @@
       .querySelectorAll(".fd-widget-tile--art")
       .forEach(function (tile) {
         tile.classList.add("is-settings-summary");
-        if (tile.querySelector(".fd-widget-chevron")) return;
 
+        var frame = tile.querySelector(".fd-widget-frame");
+        if (frame && !frame.querySelector(".fd-widget-frame-icon")) {
+          frame.insertAdjacentHTML(
+            "afterbegin",
+            '<svg class="ic fd-widget-frame-icon" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-image"></use></svg>',
+          );
+        }
+
+        if (tile.querySelector(".fd-widget-chevron")) return;
         var chevron = document.createElement("span");
         chevron.className = "fd-widget-chevron";
         chevron.setAttribute("aria-hidden", "true");
@@ -74,7 +75,7 @@
     if (!document.getElementById("audio") && !document.getElementById("widget")) {
       return;
     }
-    addAudioResizeHandles();
+    ensureFidelityStyles();
     syncSaveTreeConnectors();
     syncArtworkWidgetSummary();
   }
