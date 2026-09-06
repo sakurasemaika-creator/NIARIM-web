@@ -123,3 +123,41 @@ jobs:
           path: artifacts/final-matrix/
           if-no-files-found: error
           retention-days: 14
+
+  fullpage-eye-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: [ja, en, zh-Hans, zh-Hant, ko, fr, es]
+        viewport: [pc, sp]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
+          echo $! > /tmp/niarim-http.pid
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/niarim-http.log
+          exit 1
+      - name: Capture all 12 pages for eye review
+        env:
+          AUDIT_LANGS: ${{ matrix.lang }}
+          AUDIT_VIEWPORTS: ${{ matrix.viewport }}
+          AUDIT_FULLPAGE_DIR: artifacts/fullpage-eye-review/${{ matrix.lang }}/${{ matrix.viewport }}
+        run: node tests/fullpage-multilang-capture.mjs
+      - name: Upload eye-review PNGs
+        uses: actions/upload-artifact@v4
+        with:
+          name: fullpage-eye-review-${{ matrix.lang }}-${{ matrix.viewport }}
+          path: artifacts/fullpage-eye-review/${{ matrix.lang }}/${{ matrix.viewport }}/
+          if-no-files-found: error
+          retention-days: 14
