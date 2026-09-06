@@ -47,6 +47,11 @@ if (!langs.length || !viewports.length) {
 }
 
 async function stitchFullPage(page, file) {
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.scrollBehavior = "auto";
+  });
+
   const metrics = await page.evaluate(() => ({
     docHeight: document.documentElement.scrollHeight,
     viewportHeight: innerHeight,
@@ -96,11 +101,15 @@ async function stitchFullPage(page, file) {
           "eye-review-tail",
           hideChrome,
         );
-        scrollTo({ top, behavior: "auto" });
+        scrollTo(0, top);
       },
       { top: y, hideChrome: i > 0 },
     );
-    await page.waitForTimeout(120);
+    await page.waitForTimeout(80);
+    const actualY = await page.evaluate(() => Math.round(scrollY));
+    if (Math.abs(actualY - y) > 2) {
+      throw new Error(`scroll position mismatch: wanted ${y}, got ${actualY}`);
+    }
 
     const buffer = await page.screenshot({
       fullPage: false,
@@ -112,7 +121,7 @@ async function stitchFullPage(page, file) {
     }
     const copyHeight = Math.max(
       0,
-      Math.min(slice.height, metrics.docHeight - y),
+      Math.min(slice.height, metrics.docHeight - actualY),
     );
     if (copyHeight > 0) {
       PNG.bitblt(
@@ -123,7 +132,7 @@ async function stitchFullPage(page, file) {
         slice.width,
         copyHeight,
         0,
-        y,
+        actualY,
       );
     }
   }
