@@ -1,0 +1,31 @@
+/*
+ * 画面再現図: フレーム一覧の現在地合わせ
+ *
+ * 現在地枠は「フレーム一覧領域の中央」ではなく、アプリ画面の左右中央を
+ * 基準にする。フレーム列のほうをその固定枠へ合わせ、編集中の3枚目の
+ * フレーム中心が常に画面中央へ来るように配置する。
+ */
+
+.fd-frame-strip {
+  position: relative !important;
+}
+
+/*
+ * cursor は DOM 上では scroll の子だが、scroll 自身を positioning context
+ * にしないことで、直上の .fd-frame-strip 全体を基準に left:50% が効く。
+ */
+.fd-frame-strip-scroll {
+  position: static !important;
+  justify-content: flex-start !important;
+  padding-left: calc(50% - 111.5px) !important;
+  padding-right: 0 !important;
+}
+
+/*
+ * 43px幅のフレーム/追加マスが gap:2px で5マス並ぶ。
+ * 3枚目の中心は列先頭から 111.5px。上の padding-left で、その中心を
+ * .fd-frame-strip の内容幅50%へ合わせる。
+ */
+.fd-frame-cursor {
+  left: 50% !important;
+}
