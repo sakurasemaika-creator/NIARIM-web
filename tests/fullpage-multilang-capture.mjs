@@ -50,18 +50,6 @@ async function stitchFullPage(page, file) {
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
     document.body.style.scrollBehavior = "auto";
-  });
-
-  const metrics = await page.evaluate(() => ({
-    docHeight: document.documentElement.scrollHeight,
-    viewportHeight: innerHeight,
-  }));
-  const max = Math.max(0, metrics.docHeight - metrics.viewportHeight);
-  const positions = [];
-  for (let y = 0; y < max; y += metrics.viewportHeight) positions.push(y);
-  if (!positions.length || positions.at(-1) !== max) positions.push(max);
-
-  await page.evaluate(() => {
     document
       .querySelectorAll(".reveal")
       .forEach((el) => el.classList.add("is-visible"));
@@ -75,6 +63,12 @@ async function stitchFullPage(page, file) {
       document.head.appendChild(style);
     }
     style.textContent = `
+      html,
+      body {
+        scroll-behavior: auto !important;
+        scroll-snap-type: none !important;
+        overflow-anchor: none !important;
+      }
       .reveal,
       .stagger-grid > * {
         opacity: 1 !important;
@@ -90,7 +84,18 @@ async function stitchFullPage(page, file) {
         visibility: hidden !important;
       }
     `;
+    scrollTo(0, 0);
   });
+  await page.waitForTimeout(120);
+
+  const metrics = await page.evaluate(() => ({
+    docHeight: document.documentElement.scrollHeight,
+    viewportHeight: innerHeight,
+  }));
+  const max = Math.max(0, metrics.docHeight - metrics.viewportHeight);
+  const positions = [];
+  for (let y = 0; y < max; y += metrics.viewportHeight) positions.push(y);
+  if (!positions.length || positions.at(-1) !== max) positions.push(max);
 
   let output = null;
   for (let i = 0; i < positions.length; i++) {
