@@ -6,8 +6,7 @@ import { launchOptions } from "./browser-launch.mjs";
 
 const { PNG } = pngjs;
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const outDir =
-  process.env.AUDIT_FULLPAGE_DIR || "artifacts/fullpage-multilang";
+const outDir = process.env.AUDIT_FULLPAGE_DIR || "artifacts/fullpage-multilang";
 const routes = [
   "/",
   "/about/",
@@ -139,9 +138,7 @@ async function stitchFullPage(page, file) {
     await page.waitForTimeout(80);
     const actualY = await page.evaluate(() => Math.round(scrollY));
     if (Math.abs(actualY - y) > 2) {
-      throw new Error(
-        `scroll position mismatch: wanted ${y}, got ${actualY}`,
-      );
+      throw new Error(`scroll position mismatch: wanted ${y}, got ${actualY}`);
     }
 
     const buffer = await page.screenshot({
@@ -157,16 +154,7 @@ async function stitchFullPage(page, file) {
       Math.min(slice.height, metrics.docHeight - actualY),
     );
     if (copyHeight > 0) {
-      PNG.bitblt(
-        slice,
-        output,
-        0,
-        0,
-        slice.width,
-        copyHeight,
-        0,
-        actualY,
-      );
+      PNG.bitblt(slice, output, 0, 0, slice.width, copyHeight, 0, actualY);
     }
   }
 
@@ -197,10 +185,7 @@ for (const vp of viewports) {
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(900);
 
-      const file = path.join(
-        outDir,
-        `${lang}__${vp.name}__${slug(route)}.png`,
-      );
+      const file = path.join(outDir, `${lang}__${vp.name}__${slug(route)}.png`);
       await stitchFullPage(page, file);
       const metrics = await page.evaluate(() => ({
         width: document.documentElement.scrollWidth,
