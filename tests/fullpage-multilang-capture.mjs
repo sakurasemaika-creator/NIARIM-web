@@ -19,13 +19,27 @@ const routes = [
   "/terms/",
   "/404.html",
 ];
-const langs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
-const viewports = [
+const allLangs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
+const allViewports = [
   { name: "sp", width: 390, height: 844 },
   { name: "pc", width: 1440, height: 1000 },
 ];
+const requestedLangs = (process.env.AUDIT_LANGS || allLangs.join(","))
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
+const requestedViewports = (process.env.AUDIT_VIEWPORTS || "sp,pc")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
+const langs = allLangs.filter((lang) => requestedLangs.includes(lang));
+const viewports = allViewports.filter((vp) => requestedViewports.includes(vp.name));
 const slug = (route) =>
   route.replace(/^\//, "").replace(/[^a-zA-Z0-9_-]+/g, "-") || "home";
+
+if (!langs.length || !viewports.length) {
+  throw new Error("No valid language or viewport selected");
+}
 
 await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch(launchOptions());
@@ -50,21 +64,36 @@ for (const vp of viewports) {
       const max = await page.evaluate(() =>
         Math.max(0, document.documentElement.scrollHeight - innerHeight),
       );
-      for (let y = 0; y < max; y += Math.max(300, Math.round(vp.height * 0.65))) {
+      for (
+        let y = 0;
+        y < max;
+        y += Math.max(300, Math.round(vp.height * 0.65))
+      ) {
         await page.evaluate((top) => scrollTo({ top, behavior: "auto" }), y);
         await page.waitForTimeout(80);
       }
       await page.evaluate((top) => scrollTo({ top, behavior: "auto" }), max);
       await page.waitForTimeout(250);
       await page.evaluate(() => {
-        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-        document.querySelectorAll(".stagger-grid > *").forEach((el) => el.classList.add("is-visible"));
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => el.classList.add("is-visible"));
+        document
+          .querySelectorAll(".stagger-grid > *")
+          .forEach((el) => el.classList.add("is-visible"));
         scrollTo(0, 0);
       });
       await page.waitForTimeout(180);
 
-      const file = path.join(outDir, `${lang}__${vp.name}__${slug(route)}.png`);
-      await page.screenshot({ path: file, fullPage: true, animations: "disabled" });
+      const file = path.join(
+        outDir,
+        `${lang}__${vp.name}__${slug(route)}.png`,
+      );
+      await page.screenshot({
+        path: file,
+        fullPage: true,
+        animations: "disabled",
+      });
       const metrics = await page.evaluate(() => ({
         width: document.documentElement.scrollWidth,
         clientWidth: document.documentElement.clientWidth,
@@ -78,11 +107,12 @@ for (const vp of viewports) {
 }
 
 await browser.close();
+const expected = routes.length * langs.length * viewports.length;
 await fs.writeFile(
   path.join(outDir, "manifest.json"),
-  JSON.stringify({ expected: routes.length * langs.length * viewports.length, captures: manifest }, null, 2),
+  JSON.stringify({ expected, captures: manifest }, null, 2),
 );
 
-if (manifest.length !== routes.length * langs.length * viewports.length) {
-  throw new Error(`capture count mismatch: ${manifest.length}`);
+if (manifest.length !== expected) {
+  throw new Error(`capture count mismatch: ${manifest.length}/${expected}`);
 }
