@@ -50,16 +50,8 @@
   padding-right: 0 !important;
 }
 
+/* タイムラインでは赤い固定カーソル枠は使わない。
+   現在地は3枚目自身のテーマカラー枠（.fd-tl-frame.is-current）だけで示す。 */
 .fd-timeline-frames > .fd-frame-cursor {
-  left: 50% !important;
-}
-
-/*
- * タイムラインでは固定の現在地枠だけを表示する。
- * 3枚目自身にも is-current のテーマ色枠が付くと固定枠と二重になるため、
- * フレーム側の選択枠は消し、現在地の表示は fd-frame-cursor に一本化する。
- */
-.fd-timeline-screen .fd-tl-frame.is-current {
-  border: 1px solid var(--fd-panel, #e6d8db) !important;
-  color: var(--fd-muted, #8f8587) !important;
+  display: none !important;
 }
