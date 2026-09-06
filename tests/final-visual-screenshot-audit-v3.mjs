@@ -27,8 +27,7 @@ manifest.failures = manifest.failures.filter((failure) => {
 
 await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
 const byKind = manifest.failures.reduce(
-  (acc, failure) =>
-    ((acc[failure.kind] = (acc[failure.kind] || 0) + 1), acc),
+  (acc, failure) => ((acc[failure.kind] = (acc[failure.kind] || 0) + 1), acc),
   {},
 );
 console.log(
