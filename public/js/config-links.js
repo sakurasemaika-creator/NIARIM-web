@@ -80,10 +80,8 @@
       var style = document.createElement("style");
       style.id = "niarim-feature-fidelity-style";
       style.textContent =
-        ".fd-audio-track{overflow:hidden;padding-inline:8px}" +
         ".fd-clip-resize-handle{position:absolute;top:0;bottom:0;width:8px;background:rgba(245,241,240,.25);z-index:3}" +
         ".fd-clip-resize-handle.is-left{left:0}.fd-clip-resize-handle.is-right{right:0}" +
-        ".fd-tree-row2[data-niarim-leaf] .fd-tree-dot{box-shadow:0 0 0 2px rgba(255,92,122,.18)}" +
         ".fd-widget-tile--art.is-settings-summary{display:grid;grid-template-columns:44px minmax(0,1fr) 18px;grid-template-rows:auto auto;align-items:center;column-gap:10px;min-height:64px}" +
         ".fd-widget-tile--art.is-settings-summary .fd-widget-frame{grid-column:1;grid-row:1/3;width:44px;height:44px;margin:0;border-radius:6px}" +
         ".fd-widget-tile--art.is-settings-summary .fd-widget-name{grid-column:2;grid-row:1;align-self:end}" +
@@ -117,7 +115,6 @@
         if (old) old.remove();
         if (connectors[index])
           row.insertAdjacentHTML("afterbegin", connectors[index]);
-        row.toggleAttribute("data-niarim-leaf", index >= 2);
       });
     }
 
