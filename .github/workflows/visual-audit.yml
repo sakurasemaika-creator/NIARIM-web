@@ -97,6 +97,9 @@ jobs:
       - name: Audit normalized frame, theme and gallery invariants
         if: always()
         run: node tests/final-visual-invariants-audit.mjs
+      - name: Audit timeline current-frame invariants
+        if: always()
+        run: node tests/timeline-current-frame-audit.mjs
       - name: Capture and inspect final Home/Features matrix
         if: always()
         run: AUDIT_SCREENSHOT_DIR=artifacts/final-matrix/final-visual-screenshots node tests/final-visual-screenshot-audit-v3.mjs
