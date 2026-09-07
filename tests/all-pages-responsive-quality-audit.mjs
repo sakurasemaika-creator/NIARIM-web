@@ -50,7 +50,11 @@ for (const width of widths) {
         );
       };
       const isIntentionallyScrollable = (el) => {
-        for (let node = el; node && node !== document.documentElement; node = node.parentElement) {
+        for (
+          let node = el;
+          node && node !== document.documentElement;
+          node = node.parentElement
+        ) {
           const cs = getComputedStyle(node);
           if (
             cs.overflowX === "auto" ||
@@ -68,6 +72,17 @@ for (const width of widths) {
       const isOffscreenUtility = (el) =>
         el.matches(".visually-hidden, [aria-hidden='true']") ||
         Boolean(el.closest(".visually-hidden, [aria-hidden='true']"));
+      const isInlineTextLink = (el) => {
+        if (el.tagName !== "A") return false;
+        const cs = getComputedStyle(el);
+        const parent = el.parentElement;
+        if (!parent) return false;
+        const parentTag = parent.tagName;
+        return (
+          cs.display === "inline" &&
+          ["P", "LI", "SMALL", "SPAN", "LABEL", "ADDRESS"].includes(parentTag)
+        );
+      };
       const selectors =
         "h1,h2,h3,p,a,button,input,textarea,select,img,svg,.card,.feature-row,.screenshot-card,.section-title,.container";
       const elements = [...document.querySelectorAll(selectors)].filter(visible);
@@ -91,6 +106,7 @@ for (const width of widths) {
         if (
           el.matches("a,button,input,select") &&
           !isOffscreenUtility(el) &&
+          !isInlineTextLink(el) &&
           r.width > 0 &&
           r.height > 0 &&
           (r.width < 36 || r.height < 36)
@@ -129,7 +145,12 @@ for (const width of widths) {
       };
     });
     if (state.scrollWidth > state.clientWidth + 2)
-      findings.push({ width, route, kind: "page-horizontal-overflow", state });
+      findings.push({
+        width,
+        route,
+        kind: "page-horizontal-overflow",
+        state,
+      });
     if (state.outside.length)
       findings.push({
         width,
@@ -144,21 +165,12 @@ for (const width of widths) {
         kind: "heading-overflow",
         headings: state.headingOverflow,
       });
-    // Inline prose/footer links are allowed to use their natural line box. Controls,
-    // icon links and button-like anchors must retain a usable target.
-    const badTargets = state.tinyTargets.filter((x) => {
-      if (x.tag !== "A") return true;
-      const controlLike = /(^|\s)(btn|brand|lang-trigger|footer-social|skip-link)(\s|$)/.test(
-        x.cls,
-      );
-      return controlLike || x.height >= 28 || x.width >= 28;
-    });
-    if (badTargets.length)
+    if (state.tinyTargets.length)
       findings.push({
         width,
         route,
         kind: "undersized-control",
-        controls: badTargets,
+        controls: state.tinyTargets,
       });
   }
   await context.close();
