@@ -1,11 +1,7 @@
-/* ==========================================================================
+/* ========================================================================== 
    NIARIM contact.css - お問い合わせページ専用スタイル
    ========================================================================== */
 
-/* 以前はページ側でインラインstyleを使ってpaddingを指定していたため、
-   スマートフォン幅でも横paddingが縮まらず、フォームの実質的な横幅が
-   極端に狭くなってしまっていた。クラス化してブレークポイントごとに
-   調整できるようにする。 */
 .contact-panel {
   border-radius: var(--radius-lg);
   padding: var(--space-2xl) var(--space-xl);
@@ -48,9 +44,6 @@
   margin-top: var(--space-sm);
 }
 
-/* .contact-intro p { max-width: 42ch } の方が詳細度が高く(クラス+要素)、
-   .contact-personal-note単体(クラスのみ)のmax-width指定を上書きできて
-   いなかったため、詳細度を上げて確実に上書きする。 */
 .contact-intro .contact-personal-note {
   max-width: none;
 }
@@ -82,9 +75,6 @@
   margin-bottom: var(--space-md);
 }
 
-/* フォーム全体のフェード(.reveal)に加えて、各入力欄を上から順に
-   少し遅れて浮かび上がらせる。フォームへ実際に入力していく順番を
-   なぞるような見え方を意図している。 */
 .contact-form .form-row,
 .contact-form .form-submit {
   opacity: 0;
@@ -100,8 +90,6 @@
   transform: none;
 }
 
-/* 子要素の並び: type(1) / name(2) / email(3) / message(4) /
-   attachments(5) / honeypot(6・非表示) / agree(7) / submit-button(8) */
 .contact-form.is-visible .form-row:nth-child(1) {
   transition-delay: 0.05s;
 }
@@ -141,8 +129,6 @@
 }
 
 .form-row .required {
-  /* 必須を示す印なので、装飾ではなく読み取れる必要がある。
-     明るいテーマカラーは白地で2.97:1しかないため、文字用の濃い赤。 */
   color: var(--color-accent-text);
   margin-left: 0.25rem;
 }
@@ -164,11 +150,6 @@
   box-shadow: 0 0 0 4px var(--color-sub-tint);
 }
 
-/* 添付ファイル欄。
-   ブラウザ標準の file 入力は「Choose Files / No file chosen」という
-   ブラウザ言語のラベルが出てしまい、サイトの言語ともデザインとも合わない。
-   そのため入力自体は視覚的に隠し（フォーカスは保つ）、見た目と文言は
-   こちらのボタンと状態テキストで用意している。 */
 .form-file {
   display: flex;
   align-items: center;
@@ -247,23 +228,21 @@ textarea.form-control {
 }
 
 .form-checkbox input {
-  /* WCAG 2.2 の最小ターゲットサイズ(24x24)に合わせる。 */
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   margin-top: 0;
   accent-color: var(--color-brand);
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .form-checkbox a {
   color: var(--color-brand);
   text-decoration: underline;
-  /* 行内リンクだが単独の導線でもあるので、指で押せる高さを確保する。 */
   display: inline-block;
   padding-block: 0.3rem;
 }
 
-/* honeypot: 通常ユーザーには見えない位置に隠す */
 .form-honeypot {
   position: absolute;
   left: -9999px;
@@ -316,8 +295,6 @@ textarea.form-control {
 }
 
 @media (max-width: 640px) {
-  /* スマートフォン幅では、外枠のpaddingを大きく取ったままだと
-     フォームの実質的な横幅が極端に狭くなり読みにくくなるため縮小する。 */
   .contact-panel {
     padding: var(--space-lg) var(--space-sm);
     margin-block: var(--space-md);
