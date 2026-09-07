@@ -95,10 +95,7 @@ for (const width of widths) {
     failures.push({ width, kind: "horizontal-overflow", state });
   }
 
-  if (width < 760 && state.copy && state.showcase) {
-    if (state.showcase.top < state.copy.bottom - 1) {
-      failures.push({ width, kind: "hero-single-column-overlap", state });
-    }
+  if (width < 760) {
     if (
       state.title &&
       (state.title.left < state.hero.left - 1 ||
@@ -113,6 +110,30 @@ for (const width of widths) {
     ) {
       failures.push({ width, kind: "hero-actions-outside-container", state });
     }
+  }
+
+  /* Compact widths intentionally keep copy and product UI side by side. The
+     important invariant there is a real gap between both columns, not vertical
+     stacking. */
+  if (
+    width >= 560 &&
+    width <= 640 &&
+    state.copy &&
+    state.showcase &&
+    state.copy.right > state.showcase.left - 1
+  ) {
+    failures.push({ width, kind: "hero-compact-columns-overlap", state });
+  }
+
+  /* 641-759px is the dedicated one-column transition band. */
+  if (
+    width >= 641 &&
+    width < 760 &&
+    state.copy &&
+    state.showcase &&
+    state.showcase.top < state.copy.bottom - 1
+  ) {
+    failures.push({ width, kind: "hero-transition-column-overlap", state });
   }
 
   if (
@@ -168,7 +189,8 @@ console.log(
       widths,
       checks: [
         "Hero uses the same left/right container gutters as lower Home sections",
-        "SP and 560-759px remain non-overlapping single-column Heroes",
+        "560-640px compact copy/device columns keep a real horizontal gap",
+        "641-759px transition Hero stays non-overlapping and single-column",
         "Hero title and actions stay inside the shared container",
         "No horizontal overflow appears across the full responsive width ladder",
         "App Preview contains the Community reproduction",
