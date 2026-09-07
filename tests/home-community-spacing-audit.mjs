@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
-const widths = [390, 760, 1280, 1440];
+const widths = [390, 520, 559, 560, 600, 640, 700, 759, 760, 1280, 1440];
 const failures = [];
 
 for (const width of widths) {
@@ -25,6 +25,10 @@ for (const width of widths) {
     };
 
     const heroContainer = document.querySelector(".hero > .container");
+    const heroCopy = document.querySelector(".hero-copy");
+    const heroShowcase = document.querySelector(".hero-showcase");
+    const heroTitle = document.querySelector(".hero-title");
+    const heroActions = document.querySelector(".hero-actions");
     const sharedContainer = document.querySelector("main .section .container");
     const scroller = document.querySelector(".screenshot-scroller");
     const communityCard = scroller?.querySelector(".screenshot-card-community");
@@ -35,7 +39,13 @@ for (const width of widths) {
 
     return {
       hero: rect(heroContainer),
+      copy: rect(heroCopy),
+      showcase: rect(heroShowcase),
+      title: rect(heroTitle),
+      actions: rect(heroActions),
       shared: rect(sharedContainer),
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
       screenshotCount:
         scroller?.querySelectorAll(":scope > .screenshot-card").length ?? 0,
       communityCard: rect(communityCard),
@@ -75,6 +85,30 @@ for (const width of widths) {
         hero: state.hero,
         shared: state.shared,
       });
+    }
+  }
+
+  if (state.scrollWidth > state.clientWidth + 1) {
+    failures.push({ width, kind: "horizontal-overflow", state });
+  }
+
+  if (width < 760 && state.copy && state.showcase) {
+    if (state.showcase.top < state.copy.bottom - 1) {
+      failures.push({ width, kind: "hero-single-column-overlap", state });
+    }
+    if (
+      state.title &&
+      (state.title.left < state.hero.left - 1 ||
+        state.title.right > state.hero.right + 1)
+    ) {
+      failures.push({ width, kind: "hero-title-outside-container", state });
+    }
+    if (
+      state.actions &&
+      (state.actions.left < state.hero.left - 1 ||
+        state.actions.right > state.hero.right + 1)
+    ) {
+      failures.push({ width, kind: "hero-actions-outside-container", state });
     }
   }
 
@@ -131,6 +165,9 @@ console.log(
       widths,
       checks: [
         "Hero uses the same left/right container gutters as lower Home sections",
+        "560-759px remains a non-overlapping single-column Hero",
+        "Hero title and actions stay inside the shared container",
+        "No horizontal overflow appears around 559/560/640/759 breakpoints",
         "App Preview contains the Community reproduction",
         "Community reproduction fills the device content box inside its bezel",
         "Community reproduction contains title and four work cards",
