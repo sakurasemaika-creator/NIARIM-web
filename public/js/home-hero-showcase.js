@@ -1,34 +1,26 @@
 (function () {
   "use strict";
 
-  function icon(name, className) {
-    return (
-      '<svg class="hero-community-icon ' + (className || "") + '" aria-hidden="true">' +
-      '<use href="/assets/icons/ui/sprite.svg#' + name + '"></use>' +
-      "</svg>"
-    );
-  }
-
   function workCard(title, author, views, bookmarks, duration, tone) {
     return (
       '<article class="hero-community-work ' + tone + '">' +
       '<div class="hero-community-thumb">' +
-      '<span class="hero-community-play">▶</span>' +
+      '<span class="hero-community-play" aria-hidden="true"></span>' +
       '<span class="hero-community-bookmark" aria-hidden="true"></span>' +
       '<span class="hero-community-duration">' + duration + '</span>' +
       '</div>' +
       '<div class="hero-community-meta">' +
       '<strong>' + title + '</strong>' +
       '<span class="hero-community-author">' + author + '</span>' +
-      '<span class="hero-community-stats"><span>▶ ' + views + '</span><span class="hero-community-bookmark-stat">◆ ' + bookmarks + '</span></span>' +
+      '<span class="hero-community-stats"><span class="hero-community-view-icon" aria-hidden="true"></span><span>' + views + '</span><span class="hero-community-stat-bookmark" aria-hidden="true"></span><span>' + bookmarks + '</span></span>' +
       '</div>' +
       '</article>'
     );
   }
 
-  /* NIARIM/dev_branch CommunityScreen + CommunityWorkCard +
-     VideoTypeFilterButton の縮小再現。
-     AppBar → actions → TabBar → 16:9 work grid → extended FAB の順序を本体と一致させる。 */
+  /* NIARIM/dev_branch の CommunityScreen / CommunityWorkCard を縮小再現。
+     AppBar → actions → TabBar → 16:9作品カード → extended FAB の順序・構造を
+     アプリ本体と揃える。ヒーロー用の架空ナビや独自見出しは置かない。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
     screen.className = "hero-community-mini";
@@ -37,14 +29,10 @@
       '<div class="hero-community-appbar">' +
       '<strong>作品広場</strong>' +
       '<div class="hero-community-actions">' +
-      '<span class="hero-community-action hero-community-notification"><i></i></span>' +
-      '<span class="hero-community-video-filter">' +
-      '<i class="hero-community-filter-icon" aria-hidden="true"></i>' +
-      '<span>総合</span>' +
-      '<i class="hero-community-filter-arrow" aria-hidden="true"></i>' +
-      '</span>' +
-      '<span class="hero-community-action">' + icon("ic-search") + '</span>' +
-      '<span class="hero-community-action">' + icon("ic-help_outline") + '</span>' +
+      '<span class="hero-community-action is-notification" aria-hidden="true"><i></i></span>' +
+      '<span class="hero-community-action is-filter" aria-hidden="true"><i></i></span>' +
+      '<span class="hero-community-action is-search" aria-hidden="true"><i></i></span>' +
+      '<span class="hero-community-action is-help" aria-hidden="true">?</span>' +
       '</div>' +
       '</div>' +
       '<div class="hero-community-tabs">' +
@@ -53,12 +41,12 @@
       '<span>お気に入り作者</span>' +
       '</div>' +
       '<div class="hero-community-grid">' +
-      workCard("夜明けの冒険", "あにめ工房ミラ", "12,480", "326", "0:42", "is-a") +
+      workCard("夜明けの冒険", "あにめ工房ミラ", "1.2万", "326", "0:42", "is-a") +
       workCard("小さな街", "sakura_draws", "8,921", "211", "1:08", "is-b") +
       workCard("静かな記憶", "ペン先ラボ", "5,306", "148", "0:31", "is-c") +
       workCard("雨上がりの手紙", "よあけスタジオ", "3,744", "96", "0:55", "is-d") +
       '</div>' +
-      '<span class="hero-community-fab"><b class="hero-community-fab-icon">▣</b>自分の投稿</span>';
+      '<span class="hero-community-fab"><i aria-hidden="true"></i><b>自分の投稿</b></span>';
     return screen;
   }
 
@@ -89,6 +77,10 @@
     if (timelineSource) {
       var timeline = timelineSource.cloneNode(true);
       timeline.classList.add("hero-timeline-mini");
+      timeline.removeAttribute("aria-label");
+      timeline.querySelectorAll("[id]").forEach(function (node) {
+        node.removeAttribute("id");
+      });
       showcase.appendChild(
         buildPreviewCard("hero-preview-timeline", timeline),
       );
