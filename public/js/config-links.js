@@ -81,6 +81,17 @@
     document.head.appendChild(script);
   }
 
+  function loadHomeHeroViewport() {
+    if (!document.querySelector(".hero + .marquee-section")) return;
+    if (document.querySelector("link[data-niarim-home-hero-viewport]")) return;
+
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/home-hero-viewport.css";
+    link.setAttribute("data-niarim-home-hero-viewport", "true");
+    document.head.appendChild(link);
+  }
+
   function loadAiTrustCopy() {
     if (document.querySelector("script[data-niarim-ai-trust]")) return;
     var script = document.createElement("script");
@@ -94,6 +105,7 @@
   function init() {
     apply();
     loadFeatureFidelity();
+    loadHomeHeroViewport();
     scheduleFrameCentering();
     window.addEventListener("load", scheduleFrameCentering);
     window.addEventListener("resize", scheduleFrameCentering, {
