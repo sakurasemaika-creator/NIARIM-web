@@ -124,6 +124,108 @@ html body .hero-community-mini {
   }
 }
 
+/* 560-759px was the unstable band: home-hero-viewport.css switched back to a
+   squeezed two-column layout at 560px while responsive-consistency.css wanted
+   one column through 900px. Make the breakpoint ownership explicit. In this
+   band copy comes first and a single phone preview follows below it. */
+@media (min-width: 560px) and (max-width: 759px) {
+  html body .hero > .container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    gap: clamp(1.7rem, 5vw, 2.6rem) !important;
+  }
+
+  html body .hero-copy {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    order: 1 !important;
+  }
+
+  html body .hero-showcase {
+    grid-column: 1 !important;
+    width: min(100%, 20rem) !important;
+    justify-self: center !important;
+    order: 2 !important;
+  }
+
+  html body .hero-preview-timeline,
+  html body .hero-preview-community {
+    display: none !important;
+  }
+
+  html body .hero-preview-canvas {
+    width: 100% !important;
+  }
+
+  html body .hero-preview-canvas .hero-visual {
+    width: min(100%, 17rem) !important;
+    max-width: 17rem !important;
+    margin-inline: auto !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.7rem, 8vw, 3.5rem) !important;
+  }
+
+  html body .hero-lead,
+  html body .hero-bridge {
+    max-width: 62ch !important;
+  }
+
+  html body .hero-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+  }
+
+  html body .hero .btn {
+    width: 100% !important;
+  }
+}
+
+/* Small phones should use the same vertical narrative instead of an oversized
+   headline plus a detached mock. Keep the copy readable and let the page grow
+   naturally downward. */
+@media (max-width: 559px) {
+  html body .hero > .container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.8rem !important;
+  }
+
+  html body .hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.65rem, 12vw, 3.55rem) !important;
+  }
+
+  html body .hero-showcase {
+    width: min(100%, 19rem) !important;
+    justify-self: center !important;
+  }
+
+  html body .hero-preview-canvas .hero-visual {
+    width: min(78vw, 17rem) !important;
+    max-width: 17rem !important;
+  }
+
+  html body .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+
+  html body .hero .btn {
+    width: 100% !important;
+  }
+}
+
 .screenshot-card-community {
   --hero-bezel: #705ac2;
   --hero-surface: #211b36;
