@@ -16,7 +16,11 @@ function extractJsonObject(text) {
   const source = String(text || "");
   const candidates = [];
 
-  for (let start = source.indexOf("{"); start !== -1; start = source.indexOf("{", start + 1)) {
+  for (
+    let start = source.indexOf("{");
+    start !== -1;
+    start = source.indexOf("{", start + 1)
+  ) {
     let depth = 0;
     let inString = false;
     let escaped = false;
@@ -65,7 +69,9 @@ function extractJsonObject(text) {
 
 let legacyFailures = [];
 if (child.status !== 0) {
-  const parsed = extractJsonObject(`${child.stdout || ""}\n${child.stderr || ""}`);
+  const parsed = extractJsonObject(
+    `${child.stdout || ""}\n${child.stderr || ""}`,
+  );
   if (!parsed) {
     process.stderr.write(child.stderr || "");
     process.exit(child.status || 1);
