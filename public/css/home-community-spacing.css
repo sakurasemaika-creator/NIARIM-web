@@ -9,7 +9,9 @@ html body .hero > .container {
   ) !important;
 }
 
-@media (max-width: 520px) {
+/* Home sections use an 18px visual gutter through the compact/tablet boundary.
+   Keep Hero on that exact geometry so 559 -> 560 -> 640 does not jump sideways. */
+@media (max-width: 640px) {
   html body .hero > .container {
     width: calc(100% - 36px) !important;
   }
