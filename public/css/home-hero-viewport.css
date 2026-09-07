@@ -1,55 +1,52 @@
 /* Home hero viewport fit
-   画面幅が変わっても、文章・画面再現図・左右余白・中央gapの比率が
-   急に跳ねないことを優先する。640px以下だけSPの1カラムを使い、
-   641px以上は同じ数式で2カラムを連続的に伸縮させる。
+   基準:
+   - 画面幅を変えても文章と画面再現図の比率を急に変えない。
+   - 640px以上の監査幅では、SP版で感じられる「文章が主、再現図が補助」の
+     バランスを維持する。
+   - 縦628pxのPCでも、ヘッダー + hero + 黒いmarquee帯が初期表示内に収まる。
 */
 
-/* Tablet / narrow PC / PC共通。
-   responsive-consistency.css の固定的な390px列と大きなgapを上書きし、
-   コンテナ・gap・再現図をviewportに沿って滑らかに変化させる。 */
-@media (min-width: 641px) {
+/* 560px以上は同じ2カラム数式で連続的に伸縮させる。
+   home.css の 900pxブレークポイントによる1カラム化をここで打ち消し、
+   640→700→900→960pxでレイアウト比率が跳ねないようにする。 */
+@media (min-width: 560px) {
   .hero {
-    min-height: auto;
-    padding-top: clamp(1rem, 1.4vw, 1.25rem);
-    padding-bottom: clamp(1.1rem, 1.8vw, 1.75rem);
+    min-height: 0;
+    padding-top: clamp(0.75rem, 1.35vw, 1.15rem);
+    padding-bottom: clamp(0.8rem, 1.5vw, 1.25rem);
   }
 
   .hero .container {
-    width: min(calc(100% - clamp(2rem, 6vw, 5.5rem)), 1180px);
-    grid-template-columns: minmax(0, 1fr) minmax(0, clamp(220px, 28vw, 360px));
+    width: min(calc(100% - clamp(2rem, 5vw, 4.5rem)), 1120px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, clamp(180px, 23vw, 300px));
     align-items: center;
-    gap: clamp(1.25rem, 3vw, 3.25rem);
+    gap: clamp(1rem, 2.6vw, 2.5rem);
   }
 
   .hero-copy {
     min-width: 0;
   }
 
-  .hero-visual {
-    width: 100%;
-    max-width: 360px;
-    margin-inline: auto;
+  .hero-title {
+    font-size: clamp(2.3rem, 4.2vw, 4.4rem);
+    line-height: 1.04;
   }
-}
 
-/* 641-900pxでは内容量だけ少し圧縮する。
-   列幅・左右余白・再現図サイズは上の共通数式のままなので、
-   900/901pxを跨いでも配置比率は跳ねない。 */
-@media (min-width: 641px) and (max-width: 900px) {
   .hero-subtitle {
-    margin-top: 0.5rem;
-    font-size: 0.96rem;
+    margin-top: 0.45rem;
+    font-size: clamp(0.9rem, 1.25vw, 1rem);
   }
 
   .hero-lead {
-    margin-top: 0.75rem;
-    font-size: 0.96rem;
-    line-height: 1.58;
+    margin-top: 0.65rem;
+    max-width: 58ch;
+    font-size: clamp(0.88rem, 1.05vw, 1rem);
+    line-height: 1.55;
   }
 
   .hero-actions {
-    margin-top: 0.9rem;
-    gap: 0.6rem;
+    margin-top: 0.8rem;
+    gap: 0.55rem;
   }
 
   .hero .btn {
@@ -58,11 +55,100 @@
   }
 
   .hero-bridge {
-    margin-top: 0.7rem;
-    line-height: 1.55;
+    margin-top: 0.65rem;
+    max-width: 52ch;
+    line-height: 1.5;
   }
 
-  .hero-note {
-    margin-top: 0.4rem;
+  .hero-visual {
+    width: 100%;
+    max-width: 300px;
+    margin-inline: auto;
+  }
+
+  .marquee-section {
+    padding-block: 0.7rem;
+  }
+
+  .marquee-track span {
+    font-size: 0.96rem;
+  }
+}
+
+/* ユーザー環境の縦628pxを直接カバーする短い画面用の密度調整。
+   単にheroをoverflowで切るのではなく、文字・余白・再現図を一緒に縮め、
+   黒帯そのものまで自然にファーストビューへ入れる。 */
+@media (min-width: 560px) and (max-height: 680px) {
+  .hero {
+    padding-top: 0.55rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .hero .container {
+    width: min(calc(100% - clamp(1.75rem, 4.5vw, 4rem)), 1080px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, clamp(170px, 21vw, 260px));
+    gap: clamp(0.9rem, 2.2vw, 2rem);
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.68rem;
+    padding-block: 0.24rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.15rem, 3.7vw, 3.4rem);
+    line-height: 1.01;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.32rem;
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  .hero-lead {
+    margin-top: 0.48rem;
+    max-width: 62ch;
+    font-size: 0.82rem;
+    line-height: 1.42;
+  }
+
+  .hero-actions {
+    margin-top: 0.58rem;
+    gap: 0.45rem;
+  }
+
+  .hero .btn {
+    min-height: 36px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.84rem;
+  }
+
+  .hero-bridge {
+    margin-top: 0.45rem;
+    max-width: 58ch;
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .hero-visual {
+    max-width: 260px;
+  }
+
+  .marquee-section {
+    padding-block: 0.45rem;
+  }
+
+  .marquee-track span {
+    padding-inline: 1.15rem;
+    font-size: 0.86rem;
+  }
+}
+
+/* 本当のSP幅は従来どおり1カラム。
+   ただし低い横向き端末では再現図だけが巨大化しないよう上限を持たせる。 */
+@media (max-width: 559px) {
+  .hero-visual {
+    max-width: min(78vw, 320px);
   }
 }
