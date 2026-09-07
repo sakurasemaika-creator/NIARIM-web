@@ -141,6 +141,7 @@ html body .hero > .container {
 .screenshot-card-community {
   --hero-bezel: #705ac2;
   --hero-surface: #211b36;
+  --fd-bezel: #705ac2;
   --fd-accent: #a78cff;
   --fd-ink: #f4f0ff;
   --fd-text: #f4f0ff;
@@ -151,7 +152,7 @@ html body .hero > .container {
   --fd-panel: #302849;
   --fd-panel-2: #40365e;
 
-  border-color: var(--hero-bezel) !important;
+  border-color: var(--fd-bezel) !important;
   background: var(--hero-surface) !important;
 }
 
@@ -161,7 +162,7 @@ html body .hero > .container {
   min-height: 0 !important;
   margin: 0 !important;
   border: 0 !important;
-  border-radius: 0 !important;
+  border-radius: calc(var(--niarim-device-radius) - 5px) !important;
   box-shadow: none !important;
   overflow: hidden !important;
 }
