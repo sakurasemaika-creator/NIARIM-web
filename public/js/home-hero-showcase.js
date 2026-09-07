@@ -26,7 +26,8 @@
     );
   }
 
-  /* NIARIM/dev_branch CommunityScreen + CommunityWorkCard の縮小再現。
+  /* NIARIM/dev_branch CommunityScreen + CommunityWorkCard +
+     VideoTypeFilterButton の縮小再現。
      AppBar → actions → TabBar → 16:9 work grid → extended FAB の順序を本体と一致させる。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
@@ -37,7 +38,11 @@
       '<strong>作品広場</strong>' +
       '<div class="hero-community-actions">' +
       '<span class="hero-community-action hero-community-notification"><i></i></span>' +
-      '<span class="hero-community-action">' + icon("ic-tune") + '</span>' +
+      '<span class="hero-community-video-filter">' +
+      '<i class="hero-community-filter-icon" aria-hidden="true"></i>' +
+      '<span>総合</span>' +
+      '<i class="hero-community-filter-arrow" aria-hidden="true"></i>' +
+      '</span>' +
       '<span class="hero-community-action">' + icon("ic-search") + '</span>' +
       '<span class="hero-community-action">' + icon("ic-help_outline") + '</span>' +
       '</div>' +
