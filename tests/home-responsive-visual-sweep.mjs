@@ -3,8 +3,8 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 const widths = [
-  320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760,
-  900, 1024, 1280, 1440,
+  320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760, 900,
+  1024, 1280, 1440,
 ];
 const viewportHeight = 844;
 const outDir = path.resolve(
@@ -71,4 +71,6 @@ await fs.writeFile(
 );
 
 await browser.close();
-console.log(JSON.stringify({ ok: true, widths, screenshots: widths.length }, null, 2));
+console.log(
+  JSON.stringify({ ok: true, widths, screenshots: widths.length }, null, 2),
+);
