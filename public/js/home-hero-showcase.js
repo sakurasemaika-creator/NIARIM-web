@@ -31,7 +31,8 @@
   }
 
   /* CommunityScreen / CommunityWorkCardの実装構造を、App Previewと同じ
-     320:569の端末面へ縮小再現する。 */
+     320:569の端末面へ縮小再現する。HeroとApp Previewで同じDOMを使い、
+     片方だけ見た目が古くならないようにする。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
     screen.className = "hero-community-mini hero-theme-violet";
@@ -73,6 +74,17 @@
       "</div>" +
       '<span class="hero-community-fab"><i aria-hidden="true"></i><b>自分の投稿</b></span>';
     return screen;
+  }
+
+  function appendCommunityAppPreview() {
+    var scroller = document.querySelector(".screenshot-scroller");
+    if (!scroller || scroller.querySelector(".screenshot-card-community")) return;
+
+    var card = document.createElement("div");
+    card.className = "screenshot-card screenshot-card-community";
+    card.setAttribute("data-mock-theme", "shot-community");
+    card.appendChild(buildCommunityMini());
+    scroller.appendChild(card);
   }
 
   function clonePreviewCard(index, themeClass) {
@@ -121,6 +133,11 @@
     var hero = document.querySelector(".hero");
     var container = hero && hero.querySelector(":scope > .container");
     if (!hero || !container) return;
+
+    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
+       差し替えた後に、作品広場を同じギャラリーへ追加する。 */
+    appendCommunityAppPreview();
+
     if (container.querySelector(":scope > .hero-showcase")) return;
 
     /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
