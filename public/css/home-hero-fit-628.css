@@ -1,33 +1,301 @@
-/* Final-fit layer for the Home hero at short desktop/tablet heights.
-   Target: text + previews + the complete marquee stay inside a 628px viewport,
-   while the marquee sits as close to the bottom edge as possible. */
+/* Final Home hero layer.
+   Goals:
+   - every preview uses the same phone-like 9:16 screen ratio and 6px bezel
+   - copy always precedes previews
+   - 1 / 2 / 3 previews are selected by available width without changing the visual language
+   - desktop/tablet copy is larger and receives spare horizontal width
+   - at 628px viewport height the complete black marquee remains inside the first view
+*/
 
-/* 628px measured target:
-   760–1180: header 72px + hero 519.7px + marquee ~36.1px = ~627.8px.
-   1181+:     header 68px + hero 523.7px + marquee ~36.1px = ~627.8px. */
+.hero-preview-label {
+  display: none !important;
+}
+
+.hero-preview-card {
+  min-width: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.hero-preview-canvas .hero-visual,
+.hero-timeline-mini,
+.hero-community-mini {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: 9 / 16 !important;
+  overflow: hidden !important;
+}
+
+/* Canvas already owns the same 6px device bezel on .frame-mock. */
+.hero-preview-canvas .hero-visual {
+  max-width: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.hero-preview-canvas .hero-visual .frame-mock {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  border: 6px solid var(--color-ink) !important;
+  border-radius: var(--niarim-device-radius) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Timeline and Community previously had no matching device frame in the hero. */
+.hero-timeline-mini,
+.hero-community-mini {
+  border: 6px solid var(--color-ink) !important;
+  border-radius: var(--niarim-device-radius) !important;
+  background-clip: padding-box !important;
+}
+
+.hero-timeline-mini {
+  display: flex;
+  flex-direction: column;
+  background: #201f27 !important;
+}
+
+.hero-community-mini {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+  color: #2d2931 !important;
+  background: #f7f4f5 !important;
+}
+
+.hero-copy {
+  min-width: 0;
+  grid-column: 1 !important;
+  order: 1 !important;
+}
+
+.hero-showcase {
+  min-width: 0;
+  width: 100%;
+  grid-column: 2 !important;
+  order: 2 !important;
+  align-self: center;
+}
+
+/* Keep the current SP density: one Canvas preview and copy first. */
+@media (min-width: 560px) and (max-width: 759px) {
+  .hero .container {
+    width: calc(100% - 1rem) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(132px, 24%) !important;
+    gap: 0.55rem !important;
+  }
+
+  .hero-showcase {
+    display: block !important;
+  }
+
+  .hero-preview-canvas {
+    display: block !important;
+  }
+
+  .hero-preview-timeline,
+  .hero-preview-community {
+    display: none !important;
+  }
+}
+
+/* Tablet / narrow desktop: Canvas + Timeline. The phone ratio makes the visual
+   column narrower, so the recovered width is deliberately returned to copy. */
+@media (min-width: 760px) and (max-width: 1279px) {
+  .hero .container {
+    width: min(calc(100% - 1.5rem), 1320px) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, clamp(300px, 34vw, 430px)) !important;
+    gap: clamp(0.65rem, 1.1vw, 0.95rem) !important;
+  }
+
+  .hero-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: clamp(0.32rem, 0.55vw, 0.5rem) !important;
+  }
+
+  .hero-preview-canvas,
+  .hero-preview-timeline {
+    display: block !important;
+  }
+
+  .hero-preview-community {
+    display: none !important;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.78rem !important;
+    padding: 0.3rem 0.72rem !important;
+  }
+
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(3.15rem, 4.5vw, 4.6rem) !important;
+    line-height: 1 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.42rem !important;
+    font-size: clamp(1.02rem, 1.35vw, 1.14rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.52rem !important;
+    max-width: none !important;
+    font-size: clamp(0.94rem, 1.12vw, 1.04rem) !important;
+    line-height: 1.48 !important;
+  }
+
+  .hero-actions {
+    margin-top: 0.62rem !important;
+    gap: 0.48rem !important;
+  }
+
+  .hero .btn {
+    min-height: 40px !important;
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-bridge {
+    margin-top: 0.46rem !important;
+    max-width: none !important;
+    font-size: 0.84rem !important;
+    line-height: 1.42 !important;
+  }
+}
+
+/* Wide desktop: use the otherwise empty horizontal space for Community as the
+   third preview, while keeping all three screens exactly the same ratio. */
+@media (min-width: 1280px) {
+  .hero .container {
+    width: min(calc(100% - 2rem), 1420px) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(500px, clamp(500px, 43vw, 620px)) !important;
+    gap: clamp(0.55rem, 0.9vw, 0.85rem) !important;
+  }
+
+  .hero-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: clamp(0.3rem, 0.45vw, 0.45rem) !important;
+  }
+
+  .hero-preview-canvas,
+  .hero-preview-timeline,
+  .hero-preview-community {
+    display: block !important;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.82rem !important;
+    padding: 0.32rem 0.76rem !important;
+  }
+
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(3.7rem, 4.3vw, 5rem) !important;
+    line-height: 0.99 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.46rem !important;
+    font-size: clamp(1.08rem, 1.18vw, 1.22rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.56rem !important;
+    max-width: none !important;
+    font-size: clamp(0.98rem, 1vw, 1.08rem) !important;
+    line-height: 1.5 !important;
+  }
+
+  .hero-actions {
+    margin-top: 0.66rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .hero .btn {
+    min-height: 42px !important;
+    padding: 0.52rem 0.96rem !important;
+    font-size: 0.94rem !important;
+  }
+
+  .hero-bridge {
+    margin-top: 0.48rem !important;
+    max-width: none !important;
+    font-size: 0.88rem !important;
+    line-height: 1.44 !important;
+  }
+}
+
+/* Short desktop/tablet viewport: spend essentially all available height on
+   copy + previews and place the black marquee immediately below it. */
 @media (min-width: 760px) and (max-height: 680px) {
   .hero {
     min-height: 519.7px !important;
     height: 519.7px !important;
     box-sizing: border-box !important;
-    padding-top: 0.28rem !important;
-    padding-bottom: 0.28rem !important;
+    padding-top: 0.22rem !important;
+    padding-bottom: 0.22rem !important;
   }
 
   .hero .container {
-    width: min(calc(100% - 1rem), 1420px) !important;
-    gap: clamp(0.32rem, 0.58vw, 0.52rem) !important;
-  }
-
-  .hero-copy,
-  .hero-lead,
-  .hero-bridge {
-    max-width: none !important;
-  }
-
-  .hero-showcase {
-    align-self: center !important;
+    height: 100% !important;
     align-items: center !important;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 0.72rem !important;
+    padding: 0.24rem 0.62rem !important;
+  }
+
+  .hero-title {
+    font-size: clamp(2.75rem, 3.7vw, 4rem) !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.3rem !important;
+    font-size: 0.98rem !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.38rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.38 !important;
+  }
+
+  .hero-actions {
+    margin-top: 0.46rem !important;
+  }
+
+  .hero .btn {
+    min-height: 36px !important;
+    padding: 0.42rem 0.78rem !important;
+    font-size: 0.86rem !important;
+  }
+
+  .hero-bridge {
+    margin-top: 0.34rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.34 !important;
+  }
+
+  .marquee-section {
+    box-sizing: border-box !important;
+    min-height: 36px !important;
+    padding-block: 0.38rem !important;
   }
 }
 
@@ -36,98 +304,4 @@
     min-height: 523.7px !important;
     height: 523.7px !important;
   }
-}
-
-/* Two-screen band: Canvas + Timeline use the spare width instead of leaving a dead center gap. */
-@media (min-width: 760px) and (max-width: 1023px) and (max-height: 680px) {
-  .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 52%) !important;
-  }
-
-  .hero-showcase {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0.26rem !important;
-  }
-
-  .hero-preview-card {
-    padding: 0.18rem !important;
-  }
-
-  .hero-preview-label {
-    margin-bottom: 0.12rem !important;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1279px) and (max-height: 680px) {
-  .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(540px, 54%) !important;
-  }
-
-  .hero-showcase {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0.28rem !important;
-  }
-
-  .hero-preview-card {
-    padding: 0.18rem !important;
-  }
-
-  .hero-preview-label {
-    margin-bottom: 0.12rem !important;
-  }
-}
-
-/* Three-screen PC: maximize the three equal-ratio screens before allowing whitespace.
-   Copy still has enough width for the Japanese lead without exceeding the 628px height. */
-@media (min-width: 1280px) and (max-width: 1359px) and (max-height: 680px) {
-  .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(830px, 66%) !important;
-    gap: 0.38rem !important;
-  }
-}
-
-@media (min-width: 1360px) and (max-width: 1439px) and (max-height: 680px) {
-  .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(910px, 68%) !important;
-    gap: 0.4rem !important;
-  }
-}
-
-@media (min-width: 1440px) and (max-height: 680px) {
-  .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(975px, 69%) !important;
-    gap: 0.42rem !important;
-  }
-}
-
-@media (min-width: 1280px) and (max-height: 680px) {
-  .hero-showcase {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 0.28rem !important;
-  }
-
-  .hero-preview-card {
-    padding: 0.16rem !important;
-  }
-
-  .hero-preview-label {
-    margin-bottom: 0.1rem !important;
-    font-size: 0.54rem !important;
-  }
-}
-
-/* Around 640px keep text first and widen it instead of crushing the copy. */
-@media (min-width: 560px) and (max-width: 699px) {
-  .hero-copy {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-  }
-
-  .hero-copy > .eyebrow { order: 1 !important; }
-  .hero-copy > .hero-title { order: 2 !important; }
-  .hero-copy > .hero-subtitle { order: 3 !important; }
-  .hero-copy > .hero-lead { order: 4 !important; }
-  .hero-copy > .hero-actions { order: 5 !important; }
-  .hero-copy > .hero-bridge { order: 6 !important; }
 }
