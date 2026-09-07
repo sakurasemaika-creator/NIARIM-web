@@ -34,10 +34,7 @@ let removedLegacyGalleryFailures = 0;
 const failures = legacyFailures.filter((failure) => {
   if (failure.kind === "hero-ratio") return false;
 
-  if (
-    failure.kind === "gallery-card-count" &&
-    failure.gallery?.count === 7
-  ) {
+  if (failure.kind === "gallery-card-count" && failure.gallery?.count === 7) {
     removedLegacyGalleryFailures += 1;
     return false;
   }
