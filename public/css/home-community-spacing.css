@@ -1,6 +1,7 @@
 /* Home-only finishing layer.
-   Hero enlargement is desktop/tablet only. SP keeps the established compact
-   presentation so narrow screens never inherit the large-display treatment. */
+   Hero enlargement is tablet/desktop only. SP and compact landscape widths keep
+   the established product-first sizing so narrow screens never inherit the
+   large-display treatment. */
 
 html body .hero > .container {
   width: min(
@@ -9,16 +10,18 @@ html body .hero > .container {
   ) !important;
 }
 
-/* Home sections use an 18px visual gutter through the compact/tablet boundary.
-   Keep Hero on that exact geometry so 559 -> 560 -> 640 does not jump sideways. */
+/* Home sections use an 18px visual gutter through the compact boundary. Keep
+   Hero on that exact geometry so the 520 -> 559 -> 560 -> 640 ladder does not
+   jump sideways. */
 @media (max-width: 640px) {
   html body .hero > .container {
     width: calc(100% - 36px) !important;
   }
 }
 
-/* Larger presentation starts only after the SP range. */
-@media (min-width: 560px) {
+/* The user-facing enlargement begins only once the layout has enough room for
+   the real tablet composition. 560-640 therefore stays at SP sizing. */
+@media (min-width: 760px) {
   html body .hero {
     padding-top: clamp(1.8rem, 3vw, 3rem) !important;
     padding-bottom: clamp(2rem, 3.3vw, 3.25rem) !important;
@@ -70,14 +73,20 @@ html body .hero > .container {
   }
 }
 
-/* 560-759px remains a single-column transition band, but is deliberately
-   separate from SP. This prevents the squeezed two-column layout around 640px. */
-@media (min-width: 560px) and (max-width: 759px) {
+/* 641-759px is the only transition band. Keep one calm column here so the
+   compact two-column SP composition is never squeezed, but do not use the
+   oversized tablet device. */
+@media (min-width: 641px) and (max-width: 759px) {
+  html body .hero {
+    padding-top: clamp(1.3rem, 2.8vw, 1.8rem) !important;
+    padding-bottom: clamp(1.5rem, 3.2vw, 2rem) !important;
+  }
+
   html body .hero > .container {
     grid-template-columns: minmax(0, 1fr) !important;
     align-items: start !important;
     justify-items: stretch !important;
-    gap: clamp(1.9rem, 5vw, 2.8rem) !important;
+    gap: clamp(1.4rem, 3.6vw, 2rem) !important;
   }
 
   html body .hero-copy {
@@ -89,7 +98,7 @@ html body .hero > .container {
 
   html body .hero-showcase {
     grid-column: 1 !important;
-    width: min(100%, 20rem) !important;
+    width: min(100%, 15rem) !important;
     justify-self: center !important;
     order: 2 !important;
   }
@@ -104,25 +113,22 @@ html body .hero > .container {
   }
 
   html body .hero-preview-canvas .hero-visual {
-    width: min(100%, 17.5rem) !important;
-    max-width: 17.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
     margin-inline: auto !important;
   }
 
   html body .hero-title {
     max-width: 100% !important;
-    font-size: clamp(3.05rem, 8.4vw, 3.85rem) !important;
+    font-size: clamp(2.9rem, 6.2vw, 3.2rem) !important;
+    line-height: 1.045 !important;
   }
 
   html body .hero-subtitle {
-    font-size: clamp(1.12rem, 2.2vw, 1.24rem) !important;
+    font-size: clamp(1.02rem, 2vw, 1.14rem) !important;
   }
 
-  html body .hero-lead {
-    max-width: 62ch !important;
-    font-size: clamp(1rem, 1.8vw, 1.08rem) !important;
-  }
-
+  html body .hero-lead,
   html body .hero-bridge {
     max-width: 62ch !important;
   }
