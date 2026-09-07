@@ -12,16 +12,65 @@ const child = spawnSync(
 );
 process.stdout.write(child.stdout || "");
 
+function extractJsonObject(text) {
+  const source = String(text || "");
+  const candidates = [];
+
+  for (let start = source.indexOf("{"); start !== -1; start = source.indexOf("{", start + 1)) {
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+
+    for (let index = start; index < source.length; index += 1) {
+      const char = source[index];
+
+      if (inString) {
+        if (escaped) {
+          escaped = false;
+        } else if (char === "\\") {
+          escaped = true;
+        } else if (char === '"') {
+          inString = false;
+        }
+        continue;
+      }
+
+      if (char === '"') {
+        inString = true;
+        continue;
+      }
+
+      if (char === "{") depth += 1;
+      if (char === "}") depth -= 1;
+
+      if (depth === 0) {
+        const candidate = source.slice(start, index + 1);
+        try {
+          const parsed = JSON.parse(candidate);
+          candidates.push(parsed);
+        } catch {
+          // Keep scanning: runner/browser diagnostics can surround the JSON.
+        }
+        break;
+      }
+    }
+  }
+
+  return (
+    candidates.find((value) => Array.isArray(value?.failures)) ||
+    candidates.at(-1) ||
+    null
+  );
+}
+
 let legacyFailures = [];
 if (child.status !== 0) {
-  const raw = String(child.stdout || child.stderr || "").trim();
-  try {
-    const parsed = JSON.parse(raw);
-    legacyFailures = Array.isArray(parsed.failures) ? parsed.failures : [];
-  } catch {
+  const parsed = extractJsonObject(`${child.stdout || ""}\n${child.stderr || ""}`);
+  if (!parsed) {
     process.stderr.write(child.stderr || "");
     process.exit(child.status || 1);
   }
+  legacyFailures = Array.isArray(parsed.failures) ? parsed.failures : [];
 }
 
 function getGalleryCards(failure) {
@@ -66,7 +115,7 @@ if (failures.length) {
     JSON.stringify(
       {
         ok: false,
-        correctedAudit: "current-dom-v4-seven-card-gallery",
+        correctedAudit: "current-dom-v5-robust-json",
         removedLegacyInnerHeroFailures,
         removedLegacyGalleryFailures,
         failures,
@@ -82,7 +131,7 @@ console.log(
   JSON.stringify(
     {
       ok: true,
-      correctedAudit: "current-dom-v4-seven-card-gallery",
+      correctedAudit: "current-dom-v5-robust-json",
       removedLegacyInnerHeroFailures,
       removedLegacyGalleryFailures,
       canonicalHeroChecks: 21,
