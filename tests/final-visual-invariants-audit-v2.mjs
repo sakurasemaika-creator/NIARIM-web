@@ -14,7 +14,7 @@ process.stdout.write(child.stdout || "");
 
 let legacyFailures = [];
 if (child.status !== 0) {
-  const raw = String(child.stderr || "").trim();
+  const raw = String(child.stdout || child.stderr || "").trim();
   try {
     const parsed = JSON.parse(raw);
     legacyFailures = Array.isArray(parsed.failures) ? parsed.failures : [];
