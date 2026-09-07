@@ -27,14 +27,22 @@ window.NIARIM_CONFIG = {
   if (!document.querySelector("link[data-niarim-home-hero]")) {
     var style = document.createElement("link");
     style.rel = "stylesheet";
-    style.href = "/css/home-hero-fit-628.css?v=20260907b";
+    style.href = "/css/home-hero-fit-628.css?v=20260907c";
     style.setAttribute("data-niarim-home-hero", "true");
     document.head.appendChild(style);
   }
 
+  if (!document.querySelector("link[data-niarim-home-community-spacing]")) {
+    var finishingStyle = document.createElement("link");
+    finishingStyle.rel = "stylesheet";
+    finishingStyle.href = "/css/home-community-spacing.css?v=20260907c";
+    finishingStyle.setAttribute("data-niarim-home-community-spacing", "true");
+    document.head.appendChild(finishingStyle);
+  }
+
   if (!document.querySelector("script[data-niarim-home-hero]")) {
     var script = document.createElement("script");
-    script.src = "/js/home-hero-showcase.js?v=20260907b";
+    script.src = "/js/home-hero-showcase.js?v=20260907c";
     script.defer = true;
     script.setAttribute("data-niarim-home-hero", "true");
     document.head.appendChild(script);
