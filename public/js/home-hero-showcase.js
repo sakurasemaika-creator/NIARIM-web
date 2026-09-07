@@ -18,12 +18,11 @@
     );
   }
 
-  /* NIARIM/dev_branch の CommunityScreen / CommunityWorkCard を縮小再現。
-     AppBar → actions → TabBar → 16:9作品カード → extended FAB の順序・構造を
-     アプリ本体と揃える。ヒーロー用の架空ナビや独自見出しは置かない。 */
+  /* CommunityScreen / CommunityWorkCardの実装構造を、App Previewと同じ
+     320:569の端末面へ縮小再現する。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
-    screen.className = "hero-community-mini";
+    screen.className = "hero-community-mini hero-theme-violet";
     screen.setAttribute("aria-hidden", "true");
     screen.innerHTML =
       '<div class="hero-community-appbar">' +
@@ -50,9 +49,24 @@
     return screen;
   }
 
-  function buildPreviewCard(className, content) {
+  function clonePreviewCard(index, themeClass) {
+    var source = document.querySelector(
+      ".screenshot-scroller .screenshot-card:nth-child(" + index + ") > :first-child",
+    );
+    if (!source) return null;
+    var clone = source.cloneNode(true);
+    clone.classList.add("hero-app-preview-source", themeClass);
+    clone.removeAttribute("id");
+    clone.querySelectorAll("[id]").forEach(function (node) {
+      node.removeAttribute("id");
+    });
+    return clone;
+  }
+
+  function buildPreviewCard(className, content, themeClass) {
+    if (!content) return null;
     var card = document.createElement("div");
-    card.className = "hero-preview-card " + className;
+    card.className = "hero-preview-card " + className + " " + themeClass;
     card.setAttribute("aria-hidden", "true");
     card.appendChild(content);
     return card;
@@ -61,41 +75,49 @@
   function initHeroShowcase() {
     var hero = document.querySelector(".hero");
     var container = hero && hero.querySelector(":scope > .container");
-    var canvasVisual = container && container.querySelector(":scope > .hero-visual");
-    if (!hero || !container || !canvasVisual) return;
+    if (!hero || !container) return;
     if (container.querySelector(":scope > .hero-showcase")) return;
+
+    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
+       差し替えた後に、その完成版を複製する。Hero側で別実装を持たない。 */
+    var canvas = clonePreviewCard(1, "hero-theme-ocean");
+    var timeline = clonePreviewCard(2, "hero-theme-sand");
+    if (!canvas || !timeline) return;
+
+    var originalHeroVisual = container.querySelector(":scope > .hero-visual");
+    if (originalHeroVisual) originalHeroVisual.remove();
 
     var showcase = document.createElement("div");
     showcase.className = "hero-showcase";
     showcase.setAttribute("aria-label", "NIARIM app previews");
 
-    showcase.appendChild(buildPreviewCard("hero-preview-canvas", canvasVisual));
-
-    var timelineSource = document.querySelector(
-      ".feature-row.is-reverse .feature-media .feature-diagram",
+    var canvasCard = buildPreviewCard(
+      "hero-preview-canvas",
+      canvas,
+      "hero-theme-ocean",
     );
-    if (timelineSource) {
-      var timeline = timelineSource.cloneNode(true);
-      timeline.classList.add("hero-timeline-mini");
-      timeline.removeAttribute("aria-label");
-      timeline.querySelectorAll("[id]").forEach(function (node) {
-        node.removeAttribute("id");
-      });
-      showcase.appendChild(
-        buildPreviewCard("hero-preview-timeline", timeline),
-      );
-    }
-
-    showcase.appendChild(
-      buildPreviewCard("hero-preview-community", buildCommunityMini()),
+    var timelineCard = buildPreviewCard(
+      "hero-preview-timeline",
+      timeline,
+      "hero-theme-sand",
+    );
+    var communityCard = buildPreviewCard(
+      "hero-preview-community",
+      buildCommunityMini(),
+      "hero-theme-violet",
     );
 
+    showcase.appendChild(canvasCard);
+    showcase.appendChild(timelineCard);
+    showcase.appendChild(communityCard);
     container.appendChild(showcase);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHeroShowcase, { once: true });
-  } else {
+  /* App Previewのコード検証済みDOMはmain.jsのDOMContentLoaded処理で作られる。
+     その後が保証されるwindow.loadで複製し、静的HTMLの古いモックを拾わない。 */
+  if (document.readyState === "complete") {
     initHeroShowcase();
+  } else {
+    window.addEventListener("load", initHeroShowcase, { once: true });
   }
 })();
