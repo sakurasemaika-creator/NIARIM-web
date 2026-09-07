@@ -85,7 +85,9 @@ for (const width of widths) {
       };
       const selectors =
         "h1,h2,h3,p,a,button,input,textarea,select,img,svg,.card,.feature-row,.screenshot-card,.section-title,.container";
-      const elements = [...document.querySelectorAll(selectors)].filter(visible);
+      const elements = [...document.querySelectorAll(selectors)].filter(
+        visible,
+      );
       const outside = [];
       const tinyTargets = [];
       for (const el of elements) {
