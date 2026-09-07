@@ -1,0 +1,107 @@
+/* Temporary final-fit layer for the Home hero.
+   Consolidate into home-hero-fidelity.css after the 12-width visual sweep passes. */
+
+/* 628px viewport target:
+   760–1180: 72px header + 518px hero + ~36px marquee = ~626px.
+   1181+:     68px header + 524px hero + ~36px marquee = ~628px. */
+@media (min-width: 760px) and (max-height: 680px) {
+  .hero {
+    min-height: 518px !important;
+    height: auto !important;
+    align-items: center !important;
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+  }
+
+  .hero .container {
+    width: min(calc(100% - 1rem), 1420px) !important;
+    gap: clamp(0.38rem, 0.7vw, 0.65rem) !important;
+  }
+
+  .hero-copy,
+  .hero-lead,
+  .hero-bridge {
+    max-width: none !important;
+  }
+}
+
+@media (min-width: 1181px) and (max-height: 680px) {
+  .hero {
+    min-height: 524px !important;
+  }
+}
+
+/* Two-screen band: make Canvas + Timeline fill the available right side. */
+@media (min-width: 760px) and (max-width: 1279px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(350px, 47%) !important;
+  }
+
+  .hero-showcase {
+    gap: 0.28rem !important;
+  }
+
+  .hero-preview-card {
+    padding: 0.2rem !important;
+  }
+
+  .hero-preview-label {
+    margin-bottom: 0.14rem !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(450px, 49%) !important;
+  }
+}
+
+/* Three-screen PC: enlarge previews first; only the remaining width belongs to copy. */
+@media (min-width: 1280px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(740px, 61%) !important;
+    gap: 0.5rem !important;
+  }
+
+  .hero-showcase {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.3rem !important;
+  }
+
+  .hero-preview-card {
+    padding: 0.18rem !important;
+  }
+
+  .hero-preview-label {
+    margin-bottom: 0.12rem !important;
+  }
+}
+
+@media (min-width: 1360px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(820px, 62%) !important;
+  }
+}
+
+@media (min-width: 1440px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(880px, 62.5%) !important;
+  }
+}
+
+/* At 640-ish widths, later responsive layers used to detach hero children visually.
+   Force the source order back to Eyebrow → Title → Subtitle → Lead → Actions → Bridge. */
+@media (min-width: 560px) and (max-width: 699px) {
+  .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .hero-copy > .eyebrow { order: 1 !important; }
+  .hero-copy > .hero-title { order: 2 !important; }
+  .hero-copy > .hero-subtitle { order: 3 !important; }
+  .hero-copy > .hero-lead { order: 4 !important; }
+  .hero-copy > .hero-actions { order: 5 !important; }
+  .hero-copy > .hero-bridge { order: 6 !important; }
+}
