@@ -7,6 +7,7 @@ on:
     paths:
       - "tests/home-width-sweep.mjs"
       - "tests/home-community-spacing-audit.mjs"
+      - "tests/home-responsive-visual-sweep.mjs"
       - ".github/workflows/home-width-sweep.yml"
       - "public/css/home-hero-viewport.css"
       - "public/css/home-hero-fidelity.css"
@@ -40,6 +41,8 @@ jobs:
           exit 1
       - name: Audit Community preview and shared Home gutters
         run: node tests/home-community-spacing-audit.mjs
+      - name: Capture responsive Home visual ladder
+        run: node tests/home-responsive-visual-sweep.mjs
       - name: Capture progressive Home widths
         run: node tests/home-width-sweep.mjs
       - name: Upload width sweep PNGs
