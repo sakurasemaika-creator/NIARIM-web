@@ -153,6 +153,12 @@
   height: 51px !important;
   flex-basis: 51px !important;
 }
+/* The row label and horizontal padding bias the five-frame strip about 3–5px
+   left of the device center. The product keeps the current frame centered, so
+   calibrate the strip itself rather than moving the selected-frame artwork. */
+.fd-timeline-screen .fd-timeline-frames {
+  transform: translateX(5px) !important;
+}
 
 /* Workspace rows match the real narrow-screen list density. */
 .fd-workspace-screen .fd-workspace-row {

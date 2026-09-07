@@ -1,6 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { auditCanonicalHeroRatio } from "./hero-audit-compat.mjs";
 
+const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const outDir =
   process.env.AUDIT_OUT_DIR || "artifacts/multilang-responsive-audit-v3";
 
@@ -8,8 +10,12 @@ await import("./multilang-responsive-audit-v3.mjs");
 
 const reportPath = path.join(outDir, "report.json");
 const report = JSON.parse(await fs.readFile(reportPath, "utf8"));
-
+let removedLegacyHero = 0;
 report.findings = report.findings.filter((finding) => {
+  if (finding.kind === "hero-ratio") {
+    removedLegacyHero += 1;
+    return false;
+  }
   if (finding.kind !== "app-preview-last-card-clipped") return true;
   const end = finding.detail || {};
   if (
@@ -24,6 +30,7 @@ report.findings = report.findings.filter((finding) => {
   }
   return true;
 });
+report.findings.push(...(await auditCanonicalHeroRatio(baseURL)));
 
 await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
 const byKind = report.findings.reduce(
@@ -33,9 +40,10 @@ const byKind = report.findings.reduce(
 console.log(
   JSON.stringify(
     {
-      correctedAudit: "v4",
+      correctedAudit: "v5-current-dom",
       ok: report.findings.length === 0,
       combinations: report.combinations,
+      removedLegacyInnerHeroFindings: removedLegacyHero,
       findings: report.findings.length,
       byKind,
     },

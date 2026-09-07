@@ -51,16 +51,16 @@ jobs:
       - name: Audit latest AI trust additions with real captures
         run: node tests/ai-trust-visual-audit.mjs
       - name: Run autonomous section-by-section interaction audit
-        run: node tests/autonomous-browser-audit.mjs || node tests/validate-rendered-audit.mjs
+        run: node tests/autonomous-browser-audit-v2.mjs || node tests/validate-rendered-audit.mjs
       - name: Run complete scroll and full-page audit
         if: always()
         run: node tests/complete-scroll-audit-v2.mjs
       - name: Run deep per-section visual audit
         if: always()
-        run: node tests/deep-section-audit.mjs
+        run: node tests/deep-section-audit-v2.mjs
       - name: Capture each app screen mock as isolated PNG
         if: always()
-        run: node tests/screen-mock-capture.mjs
+        run: node tests/screen-mock-capture-v2.mjs
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
@@ -96,7 +96,7 @@ jobs:
         run: AUDIT_OUT_DIR=artifacts/final-matrix/multilang-responsive node tests/multilang-responsive-audit-v4.mjs
       - name: Audit normalized frame, theme and gallery invariants
         if: always()
-        run: node tests/final-visual-invariants-audit.mjs
+        run: node tests/final-visual-invariants-audit-v2.mjs
       - name: Audit timeline current-frame invariants
         if: always()
         run: node tests/timeline-current-frame-audit.mjs
