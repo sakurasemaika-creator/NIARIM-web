@@ -14,6 +14,10 @@
   min-height: 44px;
 }
 
+.feature-nav a {
+  min-height: 44px;
+}
+
 .form-checkbox a {
   display: inline-flex;
   align-items: center;
