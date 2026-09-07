@@ -86,10 +86,7 @@
       "/css/home-hero-fidelity.css",
       "data-niarim-home-hero-fidelity",
     );
-    addStyleOnce(
-      "/css/home-hero-fit-628.css",
-      "data-niarim-home-hero-fit-628",
-    );
+    addStyleOnce("/css/home-hero-fit-628.css", "data-niarim-home-hero-fit-628");
     addStyleOnce(
       "/css/home-community-spacing.css",
       "data-niarim-home-community-spacing",
