@@ -29,15 +29,31 @@ for (const width of widths) {
     const scroller = document.querySelector(".screenshot-scroller");
     const communityCard = scroller?.querySelector(".screenshot-card-community");
     const communityScreen = communityCard?.querySelector(".hero-community-mini");
+    const cardStyle = communityCard ? getComputedStyle(communityCard) : null;
 
     return {
       hero: rect(heroContainer),
       shared: rect(sharedContainer),
-      screenshotCount: scroller?.querySelectorAll(":scope > .screenshot-card").length ?? 0,
+      screenshotCount:
+        scroller?.querySelectorAll(":scope > .screenshot-card").length ?? 0,
       communityCard: rect(communityCard),
       communityScreen: rect(communityScreen),
+      communityBorderLeft: cardStyle
+        ? parseFloat(cardStyle.borderLeftWidth) || 0
+        : 0,
+      communityBorderRight: cardStyle
+        ? parseFloat(cardStyle.borderRightWidth) || 0
+        : 0,
+      communityBorderTop: cardStyle
+        ? parseFloat(cardStyle.borderTopWidth) || 0
+        : 0,
+      communityBorderBottom: cardStyle
+        ? parseFloat(cardStyle.borderBottomWidth) || 0
+        : 0,
       communityTitle:
-        communityScreen?.querySelector(".hero-community-appbar > strong")?.textContent?.trim() ?? "",
+        communityScreen
+          ?.querySelector(".hero-community-appbar > strong")
+          ?.textContent?.trim() ?? "",
       communityWorks:
         communityScreen?.querySelectorAll(".hero-community-work").length ?? 0,
     };
@@ -60,15 +76,33 @@ for (const width of widths) {
     }
   }
 
-  if (state.screenshotCount < 7 || !state.communityCard || !state.communityScreen) {
+  if (
+    state.screenshotCount < 7 ||
+    !state.communityCard ||
+    !state.communityScreen
+  ) {
     failures.push({ width, kind: "community-preview-missing", state });
   } else {
-    const widthDelta = Math.abs(state.communityCard.width - state.communityScreen.width);
-    const heightDelta = Math.abs(state.communityCard.height - state.communityScreen.height);
-    if (widthDelta > 11 || heightDelta > 11) {
+    const expectedInnerWidth =
+      state.communityCard.width -
+      state.communityBorderLeft -
+      state.communityBorderRight;
+    const expectedInnerHeight =
+      state.communityCard.height -
+      state.communityBorderTop -
+      state.communityBorderBottom;
+    const widthDelta = Math.abs(
+      expectedInnerWidth - state.communityScreen.width,
+    );
+    const heightDelta = Math.abs(
+      expectedInnerHeight - state.communityScreen.height,
+    );
+    if (widthDelta > 1 || heightDelta > 1) {
       failures.push({
         width,
         kind: "community-preview-size",
+        expectedInnerWidth,
+        expectedInnerHeight,
         widthDelta,
         heightDelta,
         card: state.communityCard,
@@ -96,7 +130,7 @@ console.log(
       checks: [
         "Hero uses the same left/right container gutters as lower Home sections",
         "App Preview contains the Community reproduction",
-        "Community reproduction fills its preview device",
+        "Community reproduction fills the device content box inside its bezel",
         "Community reproduction contains title and four work cards",
       ],
     },
