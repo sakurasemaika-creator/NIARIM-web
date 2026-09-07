@@ -29,21 +29,6 @@
     });
   }
 
-  /* かつてここでは、main.js の fitMockScreens() がヒーローの端末枠へ
-     付けた inline の width / height / transform を毎回消していた。
-     当時の fitMockScreens は width も height も「100/倍率 %」で広げて
-     いたため、端末の縦横比が崩れることがあったからである。
-     いまは倍率を掛けたあとの見た目の大きさが元の枠とぴったり同じに
-     なるよう（width = 元の幅/倍率、height = 必要な高さ、はみ出したぶんは
-     負のマージンで打ち消す）作り直したので、比率は崩れない。
-     消し続けると逆に、スマホでツールバーとコマ一覧が枠の下からはみ出して
-     ベゼルに切られたままになる（実測で106pxはみ出していた）ため、
-     この打ち消しはやめる。 */
-
-  /* 50x50セルのcurrentを実際のスクローラ中央へ合わせる。
-     visual-audit-tail.css の左右paddingだけでは先頭セルが中央になるため、
-     3枚目をcurrentにした現在のDOMでは約100pxずれる。offsetLeftから計算し、
-     SP/PC・モック幅に依存せず中央へ揃える。 */
   function centerCurrentFrames() {
     document
       .querySelectorAll(".fd-frame-strip-scroll")
@@ -89,6 +74,13 @@
       link.href = "/css/home-hero-viewport.css";
       link.setAttribute("data-niarim-home-hero-viewport", "true");
       document.head.appendChild(link);
+    }
+    if (!document.querySelector("link[data-niarim-home-hero-fidelity]")) {
+      var fidelity = document.createElement("link");
+      fidelity.rel = "stylesheet";
+      fidelity.href = "/css/home-hero-fidelity.css";
+      fidelity.setAttribute("data-niarim-home-hero-fidelity", "true");
+      document.head.appendChild(fidelity);
     }
     if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
       var script = document.createElement("script");
