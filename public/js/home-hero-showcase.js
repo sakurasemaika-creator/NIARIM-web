@@ -88,6 +88,23 @@
     clone.querySelectorAll("[id]").forEach(function (node) {
       node.removeAttribute("id");
     });
+
+    /* App Previewの各モックは複製元カード固有のカスタムプロパティを
+       自身に保持している。Heroでは外側カードがOcean/Sandを正本とするので、
+       複製元のピンク等が内部UIへ残らないようテーマ値を親から継承させる。 */
+    [
+      "--fd-accent",
+      "--fd-ink",
+      "--fd-text",
+      "--fd-muted",
+      "--fd-outside",
+      "--fd-surface",
+      "--fd-bg",
+      "--fd-panel",
+      "--fd-panel-2",
+    ].forEach(function (name) {
+      clone.style.setProperty(name, "inherit", "important");
+    });
     return clone;
   }
 
