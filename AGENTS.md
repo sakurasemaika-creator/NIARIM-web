@@ -7,6 +7,7 @@
 - 作業対象は **`dev_branch` のみ**。ユーザーから明示指示がない限り、`main` その他のブランチへ変更・push・mergeしない。
 - 既存仕様を壊す大規模改変を先に行わない。まず現状を把握し、重大バグ → 機能不全 → UX問題 → UI品質 → コード品質 → パフォーマンスの順で改善する。
 - 開始時に必ず `引き継ぎガイド（AI開発者向け）.md`、`HANDOFF.md`、`README.md`、`DESIGN.md`、`docs/work-continuation.md` を確認する。
+- NIARIMの全面監査・改善では `docs/product-audit/QUALITY_STANDARD.md` を恒久的な品質基準として必ず確認し、`docs/product-audit/README.md` の監査checkpointから未完了地点を復元する。
 - アプリ本体の仕様に関わる変更は `sakurasemaika-creator/NIARIM` の `dev_branch` の実装を確認し、Web側だけの憶測で機能や文言を追加しない。
 - 既存のプロジェクト固有ルールと本ファイルが競合する場合は、より具体的で安全側の既存仕様を優先する。
 
