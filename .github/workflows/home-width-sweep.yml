@@ -7,8 +7,11 @@ on:
       - "tests/home-width-sweep.mjs"
       - ".github/workflows/home-width-sweep.yml"
       - "public/css/home-hero-viewport.css"
+      - "public/css/home-hero-fidelity.css"
+      - "public/css/home-hero-fit-628.css"
       - "public/css/pages/home.css"
       - "public/css/responsive-consistency.css"
+      - "public/js/home-hero-showcase.js"
       - "public/js/config-links.js"
   workflow_dispatch:
 
