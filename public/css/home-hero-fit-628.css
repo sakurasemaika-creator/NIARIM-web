@@ -1,8 +1,7 @@
-/* Canonical final layer for the Home first view. */
+/* Canonical final layer for the Home first view.
+   Canvas / Timeline reuse the normalized App Preview mocks; Community follows
+   the app implementation and shares the same device geometry. */
 
-/* Hero previews are intentionally label-free. The surrounding hero copy already
-   explains the product; adding Canvas / Timeline / Community captions above the
-   devices only creates visual noise and can expose fallback SVG text. */
 .hero-preview-label,
 .hero-showcase > .frame-lbl,
 .hero-showcase > .frame-label {
@@ -12,71 +11,97 @@
 .hero-preview-card {
   min-width: 0;
   padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* The canonical feature diagrams are 9:16. Keep the exact same OUTER box and
-   exact same 6px device bezel for Canvas, Timeline and Community. */
-.hero-preview-canvas,
-.hero-timeline-mini,
-.hero-community-mini {
+  border: 6px solid var(--hero-bezel) !important;
+  border-radius: 22px !important;
+  background: var(--hero-surface) !important;
+  box-shadow: 0 14px 30px rgba(25, 22, 31, 0.12) !important;
+  overflow: hidden !important;
   box-sizing: border-box !important;
   width: 100% !important;
-  height: auto !important;
-  min-height: 0 !important;
-  aspect-ratio: 9 / 16 !important;
-  border: 6px solid var(--color-ink) !important;
-  border-radius: var(--niarim-device-radius) !important;
-  overflow: hidden !important;
-  background-clip: padding-box !important;
+  aspect-ratio: 320 / 569 !important;
 }
 
-/* Canvas previously kept its bezel on an inner frame, making its apparent
-   screen ratio differ from Timeline and Community. The bezel belongs to the
-   canonical 9:16 outer device box instead. */
-.hero-preview-canvas .hero-visual {
+/* Hero-only themes. They intentionally do not reuse the default pink/cream
+   palette used by the App Preview and feature diagrams elsewhere on Home. */
+.hero-theme-ocean {
+  --hero-bezel: #257f82;
+  --hero-surface: #13292d;
+  --fd-accent: #55d3c8;
+  --fd-ink: #e8fbf8;
+  --fd-text: #e8fbf8;
+  --fd-muted: #a6cbc8;
+  --fd-outside: #102126;
+  --fd-surface: #13292d;
+  --fd-bg: #13292d;
+  --fd-panel: #1c3a3e;
+  --fd-panel-2: #285057;
+}
+.hero-theme-sand {
+  --hero-bezel: #bb842f;
+  --hero-surface: #fff5d9;
+  --fd-accent: #c97b13;
+  --fd-ink: #4b3518;
+  --fd-text: #4b3518;
+  --fd-muted: #7a6541;
+  --fd-outside: #705b35;
+  --fd-surface: #fff5d9;
+  --fd-bg: #fff5d9;
+  --fd-panel: #f1dfad;
+  --fd-panel-2: #e7ce8c;
+}
+.hero-theme-violet {
+  --hero-bezel: #705ac2;
+  --hero-surface: #211b36;
+  --fd-accent: #a78cff;
+  --fd-ink: #f4f0ff;
+  --fd-text: #f4f0ff;
+  --fd-muted: #c5b8e7;
+  --fd-outside: #171327;
+  --fd-surface: #211b36;
+  --fd-bg: #211b36;
+  --fd-panel: #302849;
+  --fd-panel-2: #40365e;
+}
+
+/* The copied App Preview mock already has an app-device border. The hero owns
+   that bezel, so strip only the copied outer decoration while keeping its
+   verified internal widget layout intact. */
+.hero-preview-card > .hero-app-preview-source {
   box-sizing: border-box !important;
   width: 100% !important;
   height: 100% !important;
   max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
   aspect-ratio: auto !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: transparent !important;
   box-shadow: none !important;
+  transform: none !important;
+  background: var(--fd-bg, var(--fd-surface)) !important;
   overflow: hidden !important;
 }
-.hero-preview-canvas .hero-visual::before {
+
+/* The original hero visual is removed after the canonical App Preview clones
+   are ready, so no second device frame remains behind the showcase. */
+.hero > .container > .hero-visual {
   display: none !important;
 }
-.hero-preview-canvas .hero-visual .frame-mock {
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: auto !important;
-  box-sizing: border-box !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
-}
 
-.hero-timeline-mini {
-  display: flex;
-  flex-direction: column;
-  background: #201f27 !important;
-}
-
-/* Community miniature mirrors NIARIM/dev_branch CommunityScreen and
-   CommunityWorkCard: AppBar/actions, three tabs, 16:9 cards and extended FAB. */
+/* CommunityScreen / CommunityWorkCard miniature. */
 .hero-community-mini {
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
   padding: 0 !important;
-  color: #2d2931 !important;
-  background: #f7f4f5 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  color: var(--fd-ink) !important;
+  background: var(--fd-surface) !important;
   font-family: var(--font-sans);
   line-height: 1.2;
 }
@@ -86,15 +111,16 @@
   min-height: 10.5%;
   padding: 3.4% 3.2% 2.1%;
   gap: 2%;
-  background: #fffaf8;
-  border-bottom: 1px solid rgba(45, 41, 49, 0.12);
+  color: var(--fd-ink);
+  background: var(--fd-surface);
+  border-bottom: 1px solid color-mix(in srgb, var(--fd-ink) 18%, transparent);
 }
 .hero-community-appbar > strong {
   min-width: 0;
   margin-right: auto;
   font-family: var(--font-serif);
   font-size: clamp(6px, 0.68vw, 10px);
-  color: #3b2429;
+  color: var(--fd-ink);
   white-space: nowrap;
 }
 .hero-community-actions {
@@ -110,7 +136,7 @@
   aspect-ratio: 1;
   display: grid;
   place-items: center;
-  color: #4b454c;
+  color: var(--fd-muted);
   font-weight: 700;
   font-size: clamp(5px, 0.55vw, 8px);
 }
@@ -130,7 +156,7 @@
   width: 20%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #ff5c7a;
+  background: var(--fd-accent);
 }
 .hero-community-action.is-filter::before {
   content: "";
@@ -162,8 +188,8 @@
   grid-template-columns: 0.75fr 1fr 1.35fr;
   align-items: end;
   min-height: 7.4%;
-  background: #fffaf8;
-  border-bottom: 1px solid rgba(45, 41, 49, 0.14);
+  background: var(--fd-surface);
+  border-bottom: 1px solid color-mix(in srgb, var(--fd-ink) 18%, transparent);
 }
 .hero-community-tabs > span {
   position: relative;
@@ -171,12 +197,12 @@
   place-items: center;
   height: 100%;
   padding: 0 2% 3.5%;
-  color: #746d71;
+  color: var(--fd-muted);
   font-size: clamp(4.5px, 0.48vw, 7.5px);
   white-space: nowrap;
 }
 .hero-community-tabs > .is-active {
-  color: #3b2429;
+  color: var(--fd-ink);
   font-weight: 700;
 }
 .hero-community-tabs > .is-active::after {
@@ -187,7 +213,7 @@
   bottom: 0;
   height: 2px;
   border-radius: 99px 99px 0 0;
-  background: #ff5c7a;
+  background: var(--fd-accent);
 }
 .hero-community-grid {
   display: grid;
@@ -201,8 +227,9 @@
   min-width: 0;
   overflow: hidden;
   border-radius: 7px;
-  background: #fffdfc;
-  box-shadow: 0 1px 4px rgba(59, 36, 41, 0.14);
+  color: var(--fd-ink);
+  background: var(--fd-panel);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--fd-outside) 32%, transparent);
 }
 .hero-community-thumb {
   position: relative;
@@ -210,10 +237,10 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
-.hero-community-work.is-a .hero-community-thumb { background: linear-gradient(135deg, #ffd8df, #ff6d88); }
-.hero-community-work.is-b .hero-community-thumb { background: linear-gradient(135deg, #e5d7ff, #8b69ce); }
-.hero-community-work.is-c .hero-community-thumb { background: linear-gradient(135deg, #ffe1c6, #e89455); }
-.hero-community-work.is-d .hero-community-thumb { background: linear-gradient(135deg, #d3edf0, #5aa6ae); }
+.hero-community-work.is-a .hero-community-thumb { background: linear-gradient(135deg, #463c72, #8b70d6); }
+.hero-community-work.is-b .hero-community-thumb { background: linear-gradient(135deg, #314f70, #6d8fbd); }
+.hero-community-work.is-c .hero-community-thumb { background: linear-gradient(135deg, #5e3f69, #a068ab); }
+.hero-community-work.is-d .hero-community-thumb { background: linear-gradient(135deg, #315d64, #6a9aa0); }
 .hero-community-play {
   position: absolute;
   left: 50%;
@@ -221,7 +248,7 @@
   width: 23%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: rgba(45, 41, 49, 0.68);
+  background: color-mix(in srgb, var(--fd-outside) 72%, transparent);
   transform: translate(-50%, -50%);
 }
 .hero-community-play::after {
@@ -239,9 +266,9 @@
   top: 7%;
   width: 10%;
   height: 22%;
-  border: 1px solid rgba(255,255,255,.95);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 1px;
-  background: rgba(45,41,49,.2);
+  background: rgba(20, 16, 35, 0.25);
 }
 .hero-community-duration {
   position: absolute;
@@ -249,7 +276,7 @@
   bottom: 7%;
   padding: 1.5% 3%;
   border-radius: 2px;
-  background: rgba(45, 41, 49, 0.66);
+  background: rgba(20, 16, 35, 0.72);
   color: white;
   font-size: clamp(3.5px, 0.38vw, 6px);
 }
@@ -269,11 +296,11 @@
 }
 .hero-community-meta strong {
   font-size: clamp(4.5px, 0.48vw, 7.5px);
-  color: #2d2931;
+  color: var(--fd-ink);
 }
 .hero-community-author,
 .hero-community-stats {
-  color: #746d71;
+  color: var(--fd-muted);
   font-size: clamp(3.5px, 0.38vw, 6px);
 }
 .hero-community-stats {
@@ -284,16 +311,16 @@
 .hero-community-view-icon {
   width: 0;
   height: 0;
-  border-left: clamp(2px, .25vw, 4px) solid #746d71;
-  border-top: clamp(1.5px, .17vw, 3px) solid transparent;
-  border-bottom: clamp(1.5px, .17vw, 3px) solid transparent;
+  border-left: clamp(2px, 0.25vw, 4px) solid var(--fd-muted);
+  border-top: clamp(1.5px, 0.17vw, 3px) solid transparent;
+  border-bottom: clamp(1.5px, 0.17vw, 3px) solid transparent;
 }
 .hero-community-stat-bookmark {
   width: 5%;
   min-width: 3px;
-  aspect-ratio: .72;
+  aspect-ratio: 0.72;
   margin-left: 3%;
-  border: 1px solid #746d71;
+  border: 1px solid var(--fd-muted);
   border-radius: 1px;
 }
 .hero-community-fab {
@@ -306,14 +333,14 @@
   max-width: 56%;
   padding: 3.2% 6%;
   border-radius: 999px;
-  background: #ff5c7a;
+  background: var(--fd-accent);
   color: #fff;
-  box-shadow: 0 3px 8px rgba(59,36,41,.2);
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--fd-outside) 40%, transparent);
   white-space: nowrap;
 }
 .hero-community-fab > i {
   position: relative;
-  width: clamp(5px, .55vw, 8px);
+  width: clamp(5px, 0.55vw, 8px);
   aspect-ratio: 1.25;
   border: 1px solid currentColor;
   border-radius: 1px;
@@ -325,7 +352,7 @@
   border: 1px solid currentColor;
 }
 .hero-community-fab > b {
-  font-size: clamp(4px, .44vw, 7px);
+  font-size: clamp(4px, 0.44vw, 7px);
   font-weight: 700;
 }
 
@@ -485,7 +512,6 @@
   }
 }
 
-/* At 640 Chromium rounds the marquee to 37.2px, so 519.7px overshoots by 0.9px. */
 @media (min-width: 560px) and (max-width: 699px) and (max-height: 680px) {
   .hero {
     min-height: 518.5px !important;
