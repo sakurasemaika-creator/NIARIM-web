@@ -1,0 +1,42 @@
+name: Home width sweep
+
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - "tests/home-width-sweep.mjs"
+      - ".github/workflows/home-width-sweep.yml"
+      - "public/css/home-hero-viewport.css"
+      - "public/css/pages/home.css"
+      - "public/css/responsive-consistency.css"
+      - "public/js/config-links.js"
+  workflow_dispatch:
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/niarim-http.log
+          exit 1
+      - name: Capture progressive Home widths
+        run: node tests/home-width-sweep.mjs
+      - name: Upload width sweep PNGs
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-width-sweep
+          path: artifacts/autonomous-browser-audit/home-width-sweep/
+          if-no-files-found: error
+          retention-days: 1
