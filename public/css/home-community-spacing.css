@@ -1,14 +1,7 @@
 /* Home-only finishing layer.
-   1) Hero horizontal gutters use the same shared container geometry as the rest
-      of the Home sections.
-   2) The Community screen miniature is also exposed as the final App Preview
-      card, reusing the exact same DOM as the Hero showcase.
-   3) Hero content is intentionally larger while preserving the same horizontal
-      display range. Extra room is taken vertically instead of widening columns. */
+   Hero enlargement is desktop/tablet only. SP keeps the established compact
+   presentation so narrow screens never inherit the large-display treatment. */
 
-/* home-hero-fit-628.css intentionally uses !important for first-view fitting.
-   Beat those old narrow-gutter rules explicitly instead of depending on async
-   stylesheet insertion order. Keep the formula identical to common.css. */
 html body .hero > .container {
   width: min(
     100% - var(--container-padding) * 2,
@@ -16,18 +9,13 @@ html body .hero > .container {
   ) !important;
 }
 
-/* The polished mobile Home sections use an 18px visual gutter. Match that
-   measured geometry instead of leaving the Hero at the base 20px clamp. */
 @media (max-width: 520px) {
   html body .hero > .container {
     width: calc(100% - 36px) !important;
   }
 }
 
-/* The previous viewport-fit layer deliberately compressed the Hero so the
-   marquee could remain visible at 628px tall. The current presentation favors
-   presence and readability instead: keep every horizontal width/column rule as
-   is, but allow the Hero to grow downward. */
+/* Larger presentation starts only after the SP range. */
 @media (min-width: 560px) {
   html body .hero {
     padding-top: clamp(1.8rem, 3vw, 3rem) !important;
@@ -72,67 +60,16 @@ html body .hero > .container {
     font-size: 0.96rem !important;
     line-height: 1.62 !important;
   }
-}
 
-/* Keep the preview cards at exactly the same horizontal width, but restore a
-   phone-like vertical proportion. This makes the whole visual read larger
-   without consuming any additional horizontal range. */
-html body .hero-preview-canvas .hero-visual,
-html body .hero-timeline-mini,
-html body .hero-community-mini {
-  aspect-ratio: 320 / 569 !important;
-}
-
-@media (max-width: 559px) {
-  html body .hero {
-    padding-top: 6.9rem !important;
-    padding-bottom: 5.1rem !important;
-  }
-
-  html body .hero-copy .eyebrow {
-    font-size: 0.82rem !important;
-    padding: 0.34rem 0.76rem !important;
-  }
-
-  html body .hero-title {
-    font-size: clamp(2.95rem, 13.2vw, 3.9rem) !important;
-    line-height: 1.045 !important;
-  }
-
-  html body .hero-subtitle {
-    margin-top: 0.82rem !important;
-    font-size: 1.16rem !important;
-    line-height: 1.58 !important;
-  }
-
-  html body .hero-lead {
-    margin-top: 1.08rem !important;
-    font-size: 1.06rem !important;
-    line-height: 1.72 !important;
-  }
-
-  html body .hero-actions {
-    margin-top: 1.3rem !important;
-    gap: 0.78rem !important;
-  }
-
-  html body .hero .btn {
-    min-height: 48px !important;
-    padding: 0.76rem 1.08rem !important;
-    font-size: 1rem !important;
-  }
-
-  html body .hero-bridge {
-    margin-top: 0.94rem !important;
-    font-size: 0.96rem !important;
-    line-height: 1.64 !important;
+  html body .hero-preview-canvas .hero-visual,
+  html body .hero-timeline-mini,
+  html body .hero-community-mini {
+    aspect-ratio: 320 / 569 !important;
   }
 }
 
-/* 560-759px was the unstable band: home-hero-viewport.css switched back to a
-   squeezed two-column layout at 560px while responsive-consistency.css wanted
-   one column through 900px. Make the breakpoint ownership explicit. In this
-   band copy comes first and a single phone preview follows below it. */
+/* 560-759px remains a single-column transition band, but is deliberately
+   separate from SP. This prevents the squeezed two-column layout around 640px. */
 @media (min-width: 560px) and (max-width: 759px) {
   html body .hero > .container {
     grid-template-columns: minmax(0, 1fr) !important;
@@ -191,45 +128,6 @@ html body .hero-community-mini {
   html body .hero-actions {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    width: 100% !important;
-  }
-
-  html body .hero .btn {
-    width: 100% !important;
-  }
-}
-
-/* Small phones should use the same vertical narrative instead of an oversized
-   headline plus a detached mock. Keep the copy readable and let the page grow
-   naturally downward. */
-@media (max-width: 559px) {
-  html body .hero > .container {
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 2rem !important;
-  }
-
-  html body .hero-copy {
-    width: 100% !important;
-    max-width: none !important;
-  }
-
-  html body .hero-title {
-    max-width: 100% !important;
-  }
-
-  html body .hero-showcase {
-    width: min(100%, 19rem) !important;
-    justify-self: center !important;
-  }
-
-  html body .hero-preview-canvas .hero-visual {
-    width: min(80vw, 17.5rem) !important;
-    max-width: 17.5rem !important;
-  }
-
-  html body .hero-actions {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
     width: 100% !important;
   }
 
