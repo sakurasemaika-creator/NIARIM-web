@@ -1,0 +1,10 @@
+/* Home hero viewport fit
+   PC(>900px)ではヒーローの上下余白を抑え、1440x1000級の画面で
+   下の黒いmarquee帯までファーストビュー内に見える高さへ収める。
+   900px以下の1カラム/タブレット・SPレイアウトには影響させない。 */
+@media (min-width: 901px) {
+  .hero {
+    padding-top: clamp(4.25rem, 5vw, 5rem);
+    padding-bottom: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+}
