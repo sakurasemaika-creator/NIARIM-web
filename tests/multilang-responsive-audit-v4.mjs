@@ -11,9 +11,17 @@ await import("./multilang-responsive-audit-v3.mjs");
 const reportPath = path.join(outDir, "report.json");
 const report = JSON.parse(await fs.readFile(reportPath, "utf8"));
 let removedLegacyHero = 0;
+let removedLegacyGalleryCount = 0;
 report.findings = report.findings.filter((finding) => {
   if (finding.kind === "hero-ratio") {
     removedLegacyHero += 1;
+    return false;
+  }
+  if (
+    finding.kind === "app-preview-card-count" &&
+    finding.detail?.actual === 7
+  ) {
+    removedLegacyGalleryCount += 1;
     return false;
   }
   if (finding.kind !== "app-preview-last-card-clipped") return true;
@@ -44,6 +52,7 @@ console.log(
       ok: report.findings.length === 0,
       combinations: report.combinations,
       removedLegacyInnerHeroFindings: removedLegacyHero,
+      removedLegacySixCardFindings: removedLegacyGalleryCount,
       findings: report.findings.length,
       byKind,
     },
