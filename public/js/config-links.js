@@ -2,7 +2,11 @@
 (function () {
   "use strict";
   var LINKS = [
-    { id: "google-play-link", key: "GOOGLE_PLAY_URL", fallback: "disable" },
+    {
+      id: "google-play-link",
+      key: "GOOGLE_PLAY_URL",
+      fallback: "disable",
+    },
     { id: "footer-x-link", key: "X_URL", fallback: "hide" },
     { id: "footer-x-icon", key: "X_URL", fallback: "hide" },
     { id: "contact-x-link", key: "X_URL", fallback: "hide" },
