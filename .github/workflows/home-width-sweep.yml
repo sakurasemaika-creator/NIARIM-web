@@ -34,6 +34,7 @@ jobs:
       - name: Capture progressive Home widths
         run: node tests/home-width-sweep.mjs
       - name: Upload width sweep PNGs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: home-width-sweep
