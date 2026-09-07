@@ -3,8 +3,8 @@ import { chromium } from "playwright";
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
 const widths = [
-  320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760,
-  900, 1024, 1280, 1440,
+  320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760, 900,
+  1024, 1280, 1440,
 ];
 const failures = [];
 
