@@ -62,14 +62,10 @@
     return screen;
   }
 
-  function buildPreviewCard(label, className, content) {
+  function buildPreviewCard(className, content) {
     var card = document.createElement("div");
     card.className = "hero-preview-card " + className;
     card.setAttribute("aria-hidden", "true");
-    var labelEl = document.createElement("span");
-    labelEl.className = "hero-preview-label";
-    labelEl.textContent = label;
-    card.appendChild(labelEl);
     card.appendChild(content);
     return card;
   }
@@ -85,14 +81,7 @@
     showcase.className = "hero-showcase";
     showcase.setAttribute("aria-label", "NIARIM app previews");
 
-    var canvasCard = document.createElement("div");
-    canvasCard.className = "hero-preview-card hero-preview-canvas";
-    var canvasLabel = document.createElement("span");
-    canvasLabel.className = "hero-preview-label";
-    canvasLabel.textContent = "Canvas";
-    canvasCard.appendChild(canvasLabel);
-    canvasCard.appendChild(canvasVisual);
-    showcase.appendChild(canvasCard);
+    showcase.appendChild(buildPreviewCard("hero-preview-canvas", canvasVisual));
 
     var timelineSource = document.querySelector(
       ".feature-row.is-reverse .feature-media .feature-diagram",
@@ -101,16 +90,12 @@
       var timeline = timelineSource.cloneNode(true);
       timeline.classList.add("hero-timeline-mini");
       showcase.appendChild(
-        buildPreviewCard("Timeline", "hero-preview-timeline", timeline),
+        buildPreviewCard("hero-preview-timeline", timeline),
       );
     }
 
     showcase.appendChild(
-      buildPreviewCard(
-        "Community",
-        "hero-preview-community",
-        buildCommunityMini(),
-      ),
+      buildPreviewCard("hero-preview-community", buildCommunityMini()),
     );
 
     container.appendChild(showcase);
