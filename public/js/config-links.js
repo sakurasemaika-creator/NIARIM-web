@@ -83,13 +83,20 @@
 
   function loadHomeHeroViewport() {
     if (!document.querySelector(".hero + .marquee-section")) return;
-    if (document.querySelector("link[data-niarim-home-hero-viewport]")) return;
-
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "/css/home-hero-viewport.css";
-    link.setAttribute("data-niarim-home-hero-viewport", "true");
-    document.head.appendChild(link);
+    if (!document.querySelector("link[data-niarim-home-hero-viewport]")) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "/css/home-hero-viewport.css";
+      link.setAttribute("data-niarim-home-hero-viewport", "true");
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
+      var script = document.createElement("script");
+      script.src = "/js/home-hero-showcase.js";
+      script.defer = true;
+      script.setAttribute("data-niarim-home-hero-showcase", "true");
+      document.head.appendChild(script);
+    }
   }
 
   function loadAiTrustCopy() {
