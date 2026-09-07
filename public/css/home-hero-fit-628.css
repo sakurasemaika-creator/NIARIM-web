@@ -1,5 +1,4 @@
-/* Canonical final layer for the Home first view.
-   Keep this file small: it intentionally wins over older hero experiments. */
+/* Canonical final layer for the Home first view. */
 
 .hero-preview-label { display: none !important; }
 .hero-preview-card {
@@ -11,7 +10,8 @@
   box-shadow: none !important;
 }
 
-.hero-preview-canvas .hero-visual,
+/* All three visible devices use the exact same OUTER 9:16 box. */
+.hero-preview-canvas,
 .hero-timeline-mini,
 .hero-community-mini {
   box-sizing: border-box !important;
@@ -19,31 +19,37 @@
   height: auto !important;
   min-height: 0 !important;
   aspect-ratio: 9 / 16 !important;
+  border: 6px solid var(--color-ink) !important;
+  border-radius: var(--niarim-device-radius) !important;
   overflow: hidden !important;
+  background-clip: padding-box !important;
 }
 
+/* Canvas used to keep its bezel on an inner .frame-mock, which made only this
+   preview look frameless beside Timeline/Community. The bezel now belongs to
+   the same outer box as the other two. */
 .hero-preview-canvas .hero-visual {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
   max-width: none !important;
+  aspect-ratio: auto !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
+  overflow: hidden !important;
 }
 .hero-preview-canvas .hero-visual .frame-mock {
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: auto !important;
   box-sizing: border-box !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   overflow: hidden !important;
-  border: 6px solid var(--color-ink) !important;
-  border-radius: var(--niarim-device-radius) !important;
 }
-.hero-timeline-mini,
-.hero-community-mini {
-  border: 6px solid var(--color-ink) !important;
-  border-radius: var(--niarim-device-radius) !important;
-  background-clip: padding-box !important;
-}
+
 .hero-timeline-mini {
   display: flex;
   flex-direction: column;
@@ -71,8 +77,6 @@
   align-self: center !important;
 }
 
-/* 560–759: one preview. Force the same copy order used by the wider layouts;
-   older mobile rules used to move the eyebrow below the title around 640px. */
 @media (min-width: 560px) and (max-width: 759px) {
   .hero-copy {
     display: flex !important;
@@ -84,7 +88,7 @@
   .hero-copy > .hero-subtitle { order: 3 !important; }
   .hero-copy > .hero-lead { order: 4 !important; }
   .hero-copy > .hero-actions { order: 5 !important; }
-  .hero-copy > .hero-bridge { order: 6 !important; }
+  .hero-copy > .hero-bridge { order: 6 !important; display: block !important; }
 
   .hero .container {
     width: calc(100% - 1rem) !important;
@@ -97,7 +101,6 @@
   .hero-preview-community { display: none !important; }
 }
 
-/* 760–1279: Canvas + Timeline, with the narrow phone previews returning width to copy. */
 @media (min-width: 760px) and (max-width: 1279px) {
   .hero .container {
     width: min(calc(100% - 1.5rem), 1320px) !important;
@@ -147,7 +150,6 @@
   }
 }
 
-/* 1280+: Canvas + Timeline + Community. */
 @media (min-width: 1280px) {
   .hero .container {
     width: min(calc(100% - 2rem), 1420px) !important;
@@ -197,7 +199,7 @@
   }
 }
 
-/* 628px-height target. 72/68px header + hero + 36.1px marquee = 627.8px. */
+/* 628px-height target. */
 @media (min-width: 560px) and (max-height: 680px) {
   .hero {
     min-height: 519.7px !important;
@@ -214,6 +216,14 @@
     box-sizing: border-box !important;
     min-height: 36px !important;
     padding-block: 0.38rem !important;
+  }
+}
+
+/* At 640 Chromium rounds the marquee to 37.2px, so 519.7px overshoots by 0.9px. */
+@media (min-width: 560px) and (max-width: 699px) and (max-height: 680px) {
+  .hero {
+    min-height: 518.5px !important;
+    height: 518.5px !important;
   }
 }
 
@@ -247,6 +257,7 @@
     font-size: 0.8rem !important;
   }
   .hero-bridge {
+    display: block !important;
     margin-top: 0.3rem !important;
     max-width: none !important;
     font-size: 0.72rem !important;
