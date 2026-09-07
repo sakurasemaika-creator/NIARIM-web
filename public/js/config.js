@@ -14,3 +14,29 @@ window.NIARIM_CONFIG = {
   // 公式X（[要確認] 公式アカウント確定後に差し替え）
   X_URL: "",
 };
+
+/* Home first-view assets are kept separate from the shared bundle so the
+   heavier three-screen showcase is not downloaded on every page. config.js is
+   present on Home before main.js, so the stylesheet can start loading early;
+   the showcase script itself waits until window.load, after main.js has replaced
+   the App Preview cards with the code-verified application mocks. */
+(function loadHomeHeroShowcase() {
+  var path = window.location.pathname.replace(/\/+$/, "") || "/";
+  if (path !== "/" && path !== "/index.html") return;
+
+  if (!document.querySelector('link[data-niarim-home-hero]')) {
+    var style = document.createElement("link");
+    style.rel = "stylesheet";
+    style.href = "/css/home-hero-fit-628.css?v=20260907b";
+    style.setAttribute("data-niarim-home-hero", "true");
+    document.head.appendChild(style);
+  }
+
+  if (!document.querySelector('script[data-niarim-home-hero]')) {
+    var script = document.createElement("script");
+    script.src = "/js/home-hero-showcase.js?v=20260907b";
+    script.defer = true;
+    script.setAttribute("data-niarim-home-hero", "true");
+    document.head.appendChild(script);
+  }
+})();
