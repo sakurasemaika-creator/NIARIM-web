@@ -8,7 +8,10 @@
    Beat those old narrow-gutter rules explicitly instead of depending on async
    stylesheet insertion order. Keep the formula identical to common.css. */
 html body .hero > .container {
-  width: min(100% - var(--container-padding) * 2, var(--container-width)) !important;
+  width: min(
+    100% - var(--container-padding) * 2,
+    var(--container-width)
+  ) !important;
 }
 
 /* The polished mobile Home sections use an 18px visual gutter. Match that

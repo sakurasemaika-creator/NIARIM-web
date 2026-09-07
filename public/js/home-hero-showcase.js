@@ -78,7 +78,8 @@
 
   function appendCommunityAppPreview() {
     var scroller = document.querySelector(".screenshot-scroller");
-    if (!scroller || scroller.querySelector(".screenshot-card-community")) return;
+    if (!scroller || scroller.querySelector(".screenshot-card-community"))
+      return;
 
     var card = document.createElement("div");
     card.className = "screenshot-card screenshot-card-community";

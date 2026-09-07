@@ -28,7 +28,9 @@ for (const width of widths) {
     const sharedContainer = document.querySelector("main .section .container");
     const scroller = document.querySelector(".screenshot-scroller");
     const communityCard = scroller?.querySelector(".screenshot-card-community");
-    const communityScreen = communityCard?.querySelector(".hero-community-mini");
+    const communityScreen = communityCard?.querySelector(
+      ".hero-community-mini",
+    );
     const cardStyle = communityCard ? getComputedStyle(communityCard) : null;
 
     return {
