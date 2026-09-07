@@ -2,7 +2,10 @@ import { chromium } from "playwright";
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
-const widths = [390, 520, 559, 560, 600, 640, 700, 759, 760, 1280, 1440];
+const widths = [
+  320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760,
+  900, 1024, 1280, 1440,
+];
 const failures = [];
 
 for (const width of widths) {
@@ -165,9 +168,9 @@ console.log(
       widths,
       checks: [
         "Hero uses the same left/right container gutters as lower Home sections",
-        "560-759px remains a non-overlapping single-column Hero",
+        "SP and 560-759px remain non-overlapping single-column Heroes",
         "Hero title and actions stay inside the shared container",
-        "No horizontal overflow appears around 559/560/640/759 breakpoints",
+        "No horizontal overflow appears across the full responsive width ladder",
         "App Preview contains the Community reproduction",
         "Community reproduction fills the device content box inside its bezel",
         "Community reproduction contains title and four work cards",
