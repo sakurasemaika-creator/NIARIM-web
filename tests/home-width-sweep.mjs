@@ -217,14 +217,22 @@ for (const width of widths) {
         ),
       );
       if (themes.size !== 3) {
-        deviceFailures.push({ width, kind: "hero-theme-not-distinct", devices });
+        deviceFailures.push({
+          width,
+          kind: "hero-theme-not-distinct",
+          devices,
+        });
       }
       for (const device of devices) {
         if (
           Math.abs(device.rect.width - base.width) > deviceTolerance ||
           Math.abs(device.rect.height - base.height) > deviceTolerance
         ) {
-          deviceFailures.push({ width, kind: "hero-device-size-mismatch", device });
+          deviceFailures.push({
+            width,
+            kind: "hero-device-size-mismatch",
+            device,
+          });
         }
         if (Math.abs(device.ratio - ratioTarget) > 0.004) {
           deviceFailures.push({
@@ -245,8 +253,15 @@ for (const width of widths) {
         ) {
           deviceFailures.push({ width, kind: "hero-theme-leak", device });
         }
-        if (!device.renderedAccent || device.renderedAccent !== device.theme.accent) {
-          deviceFailures.push({ width, kind: "hero-accent-render-mismatch", device });
+        if (
+          !device.renderedAccent ||
+          device.renderedAccent !== device.theme.accent
+        ) {
+          deviceFailures.push({
+            width,
+            kind: "hero-accent-render-mismatch",
+            device,
+          });
         }
         const clipped = device.critical.filter((item) => !item.within);
         if (clipped.length) {
