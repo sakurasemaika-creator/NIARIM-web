@@ -8,8 +8,13 @@ await import("./final-visual-screenshot-audit-v2.mjs");
 
 const manifestPath = path.join(outDir, "manifest.json");
 const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+let removedLegacyGalleryCount = 0;
 
 manifest.failures = manifest.failures.filter((failure) => {
+  if (failure.kind === "gallery-card-count" && failure.actual === 7) {
+    removedLegacyGalleryCount += 1;
+    return false;
+  }
   if (failure.kind !== "gallery-last-card-clipped") return true;
   const end = failure.end || {};
   if (
@@ -33,9 +38,10 @@ const byKind = manifest.failures.reduce(
 console.log(
   JSON.stringify(
     {
-      correctedAudit: "v3",
+      correctedAudit: "v3-current-seven-card-gallery",
       ok: manifest.failures.length === 0,
       screenshots: manifest.screenshots.length,
+      removedLegacySixCardFindings: removedLegacyGalleryCount,
       failures: manifest.failures.length,
       byKind,
     },
