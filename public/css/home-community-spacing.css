@@ -1,0 +1,40 @@
+/* Home-only finishing layer.
+   1) Hero horizontal gutters use the same shared container tokens as the rest
+      of the Home sections.
+   2) The Community screen miniature is also exposed as the final App Preview
+      card, reusing the exact same DOM as the Hero showcase. */
+
+.hero .container {
+  width: min(
+    calc(100% - var(--container-padding) * 2),
+    var(--container-width)
+  ) !important;
+}
+
+.screenshot-card-community {
+  --hero-bezel: #705ac2;
+  --hero-surface: #211b36;
+  --fd-accent: #a78cff;
+  --fd-ink: #f4f0ff;
+  --fd-text: #f4f0ff;
+  --fd-muted: #c5b8e7;
+  --fd-outside: #171327;
+  --fd-surface: #211b36;
+  --fd-bg: #211b36;
+  --fd-panel: #302849;
+  --fd-panel-2: #40365e;
+
+  border-color: var(--hero-bezel) !important;
+  background: var(--hero-surface) !important;
+}
+
+.screenshot-card-community > .hero-community-mini {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
