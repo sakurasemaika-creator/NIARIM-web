@@ -9,10 +9,14 @@ import {
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const outDir =
   process.env.AUDIT_OUT_DIR || "artifacts/autonomous-browser-audit";
-const child = spawnSync(process.execPath, ["tests/autonomous-browser-audit.mjs"], {
-  env: process.env,
-  encoding: "utf8",
-});
+const child = spawnSync(
+  process.execPath,
+  ["tests/autonomous-browser-audit.mjs"],
+  {
+    env: process.env,
+    encoding: "utf8",
+  },
+);
 process.stdout.write(child.stdout || "");
 process.stderr.write(child.stderr || "");
 

@@ -3,18 +3,30 @@
 
   function workCard(title, author, views, bookmarks, duration, tone) {
     return (
-      '<article class="hero-community-work ' + tone + '">' +
+      '<article class="hero-community-work ' +
+      tone +
+      '">' +
       '<div class="hero-community-thumb">' +
       '<span class="hero-community-play" aria-hidden="true"></span>' +
       '<span class="hero-community-bookmark" aria-hidden="true"></span>' +
-      '<span class="hero-community-duration">' + duration + '</span>' +
-      '</div>' +
+      '<span class="hero-community-duration">' +
+      duration +
+      "</span>" +
+      "</div>" +
       '<div class="hero-community-meta">' +
-      '<strong>' + title + '</strong>' +
-      '<span class="hero-community-author">' + author + '</span>' +
-      '<span class="hero-community-stats"><span class="hero-community-view-icon" aria-hidden="true"></span><span>' + views + '</span><span class="hero-community-stat-bookmark" aria-hidden="true"></span><span>' + bookmarks + '</span></span>' +
-      '</div>' +
-      '</article>'
+      "<strong>" +
+      title +
+      "</strong>" +
+      '<span class="hero-community-author">' +
+      author +
+      "</span>" +
+      '<span class="hero-community-stats"><span class="hero-community-view-icon" aria-hidden="true"></span><span>' +
+      views +
+      '</span><span class="hero-community-stat-bookmark" aria-hidden="true"></span><span>' +
+      bookmarks +
+      "</span></span>" +
+      "</div>" +
+      "</article>"
     );
   }
 
@@ -26,32 +38,48 @@
     screen.setAttribute("aria-hidden", "true");
     screen.innerHTML =
       '<div class="hero-community-appbar">' +
-      '<strong>作品広場</strong>' +
+      "<strong>作品広場</strong>" +
       '<div class="hero-community-actions">' +
       '<span class="hero-community-action is-notification" aria-hidden="true"><i></i></span>' +
       '<span class="hero-community-action is-filter" aria-hidden="true"><i></i></span>' +
       '<span class="hero-community-action is-search" aria-hidden="true"><i></i></span>' +
       '<span class="hero-community-action is-help" aria-hidden="true">?</span>' +
-      '</div>' +
-      '</div>' +
+      "</div>" +
+      "</div>" +
       '<div class="hero-community-tabs">' +
       '<span class="is-active">新着</span>' +
-      '<span>ランキング</span>' +
-      '<span>お気に入り作者</span>' +
-      '</div>' +
+      "<span>ランキング</span>" +
+      "<span>お気に入り作者</span>" +
+      "</div>" +
       '<div class="hero-community-grid">' +
-      workCard("夜明けの冒険", "あにめ工房ミラ", "1.2万", "326", "0:42", "is-a") +
+      workCard(
+        "夜明けの冒険",
+        "あにめ工房ミラ",
+        "1.2万",
+        "326",
+        "0:42",
+        "is-a",
+      ) +
       workCard("小さな街", "sakura_draws", "8,921", "211", "1:08", "is-b") +
       workCard("静かな記憶", "ペン先ラボ", "5,306", "148", "0:31", "is-c") +
-      workCard("雨上がりの手紙", "よあけスタジオ", "3,744", "96", "0:55", "is-d") +
-      '</div>' +
+      workCard(
+        "雨上がりの手紙",
+        "よあけスタジオ",
+        "3,744",
+        "96",
+        "0:55",
+        "is-d",
+      ) +
+      "</div>" +
       '<span class="hero-community-fab"><i aria-hidden="true"></i><b>自分の投稿</b></span>';
     return screen;
   }
 
   function clonePreviewCard(index, themeClass) {
     var source = document.querySelector(
-      ".screenshot-scroller .screenshot-card:nth-child(" + index + ") > :first-child",
+      ".screenshot-scroller .screenshot-card:nth-child(" +
+        index +
+        ") > :first-child",
     );
     if (!source) return null;
     var clone = source.cloneNode(true);

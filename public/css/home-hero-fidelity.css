@@ -121,7 +121,9 @@
   top: 13%;
   height: 1px;
   background: currentColor;
-  box-shadow: 1px 2px 0 -0.1px currentColor, 2px 4px 0 -0.1px currentColor;
+  box-shadow:
+    1px 2px 0 -0.1px currentColor,
+    2px 4px 0 -0.1px currentColor;
   transform: skewX(-28deg);
   transform-origin: left center;
 }
@@ -255,7 +257,8 @@
   right: 12%;
   bottom: -28%;
   height: 55%;
-  background: linear-gradient(135deg, transparent 48%, #fff 49% 52%, transparent 53%),
+  background:
+    linear-gradient(135deg, transparent 48%, #fff 49% 52%, transparent 53%),
     linear-gradient(45deg, transparent 48%, #fff 49% 52%, transparent 53%);
 }
 
@@ -276,7 +279,8 @@
   flex-direction: column;
   gap: 1px;
   min-width: 0;
-  padding: clamp(3px, 0.3vw, 5px) clamp(4px, 0.36vw, 6px) clamp(4px, 0.34vw, 6px);
+  padding: clamp(3px, 0.3vw, 5px) clamp(4px, 0.36vw, 6px)
+    clamp(4px, 0.34vw, 6px);
 }
 
 .hero-community-meta strong,

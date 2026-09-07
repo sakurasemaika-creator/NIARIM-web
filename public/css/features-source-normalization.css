@@ -274,9 +274,7 @@
   column-gap: 10px;
   min-height: 64px;
 }
-.feature-diagram
-  .fd-widget-tile--art.is-settings-summary
-  .fd-widget-frame {
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-frame {
   grid-column: 1;
   grid-row: 1 / 3;
   width: 44px;
@@ -284,17 +282,13 @@
   margin: 0;
   border-radius: 6px;
 }
-.feature-diagram
-  .fd-widget-tile--art.is-settings-summary
-  .fd-widget-name {
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-name {
   grid-column: 2;
   grid-row: 1;
   align-self: end;
   min-width: 0;
 }
-.feature-diagram
-  .fd-widget-tile--art.is-settings-summary
-  .fd-widget-sub {
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-sub {
   grid-column: 2;
   grid-row: 2;
   align-self: start;

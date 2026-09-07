@@ -24,7 +24,7 @@ window.NIARIM_CONFIG = {
   var path = window.location.pathname.replace(/\/+$/, "") || "/";
   if (path !== "/" && path !== "/index.html") return;
 
-  if (!document.querySelector('link[data-niarim-home-hero]')) {
+  if (!document.querySelector("link[data-niarim-home-hero]")) {
     var style = document.createElement("link");
     style.rel = "stylesheet";
     style.href = "/css/home-hero-fit-628.css?v=20260907b";
@@ -32,7 +32,7 @@ window.NIARIM_CONFIG = {
     document.head.appendChild(style);
   }
 
-  if (!document.querySelector('script[data-niarim-home-hero]')) {
+  if (!document.querySelector("script[data-niarim-home-hero]")) {
     var script = document.createElement("script");
     script.src = "/js/home-hero-showcase.js?v=20260907b";
     script.defer = true;

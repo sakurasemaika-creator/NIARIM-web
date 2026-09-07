@@ -290,7 +290,11 @@
     padding: 0.36rem;
     color: #f5f1f0;
     background:
-      radial-gradient(circle at 82% 4%, rgba(255, 92, 122, 0.28), transparent 34%),
+      radial-gradient(
+        circle at 82% 4%,
+        rgba(255, 92, 122, 0.28),
+        transparent 34%
+      ),
       #201f27;
   }
 
@@ -345,12 +349,24 @@
   .hero-community-work b {
     display: block;
     min-height: 0;
-    background: linear-gradient(145deg, rgba(255, 92, 122, 0.6), rgba(255, 177, 92, 0.35)), #4d4857;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 92, 122, 0.6),
+        rgba(255, 177, 92, 0.35)
+      ),
+      #4d4857;
   }
 
-  .hero-community-work.is-b b { background: linear-gradient(145deg, #5d718e, #b08ea4); }
-  .hero-community-work.is-c b { background: linear-gradient(145deg, #887a61, #d9bd86); }
-  .hero-community-work.is-d b { background: linear-gradient(145deg, #5f776b, #9eb5a3); }
+  .hero-community-work.is-b b {
+    background: linear-gradient(145deg, #5d718e, #b08ea4);
+  }
+  .hero-community-work.is-c b {
+    background: linear-gradient(145deg, #887a61, #d9bd86);
+  }
+  .hero-community-work.is-d b {
+    background: linear-gradient(145deg, #5f776b, #9eb5a3);
+  }
 
   .hero-community-work i {
     position: absolute;

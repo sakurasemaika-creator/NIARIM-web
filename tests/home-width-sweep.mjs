@@ -58,8 +58,7 @@ for (const width of widths) {
       hero: box(".hero"),
       container: box(".hero .container"),
       copy: box(".hero-copy"),
-      visual:
-        fromElement(visibleHeroPreview) || box(".hero-visual"),
+      visual: fromElement(visibleHeroPreview) || box(".hero-visual"),
       marquee: box(".marquee-section"),
       viewportHeight: window.innerHeight,
     };
@@ -77,7 +76,8 @@ for (const width of widths) {
     row.marquee && row.marquee.top >= 0 && row.marquee.bottom <= height + 0.5,
   );
   row.marqueeAttachedToHero = Boolean(
-    row.heroMarqueeGap !== null && Math.abs(row.heroMarqueeGap) <= edgeTolerance,
+    row.heroMarqueeGap !== null &&
+      Math.abs(row.heroMarqueeGap) <= edgeTolerance,
   );
   row.marqueeEndsAtViewport = Boolean(
     row.marqueeBottomDelta !== null &&

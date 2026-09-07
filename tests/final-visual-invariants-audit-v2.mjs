@@ -24,7 +24,9 @@ if (child.status !== 0) {
   }
 }
 
-const failures = legacyFailures.filter((failure) => failure.kind !== "hero-ratio");
+const failures = legacyFailures.filter(
+  (failure) => failure.kind !== "hero-ratio",
+);
 const canonicalHeroFailures = await auditCanonicalHeroRatio(baseURL);
 failures.push(...canonicalHeroFailures);
 
@@ -36,7 +38,8 @@ if (failures.length) {
         correctedAudit: "current-dom-v2",
         removedLegacyInnerHeroFailures:
           legacyFailures.length -
-          legacyFailures.filter((failure) => failure.kind !== "hero-ratio").length,
+          legacyFailures.filter((failure) => failure.kind !== "hero-ratio")
+            .length,
         failures,
       },
       null,
@@ -53,7 +56,8 @@ console.log(
       correctedAudit: "current-dom-v2",
       removedLegacyInnerHeroFailures:
         legacyFailures.length -
-        legacyFailures.filter((failure) => failure.kind !== "hero-ratio").length,
+        legacyFailures.filter((failure) => failure.kind !== "hero-ratio")
+          .length,
       canonicalHeroChecks: 21,
     },
     null,

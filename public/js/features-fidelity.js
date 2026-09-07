@@ -10,7 +10,8 @@
   "use strict";
 
   function ensureFidelityStyles() {
-    if (document.querySelector("link[data-niarim-feature-fidelity-style]")) return;
+    if (document.querySelector("link[data-niarim-feature-fidelity-style]"))
+      return;
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
@@ -49,30 +50,31 @@
   }
 
   function syncArtworkWidgetSummary() {
-    document
-      .querySelectorAll(".fd-widget-tile--art")
-      .forEach(function (tile) {
-        tile.classList.add("is-settings-summary");
+    document.querySelectorAll(".fd-widget-tile--art").forEach(function (tile) {
+      tile.classList.add("is-settings-summary");
 
-        var frame = tile.querySelector(".fd-widget-frame");
-        if (frame && !frame.querySelector(".fd-widget-frame-icon")) {
-          frame.insertAdjacentHTML(
-            "afterbegin",
-            '<svg class="ic fd-widget-frame-icon" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-image"></use></svg>',
-          );
-        }
+      var frame = tile.querySelector(".fd-widget-frame");
+      if (frame && !frame.querySelector(".fd-widget-frame-icon")) {
+        frame.insertAdjacentHTML(
+          "afterbegin",
+          '<svg class="ic fd-widget-frame-icon" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-image"></use></svg>',
+        );
+      }
 
-        if (tile.querySelector(".fd-widget-chevron")) return;
-        var chevron = document.createElement("span");
-        chevron.className = "fd-widget-chevron";
-        chevron.setAttribute("aria-hidden", "true");
-        chevron.textContent = "›";
-        tile.appendChild(chevron);
-      });
+      if (tile.querySelector(".fd-widget-chevron")) return;
+      var chevron = document.createElement("span");
+      chevron.className = "fd-widget-chevron";
+      chevron.setAttribute("aria-hidden", "true");
+      chevron.textContent = "›";
+      tile.appendChild(chevron);
+    });
   }
 
   function init() {
-    if (!document.getElementById("audio") && !document.getElementById("widget")) {
+    if (
+      !document.getElementById("audio") &&
+      !document.getElementById("widget")
+    ) {
       return;
     }
     ensureFidelityStyles();

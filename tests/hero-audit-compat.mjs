@@ -59,7 +59,10 @@ export async function verifyHiddenHeroFindings(findings, baseURL) {
     for (const finding of groups.values()) {
       const viewport = viewportMap.get(finding.viewport);
       if (!viewport) return false;
-      const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
+      const context = await browser.newContext({
+        viewport,
+        deviceScaleFactor: 1,
+      });
       const page = await context.newPage();
       await page.goto(baseURL + finding.route, { waitUntil: "networkidle" });
       await page.waitForTimeout(220);

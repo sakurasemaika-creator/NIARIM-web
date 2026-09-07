@@ -47,14 +47,20 @@ for (const viewport of viewports) {
         return [...document.querySelectorAll(".fd-timeline-screen")].map(
           (screen, index) => {
             const sr = screen.getBoundingClientRect();
-            const currents = [...screen.querySelectorAll(".fd-tl-frame.is-current")];
+            const currents = [
+              ...screen.querySelectorAll(".fd-tl-frame.is-current"),
+            ];
             const current = currents[0] || null;
             const cr = current?.getBoundingClientRect();
             const currentStyle = current ? getComputedStyle(current) : null;
-            const cursor = screen.querySelector(".fd-timeline-frames > .fd-frame-cursor");
+            const cursor = screen.querySelector(
+              ".fd-timeline-frames > .fd-frame-cursor",
+            );
             const cursorStyle = cursor ? getComputedStyle(cursor) : null;
             const screenStyle = getComputedStyle(screen);
-            const accentRaw = screenStyle.getPropertyValue("--fd-accent").trim();
+            const accentRaw = screenStyle
+              .getPropertyValue("--fd-accent")
+              .trim();
             const accent = accentRaw ? resolve(accentRaw) : "";
 
             return {
@@ -91,21 +97,33 @@ for (const viewport of viewports) {
           timeline.currentCenter === null ||
           Math.abs(timeline.centerDelta) > 2
         ) {
-          failures.push({ id, kind: "timeline-current-not-screen-centered", timeline });
+          failures.push({
+            id,
+            kind: "timeline-current-not-screen-centered",
+            timeline,
+          });
         }
         if (
           !timeline.accent ||
           timeline.currentBorderColor !== timeline.accent ||
           parseFloat(timeline.currentBorderWidth) < 1.5
         ) {
-          failures.push({ id, kind: "timeline-current-theme-border-missing", timeline });
+          failures.push({
+            id,
+            kind: "timeline-current-theme-border-missing",
+            timeline,
+          });
         }
         if (
           timeline.cursorPresent &&
           timeline.cursorDisplay !== "none" &&
           timeline.cursorVisibility !== "hidden"
         ) {
-          failures.push({ id, kind: "timeline-fixed-cursor-visible", timeline });
+          failures.push({
+            id,
+            kind: "timeline-fixed-cursor-visible",
+            timeline,
+          });
         }
       }
     }

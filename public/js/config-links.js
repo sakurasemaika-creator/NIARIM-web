@@ -52,10 +52,7 @@
   }
 
   function loadFeatureFidelity() {
-    if (
-      !document.getElementById("audio") &&
-      !document.getElementById("widget")
-    )
+    if (!document.getElementById("audio") && !document.getElementById("widget"))
       return;
     if (document.querySelector("script[data-niarim-feature-fidelity]")) return;
 
@@ -77,8 +74,14 @@
 
   function loadHomeHeroViewport() {
     if (!document.querySelector(".hero + .marquee-section")) return;
-    addStyleOnce("/css/home-hero-viewport.css", "data-niarim-home-hero-viewport");
-    addStyleOnce("/css/home-hero-fidelity.css", "data-niarim-home-hero-fidelity");
+    addStyleOnce(
+      "/css/home-hero-viewport.css",
+      "data-niarim-home-hero-viewport",
+    );
+    addStyleOnce(
+      "/css/home-hero-fidelity.css",
+      "data-niarim-home-hero-fidelity",
+    );
     addStyleOnce("/css/home-hero-fit-628.css", "data-niarim-home-hero-fit-628");
 
     if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
