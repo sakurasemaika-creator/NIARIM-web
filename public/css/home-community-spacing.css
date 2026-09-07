@@ -30,47 +30,47 @@ html body .hero > .container {
    is, but allow the Hero to grow downward. */
 @media (min-width: 560px) {
   html body .hero {
-    padding-top: clamp(1.4rem, 2.4vw, 2.4rem) !important;
-    padding-bottom: clamp(1.55rem, 2.7vw, 2.7rem) !important;
+    padding-top: clamp(1.8rem, 3vw, 3rem) !important;
+    padding-bottom: clamp(2rem, 3.3vw, 3.25rem) !important;
   }
 
   html body .hero-copy .eyebrow {
-    font-size: clamp(0.74rem, 0.8vw, 0.84rem) !important;
-    padding: 0.28rem 0.68rem !important;
+    font-size: clamp(0.82rem, 0.9vw, 0.94rem) !important;
+    padding: 0.34rem 0.78rem !important;
   }
 
   html body .hero-title {
-    font-size: clamp(2.65rem, 4.35vw, 4.55rem) !important;
-    line-height: 1.06 !important;
+    font-size: clamp(3rem, 4.9vw, 5.05rem) !important;
+    line-height: 1.045 !important;
   }
 
   html body .hero-subtitle {
-    margin-top: 0.58rem !important;
-    font-size: clamp(1rem, 1.15vw, 1.14rem) !important;
-    line-height: 1.5 !important;
+    margin-top: 0.7rem !important;
+    font-size: clamp(1.1rem, 1.28vw, 1.28rem) !important;
+    line-height: 1.52 !important;
   }
 
   html body .hero-lead {
-    margin-top: 0.82rem !important;
-    font-size: clamp(0.96rem, 1.05vw, 1.08rem) !important;
-    line-height: 1.62 !important;
+    margin-top: 0.95rem !important;
+    font-size: clamp(1.03rem, 1.16vw, 1.18rem) !important;
+    line-height: 1.68 !important;
   }
 
   html body .hero-actions {
-    margin-top: 1rem !important;
-    gap: 0.62rem !important;
+    margin-top: 1.15rem !important;
+    gap: 0.72rem !important;
   }
 
   html body .hero .btn {
-    min-height: 42px !important;
-    padding: 0.62rem 1rem !important;
-    font-size: 0.95rem !important;
+    min-height: 46px !important;
+    padding: 0.72rem 1.12rem !important;
+    font-size: 1rem !important;
   }
 
   html body .hero-bridge {
-    margin-top: 0.72rem !important;
-    font-size: 0.88rem !important;
-    line-height: 1.52 !important;
+    margin-top: 0.86rem !important;
+    font-size: 0.96rem !important;
+    line-height: 1.62 !important;
   }
 }
 
@@ -85,42 +85,47 @@ html body .hero-community-mini {
 
 @media (max-width: 559px) {
   html body .hero {
-    padding-top: 6.7rem !important;
-    padding-bottom: 4.8rem !important;
+    padding-top: 6.9rem !important;
+    padding-bottom: 5.1rem !important;
+  }
+
+  html body .hero-copy .eyebrow {
+    font-size: 0.82rem !important;
+    padding: 0.34rem 0.76rem !important;
   }
 
   html body .hero-title {
-    font-size: clamp(3.25rem, 16vw, 5rem) !important;
-    line-height: 1.06 !important;
+    font-size: clamp(2.95rem, 13.2vw, 3.9rem) !important;
+    line-height: 1.045 !important;
   }
 
   html body .hero-subtitle {
-    margin-top: 0.72rem !important;
-    font-size: 1.08rem !important;
-    line-height: 1.55 !important;
+    margin-top: 0.82rem !important;
+    font-size: 1.16rem !important;
+    line-height: 1.58 !important;
   }
 
   html body .hero-lead {
-    margin-top: 1rem !important;
-    font-size: 1rem !important;
-    line-height: 1.68 !important;
+    margin-top: 1.08rem !important;
+    font-size: 1.06rem !important;
+    line-height: 1.72 !important;
   }
 
   html body .hero-actions {
-    margin-top: 1.2rem !important;
-    gap: 0.7rem !important;
+    margin-top: 1.3rem !important;
+    gap: 0.78rem !important;
   }
 
   html body .hero .btn {
-    min-height: 44px !important;
-    padding: 0.68rem 1rem !important;
-    font-size: 0.96rem !important;
+    min-height: 48px !important;
+    padding: 0.76rem 1.08rem !important;
+    font-size: 1rem !important;
   }
 
   html body .hero-bridge {
-    margin-top: 0.82rem !important;
-    font-size: 0.9rem !important;
-    line-height: 1.58 !important;
+    margin-top: 0.94rem !important;
+    font-size: 0.96rem !important;
+    line-height: 1.64 !important;
   }
 }
 
@@ -133,7 +138,7 @@ html body .hero-community-mini {
     grid-template-columns: minmax(0, 1fr) !important;
     align-items: start !important;
     justify-items: stretch !important;
-    gap: clamp(1.7rem, 5vw, 2.6rem) !important;
+    gap: clamp(1.9rem, 5vw, 2.8rem) !important;
   }
 
   html body .hero-copy {
@@ -160,17 +165,25 @@ html body .hero-community-mini {
   }
 
   html body .hero-preview-canvas .hero-visual {
-    width: min(100%, 17rem) !important;
-    max-width: 17rem !important;
+    width: min(100%, 17.5rem) !important;
+    max-width: 17.5rem !important;
     margin-inline: auto !important;
   }
 
   html body .hero-title {
     max-width: 100% !important;
-    font-size: clamp(2.7rem, 8vw, 3.5rem) !important;
+    font-size: clamp(3.05rem, 8.4vw, 3.85rem) !important;
   }
 
-  html body .hero-lead,
+  html body .hero-subtitle {
+    font-size: clamp(1.12rem, 2.2vw, 1.24rem) !important;
+  }
+
+  html body .hero-lead {
+    max-width: 62ch !important;
+    font-size: clamp(1rem, 1.8vw, 1.08rem) !important;
+  }
+
   html body .hero-bridge {
     max-width: 62ch !important;
   }
@@ -192,7 +205,7 @@ html body .hero-community-mini {
 @media (max-width: 559px) {
   html body .hero > .container {
     grid-template-columns: minmax(0, 1fr) !important;
-    gap: 1.8rem !important;
+    gap: 2rem !important;
   }
 
   html body .hero-copy {
@@ -202,7 +215,6 @@ html body .hero-community-mini {
 
   html body .hero-title {
     max-width: 100% !important;
-    font-size: clamp(2.65rem, 12vw, 3.55rem) !important;
   }
 
   html body .hero-showcase {
@@ -211,8 +223,8 @@ html body .hero-community-mini {
   }
 
   html body .hero-preview-canvas .hero-visual {
-    width: min(78vw, 17rem) !important;
-    max-width: 17rem !important;
+    width: min(80vw, 17.5rem) !important;
+    max-width: 17.5rem !important;
   }
 
   html body .hero-actions {
