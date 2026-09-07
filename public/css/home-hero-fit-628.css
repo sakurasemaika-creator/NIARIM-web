@@ -1,16 +1,7 @@
-/* Final Home hero layer.
-   Goals:
-   - every preview uses the same phone-like 9:16 screen ratio and 6px bezel
-   - copy always precedes previews
-   - 1 / 2 / 3 previews are selected by available width without changing the visual language
-   - desktop/tablet copy is larger and receives spare horizontal width
-   - at 628px viewport height the complete black marquee remains inside the first view
-*/
+/* Canonical final layer for the Home first view.
+   Keep this file small: it intentionally wins over older hero experiments. */
 
-.hero-preview-label {
-  display: none !important;
-}
-
+.hero-preview-label { display: none !important; }
 .hero-preview-card {
   min-width: 0;
   padding: 0 !important;
@@ -31,7 +22,6 @@
   overflow: hidden !important;
 }
 
-/* Canvas already owns the same 6px device bezel on .frame-mock. */
 .hero-preview-canvas .hero-visual {
   max-width: none !important;
   border: 0 !important;
@@ -39,31 +29,26 @@
   background: transparent !important;
   box-shadow: none !important;
 }
-
 .hero-preview-canvas .hero-visual .frame-mock {
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: auto !important;
-  border: 6px solid var(--color-ink) !important;
-  border-radius: var(--niarim-device-radius) !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
+  border: 6px solid var(--color-ink) !important;
+  border-radius: var(--niarim-device-radius) !important;
 }
-
-/* Timeline and Community previously had no matching device frame in the hero. */
 .hero-timeline-mini,
 .hero-community-mini {
   border: 6px solid var(--color-ink) !important;
   border-radius: var(--niarim-device-radius) !important;
   background-clip: padding-box !important;
 }
-
 .hero-timeline-mini {
   display: flex;
   flex-direction: column;
   background: #201f27 !important;
 }
-
 .hero-community-mini {
   position: relative;
   display: flex;
@@ -78,96 +63,82 @@
   grid-column: 1 !important;
   order: 1 !important;
 }
-
 .hero-showcase {
   min-width: 0;
   width: 100%;
   grid-column: 2 !important;
   order: 2 !important;
-  align-self: center;
+  align-self: center !important;
 }
 
-/* Keep the current SP density: one Canvas preview and copy first. */
+/* 560–759: one preview. Force the same copy order used by the wider layouts;
+   older mobile rules used to move the eyebrow below the title around 640px. */
 @media (min-width: 560px) and (max-width: 759px) {
+  .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .hero-copy > .eyebrow { order: 1 !important; }
+  .hero-copy > .hero-title { order: 2 !important; }
+  .hero-copy > .hero-subtitle { order: 3 !important; }
+  .hero-copy > .hero-lead { order: 4 !important; }
+  .hero-copy > .hero-actions { order: 5 !important; }
+  .hero-copy > .hero-bridge { order: 6 !important; }
+
   .hero .container {
     width: calc(100% - 1rem) !important;
-    grid-template-columns: minmax(0, 1fr) minmax(132px, 24%) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 27%) !important;
     gap: 0.55rem !important;
   }
-
-  .hero-showcase {
-    display: block !important;
-  }
-
-  .hero-preview-canvas {
-    display: block !important;
-  }
-
+  .hero-showcase { display: block !important; }
+  .hero-preview-canvas { display: block !important; }
   .hero-preview-timeline,
-  .hero-preview-community {
-    display: none !important;
-  }
+  .hero-preview-community { display: none !important; }
 }
 
-/* Tablet / narrow desktop: Canvas + Timeline. The phone ratio makes the visual
-   column narrower, so the recovered width is deliberately returned to copy. */
+/* 760–1279: Canvas + Timeline, with the narrow phone previews returning width to copy. */
 @media (min-width: 760px) and (max-width: 1279px) {
   .hero .container {
     width: min(calc(100% - 1.5rem), 1320px) !important;
     grid-template-columns: minmax(0, 1fr) minmax(300px, clamp(300px, 34vw, 430px)) !important;
     gap: clamp(0.65rem, 1.1vw, 0.95rem) !important;
   }
-
   .hero-showcase {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     align-items: center !important;
     gap: clamp(0.32rem, 0.55vw, 0.5rem) !important;
   }
-
   .hero-preview-canvas,
-  .hero-preview-timeline {
-    display: block !important;
-  }
-
-  .hero-preview-community {
-    display: none !important;
-  }
+  .hero-preview-timeline { display: block !important; }
+  .hero-preview-community { display: none !important; }
 
   .hero-copy .eyebrow {
     font-size: 0.78rem !important;
     padding: 0.3rem 0.72rem !important;
   }
-
   .hero-title {
     max-width: 100% !important;
     font-size: clamp(3.15rem, 4.5vw, 4.6rem) !important;
     line-height: 1 !important;
   }
-
   .hero-subtitle {
     margin-top: 0.42rem !important;
     font-size: clamp(1.02rem, 1.35vw, 1.14rem) !important;
   }
-
   .hero-lead {
     margin-top: 0.52rem !important;
     max-width: none !important;
     font-size: clamp(0.94rem, 1.12vw, 1.04rem) !important;
     line-height: 1.48 !important;
   }
-
-  .hero-actions {
-    margin-top: 0.62rem !important;
-    gap: 0.48rem !important;
-  }
-
+  .hero-actions { margin-top: 0.62rem !important; gap: 0.48rem !important; }
   .hero .btn {
     min-height: 40px !important;
     padding: 0.5rem 0.9rem !important;
     font-size: 0.9rem !important;
   }
-
   .hero-bridge {
     margin-top: 0.46rem !important;
     max-width: none !important;
@@ -176,62 +147,48 @@
   }
 }
 
-/* Wide desktop: use the otherwise empty horizontal space for Community as the
-   third preview, while keeping all three screens exactly the same ratio. */
+/* 1280+: Canvas + Timeline + Community. */
 @media (min-width: 1280px) {
   .hero .container {
     width: min(calc(100% - 2rem), 1420px) !important;
     grid-template-columns: minmax(0, 1fr) minmax(500px, clamp(500px, 43vw, 620px)) !important;
     gap: clamp(0.55rem, 0.9vw, 0.85rem) !important;
   }
-
   .hero-showcase {
     display: grid !important;
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     align-items: center !important;
     gap: clamp(0.3rem, 0.45vw, 0.45rem) !important;
   }
-
   .hero-preview-canvas,
   .hero-preview-timeline,
-  .hero-preview-community {
-    display: block !important;
-  }
+  .hero-preview-community { display: block !important; }
 
   .hero-copy .eyebrow {
     font-size: 0.82rem !important;
     padding: 0.32rem 0.76rem !important;
   }
-
   .hero-title {
     max-width: 100% !important;
     font-size: clamp(3.7rem, 4.3vw, 5rem) !important;
     line-height: 0.99 !important;
   }
-
   .hero-subtitle {
     margin-top: 0.46rem !important;
     font-size: clamp(1.08rem, 1.18vw, 1.22rem) !important;
   }
-
   .hero-lead {
     margin-top: 0.56rem !important;
     max-width: none !important;
     font-size: clamp(0.98rem, 1vw, 1.08rem) !important;
     line-height: 1.5 !important;
   }
-
-  .hero-actions {
-    margin-top: 0.66rem !important;
-    gap: 0.5rem !important;
-  }
-
+  .hero-actions { margin-top: 0.66rem !important; gap: 0.5rem !important; }
   .hero .btn {
     min-height: 42px !important;
     padding: 0.52rem 0.96rem !important;
     font-size: 0.94rem !important;
   }
-
   .hero-bridge {
     margin-top: 0.48rem !important;
     max-width: none !important;
@@ -240,9 +197,8 @@
   }
 }
 
-/* Short desktop/tablet viewport: spend essentially all available height on
-   copy + previews and place the black marquee immediately below it. */
-@media (min-width: 760px) and (max-height: 680px) {
+/* 628px-height target. 72/68px header + hero + 36.1px marquee = 627.8px. */
+@media (min-width: 560px) and (max-height: 680px) {
   .hero {
     min-height: 519.7px !important;
     height: 519.7px !important;
@@ -250,48 +206,10 @@
     padding-top: 0.22rem !important;
     padding-bottom: 0.22rem !important;
   }
-
   .hero .container {
     height: 100% !important;
     align-items: center !important;
   }
-
-  .hero-copy .eyebrow {
-    font-size: 0.72rem !important;
-    padding: 0.24rem 0.62rem !important;
-  }
-
-  .hero-title {
-    font-size: clamp(2.75rem, 3.7vw, 4rem) !important;
-  }
-
-  .hero-subtitle {
-    margin-top: 0.3rem !important;
-    font-size: 0.98rem !important;
-  }
-
-  .hero-lead {
-    margin-top: 0.38rem !important;
-    font-size: 0.9rem !important;
-    line-height: 1.38 !important;
-  }
-
-  .hero-actions {
-    margin-top: 0.46rem !important;
-  }
-
-  .hero .btn {
-    min-height: 36px !important;
-    padding: 0.42rem 0.78rem !important;
-    font-size: 0.86rem !important;
-  }
-
-  .hero-bridge {
-    margin-top: 0.34rem !important;
-    font-size: 0.8rem !important;
-    line-height: 1.34 !important;
-  }
-
   .marquee-section {
     box-sizing: border-box !important;
     min-height: 36px !important;
@@ -299,9 +217,68 @@
   }
 }
 
-@media (min-width: 1181px) and (max-height: 680px) {
-  .hero {
-    min-height: 523.7px !important;
-    height: 523.7px !important;
+@media (min-width: 560px) and (max-width: 759px) and (max-height: 680px) {
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(152px, 27%) !important;
   }
+  .hero-copy .eyebrow {
+    font-size: 0.66rem !important;
+    padding: 0.2rem 0.54rem !important;
+  }
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.15rem, 5vw, 2.55rem) !important;
+    line-height: 1 !important;
+  }
+  .hero-subtitle {
+    margin-top: 0.28rem !important;
+    font-size: 0.88rem !important;
+  }
+  .hero-lead {
+    margin-top: 0.34rem !important;
+    max-width: none !important;
+    font-size: 0.78rem !important;
+    line-height: 1.36 !important;
+  }
+  .hero-actions { margin-top: 0.42rem !important; }
+  .hero .btn {
+    min-height: 34px !important;
+    padding: 0.4rem 0.72rem !important;
+    font-size: 0.8rem !important;
+  }
+  .hero-bridge {
+    margin-top: 0.3rem !important;
+    max-width: none !important;
+    font-size: 0.72rem !important;
+    line-height: 1.32 !important;
+  }
+}
+
+@media (min-width: 760px) and (max-height: 680px) {
+  .hero-copy .eyebrow {
+    font-size: 0.72rem !important;
+    padding: 0.24rem 0.62rem !important;
+  }
+  .hero-title { font-size: clamp(2.75rem, 3.7vw, 4rem) !important; }
+  .hero-subtitle { margin-top: 0.3rem !important; font-size: 0.98rem !important; }
+  .hero-lead {
+    margin-top: 0.38rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.38 !important;
+  }
+  .hero-actions { margin-top: 0.46rem !important; }
+  .hero .btn {
+    min-height: 36px !important;
+    padding: 0.42rem 0.78rem !important;
+    font-size: 0.86rem !important;
+  }
+  .hero-bridge {
+    margin-top: 0.34rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.34 !important;
+  }
+}
+
+@media (min-width: 1181px) and (max-height: 680px) {
+  .hero { min-height: 523.7px !important; height: 523.7px !important; }
 }
