@@ -64,10 +64,22 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(413, { error: "payload_too_large" });
   }
 
+  const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+
+  if (env.RATE_LIMIT_KV) {
+    const limited = await isRateLimited(env.RATE_LIMIT_KV, clientIp);
+    if (limited) {
+      return jsonResponse(429, { error: "rate_limited" });
+    }
+  }
+
   let form;
   try {
-    form = await request.formData();
-  } catch {
+    form = await readLimitedFormData(request);
+  } catch (error) {
+    if (error instanceof PayloadTooLargeError) {
+      return jsonResponse(413, { error: "payload_too_large" });
+    }
     return jsonResponse(400, { error: "invalid_body" });
   }
 
@@ -129,24 +141,16 @@ export async function handleContact(request, env, ctx) {
 
   let attachments;
   try {
-    attachments = await Promise.all(
-      attachmentFiles.map(async (file) => ({
+    attachments = [];
+    for (const file of attachmentFiles) {
+      attachments.push({
         filename: sanitizeFilename(file.name) || "attachment",
         content: arrayBufferToBase64(await file.arrayBuffer()),
-      })),
-    );
+      });
+    }
   } catch (err) {
     console.error("Failed to read attachments", err);
     return jsonResponse(400, { error: "invalid_body" });
-  }
-
-  const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-
-  if (env.RATE_LIMIT_KV) {
-    const limited = await isRateLimited(env.RATE_LIMIT_KV, clientIp);
-    if (limited) {
-      return jsonResponse(429, { error: "rate_limited" });
-    }
   }
 
   if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
@@ -168,6 +172,51 @@ export async function handleContact(request, env, ctx) {
   }
 
   return jsonResponse(200, { ok: true });
+}
+
+class PayloadTooLargeError extends Error {}
+
+// Content-Lengthが無い・偽装されているリクエストも、実際に読んだバイト数で
+// 制限する。未使用フィールドやmultipartのオーバーヘッドも上限に含める。
+async function readLimitedFormData(request) {
+  if (!request.body) throw new TypeError("Empty body");
+  const reader = request.body.getReader();
+  let bytes = 0;
+  let tooLarge = false;
+  const bounded = new ReadableStream({
+    async pull(controller) {
+      try {
+        const { done, value } = await reader.read();
+        if (done) {
+          controller.close();
+          return;
+        }
+        bytes += value.byteLength;
+        if (bytes > MAX_BODY_BYTES) {
+          tooLarge = true;
+          controller.error(new PayloadTooLargeError());
+          await reader.cancel();
+          return;
+        }
+        controller.enqueue(value);
+      } catch (error) {
+        controller.error(error);
+      }
+    },
+    cancel(reason) {
+      return reader.cancel(reason);
+    },
+  });
+  try {
+    return await new Response(bounded, {
+      headers: { "Content-Type": request.headers.get("Content-Type") },
+    }).formData();
+  } catch (error) {
+    if (tooLarge) throw new PayloadTooLargeError();
+    throw error;
+  } finally {
+    reader.releaseLock();
+  }
 }
 
 function validateInput(body) {
@@ -286,6 +335,7 @@ async function sendViaResend(env, data, attachments) {
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      signal: AbortSignal.timeout(20_000),
       headers: {
         Authorization: `Bearer ${env.RESEND_API_KEY}`,
         "Content-Type": "application/json",

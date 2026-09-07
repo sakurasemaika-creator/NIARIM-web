@@ -227,7 +227,7 @@ textarea.form-control {
 .form-error {
   margin-top: 0.4rem;
   font-size: var(--fs-small);
-  color: var(--color-error);
+  color: var(--color-accent-text);
   display: none;
 }
 

@@ -7,6 +7,7 @@
 
   var MESSAGE_MAX_LENGTH = 1000;
   var NAME_MAX_LENGTH = 100;
+  var EMAIL_MAX_LENGTH = 254;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var MAX_ATTACHMENTS = 3;
   var MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
@@ -48,13 +49,20 @@
       field || row.querySelector(".form-control, input, select, textarea");
     if (!target) return;
 
+    var descriptions = (target.getAttribute("aria-describedby") || "")
+      .split(/\s+/)
+      .filter(function (id) {
+        return id && (!errorEl || id !== errorEl.id);
+      });
     if (show) {
       target.setAttribute("aria-invalid", "true");
-      if (errorEl) target.setAttribute("aria-describedby", errorEl.id);
+      if (errorEl) descriptions.push(errorEl.id);
     } else {
       target.removeAttribute("aria-invalid");
-      target.removeAttribute("aria-describedby");
     }
+    if (descriptions.length)
+      target.setAttribute("aria-describedby", descriptions.join(" "));
+    else target.removeAttribute("aria-describedby");
   }
 
   function validate(form) {
@@ -73,19 +81,22 @@
           ? field.value.length > MESSAGE_MAX_LENGTH
           : field === name
             ? field.value.length > NAME_MAX_LENGTH
-            : false;
+            : field.value.length > EMAIL_MAX_LENGTH;
       var badEmail =
         field === email && !isEmpty && !EMAIL_RE.test(field.value.trim());
 
       if (isEmpty) {
+        errorEl.setAttribute("data-i18n", "contact.error.required");
         errorEl.textContent = t("contact.error.required");
         setFieldError(row, true, field);
         valid = false;
       } else if (tooLong) {
+        errorEl.setAttribute("data-i18n", "contact.error.tooLong");
         errorEl.textContent = t("contact.error.tooLong");
         setFieldError(row, true, field);
         valid = false;
       } else if (badEmail) {
+        errorEl.setAttribute("data-i18n", "contact.error.email");
         errorEl.textContent = t("contact.error.email");
         setFieldError(row, true, field);
         valid = false;
@@ -115,7 +126,11 @@
           return !maxBytes || file.size > maxBytes;
         }) ||
         totalBytes > MAX_TOTAL_ATTACHMENT_BYTES;
-      setFieldError(attachmentsRow, attachmentsInvalid, attachments);
+      setFieldError(
+        attachmentsRow,
+        attachmentsInvalid,
+        document.getElementById("attachments-trigger") || attachments,
+      );
       if (attachmentsInvalid) valid = false;
     }
 
@@ -124,9 +139,16 @@
 
   function showStatus(statusEl, type, titleKey, bodyKey) {
     statusEl.className = "form-status is-visible is-" + type;
+    statusEl.querySelector("h2").setAttribute("data-i18n", titleKey);
     statusEl.querySelector("h2").textContent = t(titleKey);
+    statusEl.querySelector("p").setAttribute("data-i18n", bodyKey);
     statusEl.querySelector("p").textContent = t(bodyKey);
-    statusEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    statusEl.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "nearest",
+    });
   }
 
   // 添付ファイル欄。ブラウザ標準のボタン表記はサイトの言語に追随しないため、
@@ -142,7 +164,7 @@
       input.click();
     });
 
-    input.addEventListener("change", function () {
+    function updateFileStatus() {
       var files = Array.prototype.slice.call(input.files || []);
       if (!files.length) {
         status.setAttribute("data-i18n", "contact.form.attachmentsEmpty");
@@ -155,7 +177,13 @@
         files.length === 1
           ? files[0].name
           : t("contact.form.attachmentsCount").replace("%d", files.length);
-    });
+    }
+    input.addEventListener("change", updateFileStatus);
+    document.addEventListener("niarim:langchange", updateFileStatus);
+    if (input.form)
+      input.form.addEventListener("reset", function () {
+        queueMicrotask(updateFileStatus);
+      });
   }
 
   function initContactForm() {
@@ -173,9 +201,13 @@
       statusEl.className = "form-status";
 
       if (!validate(form)) {
-        var firstError = form.querySelector(
-          ".form-row.has-error .form-control",
-        );
+        var firstRow = form.querySelector(".form-row.has-error");
+        var firstError =
+          firstRow &&
+          (firstRow.querySelector("#attachments-trigger") ||
+            firstRow.querySelector(
+              ".form-control, input:not([type=hidden]), select, textarea",
+            ));
         if (firstError) firstError.focus();
         return;
       }
@@ -197,13 +229,19 @@
       }
 
       submitBtn.disabled = true;
+      submitLabel.setAttribute("data-i18n", "contact.form.submitting");
       submitLabel.textContent = t("contact.form.submitting");
 
       // Content-Typeは指定しない（ブラウザがmultipart/form-dataの
       // boundaryを含めて自動設定するため、手動指定すると壊れる）。
+      var controller = new AbortController();
+      var timeout = setTimeout(function () {
+        controller.abort();
+      }, 30000);
       fetch("/api/contact", {
         method: "POST",
         body: payload,
+        signal: controller.signal,
       })
         .then(function (res) {
           return res
@@ -249,7 +287,9 @@
           );
         })
         .finally(function () {
+          clearTimeout(timeout);
           submitBtn.disabled = false;
+          submitLabel.setAttribute("data-i18n", "contact.form.submit");
           submitLabel.textContent = t("contact.form.submit");
         });
     });

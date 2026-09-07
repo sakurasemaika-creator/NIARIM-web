@@ -4,7 +4,7 @@
   "private": true,
   "description": "NIARIM 公式サイト（Cloudflare Workers Static Assets + Worker）",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "node tools/start-dev.mjs",
     "verify:env": "node tools/verify-env.mjs",
     "shot": "node tools/shot.mjs",
     "deploy": "wrangler deploy",

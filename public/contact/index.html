@@ -244,11 +244,16 @@
                   class="form-control"
                   id="message"
                   name="message"
+                  aria-describedby="message-hint"
                   maxlength="1000"
                   required
                   data-i18n-attr="placeholder:contact.form.messagePlaceholder"
                 ></textarea>
-                <p class="form-hint" data-i18n="contact.form.messageHint">
+                <p
+                  class="form-hint"
+                  id="message-hint"
+                  data-i18n="contact.form.messageHint"
+                >
                   1,000文字以内でご記入ください。
                 </p>
                 <p class="form-error" data-i18n="contact.error.tooLong">
@@ -257,7 +262,10 @@
               </div>
 
               <div class="form-row">
-                <label for="attachments" data-i18n="contact.form.attachments"
+                <label
+                  for="attachments"
+                  id="attachments-label"
+                  data-i18n="contact.form.attachments"
                   >画像・動画を添付する（任意）</label
                 >
                 <div class="form-file">
@@ -266,6 +274,8 @@
                     type="file"
                     id="attachments"
                     name="attachments"
+                    tabindex="-1"
+                    aria-hidden="true"
                     accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime,video/webm"
                     multiple
                   />
@@ -273,6 +283,8 @@
                     class="form-file-button"
                     type="button"
                     id="attachments-trigger"
+                    aria-labelledby="attachments-trigger attachments-label"
+                    aria-describedby="attachments-hint attachments-status"
                     data-i18n="contact.form.attachmentsButton"
                   >
                     ファイルを選ぶ
@@ -285,7 +297,11 @@
                     >ファイルは選択されていません</span
                   >
                 </div>
-                <p class="form-hint" data-i18n="contact.form.attachmentsHint">
+                <p
+                  class="form-hint"
+                  id="attachments-hint"
+                  data-i18n="contact.form.attachmentsHint"
+                >
                   画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。
                 </p>
                 <p class="form-error" data-i18n="contact.error.attachments">

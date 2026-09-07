@@ -181,6 +181,15 @@
     return lang;
   }
 
+  function setLangDropdownOpen(dropdown, open, restoreFocus) {
+    dropdown.setAttribute("data-open", String(open));
+    var trigger = dropdown.querySelector("[data-lang-trigger]");
+    if (trigger) {
+      trigger.setAttribute("aria-expanded", String(open));
+      if (restoreFocus) trigger.focus();
+    }
+  }
+
   function buildLangMenu() {
     var mount = document.querySelector("[data-lang-menu]");
     if (!mount) return;
@@ -195,7 +204,7 @@
       button.addEventListener("click", function () {
         applyLang(lang.code, { persist: true });
         var dropdown = mount.closest("[data-lang-dropdown]");
-        if (dropdown) dropdown.setAttribute("data-open", "false");
+        if (dropdown) setLangDropdownOpen(dropdown, false, true);
       });
       li.appendChild(button);
       mount.appendChild(li);
@@ -208,9 +217,16 @@
     var trigger = dropdown.querySelector("[data-lang-trigger]");
     if (!trigger) return;
 
+    var menu = dropdown.querySelector("[data-lang-menu]");
+    if (menu) {
+      if (!menu.id) menu.id = "language-menu";
+      trigger.setAttribute("aria-controls", menu.id);
+    }
+    setLangDropdownOpen(dropdown, false);
+
     trigger.addEventListener("click", function () {
       var willOpen = dropdown.getAttribute("data-open") !== "true";
-      dropdown.setAttribute("data-open", String(willOpen));
+      setLangDropdownOpen(dropdown, willOpen);
       // スマホではこの切替がメニューパネルの下端付近にあり、開いた一覧が
       // 画面外へ出て「言語が3つしか無い」ように見えていた。パネルは
       // スクロールできるので、開いたら一覧が見える位置まで送ってやる。
@@ -220,17 +236,29 @@
       requestAnimationFrame(function () {
         var rect = menu.getBoundingClientRect();
         if (rect.bottom <= window.innerHeight) return;
-        menu.scrollIntoView({ block: "end", behavior: "smooth" });
+        menu.scrollIntoView({
+          block: "end",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
+        });
       });
     });
 
     document.addEventListener("click", function (event) {
       if (!dropdown.contains(event.target))
-        dropdown.setAttribute("data-open", "false");
+        setLangDropdownOpen(dropdown, false);
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") dropdown.setAttribute("data-open", "false");
+      if (
+        event.key === "Escape" &&
+        dropdown.getAttribute("data-open") === "true"
+      ) {
+        event.preventDefault();
+        setLangDropdownOpen(dropdown, false, true);
+      }
     });
   }
 
