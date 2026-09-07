@@ -1,24 +1,33 @@
 (function () {
   "use strict";
 
+  function icon(name, className) {
+    return (
+      '<svg class="hero-community-icon ' + (className || "") + '" aria-hidden="true">' +
+      '<use href="/assets/icons/ui/sprite.svg#' + name + '"></use>' +
+      "</svg>"
+    );
+  }
+
   function workCard(title, author, views, bookmarks, duration, tone) {
     return (
       '<article class="hero-community-work ' + tone + '">' +
       '<div class="hero-community-thumb">' +
       '<span class="hero-community-play">▶</span>' +
-      '<span class="hero-community-bookmark">♡</span>' +
+      '<span class="hero-community-bookmark" aria-hidden="true"></span>' +
       '<span class="hero-community-duration">' + duration + '</span>' +
       '</div>' +
       '<div class="hero-community-meta">' +
       '<strong>' + title + '</strong>' +
       '<span class="hero-community-author">' + author + '</span>' +
-      '<span class="hero-community-stats">▶ ' + views + '　◆ ' + bookmarks + '</span>' +
+      '<span class="hero-community-stats"><span>▶ ' + views + '</span><span class="hero-community-bookmark-stat">◆ ' + bookmarks + '</span></span>' +
       '</div>' +
       '</article>'
     );
   }
 
-  /* NIARIM/dev_branch CommunityScreen + CommunityWorkCard の縮小再現。 */
+  /* NIARIM/dev_branch CommunityScreen + CommunityWorkCard の縮小再現。
+     AppBar → actions → TabBar → 16:9 work grid → extended FAB の順序を本体と一致させる。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
     screen.className = "hero-community-mini";
@@ -27,10 +36,10 @@
       '<div class="hero-community-appbar">' +
       '<strong>作品広場</strong>' +
       '<div class="hero-community-actions">' +
-      '<span>♢</span>' +
-      '<span class="hero-community-filter">⌁<small>総合</small>⌄</span>' +
-      '<span>⌕</span>' +
-      '<span>?</span>' +
+      '<span class="hero-community-action hero-community-notification"><i></i></span>' +
+      '<span class="hero-community-action">' + icon("ic-tune") + '</span>' +
+      '<span class="hero-community-action">' + icon("ic-search") + '</span>' +
+      '<span class="hero-community-action">' + icon("ic-help_outline") + '</span>' +
       '</div>' +
       '</div>' +
       '<div class="hero-community-tabs">' +
@@ -44,7 +53,7 @@
       workCard("静かな記憶", "ペン先ラボ", "5,306", "148", "0:31", "is-c") +
       workCard("雨上がりの手紙", "よあけスタジオ", "3,744", "96", "0:55", "is-d") +
       '</div>' +
-      '<span class="hero-community-fab"><b>▣</b>自分の投稿</span>';
+      '<span class="hero-community-fab"><b class="hero-community-fab-icon">▣</b>自分の投稿</span>';
     return screen;
   }
 
