@@ -1,4 +1,4 @@
-/* ==========================================================================
+/* ========================================================================== 
    NIARIM community.css - みんなの作品を見るページ専用スタイル
    ========================================================================== */
 
@@ -21,6 +21,7 @@
 }
 
 .community-tabs button {
+  min-height: 44px;
   padding: 0.55rem 1.2rem;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--color-gray-300);
@@ -63,8 +64,6 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-white);
-  /* ギャラリー全体のフェード(.reveal)に加えて、カードを1枚ずつ
-     少し間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
   transition:
     opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
@@ -96,7 +95,6 @@
   text-align: center;
 }
 
-/* TOP3は金・銀・銅のメダルカラーで強調（ibisPaintのランキングページ等を参照） */
 .community-gallery .community-card:nth-child(1) {
   border-color: #ffd76a;
   box-shadow:
@@ -123,8 +121,6 @@
   padding: var(--space-sm) var(--space-md);
 }
 
-/* スマホ幅では1列になり、カードが縦に長く連なって中身の薄い画面に
-   なってしまうため、ランキングらしく2列で並べる。 */
 @media (max-width: 600px) {
   .community-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -152,9 +148,6 @@
   font-family: var(--font-serif);
   font-size: 0.95rem;
   font-weight: 600;
-  /* 実際の作品が入るまでの仮テキスト。「薄いプレースホルダー」に
-     見せたいとはいえ --color-gray-300 では白背景に対し1.7:1程度しかなく
-     読めないため、読める範囲で控えめな色にする。 */
   color: var(--color-text-muted);
 }
 
@@ -164,9 +157,6 @@
   color: var(--color-text-muted);
 }
 
-/* プレースホルダーの続き(9位以降)は実際の画面が用意でき次第置き換える。
-   それまでの間、サイト上ではこれ以上の順位を表示できないため、
-   アプリでの続きを促すCTAカードをギャラリー内に1枚差し込む。 */
 .community-card.is-more-cta {
   display: flex;
   align-items: center;
@@ -191,11 +181,38 @@
   font-weight: 600;
 }
 
-/* 文言が長い言語やスマホの2列表示でも、ボタンがカードの内側に収まるようにする。 */
 .community-card.is-more-cta .btn {
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   padding-inline: var(--space-sm);
   white-space: normal;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   line-height: 1.35;
+  text-align: center;
+}
+
+@media (max-width: 375px) {
+  .community-banner {
+    padding-inline: var(--space-md);
+  }
+
+  .community-tabs {
+    gap: 0.4rem;
+  }
+
+  .community-tabs button {
+    flex: 1 1 calc(33.333% - 0.4rem);
+    padding-inline: 0.55rem;
+  }
+
+  .community-card.is-more-cta .thumb {
+    padding: var(--space-sm);
+  }
+
+  .community-card.is-more-cta .btn {
+    padding: 0.7rem 0.45rem;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
 }
