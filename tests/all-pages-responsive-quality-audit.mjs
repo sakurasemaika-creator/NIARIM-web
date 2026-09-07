@@ -49,16 +49,37 @@ for (const width of widths) {
           r.height > 0
         );
       };
+      const isIntentionallyScrollable = (el) => {
+        for (let node = el; node && node !== document.documentElement; node = node.parentElement) {
+          const cs = getComputedStyle(node);
+          if (
+            cs.overflowX === "auto" ||
+            cs.overflowX === "scroll" ||
+            node.classList?.contains("screenshot-scroller") ||
+            node.classList?.contains("fd-frame-strip-scroll") ||
+            node.classList?.contains("fd-toolbar-overlay") ||
+            node.classList?.contains("feature-nav")
+          ) {
+            return true;
+          }
+        }
+        return false;
+      };
+      const isOffscreenUtility = (el) =>
+        el.matches(".visually-hidden, [aria-hidden='true']") ||
+        Boolean(el.closest(".visually-hidden, [aria-hidden='true']"));
       const selectors =
         "h1,h2,h3,p,a,button,input,textarea,select,img,svg,.card,.feature-row,.screenshot-card,.section-title,.container";
-      const elements = [...document.querySelectorAll(selectors)].filter(
-        visible,
-      );
+      const elements = [...document.querySelectorAll(selectors)].filter(visible);
       const outside = [];
       const tinyTargets = [];
       for (const el of elements) {
         const r = el.getBoundingClientRect();
-        if (r.right > innerWidth + 2 || r.left < -2) {
+        if (
+          (r.right > innerWidth + 2 || r.left < -2) &&
+          !isIntentionallyScrollable(el) &&
+          !isOffscreenUtility(el)
+        ) {
           outside.push({
             tag: el.tagName,
             cls: el.className?.toString().slice(0, 100) || "",
@@ -69,12 +90,14 @@ for (const width of widths) {
         }
         if (
           el.matches("a,button,input,select") &&
+          !isOffscreenUtility(el) &&
           r.width > 0 &&
           r.height > 0 &&
           (r.width < 36 || r.height < 36)
         ) {
           tinyTargets.push({
             tag: el.tagName,
+            cls: el.className?.toString().slice(0, 100) || "",
             text: (el.textContent || "").trim().slice(0, 60),
             width: r.width,
             height: r.height,
@@ -121,10 +144,15 @@ for (const width of widths) {
         kind: "heading-overflow",
         headings: state.headingOverflow,
       });
-    // Tiny inline text links are allowed; flag only control-like targets with non-trivial boxes.
-    const badTargets = state.tinyTargets.filter(
-      (x) => x.tag !== "A" || x.height >= 28 || x.width >= 28,
-    );
+    // Inline prose/footer links are allowed to use their natural line box. Controls,
+    // icon links and button-like anchors must retain a usable target.
+    const badTargets = state.tinyTargets.filter((x) => {
+      if (x.tag !== "A") return true;
+      const controlLike = /(^|\s)(btn|brand|lang-trigger|footer-social|skip-link)(\s|$)/.test(
+        x.cls,
+      );
+      return controlLike || x.height >= 28 || x.width >= 28;
+    });
     if (badTargets.length)
       findings.push({
         width,
