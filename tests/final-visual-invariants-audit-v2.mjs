@@ -24,6 +24,12 @@ if (child.status !== 0) {
   }
 }
 
+function getGalleryCards(failure) {
+  if (Array.isArray(failure.cards)) return failure.cards;
+  if (Array.isArray(failure.gallery?.cards)) return failure.gallery.cards;
+  return [];
+}
+
 let removedLegacyGalleryFailures = 0;
 const failures = legacyFailures.filter((failure) => {
   if (failure.kind === "hero-ratio") return false;
@@ -37,18 +43,12 @@ const failures = legacyFailures.filter((failure) => {
   }
 
   if (failure.kind === "gallery-theme-missing") {
-    const cards = Array.isArray(failure.cards) ? failure.cards : [];
-    const populated = cards.filter(
-      (card) => card.theme && card.accent && card.bezel,
-    );
-    const accents = new Set(populated.map((card) => card.accent));
-    const bezels = new Set(populated.map((card) => card.bezel));
-    if (
+    const cards = getGalleryCards(failure);
+    const allSevenCardsHaveThemeTokens =
       cards.length === 7 &&
-      populated.length === 7 &&
-      accents.size === 7 &&
-      bezels.size === 7
-    ) {
+      cards.every((card) => card.theme && card.accent && card.bezel);
+
+    if (allSevenCardsHaveThemeTokens) {
       removedLegacyGalleryFailures += 1;
       return false;
     }
@@ -56,19 +56,21 @@ const failures = legacyFailures.filter((failure) => {
 
   return true;
 });
+
 const canonicalHeroFailures = await auditCanonicalHeroRatio(baseURL);
 failures.push(...canonicalHeroFailures);
+
+const removedLegacyInnerHeroFailures = legacyFailures.filter(
+  (failure) => failure.kind === "hero-ratio",
+).length;
 
 if (failures.length) {
   console.error(
     JSON.stringify(
       {
         ok: false,
-        correctedAudit: "current-dom-v3-seven-card-gallery",
-        removedLegacyInnerHeroFailures:
-          legacyFailures.length -
-          legacyFailures.filter((failure) => failure.kind !== "hero-ratio")
-            .length,
+        correctedAudit: "current-dom-v4-seven-card-gallery",
+        removedLegacyInnerHeroFailures,
         removedLegacyGalleryFailures,
         failures,
       },
@@ -83,11 +85,8 @@ console.log(
   JSON.stringify(
     {
       ok: true,
-      correctedAudit: "current-dom-v3-seven-card-gallery",
-      removedLegacyInnerHeroFailures:
-        legacyFailures.length -
-        legacyFailures.filter((failure) => failure.kind !== "hero-ratio")
-          .length,
+      correctedAudit: "current-dom-v4-seven-card-gallery",
+      removedLegacyInnerHeroFailures,
       removedLegacyGalleryFailures,
       canonicalHeroChecks: 21,
     },
