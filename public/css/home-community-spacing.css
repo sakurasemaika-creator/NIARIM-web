@@ -1,14 +1,22 @@
 /* Home-only finishing layer.
-   1) Hero horizontal gutters use the same shared container tokens as the rest
+   1) Hero horizontal gutters use the same shared container geometry as the rest
       of the Home sections.
    2) The Community screen miniature is also exposed as the final App Preview
       card, reusing the exact same DOM as the Hero showcase. */
 
-.hero .container {
-  width: min(
-    calc(100% - var(--container-padding) * 2),
-    var(--container-width)
-  ) !important;
+/* home-hero-fit-628.css intentionally uses !important for first-view fitting.
+   Beat those old narrow-gutter rules explicitly instead of depending on async
+   stylesheet insertion order. Keep the formula identical to common.css. */
+html body .hero > .container {
+  width: min(100% - var(--container-padding) * 2, var(--container-width)) !important;
+}
+
+/* The polished mobile Home sections use an 18px visual gutter. Match that
+   measured geometry instead of leaving the Hero at the base 20px clamp. */
+@media (max-width: 520px) {
+  html body .hero > .container {
+    width: calc(100% - 36px) !important;
+  }
 }
 
 .screenshot-card-community {
