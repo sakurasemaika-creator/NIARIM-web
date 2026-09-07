@@ -93,6 +93,57 @@
   background: currentColor;
 }
 
+/* Flutter VideoTypeFilterButton:
+   filter_alt_outlined (18) + 4px + "総合" (12) + arrow_drop_down (18). */
+.hero-community-video-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1px, 0.13vw, 2px);
+  min-width: 0;
+  padding: clamp(1px, 0.12vw, 2px);
+  color: #4d4851;
+  font-size: clamp(3.4px, 0.34vw, 5.2px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-community-filter-icon {
+  position: relative;
+  display: block;
+  width: clamp(6px, 0.62vw, 9px);
+  height: clamp(6px, 0.62vw, 9px);
+}
+.hero-community-filter-icon::before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 13%;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 1px 2px 0 -0.1px currentColor, 2px 4px 0 -0.1px currentColor;
+  transform: skewX(-28deg);
+  transform-origin: left center;
+}
+.hero-community-filter-icon::after {
+  content: "";
+  position: absolute;
+  left: 43%;
+  bottom: 4%;
+  width: 18%;
+  height: 34%;
+  border-radius: 0 0 1px 1px;
+  background: currentColor;
+}
+
+.hero-community-filter-arrow {
+  width: 0;
+  height: 0;
+  border-left: clamp(2px, 0.2vw, 3px) solid transparent;
+  border-right: clamp(2px, 0.2vw, 3px) solid transparent;
+  border-top: clamp(3px, 0.28vw, 4px) solid currentColor;
+}
+
 .hero-community-tabs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
