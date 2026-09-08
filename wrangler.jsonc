@@ -3,6 +3,10 @@
   "name": "niarim-web",
   "main": "src/index.js",
   "compatibility_date": "2026-08-25",
+  "build": {
+    "command": "node tools/generate-seo-i18n.mjs",
+    "watch_dir": ["public/js", "tools"],
+  },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
