@@ -2,11 +2,7 @@
 (function () {
   "use strict";
   var LINKS = [
-    {
-      id: "google-play-link",
-      key: "GOOGLE_PLAY_URL",
-      fallback: "disable",
-    },
+    { id: "google-play-link", key: "GOOGLE_PLAY_URL", fallback: "disable" },
     { id: "footer-x-link", key: "X_URL", fallback: "hide" },
     { id: "footer-x-icon", key: "X_URL", fallback: "hide" },
     { id: "contact-x-link", key: "X_URL", fallback: "hide" },
@@ -34,32 +30,23 @@
   }
 
   function centerCurrentFrames() {
-    document
-      .querySelectorAll(".fd-frame-strip-scroll")
-      .forEach(function (strip) {
-        var current = strip.querySelector(
-          ".fd-frame-thumb.is-current, .fd-frame.is-current",
-        );
-        if (!current || !strip.clientWidth) return;
-        var target =
-          current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
-        var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
-        strip.scrollLeft = Math.max(0, Math.min(max, target));
-      });
+    document.querySelectorAll(".fd-frame-strip-scroll").forEach(function (strip) {
+      var current = strip.querySelector(".fd-frame-thumb.is-current, .fd-frame.is-current");
+      if (!current || !strip.clientWidth) return;
+      var target = current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
+      var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
+      strip.scrollLeft = Math.max(0, Math.min(max, target));
+    });
   }
 
   function scheduleFrameCentering() {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(centerCurrentFrames);
-    });
+    requestAnimationFrame(function () { requestAnimationFrame(centerCurrentFrames); });
     setTimeout(centerCurrentFrames, 240);
   }
 
   function loadFeatureFidelity() {
-    if (!document.getElementById("audio") && !document.getElementById("widget"))
-      return;
+    if (!document.getElementById("audio") && !document.getElementById("widget")) return;
     if (document.querySelector("script[data-niarim-feature-fidelity]")) return;
-
     var script = document.createElement("script");
     script.src = "/js/features-fidelity.js";
     script.defer = true;
@@ -78,20 +65,10 @@
 
   function loadHomeHeroViewport() {
     if (!document.querySelector(".hero + .marquee-section")) return;
-    addStyleOnce(
-      "/css/home-hero-viewport.css",
-      "data-niarim-home-hero-viewport",
-    );
-    addStyleOnce(
-      "/css/home-hero-fidelity.css",
-      "data-niarim-home-hero-fidelity",
-    );
+    addStyleOnce("/css/home-hero-viewport.css", "data-niarim-home-hero-viewport");
+    addStyleOnce("/css/home-hero-fidelity.css", "data-niarim-home-hero-fidelity");
     addStyleOnce("/css/home-hero-fit-628.css", "data-niarim-home-hero-fit-628");
-    addStyleOnce(
-      "/css/home-community-spacing.css",
-      "data-niarim-home-community-spacing",
-    );
-
+    addStyleOnce("/css/home-community-spacing.css", "data-niarim-home-community-spacing");
     if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
       var script = document.createElement("script");
       script.src = "/js/home-hero-showcase.js";
@@ -103,16 +80,21 @@
 
   function loadSignatureShowcase() {
     if (!document.querySelector(".about-hero, .features-header")) return;
-    addStyleOnce(
-      "/css/signature-showcase.css",
-      "data-niarim-signature-showcase-style",
-    );
-    if (document.querySelector("script[data-niarim-signature-showcase]")) return;
-    var script = document.createElement("script");
-    script.src = "/js/signature-showcase.js";
-    script.defer = true;
-    script.setAttribute("data-niarim-signature-showcase", "true");
-    document.head.appendChild(script);
+    addStyleOnce("/css/signature-showcase.css", "data-niarim-signature-showcase-style");
+    if (!document.querySelector("script[data-niarim-signature-showcase]")) {
+      var script = document.createElement("script");
+      script.src = "/js/signature-showcase.js";
+      script.defer = true;
+      script.setAttribute("data-niarim-signature-showcase", "true");
+      document.head.appendChild(script);
+    }
+    if (document.querySelector(".features-header") && !document.querySelector("script[data-niarim-auto-lineart-phone]")) {
+      var phone = document.createElement("script");
+      phone.src = "/js/auto-lineart-phone.js";
+      phone.defer = true;
+      phone.setAttribute("data-niarim-auto-lineart-phone", "true");
+      document.head.appendChild(phone);
+    }
   }
 
   function loadAiTrustCopy() {
@@ -132,16 +114,11 @@
     loadSignatureShowcase();
     scheduleFrameCentering();
     window.addEventListener("load", scheduleFrameCentering);
-    window.addEventListener("resize", scheduleFrameCentering, {
-      passive: true,
-    });
+    window.addEventListener("resize", scheduleFrameCentering, { passive: true });
     document.addEventListener("niarim:langchange", scheduleFrameCentering);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(scheduleFrameCentering);
-    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleFrameCentering);
   }
 
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
