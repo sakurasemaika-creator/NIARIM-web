@@ -31,7 +31,9 @@ for (const width of widths) {
     const heroCopy = document.querySelector(".hero-copy");
     const heroShowcase = document.querySelector(".hero-showcase");
     const heroTitle = document.querySelector(".hero-title");
+    const heroLead = document.querySelector(".hero-lead");
     const heroActions = document.querySelector(".hero-actions");
+    const heroBridge = document.querySelector(".hero-bridge");
     const sharedContainer = document.querySelector("main .section .container");
     const scroller = document.querySelector(".screenshot-scroller");
     const communityCard = scroller?.querySelector(".screenshot-card-community");
@@ -45,7 +47,9 @@ for (const width of widths) {
       copy: rect(heroCopy),
       showcase: rect(heroShowcase),
       title: rect(heroTitle),
+      lead: rect(heroLead),
       actions: rect(heroActions),
+      bridge: rect(heroBridge),
       shared: rect(sharedContainer),
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -112,28 +116,34 @@ for (const width of widths) {
     }
   }
 
-  /* Compact widths intentionally keep copy and product UI side by side. The
-     important invariant there is a real gap between both columns, not vertical
-     stacking. */
-  if (
-    width >= 560 &&
-    width <= 640 &&
-    state.copy &&
-    state.showcase &&
-    state.copy.right > state.showcase.left - 1
-  ) {
-    failures.push({ width, kind: "hero-compact-columns-overlap", state });
-  }
-
-  /* 641-759px is the dedicated one-column transition band. */
-  if (
-    width >= 641 &&
-    width < 760 &&
-    state.copy &&
-    state.showcase &&
-    state.showcase.top < state.copy.bottom - 1
-  ) {
-    failures.push({ width, kind: "hero-transition-column-overlap", state });
+  /* 560–759px intentionally uses the compact two-column first-view composition.
+     Assert the geometry that matters to users: the product preview must have a
+     real horizontal safety gap from every visible copy/control block. This is
+     stricter than comparing wrapper vertical ranges, which falsely reports a
+     collision whenever two valid columns share the same rows. */
+  if (width >= 560 && width < 760 && state.showcase) {
+    const copyBlocks = [
+      ["title", state.title],
+      ["lead", state.lead],
+      ["actions", state.actions],
+      ["bridge", state.bridge],
+    ];
+    for (const [name, block] of copyBlocks) {
+      if (!block) continue;
+      const horizontalGap = state.showcase.left - block.right;
+      const verticalRangesOverlap =
+        block.top < state.showcase.bottom - 1 &&
+        block.bottom > state.showcase.top + 1;
+      if (verticalRangesOverlap && horizontalGap < 8) {
+        failures.push({
+          width,
+          kind: "hero-compact-content-collision",
+          block: name,
+          horizontalGap,
+          state,
+        });
+      }
+    }
   }
 
   if (
@@ -189,8 +199,7 @@ console.log(
       widths,
       checks: [
         "Hero uses the same left/right container gutters as lower Home sections",
-        "560-640px compact copy/device columns keep a real horizontal gap",
-        "641-759px transition Hero stays non-overlapping and single-column",
+        "560-759px compact copy/device columns keep >=8px clearance for every overlapping content block",
         "Hero title and actions stay inside the shared container",
         "No horizontal overflow appears across the full responsive width ladder",
         "App Preview contains the Community reproduction",
