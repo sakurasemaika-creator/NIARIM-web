@@ -1,5 +1,9 @@
 /* Mobile first-view composition: show NIARIM's product UI immediately instead of a text-only opening. */
-@media (max-width: 640px) {
+/* Keep this compact two-column composition through 759px. At 640px the old
+   breakpoint ended and 641px abruptly fell back to the tall tablet stack,
+   nearly doubling the hero height. 760px is the intentional next composition
+   boundary, so 559/560, 640/641 and 759/760 remain visually deliberate. */
+@media (max-width: 759px) {
   .hero {
     padding-top: 1.35rem !important;
     padding-bottom: 1.15rem !important;
