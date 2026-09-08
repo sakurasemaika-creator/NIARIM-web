@@ -187,6 +187,25 @@
     max-width: 250px !important;
     margin-inline: auto !important;
   }
+
+  /* Long horizontal category bars should communicate that they can scroll.
+     Keep a clean edge-to-edge rail with a deliberate partial-next-item cue. */
+  .feature-nav.feature-nav {
+    gap: 0.55rem;
+    padding-inline: var(--container-padding);
+    scroll-padding-inline: var(--container-padding);
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .feature-nav.feature-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature-nav.feature-nav a {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
 }
 
 /* Very narrow phones need a separate density floor. 320–339px must not inherit
@@ -227,5 +246,18 @@
 
   .hero-visual {
     width: min(66vw, 210px) !important;
+  }
+
+  .feature-nav.feature-nav a {
+    padding-inline: 0.85rem;
+  }
+}
+
+/* Desktop header: preserve the airy composition while avoiding undersized,
+   low-authority navigation text on wide canvases. */
+@media (min-width: 1024px) {
+  .main-nav > ul > li > a {
+    font-size: clamp(0.78rem, 0.72vw, 0.9rem);
+    letter-spacing: 0.01em;
   }
 }
