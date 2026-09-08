@@ -211,9 +211,16 @@ for (const lang of languages) {
             await page.locator("#message").inputValue(),
             `NIARIM ${lang} contact regression`,
           );
-          assert.ok(
-            (await page.locator("#form-status p").textContent()).trim().length >
-              10,
+          const errorText = (
+            await page.locator("#form-status p").textContent()
+          ).trim();
+          // Valid Chinese copy is only eight characters; length is not a
+          // language-independent test for a missing translation.
+          assert.ok(errorText.length > 0, `${expected} must not be blank`);
+          assert.notEqual(
+            errorText,
+            expected,
+            "translation key must not leak into the UI",
           );
         }
         assert.equal(requests.length, 4);
@@ -224,7 +231,7 @@ for (const lang of languages) {
           });
         passed++;
       } catch (error) {
-        findings.push({ caseName, message: error.message });
+        findings.push({ caseName, message: error.message, stack: error.stack });
         await page.screenshot({
           path: `${output}/${caseName}-failure.png`,
           fullPage: true,
