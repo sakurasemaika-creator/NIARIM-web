@@ -1,4 +1,4 @@
-/* ==========================================================================
+/* ========================================================================== 
    NIARIM help.css - 使い方ガイドページ専用スタイル
    （カテゴリ一覧・カード類は features.css の feature-nav / spec-grid を再利用）
    ========================================================================== */
@@ -75,4 +75,30 @@
   font-size: var(--fs-small);
   color: var(--color-text-muted);
   font-weight: 400;
+}
+
+/* Long help pages need stronger wayfinding than the feature catalogue. Each
+   category gets its own quiet landmark so users can recover their position
+   while scrolling without turning every article card into a louder surface. */
+[data-help-category] .feature-section-head {
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 92, 122, 0.12);
+  border-radius: 16px;
+  background:
+    linear-gradient(90deg, rgba(255, 92, 122, 0.07), rgba(255, 255, 255, 0.72));
+}
+
+[data-help-category] .feature-section-head::before {
+  margin-bottom: 0.45rem;
+}
+
+[data-help-category] .feature-section-head h2 {
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  [data-help-category] .feature-section-head {
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
 }
