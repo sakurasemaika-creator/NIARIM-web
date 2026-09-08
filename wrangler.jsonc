@@ -6,13 +6,15 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*"],
+    // HTMLもWorkerを通し、canonical/OG等を実際の公開URLへ正規化する。
+    "run_worker_first": true,
     // 未一致パスは public/404.html を404ステータスで返す
     // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)
     "not_found_handling": "404-page",
   },
-  // お問い合わせフォームのメール送信先・送信元。実際の値はデプロイ環境ごとに設定する。
+  // 公開サイトの正規URL。独自ドメインへ移行した際はこの1か所を変更する。
   "vars": {
+    "SITE_ORIGIN": "https://niarim-web.niarim.workers.dev",
     "CONTACT_TO_EMAIL": "your-inbox@example.com",
     "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>",
   },
