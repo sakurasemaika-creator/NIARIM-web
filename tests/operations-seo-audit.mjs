@@ -48,22 +48,24 @@ for (const [, route] of routes) {
   expect(sitemap.includes(`<loc>${origin}${route}</loc>`), "sitemap-route", route);
 }
 
+const metadata = [
+  ["description", /<meta\s+name=["']description["']/i],
+  ["robots", /<meta\s+name=["']robots["']/i],
+  ["canonical", /<link\s+rel=["']canonical["']/i],
+  ["og:title", /<meta\s+property=["']og:title["']/i],
+  ["og:description", /<meta\s+property=["']og:description["']/i],
+  ["og:url", /<meta\s+property=["']og:url["']/i],
+  ["og:image", /<meta\s+property=["']og:image["']/i],
+  ["twitter:card", /<meta\s+name=["']twitter:card["']/i],
+  ["twitter:title", /<meta\s+name=["']twitter:title["']/i],
+  ["twitter:description", /<meta\s+name=["']twitter:description["']/i],
+  ["twitter:image", /<meta\s+name=["']twitter:image["']/i],
+];
+
 for (const [file, route] of routes) {
   const html = read(file);
-  for (const needle of [
-    '<meta name="description"',
-    '<meta name="robots"',
-    '<link rel="canonical"',
-    '<meta property="og:title"',
-    '<meta property="og:description"',
-    '<meta property="og:url"',
-    '<meta property="og:image"',
-    '<meta name="twitter:card"',
-    '<meta name="twitter:title"',
-    '<meta name="twitter:description"',
-    '<meta name="twitter:image"',
-  ]) {
-    expect(html.includes(needle), "page-metadata", `${route} ${needle}`);
+  for (const [name, pattern] of metadata) {
+    expect(pattern.test(html), "page-metadata", `${route} ${name}`);
   }
 }
 
