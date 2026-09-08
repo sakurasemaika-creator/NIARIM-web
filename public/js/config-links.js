@@ -40,7 +40,9 @@
   }
 
   function scheduleFrameCentering() {
-    requestAnimationFrame(function () { requestAnimationFrame(centerCurrentFrames); });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(centerCurrentFrames);
+    });
     setTimeout(centerCurrentFrames, 240);
   }
 
@@ -102,6 +104,14 @@
         narrative.defer = true;
         narrative.setAttribute("data-niarim-advanced-narrative", "true");
         document.head.appendChild(narrative);
+      }
+      addStyleOnce("/css/widget-phone-fidelity.css", "data-niarim-widget-phone-style");
+      if (!document.querySelector("script[data-niarim-widget-phone]")) {
+        var widget = document.createElement("script");
+        widget.src = "/js/widget-phone-fidelity.js";
+        widget.defer = true;
+        widget.setAttribute("data-niarim-widget-phone", "true");
+        document.head.appendChild(widget);
       }
     }
   }
