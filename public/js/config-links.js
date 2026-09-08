@@ -88,12 +88,21 @@
       script.setAttribute("data-niarim-signature-showcase", "true");
       document.head.appendChild(script);
     }
-    if (document.querySelector(".features-header") && !document.querySelector("script[data-niarim-auto-lineart-phone]")) {
-      var phone = document.createElement("script");
-      phone.src = "/js/auto-lineart-phone.js";
-      phone.defer = true;
-      phone.setAttribute("data-niarim-auto-lineart-phone", "true");
-      document.head.appendChild(phone);
+    if (document.querySelector(".features-header")) {
+      if (!document.querySelector("script[data-niarim-auto-lineart-phone]")) {
+        var phone = document.createElement("script");
+        phone.src = "/js/auto-lineart-phone.js";
+        phone.defer = true;
+        phone.setAttribute("data-niarim-auto-lineart-phone", "true");
+        document.head.appendChild(phone);
+      }
+      if (!document.querySelector("script[data-niarim-advanced-narrative]")) {
+        var narrative = document.createElement("script");
+        narrative.src = "/js/advanced-narrative-normalizer.js";
+        narrative.defer = true;
+        narrative.setAttribute("data-niarim-advanced-narrative", "true");
+        document.head.appendChild(narrative);
+      }
     }
   }
 
