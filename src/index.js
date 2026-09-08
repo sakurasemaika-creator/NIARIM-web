@@ -222,6 +222,9 @@ function rewriteSeoHtml(response, request, env) {
     })
     .on("head", {
       element(element) {
+        element.append('<script src="/js/lang-query-bridge.js"></script>', {
+          html: true,
+        });
         element.append(alternates, { html: true });
         if (schema) {
           element.append(
