@@ -19,6 +19,25 @@ jobs:
         run: npm ci
       - name: Check formatting
         run: npm run format:check
+      - name: Generate canonical formatting for diagnosis
+        if: failure()
+        run: npm run format
+      - name: Upload canonical formatting for diagnosis
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-prettier-output
+          path: |
+            public/css/pages/help.css
+            public/css/signature-showcase.css
+            public/js/advanced-narrative-normalizer.js
+            public/js/auto-lineart-phone.js
+            public/js/config-links.js
+            public/js/signature-showcase.js
+            public/js/widget-phone-fidelity.js
+            tests/page-heading-signature-audit.mjs
+          if-no-files-found: error
+          retention-days: 1
 
   audit:
     runs-on: ubuntu-latest
