@@ -94,3 +94,64 @@ a {
     line-height: 0.99 !important;
   }
 }
+
+/* 641–759px is part of the compact first-view composition. Several earlier
+   layers still own 641–900px tablet rules, and their later/specific selectors
+   can collapse this band back to one column even though mobile-first-view.css
+   intentionally extends through 759px. Keep the final loaded layer explicit:
+   one compact two-column grid, one phone preview, no cascade hand-off until
+   the deliberate 760px breakpoint. This fixes the implementation rather than
+   weakening the breakpoint audit. */
+@media (min-width: 641px) and (max-width: 759px) {
+  .hero .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) clamp(164px, 27vw, 196px) !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
+    column-gap: 0.85rem !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+  }
+
+  .hero-copy {
+    display: contents !important;
+  }
+
+  .hero-title {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+  }
+
+  .hero-subtitle {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+  }
+
+  .hero-copy .eyebrow {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+  }
+
+  .hero-lead {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+    max-width: none !important;
+  }
+
+  .hero-visual {
+    grid-column: 2 !important;
+    grid-row: 3 / span 2 !important;
+    align-self: start !important;
+    justify-self: end !important;
+    width: 100% !important;
+    max-width: 196px !important;
+    height: auto !important;
+    aspect-ratio: 320 / 569 !important;
+    margin: 0.28rem 0 0 !important;
+  }
+
+  .hero-actions {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+  }
+}
