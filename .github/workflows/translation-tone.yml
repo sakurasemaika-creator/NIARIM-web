@@ -1,0 +1,23 @@
+name: Translation Tone
+
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - 'public/js/i18n-dict-*.js'
+      - 'tools/audit-translation-tone.mjs'
+      - '.github/workflows/translation-tone.yml'
+  pull_request:
+    paths:
+      - 'public/js/i18n-dict-*.js'
+      - 'tools/audit-translation-tone.mjs'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node tools/audit-translation-tone.mjs
