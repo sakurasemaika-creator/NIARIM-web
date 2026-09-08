@@ -3,7 +3,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const widths = [
-  640, 700, 760, 820, 900, 960, 1024, 1100, 1200, 1280, 1366, 1440,
+  639, 640, 641, 700, 759, 760, 761, 820, 900, 960, 1024, 1100, 1200, 1280,
+  1366, 1440,
 ];
 const height = 628;
 const edgeTolerance = 2;
