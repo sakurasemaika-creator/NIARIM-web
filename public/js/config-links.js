@@ -101,6 +101,20 @@
     }
   }
 
+  function loadSignatureShowcase() {
+    if (!document.querySelector(".about-hero, .features-header")) return;
+    addStyleOnce(
+      "/css/signature-showcase.css",
+      "data-niarim-signature-showcase-style",
+    );
+    if (document.querySelector("script[data-niarim-signature-showcase]")) return;
+    var script = document.createElement("script");
+    script.src = "/js/signature-showcase.js";
+    script.defer = true;
+    script.setAttribute("data-niarim-signature-showcase", "true");
+    document.head.appendChild(script);
+  }
+
   function loadAiTrustCopy() {
     if (document.querySelector("script[data-niarim-ai-trust]")) return;
     var script = document.createElement("script");
@@ -115,6 +129,7 @@
     apply();
     loadFeatureFidelity();
     loadHomeHeroViewport();
+    loadSignatureShowcase();
     scheduleFrameCentering();
     window.addEventListener("load", scheduleFrameCentering);
     window.addEventListener("resize", scheduleFrameCentering, {
