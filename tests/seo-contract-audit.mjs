@@ -25,10 +25,19 @@ assert.match(robots, /Sitemap: https:\/\/example\.test\/sitemap\.xml/);
 const sitemap = sitemapXml(origin, langs);
 assert.match(sitemap, /xmlns:xhtml=/);
 assert.match(sitemap, /hreflang="x-default"/);
+assert.equal(
+  (sitemap.match(/<url>/g) || []).length,
+  SEO_PAGE_PATHS.length * langs.length,
+);
 for (const pathname of SEO_PAGE_PATHS) {
-  assert.ok(sitemap.includes(localizedUrl(origin, pathname, "ja")));
   for (const lang of langs) {
-    assert.ok(sitemap.includes(localizedUrl(origin, pathname, lang)));
+    const url = localizedUrl(origin, pathname, lang);
+    assert.ok(sitemap.includes(`<loc>${url.replaceAll("&", "&amp;")}</loc>`));
+    assert.ok(
+      sitemap.includes(
+        `hreflang="${lang}" href="${url.replaceAll("&", "&amp;")}"`,
+      ),
+    );
   }
 }
 
