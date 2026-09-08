@@ -23,6 +23,15 @@
 
   var STORAGE_KEY = "niarim_lang";
   var DICT = window.NIARIM_I18N_DICT || {};
+  var OG_LOCALES = {
+    ja: "ja_JP",
+    en: "en_US",
+    "zh-Hans": "zh_CN",
+    "zh-Hant": "zh_TW",
+    ko: "ko_KR",
+    fr: "fr_FR",
+    es: "es_ES",
+  };
 
   function matchSupportedLang(value) {
     if (!value) return null;
@@ -51,6 +60,16 @@
 
   function normalizeLang(value) {
     return matchSupportedLang(value) || "ja";
+  }
+
+  function getUrlLang() {
+    try {
+      var value = new URL(window.location.href).searchParams.get("lang");
+      var matched = matchSupportedLang(value);
+      return matched && DICT[matched] ? matched : null;
+    } catch (_) {
+      return null;
+    }
   }
 
   function getSavedLang() {
@@ -83,7 +102,12 @@
   }
 
   function detectLang() {
-    // ユーザーが既存の言語切替メニューで明示的に選んだ言語を最優先する。
+    // SEO用の明示URL（?lang=xx）は最優先。検索結果・共有URLと実際の本文言語を
+    // 一致させ、同じURLが閲覧環境によって別言語になる状態を避ける。
+    var urlLang = getUrlLang();
+    if (urlLang) return urlLang;
+
+    // ユーザーが既存の言語切替メニューで明示的に選んだ言語を次に優先する。
     var saved = getSavedLang();
     if (saved) return saved;
 
@@ -101,10 +125,37 @@
       : fallback[key] || key;
   }
 
+  function syncCurrentUrl(lang) {
+    try {
+      var url = new URL(window.location.href);
+      if (lang === "ja") url.searchParams.delete("lang");
+      else url.searchParams.set("lang", lang);
+      window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    } catch (_) {}
+  }
+
+  function localizeInternalLinks(lang) {
+    document.querySelectorAll("a[href]").forEach(function (anchor) {
+      var raw = anchor.getAttribute("href");
+      if (!raw || raw.charAt(0) === "#") return;
+      try {
+        var url = new URL(raw, window.location.href);
+        if (url.origin !== window.location.origin) return;
+        if (url.pathname.indexOf("/api/") === 0) return;
+        if (lang === "ja") url.searchParams.delete("lang");
+        else url.searchParams.set("lang", lang);
+        anchor.setAttribute("href", url.pathname + url.search + url.hash);
+      } catch (_) {}
+    });
+  }
+
   function applyLang(lang, options) {
     lang = normalizeLang(lang);
     if (!DICT[lang]) lang = "ja";
     options = options || {};
+
+    if (options.syncUrl === true) syncCurrentUrl(lang);
+    var hasLocalizedUrl = Boolean(getUrlLang());
 
     document.documentElement.setAttribute("lang", lang);
 
@@ -137,17 +188,34 @@
     });
 
     var titleKey = document.body.getAttribute("data-i18n-title");
-    if (titleKey) document.title = t(lang, titleKey);
+    if (titleKey) {
+      var title = t(lang, titleKey);
+      document.title = title;
+      [
+        document.querySelector('meta[property="og:title"]'),
+        document.querySelector('meta[name="twitter:title"]'),
+      ].forEach(function (meta) {
+        if (meta) meta.setAttribute("content", title);
+      });
+    }
 
     var descKey = document.body.getAttribute("data-i18n-description");
     if (descKey) {
+      var description = t(lang, descKey);
       [
         document.querySelector('meta[name="description"]'),
         document.querySelector('meta[property="og:description"]'),
         document.querySelector('meta[name="twitter:description"]'),
       ].forEach(function (meta) {
-        if (meta) meta.setAttribute("content", t(lang, descKey));
+        if (meta) meta.setAttribute("content", description);
       });
+    }
+
+    var ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute("content", OG_LOCALES[lang] || "ja_JP");
+
+    if (hasLocalizedUrl || options.syncUrl === true) {
+      localizeInternalLinks(lang);
     }
 
     document.querySelectorAll("[data-lang-switch]").forEach(function (button) {
@@ -202,7 +270,7 @@
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
       button.addEventListener("click", function () {
-        applyLang(lang.code, { persist: true });
+        applyLang(lang.code, { persist: true, syncUrl: true });
         var dropdown = mount.closest("[data-lang-dropdown]");
         if (dropdown) setLangDropdownOpen(dropdown, false, true);
       });
