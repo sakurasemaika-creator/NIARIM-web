@@ -23,3 +23,55 @@
   align-items: center;
   min-height: 44px;
 }
+
+/* Shared page introductions are editorial hero blocks, not left-column copy.
+   Keep the whole block optically centered at every width. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+
+:where(
+    .about-hero,
+    .features-header,
+    .help-header,
+    .faq-header,
+    .news-header,
+    .legal-header
+  )
+  > p {
+  margin-inline: auto;
+}
+
+/* Section headings use a constrained reading width, but that box itself must
+   sit on the page centre line. The decorative film-strip mark and glow were
+   previously pinned to the left edge, which made centered headings look
+   visually shifted even when their text-align was correct. */
+.section-head {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head::before {
+  margin-inline: auto;
+}
+
+.section-head::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Feature/help category headings are navigational sub-sections with an icon,
+   not page-title heroes, so their local left-aligned rhythm stays intact. */
+.feature-section-head {
+  text-align: left;
+}
