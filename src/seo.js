@@ -80,6 +80,9 @@ export function applicationSchema(origin, languages) {
 export function ogLocaleAlternateMarkup(locales, activeLang) {
   return Object.entries(locales)
     .filter(([lang]) => lang !== activeLang)
-    .map(([, locale]) => `<meta property="og:locale:alternate" content="${locale}">`)
+    .map(
+      ([, locale]) =>
+        `<meta property="og:locale:alternate" content="${locale}">`,
+    )
     .join("");
 }

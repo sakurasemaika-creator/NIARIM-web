@@ -4,13 +4,13 @@ on:
   push:
     branches: [dev_branch]
     paths:
-      - 'public/js/i18n-dict-*.js'
-      - 'tools/audit-translation-tone.mjs'
-      - '.github/workflows/translation-tone.yml'
+      - "public/js/i18n-dict-*.js"
+      - "tools/audit-translation-tone.mjs"
+      - ".github/workflows/translation-tone.yml"
   pull_request:
     paths:
-      - 'public/js/i18n-dict-*.js'
-      - 'tools/audit-translation-tone.mjs'
+      - "public/js/i18n-dict-*.js"
+      - "tools/audit-translation-tone.mjs"
 
 jobs:
   audit:

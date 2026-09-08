@@ -45,8 +45,10 @@
       if (!event.detail || event.detail.lang !== lang) return;
       try {
         var saved = window.sessionStorage.getItem(RESTORE_KEY);
-        if (saved === "__NIARIM_NONE__") window.localStorage.removeItem(STORAGE_KEY);
-        else if (saved !== null) window.localStorage.setItem(STORAGE_KEY, saved);
+        if (saved === "__NIARIM_NONE__")
+          window.localStorage.removeItem(STORAGE_KEY);
+        else if (saved !== null)
+          window.localStorage.setItem(STORAGE_KEY, saved);
         window.sessionStorage.removeItem(RESTORE_KEY);
       } catch (_) {}
       document.removeEventListener("niarim:langchange", restorePreference);

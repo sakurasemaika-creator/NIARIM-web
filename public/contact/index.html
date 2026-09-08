@@ -141,10 +141,14 @@
           <div class="contact-layout">
             <div class="contact-intro reveal">
               <h1 data-i18n="contact.title">お問い合わせ</h1>
-              <p data-i18n="contact.lead">
-                不具合報告・機能要望・使い方に関するご質問は、まず公式Xへお気軽にご連絡ください。
+              <p data-contact-lead data-i18n="meta.contact.description">
+                NIARIMへのお問い合わせはこちらから。不具合報告・機能要望・使い方に関するご質問を受け付けています。
               </p>
-              <p class="contact-personal-note" data-i18n="contact.personalNote">
+              <p
+                class="contact-personal-note"
+                data-i18n="contact.personalNote"
+                hidden
+              >
                 アカウントやメールアドレスなど、個人情報に関わるお問い合わせは、Xではお答えできません。恐れ入りますが、右記のフォームからご連絡ください。
               </p>
               <p
@@ -153,7 +157,7 @@
               >
                 ※⁠フォームの内容はメールで受け付けます。
               </p>
-              <div class="contact-channel">
+              <div class="contact-channel" hidden>
                 <h2 data-i18n="contact.channel.title">まずは公式Xへ</h2>
                 <p data-i18n="contact.channel.body">
                   不具合報告・機能要望・使い方のご質問は、公式Xへのリプライやダイレクトメッセージでお気軽にどうぞ。

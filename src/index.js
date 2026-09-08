@@ -62,7 +62,10 @@ const OG_LOCALES = {
 };
 
 function siteOrigin(request, env) {
-  return String(env.SITE_ORIGIN || new URL(request.url).origin).replace(/\/$/, "");
+  return String(env.SITE_ORIGIN || new URL(request.url).origin).replace(
+    /\/$/,
+    "",
+  );
 }
 
 function selectedLang(request) {
@@ -199,7 +202,10 @@ function rewriteSeoHtml(response, request, env) {
   const alternates = hreflangMarkup(request, env);
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
-    .map((lang) => `<meta property="og:locale:alternate" content="${OG_LOCALES[lang]}">`)
+    .map(
+      (lang) =>
+        `<meta property="og:locale:alternate" content="${OG_LOCALES[lang]}">`,
+    )
     .join("");
 
   const rewriter = new HTMLRewriter()
@@ -229,14 +235,11 @@ function rewriteSeoHtml(response, request, env) {
         element.setAttribute("content", metadata.title);
       },
     })
-    .on(
-      'meta[property="og:description"], meta[name="twitter:description"]',
-      {
-        element(element) {
-          element.setAttribute("content", metadata.description);
-        },
+    .on('meta[property="og:description"], meta[name="twitter:description"]', {
+      element(element) {
+        element.setAttribute("content", metadata.description);
       },
-    )
+    })
     .on('meta[property="og:url"]', {
       element(element) {
         element.setAttribute("content", canonical);

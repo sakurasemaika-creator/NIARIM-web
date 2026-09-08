@@ -119,6 +119,19 @@ for (const width of widths) {
       mock: Boolean(mock),
       nodes: mock.querySelectorAll(".fd-autolineart-node").length,
       controls: mock.querySelectorAll(".fd-autolineart-row").length,
+      parameters: Object.fromEntries(
+        [...mock.querySelectorAll("[data-lineart-parameter]")].map((row) => [
+          row.dataset.lineartParameter,
+          row.querySelector("strong")?.textContent.trim(),
+        ]),
+      ),
+      smoothingFill: mock.querySelector(
+        '[data-lineart-parameter="smoothing"] .fd-autolineart-slider i',
+      )?.style.width,
+      lineColor: mock.querySelector(".fd-autolineart-color i")
+        ? getComputedStyle(mock.querySelector(".fd-autolineart-color i"))
+            .backgroundColor
+        : null,
       phoneRatio: rect.width / rect.height,
       previewRatio: previewRect.width / previewRect.height,
       borderColor: style.borderTopColor,
@@ -167,6 +180,12 @@ for (const width of widths) {
     !feature.mock ||
     feature.nodes < 5 ||
     feature.controls !== 4 ||
+    feature.parameters["rough-width"] !== "12px" ||
+    feature.parameters["output-width"] !== "2px" ||
+    feature.parameters["taper-length"] !== "8px" ||
+    feature.parameters.smoothing !== "5" ||
+    feature.smoothingFill !== "50%" ||
+    feature.lineColor !== "rgb(0, 0, 0)" ||
     feature.overflow > 2 ||
     phoneDelta > 0.03 ||
     previewDelta > 0.03 ||

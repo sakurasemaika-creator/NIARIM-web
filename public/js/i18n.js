@@ -130,7 +130,11 @@
       var url = new URL(window.location.href);
       if (lang === "ja") url.searchParams.delete("lang");
       else url.searchParams.set("lang", lang);
-      window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+      window.history.replaceState(
+        null,
+        "",
+        url.pathname + url.search + url.hash,
+      );
     } catch (_) {}
   }
 

@@ -1,8 +1,10 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
-const dir = path.resolve('public/js');
-const files = fs.readdirSync(dir).filter((name) => /^i18n-dict-.*\.js$/.test(name));
+const dir = path.resolve("public/js");
+const files = fs
+  .readdirSync(dir)
+  .filter((name) => /^i18n-dict-.*\.js$/.test(name));
 
 const banned = [
   /\bgonna\b/gi,
@@ -37,20 +39,28 @@ const banned = [
 
 const errors = [];
 for (const file of files) {
-  const text = fs.readFileSync(path.join(dir, file), 'utf8');
+  const text = fs.readFileSync(path.join(dir, file), "utf8");
   for (const pattern of banned) {
     pattern.lastIndex = 0;
     const match = pattern.exec(text);
-    if (match) errors.push(`${file}: slang/casual expression ${JSON.stringify(match[0])}`);
+    if (match)
+      errors.push(
+        `${file}: slang/casual expression ${JSON.stringify(match[0])}`,
+      );
   }
   const emphatic = text.match(/!{2,}|\?{2,}|!\?|\?!/g);
-  if (emphatic) errors.push(`${file}: excessive emphatic punctuation ${JSON.stringify(emphatic.slice(0, 5))}`);
+  if (emphatic)
+    errors.push(
+      `${file}: excessive emphatic punctuation ${JSON.stringify(emphatic.slice(0, 5))}`,
+    );
 }
 
 if (errors.length) {
-  console.error('Web translation tone audit failed:');
+  console.error("Web translation tone audit failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Web translation tone audit passed across ${files.length} i18n dictionary files.`);
+console.log(
+  `Web translation tone audit passed across ${files.length} i18n dictionary files.`,
+);

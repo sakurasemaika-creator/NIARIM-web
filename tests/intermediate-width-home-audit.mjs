@@ -81,9 +81,10 @@ for (const width of widths) {
         intermediateMedia: matchMedia(
           "(min-width: 641px) and (max-width: 759px)",
         ).matches,
-        styleSheets: Array.from(document.styleSheets, (sheet) => sheet.href).filter(
-          Boolean,
-        ),
+        styleSheets: Array.from(
+          document.styleSheets,
+          (sheet) => sheet.href,
+        ).filter(Boolean),
         paddingTop: parseFloat(getComputedStyle(hero).paddingTop),
         paddingBottom: parseFloat(getComputedStyle(hero).paddingBottom),
         clientWidth: de.clientWidth,
@@ -118,7 +119,11 @@ for (const width of widths) {
     if (width <= 759) {
       const trackCount = state.columns.trim().split(/\s+/).length;
       if (trackCount < 2) {
-        failures.push({ id, kind: "compact-hero-lost-two-column-layout", state });
+        failures.push({
+          id,
+          kind: "compact-hero-lost-two-column-layout",
+          state,
+        });
       }
       if (overlaps(state.lead, state.visual)) {
         failures.push({ id, kind: "compact-lead-phone-collision", state });

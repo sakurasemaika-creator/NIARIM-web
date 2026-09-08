@@ -4,66 +4,73 @@
   var COPY = {
     ja: [
       "自動線画",
-      "判定許容範囲",
-      "線画幅",
-      "手振れ補正",
-      "入り抜き",
+      "対象ラフ線幅",
+      "線画の太さ",
+      "入り抜きの長さ",
+      "なめらか補正",
       "リセット",
       "適用",
+      "線画色",
     ],
     en: [
-      "Auto lineart",
-      "Tolerance",
-      "Line width",
-      "Stabilization",
-      "Taper",
+      "Auto line art",
+      "Rough line width",
+      "Line art width",
+      "Taper length",
+      "Smoothing",
       "Reset",
       "Apply",
+      "Line color",
     ],
     "zh-Hans": [
       "自动线稿",
-      "判定容差",
+      "草稿线宽",
       "线稿宽度",
-      "防抖",
-      "收笔",
+      "收笔长度",
+      "平滑修正",
       "重置",
       "应用",
+      "线稿颜色",
     ],
     "zh-Hant": [
       "自動線稿",
-      "判定容差",
+      "草稿線寬",
       "線稿寬度",
-      "防手震",
-      "收筆",
+      "收筆長度",
+      "平滑修正",
       "重設",
       "套用",
+      "線稿顏色",
     ],
     ko: [
       "자동 선화",
-      "판정 범위",
-      "선 굵기",
-      "손떨림 보정",
-      "테이퍼",
+      "러프 선 굵기",
+      "선화 굵기",
+      "테이퍼 길이",
+      "부드럽게",
       "초기화",
       "적용",
+      "선화 색상",
     ],
     fr: [
-      "Lineart auto",
-      "Tolérance",
-      "Épaisseur",
-      "Stabilisation",
-      "Effilement",
+      "Encrage automatique",
+      "Épaisseur du brouillon",
+      "Épaisseur du trait",
+      "Longueur de l’effilé",
+      "Lissage",
       "Réinitialiser",
       "Appliquer",
+      "Couleur du trait",
     ],
     es: [
-      "Lineart auto",
-      "Tolerancia",
-      "Grosor",
-      "Estabilización",
-      "Remate",
+      "Entintado automático",
+      "Grosor del boceto",
+      "Grosor de línea",
+      "Longitud del afinado",
+      "Suavizado",
       "Restablecer",
       "Aplicar",
+      "Color del trazo",
     ],
   };
   function icon(name) {
@@ -74,17 +81,23 @@
       '"></use></svg></span>'
     );
   }
-  function row(label, value, fill) {
+  function row(label, value, fill, parameter) {
     return (
-      '<div class="fd-autolineart-row"><span>' +
+      '<div class="fd-autolineart-row" data-lineart-parameter="' +
+      parameter +
+      '"><span>' +
       label +
-      '</span><span class="fd-autolineart-slider"><i style="width:' +
+      ": <strong>" +
+      value +
+      '</strong></span><div class="fd-autolineart-stepper">' +
+      '<span class="fd-icon-btn"><i class="fd-autolineart-minus"></i></span>' +
+      '<span class="fd-autolineart-slider"><i style="width:' +
       fill +
       '"></i><b style="left:' +
       fill +
-      '"></b></span><strong>' +
-      value +
-      "</strong></div>"
+      '"></b></span>' +
+      icon("ic-add") +
+      "</div></div>"
     );
   }
   function markup(c) {
@@ -96,10 +109,13 @@
       '</strong><span class="fd-spacer"></span>' +
       icon("ic-help_outline") +
       '</div><div class="fd-route-body fd-autolineart-body"><div class="fd-autolineart-preview"><svg viewBox="0 0 280 158" aria-hidden="true"><path class="fd-autolineart-rough" d="M24 128 C48 46 93 31 141 49 C181 63 213 44 256 60"/><path class="fd-autolineart-rough fd-autolineart-rough-b" d="M26 133 C50 52 95 37 143 55 C183 69 215 50 258 66"/><path class="fd-autolineart-guide" d="M25 130 C49 49 94 34 142 52 C182 66 214 47 257 63"/><path class="fd-autolineart-path" d="M25 130 C49 49 94 34 142 52 C182 66 214 47 257 63"/><circle class="fd-autolineart-node" cx="25" cy="130" r="4"/><circle class="fd-autolineart-node" cx="78" cy="48" r="4"/><circle class="fd-autolineart-node is-active" cx="142" cy="52" r="5"/><circle class="fd-autolineart-node" cx="204" cy="53" r="4"/><circle class="fd-autolineart-node" cx="257" cy="63" r="4"/></svg></div><div class="fd-autolineart-controls">' +
-      row(c[1], "42", "62%") +
-      row(c[2], "3.0", "38%") +
-      row(c[3], "5", "50%") +
-      row(c[4], "24", "48%") +
+      row(c[1], "12px", "12.82%", "rough-width") +
+      '<div class="fd-autolineart-color"><span>' +
+      c[7] +
+      "</span><i></i></div>" +
+      row(c[2], "2px", "3.45%", "output-width") +
+      row(c[3], "8px", "8%", "taper-length") +
+      row(c[4], "5", "50%", "smoothing") +
       '</div><div class="fd-autolineart-actions"><span class="fd-autolineart-reset">' +
       c[5] +
       '</span><span class="fd-autolineart-apply">' +

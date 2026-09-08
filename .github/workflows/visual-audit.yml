@@ -19,6 +19,12 @@ jobs:
         run: npm ci
       - name: Check formatting
         run: npm run format:check
+      - name: Build Worker with localized metadata without deploying
+        run: npx wrangler deploy --dry-run --outdir /tmp/niarim-worker-build
+      - name: Verify SEO contracts and contact API
+        run: |
+          node tests/seo-contract-audit.mjs
+          node --test tests/contact-api.test.mjs
       - name: Generate canonical formatting for diagnosis
         if: failure()
         run: npm run format
@@ -69,6 +75,8 @@ jobs:
         run: node tests/i18n-browser-detection-audit.mjs
       - name: Audit production SEO and operations invariants
         run: node tests/operations-seo-audit.mjs
+      - name: Audit contact validation, attachments and mocked responses in 7 languages
+        run: node tests/contact-form-audit.mjs
       - name: Audit intermediate Home widths and capture complete hero sections
         run: AUDIT_HERO_DIR=artifacts/intermediate-width-home node tests/intermediate-width-home-audit.mjs
       - name: Audit latest AI trust additions with real captures

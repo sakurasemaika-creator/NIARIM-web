@@ -27,6 +27,26 @@
         el.classList.add("is-unavailable");
       }
     });
+    var intro = document.querySelector(".contact-intro");
+    if (intro) {
+      var hasX = Boolean(config.X_URL);
+      var lead = intro.querySelector("[data-contact-lead]");
+      var key = hasX ? "contact.lead" : "meta.contact.description";
+      if (lead) {
+        lead.setAttribute("data-i18n", key);
+        if (window.NIARIM_I18N) {
+          lead.textContent = window.NIARIM_I18N.translate(
+            document.documentElement.lang || "ja",
+            key,
+          );
+        }
+      }
+      intro
+        .querySelectorAll(".contact-channel, .contact-personal-note")
+        .forEach(function (el) {
+          el.hidden = !hasX;
+        });
+    }
   }
 
   function centerCurrentFrames() {

@@ -7,28 +7,6 @@ const jsDir = path.join(root, "public", "js");
 const outDir = path.join(root, "src", "generated");
 const outFile = path.join(outDir, "seo-i18n.js");
 const langs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
-
-const files = fs
-  .readdirSync(jsDir)
-  .filter((name) => /^i18n-dict(?:-[\w-]+)?\.js$/.test(name))
-  .sort();
-
-const window = { NIARIM_I18N_DICT: {} };
-const context = vm.createContext({ window, console });
-
-for (const file of files) {
-  const code = fs.readFileSync(path.join(jsDir, file), "utf8");
-  vm.runInContext(code, context, { filename: file });
-}
-
-const seo = {};
-for (const lang of langs) {
-  const source = window.NIARIM_I18N_DICT[lang] || {};
-  seo[lang] = Object.fromEntries(
-    Object.entries(source).filter(([key]) => key.startsWith("meta.")),
-  );
-}
-
 const requiredPages = [
   "home",
   "about",
@@ -42,13 +20,40 @@ const requiredPages = [
   "privacy",
   "terms",
 ];
-for (const lang of langs) {
-  for (const page of requiredPages) {
+const seo = Object.fromEntries(langs.map((lang) => [lang, {}]));
+const scripts = new Map();
+const loaded = new Set();
+
+for (const page of requiredPages) {
+  const htmlPath =
+    page === "home" ? "public/index.html" : `public/${page}/index.html`;
+  const html = fs.readFileSync(path.join(root, htmlPath), "utf8");
+  const window = { NIARIM_I18N_DICT: {} };
+  const context = vm.createContext({ window, console });
+
+  // Follow this page's browser order: base dictionaries come before overrides.
+  // Scripts without metadata may also manipulate the DOM; they do not belong
+  // in a build-time metadata context.
+  for (const match of html.matchAll(
+    /<script\b[^>]*\bsrc=["']\/js\/(i18n-dict(?:-[\w-]+)?\.js)["'][^>]*>/g,
+  )) {
+    const file = match[1];
+    if (!scripts.has(file))
+      scripts.set(file, fs.readFileSync(path.join(jsDir, file), "utf8"));
+    const code = scripts.get(file);
+    if (!/["']meta\./.test(code)) continue;
+    vm.runInContext(code, context, { filename: file });
+    loaded.add(file);
+  }
+
+  for (const lang of langs) {
     for (const field of ["title", "description"]) {
       const key = `meta.${page}.${field}`;
-      if (!seo[lang][key]) {
+      const value = window.NIARIM_I18N_DICT[lang]?.[key];
+      if (typeof value !== "string" || !value.trim()) {
         throw new Error(`Missing localized SEO key: ${lang} ${key}`);
       }
+      seo[lang][key] = value;
     }
   }
 }
@@ -61,4 +66,6 @@ fs.writeFileSync(
   `${banner}export const SEO_LANGS = ${JSON.stringify(langs)};\nexport const SEO_I18N = ${JSON.stringify(seo, null, 2)};\n`,
   "utf8",
 );
-console.log(`Generated ${path.relative(root, outFile)} from ${files.length} dictionaries.`);
+console.log(
+  `Generated ${path.relative(root, outFile)} for ${requiredPages.length} pages from ${loaded.size} metadata dictionaries.`,
+);

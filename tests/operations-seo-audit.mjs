@@ -33,18 +33,22 @@ for (const needle of [
   'link[rel="canonical"]',
   'meta[property="og:url"]',
   'meta[property="og:image"], meta[name="twitter:image"]',
-  'application/ld+json',
+  "application/ld+json",
   '"@type": "SoftwareApplication"',
   '"@type": "Organization"',
   '"@type": "WebSite"',
-  'og:locale:alternate',
-  'max-image-preview:large',
-  'X-Robots-Tag',
+  "og:locale:alternate",
+  "max-image-preview:large",
+  "X-Robots-Tag",
 ]) {
   expect(worker.includes(needle), "edge-seo-rewriter", needle);
 }
 for (const lang of languages) {
-  expect(worker.includes(`${lang}:`) || worker.includes(`"${lang}"`), "worker-language", lang);
+  expect(
+    worker.includes(`${lang}:`) || worker.includes(`"${lang}"`),
+    "worker-language",
+    lang,
+  );
   expect(
     worker.includes(`hreflang=\"${lang}\"`) || worker.includes("SEO_LANGS.map"),
     "worker-hreflang",
@@ -54,13 +58,21 @@ for (const lang of languages) {
 expect(worker.includes('hreflang="x-default"'), "worker-hreflang", "x-default");
 
 const robots = read("public/robots.txt");
-expect(robots.includes(`Sitemap: ${origin}/sitemap.xml`), "robots-sitemap", null);
+expect(
+  robots.includes(`Sitemap: ${origin}/sitemap.xml`),
+  "robots-sitemap",
+  null,
+);
 expect(!robots.includes("example.com"), "robots-placeholder", null);
 
 const sitemap = read("public/sitemap.xml");
 expect(!sitemap.includes("example.com"), "sitemap-placeholder", null);
 for (const [, route] of routes) {
-  expect(sitemap.includes(`<loc>${origin}${route}</loc>`), "sitemap-route", route);
+  expect(
+    sitemap.includes(`<loc>${origin}${route}</loc>`),
+    "sitemap-route",
+    route,
+  );
   for (const lang of languages) {
     expect(
       sitemap.includes(`hreflang="${lang}"`),
@@ -69,7 +81,11 @@ for (const [, route] of routes) {
     );
   }
 }
-expect(sitemap.includes('hreflang="x-default"'), "sitemap-hreflang", "x-default");
+expect(
+  sitemap.includes('hreflang="x-default"'),
+  "sitemap-hreflang",
+  "x-default",
+);
 
 const metadata = [
   ["description", /<meta\s+name=["']description["']/i],
@@ -99,17 +115,10 @@ expect(
   null,
 );
 
-const lineart = read("public/js/auto-lineart-phone.js");
-const stabilizer = lineart.match(/row\(c\[3\],\s*"([0-9.]+)"/);
-const stabilizationValue = stabilizer ? Number(stabilizer[1]) : NaN;
-expect(
-  Number.isFinite(stabilizationValue) &&
-    stabilizationValue >= 0 &&
-    stabilizationValue <= 10,
-  "auto-lineart-stabilization-scale",
-  stabilizationValue,
-);
-expect(!lineart.includes('row(c[3], "58"'), "auto-lineart-stale-value", 58);
+// The rendered parameter values are checked in page-heading-signature-audit.
+// A COPY array offset is not a parameter identity: c[3] is now taper length.
 
-console.log(JSON.stringify({ findings: findings.length, details: findings }, null, 2));
+console.log(
+  JSON.stringify({ findings: findings.length, details: findings }, null, 2),
+);
 if (findings.length) process.exit(1);
