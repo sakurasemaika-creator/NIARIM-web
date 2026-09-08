@@ -5,6 +5,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
 const findings = [];
 const origin = "https://niarim-web.niarim.workers.dev";
+const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const routes = [
   ["public/index.html", "/"],
   ["public/about/index.html", "/about/"],
@@ -33,10 +34,24 @@ for (const needle of [
   'meta[property="og:url"]',
   'meta[property="og:image"], meta[name="twitter:image"]',
   'application/ld+json',
+  '"@type": "SoftwareApplication"',
+  '"@type": "Organization"',
+  '"@type": "WebSite"',
+  'og:locale:alternate',
+  'max-image-preview:large',
   'X-Robots-Tag',
 ]) {
   expect(worker.includes(needle), "edge-seo-rewriter", needle);
 }
+for (const lang of languages) {
+  expect(worker.includes(`${lang}:`) || worker.includes(`"${lang}"`), "worker-language", lang);
+  expect(
+    worker.includes(`hreflang=\"${lang}\"`) || worker.includes("SEO_LANGS.map"),
+    "worker-hreflang",
+    lang,
+  );
+}
+expect(worker.includes('hreflang="x-default"'), "worker-hreflang", "x-default");
 
 const robots = read("public/robots.txt");
 expect(robots.includes(`Sitemap: ${origin}/sitemap.xml`), "robots-sitemap", null);
@@ -46,7 +61,15 @@ const sitemap = read("public/sitemap.xml");
 expect(!sitemap.includes("example.com"), "sitemap-placeholder", null);
 for (const [, route] of routes) {
   expect(sitemap.includes(`<loc>${origin}${route}</loc>`), "sitemap-route", route);
+  for (const lang of languages) {
+    expect(
+      sitemap.includes(`hreflang="${lang}"`),
+      "sitemap-hreflang",
+      `${route} ${lang}`,
+    );
+  }
 }
+expect(sitemap.includes('hreflang="x-default"'), "sitemap-hreflang", "x-default");
 
 const metadata = [
   ["description", /<meta\s+name=["']description["']/i],
