@@ -12,6 +12,19 @@ const routes = [
   ["/privacy/", ".legal-header"],
   ["/terms/", ".legal-header"],
 ];
+const existingMockAccents = new Set([
+  "rgb(255, 123, 57)",
+  "rgb(118, 81, 232)",
+  "rgb(255, 211, 74)",
+  "rgb(47, 142, 234)",
+  "rgb(39, 212, 137)",
+  "rgb(40, 215, 255)",
+  "rgb(49, 87, 217)",
+  "rgb(181, 108, 255)",
+  "rgb(239, 90, 200)",
+  "rgb(255, 159, 47)",
+  "rgb(223, 52, 77)",
+]);
 const findings = [];
 const browser = await chromium.launch(launchOptions());
 
@@ -75,25 +88,72 @@ for (const width of widths) {
   await page.waitForSelector(".unique-spotlight");
   const about = await page.evaluate(() => ({
     cards: document.querySelectorAll(".unique-spotlight-card").length,
-    overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    overflow:
+      document.documentElement.scrollWidth - document.documentElement.clientWidth,
   }));
-  if (about.cards !== 6 || about.overflow > 2)
+  if (about.cards !== 6 || about.overflow > 2) {
     findings.push({ width, route: "/about/", kind: "signature-showcase", about });
+  }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
   await page.waitForSelector(".autolineart-app-mock");
-  const feature = await page.evaluate(() => ({
-    mock: Boolean(document.querySelector(".autolineart-app-mock")),
-    nodes: document.querySelectorAll(".autolineart-node").length,
-    controls: document.querySelectorAll(".autolineart-control-row").length,
-    overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  }));
-  if (!feature.mock || feature.nodes < 4 || feature.controls !== 4 || feature.overflow > 2)
-    findings.push({ width, route: "/features/", kind: "auto-lineart-showcase", feature });
+  const feature = await page.evaluate(() => {
+    const mock = document.querySelector(".autolineart-app-mock");
+    const rect = mock.getBoundingClientRect();
+    const style = getComputedStyle(mock);
+    const probe = document.createElement("span");
+    probe.style.color = style.getPropertyValue("--al-bezel");
+    document.body.appendChild(probe);
+    const bezelToken = getComputedStyle(probe).color;
+    probe.style.color = style.getPropertyValue("--al-accent");
+    const accentToken = getComputedStyle(probe).color;
+    probe.remove();
+    return {
+      mock: Boolean(mock),
+      nodes: document.querySelectorAll(".autolineart-node").length,
+      controls: document.querySelectorAll(".autolineart-control-row").length,
+      ratio: rect.width / rect.height,
+      borderColor: style.borderTopColor,
+      bezelToken,
+      accentToken,
+      theme: mock.getAttribute("data-mock-theme"),
+      title: document.querySelector(".signature-feature-copy h3")?.textContent || "",
+      lead: document.querySelector(".signature-feature-copy > p")?.textContent || "",
+      overflow:
+        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    };
+  });
+
+  const ratioDelta = Math.abs(feature.ratio - 16 / 9);
+  const releaseNoteLanguage = /最新|new auto|new lineart|now lives|added|加わりました/i.test(
+    `${feature.title} ${feature.lead}`,
+  );
+  if (
+    !feature.mock ||
+    feature.nodes < 5 ||
+    feature.controls !== 4 ||
+    feature.overflow > 2 ||
+    ratioDelta > 0.03 ||
+    feature.borderColor !== feature.bezelToken ||
+    feature.theme !== "ink" ||
+    existingMockAccents.has(feature.accentToken) ||
+    releaseNoteLanguage
+  ) {
+    findings.push({
+      width,
+      route: "/features/",
+      kind: "auto-lineart-showcase",
+      feature,
+      ratioDelta,
+      releaseNoteLanguage,
+    });
+  }
 
   await context.close();
 }
 
 await browser.close();
-console.log(JSON.stringify({ findings: findings.length, details: findings }, null, 2));
+console.log(
+  JSON.stringify({ findings: findings.length, details: findings }, null, 2),
+);
 if (findings.length) process.exit(1);
