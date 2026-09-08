@@ -1,0 +1,190 @@
+/* Widget settings reconstruction based on WidgetSettingsScreen in the app.
+   The app is a single scrolling settings screen: intro/note, artwork picker,
+   then Create and Plaza sections with theme/custom radio choices. */
+.fd-widget-settings-screen {
+  display: flex !important;
+  flex-direction: column;
+  aspect-ratio: 320 / 569;
+  min-height: 0;
+  background: var(--fd-surface);
+}
+
+.fd-widget-settings-screen .fd-appbar {
+  flex: 0 0 45px;
+}
+
+.fd-widget-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px 13px 18px;
+  color: var(--fd-text);
+  background: var(--fd-surface);
+  font-size: 9.5px;
+  line-height: 1.38;
+}
+
+.fd-widget-intro,
+.fd-widget-note,
+.fd-widget-section-note {
+  margin: 0;
+  color: var(--fd-muted);
+}
+
+.fd-widget-intro {
+  font-size: 10px;
+}
+
+.fd-widget-note {
+  margin-top: 6px;
+  font-size: 9px;
+}
+
+.fd-widget-section {
+  margin-top: 15px;
+}
+
+.fd-widget-section-title {
+  display: block;
+  margin: 0 0 2px;
+  font-family: var(--font-heading, var(--font-serif));
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: var(--fd-ink);
+}
+
+.fd-widget-section-note {
+  font-size: 8.7px;
+}
+
+.fd-widget-sublabel {
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 3px;
+  color: var(--fd-muted);
+  font-size: 8.7px;
+  font-weight: 700;
+}
+
+.fd-widget-artwork-tile,
+.fd-widget-shortcut-card {
+  border: 1px solid color-mix(in srgb, var(--fd-ink) 9%, transparent);
+  border-radius: 10px;
+  background: var(--fd-panel);
+}
+
+.fd-widget-artwork-tile {
+  display: flex;
+  align-items: center;
+  min-height: 53px;
+  padding: 5px 9px;
+  gap: 8px;
+}
+
+.fd-widget-artwork-tile > strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.fd-widget-artwork-thumb {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  border-radius: 7px;
+  color: var(--fd-accent);
+  background: color-mix(in srgb, var(--fd-accent) 10%, var(--fd-surface));
+}
+
+.fd-widget-artwork-thumb .ic {
+  width: 22px;
+  height: 22px;
+}
+
+.fd-widget-chevron {
+  width: 7px;
+  height: 7px;
+  border-top: 1.4px solid var(--fd-muted);
+  border-right: 1.4px solid var(--fd-muted);
+  transform: rotate(45deg);
+  flex: 0 0 7px;
+}
+
+.fd-widget-shortcut-card {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.fd-widget-shortcut-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 7px;
+  border-radius: 9px;
+  color: var(--fd-on-accent);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--fd-accent) 78%, white),
+    var(--fd-accent)
+  );
+  box-shadow: 0 3px 8px color-mix(in srgb, var(--fd-accent) 25%, transparent);
+}
+
+.fd-widget-shortcut-icon .ic {
+  width: 16px;
+  height: 16px;
+}
+
+.fd-widget-shortcut-copy {
+  min-width: 0;
+}
+
+.fd-widget-radio-row {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  gap: 7px;
+  padding: 2px 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--fd-ink) 7%, transparent);
+  font-size: 9.5px;
+}
+
+.fd-widget-radio-row:last-child {
+  border-bottom: 0;
+}
+
+.fd-widget-radio {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  border: 1.5px solid var(--fd-muted);
+  border-radius: 50%;
+  background: var(--fd-surface);
+}
+
+.fd-widget-radio.is-selected {
+  border-color: var(--fd-accent);
+}
+
+.fd-widget-radio.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: 2.5px;
+  border-radius: 50%;
+  background: var(--fd-accent);
+}
+
+@media (max-width: 420px) {
+  .fd-widget-scroll {
+    padding-inline: 12px;
+  }
+}
