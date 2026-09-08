@@ -1,10 +1,16 @@
+import fs from "node:fs/promises";
+import path from "node:path";
 import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const widths = [320, 339, 543, 560, 640, 642, 732, 760, 900];
+const widths = [320, 339, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760, 900];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
+const captureWidths = new Set([320, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760, 900]);
+const outDir = process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
 const failures = [];
+const screenshots = [];
+await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch(launchOptions());
 
 for (const width of widths) {
@@ -53,6 +59,18 @@ for (const width of widths) {
       };
     });
 
+    if (language === "ja" && captureWidths.has(width)) {
+      const hero = page.locator(".hero").first();
+      if (await hero.isVisible()) {
+        const file = `${width}px-ja-home-hero-section.png`;
+        await hero.screenshot({
+          path: path.join(outDir, file),
+          animations: "disabled",
+        });
+        screenshots.push(file);
+      }
+    }
+
     const id = `${width}px/${language}`;
     if (state.scrollWidth > state.clientWidth + 2) {
       failures.push({ id, kind: "horizontal-overflow", state });
@@ -91,5 +109,7 @@ for (const width of widths) {
 }
 
 await browser.close();
-console.log(JSON.stringify({ findings: failures.length, details: failures }, null, 2));
+const report = { findings: failures.length, screenshots, details: failures };
+await fs.writeFile(path.join(outDir, "report.json"), JSON.stringify(report, null, 2));
+console.log(JSON.stringify(report, null, 2));
 if (failures.length) process.exit(1);
