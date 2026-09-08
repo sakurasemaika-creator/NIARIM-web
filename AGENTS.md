@@ -6,16 +6,17 @@
 
 - 作業対象は **`dev_branch` のみ**。ユーザーから明示指示がない限り、`main` その他へ変更・push・mergeしない。
 - 全面監査の品質基準・監査範囲・完了条件の正本：`docs/product-audit/QUALITY_STANDARD.md`
+- 法務・知的財産リスク監査の正本：`docs/product-audit/LEGAL_IP_STANDARD.md`
 - 現在地点・未完了事項：`docs/work-continuation.md` と `docs/product-audit/README.md`
 - Web固有の実務ルール・禁止事項・環境：`引き継ぎガイド（AI開発者向け）.md`
 - 経緯・既知の地雷・残タスク：`HANDOFF.md`
 - 実装詳細：`README.md`、デザイン規範：`DESIGN.md`
 
-開始時は**品質基準 + 現在地点**を先に復元する。長大なガイド・HANDOFF・README・DESIGNは最初から全文を投入せず、触るページ・CSS・文言・図・失敗内容に応じて見出し・検索・該当箇所だけを読む。Web固有の絶対条件が必要な作業では、引き継ぎガイドの該当節を先に確認する（例：文言→7言語、CSS→読み込み順/詳細度、画面再現図→アプリ実装確認、監査失敗→監査スクリプト節）。
+開始時は**品質基準 + 法務/IP基準 + 現在地点**を先に復元する。長大なガイド・HANDOFF・README・DESIGNは最初から全文を投入せず、触るページ・CSS・文言・図・失敗内容に応じて見出し・検索・該当箇所だけを読む。Web固有の絶対条件が必要な作業では、引き継ぎガイドの該当節を先に確認する（例：文言→7言語、CSS→読み込み順/詳細度、画面再現図→アプリ実装確認、監査失敗→監査スクリプト節）。
 
 この「段階的に必要箇所だけ読む」という読み込み方は、参照文書にある一般的な「最初に全部読む」指示より優先する。ただし、参照文書にある**具体的な技術制約・禁止事項・デザイン規範そのものを省略してよいという意味ではない**。
 
-同じ方針を複数文書で再解釈しない。監査方針は `QUALITY_STANDARD.md`、Git/再開/チェックポイントはこの `AGENTS.md`、現在地点はcontinuation/checkpoint、Web固有の実装規範は上記の各正本を参照する。
+同じ方針を複数文書で再解釈しない。監査方針は `QUALITY_STANDARD.md`、法務/IP監査は `LEGAL_IP_STANDARD.md`、Git/再開/チェックポイントはこの `AGENTS.md`、現在地点はcontinuation/checkpoint、Web固有の実装規範は上記の各正本を参照する。
 
 アプリ本体の仕様に関わる変更は `sakurasemaika-creator/NIARIM` の最新 `dev_branch` の実装を確認し、Web側だけの憶測で機能・文言・画面を追加しない。
 
@@ -29,7 +30,7 @@
 ## 2. Workの再開
 
 - 現時点では、Scheduled Taskから **Work + GPT-6 Astra最大effortへ確実に自動復帰できることを前提にしない**。標準はユーザーがWorkを開き、現在利用可能な最大effortで再開する運用とする。
-- 再開は会話履歴に依存せず、最新 `dev_branch` → `AGENTS.md` → 品質基準 → continuation/audit checkpoint の順で復元する。
+- 再開は会話履歴に依存せず、最新 `dev_branch` → `AGENTS.md` → 品質/法務・IP基準 → continuation/audit checkpoint の順で復元する。
 - 自動Scheduled Workが実証された場合のみ補助的に利用する。それまではエージェント自身が予約作成・重複確認に監査時間を使わない。
 
 ## 3. サブエージェント
@@ -65,6 +66,6 @@
 
 ## 6. 終了
 
-- 全面監査の完了判定は `QUALITY_STANDARD.md` に従う。build/test/CI成功や利用枠到達だけでcompleteにしない。
+- 全面監査の完了判定は `QUALITY_STANDARD.md` と `LEGAL_IP_STANDARD.md` に従う。build/test/CI成功や利用枠到達だけでcompleteにしない。
 - 未完了ならcontinuationを `paused` または `in-progress` とし、次の1手を必ず残す。
 - 利用枠・権限・環境で停止する場合も、可能な限り通常終了と同じcheckpoint・commit/push手順を踏み、次回が会話履歴なしでも復元できる状態にする。
