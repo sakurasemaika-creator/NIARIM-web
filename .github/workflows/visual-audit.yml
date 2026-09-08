@@ -69,6 +69,8 @@ jobs:
         run: node tests/i18n-browser-detection-audit.mjs
       - name: Audit production SEO and operations invariants
         run: node tests/operations-seo-audit.mjs
+      - name: Audit intermediate Home widths and capture complete hero sections
+        run: AUDIT_HERO_DIR=artifacts/intermediate-width-home node tests/intermediate-width-home-audit.mjs
       - name: Audit latest AI trust additions with real captures
         run: node tests/ai-trust-visual-audit.mjs
       - name: Run autonomous section-by-section interaction audit
@@ -93,7 +95,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: autonomous-browser-audit
-          path: artifacts/autonomous-browser-audit/
+          path: |
+            artifacts/autonomous-browser-audit/
+            artifacts/intermediate-width-home/
           if-no-files-found: error
           retention-days: 14
 
