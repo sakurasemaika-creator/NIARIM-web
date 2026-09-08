@@ -6,3 +6,6 @@ __pycache__/
 
 # 監査スクリプトの出力（npm run audit:multilang / audit:i18n）
 artifacts/
+
+# Wrangler custom buildで翻訳辞書から毎回生成するSEO用モジュール
+src/generated/
