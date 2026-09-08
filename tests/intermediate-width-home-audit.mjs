@@ -4,14 +4,31 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const widths = [320, 339, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760, 900];
+const widths = [
+  320, 339, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759,
+  760, 900,
+];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
-const captureWidths = new Set([320, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760, 900]);
-const outDir = process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
+const captureWidths = new Set([
+  320, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760,
+  900,
+]);
+const outDir =
+  process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
 const failures = [];
 const screenshots = [];
 await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch(launchOptions());
+
+function overlaps(a, b, tolerance = 2) {
+  if (!a || !b) return false;
+  return (
+    a.left < b.right - tolerance &&
+    a.right > b.left + tolerance &&
+    a.top < b.bottom - tolerance &&
+    a.bottom > b.top + tolerance
+  );
+}
 
 for (const width of widths) {
   const context = await browser.newContext({
@@ -49,6 +66,10 @@ for (const width of widths) {
       return {
         hero: rect(".hero"),
         copy: rect(".hero-copy"),
+        title: rect(".hero-title"),
+        subtitle: rect(".hero-subtitle"),
+        lead: rect(".hero-lead"),
+        actions: rect(".hero-actions"),
         visual: rect(".hero-visual"),
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
@@ -82,25 +103,30 @@ for (const width of widths) {
     if (Math.abs(state.marquee.top - state.hero.bottom) > 2) {
       failures.push({ id, kind: "hero-marquee-gap", state });
     }
-    if (width >= 641) {
-      if (state.visual.left < state.copy.right - 2) {
-        failures.push({ id, kind: "intermediate-columns-overlap", state });
+
+    if (width <= 759) {
+      const trackCount = state.columns.trim().split(/\s+/).length;
+      if (trackCount < 2) {
+        failures.push({ id, kind: "compact-hero-lost-two-column-layout", state });
       }
-      if (state.visual.width > 232) {
-        failures.push({ id, kind: "intermediate-phone-too-large", state });
+      if (overlaps(state.lead, state.visual)) {
+        failures.push({ id, kind: "compact-lead-phone-collision", state });
       }
-      if (state.paddingTop > 50 || state.paddingBottom > 46) {
-        failures.push({ id, kind: "intermediate-padding-too-loose", state });
+      if (overlaps(state.actions, state.visual)) {
+        failures.push({ id, kind: "compact-actions-phone-collision", state });
       }
-    } else {
-      if (state.visual.top < state.copy.bottom - 2) {
-        failures.push({ id, kind: "sp-stack-overlap", state });
-      }
-      if (state.visual.width > 252) {
-        failures.push({ id, kind: "sp-phone-too-large", state });
+      if (state.visual.width > 200) {
+        failures.push({ id, kind: "compact-phone-too-large", state });
       }
       if (state.paddingTop > 38 || state.paddingBottom > 34) {
-        failures.push({ id, kind: "sp-padding-too-loose", state });
+        failures.push({ id, kind: "compact-padding-too-loose", state });
+      }
+    } else {
+      if (overlaps(state.copy, state.visual)) {
+        failures.push({ id, kind: "wide-hero-columns-collision", state });
+      }
+      if (state.paddingTop > 50 || state.paddingBottom > 46) {
+        failures.push({ id, kind: "wide-padding-too-loose", state });
       }
     }
   }
@@ -110,6 +136,9 @@ for (const width of widths) {
 
 await browser.close();
 const report = { findings: failures.length, screenshots, details: failures };
-await fs.writeFile(path.join(outDir, "report.json"), JSON.stringify(report, null, 2));
+await fs.writeFile(
+  path.join(outDir, "report.json"),
+  JSON.stringify(report, null, 2),
+);
 console.log(JSON.stringify(report, null, 2));
 if (failures.length) process.exit(1);
