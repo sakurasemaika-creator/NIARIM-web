@@ -1,0 +1,41 @@
+name: Apply SEO expansion
+
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - .github/workflows/temporary_seo_expansion_apply.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python .github/patches/seo_expansion_patch.py
+      - run: node tools/generate-seo-i18n.mjs
+      - run: npx prettier --write src/index.js src/seo.js tests/seo-contract-audit.mjs
+      - run: node tests/seo-contract-audit.mjs
+      - run: npx wrangler deploy --dry-run
+      - run: npm run format:check
+      - name: Commit
+        run: |
+          rm -f .github/workflows/temporary_seo_expansion_apply.yml
+          rm -f .github/patches/seo_expansion_patch.py
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git diff --cached --check
+          git commit -m "feat: expand international SEO discovery metadata"
+          git pull --rebase origin dev_branch
+          git push origin HEAD:dev_branch
