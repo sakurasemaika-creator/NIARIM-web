@@ -48,7 +48,7 @@ jobs:
       - name: Audit latest AI trust additions with real captures
         run: node tests/ai-trust-visual-audit.mjs
       - name: Run autonomous section-by-section interaction audit
-        run: node tests/autonomous-browser-audit-v2.mjs || node tests/validate-rendered-audit.mjs
+        run: node tests/autonomous-browser-audit-v2.mjs
       - name: Run complete scroll and full-page audit
         if: always()
         run: node tests/complete-scroll-audit-v2.mjs
@@ -64,9 +64,6 @@ jobs:
       - name: Verify page-heading centering and signature tools
         if: always()
         run: node tests/page-heading-signature-audit.mjs
-      - name: Audit all pages across 24 responsive widths
-        if: always()
-        run: node tests/all-pages-responsive-quality-audit.mjs
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
@@ -153,7 +150,22 @@ jobs:
           AUDIT_VIEWPORTS: ${{ matrix.viewport }}
           AUDIT_FULLPAGE_DIR: artifacts/fullpage-eye-review/${{ matrix.lang }}/${{ matrix.viewport }}
         run: node tests/fullpage-multilang-capture.mjs
+      - name: Audit 24 widths in this language and PC/SP mode
+        if: always()
+        env:
+          AUDIT_LANG: ${{ matrix.lang }}
+          AUDIT_MODE: ${{ matrix.viewport }}
+        run: node tests/all-pages-responsive-quality-audit.mjs
+      - name: Upload responsive findings and captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-quality-${{ matrix.lang }}-${{ matrix.viewport }}
+          path: artifacts/responsive-quality/${{ matrix.lang }}/${{ matrix.viewport }}/
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload eye-review PNGs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: fullpage-eye-review-${{ matrix.lang }}-${{ matrix.viewport }}

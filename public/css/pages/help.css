@@ -84,8 +84,11 @@
   padding: 1rem 1.1rem;
   border: 1px solid rgba(255, 92, 122, 0.12);
   border-radius: 16px;
-  background:
-    linear-gradient(90deg, rgba(255, 92, 122, 0.07), rgba(255, 255, 255, 0.72));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 92, 122, 0.07),
+    rgba(255, 255, 255, 0.72)
+  );
 }
 
 [data-help-category] .feature-section-head::before {

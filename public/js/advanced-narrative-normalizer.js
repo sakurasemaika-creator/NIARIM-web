@@ -56,7 +56,7 @@
     if (!block) {
       block = document.createElement("div");
       block.className = "feature-narrative-block is-auto-lineart-narrative";
-      block.innerHTML = '<h3></h3><p></p>';
+      block.innerHTML = "<h3></h3><p></p>";
     }
 
     // Advancedの既存文法を崩さない。まず節全体のキャッチコピー

@@ -7,7 +7,7 @@ const routes = [
   ["/about/", ".about-hero"],
   ["/features/", ".features-header"],
   ["/help/", ".help-header"],
-  ["/faq/", ".faq-header"],
+  ["/faq/", ".about-hero"],
   ["/news/", ".news-header"],
   ["/privacy/", ".legal-header"],
   ["/terms/", ".legal-header"],
@@ -28,20 +28,28 @@ for (const width of widths) {
     const state = await page.evaluate((heroSelector) => {
       const hero = document.querySelector(heroSelector);
       const heroRect = hero?.getBoundingClientRect();
-      const heads = [...document.querySelectorAll(".section-head")].map((head) => {
-        const r = head.getBoundingClientRect();
-        const parent = head.parentElement?.getBoundingClientRect();
-        return {
-          centerDelta: parent
-            ? Math.abs(r.left + r.width / 2 - (parent.left + parent.width / 2))
-            : 999,
-          textAlign: getComputedStyle(head).textAlign,
-        };
-      });
+      const heads = [...document.querySelectorAll(".section-head")].map(
+        (head) => {
+          const r = head.getBoundingClientRect();
+          const parent = head.parentElement?.getBoundingClientRect();
+          return {
+            centerDelta: parent
+              ? Math.abs(
+                  r.left + r.width / 2 - (parent.left + parent.width / 2),
+                )
+              : 999,
+            textAlign: getComputedStyle(head).textAlign,
+          };
+        },
+      );
       return {
         hero: heroRect
           ? {
-              centerDelta: Math.abs(heroRect.left + heroRect.width / 2 - innerWidth / 2),
+              centerDelta: Math.abs(
+                heroRect.left +
+                  heroRect.width / 2 -
+                  document.documentElement.clientWidth / 2,
+              ),
               textAlign: getComputedStyle(hero).textAlign,
             }
           : null,
@@ -50,12 +58,21 @@ for (const width of widths) {
     }, selector);
     if (!state.hero) {
       findings.push({ width, route, kind: "missing-page-heading" });
-    } else if (state.hero.centerDelta > 2 || state.hero.textAlign !== "center") {
+    } else if (
+      state.hero.centerDelta > 2 ||
+      state.hero.textAlign !== "center"
+    ) {
       findings.push({ width, route, kind: "page-heading-not-centered", state });
     }
     state.heads.forEach((head, index) => {
       if (head.centerDelta > 2 || head.textAlign !== "center") {
-        findings.push({ width, route, kind: "section-heading-not-centered", index, head });
+        findings.push({
+          width,
+          route,
+          kind: "section-heading-not-centered",
+          index,
+          head,
+        });
       }
     });
   }
@@ -65,10 +82,16 @@ for (const width of widths) {
   const about = await page.evaluate(() => ({
     cards: document.querySelectorAll(".unique-spotlight-card").length,
     overflow:
-      document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      document.documentElement.scrollWidth -
+      document.documentElement.clientWidth,
   }));
   if (about.cards !== 6 || about.overflow > 2) {
-    findings.push({ width, route: "/about/", kind: "signature-showcase", about });
+    findings.push({
+      width,
+      route: "/about/",
+      kind: "signature-showcase",
+      about,
+    });
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
@@ -87,7 +110,9 @@ for (const width of widths) {
       el.classList.contains("feature-narrative-block"),
     );
     const autoBlock = narrative?.querySelector(".is-auto-lineart-narrative");
-    const special = document.querySelector("#advanced .signature-feature-layout");
+    const special = document.querySelector(
+      "#advanced .signature-feature-layout",
+    );
     const widget = document.querySelector("#widget .fd-widget-settings-screen");
     const widgetRect = widget.getBoundingClientRect();
     return {
@@ -100,7 +125,8 @@ for (const width of widths) {
       bezel: style.getPropertyValue("--fd-bezel").trim(),
       accent: style.getPropertyValue("--fd-accent").trim(),
       oldLandscapeVisible: Boolean(
-        document.querySelector(".autolineart-app-mock")?.getClientRects().length,
+        document.querySelector(".autolineart-app-mock")?.getClientRects()
+          .length,
       ),
       specialVisible: Boolean(special?.getClientRects().length),
       headerBackground: getComputedStyle(header).backgroundImage,
@@ -110,21 +136,28 @@ for (const width of widths) {
       firstHeading: blocks[0]?.querySelector("h3")?.textContent?.trim() || "",
       secondHeading: blocks[1]?.querySelector("h3")?.textContent?.trim() || "",
       thirdHeading: blocks[2]?.querySelector("h3")?.textContent?.trim() || "",
-      promoEyebrows: document.querySelectorAll("#advanced .signature-feature-copy .eyebrow").length,
-      promoPoints: document.querySelectorAll("#advanced .signature-feature-point").length,
+      promoEyebrows: document.querySelectorAll(
+        "#advanced .signature-feature-copy .eyebrow",
+      ).length,
+      promoPoints: document.querySelectorAll(
+        "#advanced .signature-feature-point",
+      ).length,
       widget: {
         ratio: widgetRect.width / widgetRect.height,
         sections: widget.querySelectorAll(".fd-widget-section").length,
         artworkTiles: widget.querySelectorAll(".fd-widget-artwork-tile").length,
         radioRows: widget.querySelectorAll(".fd-widget-radio-row").length,
-        selectedRadios: widget.querySelectorAll(".fd-widget-radio.is-selected").length,
+        selectedRadios: widget.querySelectorAll(".fd-widget-radio.is-selected")
+          .length,
         appbarTitle:
           widget.querySelector(".fd-appbar strong")?.textContent?.trim() || "",
         oldFakeStatus: widget.querySelectorAll(".fd-widget-status-card").length,
-        oldFakeQuickActions: widget.querySelectorAll(".fd-widget-action-row").length,
+        oldFakeQuickActions: widget.querySelectorAll(".fd-widget-action-row")
+          .length,
       },
       overflow:
-        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
     };
   });
   const phoneDelta = Math.abs(feature.phoneRatio - 320 / 569);
@@ -172,5 +205,7 @@ for (const width of widths) {
 }
 
 await browser.close();
-console.log(JSON.stringify({ findings: findings.length, details: findings }, null, 2));
+console.log(
+  JSON.stringify({ findings: findings.length, details: findings }, null, 2),
+);
 if (findings.length) process.exit(1);

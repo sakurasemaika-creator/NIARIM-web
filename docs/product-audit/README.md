@@ -39,3 +39,12 @@
 2. 全ページ・7言語・スマホ/PC実画面とnavigation/empty/errorを評価。
 3. 既存CIの期待値書換えやfallbackによる見逃しを精査し、根拠のある修正を行う。
 4. App/Webの用語・機能・導線とブランドを横断確認し、修正後の再監査へ進む。
+
+## 2026-09-08 JST 12時台の監査継続
+
+- 開始HEAD `392b727`。Actions `34181676783` はformatと見出し検査で失敗。従来の24幅×12ページ（日本語PCのみ）は288条件成功、7言語の既存capture/final-matrixも成功だが、指定336条件/ページの合格ではない。
+- **W07 / P2 監査精度**: FAQは `.about-hero` を使っており、存在しない `.faq-header` を検査して6幅すべてで誤検知していた。実画面の見出しと中央配置を確認して修正。中央位置はスクロールバーを除いたclientWidth基準とする。
+- 全ページの幾何検査を、24幅×PC/SP（touch/mobile emulation）×7言語＝**336条件/ページ、12ページで4,032条件**に拡張。既存の14 capture jobに分割し、失敗条件の画像とJSONを保存する。reduced-motionを利用し、画面外revealの内容も検査する。通常motionの画像・操作検査は既存jobで継続する。
+- 自律操作監査の失敗を別テストの成功で打ち消すshell fallbackを除去。最新CIで実際に失敗した7ファイルをPrettierで整形した。
+- ローカル確認: Worker **6/6成功**、JS構文確認成功、format成功。問い合わせ空送信でname/email/message/agreeがinvalidとなりnameへfocus。FAQを実画面で確認。拡張matrixはpush後のCI実行待ちであり、まだ合格とは扱わない。
+- 次: 拡張CIの失敗を実画面で分類・修正。問い合わせ成功/reset/添付/言語変更、未設定X案内、App保存A02を継続。全体監査は未完了。

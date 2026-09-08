@@ -30,13 +30,18 @@
   }
 
   function centerCurrentFrames() {
-    document.querySelectorAll(".fd-frame-strip-scroll").forEach(function (strip) {
-      var current = strip.querySelector(".fd-frame-thumb.is-current, .fd-frame.is-current");
-      if (!current || !strip.clientWidth) return;
-      var target = current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
-      var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
-      strip.scrollLeft = Math.max(0, Math.min(max, target));
-    });
+    document
+      .querySelectorAll(".fd-frame-strip-scroll")
+      .forEach(function (strip) {
+        var current = strip.querySelector(
+          ".fd-frame-thumb.is-current, .fd-frame.is-current",
+        );
+        if (!current || !strip.clientWidth) return;
+        var target =
+          current.offsetLeft + current.offsetWidth / 2 - strip.clientWidth / 2;
+        var max = Math.max(0, strip.scrollWidth - strip.clientWidth);
+        strip.scrollLeft = Math.max(0, Math.min(max, target));
+      });
   }
 
   function scheduleFrameCentering() {
@@ -47,7 +52,8 @@
   }
 
   function loadFeatureFidelity() {
-    if (!document.getElementById("audio") && !document.getElementById("widget")) return;
+    if (!document.getElementById("audio") && !document.getElementById("widget"))
+      return;
     if (document.querySelector("script[data-niarim-feature-fidelity]")) return;
     var script = document.createElement("script");
     script.src = "/js/features-fidelity.js";
@@ -67,10 +73,19 @@
 
   function loadHomeHeroViewport() {
     if (!document.querySelector(".hero + .marquee-section")) return;
-    addStyleOnce("/css/home-hero-viewport.css", "data-niarim-home-hero-viewport");
-    addStyleOnce("/css/home-hero-fidelity.css", "data-niarim-home-hero-fidelity");
+    addStyleOnce(
+      "/css/home-hero-viewport.css",
+      "data-niarim-home-hero-viewport",
+    );
+    addStyleOnce(
+      "/css/home-hero-fidelity.css",
+      "data-niarim-home-hero-fidelity",
+    );
     addStyleOnce("/css/home-hero-fit-628.css", "data-niarim-home-hero-fit-628");
-    addStyleOnce("/css/home-community-spacing.css", "data-niarim-home-community-spacing");
+    addStyleOnce(
+      "/css/home-community-spacing.css",
+      "data-niarim-home-community-spacing",
+    );
     if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
       var script = document.createElement("script");
       script.src = "/js/home-hero-showcase.js";
@@ -82,7 +97,10 @@
 
   function loadSignatureShowcase() {
     if (!document.querySelector(".about-hero, .features-header")) return;
-    addStyleOnce("/css/signature-showcase.css", "data-niarim-signature-showcase-style");
+    addStyleOnce(
+      "/css/signature-showcase.css",
+      "data-niarim-signature-showcase-style",
+    );
     if (!document.querySelector("script[data-niarim-signature-showcase]")) {
       var script = document.createElement("script");
       script.src = "/js/signature-showcase.js";
@@ -105,7 +123,10 @@
         narrative.setAttribute("data-niarim-advanced-narrative", "true");
         document.head.appendChild(narrative);
       }
-      addStyleOnce("/css/widget-phone-fidelity.css", "data-niarim-widget-phone-style");
+      addStyleOnce(
+        "/css/widget-phone-fidelity.css",
+        "data-niarim-widget-phone-style",
+      );
       if (!document.querySelector("script[data-niarim-widget-phone]")) {
         var widget = document.createElement("script");
         widget.src = "/js/widget-phone-fidelity.js";
@@ -133,11 +154,15 @@
     loadSignatureShowcase();
     scheduleFrameCentering();
     window.addEventListener("load", scheduleFrameCentering);
-    window.addEventListener("resize", scheduleFrameCentering, { passive: true });
+    window.addEventListener("resize", scheduleFrameCentering, {
+      passive: true,
+    });
     document.addEventListener("niarim:langchange", scheduleFrameCentering);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleFrameCentering);
+    if (document.fonts && document.fonts.ready)
+      document.fonts.ready.then(scheduleFrameCentering);
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", init);
   else init();
 })();

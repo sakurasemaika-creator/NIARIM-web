@@ -1,7 +1,25 @@
-import { chromium } from "playwright";
+import { chromium, devices } from "playwright";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
+const locales = {
+  ja: "ja-JP",
+  en: "en-US",
+  "zh-Hans": "zh-CN",
+  "zh-Hant": "zh-TW",
+  ko: "ko-KR",
+  fr: "fr-FR",
+  es: "es-ES",
+};
+const lang = process.env.AUDIT_LANG || "ja";
+const mode = process.env.AUDIT_MODE || "pc";
+if (!locales[lang] || !["pc", "sp"].includes(mode)) {
+  throw new Error("Select a supported AUDIT_LANG and AUDIT_MODE (pc or sp)");
+}
+const outDir = path.join("artifacts/responsive-quality", lang, mode);
+await fs.mkdir(outDir, { recursive: true });
 const routes = [
   "/",
   "/about/",
@@ -27,12 +45,17 @@ for (const width of widths) {
   const height =
     width <= 430 ? 844 : width <= 759 ? 900 : width <= 1024 ? 1112 : 1000;
   const context = await browser.newContext({
+    ...(mode === "sp" ? devices["Pixel 7"] : {}),
     viewport: { width, height },
-    locale: "ja-JP",
+    locale: locales[lang],
+    // Use the product's reduced-motion layout so offscreen reveal sections
+    // participate in geometry checks without changing their DOM or styles.
+    reducedMotion: "reduce",
   });
   const page = await context.newPage();
 
   for (const route of routes) {
+    const previousFindings = findings.length;
     await page.goto(baseURL + route, { waitUntil: "networkidle" });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(120);
@@ -137,6 +160,7 @@ for (const width of widths) {
           };
         });
       return {
+        lang: root.lang,
         scrollWidth: root.scrollWidth,
         clientWidth: root.clientWidth,
         outside: outside.slice(0, 20),
@@ -146,6 +170,13 @@ for (const width of widths) {
         ),
       };
     });
+    if (state.lang !== lang)
+      findings.push({
+        width,
+        route,
+        kind: "unexpected-language",
+        actual: state.lang,
+      });
     if (state.scrollWidth > state.clientWidth + 2)
       findings.push({
         width,
@@ -174,20 +205,32 @@ for (const width of widths) {
         kind: "undersized-control",
         controls: state.tinyTargets,
       });
+    if (findings.length > previousFindings) {
+      const slug = route.replace(/[^a-zA-Z0-9]+/g, "-") || "home";
+      const screenshot = path.join(outDir, `${width}-${slug}.png`);
+      await page.screenshot({ path: screenshot, fullPage: true });
+      findings.slice(previousFindings).forEach((finding) => {
+        finding.screenshot = screenshot;
+      });
+    }
   }
   await context.close();
 }
 
 await browser.close();
-console.log(
-  JSON.stringify(
-    {
-      combinations: widths.length * routes.length,
-      findings: findings.length,
-      details: findings,
-    },
-    null,
-    2,
-  ),
+const report = {
+  lang,
+  mode,
+  widths,
+  routes,
+  reducedMotion: true,
+  combinations: widths.length * routes.length,
+  findings: findings.length,
+  details: findings,
+};
+await fs.writeFile(
+  path.join(outDir, "report.json"),
+  JSON.stringify(report, null, 2),
 );
+console.log(JSON.stringify(report, null, 2));
 if (findings.length) process.exit(1);
