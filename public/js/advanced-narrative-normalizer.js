@@ -47,13 +47,22 @@
     var narrative = section.querySelector(".feature-narrative");
     if (!narrative) return;
 
-    var block = narrative.querySelector(".feature-narrative-block.is-auto-lineart-narrative");
+    var first = narrative.querySelector(":scope > .feature-narrative-block");
+    if (!first) return;
+
+    var block = narrative.querySelector(
+      ":scope > .feature-narrative-block.is-auto-lineart-narrative",
+    );
     if (!block) {
       block = document.createElement("div");
       block.className = "feature-narrative-block is-auto-lineart-narrative";
       block.innerHTML = '<h3></h3><p></p>';
-      narrative.insertBefore(block, narrative.firstElementChild);
     }
+
+    // Advancedの既存文法を崩さない。まず節全体のキャッチコピー
+    // 「いつもの作業を、もっとスムーズに。」を読ませ、その直後に
+    // 自動線画を通常の機能項目として置く。専用の販促見出し・チップは作らない。
+    if (first.nextElementSibling !== block) first.after(block);
 
     var c = currentCopy();
     block.querySelector("h3").textContent = c.title;
