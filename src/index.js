@@ -1,8 +1,11 @@
 /**
  * NIARIM公式サイト Workerエントリポイント
  *
- * API処理に加え、静的HTMLを公開サイトの正規URLへ正規化して配信する。
+ * API処理に加え、静的HTMLを公開サイトの正規URL・選択言語へ正規化して配信する。
+ * 翻訳辞書由来のSEO metadataはWrangler custom buildで生成するため、Web本文と
+ * title/descriptionの文言が別管理にならない。
  */
+import { SEO_I18N, SEO_LANGS } from "./generated/seo-i18n.js";
 import { handleContact } from "./contact.js";
 import { jsonResponse } from "./utils.js";
 
@@ -32,42 +35,87 @@ const SECURITY_HEADERS = {
   "Cross-Origin-Opener-Policy": "same-origin",
 };
 
-function withSecurityHeaders(response) {
-  const headers = new Headers(response.headers);
-  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
-    headers.set(key, value);
-  }
-  if (response.status >= 400) {
-    headers.set("X-Robots-Tag", "noindex, nofollow");
-  }
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers,
-  });
+const PAGE_KEYS = new Map([
+  ["/", "home"],
+  ["/index.html", "home"],
+  ["/about/", "about"],
+  ["/community/", "community"],
+  ["/contact/", "contact"],
+  ["/faq/", "faq"],
+  ["/features/", "features"],
+  ["/help/", "help"],
+  ["/news/", "news"],
+  ["/premium/", "premium"],
+  ["/privacy/", "privacy"],
+  ["/terms/", "terms"],
+]);
+
+const OG_LOCALES = {
+  ja: "ja_JP",
+  en: "en_US",
+  "zh-Hans": "zh_CN",
+  "zh-Hant": "zh_TW",
+  ko: "ko_KR",
+  fr: "fr_FR",
+  es: "es_ES",
+};
+
+function siteOrigin(request, env) {
+  return String(env.SITE_ORIGIN || new URL(request.url).origin).replace(/\/$/, "");
 }
 
-function canonicalUrl(request, env) {
+function selectedLang(request) {
+  const raw = new URL(request.url).searchParams.get("lang");
+  return SEO_LANGS.includes(raw) ? raw : "ja";
+}
+
+function canonicalUrl(request, env, lang = selectedLang(request)) {
   const requestUrl = new URL(request.url);
-  const origin = String(env.SITE_ORIGIN || requestUrl.origin).replace(/\/$/, "");
-  return `${origin}${requestUrl.pathname}`;
+  const url = new URL(`${siteOrigin(request, env)}${requestUrl.pathname}`);
+  if (lang !== "ja") url.searchParams.set("lang", lang);
+  return url.toString();
 }
 
 function absoluteAssetUrl(value, env, request) {
   if (!value || !value.startsWith("/")) return value;
-  const origin = String(env.SITE_ORIGIN || new URL(request.url).origin).replace(
-    /\/$/,
-    "",
-  );
-  return `${origin}${value}`;
+  return `${siteOrigin(request, env)}${value}`;
 }
 
-function structuredData(env) {
-  const origin = String(env.SITE_ORIGIN || "").replace(/\/$/, "");
-  if (!origin) return null;
-  return JSON.stringify({
-    "@context": "https://schema.org",
-    "@graph": [
+function pageMetadata(request) {
+  const pathname = new URL(request.url).pathname;
+  const page = PAGE_KEYS.get(pathname);
+  if (!page) return null;
+  const lang = selectedLang(request);
+  const table = SEO_I18N[lang] || SEO_I18N.ja || {};
+  const fallback = SEO_I18N.ja || {};
+  const titleKey = `meta.${page}.title`;
+  const descriptionKey = `meta.${page}.description`;
+  return {
+    page,
+    lang,
+    title: table[titleKey] || fallback[titleKey] || "NIARIM",
+    description: table[descriptionKey] || fallback[descriptionKey] || "",
+  };
+}
+
+function structuredData(request, env, metadata) {
+  if (!metadata) return null;
+  const origin = siteOrigin(request, env);
+  const canonical = canonicalUrl(request, env, metadata.lang);
+  const graph = [
+    {
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      url: canonical,
+      name: metadata.title,
+      description: metadata.description,
+      inLanguage: metadata.lang,
+      isPartOf: { "@id": `${origin}/#website` },
+    },
+  ];
+
+  if (metadata.page === "home") {
+    graph.unshift(
       {
         "@type": "Organization",
         "@id": `${origin}/#organization`,
@@ -81,28 +129,80 @@ function structuredData(env) {
         url: `${origin}/`,
         name: "NIARIM",
         publisher: { "@id": `${origin}/#organization` },
-        inLanguage: ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"],
+        inLanguage: SEO_LANGS,
       },
-    ],
+    );
+  }
+
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
+}
+
+function hreflangMarkup(request, env) {
+  const links = SEO_LANGS.map((lang) => {
+    const href = canonicalUrl(request, env, lang);
+    return `<link rel="alternate" hreflang="${lang}" href="${href}">`;
   });
+  links.push(
+    `<link rel="alternate" hreflang="x-default" href="${canonicalUrl(request, env, "ja")}">`,
+  );
+  return links.join("");
 }
 
 function rewriteSeoHtml(response, request, env) {
   const type = response.headers.get("content-type") || "";
   if (response.status !== 200 || !type.includes("text/html")) return response;
 
-  const canonical = canonicalUrl(request, env);
-  const schema = new URL(request.url).pathname === "/" ? structuredData(env) : null;
+  const metadata = pageMetadata(request);
+  if (!metadata) return response;
 
-  let rewriter = new HTMLRewriter()
+  const canonical = canonicalUrl(request, env, metadata.lang);
+  const schema = structuredData(request, env, metadata);
+  const alternates = hreflangMarkup(request, env);
+  const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
+
+  const rewriter = new HTMLRewriter()
+    .on("html", {
+      element(element) {
+        element.setAttribute("lang", metadata.lang);
+      },
+    })
+    .on("title", {
+      text(text) {
+        if (text.lastInTextNode) text.replace(metadata.title);
+        else text.remove();
+      },
+    })
+    .on('meta[name="description"]', {
+      element(element) {
+        element.setAttribute("content", metadata.description);
+      },
+    })
     .on('link[rel="canonical"]', {
       element(element) {
         element.setAttribute("href", canonical);
       },
     })
+    .on('meta[property="og:title"], meta[name="twitter:title"]', {
+      element(element) {
+        element.setAttribute("content", metadata.title);
+      },
+    })
+    .on(
+      'meta[property="og:description"], meta[name="twitter:description"]',
+      {
+        element(element) {
+          element.setAttribute("content", metadata.description);
+        },
+      },
+    )
     .on('meta[property="og:url"]', {
       element(element) {
         element.setAttribute("content", canonical);
+      },
+    })
+    .on('meta[property="og:locale"]', {
+      element(element) {
+        element.setAttribute("content", ogLocale);
       },
     })
     .on('meta[property="og:image"], meta[name="twitter:image"]', {
@@ -119,20 +219,42 @@ function rewriteSeoHtml(response, request, env) {
           "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
         );
       },
-    });
-
-  if (schema) {
-    rewriter = rewriter.on("head", {
+    })
+    .on("head", {
       element(element) {
-        element.append(
-          `<script type="application/ld+json">${schema.replace(/</g, "\\u003c")}</script>`,
-          { html: true },
-        );
+        element.append(alternates, { html: true });
+        if (schema) {
+          element.append(
+            `<script type="application/ld+json">${schema.replace(/</g, "\\u003c")}</script>`,
+            { html: true },
+          );
+        }
       },
     });
-  }
 
-  return rewriter.transform(response);
+  const transformed = rewriter.transform(response);
+  const headers = new Headers(transformed.headers);
+  headers.set("Content-Language", metadata.lang);
+  return new Response(transformed.body, {
+    status: transformed.status,
+    statusText: transformed.statusText,
+    headers,
+  });
+}
+
+function withSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+    headers.set(key, value);
+  }
+  if (response.status >= 400) {
+    headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 }
 
 export default {
