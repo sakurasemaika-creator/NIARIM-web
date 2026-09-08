@@ -6,6 +6,7 @@
  * title/descriptionの文言が別管理にならない。
  */
 import { SEO_I18N, SEO_LANGS } from "./generated/seo-i18n.js";
+import { robotsTxt, sitemapXml } from "./seo.js";
 import { handleContact } from "./contact.js";
 import { jsonResponse } from "./utils.js";
 
@@ -314,6 +315,29 @@ export default {
 
       if (url.pathname.startsWith("/api/")) {
         return withSecurityHeaders(jsonResponse(404, { error: "not_found" }));
+      }
+
+      const origin = siteOrigin(request, env);
+      if (url.pathname === "/robots.txt") {
+        return withSecurityHeaders(
+          new Response(robotsTxt(origin), {
+            headers: {
+              "Content-Type": "text/plain; charset=utf-8",
+              "Cache-Control": "public, max-age=3600",
+            },
+          }),
+        );
+      }
+
+      if (url.pathname === "/sitemap.xml") {
+        return withSecurityHeaders(
+          new Response(sitemapXml(origin, SEO_LANGS), {
+            headers: {
+              "Content-Type": "application/xml; charset=utf-8",
+              "Cache-Control": "public, max-age=3600",
+            },
+          }),
+        );
       }
 
       const assetResponse = await env.ASSETS.fetch(request);
