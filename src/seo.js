@@ -43,7 +43,7 @@ export function robotsTxt(origin) {
 }
 
 export function sitemapXml(origin, langs) {
-  const entries = SEO_PAGE_PATHS.map((pathname) => {
+  const entries = SEO_PAGE_PATHS.flatMap((pathname) => {
     const alternates = langs
       .map(
         (lang) =>
@@ -51,7 +51,11 @@ export function sitemapXml(origin, langs) {
       )
       .join("");
     const xDefault = `<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localizedUrl(origin, pathname, "ja"))}" />`;
-    return `<url><loc>${escapeXml(localizedUrl(origin, pathname, "ja"))}</loc>${alternates}${xDefault}</url>`;
+
+    return langs.map(
+      (lang) =>
+        `<url><loc>${escapeXml(localizedUrl(origin, pathname, lang))}</loc>${alternates}${xDefault}</url>`,
+    );
   }).join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}</urlset>\n`;
