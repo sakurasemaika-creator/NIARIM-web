@@ -74,6 +74,7 @@ for (const width of widths) {
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
   await page.waitForSelector(".fd-autolineart-screen");
   await page.waitForSelector("#advanced .is-auto-lineart-narrative");
+  await page.waitForSelector("#widget .fd-widget-settings-screen");
   const feature = await page.evaluate(() => {
     const mock = document.querySelector(".fd-autolineart-screen");
     const preview = mock.querySelector(".fd-autolineart-preview");
@@ -82,9 +83,13 @@ for (const width of widths) {
     const style = getComputedStyle(mock);
     const header = document.querySelector(".features-header");
     const narrative = document.querySelector("#advanced .feature-narrative");
+    const blocks = [...(narrative?.children || [])].filter((el) =>
+      el.classList.contains("feature-narrative-block"),
+    );
     const autoBlock = narrative?.querySelector(".is-auto-lineart-narrative");
-    const firstBlock = narrative?.firstElementChild;
     const special = document.querySelector("#advanced .signature-feature-layout");
+    const widget = document.querySelector("#widget .fd-widget-settings-screen");
+    const widgetRect = widget.getBoundingClientRect();
     return {
       mock: Boolean(mock),
       nodes: mock.querySelectorAll(".fd-autolineart-node").length,
@@ -102,15 +107,29 @@ for (const width of widths) {
       autoBlockClass: autoBlock?.className || "",
       autoTitle: autoBlock?.querySelector("h3")?.textContent?.trim() || "",
       autoBody: autoBlock?.querySelector("p")?.textContent?.trim() || "",
-      autoIsFirst: Boolean(autoBlock && firstBlock === autoBlock),
+      firstHeading: blocks[0]?.querySelector("h3")?.textContent?.trim() || "",
+      secondHeading: blocks[1]?.querySelector("h3")?.textContent?.trim() || "",
+      thirdHeading: blocks[2]?.querySelector("h3")?.textContent?.trim() || "",
       promoEyebrows: document.querySelectorAll("#advanced .signature-feature-copy .eyebrow").length,
       promoPoints: document.querySelectorAll("#advanced .signature-feature-point").length,
+      widget: {
+        ratio: widgetRect.width / widgetRect.height,
+        sections: widget.querySelectorAll(".fd-widget-section").length,
+        artworkTiles: widget.querySelectorAll(".fd-widget-artwork-tile").length,
+        radioRows: widget.querySelectorAll(".fd-widget-radio-row").length,
+        selectedRadios: widget.querySelectorAll(".fd-widget-radio.is-selected").length,
+        appbarTitle:
+          widget.querySelector(".fd-appbar strong")?.textContent?.trim() || "",
+        oldFakeStatus: widget.querySelectorAll(".fd-widget-status-card").length,
+        oldFakeQuickActions: widget.querySelectorAll(".fd-widget-action-row").length,
+      },
       overflow:
         document.documentElement.scrollWidth - document.documentElement.clientWidth,
     };
   });
   const phoneDelta = Math.abs(feature.phoneRatio - 320 / 569);
   const previewDelta = Math.abs(feature.previewRatio - 16 / 9);
+  const widgetPhoneDelta = Math.abs(feature.widget.ratio - 320 / 569);
   if (
     !feature.mock ||
     feature.nodes < 5 ||
@@ -124,17 +143,28 @@ for (const width of widths) {
     !feature.autoBlockClass.includes("feature-narrative-block") ||
     feature.autoTitle !== "自動線画" ||
     !feature.autoBody.includes("ラフの線の中心") ||
-    !feature.autoIsFirst ||
+    feature.firstHeading !== "いつもの作業を、もっとスムーズに。" ||
+    feature.secondHeading !== "自動線画" ||
+    feature.thirdHeading !== "早替えツール" ||
     feature.promoEyebrows !== 0 ||
-    feature.promoPoints !== 0
+    feature.promoPoints !== 0 ||
+    widgetPhoneDelta > 0.03 ||
+    feature.widget.sections !== 3 ||
+    feature.widget.artworkTiles !== 1 ||
+    feature.widget.radioRows !== 4 ||
+    feature.widget.selectedRadios !== 2 ||
+    feature.widget.appbarTitle !== "ウィジェット設定" ||
+    feature.widget.oldFakeStatus !== 0 ||
+    feature.widget.oldFakeQuickActions !== 0
   ) {
     findings.push({
       width,
       route: "/features/",
-      kind: "auto-lineart-feature-consistency",
+      kind: "feature-detail-consistency",
       feature,
       phoneDelta,
       previewDelta,
+      widgetPhoneDelta,
     });
   }
 
