@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  patch:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,13 +22,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: python .github/patches/seo_expansion_patch.py
       - run: node tools/generate-seo-i18n.mjs
-      - run: npx prettier --write src/index.js src/seo.js tests/seo-contract-audit.mjs
+      - run: npx prettier --check src/index.js src/seo.js tests/seo-contract-audit.mjs
       - run: node tests/seo-contract-audit.mjs
       - run: npx wrangler deploy --dry-run
       - run: npm run format:check
-      - name: Commit
+      - name: Finalize
         run: |
           rm -f .github/workflows/temporary_seo_expansion_apply.yml
           rm -f .github/patches/seo_expansion_patch.py
@@ -36,6 +35,6 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
           git diff --cached --check
-          git commit -m "feat: expand international SEO discovery metadata"
+          git commit -m "chore: finalize international SEO validation"
           git pull --rebase origin dev_branch
           git push origin HEAD:dev_branch
