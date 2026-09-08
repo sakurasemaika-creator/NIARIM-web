@@ -1,18 +1,8 @@
-/* NIARIM signature tools: intentionally follows the same visual grammar as the
-   existing Features sections. Auto-lineart is a phone-screen reconstruction,
-   not a desktop/product-demo panel. */
+/* NIARIM signature tools. Keep the same hierarchy as the surrounding pages. */
+.features-header { background: transparent; }
 
-.unique-spotlight {
-  position: relative;
-  max-width: 1120px;
-  margin: 0 auto clamp(2.75rem, 6vw, 5.5rem);
-  padding: clamp(1.65rem, 4vw, 3.2rem);
-  border: 1px solid rgba(255, 92, 122, 0.18);
-  border-radius: 28px;
-  background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(255,247,245,.92));
-  box-shadow: 0 24px 64px rgba(59,36,41,.07);
-}
-.unique-spotlight-head { max-width: 760px; margin: 0 auto 2rem; text-align:center; }
+.unique-spotlight { position:relative; max-width:1120px; margin:0 auto clamp(2.75rem,6vw,5.5rem); padding:clamp(1.65rem,4vw,3.2rem); border:1px solid rgba(255,92,122,.18); border-radius:28px; background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,247,245,.92)); box-shadow:0 24px 64px rgba(59,36,41,.07); }
+.unique-spotlight-head { max-width:760px; margin:0 auto 2rem; text-align:center; }
 .unique-spotlight-kicker { display:inline-flex; align-items:center; min-height:30px; padding:.35rem .82rem; border-radius:999px; background:var(--color-ink); color:#fff; font-size:.7rem; font-weight:800; letter-spacing:.15em; }
 .unique-spotlight-head h3 { margin-top:1rem; font-family:var(--font-serif); font-size:clamp(1.9rem,3.5vw,3rem); line-height:1.15; }
 .unique-spotlight-head p { max-width:62ch; margin:.9rem auto 0; color:var(--color-text-muted); line-height:1.85; }
@@ -22,27 +12,20 @@
 .unique-spotlight-card strong { display:block; font-family:var(--font-serif); font-size:1.06rem; color:var(--color-ink); }
 .unique-spotlight-card span { display:block; margin-top:.45rem; color:var(--color-text-muted); font-size:var(--fs-small); line-height:1.75; }
 
-.signature-feature-layout {
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(280px,320px);
-  gap:clamp(1.75rem,5vw,4rem);
-  align-items:center;
-  margin:0 0 var(--space-lg);
-  padding:0;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  box-shadow:none;
-  overflow:visible;
-}
-.signature-feature-copy { max-width:640px; text-align:left; }
-.signature-feature-copy .eyebrow { margin-bottom:.7rem; }
-.signature-feature-copy h3 { font-family:var(--font-serif); font-size:clamp(1.45rem,2.6vw,2.15rem); line-height:1.25; letter-spacing:-.015em; }
-.signature-feature-copy > p { max-width:58ch; margin:.75rem 0 0; color:var(--color-text-muted); line-height:1.82; }
-.signature-feature-points { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; margin-top:1rem; }
-.signature-feature-point { min-width:0; padding:.7rem .8rem; border:1px solid var(--color-border); border-radius:12px; background:var(--color-white); font-size:var(--fs-small); line-height:1.5; }
+/* The auto-lineart introduction is ordinary feature copy, not a promo island. */
+.signature-feature-layout { display:block; margin:0 0 var(--space-lg); padding:0; border:0; background:transparent; box-shadow:none; overflow:visible; }
+.signature-feature-copy { max-width:760px; }
+.signature-feature-copy .eyebrow { margin-bottom:.65rem; }
+.signature-feature-copy h3 { font-family:var(--font-serif); font-size:clamp(1.35rem,2.4vw,1.9rem); line-height:1.3; letter-spacing:-.01em; }
+.signature-feature-copy > p { max-width:62ch; margin:.7rem 0 0; color:var(--color-text-muted); line-height:1.8; }
+.signature-feature-points { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; max-width:700px; margin-top:1rem; }
+.signature-feature-point { min-width:0; padding:.65rem .75rem; border:1px solid var(--color-border); border-radius:12px; background:var(--color-white); font-size:var(--fs-small); line-height:1.5; }
+/* The obsolete landscape promo mock is deliberately suppressed. The real phone
+   reconstruction is #advanced > .fd-autolineart-screen, produced by main.js. */
+.autolineart-app-mock { display:none !important; }
 
-.fd-autolineart-screen { --fd-accent:#6f3fb4; --fd-ink:#30213f; --fd-muted:#6d5d78; --fd-outside:#e8e0ee; --fd-bezel:#5a3d70; --fd-surface:#faf5fc; --fd-panel:#eadcf0; --fd-panel-2:#d9c6e4; --fd-bg:#faf5fc; --fd-text:#30213f; --fd-accent-fill:#6f3fb4; --fd-on-accent:#fff; }
+/* Dedicated unused hue for this screen; bezel is the same theme family. */
+.fd-autolineart-screen { --fd-accent:#5d8f24; --fd-ink:#29351e; --fd-muted:#626e54; --fd-outside:#e5eadf; --fd-bezel:#526d38; --fd-surface:#f8fbf4; --fd-panel:#e4ecd9; --fd-panel-2:#d2dfc2; --fd-bg:#f8fbf4; --fd-text:#29351e; --fd-accent-fill:#5d8f24; --fd-on-accent:#fff; }
 .fd-autolineart-body { display:flex; flex-direction:column; gap:10px; padding:12px !important; overflow:hidden !important; }
 .fd-autolineart-preview { position:relative; width:100%; aspect-ratio:16/9; flex:0 0 auto; overflow:hidden; border:1px solid color-mix(in srgb,var(--fd-ink) 14%,transparent); border-radius:10px; background:#fff; }
 .fd-autolineart-preview svg { width:100%; height:100%; display:block; }
@@ -64,19 +47,5 @@
 .fd-autolineart-reset { border:1px solid color-mix(in srgb,var(--fd-ink) 18%,transparent); background:var(--fd-surface); }
 .fd-autolineart-apply { background:var(--fd-accent-fill); color:var(--fd-on-accent); }
 
-@media (max-width:820px) {
-  .unique-spotlight-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .signature-feature-layout { grid-template-columns:1fr; }
-  .signature-feature-copy { max-width:680px; margin-inline:auto; text-align:center; }
-  .signature-feature-copy > p { margin-inline:auto; }
-  .signature-feature-points { max-width:620px; margin-inline:auto; }
-  .signature-feature-layout > .fd-autolineart-screen { margin-inline:auto !important; }
-}
-@media (max-width:520px) {
-  .unique-spotlight { padding:1rem; border-radius:20px; }
-  .unique-spotlight-grid,.signature-feature-points { grid-template-columns:1fr; }
-  .unique-spotlight-card { padding:1rem; }
-  .signature-feature-copy h3 { font-size:1.45rem; }
-  .signature-feature-copy > p { font-size:var(--fs-small); line-height:1.75; }
-  .signature-feature-point { text-align:left; }
-}
+@media (max-width:820px) { .unique-spotlight-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:520px) { .unique-spotlight { padding:1rem; border-radius:20px; } .unique-spotlight-grid,.signature-feature-points { grid-template-columns:1fr; } .unique-spotlight-card { padding:1rem; } .signature-feature-copy h3 { font-size:1.35rem; } .signature-feature-copy > p { font-size:var(--fs-small); line-height:1.75; } }
