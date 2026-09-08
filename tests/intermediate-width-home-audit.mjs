@@ -62,6 +62,8 @@ for (const width of widths) {
       };
       const hero = document.querySelector(".hero");
       const container = document.querySelector(".hero .container");
+      const copy = document.querySelector(".hero-copy");
+      const visual = document.querySelector(".hero-visual");
       const de = document.documentElement;
       return {
         hero: rect(".hero"),
@@ -73,6 +75,15 @@ for (const width of widths) {
         visual: rect(".hero-visual"),
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
+        copyDisplay: getComputedStyle(copy).display,
+        visualMaxWidth: getComputedStyle(visual).maxWidth,
+        compactMedia: matchMedia("(max-width: 759px)").matches,
+        intermediateMedia: matchMedia(
+          "(min-width: 641px) and (max-width: 759px)",
+        ).matches,
+        styleSheets: Array.from(document.styleSheets, (sheet) => sheet.href).filter(
+          Boolean,
+        ),
         paddingTop: parseFloat(getComputedStyle(hero).paddingTop),
         paddingBottom: parseFloat(getComputedStyle(hero).paddingBottom),
         clientWidth: de.clientWidth,
