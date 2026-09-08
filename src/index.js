@@ -1,26 +1,11 @@
 /**
  * NIARIM公式サイト Workerエントリポイント
  *
- * /api/* のみWorkerで処理し、それ以外は Workers Static Assets (env.ASSETS) が
- * public/ ディレクトリの静的ファイルを配信する。
+ * API処理に加え、静的HTMLを公開サイトの正規URLへ正規化して配信する。
  */
 import { handleContact } from "./contact.js";
 import { jsonResponse } from "./utils.js";
 
-/**
- * Content-Security-Policy
- *
- * サイト内のJavaScriptはすべて /js/*.js の同一オリジン外部ファイルに
- * 集約してあるため（設定値の差し込み処理も config-links.js へ切り出し済み）、
- * script-src に 'unsafe-inline' / 'unsafe-eval' を一切許可しない。
- * これによりXSSが混入した場合でもスクリプト実行を防げる。
- *
- * style-src のみ 'unsafe-inline' を許可している。本文中の細かな配置調整に
- * style属性を使っている箇所と、404ページのインライン<style>があるため。
- * スタイルの注入はスクリプト実行に比べ影響が限定的なため許容する。
- *
- * フォントは全て自前配信のため、外部ホストは一切許可しない（'self'のみ）。
- */
 const CSP = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -36,22 +21,12 @@ const CSP = [
   "upgrade-insecure-requests",
 ].join("; ");
 
-/**
- * ここで付与するヘッダーが効くのは「Workerが生成した応答」＝ /api/* だけ。
- * wrangler.jsonc の run_worker_first を ["/api/*"] に限定しているため、
- * HTML・CSS・JS等の静的アセットはWorkerを通らずに配信される。
- * 静的アセット側の同等のヘッダーは public/_headers で指定している。
- * 片方だけ直しても全体はカバーできないので、変更時は必ず両方を更新すること。
- */
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
-  // frame-ancestors に対応しない古いブラウザ向けの保険として併記する。
   "X-Frame-Options": "DENY",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Content-Security-Policy": CSP,
-  // HTTPSへの固定。Cloudflare側でHTTPSは有効な前提。
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-  // 本サイトはカメラ・マイク・位置情報等を一切使わないため明示的に無効化する。
   "Permissions-Policy":
     "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
   "Cross-Origin-Opener-Policy": "same-origin",
@@ -62,11 +37,102 @@ function withSecurityHeaders(response) {
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     headers.set(key, value);
   }
+  if (response.status >= 400) {
+    headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
     headers,
   });
+}
+
+function canonicalUrl(request, env) {
+  const requestUrl = new URL(request.url);
+  const origin = String(env.SITE_ORIGIN || requestUrl.origin).replace(/\/$/, "");
+  return `${origin}${requestUrl.pathname}`;
+}
+
+function absoluteAssetUrl(value, env, request) {
+  if (!value || !value.startsWith("/")) return value;
+  const origin = String(env.SITE_ORIGIN || new URL(request.url).origin).replace(
+    /\/$/,
+    "",
+  );
+  return `${origin}${value}`;
+}
+
+function structuredData(env) {
+  const origin = String(env.SITE_ORIGIN || "").replace(/\/$/, "");
+  if (!origin) return null;
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${origin}/#organization`,
+        name: "NIARIM",
+        url: `${origin}/`,
+        logo: `${origin}/assets/images/logo/app_logo.svg`,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${origin}/#website`,
+        url: `${origin}/`,
+        name: "NIARIM",
+        publisher: { "@id": `${origin}/#organization` },
+        inLanguage: ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"],
+      },
+    ],
+  });
+}
+
+function rewriteSeoHtml(response, request, env) {
+  const type = response.headers.get("content-type") || "";
+  if (response.status !== 200 || !type.includes("text/html")) return response;
+
+  const canonical = canonicalUrl(request, env);
+  const schema = new URL(request.url).pathname === "/" ? structuredData(env) : null;
+
+  let rewriter = new HTMLRewriter()
+    .on('link[rel="canonical"]', {
+      element(element) {
+        element.setAttribute("href", canonical);
+      },
+    })
+    .on('meta[property="og:url"]', {
+      element(element) {
+        element.setAttribute("content", canonical);
+      },
+    })
+    .on('meta[property="og:image"], meta[name="twitter:image"]', {
+      element(element) {
+        const value = element.getAttribute("content");
+        const absolute = absoluteAssetUrl(value, env, request);
+        if (absolute) element.setAttribute("content", absolute);
+      },
+    })
+    .on('meta[name="robots"]', {
+      element(element) {
+        element.setAttribute(
+          "content",
+          "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+        );
+      },
+    });
+
+  if (schema) {
+    rewriter = rewriter.on("head", {
+      element(element) {
+        element.append(
+          `<script type="application/ld+json">${schema.replace(/</g, "\\u003c")}</script>`,
+          { html: true },
+        );
+      },
+    });
+  }
+
+  return rewriter.transform(response);
 }
 
 export default {
@@ -84,7 +150,8 @@ export default {
       }
 
       const assetResponse = await env.ASSETS.fetch(request);
-      return withSecurityHeaders(assetResponse);
+      const seoResponse = rewriteSeoHtml(assetResponse, request, env);
+      return withSecurityHeaders(seoResponse);
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(
