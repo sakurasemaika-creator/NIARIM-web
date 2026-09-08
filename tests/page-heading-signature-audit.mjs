@@ -12,19 +12,6 @@ const routes = [
   ["/privacy/", ".legal-header"],
   ["/terms/", ".legal-header"],
 ];
-const existingMockAccents = new Set([
-  "rgb(255, 123, 57)",
-  "rgb(118, 81, 232)",
-  "rgb(255, 211, 74)",
-  "rgb(47, 142, 234)",
-  "rgb(39, 212, 137)",
-  "rgb(40, 215, 255)",
-  "rgb(49, 87, 217)",
-  "rgb(181, 108, 255)",
-  "rgb(239, 90, 200)",
-  "rgb(255, 159, 47)",
-  "rgb(223, 52, 77)",
-]);
 const findings = [];
 const browser = await chromium.launch(launchOptions());
 
@@ -44,116 +31,53 @@ for (const width of widths) {
       const heads = [...document.querySelectorAll(".section-head")].map((head) => {
         const r = head.getBoundingClientRect();
         const parent = head.parentElement?.getBoundingClientRect();
-        return {
-          centerDelta: parent
-            ? Math.abs(r.left + r.width / 2 - (parent.left + parent.width / 2))
-            : 999,
-          textAlign: getComputedStyle(head).textAlign,
-        };
+        return { centerDelta: parent ? Math.abs(r.left + r.width / 2 - (parent.left + parent.width / 2)) : 999, textAlign: getComputedStyle(head).textAlign };
       });
-      return {
-        hero: heroRect
-          ? {
-              centerDelta: Math.abs(
-                heroRect.left + heroRect.width / 2 - innerWidth / 2,
-              ),
-              textAlign: getComputedStyle(hero).textAlign,
-            }
-          : null,
-        heads,
-      };
+      return { hero: heroRect ? { centerDelta: Math.abs(heroRect.left + heroRect.width / 2 - innerWidth / 2), textAlign: getComputedStyle(hero).textAlign } : null, heads };
     }, selector);
-
-    if (!state.hero) {
-      findings.push({ width, route, kind: "missing-page-heading" });
-      continue;
-    }
-    if (state.hero.centerDelta > 2 || state.hero.textAlign !== "center") {
-      findings.push({ width, route, kind: "page-heading-not-centered", state });
-    }
-    state.heads.forEach((head, index) => {
-      if (head.centerDelta > 2 || head.textAlign !== "center") {
-        findings.push({
-          width,
-          route,
-          kind: "section-heading-not-centered",
-          index,
-          head,
-        });
-      }
-    });
+    if (!state.hero) findings.push({ width, route, kind: "missing-page-heading" });
+    else if (state.hero.centerDelta > 2 || state.hero.textAlign !== "center") findings.push({ width, route, kind: "page-heading-not-centered", state });
+    state.heads.forEach((head, index) => { if (head.centerDelta > 2 || head.textAlign !== "center") findings.push({ width, route, kind: "section-heading-not-centered", index, head }); });
   }
 
   await page.goto(baseURL + "/about/", { waitUntil: "networkidle" });
   await page.waitForSelector(".unique-spotlight");
-  const about = await page.evaluate(() => ({
-    cards: document.querySelectorAll(".unique-spotlight-card").length,
-    overflow:
-      document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  }));
-  if (about.cards !== 6 || about.overflow > 2) {
-    findings.push({ width, route: "/about/", kind: "signature-showcase", about });
-  }
+  const about = await page.evaluate(() => ({ cards: document.querySelectorAll(".unique-spotlight-card").length, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth }));
+  if (about.cards !== 6 || about.overflow > 2) findings.push({ width, route: "/about/", kind: "signature-showcase", about });
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
-  await page.waitForSelector(".autolineart-app-mock");
+  await page.waitForSelector(".fd-autolineart-screen");
   const feature = await page.evaluate(() => {
-    const mock = document.querySelector(".autolineart-app-mock");
+    const mock = document.querySelector(".fd-autolineart-screen");
+    const preview = mock.querySelector(".fd-autolineart-preview");
     const rect = mock.getBoundingClientRect();
+    const previewRect = preview.getBoundingClientRect();
     const style = getComputedStyle(mock);
-    const probe = document.createElement("span");
-    probe.style.color = style.getPropertyValue("--al-bezel");
-    document.body.appendChild(probe);
-    const bezelToken = getComputedStyle(probe).color;
-    probe.style.color = style.getPropertyValue("--al-accent");
-    const accentToken = getComputedStyle(probe).color;
-    probe.remove();
+    const header = document.querySelector(".features-header");
     return {
       mock: Boolean(mock),
-      nodes: document.querySelectorAll(".autolineart-node").length,
-      controls: document.querySelectorAll(".autolineart-control-row").length,
-      ratio: rect.width / rect.height,
+      nodes: mock.querySelectorAll(".fd-autolineart-node").length,
+      controls: mock.querySelectorAll(".fd-autolineart-row").length,
+      phoneRatio: rect.width / rect.height,
+      previewRatio: previewRect.width / previewRect.height,
       borderColor: style.borderTopColor,
-      bezelToken,
-      accentToken,
-      theme: mock.getAttribute("data-mock-theme"),
-      title: document.querySelector(".signature-feature-copy h3")?.textContent || "",
-      lead: document.querySelector(".signature-feature-copy > p")?.textContent || "",
-      overflow:
-        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      bezel: style.getPropertyValue("--fd-bezel").trim(),
+      accent: style.getPropertyValue("--fd-accent").trim(),
+      oldLandscapeVisible: Boolean(document.querySelector(".autolineart-app-mock")?.getClientRects().length),
+      signatureBackground: getComputedStyle(document.querySelector(".signature-feature-layout")).backgroundImage,
+      headerBackground: getComputedStyle(header).backgroundImage,
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     };
   });
-
-  const ratioDelta = Math.abs(feature.ratio - 16 / 9);
-  const releaseNoteLanguage = /最新|new auto|new lineart|now lives|added|加わりました/i.test(
-    `${feature.title} ${feature.lead}`,
-  );
-  if (
-    !feature.mock ||
-    feature.nodes < 5 ||
-    feature.controls !== 4 ||
-    feature.overflow > 2 ||
-    ratioDelta > 0.03 ||
-    feature.borderColor !== feature.bezelToken ||
-    feature.theme !== "ink" ||
-    existingMockAccents.has(feature.accentToken) ||
-    releaseNoteLanguage
-  ) {
-    findings.push({
-      width,
-      route: "/features/",
-      kind: "auto-lineart-showcase",
-      feature,
-      ratioDelta,
-      releaseNoteLanguage,
-    });
+  const phoneDelta = Math.abs(feature.phoneRatio - 320 / 569);
+  const previewDelta = Math.abs(feature.previewRatio - 16 / 9);
+  if (!feature.mock || feature.nodes < 5 || feature.controls !== 4 || feature.overflow > 2 || phoneDelta > 0.03 || previewDelta > 0.03 || feature.oldLandscapeVisible || feature.signatureBackground !== "none" || feature.headerBackground !== "none") {
+    findings.push({ width, route: "/features/", kind: "auto-lineart-phone-consistency", feature, phoneDelta, previewDelta });
   }
 
   await context.close();
 }
 
 await browser.close();
-console.log(
-  JSON.stringify({ findings: findings.length, details: findings }, null, 2),
-);
+console.log(JSON.stringify({ findings: findings.length, details: findings }, null, 2));
 if (findings.length) process.exit(1);
