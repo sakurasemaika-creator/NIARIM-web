@@ -102,6 +102,8 @@ function structuredData(request, env, metadata) {
   if (!metadata) return null;
   const origin = siteOrigin(request, env);
   const canonical = canonicalUrl(request, env, metadata.lang);
+  const organizationId = `${origin}/#organization`;
+  const websiteId = `${origin}/#website`;
   const graph = [
     {
       "@type": "WebPage",
@@ -110,7 +112,9 @@ function structuredData(request, env, metadata) {
       name: metadata.title,
       description: metadata.description,
       inLanguage: metadata.lang,
-      isPartOf: { "@id": `${origin}/#website` },
+      isPartOf: { "@id": websiteId },
+      about: { "@id": `${origin}/#software` },
+      primaryImageOfPage: { "@id": `${origin}/#primaryimage` },
     },
   ];
 
@@ -118,18 +122,52 @@ function structuredData(request, env, metadata) {
     graph.unshift(
       {
         "@type": "Organization",
-        "@id": `${origin}/#organization`,
+        "@id": organizationId,
         name: "NIARIM",
         url: `${origin}/`,
-        logo: `${origin}/assets/images/logo/app_logo.svg`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${origin}/assets/images/logo/app_logo.svg`,
+        },
       },
       {
         "@type": "WebSite",
-        "@id": `${origin}/#website`,
+        "@id": websiteId,
         url: `${origin}/`,
         name: "NIARIM",
-        publisher: { "@id": `${origin}/#organization` },
+        publisher: { "@id": organizationId },
         inLanguage: SEO_LANGS,
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${origin}/#primaryimage`,
+        url: `${origin}/assets/images/ogp-default.png`,
+        contentUrl: `${origin}/assets/images/ogp-default.png`,
+        representativeOfPage: true,
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${origin}/#software`,
+        name: "NIARIM",
+        alternateName: "ニアリム",
+        url: `${origin}/`,
+        applicationCategory: "MultimediaApplication",
+        applicationSubCategory: "Animation creation",
+        operatingSystem: "Android, iOS",
+        description: metadata.description,
+        image: { "@id": `${origin}/#primaryimage` },
+        publisher: { "@id": organizationId },
+        inLanguage: SEO_LANGS,
+        featureList: [
+          "Hand-drawn animation",
+          "Keyframe motion animation",
+          "Stop-motion animation",
+          "Drawing and layers",
+          "Timeline editing",
+          "Audio editing",
+          "Animation export",
+          "Community作品広場",
+        ],
       },
     );
   }
@@ -159,6 +197,9 @@ function rewriteSeoHtml(response, request, env) {
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
+  const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
+    .map((lang) => `<meta property="og:locale:alternate" content="${OG_LOCALES[lang]}">`)
+    .join("");
 
   const rewriter = new HTMLRewriter()
     .on("html", {
@@ -226,6 +267,7 @@ function rewriteSeoHtml(response, request, env) {
           html: true,
         });
         element.append(alternates, { html: true });
+        element.append(alternateLocales, { html: true });
         if (schema) {
           element.append(
             `<script type="application/ld+json">${schema.replace(/</g, "\\u003c")}</script>`,
