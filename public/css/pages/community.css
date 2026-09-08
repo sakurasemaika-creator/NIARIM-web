@@ -31,12 +31,17 @@
   transition:
     background var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .community-tabs button:hover:not(.is-active) {
   border-color: var(--color-ink);
   color: var(--color-ink);
+}
+
+.community-tabs button:active {
+  transform: translateY(1px);
 }
 
 .community-tabs button.is-active {
@@ -64,9 +69,11 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-white);
+  box-shadow: 0 8px 24px rgba(62, 37, 43, 0.035);
   transition:
     opacity var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
 }
 
 .community-card .thumb {
@@ -121,38 +128,16 @@
   padding: var(--space-sm) var(--space-md);
 }
 
-@media (max-width: 600px) {
-  .community-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-sm);
-  }
-
-  .community-card .thumb {
-    font-size: 0.75rem;
-  }
-
-  .community-card .rank-badge {
-    top: 0.35rem;
-    left: 0.35rem;
-    font-size: 0.95rem;
-    min-width: 1.5rem;
-    padding: 0.15rem 0.5rem;
-  }
-
-  .community-card .meta {
-    padding: var(--space-xs) var(--space-sm);
-  }
-}
-
 .community-card .meta h3 {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .community-card .meta p {
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
   font-size: var(--fs-small);
   color: var(--color-text-muted);
 }
@@ -161,6 +146,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-color: rgba(255, 92, 122, 0.18);
 }
 
 .community-card.is-more-cta .thumb {
@@ -170,7 +156,9 @@
   min-height: 180px;
   flex-direction: column;
   gap: var(--space-sm);
-  background: var(--color-bg-tint);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 92, 122, 0.09), transparent 55%),
+    var(--color-bg-tint);
   color: var(--color-text-muted);
   padding: var(--space-md);
   text-align: center;
@@ -192,6 +180,53 @@
   text-align: center;
 }
 
+@media (max-width: 600px) {
+  .community-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    scroll-padding-inline: var(--container-padding);
+    margin-inline: calc(-1 * var(--container-padding));
+    padding-inline: var(--container-padding);
+    padding-bottom: 0.2rem;
+  }
+
+  .community-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .community-tabs button {
+    flex: 0 0 auto;
+  }
+
+  .community-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .community-card .thumb {
+    font-size: 0.75rem;
+  }
+
+  .community-card .rank-badge {
+    top: 0.35rem;
+    left: 0.35rem;
+    font-size: 0.95rem;
+    min-width: 1.5rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .community-card .meta {
+    padding: 0.75rem var(--space-sm) 0.85rem;
+  }
+
+  .community-card .meta h3 {
+    font-size: 0.92rem;
+  }
+}
+
 @media (max-width: 375px) {
   .community-banner {
     padding-inline: var(--space-md);
@@ -202,8 +237,7 @@
   }
 
   .community-tabs button {
-    flex: 1 1 calc(33.333% - 0.4rem);
-    padding-inline: 0.55rem;
+    padding-inline: 0.85rem;
   }
 
   .community-card.is-more-cta .thumb {
