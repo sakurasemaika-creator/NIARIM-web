@@ -36,6 +36,9 @@ jobs:
             public/js/signature-showcase.js
             public/js/widget-phone-fidelity.js
             tests/page-heading-signature-audit.mjs
+            tests/operations-seo-audit.mjs
+            src/index.js
+            wrangler.jsonc
           if-no-files-found: error
           retention-days: 1
 
@@ -64,6 +67,8 @@ jobs:
           sed -i 's/const accentStrong = root\.getPropertyValue("--color-accent-strong")\.trim();/const accentStrong = root.getPropertyValue("--color-accent").trim();/g' tests/validate-rendered-audit.mjs
       - name: Audit browser language detection
         run: node tests/i18n-browser-detection-audit.mjs
+      - name: Audit production SEO and operations invariants
+        run: node tests/operations-seo-audit.mjs
       - name: Audit latest AI trust additions with real captures
         run: node tests/ai-trust-visual-audit.mjs
       - name: Run autonomous section-by-section interaction audit
