@@ -112,7 +112,7 @@ a {
   html body .hero-visual.fd-app-screen {
     transform: none !important;
     top: auto !important;
-    margin-top: clamp(-10rem, -25vw, -7.5rem) !important;
+    margin-top: clamp(-13rem, -32vw, -10rem) !important;
     margin-bottom: calc(-1 * clamp(3.25rem, 13.5vw, 4.75rem)) !important;
   }
 
