@@ -34,6 +34,8 @@ jobs:
         with:
           name: canonical-prettier-output
           path: |
+            public/css/home-hero-responsive-final.css
+            public/css/line-break.css
             public/css/pages/help.css
             public/css/signature-showcase.css
             public/js/advanced-narrative-normalizer.js
