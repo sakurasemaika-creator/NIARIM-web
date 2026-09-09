@@ -5,10 +5,11 @@
    <=900px centered Hero treatment. Explicitly own the sub-560 typography here
    so the title/subtitle/lead stay left-aligned on the real page as designed.
 
-   The visible phone bezel is .frame-mock. Moving only .hero-visual can leave the
-   bezel visually anchored while its screen contents shift, so keep the outer
-   grid item in place and lift the complete bezel + contents as one unit. CTA
-   geometry is intentionally unchanged. */
+   main.js replaces the static .frame-mock markup and turns .hero-visual itself
+   into .fd-app-screen. Therefore the visible bezel and all CanvasScreen content
+   must be moved by positioning .hero-visual.fd-app-screen itself. Moving a
+   descendant only can desynchronise the bezel and its contents on the real page.
+   CTA geometry remains untouched. */
 @media (max-width: 559px) {
   html body .hero-title,
   html body .hero-subtitle,
@@ -28,13 +29,8 @@
     position: relative !important;
     width: clamp(104px, 29vw, 124px) !important;
     max-width: 124px !important;
-    top: 0 !important;
+    top: clamp(-7rem, -16vw, -5rem) !important;
     justify-self: end !important;
     align-self: start !important;
-  }
-
-  html body .hero-visual.fd-app-screen > .frame-mock {
-    position: relative !important;
-    top: clamp(-6.5rem, -18vw, -4.25rem) !important;
   }
 }
