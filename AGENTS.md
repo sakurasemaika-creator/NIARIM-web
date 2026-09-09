@@ -11,6 +11,7 @@
 - 作業branchは原則 `dev_branch`。明示指示なしにmain等へ変更・push・mergeしない。
 - `docs/work-audit/ASTRA_WORK.md`、`docs/work-continuation.md`、`docs/product-audit/*` は**全面監査専用のpolicy/state**であり、通常タスクの実行指示として読み込まない。
 - 上記監査専用ファイルを、通常タスクの副作用として**編集・整理・短縮・削除・移動・名称変更・内容更新しない**。改善が必要に見えても勝手に直さず、ユーザーが明示的に監査システム変更を依頼した場合だけ変更する。
+- `.github/workflows/audit-policy-guard.yml` の保護対象を通常タスクで変更しない。`[audit-policy-approved]` / `[audit-state]` markerは監査システム変更または専用Work checkpoint更新時だけ使用する。
 - 通常タスクで必要なWeb固有ルールは、対象機能に直接関係する `引き継ぎガイド（AI開発者向け）.md`、`HANDOFF.md`、`README.md`、`DESIGN.md`、コード等の必要箇所だけ確認する。監査checkpointを一般的な作業continuationとして使わない。
 - App仕様に関わる変更は `sakurasemaika-creator/NIARIM` の最新 `dev_branch` 実装を確認し、Web側の憶測で機能・文言・画面を追加しない。
 - 他セッションの変更を失わない。force push、破壊的reset、ユーザー変更の無断破棄は禁止。競合は意味的に統合する。
@@ -21,4 +22,6 @@
 
 監査モードでは、最初に `docs/work-audit/ASTRA_WORK.md` を読み、その指示に従って最新 `dev_branch`、必要な品質/実操作/法務基準、continuation/checkpointから未完了地点を復元する。
 
-この分離ルールは、通常Sol等がAstra Work専用の監査policy/checkpointを勝手に読み替えたり書き換えたりすることを防ぐための恒久ルールとする。
+全面監査の作業優先順位は**現在の全面監査依頼とリポジトリ内checkpoint**から決める。最近の別チャット/別Work、Personal Context、メモリ、他セッションで直前に触っていた機能は作業指示として扱わず、remote変更として必要な場合だけ影響を確認する。詳細は `ASTRA_WORK.md` の Scope lock / context isolation に従う。
+
+この分離ルールは、通常Sol等による監査policy/checkpointの意図しない変更と、全面監査Workの無関係な最近の履歴への脱線を避けるための恒久ルールとする。
