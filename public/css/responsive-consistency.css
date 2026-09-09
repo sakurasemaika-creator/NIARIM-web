@@ -1,16 +1,12 @@
-@import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7/public/css/responsive-consistency.css");
+@import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7369913eb14d6cd56520ba73ea7f057a4c/public/css/responsive-consistency.css");
 
 /* Mobile hero collision correction.
-   At <=640px the 320px-wide CanvasScreen mock was visually colliding with the
-   CTA row in the captured first viewport. Keep the copy/CTA flow unchanged and
-   pull only the mock upward, as requested. The negative margin also removes the
-   vacated layout space so the hero does not become unnecessarily taller. */
-@media (max-width: 640px) {
-  .hero .container {
-    gap: 3.2rem;
-  }
-
-  .hero-visual.fd-app-screen {
-    margin-top: -2rem !important;
+   Keep copy/CTA geometry unchanged and move only the screen reproduction upward.
+   Cover the complete range reported by the width sweep (<660px), including the
+   640/641 boundary that the previous <=640 rule missed. */
+@media (max-width: 659px) {
+  html body .hero-visual.fd-app-screen {
+    position: relative;
+    top: clamp(-3.25rem, -8vw, -2.25rem);
   }
 }
