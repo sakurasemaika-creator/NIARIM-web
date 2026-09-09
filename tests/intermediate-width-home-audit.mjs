@@ -6,17 +6,18 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [
   320, 339, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759,
-  760, 900, 901, 1023, 1024,
+  760, 900, 901, 1023, 1024, 1100, 1199, 1279, 1280, 1440, 1600, 1920,
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const captureWidths = new Set([
   320, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760,
-  900,
+  900, 1023, 1024, 1280, 1600, 1920,
 ]);
 const outDir =
   process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
 const failures = [];
 const screenshots = [];
+const statesByLanguage = new Map();
 await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch(launchOptions());
 
@@ -38,6 +39,13 @@ function horizontalGap(a, b) {
 function verticalGap(a, b) {
   if (!a || !b) return null;
   return b.top - a.bottom;
+}
+
+function ratioJump(a, b) {
+  if (!Number.isFinite(a) || !Number.isFinite(b) || a <= 0 || b <= 0) {
+    return 0;
+  }
+  return Math.abs(b - a) / a;
 }
 
 for (const width of widths) {
@@ -75,6 +83,7 @@ for (const width of widths) {
       const hero = document.querySelector(".hero");
       const container = document.querySelector(".hero .container");
       const copy = document.querySelector(".hero-copy");
+      const title = document.querySelector(".hero-title");
       const showcase = container?.querySelector(":scope > .hero-showcase");
       const legacyVisual = container?.querySelector(":scope > .hero-visual");
       const visual = showcase || legacyVisual;
@@ -92,7 +101,7 @@ for (const width of widths) {
         hero: rectOf(hero),
         container: rectOf(container),
         copy: rectOf(copy),
-        title: rect(".hero-title"),
+        title: rectOf(title),
         subtitle: rect(".hero-subtitle"),
         lead: rect(".hero-lead"),
         actions: rect(".hero-actions"),
@@ -107,6 +116,9 @@ for (const width of widths) {
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
         copyDisplay: getComputedStyle(copy).display,
+        titleFontSize: title
+          ? parseFloat(getComputedStyle(title).fontSize)
+          : null,
         visualMaxWidth: visual ? getComputedStyle(visual).maxWidth : null,
         styleSheets: Array.from(
           document.styleSheets,
@@ -252,7 +264,63 @@ for (const width of widths) {
       if (overlaps(state.copy, state.visual)) {
         failures.push({ id, kind: "desktop-columns-collision", state });
       }
+      if (copyVisualGap !== null && copyVisualGap < 20) {
+        failures.push({
+          id,
+          kind: "desktop-columns-too-tight",
+          copyVisualGap,
+          state,
+        });
+      }
+      if (state.visualOwner === "showcase") {
+        if (state.visual.width < 300 || state.visual.width > 560) {
+          failures.push({ id, kind: "desktop-showcase-size-outlier", state });
+        }
+      } else if (state.visual.width < 295 || state.visual.width > 425) {
+        failures.push({ id, kind: "desktop-phone-size-outlier", state });
+      }
+      if (
+        !Number.isFinite(state.titleFontSize) ||
+        state.titleFontSize < 54 ||
+        state.titleFontSize > 86
+      ) {
+        failures.push({ id, kind: "desktop-title-size-outlier", state });
+      }
+      if (state.paddingTop > 66 || state.paddingBottom > 62) {
+        failures.push({ id, kind: "desktop-padding-too-loose", state });
+      }
     }
+
+    const previous = statesByLanguage.get(language);
+    if (previous?.width === 1023 && width === 1024) {
+      if (ratioJump(previous.state.visual.width, state.visual.width) > 0.18) {
+        failures.push({
+          id,
+          kind: "1023-1024-visual-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+      if (
+        ratioJump(previous.state.titleFontSize, state.titleFontSize) > 0.18
+      ) {
+        failures.push({
+          id,
+          kind: "1023-1024-title-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+      if (ratioJump(previous.state.paddingTop, state.paddingTop) > 0.28) {
+        failures.push({
+          id,
+          kind: "1023-1024-padding-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+    }
+    statesByLanguage.set(language, { width, state });
   }
 
   await context.close();
