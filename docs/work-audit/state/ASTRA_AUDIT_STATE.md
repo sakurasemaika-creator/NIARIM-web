@@ -2,6 +2,18 @@
 
 状態：**進行中、全体監査は未完了**。2026-09-07 Work checkpoint。
 
+## 2026-09-09 検証根拠の復元
+
+本節と継続checkpointを最新の現在地点とする。新Policy/Stateへ移行された記録の欠落を、全面監査で確認したGit/CIの証拠から補った。
+
+- **W08 / SEOメタデータ生成**: `f2d309d` で11ページのscript順序とmetadata-onlyの辞書読込を修正。DOM依存scriptのReferenceErrorや基底辞書による翻訳上書きを防ぎ、11ページ×7言語のtitle/description契約を確認。
+- **W09 / 問い合わせ回帰**: X未設定時は7言語の汎用案内にし、設定済みの場合のみX案内を表示。7言語×PC/SP×X有無の28条件で必須入力・添付MIME/個数・模擬成功/reset・重複送信抑制・429/500/通信失敗時の入力保持を検証。中国語の正しい短いエラーを誤検知した文字数assertは、空や未翻訳キーでないことの検査へ修正した。
+- **W10 / App自動線画mock整合**: App ARBと7言語を照合し、rough width12・output width2・taper8・smoothing5と対応するslider比率、黒い線画色、増減操作、折り返せるラベルを反映。
+- [CI 34281650981](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34281650981) (`b5cac10`): **17ジョブ成功、問い合わせ28/28、24幅×PC/SP×7言語×12ページ=4,032条件成功**。対象変更の根拠であり、後続HEADの合格や全UI/UX完了を意味しない。
+- [CI 34323159862](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34323159862) (`fae5cf8`): 問い合わせ、final-matrix、14全ページjob成功。formatと中間幅Home検査は失敗。後続 `cf35f9c` のCSS修正は外部変更として取り込み、必要な検証後に確定する。
+- `cf35f9c` の実操作: ナビからFAQへ遷移、閉じた回答はheight0/visibility hiddenで読み上げsnapshotに現れず、Spaceで開くと対応regionと回答が現れることを確認。以前の「閉じた回答が露出する」疑いはこのHEADでは再現せず、根拠のない修正を追加しない。
+- Workerのruntime SEO検査は既存のままCIに未接続だったため、ローカルWorker起動と検査stepを追加した。結果確認前に合格扱いしない。実メール・本番deployは行っていない。
+
 ## Git・前工程
 
 - `sakurasemaika-creator/NIARIM-web` / App `sakurasemaika-creator/NIARIM`、双方 `dev_branch` のみ。force push・破壊的reset・本番データ操作は禁止。

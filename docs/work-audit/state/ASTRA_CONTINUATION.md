@@ -2,6 +2,22 @@
 
 状態: `in-progress`（保存安全性とApp/Web回帰の監査を継続中）
 
+## 最新checkpoint: 2026-09-09 JST
+
+- 明示的な全面監査再開として両AGENTSから新Policy/Stateへ進み、移行時に欠けた直近の監査結果をGit/CIと照合して復元した。開始ローカルHEAD `8fd0c72`、外部変更を比較してWeb `cf35f9c` / App `30ff7e0b` へ統合。取り込み済みのローカル整形差分はstashへ保全した。
+- W08〜W10 `f2d309d` / `b5cac10`: SEOメタデータ生成、未設定X案内、問い合わせの模擬送信、App自動線画mockの7言語・数値・線画色を修正。CI `34281650981` は17ジョブ成功、問い合わせ28/28、静止表示4,032条件成功。後続CSS/SEOへ旧合格を流用しない。
+- 直近CI `34323159862` (`fae5cf8`) はformatと中間幅Home検査で失敗。問い合わせ28条件、final-matrix、14の全ページ検査jobは成功。後続 `cf35f9c` の修正後の合格は未確認。
+- 今回 `cf35f9c` のローカル全体Prettier3.6.2検査は成功。最新Webを実ブラウザで開き、ナビからFAQへ遷移、閉じた回答のvisibility=hiddenと読み上げ対象外、Spaceでの開閉を確認。全ページ・全操作の実査完了ではない。
+- Appの生成フィルターRedoは本体反映CI `34306797174` のanalyze 0・33/33成功を確認。保存安全性と全体gateの分類はApp Stateを参照。
+
+### 次の具体的な1手（scope lock）
+
+1. **今回追加したWorker runtime SEOと、最新CSSのCI結果を確認する。** 既存のruntime検査をvisual-auditのformat/build jobへ接続した。ローカルWorkerで言語URL・canonical・hreflang・Content-Language・JSON-LD・robots/sitemapを検証し、deployはしない。合格はCI確認後に確定する。
+2. FAQ/言語メニュー等の実操作を続け、表示検査で異常が残れば画像と実操作で原因を確認する。CIやDOM検査だけで目視済みにしない。
+3. 未精査の12ページ・主要状態・PC/SP・7言語の実操作inventory、App/Webの導線・文言、SEO/ASO・法務/IP・最終商品レビューを継続する。
+
+以下は移行前の履歴。上の最新checkpointと矛盾する未完了記述・作業順序は採用しない。
+
 ## 運用更新（2026-09-08 JST）
 
 - Scheduled Taskから **Work + GPT-6 Astra最大effortへ確実に自動復帰する挙動は未確認**。実際に「今すぐ実行」から通常Chatへ遷移したため、従来の自動再開予約を監査継続の前提にしない。

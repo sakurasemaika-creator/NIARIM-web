@@ -25,6 +25,20 @@ jobs:
         run: |
           node tests/seo-contract-audit.mjs
           node --test tests/contact-api.test.mjs
+      - name: Verify localized SEO through the local Worker runtime
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: |
+          npx wrangler dev --local --ip 127.0.0.1 --port 8790 --var SITE_ORIGIN:http://127.0.0.1:8790 > /tmp/niarim-seo-worker.log 2>&1 &
+          worker_pid=$!
+          trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
+          ready=false
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8790/robots.txt >/dev/null; then ready=true; break; fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then cat /tmp/niarim-seo-worker.log; exit 1; fi
+          node tests/worker-seo-runtime-audit.mjs
       - name: Generate canonical formatting for diagnosis
         if: failure()
         run: npm run format
