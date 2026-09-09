@@ -177,10 +177,49 @@ if "first-fold-${width}px-${language}.png" not in test:
     if anchor not in test:
         raise SystemExit("first-fold screenshot insertion anchor missing")
     test = test.replace(anchor, insert, 1)
-if "sp-marquee-below-first-fold" not in test:
-    anchor = """      if (state.paddingTop > 34 || state.paddingBottom > 32) {\n        failures.push({ id, kind: \"sp-padding-too-loose\", state });\n      }\n"""
-    insert = """      if (state.paddingTop > 34 || state.paddingBottom > 32) {\n        failures.push({ id, kind: \"sp-padding-too-loose\", state });\n      }\n      if (firstFoldWidths.has(width) && state.marquee.top > state.viewportHeight) {\n        failures.push({\n          id,\n          kind: \"sp-marquee-below-first-fold\",\n          marqueeTop: state.marquee.top,\n          viewportHeight: state.viewportHeight,\n          state,\n        });\n      }\n"""
-    if anchor not in test:
-        raise SystemExit("first-fold assertion insertion anchor missing")
-    test = test.replace(anchor, insert, 1)
-test_path.write_text(test)
+
+sp_block = r'''    if (width <= 559) {
+      if (trackCount < 2 || state.copyDisplay !== "contents") {
+        failures.push({ id, kind: "sp-compact-composition-lost", state });
+      }
+      const leadVisualGap = horizontalGap(state.lead, state.visual);
+      if (overlaps(state.lead, state.visual)) {
+        failures.push({ id, kind: "sp-lead-phone-overlap", state });
+      }
+      if (leadVisualGap !== null && leadVisualGap < 8) {
+        failures.push({ id, kind: "sp-lead-phone-too-tight", leadVisualGap, state });
+      }
+      if (
+        Math.abs(state.lead.top - state.visual.top) > 4 ||
+        state.actions.top < Math.max(state.lead.bottom, state.visual.bottom) + 4
+      ) {
+        failures.push({ id, kind: "sp-row-flow-broken", state });
+      }
+      if (state.bridge.top < state.actions.bottom - 2) {
+        failures.push({ id, kind: "sp-actions-bridge-overlap", state });
+      }
+      const minPhone = width <= 339 ? 100 : 108;
+      if (state.visual.width < minPhone || state.visual.width > 146) {
+        failures.push({ id, kind: "sp-phone-size-outlier", state });
+      }
+      if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
+        failures.push({ id, kind: "sp-showcase-card-count", state });
+      }
+      if (state.paddingTop > 24 || state.paddingBottom > 22) {
+        failures.push({ id, kind: "sp-padding-too-loose", state });
+      }
+      if (firstFoldWidths.has(width) && state.marquee.top > state.viewportHeight) {
+        failures.push({
+          id,
+          kind: "sp-marquee-below-first-fold",
+          marqueeTop: state.marquee.top,
+          viewportHeight: state.viewportHeight,
+          state,
+        });
+      }
+'''
+sp_pattern = re.compile(r'    if \(width <= 559\) \{.*?(?=    \} else if \(width <= 732\) \{)', re.S)
+test2, count = sp_pattern.subn(sp_block, test, count=1)
+if count != 1:
+    raise SystemExit(f"expected one SP audit block, replaced {count}")
+test_path.write_text(test2)
