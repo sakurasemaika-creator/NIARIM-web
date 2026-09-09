@@ -75,15 +75,18 @@ for (const width of widths) {
       const hero = document.querySelector(".hero");
       const container = document.querySelector(".hero .container");
       const copy = document.querySelector(".hero-copy");
-      /* The current Hero replaces the legacy direct .hero-visual with a
-         .hero-showcase that owns one, two or three verified App Preview cards.
-         Some cloned app-preview content can itself contain .hero-visual, so a
-         document-wide query measures one nested phone rather than the visual
-         column. Audit the direct Hero visual owner and keep a fallback for the
-         legacy/no-showcase state. */
       const showcase = container?.querySelector(":scope > .hero-showcase");
       const legacyVisual = container?.querySelector(":scope > .hero-visual");
       const visual = showcase || legacyVisual;
+      const visibleCards = showcase
+        ? Array.from(showcase.querySelectorAll(":scope > .hero-preview-card"))
+            .filter((card) => {
+              const style = getComputedStyle(card);
+              const r = card.getBoundingClientRect();
+              return style.display !== "none" && r.width > 0 && r.height > 0;
+            })
+            .map(rectOf)
+        : [];
       const de = document.documentElement;
       return {
         hero: rectOf(hero),
@@ -95,6 +98,7 @@ for (const width of widths) {
         actions: rect(".hero-actions"),
         bridge: rect(".hero-bridge"),
         visual: rectOf(visual),
+        visibleCards,
         visualOwner: showcase
           ? "showcase"
           : legacyVisual
@@ -161,6 +165,9 @@ for (const width of widths) {
       if (state.visual.width < 175 || state.visual.width > 245) {
         failures.push({ id, kind: "sp-phone-size-outlier", state });
       }
+      if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
+        failures.push({ id, kind: "sp-showcase-card-count", state });
+      }
       if (state.paddingTop > 34 || state.paddingBottom > 32) {
         failures.push({ id, kind: "sp-padding-too-loose", state });
       }
@@ -184,7 +191,10 @@ for (const width of widths) {
         });
       }
       if (state.visual.width < 145 || state.visual.width > 205) {
-        failures.push({ id, kind: "compact-phone-size-outlier", state });
+        failures.push({ id, kind: "compact-visual-size-outlier", state });
+      }
+      if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
+        failures.push({ id, kind: "compact-showcase-card-count", state });
       }
       if (state.paddingTop > 38 || state.paddingBottom > 36) {
         failures.push({ id, kind: "compact-padding-too-loose", state });
@@ -208,7 +218,24 @@ for (const width of widths) {
           state,
         });
       }
-      if (state.visual.width < 205 || state.visual.width > 290) {
+      if (state.visualOwner === "showcase") {
+        if (state.visual.width < 320 || state.visual.width > 430) {
+          failures.push({ id, kind: "tablet-showcase-size-outlier", state });
+        }
+        if (state.visibleCards.length !== 2) {
+          failures.push({ id, kind: "tablet-showcase-card-count", state });
+        }
+        for (const card of state.visibleCards) {
+          if (card.width < 145 || card.width > 210) {
+            failures.push({
+              id,
+              kind: "tablet-showcase-card-size-outlier",
+              card,
+              state,
+            });
+          }
+        }
+      } else if (state.visual.width < 205 || state.visual.width > 290) {
         failures.push({ id, kind: "tablet-phone-size-outlier", state });
       }
       if (state.paddingTop > 50 || state.paddingBottom > 46) {
