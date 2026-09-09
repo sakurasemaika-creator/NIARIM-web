@@ -95,7 +95,11 @@ for (const width of widths) {
         actions: rect(".hero-actions"),
         bridge: rect(".hero-bridge"),
         visual: rectOf(visual),
-        visualOwner: showcase ? "showcase" : legacyVisual ? "legacy" : "missing",
+        visualOwner: showcase
+          ? "showcase"
+          : legacyVisual
+            ? "legacy"
+            : "missing",
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
         copyDisplay: getComputedStyle(copy).display,
