@@ -57,8 +57,7 @@ for (const width of widths) {
     await page.waitForTimeout(180);
 
     const state = await page.evaluate(() => {
-      const rect = (selector) => {
-        const el = document.querySelector(selector);
+      const rectOf = (el) => {
         if (!el) return null;
         const r = el.getBoundingClientRect();
         return {
@@ -72,25 +71,35 @@ for (const width of widths) {
           centerY: r.top + r.height / 2,
         };
       };
+      const rect = (selector) => rectOf(document.querySelector(selector));
       const hero = document.querySelector(".hero");
       const container = document.querySelector(".hero .container");
       const copy = document.querySelector(".hero-copy");
-      const visual = document.querySelector(".hero-visual");
+      /* The current Hero replaces the legacy direct .hero-visual with a
+         .hero-showcase that owns one, two or three verified App Preview cards.
+         Some cloned app-preview content can itself contain .hero-visual, so a
+         document-wide query measures one nested phone rather than the visual
+         column. Audit the direct Hero visual owner and keep a fallback for the
+         legacy/no-showcase state. */
+      const showcase = container?.querySelector(":scope > .hero-showcase");
+      const legacyVisual = container?.querySelector(":scope > .hero-visual");
+      const visual = showcase || legacyVisual;
       const de = document.documentElement;
       return {
-        hero: rect(".hero"),
-        container: rect(".hero .container"),
-        copy: rect(".hero-copy"),
+        hero: rectOf(hero),
+        container: rectOf(container),
+        copy: rectOf(copy),
         title: rect(".hero-title"),
         subtitle: rect(".hero-subtitle"),
         lead: rect(".hero-lead"),
         actions: rect(".hero-actions"),
         bridge: rect(".hero-bridge"),
-        visual: rect(".hero-visual"),
+        visual: rectOf(visual),
+        visualOwner: showcase ? "showcase" : legacyVisual ? "legacy" : "missing",
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
         copyDisplay: getComputedStyle(copy).display,
-        visualMaxWidth: getComputedStyle(visual).maxWidth,
+        visualMaxWidth: visual ? getComputedStyle(visual).maxWidth : null,
         styleSheets: Array.from(
           document.styleSheets,
           (sheet) => sheet.href,
