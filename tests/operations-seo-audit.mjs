@@ -43,6 +43,21 @@ for (const needle of [
 ]) {
   expect(worker.includes(needle), "edge-seo-rewriter", needle);
 }
+expect(
+  worker.includes('value.endsWith("/index.html")'),
+  "index-html-normalization",
+  "suffix",
+);
+expect(
+  worker.includes("normalizedPagePath(requestUrl.pathname)"),
+  "index-html-normalization",
+  "canonical",
+);
+expect(
+  worker.includes("normalizedPagePath(new URL(request.url).pathname)"),
+  "index-html-normalization",
+  "metadata",
+);
 for (const lang of languages) {
   expect(
     worker.includes(`${lang}:`) || worker.includes(`"${lang}"`),
