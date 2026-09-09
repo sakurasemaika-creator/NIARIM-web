@@ -11,6 +11,7 @@ const widths = [
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const captureWidths = new Set(widths);
+const firstFoldWidths = new Set([320, 339, 360, 375, 390, 414]);
 const outDir =
   process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
 const failures = [];
@@ -48,7 +49,7 @@ function ratioJump(a, b) {
 
 for (const width of widths) {
   const context = await browser.newContext({
-    viewport: { width, height: 900 },
+    viewport: { width, height: firstFoldWidths.has(width) ? 667 : 900 },
     deviceScaleFactor: 1,
     reducedMotion: "reduce",
   });
@@ -126,6 +127,7 @@ for (const width of widths) {
         paddingBottom: parseFloat(getComputedStyle(hero).paddingBottom),
         clientWidth: de.clientWidth,
         scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),
+        viewportHeight: window.innerHeight,
       };
     });
 
@@ -139,6 +141,16 @@ for (const width of widths) {
         });
         screenshots.push(file);
       }
+    }
+
+    if (firstFoldWidths.has(width)) {
+      const file = `first-fold-${width}px-${language}.png`;
+      await page.screenshot({
+        path: path.join(outDir, file),
+        animations: "disabled",
+        fullPage: false,
+      });
+      screenshots.push(file);
     }
 
     const id = `${width}px/${language}`;
@@ -157,29 +169,51 @@ for (const width of widths) {
     const copyVisualGap = horizontalGap(state.copy, state.visual);
 
     if (width <= 559) {
-      const stackGap = verticalGap(state.copy, state.visual);
-      if (trackCount !== 1) {
-        failures.push({ id, kind: "sp-hero-not-stacked", state });
+      if (trackCount < 2 || state.copyDisplay !== "contents") {
+        failures.push({ id, kind: "sp-compact-composition-lost", state });
       }
-      if (state.visual.top < state.copy.bottom - 2) {
-        failures.push({ id, kind: "sp-copy-phone-overlap", state });
+      const leadVisualGap = horizontalGap(state.lead, state.visual);
+      if (overlaps(state.lead, state.visual)) {
+        failures.push({ id, kind: "sp-lead-phone-overlap", state });
       }
-      if (stackGap < 12 || stackGap > 40) {
+      if (leadVisualGap !== null && leadVisualGap < 8) {
         failures.push({
           id,
-          kind: "sp-stack-density-outlier",
-          stackGap,
+          kind: "sp-lead-phone-too-tight",
+          leadVisualGap,
           state,
         });
       }
-      if (state.visual.width < 175 || state.visual.width > 245) {
+      if (
+        Math.abs(state.lead.top - state.visual.top) > 4 ||
+        state.actions.top < Math.max(state.lead.bottom, state.visual.bottom) + 4
+      ) {
+        failures.push({ id, kind: "sp-row-flow-broken", state });
+      }
+      if (state.bridge.top < state.actions.bottom - 2) {
+        failures.push({ id, kind: "sp-actions-bridge-overlap", state });
+      }
+      const minPhone = width <= 339 ? 100 : 108;
+      if (state.visual.width < minPhone || state.visual.width > 146) {
         failures.push({ id, kind: "sp-phone-size-outlier", state });
       }
       if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
         failures.push({ id, kind: "sp-showcase-card-count", state });
       }
-      if (state.paddingTop > 34 || state.paddingBottom > 32) {
+      if (state.paddingTop > 24 || state.paddingBottom > 22) {
         failures.push({ id, kind: "sp-padding-too-loose", state });
+      }
+      if (
+        firstFoldWidths.has(width) &&
+        state.marquee.top > state.viewportHeight
+      ) {
+        failures.push({
+          id,
+          kind: "sp-marquee-below-first-fold",
+          marqueeTop: state.marquee.top,
+          viewportHeight: state.viewportHeight,
+          state,
+        });
       }
     } else if (width <= 732) {
       if (trackCount < 2) {
