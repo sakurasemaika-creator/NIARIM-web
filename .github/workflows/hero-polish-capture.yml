@@ -25,11 +25,11 @@ jobs:
         run: |
           node tools/dev-server.mjs > /tmp/niarim-server.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && break; sleep 1; done
-      - name: Capture all Hero widths
-        run: node tests/intermediate-width-home-audit.mjs
+      - name: Capture Japanese Hero widths
+        run: node tests/hero-polish-ja-capture.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: hero-polish-widths
-          path: artifacts/intermediate-width-home
+          path: artifacts/hero-polish-ja
           if-no-files-found: error
