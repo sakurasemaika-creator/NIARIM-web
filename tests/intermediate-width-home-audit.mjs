@@ -5,14 +5,12 @@ import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [
-  320, 339, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759,
-  760, 900, 901, 1023, 1024, 1100, 1199, 1279, 1280, 1440, 1600, 1920,
+  320, 339, 360, 375, 390, 414, 480, 520, 543, 559, 560, 600, 640, 641, 642,
+  700, 732, 759, 760, 768, 834, 900, 901, 1023, 1024, 1100, 1199, 1200,
+  1279, 1280, 1366, 1440, 1600, 1920,
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
-const captureWidths = new Set([
-  320, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759, 760,
-  900, 1023, 1024, 1280, 1600, 1920,
-]);
+const captureWidths = new Set(widths);
 const outDir =
   process.env.AUDIT_HERO_DIR || "artifacts/intermediate-width-home";
 const failures = [];
@@ -131,10 +129,10 @@ for (const width of widths) {
       };
     });
 
-    if (language === "ja" && captureWidths.has(width)) {
+    if (captureWidths.has(width)) {
       const hero = page.locator(".hero").first();
       if (await hero.isVisible()) {
-        const file = `${width}px-ja-home-hero-section.png`;
+        const file = `${width}px-${language}-home-hero-section.png`;
         await hero.screenshot({
           path: path.join(outDir, file),
           animations: "disabled",
@@ -292,6 +290,24 @@ for (const width of widths) {
     }
 
     const previous = statesByLanguage.get(language);
+    if (previous?.width === 759 && width === 760) {
+      if (ratioJump(previous.state.visual.width, state.visual.width) > 0.35) {
+        failures.push({
+          id,
+          kind: "759-760-visual-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+      if (ratioJump(previous.state.titleFontSize, state.titleFontSize) > 0.22) {
+        failures.push({
+          id,
+          kind: "759-760-title-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+    }
     if (previous?.width === 1023 && width === 1024) {
       if (ratioJump(previous.state.visual.width, state.visual.width) > 0.18) {
         failures.push({
