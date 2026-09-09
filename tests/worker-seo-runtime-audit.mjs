@@ -66,7 +66,11 @@ for (const testCase of [
     /<meta\s+property="og:url"\s+content="([^"]+)"/i,
     "og:url",
   );
-  assert.equal(ogUrl, canonical, `${testCase.path}: og:url must match canonical`);
+  assert.equal(
+    ogUrl,
+    canonical,
+    `${testCase.path}: og:url must match canonical`,
+  );
 
   const alternates = [
     ...text.matchAll(

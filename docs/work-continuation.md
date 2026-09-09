@@ -12,6 +12,17 @@
 
 ## 最新セッション
 
+- 開始 (JST): **2026-09-09 11:26:08**。終了前、状態 `in-progress`。
+- 開始HEAD: Web `b5cac10` / App `14d81b03`。incomingを確認しWeb `010e209` / App `f50aa57d` まで統合。AGENTSから分離された `docs/work-audit/ASTRA_WORK.md` と `HANDS_ON_UI_STANDARD.md` を確認済み。
+- 確定: [34281650981](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34281650981) (`b5cac10`) は**全17job成功、問い合わせ28/28、表示4,032条件成功**。中国語の正常な短いエラー文を10文字超と要求していた監査の誤検知を修正済み。フォームは模擬APIで検証し実メールは送っていない。
+- 実画面証跡: CIの日本語自動線画単体画像で線画色・4設定・減算/加算・SVGアイコンを確認。仏語SPと簡体字SPの問い合わせ失敗表示を目視。実ブラウザーでスペイン語必須エラー→フランス語切替時の入力エラーとfocus保持を確認。全言語/幅の目視完了ではない。
+- その後のHero構造/CSS/Worker SEO変更は未合格。`1a10acf` のCI `34302101314` は14表示jobとfinal-matrixが成功したが、Hero境界監査とformatが失敗。`6a8e130` のCI `34303121380` でも同2gateに失敗を確認。他jobが実行中の時点で全体合格にしない。
+- 今回の変更: 追加された `intermediate-width-home-audit.mjs` と `worker-seo-runtime-audit.mjs` を既存Prettier3.6.2で整形。対象format/Node構文検査成功。検査条件を変更していない。
+- **次の1手**: 最新Heroの失敗を実画面・CSSの読み込み順と照合する。Worker SEOの実行検査と全画面/主要状態/操作inventoryを継続する。Appは生成フィルターのRedo順序候補を実行検証中。
+- 問い合わせ実運用設定、公開環境のSEO/獲得ファネル、全7言語の意味/文体、全画面の実操作、法務/IPは未完了。メインモデル/effortを変更・確認できる操作は公開されていない。
+
+## 前回までの記録（履歴）
+
 - 再開確認 (JST): 2026-09-09 06:21:41。remoteはWeb `606f979` / App `a72fd78f` のままで、AGENTS・品質/法務基準に追加変更なし。前回のローカルcommitを保持。検証済みの修正と追加回帰検査をdev_branchへ反映し、CI結果を回収する。
 
 - セッション再開時刻 (JST): 2026-09-08 23:23:48（同日11:57/13:12/18時台から継続）。終了前。

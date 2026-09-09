@@ -2,6 +2,13 @@
 
 状態：**進行中、全体監査は未完了**。2026-09-07 Work checkpoint。
 
+## 2026-09-09 JST 継続checkpoint
+
+- W08〜W10と問い合わせ回帰: `b5cac10` の [CI 34281650981](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34281650981) は全17job成功。問い合わせ28/28、表示4,032条件成功。中国語短文の長さによる誤検知は修正済み。
+- 目視: 日本語自動線画のCI単体PNGでSVGアイコンを含む4設定・線画色・適用操作を確認。仏語/簡体字SP問い合わせの失敗表示、スペイン語→仏語の実ブラウザー言語切替も確認。ローカルpreview固有のアイコン欠落を製品不具合とは断定しない。
+- 後続Hero変更は境界監査とformatが失敗しており、以前の全greenを現在の品質保証として流用しない。追加2スクリプトのformatは今回修正。HEAD・最新結果・次の操作はcontinuationを正とする。
+- HANDS_ON_UI_STANDARDの全画面/主要状態/操作inventoryは未完了。法務/IP・言語品質・獲得導線・実運用も継続対象。
+
 ## Git・前工程
 
 - `sakurasemaika-creator/NIARIM-web` / App `sakurasemaika-creator/NIARIM`、双方 `dev_branch` のみ。force push・破壊的reset・本番データ操作は禁止。

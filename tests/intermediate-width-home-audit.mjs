@@ -147,7 +147,12 @@ for (const width of widths) {
         failures.push({ id, kind: "sp-copy-phone-overlap", state });
       }
       if (stackGap < 12 || stackGap > 40) {
-        failures.push({ id, kind: "sp-stack-density-outlier", stackGap, state });
+        failures.push({
+          id,
+          kind: "sp-stack-density-outlier",
+          stackGap,
+          state,
+        });
       }
       if (state.visual.width < 175 || state.visual.width > 245) {
         failures.push({ id, kind: "sp-phone-size-outlier", state });
@@ -157,13 +162,22 @@ for (const width of widths) {
       }
     } else if (width <= 759) {
       if (trackCount < 2) {
-        failures.push({ id, kind: "compact-hero-lost-two-column-layout", state });
+        failures.push({
+          id,
+          kind: "compact-hero-lost-two-column-layout",
+          state,
+        });
       }
       if (overlaps(state.copy, state.visual)) {
         failures.push({ id, kind: "compact-columns-collision", state });
       }
       if (copyVisualGap !== null && copyVisualGap < 12) {
-        failures.push({ id, kind: "compact-columns-too-tight", copyVisualGap, state });
+        failures.push({
+          id,
+          kind: "compact-columns-too-tight",
+          copyVisualGap,
+          state,
+        });
       }
       if (state.visual.width < 145 || state.visual.width > 205) {
         failures.push({ id, kind: "compact-phone-size-outlier", state });
@@ -173,13 +187,22 @@ for (const width of widths) {
       }
     } else if (width <= 1023) {
       if (trackCount < 2) {
-        failures.push({ id, kind: "tablet-hero-lost-two-column-layout", state });
+        failures.push({
+          id,
+          kind: "tablet-hero-lost-two-column-layout",
+          state,
+        });
       }
       if (overlaps(state.copy, state.visual)) {
         failures.push({ id, kind: "tablet-columns-collision", state });
       }
       if (copyVisualGap !== null && copyVisualGap < 16) {
-        failures.push({ id, kind: "tablet-columns-too-tight", copyVisualGap, state });
+        failures.push({
+          id,
+          kind: "tablet-columns-too-tight",
+          copyVisualGap,
+          state,
+        });
       }
       if (state.visual.width < 205 || state.visual.width > 290) {
         failures.push({ id, kind: "tablet-phone-size-outlier", state });
@@ -189,7 +212,11 @@ for (const width of widths) {
       }
     } else {
       if (trackCount < 2) {
-        failures.push({ id, kind: "desktop-hero-lost-two-column-layout", state });
+        failures.push({
+          id,
+          kind: "desktop-hero-lost-two-column-layout",
+          state,
+        });
       }
       if (overlaps(state.copy, state.visual)) {
         failures.push({ id, kind: "desktop-columns-collision", state });
