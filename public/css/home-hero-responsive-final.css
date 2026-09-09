@@ -1,102 +1,291 @@
-/* Final responsive composition for the Home hero.
-   This file is loaded after the fidelity/showcase layers so layout ownership is
-   explicit instead of relying on selector races between older responsive files.
+/* Final responsive ownership for the Home hero.
+   Loaded after the legacy fidelity/fit layers. These rules intentionally own
+   the structural breakpoints so older display:contents/grid-row overrides do
+   not leak across viewport bands. Audit thresholds stay in tests, not here. */
 
-   320-479px keeps the dense mini composition that already reads well. 560px+
-   keeps the existing compact/tablet/desktop compositions. The only structural
-   correction here is 480-559px, where the former flattened grid left the CTA
-   pinned below the phone and created a large empty band under the lead copy. */
-
-@media (min-width: 480px) and (max-width: 559px) {
-  .hero {
-    padding-top: clamp(1.65rem, 4vw, 1.95rem) !important;
-    padding-bottom: clamp(1.5rem, 3.6vw, 1.8rem) !important;
+@media (max-width: 559px) {
+  html body .hero {
+    padding-top: clamp(1.2rem, 5vw, 2rem) !important;
+    padding-bottom: clamp(1.2rem, 4.6vw, 1.85rem) !important;
   }
 
-  .hero .container {
-    width: calc(100% - 1rem) !important;
-    grid-template-columns: minmax(0, 1fr) minmax(150px, 27%) !important;
-    align-items: center !important;
+  html body .hero .container {
+    width: min(calc(100% - 2rem), 1360px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: none !important;
+    align-items: start !important;
     justify-items: stretch !important;
-    gap: 0.55rem !important;
+    gap: clamp(1.2rem, 4.5vw, 1.7rem) !important;
   }
 
-  .hero-copy {
+  html body .hero-copy {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     width: 100% !important;
     min-width: 0 !important;
     grid-column: 1 !important;
+    grid-row: auto !important;
   }
 
-  .hero-copy > .eyebrow {
-    order: 1 !important;
+  html body .hero-copy > .eyebrow,
+  html body .hero-copy > .hero-title,
+  html body .hero-copy > .hero-subtitle,
+  html body .hero-copy > .hero-lead,
+  html body .hero-copy > .hero-actions,
+  html body .hero-copy > .hero-bridge {
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
 
-  .hero-copy > .hero-title {
-    order: 2 !important;
+  html body .hero-visual,
+  html body .hero-showcase {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    width: clamp(190px, 48vw, 238px) !important;
+    max-width: 238px !important;
+    min-width: 0 !important;
+    justify-self: center !important;
+    align-self: start !important;
+    margin-inline: auto !important;
   }
 
-  .hero-copy > .hero-subtitle {
-    order: 3 !important;
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.25rem, 10.8vw, 3.2rem) !important;
+    line-height: 1 !important;
   }
 
-  .hero-copy > .hero-lead {
-    order: 4 !important;
+  html body .hero-subtitle {
+    margin-top: 0.7rem !important;
+    font-size: clamp(0.92rem, 3.1vw, 1rem) !important;
   }
 
-  .hero-copy > .hero-actions {
-    order: 5 !important;
+  html body .hero-lead {
+    margin-top: 0.85rem !important;
+    max-width: none !important;
+    font-size: clamp(0.88rem, 2.75vw, 0.96rem) !important;
+    line-height: 1.65 !important;
   }
 
-  .hero-copy > .hero-bridge {
-    order: 6 !important;
+  html body .hero-actions {
+    margin-top: 0.95rem !important;
+    gap: 0.55rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  html body .hero-actions .btn {
+    min-width: 0 !important;
+    min-height: 44px !important;
+    flex: 1 1 10rem !important;
+  }
+
+  html body .hero-bridge {
     display: block !important;
+    margin-top: 0.7rem !important;
+    max-width: none !important;
+    font-size: 0.78rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+@media (max-width: 339px) {
+  html body .hero .container {
+    width: calc(100% - 2rem) !important;
+    gap: 1.1rem !important;
   }
 
-  .hero-showcase {
+  html body .hero-title {
+    font-size: clamp(2rem, 10.8vw, 2.35rem) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  html body .hero-lead {
+    font-size: 0.86rem !important;
+    line-height: 1.6 !important;
+  }
+
+  html body .hero-actions {
+    flex-direction: column !important;
+  }
+
+  html body .hero-actions .btn {
+    width: 100% !important;
+  }
+
+  html body .hero-visual,
+  html body .hero-showcase {
+    width: 190px !important;
+    max-width: 190px !important;
+  }
+}
+
+@media (min-width: 560px) and (max-width: 759px) {
+  html body .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
+  }
+
+  html body .hero .container {
+    width: calc(100% - 2rem) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+
+  html body .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
     width: 100% !important;
     min-width: 0 !important;
-    grid-column: 2 !important;
-    align-self: center !important;
+    grid-column: 1 !important;
+    grid-row: auto !important;
   }
 
-  :root:lang(ja) .hero-title,
-  :root:lang(zh-Hans) .hero-title,
-  :root:lang(zh-Hant) .hero-title,
-  .hero-title {
+  html body .hero-copy > .eyebrow,
+  html body .hero-copy > .hero-title,
+  html body .hero-copy > .hero-subtitle,
+  html body .hero-copy > .hero-lead,
+  html body .hero-copy > .hero-actions,
+  html body .hero-copy > .hero-bridge {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  html body .hero-visual,
+  html body .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: auto !important;
+    width: clamp(150px, 24vw, 180px) !important;
+    max-width: 180px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin-inline: 0 !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
     font-size: clamp(2.2rem, 5.8vw, 2.85rem) !important;
     line-height: 1 !important;
   }
 
-  .hero-subtitle {
+  html body .hero-subtitle {
     margin-top: 0.65rem !important;
     font-size: clamp(0.9rem, 1.8vw, 0.98rem) !important;
   }
 
-  .hero-lead {
+  html body .hero-lead {
     margin-top: 0.8rem !important;
+    max-width: none !important;
     font-size: clamp(0.84rem, 1.55vw, 0.93rem) !important;
     line-height: 1.6 !important;
   }
 
-  .hero-actions {
+  html body .hero-actions {
     margin-top: 0.9rem !important;
     gap: 0.5rem !important;
     flex-wrap: wrap !important;
   }
 
-  .hero-actions .btn {
+  html body .hero-actions .btn {
     min-width: 0 !important;
     min-height: 44px !important;
     padding: 0.64rem 0.85rem !important;
     flex: 1 1 9.5rem !important;
   }
 
-  .hero-bridge {
+  html body .hero-bridge {
+    display: block !important;
     margin-top: 0.7rem !important;
+    max-width: none !important;
     font-size: 0.76rem !important;
     line-height: 1.5 !important;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 1023px) {
+  html body .hero {
+    padding-top: clamp(2.15rem, 3.8vw, 2.8rem) !important;
+    padding-bottom: clamp(2rem, 3.4vw, 2.6rem) !important;
+  }
+
+  html body .hero .container {
+    width: min(calc(100% - 2rem), 1360px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1.4rem, 2.8vw, 2.15rem) !important;
+  }
+
+  html body .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  html body .hero-visual,
+  html body .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: auto !important;
+    width: clamp(210px, 26vw, 280px) !important;
+    max-width: 280px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin-inline: 0 !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.65rem, 5vw, 3.65rem) !important;
+    line-height: 1 !important;
+  }
+
+  html body .hero-subtitle {
+    margin-top: 0.7rem !important;
+    font-size: 0.98rem !important;
+  }
+
+  html body .hero-lead {
+    margin-top: 0.9rem !important;
+    max-width: none !important;
+    font-size: clamp(0.9rem, 1.45vw, 1rem) !important;
+    line-height: 1.64 !important;
+  }
+
+  html body .hero-actions {
+    margin-top: 1rem !important;
+    gap: 0.55rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  html body .hero-actions .btn {
+    min-width: 0 !important;
+    min-height: 44px !important;
+    padding: 0.68rem 1rem !important;
+    flex: 1 1 10.5rem !important;
+  }
+
+  html body .hero-bridge {
+    display: block !important;
+    margin-top: 0.8rem !important;
+    max-width: none !important;
+    font-size: 0.78rem !important;
+    line-height: 1.55 !important;
   }
 }
