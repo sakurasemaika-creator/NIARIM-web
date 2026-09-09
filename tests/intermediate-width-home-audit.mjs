@@ -6,7 +6,7 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [
   320, 339, 360, 390, 520, 543, 559, 560, 600, 640, 641, 642, 700, 732, 759,
-  760, 900,
+  760, 900, 901, 1023, 1024,
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const captureWidths = new Set([
@@ -28,6 +28,16 @@ function overlaps(a, b, tolerance = 2) {
     a.top < b.bottom - tolerance &&
     a.bottom > b.top + tolerance
   );
+}
+
+function horizontalGap(a, b) {
+  if (!a || !b) return null;
+  return b.left - a.right;
+}
+
+function verticalGap(a, b) {
+  if (!a || !b) return null;
+  return b.top - a.bottom;
 }
 
 for (const width of widths) {
@@ -58,6 +68,8 @@ for (const width of widths) {
           bottom: r.bottom,
           width: r.width,
           height: r.height,
+          centerX: r.left + r.width / 2,
+          centerY: r.top + r.height / 2,
         };
       };
       const hero = document.querySelector(".hero");
@@ -67,20 +79,18 @@ for (const width of widths) {
       const de = document.documentElement;
       return {
         hero: rect(".hero"),
+        container: rect(".hero .container"),
         copy: rect(".hero-copy"),
         title: rect(".hero-title"),
         subtitle: rect(".hero-subtitle"),
         lead: rect(".hero-lead"),
         actions: rect(".hero-actions"),
+        bridge: rect(".hero-bridge"),
         visual: rect(".hero-visual"),
         marquee: rect(".marquee-section"),
         columns: getComputedStyle(container).gridTemplateColumns,
         copyDisplay: getComputedStyle(copy).display,
         visualMaxWidth: getComputedStyle(visual).maxWidth,
-        compactMedia: matchMedia("(max-width: 759px)").matches,
-        intermediateMedia: matchMedia(
-          "(min-width: 641px) and (max-width: 759px)",
-        ).matches,
         styleSheets: Array.from(
           document.styleSheets,
           (sheet) => sheet.href,
@@ -116,33 +126,64 @@ for (const width of widths) {
       failures.push({ id, kind: "hero-marquee-gap", state });
     }
 
-    if (width <= 759) {
-      const trackCount = state.columns.trim().split(/\s+/).length;
+    const trackCount = state.columns.trim().split(/\s+/).length;
+    const copyVisualGap = horizontalGap(state.copy, state.visual);
+
+    if (width <= 559) {
+      const stackGap = verticalGap(state.copy, state.visual);
+      if (trackCount !== 1) {
+        failures.push({ id, kind: "sp-hero-not-stacked", state });
+      }
+      if (state.visual.top < state.copy.bottom - 2) {
+        failures.push({ id, kind: "sp-copy-phone-overlap", state });
+      }
+      if (stackGap < 12 || stackGap > 40) {
+        failures.push({ id, kind: "sp-stack-density-outlier", stackGap, state });
+      }
+      if (state.visual.width < 175 || state.visual.width > 245) {
+        failures.push({ id, kind: "sp-phone-size-outlier", state });
+      }
+      if (state.paddingTop > 34 || state.paddingBottom > 32) {
+        failures.push({ id, kind: "sp-padding-too-loose", state });
+      }
+    } else if (width <= 759) {
       if (trackCount < 2) {
-        failures.push({
-          id,
-          kind: "compact-hero-lost-two-column-layout",
-          state,
-        });
+        failures.push({ id, kind: "compact-hero-lost-two-column-layout", state });
       }
-      if (overlaps(state.lead, state.visual)) {
-        failures.push({ id, kind: "compact-lead-phone-collision", state });
+      if (overlaps(state.copy, state.visual)) {
+        failures.push({ id, kind: "compact-columns-collision", state });
       }
-      if (overlaps(state.actions, state.visual)) {
-        failures.push({ id, kind: "compact-actions-phone-collision", state });
+      if (copyVisualGap !== null && copyVisualGap < 12) {
+        failures.push({ id, kind: "compact-columns-too-tight", copyVisualGap, state });
       }
-      if (state.visual.width > 200) {
-        failures.push({ id, kind: "compact-phone-too-large", state });
+      if (state.visual.width < 145 || state.visual.width > 205) {
+        failures.push({ id, kind: "compact-phone-size-outlier", state });
       }
-      if (state.paddingTop > 38 || state.paddingBottom > 34) {
+      if (state.paddingTop > 38 || state.paddingBottom > 36) {
         failures.push({ id, kind: "compact-padding-too-loose", state });
       }
-    } else {
+    } else if (width <= 1023) {
+      if (trackCount < 2) {
+        failures.push({ id, kind: "tablet-hero-lost-two-column-layout", state });
+      }
       if (overlaps(state.copy, state.visual)) {
-        failures.push({ id, kind: "wide-hero-columns-collision", state });
+        failures.push({ id, kind: "tablet-columns-collision", state });
+      }
+      if (copyVisualGap !== null && copyVisualGap < 16) {
+        failures.push({ id, kind: "tablet-columns-too-tight", copyVisualGap, state });
+      }
+      if (state.visual.width < 205 || state.visual.width > 290) {
+        failures.push({ id, kind: "tablet-phone-size-outlier", state });
       }
       if (state.paddingTop > 50 || state.paddingBottom > 46) {
-        failures.push({ id, kind: "wide-padding-too-loose", state });
+        failures.push({ id, kind: "tablet-padding-too-loose", state });
+      }
+    } else {
+      if (trackCount < 2) {
+        failures.push({ id, kind: "desktop-hero-lost-two-column-layout", state });
+      }
+      if (overlaps(state.copy, state.visual)) {
+        failures.push({ id, kind: "desktop-columns-collision", state });
       }
     }
   }
