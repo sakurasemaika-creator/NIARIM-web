@@ -138,11 +138,19 @@ a {
 /* In the compact composition the preview shares the lead row. Lift it toward
    the title so it sits visually between “動かす。” and the secondary CTA,
    rather than appearing to rest directly on the “機能を見る” button. The
-   transform is visual-only, so first-fold height remains stable. */
+   transform is visual-only, so first-fold height remains stable.
+
+   Because a transformed grid item still reserves its original track height,
+   that lift used to leave a conspicuous empty band below the body copy. Reduce
+   only the preview's layout contribution by the same responsive amount. The
+   title/subtitle/body/CTA then fall back onto the container's single row-gap,
+   giving those four copy stages an even vertical rhythm without shrinking the
+   preview itself or changing its visual placement. */
 @media (max-width: 559px) {
   html body .hero-visual,
   html body .hero-showcase {
     transform: translateY(clamp(-2.25rem, -7vw, -1.75rem)) !important;
+    margin-bottom: calc(-1 * clamp(3.25rem, 13.5vw, 4.75rem)) !important;
   }
 }
 
