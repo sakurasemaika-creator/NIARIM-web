@@ -7,21 +7,7 @@
 @import url("/css/screen-mock-frame-alignment.css?v=20260906-2");
 @import url("/css/home-hero-responsive-final.css");
 
-/* ---- 単語の途中での改行を防ぐ ----
-   日本語・中国語は文字単位で折り返せてしまうため、既定のままだと
-   「NIARIMでできるこ／と」「ダウン／ロードする」のように語の途中で
-   行が変わる。Chromiumは word-break: auto-phrase で文節の切れ目を
-   見て折り返してくれるので、これを本文まで含めて適用する。
-   韓国語は単語間に空白があるので keep-all で単語を割らせない。
-   未対応ブラウザでは従来どおりの折り返しに戻るだけで、崩れはしない。
-
-   このファイルは main.js の loadDesignLayers() から最後に読み込む。
-   common.css に置くと、各ページCSSが（禁則違反と横スクロールを避ける
-   ために）個別指定している word-break: normal に負けてしまうため、
-   読み込み順を最後にしたうえで !important で上書きしている。
-   なお auto-phrase は keep-all と違って「分割禁止のかたまり」を
-   作らないので、common.css の注記にある2つの不具合は再発しない。
-   実際に全12ページ×7言語ではみ出しと監査を通して確認している。 */
+/* ---- 単語の途中での改行を防ぐ ---- */
 h1,
 h2,
 h3,
@@ -37,12 +23,9 @@ label,
 .eyebrow,
 a {
   word-break: auto-phrase !important;
-  /* 「？」「ー」など行頭に来てはいけない文字の禁則を厳しめに扱う。 */
   line-break: strict;
 }
 
-/* 韓国語は分かち書きがあるので、単語の内部で割らせないほうが読みやすい。
-   はみ出しそうなときだけ overflow-wrap で逃がす。 */
 :root:lang(ko) h1,
 :root:lang(ko) h2,
 :root:lang(ko) h3,
@@ -58,11 +41,6 @@ a {
   overflow-wrap: break-word;
 }
 
-/* Desktop hero multilingual balance.
-   responsive-consistency.css used max-width:8ch for every Latin/Korean locale.
-   With the current large hero type that made EN/KO/FR/ES grow to 3–4 visual lines,
-   even though the markup intentionally contains exactly two title lines.
-   Keep the copy column available, then tune only locales whose glyph width needs it. */
 @media (min-width: 861px) {
   .hero-title {
     max-width: 100% !important;
@@ -75,9 +53,6 @@ a {
 
   :root:lang(zh-Hans) .hero-title,
   :root:lang(zh-Hant) .hero-title {
-    /* 1024px+ is the desktop-density band. Keep CJK compact relative to
-       Latin copy, but never let the primary Hero title fall below the
-       desktop visual hierarchy floor (54px). */
     font-size: clamp(3.375rem, 3.45vw, 3.6rem) !important;
     line-height: 1 !important;
     letter-spacing: -0.04em !important;
@@ -99,10 +74,6 @@ a {
   }
 }
 
-/* Chromium's sub-pixel header metrics change at the 700px content width. At a
-   628px viewport the otherwise-correct compact Hero leaves the attached black
-   marquee 0.86px beyond the physical bottom edge. Keep the implementation
-   pixel-aligned in this band; the audit tolerance remains unchanged. */
 @media (min-width: 700px) and (max-width: 759px) and (max-height: 680px) {
   html body .hero {
     min-height: 518.8px !important;
@@ -110,9 +81,6 @@ a {
   }
 }
 
-/* Final Hero typography polish.
-   Keep the responsive structure intact, but give the primary statement and
-   supporting promise more presence at every width. */
 @media (max-width: 339px) {
   html body .hero-title {
     font-size: clamp(2.08rem, 9.7vw, 2.34rem) !important;
@@ -135,22 +103,21 @@ a {
   }
 }
 
-/* In the compact composition the preview shares the lead row. Lift it toward
-   the title so it sits visually between “動かす。” and the secondary CTA,
-   rather than appearing to rest directly on the “機能を見る” button. The
-   transform is visual-only, so first-fold height remains stable.
-
-   Because a transformed grid item still reserves its original track height,
-   that lift used to leave a conspicuous empty band below the body copy. Reduce
-   only the preview's layout contribution by the same responsive amount. The
-   title/subtitle/body/CTA then fall back onto the container's single row-gap,
-   giving those four copy stages an even vertical rhythm without shrinking the
-   preview itself or changing its visual placement. */
+/* Compact Hero device placement.
+   Runtime turns .hero-visual itself into the actual .fd-app-screen bezel.
+   Move that real grid item in layout instead of translating nested contents,
+   so border/bezel and all screen UI stay locked together. CTA geometry stays
+   unchanged. */
 @media (max-width: 559px) {
-  html body .hero-visual,
-  html body .hero-showcase {
-    transform: translateY(clamp(-2.25rem, -7vw, -1.75rem)) !important;
+  html body .hero-visual.fd-app-screen {
+    transform: none !important;
+    top: auto !important;
+    margin-top: clamp(-10rem, -25vw, -7.5rem) !important;
     margin-bottom: calc(-1 * clamp(3.25rem, 13.5vw, 4.75rem)) !important;
+  }
+
+  html body .hero-showcase {
+    transform: none !important;
   }
 }
 
