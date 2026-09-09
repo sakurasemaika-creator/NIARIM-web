@@ -6,7 +6,7 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [
   320, 339, 360, 375, 390, 414, 480, 520, 543, 559, 560, 600, 640, 641, 642,
-  700, 732, 759, 760, 768, 834, 900, 901, 1023, 1024, 1100, 1199, 1200,
+  700, 732, 733, 759, 760, 768, 834, 900, 901, 1023, 1024, 1100, 1199, 1200,
   1279, 1280, 1366, 1440, 1600, 1920,
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
@@ -181,7 +181,7 @@ for (const width of widths) {
       if (state.paddingTop > 34 || state.paddingBottom > 32) {
         failures.push({ id, kind: "sp-padding-too-loose", state });
       }
-    } else if (width <= 759) {
+    } else if (width <= 732) {
       if (trackCount < 2) {
         failures.push({
           id,
@@ -208,6 +208,34 @@ for (const width of widths) {
       }
       if (state.paddingTop > 38 || state.paddingBottom > 36) {
         failures.push({ id, kind: "compact-padding-too-loose", state });
+      }
+    } else if (width <= 759) {
+      if (trackCount < 2) {
+        failures.push({
+          id,
+          kind: "transition-hero-lost-two-column-layout",
+          state,
+        });
+      }
+      if (overlaps(state.copy, state.visual)) {
+        failures.push({ id, kind: "transition-columns-collision", state });
+      }
+      if (copyVisualGap !== null && copyVisualGap < 12) {
+        failures.push({
+          id,
+          kind: "transition-columns-too-tight",
+          copyVisualGap,
+          state,
+        });
+      }
+      if (state.visual.width < 210 || state.visual.width > 245) {
+        failures.push({ id, kind: "transition-visual-size-outlier", state });
+      }
+      if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
+        failures.push({ id, kind: "transition-showcase-card-count", state });
+      }
+      if (state.paddingTop > 38 || state.paddingBottom > 36) {
+        failures.push({ id, kind: "transition-padding-too-loose", state });
       }
     } else if (width <= 1023) {
       if (trackCount < 2) {
@@ -290,6 +318,16 @@ for (const width of widths) {
     }
 
     const previous = statesByLanguage.get(language);
+    if (previous?.width === 732 && width === 733) {
+      if (ratioJump(previous.state.visual.width, state.visual.width) > 0.2) {
+        failures.push({
+          id,
+          kind: "732-733-visual-density-jump",
+          previous: previous.state,
+          state,
+        });
+      }
+    }
     if (previous?.width === 759 && width === 760) {
       if (ratioJump(previous.state.visual.width, state.visual.width) > 0.35) {
         failures.push({
@@ -317,9 +355,7 @@ for (const width of widths) {
           state,
         });
       }
-      if (
-        ratioJump(previous.state.titleFontSize, state.titleFontSize) > 0.18
-      ) {
+      if (ratioJump(previous.state.titleFontSize, state.titleFontSize) > 0.18) {
         failures.push({
           id,
           kind: "1023-1024-title-density-jump",
