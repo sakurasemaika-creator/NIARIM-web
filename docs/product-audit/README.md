@@ -2,13 +2,6 @@
 
 状態：**進行中、全体監査は未完了**。2026-09-07 Work checkpoint。
 
-## 2026-09-09 JST 継続checkpoint
-
-- W08〜W10と問い合わせ回帰: `b5cac10` の [CI 34281650981](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34281650981) は全17job成功。問い合わせ28/28、表示4,032条件成功。中国語短文の長さによる誤検知は修正済み。
-- 目視: 日本語自動線画のCI単体PNGでSVGアイコンを含む4設定・線画色・適用操作を確認。仏語/簡体字SP問い合わせの失敗表示、スペイン語→仏語の実ブラウザー言語切替も確認。ローカルpreview固有のアイコン欠落を製品不具合とは断定しない。
-- 後続Hero変更は境界監査とformatが失敗しており、以前の全greenを現在の品質保証として流用しない。追加2スクリプトのformatは今回修正。HEAD・最新結果・次の操作はcontinuationを正とする。
-- HANDS_ON_UI_STANDARDの全画面/主要状態/操作inventoryは未完了。法務/IP・言語品質・獲得導線・実運用も継続対象。
-
 ## Git・前工程
 
 - `sakurasemaika-creator/NIARIM-web` / App `sakurasemaika-creator/NIARIM`、双方 `dev_branch` のみ。force push・破壊的reset・本番データ操作は禁止。
@@ -55,14 +48,3 @@
 - 自律操作監査の失敗を別テストの成功で打ち消すshell fallbackを除去。最新CIで実際に失敗した7ファイルをPrettierで整形した。
 - ローカル確認: Worker **6/6成功**、JS構文確認成功、format成功。問い合わせ空送信でname/email/message/agreeがinvalidとなりnameへfocus。FAQを実画面で確認。拡張matrixはpush後のCI実行待ちであり、まだ合格とは扱わない。
 - 次: 拡張CIの失敗を実画面で分類・修正。問い合わせ成功/reset/添付/言語変更、未設定X案内、App保存A02を継続。全体監査は未完了。
-
-## 2026-09-08 JST 23時台の監査継続
-
-- Web `56a6610` のActions `34186579146` は全17job成功。上記4,032条件も全件成功。その後の実装変更を含む現在HEADの合格とは扱わない。
-- **W08 / P1 起動・SEO生成**: 辞書全ファイルを名前順に実行するとDOM専用辞書が `document is not defined` で停止し、ベース辞書が後勝ちで上書きもする。各HTMLの読み込み順にmetadata辞書だけを評価し、11ページ×7言語のtitle/descriptionを必須検査する。Worker dry-run build成功、既存SEO契約検査成功。CIにもbuildを追加した。
-- **W09 / P2 問い合わせ誘導**: `X_URL` 未設定時もXへ誘導する文章を表示していた。未設定時は既存7言語の汎用問い合わせ説明を使い、X専用案内を隠す。未設定のリンクは追加しない。実画面でフランス語の非空説明・X案内非表示と、日本語の必須エラー/focusを確認。
-- **W10 / P2 Appとの整合**: 自動線画のタイトル・ラフ幅/線幅/入り抜き/補正・線画色をApp ARBと既定値へ合わせた。省略されていた線画色と減算操作の表示を補い、長いラベルを折り返す。誤った配列添字による監査を、描画されたパラメーター名と値の検査へ移した。フランス語PCの表示確認済み。SVGアイコンとSP/他言語の目視は継続。
-- 問い合わせ回帰を28条件（7言語×PC/SP×X設定有無）へ追加。無効添付/4枚/成功/reset/二重送信/429/500/通信失敗をAPI差し替えで確認する設計であり、実メールは送らない。追加ブラウザー検査はCI実行待ち。
-- ローカル: Worker6/6、SEO contract、operations SEO、JS構文、Worker dry-run build成功。直近incoming変更の10ファイルは既存Prettier 3.6.2で整形。UI変更後の全matrixとスクリーンショット分類は未完了。
-- App A02は `b61db7f` でproduction修正済み。最新Flutterの保存回帰job成功。全体829成功/5skip/27失敗、analyze46件、format43ファイル。全体合格ではない。
-- 次: Web追加CI結果と実画像を確認し、Appの自動線画テスト修正を実行検証する。両repo最新の品質/法務・IP基準を継承し、未精査領域を引き続き監査する。
