@@ -2,11 +2,11 @@
 
 /* Mobile hero collision correction.
    Keep copy/CTA geometry unchanged and move only the screen reproduction upward.
-   Cover the complete range reported by the width sweep (<660px), including the
-   640/641 boundary that the previous <=640 rule missed. */
-@media (max-width: 659px) {
+   The overlap is confined to widths below 560px, so leave 560px and wider
+   untouched and roughly double the previous upward offset in the affected range. */
+@media (max-width: 559px) {
   html body .hero-visual.fd-app-screen {
     position: relative;
-    top: clamp(-3.25rem, -8vw, -2.25rem);
+    top: clamp(-6.5rem, -16vw, -4.5rem);
   }
 }
