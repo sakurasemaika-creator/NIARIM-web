@@ -78,15 +78,16 @@
 
 /* Hero responsive composition
    ---------------------------
-   The hero has three deliberate density bands instead of letting unrelated
+   The hero uses continuous density bands instead of letting unrelated
    component breakpoints decide its layout:
    - <=559px: true SP stack
    - 560-759px: compact split composition
    - 760-1023px: tablet / narrow-window split composition
+   - >=1024px: desktop split composition with a bounded visual scale
 
-   The late-loaded responsive design layer owns the broad visual treatment, so
-   these rules intentionally use !important where needed. The values within each
-   band are fluid to avoid a second, hidden breakpoint inside the band. */
+   pages/home.css is loaded after this file, so structural ownership uses
+   !important where needed. Values inside each band stay fluid and adjacent
+   bands meet at similar sizes to avoid visible density jumps. */
 @media (max-width: 559px) {
   .hero {
     padding-top: clamp(1.4rem, 5.5vw, 2rem) !important;
@@ -234,7 +235,7 @@
 }
 
 /* Tablet / narrow desktop windows. The phone grows with the viewport instead of
-   jumping directly from the compact 180px mock to the full desktop 420px mock. */
+   jumping directly from the compact 180px mock to the desktop composition. */
 @media (min-width: 760px) and (max-width: 1023px) {
   .hero {
     padding-top: clamp(2.15rem, 3.8vw, 2.8rem) !important;
@@ -294,6 +295,67 @@
   .hero-visual {
     width: clamp(210px, 26vw, 280px) !important;
     max-width: 280px !important;
+    justify-self: end !important;
+    margin-inline: 0 !important;
+  }
+}
+
+/* Desktop keeps the same information density instead of resetting to the
+   oversized legacy home.css hero at exactly 1024px. */
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: clamp(2.8rem, 4.2vw, 4rem) !important;
+    padding-bottom: clamp(2.6rem, 3.8vw, 3.7rem) !important;
+  }
+
+  .hero .container {
+    width: min(calc(100% - 3rem), 1240px) !important;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr) !important;
+    align-items: center !important;
+    gap: clamp(1.8rem, 3vw, 3rem) !important;
+  }
+
+  .hero-copy {
+    min-width: 0;
+    max-width: none !important;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(3.55rem, 4.4vw, 5.2rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.72rem !important;
+    font-size: clamp(0.98rem, 1.05vw, 1.08rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.95rem !important;
+    max-width: 62ch !important;
+    font-size: clamp(0.94rem, 1vw, 1.05rem) !important;
+    line-height: 1.62 !important;
+  }
+
+  .hero-actions {
+    margin-top: 1.05rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .hero-bridge {
+    margin-top: 0.85rem !important;
+    max-width: 58ch !important;
+    font-size: clamp(0.78rem, 0.82vw, 0.86rem) !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero-visual {
+    width: clamp(300px, 30vw, 420px) !important;
+    max-width: 420px !important;
     justify-self: end !important;
     margin-inline: 0 !important;
   }
