@@ -1,10 +1,11 @@
-name: Repair SP Hero first fold
+name: SP Hero first-fold repair
 
 on:
   push:
-    branches: [dev_branch]
+    branches:
+      - dev_branch
     paths:
-      - '.github/workflows/sp-hero-first-fold-repair.yml'
+      - .github/workflows/sp-hero-first-fold-repair.yml
 
 permissions:
   contents: write
@@ -19,205 +20,25 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: Repair compact SP Hero and strengthen first-fold audit
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          css_path = Path('public/css/home-hero-responsive-final.css')
-          css = css_path.read_text()
-          replacement = r'''@media (max-width: 559px) {
-  html body .hero {
-    padding-top: clamp(0.9rem, 3.4vw, 1.2rem) !important;
-    padding-bottom: clamp(0.8rem, 3vw, 1.05rem) !important;
-  }
-
-  html body .hero .container {
-    position: relative !important;
-    width: calc(100% - 1.5rem) !important;
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(112px, 38%) !important;
-    grid-template-rows: auto auto auto auto auto auto !important;
-    align-items: start !important;
-    justify-items: stretch !important;
-    column-gap: clamp(0.55rem, 2.6vw, 0.8rem) !important;
-    row-gap: clamp(0.42rem, 1.8vw, 0.62rem) !important;
-  }
-
-  html body .hero-copy {
-    display: contents !important;
-  }
-
-  html body .hero-copy > .eyebrow {
-    grid-column: 1 / -1 !important;
-    grid-row: 1 !important;
-    margin: 0 !important;
-  }
-
-  html body .hero-copy > .hero-title {
-    grid-column: 1 / -1 !important;
-    grid-row: 2 !important;
-    margin: 0 !important;
-  }
-
-  html body .hero-copy > .hero-subtitle {
-    grid-column: 1 / -1 !important;
-    grid-row: 3 !important;
-    margin: 0 !important;
-  }
-
-  html body .hero-copy > .hero-lead {
-    grid-column: 1 !important;
-    grid-row: 4 !important;
-    align-self: start !important;
-    margin: 0 !important;
-    max-width: none !important;
-  }
-
-  html body .hero-visual,
-  html body .hero-showcase {
-    grid-column: 2 !important;
-    grid-row: 4 !important;
-    width: clamp(112px, 34vw, 145px) !important;
-    max-width: 145px !important;
-    min-width: 0 !important;
-    justify-self: end !important;
-    align-self: start !important;
-    margin: 0 !important;
-  }
-
-  html body .hero-copy > .hero-actions {
-    grid-column: 1 / -1 !important;
-    grid-row: 5 !important;
-    margin: 0 !important;
-    gap: 0.45rem !important;
-    flex-wrap: nowrap !important;
-  }
-
-  html body .hero-copy > .hero-bridge {
-    grid-column: 1 / -1 !important;
-    grid-row: 6 !important;
-    display: block !important;
-    margin: 0 !important;
-    max-width: none !important;
-  }
-
-  html body .hero-title {
-    max-width: 100% !important;
-    font-size: clamp(2rem, 8.8vw, 2.6rem) !important;
-    line-height: 0.98 !important;
-  }
-
-  html body .hero-subtitle {
-    font-size: clamp(0.78rem, 2.65vw, 0.9rem) !important;
-    line-height: 1.35 !important;
-  }
-
-  html body .hero-lead {
-    font-size: clamp(0.7rem, 2.25vw, 0.8rem) !important;
-    line-height: 1.48 !important;
-  }
-
-  html body .hero-actions .btn {
-    min-width: 0 !important;
-    min-height: 40px !important;
-    padding: 0.56rem 0.62rem !important;
-    flex: 1 1 0 !important;
-    font-size: clamp(0.7rem, 2.4vw, 0.82rem) !important;
-  }
-
-  html body .hero-bridge {
-    font-size: clamp(0.62rem, 2vw, 0.72rem) !important;
-    line-height: 1.42 !important;
-  }
-}
-
-@media (max-width: 339px) {
-  html body .hero .container {
-    width: calc(100% - 1.1rem) !important;
-    grid-template-columns: minmax(0, 1fr) minmax(104px, 37%) !important;
-    column-gap: 0.48rem !important;
-    row-gap: 0.38rem !important;
-  }
-
-  html body .hero-title {
-    font-size: clamp(1.9rem, 9vw, 2.18rem) !important;
-  }
-
-  html body .hero-subtitle {
-    font-size: 0.76rem !important;
-  }
-
-  html body .hero-lead {
-    font-size: 0.68rem !important;
-    line-height: 1.44 !important;
-  }
-
-  html body .hero-visual,
-  html body .hero-showcase {
-    width: clamp(104px, 33vw, 116px) !important;
-    max-width: 116px !important;
-  }
-
-  html body .hero-actions .btn {
-    min-height: 38px !important;
-    padding: 0.5rem 0.45rem !important;
-    font-size: 0.68rem !important;
-  }
-
-  html body .hero-bridge {
-    font-size: 0.6rem !important;
-    line-height: 1.38 !important;
-  }
-}
-
-'''
-          pattern = re.compile(r'@media \(max-width: 559px\) \{.*?(?=@media \(min-width: 560px\))', re.S)
-          css2, count = pattern.subn(replacement, css, count=1)
-          if count != 1:
-            raise SystemExit(f'expected one compact SP ownership block, replaced {count}')
-          css_path.write_text(css2)
-
-          test_path = Path('tests/intermediate-width-home-audit.mjs')
-          test = test_path.read_text()
-          test = test.replace(
-            'const captureWidths = new Set(widths);',
-            'const captureWidths = new Set(widths);\nconst firstFoldWidths = new Set([320, 339, 360, 375, 390, 414]);'
-          )
-          test = test.replace(
-            'viewport: { width, height: 900 },',
-            'viewport: { width, height: firstFoldWidths.has(width) ? 667 : 900 },'
-          )
-          test = test.replace(
-            'scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),',
-            'scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),\n        viewportHeight: window.innerHeight,'
-          )
-          marker = '''        screenshots.push(file);\n      }\n    }\n\n    const id = `${width}px/${language}`;'''
-          insert = '''        screenshots.push(file);\n      }\n    }\n\n    if (firstFoldWidths.has(width)) {\n      const file = `first-fold-${width}px-${language}.png`;\n      await page.screenshot({\n        path: path.join(outDir, file),\n        animations: "disabled",\n        fullPage: false,\n      });\n      screenshots.push(file);\n    }\n\n    const id = `${width}px/${language}`;'''
-          if marker not in test:
-            raise SystemExit('first-fold screenshot insertion anchor missing')
-          test = test.replace(marker, insert, 1)
-          marker = '''      if (state.paddingTop > 34 || state.paddingBottom > 32) {\n        failures.push({ id, kind: "sp-padding-too-loose", state });\n      }\n'''
-          insert = '''      if (state.paddingTop > 34 || state.paddingBottom > 32) {\n        failures.push({ id, kind: "sp-padding-too-loose", state });\n      }\n      if (firstFoldWidths.has(width) && state.marquee.top > state.viewportHeight) {\n        failures.push({\n          id,\n          kind: "sp-marquee-below-first-fold",\n          marqueeTop: state.marquee.top,\n          viewportHeight: state.viewportHeight,\n          state,\n        });\n      }\n'''
-          if marker not in test:
-            raise SystemExit('first-fold assertion insertion anchor missing')
-          test = test.replace(marker, insert, 1)
-          test_path.write_text(test)
-          PY
-          npx prettier --write public/css/home-hero-responsive-final.css tests/intermediate-width-home-audit.mjs
-      - name: Install Playwright
+          node-version: "22"
+      - name: Apply repair
+        run: python3 tools/repair-sp-hero-first-fold.py
+      - name: Format
+        run: npx prettier --write public/css/home-hero-responsive-final.css tests/intermediate-width-home-audit.mjs
+      - name: Install browser
         run: |
           npm install --no-save playwright@1.55.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
-      - name: Start static server
+      - name: Start server
         run: |
-          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
-          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
-          cat /tmp/niarim-http.log
+          python3 -m http.server 8787 --directory public > /tmp/http.log 2>&1 &
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/http.log
           exit 1
-      - name: Verify all Hero widths and SP first fold
+      - name: Verify Hero
         run: AUDIT_HERO_DIR=artifacts/sp-first-fold node tests/intermediate-width-home-audit.mjs
       - name: Upload evidence
         if: always()
@@ -227,27 +48,12 @@ jobs:
           path: artifacts/sp-first-fold/
           if-no-files-found: error
           retention-days: 14
-      - name: Commit verified repair
+      - name: Commit repair
         if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/css/home-hero-responsive-final.css tests/intermediate-width-home-audit.mjs
-          git commit -m 'fix: restore compact SP Hero first fold'
-          git pull --rebase origin dev_branch
-          git push origin HEAD:dev_branch
-      - name: Remove temporary workflow after verified push
-        if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git fetch origin dev_branch
-          git checkout -B cleanup origin/dev_branch
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm .github/workflows/sp-hero-first-fold-repair.yml
-          git commit -m 'ci: remove SP Hero first-fold repair workflow'
+          git commit -m "fix: restore compact SP Hero first fold"
           git pull --rebase origin dev_branch
           git push origin HEAD:dev_branch
