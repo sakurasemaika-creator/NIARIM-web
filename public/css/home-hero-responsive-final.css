@@ -221,7 +221,7 @@
   html body .hero .container {
     width: min(calc(100% - 2rem), 1360px) !important;
     display: grid !important;
-    grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr) !important;
     grid-template-rows: none !important;
     align-items: center !important;
     justify-items: stretch !important;
@@ -242,8 +242,8 @@
   html body .hero-showcase {
     grid-column: 2 !important;
     grid-row: auto !important;
-    width: clamp(210px, 26vw, 280px) !important;
-    max-width: 280px !important;
+    width: clamp(320px, 42vw, 430px) !important;
+    max-width: 430px !important;
     min-width: 0 !important;
     justify-self: end !important;
     align-self: center !important;
