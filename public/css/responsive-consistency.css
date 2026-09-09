@@ -1,13 +1,33 @@
 @import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7369913eb14d6cd56520ba73ea7f057a4c/public/css/responsive-consistency.css");
 
-/* Mobile hero collision correction.
-   Keep copy/CTA geometry unchanged and move only the screen reproduction upward.
-   The overlap is confined to widths below 560px, so leave 560px and wider
-   untouched. The lift is sized from the latest 320-559px browser measurements
-   so the mock bottom clears the CTA top with a visible safety gap throughout. */
+/* Compact Home hero ownership.
+   polish.css is injected after the page styles and still contains an older
+   <=900px centered Hero treatment. Explicitly own the sub-560 typography here
+   so the title/subtitle/lead stay left-aligned on the real page as designed.
+   Also avoid the previous extreme top offsets: slightly reduce the mock instead
+   and use a modest lift so its bottom clears the CTA without climbing into the
+   title/subtitle area. */
 @media (max-width: 559px) {
+  html body .hero-title,
+  html body .hero-subtitle,
+  html body .hero-lead,
+  html body .hero-bridge {
+    text-align: left !important;
+  }
+
+  html body .hero-copy > .eyebrow,
+  html body .hero-copy > .hero-title,
+  html body .hero-copy > .hero-subtitle,
+  html body .hero-copy > .hero-lead {
+    justify-self: start !important;
+  }
+
   html body .hero-visual.fd-app-screen {
-    position: relative;
-    top: clamp(-12rem, -31vw, -9.25rem);
+    position: relative !important;
+    width: clamp(104px, 29vw, 124px) !important;
+    max-width: 124px !important;
+    top: clamp(-2.75rem, -8vw, -1.75rem) !important;
+    justify-self: end !important;
+    align-self: start !important;
   }
 }
