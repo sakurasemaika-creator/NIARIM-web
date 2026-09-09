@@ -103,15 +103,17 @@ a {
   }
 }
 
-/* Compact Hero device placement.
-   Keep the Canvas UI at the pre-fa388446 position, but draw the visible bezel
-   independently so only the bezel can move upward. The real 4px border stays
-   transparent to preserve the screen's original inner geometry. */
+/* Compact Hero bezel correction.
+   Restore the runtime screen box/content to its pre-bezel-experiment geometry.
+   Do not move the real .hero-visual at all. Instead hide only its real border
+   and redraw that border as an independent pseudo-element above the unchanged
+   Canvas UI. This keeps the screen contents exactly where they were while the
+   visible bezel alone moves upward. CTA geometry is untouched. */
 @media (max-width: 559px) {
   html body .hero-visual.fd-app-screen {
-    transform: none !important;
+    transform: translateY(clamp(-2.25rem, -7vw, -1.75rem)) !important;
     top: auto !important;
-    margin-top: clamp(-10rem, -25vw, -7.5rem) !important;
+    margin-top: 0 !important;
     margin-bottom: calc(-1 * clamp(3.25rem, 13.5vw, 4.75rem)) !important;
     border-color: transparent !important;
     overflow: visible !important;
@@ -125,7 +127,7 @@ a {
     box-sizing: border-box !important;
     border: 4px solid var(--fd-ink) !important;
     border-radius: 20px !important;
-    transform: translateY(clamp(-4.75rem, -12vw, -3rem)) !important;
+    transform: translateY(clamp(-7.5rem, -19vw, -5rem)) !important;
     pointer-events: none !important;
     z-index: 100 !important;
   }
