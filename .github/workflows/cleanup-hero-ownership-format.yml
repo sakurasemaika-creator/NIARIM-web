@@ -4,7 +4,7 @@ on:
   push:
     branches: [dev_branch]
     paths:
-      - '.github/workflows/cleanup-hero-ownership-format.yml'
+      - ".github/workflows/cleanup-hero-ownership-format.yml"
 
 permissions:
   contents: write
@@ -68,7 +68,7 @@ jobs:
           PY
 
       - name: Canonicalize known format debt and touched CSS
-        run: npx prettier --write docs/product-audit/QUALITY_STANDARD.md docs/work-audit/state/ASTRA_AUDIT_STATE.md docs/work-audit/state/ASTRA_CONTINUATION.md public/css/home-hero-fit-628.css public/css/home-hero-responsive-final.css
+        run: npx prettier --write .github/workflows/cleanup-hero-ownership-format.yml docs/product-audit/QUALITY_STANDARD.md docs/work-audit/state/ASTRA_AUDIT_STATE.md docs/work-audit/state/ASTRA_CONTINUATION.md public/css/home-hero-fit-628.css public/css/home-hero-responsive-final.css
 
       - name: Verify repository formatting is green
         run: npm run format:check
