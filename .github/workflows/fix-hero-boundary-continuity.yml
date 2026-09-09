@@ -43,29 +43,22 @@ jobs:
 
           css = Path('public/css/home-hero-responsive-final.css')
           text = css.read_text()
-          text = text.replace(
-              '@media (min-width: 560px) and (max-width: 759px) {',
-              '@media (min-width: 560px) and (max-width: 732px) {',
-              1,
-          )
-          old = '''  html body .hero-visual,
-          html body .hero-showcase {
-            grid-column: 2 !important;
-            grid-row: auto !important;
-            /* Grow the single-card presentation continuously through the compact band.
-               Ending near 243px at 759px keeps its visual weight close to the two-card
-               tablet presentation instead of making 760px look like a different page. */
-            width: clamp(160px, 32vw, 245px) !important;
-            max-width: 245px !important;'''
-          new = '''  html body .hero-visual,
-          html body .hero-showcase {
-            grid-column: 2 !important;
-            grid-row: auto !important;
-            width: clamp(150px, 28vw, 205px) !important;
-            max-width: 205px !important;'''
-          if old not in text:
-              raise SystemExit('compact visual anchor changed')
-          text = text.replace(old, new, 1)
+          old_media = '@media (min-width: 560px) and (max-width: 759px) {'
+          if old_media in text:
+              text = text.replace(old_media, '@media (min-width: 560px) and (max-width: 732px) {', 1)
+          elif '@media (min-width: 560px) and (max-width: 732px) {' not in text:
+              raise SystemExit('compact media anchor changed')
+
+          old_width = 'width: clamp(160px, 32vw, 245px) !important;'
+          old_max = 'max-width: 245px !important;'
+          if old_width in text:
+              text = text.replace(old_width, 'width: clamp(150px, 28vw, 205px) !important;', 1)
+          elif 'width: clamp(150px, 28vw, 205px) !important;' not in text:
+              raise SystemExit('compact width anchor changed')
+          if old_max in text:
+              text = text.replace(old_max, 'max-width: 205px !important;', 1)
+          elif 'max-width: 205px !important;' not in text:
+              raise SystemExit('compact max-width anchor changed')
 
           transition = '''
           /* 733–759px is a deliberate transition band: keep one preview card, but
@@ -150,75 +143,87 @@ jobs:
 
           '''
           tablet_anchor = '@media (min-width: 760px) and (max-width: 1023px) {'
-          if transition.strip() not in text:
+          if '@media (min-width: 733px) and (max-width: 759px) {' not in text:
               if text.count(tablet_anchor) != 1:
                   raise SystemExit('tablet media anchor changed')
               text = text.replace(tablet_anchor, transition + tablet_anchor, 1)
 
-          text = text.replace(
-              'grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr) !important;',
-              'grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr) !important;',
-              1,
-          )
-          text = text.replace(
-              'width: clamp(300px, 39vw, 424px) !important;',
-              'width: clamp(320px, 41.5vw, 424px) !important;',
-              1,
-          )
+          old_columns = 'grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr) !important;'
+          if old_columns in text:
+              text = text.replace(old_columns, 'grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr) !important;', 1)
+          elif 'minmax(320px, 0.9fr)' not in text:
+              raise SystemExit('tablet columns anchor changed')
+          old_tablet_width = 'width: clamp(300px, 39vw, 424px) !important;'
+          if old_tablet_width in text:
+              text = text.replace(old_tablet_width, 'width: clamp(320px, 41.5vw, 424px) !important;', 1)
+          elif 'width: clamp(320px, 41.5vw, 424px) !important;' not in text:
+              raise SystemExit('tablet width anchor changed')
           css.write_text(text)
 
           audit = Path('tests/intermediate-width-home-audit.mjs')
           text = audit.read_text()
-          text = text.replace('700, 732, 759, 760, 768, 834', '700, 732, 733, 759, 760, 768, 834', 1)
-          text = text.replace('} else if (width <= 759) {', '} else if (width <= 732) {', 1)
-          tablet = '''    } else if (width <= 1023) {'''
-          transition_check = '''    } else if (width <= 759) {
-              if (trackCount < 2) {
-                failures.push({
-                  id,
-                  kind: "transition-hero-lost-two-column-layout",
-                  state,
-                });
+          if '700, 732, 733, 759, 760, 768, 834' not in text:
+              old_widths = '700, 732, 759, 760, 768, 834'
+              if old_widths not in text:
+                  raise SystemExit('audit width-list anchor changed')
+              text = text.replace(old_widths, '700, 732, 733, 759, 760, 768, 834', 1)
+          if '} else if (width <= 732) {' not in text:
+              old_compact = '} else if (width <= 759) {'
+              if text.count(old_compact) != 1:
+                  raise SystemExit('compact audit anchor changed')
+              text = text.replace(old_compact, '} else if (width <= 732) {', 1)
+
+          if 'kind: "transition-visual-size-outlier"' not in text:
+              tablet = '    } else if (width <= 1023) {'
+              if text.count(tablet) != 1:
+                  raise SystemExit('tablet audit anchor changed')
+              transition_check = '''    } else if (width <= 759) {
+                if (trackCount < 2) {
+                  failures.push({
+                    id,
+                    kind: "transition-hero-lost-two-column-layout",
+                    state,
+                  });
+                }
+                if (overlaps(state.copy, state.visual)) {
+                  failures.push({ id, kind: "transition-columns-collision", state });
+                }
+                if (copyVisualGap !== null && copyVisualGap < 12) {
+                  failures.push({
+                    id,
+                    kind: "transition-columns-too-tight",
+                    copyVisualGap,
+                    state,
+                  });
+                }
+                if (state.visual.width < 210 || state.visual.width > 245) {
+                  failures.push({ id, kind: "transition-visual-size-outlier", state });
+                }
+                if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
+                  failures.push({ id, kind: "transition-showcase-card-count", state });
+                }
+                if (state.paddingTop > 38 || state.paddingBottom > 36) {
+                  failures.push({ id, kind: "transition-padding-too-loose", state });
+                }
+              } else if (width <= 1023) {'''
+              text = text.replace(tablet, transition_check, 1)
+
+          if 'kind: "732-733-visual-density-jump"' not in text:
+              marker = '    if (previous?.width === 759 && width === 760) {'
+              if text.count(marker) != 1:
+                  raise SystemExit('759 boundary audit anchor changed')
+              boundary = '''    if (previous?.width === 732 && width === 733) {
+                if (ratioJump(previous.state.visual.width, state.visual.width) > 0.2) {
+                  failures.push({
+                    id,
+                    kind: "732-733-visual-density-jump",
+                    previous: previous.state,
+                    state,
+                  });
+                }
               }
-              if (overlaps(state.copy, state.visual)) {
-                failures.push({ id, kind: "transition-columns-collision", state });
-              }
-              if (copyVisualGap !== null && copyVisualGap < 12) {
-                failures.push({
-                  id,
-                  kind: "transition-columns-too-tight",
-                  copyVisualGap,
-                  state,
-                });
-              }
-              if (state.visual.width < 210 || state.visual.width > 245) {
-                failures.push({ id, kind: "transition-visual-size-outlier", state });
-              }
-              if (state.visualOwner === "showcase" && state.visibleCards.length !== 1) {
-                failures.push({ id, kind: "transition-showcase-card-count", state });
-              }
-              if (state.paddingTop > 38 || state.paddingBottom > 36) {
-                failures.push({ id, kind: "transition-padding-too-loose", state });
-              }
-            } else if (width <= 1023) {'''
-          if text.count(tablet) != 1:
-              raise SystemExit('tablet audit anchor changed')
-          text = text.replace(tablet, transition_check, 1)
-          marker = '''    if (previous?.width === 759 && width === 760) {'''
-          boundary = '''    if (previous?.width === 732 && width === 733) {
-              if (ratioJump(previous.state.visual.width, state.visual.width) > 0.2) {
-                failures.push({
-                  id,
-                  kind: "732-733-visual-density-jump",
-                  previous: previous.state,
-                  state,
-                });
-              }
-            }
-            if (previous?.width === 759 && width === 760) {'''
-          if text.count(marker) != 1:
-              raise SystemExit('759 boundary audit anchor changed')
-          text = text.replace(marker, boundary, 1)
+              if (previous?.width === 759 && width === 760) {'''
+              text = text.replace(marker, boundary, 1)
           audit.write_text(text)
           PY
 
