@@ -6,6 +6,7 @@ on:
       - dev_branch
     paths:
       - .github/workflows/sp-hero-first-fold-repair.yml
+      - tools/repair-sp-hero-first-fold.py
 
 permissions:
   contents: write
