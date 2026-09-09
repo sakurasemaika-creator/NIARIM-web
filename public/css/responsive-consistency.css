@@ -1,1 +1,16 @@
-PLACEHOLDER
+@import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7/public/css/responsive-consistency.css");
+
+/* Mobile hero collision correction.
+   At <=640px the 320px-wide CanvasScreen mock was visually colliding with the
+   CTA row in the captured first viewport. Keep the copy/CTA flow unchanged and
+   pull only the mock upward, as requested. The negative margin also removes the
+   vacated layout space so the hero does not become unnecessarily taller. */
+@media (max-width: 640px) {
+  .hero .container {
+    gap: 3.2rem;
+  }
+
+  .hero-visual.fd-app-screen {
+    margin-top: -2rem !important;
+  }
+}
