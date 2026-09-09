@@ -73,9 +73,17 @@ function selectedLang(request) {
   return SEO_LANGS.includes(raw) ? raw : "ja";
 }
 
+function normalizedPagePath(pathname) {
+  const value = String(pathname || "/");
+  return value.endsWith("/index.html")
+    ? value.slice(0, -"index.html".length)
+    : value;
+}
+
 function canonicalUrl(request, env, lang = selectedLang(request)) {
   const requestUrl = new URL(request.url);
-  const url = new URL(`${siteOrigin(request, env)}${requestUrl.pathname}`);
+  const pathname = normalizedPagePath(requestUrl.pathname);
+  const url = new URL(`${siteOrigin(request, env)}${pathname}`);
   if (lang !== "ja") url.searchParams.set("lang", lang);
   return url.toString();
 }
@@ -86,7 +94,7 @@ function absoluteAssetUrl(value, env, request) {
 }
 
 function pageMetadata(request) {
-  const pathname = new URL(request.url).pathname;
+  const pathname = normalizedPagePath(new URL(request.url).pathname);
   const page = PAGE_KEYS.get(pathname);
   if (!page) return null;
   const lang = selectedLang(request);
