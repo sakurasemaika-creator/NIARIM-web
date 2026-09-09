@@ -39,6 +39,27 @@
     }
 
     input.addEventListener("input", apply);
+    // Category navigation leaves the search results and opens the full section.
+    // Restore its content before native/smooth anchor scrolling measures it.
+    document
+      .querySelectorAll('.feature-nav a[href^="#help-"]')
+      .forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          if (input.value) {
+            input.value = "";
+            apply();
+          }
+        });
+      });
     // 言語切り替え後、検索文字列は保持したまま再フィルタする
     document.addEventListener("niarim:langchange", apply);
   }

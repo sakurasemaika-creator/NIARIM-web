@@ -6,6 +6,10 @@
 
 本節と継続checkpointを最新の現在地点とする。新Policy/Stateへ移行された記録の欠落を、全面監査で確認したGit/CIの証拠から補った。
 
+- **W11 / ガイド検索中のカテゴリ移動**: `cf35f9c` のfr実操作で、検索語「Annuler」により保存カテゴリがdisplay noneになった状態でも「Enregistrement」リンクが残り、クリックするとURLだけが `#help-save` へ変わって内容が表示されないことを再現。最新 `e6e07ed` でも対象help.jsに変更なし。通常のカテゴリ選択時は検索を解除し、anchor移動が測定する前にカテゴリを表示する修正を追加した。7言語×PCキーボード/SPタップの14条件で検索・該当なし・カテゴリ移動を検証するCIを追加。修正後の成功は結果確認後に確定する。
+- `103e26af` / [CI 34325708843](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34325708843) は **17ジョブすべて成功**。追加したWorker runtime SEOも成功し、言語URL・canonical・hreflang・Content-Language・JSON-LD・robots/sitemapを実Worker応答で検証した。後続CSS変更 `e6e07ed` はこの合格へ含めない。
+- fr FAQの実操作: Spaceで開いた回答は言語変更後も展開を保ち、言語ボタンへfocusが戻る。回答全文の表示を目視確認し、Enterで閉じると読み上げregionから外れる。ガイドは翻訳済み語での検索と該当なし表示を確認。全操作inventoryの完了とは扱わない。
+
 - **W08 / SEOメタデータ生成**: `f2d309d` で11ページのscript順序とmetadata-onlyの辞書読込を修正。DOM依存scriptのReferenceErrorや基底辞書による翻訳上書きを防ぎ、11ページ×7言語のtitle/description契約を確認。
 - **W09 / 問い合わせ回帰**: X未設定時は7言語の汎用案内にし、設定済みの場合のみX案内を表示。7言語×PC/SP×X有無の28条件で必須入力・添付MIME/個数・模擬成功/reset・重複送信抑制・429/500/通信失敗時の入力保持を検証。中国語の正しい短いエラーを誤検知した文字数assertは、空や未翻訳キーでないことの検査へ修正した。
 - **W10 / App自動線画mock整合**: App ARBと7言語を照合し、rough width12・output width2・taper8・smoothing5と対応するslider比率、黒い線画色、増減操作、折り返せるラベルを反映。

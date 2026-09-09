@@ -12,6 +12,8 @@
 
 ### 次の具体的な1手（scope lock）
 
+2026-09-09 JST追記: `103e26af` / CI `34325708843` の17ジョブとWorker runtime SEOはすべて成功を確認した。現在の次の1手は、実操作で再現した **W11（ガイド検索で非表示のカテゴリへ移動できない）** の修正後CI14条件と実画面の確認。開始Web `e6e07ed` / App `813a7d8a`。この再開ではAGENTS/Policyの差分のみ継承し、無関係な外部作業を再調査していない。
+
 1. **今回追加したWorker runtime SEOと、最新CSSのCI結果を確認する。** 既存のruntime検査をvisual-auditのformat/build jobへ接続した。ローカルWorkerで言語URL・canonical・hreflang・Content-Language・JSON-LD・robots/sitemapを検証し、deployはしない。合格はCI確認後に確定する。
 2. FAQ/言語メニュー等の実操作を続け、表示検査で異常が残れば画像と実操作で原因を確認する。CIやDOM検査だけで目視済みにしない。
 3. 未精査の12ページ・主要状態・PC/SP・7言語の実操作inventory、App/Webの導線・文言、SEO/ASO・法務/IP・最終商品レビューを継続する。

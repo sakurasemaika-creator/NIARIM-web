@@ -93,6 +93,8 @@ jobs:
         run: node tests/operations-seo-audit.mjs
       - name: Audit contact validation, attachments and mocked responses in 7 languages
         run: node tests/contact-form-audit.mjs
+      - name: Audit localized help search and category navigation
+        run: node tests/help-interaction-audit.mjs
       - name: Audit intermediate Home widths and capture complete hero sections
         run: AUDIT_HERO_DIR=artifacts/intermediate-width-home node tests/intermediate-width-home-audit.mjs
       - name: Audit latest AI trust additions with real captures
