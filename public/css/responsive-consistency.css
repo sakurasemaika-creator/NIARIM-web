@@ -3,11 +3,11 @@
 /* Mobile hero collision correction.
    Keep copy/CTA geometry unchanged and move only the screen reproduction upward.
    The overlap is confined to widths below 560px, so leave 560px and wider
-   untouched. Increase the lift again so the mock clears the CTA with visible
-   breathing room across the complete 320-559px range. */
+   untouched. The lift is sized from the latest 320-559px browser measurements
+   so the mock bottom clears the CTA top with a visible safety gap throughout. */
 @media (max-width: 559px) {
   html body .hero-visual.fd-app-screen {
     position: relative;
-    top: clamp(-9rem, -23vw, -6.5rem);
+    top: clamp(-12rem, -31vw, -9.25rem);
   }
 }
