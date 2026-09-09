@@ -5,9 +5,10 @@
    <=900px centered Hero treatment. Explicitly own the sub-560 typography here
    so the title/subtitle/lead stay left-aligned on the real page as designed.
 
-   Keep the CTA exactly in its existing layout position. The screen reproduction
-   is the only element moved: lift it farther inside row 4 so its bottom clears
-   the CTA while preserving the current copy and button rhythm. */
+   The visible phone bezel is .frame-mock. Moving only .hero-visual can leave the
+   bezel visually anchored while its screen contents shift, so keep the outer
+   grid item in place and lift the complete bezel + contents as one unit. CTA
+   geometry is intentionally unchanged. */
 @media (max-width: 559px) {
   html body .hero-title,
   html body .hero-subtitle,
@@ -27,8 +28,13 @@
     position: relative !important;
     width: clamp(104px, 29vw, 124px) !important;
     max-width: 124px !important;
-    top: clamp(-8rem, -20vw, -5.25rem) !important;
+    top: 0 !important;
     justify-self: end !important;
     align-self: start !important;
+  }
+
+  html body .hero-visual.fd-app-screen > .frame-mock {
+    position: relative !important;
+    top: clamp(-6.5rem, -18vw, -4.25rem) !important;
   }
 }
