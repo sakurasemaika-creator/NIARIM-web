@@ -164,8 +164,11 @@
   html body .hero-showcase {
     grid-column: 2 !important;
     grid-row: auto !important;
-    width: clamp(150px, 24vw, 180px) !important;
-    max-width: 180px !important;
+    /* Grow the single-card presentation continuously through the compact band.
+       Ending near 243px at 759px keeps its visual weight close to the two-card
+       tablet presentation instead of making 760px look like a different page. */
+    width: clamp(160px, 32vw, 245px) !important;
+    max-width: 245px !important;
     min-width: 0 !important;
     justify-self: end !important;
     align-self: center !important;
@@ -221,7 +224,9 @@
   html body .hero .container {
     width: min(calc(100% - 2rem), 1360px) !important;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr) !important;
+    /* Two cards need room, but 320px at the first tablet pixel caused both the
+       copy and artwork to jump. 300px still gives two readable ~147px cards. */
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr) !important;
     grid-template-rows: none !important;
     align-items: center !important;
     justify-items: stretch !important;
@@ -242,7 +247,7 @@
   html body .hero-showcase {
     grid-column: 2 !important;
     grid-row: auto !important;
-    width: clamp(320px, 41.5vw, 424px) !important;
+    width: clamp(300px, 39vw, 424px) !important;
     max-width: 424px !important;
     min-width: 0 !important;
     justify-self: end !important;
