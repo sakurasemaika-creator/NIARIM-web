@@ -5,23 +5,10 @@
    <=900px centered Hero treatment. Explicitly own the sub-560 typography here
    so the title/subtitle/lead stay left-aligned on the real page as designed.
 
-   The screen reproduction shares grid row 4 with the lead. Do not solve CTA
-   collisions by translating the mock farther and farther upward: relative
-   offsets do not change the row's layout height and can make the mock collide
-   with the subtitle instead. Reserve enough row-4 height for the complete mock,
-   then use only a modest visual lift. This guarantees that row 5 (the CTA) starts
-   below the mock's bottom with breathing room throughout 320-559px. */
+   Keep the CTA exactly in its existing layout position. The screen reproduction
+   is the only element moved: lift it farther inside row 4 so its bottom clears
+   the CTA while preserving the current copy and button rhythm. */
 @media (max-width: 559px) {
-  html body .hero .container {
-    grid-template-rows:
-      auto
-      auto
-      auto
-      minmax(clamp(14.75rem, 58vw, 17rem), auto)
-      auto
-      auto !important;
-  }
-
   html body .hero-title,
   html body .hero-subtitle,
   html body .hero-lead,
@@ -40,14 +27,8 @@
     position: relative !important;
     width: clamp(104px, 29vw, 124px) !important;
     max-width: 124px !important;
-    top: clamp(-2.25rem, -6vw, -1.5rem) !important;
+    top: clamp(-8rem, -20vw, -5.25rem) !important;
     justify-self: end !important;
     align-self: start !important;
-  }
-
-  html body .hero-copy > .hero-actions {
-    position: relative !important;
-    z-index: 3 !important;
-    margin-top: 0 !important;
   }
 }
