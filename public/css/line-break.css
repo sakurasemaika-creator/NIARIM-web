@@ -75,13 +75,16 @@ a {
 
   :root:lang(zh-Hans) .hero-title,
   :root:lang(zh-Hant) .hero-title {
-    font-size: clamp(2.8rem, 3.45vw, 3.2rem) !important;
+    /* 1024px+ is the desktop-density band. Keep CJK compact relative to
+       Latin copy, but never let the primary Hero title fall below the
+       desktop visual hierarchy floor (54px). */
+    font-size: clamp(3.375rem, 3.45vw, 3.6rem) !important;
     line-height: 1 !important;
     letter-spacing: -0.04em !important;
   }
 
   :root:lang(ko) .hero-title {
-    font-size: clamp(3.2rem, 3.9vw, 3.7rem) !important;
+    font-size: clamp(3.375rem, 3.9vw, 3.7rem) !important;
     line-height: 0.99 !important;
   }
 
