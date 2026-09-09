@@ -109,3 +109,69 @@ a {
     height: 518.8px !important;
   }
 }
+
+/* Final Hero typography polish.
+   Keep the responsive structure intact, but give the primary statement and
+   supporting promise more presence at every width. */
+@media (max-width: 339px) {
+  html body .hero-title {
+    font-size: clamp(2.08rem, 9.7vw, 2.34rem) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: 0.86rem !important;
+    line-height: 1.32 !important;
+  }
+}
+
+@media (min-width: 340px) and (max-width: 559px) {
+  html body .hero-title {
+    font-size: clamp(2.2rem, 9.35vw, 2.78rem) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(0.88rem, 2.95vw, 1rem) !important;
+    line-height: 1.32 !important;
+  }
+}
+
+/* In the compact composition the preview shares the lead row. Lift it toward
+   the title so it sits visually between “動かす。” and the secondary CTA,
+   rather than appearing to rest directly on the “機能を見る” button. The
+   transform is visual-only, so first-fold height remains stable. */
+@media (max-width: 559px) {
+  html body .hero-visual,
+  html body .hero-showcase {
+    transform: translateY(clamp(-2.25rem, -7vw, -1.75rem)) !important;
+  }
+}
+
+@media (min-width: 560px) and (max-width: 759px) {
+  html body .hero-title {
+    font-size: clamp(2.45rem, 6.25vw, 3.08rem) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.08rem) !important;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 1023px) {
+  html body .hero-title {
+    font-size: clamp(2.9rem, 5.35vw, 3.9rem) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(1.04rem, 1.65vw, 1.14rem) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  html body .hero-title {
+    font-size: clamp(60px, 5.25vw, 92px) !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(1.08rem, 1.25vw, 1.28rem) !important;
+  }
+}
