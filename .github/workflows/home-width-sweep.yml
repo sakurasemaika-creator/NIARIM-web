@@ -49,6 +49,22 @@ jobs:
       - name: Capture progressive Home widths
         if: always()
         run: node tests/home-width-sweep.mjs
+      - name: Export representative images for the audit review
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import base64
+          from pathlib import Path
+          root = Path('artifacts/autonomous-browser-audit/home-width-sweep')
+          for name in ['responsive/home-hero-320x844.png', 'responsive/home-hero-390x844.png', 'home-1280x628.png']:
+              image = root / name
+              if image.exists():
+                  print('AUDIT_IMAGE_BEGIN ' + name)
+                  data = base64.b64encode(image.read_bytes()).decode('ascii')
+                  for offset in range(0, len(data), 76):
+                      print(data[offset:offset + 76])
+                  print('AUDIT_IMAGE_END')
+          PY
       - name: Upload width sweep PNGs
         if: always()
         uses: actions/upload-artifact@v4

@@ -6,6 +6,9 @@
 
 本節と継続checkpointを最新の現在地点とする。新Policy/Stateへ移行された記録の欠落を、全面監査で確認したGit/CIの証拠から補った。
 
+- **W11修正を検証**: `47a286c7` / [CI 34352911392](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34352911392) のガイド回帰 **14/14成功**。最新 `312c5d8` へ追従し、fr実画面で「Annuler」検索→「Enregistrement」クリック→検索解除・保存カテゴリの3カード表示と見出しへのスクロールを目視確認した。同CIはformat/Worker runtime SEO、問い合わせ28条件、final-matrix、14全ページjob成功だが、Home中間幅とdeep-sectionは失敗。全体合格とはしない。
+- Home表示の継続: `312c5d8` / [CI 34356738630](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34356738630) にgutter不一致と1280/1366/1440幅のTimeline内UI切れが残る。PC実画面とDOMでもend-card rowが画面再現図の内部枠からはみ出すことを確認。SPは親showcaseと内部sourceに重複した移動/サイズ指定があり、画像を取得して原因と意図した持ち上げ配置を区別する。代表3画像をCIログにも出し、artifact取得制約下でも目視根拠を残す。
+
 - **W11 / ガイド検索中のカテゴリ移動**: `cf35f9c` のfr実操作で、検索語「Annuler」により保存カテゴリがdisplay noneになった状態でも「Enregistrement」リンクが残り、クリックするとURLだけが `#help-save` へ変わって内容が表示されないことを再現。最新 `e6e07ed` でも対象help.jsに変更なし。通常のカテゴリ選択時は検索を解除し、anchor移動が測定する前にカテゴリを表示する修正を追加した。7言語×PCキーボード/SPタップの14条件で検索・該当なし・カテゴリ移動を検証するCIを追加。修正後の成功は結果確認後に確定する。
 - `103e26af` / [CI 34325708843](https://github.com/sakurasemaika-creator/NIARIM-web/actions/runs/34325708843) は **17ジョブすべて成功**。追加したWorker runtime SEOも成功し、言語URL・canonical・hreflang・Content-Language・JSON-LD・robots/sitemapを実Worker応答で検証した。後続CSS変更 `e6e07ed` はこの合格へ含めない。
 - fr FAQの実操作: Spaceで開いた回答は言語変更後も展開を保ち、言語ボタンへfocusが戻る。回答全文の表示を目視確認し、Enterで閉じると読み上げregionから外れる。ガイドは翻訳済み語での検索と該当なし表示を確認。全操作inventoryの完了とは扱わない。

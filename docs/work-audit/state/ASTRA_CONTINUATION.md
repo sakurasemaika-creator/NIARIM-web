@@ -12,7 +12,7 @@
 
 ### 次の具体的な1手（scope lock）
 
-2026-09-09 JST追記: `103e26af` / CI `34325708843` の17ジョブとWorker runtime SEOはすべて成功を確認した。現在の次の1手は、実操作で再現した **W11（ガイド検索で非表示のカテゴリへ移動できない）** の修正後CI14条件と実画面の確認。開始Web `e6e07ed` / App `813a7d8a`。この再開ではAGENTS/Policyの差分のみ継承し、無関係な外部作業を再調査していない。
+2026-09-09 JST追記: W11は `47a286c7` のCI14/14と、最新 `312c5d8` のfr実操作・目視で修正を確認した。開始Web `e6e07ed` / App `813a7d8a`、今回Web `312c5d8` / App `cbc12b19` へ追従。現在の次の1手は **HomeのSP配置とTimeline内部の切れ** の画像確認・修正。gutter不一致を含む失敗内容と検証済み範囲は監査Stateを参照。
 
 1. **今回追加したWorker runtime SEOと、最新CSSのCI結果を確認する。** 既存のruntime検査をvisual-auditのformat/build jobへ接続した。ローカルWorkerで言語URL・canonical・hreflang・Content-Language・JSON-LD・robots/sitemapを検証し、deployはしない。合格はCI確認後に確定する。
 2. FAQ/言語メニュー等の実操作を続け、表示検査で異常が残れば画像と実操作で原因を確認する。CIやDOM検査だけで目視済みにしない。
