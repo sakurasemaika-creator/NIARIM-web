@@ -139,17 +139,17 @@
       "html body .hero-preview-card::after{content:'';position:absolute;inset:0;box-sizing:border-box;border:6px solid var(--hero-bezel);border-radius:inherit;pointer-events:none;z-index:5}" +
       "html body .hero-preview-community::after{display:none!important}" +
       "@media (max-width:339px){" +
-      "html body .hero-title{font-size:clamp(3rem,14vw,3.3rem)!important;line-height:.93!important}" +
+      "html body .hero-title{font-size:clamp(3.15rem,14.8vw,3.5rem)!important;line-height:.92!important}" +
       "html body .hero-subtitle{font-size:1.12rem!important;line-height:1.24!important}" +
-      "html body .hero-lead{font-size:.76rem!important;line-height:1.42!important}" +
+      "html body .hero-lead{font-size:.8rem!important;line-height:1.44!important}" +
       "html body .hero .container{grid-template-columns:minmax(0,1fr) 144px!important;column-gap:.5rem!important}" +
       "html body .hero-showcase{width:144px!important;max-width:144px!important}" +
       "}" +
       "@media (min-width:340px) and (max-width:559px){" +
       "html body .hero{padding-top:.9rem!important;padding-bottom:.9rem!important}" +
-      "html body .hero-title{font-size:clamp(4.65rem,19vw,5.6rem)!important;line-height:.86!important}" +
+      "html body .hero-title{font-size:clamp(5.05rem,20.5vw,6rem)!important;line-height:.84!important}" +
       "html body .hero-subtitle{font-size:clamp(1.82rem,6.7vw,2.1rem)!important;line-height:1.12!important}" +
-      "html body .hero-lead{font-size:clamp(.92rem,3.45vw,1.04rem)!important;line-height:1.4!important}" +
+      "html body .hero-lead{font-size:clamp(.98rem,3.7vw,1.1rem)!important;line-height:1.42!important}" +
       "html body .hero .container{grid-template-columns:minmax(0,1fr) clamp(164px,46vw,188px)!important;column-gap:clamp(.5rem,2.2vw,.75rem)!important}" +
       "html body .hero-showcase{width:clamp(164px,46vw,188px)!important;max-width:188px!important;justify-self:end!important}" +
       "html body .hero-actions .btn{min-height:43px!important;font-size:clamp(.77rem,2.8vw,.88rem)!important}" +
