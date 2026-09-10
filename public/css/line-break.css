@@ -106,8 +106,8 @@ a {
   }
 
   html body .hero-lead {
-    font-size: clamp(0.78rem, 2.55vw, 0.9rem) !important;
-    line-height: 1.48 !important;
+    font-size: clamp(0.82rem, 2.8vw, 1rem) !important;
+    line-height: 1.5 !important;
   }
 
   html body .hero-showcase {
@@ -128,6 +128,25 @@ a {
     margin-bottom: 0 !important;
     border-color: var(--fd-ink) !important;
     overflow: hidden !important;
+  }
+}
+
+/* Once there is enough horizontal room, reserve roughly half of the lower
+   hero row for the phone rather than letting the copy become a very wide,
+   shallow paragraph. The phone itself remains capped at the audited 146px;
+   the narrower copy column wraps into a readable block close to the phone's
+   height, removing the large dead area above the CTA without visual offsets. */
+@media (min-width: 360px) and (max-width: 559px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(146px, 50%) !important;
+  }
+
+  html body .hero-lead {
+    font-size: clamp(0.875rem, 3vw, 1rem) !important;
+  }
+
+  html body .hero-showcase {
+    justify-self: center !important;
   }
 }
 
