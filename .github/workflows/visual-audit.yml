@@ -41,26 +41,19 @@ jobs:
           node tests/worker-seo-runtime-audit.mjs
       - name: Generate canonical formatting for diagnosis
         if: failure()
-        run: npm run format
+        run: |
+          npm run format
+          mkdir -p artifacts/canonical-prettier-output
+          git diff --name-only -z --diff-filter=ACM | while IFS= read -r -d '' file; do
+            mkdir -p "artifacts/canonical-prettier-output/$(dirname "$file")"
+            cp "$file" "artifacts/canonical-prettier-output/$file"
+          done
       - name: Upload canonical formatting for diagnosis
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: canonical-prettier-output
-          path: |
-            public/css/home-hero-responsive-final.css
-            public/css/line-break.css
-            public/css/pages/help.css
-            public/css/signature-showcase.css
-            public/js/advanced-narrative-normalizer.js
-            public/js/auto-lineart-phone.js
-            public/js/config-links.js
-            public/js/signature-showcase.js
-            public/js/widget-phone-fidelity.js
-            tests/page-heading-signature-audit.mjs
-            tests/operations-seo-audit.mjs
-            src/index.js
-            wrangler.jsonc
+          path: artifacts/canonical-prettier-output/
           if-no-files-found: error
           retention-days: 1
 
