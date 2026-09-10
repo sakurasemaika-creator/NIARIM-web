@@ -136,10 +136,10 @@
     return card;
   }
 
-  function fitHeroPreview(card) {
+  function fitHeroPreview(card, measuredWidth) {
     if (!card) return;
 
-    var width = card.getBoundingClientRect().width;
+    var width = measuredWidth || card.getBoundingClientRect().width;
     if (!width) return;
 
     card.style.setProperty("--hero-preview-scale", String(width / 320));
@@ -149,18 +149,19 @@
     if (!showcase) return;
 
     var cards = showcase.querySelectorAll(".hero-preview-card");
-    Array.prototype.forEach.call(cards, fitHeroPreview);
-
     if (typeof ResizeObserver === "function") {
       var observer = new ResizeObserver(function (entries) {
         entries.forEach(function (entry) {
-          fitHeroPreview(entry.target);
+          fitHeroPreview(entry.target, entry.contentRect.width);
         });
       });
       Array.prototype.forEach.call(cards, function (card) {
         observer.observe(card);
       });
+      return;
     }
+
+    Array.prototype.forEach.call(cards, fitHeroPreview);
   }
 
   function initHeroShowcase() {
