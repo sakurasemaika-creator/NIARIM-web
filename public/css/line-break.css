@@ -65,20 +65,29 @@ a {
   html body .hero-subtitle { font-size: clamp(0.88rem, 2.95vw, 1rem) !important; line-height: 1.32 !important; }
 }
 
-/* Compact Hero device placement.
-   Do not override ::before/::after here: the screen mock owns those pseudo-elements.
-   Keep bezel and screen UI as one native box until a dedicated outer shell exists. */
+/* Compact Hero placement.
+   The runtime showcase/card is the grid item beside the body copy. Move that
+   outer composition as a unit. Do not move .hero-visual/.fd-app-screen itself;
+   doing so shifts only the reproduced screen inside the fixed showcase and
+   makes bezel/content drift apart. CTA geometry remains untouched. */
 @media (max-width: 559px) {
+  html body .hero-showcase {
+    transform: translateY(clamp(-8rem, -20vw, -5rem)) !important;
+  }
+
+  html body .hero-showcase > .hero-preview-card,
+  html body .hero-showcase .hero-preview-card.hero-preview-canvas {
+    transform: none !important;
+  }
+
   html body .hero-visual.fd-app-screen {
     transform: none !important;
     top: auto !important;
-    margin-top: clamp(-10rem, -25vw, -7.5rem) !important;
-    margin-bottom: calc(-1 * clamp(3.25rem, 13.5vw, 4.75rem)) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     border-color: var(--fd-ink) !important;
     overflow: hidden !important;
   }
-
-  html body .hero-showcase { transform: none !important; }
 }
 
 @media (min-width: 560px) and (max-width: 759px) {
