@@ -140,9 +140,21 @@ a {
 
 @media (min-width: 1024px) {
   html body .hero-title {
-    font-size: clamp(60px, 5.25vw, 92px) !important;
+    font-size: clamp(54px, 5vw, 86px) !important;
   }
   html body .hero-subtitle {
     font-size: clamp(1.08rem, 1.25vw, 1.28rem) !important;
+  }
+}
+
+/* The Timeline reconstruction is copied from the full-size 320x569 App Preview.
+   In the three-phone hero it is scaled to roughly half size. Its calibrated
+   51px bottom row otherwise extends a few rendered pixels beyond the scaled
+   source and is clipped by the hero bezel. Keep the production calibration
+   unchanged elsewhere and shorten only this hero copy. */
+@media (min-width: 1280px) {
+  html body .hero-preview-timeline .fd-timeline-screen .fd-timeline-row {
+    height: 44px !important;
+    flex-basis: 44px !important;
   }
 }
