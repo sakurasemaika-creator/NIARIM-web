@@ -88,6 +88,27 @@
     scroller.appendChild(card);
   }
 
+  function resetPreviewFit(clone) {
+    /* App Preview側のfitMockScreens()は、そのカード自身の実寸へ収めるため
+       width/height/transform等をインライン!importantで付ける。Heroでは
+       別の320:569ベゼルへ入れ直すため、そのfit結果までcloneすると外枠と
+       内部画面が別倍率になってしまう。DOM内容だけを再利用し、Heroでは
+       外側カードを唯一のサイズ基準にする。 */
+    [
+      "width",
+      "height",
+      "max-width",
+      "max-height",
+      "margin-bottom",
+      "margin-right",
+      "transform",
+      "transform-origin",
+    ].forEach(function (name) {
+      clone.style.removeProperty(name);
+    });
+    clone.classList.remove("is-fit-scaled");
+  }
+
   function clonePreviewCard(index, themeClass) {
     var source = document.querySelector(
       ".screenshot-scroller .screenshot-card:nth-child(" +
@@ -96,6 +117,7 @@
     );
     if (!source) return null;
     var clone = source.cloneNode(true);
+    resetPreviewFit(clone);
     clone.classList.add("hero-app-preview-source", themeClass);
     clone.removeAttribute("id");
     clone.querySelectorAll("[id]").forEach(function (node) {
