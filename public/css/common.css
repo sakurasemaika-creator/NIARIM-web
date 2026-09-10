@@ -3,81 +3,415 @@
 
 /* Interactive target sizing: keep the existing visual scale while ensuring the
    full clickable area meets the 44px minimum used by the responsive audit. */
-.brand { min-height: 44px; }
-.main-nav a:not(.btn) { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
-.feature-nav a { min-height: 44px; }
-.form-checkbox a { display: inline-flex; align-items: center; min-height: 44px; }
-
-:where(.about-hero,.features-header,.help-header,.faq-header,.news-header,.legal-header) { width:100%; max-width:none; margin-inline:auto; text-align:center; }
-:where(.about-hero,.features-header,.help-header,.faq-header,.news-header,.legal-header) > p { margin-inline:auto; }
-.section-head { margin-inline:auto; text-align:center; }
-.section-head::before { margin-inline:auto; }
-.section-head::after { left:50%; transform:translateX(-50%); }
-.feature-section-head { text-align:left; }
-
-@media (max-width:559px) {
-  .hero { padding-top:clamp(1.4rem,5.5vw,2rem)!important; padding-bottom:clamp(1.35rem,4.8vw,1.85rem)!important; }
-  .hero .container { grid-template-columns:minmax(0,1fr)!important; align-items:start!important; justify-items:stretch!important; gap:clamp(1.2rem,4.5vw,1.7rem)!important; }
-  .hero-copy { width:100%!important; min-width:0; }
-  :root:lang(ja) .hero-title,:root:lang(zh-Hans) .hero-title,:root:lang(zh-Hant) .hero-title,.hero-title { font-size:clamp(2.25rem,10.8vw,3.2rem)!important; line-height:1!important; }
-  .hero-subtitle { margin-top:.7rem!important; font-size:clamp(.92rem,3.1vw,1rem)!important; }
-  .hero-lead { margin-top:.85rem!important; font-size:clamp(.88rem,2.75vw,.96rem)!important; line-height:1.65!important; }
-  .hero-actions { margin-top:.95rem!important; gap:.55rem!important; }
-  .hero-actions .btn { min-height:44px; flex:1 1 10rem; }
-  .hero-bridge { margin-top:.7rem!important; font-size:.78rem!important; line-height:1.55!important; }
-  .hero-visual { width:clamp(190px,48vw,238px)!important; max-width:238px!important; justify-self:center!important; margin-inline:auto!important; }
-  .feature-nav.feature-nav { gap:.55rem; padding-inline:var(--container-padding); scroll-padding-inline:var(--container-padding); overscroll-behavior-inline:contain; scrollbar-width:none; }
-  .feature-nav.feature-nav::-webkit-scrollbar { display:none; }
-  .feature-nav.feature-nav a { min-height:44px; padding-inline:1rem; }
+.brand {
+  min-height: 44px;
 }
 
-@media (min-width:560px) and (max-width:759px) {
-  .hero { padding-top:clamp(1.75rem,4vw,2.25rem)!important; padding-bottom:clamp(1.6rem,3.6vw,2.05rem)!important; }
-  .hero .container { grid-template-columns:minmax(0,1.28fr) minmax(150px,.72fr)!important; align-items:center!important; justify-items:stretch!important; gap:clamp(1rem,2.6vw,1.5rem)!important; }
-  .hero-copy { width:100%!important; min-width:0; }
-  :root:lang(ja) .hero-title,:root:lang(zh-Hans) .hero-title,:root:lang(zh-Hant) .hero-title,.hero-title { font-size:clamp(2.2rem,5.8vw,2.85rem)!important; line-height:1!important; }
-  .hero-subtitle { margin-top:.65rem!important; font-size:clamp(.9rem,1.8vw,.98rem)!important; }
-  .hero-lead { margin-top:.8rem!important; font-size:clamp(.84rem,1.55vw,.93rem)!important; line-height:1.6!important; }
-  .hero-actions { margin-top:.9rem!important; gap:.5rem!important; flex-wrap:wrap!important; }
-  .hero-actions .btn { min-width:0; min-height:44px; padding:.64rem .85rem!important; flex:1 1 9.5rem; }
-  .hero-bridge { margin-top:.7rem!important; font-size:.76rem!important; line-height:1.5!important; }
-  .hero-visual { width:clamp(150px,24vw,180px)!important; max-width:180px!important; justify-self:end!important; margin-inline:0!important; }
+.main-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
-@media (min-width:760px) and (max-width:1023px) {
-  .hero { padding-top:clamp(2.15rem,3.8vw,2.8rem)!important; padding-bottom:clamp(2rem,3.4vw,2.6rem)!important; }
-  .hero .container { grid-template-columns:minmax(0,1.2fr) minmax(210px,.8fr)!important; align-items:center!important; justify-items:stretch!important; gap:clamp(1.4rem,2.8vw,2.15rem)!important; }
-  .hero-copy { width:100%!important; min-width:0; }
-  :root:lang(ja) .hero-title,:root:lang(zh-Hans) .hero-title,:root:lang(zh-Hant) .hero-title,.hero-title { font-size:clamp(2.65rem,5vw,3.65rem)!important; line-height:1!important; }
-  .hero-subtitle { margin-top:.7rem!important; font-size:.98rem!important; }
-  .hero-lead { margin-top:.9rem!important; font-size:clamp(.9rem,1.45vw,1rem)!important; line-height:1.64!important; }
-  .hero-actions { margin-top:1rem!important; gap:.55rem!important; flex-wrap:wrap!important; }
-  .hero-actions .btn { min-width:0; min-height:44px; padding:.68rem 1rem!important; flex:1 1 10.5rem; }
-  .hero-bridge { margin-top:.8rem!important; font-size:.78rem!important; line-height:1.55!important; }
-  .hero-visual { width:clamp(210px,26vw,280px)!important; max-width:280px!important; justify-self:end!important; margin-inline:0!important; }
+.feature-nav a {
+  min-height: 44px;
 }
 
-@media (min-width:1024px) {
-  .hero { padding-top:clamp(2.8rem,4.2vw,4rem)!important; padding-bottom:clamp(2.6rem,3.8vw,3.7rem)!important; }
-  .hero .container { width:min(calc(100% - 3rem),1240px)!important; grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)!important; align-items:center!important; gap:clamp(1.8rem,3vw,3rem)!important; }
-  .hero-copy { min-width:0; max-width:none!important; }
-  :root:lang(ja) .hero-title,:root:lang(zh-Hans) .hero-title,:root:lang(zh-Hant) .hero-title,.hero-title { max-width:100%!important; font-size:clamp(3.55rem,4.4vw,5.2rem)!important; line-height:1.02!important; }
-  .hero-subtitle { margin-top:.72rem!important; font-size:clamp(.98rem,1.05vw,1.08rem)!important; }
-  .hero-lead { margin-top:.95rem!important; max-width:62ch!important; font-size:clamp(.94rem,1vw,1.05rem)!important; line-height:1.62!important; }
-  .hero-actions { margin-top:1.05rem!important; gap:.65rem!important; }
-  .hero-bridge { margin-top:.85rem!important; max-width:58ch!important; font-size:clamp(.78rem,.82vw,.86rem)!important; line-height:1.55!important; }
-  .hero-visual { width:clamp(300px,30vw,420px)!important; max-width:420px!important; justify-self:end!important; margin-inline:0!important; }
-  .main-nav > ul > li > a { font-size:clamp(.78rem,.72vw,.9rem); letter-spacing:.01em; }
+.form-checkbox a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
-@media (max-width:339px) {
-  .hero { padding-top:1.2rem!important; padding-bottom:1.2rem!important; }
-  .hero .container { gap:1.1rem!important; }
-  :root:lang(ja) .hero-title,:root:lang(zh-Hans) .hero-title,:root:lang(zh-Hant) .hero-title,.hero-title { font-size:clamp(2rem,10.8vw,2.35rem)!important; }
-  .hero-subtitle { font-size:.9rem!important; }
-  .hero-lead { font-size:.86rem!important; line-height:1.6!important; }
-  .hero-actions { flex-direction:column!important; }
-  .hero-actions .btn { width:100%; }
-  .hero-visual { width:min(64vw,205px)!important; }
-  .feature-nav.feature-nav a { padding-inline:.85rem; }
+/* Shared page introductions are editorial hero blocks, not left-column copy.
+   Keep the whole block optically centered at every width. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+
+:where(
+    .about-hero,
+    .features-header,
+    .help-header,
+    .faq-header,
+    .news-header,
+    .legal-header
+  )
+  > p {
+  margin-inline: auto;
+}
+
+/* Section headings use a constrained reading width, but that box itself must
+   sit on the page centre line. The decorative film-strip mark and glow were
+   previously pinned to the left edge, which made centered headings look
+   visually shifted even when their text-align was correct. */
+.section-head {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head::before {
+  margin-inline: auto;
+}
+
+.section-head::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Feature/help category headings are navigational sub-sections with an icon,
+   not page-title heroes, so their local left-aligned rhythm stays intact. */
+.feature-section-head {
+  text-align: left;
+}
+
+/* Hero responsive composition
+   ---------------------------
+   The hero uses continuous density bands instead of letting unrelated
+   component breakpoints decide its layout:
+   - <=559px: true SP stack
+   - 560-759px: compact split composition
+   - 760-1023px: tablet / narrow-window split composition
+   - >=1024px: desktop split composition with a bounded visual scale
+
+   pages/home.css is loaded after this file, so structural ownership uses
+   !important where needed. Values inside each band stay fluid and adjacent
+   bands meet at similar sizes to avoid visible density jumps. */
+@media (max-width: 559px) {
+  .hero {
+    padding-top: clamp(1.4rem, 5.5vw, 2rem) !important;
+    padding-bottom: clamp(1.35rem, 4.8vw, 1.85rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    gap: clamp(1.2rem, 4.5vw, 1.7rem) !important;
+  }
+
+  .hero-copy {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    font-size: clamp(2.25rem, 10.8vw, 3.2rem) !important;
+    line-height: 1 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.7rem !important;
+    font-size: clamp(0.92rem, 3.1vw, 1rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.85rem !important;
+    font-size: clamp(0.88rem, 2.75vw, 0.96rem) !important;
+    line-height: 1.65 !important;
+  }
+
+  .hero-actions {
+    margin-top: 0.95rem !important;
+    gap: 0.55rem !important;
+  }
+
+  .hero-actions .btn {
+    min-height: 44px;
+    flex: 1 1 10rem;
+  }
+
+  .hero-bridge {
+    margin-top: 0.7rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero-visual {
+    width: clamp(190px, 48vw, 238px) !important;
+    max-width: 238px !important;
+    justify-self: center !important;
+    margin-inline: auto !important;
+  }
+
+  /* Long horizontal category bars should communicate that they can scroll.
+     Keep a clean edge-to-edge rail with a deliberate partial-next-item cue. */
+  .feature-nav.feature-nav {
+    gap: 0.55rem;
+    padding-inline: var(--container-padding);
+    scroll-padding-inline: var(--container-padding);
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .feature-nav.feature-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature-nav.feature-nav a {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
+}
+
+/* Compact landscape phones / small tablets. Keep copy and product screen in one
+   visual unit; both columns scale continuously from 560 to 759px. */
+@media (min-width: 560px) and (max-width: 759px) {
+  .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+
+  .hero-copy {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    font-size: clamp(2.2rem, 5.8vw, 2.85rem) !important;
+    line-height: 1 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.65rem !important;
+    font-size: clamp(0.9rem, 1.8vw, 0.98rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.8rem !important;
+    font-size: clamp(0.84rem, 1.55vw, 0.93rem) !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-actions {
+    margin-top: 0.9rem !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .hero-actions .btn {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0.64rem 0.85rem !important;
+    flex: 1 1 9.5rem;
+  }
+
+  .hero-bridge {
+    margin-top: 0.7rem !important;
+    font-size: 0.76rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .hero-visual {
+    width: clamp(150px, 24vw, 180px) !important;
+    max-width: 180px !important;
+    justify-self: end !important;
+    margin-inline: 0 !important;
+  }
+}
+
+/* Tablet / narrow desktop windows. The phone grows with the viewport instead of
+   jumping directly from the compact 180px mock to the desktop composition. */
+@media (min-width: 760px) and (max-width: 1023px) {
+  .hero {
+    padding-top: clamp(2.15rem, 3.8vw, 2.8rem) !important;
+    padding-bottom: clamp(2rem, 3.4vw, 2.6rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr) !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1.4rem, 2.8vw, 2.15rem) !important;
+  }
+
+  .hero-copy {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    font-size: clamp(2.65rem, 5vw, 3.65rem) !important;
+    line-height: 1 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.7rem !important;
+    font-size: 0.98rem !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.9rem !important;
+    font-size: clamp(0.9rem, 1.45vw, 1rem) !important;
+    line-height: 1.64 !important;
+  }
+
+  .hero-actions {
+    margin-top: 1rem !important;
+    gap: 0.55rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .hero-actions .btn {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0.68rem 1rem !important;
+    flex: 1 1 10.5rem;
+  }
+
+  .hero-bridge {
+    margin-top: 0.8rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero-visual {
+    width: clamp(210px, 26vw, 280px) !important;
+    max-width: 280px !important;
+    justify-self: end !important;
+    margin-inline: 0 !important;
+  }
+}
+
+/* Desktop keeps the same information density instead of resetting to the
+   oversized legacy home.css hero at exactly 1024px. */
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: clamp(2.8rem, 4.2vw, 4rem) !important;
+    padding-bottom: clamp(2.6rem, 3.8vw, 3.7rem) !important;
+  }
+
+  .hero .container {
+    width: min(calc(100% - 3rem), 1240px) !important;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr) !important;
+    align-items: center !important;
+    gap: clamp(1.8rem, 3vw, 3rem) !important;
+  }
+
+  .hero-copy {
+    min-width: 0;
+    max-width: none !important;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(3.55rem, 4.4vw, 5.2rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .hero-subtitle {
+    margin-top: 0.72rem !important;
+    font-size: clamp(0.98rem, 1.05vw, 1.08rem) !important;
+  }
+
+  .hero-lead {
+    margin-top: 0.95rem !important;
+    max-width: 62ch !important;
+    font-size: clamp(0.94rem, 1vw, 1.05rem) !important;
+    line-height: 1.62 !important;
+  }
+
+  .hero-actions {
+    margin-top: 1.05rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .hero-bridge {
+    margin-top: 0.85rem !important;
+    max-width: 58ch !important;
+    font-size: clamp(0.78rem, 0.82vw, 0.86rem) !important;
+    line-height: 1.55 !important;
+  }
+
+  .hero-visual {
+    width: clamp(300px, 30vw, 420px) !important;
+    max-width: 420px !important;
+    justify-self: end !important;
+    margin-inline: 0 !important;
+  }
+}
+
+/* Very narrow phones need a separate density floor. 320–339px must not inherit
+   390px-era padding/font assumptions or force CTA text into awkward fragments. */
+@media (max-width: 339px) {
+  .hero {
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+
+  .hero .container {
+    gap: 1.1rem !important;
+  }
+
+  :root:lang(ja) .hero-title,
+  :root:lang(zh-Hans) .hero-title,
+  :root:lang(zh-Hant) .hero-title,
+  .hero-title {
+    font-size: clamp(2rem, 10.8vw, 2.35rem) !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  .hero-lead {
+    font-size: 0.86rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-visual {
+    width: min(64vw, 205px) !important;
+  }
+
+  .feature-nav.feature-nav a {
+    padding-inline: 0.85rem;
+  }
+}
+
+/* Desktop header: preserve the airy composition while avoiding undersized,
+   low-authority navigation text on wide canvases. */
+@media (min-width: 1024px) {
+  .main-nav > ul > li > a {
+    font-size: clamp(0.78rem, 0.72vw, 0.9rem);
+    letter-spacing: 0.01em;
+  }
 }
