@@ -159,7 +159,8 @@ html body #features .feature-row:nth-child(even) {
 }
 
 @media (max-width: 860px) {
-  html body
+  html
+    body
     #features
     .feature-row:first-child
     .feature-media:has(.hero-visual-reuse) {
