@@ -55,9 +55,7 @@ function addAttributeKeys(source, keys) {
     keys.add(match[1]);
   }
 
-  for (const match of normalized.matchAll(
-    /data-i18n-attr=["']([^"']+)["']/g,
-  )) {
+  for (const match of normalized.matchAll(/data-i18n-attr=["']([^"']+)["']/g)) {
     for (const pair of match[1].split("|")) {
       const separator = pair.indexOf(":");
       if (separator !== -1) keys.add(pair.slice(separator + 1));
@@ -77,8 +75,7 @@ function collectPageKeys(page, html, dictionary) {
 
   const runtimeFiles = scriptFilesFromHtml(html)
     .filter(
-      (file) =>
-        !/^i18n-dict(?:-[\w-]+)?\.js$/.test(file) && file !== "i18n.js",
+      (file) => !/^i18n-dict(?:-[\w-]+)?\.js$/.test(file) && file !== "i18n.js",
     )
     .map((file) => {
       if (file === "main.js" && page !== "home" && page !== "features") {
@@ -128,7 +125,7 @@ function makePageBundle(page, dictionary, keys) {
   const body =
     '(function(){"use strict";var D=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={});var B=' +
     JSON.stringify(bundle) +
-    ';Object.keys(B).forEach(function(l){D[l]=Object.assign(D[l]||{},B[l]);});})();\n';
+    ";Object.keys(B).forEach(function(l){D[l]=Object.assign(D[l]||{},B[l]);});})();\n";
   const outFile = path.join(pageBundleDir, `i18n-${page}.js`);
   fs.writeFileSync(outFile, banner + body, "utf8");
   return {
@@ -168,9 +165,7 @@ for (const page of requiredPages) {
   }
 
   const pageKeys = collectPageKeys(page, html, window.NIARIM_I18N_DICT);
-  pageBundleStats.push(
-    makePageBundle(page, window.NIARIM_I18N_DICT, pageKeys),
-  );
+  pageBundleStats.push(makePageBundle(page, window.NIARIM_I18N_DICT, pageKeys));
 }
 
 fs.mkdirSync(seoOutDir, { recursive: true });
