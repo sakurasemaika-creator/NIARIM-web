@@ -94,8 +94,8 @@ html body #features .feature-row:nth-child(even) {
 
 @media (max-width: 339px) {
   html body .hero .container .hero-copy > .hero-title {
-    font-size: clamp(3.35rem, 15.8vw, 3.7rem) !important;
-    line-height: 0.9 !important;
+    font-size: clamp(2.72rem, 13.2vw, 3rem) !important;
+    line-height: 0.94 !important;
   }
 
   html body .hero .container .hero-copy > .hero-subtitle {
@@ -113,8 +113,8 @@ html body #features .feature-row:nth-child(even) {
 
 @media (min-width: 340px) and (max-width: 559px) {
   html body .hero .container .hero-copy > .hero-title {
-    font-size: clamp(5.45rem, 22vw, 6.45rem) !important;
-    line-height: 0.82 !important;
+    font-size: clamp(2.9rem, 12.6vw, 3.55rem) !important;
+    line-height: 0.92 !important;
   }
 
   html body .hero .container .hero-copy > .hero-subtitle {
