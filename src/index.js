@@ -61,6 +61,18 @@ const OG_LOCALES = {
   es: "es_ES",
 };
 
+const COMMON_STYLE_PRELOADS = [
+  "/css/common-base.css",
+  "/css/reference-polish.css",
+  "/css/responsive-foundation.css",
+];
+
+const MOCK_STYLE_PRELOADS = [
+  "/css/screen-mock-accuracy-base.css",
+  "/css/visual-finish.css",
+  "/css/screen-mock-fidelity.css",
+];
+
 function siteOrigin(request, env) {
   return String(env.SITE_ORIGIN || new URL(request.url).origin).replace(
     /\/$/,
@@ -108,6 +120,39 @@ function pageMetadata(request) {
     title: table[titleKey] || fallback[titleKey] || "NIARIM",
     description: table[descriptionKey] || fallback[descriptionKey] || "",
   };
+}
+
+function stylePerformanceMarkup(page) {
+  const hasScreenMocks = page === "home" || page === "features";
+  const preloads = hasScreenMocks
+    ? COMMON_STYLE_PRELOADS.concat(MOCK_STYLE_PRELOADS)
+    : COMMON_STYLE_PRELOADS;
+  const preloadMarkup = preloads
+    .map((href) => `<link rel="preload" href="${href}" as="style">`)
+    .join("");
+
+  const globalLayers =
+    '<link rel="stylesheet" href="/css/polish.css" data-niarim-polish>' +
+    '<link rel="stylesheet" href="/css/responsive-consistency.css" data-niarim-responsive-consistency>' +
+    '<link rel="stylesheet" href="/css/line-break.css" data-niarim-line-break>';
+
+  if (!hasScreenMocks) {
+    return (
+      preloadMarkup +
+      globalLayers +
+      '<link rel="stylesheet" data-niarim-screen-mock-accuracy>' +
+      '<link rel="stylesheet" data-niarim-mock-palette>' +
+      '<link rel="stylesheet" data-niarim-mock-layout>'
+    );
+  }
+
+  return (
+    preloadMarkup +
+    globalLayers +
+    '<link rel="stylesheet" href="/css/screen-mock-accuracy.css" data-niarim-screen-mock-accuracy>' +
+    '<link rel="stylesheet" href="/css/screen-mock-palette.css" data-niarim-mock-palette>' +
+    '<link rel="stylesheet" href="/css/screen-mock-layout-fix.css" data-niarim-mock-layout>'
+  );
 }
 
 function structuredData(request, env, metadata) {
@@ -208,6 +253,7 @@ function rewriteSeoHtml(response, request, env) {
   const canonical = canonicalUrl(request, env, metadata.lang);
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
+  const styleMarkup = stylePerformanceMarkup(metadata.page);
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
     .map(
@@ -275,6 +321,7 @@ function rewriteSeoHtml(response, request, env) {
     })
     .on("head", {
       element(element) {
+        element.append(styleMarkup, { html: true });
         element.append('<script src="/js/lang-query-bridge.js"></script>', {
           html: true,
         });
@@ -295,6 +342,20 @@ function rewriteSeoHtml(response, request, env) {
   return new Response(transformed.body, {
     status: transformed.status,
     statusText: transformed.statusText,
+    headers,
+  });
+}
+
+function withAssetCaching(response, pathname) {
+  if (!/\.(?:css|js)$/i.test(pathname)) return response;
+  const headers = new Headers(response.headers);
+  headers.set(
+    "Cache-Control",
+    "public, max-age=300, stale-while-revalidate=86400",
+  );
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
     headers,
   });
 }
@@ -353,7 +414,8 @@ export default {
 
       const assetResponse = await env.ASSETS.fetch(request);
       const seoResponse = rewriteSeoHtml(assetResponse, request, env);
-      return withSecurityHeaders(seoResponse);
+      const cachedResponse = withAssetCaching(seoResponse, url.pathname);
+      return withSecurityHeaders(cachedResponse);
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(
