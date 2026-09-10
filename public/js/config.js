@@ -19,16 +19,18 @@ window.NIARIM_CONFIG = {
    heavier three-screen showcase is not downloaded on every page. config.js is
    present on Home before main.js, so the stylesheet can start loading early;
    the showcase script itself waits until window.load, after main.js has replaced
-   the App Preview cards with the code-verified application mocks. */
+   the App Preview cards with the code-verified application mocks. The markers
+   intentionally match config-links.js so its later Home loader sees these early
+   requests and does not fetch/parse the same assets a second time. */
 (function loadHomeHeroShowcase() {
   var path = window.location.pathname.replace(/\/+$/, "") || "/";
   if (path !== "/" && path !== "/index.html") return;
 
-  if (!document.querySelector("link[data-niarim-home-hero]")) {
+  if (!document.querySelector("link[data-niarim-home-hero-fit-628]")) {
     var style = document.createElement("link");
     style.rel = "stylesheet";
     style.href = "/css/home-hero-fit-628.css?v=20260907c";
-    style.setAttribute("data-niarim-home-hero", "true");
+    style.setAttribute("data-niarim-home-hero-fit-628", "true");
     document.head.appendChild(style);
   }
 
@@ -40,11 +42,11 @@ window.NIARIM_CONFIG = {
     document.head.appendChild(finishingStyle);
   }
 
-  if (!document.querySelector("script[data-niarim-home-hero]")) {
+  if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
     var script = document.createElement("script");
     script.src = "/js/home-hero-showcase.js?v=20260907c";
     script.defer = true;
-    script.setAttribute("data-niarim-home-hero", "true");
+    script.setAttribute("data-niarim-home-hero-showcase", "true");
     document.head.appendChild(script);
   }
 })();
