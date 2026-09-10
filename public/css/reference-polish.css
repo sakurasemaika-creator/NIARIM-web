@@ -275,11 +275,11 @@ button,
   scroll-snap-align: center;
 }
 
-/* Do not style/layout/paint long product chapters until they approach the
-   viewport. This extends an optimization already used elsewhere on the site. */
+/* Do not style/layout/paint long feature chapters until they approach the
+   viewport. The horizontal preview rail is excluded: giving a scroller an
+   intrinsic block-size changes its children's measured phone ratio before paint. */
 @supports (content-visibility: auto) {
-  #features .feature-row,
-  .screenshot-scroller {
+  #features .feature-row {
     content-visibility: auto;
     contain-intrinsic-size: auto 680px;
   }
