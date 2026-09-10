@@ -81,7 +81,8 @@
 }
 
 /* Hero: add depth around the real product UI rather than introducing unrelated
-   3D objects. The geometry of the preview cards themselves is left untouched. */
+   3D objects. The preview card geometry stays untouched, which preserves the
+   exact app-screen fitting logic used by the responsive hero. */
 .hero-showcase {
   position: relative;
   isolation: isolate;
@@ -98,8 +99,16 @@
 .hero-showcase::before {
   inset: -12% -10%;
   background:
-    radial-gradient(circle at 30% 32%, rgba(255, 92, 122, 0.18), transparent 38%),
-    radial-gradient(circle at 72% 68%, rgba(255, 173, 102, 0.16), transparent 34%);
+    radial-gradient(
+      circle at 30% 32%,
+      rgba(255, 92, 122, 0.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 72% 68%,
+      rgba(255, 173, 102, 0.16),
+      transparent 34%
+    );
   opacity: 0.95;
 }
 
@@ -107,10 +116,30 @@
   inset: 6% -3% -5%;
   border-radius: 28px;
   background:
-    linear-gradient(90deg, transparent 49.5%, rgba(255, 92, 122, 0.10) 50%, transparent 50.5%),
+    linear-gradient(
+      90deg,
+      transparent 49.5%,
+      rgba(255, 92, 122, 0.1) 50%,
+      transparent 50.5%
+    ),
     linear-gradient(rgba(40, 36, 44, 0.045) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 28px;
-  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  background-size:
+    100% 100%,
+    100% 28px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 14%,
+    #000 86%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 14%,
+    #000 86%,
+    transparent
+  );
   opacity: 0.65;
 }
 
@@ -157,7 +186,12 @@ button,
   inset: -40% auto -40% -34%;
   width: 28%;
   pointer-events: none;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
   transform: translateX(-220%) skewX(-16deg);
   opacity: 0;
 }
@@ -194,7 +228,11 @@ button,
    rather than the ubiquitous floating-card animation. */
 @media (hover: hover) and (pointer: fine) {
   :where(a.card, a[class*="-card"], .card a.stretched-link):hover {
-    border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    border-color: color-mix(
+      in srgb,
+      var(--color-accent) 30%,
+      var(--color-border)
+    );
   }
 }
 
@@ -212,9 +250,36 @@ button,
   inset-inline-start: 0;
   width: 3px;
   border-radius: 999px;
-  background: linear-gradient(to bottom, var(--color-accent), #ffad66 72%, transparent);
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent),
+    #ffad66 72%,
+    transparent
+  );
   opacity: 0.72;
   pointer-events: none;
+  transform-origin: top center;
+}
+
+/* Modern browsers can draw the feature rail as the chapter enters the viewport.
+   No JavaScript, no layout reads and no continuous main-thread loop are needed. */
+@supports (animation-timeline: view()) {
+  @keyframes niarim-feature-rail-draw {
+    from {
+      transform: scaleY(0.14);
+      opacity: 0.2;
+    }
+    to {
+      transform: scaleY(1);
+      opacity: 0.72;
+    }
+  }
+
+  #features .feature-row::before {
+    animation: niarim-feature-rail-draw linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 34%;
+  }
 }
 
 /* Final CTA: a controlled glow behind the conversion point, not another card. */
@@ -234,7 +299,11 @@ button,
   bottom: -64%;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 92, 122, 0.16), transparent 68%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 92, 122, 0.16),
+    transparent 68%
+  );
   pointer-events: none;
 }
 
@@ -334,5 +403,11 @@ button,
   .btn-primary::after,
   .btn-accent::after {
     display: none !important;
+  }
+
+  #features .feature-row::before {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.72 !important;
   }
 }
