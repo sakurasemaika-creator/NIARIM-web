@@ -99,6 +99,7 @@
       var question =
         event.target.closest && event.target.closest(".faq-question");
       if (!question) return;
+
       var item = question.closest(".faq-item");
       var answer = item && item.querySelector(".faq-answer");
       if (!item || !answer) return;
@@ -121,8 +122,10 @@
       function (event) {
         if (event.propertyName !== "max-height") return;
         var answer = event.target;
-        if (!answer.classList || !answer.classList.contains("faq-answer"))
+        if (!answer.classList || !answer.classList.contains("faq-answer")) {
           return;
+        }
+
         var item = answer.closest(".faq-item");
         if (item && item.classList.contains("is-open")) {
           answer.style.maxHeight = "none";
@@ -153,20 +156,6 @@
     });
   }
 
-  function ensureNineCommunityTiles() {
-    var gallery = document.querySelector(".community-gallery");
-    if (!gallery) return;
-    var cards = gallery.querySelectorAll(
-      ".community-card:not(.is-more-cta)",
-    );
-    var more = gallery.querySelector(".community-card.is-more-cta");
-    if (cards.length !== 8 || !more) return;
-    var ninth = cards[cards.length - 1].cloneNode(true);
-    var badge = ninth.querySelector(".rank-badge");
-    if (badge) badge.textContent = "9";
-    gallery.insertBefore(ninth, more);
-  }
-
   function settleLayoutForAnchor() {
     var root = document.documentElement;
     if (root.classList.contains("is-anchor-nav")) return;
@@ -180,6 +169,7 @@
       function (event) {
         var link = event.target.closest && event.target.closest('a[href^="#"]');
         if (!link) return;
+
         var hash = link.getAttribute("href");
         if (!hash || hash === "#") return;
         try {
@@ -190,11 +180,13 @@
     );
 
     if (!window.location.hash || window.location.hash.length <= 1) return;
+
     var initial = null;
     try {
       initial = document.querySelector(window.location.hash);
     } catch (_) {}
     if (!initial) return;
+
     settleLayoutForAnchor();
     requestAnimationFrame(function () {
       initial.scrollIntoView();
@@ -206,6 +198,5 @@
     initNavToggle();
     initFaqAccordion();
     initAnchorNav();
-    ensureNineCommunityTiles();
   });
 })();
