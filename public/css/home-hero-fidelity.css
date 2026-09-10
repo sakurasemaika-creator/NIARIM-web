@@ -380,3 +380,10 @@
     font-size: 0.54rem !important;
   }
 }
+
+/* The Community mini already owns its violet frame. Avoid stacking the shared
+   Hero bezel overlay on top of that native frame on desktop. */
+html body .hero-showcase .hero-preview-card.hero-preview-community::after {
+  content: none !important;
+  border: 0 !important;
+}
