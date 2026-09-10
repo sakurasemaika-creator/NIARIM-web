@@ -415,3 +415,31 @@
     letter-spacing: 0.01em;
   }
 }
+
+/* Hero subtitle underline: render the same accent directly in CSS instead of
+   measuring text fragments with Range.getClientRects(), generating DOM nodes,
+   and keeping a ResizeObserver alive for the lifetime of the page. Inline
+   fragmentation plus box-decoration-break naturally follows wrapped lines. */
+html body .hero-subtitle-text {
+  display: inline !important;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.02em);
+  background-size: 0 3px;
+  animation: niarim-subtitle-underline 0.9s var(--ease-out) 1.05s forwards;
+}
+
+@keyframes niarim-subtitle-underline {
+  to {
+    background-size: 100% 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .hero-subtitle-text {
+    animation: none;
+    background-size: 100% 3px;
+  }
+}
