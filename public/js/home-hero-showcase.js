@@ -41,9 +41,6 @@
     );
   }
 
-  /* CommunityScreen / CommunityWorkCardの実装構造を、App Previewと同じ
-     320:569の端末面へ縮小再現する。HeroとApp Previewで同じDOMを使い、
-     片方だけ見た目が古くならないようにする。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
     screen.className = "hero-community-mini hero-theme-violet";
@@ -100,11 +97,9 @@
   }
 
   function resetPreviewFit(clone) {
-    /* App Preview側のfitMockScreens()は、そのカード自身の実寸へ収めるため
-       width/height/transform等をインライン!importantで付ける。Heroでは
-       別の320:569ベゼルへ入れ直すため、そのfit結果までcloneすると外枠と
-       内部画面が別倍率になってしまう。DOM内容だけを再利用し、Heroの
-       実際のベゼル寸法に対して改めてfitする。 */
+    /* App Preview側で計算済みのfitをHeroへ持ち込まない。Heroでは
+       .hero-preview-cardを唯一の寸法基準とし、CSSのwidth/height:100%で
+       ベゼル内へ収める。 */
     [
       "width",
       "height",
@@ -123,53 +118,6 @@
     clone.classList.remove("is-fit-scaled");
   }
 
-  function fitHeroPreviewCard(card) {
-    var source = card.querySelector(":scope > .hero-app-preview-source");
-    if (!source || card.clientWidth < 1 || card.clientHeight < 1) return;
-
-    resetPreviewFit(source);
-    var width = card.clientWidth;
-    var height = card.clientHeight;
-    var scale = 1;
-
-    /* Heroカードは外枠寸法を正本とする。内部DOMはその寸法より広い仮想面へ
-       レイアウトしてから全体を等比縮小することで、ツールバー等の固定px
-       UIも含めて外枠と同じ基準で縮む。元App Previewで計算済みの倍率を
-       使い回さず、現在のカード寸法から最大4回だけ収束させる。 */
-    for (var pass = 0; pass < 4; pass += 1) {
-      var layoutWidth = width / scale;
-      var layoutHeight = height / scale;
-      source.style.setProperty("position", "absolute", "important");
-      source.style.setProperty("left", "0", "important");
-      source.style.setProperty("top", "0", "important");
-      source.style.setProperty("width", layoutWidth + "px", "important");
-      source.style.setProperty("height", layoutHeight + "px", "important");
-      source.style.setProperty("max-width", "none", "important");
-      source.style.setProperty("max-height", "none", "important");
-      source.style.setProperty("transform-origin", "top left", "important");
-      source.style.setProperty(
-        "transform",
-        "scale(" + scale + ")",
-        "important",
-      );
-
-      var overflow = Math.max(
-        source.scrollWidth / Math.max(1, source.clientWidth),
-        source.scrollHeight / Math.max(1, source.clientHeight),
-      );
-      if (overflow <= 1.005) break;
-      scale = Math.max(0.42, scale / overflow);
-    }
-
-    source.classList.add("is-fit-scaled");
-  }
-
-  function fitHeroShowcase(showcase) {
-    showcase.querySelectorAll(".hero-preview-card").forEach(function (card) {
-      fitHeroPreviewCard(card);
-    });
-  }
-
   function clonePreviewCard(index, themeClass) {
     var source = document.querySelector(
       ".screenshot-scroller .screenshot-card:nth-child(" +
@@ -185,9 +133,6 @@
       node.removeAttribute("id");
     });
 
-    /* App Previewの各モックは複製元カード固有のカスタムプロパティを
-       自身に保持している。Heroでは外側カードがOcean/Sandを正本とするので、
-       複製元のピンク等が内部UIへ残らないようテーマ値を親から継承させる。 */
     [
       "--fd-accent",
       "--fd-ink",
@@ -218,14 +163,10 @@
     var container = hero && hero.querySelector(":scope > .container");
     if (!hero || !container) return;
 
-    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
-       差し替えた後に、作品広場を同じギャラリーへ追加する。 */
     appendCommunityAppPreview();
 
     if (container.querySelector(":scope > .hero-showcase")) return;
 
-    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
-       差し替えた後に、その完成版を複製する。Hero側で別実装を持たない。 */
     var canvas = clonePreviewCard(1, "hero-theme-ocean");
     var timeline = clonePreviewCard(2, "hero-theme-sand");
     if (!canvas || !timeline) return;
@@ -257,22 +198,8 @@
     showcase.appendChild(timelineCard);
     showcase.appendChild(communityCard);
     container.appendChild(showcase);
-
-    requestAnimationFrame(function () {
-      fitHeroShowcase(showcase);
-    });
-
-    var resizeFrame = 0;
-    window.addEventListener("resize", function () {
-      cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(function () {
-        fitHeroShowcase(showcase);
-      });
-    });
   }
 
-  /* App Previewのコード検証済みDOMはmain.jsのDOMContentLoaded処理で作られる。
-     その後が保証されるwindow.loadで複製し、静的HTMLの古いモックを拾わない。 */
   if (document.readyState === "complete") {
     initHeroShowcase();
   } else {
