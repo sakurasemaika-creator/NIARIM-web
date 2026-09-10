@@ -73,6 +73,26 @@ const MOCK_STYLE_PRELOADS = [
   "/css/screen-mock-fidelity.css",
 ];
 
+const HOME_REPLACED_MEDIA_SELECTORS = [
+  '#features .feature-row[data-mock-theme="row1"] .feature-media',
+  '#features .feature-row[data-mock-theme="row2"] .feature-media',
+  '#features .feature-row[data-mock-theme="row3"] .feature-media',
+  '#features .feature-row[data-mock-theme="row4"] .feature-media',
+  '#features .feature-row[data-mock-theme="row5"] .feature-media',
+];
+
+const FEATURES_REPLACED_MOCK_SELECTORS = [
+  "#drawing > .feature-diagram",
+  "#animation > .feature-diagram",
+  "#editing > .feature-diagram",
+  "#advanced > .feature-diagram",
+  "#audio > .feature-diagram",
+  "#save > .feature-diagram",
+  "#workspace > .feature-diagram",
+  '#workspace [data-mock-screen="theme"]',
+  "#export > .feature-diagram",
+];
+
 function siteOrigin(request, env) {
   return String(env.SITE_ORIGIN || new URL(request.url).origin).replace(
     /\/$/,
@@ -243,6 +263,30 @@ function hreflangMarkup(request, env) {
   return links.join("");
 }
 
+function registerDiscardedMockContent(rewriter, page) {
+  if (page === "home") {
+    for (const selector of HOME_REPLACED_MEDIA_SELECTORS) {
+      rewriter.on(selector, {
+        element(element) {
+          element.setInnerContent("");
+        },
+      });
+    }
+  }
+
+  if (page === "features") {
+    for (const selector of FEATURES_REPLACED_MOCK_SELECTORS) {
+      rewriter.on(selector, {
+        element(element) {
+          element.setInnerContent("");
+        },
+      });
+    }
+  }
+
+  return rewriter;
+}
+
 function rewriteSeoHtml(response, request, env) {
   const type = response.headers.get("content-type") || "";
   if (response.status !== 200 || !type.includes("text/html")) return response;
@@ -345,26 +389,14 @@ function rewriteSeoHtml(response, request, env) {
       },
     });
 
+  registerDiscardedMockContent(rewriter, metadata.page);
+
   const transformed = rewriter.transform(response);
   const headers = new Headers(transformed.headers);
   headers.set("Content-Language", metadata.lang);
   return new Response(transformed.body, {
     status: transformed.status,
     statusText: transformed.statusText,
-    headers,
-  });
-}
-
-function withAssetCaching(response, pathname) {
-  if (!/\.(?:css|js)$/i.test(pathname)) return response;
-  const headers = new Headers(response.headers);
-  headers.set(
-    "Cache-Control",
-    "public, max-age=300, stale-while-revalidate=86400",
-  );
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
     headers,
   });
 }
@@ -423,8 +455,7 @@ export default {
 
       const assetResponse = await env.ASSETS.fetch(request);
       const seoResponse = rewriteSeoHtml(assetResponse, request, env);
-      const cachedResponse = withAssetCaching(seoResponse, url.pathname);
-      return withSecurityHeaders(cachedResponse);
+      return withSecurityHeaders(seoResponse);
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(
