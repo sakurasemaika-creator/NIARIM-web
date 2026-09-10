@@ -50,10 +50,24 @@
       "<span>お気に入り作者</span>" +
       "</div>" +
       '<div class="hero-community-grid">' +
-      workCard("夜明けの冒険", "あにめ工房ミラ", "1.2万", "326", "0:42", "is-a") +
+      workCard(
+        "夜明けの冒険",
+        "あにめ工房ミラ",
+        "1.2万",
+        "326",
+        "0:42",
+        "is-a",
+      ) +
       workCard("小さな街", "sakura_draws", "8,921", "211", "1:08", "is-b") +
       workCard("静かな記憶", "ペン先ラボ", "5,306", "148", "0:31", "is-c") +
-      workCard("雨上がりの手紙", "よあけスタジオ", "3,744", "96", "0:55", "is-d") +
+      workCard(
+        "雨上がりの手紙",
+        "よあけスタジオ",
+        "3,744",
+        "96",
+        "0:55",
+        "is-d",
+      ) +
       "</div>" +
       '<span class="hero-community-fab"><i aria-hidden="true"></i><b>自分の投稿</b></span>';
     return screen;
@@ -61,7 +75,8 @@
 
   function appendCommunityAppPreview() {
     var scroller = document.querySelector(".screenshot-scroller");
-    if (!scroller || scroller.querySelector(".screenshot-card-community")) return;
+    if (!scroller || scroller.querySelector(".screenshot-card-community"))
+      return;
     var card = document.createElement("div");
     card.className = "screenshot-card screenshot-card-community";
     card.setAttribute("data-mock-theme", "shot-community");
@@ -88,7 +103,9 @@
 
   function clonePreviewCard(index, themeClass) {
     var source = document.querySelector(
-      ".screenshot-scroller .screenshot-card:nth-child(" + index + ") > :first-child",
+      ".screenshot-scroller .screenshot-card:nth-child(" +
+        index +
+        ") > :first-child",
     );
     if (!source) return null;
     var clone = source.cloneNode(true);
@@ -261,8 +278,16 @@
     showcase.className = "hero-showcase";
     showcase.setAttribute("aria-label", "NIARIM app previews");
 
-    var canvasCard = buildPreviewCard("hero-preview-canvas", canvas, "hero-theme-ocean");
-    var timelineCard = buildPreviewCard("hero-preview-timeline", timeline, "hero-theme-sand");
+    var canvasCard = buildPreviewCard(
+      "hero-preview-canvas",
+      canvas,
+      "hero-theme-ocean",
+    );
+    var timelineCard = buildPreviewCard(
+      "hero-preview-timeline",
+      timeline,
+      "hero-theme-sand",
+    );
     var communityCard = buildPreviewCard(
       "hero-preview-community",
       buildCommunityMini(),
