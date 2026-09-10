@@ -45,14 +45,7 @@
         "0:42",
         "is-a",
       ) +
-      workCard(
-        "小さな街",
-        "sakura_draws",
-        "8,921",
-        "211",
-        "1:08",
-        "is-b",
-      ) +
+      workCard("小さな街", "sakura_draws", "8,921", "211", "1:08", "is-b") +
       workCard("静かな記憶", "ペン先ラボ", "5,306", "148", "0:31", "is-c") +
       workCard(
         "雨上がりの手紙",
@@ -69,7 +62,8 @@
 
   function appendCommunityAppPreview() {
     var scroller = document.querySelector(".screenshot-scroller");
-    if (!scroller || scroller.querySelector(".screenshot-card-community")) return;
+    if (!scroller || scroller.querySelector(".screenshot-card-community"))
+      return;
 
     var card = document.createElement("div");
     card.className = "screenshot-card screenshot-card-community";
