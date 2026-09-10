@@ -134,7 +134,10 @@ html body #features .feature-row:nth-child(even) {
    the same neutral sizing/centering path as the other feature mocks rather than
    inheriting any compact-Hero offsets. */
 @media (max-width: 860px) {
-  html body #features .feature-row:first-child .feature-media:has(.hero-visual-reuse) {
+  html body
+    #features
+    .feature-row:first-child
+    .feature-media:has(.hero-visual-reuse) {
     min-height: 0 !important;
     display: flex !important;
     align-items: center !important;
