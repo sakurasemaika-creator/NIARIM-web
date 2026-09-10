@@ -1,12 +1,37 @@
 /* Curated interaction polish
    --------------------------
-   This layer applies general principles distilled from contemporary navigation,
-   CTA, component, motion and landing-page references. It intentionally does not
-   reproduce any reference site's composition, assets, copy or signature effect.
-   NIARIM's own tokens, typography and product UI remain the source of truth. */
+   General principles distilled from contemporary navigation, CTA, motion,
+   landing-page and product-UI references. Nothing here copies a reference
+   composition, asset or signature effect. NIARIM's own app UI, typography,
+   colors and frame/timeline metaphors remain the source of truth. */
 
-/* Navigation: make the current/hover target legible without turning the header
-   into a generic SaaS pill-nav. The mark is a NIARIM-like drawn underline. */
+/* Native cross-document transitions are essentially free progressive enhancement:
+   unsupported browsers ignore this block and reduced-motion users get no motion. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand {
+  view-transition-name: niarim-brand;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-accent) 26%, white);
+}
+
+:where(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+/* Navigation: a short drawn underline communicates location/intent without
+   turning the header into a generic SaaS pill navigation. */
 @media (hover: hover) and (pointer: fine) {
   .main-nav > ul > li > a {
     position: relative;
@@ -35,8 +60,74 @@
   }
 }
 
-/* CTA feedback: short, tactile and state-driven. Motion is reserved for things
-   that can actually be pressed. */
+/* Mobile-menu state change: animate only the actual control. */
+.nav-toggle .bar,
+.nav-toggle .bar::before,
+.nav-toggle .bar::after {
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms var(--ease-out),
+    top 180ms var(--ease-out);
+}
+
+.nav-toggle[aria-expanded="true"] .bar::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .bar::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Hero: add depth around the real product UI rather than introducing unrelated
+   3D objects. The geometry of the preview cards themselves is left untouched. */
+.hero-showcase {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-showcase::before,
+.hero-showcase::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-showcase::before {
+  inset: -12% -10%;
+  background:
+    radial-gradient(circle at 30% 32%, rgba(255, 92, 122, 0.18), transparent 38%),
+    radial-gradient(circle at 72% 68%, rgba(255, 173, 102, 0.16), transparent 34%);
+  opacity: 0.95;
+}
+
+.hero-showcase::after {
+  inset: 6% -3% -5%;
+  border-radius: 28px;
+  background:
+    linear-gradient(90deg, transparent 49.5%, rgba(255, 92, 122, 0.10) 50%, transparent 50.5%),
+    linear-gradient(rgba(40, 36, 44, 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 28px;
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  opacity: 0.65;
+}
+
+@media (min-width: 760px) {
+  .hero-showcase {
+    perspective: 1200px;
+  }
+
+  .hero-showcase > .hero-preview-card {
+    box-shadow:
+      0 24px 46px rgba(40, 36, 44, 0.11),
+      0 4px 12px rgba(40, 36, 44, 0.07);
+  }
+}
+
+/* CTA feedback: tactile first, decorative second. The sheen only runs on a real
+   interactive control and uses transform/opacity so it stays GPU-friendly. */
 .btn,
 button,
 [role="button"] {
@@ -44,6 +135,7 @@ button,
 }
 
 .btn {
+  position: relative;
   transition:
     transform 180ms ease-out,
     box-shadow 180ms ease-out,
@@ -52,9 +144,38 @@ button,
     color 180ms ease-out;
 }
 
+.btn-primary,
+.btn-accent {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::after,
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -34%;
+  width: 28%;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-220%) skewX(-16deg);
+  opacity: 0;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .btn:hover {
     transform: translateY(-1px);
+  }
+
+  .btn-primary:hover::after,
+  .btn-primary:focus-visible::after,
+  .btn-accent:hover::after,
+  .btn-accent:focus-visible::after {
+    opacity: 0.78;
+    transform: translateX(620%) skewX(-16deg);
+    transition:
+      transform 520ms var(--ease-out),
+      opacity 120ms ease-out;
   }
 }
 
@@ -77,8 +198,67 @@ button,
   }
 }
 
-/* Footer references consistently reward scanning: links are visibly interactive
-   but the underline only draws when the user engages them. */
+/* Feature sections are product chapters. Give each white card a tiny timeline-like
+   accent at the leading edge so the all-white surfaces still have rhythm. */
+#features .feature-row {
+  position: relative;
+  isolation: isolate;
+}
+
+#features .feature-row::before {
+  content: "";
+  position: absolute;
+  inset-block: clamp(1.25rem, 4vw, 2.5rem);
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, var(--color-accent), #ffad66 72%, transparent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+/* Final CTA: a controlled glow behind the conversion point, not another card. */
+.final-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(62vw, 760px);
+  aspect-ratio: 1;
+  left: 50%;
+  bottom: -64%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 92, 122, 0.16), transparent 68%);
+  pointer-events: none;
+}
+
+/* Footer: translate the app's film/frame language into a lightweight divider. */
+.site-footer {
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.72) 0 8px,
+      transparent 8px 15px
+    ),
+    var(--color-accent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
 .site-footer a:not(.btn) {
   text-decoration-thickness: 1px;
   text-underline-offset: 0.24em;
@@ -94,8 +274,7 @@ button,
   }
 }
 
-/* 404: use the product's frame metaphor instead of a generic giant-error page.
-   The broken frame is deliberately quiet so the recovery CTA stays dominant. */
+/* 404: use the product's frame metaphor instead of a generic giant-error page. */
 .error-page > div {
   position: relative;
   width: min(100%, 680px);
@@ -130,9 +309,18 @@ button,
   border-radius: 0 0 24px;
 }
 
-/* Respect motion preferences globally for the refinements in this layer. */
+/* Respect motion preferences for every refinement in this layer. The Home marquee
+   remains the separate always-on product requirement owned elsewhere. */
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+
   .main-nav > ul > li > a::after,
+  .nav-toggle .bar,
+  .nav-toggle .bar::before,
+  .nav-toggle .bar::after,
   .btn,
   .site-footer a:not(.btn) {
     transition-duration: 0.01ms !important;
@@ -141,5 +329,10 @@ button,
   .btn:hover,
   .btn:active {
     transform: none !important;
+  }
+
+  .btn-primary::after,
+  .btn-accent::after {
+    display: none !important;
   }
 }
