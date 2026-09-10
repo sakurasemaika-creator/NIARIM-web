@@ -140,9 +140,9 @@ function stylePerformanceMarkup(page) {
     return (
       preloadMarkup +
       globalLayers +
-      '<link rel="stylesheet" data-niarim-screen-mock-accuracy>' +
-      '<link rel="stylesheet" data-niarim-mock-palette>' +
-      '<link rel="stylesheet" data-niarim-mock-layout>'
+      '<link data-niarim-screen-mock-accuracy>' +
+      '<link data-niarim-mock-palette>' +
+      '<link data-niarim-mock-layout>'
     );
   }
 
@@ -254,6 +254,8 @@ function rewriteSeoHtml(response, request, env) {
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
   const styleMarkup = stylePerformanceMarkup(metadata.page);
+  const useLightweightRuntime =
+    metadata.page !== "home" && metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
     .map(
@@ -317,6 +319,13 @@ function rewriteSeoHtml(response, request, env) {
           "content",
           "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
         );
+      },
+    })
+    .on('script[src="/js/main.js"]', {
+      element(element) {
+        if (useLightweightRuntime) {
+          element.setAttribute("src", "/js/common-ui.js");
+        }
       },
     })
     .on("head", {
