@@ -28,6 +28,34 @@ if (verified) {
   report.findings = report.findings.filter(
     (finding) => !isIntentionalHiddenHeroFinding(finding),
   );
+}
+
+/* The legacy autonomous audit applies the outer-device 9:16 ratio check to
+   every .fd-app-screen. Hero App Preview sources are intentionally scaled
+   inside the canonical .hero-preview-card bezel, so their own transformed
+   bounding box is not the device ratio. Keep the compatibility exception as
+   narrow as the deep-section v2 audit: only screen-mock findings carrying both
+   the hero source marker and main.js' explicit scaled-fit marker qualify. */
+const isIntentionalScaledHeroSourceFinding = (finding) => {
+  if (finding?.kind !== "screen-mock") return false;
+  const className = String(finding?.detail?.className || "");
+  const classes = className.split(/\s+/);
+  return (
+    classes.includes("hero-app-preview-source") &&
+    classes.includes("is-fit-scaled")
+  );
+};
+
+const scaledHeroSources = report.findings.filter(
+  isIntentionalScaledHeroSourceFinding,
+);
+if (scaledHeroSources.length) {
+  report.findings = report.findings.filter(
+    (finding) => !isIntentionalScaledHeroSourceFinding(finding),
+  );
+}
+
+if (verified || scaledHeroSources.length) {
   await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
 }
 
@@ -60,6 +88,7 @@ console.log(
     {
       correctedAudit: "current-dom-v2",
       hiddenHeroFindingsRemoved: verified ? candidates.length : 0,
+      scaledHeroSourceFindingsRemoved: scaledHeroSources.length,
       totalFindings: report.findings.length,
       byKind,
     },
