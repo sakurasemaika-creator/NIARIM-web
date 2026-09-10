@@ -1,4 +1,4 @@
-@import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7369913eb14d6cd56520ba73ea7f057a4c/public/css/responsive-consistency.css");
+@import url("/css/responsive-foundation.css");
 
 /* The Home marquee is intentionally always animated, including on devices
    that request reduced motion. This is a product requirement for the moving
