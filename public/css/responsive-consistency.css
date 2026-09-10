@@ -1,37 +1,37 @@
 @import url("/css/responsive-foundation.css");
 
-/* The Home marquee is intentionally always animated, including on devices
-   that request reduced motion. This is a product requirement for the moving
-   keyword band, so keep it running regardless of OS/browser preference. */
+/* Static ownership avoids runtime <style> injection and a second style pass. */
+html body .hero-preview-card {
+  position: relative !important;
+}
+
+html body .hero-preview-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  box-sizing: border-box;
+  border: 6px solid var(--hero-bezel);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+html body .hero-preview-community::after {
+  display: none !important;
+}
+
+/* Always-on product animation. This important rule follows the imported
+   foundation, so a duplicate reduced-motion override is unnecessary. */
 html body .marquee-track {
   animation: marquee-scroll 32s linear infinite !important;
   animation-play-state: running !important;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html body .marquee-track {
-    animation: marquee-scroll 32s linear infinite !important;
-    animation-play-state: running !important;
-  }
-}
-
-/* Keep every Home feature card on the same white surface. The imported polish
-   layer alternates even rows to a pink tint; the Home design now uses one
-   consistent card surface instead. */
 html body #features .feature-row,
 html body #features .feature-row:nth-child(even) {
   background: #fff !important;
 }
 
-/* Compact Home hero ownership.
-   polish.css is injected after the page styles and still contains an older
-   <=900px centered Hero treatment. Explicitly own the sub-560 typography here
-   so the title/subtitle/lead stay left-aligned on the real page as designed.
-
-   The compact placement rule is intentionally scoped to the actual Hero. The
-   first feature card reuses the same CanvasScreen node with .hero-visual-reuse;
-   applying Hero-only sizing to that clone made the drawing-tool mock tiny and
-   shifted it upward inside its card. */
 @media (max-width: 559px) {
   html body .hero-title,
   html body .hero-subtitle,
@@ -56,13 +56,10 @@ html body #features .feature-row:nth-child(even) {
     align-self: start !important;
   }
 
-  /* The Hero preview bezel is decorative; keep it lighter on phones while the
-     CanvasScreen geometry stays unchanged. */
   html body .hero .hero-preview-card::after {
     border-width: 3px !important;
   }
 
-  /* Keep the preview beside both the body copy and the CTA stack. */
   html body .hero .container > .hero-showcase {
     grid-column: 2 !important;
     grid-row: 4 / 6 !important;
@@ -130,9 +127,6 @@ html body #features .feature-row:nth-child(even) {
   }
 }
 
-/* The first Home feature card reuses the Hero CanvasScreen. Keep that clone on
-   the same neutral sizing/centering path as the other feature mocks rather than
-   inheriting any compact-Hero offsets. */
 @media (max-width: 860px) {
   html body
     #features
