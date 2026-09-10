@@ -266,6 +266,25 @@ button,
   }
 }
 
+/* Horizontal product previews settle cleanly under touch without JavaScript. */
+.screenshot-scroller {
+  scroll-snap-type: inline proximity;
+}
+
+.screenshot-scroller > .screenshot-card {
+  scroll-snap-align: center;
+}
+
+/* Do not style/layout/paint long product chapters until they approach the
+   viewport. This extends an optimization already used elsewhere on the site. */
+@supports (content-visibility: auto) {
+  #features .feature-row,
+  .screenshot-scroller {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 680px;
+  }
+}
+
 /* Feature sections are product chapters. Give each white card a tiny timeline-like
    accent at the leading edge so the all-white surfaces still have rhythm. */
 #features .feature-row {
