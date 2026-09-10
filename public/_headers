@@ -1,10 +1,8 @@
 # ==========================================================================
 # NIARIM公式サイト 静的アセットのレスポンスヘッダー
 #
-# wrangler.jsonc では run_worker_first=true とし、HTMLを含む全リクエストを
-# Workerへ通して canonical / OGP を公開サイトの正規URLへ統一している。
-# env.ASSETS.fetch() が返す静的アセットにもこの _headers が適用され、さらに
-# Worker側でも同等のセキュリティヘッダーを最終応答へ付与する。
+# HTML/SEO/APIだけWorkerを先に通し、CSS/JS/画像/フォントはStatic Assetsから
+# 直接返す。Worker側でもHTML/APIには同等のセキュリティヘッダーを付与する。
 # ==========================================================================
 
 /*
@@ -17,7 +15,15 @@
   Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
 
 # フォント・アイコン・画像は内容が変わることがほとんどなく、変わるときは
-# ファイル名ごと差し替える運用のため長めにキャッシュする。CSS/JSはファイル名に
-# ハッシュを付けていないので既定の再検証を維持し、デプロイ後すぐ反映させる。
+# ファイル名ごと差し替える運用のため長めにキャッシュする。
 /assets/*
   Cache-Control: public, max-age=2592000
+
+# CSS/JSはハッシュ付きファイル名ではないので長期immutableにはしない。
+# 短いfresh期間とstale-while-revalidateを組み合わせ、通常のページ回遊では
+# 再取得を避けつつ、デプロイ後の更新も長時間固定しない。
+/css/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/js/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
