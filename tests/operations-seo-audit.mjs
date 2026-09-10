@@ -26,7 +26,13 @@ function expect(condition, kind, detail) {
 
 const wrangler = read("wrangler.jsonc");
 expect(wrangler.includes(`"SITE_ORIGIN": "${origin}"`), "site-origin", origin);
-expect(wrangler.includes('"run_worker_first": true'), "worker-first", null);
+for (const pattern of ["/*", "!/assets/*", "!/css/*", "!/js/*"]) {
+  expect(
+    wrangler.includes(`"${pattern}"`),
+    "worker-first",
+    `missing selective route ${pattern}`,
+  );
+}
 
 const worker = read("src/index.js");
 for (const needle of [
