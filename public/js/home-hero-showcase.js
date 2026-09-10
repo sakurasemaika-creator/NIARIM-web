@@ -1,17 +1,6 @@
 (function () {
   "use strict";
 
-  function loadMobileDensityLayer() {
-    if (document.querySelector("link[data-niarim-home-mobile-density]")) return;
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "/css/home-hero-mobile-density.css";
-    link.setAttribute("data-niarim-home-mobile-density", "true");
-    document.head.appendChild(link);
-  }
-
-  loadMobileDensityLayer();
-
   function workCard(title, author, views, bookmarks, duration, tone) {
     return (
       '<article class="hero-community-work ' +
@@ -41,6 +30,9 @@
     );
   }
 
+  /* CommunityScreen / CommunityWorkCardの実装構造を、App Previewと同じ
+     320:569の端末面へ縮小再現する。HeroとApp Previewで同じDOMを使い、
+     片方だけ見た目が古くならないようにする。 */
   function buildCommunityMini() {
     var screen = document.createElement("div");
     screen.className = "hero-community-mini hero-theme-violet";
@@ -96,28 +88,6 @@
     scroller.appendChild(card);
   }
 
-  function resetPreviewFit(clone) {
-    /* App Preview側で計算済みのfitをHeroへ持ち込まない。Heroでは
-       .hero-preview-cardを唯一の寸法基準とし、CSSのwidth/height:100%で
-       ベゼル内へ収める。 */
-    [
-      "width",
-      "height",
-      "max-width",
-      "max-height",
-      "margin-bottom",
-      "margin-right",
-      "transform",
-      "transform-origin",
-      "position",
-      "left",
-      "top",
-    ].forEach(function (name) {
-      clone.style.removeProperty(name);
-    });
-    clone.classList.remove("is-fit-scaled");
-  }
-
   function clonePreviewCard(index, themeClass) {
     var source = document.querySelector(
       ".screenshot-scroller .screenshot-card:nth-child(" +
@@ -126,13 +96,15 @@
     );
     if (!source) return null;
     var clone = source.cloneNode(true);
-    resetPreviewFit(clone);
     clone.classList.add("hero-app-preview-source", themeClass);
     clone.removeAttribute("id");
     clone.querySelectorAll("[id]").forEach(function (node) {
       node.removeAttribute("id");
     });
 
+    /* App Previewの各モックは複製元カード固有のカスタムプロパティを
+       自身に保持している。Heroでは外側カードがOcean/Sandを正本とするので、
+       複製元のピンク等が内部UIへ残らないようテーマ値を親から継承させる。 */
     [
       "--fd-accent",
       "--fd-ink",
@@ -163,10 +135,14 @@
     var container = hero && hero.querySelector(":scope > .container");
     if (!hero || !container) return;
 
+    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
+       差し替えた後に、作品広場を同じギャラリーへ追加する。 */
     appendCommunityAppPreview();
 
     if (container.querySelector(":scope > .hero-showcase")) return;
 
+    /* main.jsのnormalizeScreenMocks()がApp Previewをアプリ本体準拠へ
+       差し替えた後に、その完成版を複製する。Hero側で別実装を持たない。 */
     var canvas = clonePreviewCard(1, "hero-theme-ocean");
     var timeline = clonePreviewCard(2, "hero-theme-sand");
     if (!canvas || !timeline) return;
@@ -200,6 +176,8 @@
     container.appendChild(showcase);
   }
 
+  /* App Previewのコード検証済みDOMはmain.jsのDOMContentLoaded処理で作られる。
+     その後が保証されるwindow.loadで複製し、静的HTMLの古いモックを拾わない。 */
   if (document.readyState === "complete") {
     initHeroShowcase();
   } else {
