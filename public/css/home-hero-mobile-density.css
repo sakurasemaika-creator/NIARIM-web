@@ -1,0 +1,86 @@
+/* Compact mobile Home hero composition.
+   Keep the phone beside the lead, CTA and bridge instead of forcing those
+   controls to wait below the full phone height. This preserves the desktop
+   information density while keeping the small-screen hierarchy readable. */
+
+@media (max-width: 559px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) clamp(100px, 30vw, 136px) !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
+    column-gap: clamp(0.5rem, 2.2vw, 0.72rem) !important;
+    row-gap: clamp(0.32rem, 1.35vw, 0.48rem) !important;
+  }
+
+  html body .hero-copy > .hero-lead {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+  }
+
+  html body .hero-visual,
+  html body .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: 4 / 7 !important;
+    width: clamp(100px, 30vw, 136px) !important;
+    max-width: 136px !important;
+    align-self: start !important;
+  }
+
+  html body .hero-copy > .hero-actions {
+    grid-column: 1 !important;
+    grid-row: 5 !important;
+    align-self: start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    gap: 0.36rem !important;
+  }
+
+  html body .hero-copy > .hero-bridge {
+    grid-column: 1 !important;
+    grid-row: 6 !important;
+    align-self: start !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  html body .hero-actions .btn {
+    min-height: 36px !important;
+    padding: 0.48rem 0.42rem !important;
+    font-size: clamp(0.62rem, 2vw, 0.76rem) !important;
+  }
+
+  html body .hero-bridge {
+    font-size: clamp(0.58rem, 1.75vw, 0.68rem) !important;
+    line-height: 1.36 !important;
+  }
+}
+
+@media (max-width: 359px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) clamp(92px, 29vw, 104px) !important;
+    column-gap: 0.42rem !important;
+    row-gap: 0.3rem !important;
+  }
+
+  html body .hero-visual,
+  html body .hero-showcase {
+    width: clamp(92px, 29vw, 104px) !important;
+    max-width: 104px !important;
+  }
+
+  html body .hero-copy > .hero-actions {
+    flex-direction: column !important;
+    gap: 0.3rem !important;
+  }
+
+  html body .hero-actions .btn {
+    width: 100% !important;
+    min-height: 34px !important;
+    padding: 0.42rem 0.38rem !important;
+    font-size: 0.62rem !important;
+  }
+
+  html body .hero-bridge {
+    font-size: 0.56rem !important;
+    line-height: 1.32 !important;
+  }
+}
