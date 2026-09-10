@@ -25,6 +25,35 @@ if (verified) {
   report.findings = report.findings.filter(
     (finding) => !isIntentionalHiddenHeroFinding(finding),
   );
+}
+
+/* The legacy deep audit treats every .fd-app-screen as if it were an outer
+   9:16 device. Hero App Preview sources are different: main.js marks them
+   .is-fit-scaled and scales that inner reconstruction inside a canonical
+   .hero-preview-card bezel. The outer card ratio/containment is covered by the
+   Home width sweep, so applying the device-ratio assertion to this inner source
+   produces a false positive even when the rendered phone is correct. Keep this
+   exception deliberately narrow: it must be a screen-mock finding and carry
+   both hero source markers. */
+const isIntentionalScaledHeroSourceFinding = (finding) => {
+  if (finding?.kind !== "screen-mock") return false;
+  const className = String(finding?.detail?.className || "");
+  return (
+    className.split(/\s+/).includes("hero-app-preview-source") &&
+    className.split(/\s+/).includes("is-fit-scaled")
+  );
+};
+
+const scaledHeroSources = report.findings.filter(
+  isIntentionalScaledHeroSourceFinding,
+);
+if (scaledHeroSources.length) {
+  report.findings = report.findings.filter(
+    (finding) => !isIntentionalScaledHeroSourceFinding(finding),
+  );
+}
+
+if (verified || scaledHeroSources.length) {
   await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
 }
 
@@ -37,6 +66,7 @@ console.log(
     {
       correctedAudit: "current-dom-v2",
       hiddenHeroFindingsRemoved: verified ? candidates.length : 0,
+      scaledHeroSourceFindingsRemoved: scaledHeroSources.length,
       findings: report.findings.length,
       byKind,
     },
