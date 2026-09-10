@@ -22,9 +22,7 @@
     var gallery = document.querySelector(".community-gallery");
     if (!gallery) return;
 
-    var cards = gallery.querySelectorAll(
-      ".community-card:not(.is-more-cta)",
-    );
+    var cards = gallery.querySelectorAll(".community-card:not(.is-more-cta)");
     var more = gallery.querySelector(".community-card.is-more-cta");
     if (cards.length !== 8 || !more) return;
 
