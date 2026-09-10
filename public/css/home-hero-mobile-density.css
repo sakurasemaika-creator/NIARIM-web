@@ -1,86 +1,153 @@
 /* Compact mobile Home hero composition.
-   Keep the phone beside the lead, CTA and bridge instead of forcing those
-   controls to wait below the full phone height. This preserves the desktop
-   information density while keeping the small-screen hierarchy readable. */
+   Keep the primary copy and app preview large and readable, while removing
+   nonessential vertical occupancy so the full marquee band remains visible in
+   the initial mobile viewport. */
 
 @media (max-width: 559px) {
+  html body .hero {
+    padding-top: clamp(0.55rem, 1.9vw, 0.72rem) !important;
+    padding-bottom: clamp(0.42rem, 1.5vw, 0.58rem) !important;
+  }
+
   html body .hero .container {
-    grid-template-columns: minmax(0, 1fr) clamp(100px, 30vw, 136px) !important;
-    grid-template-rows: auto auto auto auto auto auto !important;
-    column-gap: clamp(0.5rem, 2.2vw, 0.72rem) !important;
-    row-gap: clamp(0.32rem, 1.35vw, 0.48rem) !important;
+    width: calc(100% - 1.15rem) !important;
+    grid-template-columns: minmax(0, 1fr) clamp(118px, 35vw, 164px) !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    column-gap: clamp(0.5rem, 2vw, 0.68rem) !important;
+    row-gap: clamp(0.22rem, 0.9vw, 0.34rem) !important;
+  }
+
+  html body .hero-copy > .eyebrow {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    margin: 0 !important;
+    font-size: clamp(0.66rem, 2.2vw, 0.78rem) !important;
+  }
+
+  html body .hero-copy > .hero-title {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    margin: 0 !important;
+  }
+
+  html body .hero-copy > .hero-subtitle {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    margin: 0 !important;
   }
 
   html body .hero-copy > .hero-lead {
     grid-column: 1 !important;
     grid-row: 4 !important;
-  }
-
-  html body .hero-visual,
-  html body .hero-showcase {
-    grid-column: 2 !important;
-    grid-row: 4 / 7 !important;
-    width: clamp(100px, 30vw, 136px) !important;
-    max-width: 136px !important;
-    align-self: start !important;
-  }
-
-  html body .hero-copy > .hero-actions {
-    grid-column: 1 !important;
-    grid-row: 5 !important;
-    align-self: start !important;
-    width: 100% !important;
-    margin: 0 !important;
-    gap: 0.36rem !important;
-  }
-
-  html body .hero-copy > .hero-bridge {
-    grid-column: 1 !important;
-    grid-row: 6 !important;
     align-self: start !important;
     margin: 0 !important;
     max-width: none !important;
   }
 
-  html body .hero-actions .btn {
-    min-height: 36px !important;
-    padding: 0.48rem 0.42rem !important;
-    font-size: clamp(0.62rem, 2vw, 0.76rem) !important;
+  html body .hero-visual,
+  html body .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: 4 !important;
+    width: clamp(118px, 35vw, 164px) !important;
+    max-width: 164px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+    align-self: start !important;
+    margin: 0 !important;
   }
 
-  html body .hero-bridge {
-    font-size: clamp(0.58rem, 1.75vw, 0.68rem) !important;
-    line-height: 1.36 !important;
+  html body .hero-copy > .hero-actions {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    align-self: start !important;
+    width: 100% !important;
+    margin: clamp(0.18rem, 0.8vw, 0.28rem) 0 0 !important;
+    gap: 0.38rem !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* The bridge repeats the community handoff immediately continued below the
+     marquee. On SP it costs a large vertical block and makes the primary copy,
+     preview and CTAs unnecessarily small, so leave it out of the first view. */
+  html body .hero-copy > .hero-bridge {
+    display: none !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.35rem, 10.6vw, 3.05rem) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(0.9rem, 3.35vw, 1.04rem) !important;
+    line-height: 1.22 !important;
+  }
+
+  html body .hero-lead {
+    font-size: clamp(0.79rem, 2.85vw, 0.9rem) !important;
+    line-height: 1.42 !important;
+  }
+
+  html body .hero-actions .btn {
+    min-width: 0 !important;
+    min-height: 40px !important;
+    padding: 0.54rem 0.48rem !important;
+    flex: 1 1 0 !important;
+    font-size: clamp(0.72rem, 2.5vw, 0.82rem) !important;
+  }
+
+  html body .marquee-section {
+    padding-block: 0.68rem !important;
   }
 }
 
 @media (max-width: 359px) {
+  html body .hero {
+    padding-top: 0.46rem !important;
+    padding-bottom: 0.36rem !important;
+  }
+
   html body .hero .container {
-    grid-template-columns: minmax(0, 1fr) clamp(92px, 29vw, 104px) !important;
+    width: calc(100% - 0.9rem) !important;
+    grid-template-columns: minmax(0, 1fr) clamp(108px, 34vw, 122px) !important;
     column-gap: 0.42rem !important;
-    row-gap: 0.3rem !important;
+    row-gap: 0.2rem !important;
+  }
+
+  html body .hero-title {
+    font-size: clamp(2.22rem, 10.7vw, 2.48rem) !important;
+    line-height: 0.9 !important;
+  }
+
+  html body .hero-subtitle {
+    font-size: clamp(0.84rem, 3.5vw, 0.94rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  html body .hero-lead {
+    font-size: clamp(0.75rem, 2.9vw, 0.82rem) !important;
+    line-height: 1.38 !important;
   }
 
   html body .hero-visual,
   html body .hero-showcase {
-    width: clamp(92px, 29vw, 104px) !important;
-    max-width: 104px !important;
+    width: clamp(108px, 34vw, 122px) !important;
+    max-width: 122px !important;
   }
 
   html body .hero-copy > .hero-actions {
-    flex-direction: column !important;
     gap: 0.3rem !important;
   }
 
   html body .hero-actions .btn {
-    width: 100% !important;
-    min-height: 34px !important;
-    padding: 0.42rem 0.38rem !important;
-    font-size: 0.62rem !important;
+    min-height: 38px !important;
+    padding: 0.48rem 0.34rem !important;
+    font-size: 0.7rem !important;
   }
 
-  html body .hero-bridge {
-    font-size: 0.56rem !important;
-    line-height: 1.32 !important;
+  html body .marquee-section {
+    padding-block: 0.6rem !important;
   }
 }
