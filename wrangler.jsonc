@@ -10,8 +10,26 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    // HTMLもWorkerを通し、canonical/OG等を実際の公開URLへ正規化する。
-    "run_worker_first": true,
+    // HTML/SEO/APIだけWorkerを先に通す。CSS・JS・画像・フォントなどの静的
+    // アセットはCloudflare Static Assetsから直接返し、不要なWorker実行と
+    // env.ASSETS.fetch()の1段を省く。
+    "run_worker_first": [
+      "/",
+      "/index.html",
+      "/about/*",
+      "/community/*",
+      "/contact/*",
+      "/faq/*",
+      "/features/*",
+      "/help/*",
+      "/news/*",
+      "/premium/*",
+      "/privacy/*",
+      "/terms/*",
+      "/robots.txt",
+      "/sitemap.xml",
+      "/api/*",
+    ],
     // 未一致パスは public/404.html を404ステータスで返す
     // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)
     "not_found_handling": "404-page",
