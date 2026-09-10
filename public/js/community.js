@@ -1,5 +1,5 @@
 /**
- * NIARIM みんなの作品を見るページ タブ切り替え（プレースホルダー表示のみ）
+ * NIARIM みんなの作品を見るページ専用UI。
  */
 (function () {
   "use strict";
@@ -10,13 +10,32 @@
 
     buttons.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        buttons.forEach(function (b) {
-          b.classList.toggle("is-active", b === btn);
+        buttons.forEach(function (button) {
+          button.classList.toggle("is-active", button === btn);
         });
         // 実データ未実装のため、タブ切り替えは見た目のみ（プレースホルダー表示は共通）。
       });
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initTabs);
+  function ensureNineCommunityTiles() {
+    var gallery = document.querySelector(".community-gallery");
+    if (!gallery) return;
+
+    var cards = gallery.querySelectorAll(
+      ".community-card:not(.is-more-cta)",
+    );
+    var more = gallery.querySelector(".community-card.is-more-cta");
+    if (cards.length !== 8 || !more) return;
+
+    var ninth = cards[cards.length - 1].cloneNode(true);
+    var badge = ninth.querySelector(".rank-badge");
+    if (badge) badge.textContent = "9";
+    gallery.insertBefore(ninth, more);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initTabs();
+    ensureNineCommunityTiles();
+  });
 })();
