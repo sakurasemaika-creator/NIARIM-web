@@ -165,9 +165,9 @@ function performanceHeadMarkup(page) {
       preloadMarkup +
       scriptPreloads +
       globalLayers +
-      '<link data-niarim-screen-mock-accuracy>' +
-      '<link data-niarim-mock-palette>' +
-      '<link data-niarim-mock-layout>'
+      "<link data-niarim-screen-mock-accuracy>" +
+      "<link data-niarim-mock-palette>" +
+      "<link data-niarim-mock-layout>"
     );
   }
 
