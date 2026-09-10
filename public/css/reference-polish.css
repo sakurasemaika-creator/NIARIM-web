@@ -173,6 +173,23 @@
   opacity: 0.65;
 }
 
+/* The legacy no-JS Hero used a 60px blurred conic-gradient that rotated and
+   scaled forever. Preserve the warm aura without a continuously rasterized
+   filter layer. The feature-card clone does not need a second aura at all. */
+.hero .hero-visual::before {
+  background:
+    radial-gradient(circle at 28% 34%, rgba(255, 92, 122, 0.28), transparent 52%),
+    radial-gradient(circle at 72% 66%, rgba(255, 177, 92, 0.22), transparent 50%);
+  filter: none;
+  animation: none;
+}
+
+#features .hero-visual-reuse::before {
+  content: none !important;
+  animation: none !important;
+  filter: none !important;
+}
+
 @media (min-width: 760px) {
   .hero-showcase {
     perspective: 1200px;
