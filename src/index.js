@@ -142,7 +142,7 @@ function pageMetadata(request) {
   };
 }
 
-function stylePerformanceMarkup(page) {
+function performanceHeadMarkup(page) {
   const hasScreenMocks = page === "home" || page === "features";
   const preloads = hasScreenMocks
     ? COMMON_STYLE_PRELOADS.concat(MOCK_STYLE_PRELOADS)
@@ -150,6 +150,10 @@ function stylePerformanceMarkup(page) {
   const preloadMarkup = preloads
     .map((href) => `<link rel="preload" href="${href}" as="style">`)
     .join("");
+  const runtime = hasScreenMocks ? "/js/main.js" : "/js/common-ui.js";
+  const scriptPreloads =
+    `<link rel="preload" href="/js/generated/i18n-${page}.js" as="script">` +
+    `<link rel="preload" href="${runtime}" as="script">`;
 
   const globalLayers =
     '<link rel="stylesheet" href="/css/polish.css" data-niarim-polish>' +
@@ -159,6 +163,7 @@ function stylePerformanceMarkup(page) {
   if (!hasScreenMocks) {
     return (
       preloadMarkup +
+      scriptPreloads +
       globalLayers +
       '<link data-niarim-screen-mock-accuracy>' +
       '<link data-niarim-mock-palette>' +
@@ -168,6 +173,7 @@ function stylePerformanceMarkup(page) {
 
   return (
     preloadMarkup +
+    scriptPreloads +
     globalLayers +
     '<link rel="stylesheet" href="/css/screen-mock-accuracy.css" data-niarim-screen-mock-accuracy>' +
     '<link rel="stylesheet" href="/css/screen-mock-palette.css" data-niarim-mock-palette>' +
@@ -297,7 +303,7 @@ function rewriteSeoHtml(response, request, env) {
   const canonical = canonicalUrl(request, env, metadata.lang);
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
-  const styleMarkup = stylePerformanceMarkup(metadata.page);
+  const headPerformance = performanceHeadMarkup(metadata.page);
   const useLightweightRuntime =
     metadata.page !== "home" && metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
@@ -307,6 +313,7 @@ function rewriteSeoHtml(response, request, env) {
         `<meta property="og:locale:alternate" content="${OG_LOCALES[lang]}">`,
     )
     .join("");
+  let pageBundleInjected = false;
 
   const rewriter = new HTMLRewriter()
     .on("html", {
@@ -365,16 +372,29 @@ function rewriteSeoHtml(response, request, env) {
         );
       },
     })
-    .on('script[src="/js/main.js"]', {
+    .on("script[src]", {
       element(element) {
-        if (useLightweightRuntime) {
+        const src = element.getAttribute("src") || "";
+        if (/^\/js\/i18n-dict(?:-[\w-]+)?\.js$/.test(src)) {
+          if (!pageBundleInjected) {
+            element.setAttribute(
+              "src",
+              `/js/generated/i18n-${metadata.page}.js`,
+            );
+            pageBundleInjected = true;
+          } else {
+            element.remove();
+          }
+          return;
+        }
+        if (useLightweightRuntime && src === "/js/main.js") {
           element.setAttribute("src", "/js/common-ui.js");
         }
       },
     })
     .on("head", {
       element(element) {
-        element.append(styleMarkup, { html: true });
+        element.append(headPerformance, { html: true });
         element.append('<script src="/js/lang-query-bridge.js"></script>', {
           html: true,
         });
