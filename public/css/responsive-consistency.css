@@ -48,6 +48,36 @@ html body .marquee-track {
     justify-self: end !important;
     align-self: start !important;
   }
+
+  /* Keep the preview beside both the body copy and the CTA stack. The CTA no
+     longer waits for the tall preview row to end before it can render. */
+  html body .hero .container > .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: 4 / 6 !important;
+    align-self: start !important;
+  }
+
+  html body .hero .container .hero-copy > .hero-actions {
+    grid-column: 1 !important;
+    grid-row: 5 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.42rem !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  html body .hero .container .hero-copy > .hero-actions .btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  html body .hero .container .hero-copy > .hero-bridge {
+    grid-column: 1 / -1 !important;
+    grid-row: 6 !important;
+  }
 }
 
 @media (max-width: 339px) {
