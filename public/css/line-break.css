@@ -78,21 +78,21 @@ a {
 
 @media (max-width: 339px) {
   html body .hero-title {
-    font-size: clamp(2.08rem, 9.7vw, 2.34rem) !important;
+    font-size: clamp(2.28rem, 10.8vw, 2.5rem) !important;
   }
   html body .hero-subtitle {
-    font-size: 0.86rem !important;
-    line-height: 1.32 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.3 !important;
   }
 }
 
 @media (min-width: 340px) and (max-width: 559px) {
   html body .hero-title {
-    font-size: clamp(2.2rem, 9.35vw, 2.78rem) !important;
+    font-size: clamp(2.35rem, 9.35vw, 2.78rem) !important;
   }
   html body .hero-subtitle {
-    font-size: clamp(0.88rem, 2.95vw, 1rem) !important;
-    line-height: 1.32 !important;
+    font-size: clamp(0.9rem, 2.95vw, 1rem) !important;
+    line-height: 1.3 !important;
   }
 }
 
@@ -101,7 +101,18 @@ a {
    the lead. Do not move .hero-visual/.fd-app-screen independently: bezel and
    reproduced screen content must remain one composition. */
 @media (max-width: 559px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) clamp(128px, 40vw, 146px) !important;
+  }
+
+  html body .hero-lead {
+    font-size: clamp(0.78rem, 2.55vw, 0.9rem) !important;
+    line-height: 1.48 !important;
+  }
+
   html body .hero-showcase {
+    width: clamp(128px, 40vw, 146px) !important;
+    max-width: 146px !important;
     transform: none !important;
   }
 
