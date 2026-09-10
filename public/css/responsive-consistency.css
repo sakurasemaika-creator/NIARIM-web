@@ -27,6 +27,16 @@ html body .marquee-track {
   animation-play-state: running !important;
 }
 
+/* Screen mocks are visually self-contained. Keep their paint invalidation local
+   and avoid text selection without mutating each node from JavaScript. */
+html body .feature-diagram,
+html body .frame-mock,
+html body .fd-app-screen,
+html body .fd-route-screen {
+  contain: paint;
+  user-select: none;
+}
+
 html body #features .feature-row,
 html body #features .feature-row:nth-child(even) {
   background: #fff !important;
