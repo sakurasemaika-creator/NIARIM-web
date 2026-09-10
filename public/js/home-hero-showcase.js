@@ -246,9 +246,9 @@
       "}" +
       "@media (min-width:340px) and (max-width:559px){" +
       "html body .hero{padding-top:.9rem!important;padding-bottom:.9rem!important}" +
-      "html body .hero-title{font-size:clamp(3.35rem,14.2vw,4.15rem)!important;line-height:.91!important}" +
-      "html body .hero-subtitle{font-size:clamp(1.28rem,4.8vw,1.48rem)!important;line-height:1.22!important}" +
-      "html body .hero-lead{font-size:clamp(1.12rem,4.1vw,1.28rem)!important;line-height:1.42!important}" +
+      "html body .hero-title{font-size:clamp(3.9rem,16.5vw,4.8rem)!important;line-height:.89!important}" +
+      "html body .hero-subtitle{font-size:clamp(1.48rem,5.6vw,1.72rem)!important;line-height:1.18!important}" +
+      "html body .hero-lead{font-size:clamp(1.28rem,4.7vw,1.46rem)!important;line-height:1.36!important}" +
       "html body .hero .container{grid-template-columns:minmax(0,1fr) clamp(164px,46vw,188px)!important;column-gap:clamp(.5rem,2.2vw,.75rem)!important;row-gap:clamp(.46rem,1.9vw,.66rem)!important}" +
       "html body .hero-showcase{width:clamp(164px,46vw,188px)!important;max-width:188px!important;justify-self:end!important}" +
       "html body .hero-actions .btn{min-height:43px!important;font-size:clamp(.77rem,2.8vw,.88rem)!important}" +
