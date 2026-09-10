@@ -60,6 +60,36 @@
   }
 }
 
+/* Long NIARIM pages benefit from a quiet sense of location. Supporting browsers
+   render this with the compositor-driven root scroll timeline; there is no JS,
+   polling or layout work on scroll. */
+@supports (animation-timeline: scroll()) {
+  @keyframes niarim-page-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .site-header::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--color-accent), #ffad66);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: niarim-page-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
 /* Mobile-menu state change: animate only the actual control. */
 .nav-toggle .bar,
 .nav-toggle .bar::before,
@@ -386,6 +416,7 @@ button,
     animation-duration: 0.01ms !important;
   }
 
+  .site-header::after,
   .main-nav > ul > li > a::after,
   .nav-toggle .bar,
   .nav-toggle .bar::before,
@@ -393,6 +424,11 @@ button,
   .btn,
   .site-footer a:not(.btn) {
     transition-duration: 0.01ms !important;
+  }
+
+  .site-header::after {
+    animation: none !important;
+    transform: scaleX(1) !important;
   }
 
   .btn:hover,
