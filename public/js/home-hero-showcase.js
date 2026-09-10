@@ -186,6 +186,29 @@
     var cards = showcase.querySelectorAll(".hero-preview-card");
     Array.prototype.forEach.call(cards, fitHeroPreview);
 
+    /* main.jsの共通fitMockScreens()は遅延ロード完了時にも再実行されるため、
+       Hero cloneのinline styleを後から書き換える場合がある。
+       Hero内のsource styleだけを監視し、その瞬間にHeroベゼル基準へ戻す。
+       observer自身の書き換えを再検知しないよう、補正中は一時disconnectする。 */
+    if (typeof MutationObserver === "function") {
+      Array.prototype.forEach.call(cards, function (card) {
+        var source = card.querySelector(":scope > .hero-app-preview-source");
+        if (!source) return;
+        var styleObserver = new MutationObserver(function () {
+          styleObserver.disconnect();
+          fitHeroPreview(card);
+          styleObserver.observe(source, {
+            attributes: true,
+            attributeFilter: ["style"],
+          });
+        });
+        styleObserver.observe(source, {
+          attributes: true,
+          attributeFilter: ["style"],
+        });
+      });
+    }
+
     if (typeof ResizeObserver === "function") {
       var observer = new ResizeObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -195,11 +218,22 @@
       Array.prototype.forEach.call(cards, function (card) {
         observer.observe(card);
       });
-    } else {
-      window.addEventListener("resize", function () {
+    }
+
+    /* viewport変更時はmain.js側のresize fitより後のframeで再確定する。 */
+    window.addEventListener("resize", function () {
+      requestAnimationFrame(function () {
         Array.prototype.forEach.call(cards, fitHeroPreview);
       });
-    }
+    });
+
+    /* 初期ロードでは後挿しCSSのsettled処理がwindow.load後まで続くことがある。
+       直後・次tick・遅延tickの3点で同じベゼル基準を再確定して競合を残さない。 */
+    [0, 120, 400].forEach(function (delay) {
+      window.setTimeout(function () {
+        Array.prototype.forEach.call(cards, fitHeroPreview);
+      }, delay);
+    });
   }
 
   /* SPはfirst fold下部にまだ余白がある。translate等で見かけだけを動かさず、
