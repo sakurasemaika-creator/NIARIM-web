@@ -15,16 +15,23 @@ html body .marquee-track {
   }
 }
 
+/* Keep every Home feature card on the same white surface. The imported polish
+   layer alternates even rows to a pink tint; the Home design now uses one
+   consistent card surface instead. */
+html body #features .feature-row,
+html body #features .feature-row:nth-child(even) {
+  background: #fff !important;
+}
+
 /* Compact Home hero ownership.
    polish.css is injected after the page styles and still contains an older
    <=900px centered Hero treatment. Explicitly own the sub-560 typography here
    so the title/subtitle/lead stay left-aligned on the real page as designed.
 
-   main.js replaces the static .frame-mock markup and turns .hero-visual itself
-   into .fd-app-screen. Therefore the visible bezel and all CanvasScreen content
-   must be moved by positioning .hero-visual.fd-app-screen itself. Moving a
-   descendant only can desynchronise the bezel and its contents on the real page.
-   CTA geometry remains untouched. */
+   The compact placement rule is intentionally scoped to the actual Hero. The
+   first feature card reuses the same CanvasScreen node with .hero-visual-reuse;
+   applying Hero-only sizing to that clone made the drawing-tool mock tiny and
+   shifted it upward inside its card. */
 @media (max-width: 559px) {
   html body .hero-title,
   html body .hero-subtitle,
@@ -40,7 +47,7 @@ html body .marquee-track {
     justify-self: start !important;
   }
 
-  html body .hero-visual.fd-app-screen {
+  html body .hero .hero-visual.fd-app-screen {
     position: relative !important;
     width: clamp(104px, 29vw, 124px) !important;
     max-width: 124px !important;
@@ -49,8 +56,13 @@ html body .marquee-track {
     align-self: start !important;
   }
 
-  /* Keep the preview beside both the body copy and the CTA stack. The CTA no
-     longer waits for the tall preview row to end before it can render. */
+  /* The Hero preview bezel is decorative; keep it lighter on phones while the
+     CanvasScreen geometry stays unchanged. */
+  html body .hero .hero-preview-card::after {
+    border-width: 3px !important;
+  }
+
+  /* Keep the preview beside both the body copy and the CTA stack. */
   html body .hero .container > .hero-showcase {
     grid-column: 2 !important;
     grid-row: 4 / 6 !important;
@@ -81,25 +93,67 @@ html body .marquee-track {
 }
 
 @media (max-width: 339px) {
+  html body .hero .container .hero-copy > .hero-title {
+    font-size: clamp(3.35rem, 15.8vw, 3.7rem) !important;
+    line-height: 0.9 !important;
+  }
+
   html body .hero .container .hero-copy > .hero-subtitle {
+    margin-top: 0.72rem !important;
     font-size: 0.78rem !important;
     line-height: 1.18 !important;
   }
 
   html body .hero .container .hero-copy > .hero-lead {
+    margin-top: 0.9rem !important;
     font-size: 0.68rem !important;
     line-height: 1.38 !important;
   }
 }
 
 @media (min-width: 340px) and (max-width: 559px) {
+  html body .hero .container .hero-copy > .hero-title {
+    font-size: clamp(5.45rem, 22vw, 6.45rem) !important;
+    line-height: 0.82 !important;
+  }
+
   html body .hero .container .hero-copy > .hero-subtitle {
+    margin-top: clamp(0.9rem, 3.6vw, 1.2rem) !important;
     font-size: clamp(1.08rem, 4vw, 1.24rem) !important;
     line-height: 1.14 !important;
   }
 
   html body .hero .container .hero-copy > .hero-lead {
+    margin-top: clamp(1.05rem, 4vw, 1.35rem) !important;
     font-size: clamp(0.72rem, 2.8vw, 0.84rem) !important;
     line-height: 1.38 !important;
+  }
+}
+
+/* The first Home feature card reuses the Hero CanvasScreen. Keep that clone on
+   the same neutral sizing/centering path as the other feature mocks rather than
+   inheriting any compact-Hero offsets. */
+@media (max-width: 860px) {
+  html body #features .feature-row:first-child .feature-media:has(.hero-visual-reuse) {
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  html body #features .feature-row:first-child .hero-visual-reuse {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: min(100%, 360px) !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    justify-self: center !important;
+    align-self: center !important;
   }
 }
