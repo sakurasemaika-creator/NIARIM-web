@@ -1,5 +1,20 @@
 @import url("https://cdn.jsdelivr.net/gh/sakurasemaika-creator/NIARIM-web@7ed7bc7369913eb14d6cd56520ba73ea7f057a4c/public/css/responsive-consistency.css");
 
+/* The Home marquee is intentionally always animated, including on devices
+   that request reduced motion. This is a product requirement for the moving
+   keyword band, so keep it running regardless of OS/browser preference. */
+html body .marquee-track {
+  animation: marquee-scroll 32s linear infinite !important;
+  animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .marquee-track {
+    animation: marquee-scroll 32s linear infinite !important;
+    animation-play-state: running !important;
+  }
+}
+
 /* Compact Home hero ownership.
    polish.css is injected after the page styles and still contains an older
    <=900px centered Hero treatment. Explicitly own the sub-560 typography here
@@ -32,5 +47,29 @@
     top: clamp(-7rem, -16vw, -5rem) !important;
     justify-self: end !important;
     align-self: start !important;
+  }
+}
+
+@media (max-width: 339px) {
+  html body .hero .container .hero-copy > .hero-subtitle {
+    font-size: 0.78rem !important;
+    line-height: 1.18 !important;
+  }
+
+  html body .hero .container .hero-copy > .hero-lead {
+    font-size: 0.68rem !important;
+    line-height: 1.38 !important;
+  }
+}
+
+@media (min-width: 340px) and (max-width: 559px) {
+  html body .hero .container .hero-copy > .hero-subtitle {
+    font-size: clamp(1.08rem, 4vw, 1.24rem) !important;
+    line-height: 1.14 !important;
+  }
+
+  html body .hero .container .hero-copy > .hero-lead {
+    font-size: clamp(0.72rem, 2.8vw, 0.84rem) !important;
+    line-height: 1.38 !important;
   }
 }
