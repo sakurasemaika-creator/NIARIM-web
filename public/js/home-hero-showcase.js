@@ -84,6 +84,10 @@
     card.style.setProperty("border", "0", "important");
     card.style.setProperty("box-shadow", "0 14px 30px rgba(25, 22, 31, 0.12)", "important");
     source.style.setProperty("position", "relative", "important");
+    source.style.setProperty("top", "0", "important");
+    source.style.setProperty("bottom", "auto", "important");
+    source.style.setProperty("inset-block-start", "0", "important");
+    source.style.setProperty("inset-block-end", "auto", "important");
     source.style.setProperty("left", "0", "important");
     source.style.setProperty("right", "auto", "important");
     source.style.setProperty("inset-inline-start", "0", "important");
