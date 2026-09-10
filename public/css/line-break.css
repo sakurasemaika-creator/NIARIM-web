@@ -149,12 +149,13 @@ a {
 
 /* The Timeline reconstruction is copied from the full-size 320x569 App Preview.
    In the three-phone hero it is scaled to roughly half size. Its calibrated
-   51px bottom row otherwise extends a few rendered pixels beyond the scaled
-   source and is clipped by the hero bezel. Keep the production calibration
-   unchanged elsewhere and shorten only this hero copy. */
+   51px bottom row otherwise extends beyond the scaled source and is clipped by
+   the hero bezel. Keep the production calibration unchanged elsewhere and
+   shorten only this hero copy. 35px is the measured fit at the tightest 1280px
+   three-card breakpoint; wider desktop widths retain additional clearance. */
 @media (min-width: 1280px) {
   html body .hero-preview-timeline .fd-timeline-screen .fd-timeline-row {
-    height: 44px !important;
-    flex-basis: 44px !important;
+    height: 35px !important;
+    flex-basis: 35px !important;
   }
 }
