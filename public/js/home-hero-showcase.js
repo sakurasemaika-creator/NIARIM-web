@@ -140,7 +140,7 @@
       "html body .hero-preview-community::after{display:none!important}" +
       "@media (max-width:339px){" +
       "html body .hero-title{font-size:clamp(3.15rem,14.8vw,3.5rem)!important;line-height:.92!important}" +
-      "html body .hero-subtitle{font-size:1.12rem!important;line-height:1.24!important}" +
+      "html body .hero-subtitle{font-size:.9rem!important;line-height:1.2!important}" +
       "html body .hero-lead{font-size:.8rem!important;line-height:1.44!important}" +
       "html body .hero .container{grid-template-columns:minmax(0,1fr) 144px!important;column-gap:.5rem!important}" +
       "html body .hero-showcase{width:144px!important;max-width:144px!important}" +
@@ -148,7 +148,7 @@
       "@media (min-width:340px) and (max-width:559px){" +
       "html body .hero{padding-top:.9rem!important;padding-bottom:.9rem!important}" +
       "html body .hero-title{font-size:clamp(5.05rem,20.5vw,6rem)!important;line-height:.84!important}" +
-      "html body .hero-subtitle{font-size:clamp(1.82rem,6.7vw,2.1rem)!important;line-height:1.12!important}" +
+      "html body .hero-subtitle{font-size:clamp(1.32rem,4.8vw,1.5rem)!important;line-height:1.15!important}" +
       "html body .hero-lead{font-size:clamp(.98rem,3.7vw,1.1rem)!important;line-height:1.42!important}" +
       "html body .hero .container{grid-template-columns:minmax(0,1fr) clamp(164px,46vw,188px)!important;column-gap:clamp(.5rem,2.2vw,.75rem)!important}" +
       "html body .hero-showcase{width:clamp(164px,46vw,188px)!important;max-width:188px!important;justify-self:end!important}" +
