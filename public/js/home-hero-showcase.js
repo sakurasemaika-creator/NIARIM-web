@@ -136,7 +136,11 @@
       source.style.setProperty("max-width", "none", "important");
       source.style.setProperty("max-height", "none", "important");
       source.style.setProperty("transform-origin", "top left", "important");
-      source.style.setProperty("transform", "scale(" + scale + ")", "important");
+      source.style.setProperty(
+        "transform",
+        "scale(" + scale + ")",
+        "important",
+      );
 
       var overflow = Math.max(
         source.scrollWidth / Math.max(1, source.clientWidth),
