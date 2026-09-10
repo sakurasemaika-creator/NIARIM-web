@@ -1,6 +1,17 @@
 (function () {
   "use strict";
 
+  function loadMobileDensityLayer() {
+    if (document.querySelector("link[data-niarim-home-mobile-density]")) return;
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/home-hero-mobile-density.css";
+    link.setAttribute("data-niarim-home-mobile-density", "true");
+    document.head.appendChild(link);
+  }
+
+  loadMobileDensityLayer();
+
   function workCard(title, author, views, bookmarks, duration, tone) {
     return (
       '<article class="hero-community-work ' +
