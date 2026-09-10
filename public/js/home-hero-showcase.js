@@ -104,7 +104,7 @@
     if (!source) return null;
 
     var clone = source.cloneNode(true);
-    clone.classList.add("hero-app-preview-source", themeClass);
+    clone.classList.add("hero-app-preview-source", "is-fit-scaled", themeClass);
     resetPreviewFit(clone);
     clone.removeAttribute("id");
     clone.querySelectorAll("[id]").forEach(function (node) {
