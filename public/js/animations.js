@@ -2,8 +2,8 @@
  * NIARIM公式サイト アニメーション制御
  *
  * スクロールで意味のある状態変化だけをJavaScriptで補助する。
- * hover / press の装飾はCSSに任せ、pointermove / mousemove を追跡する
- * 常時インタラクションループは持たない。
+ * hover / press の装飾とHero下線はCSSに任せ、pointermove / mousemoveや
+ * テキスト行のlayout計測を行う常時インタラクションループは持たない。
  */
 (function () {
   "use strict";
@@ -132,59 +132,9 @@
     });
   }
 
-  function initHeroUnderline() {
-    var textEl = document.querySelector(".hero-subtitle-text");
-    if (!textEl) return;
-
-    var rafId = 0;
-    function rebuild() {
-      rafId = 0;
-      textEl.querySelectorAll(".hero-underline-line").forEach(function (el) {
-        el.remove();
-      });
-
-      var range = document.createRange();
-      range.selectNodeContents(textEl);
-      var rects = Array.prototype.slice.call(range.getClientRects());
-      if (!rects.length) return;
-
-      var containerRect = textEl.getBoundingClientRect();
-      var fragment = document.createDocumentFragment();
-      rects.forEach(function (rect, index) {
-        if (rect.width < 1) return;
-        var line = document.createElement("span");
-        line.className = "hero-underline-line";
-        line.style.left = rect.left - containerRect.left + "px";
-        line.style.top = rect.bottom - containerRect.top + 3 + "px";
-        line.style.width = rect.width + "px";
-        line.style.animationDelay = 1.05 + index * 0.15 + "s";
-        fragment.appendChild(line);
-      });
-      textEl.appendChild(fragment);
-    }
-
-    function scheduleRebuild() {
-      if (!rafId) rafId = requestAnimationFrame(rebuild);
-    }
-
-    scheduleRebuild();
-    document.addEventListener("niarim:langchange", scheduleRebuild);
-
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(scheduleRebuild).observe(textEl);
-    } else {
-      window.addEventListener("resize", scheduleRebuild, { passive: true });
-    }
-
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(scheduleRebuild).catch(function () {});
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initStaggerGrids();
     initFeatureNavSpy();
-    initHeroUnderline();
   });
 })();
