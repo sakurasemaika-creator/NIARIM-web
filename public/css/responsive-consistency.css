@@ -83,26 +83,9 @@ html body #features .feature-row:nth-child(even) {
   }
 }
 
-/* Desktop shows all three Hero devices. Keep the app mocks at their canonical
-   320x569 logical size and use the per-card ResizeObserver scale so every fixed
-   pixel toolbar/timeline row shrinks with the device at 1280, 1366 and 1440px. */
+/* Desktop-only child corrections. Preview sizing itself is owned once by the
+   canonical 320x569 rule above and the per-card ResizeObserver scale. */
 @media (min-width: 1280px) {
-  html
-    body
-    .hero
-    .hero-showcase
-    .hero-preview-card:not(.hero-preview-community)
-    > .hero-app-preview-source {
-    position: relative !important;
-    inset: 0 auto auto 0 !important;
-    width: 320px !important;
-    height: 569px !important;
-    max-width: none !important;
-    max-height: none !important;
-    transform-origin: top left !important;
-    transform: scale(var(--hero-preview-scale, 1)) !important;
-  }
-
   html
     body
     .hero
