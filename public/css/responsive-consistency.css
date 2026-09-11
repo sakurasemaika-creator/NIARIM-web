@@ -42,17 +42,37 @@ html body .hero-preview-card > .hero-app-preview-source {
 }
 
 /* TimelineScreen keeps an 18px label column beside five 37px frames. The
-   rendered current frame sits 16.75 logical pixels right of the strip anchor.
-   Make the screen itself the containing block, then apply that source-space
-   offset at the anchor so fitMockScreens() scales the correction together with
-   Home mocks while Features keeps the same 320px logical geometry. */
+   canonical screen/Features geometry needs a 16.75 logical-pixel source-space
+   correction. Home gallery screens are additionally resized by fitMockScreens(),
+   so keep their measured source corrections as context variables rather than
+   reopening the shared strip geometry. */
+html body .fd-timeline-screen {
+  --fd-timeline-current-offset: 16.75px;
+}
+
+/* The normal Home gallery Timeline is just over the ±2px audit tolerance after
+   fit scaling at 360/390px. Its measured source-space correction is 16px; Hero
+   clones are outside .screenshot-card and therefore keep the canonical value. */
+html body .screenshot-card .fd-timeline-screen:not(.fd-audio-context-screen) {
+  --fd-timeline-current-offset: 16px;
+}
+
+/* AudioScreen reuses TimelineScreen underneath its editor sheet. In the Home
+   gallery that fitted composition leaves the selected frame one 37px logical
+   frame cell to the right of the screen anchor. Scope that source-space shift
+   to the gallery Audio derivative so Features and the canonical Timeline stay
+   on the already-green 16.75px correction. */
+html body .screenshot-card .fd-audio-context-screen {
+  --fd-timeline-current-offset: 37.3px;
+}
+
 html body .fd-timeline-screen .fd-timeline-row {
   position: static !important;
 }
 
 html body .fd-timeline-screen .fd-timeline-frames {
   position: absolute !important;
-  left: calc(50% - 16.75px) !important;
+  left: calc(50% - var(--fd-timeline-current-offset)) !important;
   width: 185px !important;
   transform: translateX(-50%) !important;
   justify-content: center !important;
