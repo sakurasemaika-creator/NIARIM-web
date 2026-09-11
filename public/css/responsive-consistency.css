@@ -64,10 +64,7 @@ html body .hero-showcase .fd-timeline-screen > .fd-playhead {
 
 /* Screen mocks are visually self-contained. Keep their paint invalidation local
    and avoid text selection without mutating each node from JavaScript. */
-html body .feature-diagram,
-html body .frame-mock,
-html body .fd-app-screen,
-html body .fd-route-screen {
+html body :is(.feature-diagram, .frame-mock, .fd-app-screen, .fd-route-screen) {
   contain: paint;
   user-select: none;
 }
@@ -77,22 +74,47 @@ html body #features .feature-row:nth-child(even) {
   background: #fff !important;
 }
 
+/* Lightweight depth inspired by modern product galleries: no WebGL, no idle
+   animation and no permanent will-change allocation. Only direct pointer input
+   gets a tiny composited lift, keeping the app preview itself the focal point. */
+@media (hover: hover) and (pointer: fine) {
+  html body .hero-showcase {
+    perspective: 1100px;
+  }
+
+  html body .hero-preview-card {
+    transition:
+      transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1),
+      box-shadow 220ms ease !important;
+    transform-origin: 50% 70%;
+  }
+
+  html body .hero-preview-card:hover {
+    transform: translate3d(0, -4px, 0) rotateX(1.25deg) rotateY(-1deg);
+    box-shadow: 0 18px 38px rgba(25, 22, 31, 0.16) !important;
+  }
+
+  html body .hero-preview-card:nth-child(even):hover {
+    transform: translate3d(0, -4px, 0) rotateX(1.25deg) rotateY(1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .hero-preview-card {
+    transition: none !important;
+  }
+}
+
 @media (max-width: 559px) {
   /* Structural placement and compact typography are owned by
      home-hero-responsive-final.css. Keep only presentation details that are
      not part of that layout contract so late-loaded site-wide CSS cannot
      reopen the Hero grid cascade. */
-  html body .hero-title,
-  html body .hero-subtitle,
-  html body .hero-lead,
-  html body .hero-bridge {
+  html body :is(.hero-title, .hero-subtitle, .hero-lead, .hero-bridge) {
     text-align: left !important;
   }
 
-  html body .hero-copy > .eyebrow,
-  html body .hero-copy > .hero-title,
-  html body .hero-copy > .hero-subtitle,
-  html body .hero-copy > .hero-lead {
+  html body .hero-copy > :is(.eyebrow, .hero-title, .hero-subtitle, .hero-lead) {
     justify-self: start !important;
   }
 
