@@ -41,6 +41,27 @@ html body .hero-preview-card > .hero-app-preview-source {
   transform: scale(var(--hero-preview-scale, 1)) !important;
 }
 
+/* The full timeline mock keeps its normal flowing label column. In the compact
+   Home Hero clone, however, the five 37px frames must be centered on the phone
+   screen itself; centering them in the remaining flex space shifts the selected
+   third frame to the right. Scope this correction to the clone so Features and
+   other screen mocks keep their existing layout. */
+html body .hero-showcase .fd-timeline-row {
+  position: relative !important;
+}
+
+html body .hero-showcase .fd-timeline-frames {
+  position: absolute !important;
+  left: 50% !important;
+  width: 185px !important;
+  transform: translateX(-50%) !important;
+  justify-content: center !important;
+}
+
+html body .hero-showcase .fd-timeline-screen > .fd-playhead {
+  left: 50% !important;
+}
+
 /* Screen mocks are visually self-contained. Keep their paint invalidation local
    and avoid text selection without mutating each node from JavaScript. */
 html body .feature-diagram,
