@@ -114,7 +114,10 @@ html body #features .feature-row:nth-child(even) {
     text-align: left !important;
   }
 
-  html body .hero-copy > :is(.eyebrow, .hero-title, .hero-subtitle, .hero-lead) {
+  html
+    body
+    .hero-copy
+    > :is(.eyebrow, .hero-title, .hero-subtitle, .hero-lead) {
     justify-self: start !important;
   }
 
