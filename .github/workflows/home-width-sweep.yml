@@ -13,6 +13,7 @@ on:
       - "public/css/home-hero-fidelity.css"
       - "public/css/home-hero-fit-628.css"
       - "public/css/home-hero-responsive-final.css"
+      - "public/css/home-hero-cascade-final.css"
       - "public/css/line-break.css"
       - "public/css/home-community-spacing.css"
       - "public/css/pages/home.css"
