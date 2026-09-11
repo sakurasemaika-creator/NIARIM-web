@@ -42,27 +42,28 @@ html body .hero-preview-card > .hero-app-preview-source {
 }
 
 /* TimelineScreen keeps an 18px label column beside five 37px frames. The
-   canonical screen/Features geometry needs a 16.75 logical-pixel source-space
-   correction. Home gallery screens are additionally resized by fitMockScreens(),
-   so keep their measured source corrections as context variables rather than
-   reopening the shared strip geometry. */
+   canonical Hero/Features geometry needs a 16.75 logical-pixel source-space
+   correction. Home reuses the same screen in two differently fitted contexts,
+   so those contexts own measured offsets while the strip geometry stays shared. */
 html body .fd-timeline-screen {
   --fd-timeline-current-offset: 16.75px;
 }
 
-/* The normal Home gallery Timeline is just over the ±2px audit tolerance after
-   fit scaling at 360/390px. Its measured source-space correction is 16px; Hero
-   clones are outside .screenshot-card and therefore keep the canonical value. */
-html body .screenshot-card .fd-timeline-screen:not(.fd-audio-context-screen) {
-  --fd-timeline-current-offset: 16px;
+/* Home's main feature-row Timeline is outside the screenshot carousel. Across
+   the 360/390 audit widths its measured fit scale is 0.892/0.991; solving the
+   remaining -2.10/-2.52px visual deltas back into source space converges around
+   14.3px. Keep the selector on the Home-only feature-row structure so the
+   already-green Features route and Hero clone retain the canonical value. */
+html body #features .feature-row .fd-timeline-screen {
+  --fd-timeline-current-offset: 14.3px;
 }
 
-/* AudioScreen reuses TimelineScreen underneath its editor sheet. In the Home
-   gallery that fitted composition leaves the selected frame one 37px logical
-   frame cell to the right of the screen anchor. Scope that source-space shift
-   to the gallery Audio derivative so Features and the canonical Timeline stay
-   on the already-green 16.75px correction. */
-html body .screenshot-card .fd-audio-context-screen {
+/* Every Timeline-derived screen in the Home App Preview carousel is fitted to
+   the 9:16 card. The failing regular Timeline measured visual scales of
+   0.670/0.682/0.687 at SP360/SP390/PC; converting its +14.42..+14.62px deltas
+   back to source space yields 37.24..37.52px. 37.3px also keeps the already
+   passing AudioScreen derivative on the same fitted-carousel coordinate system. */
+html body .screenshot-card .fd-timeline-screen {
   --fd-timeline-current-offset: 37.3px;
 }
 
