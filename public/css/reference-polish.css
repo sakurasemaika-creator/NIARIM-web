@@ -178,8 +178,16 @@
    filter layer. The feature-card clone does not need a second aura at all. */
 .hero .hero-visual::before {
   background:
-    radial-gradient(circle at 28% 34%, rgba(255, 92, 122, 0.28), transparent 52%),
-    radial-gradient(circle at 72% 66%, rgba(255, 177, 92, 0.22), transparent 50%);
+    radial-gradient(
+      circle at 28% 34%,
+      rgba(255, 92, 122, 0.28),
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 72% 66%,
+      rgba(255, 177, 92, 0.22),
+      transparent 50%
+    );
   filter: none;
   animation: none;
 }
