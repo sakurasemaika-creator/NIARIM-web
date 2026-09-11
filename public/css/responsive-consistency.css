@@ -83,6 +83,45 @@ html body #features .feature-row:nth-child(even) {
   }
 }
 
+/* Desktop shows all three Hero devices. Canvas and Timeline are 320x569 logical
+   app mocks, while their cards are roughly half-size. Keep the mock at a roomy
+   logical size and scale its entire subtree together; shrinking only the outer
+   box leaves fixed-pixel toolbar/timeline rows below the bezel. 181.818% x .55
+   resolves back to exactly the card size at every desktop card width. */
+@media (min-width: 1280px) {
+  html
+    body
+    .hero
+    .hero-showcase
+    .hero-preview-card:not(.hero-preview-community)
+    > .hero-app-preview-source {
+    position: relative !important;
+    inset: 0 auto auto 0 !important;
+    width: 181.818182% !important;
+    height: 181.818182% !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform-origin: top left !important;
+    transform: scale(0.55) !important;
+  }
+
+  html
+    body
+    .hero
+    .hero-showcase
+    .hero-preview-canvas
+    > .hero-app-preview-source
+    > :is(.fd-toolbar, .fd-frame-strip) {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  html body .hero .hero-showcase .hero-preview-community .hero-community-fab {
+    background: var(--fd-accent) !important;
+  }
+}
+
 @media (max-width: 559px) {
   /* Structural placement and compact typography are owned by
      home-hero-responsive-final.css. Keep only presentation details that are
