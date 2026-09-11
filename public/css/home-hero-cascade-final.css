@@ -72,7 +72,11 @@ html body .hero-actions > :is(a, button) {
    contrast instead of relying on the shadow alone. */
 @media (prefers-contrast: more) {
   html body .hero-preview-card {
-    border-color: color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
+    border-color: color-mix(
+      in srgb,
+      var(--color-ink) 42%,
+      transparent
+    ) !important;
   }
 
   html body .hero-actions .btn:focus-visible {
