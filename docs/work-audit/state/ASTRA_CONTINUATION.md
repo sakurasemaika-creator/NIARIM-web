@@ -12,17 +12,23 @@ web_baseline: 2a44dd9007e4a764e489a42a70f96ac5da6b3b8a
 今回の新規Routeから開始。旧進捗の転記なし。
 
 completed_substeps:
-- A001/S1 route-policy-current-head restore: App dev_branch 97e5618fcdd4d248e5e2d85629fb800789f41798 / Web dev_branch 9491a890db7fd76ed9267e05de0665970f69b7e6、両AGENTS、locked Route、current_id=A001を確認。
-- A001/S2 startup source-order review: main()→AppErrorReporter.install→font license registration→orientation→buildAppProviders→runApp、buildAppProviders内のsettings/performance/premium/ads/projectほかの逐次初期化を現行HEADで追跡。
-- A001/S3 corrupt persisted-settings reproduction: existing isolated test run 34533483148 の生ログを再確認し、SettingsService.initのcustom_size_presets破損JSONとThemeService.initのtheme_current_json破損JSONがFormatExceptionで起動初期化を中断することを現行コード位置と照合してroot cause確定。正常設定を保持し、壊れた値を勝手に上書きしないというA001期待を満たさない。
+- A001/S1 route-policy-current-head restore: 両AGENTS、locked Route、current_id=A001を確認。Route再構築・並べ替えなし。
+- A001/S2 startup source-order review: main()→AppErrorReporter.install→font license registration→orientation→buildAppProviders→runApp、buildAppProviders内の逐次初期化を追跡。
+- A001/S3 corrupt persisted-settings reproduction: run 34533483148 の生ログと現行sourceを照合し、SettingsService/ThemeServiceの壊れたJSONがFormatExceptionでstartupを中断するroot causeを確定。
+- A001/S4 persisted JSON recovery verified: run 34575385855 success。startup_settings_recovery_test 3/3 PASS（壊れたsize preset隔離、壊れたcurrent theme fallback+raw保持、壊れたsaved theme隣接valid保持）、touched analyze 0 issues。修正commit `770e2c57d0a77c11c1a174b5a07243a71383f369` がdev_branchへpush済み。
+- A001/S5a source-side double-init root cause: AdvertisingService再initのlistener/provider重複、AppErrorReporter.install再wrapを確認。GoogleAuthServiceは既存guardあり。
+- A001/S5b minimal idempotence code: AppErrorReporter install guard commit `5d71d158c0aae465dfa9122232ff01b52f6e18bd`、AdvertisingService lifecycle guard commit `9ea1c72c54f9d5ac73825c661c851083e484408d`。
+- A001/S5c idempotence/failure visibility verified: run 34575561261 success。startup_service_contract_test 2/2 PASS（AdvertisingService init idempotence、AppErrorReporter handler single-wrap）。ProjectServiceの破損file/storage recoveryはAppErrorReporter.recordへ記録しつつ非fatal recoveryを維持。analyzeは不要import info 1件のみでfatalなし。結果はrebase後commit `a7e8ed68c1db4af7bdf9fabc3c5caff06d910a1f` 系列としてdev_branchへ入り、その後S4修正がHEAD `770e2c57...` に積まれた。
 
-current_substep: A001/S4 implement minimal recovery for corrupt JSON settings and re-run targeted startup contract tests on current dev_branch
+current_substep: A001/S5d partial-bootstrap failure/retry lifecycle + fresh/warm startup verification
+
 remaining_substeps:
-- A001/S4 SettingsService/ThemeServiceの破損JSONを項目単位で隔離して既定値へfallbackし、保存値自体は上書きしない修正。targeted testをcurrent HEADでgreen化。
-- A001/S5 fresh/warm startup・initialization failure propagation/retry・二重初期化/side-effect review（premium/ads/auth/project/license/error reporter含む）。必要なら追加targeted tests。
-- A001/S6 A001のsource review + targeted tests/log evidenceをまとめ、未確認がなければRoute/Evidenceをdone同期してA002へ。
+- A001/S5d finish fresh/warm startup and partial-bootstrap failure/retry lifecycle review。後段initializer failure時に先行serviceのlistener/subscriptionを残したまま再buildしないことを保証し、必要ならfailure surface/cleanupを実装してtargeted testする。
+- A001/S5e verify bundled font license registration and remaining auth/project/premium startup side effects for duplicate/leak/failure reporting behavior; add only necessary targeted tests.
+- A001/S6 consolidate source review + targeted tests/log evidence; only when all A001 expected conditions are verified, mark Route/Evidence done and advance A002.
 
 blockers:
-- 現時点でadvisor blockerなし。A001/S4は通常の局所root-cause修正としてSolで実行可能。
+- advisor blocker: none。S5dはSolで継続可能な通常のlifecycle設計/検証論点。
+- execution: none。S4/S5 queued runnersは双方successを生ログ確認済み。
 
-next_action: 現行dev_branchへ破損JSON回復の最小修正を入れ、startup-contract-auditをcurrent HEADで再実行して結果をEvidenceへcheckpointする。
+next_action: current HEAD `770e2c57d0a77c11c1a174b5a07243a71383f369` からS5dを継続し、partial bootstrap failureを注入できる最小test seamとcleanup ownershipを確定する。retry UIを追加する場合はcleanup safetyのtargeted testを先に成立させる。
