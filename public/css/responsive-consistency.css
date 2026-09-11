@@ -58,6 +58,16 @@ html body #features .feature-row .fd-timeline-screen {
   --fd-timeline-current-offset: 14.3px;
 }
 
+/* At desktop width this Home feature-row mock renders at source scale 1.0.
+   The 14.3px compact-layout correction therefore leaves the current frame
+   2.4375px to the right; use the canonical source-space offset once the
+   desktop composition is active. */
+@media (min-width: 1280px) {
+  html body #features .feature-row .fd-timeline-screen {
+    --fd-timeline-current-offset: 16.75px;
+  }
+}
+
 /* Every Timeline-derived screen in the Home App Preview carousel is fitted to
    the 9:16 card. The failing regular Timeline measured visual scales of
    0.670/0.682/0.687 at SP360/SP390/PC; converting its +14.42..+14.62px deltas
