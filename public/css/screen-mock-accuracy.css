@@ -153,13 +153,6 @@
   height: 51px !important;
   flex-basis: 51px !important;
 }
-/* The current DOM leaves the five-frame strip 16.75 logical pixels to the
-   right of the device center after row padding/label geometry is resolved.
-   This capture-calibration layer owns that fixed source offset, so compensate
-   it here rather than moving the selected artwork or adding viewport patches. */
-.fd-timeline-screen .fd-timeline-frames {
-  transform: translateX(-11.75px) !important;
-}
 
 /* Workspace rows match the real narrow-screen list density. */
 .fd-workspace-screen .fd-workspace-row {
