@@ -50,9 +50,34 @@ html body .hero-showcase .hero-app-preview-source {
 /* Borrow the strongest lightweight idea from modern copy-owned UI systems:
    crisp translucent edges with a tiny depth cue instead of extra JS motion. */
 html body .hero-preview-card {
+  contain: paint;
   box-shadow:
     0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
     0 12px 28px rgba(25, 22, 31, 0.1) !important;
+}
+
+/* Latin copy benefits from the same editorial rhythm used by copy-owned type
+   systems: avoid a stranded final word without touching CJK line breaking. */
+:root:is(:lang(en), :lang(fr), :lang(es)) .hero-lead,
+:root:is(:lang(en), :lang(fr), :lang(es)) .hero-bridge {
+  text-wrap: pretty;
+}
+
+/* Real controls get direct-touch behavior without adding a gesture listener. */
+html body .hero-actions > :is(a, button) {
+  touch-action: manipulation;
+}
+
+/* Keep the translucent edge treatment legible for users requesting more
+   contrast instead of relying on the shadow alone. */
+@media (prefers-contrast: more) {
+  html body .hero-preview-card {
+    border-color: color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
+  }
+
+  html body .hero-actions .btn:focus-visible {
+    outline-width: 4px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
