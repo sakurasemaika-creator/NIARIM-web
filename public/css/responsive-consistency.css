@@ -2,11 +2,11 @@
 
 /* Static ownership avoids runtime <style> injection and repeated inline writes.
    Card visibility belongs to the viewport-specific Hero layers; forcing display
-   here would resurrect cards those layers intentionally hide on narrow screens.
-   Card depth is owned by the canonical home-hero-cascade-final.css layer. */
+   here would resurrect cards those layers intentionally hide on narrow screens. */
 html body .hero-preview-card {
   position: relative !important;
   border: 0 !important;
+  box-shadow: 0 14px 30px rgba(25, 22, 31, 0.12) !important;
 }
 
 html body .hero-preview-card::after {
