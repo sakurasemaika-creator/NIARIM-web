@@ -1,0 +1,65 @@
+/* Canonical last-mile ownership for the Home hero.
+   Loaded after the generated mock/design layers by home-hero-showcase.js.
+   Keep this file intentionally small: it only resolves cascade ordering and
+   responsive preview visibility, leaving all visual construction in the
+   existing hero stylesheets. */
+
+html body .hero-showcase {
+  transform: none !important;
+}
+
+html body .hero-showcase > .hero-preview-card {
+  display: none !important;
+}
+
+html body .hero-showcase > .hero-preview-canvas {
+  display: block !important;
+}
+
+/* Hero clones are already sized by their phone card. They must not inherit the
+   generic screen-mock fitting transform used by deep feature diagrams. */
+html body .hero-showcase .hero-app-preview-source {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  transform-origin: center !important;
+}
+
+@media (max-width: 559px) {
+  html body .hero .container {
+    column-gap: clamp(0.65rem, 3vw, 0.9rem) !important;
+  }
+}
+
+@media (min-width: 760px) {
+  html body .hero-showcase > .hero-preview-timeline {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  html body .hero-showcase > .hero-preview-community {
+    display: block !important;
+  }
+}
+
+/* Borrow the strongest lightweight idea from modern copy-owned UI systems:
+   crisp translucent edges with a tiny depth cue instead of extra JS motion. */
+html body .hero-preview-card {
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
+    0 12px 28px rgba(25, 22, 31, 0.1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .hero-showcase,
+  html body .hero-preview-card,
+  html body .hero-app-preview-source {
+    transition: none !important;
+    animation: none !important;
+  }
+}
