@@ -83,11 +83,9 @@ html body #features .feature-row:nth-child(even) {
   }
 }
 
-/* Desktop shows all three Hero devices. Canvas and Timeline are 320x569 logical
-   app mocks, while their cards are roughly half-size. Keep the mock at a roomy
-   logical size and scale its entire subtree together; shrinking only the outer
-   box leaves fixed-pixel toolbar/timeline rows below the bezel. 181.818% x .55
-   resolves back to exactly the card size at every desktop card width. */
+/* Desktop shows all three Hero devices. Keep the app mocks at their canonical
+   320x569 logical size and use the per-card ResizeObserver scale so every fixed
+   pixel toolbar/timeline row shrinks with the device at 1280, 1366 and 1440px. */
 @media (min-width: 1280px) {
   html
     body
@@ -97,12 +95,12 @@ html body #features .feature-row:nth-child(even) {
     > .hero-app-preview-source {
     position: relative !important;
     inset: 0 auto auto 0 !important;
-    width: 181.818182% !important;
-    height: 181.818182% !important;
+    width: 320px !important;
+    height: 569px !important;
     max-width: none !important;
     max-height: none !important;
     transform-origin: top left !important;
-    transform: scale(0.55) !important;
+    transform: scale(var(--hero-preview-scale, 1)) !important;
   }
 
   html
