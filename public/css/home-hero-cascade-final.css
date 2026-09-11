@@ -16,19 +16,6 @@ html body .hero-showcase > .hero-preview-canvas {
   display: block !important;
 }
 
-/* Hero clones are already sized by their phone card. They must not inherit the
-   generic screen-mock fitting transform used by deep feature diagrams. */
-html body .hero-showcase .hero-app-preview-source {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  transform: none !important;
-  transform-origin: center !important;
-}
-
 @media (max-width: 559px) {
   html body .hero .container {
     column-gap: clamp(0.65rem, 3vw, 0.9rem) !important;
