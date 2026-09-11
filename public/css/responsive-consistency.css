@@ -41,17 +41,18 @@ html body .hero-preview-card > .hero-app-preview-source {
   transform: scale(var(--hero-preview-scale, 1)) !important;
 }
 
-/* TimelineScreen keeps an 18px label column beside five 37px frames. Anchor
-   the frame strip to the screen itself rather than to that padded row. This
-   keeps the selected third frame at the device center even when fitMockScreens()
-   expands a mock's logical width before scaling it back into its card. */
+/* TimelineScreen keeps an 18px label column beside five 37px frames. The
+   rendered current frame sits 16.75 logical pixels right of the strip anchor.
+   Make the screen itself the containing block, then apply that source-space
+   offset at the anchor so fitMockScreens() scales the correction together with
+   Home mocks while Features keeps the same 320px logical geometry. */
 html body .fd-timeline-screen .fd-timeline-row {
   position: static !important;
 }
 
 html body .fd-timeline-screen .fd-timeline-frames {
   position: absolute !important;
-  left: 50% !important;
+  left: calc(50% - 16.75px) !important;
   width: 185px !important;
   transform: translateX(-50%) !important;
   justify-content: center !important;
