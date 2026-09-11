@@ -41,13 +41,6 @@ html body .hero-preview-card > .hero-app-preview-source {
   transform: scale(var(--hero-preview-scale, 1)) !important;
 }
 
-/* Always-on product animation. This important rule follows the imported
-   foundation, so a duplicate reduced-motion override is unnecessary. */
-html body .marquee-track {
-  animation: marquee-scroll 32s linear infinite !important;
-  animation-play-state: running !important;
-}
-
 /* Screen mocks are visually self-contained. Keep their paint invalidation local
    and avoid text selection without mutating each node from JavaScript. */
 html body .feature-diagram,
@@ -64,6 +57,10 @@ html body #features .feature-row:nth-child(even) {
 }
 
 @media (max-width: 559px) {
+  /* Structural placement and compact typography are owned by
+     home-hero-responsive-final.css. Keep only presentation details that are
+     not part of that layout contract so late-loaded site-wide CSS cannot
+     reopen the Hero grid cascade. */
   html body .hero-title,
   html body .hero-subtitle,
   html body .hero-lead,
@@ -89,72 +86,6 @@ html body #features .feature-row:nth-child(even) {
 
   html body .hero .hero-preview-card::after {
     border-width: 3px !important;
-  }
-
-  html body .hero .container > .hero-showcase {
-    grid-column: 2 !important;
-    grid-row: 4 / 6 !important;
-    align-self: start !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-actions {
-    grid-column: 1 !important;
-    grid-row: 5 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.42rem !important;
-    width: 100% !important;
-    margin: 0 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-actions .btn {
-    flex: 0 0 auto !important;
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-bridge {
-    grid-column: 1 / -1 !important;
-    grid-row: 6 !important;
-  }
-}
-
-@media (max-width: 339px) {
-  html body .hero .container .hero-copy > .hero-title {
-    font-size: clamp(2.72rem, 13.2vw, 3rem) !important;
-    line-height: 0.94 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-subtitle {
-    margin-top: 0.72rem !important;
-    font-size: 0.78rem !important;
-    line-height: 1.18 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-lead {
-    margin-top: 0.9rem !important;
-    font-size: 0.68rem !important;
-    line-height: 1.38 !important;
-  }
-}
-
-@media (min-width: 340px) and (max-width: 559px) {
-  html body .hero .container .hero-copy > .hero-title {
-    font-size: clamp(2.9rem, 12.6vw, 3.55rem) !important;
-    line-height: 0.92 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-subtitle {
-    margin-top: clamp(0.9rem, 3.6vw, 1.2rem) !important;
-    font-size: clamp(1.08rem, 4vw, 1.24rem) !important;
-    line-height: 1.14 !important;
-  }
-
-  html body .hero .container .hero-copy > .hero-lead {
-    margin-top: clamp(1.05rem, 4vw, 1.35rem) !important;
-    font-size: clamp(0.72rem, 2.8vw, 0.84rem) !important;
-    line-height: 1.38 !important;
   }
 }
 
