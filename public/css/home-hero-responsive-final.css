@@ -148,10 +148,7 @@
   }
 }
 
-/* 560–759px shares one compact single-card composition. Keep the structural
-   and typography contract in one place; the two sub-bands below only own the
-   column and preview-size values that intentionally differ near 733px. */
-@media (min-width: 560px) and (max-width: 759px) {
+@media (min-width: 560px) and (max-width: 732px) {
   html body .hero {
     padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
     padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
@@ -160,6 +157,7 @@
   html body .hero .container {
     width: calc(100% - 2rem) !important;
     display: grid !important;
+    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
     grid-template-rows: none !important;
     align-items: center !important;
     justify-items: stretch !important;
@@ -176,10 +174,25 @@
     grid-row: auto !important;
   }
 
+  html body .hero-copy > .eyebrow,
+  html body .hero-copy > .hero-title,
+  html body .hero-copy > .hero-subtitle,
+  html body .hero-copy > .hero-lead,
+  html body .hero-copy > .hero-actions,
+  html body .hero-copy > .hero-bridge {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
   html body .hero-visual,
   html body .hero-showcase {
     grid-column: 2 !important;
     grid-row: auto !important;
+    /* Grow the single-card presentation continuously through the compact band.
+       Ending near 243px at 759px keeps its visual weight close to the two-card
+       tablet presentation instead of making 760px look like a different page. */
+    width: clamp(150px, 28vw, 205px) !important;
+    max-width: 205px !important;
     min-width: 0 !important;
     justify-self: end !important;
     align-self: center !important;
@@ -226,41 +239,83 @@
   }
 }
 
-@media (min-width: 560px) and (max-width: 732px) {
-  html body .hero .container {
-    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
+/* 733–759px is a deliberate transition band: keep one preview card, but
+   let it grow before the two-card tablet composition begins at 760px. */
+@media (min-width: 733px) and (max-width: 759px) {
+  html body .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
   }
 
-  html body .hero-copy > .eyebrow,
-  html body .hero-copy > .hero-title,
-  html body .hero-copy > .hero-subtitle,
-  html body .hero-copy > .hero-lead,
-  html body .hero-copy > .hero-actions,
-  html body .hero-copy > .hero-bridge {
-    grid-column: auto !important;
+  html body .hero .container {
+    width: calc(100% - 2rem) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.72fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+
+  html body .hero-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    grid-column: 1 !important;
     grid-row: auto !important;
   }
 
   html body .hero-visual,
   html body .hero-showcase {
-    /* Grow the single-card presentation continuously through the compact band.
-       Ending at 205px before the transition band avoids a visual weight jump. */
-    width: clamp(150px, 28vw, 205px) !important;
-    max-width: 205px !important;
-  }
-}
-
-/* 733–759px is a deliberate transition band: keep one preview card, but
-   let it grow before the two-card tablet composition begins at 760px. */
-@media (min-width: 733px) and (max-width: 759px) {
-  html body .hero .container {
-    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.72fr) !important;
-  }
-
-  html body .hero-visual,
-  html body .hero-showcase {
+    grid-column: 2 !important;
+    grid-row: auto !important;
     width: clamp(210px, 32vw, 243px) !important;
     max-width: 243px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    margin-inline: 0 !important;
+  }
+
+  html body .hero-title {
+    max-width: 100% !important;
+    font-size: clamp(2.2rem, 5.8vw, 2.85rem) !important;
+    line-height: 1 !important;
+  }
+
+  html body .hero-subtitle {
+    margin-top: 0.65rem !important;
+    font-size: clamp(0.9rem, 1.8vw, 0.98rem) !important;
+  }
+
+  html body .hero-lead {
+    margin-top: 0.8rem !important;
+    max-width: none !important;
+    font-size: clamp(0.84rem, 1.55vw, 0.93rem) !important;
+    line-height: 1.6 !important;
+  }
+
+  html body .hero-actions {
+    margin-top: 0.9rem !important;
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  html body .hero-actions .btn {
+    min-width: 0 !important;
+    min-height: 44px !important;
+    padding: 0.64rem 0.85rem !important;
+    flex: 1 1 9.5rem !important;
+  }
+
+  html body .hero-bridge {
+    display: block !important;
+    margin-top: 0.7rem !important;
+    max-width: none !important;
+    font-size: 0.76rem !important;
+    line-height: 1.5 !important;
   }
 }
 
