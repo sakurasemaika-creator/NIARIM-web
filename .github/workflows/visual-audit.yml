@@ -34,11 +34,14 @@ jobs:
           trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
           ready=false
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:8790/robots.txt >/dev/null; then ready=true; break; fi
+            if curl -fsS "http://127.0.0.1:8790/index.html?lang=en" -o /tmp/niarim-seo-ready.html && grep -Eiq '<html[^>]*lang="en"' /tmp/niarim-seo-ready.html; then
+              ready=true
+              break
+            fi
             sleep 1
           done
           if [ "$ready" != true ]; then cat /tmp/niarim-seo-worker.log; exit 1; fi
-          node tests/worker-seo-runtime-audit.mjs
+          node tests/worker-seo-runtime-audit.mjs || { cat /tmp/niarim-seo-worker.log; exit 1; }
       - name: Generate canonical formatting for diagnosis
         if: failure()
         run: |
@@ -54,7 +57,7 @@ jobs:
         with:
           name: canonical-prettier-output
           path: artifacts/canonical-prettier-output/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 1
 
   audit:
