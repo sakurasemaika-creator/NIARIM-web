@@ -53,6 +53,9 @@ for (const viewport of viewports) {
             const current = currents[0] || null;
             const cr = current?.getBoundingClientRect();
             const currentStyle = current ? getComputedStyle(current) : null;
+            const frames = screen.querySelector(".fd-timeline-frames");
+            const framesRect = frames?.getBoundingClientRect();
+            const framesStyle = frames ? getComputedStyle(frames) : null;
             const cursor = screen.querySelector(
               ".fd-timeline-frames > .fd-frame-cursor",
             );
@@ -74,6 +77,17 @@ for (const viewport of viewports) {
               currentBorderColor: currentStyle?.borderTopColor || "",
               currentBorderWidth: currentStyle?.borderTopWidth || "",
               accent,
+              timelineOffset: screenStyle
+                .getPropertyValue("--fd-timeline-current-offset")
+                .trim(),
+              inScreenshotCard: Boolean(screen.closest(".screenshot-card")),
+              isAudioContext: screen.classList.contains(
+                "fd-audio-context-screen",
+              ),
+              framesLeft: framesStyle?.left || "",
+              framesTransform: framesStyle?.transform || "",
+              framesRectLeft: framesRect?.left ?? null,
+              framesRectWidth: framesRect?.width ?? null,
               cursorPresent: Boolean(cursor),
               cursorDisplay: cursorStyle?.display || "",
               cursorVisibility: cursorStyle?.visibility || "",
