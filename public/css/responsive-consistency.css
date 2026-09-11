@@ -74,6 +74,15 @@ html body #features .feature-row:nth-child(even) {
   background: #fff !important;
 }
 
+/* At the 628px audit height the compact Hero already ends at the intended
+   baseline. Keep the black marquee to the same compact height used from 760px
+   upward instead of letting the generic 0.85rem site-wide padding add ~8px. */
+@media (min-width: 560px) and (max-width: 759px) and (max-height: 680px) {
+  html body .marquee-section {
+    padding-block: 0.6rem !important;
+  }
+}
+
 @media (max-width: 559px) {
   /* Structural placement and compact typography are owned by
      home-hero-responsive-final.css. Keep only presentation details that are
