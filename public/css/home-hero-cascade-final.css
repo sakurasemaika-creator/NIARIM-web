@@ -47,27 +47,6 @@ html body .hero-showcase .hero-app-preview-source {
   }
 }
 
-/* The full timeline mock can keep its normal flowing label column, but the
-   compact Hero clone needs the five fixed-width frames centered on the phone
-   screen itself. Otherwise the selected third frame is centered in the
-   remaining flex space and appears visibly right-shifted. Keep this correction
-   scoped to the clone instead of changing every screen mock site-wide. */
-html body .hero-showcase .fd-timeline-row {
-  position: relative !important;
-}
-
-html body .hero-showcase .fd-timeline-frames {
-  position: absolute !important;
-  left: 50% !important;
-  width: 185px !important;
-  transform: translateX(-50%) !important;
-  justify-content: center !important;
-}
-
-html body .hero-showcase .fd-timeline-screen > .fd-playhead {
-  left: 50% !important;
-}
-
 /* Borrow the strongest lightweight idea from modern copy-owned UI systems:
    crisp translucent edges with a tiny depth cue instead of extra JS motion. */
 html body .hero-preview-card {
