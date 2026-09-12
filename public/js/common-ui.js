@@ -8,6 +8,10 @@
 (function () {
   "use strict";
 
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
   function initScrollUi() {
     var header = document.querySelector(".site-header");
     var btn = document.createElement("button");
@@ -45,10 +49,10 @@
     document.addEventListener("niarim:langchange", applyLabel);
     window.addEventListener("scroll", requestScrollState, { passive: true });
     btn.addEventListener("click", function () {
-      var reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+      });
     });
   }
 
@@ -110,6 +114,11 @@
       var isOpen = item.classList.contains("is-open");
       item.classList.toggle("is-open", !isOpen);
       question.setAttribute("aria-expanded", String(!isOpen));
+
+      if (prefersReducedMotion()) {
+        answer.style.maxHeight = isOpen ? "0px" : "none";
+        return;
+      }
 
       if (isOpen) {
         answer.style.maxHeight = answer.scrollHeight + "px";
