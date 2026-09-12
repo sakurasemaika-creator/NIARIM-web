@@ -8,11 +8,20 @@
     var buttons = document.querySelectorAll("[data-community-tab]");
     if (!buttons.length) return;
 
+    function select(active) {
+      buttons.forEach(function (button) {
+        var selected = button === active;
+        button.classList.toggle("is-active", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+    }
+
+    var initial = document.querySelector("[data-community-tab].is-active");
+    select(initial || buttons[0]);
+
     buttons.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        buttons.forEach(function (button) {
-          button.classList.toggle("is-active", button === btn);
-        });
+        select(btn);
         // 実データ未実装のため、タブ切り替えは見た目のみ（プレースホルダー表示は共通）。
       });
     });
