@@ -256,6 +256,18 @@ textarea.form-control {
   margin-top: var(--space-sm);
 }
 
+.contact-form.is-visible .form-submit:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.contact-form.is-visible .form-submit:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .form-status {
   margin-top: var(--space-md);
   padding: var(--space-md);
