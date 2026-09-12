@@ -5,10 +5,6 @@
 (function () {
   "use strict";
 
-  var MESSAGE_MAX_LENGTH = 1000;
-  var NAME_MAX_LENGTH = 100;
-  var EMAIL_MAX_LENGTH = 254;
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var MAX_ATTACHMENTS = 3;
   var MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
   var MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
@@ -72,30 +68,25 @@
     var message = form.elements.message;
     var agree = form.elements.agree;
 
+    // required / type=email / maxlength はHTMLが正本。novalidate はブラウザ標準の
+    // 吹き出しUIだけを止める属性なので、ValidityState自体はそのまま利用できる。
+    // 同じ制約をJSの正規表現や数値でもう一度持たず、表示文言だけNIARIM側で制御する。
     [name, email, message].forEach(function (field) {
       var row = field.closest(".form-row");
       var errorEl = row.querySelector(".form-error");
-      var isEmpty = field.value.trim().length === 0;
-      var tooLong =
-        field === message
-          ? field.value.length > MESSAGE_MAX_LENGTH
-          : field === name
-            ? field.value.length > NAME_MAX_LENGTH
-            : field.value.length > EMAIL_MAX_LENGTH;
-      var badEmail =
-        field === email && !isEmpty && !EMAIL_RE.test(field.value.trim());
+      var state = field.validity;
 
-      if (isEmpty) {
+      if (state.valueMissing) {
         errorEl.setAttribute("data-i18n", "contact.error.required");
         errorEl.textContent = t("contact.error.required");
         setFieldError(row, true, field);
         valid = false;
-      } else if (tooLong) {
+      } else if (state.tooLong) {
         errorEl.setAttribute("data-i18n", "contact.error.tooLong");
         errorEl.textContent = t("contact.error.tooLong");
         setFieldError(row, true, field);
         valid = false;
-      } else if (badEmail) {
+      } else if (field === email && state.typeMismatch) {
         errorEl.setAttribute("data-i18n", "contact.error.email");
         errorEl.textContent = t("contact.error.email");
         setFieldError(row, true, field);
@@ -106,7 +97,7 @@
     });
 
     var agreeRow = agree.closest(".form-row");
-    if (!agree.checked) {
+    if (agree.validity.valueMissing) {
       setFieldError(agreeRow, true, agree);
       valid = false;
     } else {
