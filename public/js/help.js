@@ -14,6 +14,12 @@
     );
     if (!input || !categories.length) return;
 
+    if (noResults) {
+      noResults.setAttribute("role", "status");
+      noResults.setAttribute("aria-live", "polite");
+      noResults.setAttribute("aria-atomic", "true");
+    }
+
     function apply() {
       var query = input.value.trim().toLowerCase();
       var anyVisible = false;
