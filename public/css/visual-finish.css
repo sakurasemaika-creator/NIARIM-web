@@ -92,35 +92,10 @@
   opacity: 0.82;
 }
 
-/* Cards: consistent elevation language across the whole site. */
-@media (hover: hover) and (pointer: fine) {
-  :where(
-    .intro-card,
-    .news-card,
-    .help-category,
-    .help-item,
-    .community-card,
-    .pricing-card:not(.is-premium)
-  ) {
-    transition:
-      transform 220ms var(--ease-out),
-      box-shadow 220ms var(--ease-out),
-      border-color 220ms var(--ease-out);
-  }
-
-  :where(
-    .intro-card,
-    .news-card,
-    .help-category,
-    .help-item,
-    .community-card,
-    .pricing-card:not(.is-premium)
-  ):hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 92, 122, 0.18);
-    box-shadow: var(--finish-shadow-hover);
-  }
-}
+/* Static information cards stay visually stable. Interactive cards already get
+   restrained affordance from reference-polish.css when the semantic element is
+   an actual link. This avoids implying clickability and removes needless hover
+   transforms from large card grids. */
 
 /* Home feature blocks: reduce the boxed-in feeling and sharpen composition. */
 .feature-row {
@@ -304,15 +279,7 @@ section.section:has(.community-tabs) {
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  .lang-trigger,
-  :where(
-    .intro-card,
-    .news-card,
-    .help-category,
-    .help-item,
-    .community-card,
-    .pricing-card
-  ) {
+  .lang-trigger {
     transition: none !important;
     transform: none !important;
   }
