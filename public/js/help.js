@@ -27,11 +27,11 @@
         cards.forEach(function (card) {
           var text = card.textContent.toLowerCase();
           var match = !query || text.indexOf(query) > -1;
-          card.style.display = match ? "" : "none";
+          card.hidden = !match;
           if (match) categoryHasVisible = true;
         });
 
-        category.style.display = categoryHasVisible ? "" : "none";
+        category.hidden = !categoryHasVisible;
         if (categoryHasVisible) anyVisible = true;
       });
 
