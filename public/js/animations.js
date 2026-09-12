@@ -111,10 +111,10 @@
       if (id === currentId) return;
       currentId = id;
       links.forEach(function (link) {
-        link.classList.toggle(
-          "is-active",
-          link.getAttribute("href") === "#" + id,
-        );
+        var active = link.getAttribute("href") === "#" + id;
+        link.classList.toggle("is-active", active);
+        if (active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
     }
 
