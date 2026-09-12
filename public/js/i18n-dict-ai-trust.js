@@ -90,7 +90,7 @@
     // DOMContentLoaded 時に一括で行うが、この項目はその後に差し込まれるため
     // 対象から漏れる。ここで同じ関係を張っておく。
     item.innerHTML =
-      '<button class="faq-question" id="faq-question-ai-training" aria-expanded="false" aria-controls="faq-answer-ai-training"><span data-ai-training-q></span><span class="icon" aria-hidden="true"></span></button><div class="faq-answer" id="faq-answer-ai-training" role="region" aria-labelledby="faq-question-ai-training"><p data-ai-training-a></p></div>';
+      '<button type="button" class="faq-question" id="faq-question-ai-training" aria-expanded="false" aria-controls="faq-answer-ai-training"><span data-ai-training-q></span><span class="icon" aria-hidden="true"></span></button><div class="faq-answer" id="faq-answer-ai-training" role="region" aria-labelledby="faq-question-ai-training"><p data-ai-training-a></p></div>';
     list.appendChild(item);
     // .stagger-grid の出現演出は「一覧が画面に入った時点の子要素」にしか
     // is-visible を付けない。この項目は後から足すので対象から漏れ、
