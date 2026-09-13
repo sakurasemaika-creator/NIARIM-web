@@ -6,6 +6,7 @@
 @import url("/css/theme-accent-only.css");
 @import url("/css/screen-mock-frame-alignment.css?v=20260906-2");
 @import url("/css/home-hero-responsive-final.css");
+@import url("/css/screen-mock-production-match.css?v=20260913-1");
 
 /* ---- 単語の途中での改行を防ぐ ---- */
 h1,
