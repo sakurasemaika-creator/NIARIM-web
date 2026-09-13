@@ -167,3 +167,33 @@
 html body .fd-timeline-screen .fd-timeline-frames {
   transform: translateX(-84.234375px) !important;
 }
+
+/* line-break.css restores the canonical -50% transform for contexts that are
+   already centered. Keep only the two measured Home exceptions here with
+   stronger, context-specific selectors. At 360px the Home feature-row current
+   frame is 8.265625px left with -50%; the earlier source-space correction is
+   therefore the exact center. */
+@media (max-width: 374px) {
+  html
+    body
+    #features
+    .feature-row
+    .fd-timeline-screen:not(.fd-audio-context-screen)
+    .fd-timeline-frames {
+    transform: translateX(-84.234375px) !important;
+  }
+}
+
+/* App Preview Timeline is itself fitted to the 9:16 card at the 0.56 floor.
+   With -50% its current frame remains 10.87-12.36 rendered pixels right of
+   center across SP360/SP390/PC. Moving the 185px source strip another 21.5px
+   left becomes 12.04 rendered pixels at that fit, leaving <1.2px residual in
+   every audited viewport. AudioScreen is already centered and must not inherit
+   this regular-Timeline correction. */
+html
+  body
+  .screenshot-card
+  .fd-timeline-screen:not(.fd-audio-context-screen)
+  .fd-timeline-frames {
+  transform: translateX(-114px) !important;
+}
