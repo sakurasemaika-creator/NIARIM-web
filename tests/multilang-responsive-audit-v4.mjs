@@ -14,7 +14,8 @@ let removedLegacyHero = 0;
 let removedLegacyGalleryCount = 0;
 let removedScaledWorkspaceGeometry = 0;
 
-const rootCombination = /^(?:sp360|sp390|pc)\/(?:ja|en|zh-Hans|zh-Hant|ko|fr|es)\/$/;
+const rootCombination =
+  /^(?:sp360|sp390|pc)\/(?:ja|en|zh-Hans|zh-Hant|ko|fr|es)\/$/;
 const isUniformlyScaledWorkspaceControl = (finding) => {
   if (!rootCombination.test(finding.id || "")) return false;
   const width = Number(finding.detail?.width);
@@ -24,18 +25,14 @@ const isUniformlyScaledWorkspaceControl = (finding) => {
   if (finding.kind === "workspace-checkbox-geometry") {
     const scale = width / 15;
     return (
-      scale >= 0.55 &&
-      scale < 0.999 &&
-      Math.abs(height - 15 * scale) <= 0.75
+      scale >= 0.55 && scale < 0.999 && Math.abs(height - 15 * scale) <= 0.75
     );
   }
 
   if (finding.kind === "workspace-drag-handle-geometry") {
     const scale = width / 14;
     return (
-      scale >= 0.55 &&
-      scale < 0.999 &&
-      Math.abs(height - 10 * scale) <= 0.75
+      scale >= 0.55 && scale < 0.999 && Math.abs(height - 10 * scale) <= 0.75
     );
   }
 
