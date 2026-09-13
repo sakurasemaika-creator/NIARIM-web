@@ -16,6 +16,14 @@ html body .hero-showcase > .hero-preview-canvas {
   display: block !important;
 }
 
+/* Hero preview clones intentionally drop .fd-app-screen so they stay out of
+   the generic fitter. They still reproduce the real Flutter route viewport,
+   so the clone itself must own the same 360x760 production aspect ratio. */
+html body .hero-showcase .hero-app-preview-source {
+  aspect-ratio: 360 / 760 !important;
+  height: auto !important;
+}
+
 @media (max-width: 559px) {
   html body .hero .container {
     column-gap: clamp(0.65rem, 3vw, 0.9rem) !important;
