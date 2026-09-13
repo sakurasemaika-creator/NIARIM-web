@@ -63,11 +63,16 @@ for (const width of widths) {
             .map((child) => ({
               className:
                 child.className?.toString().slice(0, 100) || child.tagName,
+              position: getComputedStyle(child).position,
               ...rect(child),
             }));
           const widest =
             directChildren
-              .filter((child) => child.width >= outer.width * 0.7)
+              .filter(
+                (child) =>
+                  child.width >= outer.width * 0.7 &&
+                  !["absolute", "fixed"].includes(child.position),
+              )
               .sort((a, b) => b.width - a.width)[0] || null;
           return {
             index,
