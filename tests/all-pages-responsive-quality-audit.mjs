@@ -201,6 +201,18 @@ for (const width of widths) {
         ".about-name",
         ".contact-panel",
       ].join(",");
+      const symmetricPaddingSelector = [
+        ".intro-card",
+        ".feature-row",
+        ".pricing-card",
+        ".pricing-notice",
+        ".community-card",
+        ".community-banner",
+        ".news-card",
+        ".help-item",
+        ".about-name",
+        ".contact-panel",
+      ].join(",");
       const surfaces = [...document.querySelectorAll(surfaceSelector)]
         .filter(visible)
         .map((el) => {
@@ -215,7 +227,10 @@ for (const width of widths) {
           return {
             cls: el.className?.toString().slice(0, 120) || "",
             requiresRadius: el.matches(roundedSurfaceSelector),
+            requiresSymmetricPadding: el.matches(symmetricPaddingSelector),
             radius: px(cs.borderTopLeftRadius),
+            paddingLeft: px(cs.paddingLeft),
+            paddingRight: px(cs.paddingRight),
             scrollWidth: el.scrollWidth,
             clientWidth: el.clientWidth,
             outer,
@@ -229,6 +244,19 @@ for (const width of widths) {
         }
         if (surface.scrollWidth > surface.clientWidth + 2) {
           surfaceIssues.push({ kind: "surface-inner-overflow", surface });
+        }
+        if (surface.requiresSymmetricPadding) {
+          const largerPadding = Math.max(surface.paddingLeft, surface.paddingRight);
+          const smallerPadding = Math.min(surface.paddingLeft, surface.paddingRight);
+          if (
+            largerPadding - smallerPadding > 4 &&
+            smallerPadding < largerPadding * 0.75
+          ) {
+            surfaceIssues.push({
+              kind: "surface-horizontal-padding-drift",
+              surface,
+            });
+          }
         }
         for (const child of surface.children) {
           if (child.width < surface.outer.width * 0.2) continue;
