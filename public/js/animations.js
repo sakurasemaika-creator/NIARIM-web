@@ -82,6 +82,7 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
           entry.target
             .querySelectorAll(":scope > *")
             .forEach(function (item, index) {
