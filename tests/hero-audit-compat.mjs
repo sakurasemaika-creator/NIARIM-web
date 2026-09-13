@@ -17,7 +17,10 @@ export const auditViewports = [
   { name: "pc", width: 1440, height: 1000 },
 ];
 
-const ratioTarget = 320 / 569;
+// The current Flutter route-capture harness renders the real app at 360x760
+// logical pixels. Hero preview geometry must follow that production viewport,
+// not the historical website-only 320x569 mock frame.
+const ratioTarget = 360 / 760;
 
 const rect = (value) => ({
   width: value.width,
