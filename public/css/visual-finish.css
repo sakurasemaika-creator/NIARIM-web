@@ -223,6 +223,45 @@ section.section:has(.community-tabs) {
   );
 }
 
+/* Inspiration pass: borrow the hierarchy of bento/footer galleries and the
+   ambient-light idea without introducing images, canvas, WebGL, or JS. The
+   gradient is static, so the footer stays cheap to render while reading as a
+   deliberate final surface rather than a flat utility strip. */
+.site-footer {
+  background-image:
+    radial-gradient(
+      circle at 10% -10%,
+      rgba(255, 92, 122, 0.14),
+      transparent 28rem
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 16rem);
+}
+
+.site-footer .footer-grid {
+  gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+.site-footer .footer-col {
+  padding: clamp(0.85rem, 1.4vw, 1.1rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.site-footer .footer-col a {
+  display: inline-flex;
+  transition:
+    color 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer .footer-col a:hover {
+    color: #fff;
+    transform: translateX(2px);
+  }
+}
+
 @media (max-width: 640px) {
   .section {
     padding-block: 4rem;
@@ -275,11 +314,20 @@ section.section:has(.community-tabs) {
   .site-footer::before {
     width: calc(100% - 2rem);
   }
+
+  .site-footer .footer-grid {
+    gap: 0.9rem;
+  }
+
+  .site-footer .footer-col {
+    padding: 0.8rem 0.9rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  .lang-trigger {
+  .lang-trigger,
+  .site-footer .footer-col a {
     transition: none !important;
     transform: none !important;
   }
