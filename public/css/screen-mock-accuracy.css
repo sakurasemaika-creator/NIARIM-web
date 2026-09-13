@@ -2,7 +2,12 @@
 @import url("/css/visual-finish.css");
 @import url("/css/screen-mock-fidelity.css");
 
-/* ==========================================================================\n   Final capture calibration — real NIARIM route captures 360x760\n   Keep this layer small: only differences confirmed from app-vs-web PNGs.\n   Geometry is expressed in capture logical pixels so every miniature preserves\n   the current app's proportions at any rendered width.\n   ========================================================================== */
+/* ==========================================================================
+   Final capture calibration — real NIARIM route captures 360x760
+   Keep this layer small: only differences confirmed from app-vs-web PNGs.
+   Geometry is expressed in capture logical pixels so every miniature preserves
+   the current app's proportions at any rendered width.
+   ========================================================================== */
 
 /* Flutter debug overflow stripes are not product UI. Never imitate them. */
 .fd-playhead::before,
@@ -119,7 +124,9 @@
   grid-template-columns:
     calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
     calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
-    calc(35 * var(--fd-capture-px, 1px)) calc(12 * var(--fd-capture-px, 1px)) !important;
+    calc(
+      35 * var(--fd-capture-px, 1px)
+    ) calc(12 * var(--fd-capture-px, 1px)) !important;
   column-gap: calc(5 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-audio-context-screen .fd-sheet-slider {
@@ -168,7 +175,9 @@
   min-height: calc(56 * var(--fd-capture-px, 1px)) !important;
 }
 
-/* ==========================================================================\n   Paint / layout cost reductions — intentionally no visual redesign\n   ========================================================================== */
+/* ==========================================================================
+   Paint / layout cost reductions — intentionally no visual redesign
+   ========================================================================== */
 
 /* Carousel cards now use the production 360:760 footprint. At the historical
    320px intrinsic width this is about 676px tall, not the old 569px smoke size. */
