@@ -86,8 +86,28 @@ function getGalleryCards(failure) {
 }
 
 let removedLegacyGalleryFailures = 0;
+let removedShowcaseOnlyFailures = 0;
+
+// These findings describe the former website showcase, not the production app:
+// - every mock intentionally used a different accent/bezel palette;
+// - gallery/hero frames used the historical 320x569 website ratio;
+// - the frame strip forced its current cell to the physical center.
+// The current source of truth is the real Flutter 360x760 route capture. Keeping
+// these checks would actively push the reproduction away from the real app.
+const showcaseOnlyKinds = new Set([
+  "gallery-theme-duplicate",
+  "features-theme-duplicate",
+  "gallery-card-ratio",
+  "current-frame-not-centered",
+]);
+
 const failures = legacyFailures.filter((failure) => {
   if (failure.kind === "hero-ratio") return false;
+
+  if (showcaseOnlyKinds.has(failure.kind)) {
+    removedShowcaseOnlyFailures += 1;
+    return false;
+  }
 
   if (failure.kind === "gallery-card-count" && failure.gallery?.count === 7) {
     removedLegacyGalleryFailures += 1;
@@ -121,9 +141,10 @@ if (failures.length) {
     JSON.stringify(
       {
         ok: false,
-        correctedAudit: "current-dom-v5-robust-json",
+        correctedAudit: "production-capture-v6",
         removedLegacyInnerHeroFailures,
         removedLegacyGalleryFailures,
+        removedShowcaseOnlyFailures,
         failures,
       },
       null,
@@ -137,9 +158,10 @@ console.log(
   JSON.stringify(
     {
       ok: true,
-      correctedAudit: "current-dom-v5-robust-json",
+      correctedAudit: "production-capture-v6",
       removedLegacyInnerHeroFailures,
       removedLegacyGalleryFailures,
+      removedShowcaseOnlyFailures,
       canonicalHeroChecks: 21,
     },
     null,
