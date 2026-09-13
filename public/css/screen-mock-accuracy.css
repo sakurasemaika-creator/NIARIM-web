@@ -168,6 +168,30 @@
   flex-basis: calc(51 * var(--fd-capture-px, 1px)) !important;
 }
 
+/* Canvas frame-strip: the real mobile widget keeps the mode segmented control
+   pinned to the right and scrolls frame cells only in the remaining left area.
+   Keeping both children in normal flex flow let the long frame list push the
+   mode control outside the miniature. Reserve the captured 136px control area
+   explicitly; the existing 75px left inset then shows the current frame plus
+   roughly two following cells, matching the Flutter capture. */
+html body .fd-canvas-screen > .fd-frame-strip {
+  position: relative !important;
+}
+html body .fd-canvas-screen .fd-frame-strip-scroll {
+  margin-right: calc(140 * var(--fd-capture-px, 1px)) !important;
+}
+html body .fd-canvas-screen .fd-frame-mode {
+  position: absolute !important;
+  right: calc(4 * var(--fd-capture-px, 1px)) !important;
+  top: 50% !important;
+  width: calc(136 * var(--fd-capture-px, 1px)) !important;
+  height: calc(34 * var(--fd-capture-px, 1px)) !important;
+  flex: none !important;
+  transform: translateY(-50%) !important;
+  z-index: 3 !important;
+  font-size: calc(9 * var(--fd-capture-px, 1px)) !important;
+}
+
 /* Workspace rows preserve the real route-list density proportionally. */
 .fd-workspace-screen .fd-workspace-row {
   height: calc(56 * var(--fd-capture-px, 1px)) !important;
