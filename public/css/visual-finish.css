@@ -206,6 +206,60 @@ section.section:has(.community-tabs) {
   color: rgba(74, 70, 54, 0.52);
 }
 
+/* CTA-gallery inspired treatment: make the final action a single, legible
+   destination without adding another image or animation system. The frame uses
+   only static gradients and borders, so it remains cheap on mobile. */
+.final-cta > .container {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3.75rem) clamp(1.25rem, 4vw, 3.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(40, 36, 44, 0.09);
+  border-radius: clamp(18px, 2vw, 28px);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 92, 122, 0.105),
+      transparent 22rem
+    ),
+    rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 20px 60px rgba(40, 36, 44, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.final-cta > .container::before,
+.final-cta > .container::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: rgba(255, 92, 122, 0.42);
+  pointer-events: none;
+}
+
+.final-cta > .container::before {
+  top: 14px;
+  left: 14px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.final-cta > .container::after {
+  right: 14px;
+  bottom: 14px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.final-cta h2 {
+  text-wrap: balance;
+}
+
+.final-cta p {
+  max-width: calc(48 * var(--measure-ch));
+  margin-inline: auto;
+}
+
 /* Footer: small separator improves the handoff from page content. */
 .site-footer::before {
   content: "";
@@ -309,6 +363,17 @@ section.section:has(.community-tabs) {
     height: 42px;
     right: 12px;
     bottom: 12px;
+  }
+
+  .final-cta > .container {
+    padding: 2rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  .final-cta > .container::before,
+  .final-cta > .container::after {
+    width: 22px;
+    height: 22px;
   }
 
   .site-footer::before {
