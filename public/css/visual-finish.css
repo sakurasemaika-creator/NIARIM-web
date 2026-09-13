@@ -92,6 +92,13 @@
   opacity: 0.82;
 }
 
+/* Avoid holding a compositor layer open for the full page lifetime. The hero's
+   transform remains available when it actually changes, but no longer reserves
+   a permanent will-change optimization after the live app screen takes over. */
+.hero-visual {
+  will-change: auto;
+}
+
 /* Static information cards stay visually stable. Interactive cards already get
    restrained affordance from reference-polish.css when the semantic element is
    an actual link. This avoids implying clickability and removes needless hover
