@@ -43,9 +43,13 @@ async function setLanguage(page, language) {
 
 async function shot(locator, file) {
   if (!(await locator.count()) || !(await locator.first().isVisible())) return;
-  await locator
-    .first()
-    .screenshot({ path: path.join(outDir, file), animations: "disabled" });
+  const target = locator.first();
+  await target.scrollIntoViewIfNeeded();
+  await target.page().waitForTimeout(120);
+  await target.screenshot({
+    path: path.join(outDir, file),
+    animations: "disabled",
+  });
   screenshots.push(file);
 }
 
