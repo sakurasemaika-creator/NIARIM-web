@@ -47,8 +47,14 @@ html body .hero-preview-card > .hero-app-preview-source {
    than the generic .fd-app-screen/.fd-route-screen rule, it shortened Export and
    Workspace and clipped their bottom controls. This final consistency layer is
    the single owner for app/route feature mock height. */
-html body .feature-media > .feature-diagram:is(.fd-app-screen, .fd-route-screen),
-html body .feature-section > .feature-diagram:is(.fd-app-screen, .fd-route-screen) {
+html
+  body
+  .feature-media
+  > .feature-diagram:is(.fd-app-screen, .fd-route-screen),
+html
+  body
+  .feature-section
+  > .feature-diagram:is(.fd-app-screen, .fd-route-screen) {
   aspect-ratio: 360 / 760 !important;
   height: auto !important;
   min-height: 0 !important;
