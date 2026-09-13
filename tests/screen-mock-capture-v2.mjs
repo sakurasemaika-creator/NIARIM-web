@@ -87,3 +87,4 @@ console.log(
 );
 
 await import("./mock-frame-card-quality-audit.mjs");
+await import("./cross-width-visual-evidence.mjs");
