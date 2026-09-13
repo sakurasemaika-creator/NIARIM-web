@@ -35,7 +35,11 @@ const targets = [
     name: "community-gallery",
     selector: ".community-gallery",
   },
-  { route: "/help/", name: "help-category", selector: ".help-category" },
+  {
+    route: "/help/",
+    name: "help-category",
+    selector: "[data-help-category]",
+  },
   { route: "/about/", name: "about-name", selector: ".about-name" },
   { route: "/contact/", name: "contact-panel", selector: ".contact-panel" },
 ];
