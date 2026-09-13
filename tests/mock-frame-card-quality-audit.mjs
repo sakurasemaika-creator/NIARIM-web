@@ -58,6 +58,15 @@ for (const width of widths) {
         .map((el, index) => {
           const cs = getComputedStyle(el);
           const outer = rect(el);
+          const isEmbeddedHeroSource = el.matches(
+            ".hero-preview-card > .hero-app-preview-source",
+          );
+          const heroHost = isEmbeddedHeroSource
+            ? el.closest(".hero-preview-card")
+            : null;
+          const heroHostAfter = heroHost
+            ? getComputedStyle(heroHost, "::after")
+            : null;
           const directChildren = [...el.children]
             .filter(visible)
             .map((child) => ({
@@ -76,9 +85,11 @@ for (const width of widths) {
               .sort((a, b) => b.width - a.width)[0] || null;
           return {
             index,
-            kind: el.matches(".fd-app-screen, .fd-route-screen")
-              ? "app-screen"
-              : "feature-diagram",
+            kind: isEmbeddedHeroSource
+              ? "hero-embedded-source"
+              : el.matches(".fd-app-screen, .fd-route-screen")
+                ? "app-screen"
+                : "feature-diagram",
             className: el.className?.toString().slice(0, 140) || "",
             sectionId: el.closest("section")?.id || null,
             outer,
@@ -102,6 +113,14 @@ for (const width of widths) {
                 cs.borderLeftColor,
               ],
             },
+            heroHostEdge: heroHostAfter
+              ? {
+                  width: px(heroHostAfter.borderTopWidth),
+                  style: heroHostAfter.borderTopStyle,
+                  color: heroHostAfter.borderTopColor,
+                  radius: px(heroHostAfter.borderTopLeftRadius),
+                }
+              : null,
             radius: px(cs.borderTopLeftRadius),
             overflowX: cs.overflowX,
             overflowY: cs.overflowY,
@@ -175,11 +194,34 @@ for (const width of widths) {
         if (!solidBorder) {
           findings.push({ id, kind: "app-screen-outer-border-regression", frame });
         }
+        const borderSpread =
+          Math.max(...frame.border.widths) - Math.min(...frame.border.widths);
+        if (borderSpread > 0.25) {
+          findings.push({
+            id,
+            kind: "app-screen-border-thickness-drift",
+            borderSpread,
+            frame,
+          });
+        }
         if (!["hidden", "clip"].includes(frame.overflowX)) {
           findings.push({ id, kind: "app-screen-clipping-regression", frame });
         }
         if (frame.radius < 18) {
           findings.push({ id, kind: "app-screen-radius-regression", frame });
+        }
+      } else if (frame.kind === "hero-embedded-source") {
+        const edge = frame.heroHostEdge;
+        if (
+          !edge ||
+          edge.style !== "solid" ||
+          edge.width < 2.5 ||
+          !colorVisible(edge.color)
+        ) {
+          findings.push({ id, kind: "hero-preview-bezel-regression", frame });
+        }
+        if (edge && edge.radius < 10) {
+          findings.push({ id, kind: "hero-preview-radius-regression", frame });
         }
       } else {
         const surfaceVisible =
@@ -191,6 +233,22 @@ for (const width of widths) {
         }
         if (frame.radius < 12) {
           findings.push({ id, kind: "feature-diagram-radius-regression", frame });
+        }
+      }
+
+      if (["app-screen", "hero-embedded-source"].includes(frame.kind)) {
+        const target = 320 / 569;
+        const ratio = frame.outer.height
+          ? frame.outer.width / frame.outer.height
+          : null;
+        if (ratio === null || Math.abs(ratio - target) > 0.018) {
+          findings.push({
+            id,
+            kind: "app-screen-aspect-ratio-regression",
+            ratio,
+            target,
+            frame,
+          });
         }
       }
 
