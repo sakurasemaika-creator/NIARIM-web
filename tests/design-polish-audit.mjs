@@ -26,30 +26,32 @@ for (const width of widths) {
   });
 
   const state = await page.evaluate(() => {
-    const rows = [...document.querySelectorAll(".feature-row")].map((el, index) => {
-      const cs = getComputedStyle(el);
-      return {
-        index,
-        paddingLeft: parseFloat(cs.paddingLeft),
-        paddingRight: parseFloat(cs.paddingRight),
-        radius: parseFloat(cs.borderTopLeftRadius),
-      };
-    });
-    const cards = [...document.querySelectorAll(".screenshot-scroller .screenshot-card")].map(
+    const rows = [...document.querySelectorAll(".feature-row")].map(
       (el, index) => {
         const cs = getComputedStyle(el);
-        const child = el.firstElementChild;
-        const childCs = child ? getComputedStyle(child) : null;
-        const rect = el.getBoundingClientRect();
         return {
           index,
+          paddingLeft: parseFloat(cs.paddingLeft),
+          paddingRight: parseFloat(cs.paddingRight),
           radius: parseFloat(cs.borderTopLeftRadius),
-          overflow: cs.overflow,
-          ratio: rect.width / rect.height,
-          childRadius: childCs ? parseFloat(childCs.borderTopLeftRadius) : null,
         };
       },
     );
+    const cards = [
+      ...document.querySelectorAll(".screenshot-scroller .screenshot-card"),
+    ].map((el, index) => {
+      const cs = getComputedStyle(el);
+      const child = el.firstElementChild;
+      const childCs = child ? getComputedStyle(child) : null;
+      const rect = el.getBoundingClientRect();
+      return {
+        index,
+        radius: parseFloat(cs.borderTopLeftRadius),
+        overflow: cs.overflow,
+        ratio: rect.width / rect.height,
+        childRadius: childCs ? parseFloat(childCs.borderTopLeftRadius) : null,
+      };
+    });
     const body = getComputedStyle(document.body);
     const footer = document.querySelector(".site-footer");
     const footerBefore = footer ? getComputedStyle(footer, "::before") : null;
@@ -84,20 +86,25 @@ for (const width of widths) {
           }
         : null,
       pageOverflow:
-        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
     };
   });
 
   const minInlinePadding = width <= 640 ? 16 : 24;
   state.rows.forEach((row) => {
-    if (row.paddingLeft < minInlinePadding || row.paddingRight < minInlinePadding) {
+    if (
+      row.paddingLeft < minInlinePadding ||
+      row.paddingRight < minInlinePadding
+    ) {
       findings.push({ width, kind: "feature-padding", row });
     }
     if (row.radius < 16) findings.push({ width, kind: "feature-radius", row });
   });
 
   state.cards.forEach((card) => {
-    if (card.radius < 14) findings.push({ width, kind: "screenshot-radius", card });
+    if (card.radius < 14)
+      findings.push({ width, kind: "screenshot-radius", card });
     if (!["hidden", "clip"].includes(card.overflow)) {
       findings.push({ width, kind: "screenshot-clipping", card });
     }
@@ -110,7 +117,11 @@ for (const width of widths) {
   });
 
   if (!state.bodyBackgroundImage || state.bodyBackgroundImage === "none") {
-    findings.push({ width, kind: "background-depth", actual: state.bodyBackgroundImage });
+    findings.push({
+      width,
+      kind: "background-depth",
+      actual: state.bodyBackgroundImage,
+    });
   }
 
   if (!state.footer) {
@@ -124,7 +135,11 @@ for (const width of widths) {
       (col) => col.radius >= 12 && col.borderWidth >= 0.5,
     );
     if (!dividerVisible || !surfacedCols) {
-      findings.push({ width, kind: "footer-surface-regression", footer: state.footer });
+      findings.push({
+        width,
+        kind: "footer-surface-regression",
+        footer: state.footer,
+      });
     }
   }
 
@@ -144,7 +159,11 @@ for (const width of widths) {
   }
 
   if (state.pageOverflow > 2) {
-    findings.push({ width, kind: "horizontal-overflow", amount: state.pageOverflow });
+    findings.push({
+      width,
+      kind: "horizontal-overflow",
+      amount: state.pageOverflow,
+    });
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
@@ -165,13 +184,24 @@ for (const width of widths) {
     findings.push({ width, kind: "feature-nav-missing" });
   } else {
     if (featureNav.position !== "sticky") {
-      findings.push({ width, kind: "feature-nav-not-sticky", actual: featureNav.position });
+      findings.push({
+        width,
+        kind: "feature-nav-not-sticky",
+        actual: featureNav.position,
+      });
     }
     if (width <= 640) {
       if (!["auto", "scroll"].includes(featureNav.overflowX)) {
-        findings.push({ width, kind: "feature-nav-not-scrollable", actual: featureNav.overflowX });
+        findings.push({
+          width,
+          kind: "feature-nav-not-scrollable",
+          actual: featureNav.overflowX,
+        });
       }
-      if (featureNav.fadeContent === "none" || featureNav.fadeContent === "normal") {
+      if (
+        featureNav.fadeContent === "none" ||
+        featureNav.fadeContent === "normal"
+      ) {
         findings.push({ width, kind: "feature-nav-scroll-cue-missing" });
       }
       if (featureNav.fadePointerEvents !== "none") {
@@ -188,5 +218,11 @@ for (const width of widths) {
 }
 
 await browser.close();
-console.log(JSON.stringify({ auditedWidths: widths, designPolishFindings: findings.length, findings }, null, 2));
+console.log(
+  JSON.stringify(
+    { auditedWidths: widths, designPolishFindings: findings.length, findings },
+    null,
+    2,
+  ),
+);
 if (findings.length) process.exit(1);
