@@ -161,13 +161,11 @@ for (const width of widths) {
         .map((card, index) => {
           const cs = getComputedStyle(card);
           const cardRect = rect(card);
-          const children = [...card.children]
-            .filter(visible)
-            .map((child) => ({
-              className:
-                child.className?.toString().slice(0, 100) || child.tagName,
-              ...rect(child),
-            }));
+          const children = [...card.children].filter(visible).map((child) => ({
+            className:
+              child.className?.toString().slice(0, 100) || child.tagName,
+            ...rect(child),
+          }));
           return {
             index,
             className: card.className?.toString().slice(0, 120) || "",
