@@ -10,7 +10,6 @@ const routes = ["/", "/features/"];
 const findings = [];
 
 await fs.mkdir(outDir, { recursive: true });
-
 const browser = await chromium.launch(launchOptions());
 
 for (const width of widths) {
@@ -53,6 +52,7 @@ for (const width of widths) {
       };
       const px = (value) => Number.parseFloat(value) || 0;
       const frameSelector = ".feature-diagram, .fd-app-screen, .fd-route-screen";
+
       const frames = [...document.querySelectorAll(frameSelector)]
         .filter(visible)
         .map((el, index) => {
@@ -61,23 +61,29 @@ for (const width of widths) {
           const directChildren = [...el.children]
             .filter(visible)
             .map((child) => ({
-              className: child.className?.toString().slice(0, 100) || child.tagName,
+              className:
+                child.className?.toString().slice(0, 100) || child.tagName,
               ...rect(child),
             }));
-          const wideChildren = directChildren.filter(
-            (child) => child.width >= outer.width * 0.7,
-          );
-          const widest = wideChildren.sort((a, b) => b.width - a.width)[0] || null;
+          const widest =
+            directChildren
+              .filter((child) => child.width >= outer.width * 0.7)
+              .sort((a, b) => b.width - a.width)[0] || null;
           return {
             index,
+            kind: el.matches(".fd-app-screen, .fd-route-screen")
+              ? "app-screen"
+              : "feature-diagram",
             className: el.className?.toString().slice(0, 140) || "",
             sectionId: el.closest("section")?.id || null,
             outer,
             border: {
-              top: px(cs.borderTopWidth),
-              right: px(cs.borderRightWidth),
-              bottom: px(cs.borderBottomWidth),
-              left: px(cs.borderLeftWidth),
+              widths: [
+                px(cs.borderTopWidth),
+                px(cs.borderRightWidth),
+                px(cs.borderBottomWidth),
+                px(cs.borderLeftWidth),
+              ],
               styles: [
                 cs.borderTopStyle,
                 cs.borderRightStyle,
@@ -94,6 +100,7 @@ for (const width of widths) {
             radius: px(cs.borderTopLeftRadius),
             overflowX: cs.overflowX,
             overflowY: cs.overflowY,
+            backgroundColor: cs.backgroundColor,
             boxShadow: cs.boxShadow,
             directChildren,
             widest,
@@ -124,13 +131,22 @@ for (const width of widths) {
         .filter(visible)
         .map((card, index) => {
           const cs = getComputedStyle(card);
+          const cardRect = rect(card);
+          const children = [...card.children]
+            .filter(visible)
+            .map((child) => ({
+              className:
+                child.className?.toString().slice(0, 100) || child.tagName,
+              ...rect(child),
+            }));
           return {
             index,
             className: card.className?.toString().slice(0, 120) || "",
-            rect: rect(card),
+            rect: cardRect,
             radius: px(cs.borderTopLeftRadius),
             scrollWidth: card.scrollWidth,
             clientWidth: card.clientWidth,
+            children,
           };
         });
 
@@ -139,19 +155,38 @@ for (const width of widths) {
 
     const id = `${width}px${route}`;
     const before = findings.length;
+    const colorVisible = (value) => {
+      if (!value || value === "transparent") return false;
+      const alpha = value.match(/rgba?\([^/]+(?:\/|,)\s*([\d.]+)\s*\)$/)?.[1];
+      return alpha === undefined || Number(alpha) > 0.05;
+    };
 
     for (const frame of state.frames) {
-      const borderVisible =
-        frame.border.styles.every((style) => style !== "none") &&
-        [frame.border.top, frame.border.right, frame.border.bottom, frame.border.left].every(
-          (value) => value >= 0.75,
-        );
-      const shadowVisible = frame.boxShadow && frame.boxShadow !== "none";
-      if (!borderVisible && !shadowVisible) {
-        findings.push({ id, kind: "mock-outer-edge-missing", frame });
-      }
-      if (frame.radius < 8) {
-        findings.push({ id, kind: "mock-radius-too-small", frame });
+      if (frame.kind === "app-screen") {
+        const solidBorder =
+          frame.border.styles.every((style) => style === "solid") &&
+          frame.border.widths.every((value) => value >= 3.5) &&
+          frame.border.colors.every(colorVisible);
+        if (!solidBorder) {
+          findings.push({ id, kind: "app-screen-outer-border-regression", frame });
+        }
+        if (!["hidden", "clip"].includes(frame.overflowX)) {
+          findings.push({ id, kind: "app-screen-clipping-regression", frame });
+        }
+        if (frame.radius < 18) {
+          findings.push({ id, kind: "app-screen-radius-regression", frame });
+        }
+      } else {
+        const surfaceVisible =
+          colorVisible(frame.backgroundColor) &&
+          frame.boxShadow &&
+          frame.boxShadow !== "none";
+        if (!surfaceVisible) {
+          findings.push({ id, kind: "feature-diagram-edge-regression", frame });
+        }
+        if (frame.radius < 12) {
+          findings.push({ id, kind: "feature-diagram-radius-regression", frame });
+        }
       }
 
       for (const child of frame.directChildren) {
@@ -209,6 +244,15 @@ for (const width of widths) {
       }
       if (card.scrollWidth > card.clientWidth + 2) {
         findings.push({ id, kind: "section-card-content-overflow", card });
+      }
+      for (const child of card.children) {
+        if (child.width < card.rect.width * 0.15) continue;
+        if (
+          child.left < card.rect.left - 2.5 ||
+          child.right > card.rect.right + 2.5
+        ) {
+          findings.push({ id, kind: "section-card-child-escape", card, child });
+        }
       }
     }
 
