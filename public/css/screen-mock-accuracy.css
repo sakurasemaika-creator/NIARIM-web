@@ -2,7 +2,7 @@
 @import url("/css/visual-finish.css");
 @import url("/css/screen-mock-fidelity.css");
 
-/* ==========================================================================\n   Final capture calibration — real NIARIM Visual Smoke 320x569\n   Keep this layer small: only differences confirmed from app-vs-web PNGs.\n   ========================================================================== */
+/* ==========================================================================\n   Final capture calibration — real NIARIM route captures 360x760\n   Keep this layer small: only differences confirmed from app-vs-web PNGs.\n   Geometry is expressed in capture logical pixels so every miniature preserves\n   the current app's proportions at any rendered width.\n   ========================================================================== */
 
 /* Flutter debug overflow stripes are not product UI. Never imitate them. */
 .fd-playhead::before,
@@ -11,41 +11,43 @@
   display: none !important;
 }
 .fd-playhead {
-  width: 3px !important;
+  width: calc(3 * var(--fd-capture-px, 1px)) !important;
   right: 0 !important;
   background: #bd0018 !important;
   box-shadow: none !important;
 }
 
-/* SaveTree: the real 320px AppBar truncates its title before the help/save controls. */
+/* SaveTree: preserve the captured narrow AppBar truncation proportionally. */
 .fd-save-tree-screen .fd-appbar strong {
-  max-width: 52px !important;
+  max-width: calc(52 * var(--fd-capture-px, 1px)) !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
 
-/* ExportScreen — calibrated from webref_exact_07_export.png. */
+/* ExportScreen — calibrated from the current 360x760 route capture. */
 .fd-export-screen .fd-export-body {
   display: flex !important;
   flex-direction: column !important;
-  padding: 16px 16px 8px !important;
+  padding: calc(16 * var(--fd-capture-px, 1px))
+    calc(16 * var(--fd-capture-px, 1px)) calc(8 * var(--fd-capture-px, 1px)) !important;
   overflow: hidden !important;
 }
 .fd-export-screen .fd-route-section {
-  margin: 4px 0 10px !important;
-  font-size: 11px !important;
+  margin: calc(4 * var(--fd-capture-px, 1px)) 0
+    calc(10 * var(--fd-capture-px, 1px)) !important;
+  font-size: calc(11 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-export-screen .fd-export-segments {
-  height: 41px !important;
-  flex: 0 0 41px !important;
+  height: calc(41 * var(--fd-capture-px, 1px)) !important;
+  flex: 0 0 calc(41 * var(--fd-capture-px, 1px)) !important;
   border: 1px solid var(--fd-muted, #9d8f93) !important;
-  border-radius: 22px !important;
+  border-radius: calc(22 * var(--fd-capture-px, 1px)) !important;
   overflow: hidden !important;
   background: #fff !important;
 }
 .fd-export-screen .fd-export-segments .fd-segment {
-  font-size: 9px !important;
+  font-size: calc(9 * var(--fd-capture-px, 1px)) !important;
   color: var(--fd-muted, #62595c) !important;
   background: #fff !important;
   border-color: var(--fd-muted, #aa9da1) !important;
@@ -55,7 +57,8 @@
   color: var(--fd-ink, #554b4e) !important;
 }
 .fd-export-screen .fd-export-format-title {
-  margin: 27px 0 7px !important;
+  margin: calc(27 * var(--fd-capture-px, 1px)) 0
+    calc(7 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-export-screen .fd-format-list {
   display: grid !important;
@@ -63,111 +66,116 @@
   border: 0 !important;
 }
 .fd-export-screen .fd-format-row {
-  min-height: 72px !important;
-  height: 72px !important;
-  padding: 8px 22px !important;
+  min-height: calc(72 * var(--fd-capture-px, 1px)) !important;
+  height: calc(72 * var(--fd-capture-px, 1px)) !important;
+  padding: calc(8 * var(--fd-capture-px, 1px))
+    calc(22 * var(--fd-capture-px, 1px)) !important;
   border: 0 !important;
   background: transparent !important;
 }
 .fd-export-screen .fd-format-row .fd-radio {
-  width: 18px !important;
-  height: 18px !important;
-  flex: 0 0 18px !important;
-  border: 2px solid var(--fd-muted, #777174) !important;
+  width: calc(18 * var(--fd-capture-px, 1px)) !important;
+  height: calc(18 * var(--fd-capture-px, 1px)) !important;
+  flex: 0 0 calc(18 * var(--fd-capture-px, 1px)) !important;
+  border: calc(2 * var(--fd-capture-px, 1px)) solid var(--fd-muted, #777174) !important;
 }
 .fd-export-screen .fd-format-row .fd-radio.is-active {
-  border: 2px solid var(--fd-accent, #ff5877) !important;
-  box-shadow: inset 0 0 0 4px #fff !important;
+  border: calc(2 * var(--fd-capture-px, 1px)) solid var(--fd-accent, #ff5877) !important;
+  box-shadow: inset 0 0 0 calc(4 * var(--fd-capture-px, 1px)) #fff !important;
   background: var(--fd-accent, #ff5877) !important;
 }
 .fd-export-screen .fd-format-row strong {
-  font-size: 12px !important;
+  font-size: calc(12 * var(--fd-capture-px, 1px)) !important;
   color: var(--fd-ink, #312d31) !important;
 }
 .fd-export-screen .fd-format-row small {
-  font-size: 8px !important;
+  font-size: calc(8 * var(--fd-capture-px, 1px)) !important;
   color: var(--fd-muted, #8e8589) !important;
   line-height: 1.35 !important;
 }
 .fd-export-screen .fd-export-start {
-  height: 48px !important;
-  min-height: 48px !important;
+  height: calc(48 * var(--fd-capture-px, 1px)) !important;
+  min-height: calc(48 * var(--fd-capture-px, 1px)) !important;
   margin-top: auto !important;
   margin-bottom: 0 !important;
-  border-radius: 16px !important;
-  font-size: 10px !important;
+  border-radius: calc(16 * var(--fd-capture-px, 1px)) !important;
+  font-size: calc(10 * var(--fd-capture-px, 1px)) !important;
   background: var(--fd-accent, #ff5877) !important;
 }
 .fd-export-screen .fd-export-start .ic {
-  width: 16px !important;
-  height: 16px !important;
+  width: calc(16 * var(--fd-capture-px, 1px)) !important;
+  height: calc(16 * var(--fd-capture-px, 1px)) !important;
 }
 
-/* Audio bottom sheet — app capture starts slightly higher and uses a compact fixed slider track. */
+/* Audio bottom sheet — preserve the captured geometry at every mock width. */
 .fd-audio-context-screen .fd-clip-detail-sheet {
-  height: 244px !important;
-  padding-top: 6px !important;
-  border-radius: 20px 20px 0 0 !important;
+  height: calc(244 * var(--fd-capture-px, 1px)) !important;
+  padding-top: calc(6 * var(--fd-capture-px, 1px)) !important;
+  border-radius: calc(20 * var(--fd-capture-px, 1px))
+    calc(20 * var(--fd-capture-px, 1px)) 0 0 !important;
 }
 .fd-audio-context-screen .fd-sheet-row {
-  min-height: 54px !important;
-  grid-template-columns: 76px 24px 76px 24px 35px 12px !important;
-  column-gap: 5px !important;
+  min-height: calc(54 * var(--fd-capture-px, 1px)) !important;
+  grid-template-columns:
+    calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
+    calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
+    calc(35 * var(--fd-capture-px, 1px)) calc(12 * var(--fd-capture-px, 1px)) !important;
+  column-gap: calc(5 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-audio-context-screen .fd-sheet-slider {
-  width: 76px !important;
-  max-width: 76px !important;
+  width: calc(76 * var(--fd-capture-px, 1px)) !important;
+  max-width: calc(76 * var(--fd-capture-px, 1px)) !important;
   flex: none !important;
 }
 
-/* Onion panel: align the production panel a few pixels upward; keep the heavy product outline. */
+/* Onion panel: keep its captured offset proportional to the miniature. */
 .fd-app-onion-panel {
-  top: 52px !important;
+  top: calc(52 * var(--fd-capture-px, 1px)) !important;
   box-shadow: none !important;
 }
 
-/* Layer panel capture: preserve full shortcut band and first layer row height. */
+/* Layer panel capture: preserve shortcut band and first layer-row proportions. */
 .fd-app-layer-panel .fd-layer-shortcuts {
-  min-height: 92px !important;
-  flex-basis: 92px !important;
+  min-height: calc(92 * var(--fd-capture-px, 1px)) !important;
+  flex-basis: calc(92 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-app-layer-panel .fd-layer-row {
-  min-height: 54px !important;
-  flex-basis: 54px !important;
+  min-height: calc(54 * var(--fd-capture-px, 1px)) !important;
+  flex-basis: calc(54 * var(--fd-capture-px, 1px)) !important;
 }
 
-/* Timeline calibration. Product UI keeps the same vertical rhythm but does not reproduce Flutter debug stripes. */
+/* Timeline calibration from the current route capture. */
 .fd-timeline-screen .fd-timeline-preview {
-  flex-basis: 180px !important;
-  min-height: 180px !important;
+  flex-basis: calc(180 * var(--fd-capture-px, 1px)) !important;
+  min-height: calc(180 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-timeline-screen > .fd-transport {
-  height: 56px !important;
-  flex-basis: 56px !important;
+  height: calc(56 * var(--fd-capture-px, 1px)) !important;
+  flex-basis: calc(56 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-timeline-screen .fd-scene-line {
-  height: 40px !important;
-  flex-basis: 40px !important;
+  height: calc(40 * var(--fd-capture-px, 1px)) !important;
+  flex-basis: calc(40 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-timeline-screen .fd-timeline-row {
-  height: 51px !important;
-  flex-basis: 51px !important;
+  height: calc(51 * var(--fd-capture-px, 1px)) !important;
+  flex-basis: calc(51 * var(--fd-capture-px, 1px)) !important;
 }
 
-/* Workspace rows match the real narrow-screen list density. */
+/* Workspace rows preserve the real route-list density proportionally. */
 .fd-workspace-screen .fd-workspace-row {
-  height: 56px !important;
-  min-height: 56px !important;
+  height: calc(56 * var(--fd-capture-px, 1px)) !important;
+  min-height: calc(56 * var(--fd-capture-px, 1px)) !important;
 }
 
 /* ==========================================================================\n   Paint / layout cost reductions — intentionally no visual redesign\n   ========================================================================== */
 
-/* Carousel cards have a fixed 9:16 footprint, so deferring their offscreen
-   paint does not alter document flow or cause a reveal-time layout shift. */
+/* Carousel cards now use the production 360:760 footprint. At the historical
+   320px intrinsic width this is about 676px tall, not the old 569px smoke size. */
 @supports (content-visibility: auto) {
   .screenshot-card {
     content-visibility: auto;
-    contain-intrinsic-size: 320px 569px;
+    contain-intrinsic-size: 320px 676px;
   }
 }
 
