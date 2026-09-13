@@ -242,7 +242,11 @@ html body .fd-canvas-screen > .fd-frame-strip::after {
   border: 1px solid #756e73 !important;
   border-radius: calc(18 * var(--fd-capture-px, 1px)) !important;
   box-sizing: border-box !important;
-  background: linear-gradient(to right, #ffffff 0 50%, #faf7f5 50% 100%) !important;
+  background: linear-gradient(
+    to right,
+    #ffffff 0 50%,
+    #faf7f5 50% 100%
+  ) !important;
   color: #756e73 !important;
   font-family: var(--font-serif) !important;
   font-size: calc(8 * var(--fd-capture-px, 1px)) !important;
