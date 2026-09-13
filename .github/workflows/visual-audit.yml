@@ -112,6 +112,14 @@ jobs:
       - name: Verify page-heading centering and signature tools
         if: always()
         run: node tests/page-heading-signature-audit.mjs
+      - name: Upload cross-width eye-review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-width-eye-review
+          path: artifacts/autonomous-browser-audit/cross-width-eye-review/
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
