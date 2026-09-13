@@ -393,7 +393,7 @@ section.section:has(.community-tabs) {
   }
 
   .final-cta > .container {
-    padding: 2rem 1.15rem;
+    padding: 2rem 1.25rem;
     border-radius: 18px;
   }
 
@@ -419,35 +419,16 @@ section.section:has(.community-tabs) {
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .lang-trigger,
+  .feature-nav a,
+  .faq-item,
   .site-footer .footer-col a {
-    transition: none !important;
-    transform: none !important;
+    transition: none;
   }
-}
 
-/* Restore the public-facing CTA treatment to NIARIM's actual brand accent.
-   The darker accessibility fallback had visually drifted from the rest of the site. */
-body .hero .hero-actions .btn.btn-primary,
-.download-actions .btn.btn-accent,
-.final-cta .hero-actions .btn.btn-primary {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: #fff !important;
-}
-
-body .hero .hero-actions .btn.btn-primary:hover,
-.download-actions .btn.btn-accent:hover,
-.final-cta .hero-actions .btn.btn-primary:hover {
-  background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-}
-
-/* HakkouMincho's web subset predates the newly added AI-training copy, so a
-   missing Japanese glyph can fall back noticeably thinner inside FAQ headings.
-   Give this injected question a tiny synthetic stroke so the fallback glyphs
-   visually match the surrounding 600-weight heading without changing copy. */
-html[lang="ja"] [data-ai-training-q] {
-  font-weight: 600;
-  -webkit-text-stroke: 0.18px currentColor;
-  paint-order: stroke fill;
+  .btn:hover,
+  .lang-trigger:hover,
+  .feature-nav a:hover,
+  .site-footer .footer-col a:hover {
+    transform: none;
+  }
 }
