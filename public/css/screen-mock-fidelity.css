@@ -141,3 +141,14 @@
     min-height: 46px !important;
   }
 }
+
+/* TimelineScreen centers the active frame on the viewport, not on the
+   remaining row width after the 18px track label. The base mock was therefore
+   8px left of center at full scale. App-preview cards use their own miniature
+   transform, so compensate that context independently. */
+.fd-timeline-screen .fd-timeline-frames {
+  transform: translateX(-84px) !important;
+}
+.screenshot-card .fd-timeline-screen .fd-timeline-frames {
+  transform: translateX(-112px) !important;
+}
