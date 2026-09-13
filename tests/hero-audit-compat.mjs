@@ -143,8 +143,15 @@ export async function auditCanonicalHeroRatio(
                 cs.visibility !== "hidden"
               );
             });
+
+          // Measure the reconstructed app screen itself. .hero-preview-card is
+          // merely the website presentation shell and intentionally has its own
+          // composition ratio, so treating that shell as the app viewport made
+          // the old ratio audit test the wrong object.
           const element =
-            visible(".hero-preview-card") || visible(".hero-visual");
+            visible(".hero-preview-card > .hero-app-preview-source") ||
+            visible(".hero-visual.fd-app-screen") ||
+            visible(".hero-visual");
           if (!element) return null;
           return element.getBoundingClientRect().toJSON();
         });
