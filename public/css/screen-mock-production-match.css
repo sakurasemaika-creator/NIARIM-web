@@ -1,0 +1,199 @@
+/*
+ * Production screen-match layer.
+ *
+ * Source of truth: real Flutter route captures from NIARIM dev_branch.
+ * The capture baseline is still valid for the current App HEAD because the
+ * commits after it only touch CI and filter metadata, not routed UI widgets.
+ *
+ * Unlike the former showcase treatment, reconstructed app screens must not use
+ * a different decorative palette per card. They reproduce the app's default
+ * light theme and the state shown by the capture harness.
+ */
+
+:is(.fd-app-screen, .fd-route-screen, .feature-section > .feature-diagram),
+.screenshot-card > :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #ff5c7a !important;
+  --fd-accent-fill: #ff5c7a !important;
+  --fd-on-accent: #ffffff !important;
+  --fd-ink: #2b2730 !important;
+  --fd-text: #2b2730 !important;
+  --fd-muted: #756e73 !important;
+  --fd-surface: #faf7f5 !important;
+  --fd-bg: #faf7f5 !important;
+  --fd-panel: #f0dedf !important;
+  --fd-panel-2: #ead0d3 !important;
+  --fd-outside: #f0dedf !important;
+  --fd-bezel: #2b2730 !important;
+  --fd-mark: #ffb020 !important;
+}
+
+/* The actual capture viewport is 360x760. Keep every reconstructed route on
+   the same phone-screen ratio instead of the historical 320x569 mock ratio. */
+.fd-app-screen,
+.fd-route-screen {
+  aspect-ratio: 360 / 760 !important;
+  background: #faf7f5 !important;
+  color: #2b2730 !important;
+}
+
+.screenshot-card {
+  aspect-ratio: 360 / 760 !important;
+  --fd-bezel: #2b2730 !important;
+}
+
+/* Every production capture contains the same ad reservation at the top. It is
+   part of the actual app viewport, so the reproduction keeps it instead of
+   silently starting at the first AppBar. */
+.fd-app-screen::before,
+.fd-route-screen::before {
+  content: "広告バナー（提携計測モック）";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88.8889%;
+  height: 44px;
+  min-height: 44px;
+  flex: 0 0 44px;
+  margin: 7px auto 14px;
+  border: 1px solid #827449;
+  box-sizing: border-box;
+  background: #6f6b70;
+  color: rgba(43, 39, 48, 0.48);
+  font-family: var(--font-serif);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* Canvas capture: the slider is collapsed by default in the real widget.
+   Earlier website mocks deliberately expanded it for explanation, which is not
+   a faithful screen reproduction. */
+.fd-canvas-screen > .fd-brush-slider.is-expanded {
+  height: 30px !important;
+  min-height: 30px !important;
+  flex: 0 0 30px !important;
+  padding: 2px 12px !important;
+  overflow: hidden !important;
+}
+.fd-canvas-screen .fd-brush-row {
+  display: none !important;
+}
+.fd-canvas-screen .fd-brush-summary {
+  height: 26px !important;
+  min-height: 26px !important;
+  padding: 4px 0 !important;
+}
+.fd-canvas-screen .fd-brush-slider.is-expanded .fd-brush-toggle {
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid transparent !important;
+  border-top: 4px solid currentColor !important;
+  border-bottom: 0 !important;
+  transform: none !important;
+}
+
+/* The route harness opens a blank project. Do not invent a bouncing-ball
+   drawing in the canvas, timeline preview, layer thumbs, or frame thumbs. */
+:is(.fd-app-screen, .fd-route-screen) .fd-art {
+  visibility: hidden !important;
+}
+.fd-layer-row .fd-layer-thumb .fd-art {
+  visibility: hidden !important;
+}
+
+/* Canvas geometry/colors measured from the production capture. */
+.fd-canvas-screen > .fd-topbar {
+  height: 40px !important;
+  min-height: 40px !important;
+  flex: 0 0 40px !important;
+  background: #f0dedf !important;
+}
+.fd-canvas-screen > .fd-canvas-zone {
+  background: #f0dedf !important;
+}
+.fd-canvas-screen .fd-app-canvas-stage {
+  background: #ffffff !important;
+  border-radius: 0 !important;
+}
+.fd-canvas-screen > :is(.fd-brush-slider, .fd-toolbar, .fd-collapse-handle, .fd-frame-strip) {
+  background: #f0dedf !important;
+}
+
+/* In the real canvas capture the first visible 50px cell is the current frame,
+   beginning about 75 logical px from the left edge; the marker is not centered
+   in the whole phone. */
+.fd-canvas-screen .fd-frame-strip-scroll {
+  justify-content: flex-start !important;
+  padding-left: 75px !important;
+  padding-right: 0 !important;
+}
+.fd-canvas-screen .fd-frame-strip-scroll > .fd-frame-cursor {
+  left: 100px !important;
+}
+.fd-canvas-screen :is(.fd-frame-thumb, .fd-frame-add, .fd-frame-paper) {
+  background: #f3e3e4 !important;
+}
+
+/* Timeline capture: preview is the app's dark preview surface, while controls
+   and tool strip use the same default-light surfaces as the rest of the app. */
+.fd-timeline-screen > .fd-timeline-topbar,
+.fd-timeline-screen > .fd-scene-line,
+.fd-timeline-screen > .fd-timeline-row,
+.fd-timeline-screen > .fd-end-card-row {
+  background: #faf7f5 !important;
+  color: #2b2730 !important;
+}
+.fd-timeline-screen .fd-timeline-preview {
+  margin-inline: 7px !important;
+  border-radius: 3px !important;
+  background: #2b2730 !important;
+}
+.fd-timeline-screen > .fd-timeline-toolbar {
+  background: #f0dedf !important;
+  color: #2b2730 !important;
+}
+.fd-timeline-screen .fd-tl-frame {
+  background: #2b2730 !important;
+}
+.fd-timeline-screen .fd-frame-cursor.is-error {
+  border-color: #c51522 !important;
+}
+
+/* Route screens share the actual default-light canvas/background from the
+   Flutter capture. This also removes the old per-screen rainbow showcase. */
+.fd-route-screen > .fd-appbar {
+  background: #ffffff !important;
+  color: #2b2730 !important;
+}
+.fd-route-screen > .fd-route-body {
+  background: #faf7f5 !important;
+  color: #2b2730 !important;
+}
+
+/* Export selection and CTA are the exact default app accent seen in capture. */
+.fd-export-screen .fd-export-segments .fd-segment.is-active,
+.fd-export-screen .fd-export-start,
+.fd-workspace-screen .fd-check.is-on {
+  background: #ff5c7a !important;
+  color: #ffffff !important;
+}
+.fd-export-screen .fd-format-row .fd-radio.is-active {
+  border-color: #ff5c7a !important;
+  background: #ff5c7a !important;
+}
+
+/* Workspace rows and toolbar preview use the pale-pink panel surfaces visible
+   in the production screenshot. */
+.fd-workspace-screen .fd-toolbar-preview {
+  background: #f0dedf !important;
+  border-color: #d9bec1 !important;
+}
+.fd-workspace-screen .fd-workspace-card {
+  background: #fff1f2 !important;
+  border-color: #d9bec1 !important;
+}
+.fd-workspace-screen .fd-workspace-row {
+  color: #2b2730 !important;
+}
