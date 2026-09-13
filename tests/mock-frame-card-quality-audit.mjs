@@ -234,7 +234,10 @@ for (const width of widths) {
           });
       }
 
-      const target = 320 / 569;
+      // The production Flutter capture harness renders a 360 x 760 logical-px
+      // viewport. Screen reproductions must preserve that exact app viewport
+      // ratio rather than the historical website-only 320 x 569 mock ratio.
+      const target = 360 / 760;
       const ratio = frame.outer.height
         ? frame.outer.width / frame.outer.height
         : null;
