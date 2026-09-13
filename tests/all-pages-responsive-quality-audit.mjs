@@ -218,12 +218,10 @@ for (const width of widths) {
         .map((el) => {
           const cs = getComputedStyle(el);
           const outer = rect(el);
-          const children = [...el.children]
-            .filter(visible)
-            .map((child) => ({
-              cls: child.className?.toString().slice(0, 100) || child.tagName,
-              ...rect(child),
-            }));
+          const children = [...el.children].filter(visible).map((child) => ({
+            cls: child.className?.toString().slice(0, 100) || child.tagName,
+            ...rect(child),
+          }));
           return {
             cls: el.className?.toString().slice(0, 120) || "",
             requiresRadius: el.matches(roundedSurfaceSelector),
@@ -246,8 +244,14 @@ for (const width of widths) {
           surfaceIssues.push({ kind: "surface-inner-overflow", surface });
         }
         if (surface.requiresSymmetricPadding) {
-          const largerPadding = Math.max(surface.paddingLeft, surface.paddingRight);
-          const smallerPadding = Math.min(surface.paddingLeft, surface.paddingRight);
+          const largerPadding = Math.max(
+            surface.paddingLeft,
+            surface.paddingRight,
+          );
+          const smallerPadding = Math.min(
+            surface.paddingLeft,
+            surface.paddingRight,
+          );
           if (
             largerPadding - smallerPadding > 4 &&
             smallerPadding < largerPadding * 0.75
