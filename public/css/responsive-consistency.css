@@ -41,6 +41,19 @@ html body .hero-preview-card > .hero-app-preview-source {
   transform: scale(var(--hero-preview-scale, 1)) !important;
 }
 
+/* Feature-row app reproductions must use the same 360x760 logical capture
+   geometry as the Flutter harness. responsive-foundation.css still carries the
+   historical 9:16 feature-diagram ratio; because that selector is more specific
+   than the generic .fd-app-screen/.fd-route-screen rule, it shortened Export and
+   Workspace and clipped their bottom controls. This final consistency layer is
+   the single owner for app/route feature mock height. */
+html body .feature-media > .feature-diagram:is(.fd-app-screen, .fd-route-screen),
+html body .feature-section > .feature-diagram:is(.fd-app-screen, .fd-route-screen) {
+  aspect-ratio: 360 / 760 !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
 /* TimelineScreen keeps an 18px label column beside five 37px frames. The
    canonical Hero/Features geometry needs a 16.75 logical-pixel source-space
    correction. Home reuses the same screen in two differently fitted contexts,
