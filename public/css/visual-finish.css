@@ -302,11 +302,31 @@ section.section:has(.community-tabs) {
   background: rgba(255, 255, 255, 0.025);
 }
 
+/* Keep footer navigation comfortably tappable without making the cards feel
+   vertically inflated. The base stylesheet used a generous list gap around
+   text-only links; move that whitespace into the interactive boxes instead so
+   every target reaches the 44px audit floor while overall density stays close
+   to the existing composition. */
+.site-footer .footer-col ul {
+  gap: 0.1rem;
+}
+
 .site-footer .footer-col a {
   display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
   transition:
     color 180ms var(--ease-out),
     transform 180ms var(--ease-out);
+}
+
+.site-footer .footer-social a {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (hover: hover) and (pointer: fine) {
