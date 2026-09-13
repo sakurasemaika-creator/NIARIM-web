@@ -85,3 +85,5 @@ console.log(
     2,
   ),
 );
+
+await import("./mock-frame-card-quality-audit.mjs");
