@@ -58,7 +58,7 @@ for (const width of widths) {
     const body = getComputedStyle(document.body);
     const footer = document.querySelector(".site-footer");
     const footerCs = footer ? getComputedStyle(footer) : null;
-    const finalCta = document.querySelector(".final-cta");
+    const finalCta = document.querySelector(".final-cta > .container");
     const finalCtaCs = finalCta ? getComputedStyle(finalCta) : null;
     return {
       rows,
@@ -110,14 +110,16 @@ for (const width of widths) {
       actual: state.bodyBackgroundImage,
     });
   }
-  if (state.footerBackgroundImage && state.footerBackgroundImage !== "none") {
+  if (!state.footerBackgroundImage || state.footerBackgroundImage === "none") {
     findings.push({
       width,
-      kind: "footer-gradient-regression",
+      kind: "footer-depth-missing",
       actual: state.footerBackgroundImage,
     });
   }
-  if (state.finalCta) {
+  if (!state.finalCta) {
+    findings.push({ width, kind: "final-cta-surface-missing" });
+  } else {
     const minCtaPadding = width <= 640 ? 20 : 28;
     if (
       state.finalCta.paddingLeft < minCtaPadding ||
