@@ -45,6 +45,9 @@ const byKind = report.findings.reduce(
   (acc, finding) => ((acc[finding.kind] = (acc[finding.kind] || 0) + 1), acc),
   {},
 );
+const verticalSamples = report.findings
+  .filter((finding) => finding.kind === "mock-vertical-control-clipped")
+  .slice(0, 6);
 console.log(
   JSON.stringify(
     {
@@ -55,6 +58,7 @@ console.log(
       removedLegacySixCardFindings: removedLegacyGalleryCount,
       findings: report.findings.length,
       byKind,
+      verticalSamples,
     },
     null,
     2,
