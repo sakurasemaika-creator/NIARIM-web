@@ -12,6 +12,7 @@ web_baseline: 2a44dd9007e4a764e489a42a70f96ac5da6b3b8a
 今回の新規Routeから開始。旧進捗の転記なし。
 
 completed_substeps:
+
 - A001/S1 route-policy-current-head restore: 両AGENTS、locked Route、current_id=A001を確認。Route再構築・並べ替えなし。
 - A001/S2 startup source-order review: main()→AppErrorReporter.install→font license registration→orientation→buildAppProviders→runApp、buildAppProviders内の逐次初期化を追跡。
 - A001/S3 corrupt persisted-settings reproduction: run 34533483148 の生ログと現行sourceを照合し、SettingsService/ThemeServiceの壊れたJSONがFormatExceptionでstartupを中断するroot causeを確定。
@@ -23,11 +24,13 @@ completed_substeps:
 current_substep: A001/S5d partial-bootstrap failure/retry lifecycle + fresh/warm startup verification
 
 remaining_substeps:
+
 - A001/S5d finish fresh/warm startup and partial-bootstrap failure/retry lifecycle review。後段initializer failure時に先行serviceのlistener/subscriptionを残したまま再buildしないことを保証し、必要ならfailure surface/cleanupを実装してtargeted testする。
 - A001/S5e verify bundled font license registration and remaining auth/project/premium startup side effects for duplicate/leak/failure reporting behavior; add only necessary targeted tests.
 - A001/S6 consolidate source review + targeted tests/log evidence; only when all A001 expected conditions are verified, mark Route/Evidence done and advance A002.
 
 blockers:
+
 - advisor blocker: none。S5dはSolで継続可能な通常のlifecycle設計/検証論点。
 - execution: none。S4/S5 queued runnersは双方successを生ログ確認済み。
 
