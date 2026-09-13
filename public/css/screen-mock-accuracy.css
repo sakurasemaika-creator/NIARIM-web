@@ -124,9 +124,8 @@
   grid-template-columns:
     calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
     calc(76 * var(--fd-capture-px, 1px)) calc(24 * var(--fd-capture-px, 1px))
-    calc(
-      35 * var(--fd-capture-px, 1px)
-    ) calc(12 * var(--fd-capture-px, 1px)) !important;
+    calc(35 * var(--fd-capture-px, 1px))
+    calc(12 * var(--fd-capture-px, 1px)) !important;
   column-gap: calc(5 * var(--fd-capture-px, 1px)) !important;
 }
 .fd-audio-context-screen .fd-sheet-slider {
