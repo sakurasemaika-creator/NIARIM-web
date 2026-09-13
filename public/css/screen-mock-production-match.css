@@ -117,7 +117,8 @@
   background: #ffffff !important;
   border-radius: 0 !important;
 }
-.fd-canvas-screen > :is(.fd-brush-slider, .fd-toolbar, .fd-collapse-handle, .fd-frame-strip) {
+.fd-canvas-screen
+  > :is(.fd-brush-slider, .fd-toolbar, .fd-collapse-handle, .fd-frame-strip) {
   background: #f0dedf !important;
 }
 
