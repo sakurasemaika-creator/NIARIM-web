@@ -190,3 +190,29 @@ a {
     flex-basis: 35px !important;
   }
 }
+
+/* Final mock-fit visibility correction.
+   fitMockScreens() measures each screen's scrollHeight before applying its
+   transform scale. Export/Workspace used an inner overflow:hidden route body,
+   so their real bottom controls were clipped inside that child and never
+   contributed to the parent scrollHeight. Let only these two App Preview
+   bodies expose their natural extent during layout; the screen bezel itself
+   still clips the final painted result after fitMockScreens scales it to fit. */
+html
+  body
+  .screenshot-card
+  > :is(.fd-export-screen, .fd-workspace-screen)
+  > .fd-route-body {
+  overflow: visible !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* responsive-consistency.css owns Timeline centering through a contextual
+   left offset plus translateX(-50%). An older fixed-pixel calibration imported
+   later replaced only the transform and left every current frame 6-17px right
+   of center. This final cascade layer restores the shared centering transform
+   while preserving each context's audited --fd-timeline-current-offset. */
+html body .fd-timeline-screen .fd-timeline-frames {
+  transform: translateX(-50%) !important;
+}
