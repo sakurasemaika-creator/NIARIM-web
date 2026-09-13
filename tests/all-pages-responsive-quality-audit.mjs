@@ -72,6 +72,18 @@ for (const width of widths) {
           r.height > 0
         );
       };
+      const rect = (el) => {
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left,
+          right: r.right,
+          top: r.top,
+          bottom: r.bottom,
+          width: r.width,
+          height: r.height,
+        };
+      };
+      const px = (value) => Number.parseFloat(value) || 0;
       const isIntentionallyScrollable = (el) => {
         for (
           let node = el;
@@ -159,6 +171,80 @@ for (const width of widths) {
             clientWidth: el.clientWidth,
           };
         });
+
+      const surfaceSelector = [
+        ".intro-card",
+        ".feature-row",
+        ".spec-item",
+        ".screenshot-card",
+        ".pricing-card",
+        ".pricing-notice",
+        ".community-card",
+        ".community-banner",
+        ".news-card",
+        ".help-item",
+        ".faq-item",
+        ".about-name",
+        ".contact-panel",
+      ].join(",");
+      const roundedSurfaceSelector = [
+        ".intro-card",
+        ".feature-row",
+        ".spec-item",
+        ".screenshot-card",
+        ".pricing-card",
+        ".pricing-notice",
+        ".community-card",
+        ".community-banner",
+        ".news-card",
+        ".help-item",
+        ".about-name",
+        ".contact-panel",
+      ].join(",");
+      const surfaces = [...document.querySelectorAll(surfaceSelector)]
+        .filter(visible)
+        .map((el) => {
+          const cs = getComputedStyle(el);
+          const outer = rect(el);
+          const children = [...el.children]
+            .filter(visible)
+            .map((child) => ({
+              cls: child.className?.toString().slice(0, 100) || child.tagName,
+              ...rect(child),
+            }));
+          return {
+            cls: el.className?.toString().slice(0, 120) || "",
+            requiresRadius: el.matches(roundedSurfaceSelector),
+            radius: px(cs.borderTopLeftRadius),
+            scrollWidth: el.scrollWidth,
+            clientWidth: el.clientWidth,
+            outer,
+            children,
+          };
+        });
+      const surfaceIssues = [];
+      for (const surface of surfaces) {
+        if (surface.requiresRadius && surface.radius < 6) {
+          surfaceIssues.push({ kind: "surface-radius-regression", surface });
+        }
+        if (surface.scrollWidth > surface.clientWidth + 2) {
+          surfaceIssues.push({ kind: "surface-inner-overflow", surface });
+        }
+        for (const child of surface.children) {
+          if (child.width < surface.outer.width * 0.2) continue;
+          if (
+            child.left < surface.outer.left - 2.5 ||
+            child.right > surface.outer.right + 2.5
+          ) {
+            surfaceIssues.push({
+              kind: "surface-child-horizontal-escape",
+              surface,
+              child,
+            });
+          }
+        }
+      }
+
       return {
         lang: root.lang,
         scrollWidth: root.scrollWidth,
@@ -168,6 +254,7 @@ for (const width of widths) {
         headingOverflow: headings.filter(
           (h) => h.scrollWidth > h.clientWidth + 2,
         ),
+        surfaceIssues: surfaceIssues.slice(0, 30),
       };
     });
     if (state.lang !== lang)
@@ -204,6 +291,13 @@ for (const width of widths) {
         route,
         kind: "undersized-control",
         controls: state.tinyTargets,
+      });
+    if (state.surfaceIssues.length)
+      findings.push({
+        width,
+        route,
+        kind: "surface-quality-regression",
+        issues: state.surfaceIssues,
       });
     if (findings.length > previousFindings) {
       const slug = route.replace(/[^a-zA-Z0-9]+/g, "-") || "home";
