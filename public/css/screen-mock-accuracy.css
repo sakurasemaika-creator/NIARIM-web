@@ -152,8 +152,24 @@
 
 /* Timeline calibration from the current route capture. */
 .fd-timeline-screen .fd-timeline-preview {
+  position: relative !important;
   flex-basis: calc(180 * var(--fd-capture-px, 1px)) !important;
   min-height: calc(180 * var(--fd-capture-px, 1px)) !important;
+  margin-bottom: calc(22 * var(--fd-capture-px, 1px)) !important;
+}
+/* TimelineScreen reserves a 22px drag target immediately below the preview;
+   the visible grip centered inside it is 40x5 logical pixels. */
+.fd-timeline-screen .fd-timeline-preview::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  bottom: calc(-13.5 * var(--fd-capture-px, 1px)) !important;
+  width: calc(40 * var(--fd-capture-px, 1px)) !important;
+  height: calc(5 * var(--fd-capture-px, 1px)) !important;
+  border-radius: calc(3 * var(--fd-capture-px, 1px)) !important;
+  background: #756e73 !important;
+  transform: translateX(-50%) !important;
+  opacity: 0.72 !important;
 }
 .fd-timeline-screen > .fd-transport {
   height: calc(56 * var(--fd-capture-px, 1px)) !important;
@@ -167,13 +183,43 @@
   height: calc(51 * var(--fd-capture-px, 1px)) !important;
   flex-basis: calc(51 * var(--fd-capture-px, 1px)) !important;
 }
+/* The capture harness is in the state where end-card editing is available.
+   TimelineScreen therefore shows the red delete action, not a lock glyph. */
+.fd-timeline-screen .fd-end-card-row {
+  position: relative !important;
+}
+.fd-timeline-screen .fd-end-card-row .fd-lock-mark {
+  display: none !important;
+}
+.fd-timeline-screen .fd-end-card-row::after {
+  content: "" !important;
+  position: absolute !important;
+  right: calc(14 * var(--fd-capture-px, 1px)) !important;
+  top: 50% !important;
+  width: calc(11 * var(--fd-capture-px, 1px)) !important;
+  height: calc(13 * var(--fd-capture-px, 1px)) !important;
+  border: calc(1.5 * var(--fd-capture-px, 1px)) solid #c51522 !important;
+  border-top-width: calc(2.5 * var(--fd-capture-px, 1px)) !important;
+  border-radius: 0 0 calc(2 * var(--fd-capture-px, 1px))
+    calc(2 * var(--fd-capture-px, 1px)) !important;
+  box-sizing: border-box !important;
+  transform: translateY(-40%) !important;
+}
+.fd-timeline-screen .fd-end-card-row::before {
+  content: "" !important;
+  position: absolute !important;
+  right: calc(12 * var(--fd-capture-px, 1px)) !important;
+  top: calc(50% - 8 * var(--fd-capture-px, 1px)) !important;
+  width: calc(15 * var(--fd-capture-px, 1px)) !important;
+  height: calc(2 * var(--fd-capture-px, 1px)) !important;
+  border-radius: calc(1 * var(--fd-capture-px, 1px)) !important;
+  background: #c51522 !important;
+}
 
 /* Canvas frame-strip: the real mobile widget keeps the mode segmented control
    pinned to the right and scrolls frame cells only in the remaining left area.
-   Keeping both children in normal flex flow let the long frame list push the
-   mode control outside the miniature. Reserve the captured 136px control area
-   explicitly; the existing 75px left inset then shows the current frame plus
-   roughly two following cells, matching the Flutter capture. */
+   Some older fidelity layers can still swallow the real mode node, so the
+   miniature renders one canonical non-interactive copy from the strip itself. */
 html body .fd-canvas-screen > .fd-frame-strip {
   position: relative !important;
 }
@@ -181,15 +227,40 @@ html body .fd-canvas-screen .fd-frame-strip-scroll {
   margin-right: calc(140 * var(--fd-capture-px, 1px)) !important;
 }
 html body .fd-canvas-screen .fd-frame-mode {
+  display: none !important;
+}
+html body .fd-canvas-screen > .fd-frame-strip::after {
+  content: "フレーム一覧　タイムライン" !important;
   position: absolute !important;
   right: calc(4 * var(--fd-capture-px, 1px)) !important;
   top: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: calc(136 * var(--fd-capture-px, 1px)) !important;
   height: calc(34 * var(--fd-capture-px, 1px)) !important;
-  flex: none !important;
+  border: 1px solid #756e73 !important;
+  border-radius: calc(18 * var(--fd-capture-px, 1px)) !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(to right, #ffffff 0 50%, #faf7f5 50% 100%) !important;
+  color: #756e73 !important;
+  font-family: var(--font-serif) !important;
+  font-size: calc(8 * var(--fd-capture-px, 1px)) !important;
+  line-height: 1 !important;
+  white-space: pre !important;
   transform: translateY(-50%) !important;
-  z-index: 3 !important;
-  font-size: calc(9 * var(--fd-capture-px, 1px)) !important;
+  z-index: 6 !important;
+}
+html body .fd-canvas-screen > .fd-frame-strip::before {
+  content: "" !important;
+  position: absolute !important;
+  right: calc(72 * var(--fd-capture-px, 1px)) !important;
+  top: 50% !important;
+  width: 1px !important;
+  height: calc(34 * var(--fd-capture-px, 1px)) !important;
+  background: #756e73 !important;
+  transform: translateY(-50%) !important;
+  z-index: 7 !important;
 }
 
 /* Workspace rows preserve the real route-list density proportionally. */
