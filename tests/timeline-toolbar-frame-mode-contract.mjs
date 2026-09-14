@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 
-const [main, baseCss] = await Promise.all([
+const [main, finalCss] = await Promise.all([
   fs.readFile("public/js/main.js", "utf8"),
-  fs.readFile("public/css/screen-mock-accuracy-base.css", "utf8"),
+  fs.readFile("public/css/ui-regression-fixes.css", "utf8"),
 ]);
 
 const failures = [];
@@ -16,27 +16,27 @@ expectMatch(
   "Timeline mock must keep the back-to-canvas control first and preserve the remaining control order",
 );
 expectMatch(
-  baseCss,
+  finalCss,
   /\.fd-timeline-title\s*\{[\s\S]*?margin-left:\s*auto\s*!important/,
   "Timeline title must start the right-aligned group",
 );
 expectMatch(
-  baseCss,
+  finalCss,
   /\.fd-timeline-topbar\s*>\s*\.fd-spacer\s*\{[\s\S]*?flex:\s*0\s+0\s+0\s*!important/,
   "Timeline spacer must not split the title away from the right-side controls",
 );
 expectMatch(
-  baseCss,
+  finalCss,
   /\.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?border-radius:\s*50%\s*!important/,
   "Frame strip mode control must be a 42px circular icon button",
 );
 expectMatch(
-  baseCss,
+  finalCss,
   /\.fd-frame-mode::before\s*\{[\s\S]*?mask-image:[\s\S]*?M18%204l2%204/,
   "Frame strip mode control must use the existing movie_filter clapperboard icon geometry",
 );
 expectMatch(
-  baseCss,
+  finalCss,
   /\.fd-frame-mode\s*>\s*span\s*\{[\s\S]*?display:\s*none\s*!important/,
   "Frame strip mode control must hide the legacy two text segments",
 );
