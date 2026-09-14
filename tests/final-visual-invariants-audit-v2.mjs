@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 
 const scripts = [
+  "tests/hero-preview-scale-contract-audit.mjs",
   "tests/final-visual-invariants-audit.mjs",
   "tests/mock-detail-audit.mjs",
 ];
