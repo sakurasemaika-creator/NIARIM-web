@@ -1,0 +1,36 @@
+/* App parity for floating tool-panel dismissal controls.
+   The visible X stays compact at the top-right; the surrounding row preserves
+   a comfortable tap-sized affordance in reconstructed screens. */
+html body .fd-panel-close-bar {
+  height: 36px !important;
+  flex: 0 0 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: 0 8px !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+}
+
+html body .fd-panel-close {
+  position: relative !important;
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex: 0 0 14px !important;
+  font-size: 0 !important;
+  color: var(--fd-muted, #665b5f) !important;
+}
+
+html body .fd-panel-close::before,
+html body .fd-panel-close::after {
+  width: 14px !important;
+  height: 1.5px !important;
+}
+
+/* Onion-skin used a panel-specific shorter close row. Keep it compact without
+   pulling the X back to the center. */
+html body .fd-app-onion-panel .fd-panel-close-bar {
+  height: 32px !important;
+  flex-basis: 32px !important;
+}
