@@ -47,4 +47,15 @@
 
   if (lang && LATIN[lang])
     document.documentElement.setAttribute("data-latin-only", "");
+
+  /* 日本語CTAはサイト共通i18n辞書を正本として表示する。
+   * このheadスクリプトは辞書本体より先に読み込まれるため、DOMContentLoaded時に
+   * 辞書へ承認済みコピーを反映する。以後の言語切替でも同じja値が使われる。 */
+  document.addEventListener("DOMContentLoaded", function () {
+    var dict = window.NIARIM_I18N_DICT;
+    if (!dict || !dict.ja) return;
+    dict.ja["cta.title"] = "実際にアニメーションを つくってみよう！";
+    dict.ja["cta.body"] =
+      "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。";
+  });
 })();
