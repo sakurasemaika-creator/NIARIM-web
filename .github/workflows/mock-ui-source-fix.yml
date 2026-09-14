@@ -28,6 +28,18 @@ jobs:
         run: npm ci
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+      - name: Start local site
+        shell: bash
+        run: |
+          npm run dev > /tmp/niarim-web.log 2>&1 &
+          for i in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:8787/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/niarim-web.log
+          exit 1
       - name: Verify focused site audit
         run: npm run audit:mock-detail
       - name: Commit verified fix
