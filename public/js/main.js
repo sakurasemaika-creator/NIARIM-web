@@ -220,7 +220,9 @@
       // 画面中央に固定表示するコマ枠。色はテーマの更新マーク色。
       '<span class="fd-frame-cursor" aria-hidden="true"></span>' +
       "</div>" +
-      '<span class="fd-frame-mode"><span class="is-selected" data-i18n="fd.frameListMode">フレーム一覧</span><span data-i18n="fd.timelineMode">タイムライン</span></span>' +
+      '<button type="button" class="fd-frame-mode" aria-label="タイムライン" data-i18n-attr="aria-label:fd.timelineMode" tabindex="-1">' +
+      icon("ic-movie_filter") +
+      "</button>" +
       "</div>"
     );
   }

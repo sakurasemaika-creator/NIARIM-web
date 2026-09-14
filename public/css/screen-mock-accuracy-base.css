@@ -256,30 +256,23 @@
   border-color: #bbb !important;
 }
 .fd-frame-mode {
+  width: 42px !important;
   height: 42px !important;
-  flex: 0 0 117px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  flex: 0 0 42px !important;
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  align-items: stretch !important;
-  border: 1px solid var(--fd-muted, #9d8c90) !important;
-  border-radius: 20px !important;
+  place-items: center !important;
+  padding: 0 !important;
+  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
+  border-radius: 50% !important;
   overflow: hidden !important;
-  background: #fff !important;
-  font-size: 9px !important;
+  background: var(--fd-surface) !important;
   color: var(--fd-muted, #6f6064) !important;
 }
-.fd-frame-mode > span {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 5px !important;
-}
-.fd-frame-mode > span + span {
-  border-left: 1px solid var(--fd-muted, #b6a7aa) !important;
-}
-.fd-frame-mode .is-selected {
-  color: var(--fd-muted, #765f64) !important;
-  background: #fff !important;
+.fd-frame-mode .ic {
+  width: 21px !important;
+  height: 21px !important;
 }
 
 /* ── LayerPanel: 実キャプチャは右250pxの淡いピンク面 ───────────── */

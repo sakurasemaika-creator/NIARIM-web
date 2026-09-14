@@ -77,7 +77,7 @@ html body .fd-canvas-screen > .fd-frame-strip::after {
   content: none !important;
   display: none !important;
 }
-html body .fd-canvas-screen .fd-frame-mode {
+html body .fd-frame-mode {
   display: grid !important;
   place-items: center !important;
   position: relative !important;
@@ -89,32 +89,11 @@ html body .fd-canvas-screen .fd-frame-mode {
   flex: 0 0 42px !important;
   margin-inline: 6px !important;
   padding: 0 !important;
-  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
   border-radius: 50% !important;
-  overflow: hidden !important;
-  background: var(--fd-surface) !important;
-  color: var(--fd-text, var(--fd-ink)) !important;
 }
-html body .fd-canvas-screen .fd-frame-mode > span {
-  display: none !important;
-}
-/* Same geometry as sprite.svg#ic-movie_filter. The legacy DOM only contains
-   text segments, so the final visual layer reuses that existing icon shape as
-   a mask instead of adding a Web-only emoji or bespoke symbol. */
-html body .fd-canvas-screen .fd-frame-mode::before {
-  content: "" !important;
-  display: block !important;
-  width: 20px !important;
-  height: 20px !important;
-  background: currentColor !important;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.06 13.61v-6.11l5.19 3.05-5.19 3.06z'/%3E%3C/svg%3E") !important;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.06 13.61v-6.11l5.19 3.05-5.19 3.06z'/%3E%3C/svg%3E") !important;
-  -webkit-mask-repeat: no-repeat !important;
-  mask-repeat: no-repeat !important;
-  -webkit-mask-position: center !important;
-  mask-position: center !important;
-  -webkit-mask-size: contain !important;
-  mask-size: contain !important;
+html body .fd-frame-mode .ic {
+  width: 21px !important;
+  height: 21px !important;
 }
 html body .fd-canvas-screen .fd-frame-strip-scroll {
   position: relative !important;
@@ -164,41 +143,101 @@ html body .fd-canvas-screen .fd-frame-thumb.is-current {
    thumbnails where they exist; for truly empty generated cells provide a small
    recognisable project preview so the frame list never degenerates into blank
    blocks. Each frame differs slightly, like adjacent animation drawings. */
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
   .fd-frame-paper:empty {
   inset: 3px !important;
   background-color: #fff !important;
   background-repeat: no-repeat !important;
   background-size: 100% 100% !important;
 }
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-thumb:nth-child(1) .fd-frame-paper:empty {
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(1)
+  .fd-frame-paper:empty {
   background-image:
-    radial-gradient(circle at 50% 34%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
-    linear-gradient(150deg, transparent 45%, var(--fd-ink) 46% 50%, transparent 51%) !important;
+    radial-gradient(
+      circle at 50% 34%,
+      transparent 0 15%,
+      var(--fd-ink) 16% 18%,
+      transparent 19%
+    ),
+    linear-gradient(
+      150deg,
+      transparent 45%,
+      var(--fd-ink) 46% 50%,
+      transparent 51%
+    ) !important;
 }
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-thumb:nth-child(2) .fd-frame-paper:empty {
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(2)
+  .fd-frame-paper:empty {
   background-image:
-    radial-gradient(circle at 55% 35%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
-    linear-gradient(145deg, transparent 44%, var(--fd-ink) 45% 49%, transparent 50%) !important;
+    radial-gradient(
+      circle at 55% 35%,
+      transparent 0 15%,
+      var(--fd-ink) 16% 18%,
+      transparent 19%
+    ),
+    linear-gradient(
+      145deg,
+      transparent 44%,
+      var(--fd-ink) 45% 49%,
+      transparent 50%
+    ) !important;
 }
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-thumb:nth-child(3) .fd-frame-paper:empty {
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(3)
+  .fd-frame-paper:empty {
   background-image:
-    radial-gradient(circle at 60% 36%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
-    linear-gradient(140deg, transparent 43%, var(--fd-ink) 44% 48%, transparent 49%) !important;
+    radial-gradient(
+      circle at 60% 36%,
+      transparent 0 15%,
+      var(--fd-ink) 16% 18%,
+      transparent 19%
+    ),
+    linear-gradient(
+      140deg,
+      transparent 43%,
+      var(--fd-ink) 44% 48%,
+      transparent 49%
+    ) !important;
 }
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-thumb:nth-child(4) .fd-frame-paper:empty {
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(4)
+  .fd-frame-paper:empty {
   background-image:
-    radial-gradient(circle at 65% 37%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
-    linear-gradient(135deg, transparent 42%, var(--fd-ink) 43% 47%, transparent 48%) !important;
+    radial-gradient(
+      circle at 65% 37%,
+      transparent 0 15%,
+      var(--fd-ink) 16% 18%,
+      transparent 19%
+    ),
+    linear-gradient(
+      135deg,
+      transparent 42%,
+      var(--fd-ink) 43% 47%,
+      transparent 48%
+    ) !important;
 }
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-thumb .fd-art,
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
-  .fd-frame-paper .fd-art {
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb
+  .fd-art,
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-paper
+  .fd-art {
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -244,17 +283,27 @@ html body .fd-canvas-screen > .fd-toolbar > .fd-color-swatch {
 /* A reconstructed app viewport fills its bezel. Do not add a second visual
    card/gutter around Hero preview screens. */
 html body .hero-showcase .hero-preview-card,
-html body .hero-showcase .hero-preview-card > :is(.fd-app-screen, .fd-route-screen) {
+html
+  body
+  .hero-showcase
+  .hero-preview-card
+  > :is(.fd-app-screen, .fd-route-screen) {
   margin: 0 !important;
 }
-html body .hero-showcase .hero-preview-card > :is(.fd-app-screen, .fd-route-screen) {
+html
+  body
+  .hero-showcase
+  .hero-preview-card
+  > :is(.fd-app-screen, .fd-route-screen) {
   width: 100% !important;
   max-width: none !important;
   border-color: var(--fd-bezel) !important;
 }
 
 /* Key miniature labels must remain readable after theme substitution. */
-html body :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
+html
+  body
+  :is(.hero-visual, .feature-row, .screenshot-card, .feature-section)
   :is(.fd-community-title, .fd-route-title, .fd-appbar strong) {
   opacity: 1 !important;
   color: var(--fd-text, var(--fd-ink)) !important;

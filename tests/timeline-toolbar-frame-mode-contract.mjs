@@ -31,15 +31,15 @@ expectMatch(
   "Frame strip mode control must be a 42px circular icon button",
 );
 expectMatch(
-  finalCss,
-  /\.fd-frame-mode::before\s*\{[\s\S]*?mask-image:[\s\S]*?M18%204l2%204/,
-  "Frame strip mode control must use the existing movie_filter clapperboard icon geometry",
+  main,
+  /class=\"fd-frame-mode\"[\s\S]*?aria-label=\"タイムライン\"[\s\S]*?icon\(\"ic-movie_filter\"\)/,
+  "Frame strip mode control must use the existing movie_filter sprite with an accessibility label",
 );
-expectMatch(
-  finalCss,
-  /\.fd-frame-mode\s*>\s*span\s*\{[\s\S]*?display:\s*none\s*!important/,
-  "Frame strip mode control must hide the legacy two text segments",
-);
+if (finalCss.includes(".fd-frame-mode::before")) {
+  failures.push(
+    "Frame strip mode control must not synthesize the icon with a pseudo-element mask",
+  );
+}
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
