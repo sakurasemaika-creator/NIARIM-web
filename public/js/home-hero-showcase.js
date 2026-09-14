@@ -11,7 +11,7 @@
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/css/home-hero-cascade-final.css?v=20260914-app-geometry";
+    link.href = "/css/home-hero-cascade-final.css?v=20260914-canonical-scale";
     link.setAttribute(marker, "true");
     document.head.appendChild(link);
   }
@@ -155,9 +155,10 @@
     var width = measuredWidth || card.getBoundingClientRect().width;
     if (!width) return;
 
-    // Real app comparison captures use a 360 logical-pixel viewport. All three
-    // Hero screens use the same coordinate system; no per-card magic divisor.
-    card.style.setProperty("--hero-preview-scale", String(width / 360));
+    // The canonical Web reconstruction uses the same 320 logical-pixel width
+    // as the normal screen mocks. Scale the whole app viewport once so fixed
+    // UI dimensions keep exactly the same proportions inside the smaller Hero.
+    card.style.setProperty("--hero-preview-scale", String(width / 320));
   }
 
   function fitHeroPreviews(showcase) {
