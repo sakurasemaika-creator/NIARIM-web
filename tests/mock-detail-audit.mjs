@@ -39,8 +39,6 @@ for (const viewport of viewports) {
             centerX: r.left + r.width / 2,
           };
         };
-        // 図解は枠に収めるため --fd-fit で縮小されている。
-        // getBoundingClientRect が返すのは縮小後の値なので、CSS上の寸法へ戻す。
         const fitOf = (el) => {
           const host = el?.closest(
             ".feature-diagram, .fd-app-screen, .fd-route-screen",
@@ -68,6 +66,7 @@ for (const viewport of viewports) {
           const cursorRect = rect(cursor);
           const currentStyle = current ? getComputedStyle(current) : null;
           const after = getComputedStyle(strip, "::after");
+          const artwork = [...strip.querySelectorAll(".fd-frame-thumb .fd-art")];
           return {
             strip: sr,
             current: cr,
@@ -79,6 +78,10 @@ for (const viewport of viewports) {
             currentBorderWidth: currentStyle?.borderTopWidth || "",
             pseudoAfterContent: after.content,
             pseudoAfterDisplay: after.display,
+            artworkCount: artwork.length,
+            visibleArtworkCount: artwork.filter(
+              (el) => getComputedStyle(el).visibility !== "hidden",
+            ).length,
           };
         });
         const sliders = [
@@ -124,6 +127,51 @@ for (const viewport of viewports) {
             };
           })
           .filter(Boolean);
+        const themeRoots = [
+          ...document.querySelectorAll("[data-mock-theme], .feature-section"),
+        ].filter((root) => {
+          const parent = root.parentElement?.closest(
+            "[data-mock-theme], .feature-section",
+          );
+          return !parent && root.querySelector(
+            ".feature-diagram, .fd-app-screen, .fd-route-screen",
+          );
+        });
+        const themes = themeRoots.map((root) => {
+          const surface = root.matches(
+            ".feature-diagram, .fd-app-screen, .fd-route-screen",
+          )
+            ? root
+            : root.querySelector(
+                ".feature-diagram, .fd-app-screen, .fd-route-screen",
+              );
+          const cs = getComputedStyle(surface);
+          const rootStyle = getComputedStyle(root);
+          return {
+            id:
+              root.getAttribute("data-mock-theme") ||
+              root.id ||
+              root.className,
+            accent: cs.getPropertyValue("--fd-accent").trim(),
+            bezel:
+              cs.getPropertyValue("--fd-bezel").trim() ||
+              rootStyle.getPropertyValue("--fd-bezel").trim(),
+          };
+        });
+        const screens = [
+          ...document.querySelectorAll(".fd-app-screen, .fd-route-screen"),
+        ].map((screen) => {
+          const before = getComputedStyle(screen, "::before");
+          return {
+            className: screen.className,
+            beforeContent: before.content,
+            beforeDisplay: before.display,
+          };
+        });
+        const hero = document.querySelector(".hero-visual.fd-canvas-screen.fd-app-screen");
+        const heroRect = hero ? rawRect(hero) : null;
+        const heroArt = hero?.querySelector(".fd-app-canvas-stage .fd-art");
+        const heroStyle = hero ? getComputedStyle(hero) : null;
         const scroller = document.querySelector(".screenshot-scroller");
         const cards = scroller
           ? [...scroller.querySelectorAll(":scope > .screenshot-card")]
@@ -137,6 +185,18 @@ for (const viewport of viewports) {
           strips,
           sliders,
           mocks,
+          themes,
+          screens,
+          hero: hero
+            ? {
+                ratio: heroRect.width / heroRect.height,
+                artworkVisible:
+                  Boolean(heroArt) && getComputedStyle(heroArt).visibility !== "hidden",
+                accent: heroStyle.getPropertyValue("--fd-accent").trim(),
+                bezel: heroStyle.getPropertyValue("--fd-bezel").trim(),
+                borderColor: heroStyle.borderTopColor,
+              }
+            : null,
           galleryCount: cards.length,
         };
       });
@@ -173,6 +233,9 @@ for (const viewport of viewports) {
             strip,
           });
         }
+        if (strip.artworkCount > 0 && strip.visibleArtworkCount === 0) {
+          failures.push({ id, kind: "frame-preview-artwork-hidden", strip });
+        }
       }
       for (const slider of state.sliders) {
         if (slider.height && Math.abs(slider.height - 4) > 1) {
@@ -193,7 +256,37 @@ for (const viewport of viewports) {
         if (!mock.borderColor)
           failures.push({ id, kind: "mock-bezel-border-missing", mock });
       }
+      const themedAccents = state.themes.map((theme) => theme.accent).filter(Boolean);
+      if (new Set(themedAccents).size !== themedAccents.length) {
+        failures.push({ id, kind: "duplicate-mock-theme-accent", themes: state.themes });
+      }
+      const themedBezels = state.themes.map((theme) => theme.bezel).filter(Boolean);
+      if (new Set(themedBezels).size !== themedBezels.length) {
+        failures.push({ id, kind: "duplicate-mock-theme-bezel", themes: state.themes });
+      }
+      for (const screen of state.screens) {
+        if (
+          screen.beforeDisplay !== "none" &&
+          screen.beforeContent !== "none" &&
+          screen.beforeContent !== "normal"
+        ) {
+          failures.push({ id, kind: "screen-reproduction-ad-visible", screen });
+        }
+      }
       if (route === "/") {
+        if (!state.hero) {
+          failures.push({ id, kind: "hero-screen-missing" });
+        } else {
+          if (Math.abs(state.hero.ratio - 320 / 569) > 0.03) {
+            failures.push({ id, kind: "hero-screen-ratio", hero: state.hero });
+          }
+          if (!state.hero.artworkVisible) {
+            failures.push({ id, kind: "hero-artwork-hidden", hero: state.hero });
+          }
+          if (!state.hero.accent || !state.hero.bezel) {
+            failures.push({ id, kind: "hero-theme-missing", hero: state.hero });
+          }
+        }
         if (state.galleryCount !== 6) {
           failures.push({
             id,
@@ -248,8 +341,11 @@ console.log(
       checks: [
         "50x50/current center",
         "single frame cursor/no double marker",
+        "frame preview artwork visible",
         "slider geometry",
-        "theme bezel/accent",
+        "unique theme accent/bezel",
+        "no ads in screen reproductions",
+        "hero screen/theme/artwork",
         "six-card gallery",
         "gallery end visibility",
         "horizontal overflow",
