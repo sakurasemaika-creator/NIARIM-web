@@ -5,15 +5,13 @@
     var marker = "data-niarim-home-hero-cascade-final";
     var existing = document.querySelector("link[" + marker + "]");
     if (existing) {
-      // Moving the existing link to the end keeps cascade ownership deterministic
-      // even when other design layers were injected after it.
       document.head.appendChild(existing);
       return;
     }
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/css/home-hero-cascade-final.css?v=20260911a";
+    link.href = "/css/home-hero-cascade-final.css?v=20260914-app-geometry";
     link.setAttribute(marker, "true");
     document.head.appendChild(link);
   }
@@ -118,9 +116,6 @@
 
     var clone = source.cloneNode(true);
     clone.classList.add("hero-app-preview-source", "is-fit-scaled", themeClass);
-    // The generic screen fitter targets .fd-app-screen and rewrites width/height
-    // with an inline transform. Hero cards already own their aspect ratio, so a
-    // cloned hero source must stay out of that fitting pipeline.
     clone.classList.remove("fd-app-screen");
     resetPreviewFit(clone);
     clone.removeAttribute("id");
@@ -137,6 +132,7 @@
       "--fd-bg",
       "--fd-panel",
       "--fd-panel-2",
+      "--fd-bezel",
     ].forEach(function (name) {
       clone.style.setProperty(name, "inherit", "important");
     });
@@ -159,7 +155,9 @@
     var width = measuredWidth || card.getBoundingClientRect().width;
     if (!width) return;
 
-    card.style.setProperty("--hero-preview-scale", String(width / 320));
+    // Real app comparison captures use a 360 logical-pixel viewport. All three
+    // Hero screens use the same coordinate system; no per-card magic divisor.
+    card.style.setProperty("--hero-preview-scale", String(width / 360));
   }
 
   function fitHeroPreviews(showcase) {
@@ -218,8 +216,6 @@
     );
     container.appendChild(showcase);
 
-    // This link is deliberately appended only after all runtime design layers and
-    // the hero DOM are present, eliminating the old "final CSS loaded first" race.
     ensureHeroCascadeFinal();
 
     requestAnimationFrame(function () {
