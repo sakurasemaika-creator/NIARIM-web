@@ -47,46 +47,116 @@
   vertical-align: baseline !important;
 }
 
-/* Canvas frame strip: use the real mode control. Stale capture-calibration
-   layers replaced it with ::before/::after and reserved 140px, which hid the
-   frame list and made the fixed current-frame cursor collide with controls. */
+/* Canvas frame strip mirrors FrameStripWidget in the Flutter app:
+   - row height 64
+   - 50x50 cells with 7px vertical margin
+   - real SegmentedButton on the right
+   - the fixed 50x50 current marker is centered inside the remaining Expanded
+     frame-list region
+   - the horizontal list gets (regionWidth - 50) / 2 side padding so the
+     current cell moves under that fixed marker.
+   This intentionally replaces the stale Web-only full-screen centering and the
+   synthetic 140px pseudo-control. */
+html body .fd-canvas-screen > .fd-frame-strip {
+  position: relative !important;
+  height: 64px !important;
+  min-height: 64px !important;
+  flex-basis: 64px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
 html body .fd-canvas-screen > .fd-frame-strip::before,
 html body .fd-canvas-screen > .fd-frame-strip::after {
   content: none !important;
   display: none !important;
 }
 html body .fd-canvas-screen .fd-frame-mode {
-  display: inline-flex !important;
+  display: grid !important;
   position: relative !important;
   z-index: 7 !important;
-  flex: 0 0 auto !important;
+  flex: 0 0 117px !important;
+  margin-inline: 4px !important;
 }
 html body .fd-canvas-screen .fd-frame-strip-scroll {
-  position: static !important;
+  position: relative !important;
   width: auto !important;
   flex: 1 1 0 !important;
   min-width: 0 !important;
+  margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: calc(50% - 125px) !important;
-  padding-right: 0 !important;
+  padding-left: calc(50% - 25px) !important;
+  padding-right: calc(50% - 25px) !important;
   justify-content: flex-start !important;
+  align-items: center !important;
   gap: 0 !important;
   overflow: hidden !important;
 }
+html body .fd-canvas-screen :is(.fd-frame-thumb, .fd-frame-add) {
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  min-height: 50px !important;
+  flex: 0 0 50px !important;
+  margin: 7px 0 !important;
+}
 html body .fd-canvas-screen .fd-frame-cursor {
+  position: absolute !important;
   left: 50% !important;
-  transform: translateX(-50%) !important;
+  top: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  transform: translate(-50%, -50%) !important;
+  border: 3px solid var(--fd-mark, #ffad00) !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
   pointer-events: none !important;
   z-index: 8 !important;
 }
 
-/* Keep the selected cell itself from becoming a second heavy current marker. */
+/* The fixed marker is the current-position indication. The cell itself keeps
+   the normal outline so we do not paint a doubled thick border. */
 html body .fd-canvas-screen .fd-frame-thumb.is-selected,
 html body .fd-canvas-screen .fd-frame-thumb.is-current {
   border-width: 1px !important;
+  border-color: var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
 }
 
-/* The frame previews are product content, not blank capture placeholders. */
+/* Dynamic mocks historically created blank frame-paper nodes. Keep real SVG
+   thumbnails where they exist; for truly empty generated cells provide a small
+   recognisable project preview so the frame list never degenerates into blank
+   blocks. Each frame differs slightly, like adjacent animation drawings. */
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-paper:empty {
+  inset: 3px !important;
+  background-color: #fff !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+}
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(1) .fd-frame-paper:empty {
+  background-image:
+    radial-gradient(circle at 50% 34%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
+    linear-gradient(150deg, transparent 45%, var(--fd-ink) 46% 50%, transparent 51%) !important;
+}
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(2) .fd-frame-paper:empty {
+  background-image:
+    radial-gradient(circle at 55% 35%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
+    linear-gradient(145deg, transparent 44%, var(--fd-ink) 45% 49%, transparent 50%) !important;
+}
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(3) .fd-frame-paper:empty {
+  background-image:
+    radial-gradient(circle at 60% 36%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
+    linear-gradient(140deg, transparent 43%, var(--fd-ink) 44% 48%, transparent 49%) !important;
+}
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb:nth-child(4) .fd-frame-paper:empty {
+  background-image:
+    radial-gradient(circle at 65% 37%, transparent 0 15%, var(--fd-ink) 16% 18%, transparent 19%),
+    linear-gradient(135deg, transparent 42%, var(--fd-ink) 43% 47%, transparent 48%) !important;
+}
 html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
   .fd-frame-thumb .fd-art,
 html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
@@ -95,7 +165,7 @@ html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
   opacity: 1 !important;
 }
 
-/* Hero Canvas controls must retain their real left-to-right rail. Generic
+/* Hero Canvas controls must retain the app's left-to-right rail. Generic
    miniature centering made the tool group collapse toward the middle. */
 html body .hero-preview-canvas .fd-canvas-screen > .fd-toolbar,
 html body .hero-showcase .fd-canvas-screen > .fd-toolbar {
