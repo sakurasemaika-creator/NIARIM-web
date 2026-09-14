@@ -119,11 +119,62 @@ jobs:
           exit 1
 
       - name: Verify GREEN focused contracts
+        shell: bash
         run: |
           node tests/home-cta-frame-mode-source-contract.mjs
           node tests/timeline-toolbar-frame-mode-contract.mjs
           node tests/hero-preview-scale-contract-audit.mjs
-          node tests/mock-detail-audit.mjs
+          node --input-type=module <<'EOF'
+          import { chromium } from "playwright";
+
+          const browser = await chromium.launch({ headless: true });
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
+          await page.goto("http://127.0.0.1:8787/", { waitUntil: "networkidle" });
+
+          const result = await page.evaluate(() => {
+            const controls = [...document.querySelectorAll(".fd-frame-mode")];
+            const details = controls.map((control) => {
+              const style = getComputedStyle(control);
+              const use = control.querySelector("svg use");
+              return {
+                tag: control.tagName,
+                width: style.width,
+                height: style.height,
+                radius: style.borderRadius,
+                ariaLabel: control.getAttribute("aria-label") || "",
+                i18nAttr: control.getAttribute("data-i18n-attr") || "",
+                iconHref: use?.getAttribute("href") || use?.getAttribute("xlink:href") || "",
+                text: control.textContent?.trim() || "",
+              };
+            });
+            return {
+              count: controls.length,
+              legacyCount: document.querySelectorAll(".fd-frame-strip-mode").length,
+              duplicateNarrativeCount: document.querySelectorAll(".feature-narrative").length,
+              details,
+            };
+          });
+
+          const failures = [];
+          if (result.count < 2) failures.push(`expected at least two frame-mode controls, found ${result.count}`);
+          if (result.legacyCount !== 0) failures.push(`legacy frame-mode controls remain: ${result.legacyCount}`);
+          if (result.duplicateNarrativeCount !== 0) failures.push(`duplicate narrative CTA remains: ${result.duplicateNarrativeCount}`);
+          for (const [index, detail] of result.details.entries()) {
+            if (detail.tag !== "BUTTON") failures.push(`control ${index} is ${detail.tag}, expected BUTTON`);
+            if (detail.width !== "42px" || detail.height !== "42px") failures.push(`control ${index} computed size is ${detail.width}x${detail.height}, expected 42px x 42px`);
+            if (!detail.ariaLabel) failures.push(`control ${index} is missing aria-label`);
+            if (detail.i18nAttr !== "aria-label:fd.timelineMode") failures.push(`control ${index} has unexpected data-i18n-attr ${detail.i18nAttr}`);
+            if (!detail.iconHref.endsWith("sprite.svg#ic-movie_filter")) failures.push(`control ${index} does not use ic-movie_filter sprite: ${detail.iconHref}`);
+            if (detail.text.includes("フレーム一覧") || detail.text.includes("タイムライン")) failures.push(`control ${index} still exposes legacy segmented text`);
+          }
+
+          await browser.close();
+          if (failures.length) {
+            console.error(JSON.stringify({ ok: false, failures, result }, null, 2));
+            process.exit(1);
+          }
+          console.log(JSON.stringify({ ok: true, result }, null, 2));
+          EOF
           npx prettier --check public/js/main.js public/js/i18n-dict.js public/css/screen-mock-accuracy-base.css public/css/ui-regression-fixes.css public/index.html public/faq/index.html tests/home-cta-frame-mode-source-contract.mjs tests/timeline-toolbar-frame-mode-contract.mjs
 
       - name: Commit and push verified fix
