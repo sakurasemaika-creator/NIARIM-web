@@ -17,13 +17,12 @@ html body .hero-showcase > .hero-preview-card {
   min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
-  border: 0 !important;
+  border: 4px solid var(--hero-bezel, var(--fd-bezel)) !important;
   border-radius: 20px !important;
   background: var(--fd-bg, var(--hero-surface)) !important;
   overflow: hidden !important;
   contain: paint;
   box-shadow:
-    inset 0 0 0 5px var(--hero-bezel, var(--fd-bezel)),
     0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
     0 12px 28px rgba(25, 22, 31, 0.1) !important;
 }
@@ -67,6 +66,25 @@ html body .hero-showcase .hero-app-preview-source {
   transform-origin: 0 0 !important;
   background: var(--fd-bg, var(--fd-surface)) !important;
   overflow: hidden !important;
+}
+
+/* The cloned Canvas mock lost .fd-app-screen, so older generic feature rules
+   could leave these two full-width rows at intrinsic/content width. Lock them
+   to the canonical app viewport before the one Hero scale is applied. */
+html body .hero-preview-canvas .fd-topbar,
+html body .hero-preview-canvas .fd-brush-slider {
+  box-sizing: border-box !important;
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: none !important;
+  align-self: stretch !important;
+}
+
+/* The small top-right mark in the Web timeline preview was a decorative
+   fullscreen approximation, not a trash/delete action from TimelineScreen.
+   Do not show that misleading pseudo control in the Hero reconstruction. */
+html body .hero-preview-timeline .fd-fullscreen-mark {
+  display: none !important;
 }
 
 /* Never stack a generated pseudo bezel over the real Hero card bezel. */
