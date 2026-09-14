@@ -6,7 +6,6 @@
 @import url("/css/theme-accent-only.css");
 @import url("/css/screen-mock-frame-alignment.css?v=20260906-2");
 @import url("/css/home-hero-responsive-final.css");
-@import url("/css/screen-mock-production-match.css?v=20260913-1");
 
 /* ---- 単語の途中での改行を防ぐ ---- */
 h1,
@@ -127,7 +126,7 @@ a {
     top: auto !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    border-color: var(--fd-ink) !important;
+    border-color: var(--fd-bezel) !important;
     overflow: hidden !important;
   }
 }
