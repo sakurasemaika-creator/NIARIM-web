@@ -17,12 +17,13 @@ html body .hero-showcase > .hero-preview-card {
   min-height: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
-  border: 5px solid var(--hero-bezel, var(--fd-bezel)) !important;
+  border: 0 !important;
   border-radius: 20px !important;
   background: var(--fd-bg, var(--hero-surface)) !important;
   overflow: hidden !important;
   contain: paint;
   box-shadow:
+    inset 0 0 0 5px var(--hero-bezel, var(--fd-bezel)),
     0 1px 0 color-mix(in srgb, white 70%, transparent) inset,
     0 12px 28px rgba(25, 22, 31, 0.1) !important;
 }
@@ -325,7 +326,8 @@ html body .hero-actions > :is(a, button) {
 
 @media (prefers-contrast: more) {
   html body .hero-preview-card {
-    border-color: color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
+    outline: 2px solid color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
+    outline-offset: -2px !important;
   }
 
   html body .hero-actions .btn:focus-visible {
