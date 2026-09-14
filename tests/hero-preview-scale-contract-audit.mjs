@@ -24,14 +24,8 @@ requireMatch(
 
 requireMatch(
   heroCSS,
-  /\.hero-showcase\s*>\s*\.hero-preview-card[\s\S]*?border:\s*0\s*!important/,
-  "Hero bezel must not consume app viewport layout geometry",
-);
-
-requireMatch(
-  heroCSS,
-  /\.hero-showcase\s*>\s*\.hero-preview-card[\s\S]*?inset\s+0\s+0\s+0\s+5px\s+var\(--hero-bezel,\s*var\(--fd-bezel\)\)/,
-  "Hero bezel must be drawn as a 5px inset frame without shrinking the viewport",
+  /\.hero-showcase\s*>\s*\.hero-preview-card[\s\S]*?border:\s*4px\s+solid\s+var\(--hero-bezel,\s*var\(--fd-bezel\)\)\s*!important/,
+  "Hero preview must have a visible 4px device bezel",
 );
 
 requireMatch(
@@ -46,6 +40,24 @@ requireMatch(
   "Community Hero preview must use the same 320x569 logical screen and shared scale",
 );
 
+requireMatch(
+  heroCSS,
+  /\.hero-preview-canvas\s+\.fd-topbar[\s\S]*?width:\s*320px\s*!important[\s\S]*?max-width:\s*none\s*!important/,
+  "Canvas Hero topbar must span the full 320px logical app width",
+);
+
+requireMatch(
+  heroCSS,
+  /\.hero-preview-canvas\s+\.fd-brush-slider[\s\S]*?width:\s*320px\s*!important[\s\S]*?max-width:\s*none\s*!important/,
+  "Canvas Hero brush slider must span the full 320px logical app width",
+);
+
+requireMatch(
+  heroCSS,
+  /\.hero-preview-timeline\s+\.fd-fullscreen-mark[\s\S]*?display:\s*none\s*!important/,
+  "Timeline Hero preview must not show the misleading top-right pseudo control",
+);
+
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
   process.exit(1);
@@ -58,9 +70,11 @@ console.log(
       checks: [
         "Hero scale uses 320px canonical logical width",
         "Hero card ratio is 320:569",
-        "Hero bezel does not shrink the app viewport",
+        "Hero device bezel remains visible",
         "Canvas/Timeline Hero clones scale as a single 320x569 composition",
         "Community Hero preview uses the same logical screen geometry",
+        "Canvas Hero topbar and brush slider span the full logical width",
+        "Timeline Hero has no misleading top-right pseudo control",
       ],
     },
     null,
