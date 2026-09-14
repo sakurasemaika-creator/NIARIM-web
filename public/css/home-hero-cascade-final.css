@@ -308,14 +308,6 @@ html body .hero-preview-community {
   container-type: inline-size !important;
 }
 
-/* home-hero-showcase.js sets --hero-preview-scale from card width / 320 in the
-   legacy implementation. Community now uses the app's 360px logical width, so
-   correct that scale locally until the JS base is migrated. */
-html body .hero-preview-community > .hero-community-mini {
-  --hero-community-corrected-scale: calc(var(--hero-preview-scale, 1) * 0.8888889);
-  transform: scale(var(--hero-community-corrected-scale)) !important;
-}
-
 @media (max-width: 559px) {
   html body .hero .container {
     column-gap: clamp(0.65rem, 3vw, 0.9rem) !important;
