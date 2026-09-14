@@ -10,30 +10,39 @@
   position: relative !important;
 }
 
-/*
- * cursor は DOM 上では scroll の子だが、scroll 自身を positioning context
+/* cursor は DOM 上では scroll の子だが、scroll 自身を positioning context
  * にしないことで、直上の .fd-frame-strip 全体を基準に left:50% が効く。
+ * 現在のコマは 50x50 / gap 0 で5マス（4コマ+追加）。3枚目の中心は
+ * 列先頭から125pxなので、その中心を画面中央へ合わせる。
  */
+html body .fd-canvas-screen .fd-frame-strip-scroll,
 .fd-frame-strip-scroll {
   position: static !important;
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  margin-right: 0 !important;
   justify-content: flex-start !important;
-  padding-left: calc(50% - 111.5px) !important;
+  padding-left: calc(50% - 125px) !important;
   padding-right: 0 !important;
+  gap: 0 !important;
 }
 
-/*
- * 43px幅のフレーム/追加マスが gap:2px で5マス並ぶ。
- * 3枚目の中心は列先頭から 111.5px。上の padding-left で、その中心を
- * .fd-frame-strip の内容幅50%へ合わせる。
- */
 .fd-frame-cursor {
   left: 50% !important;
 }
 
-/*
- * タイムラインモードも同じ考え方にする。
+/* 旧レイヤーが右側に表示切替の擬似UIを作り、その分だけ一覧を140px縮めて
+ * いた。現在地枠の基準を画面中央に固定する要件と衝突するため使わない。
+ */
+html body .fd-canvas-screen > .fd-frame-strip::before,
+html body .fd-canvas-screen > .fd-frame-strip::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* タイムラインモードも同じ考え方にする。
  * .fd-timeline-frames 自体の中央ではなく、画面幅いっぱいの
- * .fd-timeline-row を現在地枠の基準にする。
+ * .fd-timeline-row を現在地の基準にする。
  */
 .fd-timeline-row {
   position: relative !important;
@@ -50,8 +59,7 @@
   padding-right: 0 !important;
 }
 
-/* タイムラインでは赤い固定カーソル枠は使わない。
-   現在地は3枚目自身のテーマカラー枠（.fd-tl-frame.is-current）だけで示す。 */
+/* タイムラインでは現在フレーム自身のテーマカラー枠で位置を示す。 */
 .fd-timeline-frames > .fd-frame-cursor {
   display: none !important;
 }
