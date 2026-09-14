@@ -57,6 +57,7 @@ jobs:
           expect(!main.includes('<span class="fd-frame-mode"><span class="is-selected"') && !main.includes('data-i18n="fd.frameListMode">フレーム一覧</span><span'), "Dynamic frame-mode control must not keep the legacy two visible text segments");
           expect(/\.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important[\s\S]*?border-radius:\s*50%\s*!important/.test(baseCss), "Canonical frame-mode CSS must define a 42px circular control");
           expect(!/\.fd-frame-mode\s*\{[\s\S]*?grid-template-columns:\s*1fr\s+1fr/.test(baseCss) && !baseCss.includes(".fd-frame-mode > span + span"), "Canonical frame-mode CSS must not retain the segmented-pill split layout");
+          expect(/html body \.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?min-width:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important/.test(finalCss), "Final regression layer must enforce 42px frame-mode geometry for every fallback context");
           expect(!finalCss.includes(".fd-frame-mode::before") && !finalCss.includes('mask-image: url("data:image/svg+xml'), "Final regression layer must not synthesize movie_filter with a pseudo-element mask");
           expect(dict.includes("cta.title") && dict.includes(title) && dict.includes("cta.body") && dict.includes(body), "Japanese shared CTA dictionary must contain the requested title and body");
           for (const [name, html] of [["home", home], ["faq", faq]]) {
@@ -82,6 +83,7 @@ jobs:
           set -e
           test "$status" -ne 0
           grep -q 'Dynamic canvas frame-mode control' /tmp/home_contract_red.log
+          grep -q 'Final regression layer must enforce 42px frame-mode geometry' /tmp/home_contract_red.log
           grep -q 'Japanese shared CTA dictionary' /tmp/home_contract_red.log
           grep -q 'Home must not retain the duplicate feature-narrative CTA block' /tmp/home_contract_red.log
           echo 'RED confirmed.'
@@ -100,6 +102,22 @@ jobs:
           Path('/tmp/apply_home_source_fix.py').write_text(code)
           PY
           python3 /tmp/apply_home_source_fix.py
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path('public/css/ui-regression-fixes.css')
+          text = path.read_text()
+          replacements = [
+              ('html body .fd-canvas-screen .fd-frame-mode {', 'html body .fd-frame-mode {', 'frame-mode final selector'),
+              ('html body .fd-canvas-screen .fd-frame-mode .ic {', 'html body .fd-frame-mode .ic {', 'frame-mode icon final selector'),
+          ]
+          for old, new, label in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly one match after canonical patch, found {count}')
+              text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
 
       - name: Format changed sources
         run: npx prettier --write public/js/main.js public/js/i18n-dict.js public/css/screen-mock-accuracy-base.css public/css/ui-regression-fixes.css public/index.html public/faq/index.html tests/home-cta-frame-mode-source-contract.mjs tests/timeline-toolbar-frame-mode-contract.mjs
