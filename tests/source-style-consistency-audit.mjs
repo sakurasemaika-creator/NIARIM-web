@@ -15,6 +15,8 @@ function stripComments(text) {
 const lineBreak = await read("public/css/line-break.css");
 const themeGuard = await read("public/css/theme-accent-only.css");
 const visualTail = await read("public/css/visual-audit-tail.css");
+const visualFinish = await read("public/css/visual-finish.css");
+const uiRegression = await read("public/css/ui-regression-fixes.css");
 const featuresNormalization = await read(
   "public/css/features-source-normalization.css",
 );
@@ -119,6 +121,17 @@ if (
   );
 }
 
+for (const [name, source] of [
+  ["visual-finish.css", visualFinish],
+  ["ui-regression-fixes.css", uiRegression],
+]) {
+  if (/\.site-footer::before\s*\{/.test(stripComments(source))) {
+    failures.push(
+      `${name} must not define the removed decorative footer separator`,
+    );
+  }
+}
+
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
   process.exit(1);
@@ -137,6 +150,7 @@ console.log(
         "generated selected frame is centered",
         "gallery trailing space invariant exists",
         "slider geometry normalization exists",
+        "removed footer separator has no source definition or downstream hide override",
       ],
     },
     null,
