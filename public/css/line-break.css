@@ -7,6 +7,7 @@
 @import url("/css/screen-mock-frame-alignment.css?v=20260906-2");
 @import url("/css/home-hero-responsive-final.css");
 @import url("/css/ui-regression-fixes.css?v=20260914-1");
+@import url("/css/popup-close-affordance.css?v=20260914-1");
 
 /* ---- 単語の途中での改行を防ぐ ---- */
 h1,
