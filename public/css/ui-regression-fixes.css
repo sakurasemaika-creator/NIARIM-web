@@ -2,12 +2,6 @@
    Loaded last from line-break.css so stale fidelity layers cannot reintroduce
    synthetic controls, misaligned navigation decoration, or oversized consent UI. */
 
-/* Footer: no decorative separator/film-strip pseudo element. */
-.site-footer::before {
-  content: none !important;
-  display: none !important;
-}
-
 /* Header navigation underline follows the actual label center instead of the
    left edge of the 44px minimum hit target. */
 .main-nav a:not(.btn)::after {
