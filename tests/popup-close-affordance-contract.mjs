@@ -1,8 +1,9 @@
 import fs from "node:fs/promises";
 
-const [main, css] = await Promise.all([
+const [main, css, lineBreak] = await Promise.all([
   fs.readFile("public/js/main.js", "utf8"),
-  fs.readFile("public/css/screen-mock-accuracy-base.css", "utf8"),
+  fs.readFile("public/css/popup-close-affordance.css", "utf8"),
+  fs.readFile("public/css/line-break.css", "utf8"),
 ]);
 
 const failures = [];
@@ -30,6 +31,11 @@ expect(
 expect(
   /\.fd-panel-close-bar\s*\{[\s\S]*?padding:\s*0\s+8px\s*!important/.test(css),
   "Mock popup close affordance must keep a comfortable right-side hit area",
+);
+
+expect(
+  lineBreak.includes('/css/popup-close-affordance.css?v=20260914-1'),
+  "Popup close affordance parity layer must load after the regression fixes",
 );
 
 if (failures.length) {
