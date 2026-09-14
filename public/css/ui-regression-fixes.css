@@ -41,10 +41,22 @@
   vertical-align: baseline !important;
 }
 
+/* Timeline top bar: only the canvas-back affordance belongs on the left.
+   Project title and every other action form one compact right-side group. */
+html body .fd-timeline-topbar > .fd-timeline-title {
+  margin-left: auto !important;
+  flex: 0 1 auto !important;
+}
+html body .fd-timeline-topbar > .fd-spacer {
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+}
+
 /* Canvas frame strip mirrors FrameStripWidget in the Flutter app:
    - row height 64
    - 50x50 cells with 7px vertical margin
-   - real SegmentedButton on the right
+   - one circular timeline-entry icon on the right
    - the fixed 50x50 current marker is centered inside the remaining Expanded
      frame-list region.
    The showcase uses frame index 2 as the editing frame. Flutter would scroll
@@ -67,10 +79,42 @@ html body .fd-canvas-screen > .fd-frame-strip::after {
 }
 html body .fd-canvas-screen .fd-frame-mode {
   display: grid !important;
+  place-items: center !important;
   position: relative !important;
   z-index: 7 !important;
-  flex: 0 0 117px !important;
-  margin-inline: 4px !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  flex: 0 0 42px !important;
+  margin-inline: 6px !important;
+  padding: 0 !important;
+  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: var(--fd-surface) !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+}
+html body .fd-canvas-screen .fd-frame-mode > span {
+  display: none !important;
+}
+/* Same geometry as sprite.svg#ic-movie_filter. The legacy DOM only contains
+   text segments, so the final visual layer reuses that existing icon shape as
+   a mask instead of adding a Web-only emoji or bespoke symbol. */
+html body .fd-canvas-screen .fd-frame-mode::before {
+  content: "" !important;
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  background: currentColor !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.06 13.61v-6.11l5.19 3.05-5.19 3.06z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zm-6.06 13.61v-6.11l5.19 3.05-5.19 3.06z'/%3E%3C/svg%3E") !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-position: center !important;
+  mask-position: center !important;
+  -webkit-mask-size: contain !important;
+  mask-size: contain !important;
 }
 html body .fd-canvas-screen .fd-frame-strip-scroll {
   position: relative !important;
