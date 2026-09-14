@@ -4,21 +4,20 @@
 @import url("/css/manual-visual-audit-final.css");
 @import url("/css/manual-visual-audit-continuation.css");
 
-/* All app/route reproductions follow the current Flutter capture harness:
-   360x760 logical pixels. The historical website-only 320x569 ratio made the
-   reconstructed screens too short, clipping real bottom controls. */
+/* All app/route reproductions follow the exact current app reference viewport:
+   320x569 pixels. Keep the website reproduction on the same outer geometry as
+   the checked-in reference captures; internal 360px calibration stays separate. */
 .fd-app-screen,
 .fd-route-screen {
-  aspect-ratio: 360 / 760 !important;
+  aspect-ratio: 320 / 569 !important;
 }
 
-/* The outer preview card used to force 320/569 and its direct child to 100%
-   height, which silently overrode the production ratio above. Keep the card
-   and contained route/app screen on the same 360x760 geometry. */
+/* Keep the outer preview card and its contained route/app screen on the same
+   exact-reference geometry so fitting cannot reintroduce a second ratio. */
 .screenshot-card.is-code-verified-mock,
 .screenshot-card:has(.fd-app-screen),
 .screenshot-card:has(.fd-route-screen) {
-  aspect-ratio: 360 / 760 !important;
+  aspect-ratio: 320 / 569 !important;
 }
 
 /* Canvas-screen fidelity corrections against NIARIM app dev_branch.
@@ -111,10 +110,9 @@
   background: transparent !important;
 }
 
-/* App Preview uses a narrower 9:16 card than the full Features mock.
-   Keep the full-size Features calibration untouched, but compact the two
-   vertically dense route screens so their real controls remain inside the
-   bezel instead of being clipped below it. */
+/* App Preview uses a narrower card than the full Features mock. Keep the
+   full-size Features calibration untouched, but compact the two vertically
+   dense route screens so their real controls remain inside the bezel. */
 .screenshot-card .fd-export-screen .fd-export-body {
   padding: 10px 12px 6px !important;
 }
@@ -130,17 +128,16 @@
   flex: 0 0 48px !important;
 }
 
-/* Seven workspace rows were still 5-13px taller than the App Preview bezel
-   at 360/390px viewports. Two pixels per row recovers 14px without changing
-   the control geometry or the full-size Features mock. */
+/* Seven workspace rows were still too tall at compact App Preview sizes.
+   Two pixels per row recovers space without changing the control geometry or
+   the full-size Features mock. */
 .screenshot-card .fd-workspace-screen .fd-workspace-row {
   height: 40px !important;
   min-height: 40px !important;
 }
 
 /* The Home feature-row Export mock is narrower than the Features-page mock.
-   Only the 360px layout needed a little more vertical compression: the start
-   button previously began 2-3px above the bezel bottom and extended below it. */
+   Only the 360px layout needed a little more vertical compression. */
 @media (max-width: 374px) {
   #features .feature-media .fd-export-screen .fd-export-body {
     padding: 8px 12px 5px !important;
@@ -184,12 +181,12 @@ html body .fd-timeline-screen .fd-timeline-frames {
   }
 }
 
-/* App Preview Timeline is itself fitted to the 9:16 card at the 0.56 floor.
-   With -50% its current frame remains 10.87-12.36 rendered pixels right of
-   center across SP360/SP390/PC. Moving the 185px source strip another 21.5px
-   left becomes 12.04 rendered pixels at that fit, leaving <1.2px residual in
-   every audited viewport. AudioScreen is already centered and must not inherit
-   this regular-Timeline correction. */
+/* App Preview Timeline is itself fitted to the preview card. With -50% its
+   current frame remains 10.87-12.36 rendered pixels right of center across
+   SP360/SP390/PC. Moving the 185px source strip another 21.5px left becomes
+   12.04 rendered pixels at that fit, leaving <1.2px residual in every audited
+   viewport. AudioScreen is already centered and must not inherit this regular-
+   Timeline correction. */
 html
   body
   .screenshot-card
