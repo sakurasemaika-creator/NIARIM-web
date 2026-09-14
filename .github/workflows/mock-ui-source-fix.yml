@@ -1,0 +1,22 @@
+name: Mock UI Source Fix Validation
+
+on:
+  push:
+    branches:
+      - fix/popup-close-frame-mode-20260914
+    paths:
+      - 'tests/mock-ui-source-regression.mjs'
+      - '.github/workflows/mock-ui-source-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/popup-close-frame-mode-20260914
+      - run: node tests/mock-ui-source-regression.mjs
