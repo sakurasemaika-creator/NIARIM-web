@@ -220,7 +220,7 @@
       // 画面中央に固定表示するコマ枠。色はテーマの更新マーク色。
       '<span class="fd-frame-cursor" aria-hidden="true"></span>' +
       "</div>" +
-      '<span class="fd-frame-mode"><span class="is-selected" data-i18n="fd.frameListMode">フレーム一覧</span><span data-i18n="fd.timelineMode">タイムライン</span></span>' +
+      '<span class="fd-frame-mode-icon">' + icon("ic-movie_filter") + "</span>" +
       "</div>"
     );
   }
@@ -289,7 +289,6 @@
     return (
       '<div class="fd-app-overlay-panel fd-app-layer-panel">' +
       '<div class="fd-layers">' +
-      panelCloseBar() +
       '<div class="fd-layer-header"><strong data-i18n="fd.layerPanelTitle">レイヤー</strong><span class="fd-spacer"></span>' +
       iconButton("ic-merge_type") +
       iconButton("ic-help_outline") +
@@ -336,6 +335,7 @@
         fallback: "レイヤー1",
         active: true,
       }) +
+      panelCloseBar() +
       "</div>" +
       "</div>"
     );
@@ -364,7 +364,6 @@
   function onionPanel() {
     return (
       '<div class="fd-app-overlay-panel fd-app-onion-panel">' +
-      panelCloseBar() +
       '<div class="fd-onion-title"><strong data-i18n="fd.onionSkin">オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div>' +
       '<div class="fd-panel-divider"></div>' +
       onionSide("前フレーム", "#ff5c7a", 35, "fd.prevFrame") +
@@ -373,6 +372,7 @@
       '<div class="fd-panel-divider"></div>' +
       '<div class="fd-onion-common"><span data-i18n="fd.onionInterval">フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div>' +
       '<div class="fd-onion-fade"><span data-i18n="fd.onionFade">距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div>' +
+      panelCloseBar() +
       "</div>"
     );
   }
@@ -401,16 +401,18 @@
   function timelineTopBar() {
     return (
       '<div class="fd-timeline-topbar">' +
-      '<span class="fd-back-canvas">' +
+      '<span class="fd-timeline-topbar-left"><span class="fd-back-canvas">' +
       icon("ic-arrow_back") +
       icon("ic-palette") +
-      "</span>" +
-      '<span class="fd-timeline-title" data-i18n="fd.projectName">プロジェクト名</span><span class="fd-spacer"></span>' +
+      "</span></span>" +
+      '<span class="fd-timeline-topbar-right">' +
+      '<span class="fd-timeline-title" data-i18n="fd.projectName">プロジェクト名</span>' +
       iconButton("ic-home_outlined") +
       iconButton("ic-undo") +
       iconButton("ic-redo") +
       iconButton("ic-more_vert") +
       iconButton("ic-help_outline") +
+      "</span>" +
       "</div>"
     );
   }

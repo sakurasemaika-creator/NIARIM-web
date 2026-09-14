@@ -255,31 +255,21 @@
   background: #fff !important;
   border-color: #bbb !important;
 }
-.fd-frame-mode {
+.fd-frame-mode-icon {
+  width: 42px !important;
   height: 42px !important;
-  flex: 0 0 117px !important;
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  align-items: stretch !important;
-  border: 1px solid var(--fd-muted, #9d8c90) !important;
-  border-radius: 20px !important;
-  overflow: hidden !important;
-  background: #fff !important;
-  font-size: 9px !important;
-  color: var(--fd-muted, #6f6064) !important;
-}
-.fd-frame-mode > span {
+  flex: 0 0 42px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 0 5px !important;
-}
-.fd-frame-mode > span + span {
-  border-left: 1px solid var(--fd-muted, #b6a7aa) !important;
-}
-.fd-frame-mode .is-selected {
-  color: var(--fd-muted, #765f64) !important;
+  border: 1px solid var(--fd-muted, #9d8c90) !important;
+  border-radius: 50% !important;
   background: #fff !important;
+  color: var(--fd-muted, #6f6064) !important;
+}
+.fd-frame-mode-icon .ic {
+  width: 22px !important;
+  height: 22px !important;
 }
 
 /* ── LayerPanel: 実キャプチャは右250pxの淡いピンク面 ───────────── */
@@ -1409,4 +1399,20 @@
 .fd-app-screen.fd-timeline-screen > .fd-transport {
   height: 78px !important;
   flex-basis: 78px !important;
+}
+
+
+/* Structural groups keep timeline navigation left and project/actions right. */
+.fd-timeline-topbar-left,
+.fd-timeline-topbar-right {
+  display: flex !important;
+  align-items: center !important;
+}
+.fd-timeline-topbar-left {
+  flex: 0 0 auto !important;
+}
+.fd-timeline-topbar-right {
+  min-width: 0 !important;
+  margin-left: auto !important;
+  gap: 2px !important;
 }
