@@ -1,0 +1,126 @@
+/* User-requested regression fixes.
+   Loaded last from line-break.css so stale fidelity layers cannot reintroduce
+   synthetic controls, misaligned navigation decoration, or oversized consent UI. */
+
+/* Footer: no decorative separator/film-strip pseudo element. */
+.site-footer::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Header navigation underline follows the actual label center instead of the
+   left edge of the 44px minimum hit target. */
+.main-nav a:not(.btn)::after {
+  left: 50% !important;
+  right: auto !important;
+  bottom: 4px !important;
+  width: 0 !important;
+  transform: translateX(-50%) !important;
+  transform-origin: center !important;
+}
+.main-nav a:not(.btn):hover::after,
+.main-nav a:not(.btn)[aria-current="page"]::after {
+  width: calc(100% - 1rem) !important;
+}
+
+/* Contact consent: 25px control, optically aligned with the consent copy. */
+.contact-form .form-checkbox {
+  align-items: center !important;
+  gap: 0.7rem !important;
+}
+.contact-form .form-checkbox > input#agree {
+  width: 25px !important;
+  height: 25px !important;
+  min-width: 25px !important;
+  min-height: 25px !important;
+  flex: 0 0 25px !important;
+  margin: 0 !important;
+}
+.contact-form .form-checkbox > span {
+  display: block !important;
+  line-height: 1.55 !important;
+}
+.contact-form .form-checkbox a {
+  display: inline !important;
+  min-height: 0 !important;
+  padding-block: 0 !important;
+  vertical-align: baseline !important;
+}
+
+/* Canvas frame strip: use the real mode control. Stale capture-calibration
+   layers replaced it with ::before/::after and reserved 140px, which hid the
+   frame list and made the fixed current-frame cursor collide with controls. */
+html body .fd-canvas-screen > .fd-frame-strip::before,
+html body .fd-canvas-screen > .fd-frame-strip::after {
+  content: none !important;
+  display: none !important;
+}
+html body .fd-canvas-screen .fd-frame-mode {
+  display: inline-flex !important;
+  position: relative !important;
+  z-index: 7 !important;
+  flex: 0 0 auto !important;
+}
+html body .fd-canvas-screen .fd-frame-strip-scroll {
+  position: static !important;
+  width: auto !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+  padding-left: calc(50% - 125px) !important;
+  padding-right: 0 !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
+html body .fd-canvas-screen .fd-frame-cursor {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none !important;
+  z-index: 8 !important;
+}
+
+/* Keep the selected cell itself from becoming a second heavy current marker. */
+html body .fd-canvas-screen .fd-frame-thumb.is-selected,
+html body .fd-canvas-screen .fd-frame-thumb.is-current {
+  border-width: 1px !important;
+}
+
+/* The frame previews are product content, not blank capture placeholders. */
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-thumb .fd-art,
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  .fd-frame-paper .fd-art {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Hero Canvas controls must retain their real left-to-right rail. Generic
+   miniature centering made the tool group collapse toward the middle. */
+html body .hero-preview-canvas .fd-canvas-screen > .fd-toolbar,
+html body .hero-showcase .fd-canvas-screen > .fd-toolbar {
+  justify-content: flex-start !important;
+  align-items: center !important;
+  padding-inline: 4px !important;
+  gap: 0 !important;
+}
+
+/* A reconstructed app viewport fills its bezel. Do not add a second visual
+   card/gutter around Hero preview screens. */
+html body .hero-showcase .hero-preview-card,
+html body .hero-showcase .hero-preview-card > :is(.fd-app-screen, .fd-route-screen) {
+  margin: 0 !important;
+}
+html body .hero-showcase .hero-preview-card > :is(.fd-app-screen, .fd-route-screen) {
+  width: 100% !important;
+  max-width: none !important;
+  border-color: var(--fd-bezel) !important;
+}
+
+/* Key miniature labels must remain readable after theme substitution. */
+html body :is(.hero-showcase, .feature-row, .screenshot-card, .feature-section)
+  :is(.fd-community-title, .fd-route-title, .fd-appbar strong) {
+  opacity: 1 !important;
+  color: var(--fd-text, var(--fd-ink)) !important;
+  text-shadow: none !important;
+}
