@@ -12,19 +12,23 @@ const expect = (condition, message) => {
 };
 
 expect(
-  main.includes('function panelCloseBar()') &&
+  main.includes("function panelCloseBar()") &&
     main.includes('class="fd-panel-close-bar"') &&
     main.includes('class="fd-panel-close"'),
   "Screen mocks must keep the shared close affordance markup",
 );
 
 expect(
-  /\.fd-panel-close-bar\s*\{[\s\S]*?justify-content:\s*flex-end\s*!important/.test(css),
+  /\.fd-panel-close-bar\s*\{[\s\S]*?justify-content:\s*flex-end\s*!important/.test(
+    css,
+  ),
   "Mock popup close bar must align the close affordance to the right",
 );
 
 expect(
-  /\.fd-panel-close\s*\{[\s\S]*?width:\s*14px\s*!important[\s\S]*?height:\s*14px\s*!important/.test(css),
+  /\.fd-panel-close\s*\{[\s\S]*?width:\s*14px\s*!important[\s\S]*?height:\s*14px\s*!important/.test(
+    css,
+  ),
   "Mock popup close glyph must stay visually compact",
 );
 
@@ -34,7 +38,7 @@ expect(
 );
 
 expect(
-  lineBreak.includes('/css/popup-close-affordance.css?v=20260914-1'),
+  lineBreak.includes("/css/popup-close-affordance.css?v=20260914-1"),
   "Popup close affordance parity layer must load after the regression fixes",
 );
 

@@ -34,3 +34,10 @@ html body .fd-app-onion-panel .fd-panel-close-bar {
   height: 32px !important;
   flex-basis: 32px !important;
 }
+
+/* Match CanvasScreen's transparent outside-tap barrier: interactions
+   inside the floating panel stay open; tapping the surrounding mock
+   canvas dismisses only the active floating tool panel. */
+html body .fd-app-overlay-panel.is-dismissed {
+  display: none !important;
+}
