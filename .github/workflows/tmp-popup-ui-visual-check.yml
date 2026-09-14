@@ -1,0 +1,76 @@
+name: Temporary popup UI visual check
+
+on:
+  push:
+    branches:
+      - fix/popup-close-frame-mode-20260914
+    paths:
+      - '.github/workflows/tmp-popup-ui-visual-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  visual-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-http.log 2>&1 &
+          echo $! > /tmp/niarim-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8787/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/niarim-http.log
+          exit 1
+      - name: Capture home and features without networkidle
+        run: |
+          mkdir -p artifacts/popup-ui-visual-check
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser = await chromium.launch({headless:true});
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1200 }, deviceScaleFactor: 1 });
+          const targets = [
+            ['home', 'http://127.0.0.1:8787/'],
+            ['features', 'http://127.0.0.1:8787/features/'],
+          ];
+          const report = {};
+          for (const [name, url] of targets) {
+            const response = await page.goto(url, {waitUntil:'domcontentloaded', timeout:30000});
+            if (!response || !response.ok()) throw new Error(`${name}: HTTP ${response?.status()}`);
+            await page.waitForTimeout(1500);
+            report[name] = await page.evaluate(() => ({
+              legacyFrameMode: document.querySelectorAll('.fd-frame-mode').length,
+              iconFrameMode: document.querySelectorAll('.fd-frame-mode-icon').length,
+              timelineLeft: document.querySelectorAll('.fd-timeline-topbar-left').length,
+              timelineRight: document.querySelectorAll('.fd-timeline-topbar-right').length,
+              oldFrameListLabel: [...document.querySelectorAll('[data-i18n="fd.frameListMode"]')].length,
+              oldTimelineLabel: [...document.querySelectorAll('[data-i18n="fd.timelineMode"]')].length,
+            }));
+            await page.screenshot({path:`artifacts/popup-ui-visual-check/${name}.png`, fullPage:true});
+          }
+          fs.writeFileSync('artifacts/popup-ui-visual-check/report.json', JSON.stringify(report, null, 2));
+          if (Object.values(report).some(r => r.legacyFrameMode !== 0 || r.oldFrameListLabel !== 0 || r.oldTimelineLabel !== 0)) {
+            throw new Error(`legacy frame mode DOM remains: ${JSON.stringify(report)}`);
+          }
+          if (Object.values(report).every(r => r.iconFrameMode === 0)) {
+            throw new Error(`new frame mode icon not rendered on either target: ${JSON.stringify(report)}`);
+          }
+          await browser.close();
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: popup-ui-visual-check
+          path: artifacts/popup-ui-visual-check/
+          retention-days: 1
