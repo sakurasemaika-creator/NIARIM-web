@@ -40,8 +40,30 @@ jobs:
           done
           cat /tmp/niarim-web.log
           exit 1
-      - name: Verify focused site audit
-        run: npm run audit:mock-detail
+      - name: Verify focused rendered mock UI
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { launchOptions } from './tests/browser-launch.mjs';
+
+          const browser = await chromium.launch(launchOptions());
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+          await page.goto('http://127.0.0.1:8787/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+          await page.waitForSelector('.fd-frame-mode-icon', { state: 'attached', timeout: 10000 });
+          const result = await page.evaluate(() => ({
+            legacyModeCount: document.querySelectorAll('.fd-frame-mode').length,
+            iconModeCount: document.querySelectorAll('.fd-frame-mode-icon').length,
+            topbarLeftCount: document.querySelectorAll('.fd-timeline-topbar-left').length,
+            topbarRightCount: document.querySelectorAll('.fd-timeline-topbar-right').length,
+          }));
+          await browser.close();
+          if (result.legacyModeCount !== 0 || result.iconModeCount < 1 || result.topbarLeftCount < 1 || result.topbarRightCount < 1) {
+            console.error(result);
+            process.exit(1);
+          }
+          console.log('focused-rendered-mock-ui: ok', result);
+          NODE
       - name: Commit verified fix
         shell: bash
         run: |
