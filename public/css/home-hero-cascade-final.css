@@ -1,7 +1,7 @@
 /* Canonical last-mile ownership for the Home hero.
    Loaded after every generated mock/design layer by home-hero-showcase.js.
    Hero previews use one device frame and one app viewport. Geometry follows the
-   current 360x760 app capture; only the showcase theme/bezel differs. */
+   canonical 320x569 Web reconstruction; only the showcase theme/bezel differs. */
 
 html body .hero-showcase {
   transform: none !important;
@@ -12,7 +12,7 @@ html body .hero-showcase > .hero-preview-card {
   position: relative !important;
   box-sizing: border-box !important;
   width: 100% !important;
-  aspect-ratio: 360 / 760 !important;
+  aspect-ratio: 320 / 569 !important;
   height: auto !important;
   min-height: 0 !important;
   padding: 0 !important;
@@ -44,14 +44,14 @@ html body .hero-showcase > .hero-preview-canvas {
 }
 
 /* Canvas/Timeline clones intentionally drop .fd-app-screen so they stay out of
-   the generic multi-pass fitter. The card is the bezel; the clone is exactly
-   the inner app viewport. Do not add a second border, padding, or transform. */
+   the generic multi-pass fitter. Keep the normal mock's 320x569 logical screen
+   intact and scale the entire composition once inside the smaller Hero card. */
 html body .hero-showcase .hero-app-preview-source {
   box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
-  width: 100% !important;
-  height: 100% !important;
+  width: 320px !important;
+  height: 569px !important;
   min-width: 0 !important;
   min-height: 0 !important;
   max-width: none !important;
@@ -62,8 +62,8 @@ html body .hero-showcase .hero-app-preview-source {
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  transform: none !important;
-  transform-origin: center !important;
+  transform: scale(var(--hero-preview-scale, 1)) !important;
+  transform-origin: 0 0 !important;
   background: var(--fd-bg, var(--fd-surface)) !important;
   overflow: hidden !important;
 }
@@ -291,13 +291,12 @@ html body .hero-community-fab > b {
   font-weight: 700 !important;
 }
 
-/* The card itself is rendered much smaller than 360px in the Hero. Scale the
-   app-coordinate UI as one composition, not by giving each element its own
-   unrelated clamp(). This preserves recognisable proportions and avoids the
-   crushed "tiny UI" look. */
+/* Hero cards are smaller than the 320px canonical mock. Keep the entire app
+   viewport in that coordinate system and scale it once, exactly like the
+   Canvas/Timeline clones, so internal UI proportions stay consistent. */
 html body .hero-preview-community > .hero-community-mini {
-  width: 360px !important;
-  height: 760px !important;
+  width: 320px !important;
+  height: 569px !important;
   max-width: none !important;
   max-height: none !important;
   transform: scale(var(--hero-preview-scale, 1)) !important;
