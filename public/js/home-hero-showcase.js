@@ -11,7 +11,7 @@
 
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/css/home-hero-cascade-final.css?v=20260914-canonical-scale";
+    link.href = "/css/home-hero-cascade-final.css?v=20260914-visible-bezel";
     link.setAttribute(marker, "true");
     document.head.appendChild(link);
   }
@@ -152,12 +152,12 @@
   function fitHeroPreview(card, measuredWidth) {
     if (!card) return;
 
-    var width = measuredWidth || card.getBoundingClientRect().width;
+    var width = measuredWidth || card.clientWidth || card.getBoundingClientRect().width;
     if (!width) return;
 
-    // The canonical Web reconstruction uses the same 320 logical-pixel width
-    // as the normal screen mocks. Scale the whole app viewport once so fixed
-    // UI dimensions keep exactly the same proportions inside the smaller Hero.
+    // The card owns a real 4px bezel. clientWidth is the inner app viewport,
+    // so scaling the canonical 320px screen against it keeps the bezel visible
+    // without clipping the app's right edge or narrowing full-width controls.
     card.style.setProperty("--hero-preview-scale", String(width / 320));
   }
 
@@ -168,7 +168,7 @@
     if (typeof ResizeObserver === "function") {
       var observer = new ResizeObserver(function (entries) {
         entries.forEach(function (entry) {
-          fitHeroPreview(entry.target, entry.contentRect.width);
+          fitHeroPreview(entry.target);
         });
       });
       Array.prototype.forEach.call(cards, function (card) {
