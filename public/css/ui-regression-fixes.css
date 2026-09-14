@@ -52,11 +52,11 @@
    - 50x50 cells with 7px vertical margin
    - real SegmentedButton on the right
    - the fixed 50x50 current marker is centered inside the remaining Expanded
-     frame-list region
-   - the horizontal list gets (regionWidth - 50) / 2 side padding so the
-     current cell moves under that fixed marker.
-   This intentionally replaces the stale Web-only full-screen centering and the
-   synthetic 140px pseudo-control. */
+     frame-list region.
+   The showcase uses frame index 2 as the editing frame. Flutter would scroll
+   that index by 2 * 50px after applying (regionWidth - 50) / 2 side padding;
+   the static Web reproduction expresses the same final geometry directly as
+   50% - 25px - 100px = 50% - 125px left padding. */
 html body .fd-canvas-screen > .fd-frame-strip {
   position: relative !important;
   height: 64px !important;
@@ -85,7 +85,7 @@ html body .fd-canvas-screen .fd-frame-strip-scroll {
   min-width: 0 !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: calc(50% - 25px) !important;
+  padding-left: calc(50% - 125px) !important;
   padding-right: calc(50% - 25px) !important;
   justify-content: flex-start !important;
   align-items: center !important;
