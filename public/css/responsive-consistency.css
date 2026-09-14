@@ -41,12 +41,9 @@ html body .hero-preview-card > .hero-app-preview-source {
   transform: scale(var(--hero-preview-scale, 1)) !important;
 }
 
-/* Feature-row app reproductions must use the same 360x760 logical capture
-   geometry as the Flutter harness. responsive-foundation.css still carries the
-   historical 9:16 feature-diagram ratio; because that selector is more specific
-   than the generic .fd-app-screen/.fd-route-screen rule, it shortened Export and
-   Workspace and clipped their bottom controls. This final consistency layer is
-   the single owner for app/route feature mock height. */
+/* Feature-row app reproductions use the same 320x569 outer geometry as the
+   checked-in exact app references. Internal capture-pixel calibration remains
+   independent; this layer owns only the visible reproduction footprint. */
 html
   body
   .feature-media
@@ -55,7 +52,7 @@ html
   body
   .feature-section
   > .feature-diagram:is(.fd-app-screen, .fd-route-screen) {
-  aspect-ratio: 360 / 760 !important;
+  aspect-ratio: 320 / 569 !important;
   height: auto !important;
   min-height: 0 !important;
 }
@@ -88,7 +85,7 @@ html body #features .feature-row .fd-timeline-screen {
 }
 
 /* Every Timeline-derived screen in the Home App Preview carousel is fitted to
-   the 9:16 card. The failing regular Timeline measured visual scales of
+   the preview card. The failing regular Timeline measured visual scales of
    0.670/0.682/0.687 at SP360/SP390/PC; converting its +14.42..+14.62px deltas
    back to source space yields 37.24..37.52px. 37.3px also keeps the already
    passing AudioScreen derivative on the same fitted-carousel coordinate system. */
