@@ -31,6 +31,13 @@ html body .fd-canvas-screen .fd-frame-strip-scroll,
   left: 50% !important;
 }
 
+/* 現在地は中央固定カーソルだけで示す。編集中コマそのものへ太い色枠を
+ * 重ねると二重の現在地表示になるので、通常の細いセル枠だけ残す。 */
+.fd-canvas-screen .fd-frame-thumb.is-current,
+.fd-canvas-screen .fd-frame-thumb.is-selected {
+  border: 1px solid var(--fd-panel-2, rgba(40, 36, 44, 0.24)) !important;
+}
+
 /* 旧レイヤーが右側に表示切替の擬似UIを作り、その分だけ一覧を140px縮めて
  * いた。現在地枠の基準を画面中央に固定する要件と衝突するため使わない。
  */
