@@ -118,6 +118,13 @@ for (const width of widths) {
           ["P", "LI", "SMALL", "SPAN", "LABEL", "ADDRESS"].includes(parentTag)
         );
       };
+      const effectiveTargetRect = (el) => {
+        if (el.matches("input[type='checkbox'], input[type='radio']")) {
+          const label = el.closest("label");
+          if (label && visible(label)) return label.getBoundingClientRect();
+        }
+        return el.getBoundingClientRect();
+      };
       const selectors =
         "h1,h2,h3,p,a,button,input,textarea,select,img,svg,.card,.feature-row,.screenshot-card,.section-title,.container";
       const elements = [...document.querySelectorAll(selectors)].filter(
@@ -143,18 +150,22 @@ for (const width of widths) {
         if (
           el.matches("a,button,input,select") &&
           !isOffscreenUtility(el) &&
-          !isInlineTextLink(el) &&
-          r.width > 0 &&
-          r.height > 0 &&
-          (r.width < 36 || r.height < 36)
+          !isInlineTextLink(el)
         ) {
-          tinyTargets.push({
-            tag: el.tagName,
-            cls: el.className?.toString().slice(0, 100) || "",
-            text: (el.textContent || "").trim().slice(0, 60),
-            width: r.width,
-            height: r.height,
-          });
+          const targetR = effectiveTargetRect(el);
+          if (
+            targetR.width > 0 &&
+            targetR.height > 0 &&
+            (targetR.width < 36 || targetR.height < 36)
+          ) {
+            tinyTargets.push({
+              tag: el.tagName,
+              cls: el.className?.toString().slice(0, 100) || "",
+              text: (el.textContent || "").trim().slice(0, 60),
+              width: targetR.width,
+              height: targetR.height,
+            });
+          }
         }
       }
       const headings = [...document.querySelectorAll("h1,h2,h3")]
