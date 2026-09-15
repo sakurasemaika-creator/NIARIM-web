@@ -1,0 +1,29 @@
+/* Explicit user-requested UI corrections. Loaded from lang-flag.js before first paint. */
+
+/* Consent control and its sentence stay in one horizontal flex row. The copy may
+   wrap internally on narrow screens, but never drops below the checkbox. */
+.contact-form .form-checkbox {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+}
+.contact-form .form-checkbox > input#agree {
+  flex: 0 0 25px !important;
+}
+.contact-form .form-checkbox > span {
+  display: inline !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  line-height: 1.55 !important;
+}
+.contact-form .form-checkbox > span > * {
+  display: inline !important;
+}
+
+/* Old static mock markup used a text pill. The live app uses the circular
+   timeline icon control; user-request-fixes.js upgrades any remaining legacy
+   nodes, and this guard prevents the stale pill from flashing before upgrade. */
+.fd-frame-strip-mode {
+  display: none !important;
+}
