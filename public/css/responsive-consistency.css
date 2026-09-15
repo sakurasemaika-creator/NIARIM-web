@@ -57,49 +57,18 @@ html
   min-height: 0 !important;
 }
 
-/* TimelineScreen keeps an 18px label column beside five 37px frames. The
-   canonical Hero/Features geometry needs a 16.75 logical-pixel source-space
-   correction. Home reuses the same screen in two differently fitted contexts,
-   so those contexts own measured offsets while the strip geometry stays shared. */
-html body .fd-timeline-screen {
-  --fd-timeline-current-offset: 16.75px;
-}
-
-/* Home's main feature-row Timeline is outside the screenshot carousel. Across
-   the 360/390 audit widths its measured fit scale is 0.892/0.991; solving the
-   remaining -2.10/-2.52px visual deltas back into source space converges around
-   14.3px. Keep the selector on the Home-only feature-row structure so the
-   already-green Features route and Hero clone retain the canonical value. */
-html body #features .feature-row .fd-timeline-screen {
-  --fd-timeline-current-offset: 14.3px;
-}
-
-/* At desktop width this Home feature-row mock renders at source scale 1.0.
-   The 14.3px compact-layout correction therefore leaves the current frame
-   2.4375px to the right; use the canonical source-space offset once the
-   desktop composition is active. */
-@media (min-width: 1280px) {
-  html body #features .feature-row .fd-timeline-screen {
-    --fd-timeline-current-offset: 16.75px;
-  }
-}
-
-/* Every Timeline-derived screen in the Home App Preview carousel is fitted to
-   the preview card. The failing regular Timeline measured visual scales of
-   0.670/0.682/0.687 at SP360/SP390/PC; converting its +14.42..+14.62px deltas
-   back to source space yields 37.24..37.52px. 37.3px also keeps the already
-   passing AudioScreen derivative on the same fitted-carousel coordinate system. */
-html body .screenshot-card .fd-timeline-screen {
-  --fd-timeline-current-offset: 37.3px;
-}
-
+/* TimelineScreen keeps five equal 37px frame cells. The third cell is the
+   current frame, so centering the five-cell strip itself puts the current-frame
+   center exactly on the app-screen center. Do this in the screen coordinate
+   system rather than compensating with context-specific source-space offsets;
+   parent fitting/scaling then preserves the same visual center everywhere. */
 html body .fd-timeline-screen .fd-timeline-row {
   position: static !important;
 }
 
 html body .fd-timeline-screen .fd-timeline-frames {
   position: absolute !important;
-  left: calc(50% - var(--fd-timeline-current-offset)) !important;
+  left: 50% !important;
   width: 185px !important;
   transform: translateX(-50%) !important;
   justify-content: center !important;
