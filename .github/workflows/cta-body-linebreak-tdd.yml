@@ -1,0 +1,77 @@
+name: CTA Body Line Break TDD
+on:
+  push:
+    branches: [fix/web-final-work]
+    paths: ['.github/workflows/cta-body-linebreak-tdd.yml']
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/web-final-work
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Add regression first and verify RED
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('tests/cta-copy-regression.mjs')
+          s=p.read_text()
+          marker="console.log('cta-copy-regression: ok');"
+          block=r'''
+const home = fs.readFileSync('public/index.html', 'utf8');
+const faq = fs.readFileSync('public/faq/index.html', 'utf8');
+const approvedBodyHtml = '描きたいと思ったら今すぐにでも始められる。<br>全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。';
+assert.ok(source.includes(approvedBodyHtml), 'Japanese CTA body must include the approved line break');
+for (const [name, html] of [['home', home], ['faq', faq]]) {
+  assert.match(html, /<p data-i18n-html="cta\.body">[\s\S]*始められる。<br\s*\/>[\s\S]*全フレーム手描きでも/, `${name} CTA fallback must preserve the approved line break`);
+}
+'''
+          if 'const approvedBodyHtml =' not in s:
+              s=s.replace(marker, block+'\n'+marker)
+              p.write_text(s)
+          PY
+          if node tests/cta-copy-regression.mjs; then
+            echo 'Expected RED but regression unexpectedly passed' >&2
+            exit 1
+          fi
+      - name: Apply approved line break
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          old='描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
+          new='描きたいと思ったら今すぐにでも始められる。<br>全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
+          p=Path('public/js/lang-flag.js'); s=p.read_text()
+          if old not in s: raise SystemExit('approved CTA body source not found')
+          p.write_text(s.replace(old,new,1))
+          for name in ['public/index.html','public/faq/index.html']:
+              p=Path(name); s=p.read_text()
+              s=s.replace('data-i18n="cta.body"','data-i18n-html="cta.body"')
+              # Current branch fallback already contains the approved copy; preserve it with an actual BR.
+              s=s.replace(old,new.replace('<br>','<br />'))
+              p.write_text(s)
+          PY
+          npx prettier --write tests/cta-copy-regression.mjs public/js/lang-flag.js public/index.html public/faq/index.html
+      - name: Verify GREEN
+        run: |
+          node tests/cta-copy-regression.mjs
+          node tests/mock-ui-source-regression.mjs
+      - name: Commit verified change
+        shell: bash
+        run: |
+          git config user.name 'NIARIM Web UI Fix Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add tests/cta-copy-regression.mjs public/js/lang-flag.js public/index.html public/faq/index.html
+          git diff --cached --check
+          git commit -m 'fix: add requested CTA body line break'
+          git push origin HEAD:fix/web-final-work
