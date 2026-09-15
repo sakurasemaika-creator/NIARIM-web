@@ -176,7 +176,12 @@ html body .hero-community-tabs {
   gap: 0 !important;
   background: var(--fd-surface) !important;
   border: 0 !important;
-  border-bottom: 1px solid color-mix(in srgb, var(--fd-text, var(--fd-ink)) 14%, transparent) !important;
+  border-bottom: 1px solid
+    color-mix(
+      in srgb,
+      var(--fd-text, var(--fd-ink)) 14%,
+      transparent
+    ) !important;
 }
 
 html body .hero-community-tabs > span {
@@ -240,7 +245,8 @@ html body .hero-community-work {
   border-radius: 14px !important;
   color: var(--fd-text, var(--fd-ink)) !important;
   background: var(--fd-panel) !important;
-  box-shadow: 0 1px 3px color-mix(in srgb, var(--fd-outside) 28%, transparent) !important;
+  box-shadow: 0 1px 3px
+    color-mix(in srgb, var(--fd-outside) 28%, transparent) !important;
 }
 
 html body .hero-community-thumb {
@@ -258,7 +264,11 @@ html body .hero-community-play {
   width: 40px !important;
   height: 40px !important;
   border-radius: 50% !important;
-  background: color-mix(in srgb, var(--fd-text, var(--fd-ink)) 70%, transparent) !important;
+  background: color-mix(
+    in srgb,
+    var(--fd-text, var(--fd-ink)) 70%,
+    transparent
+  ) !important;
   transform: translate(-50%, -50%) !important;
   opacity: 0.72 !important;
 }
@@ -301,7 +311,8 @@ html body .hero-community-fab {
   border-radius: 999px !important;
   color: var(--fd-on-accent, #fff) !important;
   background: var(--fd-accent) !important;
-  box-shadow: 0 3px 8px color-mix(in srgb, var(--fd-outside) 40%, transparent) !important;
+  box-shadow: 0 3px 8px
+    color-mix(in srgb, var(--fd-outside) 40%, transparent) !important;
   white-space: nowrap !important;
 }
 
@@ -344,7 +355,8 @@ html body .hero-actions > :is(a, button) {
 
 @media (prefers-contrast: more) {
   html body .hero-preview-card {
-    outline: 2px solid color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
+    outline: 2px solid
+      color-mix(in srgb, var(--color-ink) 42%, transparent) !important;
     outline-offset: -2px !important;
   }
 
