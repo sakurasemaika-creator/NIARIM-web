@@ -224,6 +224,7 @@ textarea.form-control {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  min-height: 36px;
   font-size: var(--fs-small);
 }
 
