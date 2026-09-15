@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const outDir = process.env.AUDIT_SCREENSHOT_DIR || "artifacts/final-visual-screenshots-v2";
+const outDir =
+  process.env.AUDIT_SCREENSHOT_DIR || "artifacts/final-visual-screenshots-v2";
 
 await import("./final-visual-screenshot-audit-v2.mjs");
 

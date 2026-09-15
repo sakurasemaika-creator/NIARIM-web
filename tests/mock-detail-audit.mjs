@@ -66,7 +66,9 @@ for (const viewport of viewports) {
           const cursorRect = rect(cursor);
           const currentStyle = current ? getComputedStyle(current) : null;
           const after = getComputedStyle(strip, "::after");
-          const artwork = [...strip.querySelectorAll(".fd-frame-thumb .fd-art")];
+          const artwork = [
+            ...strip.querySelectorAll(".fd-frame-thumb .fd-art"),
+          ];
           return {
             strip: sr,
             current: cr,
@@ -133,8 +135,11 @@ for (const viewport of viewports) {
           const parent = root.parentElement?.closest(
             "[data-mock-theme], .feature-section",
           );
-          return !parent && root.querySelector(
-            ".feature-diagram, .fd-app-screen, .fd-route-screen",
+          return (
+            !parent &&
+            root.querySelector(
+              ".feature-diagram, .fd-app-screen, .fd-route-screen",
+            )
           );
         });
         const themes = themeRoots.map((root) => {
@@ -149,9 +154,7 @@ for (const viewport of viewports) {
           const rootStyle = getComputedStyle(root);
           return {
             id:
-              root.getAttribute("data-mock-theme") ||
-              root.id ||
-              root.className,
+              root.getAttribute("data-mock-theme") || root.id || root.className,
             accent: cs.getPropertyValue("--fd-accent").trim(),
             bezel:
               cs.getPropertyValue("--fd-bezel").trim() ||
@@ -168,7 +171,9 @@ for (const viewport of viewports) {
             beforeDisplay: before.display,
           };
         });
-        const hero = document.querySelector(".hero-visual.fd-canvas-screen.fd-app-screen");
+        const hero = document.querySelector(
+          ".hero-visual.fd-canvas-screen.fd-app-screen",
+        );
         const heroRect = hero ? rawRect(hero) : null;
         const heroArt = hero?.querySelector(".fd-app-canvas-stage .fd-art");
         const heroStyle = hero ? getComputedStyle(hero) : null;
@@ -191,7 +196,8 @@ for (const viewport of viewports) {
             ? {
                 ratio: heroRect.width / heroRect.height,
                 artworkVisible:
-                  Boolean(heroArt) && getComputedStyle(heroArt).visibility !== "hidden",
+                  Boolean(heroArt) &&
+                  getComputedStyle(heroArt).visibility !== "hidden",
                 accent: heroStyle.getPropertyValue("--fd-accent").trim(),
                 bezel: heroStyle.getPropertyValue("--fd-bezel").trim(),
                 borderColor: heroStyle.borderTopColor,
@@ -256,13 +262,25 @@ for (const viewport of viewports) {
         if (!mock.borderColor)
           failures.push({ id, kind: "mock-bezel-border-missing", mock });
       }
-      const themedAccents = state.themes.map((theme) => theme.accent).filter(Boolean);
+      const themedAccents = state.themes
+        .map((theme) => theme.accent)
+        .filter(Boolean);
       if (new Set(themedAccents).size !== themedAccents.length) {
-        failures.push({ id, kind: "duplicate-mock-theme-accent", themes: state.themes });
+        failures.push({
+          id,
+          kind: "duplicate-mock-theme-accent",
+          themes: state.themes,
+        });
       }
-      const themedBezels = state.themes.map((theme) => theme.bezel).filter(Boolean);
+      const themedBezels = state.themes
+        .map((theme) => theme.bezel)
+        .filter(Boolean);
       if (new Set(themedBezels).size !== themedBezels.length) {
-        failures.push({ id, kind: "duplicate-mock-theme-bezel", themes: state.themes });
+        failures.push({
+          id,
+          kind: "duplicate-mock-theme-bezel",
+          themes: state.themes,
+        });
       }
       for (const screen of state.screens) {
         if (
@@ -281,7 +299,11 @@ for (const viewport of viewports) {
             failures.push({ id, kind: "hero-screen-ratio", hero: state.hero });
           }
           if (!state.hero.artworkVisible) {
-            failures.push({ id, kind: "hero-artwork-hidden", hero: state.hero });
+            failures.push({
+              id,
+              kind: "hero-artwork-hidden",
+              hero: state.hero,
+            });
           }
           if (!state.hero.accent || !state.hero.bezel) {
             failures.push({ id, kind: "hero-theme-missing", hero: state.hero });

@@ -152,7 +152,8 @@
   function fitHeroPreview(card, measuredWidth) {
     if (!card) return;
 
-    var width = measuredWidth || card.clientWidth || card.getBoundingClientRect().width;
+    var width =
+      measuredWidth || card.clientWidth || card.getBoundingClientRect().width;
     if (!width) return;
 
     // The card owns a real 4px bezel. clientWidth is the inner app viewport,

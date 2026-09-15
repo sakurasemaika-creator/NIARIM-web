@@ -25,7 +25,8 @@
       project: "별이 내리는 밤",
     },
     fr: {
-      community: "Créez une animation avec NIARIM et publiez-la dans la Galerie.",
+      community:
+        "Créez une animation avec NIARIM et publiez-la dans la Galerie.",
       project: "Nuit étoilée",
     },
     es: {
@@ -51,17 +52,19 @@
   }
 
   function upgradeLegacyFrameModeControls(root) {
-    (root || document).querySelectorAll(".fd-frame-strip-mode").forEach(function (old) {
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "fd-frame-mode";
-      button.tabIndex = -1;
-      button.setAttribute("aria-label", "タイムライン");
-      button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
-      button.innerHTML =
-        '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
-      old.replaceWith(button);
-    });
+    (root || document)
+      .querySelectorAll(".fd-frame-strip-mode")
+      .forEach(function (old) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "fd-frame-mode";
+        button.tabIndex = -1;
+        button.setAttribute("aria-label", "タイムライン");
+        button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
+        button.innerHTML =
+          '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
+        old.replaceWith(button);
+      });
   }
 
   function localizeFd(root) {
@@ -69,22 +72,30 @@
     if (!api || !api.translate) return;
     var code = lang();
     var nodes = [];
-    if (root && root.matches && root.matches('[data-i18n^="fd."]')) nodes.push(root);
-    (root || document).querySelectorAll?.('[data-i18n^="fd."]').forEach(function (el) {
-      nodes.push(el);
-    });
+    if (root && root.matches && root.matches('[data-i18n^="fd."]'))
+      nodes.push(root);
+    (root || document)
+      .querySelectorAll?.('[data-i18n^="fd."]')
+      .forEach(function (el) {
+        nodes.push(el);
+      });
     nodes.forEach(function (el) {
       var key = el.getAttribute("data-i18n");
-      el.textContent = key === "fd.projectName" ? copy[code].project : api.translate(code, key);
+      el.textContent =
+        key === "fd.projectName"
+          ? copy[code].project
+          : api.translate(code, key);
     });
   }
 
   function applyRequestedCopy() {
     installDictionaryOverrides();
     var code = lang();
-    var finalBody = document.querySelector(".final-cta [data-i18n=\"cta.body\"]");
+    var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
-    var communityBody = document.querySelector('[data-i18n="communityPage.cta.body"]');
+    var communityBody = document.querySelector(
+      '[data-i18n="communityPage.cta.body"]',
+    );
     if (communityBody) communityBody.textContent = copy[code].community;
     localizeFd(document);
     upgradeLegacyFrameModeControls(document);
@@ -101,11 +112,16 @@
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (node.nodeType !== 1) return;
-        var scope = node.matches?.(".fd-frame-strip-mode") ? node.parentElement : node;
+        var scope = node.matches?.(".fd-frame-strip-mode")
+          ? node.parentElement
+          : node;
         upgradeLegacyFrameModeControls(scope);
         localizeFd(node);
       });
     });
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
 })();
