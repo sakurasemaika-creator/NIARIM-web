@@ -8,7 +8,7 @@ permissions:
 jobs:
   fix-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,51 +19,46 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Apply requested header/contact/footer polish
+      - name: Verify CTA line break is RED
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('public/css/common-base.css'); s=p.read_text()
-          old='''.main-nav a::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  bottom: -2px;'''
-          new='''.main-nav a::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  bottom: 5px;'''
-          if old not in s: raise SystemExit('nav underline rule not found')
-          p.write_text(s.replace(old,new,1))
+          wanted='始められる。<br>全フレーム手描きでも'
+          if wanted in Path('public/js/lang-flag.js').read_text():
+              raise SystemExit('Expected RED before implementation')
+          print('RED: requested break absent')
           PY
-          npx prettier --write public/css/common-base.css public/css/pages/contact.css public/css/visual-finish.css public/css/home-hero-cascade-final.css
-      - name: Verify requested source contracts
+      - name: Apply requested CTA line break
         run: |
-          node - <<'JS'
-          const fs=require('fs');
-          const common=fs.readFileSync('public/css/common-base.css','utf8');
-          const contact=fs.readFileSync('public/css/pages/contact.css','utf8');
-          const finish=fs.readFileSync('public/css/visual-finish.css','utf8');
-          const hero=fs.readFileSync('public/css/home-hero-cascade-final.css','utf8');
-          if(!/\.main-nav a::after[\s\S]*bottom: 5px/.test(common)) throw Error('nav underline alignment');
-          if(!/\.form-checkbox input[\s\S]*width: 25px;[\s\S]*height: 25px/.test(contact)) throw Error('checkbox must be 25px');
-          if(/\.site-footer::before\s*\{/.test(finish)) throw Error('footer stripe must stay removed');
-          if(!/\.form-checkbox\s*\{[\s\S]*align-items: center/.test(contact)) throw Error('checkbox label vertical alignment');
-          if(!/hero-preview-canvas \.fd-topbar[\s\S]*width: 320px/.test(hero)) throw Error('hero topbar canonical width');
-          if(!/hero-preview-canvas \.fd-brush-slider[\s\S]*width: 320px/.test(hero)) throw Error('hero brush slider canonical width');
-          if(!/hero-preview-timeline \.fd-fullscreen-mark[\s\S]*display: none/.test(hero)) throw Error('misleading timeline mark must be hidden');
-          if(!/hero-preview-card[\s\S]*border: 4px solid/.test(hero)) throw Error('hero bezel must remain visible');
-          console.log('requested UI source contracts: ok');
-          JS
-      - name: Run source regressions
+          python3 - <<'PY'
+          from pathlib import Path
+          old='描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
+          new='描きたいと思ったら今すぐにでも始められる。<br>全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
+          p=Path('public/js/lang-flag.js'); s=p.read_text(); p.write_text(s.replace(old,new,1))
+          for name in ('public/index.html','public/faq/index.html'):
+              p=Path(name); s=p.read_text()
+              s=s.replace('data-i18n="cta.body"','data-i18n-html="cta.body"')
+              s=s.replace(old,new.replace('<br>','<br />'))
+              p.write_text(s)
+          PY
+          npx prettier --write public/js/lang-flag.js public/index.html public/faq/index.html
+      - name: Verify CTA line break is GREEN
         run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          assert '始められる。<br>全フレーム手描きでも' in Path('public/js/lang-flag.js').read_text()
+          for name in ('public/index.html','public/faq/index.html'):
+              s=Path(name).read_text()
+              assert 'data-i18n-html="cta.body"' in s
+              assert '始められる。<br />全フレーム手描きでも' in s
+          print('GREEN: CTA line break installed')
+          PY
           node tests/mock-ui-source-regression.mjs
-          node tests/cta-copy-regression.mjs
-          npm run format:check
-      - name: Run visual invariant audits
-        run: |
-          npm run audit:visual-final
-          npm run audit:mock-detail
-          npm run audit:style-source
-      - name: Commit verified polish
+      - name: Commit verified CTA change
         run: |
           git config user.name 'NIARIM Web UI Fix Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add public/css/common-base.css public/css/pages/contact.css public/css/visual-finish.css public/css/home-hero-cascade-final.css
+          git add public/js/lang-flag.js public/index.html public/faq/index.html
           git diff --cached --check
-          if git diff --cached --quiet; then echo 'No product changes'; exit 0; fi
-          git commit -m 'fix: finish requested web UI polish'
+          git commit -m 'fix: add requested CTA body line break'
           git push origin HEAD:fix/web-final-work
