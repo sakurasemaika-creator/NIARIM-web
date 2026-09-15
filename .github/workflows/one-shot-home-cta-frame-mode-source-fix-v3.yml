@@ -1,4 +1,4 @@
-name: One-shot home CTA and frame mode source fix v3
+name: One-shot canonical formatting repair
 
 on:
   push:
@@ -11,14 +11,14 @@ permissions:
   contents: write
 
 jobs:
-  patch-and-verify:
+  format-and-restore:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout dev_branch
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        uses: actions/checkout@v4
         with:
           ref: dev_branch
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -29,181 +29,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Chromium for visual verification
-        run: npx playwright install --with-deps chromium
+      - name: Apply canonical Prettier formatting
+        run: npm run format
 
-      - name: Write semantic regression contract
+      - name: Restore one-shot workflow source
+        shell: bash
+        run: git show HEAD^:.github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml > .github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml
+
+      - name: Verify formatting and commit
         shell: bash
         run: |
-          cat > tests/home-cta-frame-mode-source-contract.mjs <<'EOF'
-          import fs from "node:fs/promises";
-
-          const [main, baseCss, finalCss, dict, home, faq, finishCss] = await Promise.all([
-            fs.readFile("public/js/main.js", "utf8"),
-            fs.readFile("public/css/screen-mock-accuracy-base.css", "utf8"),
-            fs.readFile("public/css/ui-regression-fixes.css", "utf8"),
-            fs.readFile("public/js/i18n-dict.js", "utf8"),
-            fs.readFile("public/index.html", "utf8"),
-            fs.readFile("public/faq/index.html", "utf8"),
-            fs.readFile("public/css/visual-finish.css", "utf8"),
-          ]);
-
-          const title = "実際にアニメーションを つくってみよう！";
-          const body = "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。";
-          const failures = [];
-          const expect = (ok, message) => { if (!ok) failures.push(message); };
-
-          expect(main.includes('class="fd-frame-mode"') && main.includes('aria-label="タイムライン"') && main.includes('aria-label:fd.timelineMode') && main.includes('icon("ic-movie_filter")'), "Dynamic canvas frame-mode control must be an accessible button using the existing ic-movie_filter sprite icon");
-          expect(!main.includes('<span class="fd-frame-mode"><span class="is-selected"') && !main.includes('data-i18n="fd.frameListMode">フレーム一覧</span><span'), "Dynamic frame-mode control must not keep the legacy two visible text segments");
-          expect(/\.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important[\s\S]*?border-radius:\s*50%\s*!important/.test(baseCss), "Canonical frame-mode CSS must define a 42px circular control");
-          expect(!/\.fd-frame-mode\s*\{[\s\S]*?grid-template-columns:\s*1fr\s+1fr/.test(baseCss) && !baseCss.includes(".fd-frame-mode > span + span"), "Canonical frame-mode CSS must not retain the segmented-pill split layout");
-          expect(/html body \.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?min-width:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important/.test(finalCss), "Final regression layer must enforce 42px frame-mode geometry for every fallback context");
-          expect(!finalCss.includes(".fd-frame-mode::before") && !finalCss.includes('mask-image: url("data:image/svg+xml'), "Final regression layer must not synthesize movie_filter with a pseudo-element mask");
-          expect(dict.includes("cta.title") && dict.includes(title) && dict.includes("cta.body") && dict.includes(body), "Japanese shared CTA dictionary must contain the requested title and body");
-          for (const [name, html] of [["home", home], ["faq", faq]]) {
-            expect(html.includes('data-i18n="cta.title"') && html.includes(title) && html.includes('data-i18n="cta.body"') && html.includes(body), `${name} fallback CTA must match the requested Japanese copy`);
-          }
-          expect(!home.includes("feature-narrative") && !home.includes("narrative.home.cta.heading") && !home.includes("narrative.home.cta.body"), "Home must not retain the duplicate feature-narrative CTA block");
-          expect(!home.includes("fd-frame-strip-mode") && (home.match(/class="fd-frame-mode"/g) || []).length >= 2 && home.includes("sprite.svg#ic-movie_filter"), "Static home canvas fallbacks must use circular fd-frame-mode controls with the movie_filter sprite");
-          expect(!finishCss.includes(".site-footer::before") && !/repeating-linear-gradient\(\s*90deg[\s\S]*?var\(--color-accent\)/.test(finishCss), "Footer stripe pseudo-element must stay removed");
-
-          if (failures.length) {
-            console.error(JSON.stringify({ ok: false, failures }, null, 2));
-            process.exit(1);
-          }
-          console.log(JSON.stringify({ ok: true }, null, 2));
-          EOF
-
-      - name: Verify RED before production changes
-        shell: bash
-        run: |
-          set +e
-          node tests/home-cta-frame-mode-source-contract.mjs 2>&1 | tee /tmp/home_contract_red.log
-          status=${PIPESTATUS[0]}
-          set -e
-          test "$status" -ne 0
-          grep -q 'Dynamic canvas frame-mode control' /tmp/home_contract_red.log
-          grep -q 'Final regression layer must enforce 42px frame-mode geometry' /tmp/home_contract_red.log
-          grep -q 'Japanese shared CTA dictionary' /tmp/home_contract_red.log
-          grep -q 'Home must not retain the duplicate feature-narrative CTA block' /tmp/home_contract_red.log
-          echo 'RED confirmed.'
-
-      - name: Extract and apply reviewed production patch
-        shell: bash
-        run: |
-          python3 <<'PY'
-          from pathlib import Path
-          source = Path('.github/workflows/one-shot-home-cta-frame-mode-source-fix.yml').read_text()
-          marker = "          python3 <<'PY'\n"
-          start = source.index(marker) + len(marker)
-          end = source.index("\n          PY", start)
-          lines = source[start:end].splitlines()
-          code = "\n".join(line[10:] if line.startswith("          ") else line for line in lines) + "\n"
-          Path('/tmp/apply_home_source_fix.py').write_text(code)
-          PY
-          python3 /tmp/apply_home_source_fix.py
-          python3 <<'PY'
-          from pathlib import Path
-
-          path = Path('public/css/ui-regression-fixes.css')
-          text = path.read_text()
-          replacements = [
-              ('html body .fd-canvas-screen .fd-frame-mode {', 'html body .fd-frame-mode {', 'frame-mode final selector'),
-              ('html body .fd-canvas-screen .fd-frame-mode .ic {', 'html body .fd-frame-mode .ic {', 'frame-mode icon final selector'),
-          ]
-          for old, new, label in replacements:
-              count = text.count(old)
-              if count != 1:
-                  raise SystemExit(f'{label}: expected exactly one match after canonical patch, found {count}')
-              text = text.replace(old, new, 1)
-          path.write_text(text)
-          PY
-
-      - name: Format changed sources
-        run: npx prettier --write public/js/main.js public/js/i18n-dict.js public/css/screen-mock-accuracy-base.css public/css/ui-regression-fixes.css public/index.html public/faq/index.html tests/home-cta-frame-mode-source-contract.mjs tests/timeline-toolbar-frame-mode-contract.mjs
-
-      - name: Start local server
-        shell: bash
-        run: |
-          python3 -m http.server 8787 --directory public >/tmp/niarim-web-http.log 2>&1 &
-          echo $! > /tmp/niarim-web-http.pid
-          for i in {1..20}; do
-            if curl --fail --silent http://127.0.0.1:8787/ >/dev/null; then
-              exit 0
-            fi
-            sleep 0.5
-          done
-          cat /tmp/niarim-web-http.log
-          exit 1
-
-      - name: Verify GREEN focused contracts
-        shell: bash
-        run: |
-          node tests/home-cta-frame-mode-source-contract.mjs
-          node tests/timeline-toolbar-frame-mode-contract.mjs
-          node tests/hero-preview-scale-contract-audit.mjs
-          node --input-type=module <<'EOF'
-          import { chromium } from "playwright";
-
-          const browser = await chromium.launch({ headless: true });
-          const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
-          await page.goto("http://127.0.0.1:8787/", { waitUntil: "networkidle" });
-
-          const result = await page.evaluate(() => {
-            const controls = [...document.querySelectorAll(".fd-frame-mode")];
-            const details = controls.map((control) => {
-              const style = getComputedStyle(control);
-              const use = control.querySelector("svg use");
-              return {
-                tag: control.tagName,
-                width: style.width,
-                height: style.height,
-                radius: style.borderRadius,
-                ariaLabel: control.getAttribute("aria-label") || "",
-                i18nAttr: control.getAttribute("data-i18n-attr") || "",
-                iconHref: use?.getAttribute("href") || use?.getAttribute("xlink:href") || "",
-                text: control.textContent?.trim() || "",
-              };
-            });
-            return {
-              count: controls.length,
-              legacyCount: document.querySelectorAll(".fd-frame-strip-mode").length,
-              duplicateNarrativeCount: document.querySelectorAll(".feature-narrative").length,
-              details,
-            };
-          });
-
-          const failures = [];
-          if (result.count < 2) failures.push(`expected at least two frame-mode controls, found ${result.count}`);
-          if (result.legacyCount !== 0) failures.push(`legacy frame-mode controls remain: ${result.legacyCount}`);
-          if (result.duplicateNarrativeCount !== 0) failures.push(`duplicate narrative CTA remains: ${result.duplicateNarrativeCount}`);
-          for (const [index, detail] of result.details.entries()) {
-            if (detail.tag !== "BUTTON") failures.push(`control ${index} is ${detail.tag}, expected BUTTON`);
-            if (detail.width !== "42px" || detail.height !== "42px") failures.push(`control ${index} computed size is ${detail.width}x${detail.height}, expected 42px x 42px`);
-            if (!detail.ariaLabel) failures.push(`control ${index} is missing aria-label`);
-            if (detail.i18nAttr !== "aria-label:fd.timelineMode") failures.push(`control ${index} has unexpected data-i18n-attr ${detail.i18nAttr}`);
-            if (!detail.iconHref.endsWith("sprite.svg#ic-movie_filter")) failures.push(`control ${index} does not use ic-movie_filter sprite: ${detail.iconHref}`);
-            if (detail.text.includes("フレーム一覧") || detail.text.includes("タイムライン")) failures.push(`control ${index} still exposes legacy segmented text`);
-          }
-
-          await browser.close();
-          if (failures.length) {
-            console.error(JSON.stringify({ ok: false, failures, result }, null, 2));
-            process.exit(1);
-          }
-          console.log(JSON.stringify({ ok: true, result }, null, 2));
-          EOF
-          npx prettier --check public/js/main.js public/js/i18n-dict.js public/css/screen-mock-accuracy-base.css public/css/ui-regression-fixes.css public/index.html public/faq/index.html tests/home-cta-frame-mode-source-contract.mjs tests/timeline-toolbar-frame-mode-contract.mjs
-
-      - name: Commit and push verified fix
-        shell: bash
-        run: |
+          npm run format:check
+          git diff --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/js/main.js public/js/i18n-dict.js public/css/screen-mock-accuracy-base.css public/css/ui-regression-fixes.css public/index.html public/faq/index.html tests/home-cta-frame-mode-source-contract.mjs tests/timeline-toolbar-frame-mode-contract.mjs
-          git diff --cached --check
-          git commit -m "fix: canonicalize home CTA and frame mode source"
+          git add docs/superpowers/plans/2026-09-14-screen-mock-fidelity-implementation.md public/css/home-hero-cascade-final.css public/js/home-hero-showcase.js public/js/user-request-fixes.js tests/final-visual-invariants-audit.mjs tests/final-visual-screenshot-audit-v2.mjs tests/final-visual-screenshot-audit-v3.mjs tests/mock-detail-audit.mjs tests/user-request-regressions-audit.mjs .github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: apply canonical formatting"
           git pull --rebase origin dev_branch
-          node tests/home-cta-frame-mode-source-contract.mjs
-          node tests/timeline-toolbar-frame-mode-contract.mjs
+          npm run format:check
           git push origin HEAD:dev_branch
