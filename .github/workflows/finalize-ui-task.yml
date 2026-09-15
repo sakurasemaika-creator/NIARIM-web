@@ -45,12 +45,13 @@ jobs:
       - name: Verify CTA line break is GREEN
         run: |
           python3 - <<'PY'
+          import re
           from pathlib import Path
           assert '始められる。<br>全フレーム手描きでも' in Path('public/js/lang-flag.js').read_text()
           for name in ('public/index.html','public/faq/index.html'):
               s=Path(name).read_text()
               assert 'data-i18n-html="cta.body"' in s
-              assert '始められる。<br />全フレーム手描きでも' in s
+              assert re.search(r'始められる。\s*<br\s*/?>\s*全フレーム手描きでも', s)
           print('GREEN: CTA line break installed')
           PY
           node tests/mock-ui-source-regression.mjs
