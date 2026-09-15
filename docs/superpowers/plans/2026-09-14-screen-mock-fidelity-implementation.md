@@ -25,10 +25,12 @@
 ### Task 1: Add failing invariants for the reported screen-mock regressions
 
 **Files:**
+
 - Modify: `tests/mock-detail-audit.mjs`
 - Modify: `tests/final-visual-invariants-audit.mjs`
 
 **Interfaces:**
+
 - Consumes: existing DOM classes under `.fd-app-screen`, `.fd-route-screen`, `.feature-diagram`.
 - Produces: regression failures for frame-marker overlap, hidden frame list/art, collapsed toolbars, nested bezel, invisible key labels, crushed controls, and unexpected viewport gutters.
 
@@ -41,12 +43,14 @@
 ### Task 2: Normalize Home/Features screen geometry to one coordinate system
 
 **Files:**
+
 - Modify: `public/css/screen-mock-accuracy.css`
 - Modify: `public/css/screen-mock-frame-alignment.css`
 - Modify: relevant mock fidelity/base CSS only where needed
 - Modify: `public/js/main.js` only if DOM structure itself differs from the app
 
 **Interfaces:**
+
 - Consumes: canonical app logical viewport and existing mock DOM.
 - Produces: one-scale-origin compositions with app-faithful control ordering, spacing, frame strip, panels, and outer bezel.
 
@@ -61,10 +65,12 @@
 ### Task 3: Preserve unique showcase themes without altering geometry
 
 **Files:**
+
 - Modify: `public/css/screen-mock-contrast-palettes.css`
 - Modify: other palette file only if selector precedence is incorrect
 
 **Interfaces:**
+
 - Consumes: stable app-faithful geometry from Task 2.
 - Produces: unique accent/background/panel/bezel theme identity per showcase slot.
 
@@ -76,11 +82,13 @@
 ### Task 4: Remove footer separator and repair header hover underline alignment
 
 **Files:**
+
 - Modify: `public/css/visual-finish.css`
 - Modify: the header/navigation stylesheet that owns hover underline geometry
 - Test: existing responsive/browser audit plus focused DOM geometry assertion
 
 **Interfaces:**
+
 - Produces: no `.site-footer::before` decoration; hover underline centered directly under each navigation label.
 
 - [ ] Delete all `.site-footer::before` declarations, including responsive overrides.
@@ -91,10 +99,12 @@
 ### Task 5: Resize and vertically align the Contact consent checkbox
 
 **Files:**
+
 - Modify: `public/css/pages/contact.css`
 - Test: contact-page Playwright audit
 
 **Interfaces:**
+
 - Consumes: `<label class="form-checkbox"><input id="agree">...</label>`.
 - Produces: 25x25 checkbox with visually centered consent copy in all supported languages.
 
@@ -106,10 +116,12 @@
 ### Task 6: Full capture comparison and acceptance
 
 **Files:**
+
 - Modify: visual audit scripts only where required to capture evidence
 - Evidence: generated Home/Features screenshots and isolated mock captures
 
 **Interfaces:**
+
 - Produces: final app-vs-Web comparison evidence and green regression suite.
 
 - [ ] Generate fresh isolated Web captures for every Home and Features app-like visual.
