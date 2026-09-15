@@ -209,11 +209,7 @@ html
   mask-image: none !important;
 }
 
-/* responsive-consistency.css owns Timeline centering through a contextual
-   left offset plus translateX(-50%). An older fixed-pixel calibration imported
-   later replaced only the transform and left every current frame 6-17px right
-   of center. This final cascade layer restores the shared centering transform
-   while preserving each context's audited --fd-timeline-current-offset. */
-html body .fd-timeline-screen .fd-timeline-frames {
-  transform: translateX(-50%) !important;
-}
+/* Timeline centering is intentionally owned by screen-mock-fidelity.css.
+   Do not restore a generic translateX(-50%) here: doing so overrides the
+   capture-measured regular Timeline offsets and moves the selected frame away
+   from the fixed app-screen centre. */
