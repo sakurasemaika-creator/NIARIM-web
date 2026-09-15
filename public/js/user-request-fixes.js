@@ -52,8 +52,6 @@
 
   function upgradeLegacyFrameModeControls(root) {
     (root || document).querySelectorAll(".fd-frame-strip-mode").forEach(function (old) {
-      if (old.dataset.upgraded === "true") return;
-      old.dataset.upgraded = "true";
       var button = document.createElement("button");
       button.type = "button";
       button.className = "fd-frame-mode";
@@ -66,18 +64,29 @@
     });
   }
 
+  function localizeFd(root) {
+    var api = window.NIARIM_I18N;
+    if (!api || !api.translate) return;
+    var code = lang();
+    var nodes = [];
+    if (root && root.matches && root.matches('[data-i18n^="fd."]')) nodes.push(root);
+    (root || document).querySelectorAll?.('[data-i18n^="fd."]').forEach(function (el) {
+      nodes.push(el);
+    });
+    nodes.forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      el.textContent = key === "fd.projectName" ? copy[code].project : api.translate(code, key);
+    });
+  }
+
   function applyRequestedCopy() {
     installDictionaryOverrides();
     var code = lang();
     var finalBody = document.querySelector(".final-cta [data-i18n=\"cta.body\"]");
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
-    var communityBody = document.querySelector(
-      '[data-i18n="communityPage.cta.body"]',
-    );
+    var communityBody = document.querySelector('[data-i18n="communityPage.cta.body"]');
     if (communityBody) communityBody.textContent = copy[code].community;
-    document.querySelectorAll('[data-i18n="fd.projectName"]').forEach(function (el) {
-      el.textContent = copy[code].project;
-    });
+    localizeFd(document);
     upgradeLegacyFrameModeControls(document);
   }
 
@@ -92,13 +101,9 @@
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (node.nodeType !== 1) return;
-        upgradeLegacyFrameModeControls(node.matches?.(".fd-frame-strip-mode") ? node.parentElement : node);
-        if (node.matches?.('[data-i18n="fd.projectName"]')) {
-          node.textContent = copy[lang()].project;
-        }
-        node.querySelectorAll?.('[data-i18n="fd.projectName"]').forEach(function (el) {
-          el.textContent = copy[lang()].project;
-        });
+        var scope = node.matches?.(".fd-frame-strip-mode") ? node.parentElement : node;
+        upgradeLegacyFrameModeControls(scope);
+        localizeFd(node);
       });
     });
   });
