@@ -11,14 +11,14 @@ permissions:
   contents: write
 
 jobs:
-  format-and-restore:
+  format-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout dev_branch
         uses: actions/checkout@v4
         with:
           ref: dev_branch
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,22 +30,17 @@ jobs:
         run: npm ci
 
       - name: Apply canonical Prettier formatting
-        run: npm run format
+        run: npx prettier --write docs/superpowers/plans/2026-09-14-screen-mock-fidelity-implementation.md public/css/home-hero-cascade-final.css public/js/home-hero-showcase.js public/js/user-request-fixes.js tests/final-visual-invariants-audit.mjs tests/final-visual-screenshot-audit-v2.mjs tests/final-visual-screenshot-audit-v3.mjs tests/mock-detail-audit.mjs tests/user-request-regressions-audit.mjs
 
-      - name: Restore one-shot workflow source
-        shell: bash
-        run: git show HEAD^:.github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml > .github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml
-
-      - name: Verify formatting and commit
+      - name: Verify and push formatted sources
         shell: bash
         run: |
-          npm run format:check
+          npx prettier --check docs/superpowers/plans/2026-09-14-screen-mock-fidelity-implementation.md public/css/home-hero-cascade-final.css public/js/home-hero-showcase.js public/js/user-request-fixes.js tests/final-visual-invariants-audit.mjs tests/final-visual-screenshot-audit-v2.mjs tests/final-visual-screenshot-audit-v3.mjs tests/mock-detail-audit.mjs tests/user-request-regressions-audit.mjs
           git diff --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/superpowers/plans/2026-09-14-screen-mock-fidelity-implementation.md public/css/home-hero-cascade-final.css public/js/home-hero-showcase.js public/js/user-request-fixes.js tests/final-visual-invariants-audit.mjs tests/final-visual-screenshot-audit-v2.mjs tests/final-visual-screenshot-audit-v3.mjs tests/mock-detail-audit.mjs tests/user-request-regressions-audit.mjs .github/workflows/one-shot-home-cta-frame-mode-source-fix-v3.yml
+          git add docs/superpowers/plans/2026-09-14-screen-mock-fidelity-implementation.md public/css/home-hero-cascade-final.css public/js/home-hero-showcase.js public/js/user-request-fixes.js tests/final-visual-invariants-audit.mjs tests/final-visual-screenshot-audit-v2.mjs tests/final-visual-screenshot-audit-v3.mjs tests/mock-detail-audit.mjs tests/user-request-regressions-audit.mjs
           git diff --cached --quiet && exit 0
           git commit -m "chore: apply canonical formatting"
           git pull --rebase origin dev_branch
-          npm run format:check
           git push origin HEAD:dev_branch
