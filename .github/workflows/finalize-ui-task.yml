@@ -1,0 +1,69 @@
+name: Finalize UI Task
+on:
+  push:
+    branches: [fix/web-final-work]
+    paths: ['.github/workflows/finalize-ui-task.yml']
+permissions:
+  contents: write
+jobs:
+  fix-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/web-final-work
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply requested header/contact/footer polish
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('public/css/common-base.css'); s=p.read_text()
+          old='''.main-nav a::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  bottom: -2px;'''
+          new='''.main-nav a::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  bottom: 5px;'''
+          if old not in s: raise SystemExit('nav underline rule not found')
+          p.write_text(s.replace(old,new,1))
+          PY
+          npx prettier --write public/css/common-base.css public/css/pages/contact.css public/css/visual-finish.css public/css/home-hero-cascade-final.css
+      - name: Verify requested source contracts
+        run: |
+          node - <<'JS'
+          const fs=require('fs');
+          const common=fs.readFileSync('public/css/common-base.css','utf8');
+          const contact=fs.readFileSync('public/css/pages/contact.css','utf8');
+          const finish=fs.readFileSync('public/css/visual-finish.css','utf8');
+          const hero=fs.readFileSync('public/css/home-hero-cascade-final.css','utf8');
+          if(!/\.main-nav a::after[\s\S]*bottom: 5px/.test(common)) throw Error('nav underline alignment');
+          if(!/\.form-checkbox input[\s\S]*width: 25px;[\s\S]*height: 25px/.test(contact)) throw Error('checkbox must be 25px');
+          if(/\.site-footer::before\s*\{/.test(finish)) throw Error('footer stripe must stay removed');
+          if(!/\.form-checkbox\s*\{[\s\S]*align-items: center/.test(contact)) throw Error('checkbox label vertical alignment');
+          if(!/hero-preview-canvas \.fd-topbar[\s\S]*width: 320px/.test(hero)) throw Error('hero topbar canonical width');
+          if(!/hero-preview-canvas \.fd-brush-slider[\s\S]*width: 320px/.test(hero)) throw Error('hero brush slider canonical width');
+          if(!/hero-preview-timeline \.fd-fullscreen-mark[\s\S]*display: none/.test(hero)) throw Error('misleading timeline mark must be hidden');
+          if(!/hero-preview-card[\s\S]*border: 4px solid/.test(hero)) throw Error('hero bezel must remain visible');
+          console.log('requested UI source contracts: ok');
+          JS
+      - name: Run source regressions
+        run: |
+          node tests/mock-ui-source-regression.mjs
+          node tests/cta-copy-regression.mjs
+          npm run format:check
+      - name: Run visual invariant audits
+        run: |
+          npm run audit:visual-final
+          npm run audit:mock-detail
+          npm run audit:style-source
+      - name: Commit verified polish
+        run: |
+          git config user.name 'NIARIM Web UI Fix Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/css/common-base.css public/css/pages/contact.css public/css/visual-finish.css public/css/home-hero-cascade-final.css
+          git diff --cached --check
+          if git diff --cached --quiet; then echo 'No product changes'; exit 0; fi
+          git commit -m 'fix: finish requested web UI polish'
+          git push origin HEAD:fix/web-final-work
