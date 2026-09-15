@@ -17,10 +17,11 @@ export const auditViewports = [
   { name: "pc", width: 1440, height: 1000 },
 ];
 
-// The current Flutter route-capture harness renders the real app at 360x760
-// logical pixels. Hero preview geometry must follow that production viewport,
-// not the historical website-only 320x569 mock frame.
-const ratioTarget = 360 / 760;
+// The Home hero deliberately reconstructs the canonical 320x569 app viewport
+// and scales that complete composition into its responsive showcase cards.
+// Audit the reconstructed app screen itself against that canonical geometry;
+// the 360x760 route-capture viewport belongs to a different capture surface.
+const ratioTarget = 320 / 569;
 
 const rect = (value) => ({
   width: value.width,
