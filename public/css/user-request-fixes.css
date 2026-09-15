@@ -1,4 +1,5 @@
-/* Explicit user-requested UI corrections. Loaded from lang-flag.js before first paint. */
+/* Explicit user-requested UI corrections. Loaded from lang-flag.js before first paint.
+   This layer also acts as the visual-audit trigger after canonical source formatting. */
 
 /* Consent control and its sentence stay in one horizontal flex row. The copy may
    wrap internally on narrow screens, but never drops below the checkbox. */
