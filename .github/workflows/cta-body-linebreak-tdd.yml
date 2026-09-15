@@ -25,45 +25,40 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          src=Path('public/js/lang-flag.js').read_text()
-          wanted='始められる。<br>全フレーム手描きでも'
-          if wanted in src:
-              raise SystemExit('Expected RED but requested break already exists')
-          print('RED confirmed: requested CTA break is absent')
+          d=Path('public/js/i18n-dict-narrative.js').read_text()
+          h=Path('public/index.html').read_text()
+          assert '始められる。<br>全フレーム手描きでも' not in d
+          assert 'data-i18n-html="narrative.home.cta.body"' not in h
+          print('RED confirmed')
           PY
-      - name: Apply requested break
+      - name: Apply requested narrative copy and break
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          old='描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
+          old='描きたいと思ったら、すぐに始められる。一枚の絵からでも、何十枚ものフレームを使った作品でも。手描きで動かす。キーフレームで動かす。画像や音を組み合わせる。仕上げまでこだわって、自分だけの作品にする。そして完成したら、「作品広場」へ。つくって、公開して、みつけよう。NIARIMで、アニメーションをつくってみよう！'
           new='描きたいと思ったら今すぐにでも始められる。<br>全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。'
-          p=Path('public/js/lang-flag.js'); s=p.read_text()
-          if old not in s: raise SystemExit('CTA body source not found')
-          p.write_text(s.replace(old,new,1))
-          for name in ('public/index.html','public/faq/index.html'):
-              p=Path(name); s=p.read_text()
-              s=s.replace('data-i18n="cta.body"','data-i18n-html="cta.body"')
-              s=s.replace(old,new.replace('<br>','<br />'))
-              p.write_text(s)
+          p=Path('public/js/i18n-dict-narrative.js'); s=p.read_text(); assert old in s; p.write_text(s.replace(old,new,1))
+          p=Path('public/index.html'); s=p.read_text(); assert old in s; s=s.replace('data-i18n="narrative.home.cta.body"','data-i18n-html="narrative.home.cta.body"',1); s=s.replace(old,new.replace('<br>','<br />'),1); p.write_text(s)
           PY
-          npx prettier --write public/js/lang-flag.js public/index.html public/faq/index.html
+          npx prettier --write public/js/i18n-dict-narrative.js public/index.html
       - name: Verify GREEN
         run: |
           python3 - <<'PY'
+          import re
           from pathlib import Path
-          assert '始められる。<br>全フレーム手描きでも' in Path('public/js/lang-flag.js').read_text()
-          for name in ('public/index.html','public/faq/index.html'):
-              s=Path(name).read_text()
-              assert 'data-i18n-html="cta.body"' in s
-              assert '始められる。<br />全フレーム手描きでも' in s
-          print('CTA line-break contract: ok')
+          d=Path('public/js/i18n-dict-narrative.js').read_text(); h=Path('public/index.html').read_text()
+          assert '始められる。<br>全フレーム手描きでも' in d
+          assert 'data-i18n-html="narrative.home.cta.body"' in h
+          assert re.search(r'始められる。\s*<br\s*/?>\s*全フレーム手描きでも', h)
+          print('GREEN confirmed')
           PY
           node tests/mock-ui-source-regression.mjs
+          npx prettier --check public/js/i18n-dict-narrative.js public/index.html
       - name: Commit verified change
         run: |
           git config user.name 'NIARIM Web UI Fix Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add public/js/lang-flag.js public/index.html public/faq/index.html
+          git add public/js/i18n-dict-narrative.js public/index.html
           git diff --cached --check
-          git commit -m 'fix: add requested CTA body line break'
+          git commit -m 'fix: add requested narrative CTA line break'
           git push origin HEAD:fix/web-final-work
