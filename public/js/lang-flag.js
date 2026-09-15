@@ -8,6 +8,18 @@
 (function () {
   "use strict";
 
+  /* User-requested corrections are deliberately loaded from this parser-blocking
+     bootstrap so CSS is present before first paint and the DOM/i18n patch is
+     registered before the rest of the deferred page behavior runs. */
+  var fixStyle = document.createElement("link");
+  fixStyle.rel = "stylesheet";
+  fixStyle.href = "/css/user-request-fixes.css";
+  document.head.appendChild(fixStyle);
+  var fixScript = document.createElement("script");
+  fixScript.src = "/js/user-request-fixes.js";
+  fixScript.defer = true;
+  document.head.appendChild(fixScript);
+
   var LATIN = { en: 1, fr: 1, es: 1 };
 
   function pick(value) {
