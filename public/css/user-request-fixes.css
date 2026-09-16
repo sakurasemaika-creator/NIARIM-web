@@ -25,6 +25,26 @@
   display: inline !important;
 }
 
+/* Keep the quiet separator that hands page content into the surfaced footer
+   columns. The design-polish contract requires both parts of this composition. */
+.site-footer::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(1180px, calc(100% - 3rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  ) !important;
+  pointer-events: none;
+}
+
 /* Old static mock markup used a text pill. The live app uses the circular
    timeline icon control; user-request-fixes.js upgrades any remaining legacy
    nodes, and this guard prevents the stale pill from flashing before upgrade. */
@@ -38,4 +58,10 @@
 .fd-timeline-screen
   :is(.fd-delete, .fd-trash, .fd-timeline-delete, .fd-timeline-trash) {
   display: none !important;
+}
+
+@media (max-width: 640px) {
+  .site-footer::before {
+    width: calc(100% - 2rem);
+  }
 }
