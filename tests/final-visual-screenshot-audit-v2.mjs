@@ -46,10 +46,11 @@ async function settleFullPage(page) {
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
     document.body.style.scrollBehavior = "auto";
+    document.getElementById("audit-fullpage-paint")?.remove();
     const style = document.createElement("style");
     style.id = "audit-fullpage-paint";
     style.textContent = `
-      .section,.feature-section,.screenshot-card{content-visibility:visible!important}
+      *,*::before,*::after{content-visibility:visible!important}
       .reveal,.stagger-grid{opacity:1!important;transform:none!important;visibility:visible!important}
     `;
     document.head.appendChild(style);
@@ -62,13 +63,13 @@ async function settleFullPage(page) {
       viewportHeight: innerHeight,
     }));
     const max = Math.max(0, state.height - state.viewportHeight);
-    const step = Math.max(300, Math.round(state.viewportHeight * 0.65));
+    const step = Math.max(240, Math.round(state.viewportHeight * 0.5));
     for (let y = 0; y < max; y += step) {
       await page.evaluate((top) => scrollTo(0, top), y);
-      await page.waitForTimeout(55);
+      await page.waitForTimeout(70);
     }
     await page.evaluate((top) => scrollTo(0, top), max);
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(140);
     const currentHeight = await page.evaluate(
       () => document.documentElement.scrollHeight,
     );
@@ -77,7 +78,7 @@ async function settleFullPage(page) {
   }
 
   await page.evaluate(() => scrollTo(0, 0));
-  await page.waitForTimeout(140);
+  await page.waitForTimeout(180);
 }
 
 async function shot(locator, file) {
