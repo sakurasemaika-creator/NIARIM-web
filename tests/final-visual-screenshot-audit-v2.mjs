@@ -42,6 +42,42 @@ async function setLanguage(page, language) {
   await page.waitForTimeout(220);
 }
 
+async function settleFullPage(page) {
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    document.body.style.scrollBehavior = "auto";
+    document
+      .querySelectorAll(".reveal")
+      .forEach((el) => el.classList.add("is-visible"));
+    document
+      .querySelectorAll(".stagger-grid > *")
+      .forEach((el) => el.classList.add("is-visible"));
+  });
+
+  let previousHeight = -1;
+  for (let round = 0; round < 3; round++) {
+    const state = await page.evaluate(() => ({
+      height: document.documentElement.scrollHeight,
+      viewportHeight: innerHeight,
+    }));
+    const max = Math.max(0, state.height - state.viewportHeight);
+    const step = Math.max(300, Math.round(state.viewportHeight * 0.65));
+    for (let y = 0; y < max; y += step) {
+      await page.evaluate((top) => scrollTo(0, top), y);
+      await page.waitForTimeout(55);
+    }
+    await page.evaluate((top) => scrollTo(0, top), max);
+    await page.waitForTimeout(100);
+    const currentHeight = await page.evaluate(
+      () => document.documentElement.scrollHeight,
+    );
+    if (currentHeight === previousHeight) break;
+    previousHeight = currentHeight;
+  }
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.waitForTimeout(100);
+}
+
 async function shot(locator, file) {
   if (!(await locator.count()) || !(await locator.first().isVisible())) return;
   const target = locator.first();
@@ -132,6 +168,7 @@ for (const vp of viewports) {
     const prefix = `${vp.name}__${safe(language)}`;
     await page.goto(baseURL + "/", { waitUntil: "networkidle" });
     await setLanguage(page, language);
+    await settleFullPage(page);
     await page.screenshot({
       path: path.join(outDir, `${prefix}__home__full.png`),
       fullPage: true,
@@ -192,6 +229,7 @@ for (const vp of viewports) {
     }
     await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
     await setLanguage(page, language);
+    await settleFullPage(page);
     await page.screenshot({
       path: path.join(outDir, `${prefix}__features__full.png`),
       fullPage: true,
