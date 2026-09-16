@@ -27,7 +27,8 @@ const scripts = new Map();
 const loaded = new Set();
 
 function writeIfChanged(file, content) {
-  if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content) return false;
+  if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content)
+    return false;
   fs.writeFileSync(file, content, "utf8");
   return true;
 }
