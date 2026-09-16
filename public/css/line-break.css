@@ -204,3 +204,12 @@ html body .fd-timeline-screen .fd-timeline-frames {
 html body .fd-timeline-screen.fd-audio-context-screen .fd-timeline-frames {
   transform: translateX(calc(-50% - 17.35px)) !important;
 }
+
+/* Explicit session requirements: no decorative stripe above the footer and no
+   synthetic delete/trash affordance beside the Timeline scrubber. Keep these in
+   the last-loaded layer so older visual-polish imports cannot reintroduce them. */
+html body .site-footer::before,
+html body .fd-timeline-screen .fd-timeline-scrubber::after {
+  content: none !important;
+  display: none !important;
+}
