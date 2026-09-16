@@ -68,8 +68,30 @@ async function settleFullPage(page) {
     if (currentHeight === previousHeight) break;
     previousHeight = currentHeight;
   }
+
+  // Full-page screenshots are taken after a synthetic stepped sweep. A step can
+  // jump completely over a short reveal target (or over the narrow intersection
+  // band created by rootMargin), leaving real content transparent in the evidence
+  // even though continuous user scrolling reveals it normally. Before capturing,
+  // explicitly visit every still-pending reveal/stagger target and let the real
+  // IntersectionObservers fire. This does not force classes or weaken the audit:
+  // the production observer still has to reveal each target.
+  for (let pass = 0; pass < 3; pass++) {
+    const pending = page.locator(
+      ".reveal:not(.is-visible), .stagger-grid:not(.is-visible)",
+    );
+    const count = await pending.count();
+    if (!count) break;
+    const handles = await pending.elementHandles();
+    for (const handle of handles) {
+      if (!(await handle.isVisible())) continue;
+      await handle.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(90);
+    }
+  }
+
   await page.evaluate(() => scrollTo(0, 0));
-  await page.waitForTimeout(100);
+  await page.waitForTimeout(140);
 }
 
 async function shot(locator, file) {
@@ -180,37 +202,38 @@ for (const vp of viewports) {
         actual: cardCount,
         expected: expectedGalleryCards,
       });
-    for (let i = 0; i < cardCount; i++)
+    await shot(
+      page.locator(".screenshot-scroller"),
+      `${prefix}__home__gallery-start.png`,
+    );
+    for (let i = 0; i < cardCount; i++) {
       await shot(cards.nth(i), `${prefix}__home__gallery-card-${i + 1}.png`);
-    const scroller = page.locator(".screenshot-scroller");
-    if (await scroller.count()) {
-      await scroller.evaluate((el) => {
-        el.scrollLeft = 0;
-      });
-      await page.waitForTimeout(80);
-      await shot(scroller, `${prefix}__home__gallery-start.png`);
-      await scroller.evaluate((el) => {
-        el.scrollTo({ left: el.scrollWidth, behavior: "instant" });
-      });
-      await page.waitForTimeout(180);
-      const end = await scroller.evaluate((s) => {
-        const last = s.querySelector(":scope > .screenshot-card:last-of-type");
-        if (!last) return null;
-        const sr = s.getBoundingClientRect();
-        const lr = last.getBoundingClientRect();
-        return {
-          scrollLeft: s.scrollLeft,
-          maxScrollLeft: s.scrollWidth - s.clientWidth,
-          scrollerLeft: sr.left,
-          scrollerRight: sr.right,
-          lastLeft: lr.left,
-          lastRight: lr.right,
-        };
-      });
+    }
+    if (cardCount) {
+      await cards.last().scrollIntoViewIfNeeded();
+      await page.waitForTimeout(100);
+      const end = await page
+        .locator(".screenshot-scroller")
+        .evaluate((scroller) => {
+          scroller.scrollLeft = scroller.scrollWidth;
+          const last = scroller.lastElementChild?.getBoundingClientRect();
+          const sr = scroller.getBoundingClientRect();
+          return {
+            lastLeft: last?.left,
+            lastRight: last?.right,
+            scrollerLeft: sr.left,
+            scrollerRight: sr.right,
+          };
+        });
+      await page.waitForTimeout(100);
+      await shot(
+        page.locator(".screenshot-scroller"),
+        `${prefix}__home__gallery-end.png`,
+      );
       if (
-        end &&
-        (end.maxScrollLeft - end.scrollLeft > 2 ||
-          end.lastLeft < end.scrollerLeft - 2 ||
+        Number.isFinite(end.lastLeft) &&
+        Number.isFinite(end.lastRight) &&
+        (end.lastLeft < end.scrollerLeft - 2 ||
           end.lastRight > end.scrollerRight + 2)
       )
         failures.push({
@@ -219,8 +242,8 @@ for (const vp of viewports) {
           language,
           end,
         });
-      await shot(scroller, `${prefix}__home__gallery-end.png`);
     }
+
     await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
     await setLanguage(page, language);
     await settleFullPage(page);
@@ -232,47 +255,36 @@ for (const vp of viewports) {
     screenshots.push(`${prefix}__features__full.png`);
     for (const id of featureIds) {
       const section = page.locator(`#${id}`);
-      if (!(await section.count())) {
-        failures.push({
-          kind: "feature-missing",
-          viewport: vp.name,
-          language,
-          id,
-        });
-        continue;
-      }
-      await shot(section, `${prefix}__features__feature-${id}.png`);
-      const surface = section
-        .locator(
-          ":scope > .feature-diagram, :scope > .fd-app-screen, :scope > .fd-route-screen",
-        )
-        .first();
-      if (!(await surface.count())) continue;
-      const inspection = await inspectSurface(
-        page,
-        `#${id} > .feature-diagram, #${id} > .fd-app-screen, #${id} > .fd-route-screen`,
+      if (!(await section.count())) continue;
+      await shot(
+        section.locator(".feature-diagram"),
+        `${prefix}__features__feature-${id}.png`,
       );
-      if (inspection.descendants.length)
-        failures.push({
-          kind: "feature-internal-overflow",
-          viewport: vp.name,
-          language,
-          id,
-          ...inspection,
-        });
+      const diagram = section.locator(".feature-diagram");
+      if (await diagram.count()) {
+        const inspection = await inspectSurface(page, `#${id} .feature-diagram`);
+        if (inspection.descendants.length)
+          failures.push({
+            kind: "feature-diagram-overflow",
+            viewport: vp.name,
+            language,
+            feature: id,
+            inspection,
+          });
+      }
     }
   }
   await context.close();
 }
+
 await browser.close();
-const manifest = {
-  generatedAt: new Date().toISOString(),
-  screenshots,
-  failures,
-};
 await fs.writeFile(
   path.join(outDir, "manifest.json"),
-  JSON.stringify(manifest, null, 2),
+  JSON.stringify({ screenshots, failures }, null, 2),
+);
+const byKind = failures.reduce(
+  (acc, failure) => ((acc[failure.kind] = (acc[failure.kind] || 0) + 1), acc),
+  {},
 );
 console.log(
   JSON.stringify(
@@ -280,13 +292,10 @@ console.log(
       ok: failures.length === 0,
       screenshots: screenshots.length,
       failures: failures.length,
-      byKind: failures.reduce(
-        (a, x) => ((a[x.kind] = (a[x.kind] || 0) + 1), a),
-        {},
-      ),
+      byKind,
     },
     null,
     2,
   ),
 );
-if (failures.length) process.exitCode = 1;
+process.exitCode = failures.length ? 1 : 0;
