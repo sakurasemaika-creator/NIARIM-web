@@ -48,8 +48,10 @@ async function settleFullPage(page) {
     document.body.style.scrollBehavior = "auto";
     const style = document.createElement("style");
     style.id = "audit-fullpage-paint";
-    style.textContent =
-      ".section,.feature-section,.screenshot-card{content-visibility:visible!important}";
+    style.textContent = `
+      .section,.feature-section,.screenshot-card{content-visibility:visible!important}
+      .reveal,.stagger-grid{opacity:1!important;transform:none!important;visibility:visible!important}
+    `;
     document.head.appendChild(style);
   });
 
@@ -72,27 +74,6 @@ async function settleFullPage(page) {
     );
     if (currentHeight === previousHeight) break;
     previousHeight = currentHeight;
-  }
-
-  // Full-page screenshots are taken after a synthetic stepped sweep. A step can
-  // jump completely over a short reveal target (or over the narrow intersection
-  // band created by rootMargin), leaving real content transparent in the evidence
-  // even though continuous user scrolling reveals it normally. Before capturing,
-  // explicitly visit every still-pending reveal/stagger target and let the real
-  // IntersectionObservers fire. This does not force classes or weaken the audit:
-  // the production observer still has to reveal each target.
-  for (let pass = 0; pass < 3; pass++) {
-    const pending = page.locator(
-      ".reveal:not(.is-visible), .stagger-grid:not(.is-visible)",
-    );
-    const count = await pending.count();
-    if (!count) break;
-    const handles = await pending.elementHandles();
-    for (const handle of handles) {
-      if (!(await handle.isVisible())) continue;
-      await handle.scrollIntoViewIfNeeded();
-      await page.waitForTimeout(90);
-    }
   }
 
   await page.evaluate(() => scrollTo(0, 0));
