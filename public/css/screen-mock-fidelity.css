@@ -22,38 +22,28 @@
 
 /* Canvas-screen fidelity corrections against NIARIM app dev_branch.
    The Flutter implementation is the source of truth. */
-
-/* CanvasScreen _buildTopBar(): Padding + Row only; no opaque bar surface. */
 .fd-canvas-screen > .fd-topbar {
   background: transparent !important;
 }
-
-/* BrushSizeSlider and ToolbarWidget are explicitly transparent in Flutter. */
 .fd-canvas-screen > .fd-brush-slider,
 .fd-canvas-screen > .fd-toolbar {
   background: transparent !important;
   color: var(--fd-ink) !important;
 }
-
 .fd-canvas-screen > .fd-brush-slider {
   padding-inline: 12px !important;
 }
-
 .fd-canvas-screen > .fd-brush-slider .fd-brush-dot,
 .fd-canvas-screen > .fd-brush-slider .fd-brush-opacity-ic {
   color: var(--fd-ink) !important;
 }
-
 .fd-canvas-screen > .fd-brush-slider .fd-brush-dot {
   background: var(--fd-ink) !important;
 }
-
 .fd-canvas-screen > .fd-brush-slider .fd-brush-opacity-ic,
 .fd-canvas-screen > .fd-brush-slider .fd-brush-toggle {
   opacity: 0.72;
 }
-
-/* ToolbarWidget has no band background. Keep only the individual controls. */
 .fd-canvas-screen > .fd-toolbar .fd-icon-btn {
   color: var(--fd-ink) !important;
   background: transparent !important;
@@ -61,8 +51,6 @@
 .fd-canvas-screen > .fd-toolbar .fd-icon-btn.is-active {
   color: var(--fd-accent) !important;
 }
-
-/* Frame-strip collapse handle and FrameStripWidget are transparent in app. */
 .fd-canvas-screen > .fd-frame-collapse,
 .fd-canvas-screen > .fd-frame-strip {
   background: transparent !important;
@@ -80,15 +68,10 @@
   gap: 0 !important;
 }
 
-/* The drawing canvas must always remain visibly present. CanvasArea sits on
-   the fixed dark outside area, while the 16:9 drawing rect itself is white. */
 .fd-canvas-zone {
   position: relative !important;
   min-height: 180px !important;
   background: var(--fd-outside) !important;
-  /* 親が align-items: center の縦フレックスだと、この帯は内容幅に縮む。
-     中身の描画面は width:100% + aspect-ratio なので参照先が定まらず、
-     幅0＝キャンバスが消えた状態になっていた。必ず枠いっぱいに広げる。 */
   align-self: stretch !important;
   width: 100% !important;
 }
@@ -101,8 +84,6 @@
   background: #fff !important;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
 }
-
-/* App's frame-mode SegmentedButton is transparent too. */
 .fd-frame-mode {
   background: transparent !important;
 }
@@ -110,9 +91,6 @@
   background: transparent !important;
 }
 
-/* App Preview uses a narrower card than the full Features mock. Keep the
-   full-size Features calibration untouched, but compact the two vertically
-   dense route screens so their real controls remain inside the bezel. */
 .screenshot-card .fd-export-screen .fd-export-body {
   padding: 10px 12px 6px !important;
 }
@@ -127,17 +105,11 @@
 .screenshot-card .fd-export-screen .fd-export-start {
   flex: 0 0 48px !important;
 }
-
-/* Seven workspace rows were still too tall at compact App Preview sizes.
-   Two pixels per row recovers space without changing the control geometry or
-   the full-size Features mock. */
 .screenshot-card .fd-workspace-screen .fd-workspace-row {
   height: 40px !important;
   min-height: 40px !important;
 }
 
-/* The Home feature-row Export mock is narrower than the Features-page mock.
-   Only the 360px layout needed a little more vertical compression. */
 @media (max-width: 374px) {
   #features .feature-media .fd-export-screen .fd-export-body {
     padding: 8px 12px 5px !important;
@@ -156,41 +128,34 @@
   }
 }
 
-/* The final calibration layer positions the timeline strip with a non-zero
-   left offset. At the previous -92.5px translation the current frame measured
-   8.265625px left of the app-screen center. Move the same strip right by that
-   measured delta and use html/body specificity so this canonical correction
-   wins over the older calibration rule. */
-html body .fd-timeline-screen .fd-timeline-frames {
-  transform: translateX(-84.234375px) !important;
+/* Timeline current-frame calibration.
+   #864 showed that the previous context-specific offsets were fighting each
+   other: the regular Features copies were consistently 8.03 rendered px left,
+   while App Preview copies were 12.36-12.47px right. Convert those measured
+   deltas back through each fitted strip scale and keep the correction in source
+   coordinates, so parent scaling preserves the visual centre. */
+html
+  body
+  .fd-timeline-screen:not(.fd-audio-context-screen)
+  .fd-timeline-frames {
+  transform: translateX(-109.85px) !important;
 }
 
-/* line-break.css restores the canonical -50% transform for contexts that are
-   already centered. Keep only the two measured Home exceptions here with
-   stronger, context-specific selectors. At 360px the Home feature-row current
-   frame is 8.265625px left with -50%; the earlier source-space correction is
-   therefore the exact center. */
-@media (max-width: 374px) {
-  html
-    body
-    #features
-    .feature-row
-    .fd-timeline-screen:not(.fd-audio-context-screen)
-    .fd-timeline-frames {
-    transform: translateX(-84.234375px) !important;
-  }
-}
-
-/* App Preview Timeline is itself fitted to the preview card. With -50% its
-   current frame remains 10.87-12.36 rendered pixels right of center across
-   SP360/SP390/PC. Moving the 185px source strip another 21.5px left becomes
-   12.04 rendered pixels at that fit, leaving <1.2px residual in every audited
-   viewport. AudioScreen is already centered and must not inherit this regular-
-   Timeline correction. */
+/* App Preview is fitted more aggressively than the full Features reproduction.
+   Its #864 measurements (120.25-123.40 rendered px from the same source strip)
+   require roughly another 19px of source-space travel to put frame 3 on the
+   screen centre. */
 html
   body
   .screenshot-card
   .fd-timeline-screen:not(.fd-audio-context-screen)
   .fd-timeline-frames {
-  transform: translateX(-114px) !important;
+  transform: translateX(-133px) !important;
+}
+
+/* Audio uses the same timeline geometry and the same fixed-current-frame
+   contract. #864 measured both Features audio copies 8.03px left with the old
+   -117.9px rule, so use the regular source-space centre here too. */
+html body .fd-audio-context-screen .fd-timeline-frames {
+  transform: translateX(-109.85px) !important;
 }
