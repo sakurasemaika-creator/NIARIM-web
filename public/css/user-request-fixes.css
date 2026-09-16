@@ -25,15 +25,6 @@
   display: inline !important;
 }
 
-/* The decorative striped footer edge was explicitly removed from the product.
-   Neutralize any earlier finish-layer pseudo-element rather than replacing it
-   with another decoration. */
-.site-footer::before {
-  content: none !important;
-  display: none !important;
-  background: none !important;
-}
-
 /* Old static mock markup used a text pill. The live app uses the circular
    timeline icon control; user-request-fixes.js upgrades any remaining legacy
    nodes, and this guard prevents the stale pill from flashing before upgrade. */
@@ -44,6 +35,7 @@
 /* Timeline mode has no delete/trash action beside the seek bar in the current
    app. Hide legacy reconstruction remnants if an older mock fragment supplies
    one. */
-.fd-timeline-screen :is(.fd-delete, .fd-trash, .fd-timeline-delete, .fd-timeline-trash) {
+.fd-timeline-screen
+  :is(.fd-delete, .fd-trash, .fd-timeline-delete, .fd-timeline-trash) {
   display: none !important;
 }
