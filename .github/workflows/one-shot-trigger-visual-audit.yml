@@ -1,0 +1,34 @@
+name: One-shot trigger visual audit
+
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - '.github/workflows/one-shot-trigger-visual-audit.yml'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Visual interaction audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run "Visual interaction audit" --repo "${{ github.repository }}" --ref dev_branch
+
+      - name: Remove this one-shot workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" repo
+          cd repo
+          git checkout dev_branch
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/one-shot-trigger-visual-audit.yml
+          git commit -m "Remove one-shot visual audit trigger"
+          git push origin dev_branch
