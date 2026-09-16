@@ -98,10 +98,6 @@ a {
   }
 }
 
-/* Compact Hero placement.
-   Keep the showcase in its native grid row so the phone top stays aligned with
-   the lead. Do not move .hero-visual/.fd-app-screen independently: bezel and
-   reproduced screen content must remain one composition. */
 @media (max-width: 559px) {
   html body .hero .container {
     grid-template-columns: minmax(0, 1fr) clamp(128px, 40vw, 146px) !important;
@@ -133,11 +129,6 @@ a {
   }
 }
 
-/* Once there is enough horizontal room, reserve roughly half of the lower
-   hero row for the phone rather than letting the copy become a very wide,
-   shallow paragraph. The phone itself remains capped at the audited 146px;
-   the narrower copy column wraps into a readable block close to the phone's
-   height, removing the large dead area above the CTA without visual offsets. */
 @media (min-width: 360px) and (max-width: 559px) {
   html body .hero .container {
     grid-template-columns: minmax(0, 1fr) minmax(146px, 50%) !important;
@@ -179,12 +170,6 @@ a {
   }
 }
 
-/* The Timeline reconstruction is copied from the full-size 320x569 App Preview.
-   In the three-phone hero it is scaled to roughly half size. Its calibrated
-   51px bottom row otherwise extends beyond the scaled source and is clipped by
-   the hero bezel. Keep the production calibration unchanged elsewhere and
-   shorten only this hero copy. 35px is the measured fit at the tightest 1280px
-   three-card breakpoint; wider desktop widths retain additional clearance. */
 @media (min-width: 1280px) {
   html body .hero-preview-timeline .fd-timeline-screen .fd-timeline-row {
     height: 35px !important;
@@ -192,13 +177,6 @@ a {
   }
 }
 
-/* Final mock-fit visibility correction.
-   fitMockScreens() measures each screen's scrollHeight before applying its
-   transform scale. Export/Workspace used an inner overflow:hidden route body,
-   so their real bottom controls were clipped inside that child and never
-   contributed to the parent scrollHeight. Let only these two App Preview
-   bodies expose their natural extent during layout; the screen bezel itself
-   still clips the final painted result after fitMockScreens scales it to fit. */
 html
   body
   .screenshot-card
@@ -209,7 +187,11 @@ html
   mask-image: none !important;
 }
 
-/* Timeline centering is intentionally owned by screen-mock-fidelity.css.
-   Do not restore a generic translateX(-50%) here: doing so overrides the
-   capture-measured regular Timeline offsets and moves the selected frame away
-   from the fixed app-screen centre. */
+/* TimelineScreen fixes the selected frame on the app-screen centre. The
+   selected cell is 25.4 logical pixels right of the strip midpoint in the
+   current DOM; correcting in source pixels survives every parent fit/scale. */
+html body .fd-timeline-screen .fd-timeline-frames {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(calc(-50% - 25.4px)) !important;
+}
