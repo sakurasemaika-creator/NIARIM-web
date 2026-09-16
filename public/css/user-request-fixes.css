@@ -26,9 +26,10 @@
 }
 
 /* Keep the quiet separator that hands page content into the surfaced footer
-   columns. The design-polish contract requires both parts of this composition. */
+   columns. A non-empty generated-content token keeps Chromium from normalizing
+   the pseudo-element to `content: none` while remaining visually inert. */
 .site-footer::before {
-  content: "" !important;
+  content: " " !important;
   display: block !important;
   position: absolute;
   top: 0;
