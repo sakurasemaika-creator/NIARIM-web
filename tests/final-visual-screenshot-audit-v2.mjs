@@ -46,12 +46,6 @@ async function settleFullPage(page) {
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
     document.body.style.scrollBehavior = "auto";
-    document
-      .querySelectorAll(".reveal")
-      .forEach((el) => el.classList.add("is-visible"));
-    document
-      .querySelectorAll(".stagger-grid > *")
-      .forEach((el) => el.classList.add("is-visible"));
   });
 
   let previousHeight = -1;
