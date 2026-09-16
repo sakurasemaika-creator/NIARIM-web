@@ -46,6 +46,11 @@ async function settleFullPage(page) {
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = "auto";
     document.body.style.scrollBehavior = "auto";
+    const style = document.createElement("style");
+    style.id = "audit-fullpage-paint";
+    style.textContent =
+      ".section,.feature-section,.screenshot-card{content-visibility:visible!important}";
+    document.head.appendChild(style);
   });
 
   let previousHeight = -1;
@@ -262,7 +267,10 @@ for (const vp of viewports) {
       );
       const diagram = section.locator(".feature-diagram");
       if (await diagram.count()) {
-        const inspection = await inspectSurface(page, `#${id} .feature-diagram`);
+        const inspection = await inspectSurface(
+          page,
+          `#${id} .feature-diagram`,
+        );
         if (inspection.descendants.length)
           failures.push({
             kind: "feature-diagram-overflow",
