@@ -28,25 +28,19 @@ jobs:
           from pathlib import Path
           p = Path('tests/final-visual-screenshot-audit-v2.mjs')
           s = p.read_text()
-          old = '''  await page.evaluate(() => {
-            document.documentElement.style.scrollBehavior = "auto";
-            document.body.style.scrollBehavior = "auto";
-          });'''
-          new = '''  await page.evaluate(() => {
-            document.documentElement.style.scrollBehavior = "auto";
-            document.body.style.scrollBehavior = "auto";
-            var style = document.getElementById("audit-fullpage-paint");
-            if (!style) {
-              style = document.createElement("style");
-              style.id = "audit-fullpage-paint";
-              style.textContent =
-                ".section,.feature-section,.screenshot-card{content-visibility:visible!important}";
-              document.head.appendChild(style);
-            }
-          });'''
-          if old not in s:
-              raise SystemExit('target block not found')
-          p.write_text(s.replace(old, new, 1))
+          needle = '    document.body.style.scrollBehavior = "auto";\n  });\n\n  let previousHeight = -1;'
+          replacement = '''    document.body.style.scrollBehavior = "auto";
+            const style = document.createElement("style");
+            style.id = "audit-fullpage-paint";
+            style.textContent =
+              ".section,.feature-section,.screenshot-card{content-visibility:visible!important}";
+            document.head.appendChild(style);
+          });
+
+          let previousHeight = -1;'''
+          if needle not in s:
+              raise SystemExit('settleFullPage target not found')
+          p.write_text(s.replace(needle, replacement, 1))
           PY
           npx prettier --write tests/final-visual-screenshot-audit-v2.mjs
           rm .github/workflows/one-shot-fullpage-evidence-paint-fix.yml
