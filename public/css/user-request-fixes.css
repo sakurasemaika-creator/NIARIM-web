@@ -26,10 +26,10 @@
 }
 
 /* Keep the quiet separator that hands page content into the surfaced footer
-   columns. A non-empty generated-content token keeps Chromium from normalizing
-   the pseudo-element to `content: none` while remaining visually inert. */
+   columns. A zero-width generated token survives Chromium computed-style
+   normalization while remaining visually inert. */
 .site-footer::before {
-  content: " " !important;
+  content: "\200b" !important;
   display: block !important;
   position: absolute;
   top: 0;
