@@ -189,9 +189,18 @@ html
 
 /* TimelineScreen fixes the selected frame on the app-screen centre. The
    selected cell is 25.4 logical pixels right of the strip midpoint in the
-   current DOM; correcting in source pixels survives every parent fit/scale. */
+   standard Timeline DOM; correcting in source pixels survives parent fitting. */
 html body .fd-timeline-screen .fd-timeline-frames {
   left: 50% !important;
   right: auto !important;
   transform: translateX(calc(-50% - 25.4px)) !important;
+}
+
+/* The audio-detail reproduction adds a bottom sheet and is laid out through a
+   distinct fitted Features card. Run #865 measured its selected frame exactly
+   8.03 rendered px left of the app-screen centre at every audited viewport and
+   language. Move only this context by that measured source-space delta; the
+   regular Timeline and Hero copies already satisfy the centre invariant. */
+html body .fd-timeline-screen.fd-audio-context-screen .fd-timeline-frames {
+  transform: translateX(calc(-50% - 17.35px)) !important;
 }
