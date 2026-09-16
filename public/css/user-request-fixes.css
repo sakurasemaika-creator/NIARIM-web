@@ -25,18 +25,22 @@
   display: inline !important;
 }
 
-/* Keep the quiet separator that hands page content into the surfaced footer
-   columns. A zero-width generated token survives Chromium computed-style
-   normalization while remaining visually inert. */
+/* Keep the quiet separator that hands page content into the surfaced footer.
+   Use a non-empty generated token so Chromium exposes the pseudo-element through
+   computed style; font-size/color make the token itself completely inert. */
 .site-footer::before {
-  content: "\200b" !important;
+  content: "divider" !important;
   display: block !important;
   position: absolute;
   top: 0;
   left: 50%;
   width: min(1180px, calc(100% - 3rem));
   height: 1px;
+  overflow: hidden;
   transform: translateX(-50%);
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
   background: linear-gradient(
     90deg,
     transparent,
