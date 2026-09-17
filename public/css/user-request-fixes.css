@@ -72,3 +72,65 @@ html body .fd-canvas-screen.fd-canvas-screen > .fd-frame-strip.fd-frame-strip::a
   :is(.fd-delete, .fd-trash, .fd-timeline-delete, .fd-timeline-trash) {
   display: none !important;
 }
+
+/* Screen reconstructions must use the same transparent canvas chrome as the
+   actual CanvasScreen. The page/phone surface supplies the colour; the top bar,
+   brush sliders and drawing toolbar must not introduce their own panels. */
+html body .fd-canvas-screen.fd-canvas-screen > .fd-topbar,
+html body .fd-canvas-screen.fd-canvas-screen > .fd-brush-slider,
+html body .fd-canvas-screen.fd-canvas-screen > .fd-toolbar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Canvas and Timeline are peer modes. Keep their primary top chrome on the same
+   40 logical-pixel rhythm in every reconstruction instead of letting Timeline
+   use a taller one-off header. */
+html body .fd-timeline-screen .fd-timeline-topbar {
+  height: 40px !important;
+  min-height: 40px !important;
+  flex: 0 0 40px !important;
+  padding-block: 4px !important;
+}
+
+/* On the Features page the explanation and its reconstructed app screen form a
+   single desktop row. This keeps the narrative mass and visual at one visual
+   height instead of stacking a tall text block above a second tall phone. */
+@media (min-width: 900px) {
+  .features-header ~ .feature-section {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px) !important;
+    column-gap: clamp(2rem, 4vw, 4.5rem) !important;
+    align-items: start !important;
+  }
+
+  .features-header ~ .feature-section > .feature-section-head {
+    grid-column: 1 / -1 !important;
+  }
+
+  .features-header ~ .feature-section > .feature-narrative {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: stretch !important;
+    margin: 0 !important;
+  }
+
+  .features-header ~ .feature-section > .feature-diagram {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    align-self: start !important;
+    margin: 0 auto !important;
+    width: min(100%, 320px) !important;
+  }
+}
+
+/* Narrow layouts retain the readable document order: narrative first, visual
+   second. Explicitly clear grid placement so older feature rules cannot keep a
+   desktop column assignment alive at phone/tablet widths. */
+@media (max-width: 899px) {
+  .features-header ~ .feature-section > .feature-narrative,
+  .features-header ~ .feature-section > .feature-diagram {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
