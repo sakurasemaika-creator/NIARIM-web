@@ -38,7 +38,9 @@ if (
   /\.site-footer::before\s*\{/.test(uiFixes) ||
   /\.site-footer::before\s*\{/.test(fixCss)
 )
-  failures.push("footer decorative separator must stay removed from every final layer");
+  failures.push(
+    "footer decorative separator must stay removed from every final layer",
+  );
 if (!fixJs.includes('project: "星降る夜"'))
   failures.push("JA mock project title must be natural");
 if (!fixJs.includes('onionNext: "次フレーム"'))
@@ -58,7 +60,9 @@ if (
 )
   failures.push("requested fix assets must use a fresh deployment cache key");
 if (!lineBreak.includes("/css/ui-regression-fixes.css?v=20260917-1"))
-  failures.push("final UI regression stylesheet must use a fresh deployment cache key");
+  failures.push(
+    "final UI regression stylesheet must use a fresh deployment cache key",
+  );
 if (!home.includes('class="fd-frame-mode"'))
   failures.push(
     "canonical circular frame/timeline icon control missing from home",
