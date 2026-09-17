@@ -13,44 +13,59 @@ try {
     const pairs = sections
       .map((section) => section.querySelector(":scope > .feature-pair"))
       .filter(Boolean);
-    const diagrams = pairs
-      .map((pair) => pair.querySelector(":scope > .feature-diagram"))
-      .filter(Boolean);
-    const narratives = pairs
-      .map((pair) => pair.querySelector(":scope > .feature-narrative"))
-      .filter(Boolean);
+    const diagramStacks = pairs.map((pair) => pair.querySelector(":scope > .feature-diagram-stack"));
+    const diagrams = diagramStacks.flatMap((stack) => stack ? [...stack.querySelectorAll(":scope > .feature-diagram")] : []);
+    const leftColumns = pairs.map((pair) => pair.querySelector(":scope > .feature-copy-column"));
+    const narratives = leftColumns.map((left) => left?.querySelector(":scope > .feature-narrative")).filter(Boolean);
     const rects = diagrams.map((diagram) => diagram.getBoundingClientRect());
-    const specGridsOutsidePairs = sections.filter((section) => {
-      const spec = section.querySelector(":scope > .spec-grid");
-      return !spec || !spec.closest(".feature-pair");
-    }).length;
+    const alignedStacks = diagramStacks.every((stack) => {
+      if (!stack) return false;
+      const children = [...stack.querySelectorAll(":scope > .feature-diagram")];
+      if (children.length < 2) return true;
+      const lefts = children.map((el) => el.getBoundingClientRect().left);
+      return Math.max(...lefts) - Math.min(...lefts) < 1;
+    });
+    const specPlacement = pairs.every((pair) => {
+      const left = pair.querySelector(":scope > .feature-copy-column");
+      const narrative = left?.querySelector(":scope > .feature-narrative");
+      const spec = left?.querySelector(":scope > .spec-grid");
+      if (!left || !narrative || !spec) return false;
+      const nr = narrative.getBoundingClientRect();
+      const sr = spec.getBoundingClientRect();
+      const lr = left.getBoundingClientRect();
+      return Math.abs(sr.left - lr.left) < 1 && Math.abs(sr.width - lr.width) < 1 && sr.top >= nr.bottom && sr.top - nr.bottom < 50;
+    });
+    const widget = document.querySelector("#widget .fd-widget-grid");
+    const widgetTiles = widget ? [...widget.querySelectorAll(":scope > .fd-widget-tile")].map((el) => el.getBoundingClientRect()) : [];
+    const widgetHealthy = widgetTiles.length === 3 && widgetTiles.every((r) => r.width > 70 && r.height >= 90 && r.height < 180);
     const hydrated = {
-      drawing: !!document.querySelector("#drawing .feature-pair > .fd-canvas-screen"),
-      animation: !!document.querySelector("#animation .feature-pair > .fd-timeline-screen"),
-      editing: !!document.querySelector("#editing .feature-pair > .fd-canvas-screen .fd-layer-panel-overlay"),
-      advanced: !!document.querySelector("#advanced .feature-pair > .fd-canvas-screen .fd-app-onion-panel"),
-      audio: !!document.querySelector("#audio .feature-pair > .fd-audio-screen"),
-      save: !!document.querySelector("#save .feature-pair > .fd-route-screen"),
-      workspace: !!document.querySelector("#workspace .feature-pair > .fd-workspace-screen"),
-      export: !!document.querySelector("#export .feature-pair > .fd-route-screen"),
+      drawing: !!document.querySelector("#drawing .feature-diagram-stack > .fd-canvas-screen"),
+      animation: !!document.querySelector("#animation .feature-diagram-stack > .fd-timeline-screen"),
+      editing: !!document.querySelector("#editing .feature-diagram-stack > .fd-canvas-screen .fd-layer-panel-overlay"),
+      advanced: !!document.querySelector("#advanced .feature-diagram-stack > .fd-canvas-screen .fd-app-onion-panel"),
+      audio: !!document.querySelector("#audio .feature-diagram-stack > .fd-audio-screen"),
+      save: !!document.querySelector("#save .feature-diagram-stack > .fd-route-screen"),
+      workspace: !!document.querySelector("#workspace .feature-diagram-stack > .fd-workspace-screen"),
+      export: !!document.querySelector("#export .feature-diagram-stack > .fd-route-screen"),
     };
     return {
       sectionCount: sections.length,
       pairCount: pairs.length,
       diagramCount: diagrams.length,
       narrativeCount: narratives.length,
-      specGridsOutsidePairs,
+      alignedStacks,
+      specPlacement,
+      widgetHealthy,
       hydrated,
       minWidth: rects.length ? Math.min(...rects.map((rect) => rect.width)) : 0,
       visibleCount: rects.filter((rect) => rect.width > 0 && rect.height > 0).length,
     };
   });
-  if (!state.pairCount || state.pairCount !== state.diagramCount)
-    failures.push("each feature diagram must have an isolated feature-pair");
-  if (state.narrativeCount !== state.pairCount)
-    failures.push("feature-pair must contain one narrative block as a whole");
-  if (state.specGridsOutsidePairs !== state.sectionCount)
-    failures.push("spec grids must stay outside feature-pair");
+  if (!state.pairCount || state.narrativeCount !== state.pairCount)
+    failures.push("each feature pair must keep one whole narrative in its left column");
+  if (!state.alignedStacks) failures.push("multiple feature diagrams must share one aligned right-hand stack");
+  if (!state.specPlacement) failures.push("spec grid must sit directly below narrative at the same left-column width");
+  if (!state.widgetHealthy) failures.push("widget reconstruction tiles are stretched or collapsed");
   if (!state.diagramCount || state.visibleCount !== state.diagramCount)
     failures.push("every feature diagram must keep visible geometry");
   if (state.minWidth < 420)
