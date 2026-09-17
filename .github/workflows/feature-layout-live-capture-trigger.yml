@@ -1,4 +1,4 @@
-name: Recover and verify feature mocks
+name: Recover feature mocks
 on: push
 permissions:
   contents: write
@@ -14,24 +14,21 @@ jobs:
           set -euo pipefail
           BASE=626b07ad9563a92437e1018d75dcb109db364e60
           git show "$BASE:public/js/main.js" > public/js/main.js
-          git show "$BASE:.github/workflows/feature-layout-live-capture-trigger.yml" > .github/workflows/feature-layout-live-capture-trigger.yml
           python3 - <<'PY'
           from pathlib import Path
           p = Path('public/js/main.js')
           s = p.read_text()
           old = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    var old = section.querySelector(":scope > .feature-diagram");\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
-          new = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    /* user-request-fixes.js can pair the feature columns on an early\n       language-change event before DOMContentLoaded. Support both the static\n       direct-child placeholder and the already-paired diagram stack. */\n    var old = section.querySelector(\n      ":scope > .feature-diagram, :scope > .feature-pair > .feature-diagram-stack > .feature-diagram",\n    );\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
+          new = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    /* user-request-fixes.js may pair the columns before DOMContentLoaded. */\n    var old = section.querySelector(\n      ":scope > .feature-diagram, :scope > .feature-pair > .feature-diagram-stack > .feature-diagram",\n    );\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
           if old not in s:
               raise SystemExit('expected replaceFeatureDiagram source not found')
           p.write_text(s.replace(old, new))
           PY
           node --check public/js/main.js
           test "$(wc -c < public/js/main.js)" -gt 51963
-          if git diff --quiet; then
-            exit 0
-          fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add public/js/main.js .github/workflows/feature-layout-live-capture-trigger.yml
+          git add public/js/main.js
+          if git diff --cached --quiet; then exit 0; fi
           git commit -m "fix: recover and restore paired feature mocks"
           git push origin HEAD:dev_branch
