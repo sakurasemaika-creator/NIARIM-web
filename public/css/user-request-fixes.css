@@ -46,26 +46,23 @@ html body .fd-canvas-screen.fd-canvas-screen > .fd-frame-strip.fd-frame-strip::a
   background: none !important;
 }
 
-/* The canvas/timeline mode switch now lives at the far right of the canvas
-   top bar, paired with the timeline screen's "back to canvas" control. Keep the
-   frame-add tile unobstructed and suppress the obsolete lower-right switch. */
+/* The canvas/timeline mode switch lives at the far right of the canvas top bar,
+   paired with the timeline screen's back-to-canvas control. Keep the frame-add
+   tile unobstructed and suppress the obsolete lower-right switch. */
 .fd-canvas-screen .fd-frame-mode {
   display: none !important;
 }
 
 .fd-canvas-screen .fd-topbar::after {
-  content: "🎞 →";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 34px;
-  height: 28px;
+  content: "";
+  display: inline-block;
+  width: 48px;
+  height: 24px;
   margin-left: 2px;
-  font-size: 13px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: currentColor;
-  white-space: nowrap;
+  flex: 0 0 48px;
+  background: currentColor;
+  -webkit-mask: url("/assets/icons/ui/timeline-mode-forward.svg") center / 48px 24px no-repeat;
+  mask: url("/assets/icons/ui/timeline-mode-forward.svg") center / 48px 24px no-repeat;
 }
 
 /* Timeline mode has no delete/trash action beside the seek bar in the current
