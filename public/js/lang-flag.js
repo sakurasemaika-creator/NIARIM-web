@@ -13,10 +13,10 @@
      registered before the rest of the deferred page behavior runs. */
   var fixStyle = document.createElement("link");
   fixStyle.rel = "stylesheet";
-  fixStyle.href = "/css/user-request-fixes.css";
+  fixStyle.href = "/css/user-request-fixes.css?v=20260917-1";
   document.head.appendChild(fixStyle);
   var fixScript = document.createElement("script");
-  fixScript.src = "/js/user-request-fixes.js";
+  fixScript.src = "/js/user-request-fixes.js?v=20260917-1";
   fixScript.defer = true;
   document.head.appendChild(fixScript);
 
