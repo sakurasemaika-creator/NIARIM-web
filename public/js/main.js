@@ -6,13 +6,13 @@
 
   function loadDesignLayers() {
     var styles = [
-      ["/css/polish.css", "data-niarim-polish"],
-      ["/css/responsive-consistency.css", "data-niarim-responsive-consistency"],
-      ["/css/screen-mock-accuracy.css", "data-niarim-screen-mock-accuracy"],
-      ["/css/screen-mock-palette.css", "data-niarim-mock-palette"],
-      ["/css/screen-mock-layout-fix.css", "data-niarim-mock-layout"],
+      ["/css/polish.css?v=20260918-1", "data-niarim-polish"],
+      ["/css/responsive-consistency.css?v=20260918-1", "data-niarim-responsive-consistency"],
+      ["/css/screen-mock-accuracy.css?v=20260918-1", "data-niarim-screen-mock-accuracy"],
+      ["/css/screen-mock-palette.css?v=20260918-1", "data-niarim-mock-palette"],
+      ["/css/screen-mock-layout-fix.css?v=20260918-1", "data-niarim-mock-layout"],
       // 改行位置の調整は各ページCSSの word-break 指定より後に効かせたいので最後。
-      ["/css/line-break.css", "data-niarim-line-break"],
+      ["/css/line-break.css?v=20260918-1", "data-niarim-line-break"],
     ];
     styles.forEach(function (entry) {
       var href = entry[0],
