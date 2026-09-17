@@ -11,33 +11,60 @@ html body .fd-canvas-screen.fd-canvas-screen > .fd-frame-strip.fd-frame-strip::a
 .fd-canvas-screen .fd-topbar::after { content:""; display:inline-block; width:48px; height:24px; margin-left:2px; flex:0 0 48px; background:currentColor; -webkit-mask:url("/assets/icons/ui/timeline-mode-forward.svg") center/48px 24px no-repeat; mask:url("/assets/icons/ui/timeline-mode-forward.svg") center/48px 24px no-repeat; }
 .fd-timeline-screen :is(.fd-delete,.fd-trash,.fd-timeline-delete,.fd-timeline-trash) { display:none!important; }
 
-/* Feature body: one fixed left copy column and one fixed right mock column.
-   The spec grid belongs to the copy column, so it starts immediately after the
-   narrative instead of waiting for a taller screen reconstruction. */
+/* The section body has two equal logical columns. The left column owns the prose
+   and spec cards; the right column owns a narrow phone-screen stack. Keeping the
+   stack itself full-column but the screen fixed-width prevents every mock from
+   becoming a different horizontal bar when its internal content height differs. */
 .feature-pair {
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(420px,520px);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   align-items:start;
-  gap:clamp(2rem,5vw,5rem);
+  column-gap:clamp(2rem,5vw,5rem);
   margin-bottom:var(--space-lg);
 }
-.feature-copy-column { min-width:0; display:flex; flex-direction:column; gap:var(--space-md); }
-.feature-copy-column > .feature-narrative { min-width:0; margin:0; }
-.feature-copy-column > .spec-grid { width:100%; margin:0; grid-template-columns:repeat(2,minmax(0,1fr)); }
-.feature-diagram-stack { min-width:0; width:100%; display:flex; flex-direction:column; align-items:stretch; gap:var(--space-lg); }
-.feature-diagram-stack > .feature-diagram { width:100%!important; min-width:0!important; margin:0!important; justify-self:stretch; }
+.feature-copy-column { min-width:0; display:flex; flex-direction:column; gap:0; }
+.feature-copy-column > .feature-narrative { min-width:0; width:100%; margin:0; }
+.feature-copy-column > .spec-grid { width:100%; margin:var(--space-md) 0 0; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.feature-diagram-stack { min-width:0; width:100%; display:flex; flex-direction:column; align-items:center; gap:var(--space-lg); }
+
+/* App/route reproductions are phones: preserve the canonical 320:569 geometry
+   and give every section exactly the same rendered width. main.js may apply an
+   inline fit transform for overflowing internals, so the wrapper owns alignment
+   while the screen owns its phone dimensions. */
+html body .feature-diagram-stack > :is(.fd-app-screen,.fd-route-screen) {
+  width:min(320px,100%)!important;
+  min-width:0!important;
+  max-width:320px!important;
+  height:auto!important;
+  aspect-ratio:320 / 569!important;
+  flex:0 0 auto!important;
+  margin:0!important;
+  align-self:center!important;
+}
+
+/* Legacy/concept diagrams do not pretend to be phone screens. They use the same
+   320px alignment rail without inheriting the tall device aspect ratio. */
+html body .feature-diagram-stack > .feature-diagram:not(.fd-app-screen):not(.fd-route-screen) {
+  width:min(320px,100%)!important;
+  min-width:0!important;
+  max-width:320px!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  align-self:center!important;
+}
 
 /* Widget is a three-card concept diagram, not an app screen. A generic late
    .feature-diagram > * rule used !important align-self:stretch and elongated
-   these cards. Keep each tile at its content height and keep all three columns. */
-html body #widget .fd-widget-grid { display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important; align-items:start!important; align-content:start!important; grid-auto-rows:min-content!important; }
-html body #widget .fd-widget-grid > .fd-widget-tile { align-self:start!important; height:auto!important; min-height:104px!important; max-height:none!important; width:auto!important; }
+   these cards. Keep the three cards in one compact row. */
+html body #widget .fd-widget-grid { display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important; align-items:start!important; align-content:start!important; grid-auto-rows:min-content!important; gap:8px!important; padding:12px!important; }
+html body #widget .fd-widget-grid > .fd-widget-tile { align-self:start!important; height:auto!important; min-height:104px!important; max-height:none!important; width:auto!important; min-width:0!important; padding:10px!important; }
 
 @media (max-width:899px) {
-  .feature-pair { grid-template-columns:minmax(0,1fr); gap:var(--space-lg); }
+  .feature-pair { grid-template-columns:minmax(0,1fr); row-gap:var(--space-lg); }
   .feature-copy-column > .spec-grid { grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); }
   .feature-diagram-stack { width:100%; }
-  .feature-diagram-stack > .feature-diagram { width:100%!important; }
 }
 
 @media (max-width:560px) {
