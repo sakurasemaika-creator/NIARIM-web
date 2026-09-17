@@ -1,0 +1,57 @@
+name: Feature layout live capture
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev_branch]
+    paths:
+      - '.github/workflows/feature-layout-live-capture.yml'
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright Chromium
+        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Capture deployed Features page and geometry
+        run: |
+          cat > /tmp/capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser = await chromium.launch({headless:true});
+          const url = 'https://niarim-web.niarim.workers.dev/features/';
+          for (const [name,width,height] of [['pc',1440,1000],['sp',390,844]]) {
+            const page = await browser.newPage({viewport:{width,height}});
+            const response = await page.goto(url,{waitUntil:'networkidle',timeout:60000});
+            console.log(name,'status',response?.status(),'url',page.url());
+            await page.screenshot({path:`capture-${name}.png`,fullPage:true});
+            const data = await page.evaluate(() => ({
+              viewport:[innerWidth,innerHeight],
+              nav: document.querySelector('.main-nav')?.getBoundingClientRect().toJSON(),
+              navLinks:[...document.querySelectorAll('.main-nav a:not(.btn)')].map(e=>({text:e.textContent.trim(),rect:e.getBoundingClientRect().toJSON(),align:getComputedStyle(e).textAlign,justify:getComputedStyle(e).justifyContent})),
+              sections:[...document.querySelectorAll('.feature-section')].map(s=>({
+                id:s.id,
+                pair:s.querySelector('.feature-pair')?.getBoundingClientRect().toJSON(),
+                narrative:s.querySelector('.feature-narrative')?.getBoundingClientRect().toJSON(),
+                stack:s.querySelector('.feature-diagram-stack')?.getBoundingClientRect().toJSON(),
+                diagrams:[...s.querySelectorAll('.feature-diagram-stack > .feature-diagram')].map(d=>({class:d.className,rect:d.getBoundingClientRect().toJSON(),scroll:[d.scrollWidth,d.scrollHeight],client:[d.clientWidth,d.clientHeight],transform:getComputedStyle(d).transform})),
+                specs:s.querySelector('.spec-grid')?.getBoundingClientRect().toJSON()
+              }))
+            }));
+            fs.writeFileSync(`geometry-${name}.json`,JSON.stringify(data,null,2));
+            await page.close();
+          }
+          await browser.close();
+          EOF
+          node /tmp/capture.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: feature-layout-live-capture
+          path: |
+            capture-*.png
+            geometry-*.json
