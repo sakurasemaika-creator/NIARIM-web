@@ -17,10 +17,12 @@ jobs:
         with:
           node-version: '20'
       - name: Install Playwright Chromium
-        run: npx --yes playwright@1.55.0 install --with-deps chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
       - name: Capture deployed Features page and geometry
         run: |
-          cat > /tmp/capture.mjs <<'EOF'
+          cat > capture.mjs <<'EOF'
           import { chromium } from 'playwright';
           import fs from 'node:fs';
           const browser = await chromium.launch({headless:true});
@@ -72,7 +74,7 @@ jobs:
           await browser.close();
           if (failed) process.exit(1);
           EOF
-          node /tmp/capture.mjs
+          node capture.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
