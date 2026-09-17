@@ -1,0 +1,26 @@
+name: Trigger live feature capture
+on: push
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium
+        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Capture deployed Features page and geometry
+        run: |
+          cat > /tmp/capture.mjs <<'EOF'
+          import { chromium } from 'playwright'; import fs from 'node:fs';
+          const browser=await chromium.launch({headless:true}); const url='https://niarim-web.niarim.workers.dev/features/';
+          for(const [name,width,height] of [['pc',1440,1000],['sp',390,844]]){const page=await browser.newPage({viewport:{width,height}});const r=await page.goto(url,{waitUntil:'networkidle',timeout:60000});console.log(name,r?.status(),page.url());await page.screenshot({path:`capture-${name}.png`,fullPage:true});const data=await page.evaluate(()=>({nav:[...document.querySelectorAll('.main-nav a:not(.btn)')].map(e=>({t:e.textContent.trim(),r:e.getBoundingClientRect().toJSON(),a:getComputedStyle(e).textAlign,j:getComputedStyle(e).justifyContent})),sections:[...document.querySelectorAll('.feature-section')].map(s=>({id:s.id,n:s.querySelector('.feature-narrative')?.getBoundingClientRect().toJSON(),stack:s.querySelector('.feature-diagram-stack')?.getBoundingClientRect().toJSON(),d:[...s.querySelectorAll('.feature-diagram-stack > .feature-diagram')].map(e=>({c:e.className,r:e.getBoundingClientRect().toJSON(),scroll:[e.scrollWidth,e.scrollHeight],client:[e.clientWidth,e.clientHeight],tr:getComputedStyle(e).transform})),spec:s.querySelector('.spec-grid')?.getBoundingClientRect().toJSON()}))}));fs.writeFileSync(`geometry-${name}.json`,JSON.stringify(data,null,2));await page.close();}await browser.close();
+          EOF
+          node /tmp/capture.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: feature-layout-live-capture
+          path: |
+            capture-*.png
+            geometry-*.json
