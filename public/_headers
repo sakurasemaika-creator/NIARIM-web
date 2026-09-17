@@ -19,11 +19,11 @@
 /assets/*
   Cache-Control: public, max-age=2592000
 
-# CSS/JSはハッシュ付きファイル名ではないので長期immutableにはしない。
-# 短いfresh期間とstale-while-revalidateを組み合わせ、通常のページ回遊では
-# 再取得を避けつつ、デプロイ後の更新も長時間固定しない。
+# CSS/JSはハッシュ付きファイル名ではない。デプロイ後に旧UIのCSS/JSを
+# stale-while-revalidateで最大1日再利用すると、最新commitでも旧UIが見える。
+# 毎回再検証させ、ETag/304で転送量を抑えつつ最新deployとの一致を保証する。
 /css/*
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: no-cache, must-revalidate
 
 /js/*
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: no-cache, must-revalidate
