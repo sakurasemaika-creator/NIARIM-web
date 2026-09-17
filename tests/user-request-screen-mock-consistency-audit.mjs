@@ -10,15 +10,19 @@ try {
   await page.goto(`${baseURL}/features/`, { waitUntil: "networkidle" });
   const state = await page.evaluate(() => {
     const first = document.querySelector(".feature-section");
-    const narrative = first?.querySelector(":scope > .feature-narrative");
-    const diagram = first?.querySelector(":scope > .feature-diagram");
+    const pair = first?.querySelector(":scope > .feature-pair");
+    const narrative = pair?.querySelector(":scope > .feature-narrative");
+    const diagram = pair?.querySelector(":scope > .feature-diagram");
     const nr = narrative?.getBoundingClientRect();
     const dr = diagram?.getBoundingClientRect();
     return {
-      sideBySide: Boolean(nr && dr && dr.left > nr.left && Math.abs(dr.top - nr.top) < 3),
+      sideBySide: Boolean(
+        nr && dr && dr.left > nr.left && Math.abs(dr.top - nr.top) < 3,
+      ),
     };
   });
-  if (!state.sideBySide) failures.push("features narrative and diagram are not side-by-side");
+  if (!state.sideBySide)
+    failures.push("features narrative and diagram are not side-by-side");
 
   await page.goto(baseURL, { waitUntil: "networkidle" });
   const mock = await page.evaluate(() => {
@@ -26,8 +30,11 @@ try {
     const topbar = canvas?.querySelector(":scope > .fd-topbar");
     const slider = canvas?.querySelector(":scope > .fd-brush-slider");
     const toolbar = canvas?.querySelector(":scope > .fd-toolbar");
-    const timeline = document.querySelector(".fd-timeline-screen .fd-timeline-topbar");
-    const transparent = (el) => el && getComputedStyle(el).backgroundColor === "rgba(0, 0, 0, 0)";
+    const timeline = document.querySelector(
+      ".fd-timeline-screen .fd-timeline-topbar",
+    );
+    const transparent = (el) =>
+      el && getComputedStyle(el).backgroundColor === "rgba(0, 0, 0, 0)";
     return {
       topbarTransparent: transparent(topbar),
       sliderTransparent: transparent(slider),
@@ -36,11 +43,19 @@ try {
       timelineTopbarHeight: timeline?.getBoundingClientRect().height || 0,
     };
   });
-  if (!mock.topbarTransparent) failures.push("canvas top bar is not transparent");
-  if (!mock.sliderTransparent) failures.push("canvas slider area is not transparent");
-  if (!mock.toolbarTransparent) failures.push("canvas tool bar is not transparent");
-  if (mock.timelineTopbarHeight && Math.abs(mock.canvasTopbarHeight - mock.timelineTopbarHeight) > 1)
-    failures.push(`canvas/timeline top bars differ: ${mock.canvasTopbarHeight}/${mock.timelineTopbarHeight}`);
+  if (!mock.topbarTransparent)
+    failures.push("canvas top bar is not transparent");
+  if (!mock.sliderTransparent)
+    failures.push("canvas slider area is not transparent");
+  if (!mock.toolbarTransparent)
+    failures.push("canvas tool bar is not transparent");
+  if (
+    mock.timelineTopbarHeight &&
+    Math.abs(mock.canvasTopbarHeight - mock.timelineTopbarHeight) > 1
+  )
+    failures.push(
+      `canvas/timeline top bars differ: ${mock.canvasTopbarHeight}/${mock.timelineTopbarHeight}`,
+    );
 } finally {
   await browser.close();
 }
