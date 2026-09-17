@@ -81,56 +81,5 @@ html
   display: none !important;
 }
 
-/* Screen reconstructions must use the same transparent canvas chrome as the
-   actual CanvasScreen. The page/phone surface supplies the colour; the top bar,
-   brush sliders and drawing toolbar must not introduce their own panels. */
-html body .fd-canvas-screen.fd-canvas-screen > .fd-topbar,
-html body .fd-canvas-screen.fd-canvas-screen > .fd-brush-slider,
-html body .fd-canvas-screen.fd-canvas-screen > .fd-toolbar {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Canvas and Timeline are peer modes. Keep their primary top chrome on the same
-   40 logical-pixel rhythm in every reconstruction instead of letting Timeline
-   use a taller one-off header. */
-html body .fd-timeline-screen .fd-timeline-topbar {
-  height: 40px !important;
-  min-height: 40px !important;
-  flex: 0 0 40px !important;
-  padding-block: 4px !important;
-}
-
-/* Only the narrative and its reconstructed screen form the desktop two-column
-   row. The feature section itself stays in normal document flow so spec grids,
-   category navigation and every unrelated child keep their original full width. */
-.feature-pair {
-  width: 100%;
-}
-
-@media (min-width: 900px) {
-  .feature-pair {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-    column-gap: clamp(2rem, 4vw, 4.5rem);
-    align-items: start;
-  }
-
-  .feature-pair > .feature-narrative {
-    min-width: 0;
-    margin: 0 !important;
-  }
-
-  .feature-pair > .feature-diagram {
-    align-self: start;
-    margin: 0 auto !important;
-    width: min(100%, 320px) !important;
-  }
-}
-
-/* Narrow layouts retain the readable document order inside the dedicated pair. */
-@media (max-width: 899px) {
-  .feature-pair {
-    display: block;
-  }
-}
+/* Keep the screen mock's original panel surfaces and dimensions. Feature-page
+   reconstructions are compact app screenshots, not page-layout columns. */
