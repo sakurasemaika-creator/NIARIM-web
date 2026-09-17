@@ -75,6 +75,23 @@
       });
   }
 
+  function wrapFeaturePairs(root) {
+    (root || document)
+      .querySelectorAll(".feature-section")
+      .forEach(function (section) {
+        if (section.querySelector(":scope > .feature-pair")) return;
+        var narrative = section.querySelector(":scope > .feature-narrative");
+        var diagram = section.querySelector(":scope > .feature-diagram");
+        if (!narrative || !diagram) return;
+
+        var pair = document.createElement("div");
+        pair.className = "feature-pair";
+        section.insertBefore(pair, narrative);
+        pair.appendChild(narrative);
+        pair.appendChild(diagram);
+      });
+  }
+
   function localizeFd(root) {
     var api = window.NIARIM_I18N;
     if (!api || !api.translate) return;
@@ -89,12 +106,13 @@
       });
     nodes.forEach(function (el) {
       var key = el.getAttribute("data-i18n");
-      el.textContent =
+      var translated =
         key === "fd.projectName"
           ? copy[code].project
           : key === "fd.onionNext"
             ? copy[code].onionNext
             : api.translate(code, key);
+      if (translated && translated !== key) el.textContent = translated;
     });
   }
 
@@ -107,6 +125,7 @@
       '[data-i18n="communityPage.cta.body"]',
     );
     if (communityBody) communityBody.textContent = copy[code].community;
+    wrapFeaturePairs(document);
     localizeFd(document);
     upgradeLegacyFrameModeControls(document);
   }
@@ -126,6 +145,7 @@
           ? node.parentElement
           : node;
         upgradeLegacyFrameModeControls(scope);
+        wrapFeaturePairs(node.parentElement || node);
         localizeFd(node);
       });
     });
