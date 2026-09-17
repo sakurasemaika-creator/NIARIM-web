@@ -25,8 +25,11 @@ jobs:
           import fs from 'node:fs';
           const browser = await chromium.launch({headless:true});
           const url = 'https://niarim-web.niarim.workers.dev/features/';
+          let failed = false;
           for (const [name,width,height] of [['pc',1440,1000],['sp',390,844]]) {
             const page = await browser.newPage({viewport:{width,height}});
+            const errors=[];
+            page.on('pageerror', e => errors.push(String(e)));
             const response = await page.goto(url,{waitUntil:'networkidle',timeout:60000});
             console.log(name,'status',response?.status(),'url',page.url());
             await page.screenshot({path:`capture-${name}.png`,fullPage:true});
@@ -40,16 +43,38 @@ jobs:
                 narrative:s.querySelector('.feature-narrative')?.getBoundingClientRect().toJSON(),
                 stack:s.querySelector('.feature-diagram-stack')?.getBoundingClientRect().toJSON(),
                 diagrams:[...s.querySelectorAll('.feature-diagram-stack > .feature-diagram')].map(d=>({class:d.className,rect:d.getBoundingClientRect().toJSON(),scroll:[d.scrollWidth,d.scrollHeight],client:[d.clientWidth,d.clientHeight],transform:getComputedStyle(d).transform})),
+                generated:[...s.querySelectorAll('.feature-diagram-stack > .fd-app-screen, .feature-diagram-stack > .fd-route-screen')].map(d=>({class:d.className,rect:d.getBoundingClientRect().toJSON()})),
                 specs:s.querySelector('.spec-grid')?.getBoundingClientRect().toJSON()
               }))
             }));
+            data.errors=errors;
             fs.writeFileSync(`geometry-${name}.json`,JSON.stringify(data,null,2));
+            if (response?.status() !== 200 || errors.length) failed=true;
+            if (name === 'pc') {
+              for (const s of data.sections) {
+                if (s.id === 'widget') continue;
+                if (!s.generated.length) {
+                  console.error('missing generated screen mock:',s.id);
+                  failed=true;
+                  continue;
+                }
+                for (const m of s.generated) {
+                  const r=m.rect;
+                  if (r.width < 180 || r.height < 300 || r.height/r.width < 1.55 || r.height/r.width > 1.95) {
+                    console.error('collapsed generated screen mock:',s.id,r);
+                    failed=true;
+                  }
+                }
+              }
+            }
             await page.close();
           }
           await browser.close();
+          if (failed) process.exit(1);
           EOF
           node /tmp/capture.mjs
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: feature-layout-live-capture
           path: |
