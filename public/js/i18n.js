@@ -174,11 +174,15 @@
     }
 
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      el.textContent = t(lang, el.getAttribute("data-i18n"));
+      var key = el.getAttribute("data-i18n");
+      var translated = t(lang, key);
+      if (translated !== key) el.textContent = translated;
     });
 
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-      el.innerHTML = t(lang, el.getAttribute("data-i18n-html"));
+      var key = el.getAttribute("data-i18n-html");
+      var translated = t(lang, key);
+      if (translated !== key) el.innerHTML = translated;
     });
 
     document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
