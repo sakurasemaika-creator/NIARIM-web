@@ -1,0 +1,66 @@
+name: Temporary fix screen mock i18n
+
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - .github/workflows/tmp-fix-screen-mock-i18n.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+      - name: Patch missing-key fallback and cache keys
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('public/js/i18n.js')
+          s = p.read_text()
+          old = '''    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                el.textContent = t(lang, el.getAttribute("data-i18n"));
+              });'''.replace('                ', '      ')
+          new = '''    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n");
+                var translated = t(lang, key);
+                if (translated !== key) el.textContent = translated;
+              });'''.replace('                ', '      ')
+          if old not in s:
+              raise SystemExit('data-i18n block not found')
+          s = s.replace(old, new, 1)
+          old = '''    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+                el.innerHTML = t(lang, el.getAttribute("data-i18n-html"));
+              });'''.replace('                ', '      ')
+          new = '''    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+                var key = el.getAttribute("data-i18n-html");
+                var translated = t(lang, key);
+                if (translated !== key) el.innerHTML = translated;
+              });'''.replace('                ', '      ')
+          if old not in s:
+              raise SystemExit('data-i18n-html block not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          for name in ['public/index.html', 'public/features/index.html']:
+              p = Path(name)
+              s = p.read_text()
+              for asset in ['i18n-dict-features-diagram.js', 'i18n.js', 'main.js']:
+                  s = s.replace(f'/js/{asset}"', f'/js/{asset}?v=20260917-2"')
+              p.write_text(s)
+          PY
+      - name: Verify focused regression
+        run: node tests/screen-mock-i18n-key-leak-contract.mjs
+      - name: Remove temporary workflow and commit
+        run: |
+          rm .github/workflows/tmp-fix-screen-mock-i18n.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/js/i18n.js public/index.html public/features/index.html .github/workflows/tmp-fix-screen-mock-i18n.yml
+          git commit -m 'fix: prevent screen mock i18n key leakage'
+          git push origin HEAD:dev_branch
