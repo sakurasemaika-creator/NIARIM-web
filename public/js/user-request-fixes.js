@@ -9,37 +9,12 @@
       project: "星降る夜",
       onionNext: "次フレーム",
     },
-    en: {
-      community: "Create an animation with NIARIM and share it in the Gallery.",
-      project: "Starlit Night",
-      onionNext: "Next frame",
-    },
-    "zh-Hans": {
-      community: "用 NIARIM 制作动画，并投稿到作品广场吧。",
-      project: "星夜",
-      onionNext: "后一帧",
-    },
-    "zh-Hant": {
-      community: "用 NIARIM 製作動畫，並投稿到作品廣場吧。",
-      project: "星夜",
-      onionNext: "後一幀",
-    },
-    ko: {
-      community: "NIARIM으로 애니메이션을 만들어 작품광장에 올려 보세요.",
-      project: "별이 내리는 밤",
-      onionNext: "다음 프레임",
-    },
-    fr: {
-      community:
-        "Créez une animation avec NIARIM et publiez-la dans la Galerie.",
-      project: "Nuit étoilée",
-      onionNext: "Image suivante",
-    },
-    es: {
-      community: "Crea una animación con NIARIM y publícala en la Galería.",
-      project: "Noche estrellada",
-      onionNext: "Fotograma siguiente",
-    },
+    en: { community: "Create an animation with NIARIM and share it in the Gallery.", project: "Starlit Night", onionNext: "Next frame" },
+    "zh-Hans": { community: "用 NIARIM 制作动画，并投稿到作品广场吧。", project: "星夜", onionNext: "后一帧" },
+    "zh-Hant": { community: "用 NIARIM 製作動畫，並投稿到作品廣場吧。", project: "星夜", onionNext: "後一幀" },
+    ko: { community: "NIARIM으로 애니메이션을 만들어 작품광장에 올려 보세요.", project: "별이 내리는 밤", onionNext: "다음 프레임" },
+    fr: { community: "Créez une animation avec NIARIM et publiez-la dans la Galerie.", project: "Nuit étoilée", onionNext: "Image suivante" },
+    es: { community: "Crea una animación con NIARIM y publícala en la Galería.", project: "Noche estrellada", onionNext: "Fotograma siguiente" },
   };
 
   function lang() {
@@ -59,33 +34,42 @@
     if (dict.ja) dict.ja["cta.body"] = copy.ja.ctaBody;
   }
 
+  /* main.js が再現図を完成させた後にだけ構造を組む。
+     左列は narrative + spec-grid、右列はその節の全 feature-diagram を
+     ひとつの stack にする。これで2枚以上の再現図も同じX座標に揃い、
+     spec は右列の高さに引っ張られず narrative の直下から始まる。 */
   function pairFeatureNarratives(root) {
     (root || document).querySelectorAll?.(".feature-section").forEach(function (section) {
       if (section.querySelector(":scope > .feature-pair")) return;
       var narrative = section.querySelector(":scope > .feature-narrative");
-      var diagram = section.querySelector(":scope > .feature-diagram");
-      if (!narrative || !diagram) return;
+      var diagrams = Array.from(section.querySelectorAll(":scope > .feature-diagram"));
+      if (!narrative || !diagrams.length) return;
+      var spec = section.querySelector(":scope > .spec-grid");
       var pair = document.createElement("div");
       pair.className = "feature-pair";
+      var left = document.createElement("div");
+      left.className = "feature-copy-column";
+      var stack = document.createElement("div");
+      stack.className = "feature-diagram-stack";
       narrative.before(pair);
-      pair.append(narrative, diagram);
+      pair.append(left, stack);
+      left.append(narrative);
+      if (spec) left.append(spec);
+      diagrams.forEach(function (diagram) { stack.append(diagram); });
     });
   }
 
   function upgradeLegacyFrameModeControls(root) {
-    (root || document)
-      .querySelectorAll(".fd-frame-strip-mode")
-      .forEach(function (old) {
-        var button = document.createElement("button");
-        button.type = "button";
-        button.className = "fd-frame-mode";
-        button.tabIndex = -1;
-        button.setAttribute("aria-label", "タイムライン");
-        button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
-        button.innerHTML =
-          '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
-        old.replaceWith(button);
-      });
+    (root || document).querySelectorAll(".fd-frame-strip-mode").forEach(function (old) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "fd-frame-mode";
+      button.tabIndex = -1;
+      button.setAttribute("aria-label", "タイムライン");
+      button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
+      button.innerHTML = '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
+      old.replaceWith(button);
+    });
   }
 
   function localizeFd(root) {
@@ -93,33 +77,22 @@
     if (!api || !api.translate) return;
     var code = lang();
     var nodes = [];
-    if (root && root.matches && root.matches('[data-i18n^="fd."]'))
-      nodes.push(root);
-    (root || document)
-      .querySelectorAll?.('[data-i18n^="fd."]')
-      .forEach(function (el) {
-        nodes.push(el);
-      });
+    if (root && root.matches && root.matches('[data-i18n^="fd."]')) nodes.push(root);
+    (root || document).querySelectorAll?.('[data-i18n^="fd."]').forEach(function (el) { nodes.push(el); });
     nodes.forEach(function (el) {
       var key = el.getAttribute("data-i18n");
-      var translated =
-        key === "fd.projectName"
-          ? copy[code].project
-          : key === "fd.onionNext"
-            ? copy[code].onionNext
-            : api.translate(code, key);
+      var translated = key === "fd.projectName" ? copy[code].project : key === "fd.onionNext" ? copy[code].onionNext : api.translate(code, key);
       if (translated && translated !== key) el.textContent = translated;
     });
   }
 
   function applyRequestedCopy() {
     installDictionaryOverrides();
+    pairFeatureNarratives(document);
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
-    var communityBody = document.querySelector(
-      '[data-i18n="communityPage.cta.body"]',
-    );
+    var communityBody = document.querySelector('[data-i18n="communityPage.cta.body"]');
     if (communityBody) communityBody.textContent = copy[code].community;
     localizeFd(document);
     upgradeLegacyFrameModeControls(document);
@@ -127,15 +100,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     installDictionaryOverrides();
-    applyRequestedCopy();
-    /* main.js hydrates the feature screen mocks during DOMContentLoaded while
-       they are still direct children of each section. Pair only after that
-       hydration pass, so the narrative can move left and the fully-built mock
-       can move right without breaking main.js's direct-child lookup. */
-    requestAnimationFrame(function () {
-      pairFeatureNarratives(document);
-      applyRequestedCopy();
-    });
+    requestAnimationFrame(applyRequestedCopy);
   });
   document.addEventListener("niarim:langchange", applyRequestedCopy);
 
@@ -143,16 +108,11 @@
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (node.nodeType !== 1) return;
-        var scope = node.matches?.(".fd-frame-strip-mode")
-          ? node.parentElement
-          : node;
+        var scope = node.matches?.(".fd-frame-strip-mode") ? node.parentElement : node;
         upgradeLegacyFrameModeControls(scope);
         localizeFd(node);
       });
     });
   });
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 })();
