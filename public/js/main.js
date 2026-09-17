@@ -243,11 +243,6 @@
     return '<div class="fd-panel-close-bar"><span class="fd-panel-close">×</span></div>';
   }
 
-  /* レイヤーの1行。アプリ側は種別ごとに小さなアイコンを添え、共通
-     レイヤーには表示範囲、クリッピング中のレイヤーにはその旨を
-     副題として出す（layer_panel.dart の _layerTypeIcon / subtitle）。
-     通常レイヤーだけを1枚出していたときは、レイヤーの種類が豊富なこと
-     も、ブレンドモードを選べることも図から伝わらなかった。 */
   function layerRow(opt) {
     return (
       '<div class="fd-layer-row' +
@@ -257,10 +252,6 @@
       (opt.type
         ? icon(opt.type, "ic-layer-type " + (opt.typeClass || ""))
         : '<span class="fd-layer-pencil" aria-hidden="true"></span>') +
-      // サムネイルにはそのレイヤーの絵が出る。空の四角のままだと
-      // 何のレイヤーなのか分からないので、紙の白に絵を載せて見せる。
-      // 24px角なので、コマ一覧と同じ画角では線が細くなりすぎる。
-      // ここだけ絵に寄った画角にする。
       '<span class="fd-layer-thumb">' +
       '<svg class="fd-art" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
       '<circle class="fd-art-ball" cx="50" cy="50" r="28" stroke-width="11"/>' +
@@ -302,79 +293,55 @@
       icon("ic-add") +
       '<span data-i18n="fd.newLayer">新規レイヤー</span></span>' +
       '<span class="fd-shortcut-btn">' +
-      icon("ic-folder") +
-      '<span data-i18n="fd.newFolder">新規フォルダ</span></span>' +
+      icon("ic-folder_open") +
+      '<span data-i18n="fd.newGroup">グループ</span></span>' +
       '<span class="fd-shortcut-btn">' +
-      icon("ic-library_add") +
-      '<span data-i18n="fd.addLayer">追加</span></span>' +
-      '<span class="fd-shortcut-btn">' +
-      icon("ic-image") +
-      '<span data-i18n="fd.importImage">画像読み込み</span></span>' +
+      icon("ic-link") +
+      '<span data-i18n="fd.commonLayer">共通</span></span>' +
       "</div>" +
+      '<div class="fd-blend-row"><span data-i18n="fd.blendMode">合成モード</span><strong data-i18n="fd.blendNormal">通常</strong><span>⌄</span></div>' +
+      '<div class="fd-layer-list">' +
       layerRow({
-        key: "fd.layer4",
-        fallback: "レイヤー4（自動塗り・下書き）",
-        type: "ic-edit",
-        typeClass: "is-lineart",
+        active: true,
+        key: "fd.layerNormal",
+        fallback: "線画",
       }) +
       layerRow({
-        key: "fd.layer3",
-        fallback: "レイヤー3（自動塗り）",
-        type: "ic-palette",
-        typeClass: "is-autofill",
-        badge: "fd.blendMultiply",
-        badgeText: "乗算",
-      }) +
-      layerRow({
-        key: "fd.layer2",
-        fallback: "レイヤー2（共通レイヤー）",
         type: "ic-link",
         typeClass: "is-common",
+        key: "fd.layerCommon",
+        fallback: "共通レイヤー",
+        badge: "fd.layerRangeAll",
+        badgeText: "全フレーム",
+      }) +
+      layerRow({
+        type: "ic-folder",
+        key: "fd.layerGroup",
+        fallback: "色塗り",
+      }) +
+      layerRow({
+        key: "fd.layerClipped",
+        fallback: "影",
         badge: "fd.layerClipping",
         badgeText: "クリッピング",
       }) +
-      layerRow({
-        key: "fd.layer1",
-        fallback: "レイヤー1",
-        active: true,
-      }) +
-      "</div>" +
-      "</div>"
-    );
-  }
-
-  function onionSide(label, color, opacity, key) {
-    return (
-      '<div class="fd-onion-side">' +
-      '<div class="fd-onion-side-head">' +
-      (key ? '<strong data-i18n="' + key + '">' : "<strong>") +
-      label +
-      '</strong><span class="fd-mini-switch is-on"></span></div>' +
-      '<div class="fd-onion-control"><span class="fd-onion-color" style="--onion-color:' +
-      color +
-      '"></span><span data-i18n="fd.onionColor">色</span></div>' +
-      '<div class="fd-onion-control"><span data-i18n="fd.onionOpacity">不透明度</span><span class="fd-mini-slider"><i style="width:' +
-      opacity +
-      '%"></i></span><b>' +
-      opacity +
-      "%</b></div>" +
-      '<div class="fd-onion-control"><span data-i18n="fd.onionCount">枚数</span><span class="fd-mini-slider"><i style="width:28%"></i></span><b>1</b></div>' +
-      "</div>"
+      "</div></div></div>"
     );
   }
 
   function onionPanel() {
     return (
       '<div class="fd-app-overlay-panel fd-app-onion-panel">' +
+      '<div class="fd-onion-head">' +
       panelCloseBar() +
-      '<div class="fd-onion-title"><strong data-i18n="fd.onionSkin">オニオンスキン</strong><span class="fd-mini-switch is-on"></span></div>' +
-      '<div class="fd-panel-divider"></div>' +
-      onionSide("前フレーム", "#ff5c7a", 35, "fd.prevFrame") +
-      '<div class="fd-panel-divider"></div>' +
-      onionSide("後フレーム", "#5374ff", 35, "fd.onionNext") +
-      '<div class="fd-panel-divider"></div>' +
-      '<div class="fd-onion-common"><span data-i18n="fd.onionInterval">フレーム間隔</span><div><b class="is-selected">1</b><b>2</b><b>3</b></div></div>' +
-      '<div class="fd-onion-fade"><span data-i18n="fd.onionFade">距離に応じて薄くする</span><span class="fd-mini-switch is-on"></span></div>' +
+      '<strong data-i18n="fd.onionTitle">オニオンスキン</strong><span class="fd-spacer"></span>' +
+      iconButton("ic-help_outline") +
+      "</div>" +
+      '<div class="fd-onion-row"><span data-i18n="fd.onionEnabled">有効</span><span class="fd-switch is-on"></span></div>' +
+      '<div class="fd-onion-row"><span data-i18n="fd.onionPrev">前フレーム</span><span class="fd-color-chip is-prev"></span></div>' +
+      '<div class="fd-onion-row"><span data-i18n="fd.onionNext">次フレーム</span><span class="fd-color-chip is-next"></span></div>' +
+      '<div class="fd-onion-row"><span data-i18n="fd.onionCount">表示枚数</span><span>2</span></div>' +
+      '<div class="fd-onion-row"><span data-i18n="fd.onionOpacity">不透明度</span><span>45%</span></div>' +
       "</div>"
     );
   }
@@ -382,13 +349,12 @@
   function canvasContents(panel) {
     return (
       canvasTopBar() +
-      canvasDrawing(panel === "onion") +
       brushSlider() +
-      '<div class="fd-collapse-handle"></div>' +
       canvasToolbar() +
-      '<div class="fd-collapse-handle fd-frame-collapse"></div>' +
+      canvasDrawing(panel === "onion") +
       frameStrip() +
-      (panel === "layer" ? layerPanel() : panel === "onion" ? onionPanel() : "")
+      (panel === "layer" ? layerPanel() : "") +
+      (panel === "onion" ? onionPanel() : "")
     );
   }
 
@@ -408,36 +374,13 @@
       icon("ic-palette") +
       "</span>" +
       '<span class="fd-timeline-title" data-i18n="fd.projectName">プロジェクト名</span><span class="fd-spacer"></span>' +
-      iconButton("ic-home_outlined") +
-      iconButton("ic-undo") +
-      iconButton("ic-redo") +
-      iconButton("ic-more_vert") +
-      iconButton("ic-help_outline") +
-      "</div>"
-    );
-  }
-
-  function timelineToolbar() {
-    return (
-      '<div class="fd-timeline-toolbar">' +
-      iconButton("ic-videocam") +
-      iconButton("ic-audiotrack", "is-active") +
-      '<span class="fd-watermark-tool">' +
-      icon("ic-branding_watermark") +
-      icon("ic-lock", "fd-lock-mark") +
-      "</span>" +
-      iconButton("ic-movie_filter") +
-      iconButton("ic-camera") +
-      iconButton("ic-push_pin_outlined") +
-      uploadIconButton() +
+      iconButton("ic-settings") +
       "</div>"
     );
   }
 
   function timelineScreen() {
     var frames = "";
-    // 5マスを中央寄せにして、真ん中のコマが中央固定の赤枠に入るようにする
-    // （実機のTimelineScreenと同じ見え方）。
     for (var i = 1; i <= 5; i++)
       frames +=
         '<span class="fd-tl-frame' +
@@ -448,40 +391,17 @@
     return (
       '<div class="feature-diagram fd-timeline-screen fd-app-screen" aria-hidden="true">' +
       timelineTopBar() +
-      // プレビュー欄は再生中のコマが出る場所。真っ白のままだと
-      // 何を映しているのか分からないので、編集中のコマと同じ絵を出す。
       '<div class="fd-timeline-preview">' +
       frameArtwork(2) +
-      '<span class="fd-preview-loading"></span><span class="fd-fullscreen-mark"></span></div>' +
-      '<div class="fd-timeline-scrubber"><i></i></div>' +
-      '<div class="fd-transport">' +
+      "</div>" +
+      '<div class="fd-timeline-controls">' +
       iconButton("ic-skip_previous") +
-      iconButton("ic-fast_rewind") +
-      iconButton("ic-play_arrow") +
-      iconButton("ic-fast_forward") +
+      iconButton("ic-play_arrow", "is-play") +
       iconButton("ic-skip_next") +
-      // ループ再生の切り替え（アプリの Icons.repeat / _loopEnabled）。
-      // 以前は「↔」という双方向の矢印を置いていたため何の記号か
-      // 分からなかったので、ぐるっと一周する矢印のアイコンにした。
-      // 位置は右端。送り戻しの5つは中央のまま（再生ボタンがちょうど
-      // 真ん中に来る）で、これだけCSSで右へ寄せている。
-      // 既定でループONなのでアクセント色。
-      iconButton("ic-loop", "fd-loop-btn is-active") +
-      "</div>" +
-      timelineToolbar() +
-      '<div class="fd-scene-line"><small data-i18n="fd.trackScene">選択</small><span class="fd-scene-pill"><i class="fd-tick"></i>Scene1</span><span class="fd-scene-more">' +
-      icon("ic-more_vert") +
-      "</span><span>+</span></div>" +
-      '<div class="fd-timeline-row"><small data-i18n="fd.trackArt">絵</small><div class="fd-timeline-frames">' +
+      '<span class="fd-spacer"></span><span>12 fps</span></div>' +
+      '<div class="fd-timeline-track"><span class="fd-timeline-cursor"></span>' +
       frames +
-      // 実機のTimelineScreenは、コマ一覧の中央に固定した赤枠で現在位置を
-      // 示す（再生位置を貫く縦線は存在しない）。
-      '<span class="fd-frame-cursor is-error" aria-hidden="true"></span>' +
-      "</div></div>" +
-      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span>' +
-      icon("ic-lock", "fd-lock-mark") +
-      "</div>" +
-      "</div>"
+      "</div></div>"
     );
   }
 
@@ -495,72 +415,49 @@
       '<div class="fd-sheet-handle"></div><div class="fd-audio-sheet-head"><strong data-i18n="fd.audioClip">音声クリップ</strong><span>' +
       icon("ic-content_copy") +
       '</span><span class="fd-delete-mark"></span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.volume">音量</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:72%;width:72%"></i></span><button>+</button><b>72%</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeIn">フェードイン</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
-      '<div class="fd-sheet-row"><span data-i18n="fd.fadeOut">フェードアウト</span><button>−</button><span class="fd-sheet-slider"><i style="--fd-fill:6%;width:6%"></i></span><button>+</button><b>0.0s</b><span>⌄</span></div>' +
+      '<div class="fd-audio-row"><span data-i18n="fd.audioVolume">音量</span><span class="fd-slider"><span></span></span><b>100%</b></div>' +
+      '<div class="fd-audio-row"><span data-i18n="fd.audioFadeIn">フェードイン</span><span class="fd-slider is-short"><span></span></span><b>0.0s</b></div>' +
+      '<div class="fd-audio-row"><span data-i18n="fd.audioFadeOut">フェードアウト</span><span class="fd-slider is-short"><span></span></span><b>0.0s</b></div>' +
+      '<div class="fd-audio-row"><span data-i18n="fd.audioStart">開始</span><span>00:00.00</span></div>' +
       "</div>";
-    return html.replace(/<\/div>$/, sheet + "</div>");
+    return html.replace("</div>", "</div>" + sheet);
   }
 
-  function appBar(title, treeMode, key) {
+  function appBar(title, back, key) {
     return (
       '<div class="fd-appbar">' +
-      iconButton("ic-arrow_back") +
-      (key ? '<strong data-i18n="' + key + '">' : "<strong>") +
+      (back ? iconButton("ic-arrow_back") : '<span class="fd-appbar-space"></span>') +
+      '<strong' +
+      (key ? ' data-i18n="' + key + '"' : "") +
+      ">" +
       title +
       '</strong><span class="fd-spacer"></span>' +
       iconButton("ic-help_outline") +
-      (treeMode
-        ? '<span class="fd-tree-save-btn">' +
-          icon("ic-save_outlined") +
-          '<b data-i18n="fd.saveButton">保存</b></span>'
-        : "") +
       "</div>"
     );
   }
 
-  function saveSlotsScreen() {
-    var slots = "";
-    for (var i = 1; i <= 5; i++) {
-      slots +=
-        '<div class="fd-save-slot"><span class="fd-save-thumb">+</span><span class="fd-save-copy"><strong><span data-i18n="fd.slotPrefix">スロット</span>' +
-        i +
-        '</strong><small data-i18n="fd.slotEmpty">保存データなし</small></span><span class="fd-save-plus">+</span></div>';
-    }
+  function treeRow(depth, continuations, selected, label) {
+    var connectors = "";
+    for (var i = 0; i < depth; i++)
+      connectors +=
+        '<span class="fd-tree-line' +
+        (continuations[i] ? " is-continuing" : "") +
+        '"></span>';
     return (
-      '<div class="feature-diagram fd-route-screen fd-save-slots-screen" aria-hidden="true">' +
-      appBar("セーブスロット", false, "fd.saveSlotsTitle") +
-      '<div class="fd-route-body fd-save-slots-body">' +
-      slots +
-      "</div></div>"
-    );
-  }
-
-  // SaveTreeScreen の再現。アプリ側 _TreeConnectorPainter と同じ規則で線を引く。
-  //  ・接続線の欄は深さ1つにつき20px。線は各20px欄の中央(10px)を通る。
-  //  ・祖先の欄は、そこからまだ枝分かれが続く場合だけ全高の縦線。
-  //  ・自分の欄は上半分が必ず縦線。下に続く兄弟がいる場合だけ下半分も引く。
-  //  ・自分の欄の中央から右のタイルへ横線。
-  //  ・深さ0の行には接続線の欄そのものが無い。
-  function treeRow(depth, ancestorContinues, hasNextSibling, num) {
-    var cols = "";
-    for (var i = 0; i < depth; i++) {
-      var isSelf = i === depth - 1;
-      var cls = "fd-tree-col";
-      if (isSelf) cls += " is-self" + (hasNextSibling ? " is-continue" : "");
-      else if (ancestorContinues[i]) cls += " is-through";
-      cols += '<i class="' + cls + '"></i>';
-    }
-    return (
-      '<div class="fd-tree-row">' +
-      (depth ? '<span class="fd-tree-lines">' + cols + "</span>" : "") +
-      '<span class="fd-tree-commit" aria-hidden="true"></span>' +
-      '<span class="fd-tree-copy"><strong><span data-i18n="fd.savePointPrefix">保存</span> ' +
-      num +
-      "</strong><small>2026/09/01 23:34</small></span>" +
-      '<span class="fd-tree-more">' +
+      '<div class="fd-tree-row2' +
+      (selected ? " is-selected" : "") +
+      '" style="--fd-tree-depth:' +
+      depth +
+      '">' +
+      connectors +
+      '<span class="fd-tree-thumb">' +
+      frameArtwork(depth) +
+      '</span><span class="fd-tree-copy"><strong>Save ' +
+      label +
+      '</strong><small data-i18n="fd.saveTreeAuto">自動保存</small></span><span class="fd-spacer"></span>' +
       icon("ic-more_vert") +
-      "</span></div>"
+      "</div>"
     );
   }
 
@@ -569,7 +466,6 @@
       '<div class="feature-diagram fd-route-screen fd-save-tree-screen" aria-hidden="true">' +
       appBar("セーブツリー", true, "fd.saveTreeTitle") +
       '<div class="fd-route-body fd-save-tree-body"><div class="fd-real-tree">' +
-      // 親が上、子が下。アプリの _flattenTreeRows と同じ深さ優先の並び。
       treeRow(0, [], false, "01") +
       treeRow(1, [], false, "02") +
       treeRow(2, [false], false, "03") +
@@ -577,115 +473,16 @@
     );
   }
 
-  /* テーマ・外観の設定画面（theme_settings_screen.dart）。
-     「カラーカスタマイズ」の6つの色と「テーマ一覧」からなる。
-     色見本にはその図が使っているテーマの色をそのまま出しているので、
-     図ごとに違う配色になっていること自体が説明になる。
-     更新マーク色だけはアプリ側でどのプリセットも #FFB020 固定。
-
-     テーマ名（レッド（ライト）等）はアプリ側では日本語のまま持っている
-     が、ここは説明のための図なので、閲覧している言語で出す。 */
-  function themeColorRow(key, fallback, swatch) {
-    return (
-      '<div class="fd-theme-color-row">' +
-      '<span class="fd-theme-swatch" style="background:' +
-      swatch +
-      '"></span>' +
-      '<span data-i18n="' +
-      key +
-      '">' +
-      fallback +
-      "</span></div>"
-    );
-  }
-
-  /* テーマ一覧の行をタップしても、その行が「選択中」になるわけではない。
-     タップはそのテーマの色の組み合わせを上の「カラーカスタマイズ」へ
-     流し込むだけで、以後そこで色を変えても元のテーマは変わらない。
-     だからチェックも選択中の面も付かない。テーマそのものを触るのは
-     三点メニューの中（編集・名前変更・複製・書き出し・削除）。 */
-  function themePresetRow(key, fallback, opt) {
-    var o = opt || {};
-    return (
-      '<div class="fd-theme-preset' +
-      (o.menuOpen ? " has-menu" : "") +
-      '">' +
-      '<span class="fd-theme-preset-name" data-i18n="' +
-      key +
-      '">' +
-      fallback +
-      "</span>" +
-      '<span class="fd-spacer"></span>' +
-      '<span class="fd-theme-star' +
-      (o.favorite ? " is-on" : "") +
-      '">' +
-      icon(o.favorite ? "ic-star" : "ic-star_outline") +
-      "</span>" +
-      '<span class="fd-layer-menu">' +
-      icon("ic-more_vert") +
-      "</span>" +
-      icon("ic-drag_handle", "fd-theme-drag") +
-      (o.menuOpen ? themePresetMenu() : "") +
-      "</div>"
-    );
-  }
-
-  function themePresetMenu() {
-    var items = [
-      ["fd.themeMenuEdit", "編集", " is-lead"],
-      ["fd.themeMenuRename", "名前変更", ""],
-      ["fd.themeMenuDuplicate", "複製", ""],
-      ["fd.themeMenuExport", "書き出し (.niatheme)", ""],
-      ["fd.themeMenuDelete", "削除", " is-danger"],
-    ];
-    return (
-      '<div class="fd-theme-menu">' +
-      items
-        .map(function (it) {
-          return (
-            '<span class="fd-theme-menu-item' +
-            it[2] +
-            '" data-i18n="' +
-            it[0] +
-            '">' +
-            it[1] +
-            "</span>"
-          );
-        })
-        .join("") +
-      "</div>"
-    );
-  }
-
   function themeScreen() {
     return (
       '<div class="feature-diagram fd-route-screen fd-theme-screen" data-mock-screen="theme" aria-hidden="true">' +
-      appBar("テーマ・外観", false, "fd.themeTitle") +
+      appBar("テーマ・外観", true, "fd.themeTitle") +
       '<div class="fd-route-body fd-theme-body">' +
-      '<strong class="fd-route-section" data-i18n="fd.themeColorSection">カラーカスタマイズ</strong>' +
-      themeColorRow("fd.themeAccent", "アクセントカラー", "var(--fd-accent)") +
-      themeColorRow("fd.themeText", "文字色", "var(--fd-ink)") +
-      themeColorRow("fd.themePanelBg", "パネル背景色", "var(--fd-panel)") +
-      themeColorRow("fd.themeMenuBg", "メニュー背景色", "var(--fd-surface)") +
-      themeColorRow("fd.themeSelection", "選択色", "var(--fd-accent)") +
-      themeColorRow("fd.themeUpdateMark", "更新マーク色", "#ffb020") +
-      '<div class="fd-panel-divider"></div>' +
-      '<strong class="fd-route-section" data-i18n="fd.themePresetSection">テーマ一覧</strong>' +
-      '<p class="fd-route-hint" data-i18n="fd.themePresetHint">タップすると、その配色が上のカラーカスタマイズに入ります</p>' +
-      themePresetRow("fd.themePresetRedLight", "レッド（ライト）", {
-        favorite: true,
-      }) +
-      themePresetRow("fd.themePresetRedDark", "レッド（ダーク）", {
-        menuOpen: true,
-      }) +
-      themePresetRow("fd.themePresetOrangeLight", "オレンジ（ライト）") +
-      themePresetRow("fd.themePresetOrangeDark", "オレンジ（ダーク）") +
-      themePresetRow("fd.themePresetYellowLight", "イエロー（ライト）") +
-      themePresetRow("fd.themePresetYellowDark", "イエロー（ダーク）") +
-      '<div class="fd-theme-actions">' +
-      '<span class="fd-theme-save-btn" data-i18n="fd.themeSaveAsNew">現在の設定を新しいテーマとして保存</span>' +
-      '<span class="fd-theme-import-btn" data-i18n="fd.themeImport">テーマを読み込む</span>' +
-      "</div>" +
+      '<strong class="fd-route-section" data-i18n="fd.themeSection">テーマ</strong>' +
+      '<div class="fd-theme-card"><span data-i18n="fd.themeDark">ダーク</span><span class="fd-radio is-active"></span></div>' +
+      '<div class="fd-theme-card"><span data-i18n="fd.themeLight">ライト</span><span class="fd-radio"></span></div>' +
+      '<strong class="fd-route-section" data-i18n="fd.accentSection">アクセントカラー</strong>' +
+      '<div class="fd-accent-row"><span class="fd-accent-dot is-pink"></span><span class="fd-accent-dot is-blue"></span><span class="fd-accent-dot is-green"></span><span class="fd-accent-dot is-orange"></span></div>' +
       "</div></div>"
     );
   }
@@ -708,7 +505,9 @@
           item[1] +
           '">' +
           name +
-          '</strong><span class="fd-spacer"></span><span class="fd-drag-mark" aria-hidden="true"></span></div>'
+          "</strong><span class="fd-spacer"></span>" +
+          icon("ic-drag_handle") +
+          "</div>"
         );
       })
       .join("");
@@ -757,8 +556,6 @@
     return wrap.firstElementChild;
   }
 
-  /* 節の2つ目以降の再現図は :scope > .feature-diagram では取れないので、
-     図そのものを指すセレクタで直接差し替える。 */
   function replaceDiagramNode(selector, html) {
     var old = document.querySelector(selector);
     if (old) old.replaceWith(htmlToElement(html));
@@ -767,7 +564,13 @@
   function replaceFeatureDiagram(sectionSelector, html) {
     var section = document.querySelector(sectionSelector);
     if (!section) return;
-    var old = section.querySelector(":scope > .feature-diagram");
+    /* user-request-fixes.js can pair the feature copy/diagram columns on an
+       early language-change event before DOMContentLoaded. In that ordering
+       the placeholder is already inside .feature-diagram-stack, so only
+       looking for a direct child leaves the deployed Features mock empty. */
+    var old = section.querySelector(
+      ":scope > .feature-diagram, :scope > .feature-pair > .feature-diagram-stack > .feature-diagram",
+    );
     if (old) old.replaceWith(htmlToElement(html));
   }
 
@@ -787,7 +590,6 @@
   }
 
   function normalizeScreenMocks() {
-    /* capture the original gallery targets before replacing any DOM */
     var galleryCanvas = document.querySelector(
       ".screenshot-scroller .screenshot-card:first-child",
     );
@@ -799,7 +601,6 @@
     var galleryWorkspace = findScreenshotCard(".fd-setting-row");
     var galleryExport = findScreenshotCard(".fd-segmented");
 
-    /* hero = actual CanvasScreen baseline; first feature and first app preview reuse it exactly */
     var hero = document.querySelector(".hero-visual");
     if (hero) {
       hero.className = "hero-visual fd-canvas-screen fd-app-screen";
@@ -822,7 +623,6 @@
       galleryCanvas.classList.add("is-code-verified-mock");
     }
 
-    /* Features page: 保存は実Tree mode、Galleryは既定のセーブスロットを使い分ける。 */
     replaceFeatureDiagram("#drawing", canvasScreen(null));
     replaceFeatureDiagram("#animation", timelineScreen());
     replaceFeatureDiagram("#editing", canvasScreen("layer"));
@@ -833,7 +633,6 @@
     replaceDiagramNode('#workspace [data-mock-screen="theme"]', themeScreen());
     replaceFeatureDiagram("#export", exportScreen());
 
-    /* Home main-feature rows */
     var rows = document.querySelectorAll("#features .feature-row");
     if (rows[1]) {
       var m1 = rows[1].querySelector(".feature-media");
@@ -852,12 +651,11 @@
       if (m4) m4.replaceChildren(htmlToElement(exportScreen()));
     }
 
-    /* Home app-preview gallery */
     replaceCard(galleryTimeline, timelineScreen());
     replaceCard(galleryLayer, canvasScreen("layer"));
     replaceCard(galleryOnion, canvasScreen("onion"));
     replaceCard(galleryAudio, audioScreen());
-    replaceCard(gallerySave, saveSlotsScreen());
+    replaceCard(gallerySave, saveTreeScreen());
     replaceCard(galleryWorkspace, workspaceScreen());
     replaceCard(galleryExport, exportScreen());
   }
@@ -870,199 +668,87 @@
     btn.className = "scroll-top-btn";
     btn.innerHTML =
       '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"/></svg>';
+    btn.setAttribute("aria-label", "ページ上部へ");
     document.body.appendChild(btn);
-    function applyLabel() {
-      var lang = document.documentElement.getAttribute("lang") || "ja";
-      var label =
-        window.NIARIM_I18N &&
-        window.NIARIM_I18N.translate(lang, "common.scrollTop");
-      btn.setAttribute("aria-label", label || "ページトップへ戻る");
-    }
-    function applyScrollState() {
+
+    function updateScrollUi() {
       scheduled = false;
-      var y = window.scrollY;
-      if (header) header.classList.toggle("is-scrolled", y > 8);
-      btn.classList.toggle("is-visible", y > 480);
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      if (header) header.classList.toggle("is-scrolled", y > 16);
+      btn.classList.toggle("is-visible", y > 520);
     }
-    function requestScrollState() {
+
+    function scheduleScrollUi() {
       if (scheduled) return;
       scheduled = true;
-      requestAnimationFrame(applyScrollState);
+      requestAnimationFrame(updateScrollUi);
     }
-    applyLabel();
-    applyScrollState();
-    document.addEventListener("niarim:langchange", applyLabel);
-    window.addEventListener("scroll", requestScrollState, { passive: true });
+
+    window.addEventListener("scroll", scheduleScrollUi, { passive: true });
+    updateScrollUi();
     btn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
   function initNavToggle() {
-    var toggle = document.querySelector(".nav-toggle");
-    var nav = document.querySelector(".main-nav");
-    if (!toggle || !nav) return;
-    // Escapeで閉じたときにフォーカスが画面外の（非表示になった）メニュー項目に
-    // 残ると、キーボード操作の現在地を見失うため、開閉ボタンへ明示的に戻す。
-    function close(returnFocus) {
-      var wasOpen = nav.classList.contains("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
-      if (returnFocus && wasOpen) toggle.focus();
+    var btn = document.querySelector(".nav-toggle");
+    var nav = document.querySelector(".site-nav");
+    if (!btn || !nav) return;
+    var panel = document.createElement("div");
+    panel.className = "nav-panel";
+    panel.setAttribute("aria-hidden", "true");
+    var links = nav.cloneNode(true);
+    links.classList.remove("site-nav");
+    links.classList.add("nav-panel-links");
+    panel.appendChild(links);
+    document.body.appendChild(panel);
+
+    function closeNav() {
+      panel.classList.remove("is-open");
+      panel.setAttribute("aria-hidden", "true");
+      btn.setAttribute("aria-expanded", "false");
     }
-    toggle.addEventListener("click", function () {
-      var isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      nav.classList.toggle("is-open", !isOpen);
+
+    btn.addEventListener("click", function () {
+      var open = !panel.classList.contains("is-open");
+      panel.classList.toggle("is-open", open);
+      panel.setAttribute("aria-hidden", open ? "false" : "true");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    nav.addEventListener("click", function (event) {
-      if (event.target.closest && event.target.closest("a")) close(false);
+    panel.addEventListener("click", function (event) {
+      if (event.target.closest("a")) closeNav();
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") close(true);
+      if (event.key === "Escape") closeNav();
     });
   }
 
   function initFaqAccordion() {
-    var items = document.querySelectorAll(".faq-item");
-    if (!items.length) return;
-
-    // 開閉ボタンと中身を aria-controls / aria-labelledby で結び付ける。
-    // 以前は aria-expanded のみで、支援技術からは「このボタンがどの領域を
-    // 開くのか」が辿れなかった。
-    items.forEach(function (item, index) {
-      var question = item.querySelector(".faq-question");
-      var answer = item.querySelector(".faq-answer");
-      if (!question || !answer) return;
-      if (!answer.id) answer.id = "faq-answer-" + index;
-      if (!question.id) question.id = "faq-question-" + index;
-      question.setAttribute("aria-controls", answer.id);
-      question.setAttribute(
-        "aria-expanded",
-        String(item.classList.contains("is-open")),
-      );
-      answer.setAttribute("role", "region");
-      answer.setAttribute("aria-labelledby", question.id);
+    document.querySelectorAll(".faq-question").forEach(function (q) {
+      q.addEventListener("click", function () {
+        var item = q.closest(".faq-item");
+        if (!item) return;
+        var open = item.classList.toggle("is-open");
+        q.setAttribute("aria-expanded", open ? "true" : "false");
+      });
     });
-
-    // 開閉はイベント委譲で扱う（後から差し込まれた項目にも効くため）。
-    document.addEventListener("click", function (event) {
-      var question =
-        event.target.closest && event.target.closest(".faq-question");
-      if (!question) return;
-      var item = question.closest(".faq-item");
-      var answer = item && item.querySelector(".faq-answer");
-      if (!item || !answer) return;
-      var isOpen = item.classList.contains("is-open");
-      item.classList.toggle("is-open", !isOpen);
-      question.setAttribute("aria-expanded", String(!isOpen));
-      if (isOpen) {
-        // 閉じるときは、いまの高さをpxに戻してから0へ動かす。
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        void answer.offsetHeight;
-        answer.style.maxHeight = "0px";
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      }
-    });
-
-    // 開き切ったら高さの上限を外す。px固定のままだと、測った値と実際の
-    // 高さが数px食い違って最終行の下が切れることがある（フォントの
-    // 読み込み完了や行の丸めで生じる）。
-    document.addEventListener(
-      "transitionend",
-      function (event) {
-        if (event.propertyName !== "max-height") return;
-        var answer = event.target;
-        if (!answer.classList || !answer.classList.contains("faq-answer"))
-          return;
-        var item = answer.closest(".faq-item");
-        if (item && item.classList.contains("is-open"))
-          answer.style.maxHeight = "none";
-      },
-      true,
-    );
-
-    // 開いたまま画面幅が変わったり言語を切り替えたりすると、px固定の
-    // max-heightが実際の内容の高さと合わなくなり、答えが途中で切れる
-    // （逆に余白が余る）ため、開いている項目の高さを測り直す。
-    function remeasure() {
-      // 開いている項目は上限を外しておけば、幅の変化や言語切り替えで
-      // 中身の高さが変わっても勝手に追従する（px固定だと合わなくなる）。
-      document
-        .querySelectorAll(".faq-item.is-open .faq-answer")
-        .forEach(function (answer) {
-          answer.style.maxHeight = "none";
-        });
-    }
-
-    var resizeTimer = null;
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(remeasure, 150);
-    });
-    document.addEventListener("niarim:langchange", function () {
-      requestAnimationFrame(remeasure);
-    });
-  }
-
-  function ensureNineCommunityTiles() {
-    var gallery = document.querySelector(".community-gallery");
-    if (!gallery) return;
-    var cards = gallery.querySelectorAll(".community-card:not(.is-more-cta)");
-    var more = gallery.querySelector(".community-card.is-more-cta");
-    if (cards.length !== 8 || !more) return;
-    var ninth = cards[cards.length - 1].cloneNode(true);
-    var badge = ninth.querySelector(".rank-badge");
-    if (badge) badge.textContent = "9";
-    gallery.insertBefore(ninth, more);
-  }
-
-  /**
-   * ページ内リンクの着地点がずれるのを防ぐ。
-   *
-   * 画面外のセクションは content-visibility: auto で描画を遅らせているが、
-   * まだ描画していないセクションの高さはブラウザが見積り値（720px）で
-   * 扱う。実際の機能セクションはこれよりずっと高いため、ページを開いた
-   * 直後に機能ページのタブを押すと、目的の見出しより手前で止まってしまう
-   * （実測で最大1155pxのずれ。押した直後に is-active が1つ前の節を指す
-   * のもこれが原因）。
-   *
-   * リンクを押した時点で見積りをやめ、実寸で並べ直してからスクロールさせる。
-   * 一度きりの切り替えなので、初回表示の描画を軽くする効果は保たれる。
-   */
-  function settleLayoutForAnchor() {
-    var root = document.documentElement;
-    if (root.classList.contains("is-anchor-nav")) return;
-    root.classList.add("is-anchor-nav");
-    // ここで一度レイアウトを確定させておかないと、ブラウザは見積りの
-    // ままスクロール位置を決めてしまう。
-    void document.body.offsetHeight;
   }
 
   function initAnchorNav() {
-    document.addEventListener(
-      "click",
-      function (event) {
-        var link = event.target.closest && event.target.closest('a[href^="#"]');
-        if (!link) return;
-        var hash = link.getAttribute("href");
-        if (!hash || hash === "#") return;
-        var target = null;
-        try {
-          target = document.querySelector(hash);
-        } catch (_) {
-          return;
-        }
-        if (target) settleLayoutForAnchor();
-      },
-      // ブラウザ既定のスクロールより前に走らせる必要があるため捕捉フェーズ。
-      true,
-    );
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var href = link.getAttribute("href");
+        if (!href || href === "#") return;
+        var target = document.querySelector(href);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", href);
+      });
+    });
 
-    // /features/#export のようにハッシュ付きで開かれた場合も同じ理由で
-    // ずれるため、並べ直したうえで目的地へ入れ直す。
-    if (window.location.hash && window.location.hash.length > 1) {
+    if (window.location.hash) {
       var initial = null;
       try {
         initial = document.querySelector(window.location.hash);
@@ -1078,6 +764,24 @@
     }
   }
 
+  function settleLayoutForAnchor() {
+    document.documentElement.style.scrollBehavior = "auto";
+    requestAnimationFrame(function () {
+      document.documentElement.style.scrollBehavior = "";
+    });
+  }
+
+  function ensureNineCommunityTiles() {
+    var gallery = document.querySelector(".community-gallery");
+    if (!gallery) return;
+    var items = gallery.querySelectorAll(":scope > *");
+    if (!items.length || items.length >= 9) return;
+    for (var i = items.length; i < 9; i++) {
+      var clone = items[i % items.length].cloneNode(true);
+      gallery.appendChild(clone);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     normalizeScreenMocks();
     initScrollUi();
@@ -1085,15 +789,7 @@
     initFaqAccordion();
     initAnchorNav();
     ensureNineCommunityTiles();
-    // 画面図はこのファイルがJavaScriptで組み立てているため、i18n.jsが
-    // 最初に翻訳を当てた時点ではまだDOMに存在しない。そのままだと図の中の
-    // ラベルだけ日本語のまま残る（実際に英語表示でも「フレーム一覧」等が
-    // 出ていた）。組み立て後に現在の言語で翻訳し直す。
-    // 以後の言語切り替えは i18n.js が [data-i18n] を都度走査するため、
-    // この一度の再適用だけで足りる。
-    // 画面再現図は実機と同じ寸法のUIを、実機より小さい枠に積んでいる。
-    // 枠に収まりきらない画面は、下の段が切れたまま表示されてしまうので、
-    // 収まる倍率を測って縮める（レイアウトは等倍のまま見た目だけ縮小）。
+
     function fitMockScreens(force) {
       var mocks = document.querySelectorAll(
         ".fd-app-screen, .fd-route-screen, .feature-section > .feature-diagram",
@@ -1112,79 +808,24 @@
         var need = m.scrollHeight;
         var have = m.clientHeight;
         if (!have || need <= have + 1) return;
-        // 枠の外側の大きさ（ベゼルの線も含む）。倍率を掛けたあとの
-        // 見た目がこの大きさとぴったり同じになるようにする。
-        // 以前は内側（clientWidth/clientHeight）を基準にしていたため、
-        // 6pxのベゼル2本ぶん（12px）だけ小さく描かれ、しかもその12pxは
-        // 幅に対しては高さに対してよりずっと大きな割合なので、端末の
-        // 縦横比が 320:569 から 3.9% ずれていた（360px幅で実測）。
         var boxW = m.offsetWidth;
         var boxH = m.offsetHeight;
-        // 極端に縮むと文字が読めないので下限を設ける。320px幅の端末では
-        // 枠自体が小さく、0.62では収まりきらずコマ一覧の下端が数px
-        // 切れていたため、0.56まで許容する。
         var scale = Math.max(0.56, have / need);
         var z = Math.round(scale * 1000) / 1000;
 
         function applyFit(zoom) {
-          // 幅・高さは他のレイヤーが !important で 100% に固定しているため、
-          // インラインの !important で上書きする必要がある。
-          // 大きさは % ではなく実測のpxで持たせ、広げたぶんを負のマージンで
-          // 取り消す。transform はレイアウト上の大きさを変えないため、
-          // % で広げると「枠が伸びる→親の行が伸びる→また測り直す」の
-          // 堂々巡りになり、スマホのヒーローで倍率が付いたり消えたりしていた。
           m.style.setProperty("--fd-fit", String(zoom));
-          m.style.setProperty("transform", "scale(" + zoom + ")", "important");
-          m.style.setProperty("transform-origin", "top left", "important");
-          m.style.setProperty("width", boxW / zoom + "px", "important");
-          m.style.setProperty("height", boxH / zoom + "px", "important");
-          m.style.setProperty(
-            "margin-right",
-            -(boxW / zoom - boxW) + "px",
-            "important",
-          );
-          m.style.setProperty(
-            "margin-bottom",
-            -(boxH / zoom - boxH) + "px",
-            "important",
-          );
-          // 他のレイヤーが max-width/max-height を 100% で固定しているため、
-          // 広げた分が clamp されないよう外す。
-          m.style.setProperty("max-width", "none", "important");
-          m.style.setProperty("max-height", "none", "important");
+          m.classList.add("is-fit-scaled");
         }
-
         applyFit(z);
-        m.classList.add("is-fit-scaled");
-
-        // 幅を広げたぶん行の折り返しが変わり、縮めたあとでも数pxだけ
-        // はみ出しが残ることがある。残っていたら、その実測でもう一度だけ
-        // 詰める（何度も繰り返すと文字が読めない大きさになるので3回まで）。
-        for (var pass = 0; pass < 3; pass += 1) {
-          var rest = m.scrollHeight - m.clientHeight;
-          if (rest <= 1) break;
-          var next = Math.max(
-            0.56,
-            Math.round(((z * have) / (have + rest)) * 1000) / 1000,
-          );
-          if (next >= z) break;
-          z = next;
-          applyFit(z);
-        }
       });
     }
-    // 初期表示直後はまだ高さが確定していないことがあるので、
-    // レイアウト後・フォント読み込み後にも測り直す。
-    // レイアウトが確定していく途中の測定は当てにならないので、節目ごとに
-    // キャッシュを無視して測り直す（force）。以降のリサイズは幅が
-    // 変わったときだけで足りる。
+
     function refitNow() {
       fitMockScreens(true);
     }
     requestAnimationFrame(refitNow);
     window.addEventListener("load", refitNow);
-    // 後から足しているデザイン用CSSが当たると枠の大きさが変わるため、
-    // それが出揃ってから必ず測り直す。
     whenDesignLayersReady(function () {
       requestAnimationFrame(refitNow);
     });
@@ -1198,12 +839,6 @@
     }
     window.addEventListener("resize", scheduleFit);
 
-    // 画面幅ではなく「枠そのものの大きさ」が変わることでも収まりは崩れる。
-    // スマホのヒーローでは枠の幅がレイアウト確定後に決まるため、
-    // 初回の測定が空振りして、ツールバーやコマ一覧が枠の下からはみ出した
-    // まま（＝ベゼルで切れたまま）表示されていた。
-    // 枠自身は倍率調整でwidth/heightを書き換えるので、監視するのは
-    // 「こちらが触らない親要素」にして、自分の書き換えで再発火しないようにする。
     if (window.ResizeObserver) {
       var fitObserver = new ResizeObserver(scheduleFit);
       Array.prototype.forEach.call(
