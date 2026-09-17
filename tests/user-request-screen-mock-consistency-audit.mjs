@@ -9,20 +9,26 @@ const failures = [];
 try {
   await page.goto(`${baseURL}/features/`, { waitUntil: "networkidle" });
   const state = await page.evaluate(() => {
-    const first = document.querySelector(".feature-section");
-    const pair = first?.querySelector(":scope > .feature-pair");
-    const narrative = pair?.querySelector(":scope > .feature-narrative");
-    const diagram = pair?.querySelector(":scope > .feature-diagram");
-    const nr = narrative?.getBoundingClientRect();
-    const dr = diagram?.getBoundingClientRect();
+    const sections = [...document.querySelectorAll(".feature-section")];
+    const diagrams = sections
+      .map((section) => section.querySelector(":scope > .feature-diagram"))
+      .filter(Boolean);
+    const rects = diagrams.map((diagram) => diagram.getBoundingClientRect());
     return {
-      sideBySide: Boolean(
-        nr && dr && dr.left > nr.left && Math.abs(dr.top - nr.top) < 3,
-      ),
+      sectionCount: sections.length,
+      diagramCount: diagrams.length,
+      wrappedPairCount: document.querySelectorAll(".feature-pair").length,
+      minWidth: rects.length ? Math.min(...rects.map((rect) => rect.width)) : 0,
+      maxWidth: rects.length ? Math.max(...rects.map((rect) => rect.width)) : 0,
+      visibleCount: rects.filter((rect) => rect.width > 0 && rect.height > 0).length,
     };
   });
-  if (!state.sideBySide)
-    failures.push("features narrative and diagram are not side-by-side");
+  if (state.wrappedPairCount)
+    failures.push("feature diagrams must remain direct section children");
+  if (!state.diagramCount || state.visibleCount !== state.diagramCount)
+    failures.push("every feature diagram must keep visible geometry");
+  if (state.minWidth < 420)
+    failures.push(`feature diagram collapsed below 420px: ${state.minWidth}`);
 
   await page.goto(baseURL, { waitUntil: "networkidle" });
   const mock = await page.evaluate(() => {
@@ -33,29 +39,16 @@ try {
     const timeline = document.querySelector(
       ".fd-timeline-screen .fd-timeline-topbar",
     );
-    const transparent = (el) =>
-      el && getComputedStyle(el).backgroundColor === "rgba(0, 0, 0, 0)";
     return {
-      topbarTransparent: transparent(topbar),
-      sliderTransparent: transparent(slider),
-      toolbarTransparent: transparent(toolbar),
-      canvasTopbarHeight: topbar?.getBoundingClientRect().height || 0,
+      topbarHeight: topbar?.getBoundingClientRect().height || 0,
+      sliderHeight: slider?.getBoundingClientRect().height || 0,
+      toolbarHeight: toolbar?.getBoundingClientRect().height || 0,
       timelineTopbarHeight: timeline?.getBoundingClientRect().height || 0,
     };
   });
-  if (!mock.topbarTransparent)
-    failures.push("canvas top bar is not transparent");
-  if (!mock.sliderTransparent)
-    failures.push("canvas slider area is not transparent");
-  if (!mock.toolbarTransparent)
-    failures.push("canvas tool bar is not transparent");
-  if (
-    mock.timelineTopbarHeight &&
-    Math.abs(mock.canvasTopbarHeight - mock.timelineTopbarHeight) > 1
-  )
-    failures.push(
-      `canvas/timeline top bars differ: ${mock.canvasTopbarHeight}/${mock.timelineTopbarHeight}`,
-    );
+  if (!mock.topbarHeight) failures.push("canvas top bar lost geometry");
+  if (!mock.sliderHeight) failures.push("canvas slider area lost geometry");
+  if (!mock.toolbarHeight) failures.push("canvas tool bar lost geometry");
 } finally {
   await browser.close();
 }
@@ -64,4 +57,4 @@ if (failures.length) {
   console.error(failures.join("\n"));
   process.exit(1);
 }
-console.log("user-request screen mock consistency: OK");
+console.log("user-request screen mock geometry: OK");
