@@ -7,31 +7,38 @@
         "描きたいと思ったら今すぐにでも始められる。<br>全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。",
       community: "NIARIMでアニメを制作して、作品広場に投稿してみませんか？",
       project: "星降る夜",
+      onionNext: "次フレーム",
     },
     en: {
       community: "Create an animation with NIARIM and share it in the Gallery.",
       project: "Starlit Night",
+      onionNext: "Next frame",
     },
     "zh-Hans": {
       community: "用 NIARIM 制作动画，并投稿到作品广场吧。",
       project: "星夜",
+      onionNext: "后一帧",
     },
     "zh-Hant": {
       community: "用 NIARIM 製作動畫，並投稿到作品廣場吧。",
       project: "星夜",
+      onionNext: "後一幀",
     },
     ko: {
       community: "NIARIM으로 애니메이션을 만들어 작품광장에 올려 보세요.",
       project: "별이 내리는 밤",
+      onionNext: "다음 프레임",
     },
     fr: {
       community:
         "Créez une animation avec NIARIM et publiez-la dans la Galerie.",
       project: "Nuit étoilée",
+      onionNext: "Image suivante",
     },
     es: {
       community: "Crea una animación con NIARIM y publícala en la Galería.",
       project: "Noche estrellada",
+      onionNext: "Fotograma siguiente",
     },
   };
 
@@ -47,6 +54,7 @@
       if (!dict[code]) dict[code] = {};
       dict[code]["communityPage.cta.body"] = copy[code].community;
       dict[code]["fd.projectName"] = copy[code].project;
+      dict[code]["fd.onionNext"] = copy[code].onionNext;
     });
     if (dict.ja) dict.ja["cta.body"] = copy.ja.ctaBody;
   }
@@ -84,7 +92,9 @@
       el.textContent =
         key === "fd.projectName"
           ? copy[code].project
-          : api.translate(code, key);
+          : key === "fd.onionNext"
+            ? copy[code].onionNext
+            : api.translate(code, key);
     });
   }
 
