@@ -114,7 +114,6 @@
 
   function applyRequestedCopy() {
     installDictionaryOverrides();
-    pairFeatureNarratives(document);
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
@@ -128,9 +127,15 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     installDictionaryOverrides();
-    pairFeatureNarratives(document);
     applyRequestedCopy();
-    requestAnimationFrame(applyRequestedCopy);
+    /* main.js hydrates the feature screen mocks during DOMContentLoaded while
+       they are still direct children of each section. Pair only after that
+       hydration pass, so the narrative can move left and the fully-built mock
+       can move right without breaking main.js's direct-child lookup. */
+    requestAnimationFrame(function () {
+      pairFeatureNarratives(document);
+      applyRequestedCopy();
+    });
   });
   document.addEventListener("niarim:langchange", applyRequestedCopy);
 
