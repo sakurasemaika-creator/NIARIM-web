@@ -21,6 +21,12 @@ jobs:
           const url = 'https://niarim-web.niarim.workers.dev/features/';
           for (const [name, width, height] of [['pc', 1440, 1000], ['sp', 390, 844]]) {
             const page = await browser.newPage({ viewport: { width, height } });
+            const consoleMessages = [];
+            const pageErrors = [];
+            const failedRequests = [];
+            page.on('console', (msg) => consoleMessages.push(`${msg.type()}: ${msg.text()}`));
+            page.on('pageerror', (error) => pageErrors.push(String(error)));
+            page.on('requestfailed', (request) => failedRequests.push(`${request.url()} :: ${request.failure()?.errorText ?? 'unknown'}`));
             const r = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
             console.log(name, r?.status(), page.url());
             const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -32,6 +38,10 @@ jobs:
             await page.waitForTimeout(300);
             await page.screenshot({ path: `capture-${name}.png`, fullPage: true });
             const data = await page.evaluate(() => ({
+              url: location.href,
+              title: document.title,
+              readyState: document.readyState,
+              scripts: [...document.scripts].map((s) => ({ src: s.src, type: s.type, defer: s.defer, async: s.async })),
               nav: [...document.querySelectorAll('.main-nav a:not(.btn)')].map((e) => ({
                 t: e.textContent.trim(),
                 r: e.getBoundingClientRect().toJSON(),
@@ -48,10 +58,16 @@ jobs:
                   scroll: [e.scrollWidth, e.scrollHeight],
                   client: [e.clientWidth, e.clientHeight],
                   tr: getComputedStyle(e).transform,
+                  childCount: e.childElementCount,
+                  htmlLength: e.innerHTML.length,
+                  text: e.textContent.trim().slice(0, 160),
                 })),
                 spec: s.querySelector('.spec-grid')?.getBoundingClientRect().toJSON(),
               })),
             }));
+            data.consoleMessages = consoleMessages;
+            data.pageErrors = pageErrors;
+            data.failedRequests = failedRequests;
             fs.writeFileSync(`geometry-${name}.json`, JSON.stringify(data, null, 2));
             await page.close();
           }
