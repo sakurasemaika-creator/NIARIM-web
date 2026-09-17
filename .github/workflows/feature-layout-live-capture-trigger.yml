@@ -1,106 +1,37 @@
-name: Trigger live feature capture
+name: Recover and verify feature mocks
 on: push
 permissions:
-  contents: read
+  contents: write
 jobs:
-  capture:
+  recover:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Install Chromium
-        run: |
-          npm install --no-save playwright@1.55.0
-          npx playwright install --with-deps chromium
-      - name: Capture deployed Features page and geometry
-        run: |
-          cat > capture.mjs <<'EOF'
-          import { chromium } from 'playwright';
-          import fs from 'node:fs';
-          import crypto from 'node:crypto';
-          const browser = await chromium.launch({ headless: true });
-          const url = 'https://niarim-web.niarim.workers.dev/features/';
-          for (const [name, width, height] of [['pc', 1440, 1000], ['sp', 390, 844]]) {
-            const page = await browser.newPage({ viewport: { width, height } });
-            const consoleMessages = [];
-            const pageErrors = [];
-            const failedRequests = [];
-            const responseMeta = [];
-            page.on('console', (msg) => consoleMessages.push(`${msg.type()}: ${msg.text()}`));
-            page.on('pageerror', (error) => pageErrors.push(String(error)));
-            page.on('requestfailed', (request) => failedRequests.push(`${request.url()} :: ${request.failure()?.errorText ?? 'unknown'}`));
-            page.on('response', async (response) => {
-              const u = response.url();
-              if (!/\/(features\/|js\/main\.js|js\/i18n\.js)/.test(u)) return;
-              try {
-                const body = await response.body();
-                responseMeta.push({ url: u, status: response.status(), bytes: body.length, sha256: crypto.createHash('sha256').update(body).digest('hex') });
-                if (u.includes('/js/main.js')) fs.writeFileSync(`live-main-${name}.js`, body);
-                if (/\/features\/?(?:\?|$)/.test(u)) fs.writeFileSync(`live-features-${name}.html`, body);
-              } catch (error) {
-                responseMeta.push({ url: u, status: response.status(), bodyError: String(error) });
-              }
-            });
-            await page.addInitScript(() => {
-              window.__niarimMutations = [];
-              const originalReplaceWith = Element.prototype.replaceWith;
-              Element.prototype.replaceWith = function (...nodes) {
-                if (this.matches?.('.feature-diagram')) {
-                  window.__niarimMutations.push({ op: 'replaceWith', id: this.closest('.feature-section')?.id || '', oldChildren: this.childElementCount, newHtml: nodes.map((n) => n?.outerHTML || String(n)).join('').slice(0, 500) });
-                }
-                return originalReplaceWith.apply(this, nodes);
-              };
-              const originalReplaceChildren = Element.prototype.replaceChildren;
-              Element.prototype.replaceChildren = function (...nodes) {
-                if (this.matches?.('.feature-diagram') || this.querySelector?.('.feature-diagram')) {
-                  window.__niarimMutations.push({ op: 'replaceChildren', cls: this.className || '', count: nodes.length });
-                }
-                return originalReplaceChildren.apply(this, nodes);
-              };
-            });
-            const r = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
-            console.log(name, r?.status(), page.url());
-            const beforeScroll = await page.evaluate(() => ({
-              mutations: window.__niarimMutations || [],
-              diagrams: [...document.querySelectorAll('.feature-section > .feature-diagram')].map((e) => ({ id: e.closest('.feature-section')?.id, cls: e.className, children: e.childElementCount, htmlLength: e.innerHTML.length, opacity: getComputedStyle(e.closest('.feature-section')).opacity })),
-            }));
-            const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-            for (let y = 0; y < pageHeight; y += Math.max(320, Math.floor(height * 0.7))) {
-              await page.evaluate((scrollY) => window.scrollTo(0, scrollY), y);
-              await page.waitForTimeout(160);
-            }
-            await page.evaluate(() => window.scrollTo(0, 0));
-            await page.waitForTimeout(500);
-            await page.screenshot({ path: `capture-${name}.png`, fullPage: true });
-            const data = await page.evaluate(() => ({
-              url: location.href,
-              title: document.title,
-              readyState: document.readyState,
-              scripts: [...document.scripts].map((s) => ({ src: s.src, type: s.type, defer: s.defer, async: s.async })),
-              sections: [...document.querySelectorAll('.feature-section')].map((s) => ({
-                id: s.id,
-                opacity: getComputedStyle(s).opacity,
-                n: s.querySelector('.feature-narrative')?.getBoundingClientRect().toJSON(),
-                d: [...s.querySelectorAll(':scope > .feature-diagram, .feature-diagram-stack > .feature-diagram')].map((e) => ({ c: e.className, r: e.getBoundingClientRect().toJSON(), scroll: [e.scrollWidth, e.scrollHeight], client: [e.clientWidth, e.clientHeight], tr: getComputedStyle(e).transform, childCount: e.childElementCount, htmlLength: e.innerHTML.length, text: e.textContent.trim().slice(0, 160) })),
-                spec: s.querySelector('.spec-grid')?.getBoundingClientRect().toJSON(),
-              })),
-            }));
-            data.beforeScroll = beforeScroll;
-            data.responseMeta = responseMeta;
-            data.consoleMessages = consoleMessages;
-            data.pageErrors = pageErrors;
-            data.failedRequests = failedRequests;
-            fs.writeFileSync(`geometry-${name}.json`, JSON.stringify(data, null, 2));
-            await page.close();
-          }
-          await browser.close();
-          EOF
-          node capture.mjs
-      - uses: actions/upload-artifact@v4
         with:
-          name: feature-layout-live-capture
-          path: |
-            capture-*.png
-            geometry-*.json
-            live-main-*.js
-            live-features-*.html
+          fetch-depth: 0
+      - name: Restore exact main.js and apply race fix
+        run: |
+          set -euo pipefail
+          BASE=626b07ad9563a92437e1018d75dcb109db364e60
+          git show "$BASE:public/js/main.js" > public/js/main.js
+          git show "$BASE:.github/workflows/feature-layout-live-capture-trigger.yml" > .github/workflows/feature-layout-live-capture-trigger.yml
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('public/js/main.js')
+          s = p.read_text()
+          old = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    var old = section.querySelector(":scope > .feature-diagram");\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
+          new = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    /* user-request-fixes.js can pair the feature columns on an early\n       language-change event before DOMContentLoaded. Support both the static\n       direct-child placeholder and the already-paired diagram stack. */\n    var old = section.querySelector(\n      ":scope > .feature-diagram, :scope > .feature-pair > .feature-diagram-stack > .feature-diagram",\n    );\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
+          if old not in s:
+              raise SystemExit('expected replaceFeatureDiagram source not found')
+          p.write_text(s.replace(old, new))
+          PY
+          node --check public/js/main.js
+          test "$(wc -c < public/js/main.js)" -gt 51963
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add public/js/main.js .github/workflows/feature-layout-live-capture-trigger.yml
+          git commit -m "fix: recover and restore paired feature mocks"
+          git push origin HEAD:dev_branch
