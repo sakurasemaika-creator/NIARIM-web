@@ -59,6 +59,19 @@
     if (dict.ja) dict.ja["cta.body"] = copy.ja.ctaBody;
   }
 
+  function pairFeatureNarratives(root) {
+    (root || document).querySelectorAll?.(".feature-section").forEach(function (section) {
+      if (section.querySelector(":scope > .feature-pair")) return;
+      var narrative = section.querySelector(":scope > .feature-narrative");
+      var diagram = section.querySelector(":scope > .feature-diagram");
+      if (!narrative || !diagram) return;
+      var pair = document.createElement("div");
+      pair.className = "feature-pair";
+      narrative.before(pair);
+      pair.append(narrative, diagram);
+    });
+  }
+
   function upgradeLegacyFrameModeControls(root) {
     (root || document)
       .querySelectorAll(".fd-frame-strip-mode")
@@ -101,6 +114,7 @@
 
   function applyRequestedCopy() {
     installDictionaryOverrides();
+    pairFeatureNarratives(document);
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
@@ -114,6 +128,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     installDictionaryOverrides();
+    pairFeatureNarratives(document);
     applyRequestedCopy();
     requestAnimationFrame(applyRequestedCopy);
   });
