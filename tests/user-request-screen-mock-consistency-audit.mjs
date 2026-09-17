@@ -24,12 +24,23 @@ try {
       const spec = section.querySelector(":scope > .spec-grid");
       return !spec || !spec.closest(".feature-pair");
     }).length;
+    const hydrated = {
+      drawing: !!document.querySelector("#drawing .feature-pair > .fd-canvas-screen"),
+      animation: !!document.querySelector("#animation .feature-pair > .fd-timeline-screen"),
+      editing: !!document.querySelector("#editing .feature-pair > .fd-canvas-screen .fd-layer-panel-overlay"),
+      advanced: !!document.querySelector("#advanced .feature-pair > .fd-canvas-screen .fd-app-onion-panel"),
+      audio: !!document.querySelector("#audio .feature-pair > .fd-audio-screen"),
+      save: !!document.querySelector("#save .feature-pair > .fd-route-screen"),
+      workspace: !!document.querySelector("#workspace .feature-pair > .fd-workspace-screen"),
+      export: !!document.querySelector("#export .feature-pair > .fd-route-screen"),
+    };
     return {
       sectionCount: sections.length,
       pairCount: pairs.length,
       diagramCount: diagrams.length,
       narrativeCount: narratives.length,
       specGridsOutsidePairs,
+      hydrated,
       minWidth: rects.length ? Math.min(...rects.map((rect) => rect.width)) : 0,
       visibleCount: rects.filter((rect) => rect.width > 0 && rect.height > 0).length,
     };
@@ -44,6 +55,11 @@ try {
     failures.push("every feature diagram must keep visible geometry");
   if (state.minWidth < 420)
     failures.push(`feature diagram collapsed below 420px: ${state.minWidth}`);
+  const unhydrated = Object.entries(state.hydrated)
+    .filter(([, ok]) => !ok)
+    .map(([name]) => name);
+  if (unhydrated.length)
+    failures.push(`feature mocks were not hydrated: ${unhydrated.join(", ")}`);
 
   await page.goto(baseURL, { waitUntil: "networkidle" });
   const mock = await page.evaluate(() => {
