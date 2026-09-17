@@ -35,9 +35,9 @@
   }
 
   /* main.js が再現図を完成させた後にだけ構造を組む。
-     左列は narrative + spec-grid、右列はその節の全 feature-diagram を
-     ひとつの stack にする。これで2枚以上の再現図も同じX座標に揃い、
-     spec は右列の高さに引っ張られず narrative の直下から始まる。 */
+     PCでは再現図stackを本文とカードと同じflowの先頭で右floatさせる。
+     これにより本文は再現図の左隣、spec-gridは本文の直下から始まり、
+     再現図の下端を越えた行から自然に右端まで広がる。 */
   function pairFeatureNarratives(root) {
     (root || document).querySelectorAll?.(".feature-section").forEach(function (section) {
       if (section.querySelector(":scope > .feature-pair")) return;
@@ -52,8 +52,8 @@
       var stack = document.createElement("div");
       stack.className = "feature-diagram-stack";
       narrative.before(pair);
-      pair.append(left, stack);
-      left.append(narrative);
+      pair.append(left);
+      left.append(stack, narrative);
       if (spec) left.append(spec);
       diagrams.forEach(function (diagram) { stack.append(diagram); });
     });
