@@ -1,34 +1,59 @@
-name: Recover feature mocks
+name: Verify recovered feature mocks
 on: push
 permissions:
-  contents: write
+  contents: read
 jobs:
-  recover:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Restore exact main.js and apply race fix
+      - name: Validate source
         run: |
           set -euo pipefail
-          BASE=626b07ad9563a92437e1018d75dcb109db364e60
-          git show "$BASE:public/js/main.js" > public/js/main.js
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('public/js/main.js')
-          s = p.read_text()
-          old = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    var old = section.querySelector(":scope > .feature-diagram");\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
-          new = '''  function replaceFeatureDiagram(sectionSelector, html) {\n    var section = document.querySelector(sectionSelector);\n    if (!section) return;\n    /* user-request-fixes.js may pair the columns before DOMContentLoaded. */\n    var old = section.querySelector(\n      ":scope > .feature-diagram, :scope > .feature-pair > .feature-diagram-stack > .feature-diagram",\n    );\n    if (old) old.replaceWith(htmlToElement(html));\n  }'''
-          if old not in s:
-              raise SystemExit('expected replaceFeatureDiagram source not found')
-          p.write_text(s.replace(old, new))
-          PY
           node --check public/js/main.js
           test "$(wc -c < public/js/main.js)" -gt 51963
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add public/js/main.js
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "fix: recover and restore paired feature mocks"
-          git push origin HEAD:dev_branch
+          grep -q 'feature-diagram-stack > .feature-diagram' public/js/main.js
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Capture deployed Features page
+        run: |
+          cat > capture.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          const browser = await chromium.launch({ headless: true });
+          const url = 'https://niarim-web.niarim.workers.dev/features/';
+          let failed = false;
+          for (const [name, width, height] of [['pc',1440,1000],['sp',390,844]]) {
+            const page = await browser.newPage({viewport:{width,height}});
+            const errors=[];
+            page.on('pageerror', e => errors.push(String(e)));
+            const r = await page.goto(url,{waitUntil:'networkidle',timeout:60000});
+            for (let y=0, h=await page.evaluate(()=>document.documentElement.scrollHeight); y<h; y+=Math.max(320,Math.floor(height*.7))) {
+              await page.evaluate(v=>scrollTo(0,v),y); await page.waitForTimeout(120);
+            }
+            await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(400);
+            await page.screenshot({path:`capture-${name}.png`,fullPage:true});
+            const data=await page.evaluate(()=>({
+              href:location.href,
+              diagrams:[...document.querySelectorAll('#features .feature-row')].map((row,i)=>({i,count:row.querySelectorAll('.feature-diagram,.fd-app-screen,.fd-route-screen,.hero-visual-reuse').length,media:row.querySelector('.feature-media')?.innerHTML.length||0})),
+              sections:[...document.querySelectorAll('.feature-section')].map(s=>({id:s.id,diagrams:s.querySelectorAll('.feature-diagram').length,opacity:getComputedStyle(s).opacity}))
+            }));
+            data.status=r?.status(); data.errors=errors;
+            fs.writeFileSync(`geometry-${name}.json`,JSON.stringify(data,null,2));
+            if (data.status!==200 || errors.length || data.diagrams.slice(0,5).some(x=>x.media<100)) failed=true;
+            await page.close();
+          }
+          await browser.close();
+          if (failed) process.exit(1);
+          EOF
+          node capture.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recovered-feature-mocks
+          path: |
+            capture-*.png
+            geometry-*.json
