@@ -10,21 +10,36 @@ try {
   await page.goto(`${baseURL}/features/`, { waitUntil: "networkidle" });
   const state = await page.evaluate(() => {
     const sections = [...document.querySelectorAll(".feature-section")];
-    const diagrams = sections
-      .map((section) => section.querySelector(":scope > .feature-diagram"))
+    const pairs = sections
+      .map((section) => section.querySelector(":scope > .feature-pair"))
+      .filter(Boolean);
+    const diagrams = pairs
+      .map((pair) => pair.querySelector(":scope > .feature-diagram"))
+      .filter(Boolean);
+    const narratives = pairs
+      .map((pair) => pair.querySelector(":scope > .feature-narrative"))
       .filter(Boolean);
     const rects = diagrams.map((diagram) => diagram.getBoundingClientRect());
+    const specGridsOutsidePairs = sections.filter((section) => {
+      const spec = section.querySelector(":scope > .spec-grid");
+      return !spec || !spec.closest(".feature-pair");
+    }).length;
     return {
       sectionCount: sections.length,
+      pairCount: pairs.length,
       diagramCount: diagrams.length,
-      wrappedPairCount: document.querySelectorAll(".feature-pair").length,
+      narrativeCount: narratives.length,
+      specGridsOutsidePairs,
       minWidth: rects.length ? Math.min(...rects.map((rect) => rect.width)) : 0,
-      maxWidth: rects.length ? Math.max(...rects.map((rect) => rect.width)) : 0,
       visibleCount: rects.filter((rect) => rect.width > 0 && rect.height > 0).length,
     };
   });
-  if (state.wrappedPairCount)
-    failures.push("feature diagrams must remain direct section children");
+  if (!state.pairCount || state.pairCount !== state.diagramCount)
+    failures.push("each feature diagram must have an isolated feature-pair");
+  if (state.narrativeCount !== state.pairCount)
+    failures.push("feature-pair must contain one narrative block as a whole");
+  if (state.specGridsOutsidePairs !== state.sectionCount)
+    failures.push("spec grids must stay outside feature-pair");
   if (!state.diagramCount || state.visibleCount !== state.diagramCount)
     failures.push("every feature diagram must keep visible geometry");
   if (state.minWidth < 420)
@@ -36,14 +51,10 @@ try {
     const topbar = canvas?.querySelector(":scope > .fd-topbar");
     const slider = canvas?.querySelector(":scope > .fd-brush-slider");
     const toolbar = canvas?.querySelector(":scope > .fd-toolbar");
-    const timeline = document.querySelector(
-      ".fd-timeline-screen .fd-timeline-topbar",
-    );
     return {
       topbarHeight: topbar?.getBoundingClientRect().height || 0,
       sliderHeight: slider?.getBoundingClientRect().height || 0,
       toolbarHeight: toolbar?.getBoundingClientRect().height || 0,
-      timelineTopbarHeight: timeline?.getBoundingClientRect().height || 0,
     };
   });
   if (!mock.topbarHeight) failures.push("canvas top bar lost geometry");
