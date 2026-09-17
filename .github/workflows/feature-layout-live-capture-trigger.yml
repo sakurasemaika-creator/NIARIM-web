@@ -38,12 +38,28 @@ jobs:
             await page.screenshot({path:`capture-${name}.png`,fullPage:true});
             const data=await page.evaluate(()=>({
               href:location.href,
-              diagrams:[...document.querySelectorAll('#features .feature-row')].map((row,i)=>({i,count:row.querySelectorAll('.feature-diagram,.fd-app-screen,.fd-route-screen,.hero-visual-reuse').length,media:row.querySelector('.feature-media')?.innerHTML.length||0})),
-              sections:[...document.querySelectorAll('.feature-section')].map(s=>({id:s.id,diagrams:s.querySelectorAll('.feature-diagram').length,opacity:getComputedStyle(s).opacity}))
+              sections:[...document.querySelectorAll('.feature-section')].map(s=>{
+                const pair=s.querySelector('.feature-pair');
+                const copy=s.querySelector('.feature-copy-column');
+                const stack=s.querySelector('.feature-diagram-stack');
+                const mocks=[...s.querySelectorAll('.feature-diagram-stack .fd-app-screen,.feature-diagram-stack .fd-route-screen')];
+                const cards=[...s.querySelectorAll('.spec-grid .spec-item')];
+                const rect=e=>e?(()=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}})():null;
+                return {id:s.id,pair:rect(pair),copy:rect(copy),stack:rect(stack),mocks:mocks.map(rect),cards:cards.map(rect),opacity:getComputedStyle(s).opacity};
+              })
             }));
             data.status=r?.status(); data.errors=errors;
             fs.writeFileSync(`geometry-${name}.json`,JSON.stringify(data,null,2));
-            if (data.status!==200 || errors.length || data.diagrams.slice(0,5).some(x=>x.media<100)) failed=true;
+            if (data.status!==200 || errors.length) failed=true;
+            if (name==='pc') {
+              for (const s of data.sections) {
+                for (const m of s.mocks) {
+                  const ratio=m.height/m.width;
+                  if (m.width<180 || m.height<300 || ratio<1.55 || ratio>1.95) failed=true;
+                }
+                if (s.stack && s.copy && !(s.stack.x > s.copy.x)) failed=true;
+              }
+            }
             await page.close();
           }
           await browser.close();
