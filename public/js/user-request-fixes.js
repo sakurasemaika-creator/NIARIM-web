@@ -86,8 +86,65 @@
     });
   }
 
+
+  function realCapture(name, alt) {
+    var picture = document.createElement("picture");
+    picture.className = "real-app-capture";
+    var avif = document.createElement("source");
+    avif.type = "image/avif";
+    avif.srcset = "/assets/images/app-captures/" + name + ".avif";
+    var img = document.createElement("img");
+    img.src = "/assets/images/app-captures/" + name + ".webp";
+    img.alt = alt || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    picture.append(avif, img);
+    return picture;
+  }
+
+  function installRealAppCaptures(root) {
+    var scope = root || document;
+    var featureMap = {
+      drawing: ["canvas", "NIARIM canvas"],
+      animation: ["timeline", "NIARIM timeline"],
+      editing: ["layers", "NIARIM layer panel"],
+      advanced: ["onion-skin", "NIARIM onion skin settings"],
+      audio: ["audio-editor", "NIARIM audio editor"],
+      save: ["save-tree", "NIARIM save tree"],
+      workspace: ["workspace", "NIARIM workspace settings"],
+      export: ["export", "NIARIM export settings"],
+    };
+    Object.keys(featureMap).forEach(function (id) {
+      var section = scope.querySelector?.("#" + id);
+      if (!section || section.querySelector(".real-app-capture")) return;
+      var diagram = section.querySelector(":scope > .feature-diagram");
+      if (!diagram) return;
+      diagram.classList.add("feature-diagram--real");
+      diagram.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+    });
+
+    var homeNames = ["canvas", "timeline", "layers", "onion-skin", "export"];
+    scope.querySelectorAll?.(".feature-row .feature-media").forEach(function (media, index) {
+      if (index >= homeNames.length || media.querySelector(".real-app-capture")) return;
+      var diagram = media.querySelector(":scope > .feature-diagram");
+      if (!diagram) return;
+      diagram.classList.add("feature-diagram--real");
+      diagram.replaceChildren(realCapture(homeNames[index], ""));
+    });
+
+    var previewNames = ["canvas", "timeline", "layers", "export", "save-tree", "workspace"];
+    scope.querySelectorAll?.(".screenshot-scroller .screenshot-card").forEach(function (card, index) {
+      if (index >= previewNames.length || card.querySelector(".real-app-capture")) return;
+      var diagram = card.querySelector(".feature-diagram");
+      if (!diagram) return;
+      diagram.classList.add("feature-diagram--real");
+      diagram.replaceChildren(realCapture(previewNames[index], ""));
+    });
+  }
+
   function applyRequestedCopy() {
     installDictionaryOverrides();
+    installRealAppCaptures(document);
     pairFeatureNarratives(document);
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
