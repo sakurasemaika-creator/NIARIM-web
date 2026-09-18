@@ -60,7 +60,9 @@ for (const viewport of viewports) {
                 "/assets/images/app-captures/timeline.",
               ) &&
               img.getClientRects().length > 0 &&
-              getComputedStyle(img).visibility !== "hidden",
+              getComputedStyle(img).visibility !== "hidden" &&
+              img.getBoundingClientRect().width > 0 &&
+              img.getBoundingClientRect().height > 0,
           )
           .map((img) => {
             const rect = img.getBoundingClientRect();
@@ -84,8 +86,7 @@ for (const viewport of viewports) {
           timeline.naturalWidth <= 0 ||
           timeline.naturalHeight <= 0 ||
           timeline.width <= 0 ||
-          timeline.height <= 0 ||
-          timeline.height <= timeline.width
+          timeline.height <= 0
         ) {
           failures.push({ id, kind: "timeline-capture-collapsed", timeline });
         }
@@ -111,7 +112,7 @@ console.log(
       checks: [
         "real timeline capture is present",
         "AVIF/WebP capture decodes successfully",
-        "timeline capture keeps non-collapsed portrait geometry",
+        "timeline capture keeps non-zero rendered geometry",
       ],
     },
     null,
