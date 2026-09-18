@@ -38,6 +38,9 @@ for (const viewport of viewports) {
       const timelineCount = await timelineImages.count();
       for (let index = 0; index < timelineCount; index += 1) {
         const image = timelineImages.nth(index);
+        // Some localized/carousel clones are intentionally hidden. Lazy images
+        // only need to be forced for the visible capture under test.
+        if (!(await image.isVisible())) continue;
         await image.scrollIntoViewIfNeeded();
         await image.evaluate((img) => {
           if (img.complete && img.naturalWidth > 0) return;
