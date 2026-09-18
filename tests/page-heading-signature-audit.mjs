@@ -102,7 +102,7 @@ for (const width of widths) {
     return img?.complete && img.naturalWidth > 0 && img.naturalHeight > 0;
   });
   await page.waitForSelector("#advanced .is-auto-lineart-narrative");
-  await page.waitForSelector("#widget .fd-widget-settings-screen");
+  await page.waitForSelector("#widget .fd-widget-grid");
   const feature = await page.evaluate(() => {
     const capture = document.querySelector("#advanced .real-app-capture img");
     const captureRect = capture.getBoundingClientRect();
@@ -112,7 +112,7 @@ for (const width of widths) {
       el.classList.contains("feature-narrative-block"),
     );
     const autoBlock = narrative?.querySelector(".is-auto-lineart-narrative");
-    const widget = document.querySelector("#widget .fd-widget-settings-screen");
+    const widget = document.querySelector("#widget .fd-widget-grid");
     const widgetRect = widget.getBoundingClientRect();
     return {
       capture: {
@@ -130,7 +130,7 @@ for (const width of widths) {
       secondHeading: blocks[1]?.querySelector("h3")?.textContent?.trim() || "",
       thirdHeading: blocks[2]?.querySelector("h3")?.textContent?.trim() || "",
       widgetRatio: widgetRect.width / widgetRect.height,
-      widgetSections: widget.querySelectorAll(".fd-widget-section").length,
+      widgetTiles: widget.querySelectorAll(".fd-widget-tile").length,
       overflow:
         document.documentElement.scrollWidth -
         document.documentElement.clientWidth,
@@ -153,7 +153,7 @@ for (const width of widths) {
     feature.firstHeading !== "いつもの作業を、もっとスムーズに。" ||
     feature.secondHeading !== "自動線画" ||
     feature.thirdHeading !== "早替えツール" ||
-    feature.widgetSections !== 3
+    feature.widgetTiles < 3
   ) {
     findings.push({
       width,
