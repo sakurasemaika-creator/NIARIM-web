@@ -33,111 +33,39 @@ for (const viewport of viewports) {
       }, language);
       await page.waitForTimeout(220);
 
-      const timelines = await page.evaluate(() => {
-        const resolve = (value) => {
-          const probe = document.createElement("i");
-          probe.style.color = value;
-          probe.style.display = "none";
-          document.body.appendChild(probe);
-          const result = getComputedStyle(probe).color;
-          probe.remove();
-          return result;
-        };
-
-        return [...document.querySelectorAll(".fd-timeline-screen")].map(
-          (screen, index) => {
-            const sr = screen.getBoundingClientRect();
-            const currents = [
-              ...screen.querySelectorAll(".fd-tl-frame.is-current"),
-            ];
-            const current = currents[0] || null;
-            const cr = current?.getBoundingClientRect();
-            const currentStyle = current ? getComputedStyle(current) : null;
-            const frames = screen.querySelector(".fd-timeline-frames");
-            const framesRect = frames?.getBoundingClientRect();
-            const framesStyle = frames ? getComputedStyle(frames) : null;
-            const cursor = screen.querySelector(
-              ".fd-timeline-frames > .fd-frame-cursor",
-            );
-            const cursorStyle = cursor ? getComputedStyle(cursor) : null;
-            const screenStyle = getComputedStyle(screen);
-            const accentRaw = screenStyle
-              .getPropertyValue("--fd-accent")
-              .trim();
-            const accent = accentRaw ? resolve(accentRaw) : "";
-
+      const timelines = await page.evaluate(() =>
+        [...document.querySelectorAll(".real-app-capture img")]
+          .filter((img) =>
+            (img.currentSrc || img.src).includes(
+              "/assets/images/app-captures/timeline.",
+            ),
+          )
+          .map((img) => {
+            const rect = img.getBoundingClientRect();
             return {
-              index,
-              currentCount: currents.length,
-              screenCenter: sr.left + sr.width / 2,
-              currentCenter: cr ? cr.left + cr.width / 2 : null,
-              centerDelta: cr
-                ? cr.left + cr.width / 2 - (sr.left + sr.width / 2)
-                : null,
-              currentBorderColor: currentStyle?.borderTopColor || "",
-              currentBorderWidth: currentStyle?.borderTopWidth || "",
-              accent,
-              timelineOffset: screenStyle
-                .getPropertyValue("--fd-timeline-current-offset")
-                .trim(),
-              inScreenshotCard: Boolean(screen.closest(".screenshot-card")),
-              isAudioContext: screen.classList.contains(
-                "fd-audio-context-screen",
-              ),
-              framesLeft: framesStyle?.left || "",
-              framesTransform: framesStyle?.transform || "",
-              framesRectLeft: framesRect?.left ?? null,
-              framesRectWidth: framesRect?.width ?? null,
-              cursorPresent: Boolean(cursor),
-              cursorDisplay: cursorStyle?.display || "",
-              cursorVisibility: cursorStyle?.visibility || "",
+              src: img.currentSrc || img.src,
+              width: rect.width,
+              height: rect.height,
+              naturalWidth: img.naturalWidth,
+              naturalHeight: img.naturalHeight,
             };
-          },
-        );
-      });
+          }),
+      );
 
       const id = `${viewport.name}/${language}${route}`;
       if (!timelines.length) {
-        failures.push({ id, kind: "timeline-mock-missing" });
+        failures.push({ id, kind: "timeline-capture-missing" });
         continue;
       }
-
       for (const timeline of timelines) {
-        if (timeline.currentCount !== 1) {
-          failures.push({ id, kind: "timeline-current-count", timeline });
-          continue;
-        }
         if (
-          timeline.currentCenter === null ||
-          Math.abs(timeline.centerDelta) > 2
+          timeline.naturalWidth <= 0 ||
+          timeline.naturalHeight <= 0 ||
+          timeline.width <= 0 ||
+          timeline.height <= 0 ||
+          timeline.height <= timeline.width
         ) {
-          failures.push({
-            id,
-            kind: "timeline-current-not-screen-centered",
-            timeline,
-          });
-        }
-        if (
-          !timeline.accent ||
-          timeline.currentBorderColor !== timeline.accent ||
-          parseFloat(timeline.currentBorderWidth) < 1.5
-        ) {
-          failures.push({
-            id,
-            kind: "timeline-current-theme-border-missing",
-            timeline,
-          });
-        }
-        if (
-          timeline.cursorPresent &&
-          timeline.cursorDisplay !== "none" &&
-          timeline.cursorVisibility !== "hidden"
-        ) {
-          failures.push({
-            id,
-            kind: "timeline-fixed-cursor-visible",
-            timeline,
-          });
+          failures.push({ id, kind: "timeline-capture-collapsed", timeline });
         }
       }
     }
@@ -159,10 +87,9 @@ console.log(
       ok: true,
       combinations: routes.length * languages.length * viewports.length,
       checks: [
-        "exactly one current timeline frame",
-        "current timeline frame centered on app screen",
-        "current timeline frame keeps theme accent border",
-        "legacy fixed red cursor stays hidden",
+        "real timeline capture is present",
+        "AVIF/WebP capture decodes successfully",
+        "timeline capture keeps non-collapsed portrait geometry",
       ],
     },
     null,
