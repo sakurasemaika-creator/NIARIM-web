@@ -1175,3 +1175,55 @@
     min-height: 0;
   }
 }
+
+
+/* User-requested Features layout: on desktop, narrative copy occupies the left
+   column while the app reproduction sits as a portrait screen on the right.
+   The spec cards stay in normal flow below both columns, so once they pass the
+   screen bottom they can use the full section width. No HTML restructuring is
+   required: CSS grid places the existing three siblings explicitly. */
+@media (min-width: 900px) {
+  .feature-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 34vw, 430px);
+    column-gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .feature-section-head {
+    grid-column: 1 / -1;
+  }
+
+  .feature-section > .feature-narrative {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  .feature-section > .feature-diagram {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    min-height: 560px;
+    margin: 0 0 var(--space-lg);
+    align-self: start;
+  }
+
+  .feature-section > .spec-grid {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: 100%;
+    margin-top: var(--space-lg);
+  }
+}
+
+/* Mobile feature tabs are a horizontally scrollable list; keep the first item
+   flush with the content edge instead of visually centering the scroll strip. */
+@media (max-width: 899px) {
+  .feature-nav {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-padding-inline: 0;
+  }
+}
