@@ -28,7 +28,7 @@ jobs:
       - name: Capture current app UI
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk webp libavif-bin
+          sudo apt-get install -y fonts-noto-cjk webp libavif-bin imagemagick
           fc-cache -f
           cd _app
           flutter pub get
@@ -43,8 +43,13 @@ jobs:
           for key in "${!map[@]}"; do
             png="$src/webref_${key}.png"; [ -f "$png" ] || continue
             name="${map[$key]}"
-            cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name.webp"
-            avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name.avif" >/dev/null
+            # Flutter golden PNGs can carry a very small logical capture in a
+            # large transparent surface. Trim that transparent padding before
+            # encoding so the browser receives the real app-screen geometry.
+            trimmed="/tmp/$name-trimmed.png"
+            convert "$png" -trim +repage "$trimmed"
+            cwebp -quiet -q 78 -m 6 "$trimmed" -o "$dst/$name.webp"
+            avifenc --min 24 --max 34 --speed 6 "$trimmed" "$dst/$name.avif" >/dev/null
           done
           for required in canvas timeline layers onion-skin save-tree export workspace; do test -f "$dst/$required.avif"; done
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(git -C _app rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
