@@ -53,3 +53,22 @@ html body #widget .fd-widget-grid > .fd-widget-tile { align-self:start!important
     margin-inline:auto!important;
   }
 }
+
+
+/* Real NIARIM captures are the source of truth for app-screen previews.
+   Intrinsic image dimensions determine height, preventing CSS mock collapse. */
+.feature-diagram.feature-diagram--real {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+  overflow: hidden;
+  background: transparent !important;
+}
+.feature-diagram--real .real-app-capture,
+.feature-diagram--real .real-app-capture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.feature-diagram--real .real-app-capture img { object-fit: contain; }
