@@ -35,37 +35,29 @@ for (const viewport of viewports) {
         }
       }, language);
       await page.waitForTimeout(220);
-      const timelineImages = page.locator(
-        '.real-app-capture img[src*="/assets/images/app-captures/timeline."]',
-      );
-      const timelineCount = await timelineImages.count();
-      for (let index = 0; index < timelineCount; index += 1) {
-        const image = timelineImages.nth(index);
-        // Some localized/carousel clones are intentionally hidden. Lazy images
-        // only need to be forced for the visible capture under test.
-        if (!(await image.isVisible())) continue;
-        await image.scrollIntoViewIfNeeded();
-        await image.evaluate((img) => {
-          if (img.complete && img.naturalWidth > 0) return;
-          return new Promise((resolve) => {
-            const done = () => resolve();
-            img.addEventListener("load", done, { once: true });
-            img.addEventListener("error", done, { once: true });
-          });
+      // The feature image is lazy-loaded. In narrow layouts it can sit far
+      // below the fold, so force the canonical Animation capture to load
+      // instead of relying on intersection timing.
+      const timelineImage = page.locator(
+        '#animation .real-app-capture img[src*="/assets/images/app-captures/timeline."]',
+      ).first();
+      await timelineImage.waitFor({ state: "attached" });
+      await timelineImage.evaluate((img) => {
+        img.loading = "eager";
+        if (img.complete && img.naturalWidth > 0) return;
+        return new Promise((resolve) => {
+          const done = () => resolve();
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
         });
-      }
+      });
 
       const timelines = await page.evaluate(() =>
-        [...document.querySelectorAll(".real-app-capture img")]
-          .filter(
-            (img) =>
-              (img.currentSrc || img.src).includes(
-                "/assets/images/app-captures/timeline.",
-              ) &&
-              img.getClientRects().length > 0 &&
-              getComputedStyle(img).visibility !== "hidden" &&
-              img.getBoundingClientRect().width > 0 &&
-              img.getBoundingClientRect().height > 0,
+        [...document.querySelectorAll("#animation .real-app-capture img")]
+          .filter((img) =>
+            (img.currentSrc || img.src).includes(
+              "/assets/images/app-captures/timeline.",
+            ),
           )
           .map((img) => {
             const rect = img.getBoundingClientRect();
