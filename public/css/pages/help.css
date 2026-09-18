@@ -105,3 +105,89 @@
     border-radius: 14px;
   }
 }
+
+
+/* Guide entries intentionally use an app-help-like accordion instead of the
+   feature catalogue cards. This makes the two pages' roles visually distinct:
+   Features = overview/catalogue, Guide = open one instruction at a time. */
+[data-help-category] .spec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+[data-help-category] .spec-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+  cursor: pointer;
+}
+
+[data-help-category] .spec-item::before {
+  display: none;
+}
+
+[data-help-category] .spec-item h3 {
+  position: relative;
+  margin: 0;
+  padding: 1rem 3.25rem 1rem 0.25rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+[data-help-category] .spec-item h3::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  color: var(--color-accent-strong);
+  background: var(--color-sub-tint);
+  font-family: sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+[data-help-category] .spec-item[aria-expanded="true"] h3::after {
+  content: "−";
+}
+
+[data-help-category] .spec-item p {
+  display: none;
+  margin: 0;
+  padding: 0.1rem 3.25rem 1.25rem 0.25rem;
+  color: var(--color-text-muted);
+  line-height: 1.9;
+}
+
+[data-help-category] .spec-item[aria-expanded="true"] p {
+  display: block;
+}
+
+[data-help-category] .spec-item:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  [data-help-category] .spec-item h3 {
+    padding-block: 0.9rem;
+    padding-right: 2.75rem;
+  }
+
+  [data-help-category] .spec-item p {
+    padding-right: 0.25rem;
+  }
+}
