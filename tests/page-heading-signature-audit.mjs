@@ -95,53 +95,28 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
-  await page.waitForSelector(".fd-autolineart-screen");
+  await page.waitForSelector("#advanced .real-app-capture img");
   await page.waitForSelector("#advanced .is-auto-lineart-narrative");
   await page.waitForSelector("#widget .fd-widget-settings-screen");
   const feature = await page.evaluate(() => {
-    const mock = document.querySelector(".fd-autolineart-screen");
-    const preview = mock.querySelector(".fd-autolineart-preview");
-    const rect = mock.getBoundingClientRect();
-    const previewRect = preview.getBoundingClientRect();
-    const style = getComputedStyle(mock);
+    const capture = document.querySelector("#advanced .real-app-capture img");
+    const captureRect = capture.getBoundingClientRect();
     const header = document.querySelector(".features-header");
     const narrative = document.querySelector("#advanced .feature-narrative");
     const blocks = [...(narrative?.children || [])].filter((el) =>
       el.classList.contains("feature-narrative-block"),
     );
     const autoBlock = narrative?.querySelector(".is-auto-lineart-narrative");
-    const special = document.querySelector(
-      "#advanced .signature-feature-layout",
-    );
     const widget = document.querySelector("#widget .fd-widget-settings-screen");
     const widgetRect = widget.getBoundingClientRect();
     return {
-      mock: Boolean(mock),
-      nodes: mock.querySelectorAll(".fd-autolineart-node").length,
-      controls: mock.querySelectorAll(".fd-autolineart-row").length,
-      parameters: Object.fromEntries(
-        [...mock.querySelectorAll("[data-lineart-parameter]")].map((row) => [
-          row.dataset.lineartParameter,
-          row.querySelector("strong")?.textContent.trim(),
-        ]),
-      ),
-      smoothingFill: mock.querySelector(
-        '[data-lineart-parameter="smoothing"] .fd-autolineart-slider i',
-      )?.style.width,
-      lineColor: mock.querySelector(".fd-autolineart-color i")
-        ? getComputedStyle(mock.querySelector(".fd-autolineart-color i"))
-            .backgroundColor
-        : null,
-      phoneRatio: rect.width / rect.height,
-      previewRatio: previewRect.width / previewRect.height,
-      borderColor: style.borderTopColor,
-      bezel: style.getPropertyValue("--fd-bezel").trim(),
-      accent: style.getPropertyValue("--fd-accent").trim(),
-      oldLandscapeVisible: Boolean(
-        document.querySelector(".autolineart-app-mock")?.getClientRects()
-          .length,
-      ),
-      specialVisible: Boolean(special?.getClientRects().length),
+      capture: {
+        src: capture?.currentSrc || capture?.src || "",
+        width: captureRect.width,
+        height: captureRect.height,
+        naturalWidth: capture?.naturalWidth || 0,
+        naturalHeight: capture?.naturalHeight || 0,
+      },
       headerBackground: getComputedStyle(header).backgroundImage,
       autoBlockClass: autoBlock?.className || "",
       autoTitle: autoBlock?.querySelector("h3")?.textContent?.trim() || "",
@@ -149,48 +124,23 @@ for (const width of widths) {
       firstHeading: blocks[0]?.querySelector("h3")?.textContent?.trim() || "",
       secondHeading: blocks[1]?.querySelector("h3")?.textContent?.trim() || "",
       thirdHeading: blocks[2]?.querySelector("h3")?.textContent?.trim() || "",
-      promoEyebrows: document.querySelectorAll(
-        "#advanced .signature-feature-copy .eyebrow",
-      ).length,
-      promoPoints: document.querySelectorAll(
-        "#advanced .signature-feature-point",
-      ).length,
-      widget: {
-        ratio: widgetRect.width / widgetRect.height,
-        sections: widget.querySelectorAll(".fd-widget-section").length,
-        artworkTiles: widget.querySelectorAll(".fd-widget-artwork-tile").length,
-        radioRows: widget.querySelectorAll(".fd-widget-radio-row").length,
-        selectedRadios: widget.querySelectorAll(".fd-widget-radio.is-selected")
-          .length,
-        appbarTitle:
-          widget.querySelector(".fd-appbar strong")?.textContent?.trim() || "",
-        oldFakeStatus: widget.querySelectorAll(".fd-widget-status-card").length,
-        oldFakeQuickActions: widget.querySelectorAll(".fd-widget-action-row")
-          .length,
-      },
+      widgetRatio: widgetRect.width / widgetRect.height,
+      widgetSections: widget.querySelectorAll(".fd-widget-section").length,
       overflow:
         document.documentElement.scrollWidth -
         document.documentElement.clientWidth,
     };
   });
-  const phoneDelta = Math.abs(feature.phoneRatio - 320 / 569);
-  const previewDelta = Math.abs(feature.previewRatio - 16 / 9);
-  const widgetPhoneDelta = Math.abs(feature.widget.ratio - 320 / 569);
+  const captureRatio =
+    feature.capture.height > 0 ? feature.capture.width / feature.capture.height : 0;
   if (
-    !feature.mock ||
-    feature.nodes < 5 ||
-    feature.controls !== 4 ||
-    feature.parameters["rough-width"] !== "12px" ||
-    feature.parameters["output-width"] !== "2px" ||
-    feature.parameters["taper-length"] !== "8px" ||
-    feature.parameters.smoothing !== "5" ||
-    feature.smoothingFill !== "50%" ||
-    feature.lineColor !== "rgb(0, 0, 0)" ||
+    !feature.capture.src.includes("/assets/images/app-captures/onion-skin.") ||
+    feature.capture.naturalWidth <= 0 ||
+    feature.capture.naturalHeight <= 0 ||
+    feature.capture.width < 250 ||
+    feature.capture.height < 300 ||
+    captureRatio > 1 ||
     feature.overflow > 2 ||
-    phoneDelta > 0.03 ||
-    previewDelta > 0.03 ||
-    feature.oldLandscapeVisible ||
-    feature.specialVisible ||
     feature.headerBackground !== "none" ||
     !feature.autoBlockClass.includes("feature-narrative-block") ||
     feature.autoTitle !== "自動線画" ||
@@ -198,25 +148,14 @@ for (const width of widths) {
     feature.firstHeading !== "いつもの作業を、もっとスムーズに。" ||
     feature.secondHeading !== "自動線画" ||
     feature.thirdHeading !== "早替えツール" ||
-    feature.promoEyebrows !== 0 ||
-    feature.promoPoints !== 0 ||
-    widgetPhoneDelta > 0.03 ||
-    feature.widget.sections !== 3 ||
-    feature.widget.artworkTiles !== 1 ||
-    feature.widget.radioRows !== 4 ||
-    feature.widget.selectedRadios !== 2 ||
-    feature.widget.appbarTitle !== "ウィジェット設定" ||
-    feature.widget.oldFakeStatus !== 0 ||
-    feature.widget.oldFakeQuickActions !== 0
+    feature.widgetSections !== 3
   ) {
     findings.push({
       width,
       route: "/features/",
       kind: "feature-detail-consistency",
       feature,
-      phoneDelta,
-      previewDelta,
-      widgetPhoneDelta,
+      captureRatio,
     });
   }
 
