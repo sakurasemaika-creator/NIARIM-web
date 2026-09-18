@@ -95,7 +95,12 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
-  await page.waitForSelector("#advanced .real-app-capture img");
+  await page.waitForSelector("#advanced .real-app-capture img", { state: "attached" });
+  await page.locator("#advanced .real-app-capture img").scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => {
+    const img = document.querySelector("#advanced .real-app-capture img");
+    return img?.complete && img.naturalWidth > 0 && img.naturalHeight > 0;
+  });
   await page.waitForSelector("#advanced .is-auto-lineart-narrative");
   await page.waitForSelector("#widget .fd-widget-settings-screen");
   const feature = await page.evaluate(() => {
