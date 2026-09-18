@@ -32,6 +32,22 @@ for (const viewport of viewports) {
         }
       }, language);
       await page.waitForTimeout(220);
+      const timelineImages = page.locator(
+        '.real-app-capture img[src*="/assets/images/app-captures/timeline."]',
+      );
+      const timelineCount = await timelineImages.count();
+      for (let index = 0; index < timelineCount; index += 1) {
+        const image = timelineImages.nth(index);
+        await image.scrollIntoViewIfNeeded();
+        await image.evaluate((img) => {
+          if (img.complete && img.naturalWidth > 0) return;
+          return new Promise((resolve) => {
+            const done = () => resolve();
+            img.addEventListener("load", done, { once: true });
+            img.addEventListener("error", done, { once: true });
+          });
+        });
+      }
 
       const timelines = await page.evaluate(() =>
         [...document.querySelectorAll(".real-app-capture img")]
