@@ -54,10 +54,13 @@ for (const viewport of viewports) {
 
       const timelines = await page.evaluate(() =>
         [...document.querySelectorAll(".real-app-capture img")]
-          .filter((img) =>
-            (img.currentSrc || img.src).includes(
-              "/assets/images/app-captures/timeline.",
-            ),
+          .filter(
+            (img) =>
+              (img.currentSrc || img.src).includes(
+                "/assets/images/app-captures/timeline.",
+              ) &&
+              img.getClientRects().length > 0 &&
+              getComputedStyle(img).visibility !== "hidden",
           )
           .map((img) => {
             const rect = img.getBoundingClientRect();
