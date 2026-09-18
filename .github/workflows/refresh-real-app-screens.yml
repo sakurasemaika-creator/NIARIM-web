@@ -5,6 +5,7 @@ on:
     branches: [dev_branch]
     paths:
       - ".github/workflows/refresh-real-app-screens.yml"
+      # retry marker: app capture route updated 2026-09-18
 permissions:
   contents: write
 jobs:
