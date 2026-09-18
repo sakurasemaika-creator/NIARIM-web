@@ -8,7 +8,10 @@ const viewports = [
   { name: "sp390", width: 390, height: 844 },
   { name: "pc", width: 1440, height: 1000 },
 ];
-// The canonical Timeline capture lives in the Animation section. Home may not\n// render that card in every responsive/localized composition, so audit the\n// source-of-truth placement rather than requiring an unrelated Home slot.\nconst routes = ["/features/"];
+// The canonical Timeline capture lives in the Animation section. Home may not
+// render that card in every responsive/localized composition, so audit the
+// source-of-truth placement rather than requiring an unrelated Home slot.
+const routes = ["/features/"];
 const failures = [];
 
 const browser = await chromium.launch(launchOptions());
