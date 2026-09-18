@@ -27,3 +27,29 @@ html body #widget .fd-widget-grid > .fd-widget-tile { align-self:start!important
 @media (max-width:1180px) { .main-nav { padding:clamp(.85rem,3vh,1.35rem) var(--container-padding)!important; } .main-nav > ul { gap:clamp(.2rem,1.1vh,.55rem)!important; } .main-nav > ul > li { width:100%!important; } .main-nav a:not(.btn) { width:100%!important; min-height:42px!important; padding-block:.25rem!important; justify-content:flex-start!important; text-align:left!important; } .main-nav .lang-dropdown { width:100%!important; margin-top:.35rem!important; } .main-nav .lang-trigger { width:100%!important; justify-content:flex-start!important; text-align:left!important; } .main-nav .lang-menu button { text-align:left!important; } }
 @media (max-width:899px) { .feature-diagram-stack { float:none!important; width:min(420px,100%)!important; min-width:0!important; margin:var(--space-lg) auto!important; } .feature-copy-column > .spec-grid { grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr))!important; } }
 @media (max-width:560px) { html body #widget .fd-widget-grid { grid-template-columns:1fr!important; } }
+
+/* Align all reconstructed app screens to one vertical axis. The mock itself has
+   one canonical width; only its containing column changes between pages. */
+@media (min-width:900px) {
+  html body .feature-diagram-stack {
+    width:320px!important;
+    min-width:320px!important;
+    margin-left:clamp(2rem,5vw,5rem)!important;
+    margin-right:0!important;
+  }
+  html body .feature-diagram-stack > :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+    width:320px!important;
+    max-width:320px!important;
+    margin-inline:auto!important;
+  }
+  html body .feature-row .feature-media:has(.feature-diagram) {
+    display:flex!important;
+    justify-content:center!important;
+    align-items:flex-start!important;
+  }
+  html body .feature-row .feature-media > :is(.feature-diagram,.fd-app-screen,.fd-route-screen) {
+    width:320px!important;
+    max-width:320px!important;
+    margin-inline:auto!important;
+  }
+}
