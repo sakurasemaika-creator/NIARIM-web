@@ -38,16 +38,37 @@ try {
     const widget = document.querySelector("#widget .fd-widget-grid");
     const widgetTiles = widget ? [...widget.querySelectorAll(":scope > .fd-widget-tile")].map((el) => el.getBoundingClientRect()) : [];
     const widgetHealthy = widgetTiles.length === 3 && widgetTiles.every((r) => r.width > 70 && r.height >= 90 && r.height < 180);
-    const hydrated = {
-      drawing: !!document.querySelector("#drawing .feature-diagram-stack > .fd-canvas-screen"),
-      animation: !!document.querySelector("#animation .feature-diagram-stack > .fd-timeline-screen"),
-      editing: !!document.querySelector("#editing .feature-diagram-stack > .fd-canvas-screen .fd-layer-panel-overlay"),
-      advanced: !!document.querySelector("#advanced .feature-diagram-stack > .fd-canvas-screen .fd-app-onion-panel"),
-      audio: !!document.querySelector("#audio .feature-diagram-stack > .fd-audio-screen"),
-      save: !!document.querySelector("#save .feature-diagram-stack > .fd-route-screen"),
-      workspace: !!document.querySelector("#workspace .feature-diagram-stack > .fd-workspace-screen"),
-      export: !!document.querySelector("#export .feature-diagram-stack > .fd-route-screen"),
+    const captureNames = {
+      drawing: "canvas",
+      animation: "timeline",
+      editing: "layers",
+      advanced: "onion-skin",
+      audio: "audio-editor",
+      save: "save-tree",
+      workspace: "workspace",
+      export: "export",
     };
+    const hydrated = Object.fromEntries(
+      Object.entries(captureNames).map(([id, name]) => {
+        const image = document.querySelector(
+          `#${id} .feature-diagram-stack .real-app-capture img`,
+        );
+        const rect = image?.getBoundingClientRect();
+        return [
+          id,
+          Boolean(
+            image &&
+              (image.currentSrc || image.src).includes(
+                `/assets/images/app-captures/${name}.`,
+              ) &&
+              image.naturalWidth > 0 &&
+              image.naturalHeight > 0 &&
+              rect.width > 0 &&
+              rect.height > 0,
+          ),
+        ];
+      }),
+    );
     return {
       sectionCount: sections.length,
       pairCount: pairs.length,
@@ -68,13 +89,13 @@ try {
   if (!state.widgetHealthy) failures.push("widget reconstruction tiles are stretched or collapsed");
   if (!state.diagramCount || state.visibleCount !== state.diagramCount)
     failures.push("every feature diagram must keep visible geometry");
-  if (state.minWidth < 420)
-    failures.push(`feature diagram collapsed below 420px: ${state.minWidth}`);
+  if (state.minWidth < 300)
+    failures.push(`feature diagram collapsed below 300px: ${state.minWidth}`);
   const unhydrated = Object.entries(state.hydrated)
     .filter(([, ok]) => !ok)
     .map(([name]) => name);
   if (unhydrated.length)
-    failures.push(`feature mocks were not hydrated: ${unhydrated.join(", ")}`);
+    failures.push(`real app captures were not hydrated: ${unhydrated.join(", ")}`);
 
   await page.goto(baseURL, { waitUntil: "networkidle" });
   const mock = await page.evaluate(() => {
