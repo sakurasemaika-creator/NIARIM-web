@@ -1,0 +1,65 @@
+name: Refresh real app screenshots
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev_branch]
+    paths: [".github/workflows/refresh-real-app-screens.yml"]
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+      - uses: actions/checkout@v4
+        with:
+          repository: sakurasemaika-creator/NIARIM
+          ref: dev_branch
+          path: _app
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: false
+      - name: Capture current app UI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk webp libavif-bin
+          fc-cache -f
+          cd _app
+          flutter pub get
+          flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
+      - name: Build lightweight web assets
+        run: |
+          set -euo pipefail
+          src="_app/build/visual-smoke"
+          dst="public/assets/images/app-captures"
+          mkdir -p "$dst"
+          declare -A map=([01_canvas_default]=canvas [02_canvas_layer_panel]=layers [03_canvas_onion_skin]=onion-skin [04_timeline_default]=timeline [05_timeline_audio_editor]=audio-editor [06_save_tree]=save-tree [07_export]=export [08_workspace]=workspace)
+          for key in "${!map[@]}"; do
+            png="$src/webref_${key}.png"; [ -f "$png" ] || continue
+            name="${map[$key]}"
+            cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name.webp"
+            avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name.avif" >/dev/null
+          done
+          for required in canvas timeline layers onion-skin save-tree export workspace; do test -f "$dst/$required.avif"; done
+          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(git -C _app rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          du -h "$dst"/*
+      - name: Commit captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/images/app-captures
+          git diff --cached --quiet && exit 0
+          git commit -m "assets: refresh real NIARIM app captures"
+          git push origin HEAD:dev_branch
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: real-app-captures
+          path: |
+            _app/build/visual-smoke/webref_*.png
+            public/assets/images/app-captures/*
+          retention-days: 14
