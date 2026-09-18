@@ -14,6 +14,38 @@
     );
     if (!input || !categories.length) return;
 
+    // Match the in-app Help interaction: entries are a single vertical list
+    // and each title toggles its explanation open/closed.
+    categories.forEach(function (category) {
+      category.querySelectorAll("[data-help-card]").forEach(function (card, index) {
+        var title = card.querySelector("h3");
+        var body = card.querySelector("p");
+        if (!title || !body) return;
+
+        var panelId = (category.id || "help") + "-entry-" + index;
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-expanded", "false");
+        card.setAttribute("aria-controls", panelId);
+        body.id = panelId;
+
+        function toggle() {
+          card.setAttribute(
+            "aria-expanded",
+            card.getAttribute("aria-expanded") === "true" ? "false" : "true",
+          );
+        }
+
+        card.addEventListener("click", toggle);
+        card.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggle();
+          }
+        });
+      });
+    });
+
     if (noResults) {
       noResults.setAttribute("role", "status");
       noResults.setAttribute("aria-live", "polite");
@@ -34,6 +66,9 @@
           var text = card.textContent.toLowerCase();
           var match = !query || text.indexOf(query) > -1;
           card.hidden = !match;
+          // Search results expose matching explanations immediately; clearing
+          // the query restores the normal collapsed app-help presentation.
+          card.setAttribute("aria-expanded", query && match ? "true" : "false");
           if (match) categoryHasVisible = true;
         });
 
