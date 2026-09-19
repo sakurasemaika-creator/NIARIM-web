@@ -27,7 +27,9 @@ for (const route of ["/", "/features/"]) {
   });
   await page.waitForTimeout(300);
 
-  const mocks = page.locator(".fd-app-screen, .fd-route-screen");
+  const mocks = page.locator(
+    ".feature-diagram--real, .fd-app-screen:not(.feature-diagram--real), .fd-route-screen:not(.feature-diagram--real), .fd-widget-grid",
+  );
   const count = await mocks.count();
   for (let i = 0; i < count; i++) {
     const mock = mocks.nth(i);
@@ -64,4 +66,4 @@ await fs.writeFile(
   JSON.stringify(manifest, null, 2),
 );
 await browser.close();
-console.log(`captured ${manifest.length} isolated screen mocks`);
+console.log(`captured ${manifest.length} isolated app captures and diagrams`);
