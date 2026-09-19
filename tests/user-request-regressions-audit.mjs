@@ -50,13 +50,14 @@ if (!fixJs.includes("upgradeLegacyFrameModeControls"))
 if (!fixJs.includes('className = "fd-frame-mode"'))
   failures.push("circular frame/timeline icon control missing");
 if (
-  !fixCss.includes(".fd-frame-strip-mode") ||
-  !fixCss.includes("display: none !important")
+  !/\.fd-frame-strip-mode[^{]*\{[\s\S]*?display:\s*none\s*!important/.test(
+    fixCss,
+  )
 )
   failures.push("legacy frame pill flash guard missing");
 if (
-  !bootstrap.includes("/css/user-request-fixes.css?v=20260917-1") ||
-  !bootstrap.includes("/js/user-request-fixes.js?v=20260917-1")
+  !bootstrap.includes("/css/user-request-fixes.css?v=20260918-1") ||
+  !bootstrap.includes("/js/user-request-fixes.js?v=20260918-1")
 )
   failures.push("requested fix assets must use a fresh deployment cache key");
 if (!lineBreak.includes("/css/ui-regression-fixes.css?v=20260917-1"))
