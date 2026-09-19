@@ -66,6 +66,7 @@ for (const width of widths) {
           const isEmbeddedHeroSource = el.matches(
             ".hero-preview-card > .hero-app-preview-source",
           );
+          const isRealCapture = el.classList.contains("feature-diagram--real");
           const isPresentationSurface = el.matches(
             ".feature-diagram, .hero-visual-reuse",
           );
@@ -95,9 +96,11 @@ for (const width of widths) {
             index,
             kind: isEmbeddedHeroSource
               ? "hero-embedded-source"
-              : isPresentationSurface
-                ? "presentation-surface"
-                : "app-screen",
+              : isRealCapture
+                ? "real-app-capture"
+                : isPresentationSurface
+                  ? "presentation-surface"
+                  : "app-screen",
             className: el.className?.toString().slice(0, 140) || "",
             outer,
             border: {
@@ -208,6 +211,14 @@ for (const width of widths) {
           findings.push({ id, kind: "app-screen-clipping-regression", frame });
         if (frame.radius < 12)
           findings.push({ id, kind: "app-screen-radius-regression", frame });
+      } else if (frame.kind === "real-app-capture") {
+        // Real captures own their pixels. Do not require the legacy mock's
+        // synthetic bezel/background/radius; only require usable geometry and
+        // clipping at the host boundary.
+        if (frame.outer.width <= 1 || frame.outer.height <= 1)
+          findings.push({ id, kind: "real-capture-collapsed", frame });
+        if (!["hidden", "clip"].includes(frame.overflowX))
+          findings.push({ id, kind: "real-capture-clipping-regression", frame });
       } else if (frame.kind === "hero-embedded-source") {
         const edge = frame.heroHostEdge;
         if (
@@ -234,21 +245,22 @@ for (const width of widths) {
           });
       }
 
-      // The checked-in exact app references are 320 x 569. Screen
-      // reproductions must preserve that visible outer ratio independently of
-      // any internal source-space calibration used for child measurements.
-      const target = 320 / 569;
-      const ratio = frame.outer.height
-        ? frame.outer.width / frame.outer.height
-        : null;
-      if (ratio === null || Math.abs(ratio - target) > 0.02)
-        findings.push({
-          id,
-          kind: "app-screen-aspect-ratio-regression",
-          ratio,
-          target,
-          frame,
-        });
+      // Only legacy/code-rendered mocks have a normalized 320x569 contract.
+      // Real app captures preserve the source app geometry instead.
+      if (frame.kind !== "real-app-capture") {
+        const target = 320 / 569;
+        const ratio = frame.outer.height
+          ? frame.outer.width / frame.outer.height
+          : null;
+        if (ratio === null || Math.abs(ratio - target) > 0.02)
+          findings.push({
+            id,
+            kind: "app-screen-aspect-ratio-regression",
+            ratio,
+            target,
+            frame,
+          });
+      }
 
       for (const child of frame.directChildren) {
         if (child.width < frame.outer.width * 0.2) continue;
