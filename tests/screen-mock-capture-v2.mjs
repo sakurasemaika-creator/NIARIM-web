@@ -28,7 +28,9 @@ for (const route of ["/", "/features/"]) {
   });
   await page.waitForTimeout(300);
 
-  const mocks = page.locator(".fd-app-screen, .fd-route-screen");
+  const mocks = page.locator(
+    ".feature-diagram--real, .fd-app-screen:not(.feature-diagram--real), .fd-route-screen:not(.feature-diagram--real), .fd-widget-grid",
+  );
   const count = await mocks.count();
   for (let i = 0; i < count; i++) {
     const mock = mocks.nth(i);
@@ -54,7 +56,7 @@ for (const route of ["/", "/features/"]) {
     }, i);
     if (meta.width < 1 || meta.height < 1) {
       throw new Error(
-        `Visible screen mock has zero geometry: ${route} #${i} ${meta.classes}`,
+        `Visible app capture or diagram has zero geometry: ${route} #${i} ${meta.classes}`,
       );
     }
     const routeName = route === "/" ? "home" : "features";
