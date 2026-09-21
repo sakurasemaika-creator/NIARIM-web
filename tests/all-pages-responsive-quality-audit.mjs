@@ -208,7 +208,7 @@ for (const width of widths) {
         ".community-card",
         ".community-banner",
         ".news-card",
-        ".help-item",
+        // Help is intentionally an app-like accordion list, not a rounded card.
         ".about-name",
         ".contact-panel",
       ].join(",");
@@ -220,7 +220,7 @@ for (const width of widths) {
         ".community-card",
         ".community-banner",
         ".news-card",
-        ".help-item",
+        // Accordion rows do not require card-style symmetric inset padding.
         ".about-name",
         ".contact-panel",
       ].join(",");
