@@ -95,7 +95,17 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
-  await page.waitForSelector("#advanced .real-app-capture img", { state: "attached" });
+  // Real captures are installed on the first animation frame after
+  // DOMContentLoaded. Wait for that installer explicitly before asserting.
+  await page.waitForFunction(
+    () =>
+      document.readyState !== "loading" &&
+      typeof document.querySelector("#advanced") !== "undefined",
+  );
+  await page.waitForSelector("#advanced .real-app-capture img", {
+    state: "attached",
+    timeout: 10000,
+  });
   await page.locator("#advanced .real-app-capture img").scrollIntoViewIfNeeded();
   await page.waitForFunction(() => {
     const img = document.querySelector("#advanced .real-app-capture img");
