@@ -186,7 +186,7 @@ for (const width of widths) {
       const surfaceSelector = [
         ".intro-card",
         ".feature-row",
-        ".spec-item",
+        ".spec-item:not([data-help-card])",
         ".screenshot-card",
         ".pricing-card",
         ".pricing-notice",
