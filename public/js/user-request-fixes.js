@@ -123,23 +123,41 @@
       diagram.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
     });
 
-    var homeNames = ["canvas", "timeline", "layers", "onion-skin", "export"];
-    scope.querySelectorAll?.(".feature-row .feature-media").forEach(function (media, index) {
-      if (index >= homeNames.length || media.querySelector(".real-app-capture")) return;
+    var homeMap = {
+      row1: "canvas",
+      row2: "timeline",
+      row3: "layers",
+      row4: "onion-skin",
+      row5: "export",
+    };
+    scope.querySelectorAll?.(".feature-row[data-mock-theme]").forEach(function (row) {
+      var name = homeMap[row.dataset.mockTheme];
+      var media = row.querySelector(":scope > .feature-media");
+      if (!name || !media || media.querySelector(".real-app-capture")) return;
       var diagram = media.querySelector(":scope > .feature-diagram");
       if (!diagram) return;
       diagram.classList.add("feature-diagram--real");
-      diagram.replaceChildren(realCapture(homeNames[index], ""));
+      diagram.replaceChildren(realCapture(name, ""));
     });
 
-    var previewNames = ["canvas", "timeline", "layers", "export", "save-tree", "workspace"];
-    scope.querySelectorAll?.(".screenshot-scroller .screenshot-card").forEach(function (card, index) {
-      if (index >= previewNames.length || card.querySelector(".real-app-capture")) return;
-      var diagram = card.querySelector(".feature-diagram");
-      if (!diagram) return;
-      diagram.classList.add("feature-diagram--real");
-      diagram.replaceChildren(realCapture(previewNames[index], ""));
-    });
+    var previewMap = {
+      shot1: "canvas",
+      shot2: "timeline",
+      shot3: "layers",
+      shot4: "export",
+      shot5: "save-tree",
+      shot6: "workspace",
+    };
+    scope
+      .querySelectorAll?.(".screenshot-scroller .screenshot-card[data-mock-theme]")
+      .forEach(function (card) {
+        var name = previewMap[card.dataset.mockTheme];
+        if (!name || card.querySelector(".real-app-capture")) return;
+        var diagram = card.querySelector(".feature-diagram");
+        if (!diagram) return;
+        diagram.classList.add("feature-diagram--real");
+        diagram.replaceChildren(realCapture(name, ""));
+      });
   }
 
   function applyRequestedCopy() {
