@@ -109,6 +109,9 @@ jobs:
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
+      - name: Verify rendered feature capture alignment
+        if: always()
+        run: node tests/feature-rendered-alignment-audit.mjs
       - name: Capture cross-width eye-review evidence
         if: always()
         run: node tests/cross-width-visual-evidence.mjs
