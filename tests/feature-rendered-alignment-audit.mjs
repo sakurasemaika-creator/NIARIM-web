@@ -1,6 +1,6 @@
 import { chromium } from "playwright";
 
-const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:4173";
+const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [1024, 1180, 1280, 1440, 1920];
 const issues = [];
 const browser = await chromium.launch({ headless: true });
