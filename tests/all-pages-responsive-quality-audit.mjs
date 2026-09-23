@@ -170,6 +170,15 @@ for (const width of widths) {
       }
       const headings = [...document.querySelectorAll("h1,h2,h3")]
         .filter(visible)
+        // At the 900px feature breakpoint, legacy mock-only headings can remain
+        // in a collapsed source diagram behind the real capture. They are not
+        // user-visible text and must not be treated as page-heading overflow.
+        .filter(
+          (el) =>
+            !el.closest(
+              ".feature-diagram--real, .fd-app-screen, .fd-route-screen",
+            ),
+        )
         .map((el) => {
           const r = el.getBoundingClientRect();
           const cs = getComputedStyle(el);
