@@ -5,8 +5,18 @@ const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const browser = await chromium.launch(launchOptions);
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
 const page = await context.newPage();
-await page.goto(baseURL + "/", { waitUntil: "domcontentloaded" });
-await page.waitForFunction(() => document.querySelectorAll(".real-app-capture img").length > 0);
+await page.goto(baseURL + "/", { waitUntil: "networkidle" });
+await page.waitForFunction(
+  () =>
+    [...document.scripts].some((script) =>
+      script.src.includes("/js/user-request-fixes.js"),
+    ),
+);
+await page.waitForFunction(
+  () => document.querySelectorAll(".real-app-capture img").length > 0,
+  null,
+  { timeout: 10000 },
+);
 
 const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
   imgs.map((img) => {
@@ -31,8 +41,12 @@ for (const [index, img] of result.entries()) {
     issues.push({ index, kind: "missing-intrinsic-geometry", img });
 }
 
-await page.goto(baseURL + "/features/", { waitUntil: "domcontentloaded" });
-await page.waitForFunction(() => document.querySelectorAll(".real-app-capture img").length > 0);
+await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
+await page.waitForFunction(
+  () => document.querySelectorAll(".real-app-capture img").length > 0,
+  null,
+  { timeout: 10000 },
+);
 const featureImages = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
   imgs.map((img) => ({ loading: img.loading, width: img.getAttribute("width"), height: img.getAttribute("height") })),
 );
