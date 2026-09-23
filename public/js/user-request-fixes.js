@@ -96,6 +96,11 @@
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp";
     img.alt = alt || "";
+    // Captures are normalized to the app's 320×569 reference frame. Reserve
+    // that intrinsic ratio before lazy decoding so the surrounding layout does
+    // not jump when the image arrives.
+    img.width = 320;
+    img.height = 569;
     img.loading = "lazy";
     img.decoding = "async";
     picture.append(avif, img);
