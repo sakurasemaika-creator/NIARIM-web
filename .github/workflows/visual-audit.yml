@@ -109,6 +109,9 @@ jobs:
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
+      - name: Verify compact left-aligned mobile menu
+        if: always()
+        run: node tests/mobile-nav-density-alignment-audit.mjs
       - name: Verify real capture loading contract
         if: always()
         run: node tests/real-capture-loading-contract.mjs
