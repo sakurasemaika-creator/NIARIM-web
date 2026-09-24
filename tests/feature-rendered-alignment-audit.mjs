@@ -21,6 +21,8 @@ for (const width of widths) {
       if (!narrative || !stack) return null;
       const nr = narrative.getBoundingClientRect();
       const sr = stack.getBoundingClientRect();
+      if (nr.width <= 1 || nr.height <= 1 || sr.width <= 1 || sr.height <= 1)
+        return null;
       const diagrams = [...stack.querySelectorAll(":scope > .feature-diagram")]
         .filter((el) => {
           const cs = getComputedStyle(el);
