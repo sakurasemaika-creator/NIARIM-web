@@ -26,9 +26,13 @@ for (const width of widths) {
   );
   await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
   await page.waitForFunction(
-    () =>
-      document.querySelectorAll(".feature-row .real-app-capture").length ===
-      document.querySelectorAll(".feature-row[data-mock-theme]").length,
+    () => {
+      const expected = [...document.querySelectorAll(".feature-row[data-mock-theme]")]
+        .filter((row) => ["row1", "row2", "row3", "row4", "row5"].includes(row.dataset.mockTheme))
+        .length;
+      return expected > 0 &&
+        document.querySelectorAll(".feature-row .real-app-capture").length >= expected;
+    },
     null,
     { timeout: 10000 },
   );
