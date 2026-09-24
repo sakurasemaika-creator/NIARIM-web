@@ -13,6 +13,12 @@ await page.waitForFunction(
     ),
 );
 await page.waitForFunction(
+  () => typeof window.__niarimInstallRealAppCaptures === "function",
+  null,
+  { timeout: 10000 },
+);
+await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
+await page.waitForFunction(
   () => document.querySelectorAll(".real-app-capture img").length > 0,
   null,
   { timeout: 10000 },
@@ -42,6 +48,12 @@ for (const [index, img] of result.entries()) {
 }
 
 await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
+await page.waitForFunction(
+  () => typeof window.__niarimInstallRealAppCaptures === "function",
+  null,
+  { timeout: 10000 },
+);
+await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
 await page.waitForFunction(
   () => document.querySelectorAll(".real-app-capture img").length > 0,
   null,
