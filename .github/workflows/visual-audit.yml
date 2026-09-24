@@ -112,6 +112,9 @@ jobs:
       - name: Verify real capture loading contract
         if: always()
         run: node tests/real-capture-loading-contract.mjs
+      - name: Verify rendered home capture alignment
+        if: always()
+        run: node tests/home-rendered-capture-alignment-audit.mjs
       - name: Verify rendered feature capture alignment
         if: always()
         run: node tests/feature-rendered-alignment-audit.mjs
