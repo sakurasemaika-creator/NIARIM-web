@@ -19,10 +19,12 @@ for (const width of widths) {
         script.src.includes("/js/user-request-fixes.js"),
       ),
   );
-  await page.evaluate(async () => {
-    const mod = await import("/js/user-request-fixes.js");
-    mod.installRealAppCaptures?.(document);
-  });
+  await page.waitForFunction(
+    () => typeof window.__niarimInstallRealAppCaptures === "function",
+    null,
+    { timeout: 10000 },
+  );
+  await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
   await page.waitForFunction(
     () =>
       document.querySelectorAll(".feature-row .real-app-capture").length ===
