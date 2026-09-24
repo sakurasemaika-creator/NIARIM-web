@@ -165,6 +165,10 @@
       });
   }
 
+  // Stable hook for browser audits. Keeping installation idempotent lets
+  // tests invoke the same production path without depending on rAF timing.
+  window.__niarimInstallRealAppCaptures = installRealAppCaptures;
+
   function applyRequestedCopy() {
     installDictionaryOverrides();
     installRealAppCaptures(document);
