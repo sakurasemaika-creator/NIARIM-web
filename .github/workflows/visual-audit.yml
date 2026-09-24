@@ -109,6 +109,9 @@ jobs:
       - name: Run spacing, corner and background quality audit
         if: always()
         run: node tests/design-polish-audit.mjs
+      - name: Verify rendered Hero layout
+        if: always()
+        run: node tests/hero-rendered-layout-audit.mjs
       - name: Verify compact left-aligned mobile menu
         if: always()
         run: node tests/mobile-nav-density-alignment-audit.mjs
