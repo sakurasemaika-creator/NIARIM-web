@@ -99,10 +99,12 @@ for (const width of widths) {
   // deferred through lang-flag.js, which can race under a heavily loaded CI
   // runner even though the rendered page itself is healthy.
   await page.waitForSelector("#advanced");
-  await page.evaluate(async () => {
-    const mod = await import("/js/user-request-fixes.js");
-    mod.installRealAppCaptures?.(document);
-  });
+  await page.waitForFunction(
+    () => typeof window.__niarimInstallRealAppCaptures === "function",
+    null,
+    { timeout: 10000 },
+  );
+  await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
   await page.waitForSelector("#advanced .real-app-capture img", {
     state: "attached",
     timeout: 10000,
