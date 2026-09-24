@@ -14,7 +14,15 @@ for (const width of widths) {
   const page = await context.newPage();
   await page.goto(baseURL + "/", { waitUntil: "networkidle" });
   await page.waitForFunction(
+    () =>
+      [...document.scripts].some((script) =>
+        script.src.includes("/js/user-request-fixes.js"),
+      ),
+  );
+  await page.waitForFunction(
     () => document.querySelectorAll(".feature-row .real-app-capture").length > 0,
+    null,
+    { timeout: 10000 },
   );
 
   const rows = await page.locator(".feature-row").evaluateAll((nodes) =>
