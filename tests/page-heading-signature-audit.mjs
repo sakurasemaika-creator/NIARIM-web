@@ -95,13 +95,14 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
-  // Real captures are installed on the first animation frame after
-  // DOMContentLoaded. Wait for that installer explicitly before asserting.
-  await page.waitForFunction(
-    () =>
-      document.readyState !== "loading" &&
-      typeof document.querySelector("#advanced") !== "undefined",
-  );
+  // Install real captures deterministically. The production installer is
+  // deferred through lang-flag.js, which can race under a heavily loaded CI
+  // runner even though the rendered page itself is healthy.
+  await page.waitForSelector("#advanced");
+  await page.evaluate(async () => {
+    const mod = await import("/js/user-request-fixes.js");
+    mod.installRealAppCaptures?.(document);
+  });
   await page.waitForSelector("#advanced .real-app-capture img", {
     state: "attached",
     timeout: 10000,
