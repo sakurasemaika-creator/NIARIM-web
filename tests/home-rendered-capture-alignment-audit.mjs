@@ -19,8 +19,14 @@ for (const width of widths) {
         script.src.includes("/js/user-request-fixes.js"),
       ),
   );
+  await page.evaluate(async () => {
+    const mod = await import("/js/user-request-fixes.js");
+    mod.installRealAppCaptures?.(document);
+  });
   await page.waitForFunction(
-    () => document.querySelectorAll(".feature-row .real-app-capture").length > 0,
+    () =>
+      document.querySelectorAll(".feature-row .real-app-capture").length ===
+      document.querySelectorAll(".feature-row[data-mock-theme]").length,
     null,
     { timeout: 10000 },
   );
