@@ -103,15 +103,18 @@ try {
     const topbar = canvas?.querySelector(":scope > .fd-topbar");
     const slider = canvas?.querySelector(":scope > .fd-brush-slider");
     const toolbar = canvas?.querySelector(":scope > .fd-toolbar");
+    const visibleText = document.body.innerText;
     return {
       topbarHeight: topbar?.getBoundingClientRect().height || 0,
       sliderHeight: slider?.getBoundingClientRect().height || 0,
       toolbarHeight: toolbar?.getBoundingClientRect().height || 0,
+      leakedFdToken: /(^|\\s)fd\\.[A-Za-z0-9_.-]+/m.test(visibleText),
     };
   });
   if (!mock.topbarHeight) failures.push("canvas top bar lost geometry");
   if (!mock.sliderHeight) failures.push("canvas slider area lost geometry");
   if (!mock.toolbarHeight) failures.push("canvas tool bar lost geometry");
+  if (mock.leakedFdToken) failures.push("user-visible fd.* placeholder token leaked on home");
 } finally {
   await browser.close();
 }
