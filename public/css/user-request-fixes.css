@@ -52,6 +52,14 @@ html body #widget .fd-widget-grid > .fd-widget-tile { align-self:start!important
     max-width:320px!important;
     margin-inline:auto!important;
   }
+  /* Reverse rows inherited a right-edge bias from the legacy mock layout.
+     Anchor real captures to the media column's actual center instead. */
+  html body .feature-row .feature-media > .feature-diagram--real {
+    position:relative!important;
+    left:50%!important;
+    transform:translateX(-50%)!important;
+    margin-inline:0!important;
+  }
 }
 
 
