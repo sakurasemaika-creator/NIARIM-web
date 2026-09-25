@@ -140,9 +140,15 @@
       var media = row.querySelector(":scope > .feature-media");
       if (!name || !media || media.querySelector(".real-app-capture")) return;
       var diagram = media.querySelector(":scope > .feature-diagram");
-      if (!diagram) return;
-      diagram.classList.add("feature-diagram--real");
-      diagram.replaceChildren(realCapture(name, ""));
+      if (diagram) {
+        diagram.classList.add("feature-diagram--real");
+        diagram.replaceChildren(realCapture(name, ""));
+        return;
+      }
+      // main.js reuses the Hero mock for Home row1 and therefore removes the
+      // original .feature-diagram wrapper. Replace that legacy clone directly
+      // so every Home feature uses the same lightweight real app capture path.
+      media.replaceChildren(realCapture(name, ""));
     });
 
     var previewMap = {
