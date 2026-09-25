@@ -24,18 +24,23 @@ for (const width of widths) {
     null,
     { timeout: 10000 },
   );
-  await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
-  await page.waitForFunction(
-    () => {
-      const expected = [...document.querySelectorAll(".feature-row[data-mock-theme]")]
-        .filter((row) => ["row1", "row2", "row3", "row4", "row5"].includes(row.dataset.mockTheme))
-        .length;
-      return expected > 0 &&
-        document.querySelectorAll(".feature-row .real-app-capture").length >= expected;
-    },
-    null,
-    { timeout: 10000 },
-  );
+  const installState = await page.evaluate(() => {
+    window.__niarimInstallRealAppCaptures(document);
+    const rows = [...document.querySelectorAll(".feature-row[data-mock-theme]")]
+      .filter((row) => ["row1", "row2", "row3", "row4", "row5"].includes(row.dataset.mockTheme));
+    return {
+      expected: rows.length,
+      installed: rows.filter((row) => row.querySelector(".real-app-capture")).length,
+      missing: rows
+        .filter((row) => !row.querySelector(".real-app-capture"))
+        .map((row) => row.dataset.mockTheme),
+    };
+  });
+  if (installState.expected === 0 || installState.installed !== installState.expected) {
+    issues.push({ width, kind: "home-capture-install-incomplete", installState });
+    await context.close();
+    continue;
+  }
 
   const rows = await page.locator(".feature-row").evaluateAll((nodes) =>
     nodes.map((row) => {
