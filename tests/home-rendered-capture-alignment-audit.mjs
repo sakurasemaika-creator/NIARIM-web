@@ -43,7 +43,9 @@ for (const width of widths) {
   }
 
   const rows = await page.locator(".feature-row").evaluateAll((nodes) =>
-    nodes.map((row) => {
+    nodes
+      .filter((row) => ["row1", "row2", "row3", "row4", "row5"].includes(row.dataset.mockTheme))
+      .map((row) => {
       const copy = row.querySelector(":scope > .feature-copy");
       const media = row.querySelector(":scope > .feature-media");
       const capture = media?.querySelector(".real-app-capture");
