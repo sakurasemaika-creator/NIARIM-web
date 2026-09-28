@@ -1,4 +1,5 @@
 name: Refresh real app screenshots
+# Imports the latest successful premium capture artifact from the app repository.
 on:
   workflow_dispatch:
   push:
