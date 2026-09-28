@@ -134,7 +134,9 @@
       if (!section || section.querySelector(".real-app-capture")) return;
       var diagram = section.querySelector(":scope > .feature-diagram");
       if (!diagram) return;
-      diagram.classList.add("feature-diagram--real");
+      diagram.className = "feature-diagram feature-diagram--real";
+      diagram.removeAttribute("data-mock-theme");
+      diagram.removeAttribute("style");
       diagram.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
     });
 
