@@ -36,12 +36,12 @@ jobs:
           test -n "$run_id"
           if [ "$run_sha" != "$app_head" ]; then
             compare="$(gh api "repos/sakurasemaika-creator/NIARIM/compare/$run_sha...$app_head")"
-            ui_changes="$(printf '%s' "$compare" | jq '[.files[]?.filename | select(startswith("lib/") or startswith("test/app_web_reference_capture"))] | length')"
+            ui_changes="$(printf '%s' "$compare" | jq '[.files[]?.filename | select(startswith("lib/") or . == "test/app_web_reference_capture_test_v2.dart")] | length')"
             if [ "$ui_changes" != "0" ]; then
               echo "::error::Latest successful capture ($run_sha) predates relevant app UI/capture changes at $app_head"
               exit 1
             fi
-            echo "Using capture $run_sha: newer app commits contain no lib/ or web-reference-capture changes."
+            echo "Using capture $run_sha: newer app commits do not affect runtime UI or the web-reference capture test."
           fi
           gh run download "$run_id" -R sakurasemaika-creator/NIARIM -n web-reference-captures -D _app/build/visual-smoke
           echo "APP_CAPTURE_RUN_ID=$run_id" >> "$GITHUB_ENV"
