@@ -66,6 +66,16 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
   }),
 );
 
+const expectedFrames = {
+  canvas: "rgb(58, 166, 255)",
+  timeline: "rgb(242, 185, 15)",
+  layers: "rgb(177, 92, 255)",
+  "onion-skin": "rgb(16, 185, 129)",
+  "audio-editor": "rgb(255, 138, 61)",
+  "save-tree": "rgb(92, 107, 255)",
+  workspace: "rgb(216, 160, 166)",
+  export: "rgb(141, 169, 196)",
+};
 const issues = [];
 for (const [index, img] of result.entries()) {
   if (img.loading !== "lazy") issues.push({ index, kind: "not-lazy", img });
@@ -106,6 +116,8 @@ const featureImages = await page.locator(".real-app-capture img").evaluateAll((i
       height: img.getAttribute("height"),
       renderedWidth: ir.width,
       renderedHeight: ir.height,
+      frameTheme: frame?.dataset.captureTheme || "",
+      frameColor: frame ? getComputedStyle(frame).borderTopColor : "",
       frame: fr ? {
         width: fr.width,
         height: fr.height,
@@ -120,6 +132,8 @@ Object.keys(expectedGeometry).forEach((file) => {
   if (!featureFiles.has(file)) issues.push({ page: "features", kind: "missing-capture", file });
 });
 featureImages.forEach((img, index) => {
+  if (img.frameTheme && img.frameColor !== expectedFrames[img.frameTheme])
+    issues.push({ page: "features", index, kind: "capture-frame-theme-mismatch", expected: expectedFrames[img.frameTheme], img });
   if (img.loading !== "lazy") issues.push({ page: "features", index, kind: "not-lazy", img });
   const expected = expectedGeometry[img.file];
   if (!expected || img.width !== expected[0] || img.height !== expected[1])
