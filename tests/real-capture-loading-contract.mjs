@@ -125,7 +125,10 @@ const featureImages = await page.locator(".real-app-capture img").evaluateAll((i
     };
   }),
 );
-const allPlacementFiles = result.map((img) => img.file).concat(featureImages.map((img) => img.file));
+// The Home hero capture is also discovered by the generic Home selector.
+// Deduplicate the same DOM image before checking cross-placement theme reuse.
+const allPlacementFiles = [...new Set(result.map((img) => img.file))]
+  .concat(featureImages.map((img) => img.file));
 const duplicatePlacementFiles = allPlacementFiles.filter(
   (file, index) => allPlacementFiles.indexOf(file) !== index,
 );
