@@ -86,6 +86,10 @@ for (const width of widths) {
       };
     };
 
+    // Wait briefly for the load-time real-capture showcase replacement.
+    for (let i = 0; i < 20 && !document.querySelector(".hero-showcase--real"); i += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
     const visibleHeroPreview = [
       ...document.querySelectorAll(".hero-preview-card"),
     ].filter(visible);
