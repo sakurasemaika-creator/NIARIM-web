@@ -1,11 +1,6 @@
 name: Refresh real app screenshots
 on:
   workflow_dispatch:
-  push:
-    branches: [dev_branch]
-    paths:
-      - ".github/workflows/refresh-real-app-screens.yml"
-      # retry marker: app capture route updated 2026-09-18
 permissions:
   contents: write
 jobs:
@@ -16,23 +11,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: dev_branch
-      - uses: actions/checkout@v4
-        with:
-          repository: sakurasemaika-creator/NIARIM
-          ref: dev_branch
-          path: _app
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: false
-      - name: Capture current app UI
+      - name: Install image encoders
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk webp libavif-bin imagemagick
-          fc-cache -f
-          cd _app
-          flutter pub get
-          flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
+          sudo apt-get install -y webp libavif-bin imagemagick
+      - name: Download latest successful premium app captures
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p _app/build/visual-smoke
+          run_id="$(gh api 'repos/sakurasemaika-creator/NIARIM/actions/workflows/web-reference-capture.yml/runs?branch=dev_branch&status=success&per_page=1' --jq '.workflow_runs[0].id')"
+          test -n "$run_id"
+          gh run download "$run_id" -R sakurasemaika-creator/NIARIM -n web-reference-captures -D _app/build/visual-smoke
+          echo "APP_CAPTURE_RUN_ID=$run_id" >> "$GITHUB_ENV"
       - name: Build lightweight web assets
         run: |
           set -euo pipefail
@@ -57,7 +49,7 @@ jobs:
               exit 1
             fi
           done
-          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(git -C _app rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(sed -n 's/^commit=//p' _app/build/visual-smoke/webref_capture_metadata.txt | head -n1)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           du -h "$dst"/*
       - name: Commit captures
         run: |
