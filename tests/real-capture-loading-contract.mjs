@@ -49,7 +49,9 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
       renderedWidth: r.width,
       renderedHeight: r.height,
       frame: (() => {
-        const frame = img.closest(".feature-diagram--real");
+        const frame = img.closest(
+          ".feature-diagram--real, .hero-visual--real, .screenshot-card, .feature-media",
+        );
         if (!frame) return null;
         const fr = frame.getBoundingClientRect();
         return { width: fr.width, height: fr.height };
