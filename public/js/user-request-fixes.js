@@ -101,6 +101,9 @@
   function realCapture(name, alt) {
     var picture = document.createElement("picture");
     picture.className = "real-app-capture";
+    var avif = document.createElement("source");
+    avif.type = "image/avif";
+    avif.srcset = "/assets/images/app-captures/" + name + ".avif";
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp";
     img.alt = alt || "";
