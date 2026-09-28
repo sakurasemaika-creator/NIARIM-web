@@ -76,7 +76,9 @@ const expectedFrames = {
 
 const issues = [];
 for (const [index, img] of result.entries()) {
-  if (img.loading !== "lazy") issues.push({ index, kind: "not-lazy", img });
+  // The three Hero images are above-the-fold/LCP candidates and intentionally
+  // use the browser default eager loading. All remaining Home captures are lazy.
+  if (index >= 3 && img.loading !== "lazy") issues.push({ index, kind: "not-lazy", img });
   if (img.decoding !== "async") issues.push({ index, kind: "not-async-decoding", img });
   const expected = expectedGeometry[img.file];
   if (!expected || img.widthAttr !== expected[0] || img.heightAttr !== expected[1])
