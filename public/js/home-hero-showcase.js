@@ -204,7 +204,6 @@
     var container = hero && hero.querySelector(":scope > .container");
     if (!hero || !container) return;
 
-    appendCommunityAppPreview();
     var currentShowcase = container.querySelector(":scope > .hero-showcase");
     if (currentShowcase) currentShowcase.remove();
 
