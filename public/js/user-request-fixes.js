@@ -154,15 +154,15 @@
       hero.className = "hero-visual hero-visual--real";
       hero.removeAttribute("data-mock-theme");
       hero.removeAttribute("style");
-      hero.replaceChildren(realCapture("canvas", "NIARIM canvas"));
+      hero.replaceChildren(realCapture("canvas-v4", "NIARIM canvas"));
     }
 
     var homeMap = {
-      row1: "canvas",
-      row2: "timeline",
-      row3: "layers",
-      row4: "onion-skin",
-      row5: "export",
+      row1: "canvas-v2",
+      row2: "timeline-v2",
+      row3: "layers-v2",
+      row4: "onion-skin-v2",
+      row5: "export-v2",
     };
     scope.querySelectorAll?.(".feature-row[data-mock-theme]").forEach(function (row) {
       var name = homeMap[row.dataset.mockTheme];
@@ -184,12 +184,12 @@
     });
 
     var previewMap = {
-      shot1: "canvas",
-      shot2: "timeline",
-      shot3: "layers",
-      shot4: "export",
-      shot5: "save-tree",
-      shot6: "workspace",
+      shot1: "canvas-v3",
+      shot2: "timeline-v3",
+      shot3: "layers-v3",
+      shot4: "export-v3",
+      shot5: "save-tree-v2",
+      shot6: "workspace-v2",
     };
     scope
       .querySelectorAll?.(".screenshot-scroller .screenshot-card[data-mock-theme]")
