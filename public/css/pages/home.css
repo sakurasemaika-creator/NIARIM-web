@@ -1033,7 +1033,12 @@
 .hero-showcase--real .hero-preview-card {
   overflow: hidden;
   background: transparent;
+  border-width: 5px;
+  border-style: solid;
 }
+.hero-showcase--real .hero-preview-canvas { border-color: #3AA6FF; }
+.hero-showcase--real .hero-preview-timeline { border-color: #F2B90F; }
+.hero-showcase--real .hero-preview-workspace { border-color: #D8A0A6; }
 .hero-showcase--real .hero-real-capture,
 .hero-showcase--real .hero-real-capture > img {
   display: block;
