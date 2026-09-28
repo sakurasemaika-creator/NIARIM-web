@@ -129,7 +129,11 @@ const allPlacementFiles = result.map((img) => img.file).concat(featureImages.map
 const duplicatePlacementFiles = allPlacementFiles.filter(
   (file, index) => allPlacementFiles.indexOf(file) !== index,
 );
-if (duplicatePlacementFiles.length) {
+// A filename variant maps 1:1 to an App theme accent. Reusing any filename
+// therefore means reusing a theme, which is forbidden across the website.
+const placementBaseNames = allPlacementFiles.map((file) => file.replace(/\.webp$/, ""));
+const uniquePlacementNames = new Set(placementBaseNames);
+if (duplicatePlacementFiles.length || uniquePlacementNames.size !== placementBaseNames.length) {
   issues.push({
     kind: "duplicate-capture-theme-placement",
     files: [...new Set(duplicatePlacementFiles)],
