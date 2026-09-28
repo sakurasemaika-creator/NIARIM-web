@@ -1282,3 +1282,4 @@
 .feature-diagram--real[data-capture-theme="save-tree"] { --capture-frame: #C15F35; }
 .feature-diagram--real[data-capture-theme="workspace"] { --capture-frame: #E65F2B; }
 .feature-diagram--real[data-capture-theme="export"] { --capture-frame: #0086C9; }
+.feature-diagram--real[data-capture-theme="widget"] { --capture-frame: #00796B; }
