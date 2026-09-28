@@ -204,12 +204,12 @@
       .forEach(function (card) {
         var name = previewMap[card.dataset.mockTheme];
         if (!name || card.querySelector(".real-app-capture")) return;
-        var diagram = card.querySelector(".feature-diagram");
-        if (!diagram) return;
-        diagram.className = "feature-diagram feature-diagram--real";
-        diagram.dataset.captureTheme = name;
-        diagram.removeAttribute("style");
-        diagram.replaceChildren(realCapture(name, ""));
+        // Replace the whole gallery card, not only the legacy diagram.
+        // main.js can restructure/remove the first coded diagram before this
+        // hook runs; replacing the card itself guarantees that no HTML/CSS
+        // facsimile, mock ad strip, or stale aspect-ratio wrapper survives.
+        card.replaceChildren(realCapture(name, ""));
+        card.dataset.captureTheme = name;
       });
   }
 
