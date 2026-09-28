@@ -19,6 +19,8 @@ on:
       - "public/css/pages/home.css"
       - "public/css/responsive-consistency.css"
       - "public/js/home-hero-showcase.js"
+      - "public/js/user-request-fixes.js"
+      - "public/assets/images/app-captures/**"
       - "public/js/config.js"
       - "public/js/config-links.js"
   workflow_dispatch:
@@ -50,6 +52,12 @@ jobs:
       - name: Capture progressive Home widths
         if: always()
         run: node tests/home-width-sweep.mjs
+      - name: Verify real capture loading and unique-theme contract
+        if: always()
+        run: node tests/real-capture-loading-contract.mjs
+      - name: Verify rendered Home capture/frame alignment
+        if: always()
+        run: node tests/home-rendered-capture-alignment-audit.mjs
       - name: Export representative images for the audit review
         if: always()
         run: |
