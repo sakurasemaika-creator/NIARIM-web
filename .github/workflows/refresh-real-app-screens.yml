@@ -49,7 +49,7 @@ jobs:
           src="_app/build/visual-smoke"
           dst="public/assets/images/app-captures"
           mkdir -p "$dst"
-          declare -A map=([01_canvas_default]=canvas [02_canvas_layer_panel]=layers [03_canvas_onion_skin]=onion-skin [04_timeline_default]=timeline [05_timeline_audio_editor]=audio-editor [06_save_tree]=save-tree [07_export]=export [08_workspace]=workspace)
+          declare -A map=([01_canvas_default]=canvas [02_canvas_layer_panel]=layers [03_canvas_onion_skin]=onion-skin [04_timeline_default]=timeline [05_timeline_audio_editor]=audio-editor [06_save_tree]=save-tree [07_export]=export [08_workspace]=workspace [09_widget]=widget)
           for key in "${!map[@]}"; do
             name="${map[$key]}"
             for variant in 1 2 3 4; do
