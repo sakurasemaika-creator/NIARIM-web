@@ -213,6 +213,23 @@
       });
   }
 
+  function assertUniqueCapturePlacements(root) {
+    var scope = root || document;
+    var files = Array.prototype.map.call(
+      scope.querySelectorAll(".real-app-capture img"),
+      function (img) { return img.src.split("/").pop().split("?")[0]; }
+    );
+    var seen = new Set();
+    var duplicates = files.filter(function (file) {
+      if (seen.has(file)) return true;
+      seen.add(file);
+      return false;
+    });
+    if (duplicates.length && /(?:localhost|127\.0\.0\.1)/.test(location.hostname)) {
+      console.error("Duplicate real capture theme placements:", Array.from(new Set(duplicates)));
+    }
+  }
+
   // Stable hook for browser audits. Keeping installation idempotent lets
   // tests invoke the same production path without depending on rAF timing.
   window.__niarimInstallRealAppCaptures = installRealAppCaptures;
