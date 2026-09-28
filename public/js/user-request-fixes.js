@@ -87,6 +87,17 @@
   }
 
 
+  var captureGeometry = {
+    "canvas": [320, 554],
+    "timeline": [316, 561],
+    "layers": [320, 561],
+    "onion-skin": [320, 542],
+    "export": [320, 543],
+    "audio-editor": [320, 487],
+    "save-tree": [320, 561],
+    "workspace": [316, 561],
+  };
+
   function realCapture(name, alt) {
     var picture = document.createElement("picture");
     picture.className = "real-app-capture";
@@ -96,11 +107,13 @@
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp";
     img.alt = alt || "";
-    // Captures are normalized to the app's 320×569 reference frame. Reserve
-    // that intrinsic ratio before lazy decoding so the surrounding layout does
-    // not jump when the image arrives.
-    img.width = 320;
-    img.height = 569;
+    // Reserve the capture's real intrinsic geometry before lazy decoding.
+    // These files are intentionally cropped to the paid-member app surface,
+    // so their heights differ by route; forcing one legacy 320x569 frame is
+    // what created the visible outer-frame/capture mismatch.
+    var geometry = captureGeometry[name] || [320, 569];
+    img.width = geometry[0];
+    img.height = geometry[1];
     img.loading = "lazy";
     img.decoding = "async";
     picture.append(avif, img);
