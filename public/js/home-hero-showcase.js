@@ -205,10 +205,7 @@
 
     appendCommunityAppPreview();
     var currentShowcase = container.querySelector(":scope > .hero-showcase");
-    if (currentShowcase) {
-      ensureHeroCascadeFinal();
-      return;
-    }
+    if (currentShowcase) currentShowcase.remove();
 
     var canvas = buildRealCapture("canvas", "NIARIM canvas");
     var timeline = buildRealCapture("timeline", "NIARIM timeline");
