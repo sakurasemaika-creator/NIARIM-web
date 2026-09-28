@@ -1003,3 +1003,43 @@
   box-shadow: none;
   overflow: hidden;
 }
+
+
+/* Real captures still sit inside a visible device/frame treatment. The frame
+   is decoration only; the capture itself keeps its native 320:569 ratio. */
+.feature-row[data-mock-theme] .feature-media:has(.real-app-capture) {
+  box-sizing: content-box;
+  border: 5px solid var(--capture-frame, var(--color-ink));
+  border-radius: var(--radius-lg);
+}
+.feature-row[data-mock-theme="row1"] { --capture-frame: #2f6fb3; }
+.feature-row[data-mock-theme="row2"] { --capture-frame: #b98517; }
+.feature-row[data-mock-theme="row3"] { --capture-frame: #8b4bb0; }
+.feature-row[data-mock-theme="row4"] { --capture-frame: #2d8f68; }
+.feature-row[data-mock-theme="row5"] { --capture-frame: #738da8; }
+
+.screenshot-card:has(.real-app-capture) {
+  box-sizing: content-box;
+  border: 5px solid var(--capture-frame, var(--color-ink));
+  border-radius: var(--radius-lg);
+}
+.screenshot-card[data-mock-theme="shot1"] { --capture-frame: #2f6fb3; }
+.screenshot-card[data-mock-theme="shot2"] { --capture-frame: #b98517; }
+.screenshot-card[data-mock-theme="shot3"] { --capture-frame: #8b4bb0; }
+.screenshot-card[data-mock-theme="shot4"] { --capture-frame: #738da8; }
+.screenshot-card[data-mock-theme="shot5"] { --capture-frame: #5264b8; }
+.screenshot-card[data-mock-theme="shot6"] { --capture-frame: #b06b79; }
+
+.hero-showcase--real .hero-preview-card {
+  overflow: hidden;
+  background: transparent;
+}
+.hero-showcase--real .hero-real-capture,
+.hero-showcase--real .hero-real-capture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hero-showcase--real .hero-real-capture > img {
+  object-fit: cover;
+}
