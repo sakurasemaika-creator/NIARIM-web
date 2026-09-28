@@ -103,6 +103,12 @@ await page.waitForFunction(
   null,
   { timeout: 10000 },
 );
+const featureCaptureLocator = page.locator(".real-app-capture img");
+for (let i = 0; i < await featureCaptureLocator.count(); i++) {
+  await featureCaptureLocator.nth(i).scrollIntoViewIfNeeded();
+  await featureCaptureLocator.nth(i).evaluate((img) => img.decode?.().catch(() => {}));
+}
+await page.evaluate(() => scrollTo(0, 0));
 const featureImages = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
   imgs.map((img) => {
     const ir = img.getBoundingClientRect();
