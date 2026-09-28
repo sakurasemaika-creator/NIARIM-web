@@ -3,8 +3,26 @@ name: Audit policy guard
 on:
   push:
     branches: [dev_branch]
+    paths:
+      - "AGENTS.md"
+      - ".github/workflows/audit-policy-guard.yml"
+      - "docs/work-audit/**"
+      - "docs/product-audit/QUALITY_STANDARD.md"
+      - "docs/product-audit/LEGAL_IP_STANDARD.md"
+      - "docs/product-audit/HANDS_ON_UI_STANDARD.md"
+      - "docs/work-continuation.md"
+      - "docs/product-audit/README.md"
   pull_request:
     branches: [dev_branch]
+    paths:
+      - "AGENTS.md"
+      - ".github/workflows/audit-policy-guard.yml"
+      - "docs/work-audit/**"
+      - "docs/product-audit/QUALITY_STANDARD.md"
+      - "docs/product-audit/LEGAL_IP_STANDARD.md"
+      - "docs/product-audit/HANDS_ON_UI_STANDARD.md"
+      - "docs/work-continuation.md"
+      - "docs/product-audit/README.md"
 
 permissions:
   contents: read
@@ -15,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
       - name: Reject unauthorized audit policy/state edits
         shell: bash
         run: |
