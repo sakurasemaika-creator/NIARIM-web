@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const baseCaptureNames = ["canvas", "timeline", "layers", "onion-skin", "export", "audio-editor", "save-tree", "workspace"];
+const baseCaptureNames = ["canvas", "timeline", "layers", "onion-skin", "export", "audio-editor", "save-tree", "workspace", "widget"];
 const expectedGeometry = Object.fromEntries(
   baseCaptureNames.flatMap((name) =>
     ["", "-v2", "-v3", "-v4"].map((suffix) => [name + suffix + ".webp", ["320", "569"]]),
@@ -71,6 +71,7 @@ const expectedFrames = {
   "save-tree": "rgb(193, 95, 53)",
   workspace: "rgb(230, 95, 43)",
   export: "rgb(0, 134, 201)",
+  widget: "rgb(0, 121, 107)",
 };
 
 const issues = [];
