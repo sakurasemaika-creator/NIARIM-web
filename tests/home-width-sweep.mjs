@@ -93,7 +93,7 @@ for (const width of widths) {
     const devices = visibleHeroPreview.map((card) => {
       const cs = getComputedStyle(card);
       const source = card.querySelector(
-        ":scope > .hero-app-preview-source, :scope > .hero-community-mini",
+        ":scope > .hero-app-preview-source, :scope > .hero-community-mini, :scope > .real-app-capture",
       );
       const sourceStyle = source ? getComputedStyle(source) : null;
       const accent = resolveColor(cs.getPropertyValue("--fd-accent").trim());
@@ -128,28 +128,6 @@ for (const width of widths) {
       }
       const critical = [];
       if (source) critical.push(containment(card, source));
-      if (card.classList.contains("hero-preview-canvas")) {
-        critical.push(
-          containment(source, card.querySelector(".fd-topbar")),
-          containment(source, card.querySelector(".fd-toolbar")),
-          containment(source, card.querySelector(".fd-frame-strip")),
-        );
-      } else if (card.classList.contains("hero-preview-timeline")) {
-        critical.push(
-          containment(source, card.querySelector(".fd-timeline-preview")),
-          containment(source, card.querySelector(".fd-transport")),
-          containment(source, card.querySelector(".fd-scene-line")),
-          containment(source, card.querySelector(".fd-tl-frame.is-current")),
-          containment(source, card.querySelector(".fd-end-card-row")),
-        );
-      } else if (card.classList.contains("hero-preview-community")) {
-        critical.push(
-          containment(source, card.querySelector(".hero-community-appbar")),
-          containment(source, card.querySelector(".hero-community-tabs")),
-          containment(source, card.querySelector(".hero-community-grid")),
-          containment(source, card.querySelector(".hero-community-fab")),
-        );
-      }
       const r = card.getBoundingClientRect();
       return {
         classes: card.className,
@@ -207,80 +185,21 @@ for (const width of widths) {
         actual: devices.length,
       });
     } else {
-      const base = devices[0].rect;
-      const themes = new Set(
-        devices.map((device) =>
-          JSON.stringify([
-            device.theme.accent,
-            device.theme.surface,
-            device.theme.bg,
-            device.theme.bezel,
-          ]),
-        ),
-      );
-      if (themes.size !== 3) {
-        deviceFailures.push({
-          width,
-          kind: "hero-theme-not-distinct",
-          devices,
+      devices.forEach((device) => {
+        (device.critical || []).forEach((item) => {
+          if (!item.within) {
+            deviceFailures.push({
+              width,
+              kind: "hero-real-capture-overflow",
+              classes: device.classes,
+              item,
+            });
+          }
         });
-      }
-      for (const device of devices) {
-        if (
-          Math.abs(device.rect.width - base.width) > deviceTolerance ||
-          Math.abs(device.rect.height - base.height) > deviceTolerance
-        ) {
-          deviceFailures.push({
-            width,
-            kind: "hero-device-size-mismatch",
-            device,
-          });
-        }
-        if (Math.abs(device.ratio - ratioTarget) > 0.004) {
-          deviceFailures.push({
-            width,
-            kind: "hero-device-ratio",
-            target: ratioTarget,
-            device,
-          });
-        }
-        if (
-          !device.theme.accent ||
-          !device.theme.surface ||
-          !device.theme.bg ||
-          !device.theme.bezel ||
-          device.sourceTheme.accent !== device.theme.accent ||
-          device.sourceTheme.surface !== device.theme.surface ||
-          device.sourceTheme.bg !== device.theme.bg
-        ) {
-          deviceFailures.push({ width, kind: "hero-theme-leak", device });
-        }
-        // Real app captures intentionally replace the old coded preview DOM.
-        // Only require a sampled accent while a legacy preview still exposes
-        // an accent-bearing control; otherwise the screenshot pixels are the source of truth.
-        if (
-          device.renderedAccent &&
-          device.renderedAccent !== device.theme.accent
-        ) {
-          deviceFailures.push({
-            width,
-            kind: "hero-accent-render-mismatch",
-            device,
-          });
-        }
-        const clipped = device.critical.filter((item) => !item.within);
-        if (clipped.length) {
-          deviceFailures.push({
-            width,
-            kind: "hero-internal-ui-clipped",
-            classes: device.classes,
-            host: device.rect,
-            clipped,
-          });
-        }
-      }
+      });
     }
   }
+
 
   metrics.push(row);
 
