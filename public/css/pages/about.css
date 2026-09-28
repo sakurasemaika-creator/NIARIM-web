@@ -127,3 +127,32 @@
 .about-name-result {
   color: var(--color-accent-strong);
 }
+
+
+/* Keep the Only in NIARIM heading as a distinct introduction block.
+   The shared .spec-grid has no top margin, so without page-local spacing
+   the first tile row visually collides with the heading/lead at some widths. */
+.about-unique .section-head {
+  max-width: calc(72 * var(--measure-ch));
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.about-unique .section-head h2 {
+  margin-top: var(--space-xs);
+}
+
+.about-unique .section-head p {
+  margin-top: var(--space-sm);
+}
+
+.about-unique .spec-grid {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .about-unique .section-head {
+    margin-bottom: var(--space-lg);
+  }
+}
