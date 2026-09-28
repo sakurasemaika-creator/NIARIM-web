@@ -14,6 +14,12 @@
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
 
+# Web掲載用アプリ実キャプチャは同名ファイルを最新Appから継続更新する。
+# 一般assetsの30日キャッシュを適用すると、広告モックや旧UIを長期間表示し続けるため
+# 必ず再検証する。
+/assets/images/app-captures/*
+  Cache-Control: no-cache, must-revalidate
+
 # フォント・アイコン・画像は内容が変わることがほとんどなく、変わるときは
 # ファイル名ごと差し替える運用のため長めにキャッシュする。
 /assets/*
