@@ -199,7 +199,6 @@
       shot1: "canvas-v3",
       shot2: "timeline-v3",
       shot3: "layers-v3",
-      shot4: "export-v3",
       shot5: "save-tree-v2",
       shot6: "workspace-v2",
     };
@@ -207,6 +206,13 @@
       .querySelectorAll?.(".screenshot-scroller .screenshot-card[data-mock-theme]")
       .forEach(function (card) {
         var name = previewMap[card.dataset.mockTheme];
+        // shot4 was a second timeline-style card in the legacy gallery. The
+        // gallery already has the dedicated Timeline capture, so remove that
+        // duplicate rather than showing the same mode twice.
+        if (card.dataset.mockTheme === "shot4") {
+          card.remove();
+          return;
+        }
         if (!name || card.querySelector(".real-app-capture")) return;
         // Replace the whole gallery card, not only the legacy diagram.
         // main.js can restructure/remove the first coded diagram before this
