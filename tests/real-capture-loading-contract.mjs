@@ -125,6 +125,16 @@ const featureImages = await page.locator(".real-app-capture img").evaluateAll((i
     };
   }),
 );
+const allPlacementFiles = result.map((img) => img.file).concat(featureImages.map((img) => img.file));
+const duplicatePlacementFiles = allPlacementFiles.filter(
+  (file, index) => allPlacementFiles.indexOf(file) !== index,
+);
+if (duplicatePlacementFiles.length) {
+  issues.push({
+    kind: "duplicate-capture-theme-placement",
+    files: [...new Set(duplicatePlacementFiles)],
+  });
+}
 const featureFiles = new Set(featureImages.map((img) => img.file));
 baseCaptureNames.forEach((name) => {
   const file = name + ".webp";
