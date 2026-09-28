@@ -187,9 +187,10 @@
     picture.className = "real-app-capture hero-real-capture";
     var source = document.createElement("source");
     source.type = "image/avif";
-    source.srcset = "/assets/images/app-captures/" + name + ".avif";
+    var revision = "89cbf834";
+    source.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
-    img.src = "/assets/images/app-captures/" + name + ".webp";
+    img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
     img.alt = alt || "";
     img.width = 320;
     img.height = 569;
