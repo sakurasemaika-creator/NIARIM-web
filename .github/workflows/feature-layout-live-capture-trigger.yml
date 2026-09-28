@@ -1,5 +1,19 @@
 name: Verify recovered feature mocks
-on: push
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - "public/features/**"
+      - "public/js/main.js"
+      - "public/js/user-request-fixes.js"
+      - "public/css/**"
+      - "public/assets/images/app-captures/**"
+      - ".github/workflows/feature-layout-live-capture-trigger.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: feature-mock-verify-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
