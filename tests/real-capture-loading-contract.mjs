@@ -43,7 +43,7 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
       widthAttr: img.getAttribute("width"),
       heightAttr: img.getAttribute("height"),
       complete: img.complete,
-      file: img.src.split("/").pop(),
+      file: img.src.split("/").pop().split("?")[0],
       top: r.top,
       bottom: r.bottom,
       renderedWidth: r.width,
@@ -54,7 +54,13 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
         );
         if (!frame) return null;
         const fr = frame.getBoundingClientRect();
-        return { width: fr.width, height: fr.height };
+        const cs = getComputedStyle(frame);
+        return {
+          width: fr.width,
+          height: fr.height,
+          contentWidth: fr.width - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth),
+          contentHeight: fr.height - parseFloat(cs.borderTopWidth) - parseFloat(cs.borderBottomWidth),
+        };
       })(),
     };
   }),
@@ -69,8 +75,8 @@ for (const [index, img] of result.entries()) {
     issues.push({ index, kind: "wrong-intrinsic-geometry", expected, img });
   if (
     img.frame &&
-    (Math.abs(img.frame.width - img.renderedWidth) > 1 ||
-      Math.abs(img.frame.height - img.renderedHeight) > 1)
+    (Math.abs(img.frame.contentWidth - img.renderedWidth) > 1 ||
+      Math.abs(img.frame.contentHeight - img.renderedHeight) > 1)
   )
     issues.push({ index, kind: "capture-frame-size-mismatch", img });
 }
@@ -92,14 +98,20 @@ const featureImages = await page.locator(".real-app-capture img").evaluateAll((i
     const ir = img.getBoundingClientRect();
     const frame = img.closest(".feature-diagram--real");
     const fr = frame?.getBoundingClientRect();
+    const cs = frame ? getComputedStyle(frame) : null;
     return {
       loading: img.loading,
-      file: img.src.split("/").pop(),
+      file: img.src.split("/").pop().split("?")[0],
       width: img.getAttribute("width"),
       height: img.getAttribute("height"),
       renderedWidth: ir.width,
       renderedHeight: ir.height,
-      frame: fr ? { width: fr.width, height: fr.height } : null,
+      frame: fr ? {
+        width: fr.width,
+        height: fr.height,
+        contentWidth: fr.width - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth),
+        contentHeight: fr.height - parseFloat(cs.borderTopWidth) - parseFloat(cs.borderBottomWidth),
+      } : null,
     };
   }),
 );
@@ -114,8 +126,8 @@ featureImages.forEach((img, index) => {
     issues.push({ page: "features", index, kind: "wrong-intrinsic-geometry", expected, img });
   if (
     img.frame &&
-    (Math.abs(img.frame.width - img.renderedWidth) > 1 ||
-      Math.abs(img.frame.height - img.renderedHeight) > 1)
+    (Math.abs(img.frame.contentWidth - img.renderedWidth) > 1 ||
+      Math.abs(img.frame.contentHeight - img.renderedHeight) > 1)
   )
     issues.push({ page: "features", index, kind: "capture-frame-size-mismatch", img });
 });
