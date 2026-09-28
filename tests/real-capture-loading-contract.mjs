@@ -3,14 +3,14 @@ import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const expectedGeometry = {
-  "canvas.webp": ["320", "554"],
-  "timeline.webp": ["316", "561"],
-  "layers.webp": ["320", "561"],
-  "onion-skin.webp": ["320", "542"],
-  "export.webp": ["320", "543"],
-  "audio-editor.webp": ["320", "487"],
-  "save-tree.webp": ["320", "561"],
-  "workspace.webp": ["316", "561"],
+  "canvas.webp": ["320", "569"],
+  "timeline.webp": ["320", "569"],
+  "layers.webp": ["320", "569"],
+  "onion-skin.webp": ["320", "569"],
+  "export.webp": ["320", "569"],
+  "audio-editor.webp": ["320", "569"],
+  "save-tree.webp": ["320", "569"],
+  "workspace.webp": ["320", "569"],
 };
 const browser = await chromium.launch(launchOptions);
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
