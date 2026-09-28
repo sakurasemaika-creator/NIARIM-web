@@ -1265,3 +1265,20 @@
     margin-inline: auto;
   }
 }
+
+
+/* Canonical real-capture frame palette. Each frame uses the exact accent
+   configured in the app capture artifact; the image remains native 320:569. */
+.feature-diagram--real[data-capture-theme] {
+  box-sizing: content-box;
+  border: 5px solid var(--capture-frame);
+  border-radius: var(--radius-lg);
+}
+.feature-diagram--real[data-capture-theme="canvas"] { --capture-frame: #3AA6FF; }
+.feature-diagram--real[data-capture-theme="timeline"] { --capture-frame: #F2B90F; }
+.feature-diagram--real[data-capture-theme="layers"] { --capture-frame: #B15CFF; }
+.feature-diagram--real[data-capture-theme="onion-skin"] { --capture-frame: #10B981; }
+.feature-diagram--real[data-capture-theme="audio-editor"] { --capture-frame: #FF8A3D; }
+.feature-diagram--real[data-capture-theme="save-tree"] { --capture-frame: #5C6BFF; }
+.feature-diagram--real[data-capture-theme="workspace"] { --capture-frame: #D8A0A6; }
+.feature-diagram--real[data-capture-theme="export"] { --capture-frame: #8DA9C4; }
