@@ -2,16 +2,12 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const expectedGeometry = {
-  "canvas.webp": ["320", "569"],
-  "timeline.webp": ["320", "569"],
-  "layers.webp": ["320", "569"],
-  "onion-skin.webp": ["320", "569"],
-  "export.webp": ["320", "569"],
-  "audio-editor.webp": ["320", "569"],
-  "save-tree.webp": ["320", "569"],
-  "workspace.webp": ["320", "569"],
-};
+const baseCaptureNames = ["canvas", "timeline", "layers", "onion-skin", "export", "audio-editor", "save-tree", "workspace"];
+const expectedGeometry = Object.fromEntries(
+  baseCaptureNames.flatMap((name) =>
+    ["", "-v2", "-v3", "-v4"].map((suffix) => [name + suffix + ".webp", ["320", "569"]]),
+  ),
+);
 const browser = await chromium.launch(launchOptions);
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
 const page = await context.newPage();
@@ -68,14 +64,15 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
 
 const expectedFrames = {
   canvas: "rgb(58, 166, 255)",
-  timeline: "rgb(242, 185, 15)",
-  layers: "rgb(177, 92, 255)",
-  "onion-skin": "rgb(16, 185, 129)",
-  "audio-editor": "rgb(255, 138, 61)",
-  "save-tree": "rgb(92, 107, 255)",
-  workspace: "rgb(216, 160, 166)",
-  export: "rgb(141, 169, 196)",
+  timeline: "rgb(46, 155, 79)",
+  layers: "rgb(255, 138, 61)",
+  "onion-skin": "rgb(232, 93, 117)",
+  "audio-editor": "rgb(75, 143, 220)",
+  "save-tree": "rgb(193, 95, 53)",
+  workspace: "rgb(230, 95, 43)",
+  export: "rgb(0, 134, 201)",
 };
+
 const issues = [];
 for (const [index, img] of result.entries()) {
   if (img.loading !== "lazy") issues.push({ index, kind: "not-lazy", img });
