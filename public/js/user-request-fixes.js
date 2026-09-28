@@ -128,6 +128,7 @@
       audio: ["audio-editor", "NIARIM audio editor"],
       save: ["save-tree", "NIARIM save tree"],
       workspace: ["workspace", "NIARIM workspace settings"],
+      widget: ["widget", "NIARIM widget settings"],
       export: ["export", "NIARIM export settings"],
     };
     Object.keys(featureMap).forEach(function (id) {
