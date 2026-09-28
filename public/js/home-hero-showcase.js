@@ -208,9 +208,9 @@
     var currentShowcase = container.querySelector(":scope > .hero-showcase");
     if (currentShowcase) currentShowcase.remove();
 
-    var canvas = buildRealCapture("canvas", "NIARIM canvas");
-    var timeline = buildRealCapture("timeline", "NIARIM timeline");
-    var workspace = buildRealCapture("workspace", "NIARIM workspace settings");
+    var canvas = buildRealCapture("canvas-v4", "NIARIM canvas");
+    var timeline = buildRealCapture("timeline-v4", "NIARIM timeline");
+    var workspace = buildRealCapture("workspace-v3", "NIARIM workspace settings");
 
     var originalHeroVisual = container.querySelector(":scope > .hero-visual");
     if (originalHeroVisual) originalHeroVisual.remove();
