@@ -28,7 +28,7 @@ jobs:
       - name: Capture current app UI
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk webp libavif-bin
+          sudo apt-get install -y fonts-noto-cjk webp libavif-bin imagemagick
           fc-cache -f
           cd _app
           flutter pub get
@@ -48,7 +48,15 @@ jobs:
             cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name.webp"
             avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name.avif" >/dev/null
           done
-          for required in canvas timeline layers onion-skin save-tree export workspace; do test -f "$dst/$required.avif"; done
+          for required in canvas timeline layers onion-skin audio-editor save-tree export workspace; do
+            test -f "$dst/$required.webp"
+            test -f "$dst/$required.avif"
+            dims="$(identify -format '%wx%h' "$dst/$required.webp" 2>/dev/null || true)"
+            if [ "$dims" != "320x569" ]; then
+              echo "::error::$required.webp must remain 320x569, got ${dims:-unknown}"
+              exit 1
+            fi
+          done
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(git -C _app rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           du -h "$dst"/*
       - name: Commit captures
