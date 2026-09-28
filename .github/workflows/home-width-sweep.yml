@@ -64,6 +64,17 @@ jobs:
       - name: Verify rendered Features capture/frame alignment
         if: always()
         run: node tests/feature-rendered-alignment-audit.mjs
+      - name: Capture current PC/SP pages for human review
+        if: always()
+        run: node tests/capture-current-site.mjs
+      - name: Upload current PC/SP pages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-site-manual-review
+          path: artifacts/current-site/
+          if-no-files-found: error
+          retention-days: 7
       - name: Export representative images for the audit review
         if: always()
         run: |
