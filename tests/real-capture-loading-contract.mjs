@@ -2,6 +2,16 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
+const expectedGeometry = {
+  "canvas.webp": ["320", "554"],
+  "timeline.webp": ["316", "561"],
+  "layers.webp": ["320", "561"],
+  "onion-skin.webp": ["320", "542"],
+  "export.webp": ["320", "543"],
+  "audio-editor.webp": ["320", "487"],
+  "save-tree.webp": ["320", "561"],
+  "workspace.webp": ["316", "561"],
+};
 const browser = await chromium.launch(launchOptions);
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
 const page = await context.newPage();
@@ -33,6 +43,7 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
       widthAttr: img.getAttribute("width"),
       heightAttr: img.getAttribute("height"),
       complete: img.complete,
+      file: img.src.split("/").pop(),
       top: r.top,
       bottom: r.bottom,
     };
@@ -43,8 +54,9 @@ const issues = [];
 for (const [index, img] of result.entries()) {
   if (img.loading !== "lazy") issues.push({ index, kind: "not-lazy", img });
   if (img.decoding !== "async") issues.push({ index, kind: "not-async-decoding", img });
-  if (img.widthAttr !== "320" || img.heightAttr !== "569")
-    issues.push({ index, kind: "missing-intrinsic-geometry", img });
+  const expected = expectedGeometry[img.file];
+  if (!expected || img.widthAttr !== expected[0] || img.heightAttr !== expected[1])
+    issues.push({ index, kind: "wrong-intrinsic-geometry", expected, img });
 }
 
 await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
@@ -60,12 +72,13 @@ await page.waitForFunction(
   { timeout: 10000 },
 );
 const featureImages = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
-  imgs.map((img) => ({ loading: img.loading, width: img.getAttribute("width"), height: img.getAttribute("height") })),
+  imgs.map((img) => ({ loading: img.loading, file: img.src.split("/").pop(), width: img.getAttribute("width"), height: img.getAttribute("height") })),
 );
 featureImages.forEach((img, index) => {
   if (img.loading !== "lazy") issues.push({ page: "features", index, kind: "not-lazy", img });
-  if (img.width !== "320" || img.height !== "569")
-    issues.push({ page: "features", index, kind: "missing-intrinsic-geometry", img });
+  const expected = expectedGeometry[img.file];
+  if (!expected || img.width !== expected[0] || img.height !== expected[1])
+    issues.push({ page: "features", index, kind: "wrong-intrinsic-geometry", expected, img });
 });
 
 await context.close();
