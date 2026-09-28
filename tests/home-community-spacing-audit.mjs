@@ -163,7 +163,9 @@ for (const width of widths) {
 
   // The coded Community app preview was intentionally removed. Community
   // remains a normal website card/link, not an app-screen reproduction.
-  if (state.screenshotCount < 6) {
+  // The duplicate timeline-style legacy shot was also removed, leaving five
+  // distinct app-screen cards in this gallery.
+  if (state.screenshotCount !== 5) {
     failures.push({ width, kind: "screenshot-count", state });
   }
 
