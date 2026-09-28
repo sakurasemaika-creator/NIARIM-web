@@ -161,43 +161,12 @@ for (const width of widths) {
     }
   }
 
-  if (
-    state.screenshotCount < 7 ||
-    !state.communityCard ||
-    !state.communityScreen
-  ) {
-    failures.push({ width, kind: "community-preview-missing", state });
-  } else {
-    const expectedInnerWidth =
-      state.communityCard.width -
-      state.communityBorderLeft -
-      state.communityBorderRight;
-    const expectedInnerHeight =
-      state.communityCard.height -
-      state.communityBorderTop -
-      state.communityBorderBottom;
-    const widthDelta = Math.abs(
-      expectedInnerWidth - state.communityScreen.width,
-    );
-    const heightDelta = Math.abs(
-      expectedInnerHeight - state.communityScreen.height,
-    );
-    if (widthDelta > 1 || heightDelta > 1) {
-      failures.push({
-        width,
-        kind: "community-preview-size",
-        expectedInnerWidth,
-        expectedInnerHeight,
-        widthDelta,
-        heightDelta,
-        card: state.communityCard,
-        screen: state.communityScreen,
-      });
-    }
-    if (state.communityTitle !== "作品広場" || state.communityWorks !== 4) {
-      failures.push({ width, kind: "community-preview-content", state });
-    }
+  // The coded Community app preview was intentionally removed. Community
+  // remains a normal website card/link, not an app-screen reproduction.
+  if (state.screenshotCount < 6) {
+    failures.push({ width, kind: "screenshot-count", state });
   }
+
 }
 
 await browser.close();
