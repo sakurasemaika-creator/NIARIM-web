@@ -103,9 +103,10 @@
     picture.className = "real-app-capture";
     var avif = document.createElement("source");
     avif.type = "image/avif";
-    avif.srcset = "/assets/images/app-captures/" + name + ".avif";
+    var revision = "8443c5a9";
+    avif.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
-    img.src = "/assets/images/app-captures/" + name + ".webp";
+    img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
     img.alt = alt || "";
     // Reserve the canonical premium reference capture geometry before lazy decoding.
     var geometry = captureGeometry[name] || [320, 569];
