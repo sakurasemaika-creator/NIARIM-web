@@ -140,6 +140,14 @@
       diagram.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
     });
 
+    var hero = scope.querySelector?.(".hero-visual");
+    if (hero && !hero.querySelector(".real-app-capture")) {
+      hero.className = "hero-visual hero-visual--real";
+      hero.removeAttribute("data-mock-theme");
+      hero.removeAttribute("style");
+      hero.replaceChildren(realCapture("canvas", "NIARIM canvas"));
+    }
+
     var homeMap = {
       row1: "canvas",
       row2: "timeline",
@@ -153,7 +161,9 @@
       if (!name || !media || media.querySelector(".real-app-capture")) return;
       var diagram = media.querySelector(":scope > .feature-diagram");
       if (diagram) {
-        diagram.classList.add("feature-diagram--real");
+        diagram.className = "feature-diagram feature-diagram--real";
+        diagram.removeAttribute("data-mock-theme");
+        diagram.removeAttribute("style");
         diagram.replaceChildren(realCapture(name, ""));
         return;
       }
