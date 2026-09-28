@@ -181,6 +181,23 @@
     Array.prototype.forEach.call(cards, fitHeroPreview);
   }
 
+
+  function buildRealCapture(name, alt) {
+    var picture = document.createElement("picture");
+    picture.className = "real-app-capture hero-real-capture";
+    var source = document.createElement("source");
+    source.type = "image/avif";
+    source.srcset = "/assets/images/app-captures/" + name + ".avif";
+    var img = document.createElement("img");
+    img.src = "/assets/images/app-captures/" + name + ".webp";
+    img.alt = alt || "";
+    img.width = 320;
+    img.height = 569;
+    img.decoding = "async";
+    picture.append(source, img);
+    return picture;
+  }
+
   function initHeroShowcase() {
     var hero = document.querySelector(".hero");
     var container = hero && hero.querySelector(":scope > .container");
@@ -193,15 +210,15 @@
       return;
     }
 
-    var canvas = clonePreviewCard(1, "hero-theme-ocean");
-    var timeline = clonePreviewCard(2, "hero-theme-sand");
-    if (!canvas || !timeline) return;
+    var canvas = buildRealCapture("canvas", "NIARIM canvas");
+    var timeline = buildRealCapture("timeline", "NIARIM timeline");
+    var workspace = buildRealCapture("workspace", "NIARIM workspace settings");
 
     var originalHeroVisual = container.querySelector(":scope > .hero-visual");
     if (originalHeroVisual) originalHeroVisual.remove();
 
     var showcase = document.createElement("div");
-    showcase.className = "hero-showcase";
+    showcase.className = "hero-showcase hero-showcase--real";
     showcase.setAttribute("aria-label", "NIARIM app previews");
     showcase.appendChild(
       buildPreviewCard("hero-preview-canvas", canvas, "hero-theme-ocean"),
@@ -210,11 +227,7 @@
       buildPreviewCard("hero-preview-timeline", timeline, "hero-theme-sand"),
     );
     showcase.appendChild(
-      buildPreviewCard(
-        "hero-preview-community",
-        buildCommunityMini(),
-        "hero-theme-violet",
-      ),
+      buildPreviewCard("hero-preview-workspace", workspace, "hero-theme-violet"),
     );
     container.appendChild(showcase);
 
