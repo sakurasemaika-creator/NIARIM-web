@@ -1,17 +1,6 @@
 name: Visual interaction audit
 
 on:
-  push:
-    branches: [dev_branch]
-    paths:
-      - "public/**"
-      - "src/**"
-      - "tests/**"
-      - "tools/**"
-      - "package.json"
-      - "package-lock.json"
-      - "wrangler.toml"
-      - ".github/workflows/visual-audit.yml"
   workflow_dispatch:
 
 concurrency:
