@@ -125,7 +125,8 @@ const featureImages = await page.locator(".real-app-capture img").evaluateAll((i
   }),
 );
 const featureFiles = new Set(featureImages.map((img) => img.file));
-Object.keys(expectedGeometry).forEach((file) => {
+baseCaptureNames.forEach((name) => {
+  const file = name + ".webp";
   if (!featureFiles.has(file)) issues.push({ page: "features", kind: "missing-capture", file });
 });
 featureImages.forEach((img, index) => {
