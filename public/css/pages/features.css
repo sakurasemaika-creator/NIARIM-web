@@ -1238,6 +1238,9 @@
   width: min(100%, 320px);
   aspect-ratio: 320 / 569;
   background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
 }
 .feature-diagram--real > .real-app-capture,
