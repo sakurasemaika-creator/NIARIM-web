@@ -29,7 +29,8 @@ for (const width of widths) {
     localStorage.setItem("niarim-lang", "ja");
     window.dispatchEvent(new Event("resize"));
   });
-  await page.waitForTimeout(450);
+  await page.waitForSelector(".hero-showcase--real", { state: "attached", timeout: 2000 }).catch(() => {});
+  await page.waitForTimeout(100);
 
   const row = await page.evaluate(() => {
     const rounded = (value) => Math.round(value * 100) / 100;
@@ -86,10 +87,6 @@ for (const width of widths) {
       };
     };
 
-    // Wait briefly for the load-time real-capture showcase replacement.
-    for (let i = 0; i < 20 && !document.querySelector(".hero-showcase--real"); i += 1) {
-      await new Promise((resolve) => setTimeout(resolve, 50));
-    }
     const visibleHeroPreview = [
       ...document.querySelectorAll(".hero-preview-card"),
     ].filter(visible);
