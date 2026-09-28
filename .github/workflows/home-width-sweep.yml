@@ -58,6 +58,9 @@ jobs:
       - name: Verify rendered Home capture/frame alignment
         if: always()
         run: node tests/home-rendered-capture-alignment-audit.mjs
+      - name: Verify rendered Features capture/frame alignment
+        if: always()
+        run: node tests/feature-rendered-alignment-audit.mjs
       - name: Export representative images for the audit review
         if: always()
         run: |
