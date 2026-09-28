@@ -77,14 +77,22 @@ jobs:
           git add public/assets/images/app-captures
           git diff --cached --quiet && exit 0
           git commit -m "assets: refresh real NIARIM app captures"
-          # dev_branch can advance while this artifact is being converted. Rebase
-          # the generated asset-only commit instead of failing on a harmless race.
+          # Another refresh run may publish the identical artifact first.
+          # If so, treat that as success. Otherwise retry from the new tip and
+          # regenerate the metadata timestamp instead of rebasing source.txt.
           for attempt in 1 2 3; do
             if git push origin HEAD:dev_branch; then exit 0; fi
             git fetch origin dev_branch
-            git rebase origin/dev_branch
+            remote_source="$(git show origin/dev_branch:public/assets/images/app-captures/source.txt 2>/dev/null || true)"
+            if printf '%s' "$remote_source" | grep -q "source_commit=$run_sha"; then
+              echo "Capture artifact $run_sha is already published by another run."
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/dev_branch
+            echo "::error::dev_branch advanced with different capture assets; rerun refresh from the new tip."
+            exit 1
           done
-          echo "::error::Could not publish refreshed captures after rebasing"
           exit 1
       - uses: actions/upload-artifact@v4
         if: always()
