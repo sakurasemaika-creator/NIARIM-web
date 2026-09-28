@@ -25,8 +25,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _app/build/visual-smoke
-          run_id="$(gh api 'repos/sakurasemaika-creator/NIARIM/actions/workflows/web-reference-capture.yml/runs?branch=dev_branch&status=success&per_page=1' --jq '.workflow_runs[0].id')"
+          run_json="$(gh api 'repos/sakurasemaika-creator/NIARIM/actions/workflows/web-reference-capture.yml/runs?branch=dev_branch&status=success&per_page=1')"
+          run_id="$(printf '%s' "$run_json" | jq -r '.workflow_runs[0].id // empty')"
+          run_sha="$(printf '%s' "$run_json" | jq -r '.workflow_runs[0].head_sha // empty')"
+          app_head="$(gh api 'repos/sakurasemaika-creator/NIARIM/branches/dev_branch' --jq '.commit.sha')"
           test -n "$run_id"
+          if [ "$run_sha" != "$app_head" ]; then
+            echo "::error::Latest successful capture ($run_sha) is stale; NIARIM dev_branch is $app_head"
+            exit 1
+          fi
           gh run download "$run_id" -R sakurasemaika-creator/NIARIM -n web-reference-captures -D _app/build/visual-smoke
           echo "APP_CAPTURE_RUN_ID=$run_id" >> "$GITHUB_ENV"
       - name: Build lightweight web assets
