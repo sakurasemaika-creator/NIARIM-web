@@ -1012,23 +1012,23 @@
   border: 5px solid var(--capture-frame, var(--color-ink));
   border-radius: var(--radius-lg);
 }
-.feature-row[data-mock-theme="row1"] { --capture-frame: #3AA6FF; }
-.feature-row[data-mock-theme="row2"] { --capture-frame: #F2B90F; }
-.feature-row[data-mock-theme="row3"] { --capture-frame: #B15CFF; }
-.feature-row[data-mock-theme="row4"] { --capture-frame: #10B981; }
-.feature-row[data-mock-theme="row5"] { --capture-frame: #8DA9C4; }
+.feature-row[data-mock-theme="row1"] { --capture-frame: #F2B90F; }
+.feature-row[data-mock-theme="row2"] { --capture-frame: #D45AA6; }
+.feature-row[data-mock-theme="row3"] { --capture-frame: #5C6BFF; }
+.feature-row[data-mock-theme="row4"] { --capture-frame: #00A6A6; }
+.feature-row[data-mock-theme="row5"] { --capture-frame: #E08B00; }
 
 .screenshot-card:has(.real-app-capture) {
   box-sizing: content-box;
   border: 5px solid var(--capture-frame, var(--color-ink));
   border-radius: var(--radius-lg);
 }
-.screenshot-card[data-mock-theme="shot1"] { --capture-frame: #3AA6FF; }
-.screenshot-card[data-mock-theme="shot2"] { --capture-frame: #F2B90F; }
-.screenshot-card[data-mock-theme="shot3"] { --capture-frame: #B15CFF; }
-.screenshot-card[data-mock-theme="shot4"] { --capture-frame: #8DA9C4; }
-.screenshot-card[data-mock-theme="shot5"] { --capture-frame: #5C6BFF; }
-.screenshot-card[data-mock-theme="shot6"] { --capture-frame: #D8A0A6; }
+.screenshot-card[data-mock-theme="shot1"] { --capture-frame: #B15CFF; }
+.screenshot-card[data-mock-theme="shot2"] { --capture-frame: #567D46; }
+.screenshot-card[data-mock-theme="shot3"] { --capture-frame: #D8A0A6; }
+.screenshot-card[data-mock-theme="shot4"] { --capture-frame: #9A4FD0; }
+.screenshot-card[data-mock-theme="shot5"] { --capture-frame: #6678B8; }
+.screenshot-card[data-mock-theme="shot6"] { --capture-frame: #485CC7; }
 
 .hero-showcase--real .hero-preview-card {
   overflow: hidden;
@@ -1036,9 +1036,9 @@
   border-width: 5px;
   border-style: solid;
 }
-.hero-showcase--real .hero-preview-canvas { border-color: #3AA6FF; }
-.hero-showcase--real .hero-preview-timeline { border-color: #F2B90F; }
-.hero-showcase--real .hero-preview-workspace { border-color: #D8A0A6; }
+.hero-showcase--real .hero-preview-canvas { border-color: #10B981; }
+.hero-showcase--real .hero-preview-timeline { border-color: #EF6C57; }
+.hero-showcase--real .hero-preview-workspace { border-color: #C76C8A; }
 .hero-showcase--real .hero-real-capture,
 .hero-showcase--real .hero-real-capture > img {
   display: block;
