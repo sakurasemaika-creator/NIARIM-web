@@ -46,6 +46,14 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
       file: img.src.split("/").pop(),
       top: r.top,
       bottom: r.bottom,
+      renderedWidth: r.width,
+      renderedHeight: r.height,
+      frame: (() => {
+        const frame = img.closest(".feature-diagram--real");
+        if (!frame) return null;
+        const fr = frame.getBoundingClientRect();
+        return { width: fr.width, height: fr.height };
+      })(),
     };
   }),
 );
@@ -57,6 +65,12 @@ for (const [index, img] of result.entries()) {
   const expected = expectedGeometry[img.file];
   if (!expected || img.widthAttr !== expected[0] || img.heightAttr !== expected[1])
     issues.push({ index, kind: "wrong-intrinsic-geometry", expected, img });
+  if (
+    img.frame &&
+    (Math.abs(img.frame.width - img.renderedWidth) > 1 ||
+      Math.abs(img.frame.height - img.renderedHeight) > 1)
+  )
+    issues.push({ index, kind: "capture-frame-size-mismatch", img });
 }
 
 await page.goto(baseURL + "/features/", { waitUntil: "networkidle" });
