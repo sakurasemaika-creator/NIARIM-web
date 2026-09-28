@@ -254,8 +254,11 @@ for (const width of widths) {
         ) {
           deviceFailures.push({ width, kind: "hero-theme-leak", device });
         }
+        // Real app captures intentionally replace the old coded preview DOM.
+        // Only require a sampled accent while a legacy preview still exposes
+        // an accent-bearing control; otherwise the screenshot pixels are the source of truth.
         if (
-          !device.renderedAccent ||
+          device.renderedAccent &&
           device.renderedAccent !== device.theme.accent
         ) {
           deviceFailures.push({
