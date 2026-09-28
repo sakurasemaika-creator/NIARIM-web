@@ -132,13 +132,21 @@
     };
     Object.keys(featureMap).forEach(function (id) {
       var section = scope.querySelector?.("#" + id);
-      if (!section || section.querySelector(".real-app-capture")) return;
-      var diagram = section.querySelector(":scope > .feature-diagram");
-      if (!diagram) return;
-      diagram.className = "feature-diagram feature-diagram--real";
-      diagram.removeAttribute("data-mock-theme");
-      diagram.removeAttribute("style");
-      diagram.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+      if (!section) return;
+      var diagrams = Array.prototype.slice.call(section.querySelectorAll(".feature-diagram"));
+      if (!diagrams.length) return;
+      var primary = diagrams[0];
+      primary.className = "feature-diagram feature-diagram--real";
+      primary.dataset.captureTheme = featureMap[id][0];
+      primary.removeAttribute("data-mock-theme");
+      primary.removeAttribute("style");
+      primary.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+      // A feature section represents one app screen. Remove every leftover
+      // coded reproduction/concept mock in that section so the site never
+      // mixes a real capture with stale HTML/CSS screen facsimiles.
+      diagrams.slice(1).forEach(function (diagram) {
+        diagram.remove();
+      });
     });
 
     var hero = scope.querySelector?.(".hero-visual");
@@ -163,6 +171,7 @@
       var diagram = media.querySelector(":scope > .feature-diagram");
       if (diagram) {
         diagram.className = "feature-diagram feature-diagram--real";
+        diagram.dataset.captureTheme = name;
         diagram.removeAttribute("data-mock-theme");
         diagram.removeAttribute("style");
         diagram.replaceChildren(realCapture(name, ""));
@@ -189,7 +198,9 @@
         if (!name || card.querySelector(".real-app-capture")) return;
         var diagram = card.querySelector(".feature-diagram");
         if (!diagram) return;
-        diagram.classList.add("feature-diagram--real");
+        diagram.className = "feature-diagram feature-diagram--real";
+        diagram.dataset.captureTheme = name;
+        diagram.removeAttribute("style");
         diagram.replaceChildren(realCapture(name, ""));
       });
   }
