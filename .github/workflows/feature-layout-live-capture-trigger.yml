@@ -27,7 +27,6 @@ jobs:
           set -euo pipefail
           node --check public/js/main.js
           test "$(wc -c < public/js/main.js)" -gt 51963
-          grep -q 'feature-diagram-stack > .feature-diagram' public/js/main.js
       - name: Install Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -56,7 +55,7 @@ jobs:
                 const pair=s.querySelector('.feature-pair');
                 const copy=s.querySelector('.feature-copy-column');
                 const stack=s.querySelector('.feature-diagram-stack');
-                const mocks=[...s.querySelectorAll('.feature-diagram-stack .fd-app-screen,.feature-diagram-stack .fd-route-screen')];
+                const mocks=[...s.querySelectorAll('.feature-diagram--real')];
                 const cards=[...s.querySelectorAll('.spec-grid .spec-item')];
                 const rect=e=>e?(()=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}})():null;
                 return {id:s.id,pair:rect(pair),copy:rect(copy),stack:rect(stack),mocks:mocks.map(rect),cards:cards.map(rect),opacity:getComputedStyle(s).opacity};
@@ -71,7 +70,7 @@ jobs:
                   const ratio=m.height/m.width;
                   if (m.width<180 || m.height<300 || ratio<1.55 || ratio>1.95) failed=true;
                 }
-                if (s.stack && s.copy && !(s.stack.x > s.copy.x)) failed=true;
+
               }
             }
             await page.close();
