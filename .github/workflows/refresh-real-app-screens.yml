@@ -1,6 +1,10 @@
 name: Refresh real app screenshots
 on:
   workflow_dispatch:
+  push:
+    branches: [dev_branch]
+    paths:
+      - ".github/workflows/refresh-real-app-screens.yml"
 permissions:
   contents: write
 jobs:
