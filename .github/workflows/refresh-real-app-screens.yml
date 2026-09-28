@@ -51,21 +51,20 @@ jobs:
           mkdir -p "$dst"
           declare -A map=([01_canvas_default]=canvas [02_canvas_layer_panel]=layers [03_canvas_onion_skin]=onion-skin [04_timeline_default]=timeline [05_timeline_audio_editor]=audio-editor [06_save_tree]=save-tree [07_export]=export [08_workspace]=workspace)
           for key in "${!map[@]}"; do
-            png="$src/webref_${key}.png"; [ -f "$png" ] || continue
             name="${map[$key]}"
-            # Preserve the exact premium reference-capture canvas. Cropping or
-            # trimming changes intrinsic geometry and makes the website frame diverge.
-            cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name.webp"
-            avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name.avif" >/dev/null
-          done
-          for required in canvas timeline layers onion-skin audio-editor save-tree export workspace; do
-            test -f "$dst/$required.webp"
-            test -f "$dst/$required.avif"
-            dims="$(identify -format '%wx%h' "$dst/$required.webp" 2>/dev/null || true)"
-            if [ "$dims" != "320x569" ]; then
-              echo "::error::$required.webp must remain 320x569, got ${dims:-unknown}"
-              exit 1
-            fi
+            for variant in 1 2 3; do
+              suffix=""; out_suffix=""
+              if [ "$variant" != "1" ]; then suffix="_v$variant"; out_suffix="-v$variant"; fi
+              png="$src/webref_${key}$suffix.png"
+              test -f "$png"
+              cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name$out_suffix.webp"
+              avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name$out_suffix.avif" >/dev/null
+              dims="$(identify -format '%wx%h' "$dst/$name$out_suffix.webp" 2>/dev/null || true)"
+              if [ "$dims" != "320x569" ]; then
+                echo "::error::$name$out_suffix.webp must remain 320x569, got ${dims:-unknown}"
+                exit 1
+              fi
+            done
           done
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(sed -n 's/^commit=//p' _app/build/visual-smoke/webref_capture_metadata.txt | head -n1)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           du -h "$dst"/*
