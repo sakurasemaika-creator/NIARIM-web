@@ -99,6 +99,10 @@
     "widget": [320, 569],
   };
 
+  function captureBaseName(name) {
+    return name.replace(/-v[2-4]$/, "");
+  }
+
   function realCapture(name, alt) {
     var picture = document.createElement("picture");
     picture.className = "real-app-capture";
@@ -110,7 +114,7 @@
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
     img.alt = alt || "";
     // Reserve the canonical premium reference capture geometry before lazy decoding.
-    var geometry = captureGeometry[name] || [320, 569];
+    var geometry = captureGeometry[captureBaseName(name)] || [320, 569];
     img.width = geometry[0];
     img.height = geometry[1];
     img.loading = "lazy";
