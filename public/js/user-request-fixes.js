@@ -96,6 +96,7 @@
     "audio-editor": [320, 569],
     "save-tree": [320, 569],
     "workspace": [320, 569],
+    "widget": [320, 569],
   };
 
   function realCapture(name, alt) {
@@ -139,6 +140,12 @@
       var primary = diagrams[0];
       primary.className = "feature-diagram feature-diagram--real";
       primary.dataset.captureTheme = featureMap[id][0];
+      primary.dataset.captureAccent = ({
+        canvas: "#3AA6FF", timeline: "#2E9B4F", layers: "#FF8A3D",
+        "onion-skin": "#E85D75", "audio-editor": "#4B8FDC",
+        "save-tree": "#C15F35", workspace: "#E65F2B",
+        widget: "#00796B", export: "#0086C9"
+      })[featureMap[id][0]];
       primary.removeAttribute("data-mock-theme");
       primary.removeAttribute("style");
       primary.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
