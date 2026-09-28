@@ -1219,6 +1219,24 @@
       );
     }
 
+    // Aboutの「Only in NIARIM」は常に1セクションだけにする。
+    // 旧HTMLがCDN/ブラウザに残った状態で新しい統合セクションと混在しても、
+    // 同じ見出しを二重表示しない。
+    var uniqueHeads = Array.prototype.slice.call(
+      document.querySelectorAll('[data-i18n="about.unique.eyebrow"]'),
+    );
+    if (uniqueHeads.length > 1) {
+      var keepHead =
+        uniqueHeads.find(function (node) {
+          return node.closest("[data-about-unique]");
+        }) || uniqueHeads[0];
+      uniqueHeads.forEach(function (node) {
+        if (node === keepHead) return;
+        var section = node.closest("section");
+        if (section) section.remove();
+      });
+    }
+
     if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
       window.NIARIM_I18N.applyLang(
         document.documentElement.getAttribute("lang") || "ja",
