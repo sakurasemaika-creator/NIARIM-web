@@ -1,7 +1,7 @@
 /* Canonical last-mile ownership for the Home hero.
    Loaded after every generated mock/design layer by home-hero-showcase.js.
    Hero previews use one device frame and one app viewport. Geometry follows the
-   canonical 320x569 Web reconstruction; only the showcase theme/bezel differs. */
+   canonical 320x569 real App capture; only the capture theme/bezel differs. */
 
 html body .hero-showcase {
   transform: none !important;
@@ -38,7 +38,7 @@ html body .hero-showcase > .hero-preview-canvas {
 }
 
 @media (min-width: 1280px) {
-  html body .hero-showcase > .hero-preview-community {
+  html body .hero-showcase > .hero-preview-workspace {
     display: block !important;
   }
 }
