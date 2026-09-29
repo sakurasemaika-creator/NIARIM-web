@@ -1,5 +1,5 @@
 # Final validation entry point for Home first-view geometry and Community preview.
-# Revalidate flattened About and full-width desktop feature pair after requested UI fixes.
+# Revalidate runtime-flattened About and full-span desktop feature pair.
 name: Home width sweep
 
 on:
