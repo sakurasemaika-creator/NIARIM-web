@@ -1270,7 +1270,7 @@
 /* Canonical real-capture frame palette. Each frame uses the exact accent
    configured in the app capture artifact; the image remains native 320:569. */
 .feature-diagram--real[data-capture-theme] {
-  box-sizing: content-box;
+  box-sizing: border-box;
   border: 5px solid var(--capture-frame);
   border-radius: var(--radius-lg);
 }
