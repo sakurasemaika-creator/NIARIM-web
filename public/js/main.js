@@ -1219,6 +1219,25 @@
       );
     }
 
+    // Aboutの統合セクションは、見出しと最終10カードだけを所有する。
+    // 旧ランタイムが同じsection内へ「見出し+6カード」のパネルを再挿入しても
+    // 公開DOMに残さない。ソースHTMLの直下2要素をcanonicalとする。
+    function flattenAboutUniqueSection() {
+      var section = document.querySelector("[data-about-unique-section]");
+      if (!section) return;
+      var container = section.querySelector(":scope > .container");
+      if (!container) return;
+      var canonicalHead = container.querySelector(":scope > [data-about-unique]");
+      var canonicalGrid = container.querySelector(":scope > .spec-grid");
+      if (!canonicalHead || !canonicalGrid) return;
+      Array.prototype.slice.call(container.children).forEach(function (child) {
+        if (child !== canonicalHead && child !== canonicalGrid) child.remove();
+      });
+    }
+    flattenAboutUniqueSection();
+    requestAnimationFrame(flattenAboutUniqueSection);
+    setTimeout(flattenAboutUniqueSection, 250);
+
     // Aboutの「Only in NIARIM」は常に1セクションだけにする。
     // 旧HTMLがCDN/ブラウザに残った状態で新しい統合セクションと混在しても、
     // 同じ見出しを二重表示しない。
