@@ -23,6 +23,7 @@ on:
       - "public/css/responsive-consistency.css"
       - "public/js/home-hero-showcase.js"
       - "public/js/user-request-fixes.js"
+      - "public/css/user-request-fixes.css"
       - "public/assets/images/app-captures/**"
       - "public/js/config.js"
       - "public/js/config-links.js"
