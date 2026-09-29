@@ -89,7 +89,17 @@ for (const width of widths) {
 
     const visibleHeroPreview = [
       ...document.querySelectorAll(".hero-preview-card"),
-    ].filter(visible);
+    ].filter((card) => {
+      if (!card) return false;
+      const r = card.getBoundingClientRect();
+      const cs = getComputedStyle(card);
+      return (
+        r.width > 0 &&
+        r.height > 0 &&
+        cs.display !== "none" &&
+        cs.visibility !== "hidden"
+      );
+    });
     const devices = visibleHeroPreview.map((card) => {
       const cs = getComputedStyle(card);
       const source = card.querySelector(
@@ -262,8 +272,8 @@ if (failures.length) {
           "marquee bottom matches 628px viewport",
           "three hero devices have equal rendered size",
           "three hero devices keep 320:569 ratio",
-          "three hero themes remain distinct and inherit into inner UI",
-          "canvas/timeline/community accents render from their own theme",
+          "three real hero captures remain distinct",
+          "canvas/timeline/workspace captures stay inside their device frames",
           "critical internal UI stays inside each device",
         ],
       },
