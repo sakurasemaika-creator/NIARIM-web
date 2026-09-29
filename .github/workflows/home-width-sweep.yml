@@ -1,5 +1,5 @@
 # Final validation entry point for Home first-view geometry and Community preview.
-# Revalidate after refreshed Canvas reference captures and real-preview cleanup.
+# Revalidate real-capture hero sweep after preview cleanup.
 name: Home width sweep
 
 on:
