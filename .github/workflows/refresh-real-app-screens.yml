@@ -2,7 +2,7 @@ name: Refresh real app screenshots
 # Imports the latest successful premium capture artifact from the app repository.
 # Refresh trigger: distinct-theme premium references.
 # Import the latest four-variant capture set including Widget.
-# Refresh after successful App capture e81a5224 (visible timeline arrow and fully re-themed capture set).
+# Refresh captures and cache keys from the latest successful App capture.
 on:
   workflow_dispatch:
   push:
@@ -45,6 +45,7 @@ jobs:
           fi
           gh run download "$run_id" -R sakurasemaika-creator/NIARIM -n web-reference-captures -D _app/build/visual-smoke
           echo "APP_CAPTURE_RUN_ID=$run_id" >> "$GITHUB_ENV"
+          echo "APP_CAPTURE_SHA=$run_sha" >> "$GITHUB_ENV"
       - name: Build lightweight web assets
         run: |
           set -euo pipefail
@@ -69,6 +70,18 @@ jobs:
             done
           done
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(sed -n 's/^commit=//p' _app/build/visual-smoke/webref_capture_metadata.txt | head -n1)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
+          python3 - "$revision" <<'PY'
+import pathlib, re, sys
+revision = sys.argv[1]
+for name in ("public/js/user-request-fixes.js", "public/js/home-hero-showcase.js"):
+    path = pathlib.Path(name)
+    text = path.read_text()
+    text, count = re.subn(r'var revision = "[0-9a-f]+";', f'var revision = "{revision}";', text)
+    if count != 1:
+        raise SystemExit(f"{name}: expected one capture revision token, got {count}")
+    path.write_text(text)
+PY
           du -h "$dst"/*
       - name: Commit captures
         run: |
