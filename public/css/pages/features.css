@@ -1332,3 +1332,21 @@
     margin-top: var(--space-lg);
   }
 }
+
+
+@media (min-width: 900px) {
+  /* user-request-fixes.js owns the desktop two-column pair. Disable the older
+     section-level grid or the pair itself is auto-placed into column 1 and
+     leaves the entire right half of the 1220px section empty. */
+  .feature-section:has(> .feature-pair) {
+    display: block;
+    width: 100%;
+  }
+  .feature-section:has(> .feature-pair) > .feature-section-head {
+    width: 100%;
+  }
+  .feature-section:has(> .feature-pair) > .spec-grid {
+    width: 100%;
+    margin-top: var(--space-lg);
+  }
+}
