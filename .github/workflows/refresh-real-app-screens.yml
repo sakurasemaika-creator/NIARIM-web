@@ -71,23 +71,14 @@ jobs:
           done
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(sed -n 's/^commit=//p' _app/build/visual-smoke/webref_capture_metadata.txt | head -n1)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
-          python3 - "$revision" <<'PY'
-import pathlib, re, sys
-revision = sys.argv[1]
-for name in ("public/js/user-request-fixes.js", "public/js/home-hero-showcase.js"):
-    path = pathlib.Path(name)
-    text = path.read_text()
-    text, count = re.subn(r'var revision = "[0-9a-f]+";', f'var revision = "{revision}";', text)
-    if count != 1:
-        raise SystemExit(f"{name}: expected one capture revision token, got {count}")
-    path.write_text(text)
-PY
+          sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/user-request-fixes.js
+          sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/home-hero-showcase.js
           du -h "$dst"/*
       - name: Commit captures
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/assets/images/app-captures
+          git add public/assets/images/app-captures public/js/user-request-fixes.js public/js/home-hero-showcase.js
           git diff --cached --quiet && exit 0
           git commit -m "assets: refresh real NIARIM app captures"
           # Another refresh run may publish the identical artifact first.
