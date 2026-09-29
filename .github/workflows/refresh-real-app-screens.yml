@@ -2,7 +2,7 @@ name: Refresh real app screenshots
 # Imports the latest successful premium capture artifact from the app repository.
 # Refresh trigger: distinct-theme premium references.
 # Import the latest four-variant capture set including Widget.
-# Refresh captures and cache keys from the latest successful App capture.
+# Refresh captures and cache keys after the visible Canvas timeline-arrow fix.
 on:
   workflow_dispatch:
   push:
