@@ -192,7 +192,11 @@
       // main.js reuses the Hero mock for Home row1 and therefore removes the
       // original .feature-diagram wrapper. Replace that legacy clone directly
       // so every Home feature uses the same lightweight real app capture path.
-      media.replaceChildren(realCapture(name, ""));
+      var wrapper = document.createElement("div");
+      wrapper.className = "feature-diagram feature-diagram--real";
+      wrapper.dataset.captureTheme = name;
+      wrapper.replaceChildren(realCapture(name, ""));
+      media.replaceChildren(wrapper);
     });
 
     var previewMap = {
