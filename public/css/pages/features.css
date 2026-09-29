@@ -1283,3 +1283,27 @@
 .feature-diagram--real[data-capture-theme="workspace"] { --capture-frame: #E65F2B; }
 .feature-diagram--real[data-capture-theme="export"] { --capture-frame: #0086C9; }
 .feature-diagram--real[data-capture-theme="widget"] { --capture-frame: #00796B; }
+
+
+/* Desktop real-capture feature sections: use the full content width.
+   Legacy coded diagrams used a narrow right column; real portrait captures
+   should sit beside copy while the section itself continues to span the
+   container, rather than leaving the right half visually empty. */
+@media (min-width: 900px) {
+  .feature-section:has(> .feature-diagram--real) {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    column-gap: clamp(28px, 4vw, 56px);
+    width: 100%;
+  }
+  .feature-section:has(> .feature-diagram--real) > .feature-narrative {
+    width: 100%;
+    max-width: none;
+  }
+  .feature-section:has(> .feature-diagram--real) > .feature-diagram--real {
+    justify-self: end;
+    width: min(100%, 320px);
+  }
+  .feature-section:has(> .feature-diagram--real) > .spec-grid {
+    grid-column: 1 / -1;
+  }
+}
