@@ -2,7 +2,7 @@ name: Refresh real app screenshots
 # Imports the latest successful premium capture artifact from the app repository.
 # Refresh trigger: distinct-theme premium references.
 # Import the latest four-variant capture set including Widget.
-# Refresh after successful App capture d7adeffe (compact audio controls and shorter title).
+# Refresh after successful App capture 984096c3 (single-line audio adjustment title).
 on:
   workflow_dispatch:
   push:
