@@ -1350,3 +1350,26 @@
     margin-top: var(--space-lg);
   }
 }
+
+
+@media (min-width: 900px) {
+  /* Final desktop contract: the runtime pair itself is the two-column row. */
+  .feature-section > .feature-pair {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 320px !important;
+    column-gap: clamp(32px, 5vw, 72px) !important;
+    align-items: start !important;
+  }
+  .feature-section > .feature-pair > .feature-copy-column {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+  }
+  .feature-section > .feature-pair > .feature-diagram-stack {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    width: 320px !important;
+    justify-self: end !important;
+  }
+}
