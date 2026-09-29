@@ -1,4 +1,4 @@
 source_repo=sakurasemaika-creator/NIARIM
 source_branch=dev_branch
-source_commit=e823fa891b1ebd60993806414cfd64b2087f40b4
-captured_at=2026-09-29T01:10:12Z
+source_commit=acaa17acac03974f9638afa6050704c208710b8d
+captured_at=2026-09-29T01:20:56Z
