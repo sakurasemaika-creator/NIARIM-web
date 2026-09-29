@@ -68,12 +68,19 @@
   }
 
 
+  function buildPreviewCard(className, capture, themeClass) {
+    var card = document.createElement("div");
+    card.className = "hero-preview-card " + className + " " + themeClass;
+    card.appendChild(capture);
+    return card;
+  }
+
   function buildRealCapture(name, alt) {
     var picture = document.createElement("picture");
     picture.className = "real-app-capture hero-real-capture";
     var source = document.createElement("source");
     source.type = "image/avif";
-    var revision = "612adcd4";
+    var revision = "626258c3";
     source.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
