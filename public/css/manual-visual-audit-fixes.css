@@ -315,3 +315,21 @@ html body .fd-frame-strip-scroll.fd-frame-strip-scroll {
     text-overflow: ellipsis !important;
   }
 }
+
+
+/* Real-capture gallery cards: the image, not the retired coded-mock phone
+   ratio, owns the content height. Keep the 6px bezel outside that 320:569
+   viewport so frame and capture end on the same vertical edge. */
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) > .real-app-capture,
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) > .real-app-capture > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 320 / 569 !important;
+}
