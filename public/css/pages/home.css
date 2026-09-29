@@ -1048,3 +1048,22 @@
 .hero-showcase--real .hero-real-capture > img {
   object-fit: cover;
 }
+
+
+/* Real gallery captures define their own vertical geometry. The frame wraps the
+   decoded 320x569 image instead of imposing the old mock-card ratio, so no
+   extra strip can appear above or below the capture. */
+.screenshot-scroller .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box;
+  width: min(72vw, 320px);
+  height: auto;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+.screenshot-scroller .screenshot-card:has(> .real-app-capture) > .real-app-capture,
+.screenshot-scroller .screenshot-card:has(> .real-app-capture) > .real-app-capture > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 320 / 569;
+}
