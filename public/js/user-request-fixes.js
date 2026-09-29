@@ -44,18 +44,18 @@
       var narrative = section.querySelector(":scope > .feature-narrative");
       var diagrams = Array.from(section.querySelectorAll(":scope > .feature-diagram"));
       if (!narrative || !diagrams.length) return;
-      var spec = section.querySelector(":scope > .spec-grid");
       var pair = document.createElement("div");
       pair.className = "feature-pair";
-      var left = document.createElement("div");
-      left.className = "feature-copy-column";
+      var copyColumn = document.createElement("div");
+      copyColumn.className = "feature-copy-column";
       var stack = document.createElement("div");
       stack.className = "feature-diagram-stack";
       narrative.before(pair);
-      pair.append(left);
-      left.append(stack, narrative);
-      if (spec) left.append(spec);
+      pair.append(copyColumn, stack);
+      copyColumn.append(narrative);
       diagrams.forEach(function (diagram) { stack.append(diagram); });
+      // Keep the spec grid outside the two-column pair. It then spans the
+      // section's full desktop width instead of being trapped in the left half.
     });
   }
 
@@ -108,7 +108,7 @@
     picture.className = "real-app-capture";
     var avif = document.createElement("source");
     avif.type = "image/avif";
-    var revision = "612adcd4";
+    var revision = "602f5e65";
     avif.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
