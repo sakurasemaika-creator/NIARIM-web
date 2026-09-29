@@ -1307,3 +1307,28 @@
     grid-column: 1 / -1;
   }
 }
+
+
+@media (min-width: 900px) {
+  .feature-section > .feature-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: clamp(28px, 4vw, 56px);
+    width: 100%;
+    align-items: start;
+  }
+  .feature-pair > .feature-copy-column {
+    min-width: 0;
+    width: 100%;
+  }
+  .feature-pair > .feature-diagram-stack {
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .feature-section > .feature-pair + .spec-grid {
+    width: 100%;
+    margin-top: var(--space-lg);
+  }
+}
