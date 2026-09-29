@@ -156,3 +156,17 @@
     margin-bottom: var(--space-lg);
   }
 }
+
+
+/* One editorial block owns the complete Only in NIARIM story. Do not nest a
+   second feature panel around the first six items: every feature appears once
+   in the same grid beneath one heading. */
+.about-unique-panel {
+  width: 100%;
+}
+.about-unique-panel > .section-head[data-about-unique] {
+  margin-bottom: var(--space-xl);
+}
+.about-unique-panel > .spec-grid {
+  margin-top: 0;
+}
