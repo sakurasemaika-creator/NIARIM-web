@@ -1,5 +1,5 @@
 # Final validation entry point for Home first-view geometry and Community preview.
-# Revalidate real-capture hero sweep after preview cleanup.
+# Revalidate About consolidation and desktop feature width after requested UI fixes.
 name: Home width sweep
 
 on:
