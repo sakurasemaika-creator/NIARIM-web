@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 
 const failures = [];
 const read = (path) => fs.readFile(path, "utf8");
-const [home, visualFinish, uiFixes, fixCss, fixJs, bootstrap, lineBreak] =
+const [home, visualFinish, uiFixes, fixCss, fixJs, bootstrap, lineBreak, heroShowcase, about] =
   await Promise.all([
     read("public/index.html"),
     read("public/css/visual-finish.css"),
@@ -11,6 +11,8 @@ const [home, visualFinish, uiFixes, fixCss, fixJs, bootstrap, lineBreak] =
     read("public/js/user-request-fixes.js"),
     read("public/js/lang-flag.js"),
     read("public/css/line-break.css"),
+    read("public/js/home-hero-showcase.js"),
+    read("public/about/index.html"),
   ]);
 
 if (
@@ -64,6 +66,23 @@ if (!lineBreak.includes("/css/ui-regression-fixes.css?v=20260917-1"))
   failures.push(
     "final UI regression stylesheet must use a fresh deployment cache key",
   );
+
+if (!heroShowcase.includes('buildRealCapture("canvas-v4"') ||
+    !heroShowcase.includes('buildRealCapture("timeline-v4"') ||
+    !heroShowcase.includes('buildRealCapture("workspace-v3"'))
+  failures.push("hero must keep exactly the three intended real app capture sources");
+if (/buildCommunityMini|clonePreviewCard|workCard\(/.test(heroShowcase))
+  failures.push("unused coded app/community preview builders must stay removed");
+if ((about.match(/data-about-unique/g) || []).length !== 1)
+  failures.push("About Only in NIARIM heading must appear exactly once");
+if (!fixJs.includes('shot1: "canvas-v3"') ||
+    !fixJs.includes('shot2: "timeline-v3"') ||
+    !fixJs.includes('shot3: "layers-v3"') ||
+    !fixJs.includes('shot5: "save-tree-v2"') ||
+    !fixJs.includes('shot6: "workspace-v2"') ||
+    !fixJs.includes('card.dataset.mockTheme === "shot4"'))
+  failures.push("app preview gallery must keep the five-screen real-capture mapping and remove legacy shot4");
+
 if (!home.includes('class="fd-frame-mode"'))
   failures.push(
     "canonical circular frame/timeline icon control missing from home",
@@ -73,4 +92,4 @@ if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
   process.exit(1);
 }
-console.log(JSON.stringify({ ok: true, checks: 14 }, null, 2));
+console.log(JSON.stringify({ ok: true, checks: 18 }, null, 2));
