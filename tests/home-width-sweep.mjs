@@ -93,12 +93,7 @@ for (const width of widths) {
       if (!card) return false;
       const r = card.getBoundingClientRect();
       const cs = getComputedStyle(card);
-      return (
-        r.width > 0 &&
-        r.height > 0 &&
-        cs.display !== "none" &&
-        cs.visibility !== "hidden"
-      );
+      return r.width > 0 && r.height > 0 && cs.display !== "none";
     });
     const devices = visibleHeroPreview.map((card) => {
       const cs = getComputedStyle(card);
