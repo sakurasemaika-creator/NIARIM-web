@@ -26,3 +26,16 @@
 ## TODO
 
 `bootstrap-required` のため未作成。次の明示的な全面監査Workは、実装を調査してこの節を一度だけ完全な固定TODOへ置き換えること。旧StateからTODOを復元・転記しない。
+
+## 2026-10-06 App-side post-lock product delta to incorporate in the shared audit
+
+Web側RouteはApp/Web共通監査のmirrorであるため、App側の通常開発でRoute lock後に追加された機能も、次回の共通監査bootstrap/差分回帰時に対象へ取り込む。Web固有のTODO順序をこの追補で変更しない。
+
+- 範囲選択：作業レイヤーのみ／表示レイヤーすべて。
+- 投げ縄「線に吸着」：軌跡・連続性・進行方向・交差角を考慮した境界追跡。
+- 球体陰影：影色／光色、透明色、個別blend、楕円光領域、X/Y/位置/blur、数値入力、Canvas drag、影領域、保存復元、Undo/Redo。
+- Gaussian／Lens／Prism外側blur、Anime Style線幅slider、Tone Curve、Levels、Filter編集UI/Undo、Outline侵食threshold＋下層レイヤー、Vignette、Retro Anime、CRT/VHS、Fisheye、Chromatic Aberration XYZ、眼鏡断層mask、Pixel Art、背景なじませ、墨溜まり、Auto Lineart操作、線画色トレス、Blend preview、Automationからオーロラホログラム削除、Auto Fill完成状態capture。
+- 作品広場：「AI画像・AI動画使用」フラグの投稿時／投稿後ON/OFF、AI作品非表示、ミュートタイトル、ミュートタグ、全閲覧面への一貫適用、backend/API反映。
+- 7言語、保存復元、targeted regression、最新Visual PDFを最終closureで再確認。
+
+旧監査成果物や過去sessionの申告だけで完了扱いしない。最新production UI／実処理／保存復元／必要なbackend／実画像まで確認する。
