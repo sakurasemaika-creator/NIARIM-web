@@ -69,3 +69,21 @@ Web側RouteはApp/Web共通監査のmirrorであるため、App側の通常開�
 
 ### 監査への取り込み
 既存A/W IDを並べ替えない。既存IDで表現できる対象はそのIDへ紐付け、独立した検証が必要な上記新規対象はlock後差分回帰の末尾へ明示的な子TODOとして追加する。全面監査のcurrent_idをこの追補だけで飛ばさない。
+
+
+## 2026-10-06 App lock-after formal TODO mirror
+
+App側の追補を正式なlock後差分TODO IDへ展開したため、Web mirrorにも同じ監査対象を明示する。これはWeb固有TODOを捏造するものではなく、App/Web共通製品監査で取り込むべきApp-side deltaの正式ID対応表である。Web Route自体は引き続き bootstrap-required であり、既存W001–W042のlock済み定義を変更しない。
+
+| App delta ID | 共通監査対象 | Web側での扱い |
+|---|---|---|
+| A105 / A105.01–A105.06 | **全フィルター、質感変更系、質感偏光フィルター** | 次回shared bootstrap/delta regressionでApp実装とWebの説明・Help・公開機能一覧を照合。Webに相当する公開導線がある場合のみW子TODOへ割当 |
+| A106 / A106.01–A106.02 | **ブラシカスタム** | App機能説明、Help/Tips、公開ページがある場合の用語・仕様照合 |
+| A107 / A107.01–A107.02 | **縁取りペン** | App機能説明、Help/Tips、公開ページとの仕様照合 |
+| A108 / A108.01–A108.07 | **Hair Fold 5モード** | Webで説明/公開される場合の用語・仕様・画像照合。App側実描画証拠はA108で管理 |
+| A109 / A109.01–A109.02 | **髪の毛ブラシpreset** | Web Help/feature説明に露出する場合のみ対応W子TODOへ割当 |
+| A110 / A110.01–A110.02 | **前髪ブラシpreset** | 同上 |
+| A111 | 追加対象Visual closure | App最新Visual PDFとWeb掲載画像/説明が存在する場合の整合確認 |
+| A112 | 追加TODO coverage締め | shared audit bootstrapでApp/Web両側の未割当を0にする |
+
+App側の正式IDそのものはNIARIMの AUDIT_ROUTE.md が正本。Web側では別IDを先行発行せず、Webの初回bootstrap時に実navigation/公開面を調査して必要なW子TODOを発行する。
