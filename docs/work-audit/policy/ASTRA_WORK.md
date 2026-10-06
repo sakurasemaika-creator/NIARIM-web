@@ -1,4 +1,4 @@
-# NIARIM-web Full Audit — execution policy
+# NIARIM Full Audit — execution policy
 
 > このpolicyは、ユーザーが現在のトップレベル依頼でNIARIMの全面監査/全面監査再開を明示した場合だけ有効化する。通常タスクはこのpolicy/state領域を実行指示として使わない。実行場所がWorkか通常Chatか、担当モデルがAstra/Sol/その他かは問わない。
 
@@ -23,24 +23,27 @@
 - App=`A###`、Web=`W###` の安定IDを付け、実UI/navigationに沿う固定順序にする。
 - 画面だけでなくモーダル、パネル、empty/error/loading、無料/Premium、設定、入力、ジェスチャー、編集、保存/復元、共有/export等を含める。
 - 各TODOへ対象、前提状態、実操作、期待結果、必要なviewport/PC-SP/7言語/Premium条件、必要な画像・証拠、statusを定義する。
-- QUALITY / HANDS_ON_UI / LEGAL_IPを含む監査品質基準の全要件をTODOへ割り当て、coverage checkで未割当がないことを確認してから `locked` にする。
+- QUALITY / HANDS_ON_UI（該当repo）/ LEGAL_IPを含む監査品質基準の全要件をTODOへ割り当て、coverage checkで未割当がないことを確認してから `locked` にする。
 - **旧checkpoint、過去会話、最近の別セッションからTODOや完了状態を復元しない。** 最新実装と品質基準から作る。
 
 ## 2. locked後のscope lock + Discovery
 
 Routeがlockedになった後は、`current_id` の未完了Baseline項目からID順に進める。毎回「次に何を調べるか」を再判断しない。最近のcommit、別セッションの話題、興味深い機能、CI失敗を理由にrouteを飛び越えない。
 
-**Route lockはBaseline TODOのID・順序・coverage基準を固定するものであり、実監査で新たに実証された監査対象の追加を禁止しない。** 静的coverageが通っていても、実操作・実画面・実データ・組合せ検証で初めて判明する画面、状態、操作、分岐、入力条件、回帰条件、品質リスク等はあり得る。発見した対象を既存Baselineにないという理由で無視・無理に包含してはならない。
+**Route lockはBaseline TODOのID・順序・coverage基準を固定するものであり、実監査で新たに実証された監査対象の追加を禁止しない。** 静的coverageが通っていても、実操作・実画面・実データ・組合せ検証で初めて判明する画面、状態、操作、分岐、入力条件、回帰条件、品質リスク等はあり得る。発見した対象を「628件にないから」等の理由で無視・既存項目へ無理に包含してはならない。
 
 新たな監査対象を発見した場合：
 
-1. 既存Baseline IDの意味・順序・完了済み状態を変更せず、`D001`, `D002`... の安定したDiscovery TODOとして `AUDIT_ROUTE.md` のDiscovery section末尾へ追記する。
-2. Discoveryには `discovered_from`（発見元Baseline/Discovery ID）、対象、再現/前提、必要な検証、期待結果、証拠条件、statusを記録する。同一対象の重複D-IDは作らない。
+1. 既存Baseline IDの意味・順序・完了済み状態を変更せず、`DISC001`, `DISC002`... の安定したDiscovery TODOとして `AUDIT_ROUTE.md` のDiscovery section末尾へ追記する。`D###` はlock後delta route専用に予約する。
+2. Discoveryには `discovered_from`（発見元Baseline/Discovery ID）、対象、再現/前提、必要な検証、期待結果、証拠条件、statusを記録する。同一対象の重複DISC-IDは作らない。
 3. 現在IDの完了を妨げる問題、security/data-loss/privacy等の重大リスク、または後続監査の前提を壊す問題だけ即時対応してよい。それ以外はDiscovery backlogへ積み、Baselineの固定順序へ戻る。
-4. Baseline全件完了後、D-IDを番号順に全件消化する。Discovery監査中にさらに未想定対象を発見した場合も次のD-IDを末尾へ追加する。
+4. Baseline全件完了後、DISC-IDを番号順に全件消化する。Discovery監査中にさらに未想定対象を発見した場合も次のDISC-IDを末尾へ追加する。
 5. Discovery TODOが追加されてもBaseline Routeを再bootstrap/relockせず、既存IDをrenumber/reorderしない。
 
 新規画面/機能がroute lock後の製品変更として追加された場合も既存Baselineを並べ替えず、変更差分回帰フェーズの対象として追跡する。巡回中の実監査から自然に発見された未想定状態等は上記Discoveryへ入れる。
+
+### lock後deltaの正式正本
+route lock後の製品変更と、全面監査開始時点で明示的に追加された監査対象は `docs/work-audit/state/AUDIT_DELTA_ROUTE.md` を正式なD-series delta routeとして使う。`AUDIT_ROUTE.md` のlocked A/W rowsへA105等を追加しない。D-seriesはBaselineの代用品ではなく、Baseline完了後に番号順で消化する。D002の全フィルターinventory、D026/D027のpreset inventory等で最新HEADから対象数が変わった場合、D-series内の末尾へ対象名付き子TODOを追加する。
 
 ## 3. 最短再開手順
 
@@ -48,7 +51,7 @@ Routeがlockedになった後は、`current_id` の未完了Baseline項目から
 2. `AUDIT_ROUTE.md` を読む。bootstrap-requiredならSection 1だけを行う。lockedなら `ASTRA_CONTINUATION.md` の `current_id` を読む。
 3. current IDに必要な仕様/品質基準の該当節だけ確認し、直ちにそのTODOを実行する。
 4. checkpoint後のremote差分は現在IDの前提を壊すかだけscope-boundedに確認する。全commit・全CIを網羅的に再調査してStateを再構築しない。
-5. 完了条件を満たしたIDだけdoneにして次IDへ進む。Baseline完了後は未完了D-IDの最小番号へ進む。利用枠終了時は現在IDを保存する。
+5. 完了条件を満たしたIDだけdoneにして次IDへ進む。Baseline完了後は未完了DISC-IDを番号順に消化し、その後に未完了D-ID（lock後delta）の最小番号へ進む。利用枠終了時は現在IDを保存する。
 
 開始時刻記録だけのcommit/push、理由のない再監査・重いsuite再実行、復元のためだけの広範な履歴探索をしない。
 
@@ -56,11 +59,11 @@ Routeがlockedになった後は、`current_id` の未完了Baseline項目から
 
 NIARIMを世界最高水準の商用製品へ仕上げることを優先し、App/Webを1製品として扱う。必要に応じて再現→影響範囲→root cause→修正→検証→実画面→regressionまで完結させる。品質上有利なら影響を理解した上でrefactor/rewriteしてよい。重大な製品全体変更のみ事前確認する。
 
-変更ごとに最小かつ十分なformat/lint/test/build/visual checkを行う。CI/test/screenshot diff PASSだけで品質保証済み・実操作済み・目視済みにしない。`HANDS_ON_UI_STANDARD.md` に従い全到達可能画面・主要状態・適用可能な全操作を実操作/目視する。24幅×PC/SP×7言語=336表示matrixは決定論的自動化で全件網羅する。security、安定性、保守性、performance、accessibility/i18n等も各正本を適用する。
+変更ごとに最小かつ十分なformat/static analysis/test/build/visual checkを行う。CI/test PASSだけで品質保証済みにしない。UI/UX、PC/SP差別化、7言語、336表示matrix、全画面・全操作の実操作/目視、SEO/ASO、法務、security、安定性、保守性、performance、accessibility/i18n等は各正本を適用する。
 
 ## 5. AI/非AI作業の効率
 
-単純反復・matrix・lint/test/build/screenshot等はActions/CI/Playwright等へ寄せ、主担当モデルはRoute進行、root-cause、実装、UI/UX、翻訳品質、法務リスク、異常差分など判断価値の高い作業へ使う。
+単純反復・matrix・lint/test/build/screenshot等はActions/CI/決定論的自動化へ寄せ、主担当モデルはRoute進行、root-cause、実装、UI/UX、翻訳品質、法務リスク、異常差分など判断価値の高い作業へ使う。
 
 ### 5.1 主担当と上位advisorの役割
 
@@ -113,4 +116,18 @@ Route/Progress/Evidenceは**明示的な全面監査モードで実際に検証�
 
 State更新commitには `[audit-state]`、policy/guard変更にはユーザーの明示依頼のもと `[audit-policy-approved]` を使う。
 
-全面監査completeには、少なくとも **Baseline未完了=0、Discovery未完了=0、advisor-pending=0、現在認識している未登録Discovery=0** を満たし、QUALITY + HANDS_ON_UI + LEGAL_IPを含む各品質正本の完了条件と最終回帰フェーズも完了していることが必要。Baseline coverageの通過だけを「これ以上発見対象はない」「監査complete」の根拠にしてはならない。
+全面監査completeには、少なくとも **Baseline未完了=0、Discovery（DISC）未完了=0、Delta（D）未完了=0、advisor-pending=0、現在認識している未登録Discovery=0** を満たし、各品質正本の完了条件と最終回帰フェーズも完了していることが必要。Baseline coverageの通過だけを「これ以上発見対象はない」「監査complete」の根拠にしてはならない。
+
+## 7. 「NIARIMの全面監査をしてください」だけで起動できる実行契約
+
+ユーザーが現在のトップレベル依頼でNIARIMの全面監査実行／全面監査再開を明示した場合、追加質問を待たず次の順で実行を開始する。
+
+1. App sakurasemaika-creator/NIARIM と Web sakurasemaika-creator/NIARIM-web の dev_branch 最新HEADを取得し、作業開始SHAをEvidenceへ記録する。
+2. AGENTS.md → 本Policy → locked Baseline AUDIT_ROUTE.md → ASTRA_CONTINUATION.md / ASTRA_AUDIT_STATE.md → AUDIT_DELTA_ROUTE.md の順に読み、Baseline/Progress/Evidence/Deltaの役割を混同しない。
+3. Baseline verifierとDelta verifierを先に実行し、lock integrity、mirror、current_id、delta route integrityを確認する。違反があればstate構造を修正してから製品監査へ進む。
+4. current_id の未完了Baselineを番号順に実行する。必要なら実装を修正し、root cause→fix→targeted test→analyze/build→production UI実操作→visual inspection→save/restore→regressionまで完結させる。
+5. 途中で未登録の画面・状態・操作・分岐・品質リスクを発見したらDISC-IDとして追加し、現在IDへ影響するものを先に処理し、それ以外は固定順序へ戻る。
+6. Baseline完了後、DISC backlogを消化し、その後D001からDeltaを順番に消化する。D002の全フィルターinventory、D026/D027のpreset inventoryで対象数が変わる場合、子TODOを最新HEADへ合わせる。
+7. 不具合を見つけた場合は問題の列挙だけで止めず、修正可能なものはroot cause→fix→test→実画面→regressionまで行う。外部依存・実機不足のみblockedとし、未確認をblockedへ隠さない。
+8. Visual closureは最新HEADで再生成する。旧PDF・旧CI・旧sessionは補助証拠に留め、今回の最終closureを代替しない。画像には機能名、BEFORE/SETTINGS/AFTER、preset/mode、主要設定値を焼き込み、PDF全ページrenderと実画像目視を行う。
+9. 完了宣言前にD031のcoverage gateを通し、Baseline/DISC/Delta全ての未完了、advisor-pending、未登録Discovery、必須証拠のqueued/runningを0へ収束させる。できないものは完了と宣言せず、blocking reasonをEvidenceへ残す。
