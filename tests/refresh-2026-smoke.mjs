@@ -31,6 +31,14 @@ try {
     if(!hero.includes("NIARIM")) log("Brand wordmark missing",width);
     const paired = await page.locator(".nr-gallery-item .nr-duo[data-paired-capture]").count();
     if(paired!==9) log("PC/SP paired gallery count",width,paired);
+    const imageDimensions=await page.locator(".nr-hero-showcase").evaluate(el=>({
+      sp:[el.querySelector("[data-capture='canvas'] img")?.naturalWidth,el.querySelector("[data-capture='canvas'] img")?.naturalHeight],
+      pc:[el.querySelector("[data-capture-pc='canvas'] img")?.naturalWidth,el.querySelector("[data-capture-pc='canvas'] img")?.naturalHeight]
+    }));
+    if(imageDimensions.sp[0]!==320||imageDimensions.sp[1]!==569)log("SP screenshot native size",width,JSON.stringify(imageDimensions.sp));
+    if(imageDimensions.pc[0]!==1440||imageDimensions.pc[1]!==900)log("PC screenshot native size",width,JSON.stringify(imageDimensions.pc));
+    const oldScripts=await page.locator('script[src*="home-hero-showcase"],script[src*="popup-mock"],script[src*="user-request-fixes"]').count();
+    if(oldScripts)log("Obsolete mock runtime loaded on landing",width,oldScripts);
     const stagePC = await page.locator(".nr-hero-showcase [data-capture-pc='canvas']").count();
     if(stagePC!==1)log("PC hero capture missing",width);
     const missingPair=await page.evaluate(()=>[...document.querySelectorAll("figure.nr-shot[data-capture]:not(.nr-hero-showcase *)")].filter(f=>!f.closest(".nr-duo")).length);
