@@ -35,6 +35,21 @@ jobs:
           exit 1
       - name: Run language, responsive, image and palette smoke checks
         run: node tests/refresh-2026-smoke.mjs
+      - name: Capture all website pages top-to-bottom, Japanese PC and mobile
+        env:
+          AUDIT_LANGS: ja
+          AUDIT_VIEWPORTS: sp,pc
+          AUDIT_FULLPAGE_DIR: artifacts/site-all-pages
+        run: |
+          npm install --no-save pngjs@7.0.0
+          node tests/fullpage-multilang-capture.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-all-pages-japanese-full-height
+          path: artifacts/site-all-pages/
+          if-no-files-found: warn
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         if: always()
         with:
