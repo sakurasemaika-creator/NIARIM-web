@@ -62,6 +62,27 @@ jobs:
         run: |
           flutter pub get
           flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
+      - name: Build PC-mode references from the same production Flutter screens
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          source = Path('_app/test/app_web_reference_capture_test_v2.dart')
+          desktop = source.read_text()
+          old = 'tester.view.physicalSize = const Size(960, 1707);'
+          assert desktop.count(old) == 1, 'Reference viewport changed upstream'
+          desktop = desktop.replace(old, 'tester.view.physicalSize = const Size(1440, 900);')
+          desktop = desktop.replace('tester.view.devicePixelRatio = 3.0;', 'tester.view.devicePixelRatio = 1.0;')
+          target = "webref_$name$suffix.png"
+          assert target in desktop, 'Reference output path changed upstream'
+          desktop = desktop.replace(target, "webref_pc_$name$suffix.png")
+          desktop = desktop.replace("niarim_web_reference_v2_", "niarim_web_reference_pc_")
+          Path('_app/test/app_web_reference_pc_capture_test.dart').write_text(desktop)
+          PY
+      - name: Capture genuine desktop layout in premium mode without advertisements
+        working-directory: _app
+        env:
+          CI: "true"
+        run: flutter test test/app_web_reference_pc_capture_test.dart --reporter expanded
       - name: Convert nine screens times four themed variants
         run: |
           set -euo pipefail
@@ -96,11 +117,28 @@ jobs:
             done
           done
           test "$total" = 36
+          desktop_total=0
+          for key in "${!mapping[@]}"; do
+            name="${mapping[$key]}"
+            for variant in 1 2 3 4; do
+              suffix="" ; dest=""
+              if [ "$variant" != 1 ]; then suffix="_v$variant"; dest="-v$variant"; fi
+              png="$src/webref_pc_${key}${suffix}.png"
+              test -s "$png" || { echo "::error::Missing actual PC capture $png"; exit 1; }
+              cwebp -quiet -q 83 -m 6 "$png" -o "$dst/pc-$name$dest.webp"
+              avifenc --min 20 --max 30 --speed 6 "$png" "$dst/pc-$name$dest.avif" > /dev/null
+              test "$(identify -format '%wx%h' "$dst/pc-$name$dest.webp")" = "1440x900" || {
+                echo "::error::Desktop capture has wrong dimensions for pc-$name$dest"; exit 1;
+              }
+              desktop_total=$((desktop_total+1))
+            done
+          done
+          test "$desktop_total" = 36
           printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/user-request-fixes.js
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/home-hero-showcase.js
-          echo "Generated $total premium, ad-free, themed app captures from $APP_CAPTURE_SHA"
+          echo "Generated $total phone and $desktop_total desktop premium ad-free app captures from $APP_CAPTURE_SHA"
       - name: Publish captures only to dev_branch
         run: |
           set -euo pipefail
