@@ -85,7 +85,7 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
       method: "GET",
       headers: {"accept":"application/json"},
       redirect: "error",
-      signal: AbortSignal.timeout(7000),
+      signal: AbortSignal.timeout(checkingPlayback ? 10000 : 7000),
     });
   } catch (_) {
     return json({error:"upstream_unavailable"},502);
