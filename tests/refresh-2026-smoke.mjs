@@ -29,6 +29,12 @@ try {
     if(dims.doc>dims.win+2) log("Horizontal overflow",width,JSON.stringify(dims));
     const hero = await page.locator("#nr-hero-title").innerHTML();
     if(!hero.includes("<em>")) log("Hero emphasis missing",width);
+    const paired = await page.locator(".nr-gallery-item .nr-duo[data-paired-capture]").count();
+    if(paired!==9) log("PC/SP paired gallery count",width,paired);
+    const stagePC = await page.locator(".nr-hero-showcase [data-capture-pc='canvas']").count();
+    if(stagePC!==1)log("PC hero capture missing",width);
+    const missingPair=await page.evaluate(()=>[...document.querySelectorAll("figure.nr-shot[data-capture]:not(.nr-hero-showcase *)")].filter(f=>!f.closest(".nr-duo")).length);
+    if(missingPair)log("Unpaired mobile captures",width,missingPair);
     const count = await page.locator(".nr-gallery-item").count();
     if(count!==9) log("Gallery count",width,count);
     if(width===390 || width===1440){
@@ -53,6 +59,8 @@ try {
           const url=base+"/assets/images/app-captures/"+name+suffix+".webp";
           const result=await page.request.get(url);
           if(result.status()!==200) log("Missing screenshot",url,result.status());
+          const pc=await page.request.get(base+"/assets/images/app-captures/pc-"+name+suffix+".webp");
+          if(pc.status()!==200) log("Missing PC screenshot",name,variant,pc.status());
         }
       }
     }

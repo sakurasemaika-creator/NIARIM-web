@@ -15,10 +15,11 @@ var colors=[
 var names=["canvas","layers","onion-skin","timeline","audio-editor","save-tree","export","workspace","widget"];
 function apply(variant){
  var n=Math.max(1,Math.min(4,Number(variant)||1)),tail=n===1?"":"-v"+n;
- document.querySelectorAll("[data-capture]").forEach(function(figure){
-   var name=figure.getAttribute("data-capture"),i=names.indexOf(name);if(i<0)return;
+ document.querySelectorAll("[data-capture], [data-capture-pc]").forEach(function(figure){
+   var isPc=figure.hasAttribute("data-capture-pc");
+   var name=figure.getAttribute(isPc?"data-capture-pc":"data-capture"),i=names.indexOf(name);if(i<0)return;
    figure.style.setProperty("--capture-accent",colors[i][n-1]);
-   var base="/assets/images/app-captures/"+name+tail;
+   var base="/assets/images/app-captures/"+(isPc?"pc-":"")+name+tail;
    var source=figure.querySelector("source"),img=figure.querySelector("img");
    if(source)source.srcset=base+".avif";
    if(img)img.src=base+".webp";
@@ -29,6 +30,7 @@ function apply(variant){
    btn.setAttribute("aria-pressed",String(selected));
  });
 }
+window.NIARIM_applyCapturePalette=apply;
 document.addEventListener("DOMContentLoaded",function(){
  document.querySelectorAll(".nr-palette-button").forEach(function(btn){
    btn.addEventListener("click",function(){apply(btn.dataset.variant)});
