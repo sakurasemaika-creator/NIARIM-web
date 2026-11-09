@@ -1,48 +1,117 @@
 /**
- * NIARIM みんなの作品を見るページ専用UI。
+ * Public-only live community views. Same API paths as the production Flutter
+ * CommunityApi. No fabricated cards, credentials or local ranking metrics.
  */
-(function () {
+(function(){
   "use strict";
+  const buttons = [...document.querySelectorAll("[data-community-tab]")];
+  const gallery = document.querySelector("[data-community-gallery]");
+  if (!gallery || !buttons.length) return;
+  let current = buttons.find(b=>b.classList.contains("is-active"))?.dataset.communityTab || "latest";
+  let state = {kind:"loading",works:[]};
+  let requestCounter = 0;
 
-  function initTabs() {
-    var buttons = document.querySelectorAll("[data-community-tab]");
-    if (!buttons.length) return;
-
-    function select(active) {
-      buttons.forEach(function (button) {
-        var selected = button === active;
-        button.classList.toggle("is-active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
+  const labels = {
+    ja: {
+      loading:"公開作品を読み込んでいます。",
+      empty:"現在表示できる公開作品はありません。公開後、作品が投稿されるとここに表示されます。",
+      unavailable:"この期間のランキングはアプリ側でまだ集計に対応していません。累計ランキングまたは新着をご覧ください。",
+      error:"作品データを取得できませんでした。時間をおいて再度ご確認ください。",
+      count:"ブックマーク",
+      title:"作品をYouTubeで開く"
+    },
+    en: {
+      loading:"Loading published works...",
+      empty:"No published works are available yet. They will appear here after release.",
+      unavailable:"The app's backend does not provide rankings for this period yet. See All-time or Latest.",
+      error:"Couldn't load published works. Please try again later.",
+      count:"Bookmarks",title:"Open on YouTube"
+    },
+    "zh-Hans": {loading:"正在读取公开作品……",empty:"暂无可显示的公开作品，发布后将自动出现。",unavailable:"应用尚未提供该期间的排行，请查看累计或最新。",error:"作品加载失败，请稍后重试。",count:"收藏",title:"在 YouTube 打开"},
+    "zh-Hant": {loading:"正在讀取公開作品……",empty:"目前沒有公開作品，發布後將自動顯示。",unavailable:"應用程式尚未提供這段期間的排行，請查看累計或最新。",error:"作品載入失敗，請稍後再試。",count:"書籤",title:"在 YouTube 開啟"},
+    ko: {loading:"공개 작품을 불러오는 중...",empty:"아직 공개된 작품이 없습니다. 출시 후 이곳에 표시됩니다.",unavailable:"이 기간의 순위는 아직 제공되지 않습니다. 누적 또는 최신을 확인하세요.",error:"작품을 불러오지 못했습니다. 나중에 다시 시도하세요.",count:"북마크",title:"YouTube에서 열기"},
+    fr: {loading:"Chargement des œuvres publiques…",empty:"Aucune œuvre publique pour le moment. Elles apparaîtront ici après le lancement.",unavailable:"Ce classement périodique n'est pas encore disponible. Consultez les nouveautés ou le classement général.",error:"Impossible de charger les œuvres. Réessayez plus tard.",count:"Favoris",title:"Ouvrir sur YouTube"},
+    es: {loading:"Cargando obras públicas…",empty:"Aún no hay obras públicas. Aparecerán aquí después del lanzamiento.",unavailable:"Este ranking por período aún no está disponible. Consulta Novedades o Acumulado.",error:"No se pudieron cargar las obras. Inténtalo más tarde.",count:"Marcadores",title:"Abrir en YouTube"}
+  };
+  function copy(){
+    const lang=document.documentElement.lang;
+    return labels[lang] || labels.ja;
+  }
+  function clear(){gallery.replaceChildren()}
+  function message(kind){
+    const p=document.createElement("p");
+    p.className="community-live-message";
+    p.textContent=copy()[kind] || copy().error;
+    clear();gallery.append(p);
+  }
+  function card(work, index, ranked){
+    const a=document.createElement("a");
+    a.className="community-card community-card--live";
+    a.href=work.youtubeUrl;
+    a.target="_blank";a.rel="noopener noreferrer";
+    a.setAttribute("aria-label",copy().title+": "+work.title);
+    const thumb=document.createElement("div");thumb.className="thumb";
+    const image=document.createElement("img");
+    image.loading="lazy";image.decoding="async";image.alt="";
+    image.src=work.thumbnailUrl;
+    image.addEventListener("error",()=>{
+      image.remove();
+      const fallback=document.createElement("span");
+      fallback.className="community-thumb-fallback";fallback.textContent="✦";
+      thumb.append(fallback);
+    },{once:true});
+    thumb.append(image);
+    if(ranked){
+      const badge=document.createElement("span");badge.className="rank-badge";
+      badge.textContent=String(index+1);thumb.append(badge);
     }
-
-    var initial = document.querySelector("[data-community-tab].is-active");
-    select(initial || buttons[0]);
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        select(btn);
-        // 実データ未実装のため、タブ切り替えは見た目のみ（プレースホルダー表示は共通）。
-      });
+    const meta=document.createElement("div");meta.className="meta";
+    const h=document.createElement("h3");h.textContent=work.title;
+    const author=document.createElement("p");author.textContent=work.channelName || "NIARIM";
+    const count=document.createElement("span");count.className="community-count";
+    count.textContent=copy().count+": "+String(work.bookmarkCount);
+    meta.append(h,author,count);a.append(thumb,meta);
+    return a;
+  }
+  function render(){
+    gallery.setAttribute("aria-busy",String(state.kind==="loading"));
+    if(state.kind!=="ready"){message(state.kind);return;}
+    clear();
+    state.works.forEach((w,i)=>gallery.append(card(w,i,current!=="latest")));
+    if(!state.works.length) message("empty");
+  }
+  function select(view){
+    current=view;
+    buttons.forEach(b=>{
+      const pressed=b.dataset.communityTab===view;
+      b.classList.toggle("is-active",pressed);
+      b.setAttribute("aria-pressed",String(pressed));
+    });
+    const thisRequest=++requestCounter;
+    state={kind:"loading",works:[]};render();
+    fetch("/api/community?view="+encodeURIComponent(view),{
+      headers:{"accept":"application/json"},
+      credentials:"omit",
+      cache:"no-store"
+    }).then(async res=>{
+      if(!res.ok) throw Error("Community API status "+res.status);
+      return res.json();
+    }).then(body=>{
+      if(thisRequest!==requestCounter)return;
+      if(body.unavailableReason==="BOOKMARK_PERIOD_NOT_IMPLEMENTED"){
+        state={kind:"unavailable",works:[]};
+      } else if(Array.isArray(body.works)){
+        state={kind:"ready",works:body.works};
+      } else {
+        state={kind:"error",works:[]};
+      }
+      render();
+    }).catch(()=>{
+      if(thisRequest!==requestCounter)return;
+      state={kind:"error",works:[]};render();
     });
   }
-
-  function ensureNineCommunityTiles() {
-    var gallery = document.querySelector(".community-gallery");
-    if (!gallery) return;
-
-    var cards = gallery.querySelectorAll(".community-card:not(.is-more-cta)");
-    var more = gallery.querySelector(".community-card.is-more-cta");
-    if (cards.length !== 8 || !more) return;
-
-    var ninth = cards[cards.length - 1].cloneNode(true);
-    var badge = ninth.querySelector(".rank-badge");
-    if (badge) badge.textContent = "9";
-    gallery.insertBefore(ninth, more);
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    initTabs();
-    ensureNineCommunityTiles();
-  });
+  buttons.forEach(button=>button.addEventListener("click",()=>select(button.dataset.communityTab)));
+  document.addEventListener("niarim:langchange",render);
+  select(current);
 })();

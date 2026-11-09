@@ -8,6 +8,7 @@
 import { SEO_I18N, SEO_LANGS } from "./generated/seo-i18n.js";
 import { robotsTxt, sitemapXml } from "./seo.js";
 import { handleContact } from "./contact.js";
+import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
 
 const CSP = [
@@ -19,7 +20,7 @@ const CSP = [
   "script-src 'self'",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
-  "img-src 'self' data:",
+  "img-src 'self' data: https://i.ytimg.com https://img.youtube.com",
   "connect-src 'self'",
   "manifest-src 'self'",
   "upgrade-insecure-requests",
@@ -441,6 +442,9 @@ export default {
     const url = new URL(request.url);
 
     try {
+      if (url.pathname === "/api/community") {
+        return withSecurityHeaders(await handleCommunityFeed(request, env));
+      }
       if (url.pathname === "/api/contact") {
         const response = await handleContact(request, env, ctx);
         return withSecurityHeaders(response);

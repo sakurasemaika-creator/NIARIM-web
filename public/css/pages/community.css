@@ -254,3 +254,18 @@
     letter-spacing: 0;
   }
 }
+
+/* Live community cards are rendered from the same public API as NIARIM.
+   Never style skeleton/mock cards to look like real published works. */
+.community-gallery[data-community-gallery] {min-height:240px;align-items:start}
+.community-gallery[data-community-gallery] .community-live-message{grid-column:1/-1;margin:0;padding:48px 24px;border-radius:16px;border:1px dashed #d4c7cc;background:#fff9fa;color:#5f5762;text-align:center;line-height:1.9}
+.community-gallery[data-community-gallery] .community-card{display:block;overflow:hidden;text-decoration:none;color:inherit;min-width:0}
+.community-gallery[data-community-gallery] .community-card .thumb{overflow:hidden;background:linear-gradient(135deg,#eee6ed,#e5edf0)}
+.community-gallery[data-community-gallery] .community-card .thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.community-gallery[data-community-gallery] .community-card .thumb .community-thumb-fallback{font-size:2.4rem;color:#ba8aa1}
+.community-gallery[data-community-gallery] .community-card .meta{min-width:0}
+.community-gallery[data-community-gallery] .community-card .meta h3{overflow-wrap:anywhere;line-height:1.5}
+.community-gallery[data-community-gallery] .community-card .meta p{overflow-wrap:anywhere;line-height:1.6}
+.community-gallery[data-community-gallery] .community-card .meta .community-count{display:inline-block;margin-top:7px;font-size:.79rem;color:#a34f66}
+.community-gallery[data-community-gallery] .community-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #2c252c17}
+.community-tabs button:focus-visible{outline:3px solid #e65f88;outline-offset:3px}

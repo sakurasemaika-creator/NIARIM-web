@@ -27,6 +27,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Test live community API proxy with mock upstream
+        run: node --test tests/community-feed.test.mjs
       - name: Start static site
         run: |
           python3 -m http.server 8787 --directory public > /tmp/niarim-site.log 2>&1 &

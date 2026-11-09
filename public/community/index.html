@@ -238,133 +238,11 @@
             class="community-ranking-note reveal"
             data-i18n="communityPage.ranking.note"
           >
-            各ランキングはTOP50を表示予定です。
+            新着作品と累計ブックマークランキングをアプリと共通のデータから表示します。期間別ランキングは集計準備中です。
           </p>
 
-          <div class="community-gallery reveal">
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">1</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">2</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">3</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">4</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">5</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">6</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">7</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card">
-              <div class="thumb">
-                <span class="rank-badge">8</span>
-                <span data-i18n="communityPage.placeholder.label"
-                  >作品プレースホルダー</span
-                >
-              </div>
-              <div class="meta">
-                <h3 data-i18n="communityPage.placeholder.title">
-                  作品タイトル
-                </h3>
-                <p data-i18n="communityPage.placeholder.author">作者名</p>
-              </div>
-            </div>
-            <div class="community-card is-more-cta">
-              <div class="thumb">
-                <p data-i18n="communityPage.moreInApp.body">続きはアプリで</p>
-                <a
-                  class="btn btn-accent"
-                  href="/#download"
-                  data-i18n="communityPage.moreInApp.link"
-                  >NIARIMをダウンロードする</a
-                >
-              </div>
-            </div>
+          <div class="community-gallery reveal" data-community-gallery aria-live="polite" aria-busy="true">
+            <p class="community-live-message" data-community-message data-i18n="communityLive.loading">作品を読み込んでいます。</p>
           </div>
         </div>
       </section>
@@ -674,6 +552,7 @@
     <script src="/js/i18n-dict-community.js"></script>
     <script src="/js/i18n-dict-narrative.js"></script>
     <script src="/js/i18n-dict-refresh-2026.js?v=20261109"></script>
+    <script src="/js/i18n-dict-community-live.js?v=20261109"></script>
     <script src="/js/i18n.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/animations.js"></script>
