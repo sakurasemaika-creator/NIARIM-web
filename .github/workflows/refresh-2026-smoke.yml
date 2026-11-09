@@ -1,0 +1,44 @@
+name: Refreshed website smoke and visual evidence
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - ".github/workflows/refresh-2026-smoke.yml"
+      - "tests/refresh-2026-smoke.mjs"
+      - "public/index.html"
+      - "public/features/index.html"
+      - "public/community/index.html"
+      - "public/premium/index.html"
+      - "public/css/refresh-2026.css"
+      - "public/js/refresh-2026.js"
+      - "public/js/i18n-dict-refresh-2026.js"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Start static site
+        run: |
+          python3 -m http.server 8787 --directory public > /tmp/niarim-site.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/niarim-site.log
+          exit 1
+      - name: Run language, responsive, image and palette smoke checks
+        run: node tests/refresh-2026-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: refreshed-website-mobile-desktop
+          path: artifacts/refresh-2026/
+          if-no-files-found: warn
+          retention-days: 14
