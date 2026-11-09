@@ -1,108 +1,123 @@
-name: Refresh real app screenshots
-# Imports the latest successful premium capture artifact from the app repository.
-# Refresh trigger: distinct-theme premium references.
-# Import the latest four-variant capture set including Widget.
-# Refresh captures and cache keys after the visible Canvas timeline-arrow fix.
+name: Refresh real app screenshots from current NIARIM dev_branch
+# One production-Flutter capture per app screen, four uniquely themed premium variants.
+# Every image must come from the current app branch; do not publish outdated captures.
 on:
   workflow_dispatch:
   push:
     branches: [dev_branch]
     paths:
       - ".github/workflows/refresh-real-app-screens.yml"
+      - "public/index.html"
+      - "public/features/index.html"
+      - "public/css/refresh-2026.css"
+      - "public/js/refresh-2026.js"
 permissions:
   contents: write
+concurrency:
+  group: refresh-real-app-screens
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
           ref: dev_branch
-      - name: Install image encoders
+          fetch-depth: 1
+      - name: Checkout current NIARIM app source
+        run: |
+          git clone --depth 1 --single-branch --branch dev_branch https://github.com/sakurasemaika-creator/NIARIM.git _app
+          echo "APP_CAPTURE_SHA=$(git -C _app rev-parse HEAD)" >> "$GITHUB_ENV"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: false
+      - name: Install capture fonts and encoders
         run: |
           sudo apt-get update
-          sudo apt-get install -y webp libavif-bin imagemagick
-      - name: Download latest successful premium app captures
-        env:
-          GH_TOKEN: ${{ github.token }}
+          sudo apt-get install -y fonts-noto-cjk webp libavif-bin imagemagick
+          fc-cache -f
+      - name: Check matching screen-frame themes against app source
         run: |
-          set -euo pipefail
-          mkdir -p _app/build/visual-smoke
-          run_json="$(gh api 'repos/sakurasemaika-creator/NIARIM/actions/workflows/web-reference-capture.yml/runs?branch=dev_branch&status=success&per_page=1')"
-          run_id="$(printf '%s' "$run_json" | jq -r '.workflow_runs[0].id // empty')"
-          run_sha="$(printf '%s' "$run_json" | jq -r '.workflow_runs[0].head_sha // empty')"
-          app_head="$(gh api 'repos/sakurasemaika-creator/NIARIM/branches/dev_branch' --jq '.commit.sha')"
-          test -n "$run_id"
-          if [ "$run_sha" != "$app_head" ]; then
-            compare="$(gh api "repos/sakurasemaika-creator/NIARIM/compare/$run_sha...$app_head")"
-            ui_changes="$(printf '%s' "$compare" | jq '[.files[]?.filename | select(startswith("lib/") or . == "test/app_web_reference_capture_test_v2.dart")] | length')"
-            if [ "$ui_changes" != "0" ]; then
-              echo "::error::Latest successful capture ($run_sha) predates relevant app UI/capture changes at $app_head"
-              exit 1
-            fi
-            echo "Using capture $run_sha: newer app commits do not affect runtime UI or the web-reference capture test."
-          fi
-          gh run download "$run_id" -R sakurasemaika-creator/NIARIM -n web-reference-captures -D _app/build/visual-smoke
-          echo "APP_CAPTURE_RUN_ID=$run_id" >> "$GITHUB_ENV"
-          echo "APP_CAPTURE_SHA=$run_sha" >> "$GITHUB_ENV"
-      - name: Build lightweight web assets
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const dart=fs.readFileSync('_app/test/app_web_reference_capture_test_v2.dart','utf8');
+          const match=dart.match(/const webCaptureAccents = <Color>\[([\s\S]*?)\];/);
+          if(!match) throw Error('Cannot find app capture theme catalog');
+          const app=[...match[1].matchAll(/Color\(0xFF([0-9A-Fa-f]{6})\)/g)].map(m=>'#'+m[1].toUpperCase());
+          const js=fs.readFileSync('public/js/refresh-2026.js','utf8');
+          const expectedMatch=js.match(/var colors=([\s\S]*?\];)/);
+          if(!expectedMatch)throw Error('Cannot find web gallery theme catalog');
+          const expected=JSON.parse(expectedMatch[1].replace(/;$/,'')).flat();
+          if(app.length!==36||JSON.stringify(app)!==JSON.stringify(expected)){
+            throw Error('App theme accents and website screenshot frame colors differ');
+          }
+          console.log('Verified all 36 app accent colors against website gallery');
+          NODE
+      - name: Generate latest premium app images, without advertisements
+        working-directory: _app
+        env:
+          CI: "true"
+        run: |
+          flutter pub get
+          flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
+      - name: Convert nine screens times four themed variants
         run: |
           set -euo pipefail
           src="_app/build/visual-smoke"
           dst="public/assets/images/app-captures"
           mkdir -p "$dst"
-          declare -A map=([01_canvas_default]=canvas [02_canvas_layer_panel]=layers [03_canvas_onion_skin]=onion-skin [04_timeline_default]=timeline [05_timeline_audio_editor]=audio-editor [06_save_tree]=save-tree [07_export]=export [08_workspace]=workspace [09_widget]=widget)
-          for key in "${!map[@]}"; do
-            name="${map[$key]}"
+          declare -A mapping=(
+            [01_canvas_default]=canvas
+            [02_canvas_layer_panel]=layers
+            [03_canvas_onion_skin]=onion-skin
+            [04_timeline_default]=timeline
+            [05_timeline_audio_editor]=audio-editor
+            [06_save_tree]=save-tree
+            [07_export]=export
+            [08_workspace]=workspace
+            [09_widget]=widget
+          )
+          total=0
+          for key in "${!mapping[@]}"; do
+            name="${mapping[$key]}"
             for variant in 1 2 3 4; do
-              suffix=""; out_suffix=""
-              if [ "$variant" != "1" ]; then suffix="_v$variant"; out_suffix="-v$variant"; fi
-              png="$src/webref_${key}$suffix.png"
-              test -f "$png"
-              cwebp -quiet -q 78 -m 6 "$png" -o "$dst/$name$out_suffix.webp"
-              avifenc --min 24 --max 34 --speed 6 "$png" "$dst/$name$out_suffix.avif" >/dev/null
-              dims="$(identify -format '%wx%h' "$dst/$name$out_suffix.webp" 2>/dev/null || true)"
-              if [ "$dims" != "320x569" ]; then
-                echo "::error::$name$out_suffix.webp must remain 320x569, got ${dims:-unknown}"
-                exit 1
-              fi
+              suffix="" ; dest=""
+              if [ "$variant" != 1 ]; then suffix="_v$variant"; dest="-v$variant"; fi
+              png="$src/webref_${key}${suffix}.png"
+              test -s "$png" || { echo "::error::Missing capture $png"; exit 1; }
+              cwebp -quiet -q 83 -m 6 "$png" -o "$dst/$name$dest.webp"
+              avifenc --min 20 --max 30 --speed 6 "$png" "$dst/$name$dest.avif" > /dev/null
+              test "$(identify -format '%wx%h' "$dst/$name$dest.webp")" = "320x569" || {
+                echo "::error::Capture dimension mismatch for $name$dest"; exit 1;
+              }
+              total=$((total+1))
             done
           done
-          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\n' "$(sed -n 's/^commit=//p' _app/build/visual-smoke/webref_capture_metadata.txt | head -n1)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          test "$total" = 36
+          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/user-request-fixes.js
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/home-hero-showcase.js
-          du -h "$dst"/*
-      - name: Commit captures
+          echo "Generated $total premium, ad-free, themed app captures from $APP_CAPTURE_SHA"
+      - name: Publish captures only to dev_branch
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/assets/images/app-captures public/js/user-request-fixes.js public/js/home-hero-showcase.js
-          git diff --cached --quiet && exit 0
-          git commit -m "assets: refresh real NIARIM app captures"
-          # Another refresh run may publish the identical artifact first.
-          # If so, treat that as success. Otherwise retry from the new tip and
-          # regenerate the metadata timestamp instead of rebasing source.txt.
-          for attempt in 1 2 3; do
-            if git push origin HEAD:dev_branch; then exit 0; fi
-            git fetch origin dev_branch
-            remote_source="$(git show origin/dev_branch:public/assets/images/app-captures/source.txt 2>/dev/null || true)"
-            if printf '%s' "$remote_source" | grep -q "source_commit=$run_sha"; then
-              echo "Capture artifact $run_sha is already published by another run."
-              exit 0
-            fi
-            git rebase --abort 2>/dev/null || true
-            git reset --hard origin/dev_branch
-            echo "::error::dev_branch advanced with different capture assets; rerun refresh from the new tip."
-            exit 1
-          done
-          exit 1
+          if git diff --cached --quiet; then echo 'Screens are already current'; exit 0; fi
+          git commit -m "assets: refresh 36 real premium captures from NIARIM dev_branch"
+          git fetch origin dev_branch
+          git rebase origin/dev_branch || { git rebase --abort; echo "::error::Conflicting parallel changes; no force push performed"; exit 1; }
+          git push origin HEAD:dev_branch
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: real-app-captures
+          name: niarim-premium-ad-free-current-app-captures
           path: |
             _app/build/visual-smoke/webref_*.png
-            public/assets/images/app-captures/*
+            public/assets/images/app-captures/source.txt
+          if-no-files-found: warn
           retention-days: 14
