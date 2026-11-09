@@ -144,7 +144,7 @@ function pageMetadata(request) {
 }
 
 function performanceHeadMarkup(page) {
-  const hasScreenMocks = page === "home" || page === "features";
+  const hasScreenMocks = page === "features";
   const preloads = hasScreenMocks
     ? COMMON_STYLE_PRELOADS.concat(MOCK_STYLE_PRELOADS)
     : COMMON_STYLE_PRELOADS;
@@ -306,7 +306,7 @@ function rewriteSeoHtml(response, request, env) {
   const alternates = hreflangMarkup(request, env);
   const headPerformance = performanceHeadMarkup(metadata.page);
   const useLightweightRuntime =
-    metadata.page !== "home" && metadata.page !== "features";
+    metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
     .map(

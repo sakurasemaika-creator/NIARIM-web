@@ -7,10 +7,6 @@ on:
     branches: [dev_branch]
     paths:
       - ".github/workflows/refresh-real-app-screens.yml"
-      - "public/index.html"
-      - "public/features/index.html"
-      - "public/css/refresh-2026.css"
-      - "public/js/refresh-2026.js"
 permissions:
   contents: write
 concurrency:
