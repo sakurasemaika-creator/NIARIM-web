@@ -187,3 +187,49 @@ html body .feature-section .nr-feature-duo>.feature-diagram--pc{width:min(55%,23
 .nr-enhanced .section-head{margin-bottom:26px}
 .nr-enhanced :is(a,button):focus-visible{outline:3px solid #d14871;outline-offset:3px}
 @media(max-width:740px){.nr-enhanced .about-hero{padding:36px 22px;border-radius:13px}.nr-enhanced .about-hero::after{width:155px;height:155px}}
+
+/* Final responsive polish after reviewing full-height PC and SP screenshots. */
+html:lang(ja) .nr-main {
+ font-family:"Noto Sans CJK JP","Noto Sans JP","Yu Gothic","Meiryo",system-ui,sans-serif;
+}
+html:lang(ja) .nr-site .nr-main p:not(.nr-kicker):not(.nr-hero-category){
+ font-synthesis:none;
+}
+.nr-site .nr-hero-lead{
+ font-family:"Noto Sans CJK JP","Noto Sans JP","Yu Gothic","Meiryo",system-ui,sans-serif;
+ font-size:1.02rem!important;line-height:1.85;
+}
+.nr-site .nr-store-notice{font-size:.82rem;line-height:1.8}
+.nr-hero-highlights span{font-size:.76rem}
+.nr-curated .nr-curated-copy p{line-height:1.7}
+@media(min-width:900px){
+  /* Real feature screenshots are a TWO-MODE composition rather than a
+     narrow handset thumbnail squeezed into a wide desktop page. */
+  html body .feature-section>.feature-pair:has(.nr-feature-duo){
+    grid-template-columns:minmax(0,1fr) minmax(470px,48%)!important;
+  }
+  html body .feature-section>.feature-pair:has(.nr-feature-duo)>.feature-diagram-stack{
+    width:100%!important;min-width:0!important;max-width:none!important;
+    grid-column:2!important;grid-row:1!important;
+  }
+  html body .feature-section .feature-diagram-stack .nr-feature-duo{
+    display:flex!important;flex-direction:row!important;
+    gap:22px;align-items:center;justify-content:center;min-width:0;
+  }
+  html body .feature-section .feature-diagram-stack .nr-feature-duo>.feature-diagram--real{
+    width:min(34%,165px)!important;min-width:0!important;
+  }
+  html body .feature-section .feature-diagram-stack .nr-feature-duo>.feature-diagram--pc{
+    width:min(60%,320px)!important;min-width:0!important;
+  }
+}
+@media(max-width:740px){
+ .nr-curated .nr-curated-item{display:block!important}
+ .nr-curated .nr-curated-picture{min-height:225px}
+ .nr-curated .nr-duo{flex-direction:row!important;flex-wrap:nowrap!important;gap:18px}
+ .nr-curated .nr-duo>.nr-shot:not(.nr-shot--pc){width:81px!important}
+ .nr-curated .nr-duo>.nr-shot--pc{width:min(56%,204px)!important}
+ .nr-curated .nr-curated-copy{padding:20px 22px}
+ .nr-site .nr-hero-lead{font-size:1rem!important;line-height:1.9}
+ .nr-hero-highlights span{font-size:.69rem}
+}
