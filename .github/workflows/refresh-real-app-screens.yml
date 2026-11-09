@@ -58,20 +58,39 @@ jobs:
         run: |
           flutter pub get
           flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
-      - name: Build PC-mode references from the same production Flutter screens
+      - name: Build forced PC/DeX mode reference from production Flutter widgets
         run: |
           python3 - <<'PY'
           from pathlib import Path
           source = Path('_app/test/app_web_reference_capture_test_v2.dart')
           desktop = source.read_text()
-          old = 'tester.view.physicalSize = const Size(960, 1707);'
-          assert desktop.count(old) == 1, 'Reference viewport changed upstream'
-          desktop = desktop.replace(old, 'tester.view.physicalSize = const Size(1440, 900);')
+          old_view = 'tester.view.physicalSize = const Size(960, 1707);'
+          assert desktop.count(old_view) == 1
+          desktop = desktop.replace(old_view, 'tester.view.physicalSize = const Size(1440, 900);')
           desktop = desktop.replace('tester.view.devicePixelRatio = 3.0;', 'tester.view.devicePixelRatio = 1.0;')
           target = "webref_$name$suffix.png"
-          assert target in desktop, 'Reference output path changed upstream'
+          assert target in desktop
           desktop = desktop.replace(target, "webref_pc_$name$suffix.png")
           desktop = desktop.replace("niarim_web_reference_v2_", "niarim_web_reference_pc_")
+          import_line = "import 'package:niarim/services/theme_service.dart';"
+          assert import_line in desktop
+          desktop = desktop.replace(import_line, import_line + "\nimport 'package:niarim/services/settings_service.dart';")
+          begin = "  Future<void> capture(WidgetTester tester, String name) async {\n    final appContext = tester.element(find.byType(NiarimApp));"
+          assert desktop.count(begin) == 1
+          replacement = begin + """
+    // Landscape alone remains SP mode without a mouse/stylus.
+    // Force the ACTUAL PC/DeX workspace for this capture only.
+    await appContext.read<SettingsService>().setForcePcMode(true);
+    await tester.pump(const Duration(milliseconds: 500));"""
+          desktop = desktop.replace(begin,replacement)
+          end = "    }\n  }\n\n  void expectClean(WidgetTester tester, String operation) {"
+          assert desktop.count(end) == 1
+          desktop = desktop.replace(end, """    }
+    await appContext.read<SettingsService>().setForcePcMode(null);
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  void expectClean(WidgetTester tester, String operation) {""")
           Path('_app/test/app_web_reference_pc_capture_test.dart').write_text(desktop)
           PY
       - name: Capture genuine desktop layout in premium mode without advertisements
