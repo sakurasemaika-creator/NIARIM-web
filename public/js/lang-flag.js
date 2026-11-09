@@ -8,17 +8,21 @@
 (function () {
   "use strict";
 
-  /* User-requested corrections are deliberately loaded from this parser-blocking
-     bootstrap so CSS is present before first paint and the DOM/i18n patch is
-     registered before the rest of the deferred page behavior runs. */
-  var fixStyle = document.createElement("link");
-  fixStyle.rel = "stylesheet";
-  fixStyle.href = "/css/user-request-fixes.css?v=20260918-1";
-  document.head.appendChild(fixStyle);
-  var fixScript = document.createElement("script");
-  fixScript.src = "/js/user-request-fixes.js?v=20260929-feature-pair";
-  fixScript.defer = true;
-  document.head.appendChild(fixScript);
+  // Legacy mock/panel patches remain necessary on the detailed feature pages,
+  // but the rebuilt landing page exclusively uses current Flutter captures.
+  // Do not load old mocks or their CSS during first paint of the new Home.
+  var currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  var modernHome = currentPath === "/" || currentPath === "/index.html";
+  if (!modernHome) {
+    var fixStyle = document.createElement("link");
+    fixStyle.rel = "stylesheet";
+    fixStyle.href = "/css/user-request-fixes.css?v=20261109";
+    document.head.appendChild(fixStyle);
+    var fixScript = document.createElement("script");
+    fixScript.src = "/js/user-request-fixes.js?v=20261109";
+    fixScript.defer = true;
+    document.head.appendChild(fixScript);
+  }
 
   var LATIN = { en: 1, fr: 1, es: 1 };
 

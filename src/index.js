@@ -237,7 +237,7 @@ function structuredData(request, env, metadata) {
         url: `${origin}/`,
         applicationCategory: "MultimediaApplication",
         applicationSubCategory: "Animation creation",
-        operatingSystem: "Android, iOS",
+        operatingSystem: "Android",
         description: metadata.description,
         image: { "@id": `${origin}/#primaryimage` },
         publisher: { "@id": organizationId },
@@ -250,7 +250,7 @@ function structuredData(request, env, metadata) {
           "Timeline editing",
           "Audio editing",
           "Animation export",
-          "Community作品広場",
+          "Community gallery",
         ],
       },
     );
