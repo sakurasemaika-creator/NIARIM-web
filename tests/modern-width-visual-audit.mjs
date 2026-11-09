@@ -57,6 +57,10 @@ try{
    await page.route("**/api/community?**",r=>r.fulfill({status:200,contentType:"application/json",body:JSON.stringify({works:[],unavailableReason:null})}));
    for(const route of pages){
      await loadPage(page,route);
+     if(route==="/features/"){
+       try {await page.waitForFunction(()=>document.querySelectorAll(".nr-feature-duo[data-paired-capture]").length>=9,{timeout:5000});}
+       catch(_){issue("feature_captures_missing",width,"SP/PC pairing was not initialized");}
+     }
      await measure(page,route,width,"ja");
      if((width===390||width===1440)&&route!=="/404.html"){
        const name=(route==="/"? "home":route.replaceAll("/","_")).replace(/^_/,"");
@@ -72,6 +76,10 @@ try{
    for(const route of ["/","/features/","/community/"]){
      const sep=route.includes("?")?"&":"?";
      await loadPage(page,route+sep+"lang="+encodeURIComponent(lang));
+     if(route==="/features/"){
+       try {await page.waitForFunction(()=>document.querySelectorAll(".nr-feature-duo[data-paired-capture]").length>=9,{timeout:5000});}
+       catch(_){issue("feature_captures_missing",lang,"SP/PC pairing was not initialized");}
+     }
      const current=await page.evaluate(()=>document.documentElement.lang);
      if(current!==lang)issue("language",route,lang,current);
      await measure(page,route,390,lang);

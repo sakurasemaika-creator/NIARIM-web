@@ -107,7 +107,7 @@ try {
     const bad=sp.filter(x=>!x.closest(".nr-feature-duo")||!x.closest(".nr-feature-duo").querySelector(".feature-diagram--pc"));
     return {sp:sp.length,bad:bad.length};
   });
-  if(featurePairs.sp<5||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
+  if(featurePairs.sp!==9||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
   await page.close();
 } catch(error){log("Unexpected error",error.stack||error.message)}
 finally {await browsers.close()}

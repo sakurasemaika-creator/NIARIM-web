@@ -265,10 +265,18 @@
     upgradeLegacyFrameModeControls(document);
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  // This file is also dynamically inserted by lang-flag.js. A dynamically
+  // appended script can finish AFTER DOMContentLoaded; in that case adding
+  // a DOMContentLoaded listener silently loses the initialization forever.
+  function startRequestedCopy() {
     installDictionaryOverrides();
     requestAnimationFrame(applyRequestedCopy);
-  });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startRequestedCopy, {once: true});
+  } else {
+    startRequestedCopy();
+  }
   document.addEventListener("niarim:langchange", applyRequestedCopy);
 
   var observer = new MutationObserver(function (records) {
