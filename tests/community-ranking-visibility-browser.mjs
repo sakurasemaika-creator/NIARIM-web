@@ -11,12 +11,11 @@ try{
  const page=await app.newPage({viewport:{width:390,height:844},locale:"ja-JP"});
  await page.route("**/api/community?**",async route=>{
    const query=new URL(route.request().url()).searchParams;
-   if(query.has("ids")){
+   if(query.has("playbackId")){
      checks++;
-     const status=Object.fromEntries((query.get("ids")||"").split(",")
-       .map(id=>[id,available.get(id)===true]));
+     const id=query.get("playbackId");
      return route.fulfill({status:200,contentType:"application/json",
-       body:JSON.stringify({visibility:status})});
+       body:JSON.stringify({status:available.get(id)===true?"available":"private"})});
    }
    if(query.get("view")==="daily"){
      rankingReads++;
@@ -39,7 +38,7 @@ try{
  await page.waitForFunction(()=>document.querySelectorAll(
    "[data-community-gallery] .community-card").length===3);
  assert.deepEqual(await page.locator(".community-card .rank-badge").allTextContents(),["1","2","3"]);
- assert.equal(checks,0,"A ranking fetch must not trigger another bulk visibility read");
+ assert.equal(checks,0,"A ranking fetch must not trigger a playback check");
 
  // An already-displayed work becomes private. Resuming fetches an entirely
  // new public-only order, with no placeholder and no extra visibility request.
@@ -53,7 +52,7 @@ try{
  assert.equal(checks,0);
 
  // If another work becomes private between refresh and opening, a single
- // metadata-free click check blocks opening and refreshes the compact order.
+ // live playback check blocks opening and refreshes the compact order.
  available.set(ids[0],false);
  await page.locator(".community-card").first().click();
  await page.waitForFunction(()=>document.querySelectorAll(
