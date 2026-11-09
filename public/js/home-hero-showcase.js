@@ -80,7 +80,7 @@
     picture.className = "real-app-capture hero-real-capture";
     var source = document.createElement("source");
     source.type = "image/avif";
-    var revision = "a12c9fa4";
+    var revision = "955b4389";
     source.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
