@@ -14,7 +14,10 @@ await fs.mkdir(dir,{recursive:true});
 function issue(...parts){issues.push(parts.join(" :: "));}
 async function loadPage(page,route){
  try {
-   const res=await page.goto(base+route,{waitUntil:"networkidle",timeout:30000});
+   // Always pin Japanese audit pages to ja; the CI browser defaults to en-US
+   // otherwise, resulting in English screenshots mislabeled as Japanese.
+   const auditRoute=/[?&]lang=/.test(route)?route:route+(route.includes("?")?"&":"?")+"lang=ja";
+   const res=await page.goto(base+auditRoute,{waitUntil:"networkidle",timeout:30000});
    if(!res||res.status()>=400)issue(route,"HTTP",res?.status());
    await page.evaluate(()=>document.fonts?.ready);
  }catch(e){issue(route,"navigation",e.message)}
@@ -25,6 +28,8 @@ async function measure(page,route,width,lang){
    const images=[...document.images].filter(x=>x.getBoundingClientRect().width>0&&x.getBoundingClientRect().height>0&&x.getBoundingClientRect().top<innerHeight+100);
    const resources=performance.getEntriesByType("resource");
    const screenshotImages=[...document.querySelectorAll('img[src*="/assets/images/app-captures/"]')];
+   const bodyFont=getComputedStyle(document.body).fontFamily;
+   const headingFont=document.querySelector("main h1,main h2")?getComputedStyle(document.querySelector("main h1,main h2")).fontFamily:"";
    const unpaired=screenshotImages.filter(img=>{
      if(img.getAttribute("src")?.includes("/pc-"))return false;
      if(img.closest(".nr-hero-showcase"))return !img.closest(".nr-hero-sp-view");
@@ -38,10 +43,16 @@ async function measure(page,route,width,lang){
      visibleBroken:images.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src.slice(-120)),
      captured:screenshotImages.length,unpaired:unpaired.map(i=>i.src.slice(-70)),
      headings:[...document.querySelectorAll("h1")].map(n=>n.textContent.trim()).slice(0,3),
+     bodyFont,headingFont,
      visible:!!body&&getComputedStyle(body).visibility!=="hidden"
    };
  });
  if(v.doc>width+2)issue(lang,route,width,"horizontal_overflow",v.doc);
+ const actualLang=await page.evaluate(()=>document.documentElement.lang);
+ if(actualLang!==lang)issue(lang,route,width,"wrong_document_language",actualLang);
+ if(lang==="ja"&&(v.bodyFont.includes("HakkouMincho")||
+       (v.headingFont&&v.headingFont.includes("Kuramubon"))))
+   issue(lang,route,width,"incomplete_CJK_subset_font",v.bodyFont,v.headingFont);
  if(v.visibleBroken.length)issue(lang,route,width,"broken_visible_images",JSON.stringify(v.visibleBroken));
  if(v.unpaired.length)issue(lang,route,width,"unpaired_SP_captures",JSON.stringify(v.unpaired));
  if(!v.visible||!v.headings.length)issue(lang,route,width,"missing_content");

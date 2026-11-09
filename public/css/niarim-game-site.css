@@ -255,3 +255,53 @@ html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section h3{
     font-size:.92rem;line-height:1.85;
   }
 }
+
+
+/* Full-coverage CJK typography for all public content pages.
+   Older headings used a custom Kuramubon subset and paragraphs used a
+   HakkouMincho subset. Their fallback was visibly different *inside words*,
+   especially for new product headings and release-related vocabulary.
+   Keep the original NIARIM brand logo and latin hero wordmark intact. */
+html:lang(ja) body,
+html:lang(ja) body :is(p,li,dt,dd,summary,input,textarea,select,button),
+html:lang(ja) body :is(h1,h2,h3,h4):not(.nr-hero-wordmark),
+html:lang(ja) body :is(.eyebrow,.badge,.btn,.section-label,.section-kicker),
+html:lang(ja) body :is(.nav-link,.site-nav a,.feature-nav a) {
+  font-family: "Noto Sans CJK JP","Noto Sans JP",
+    "Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",
+    system-ui,sans-serif !important;
+}
+html:lang(ja) body :is(h1,h2,h3,h4):not(.nr-hero-wordmark) {
+  font-synthesis: none;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.4;
+}
+html:lang(ja) body :is(p,li,dt,dd) {
+  font-synthesis: none;
+  letter-spacing: normal;
+  line-height: 1.85;
+}
+html:lang(ja) body .site-logo,
+html:lang(ja) body .site-logo *,
+html:lang(ja) body .logo,
+html:lang(ja) body .logo *,
+html:lang(ja) body .nr-hero-wordmark {
+  font-family: Arial,Helvetica,sans-serif !important;
+}
+html:lang(ja) body :is(.community-gallery,.community-tabs) {
+  font-family: "Noto Sans CJK JP","Noto Sans JP",
+    "Yu Gothic","Meiryo",system-ui,sans-serif !important;
+}
+/* Other CJK languages should not fall back through Japanese subset fonts. */
+html:lang(ko) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
+  font-family: "Noto Sans CJK KR","Noto Sans KR","Malgun Gothic",system-ui,sans-serif !important;
+}
+html:lang(zh-Hans) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
+  font-family: "Noto Sans CJK SC","Noto Sans SC","Microsoft YaHei",
+    "PingFang SC",system-ui,sans-serif !important;
+}
+html:lang(zh-Hant) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
+  font-family: "Noto Sans CJK TC","Noto Sans TC","Microsoft JhengHei",
+    "PingFang TC",system-ui,sans-serif !important;
+}
