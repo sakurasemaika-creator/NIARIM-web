@@ -143,7 +143,7 @@ jobs:
             done
           done
           test "$desktop_total" = 36
-          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\nplatforms=sp,pc\nsp_resolution=320x569\npc_resolution=1440x900\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/user-request-fixes.js
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/home-hero-showcase.js
