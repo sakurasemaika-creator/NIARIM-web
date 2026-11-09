@@ -102,7 +102,7 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
       works: payload.works.slice(0,9).map(publicWork).filter(Boolean),
       unavailableReason: payload.unavailableReason === "BOOKMARK_PERIOD_NOT_IMPLEMENTED"
         ? "BOOKMARK_PERIOD_NOT_IMPLEMENTED" : null,
-    });
+    },200,view !== "latest");
   } catch (_) {
     return json({error:"bad_response"},502);
   }
