@@ -233,3 +233,25 @@ html:lang(ja) .nr-site .nr-main p:not(.nr-kicker):not(.nr-hero-category){
  .nr-site .nr-hero-lead{font-size:1rem!important;line-height:1.9}
  .nr-hero-highlights span{font-size:.69rem}
 }
+
+/* Legible full-CJK feature text instead of mixed glyphs from old subset fonts. */
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section :is(h2,h3,p),
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-narrative :is(h2,h3,p),
+html:lang(ja) body[data-i18n-title="meta.features.title"] .spec-grid :is(h2,h3,p) {
+  font-family:"Noto Sans CJK JP","Noto Sans JP","Hiragino Kaku Gothic ProN",
+  "Yu Gothic","Meiryo",sans-serif;
+  font-synthesis:none;
+}
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section p,
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-narrative p,
+html:lang(ja) body[data-i18n-title="meta.features.title"] .spec-grid p{
+  color:#49454c;font-weight:400;line-height:1.85;
+}
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section h3{
+  font-weight:800;line-height:1.45;
+}
+@media(max-width:740px){
+  html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section p{
+    font-size:.92rem;line-height:1.85;
+  }
+}
