@@ -54,15 +54,24 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
   // Metadata-free, strongly-consistent status check of a displayed snapshot.
   // Missing IDs and hidden IDs look identical; no title/media can escape.
   const checking = url.searchParams.has("ids");
+  const checkingPlayback = url.searchParams.has("playbackId");
+  if (checking && checkingPlayback) return json({error:"invalid_query"},400,true);
   const ids = checking ? url.searchParams.get("ids")?.split(",") ?? [] : [];
   if (checking && (ids.length < 1 || ids.length > 50 ||
       new Set(ids).size !== ids.length ||
       ids.some(id=>!/^[A-Za-z0-9_-]{11}$/.test(id)))) {
     return json({error:"invalid_ids"},400,true);
   }
-  const route = checking
-    ? "/ranking/visibility?ids="+encodeURIComponent(ids.join(","))
-    : ALLOWED.get(view);
+  const playbackId = checkingPlayback
+    ? safeYoutubeVideoId(url.searchParams.get("playbackId")) : "";
+  if (checkingPlayback && !playbackId) {
+    return json({error:"invalid_playback_id"},400,true);
+  }
+  const route = checkingPlayback
+    ? "/works/"+playbackId+"/playback-status"
+    : checking
+      ? "/ranking/visibility?ids="+encodeURIComponent(ids.join(","))
+      : ALLOWED.get(view);
   if (!route) return json({error:"invalid_view"},400);
   const base = env.NIARIM_PUBLIC_API_BASE_URL;
   if (typeof base !== "string" || !/^https:\/\/[a-z0-9.-]+\/?$/i.test(base)) {
@@ -84,6 +93,14 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
   if(!response.ok) return json({error:"upstream_unavailable"},502);
   try {
     const payload = await response.json();
+    if (checkingPlayback) {
+      // Return only a fixed status label, never a work's private metadata.
+      const statuses = ["available","private","deleted","unavailable","unknown"];
+      if (!payload || !statuses.includes(payload.status)) {
+        return json({error:"bad_response"},502,true);
+      }
+      return json({status:payload.status},200,true);
+    }
     if (checking) {
       if (!payload || typeof payload.visibility !== "object" ||
           payload.visibility === null || Array.isArray(payload.visibility)) {
