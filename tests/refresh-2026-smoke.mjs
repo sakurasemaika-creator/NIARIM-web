@@ -41,6 +41,12 @@ try {
       await fs.mkdir("artifacts/refresh-2026",{recursive:true});
       await page.screenshot({path:"artifacts/refresh-2026/home-"+width+".png",fullPage:true,animations:"disabled"});
     }
+    if(width===390){
+      const store = page.locator("[data-play-store-button]");
+      if(await store.count()){
+        if(!(await store.isDisabled()))log("Pre-release Play Store CTA must not imply download");
+      }
+    }
     if(width===390) {
       for(const variant of [1,2,3,4,1]){
         await page.locator(".nr-palette-button[data-variant='"+variant+"']").click();
@@ -52,6 +58,13 @@ try {
         if(!state.src.endsWith("canvas"+expectedTail+".webp"))log("Variant switch",variant,JSON.stringify(state));
         const expectedColors=["#3AA6FF","#F2B90F","#B15CFF","#10B981"];
         if(state.color.toUpperCase()!==expectedColors[variant-1])log("Theme/frame mismatch",variant,state.color);
+        const desktop=await page.locator(".nr-gallery-item").first().locator("[data-capture-pc]").evaluate(el=>({
+          src:el.querySelector("img")?.getAttribute("src"),
+          accent:el.style.getPropertyValue("--capture-accent")
+        }));
+        if(!desktop.src.endsWith("pc-canvas"+expectedTail+".webp"))log("PC gallery variant mismatch",variant,desktop.src);
+        if(desktop.accent.toUpperCase()!==expectedColors[variant-1])log("PC/SP accent mismatch",variant,desktop.accent);
+
       }
       for(const name of captureNames){
         for(const variant of [1,2,3,4]){
@@ -80,6 +93,13 @@ try {
     const response=await page.goto(base+path,{waitUntil:"networkidle"});
     if(response?.status()!==200||!(await page.locator(selector).count()))log("Interior missing",path,selector);
   }
+  await page.goto(base+"/features/",{waitUntil:"networkidle"});
+  const featurePairs=await page.evaluate(()=>{
+    const sp=[...document.querySelectorAll(".feature-diagram--real[data-capture-theme]:not(.feature-diagram--pc)")];
+    const bad=sp.filter(x=>!x.closest(".nr-feature-duo")||!x.closest(".nr-feature-duo").querySelector(".feature-diagram--pc"));
+    return {sp:sp.length,bad:bad.length};
+  });
+  if(featurePairs.sp<5||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
   await page.close();
 } catch(error){log("Unexpected error",error.stack||error.message)}
 finally {await browsers.close()}
