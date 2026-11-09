@@ -72,6 +72,7 @@ function pair(){
  document.querySelectorAll(".screenshot-card picture.real-app-capture").forEach(pairScroller);
  window.NIARIM_applyCapturePalette?.(document.querySelector(".nr-palette-button.is-selected")?.dataset.variant||1);
 }
+window.__niarimPairCaptures=pair;
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",pair,{once:true});else pair();
 window.addEventListener("load",pair,{once:true});
 })();

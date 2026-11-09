@@ -139,7 +139,7 @@
     Object.keys(featureMap).forEach(function (id) {
       var section = scope.querySelector?.("#" + id);
       if (!section) return;
-      var diagrams = Array.prototype.slice.call(section.querySelectorAll(".feature-diagram"));
+      var diagrams = Array.prototype.slice.call(section.querySelectorAll(".feature-diagram:not(.feature-diagram--pc)"));
       if (!diagrams.length) return;
       var primary = diagrams[0];
       primary.className = "feature-diagram feature-diagram--real";
@@ -152,7 +152,10 @@
       })[featureMap[id][0]];
       primary.removeAttribute("data-mock-theme");
       primary.removeAttribute("style");
-      primary.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+      if (!primary.querySelector(".real-app-capture") ||
+          primary.dataset.captureTheme !== featureMap[id][0]) {
+        primary.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+      }
       // A feature section represents one app screen. Remove every leftover
       // coded reproduction/concept mock in that section so the site never
       // mixes a real capture with stale HTML/CSS screen facsimiles.
@@ -251,6 +254,7 @@
   function applyRequestedCopy() {
     installDictionaryOverrides();
     installRealAppCaptures(document);
+    window.__niarimPairCaptures?.();
     pairFeatureNarratives(document);
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');

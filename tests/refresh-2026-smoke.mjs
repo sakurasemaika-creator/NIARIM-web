@@ -38,7 +38,7 @@ try {
     if(imageDimensions.sp[0]!==320||imageDimensions.sp[1]!==569)log("SP screenshot native size",width,JSON.stringify(imageDimensions.sp));
     if(imageDimensions.pc[0]!==1440||imageDimensions.pc[1]!==900)log("PC screenshot native size",width,JSON.stringify(imageDimensions.pc));
     const oldScripts=await page.locator('script[src*="home-hero-showcase"],script[src*="popup-mock"],script[src*="user-request-fixes"]').count();
-    if(oldScripts)log("Obsolete mock runtime loaded on landing",width,oldScripts);
+    if(oldScripts){const sources=await page.locator('script[src*="home-hero-showcase"],script[src*="popup-mock"],script[src*="user-request-fixes"]').evaluateAll(ns=>ns.map(n=>n.getAttribute("src")));log("Obsolete mock runtime loaded on landing",width,JSON.stringify(sources));}
     const stagePC = await page.locator(".nr-hero-showcase [data-capture-pc='canvas']").count();
     if(stagePC!==1)log("PC hero capture missing",width);
     const missingPair=await page.evaluate(()=>[...document.querySelectorAll("figure.nr-shot[data-capture]:not(.nr-hero-showcase *)")].filter(f=>!f.closest(".nr-duo")).length);
