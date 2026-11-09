@@ -90,3 +90,34 @@ test("visibility query rejects malformed identifiers and keeps hidden IDs indist
    async()=>Response.json({visibility:{}}));
  assert.deepEqual(await missing.json(),{visibility:{[id]:false}});
 });
+
+test("playback click preflight checks backend status and never leaks metadata",async()=>{
+ let endpoint="";
+ const res=await handleCommunityFeed(
+   new Request("https://test.example/api/community?playbackId=aaaaaaaaaaa"),
+   env,
+   async url=>{
+     endpoint=url;
+     return Response.json({status:"private",title:"HIDDEN TITLE",thumbnailUrl:"secret"});
+   }
+ );
+ assert.match(endpoint,/\/works\/aaaaaaaaaaa\/playback-status$/);
+ assert.equal(res.status,200);
+ assert.equal(res.headers.get("cache-control"),"no-store");
+ assert.deepEqual(await res.json(),{status:"private"});
+});
+test("playback click preflight refuses invalid IDs and malformed backend replies",async()=>{
+ const invalid=await handleCommunityFeed(
+   new Request("https://test.example/api/community?playbackId=..%2Fprivate"),
+   env,async()=>{throw Error("must not query upstream")});
+ assert.equal(invalid.status,400);
+ const malformed=await handleCommunityFeed(
+   new Request("https://test.example/api/community?playbackId=aaaaaaaaaaa"),
+   env,async()=>Response.json({status:"available",title:"wrong"}));
+ assert.equal(malformed.status,200);
+ assert.deepEqual(await malformed.json(),{status:"available"});
+ const bad=await handleCommunityFeed(
+   new Request("https://test.example/api/community?playbackId=aaaaaaaaaaa"),
+   env,async()=>Response.json({status:"unexpected"}));
+ assert.equal(bad.status,502);
+});
