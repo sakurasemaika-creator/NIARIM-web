@@ -30,6 +30,22 @@ test("overall ranking uses the same bookmarks endpoint as Flutter",async()=>{
  assert.match(endpoint,/\/ranking\/bookmarks\?limit=9$/);
  assert.equal((await res.json()).works.length,1);
 });
+test("daily, weekly, monthly and yearly use the app's real period ranking",async()=>{
+ for(const view of ["daily","weekly","monthly","yearly"]){
+  let called="";
+  const res=await handleCommunityFeed(new Request("https://test.example/api/community?view="+view),env,async url=>{
+    called=url;return Response.json({period:view,metric:"periodBookmarks",windowId:"20261109",works:[
+      {...valid,periodBookmarkCount:5}
+    ]});
+  });
+  assert.match(called,new RegExp("/ranking/"+view+"\\?limit=9$"));
+  const body=await res.json();
+  assert.equal(body.unavailableReason,null);
+  assert.equal(body.metric,"periodBookmarks");
+  assert.equal(body.works[0].periodBookmarkCount,5);
+  assert.equal(body.works[0].bookmarkCount,21);
+ }
+});
 test("period not implemented is never substituted with made-up ranking",async()=>{
  const res=await handleCommunityFeed(new Request("https://test.example/api/community?view=daily"),env,async()=>Response.json({works:[],unavailableReason:"BOOKMARK_PERIOD_NOT_IMPLEMENTED"}));
  assert.deepEqual((await res.json()).works,[]);

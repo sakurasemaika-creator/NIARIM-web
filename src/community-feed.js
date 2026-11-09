@@ -1,8 +1,8 @@
 /**
  * Same read-only API endpoints the NIARIM Flutter community client uses:
  * GET /works/latest and GET /ranking/{period}. No credentials are forwarded.
- * The period-ranking backend currently returns unavailableReason for daily,
- * weekly, monthly and yearly. Preserve this fact rather than inventing data.
+ * Period counters come from the same backend used by Flutter. We never
+ * invent or locally re-rank scores; old backend responses remain explicit.
  */
 const ALLOWED = new Map([
   ["latest", "/works/latest?limit=9"],
@@ -31,6 +31,8 @@ function publicWork(value) {
     channelName: safeString(value.channelName, 110),
     postedAt: safeString(value.postedAt, 40),
     bookmarkCount: Number.isFinite(value.bookmarkCount) ? Math.max(0, Math.floor(value.bookmarkCount)) : 0,
+    periodBookmarkCount: Number.isSafeInteger(value.periodBookmarkCount) &&
+      value.periodBookmarkCount >= 0 ? value.periodBookmarkCount : null,
     thumbnailUrl: "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg",
     youtubeUrl: "https://www.youtube.com/watch?v=" + id,
   };
@@ -74,6 +76,9 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
     if (!payload || !Array.isArray(payload.works)) return json({error:"bad_response"},502);
     return json({
       view,
+      metric: payload.metric === "periodBookmarks" ? "periodBookmarks" : "bookmarks",
+      windowId: typeof payload.windowId === "string" && /^[0-9W]{4,9}$/.test(payload.windowId)
+        ? payload.windowId : null,
       works: payload.works.slice(0,9).map(publicWork).filter(Boolean),
       unavailableReason: payload.unavailableReason === "BOOKMARK_PERIOD_NOT_IMPLEMENTED"
         ? "BOOKMARK_PERIOD_NOT_IMPLEMENTED" : null,
