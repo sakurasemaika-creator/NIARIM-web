@@ -48,16 +48,13 @@
     p.textContent=copy()[kind] || copy().error;
     clear();gallery.append(p);
   }
-  async function getVisibility(ids) {
-    if (!ids.length) return {};
-    const response=await fetch("/api/community?ids="+encodeURIComponent(ids.join(",")),{
+  async function playbackAvailable(id) {
+    const response=await fetch("/api/community?playbackId="+encodeURIComponent(id),{
       headers:{"accept":"application/json"},credentials:"omit",cache:"no-store"
     });
-    if (!response.ok) throw Error("Visibility status unavailable");
+    if (!response.ok) return false;
     const reply=await response.json();
-    if (!reply || typeof reply.visibility!=="object" ||
-        reply.visibility===null) throw Error("Invalid visibility reply");
-    return reply.visibility;
+    return reply && reply.status==="available";
   }
   function card(work, index, ranked){
     const hidden=work.isUnavailable===true;
@@ -75,9 +72,9 @@
         event.preventDefault();
         const requestAtClick=requestCounter;
         try{
-          const visible=await getVisibility([work.workId]);
+          const available=await playbackAvailable(work.workId);
           if(requestAtClick!==requestCounter)return;
-          if(visible[work.workId]!==true){select(current);return;}
+          if(!available){select(current);return;}
           window.location.assign(work.youtubeUrl);
         }catch(_){
           // Fail closed: never open a stale item when status is unknown.
