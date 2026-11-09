@@ -77,20 +77,11 @@ jobs:
           desktop = desktop.replace(import_line, import_line + "\nimport 'package:niarim/services/settings_service.dart';")
           begin = "  Future<void> capture(WidgetTester tester, String name) async {\n    final appContext = tester.element(find.byType(NiarimApp));"
           assert desktop.count(begin) == 1
-          replacement = begin + """
-    // Landscape alone remains SP mode without a mouse/stylus.
-    // Force the ACTUAL PC/DeX workspace for this capture only.
-    await appContext.read<SettingsService>().setForcePcMode(true);
-    await tester.pump(const Duration(milliseconds: 500));"""
+          replacement = begin + "\n    // Force real PC/DeX view, not just a wide phone window.\n    await appContext.read<SettingsService>().setForcePcMode(true);\n    await tester.pump(const Duration(milliseconds: 500));"
           desktop = desktop.replace(begin,replacement)
           end = "    }\n  }\n\n  void expectClean(WidgetTester tester, String operation) {"
           assert desktop.count(end) == 1
-          desktop = desktop.replace(end, """    }
-    await appContext.read<SettingsService>().setForcePcMode(null);
-    await tester.pump(const Duration(milliseconds: 400));
-  }
-
-  void expectClean(WidgetTester tester, String operation) {""")
+          desktop = desktop.replace(end, "    }\n    await appContext.read<SettingsService>().setForcePcMode(null);\n    await tester.pump(const Duration(milliseconds: 400));\n  }\n\n  void expectClean(WidgetTester tester, String operation) {")
           Path('_app/test/app_web_reference_pc_capture_test.dart').write_text(desktop)
           PY
       - name: Capture genuine desktop layout in premium mode without advertisements
