@@ -162,3 +162,28 @@ html body .feature-section .nr-feature-duo>.feature-diagram--pc{width:min(55%,23
 .nr-gallery-visual{min-height:275px}
 }
 @media(prefers-reduced-motion:reduce){.nr-store-button,.nr-hero-showcase{animation:none;transition:none}}
+
+/* Shared presentation on informational tabs; policy text remains readable. */
+.nr-enhanced .site-header{background:#fffbfbf5;box-shadow:0 1px 0 #f1e4e8}
+.nr-enhanced .about-hero{
+  background:linear-gradient(130deg,#191822,#302339 72%,#432c46);
+  padding:clamp(36px,5.5vw,85px) clamp(24px,5vw,65px);
+  border-radius:19px;color:#fdf4f7;position:relative;
+  overflow:hidden;box-shadow:0 15px 42px #271d2914;
+}
+.nr-enhanced .about-hero::after{
+  content:"";position:absolute;pointer-events:none;right:-55px;top:-85px;
+  width:240px;height:240px;border:1px solid #ff8bab67;border-radius:42px;
+  transform:rotate(18deg);box-shadow:0 0 0 45px #ff8bab11,0 0 0 90px #ff8bab0a;
+}
+.nr-enhanced .about-hero :is(h1,p,span){position:relative;z-index:1;color:inherit}
+.nr-enhanced .about-hero h1{font-size:clamp(2.3rem,4.2vw,4.4rem);font-weight:850;letter-spacing:-.04em}
+.nr-enhanced .about-hero .eyebrow{color:#ffa2b8}
+.nr-enhanced .section-head h2,.nr-enhanced .feature-heading h2{letter-spacing:-.025em}
+.nr-enhanced :is(.intro-card,.feature-narrative-block){border-radius:13px;box-shadow:0 8px 25px #2c20300a}
+.nr-enhanced .intro-card{border:1px solid #eee4e8}
+.nr-enhanced .community-gallery .community-card{border-radius:13px}
+.nr-enhanced .faq-item{border-radius:10px}
+.nr-enhanced .section-head{margin-bottom:26px}
+.nr-enhanced :is(a,button):focus-visible{outline:3px solid #d14871;outline-offset:3px}
+@media(max-width:740px){.nr-enhanced .about-hero{padding:36px 22px;border-radius:13px}.nr-enhanced .about-hero::after{width:155px;height:155px}}
