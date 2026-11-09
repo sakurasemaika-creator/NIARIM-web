@@ -11,3 +11,6 @@
 
 /* Final Japanese section titles, avoiding mobile orphan lines. */
 (function(){var dict=window.NIARIM_I18N_DICT||{};dict.ja=Object.assign(dict.ja||{},{"refresh.story.title":"アニメ制作の流れ","narrative.community.1.heading":"公開された作品を見る"});})();
+
+/* Product-led section labels without formulaic from-to slogans. */
+(function(){var d=window.NIARIM_I18N_DICT||{};var labels={"ja":{"refresh.story.kicker":"制作のステップ","refresh.story.title":"アニメ制作の流れ"},"en":{"refresh.story.kicker":"DRAW / ANIMATE / EXPORT","refresh.story.title":"Animation workflow"},"zh-Hans":{"refresh.story.kicker":"制作步骤","refresh.story.title":"动画制作流程"},"zh-Hant":{"refresh.story.kicker":"製作步驟","refresh.story.title":"動畫製作流程"},"ko":{"refresh.story.kicker":"제작 단계","refresh.story.title":"애니메이션 제작 과정"},"fr":{"refresh.story.kicker":"ÉTAPES DE CRÉATION","refresh.story.title":"Le processus d’animation"},"es":{"refresh.story.kicker":"PROCESO CREATIVO","refresh.story.title":"Proceso de animación"}};Object.keys(labels).forEach(function(lang){d[lang]=Object.assign(d[lang]||{},labels[lang]);});})();
