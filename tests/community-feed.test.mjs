@@ -59,3 +59,33 @@ test("hidden/unavailable works never expose private titles",async()=>{
  const r=await handleCommunityFeed(new Request("https://test.example/api/community"),env,async()=>Response.json({works:[valid,{...valid,isNiarimPublished:false,title:"Private"},{...valid,isUnavailable:true,title:"Unavailable"}]}));
  const obj=await r.json();assert.equal(obj.works.length,1);assert.equal(obj.works[0].title,"Original animation");
 });
+
+test("ranking visibility proxy does not disclose private metadata and disables caching",async()=>{
+ let endpoint="";
+ const res=await handleCommunityFeed(
+   new Request("https://test.example/api/community?ids=aaaaaaaaaaa%2Cbbbbbbbbbbb"),
+   env,
+   async url=>{
+     endpoint=url;
+     return Response.json({visibility:{aaaaaaaaaaa:true,bbbbbbbbbbb:false},
+       title:"private leaked title",thumbnailUrl:"private image"});
+   }
+ );
+ assert.equal(res.status,200);
+ assert.match(endpoint,/\/ranking\/visibility\?ids=aaaaaaaaaaa%2Cbbbbbbbbbbb$/);
+ const obj=await res.json();
+ assert.deepEqual(obj,{visibility:{aaaaaaaaaaa:true,bbbbbbbbbbb:false}});
+ assert.ok(!JSON.stringify(obj).includes("private leaked title"));
+ assert.equal(res.headers.get("cache-control"),"no-store");
+});
+test("visibility query rejects malformed identifiers and keeps hidden IDs indistinguishable",async()=>{
+ const malformed=await handleCommunityFeed(
+   new Request("https://test.example/api/community?ids=../secret"),env,
+   async()=>{throw Error("should not request backend")});
+ assert.equal(malformed.status,400);
+ let id="ccccccccccc";
+ const missing=await handleCommunityFeed(
+   new Request("https://test.example/api/community?ids="+id),env,
+   async()=>Response.json({visibility:{}}));
+ assert.deepEqual(await missing.json(),{visibility:{[id]:false}});
+});
