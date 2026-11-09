@@ -129,3 +129,106 @@
 @media(max-width:740px){.nr-wrap{width:min(100% - 32px,600px)}.nr-hero{padding-top:38px}.nr-hero-grid,.nr-story-card,.nr-feature-layout,.nr-workspace-grid,.nr-plaza-grid,.nr-pricing-grid{grid-template-columns:minmax(0,1fr)}.nr-hero-grid{min-height:0}.nr-hero h1{font-size:clamp(2.8rem,10vw,4rem)}.nr-hero-stage{min-height:350px;transform:scale(.73);margin:-48px 0 -42px}.nr-hero-bottom{padding-bottom:7px}.nr-stage-caption{bottom:23px}.nr-statement{padding-top:75px;padding-bottom:66px}.nr-story{padding-bottom:70px;gap:18px}.nr-story-card{min-height:0}.nr-story-media{height:325px;min-height:0;padding:20px}.nr-story-media .nr-shot{width:150px}.nr-story-card:nth-child(even) .nr-story-media{order:0}.nr-story-copy{padding:30px 24px 38px}.nr-feature-band,.nr-workspace,.nr-plaza,.nr-pricing{padding:75px 0}.nr-feature-visual{height:385px}.nr-feature-visual .nr-shot{width:162px;left:10%}.nr-feature-visual .nr-feature-shot-bottom{left:46%}.nr-tools{padding-top:80px;padding-bottom:80px}.nr-workspace-media{height:350px}.nr-workspace-media .nr-shot{width:150px}.nr-plaza-art{min-height:330px}.nr-section-header{flex-direction:column;align-items:flex-start;gap:12px}.nr-gallery{padding-top:80px;padding-bottom:80px}.nr-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.nr-gallery-visual{padding:22px 10px}.nr-gallery-visual .nr-shot{width:132px}.nr-gallery-meta{padding:14px 12px}.nr-gallery-meta h3{font-size:.84rem}.nr-curated-grid{grid-template-columns:minmax(0,1fr)}.nr-curated-item{display:grid;grid-template-columns:130px 1fr}.nr-curated-picture{padding:15px}.nr-curated-item .nr-shot{width:95px}.nr-pricing-grid{gap:30px}.nr-launch{padding:83px 0}}
 @media(max-width:430px){.nr-hero-stage{transform:scale(.61);margin:-71px 0 -64px}.nr-tools .nr-tool-grid{grid-template-columns:minmax(0,1fr)}.nr-tool-grid article{min-height:0}.nr-tool-grid h3{margin-top:18px}.nr-pricing-panel{grid-template-columns:minmax(0,1fr)}.nr-gallery-visual .nr-shot{width:112px}.nr-gallery-meta{display:block}.nr-gallery-meta h3{margin-top:5px}.nr-btn{width:100%}.nr-stage-tag{left:-28px}.nr-curated{padding:36px 16px}.nr-curated-item{grid-template-columns:112px 1fr}.nr-curated-copy{padding:15px}}
 @media(prefers-reduced-motion:reduce){.nr-btn{transition:none}.nr-btn:hover{transform:none}}
+
+
+/* 2026-11 glyph and screenshot alignment pass.
+   The display-font WOFF2 is a purpose-made subset for older copy. Newly
+   written Japanese/Chinese/Korean headlines may contain characters absent
+   from that subset, causing visibly mixed font weights within one word.
+   Use full-coverage platform CJK families for the new editorial headings. */
+.nr-main { font-family: var(--font-sans); }
+html:lang(ja) .nr-main :is(h1,h2,h3),
+html:lang(ja) .nr-curated :is(h1,h2,h3) {
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Meiryo", sans-serif;
+  font-weight: 800;
+  font-synthesis: none;
+  letter-spacing: -.045em;
+}
+html:lang(ko) .nr-main :is(h1,h2,h3),
+html:lang(ko) .nr-curated :is(h1,h2,h3) {
+  font-family: "Noto Sans CJK KR", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-weight: 800;
+}
+html:lang(zh-Hans) .nr-main :is(h1,h2,h3),
+html:lang(zh-Hans) .nr-curated :is(h1,h2,h3) {
+  font-family: "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei",
+    "PingFang SC", sans-serif;
+  font-weight: 800;
+}
+html:lang(zh-Hant) .nr-main :is(h1,h2,h3),
+html:lang(zh-Hant) .nr-curated :is(h1,h2,h3) {
+  font-family: "Noto Sans CJK TC", "Noto Sans TC", "PingFang TC",
+    "Microsoft JhengHei", sans-serif;
+  font-weight: 800;
+}
+/* A screenshot is exactly 320 x 569. Padding or border on that ratio box
+   shrinks the image content and creates white gutters or mismatched corners.
+   Put the theme ring OUTSIDE the image rather than consuming image pixels. */
+.nr-main .nr-shot,
+.nr-curated .nr-shot {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  aspect-ratio: 320 / 569;
+  height: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: 0 0 0 4px var(--capture-accent, #e3587a),
+    0 22px 45px rgba(39, 29, 42, .18);
+}
+.nr-main .nr-shot picture,
+.nr-main .nr-shot img,
+.nr-curated .nr-shot picture,
+.nr-curated .nr-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  aspect-ratio: 320 / 569;
+  object-fit: cover;
+}
+.nr-main .nr-shot img,
+.nr-curated .nr-shot img {
+  vertical-align: top;
+}
+.nr-stage-caption {
+  display: none;
+}
+/* The older feature diagrams have the same inset-border problem. */
+html body .feature-diagram.feature-diagram--real[data-capture-theme] {
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+  aspect-ratio: 320 / 569;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 0 0 4px var(--capture-frame),
+    0 16px 34px rgba(29, 27, 35, .13);
+}
+html body .feature-diagram.feature-diagram--real[data-capture-theme] > .real-app-capture,
+html body .feature-diagram.feature-diagram--real[data-capture-theme] > .real-app-capture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 320 / 569;
+  object-fit: cover;
+}
+html body .feature-diagram.feature-diagram--real[data-capture-theme] > .real-app-capture > img {
+  max-width: none;
+}
+/* The free-plan card should hug its content; it must not appear as a largely
+   empty slab merely because the Premium card alongside it is much taller. */
+.pricing-grid { align-items: start; }
+.pricing-grid .pricing-card:not(.is-premium) {
+  align-self: start;
+  min-height: 0;
+}
+.nr-curated .nr-curated-picture { align-items: center; }
+.nr-main .nr-story-media { isolation: isolate; }
+@media (max-width: 740px) {
+  .nr-main .nr-hero h1 { line-height: 1.3; }
+  .nr-main .nr-story-copy h3 { line-height: 1.45; }
+  .nr-main .nr-story-copy { min-width: 0; }
+}
