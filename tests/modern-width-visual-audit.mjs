@@ -101,7 +101,7 @@ try{
  await page.route("**/api/community?**",r=>{
    const v=new URL(r.request().url()).searchParams.get("view");
    return r.fulfill({status:200,contentType:"application/json",body:JSON.stringify({
-     works:[],unavailableReason:["daily","weekly","monthly","yearly"].includes(v)?"BOOKMARK_PERIOD_NOT_IMPLEMENTED":null
+     works:[],unavailableReason:null
    })});
  });
  await loadPage(page,"/community/");

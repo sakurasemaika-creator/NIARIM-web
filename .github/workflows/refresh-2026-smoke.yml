@@ -5,6 +5,9 @@ on:
     paths:
       - ".github/workflows/refresh-2026-smoke.yml"
       - "tests/refresh-2026-smoke.mjs"
+      - "tests/community-ranking-visibility-browser.mjs"
+      - "tests/community-feed.test.mjs"
+      - "public/css/pages/community.css"
       - "public/index.html"
       - "public/404.html"
       - "public/features/index.html"
@@ -45,6 +48,8 @@ jobs:
           exit 1
       - name: Run language, responsive, image and palette smoke checks
         run: node tests/refresh-2026-smoke.mjs
+      - name: Test in-place redaction of newly private ranked works
+        run: node tests/community-ranking-visibility-browser.mjs
       - name: Capture all website pages top-to-bottom, Japanese PC and mobile
         env:
           AUDIT_LANGS: ja
