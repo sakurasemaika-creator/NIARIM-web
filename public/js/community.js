@@ -59,32 +59,6 @@
         reply.visibility===null) throw Error("Invalid visibility reply");
     return reply.visibility;
   }
-  function redact(id){
-    if (state.kind!=="ready") return;
-    let changed=false;
-    state.works=state.works.map(work=>{
-      if (work.workId!==id || work.isUnavailable) return work;
-      changed=true;
-      return {workId:id,isUnavailable:true};
-    });
-    if(changed)render();
-  }
-  async function revalidateSnapshot(){
-    if (state.kind!=="ready" || current==="latest") return;
-    const savedRequest=requestCounter;
-    const ids=state.works.filter(w=>!w.isUnavailable).map(w=>w.workId);
-    if (!ids.length) return;
-    try{
-      const visible=await getVisibility(ids);
-      if (savedRequest!==requestCounter) return;
-      for (const id of ids) {
-        if (visible[id]!==true) redact(id);
-      }
-    }catch(_){
-      // A network failure does not assert that a published work became private.
-      // Every click still fails closed until privacy can be confirmed.
-    }
-  }
   function card(work, index, ranked){
     const hidden=work.isUnavailable===true;
     const a=document.createElement(hidden?"div":"a");
@@ -103,7 +77,7 @@
         try{
           const visible=await getVisibility([work.workId]);
           if(requestAtClick!==requestCounter)return;
-          if(visible[work.workId]!==true){redact(work.workId);return;}
+          if(visible[work.workId]!==true){select(current);return;}
           window.location.assign(work.youtubeUrl);
         }catch(_){
           // Fail closed: never open a stale item when status is unknown.
@@ -179,12 +153,12 @@
       if(body.unavailableReason==="BOOKMARK_PERIOD_NOT_IMPLEMENTED"){
         state={kind:"unavailable",works:[]};
       } else if(Array.isArray(body.works)){
-        state={kind:"ready",works:body.works};
+        state={kind:"ready",works:body.works.filter(work=>
+          work && work.isUnavailable!==true && work.isNiarimPublished!==false)};
       } else {
         state={kind:"error",works:[]};
       }
       render();
-      revalidateSnapshot();
     }).catch(()=>{
       if(thisRequest!==requestCounter)return;
       state={kind:"error",works:[]};render();
@@ -192,7 +166,7 @@
   }
   buttons.forEach(button=>button.addEventListener("click",()=>select(button.dataset.communityTab)));
   document.addEventListener("visibilitychange",()=>{
-    if(!document.hidden)revalidateSnapshot();
+    if(!document.hidden)select(current);
   });
   document.addEventListener("niarim:langchange",render);
   select(current);
