@@ -28,7 +28,7 @@ try {
     const dims = await page.evaluate(() => ({doc:document.documentElement.scrollWidth,win:innerWidth}));
     if(dims.doc>dims.win+2) log("Horizontal overflow",width,JSON.stringify(dims));
     const hero = await page.locator("#nr-hero-title").innerHTML();
-    if(!hero.includes("<em>")) log("Hero emphasis missing",width);
+    if(!hero.includes("NIARIM")) log("Brand wordmark missing",width);
     const paired = await page.locator(".nr-gallery-item .nr-duo[data-paired-capture]").count();
     if(paired!==9) log("PC/SP paired gallery count",width,paired);
     const stagePC = await page.locator(".nr-hero-showcase [data-capture-pc='canvas']").count();
