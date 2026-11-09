@@ -6,6 +6,7 @@ on:
       - ".github/workflows/refresh-2026-smoke.yml"
       - "tests/refresh-2026-smoke.mjs"
       - "public/index.html"
+      - "public/404.html"
       - "public/features/index.html"
       - "public/community/index.html"
       - "public/premium/index.html"
