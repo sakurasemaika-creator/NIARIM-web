@@ -29,6 +29,7 @@ test("overall ranking uses the same bookmarks endpoint as Flutter",async()=>{
  });
  assert.match(endpoint,/\/ranking\/bookmarks\?limit=9$/);
  assert.equal((await res.json()).works.length,1);
+ assert.equal(res.headers.get("cache-control"),"no-store");
 });
 test("daily, weekly, monthly and yearly use the app's real period ranking",async()=>{
  for(const view of ["daily","weekly","monthly","yearly"]){
