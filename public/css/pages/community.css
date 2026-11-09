@@ -269,3 +269,24 @@
 .community-gallery[data-community-gallery] .community-card .meta .community-count{display:inline-block;margin-top:7px;font-size:.79rem;color:#a34f66}
 .community-gallery[data-community-gallery] .community-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #2c252c17}
 .community-tabs button:focus-visible{outline:3px solid #e65f88;outline-offset:3px}
+
+/* Non-interactive tombstone preserves original rank in an already fetched
+   list. No thumbnail, private title, author or detail link is emitted. */
+.community-gallery[data-community-gallery] .community-card--unavailable {
+  cursor:default;
+  background:#f7f4f6;
+  border-color:#d8d1d7;
+  box-shadow:none;
+}
+.community-gallery[data-community-gallery] .community-card--unavailable:hover {
+  transform:none;box-shadow:none;
+}
+.community-gallery[data-community-gallery] .community-card--unavailable .thumb {
+  background:#e6e2e6;
+}
+.community-gallery[data-community-gallery] .community-card--unavailable .community-thumb-fallback {
+  font-size:2rem;color:#827a83;
+}
+.community-gallery[data-community-gallery] .community-card--unavailable .meta h3 {
+  font-weight:600;color:#6a626a;
+}

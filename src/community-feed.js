@@ -37,12 +37,12 @@ function publicWork(value) {
     youtubeUrl: "https://www.youtube.com/watch?v=" + id,
   };
 }
-function json(body, status=200) {
+function json(body, status=200, noStore=false) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": status === 200 ? "public, max-age=60" : "no-store",
+      "cache-control": noStore ? "no-store" : (status === 200 ? "public, max-age=60" : "no-store"),
       "x-content-type-options": "nosniff",
     },
   });
@@ -51,7 +51,18 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
   if (request.method !== "GET") return json({error:"method_not_allowed"},405);
   const url = new URL(request.url);
   const view = url.searchParams.get("view") || "latest";
-  const route = ALLOWED.get(view);
+  // Metadata-free, strongly-consistent status check of a displayed snapshot.
+  // Missing IDs and hidden IDs look identical; no title/media can escape.
+  const checking = url.searchParams.has("ids");
+  const ids = checking ? url.searchParams.get("ids")?.split(",") ?? [] : [];
+  if (checking && (ids.length < 1 || ids.length > 50 ||
+      new Set(ids).size !== ids.length ||
+      ids.some(id=>!/^[A-Za-z0-9_-]{11}$/.test(id)))) {
+    return json({error:"invalid_ids"},400,true);
+  }
+  const route = checking
+    ? "/ranking/visibility?ids="+encodeURIComponent(ids.join(","))
+    : ALLOWED.get(view);
   if (!route) return json({error:"invalid_view"},400);
   const base = env.NIARIM_PUBLIC_API_BASE_URL;
   if (typeof base !== "string" || !/^https:\/\/[a-z0-9.-]+\/?$/i.test(base)) {
@@ -73,6 +84,15 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
   if(!response.ok) return json({error:"upstream_unavailable"},502);
   try {
     const payload = await response.json();
+    if (checking) {
+      if (!payload || typeof payload.visibility !== "object" ||
+          payload.visibility === null || Array.isArray(payload.visibility)) {
+        return json({error:"bad_response"},502,true);
+      }
+      const visible=Object.create(null);
+      for(const id of ids) visible[id] = payload.visibility[id] === true;
+      return json({visibility:visible},200,true);
+    }
     if (!payload || !Array.isArray(payload.works)) return json({error:"bad_response"},502);
     return json({
       view,
