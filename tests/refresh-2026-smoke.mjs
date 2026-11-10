@@ -35,7 +35,7 @@ try {
       sp:[el.querySelector("[data-capture='canvas'] img")?.naturalWidth,el.querySelector("[data-capture='canvas'] img")?.naturalHeight],
       pc:[el.querySelector("[data-capture-pc='canvas'] img")?.naturalWidth,el.querySelector("[data-capture-pc='canvas'] img")?.naturalHeight]
     }));
-    if(imageDimensions.sp[0]!==320||imageDimensions.sp[1]!==569)log("SP screenshot native size",width,JSON.stringify(imageDimensions.sp));
+    if(imageDimensions.sp[0]!==640||imageDimensions.sp[1]!==1138)log("SP screenshot native size",width,JSON.stringify(imageDimensions.sp));
     if(imageDimensions.pc[0]!==1440||imageDimensions.pc[1]!==900)log("PC screenshot native size",width,JSON.stringify(imageDimensions.pc));
     const oldScripts=await page.locator('script[src*="home-hero-showcase"],script[src*="popup-mock"],script[src*="user-request-fixes"]').count();
     if(oldScripts){const sources=await page.locator('script[src*="home-hero-showcase"],script[src*="popup-mock"],script[src*="user-request-fixes"]').evaluateAll(ns=>ns.map(n=>n.getAttribute("src")));log("Obsolete mock runtime loaded on landing",width,JSON.stringify(sources));}
@@ -50,6 +50,12 @@ try {
       await page.screenshot({path:"artifacts/refresh-2026/home-"+width+".png",fullPage:true,animations:"disabled"});
     }
     if(width===390){
+      const fonts = await page.evaluate(() => ({
+        heading: getComputedStyle(document.querySelector("#nr-statement-title")).fontFamily,
+        body: getComputedStyle(document.querySelector(".nr-hero-lead")).fontFamily
+      }));
+      if(!fonts.heading.includes("Kuramubon"))log("Brand display font missing",JSON.stringify(fonts));
+      if(!fonts.body.includes("HakkouMincho"))log("Brand body font missing",JSON.stringify(fonts));
       const store = page.locator("[data-play-store-button]");
       if(await store.count()){
         if(!(await store.isDisabled()))log("Pre-release Play Store CTA must not imply download");
@@ -63,14 +69,14 @@ try {
           color:el.querySelector(".nr-shot").style.getPropertyValue("--capture-accent")
         }));
         const expectedTail=variant===1?"":"-v"+variant;
-        if(!state.src.endsWith("canvas"+expectedTail+".webp"))log("Variant switch",variant,JSON.stringify(state));
+        if(!new URL(state.src,base).pathname.endsWith("canvas"+expectedTail+".webp"))log("Variant switch",variant,JSON.stringify(state));
         const expectedColors=["#3AA6FF","#F2B90F","#B15CFF","#10B981"];
         if(state.color.toUpperCase()!==expectedColors[variant-1])log("Theme/frame mismatch",variant,state.color);
         const desktop=await page.locator(".nr-gallery-item").first().locator("[data-capture-pc]").evaluate(el=>({
           src:el.querySelector("img")?.getAttribute("src"),
           accent:el.style.getPropertyValue("--capture-accent")
         }));
-        if(!desktop.src.endsWith("pc-canvas"+expectedTail+".webp"))log("PC gallery variant mismatch",variant,desktop.src);
+        if(!new URL(desktop.src,base).pathname.endsWith("pc-canvas"+expectedTail+".webp"))log("PC gallery variant mismatch",variant,desktop.src);
         if(desktop.accent.toUpperCase()!==expectedColors[variant-1])log("PC/SP accent mismatch",variant,desktop.accent);
 
       }
