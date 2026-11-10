@@ -58,40 +58,9 @@ jobs:
         run: |
           flutter pub get
           flutter test test/app_web_reference_capture_test_v2.dart --reporter expanded
-      - name: Build forced PC/DeX mode reference from production Flutter widgets
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          source = Path('_app/test/app_web_reference_capture_test_v2.dart')
-          desktop = source.read_text()
-          old_view = 'tester.view.physicalSize = const Size(960, 1707);'
-          assert desktop.count(old_view) == 1
-          desktop = desktop.replace(old_view, 'tester.view.physicalSize = const Size(1440, 900);')
-          desktop = desktop.replace('tester.view.devicePixelRatio = 3.0;', 'tester.view.devicePixelRatio = 1.0;')
-          target = "webref_$name$suffix.png"
-          assert target in desktop
-          desktop = desktop.replace(target, "webref_pc_$name$suffix.png")
-          desktop = desktop.replace("niarim_web_reference_v2_", "niarim_web_reference_pc_")
-          import_line = "import 'package:niarim/services/theme_service.dart';"
-          assert import_line in desktop
-          desktop = desktop.replace(import_line, import_line + "\nimport 'package:niarim/services/settings_service.dart';")
-          begin = "  Future<void> capture(WidgetTester tester, String name) async {\n    final appContext = tester.element(find.byType(NiarimApp));"
-          assert desktop.count(begin) == 1
-          replacement = begin + "\n    // Force real PC/DeX view, not just a wide phone window.\n    await appContext.read<SettingsService>().setForcePcMode(true);\n    await tester.pump(const Duration(milliseconds: 500));"
-          desktop = desktop.replace(begin,replacement)
-          end = "    }\n  }\n\n  void expectClean(WidgetTester tester, String operation) {"
-          assert desktop.count(end) == 1
-          desktop = desktop.replace(end, "    }\n    await appContext.read<SettingsService>().setForcePcMode(null);\n    await tester.pump(const Duration(milliseconds: 400));\n  }\n\n  void expectClean(WidgetTester tester, String operation) {")
-          # PC dock panels do not always expose the temporary SP overlay close
-          # icon; continuing is correct when the overlay already disappeared.
-          desktop = desktop.replace("    expect(close, findsWidgets);", "    if (close.evaluate().isEmpty) return;", 1)
-          Path('_app/test/app_web_reference_pc_capture_test.dart').write_text(desktop)
-          PY
-      - name: Capture genuine desktop layout in premium mode without advertisements
-        working-directory: _app
-        env:
-          CI: "true"
-        run: flutter test test/app_web_reference_pc_capture_test.dart --reporter expanded
+      # The current source capture test outputs BOTH 2x-density SP and
+      # real-width 1440x900 PC frames in one run; the former duplicate PC
+      # test would overwrite the images and is intentionally omitted.
       - name: Convert nine screens times four themed variants
         run: |
           set -euo pipefail
@@ -119,7 +88,7 @@ jobs:
               test -s "$png" || { echo "::error::Missing capture $png"; exit 1; }
               cwebp -quiet -q 83 -m 6 "$png" -o "$dst/$name$dest.webp"
               avifenc --min 20 --max 30 --speed 6 "$png" "$dst/$name$dest.avif" > /dev/null
-              test "$(identify -format '%wx%h' "$dst/$name$dest.webp")" = "320x569" || {
+              test "$(identify -format '%wx%h' "$dst/$name$dest.webp")" = "640x1138" || {
                 echo "::error::Capture dimension mismatch for $name$dest"; exit 1;
               }
               total=$((total+1))
@@ -143,17 +112,32 @@ jobs:
             done
           done
           test "$desktop_total" = 36
-          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\nplatforms=sp,pc\nsp_resolution=320x569\npc_resolution=1440x900\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
+          printf 'source_repo=sakurasemaika-creator/NIARIM\nsource_branch=dev_branch\nsource_commit=%s\ncaptured_at=%s\npremium=true\nads=false\nvariants_per_screen=4\nscreens=9\nplatforms=sp,pc\nsp_resolution=640x1138\npc_resolution=1440x900\n' "$APP_CAPTURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$dst/source.txt"
           revision="$(printf '%s' "$APP_CAPTURE_SHA" | cut -c1-8)"
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/user-request-fixes.js
           sed -E -i "s/var revision = \"[0-9a-f]+\";/var revision = \"$revision\";/" public/js/home-hero-showcase.js
+          sed -E -i "s/const revision=\"[0-9a-f]+\";/const revision=\"$revision\";/" public/js/refresh-2026.js
           echo "Generated $total phone and $desktop_total desktop premium ad-free app captures from $APP_CAPTURE_SHA"
+      - name: Confirm all 72 native captures and variant resources exist
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const names=['canvas','layers','onion-skin','timeline','audio-editor',
+                       'save-tree','export','workspace','widget'];
+          for (const name of names) for (const suffix of ['','-v2','-v3','-v4']) {
+            for (const prefix of ['', 'pc-']) for(const ext of ['webp','avif']){
+              const path='public/assets/images/app-captures/'+prefix+name+suffix+'.'+ext;
+              if(!fs.statSync(path).size)throw Error('Missing or empty '+path);
+            }
+          }
+          console.log('Verified 144 files: 9 routes × 4 palettes × SP/PC × WebP/AVIF');
+          NODE
       - name: Publish captures only to dev_branch
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/assets/images/app-captures public/js/user-request-fixes.js public/js/home-hero-showcase.js
+          git add public/assets/images/app-captures public/js/user-request-fixes.js public/js/home-hero-showcase.js public/js/refresh-2026.js
           if git diff --cached --quiet; then echo 'Screens are already current'; exit 0; fi
           git commit -m "assets: refresh 36 real premium captures from NIARIM dev_branch"
           git fetch origin dev_branch

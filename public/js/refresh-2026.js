@@ -13,19 +13,32 @@ var colors=[
 ["#00796B","#AD5A00","#6D5BD0","#B04A72"]
 ];
 var names=["canvas","layers","onion-skin","timeline","audio-editor","save-tree","export","workspace","widget"];
+/* The screenshot palette is a single source of truth for both renderings and
+   their frames, including real-app captures inserted after DOMContentLoaded. */
 function apply(variant){
- var n=Math.max(1,Math.min(4,Number(variant)||1)),tail=n===1?"":"-v"+n;
- document.querySelectorAll("[data-capture], [data-capture-pc]").forEach(function(figure){
-   var isPc=figure.hasAttribute("data-capture-pc");
-   var name=figure.getAttribute(isPc?"data-capture-pc":"data-capture"),i=names.indexOf(name);if(i<0)return;
-   figure.style.setProperty("--capture-accent",colors[i][n-1]);
-   var base="/assets/images/app-captures/"+(isPc?"pc-":"")+name+tail;
-   var source=figure.querySelector("source"),img=figure.querySelector("img");
-   if(source)source.srcset=base+".avif";
-   if(img)img.src=base+".webp";
+ const n=Math.max(1,Math.min(4,Number(variant)||1));
+ const suffix=n===1?"":"-v"+n;
+ const revision="aba41189";
+ document.querySelectorAll("[data-capture], [data-capture-pc], .feature-diagram--real[data-capture-theme]").forEach(function(figure){
+   const isPc=figure.hasAttribute("data-capture-pc") || figure.classList.contains("feature-diagram--pc");
+   const raw=figure.getAttribute("data-capture-pc") ||
+     figure.getAttribute("data-capture") || figure.getAttribute("data-capture-theme") || "";
+   const name=raw.replace(/-v[234]$/,"");
+   const i=names.indexOf(name);
+   if(i<0)return;
+   const color=colors[i][n-1];
+   // Some legacy frames use --capture-frame, modern shots --capture-accent.
+   // Setting both prevents a border/screen palette mismatch on any page.
+   figure.style.setProperty("--capture-accent",color);
+   figure.style.setProperty("--capture-frame",color);
+   const base="/assets/images/app-captures/"+(isPc?"pc-":"")+name+suffix;
+   const source=figure.querySelector('source[type="image/avif"]');
+   const img=figure.querySelector("img");
+   if(source)source.srcset=base+".avif?v="+revision;
+   if(img)img.src=base+".webp?v="+revision;
  });
  document.querySelectorAll(".nr-palette-button").forEach(function(btn){
-   var selected=Number(btn.dataset.variant)===n;
+   const selected=Number(btn.dataset.variant)===n;
    btn.classList.toggle("is-selected",selected);
    btn.setAttribute("aria-pressed",String(selected));
  });
