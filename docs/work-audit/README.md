@@ -18,6 +18,10 @@
 
 State / inventory / verifier群も、全面監査開始時に現在HEADから確認します。
 
+## Backend/APIの現行ルート棚卸しと監査チェックリスト
+
+- `docs/work-audit/BACKEND_API_AUDIT_CHECKLIST.md` — NIARIM Appの登録時49 HTTPルートとApp/Web横断の認証・公開範囲・YouTube/FCM/AdMob/Play/AWS等の未実施監査項目。正式Delta `D001.61` / `D021` に紐づく。Webから利用するAPI/proxyも照合し、最新App/Web HEADで再inventoryする。**監査完了の証拠ではない。**
+
 ## 補助資料
 `docs/AI設計書/**`、機能別verification、security audit、operation capture等は仕様・過去証拠として必要な箇所だけ参照します。日付付き資料や古いHEADは現在の監査完了の根拠にしません。現在のdev_branchと矛盾する場合は現在の実装を一次事実とし、必要ならDiscovery/Deltaへ登録します。
 
