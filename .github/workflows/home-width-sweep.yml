@@ -12,6 +12,7 @@ on:
       - "public/features/index.html"
       - "public/community/index.html"
       - "public/css/niarim-game-site.css"
+      - "public/css/font-and-capture-2026.css"
       - "public/js/lang-flag.js"
       - "public/js/config.js"
       - "public/js/user-request-fixes.js"
