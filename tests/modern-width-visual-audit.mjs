@@ -29,7 +29,7 @@ async function measure(page,route,width,lang){
    const resources=performance.getEntriesByType("resource");
    const screenshotImages=[...document.querySelectorAll('img[src*="/assets/images/app-captures/"]')];
    const bodyFont=getComputedStyle(document.body).fontFamily;
-   const headingFont=document.querySelector("main h1,main h2")?getComputedStyle(document.querySelector("main h1,main h2")).fontFamily:"";
+   const headingFont=document.querySelector("main h1:not(.nr-hero-wordmark),main h2")?getComputedStyle(document.querySelector("main h1:not(.nr-hero-wordmark),main h2")).fontFamily:"";
    const unpaired=screenshotImages.filter(img=>{
      if(img.getAttribute("src")?.includes("/pc-"))return false;
      if(img.closest(".nr-hero-showcase"))return !img.closest(".nr-hero-sp-view");

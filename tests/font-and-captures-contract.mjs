@@ -4,7 +4,7 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
-const pages = ["public/index.html", ...[
+const pages = ["public/index.html", "public/404.html", ...[
   "about", "community", "contact", "faq", "features", "help",
   "news", "premium", "privacy", "terms"
 ].map((name) => `public/${name}/index.html`)];
