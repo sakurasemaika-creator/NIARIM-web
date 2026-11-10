@@ -1,0 +1,26 @@
+name: Font and capture consistency
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - public/**/*.html
+      - public/css/font-and-capture-2026.css
+      - public/js/refresh-2026.js
+      - public/assets/images/app-captures/**
+      - public/assets/fonts/LICENSE.md
+      - tests/font-and-captures-contract.mjs
+      - .github/workflows/font-and-capture-contract.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node tests/font-and-captures-contract.mjs
