@@ -108,7 +108,7 @@
     picture.className = "real-app-capture";
     var avif = document.createElement("source");
     avif.type = "image/avif";
-    var revision = "c335bc38";
+    var revision = "b506876f";
     avif.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;

@@ -18,7 +18,7 @@ var names=["canvas","layers","onion-skin","timeline","audio-editor","save-tree",
 function apply(variant){
  const n=Math.max(1,Math.min(4,Number(variant)||1));
  const suffix=n===1?"":"-v"+n;
- const revision="c335bc38";
+ const revision="b506876f";
  document.querySelectorAll("[data-capture], [data-capture-pc], .feature-diagram--real[data-capture-theme]").forEach(function(figure){
    const isPc=figure.hasAttribute("data-capture-pc") || figure.classList.contains("feature-diagram--pc");
    const raw=figure.getAttribute("data-capture-pc") ||
