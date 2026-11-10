@@ -2,7 +2,9 @@
    Final stylesheet intentionally overrides old Noto Sans fallback rules.
    Display / navigation / labels: Kuramubon, body / help / notices: HakkouMincho.
    Both are self-hosted; CJK fallback families remain in variables.css. */
-html body {
+html body,
+html[lang] body,
+html[lang] body.nr-site {
   font-family: var(--font-sans) !important;
 }
 html body :is(p, li, dd, blockquote, figcaption, small, time, textarea,
