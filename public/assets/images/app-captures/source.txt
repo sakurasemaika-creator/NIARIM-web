@@ -1,11 +1,11 @@
 source_repo=sakurasemaika-creator/NIARIM
 source_branch=dev_branch
-source_commit=955b4389253185531d6d4d4bd2d5441a35e65fa3
-captured_at=2026-11-09T10:54:29Z
+source_commit=c335bc382e24601b10febf4e8f088f09a0242afb
+captured_at=2026-11-10T09:36:13Z
 premium=true
 ads=false
 variants_per_screen=4
 screens=9
 platforms=sp,pc
-sp_resolution=320x569
+sp_resolution=640x1138
 pc_resolution=1440x900
