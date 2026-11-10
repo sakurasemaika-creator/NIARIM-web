@@ -173,3 +173,9 @@ DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 ```
+
+## 補完フォントの著作権表示
+
+- Noto Serif KR / Noto Serif SC：Copyright 2012 Google Inc. All Rights Reserved; (c) 2017-2024 Adobe (http://www.adobe.com/).
+- Noto Sans KR / Noto Sans SC：(c) 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+- Modified/subset font families are renamed in CSS; the reserved name 'Source' is not used.
