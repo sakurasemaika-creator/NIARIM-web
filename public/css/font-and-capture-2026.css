@@ -1,0 +1,193 @@
+/* NIARIM web typography + screenshot readability (2026-11)
+   Final stylesheet intentionally overrides old Noto Sans fallback rules.
+   Display / navigation / labels: Kuramubon, body / help / notices: HakkouMincho.
+   Both are self-hosted; CJK fallback families remain in variables.css. */
+html body {
+  font-family: var(--font-sans) !important;
+}
+html body :is(p, li, dd, blockquote, figcaption, small, time, textarea,
+  input, .caption, .description, .notice, .legal-content,
+  .nr-hero-lead, .nr-story-copy p, .nr-curated-copy p,
+  .nr-gallery-description, .nr-gallery-note, .feature-narrative p,
+  .spec-grid p, .faq-answer, .nr-launch-status) {
+  font-family: var(--font-sans) !important;
+}
+html body :is(h1, h2, h3, h4, h5, h6, dt,
+  button, .btn, .nr-btn, .nr-text-link, .nr-kicker, .eyebrow,
+  .nr-step, .section-label, .section-kicker, .nr-tool-number,
+  .nav-link, .main-nav a, .site-nav a, .feature-nav a,
+  .community-tabs button, [role="tab"], .tab, .tabs a,
+  .faq-question, .nr-gallery-meta h3, .nr-store-label) {
+  font-family: var(--font-serif) !important;
+}
+/* Preserve existing original logotype rather than changing its bespoke lettering. */
+html body :is(.nr-hero-wordmark, .site-logo, .site-logo *, .logo, .logo *) {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+/* Capture geometry is responsive, but never distort either source device. */
+html body .nr-shot:not(.nr-shot--pc),
+html body .feature-diagram--real:not(.feature-diagram--pc) {
+  aspect-ratio: 320 / 569;
+  max-width: 100%;
+}
+html body .nr-shot--pc,
+html body .feature-diagram--pc,
+html body .real-app-capture--pc {
+  aspect-ratio: 1440 / 900 !important;
+  max-width: 100%;
+}
+html body :is(.nr-shot, .feature-diagram--real) :is(picture, img) {
+  display: block;
+  max-width: 100%;
+}
+html body .nr-shot img,
+html body .feature-diagram--real img {
+  object-fit: contain;
+}
+html body .nr-gallery-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2.2vw, 30px);
+}
+html body .nr-gallery-visual {
+  padding: clamp(10px, 1.5vw, 22px);
+  min-height: clamp(310px, 33vw, 450px);
+}
+html body .nr-gallery-visual .nr-duo {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  align-items: center;
+  gap: clamp(9px, 1.4vw, 20px);
+}
+html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(33%, 195px) !important;
+  flex: 0 1 auto !important;
+}
+html body .nr-gallery-visual .nr-duo > .nr-shot--pc {
+  width: min(64%, 385px) !important;
+  flex: 1 1 auto !important;
+}
+html body .nr-curated .nr-curated-item .nr-shot {
+  width: clamp(145px, 20vw, 255px) !important;
+  max-width: 100% !important;
+}
+html body .nr-curated .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: clamp(130px, 14vw, 180px) !important;
+}
+html body .nr-curated .nr-duo > .nr-shot--pc {
+  width: min(100%, 360px) !important;
+}
+html body .nr-story-media .nr-duo {
+  width: 100%;
+  flex-wrap: nowrap;
+}
+html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(32%, 220px) !important;
+  flex: 0 1 auto;
+}
+html body .nr-story-media .nr-duo > .nr-shot--pc {
+  width: min(65%, 470px) !important;
+  flex: 1 1 auto;
+}
+html body .nr-feature-visual .nr-duo > .nr-shot:not(.nr-shot--pc),
+html body .nr-workspace-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(43%, 220px) !important;
+}
+html body .nr-feature-visual .nr-duo > .nr-shot--pc,
+html body .nr-workspace-media .nr-duo > .nr-shot--pc {
+  width: min(100%, 480px) !important;
+}
+html body .nr-hero-pc-view {
+  width: min(100%, 650px) !important;
+  max-width: 650px !important;
+}
+html body .nr-hero-sp-view {
+  width: clamp(155px, 17vw, 245px) !important;
+}
+html body .nr-feature-duo {
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 1100px) {
+  html body .feature-section > .feature-pair:has(.nr-feature-duo) {
+    grid-template-columns: minmax(0, 1fr) minmax(510px, 57%) !important;
+  }
+  html body .feature-section > .feature-pair > .feature-diagram-stack {
+    width: 100% !important;
+    max-width: 680px !important;
+  }
+  html body .feature-section .feature-diagram-stack .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+    width: min(35%, 235px) !important;
+  }
+  html body .feature-section .feature-diagram-stack .nr-feature-duo > .feature-diagram--pc {
+    width: min(64%, 420px) !important;
+  }
+}
+@media (min-width: 760px) and (max-width: 1099px) {
+  html body .feature-section > .feature-pair:has(.nr-feature-duo) {
+    display: block !important;
+  }
+  html body .feature-section > .feature-pair > .feature-diagram-stack {
+    width: min(100%, 760px) !important;
+    margin: 22px auto 0;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+    width: min(31%, 235px) !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+    width: min(65%, 460px) !important;
+  }
+}
+@media (max-width: 759px) {
+  html body .nr-gallery-grid { grid-template-columns: 1fr !important; }
+  html body .nr-gallery-visual { min-height: 230px; }
+  html body .nr-curated .nr-curated-item { display: block !important; }
+  html body .nr-curated .nr-curated-picture { padding: 12px; }
+  html body .nr-curated .nr-duo { flex-direction: row !important; flex-wrap: nowrap !important; }
+  html body .nr-curated .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 32% !important; }
+  html body .nr-curated .nr-duo > .nr-shot--pc { width: 64% !important; }
+  html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 33% !important; }
+  html body .nr-story-media .nr-duo > .nr-shot--pc { width: 63% !important; }
+  html body .nr-feature-visual .nr-duo > .nr-shot--pc,
+  html body .nr-workspace-media .nr-duo > .nr-shot--pc { width: min(100%, 300px) !important; }
+  html body .nr-hero-sp-view { width: clamp(100px, 28vw, 175px) !important; }
+  html body .feature-section > .feature-pair > .feature-diagram-stack {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+    width: min(34%, 190px) !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+    width: min(64%, 400px) !important;
+  }
+}
+@media (max-width: 359px) {
+  html body .nr-gallery-visual .nr-duo,
+  html body .nr-curated .nr-duo { gap: 7px !important; }
+  html body .nr-gallery-visual { padding-inline: 8px; }
+  html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 31% !important; }
+  html body .nr-gallery-visual .nr-duo > .nr-shot--pc { width: 65% !important; }
+}
+.font-license-access {
+  width: min(100% - 32px, 1216px);
+  margin: 0 auto;
+  padding: 10px 0 18px;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: .8rem;
+}
+.font-license-access a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.font-license-document { width: min(100% - 32px, 960px); margin: 3rem auto; }
+.font-license-document pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: clamp(12px, 3vw, 30px);
+  border-radius: 12px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
+  font: .81rem/1.7 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
