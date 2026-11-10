@@ -24,6 +24,30 @@ html body :is(h1, h2, h3, h4, h5, h6, dt,
 html body :is(.nr-hero-wordmark, .site-logo, .site-logo *, .logo, .logo *) {
   font-family: Arial, Helvetica, sans-serif !important;
 }
+/* Override the older html:lang(ja) and language-specific Noto Sans
+   !important selectors: an unqualified html body rule is not specific enough. */
+html[lang] body :is(h1, h2, h3, h4, h5, h6, dt, button, .btn,
+  .nr-btn, .nr-kicker, .nr-step, .nr-text-link, .eyebrow, .section-label,
+  .section-kicker, .nav-link, .main-nav a, .site-nav a, .feature-nav a,
+  .community-tabs button, [role="tab"], .tab, .tabs a, .faq-question),
+html[lang] body.nr-site .nr-main :is(h1, h2, h3, h4, h5, h6, button,
+  .nr-kicker, .nr-step, .nr-text-link, .nr-tool-number, .nr-store-label,
+  [role="tab"], .tab) {
+  font-family: var(--font-serif) !important;
+}
+html[lang] body :is(p, li, dd, blockquote, figcaption, small, time, textarea,
+  input, .caption, .description, .notice, .legal-content,
+  .nr-hero-lead, .nr-gallery-description, .nr-gallery-note,
+  .feature-narrative p, .spec-grid p, .faq-answer, .nr-launch-status),
+html[lang] body.nr-site .nr-main :is(p, li, dd, small, .nr-hero-lead,
+  .nr-story-copy p, .nr-curated-copy p, .nr-gallery-description,
+  .nr-gallery-note, .nr-launch-status) {
+  font-family: var(--font-sans) !important;
+}
+html[lang] body.nr-site .nr-main .nr-hero-wordmark,
+html[lang] body :is(.site-logo, .site-logo *, .logo, .logo *) {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
 /* Capture geometry is responsive, but never distort either source device. */
 html body .nr-shot:not(.nr-shot--pc),
 html body .feature-diagram--real:not(.feature-diagram--pc) {
