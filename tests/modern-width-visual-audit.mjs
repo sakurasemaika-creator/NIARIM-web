@@ -50,9 +50,11 @@ async function measure(page,route,width,lang){
  if(v.doc>width+2)issue(lang,route,width,"horizontal_overflow",v.doc);
  const actualLang=await page.evaluate(()=>document.documentElement.lang);
  if(actualLang!==lang)issue(lang,route,width,"wrong_document_language",actualLang);
- if(lang==="ja"&&(v.bodyFont.includes("HakkouMincho")||
-       (v.headingFont&&v.headingFont.includes("Kuramubon"))))
-   issue(lang,route,width,"incomplete_CJK_subset_font",v.bodyFont,v.headingFont);
+ // The website follows NIARIM's original brand font roles, not platform Noto Sans.
+ if(lang==="ja"&&!v.bodyFont.includes("HakkouMincho"))
+   issue(lang,route,width,"body_font_not_HakkouMincho",v.bodyFont);
+ if(lang==="ja"&&v.headingFont&&!v.headingFont.includes("Kuramubon"))
+   issue(lang,route,width,"heading_font_not_Kuramubon",v.headingFont);
  if(v.visibleBroken.length)issue(lang,route,width,"broken_visible_images",JSON.stringify(v.visibleBroken));
  if(v.unpaired.length)issue(lang,route,width,"unpaired_SP_captures",JSON.stringify(v.unpaired));
  if(!v.visible||!v.headings.length)issue(lang,route,width,"missing_content");
