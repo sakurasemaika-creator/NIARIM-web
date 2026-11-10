@@ -46,6 +46,17 @@ try {
     const count = await page.locator(".nr-gallery-item").count();
     if(count!==9) log("Gallery count",width,count);
     if(width===390 || width===1440){
+      // Full-page snapshots do not naturally scroll through lazy screenshots.
+      // Decode all real SP/PC captures first so visual evidence is complete,
+      // not a grid of border-only rectangles below the initial viewport.
+      const missing = await page.locator('img[src*="/assets/images/app-captures/"]').evaluateAll(async (images) => {
+        await Promise.all(images.map(async (img) => {
+          img.loading = "eager";
+          try { await img.decode(); } catch (_) { /* checked below */ }
+        }));
+        return images.filter(img => !img.naturalWidth).map(img => img.currentSrc || img.src);
+      });
+      if(missing.length) log("Unloaded screenshots",width,JSON.stringify(missing));
       await fs.mkdir("artifacts/refresh-2026",{recursive:true});
       await page.screenshot({path:"artifacts/refresh-2026/home-"+width+".png",fullPage:true,animations:"disabled"});
     }
