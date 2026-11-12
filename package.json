@@ -20,7 +20,8 @@
     "audit:all": "npm run audit && npm run audit:browser && npm run audit:multilang && npm run audit:intermediate-widths && npm run audit:i18n && npm run audit:visual-final && npm run audit:visual-screenshots && npm run audit:mock-detail && npm run audit:style-source && npm run audit:font-capture",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown",
-    "audit:font-capture": "node tests/font-and-captures-contract.mjs"
+    "audit:font-capture": "node tests/font-and-captures-contract.mjs",
+    "audit:brand-direction": "node tests/brand-direction-contract.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
