@@ -1,0 +1,8 @@
+source_repo=sakurasemaika-creator/NIARIM
+source_branch=dev_branch
+source_commit=4a4daa265c936de73ed6d55ac076b58ada733764
+source_workflow_run=43144886276
+source_artifact=all-route-screenshot-audit
+source_screen=10_community.png
+source_resolution=360x760
+captured_at=2026-11-12T02:59:14Z
