@@ -31,6 +31,9 @@ async function measure(page,route,width,lang){
    const bodyFont=getComputedStyle(document.body).fontFamily;
    const headingFont=document.querySelector("main h1:not(.nr-hero-wordmark),main h2")?getComputedStyle(document.querySelector("main h1:not(.nr-hero-wordmark),main h2")).fontFamily:"";
    const unpaired=screenshotImages.filter(img=>{
+     // The standalone community/plaza app screen is SP-only by design;
+     // only feature-gallery screenshots require matching PC captures.
+     if(img.matches(".nr-plaza-capture-image") && img.closest(".nr-plaza-capture"))return false;
      if(img.getAttribute("src")?.includes("/pc-"))return false;
      if(img.closest(".nr-hero-showcase"))return !img.closest(".nr-hero-sp-view");
      return !img.closest(".nr-duo,.nr-feature-duo");
