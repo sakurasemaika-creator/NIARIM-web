@@ -176,7 +176,26 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       var translated = t(lang, key);
-      if (translated !== key) el.textContent = translated;
+      if (translated !== key) {
+        // Dictionary markup for line breaks/emphasis is rendered as safe DOM,
+        // never as literal <br> text or arbitrary innerHTML.
+        if (/<br\s*\/?>|<\/?(?:em|strong)>/i.test(translated)) {
+          var fragment = document.createDocumentFragment();
+          var stack = [fragment];
+          translated.split(/(<br\s*\/?>|<\/?em>|<\/?strong>)/gi).forEach(function (part) {
+            if (/^<br\s*\/?>$/i.test(part)) stack[stack.length - 1].appendChild(document.createElement("br"));
+            else if (/^<(em|strong)>$/i.test(part)) {
+              var tag = part.slice(1, -1).toLowerCase();
+              var item = document.createElement(tag);
+              stack[stack.length - 1].appendChild(item);
+              stack.push(item);
+            } else if (/^<\/(em|strong)>$/i.test(part)) {
+              if (stack.length > 1) stack.pop();
+            } else if (part) stack[stack.length - 1].appendChild(document.createTextNode(part));
+          });
+          el.replaceChildren(fragment);
+        } else el.textContent = translated;
+      }
     });
 
     document.querySelectorAll("[data-i18n-html]").forEach(function (el) {

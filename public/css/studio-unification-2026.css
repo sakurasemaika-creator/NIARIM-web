@@ -147,3 +147,29 @@ html body .site-footer :is(h2,h3) { font-family:var(--font-serif) !important; }
   html body.nr-site .nr-hero-pc-view,
   html body.nr-site .nr-hero-sp-view { transition:none !important; }
 }
+
+/* The hero uses the same real SVG wordmark as the site header. */
+html body.nr-site .nr-hero-wordmark {
+  width:min(100%, 610px);
+  max-width:100%;
+  margin-block:clamp(12px,2vw,25px);
+  line-height:1;
+}
+html body.nr-site .nr-hero-brand-logo {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:clamp(90px,14vw,155px);
+  object-fit:contain;
+  object-position:left center;
+}
+html body.nr-site .nr-pricing-panel strong {
+  font-family:var(--font-serif) !important;
+  font-size:clamp(1.32rem,2.4vw,2rem);
+  letter-spacing:.025em;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+html body.nr-site .nr-pricing-panel small { font-family:var(--font-serif) !important; }
+html body.nr-site .nr-pricing-panel span { font-family:var(--font-sans) !important; }
+@media(max-width:600px) { html body.nr-site .nr-hero-wordmark {width:min(100%,410px);} }
