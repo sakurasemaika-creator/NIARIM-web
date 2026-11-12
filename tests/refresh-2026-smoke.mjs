@@ -108,8 +108,22 @@ try {
     const page=await browsers.newPage({viewport:{width:390,height:844}});
     page.on("pageerror",e=>log("Browser JS",lang,e.message));
     await page.goto(base+"/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
-    const status=await page.evaluate(() => ({lang:document.documentElement.lang,title:document.title,body:document.querySelector("#nr-hero-title")?.textContent,missing:[...document.querySelectorAll('[data-i18n^="refresh."],[data-i18n-html^="refresh."]')].map(n=>n.getAttribute("data-i18n")||n.getAttribute("data-i18n-html")).filter(k=>!Object.hasOwn(window.NIARIM_I18N_DICT[document.documentElement.lang]||{},k))}));
-    if(status.lang!==lang || !status.title || !status.body || status.missing.length)log("Localization",lang,JSON.stringify(status));
+    const status=await page.evaluate(() => {
+      const heroHeading=document.querySelector("#nr-hero-title");
+      const heroLogo=heroHeading?.querySelector("img");
+      const headerLogo=document.querySelector("header .brand-title");
+      // The post-launch hero uses the exact header logo image rather than text.
+      // Its accessible name comes from the image alt, not h1.textContent.
+      return {
+        lang:document.documentElement.lang,
+        title:document.title,
+        heroName:(heroHeading?.textContent?.trim() || heroLogo?.getAttribute("alt")?.trim() || ""),
+        heroLogoSrc:heroLogo?.getAttribute("src"),
+        headerLogoSrc:headerLogo?.getAttribute("src"),
+        missing:[...document.querySelectorAll('[data-i18n^="refresh."],[data-i18n-html^="refresh."]')].map(n=>n.getAttribute("data-i18n")||n.getAttribute("data-i18n-html")).filter(k=>!Object.hasOwn(window.NIARIM_I18N_DICT[document.documentElement.lang]||{},k))
+      };
+    });
+    if(status.lang!==lang || !status.title || !status.heroName.includes("NIARIM") || !status.heroLogoSrc || status.heroLogoSrc!==status.headerLogoSrc || status.missing.length)log("Localization",lang,JSON.stringify(status));
     await page.close();
   }
   const page=await browsers.newPage({viewport:{width:1280,height:960}});
