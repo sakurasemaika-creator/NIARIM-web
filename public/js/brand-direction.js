@@ -4,10 +4,14 @@
   "use strict";
   const start = () => {
     if (!document.body || document.querySelector(".brand-reading-progress")) return;
+    const header = document.querySelector(".site-header");
+    if (!header) return;
     const bar = document.createElement("div");
     bar.className = "brand-reading-progress";
     bar.setAttribute("aria-hidden", "true");
-    document.body.appendChild(bar);
+    // Anchor to sticky header, not a fixed viewport layer: full-page
+    // captures and mobile menus should never show a stray floating line.
+    header.appendChild(bar);
     let pending = false;
     const paint = () => {
       pending = false;
