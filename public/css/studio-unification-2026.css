@@ -1,0 +1,124 @@
+/* NIARIM / Studio typography & product presentation, November 2026.
+ * No external fonts, JS animation framework or decorative image requests.
+ * The language-specific CJK fallbacks are retained for glyphs that neither
+ * Japanese font covers in Korean/Simplified Chinese translations. */
+:root:lang(ja), :root:lang(en), :root:lang(fr), :root:lang(es) {
+  --font-sans: "HakkouMincho", "HakkouMinchoCJK";
+  --font-serif: "Kuramubon", "KuramubonCJK";
+}
+html body { font-family:var(--font-sans) !important; }
+html body :is(h1,h2,h3,h4,h5,h6,dt,button,.btn,.nr-btn,
+ .nav-toggle,.main-nav a,.site-header .btn,
+ .nr-text-link,.nr-step,.nr-kicker,.eyebrow,.section-kicker,
+ .section-label,.nr-store-label strong,.faq-question,.tab,
+ [role="tab"],.nr-tool-number,.nr-gallery-meta h3,
+ .nr-image-caption,.nr-hero-overline,.nr-hero-highlights,
+ .footer-col h2) {
+  font-family:var(--font-serif) !important;
+}
+html body :is(p,li,dd,blockquote,small,time,figcaption,label,
+ input,textarea,select,.description,.notice,.caption,
+ .faq-answer,.legal-content,.nr-hero-lead,.nr-store-notice,
+ .nr-gallery-description,.nr-plaza-capture figcaption) {
+  font-family:var(--font-sans) !important;
+}
+/* The actual logomark remains an SVG asset; the typographic wordmark and
+ * decorative letterforms must never fall back to an unrelated Arial face. */
+html body.nr-site .nr-hero-wordmark,
+html body .site-footer::before,
+html body.nr-site .nr-feature-band::before,
+html body.nr-site .nr-statement::after {
+  font-family:var(--font-serif) !important;
+}
+html body :is(code,pre,kbd,samp) { font-family:var(--font-sans) !important; }
+html:lang(ja) body :is(h1,h2,h3,h4,h5,h6,.nr-btn,.btn,
+ .main-nav a,.nr-text-link,.nr-gallery-meta h3) {
+  letter-spacing: .012em !important;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  font-kerning: normal;
+}
+html:lang(ja) body.nr-site .nr-hero-wordmark {
+  letter-spacing:-.042em !important;
+  overflow-wrap:normal;
+}
+html body.nr-site .nr-plaza h2 {
+  font-size:clamp(2rem,3.9vw,4.2rem);
+  line-height:1.35;
+  text-wrap:pretty;
+  max-width:10.6em;
+}
+html body.nr-site .nr-plaza-grid > div:first-child { min-width:0; }
+html body.nr-site .nr-plaza-art {
+  min-width:0;
+  min-height:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(12px,2.2vw,26px);
+  border:1px solid rgba(70,45,55,.11);
+  border-radius:20px;
+  background:linear-gradient(160deg,rgba(255,255,255,.46),rgba(245,225,229,.32));
+}
+html body.nr-site .nr-plaza-capture {
+  margin:0;
+  width:min(100%,304px);
+  text-align:center;
+}
+html body.nr-site .nr-plaza-capture-device {
+  border:7px solid #25212b;
+  border-radius:23px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 18px 45px rgba(47,30,42,.17);
+}
+html body.nr-site .nr-plaza-capture-image {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:360/760;
+  object-fit:contain;
+}
+html body.nr-site .nr-plaza-capture figcaption {
+  margin:13px 0 0;
+  font-size:.69rem;
+  letter-spacing:.09em;
+  color:#65525a;
+  line-height:1.5;
+}
+html body.nr-site .nr-plaza .nr-btn {
+  min-height:50px;
+  font-size:clamp(.93rem,1.2vw,1.05rem);
+  line-height:1.35;
+  padding-inline:1.4rem;
+}
+html body.nr-site .nr-hero-showcase::before {
+  filter:none;
+  background:radial-gradient(ellipse,rgba(255,182,199,.15),transparent 65%);
+}
+html body.nr-site .nr-story-card .nr-story-media::before { opacity:.55; }
+html body.nr-site :is(.nr-story-media,.nr-gallery-visual) img {
+  max-width:100%;
+  height:auto;
+}
+html body :is(.nr-story-copy p,.nr-feature-text p,.nr-plaza p,
+ .nr-workspace-copy p,.nr-gallery-description) { line-height:1.85; }
+@media (max-width:800px) {
+  html body.nr-site .nr-plaza-grid { gap:clamp(24px,5vw,40px); }
+  html body.nr-site .nr-plaza-art { padding:18px; }
+  html body.nr-site .nr-plaza-capture { width:min(100%,278px); }
+}
+@media (max-width:560px) {
+  html body.nr-site .nr-plaza-capture { width:min(100%,248px); }
+  html body.nr-site .nr-plaza h2 { font-size:clamp(1.85rem,8vw,2.65rem); }
+  html body.nr-site .nr-plaza .nr-btn { width:100%; max-width:320px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto !important; }
+  html body *,html body *::before,html body *::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
