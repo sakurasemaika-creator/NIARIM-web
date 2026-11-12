@@ -135,7 +135,7 @@ try {
         missingKeys:keys.filter(key=>!Object.hasOwn(dict,key)),
         pricedCells:main.querySelectorAll(".coins-table--priced .coins-unit").length,
         unitLabels:[...main.querySelectorAll(".coins-table--priced .coins-unit")].filter(el=>!el.textContent.trim()).length,
-        numericRewards:/\\d[\\d,]*\\s*(?:COINS?|コイン|金币|金幣|코인|pièces|monedas)/i.test(main.querySelector("#earning")?.textContent||""),
+        numericRewards:/\d[\d,]*\s*(?:COINS?|コイン|金币|金幣|코인|pièces|monedas)/i.test(main.querySelector("#earning")?.textContent||""),
         rawJapanese:language!=="ja"&&main.querySelector("[data-i18n='coins.earn']")?.textContent.trim()==="コインを集める",
         technical:/サーバー|SSV|安全性審査|実装済|未実装|本番交換|server validation|security review|backend|servidor|serveur|服务器|伺服器|서버/i.test(main.textContent)
       };
