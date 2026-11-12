@@ -208,6 +208,20 @@ try {
   }
   await page.goto(base+"/premium/",{waitUntil:"networkidle"});
   if(!(await page.locator(".premium-coin-panel a[href='/coins/']").count()))log("Premium to coins cross-link missing");
+
+  // The newly linked stylesheet must really style the Premium -> Coins panel.
+  const premiumContrast=await page.evaluate(()=>{
+    const panel=document.querySelector(".premium-coin-panel");
+    const heading=panel?.querySelector("h2");
+    const panelBg=panel&&getComputedStyle(panel).backgroundColor;
+    const headingFg=heading&&getComputedStyle(heading).color;
+    function rgb(value){return (value.match(/[0-9.]+/g)||[]).slice(0,3).map(Number)}
+    function lum(value){const a=rgb(value).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*a[0]+.7152*a[1]+.0722*a[2]}
+    const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
+    return {hasStylesheet:!!document.querySelector('link[href*="/css/pages/coins.css"]'),panelBg,headingFg,contrast:headingFg&&panelBg?ratio(headingFg,panelBg):0};
+  });
+  if(!premiumContrast.hasStylesheet||premiumContrast.contrast<4.5)log("Premium coin panel contrast",JSON.stringify(premiumContrast));
+
   await page.goto(base+"/help/",{waitUntil:"networkidle"});
   const helpCards=await page.locator("[data-help-card]").count();
   if(helpCards!==79)log("Help must expose all 79 app topics",helpCards);
