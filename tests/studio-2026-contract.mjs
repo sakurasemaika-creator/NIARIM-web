@@ -15,7 +15,7 @@ assert.match(css,/Kuramubon/);
 assert.match(css,/HakkouMincho/);
 assert.match(css,/prefers-reduced-motion/);
 const dict=fs.readFileSync("public/js/i18n-dict-refresh-2026.js","utf8");
-assert.match(dict,/"plaza.title":"作品から、次の物語へ。"/);
+assert.match(dict,/"plaza.title":"作品から、<br>次の物語へ。"/);
 const image="public/assets/images/app-captures/community.webp";
 if(fs.existsSync(image)) {
  const buf=fs.readFileSync(image);
