@@ -115,3 +115,28 @@
     }
   }
 })();
+
+/* Account guidance focused on what creators can do. */
+(function(){ "use strict"; var entries={
+  "ja": {
+    "faq.a6": "作品を描くだけならアカウント登録は不要です。作品やプロジェクトは端末内に保存されます。作品広場に投稿するときはGoogleアカウントでのログインが必要です。"
+  },
+  "en": {
+    "faq.a6": "You can draw and create without an account. Your works and projects are saved on your device. A Google account sign-in is required to post to the gallery."
+  },
+  "zh-Hans": {
+    "faq.a6": "无需注册账号也能进行创作。作品和项目保存在设备内。向作品广场投稿时需要登录 Google 账号。"
+  },
+  "zh-Hant": {
+    "faq.a6": "無需註冊帳號也能進行創作。作品和專案會儲存在裝置內。投稿至作品廣場時需要登入 Google 帳號。"
+  },
+  "ko": {
+    "faq.a6": "계정 등록 없이도 작품을 만들 수 있어요. 작품과 프로젝트는 기기에 저장됩니다. 작품 광장에 게시하려면 Google 계정 로그인이 필요해요."
+  },
+  "fr": {
+    "faq.a6": "Aucun compte n'est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la galerie."
+  },
+  "es": {
+    "faq.a6": "Puedes crear sin registrarte. Tus obras y proyectos se guardan en el dispositivo. Para publicar en la galería, debes iniciar sesión con una cuenta de Google."
+  }
+}; var dictionary=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={}); Object.keys(entries).forEach(function(locale){dictionary[locale]=Object.assign(dictionary[locale]||{},entries[locale]);});})();
