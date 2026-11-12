@@ -362,3 +362,128 @@ body main .news-item:focus-within { border-color: var(--color-accent-text, #b826
   }
   .brand-reading-progress { will-change: auto; }
 }
+
+/* Studio-grade composition refinement — 2026-11-12 */
+/* A deliberate product presentation: one hero stage, tangible studio details,
+   and a consistent editorial rhythm across the product story. */
+html body.nr-site .nr-hero {
+  background:
+    radial-gradient(ellipse 41% 69% at 82% 46%, rgba(255, 117, 144, .20), transparent 76%),
+    radial-gradient(ellipse 42% 60% at 7% 106%, rgba(147, 129, 180, .18), transparent 81%),
+    linear-gradient(122deg, #15151d 0%, #24202a 49%, #12141c 100%);
+}
+html body.nr-site .nr-hero-grid { position: relative; }
+html body.nr-site .nr-hero-copy { position: relative; z-index: 3; }
+html body.nr-site .nr-hero-category {
+  display: flex; align-items: center; gap: 13px;
+  font-size: .73rem; font-weight: 750;
+}
+html body.nr-site .nr-hero-category::before {
+  content: ""; display: block; width: 30px; height: 1px;
+  flex: 0 0 30px; background: currentColor; opacity: .9;
+}
+html body.nr-site .nr-hero-wordmark {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(4rem, 7.6vw, 8.35rem) !important;
+  letter-spacing: -.09em !important;
+  text-wrap: nowrap;
+}
+html body.nr-site .nr-hero-showcase { isolation: isolate; }
+html body.nr-site .nr-hero-showcase::before {
+  content: ""; position: absolute; inset: 8% -8% 7% 12%;
+  z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse, rgba(255, 182, 199, .21), transparent 66%);
+  filter: blur(16px);
+}
+html body.nr-site .nr-hero-pc-view,
+html body.nr-site .nr-hero-sp-view {
+  transition: transform .65s var(--nr-ease);
+  backface-visibility: hidden;
+}
+@media (hover: hover) and (pointer: fine) {
+  html body.nr-site .nr-hero-showcase:hover .nr-hero-pc-view {
+    transform: translate(-5px, -7px) rotate(-1deg);
+  }
+  html body.nr-site .nr-hero-showcase:hover .nr-hero-sp-view {
+    transform: translate(3px, -10px) rotate(3deg);
+  }
+}
+html body.nr-site .nr-statement {
+  position: relative; border-bottom: 1px solid var(--nr-rule);
+}
+html body.nr-site .nr-statement::after {
+  content: "01 / THE PROCESS"; position: absolute;
+  right: 0; bottom: 26px; color: #82787d;
+  font: 700 .67rem/1.4 Arial, sans-serif; letter-spacing: .19em;
+}
+html body.nr-site .nr-story-card { overflow: hidden; }
+html body.nr-site .nr-story-card .nr-story-media {
+  position: relative; isolation: isolate;
+}
+html body.nr-site .nr-story-card .nr-story-media::before {
+  content: ""; position: absolute; z-index: -1;
+  width: 70%; aspect-ratio: 1; left: 15%; top: 14%;
+  border: 1px solid rgba(48, 37, 48, .10); border-radius: 50%;
+  pointer-events: none;
+}
+html body.nr-site .nr-story-copy h3 {
+  max-width: 13em; text-wrap: pretty;
+}
+html body.nr-site .nr-story-copy p { max-width: 35em; }
+html body.nr-site .nr-feature-band {
+  position: relative; overflow: hidden; isolation: isolate;
+}
+html body.nr-site .nr-feature-band::before {
+  content: "NIARIM"; position: absolute; z-index: -1;
+  right: -3%; top: 0; pointer-events: none;
+  color: rgba(255,255,255,.035);
+  font: 900 clamp(7rem, 22vw, 23rem)/1 Arial, sans-serif;
+  letter-spacing: -.08em;
+}
+html body.nr-site .nr-tools .nr-section-header { align-items: end; }
+html body.nr-site .nr-tool-grid article {
+  position: relative;
+  transition: background-color .25s ease;
+}
+html body.nr-site .nr-tool-grid article::before {
+  content: ""; position: absolute;
+  left: clamp(17px, 2.5vw, 35px); right: clamp(17px, 2.5vw, 35px);
+  top: 0; height: 2px; background: #bc4460; opacity: .72;
+}
+html body.nr-site .nr-gallery-grid { align-items: stretch; }
+html body.nr-site .nr-gallery-item {
+  overflow: hidden; transition: border-color .25s ease;
+}
+html body.nr-site .nr-gallery-meta {
+  border-top: 1px solid var(--nr-rule);
+}
+html body.nr-site .nr-gallery-meta span {
+  font-variant-numeric: tabular-nums; letter-spacing: .13em;
+}
+html body.nr-site .nr-gallery-description { max-width: 44em; }
+html body.nr-site .nr-plaza-window { border: 1px solid rgba(64,42,54,.17); }
+html body.nr-site .nr-workspace-copy,
+html body.nr-site .nr-feature-text { min-width: 0; }
+html body.nr-site .nr-workspace-copy > p,
+html body.nr-site .nr-feature-text > p { max-width: 37em; }
+@media (max-width: 800px) {
+  html body.nr-site .nr-hero-wordmark {
+    font-size: clamp(3.6rem, 11vw, 6rem) !important;
+  }
+  html body.nr-site .nr-statement::after { bottom: 15px; }
+}
+@media (max-width: 560px) {
+  html body.nr-site .nr-hero-wordmark {
+    font-size: clamp(3.15rem, 13vw, 4.65rem) !important;
+  }
+  html body.nr-site .nr-hero-category { gap: 9px; }
+  html body.nr-site .nr-hero-category::before { width: 18px; flex-basis: 18px; }
+  html body.nr-site .nr-statement::after { font-size: .57rem; }
+  html body.nr-site .nr-tool-grid article::before { left: 14px; right: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body.nr-site .nr-hero-pc-view,
+  html body.nr-site .nr-hero-sp-view { transition: none !important; }
+  html body.nr-site .nr-hero-showcase:hover .nr-hero-pc-view { transform: rotate(-2deg); }
+  html body.nr-site .nr-hero-showcase:hover .nr-hero-sp-view { transform: rotate(4deg); }
+}
