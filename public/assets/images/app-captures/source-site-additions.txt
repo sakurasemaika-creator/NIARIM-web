@@ -1,0 +1,7 @@
+source_repo=sakurasemaika-creator/NIARIM
+source_branch=dev_branch
+source_commit=7599a26e58
+source_run=43156461562
+source_artifact=13916197147
+source_screens=12_premium.png,29_help.png,09_autofill_presets.png
+source_dimensions=360x760
