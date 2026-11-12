@@ -15,6 +15,9 @@ on:
       - "public/premium/index.html"
       - "public/css/refresh-2026.css"
       - "public/css/niarim-game-site.css"
+      - "public/css/brand-direction-2026.css"
+      - "public/js/brand-direction.js"
+      - "tests/brand-direction-contract.mjs"
       - "public/js/pc-paired-captures.js"
       - "public/js/store-release-link.js"
       - "public/js/community.js"
@@ -37,6 +40,8 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      - name: Verify brand direction contract across public pages
+        run: npm run audit:brand-direction
       - run: npx playwright install --with-deps chromium
       - name: Test live community API proxy with mock upstream
         run: node --test tests/community-feed.test.mjs
