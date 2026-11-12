@@ -15,9 +15,16 @@ body .site-header {
   z-index: 100;
   border-bottom: 1px solid var(--nr-rule);
   background: rgba(250, 247, 246, .96);
+  /* Keep filters on ::before: filtering the header itself would turn
+     position:fixed mobile navigation into a header-relative element. */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: box-shadow .28s ease, background-color .28s ease;
+}
+body .site-header::before {
+  background: rgba(250,247,246,.96);
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
-  transition: box-shadow .28s ease, background-color .28s ease;
 }
 body.brand-has-scrolled .site-header {
   background: rgba(250, 247, 246, .98);
