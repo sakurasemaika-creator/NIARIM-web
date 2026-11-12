@@ -76,7 +76,7 @@ try {
   await motion.evaluate(()=>window.scrollTo(0,Math.min(700,document.documentElement.scrollHeight-innerHeight)));
   await motion.waitForTimeout(180);
   const progress=await bar.evaluate(el=>getComputedStyle(el).transform);
-  if(progress==="none"||/^matrix\\(0(?:\\.0+)?,/.test(progress)) {
+  if(progress==="none"||/^matrix\(0(?:\.0+)?,/.test(progress)) {
     bad.push("Header scroll progress failed to update: "+progress);
   }
   await live.close();
