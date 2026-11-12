@@ -20,6 +20,7 @@ on:
       - "public/assets/images/app-captures/community.webp"
       - "tests/studio-2026-contract.mjs"
       - "tests/studio-2026-browser.mjs"
+      - "tests/studio-heading-glyph-contract.mjs"
       - "public/js/brand-direction.js"
       - "tests/brand-direction-contract.mjs"
       - "public/js/pc-paired-captures.js"
@@ -56,7 +57,9 @@ jobs:
           cat /tmp/niarim-site.log
           exit 1
       - name: Verify studio typography and real community capture
-        run: node tests/studio-2026-contract.mjs
+        run: |
+          node tests/studio-2026-contract.mjs
+          node tests/studio-heading-glyph-contract.mjs
       - name: Run language, responsive, image and palette smoke checks
         run: node tests/refresh-2026-smoke.mjs
       - name: Verify editorial fonts, motion and native screenshots in browser
