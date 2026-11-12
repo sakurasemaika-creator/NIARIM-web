@@ -124,6 +124,26 @@ try {
       };
     });
     if(status.lang!==lang || !status.title || !status.heroName.includes("NIARIM") || !status.heroLogoSrc || status.heroLogoSrc!==status.headerLogoSrc || status.missing.length)log("Localization",lang,JSON.stringify(status));
+    await page.goto(base+"/coins/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
+    const localizedCoins=await page.evaluate(()=>{
+      const language=document.documentElement.lang;
+      const dict=window.NIARIM_I18N_DICT?.[language]||{};
+      const main=document.querySelector(".coins-main");
+      const keys=[...main.querySelectorAll("[data-i18n]")].map(el=>el.getAttribute("data-i18n"));
+      return {
+        language,
+        missingKeys:keys.filter(key=>!Object.hasOwn(dict,key)),
+        pricedCells:main.querySelectorAll(".coins-table--priced .coins-unit").length,
+        unitLabels:[...main.querySelectorAll(".coins-table--priced .coins-unit")].filter(el=>!el.textContent.trim()).length,
+        numericRewards:/\\d[\\d,]*\\s*(?:COINS?|コイン|金币|金幣|코인|pièces|monedas)/i.test(main.querySelector("#earning")?.textContent||""),
+        rawJapanese:language!=="ja"&&main.querySelector("[data-i18n='coins.earn']")?.textContent.trim()==="コインを集める",
+        technical:/サーバー|SSV|安全性審査|実装済|未実装|本番交換|server validation|security review|backend|servidor|serveur|服务器|伺服器|서버/i.test(main.textContent)
+      };
+    });
+    if(localizedCoins.language!==lang||localizedCoins.missingKeys.length||localizedCoins.pricedCells!==48||
+       localizedCoins.unitLabels||localizedCoins.numericRewards||localizedCoins.rawJapanese||localizedCoins.technical){
+      log("Coins visitor copy / localization",lang,JSON.stringify(localizedCoins));
+    }
     await page.close();
   }
   const page=await browsers.newPage({viewport:{width:1280,height:960}});
@@ -157,6 +177,10 @@ try {
       missionAccordions:document.querySelectorAll("#missions details.coins-accordion").length,
       loginAccordion:!!document.querySelector("#coin-login-bonus:not([open])"),
       hasPremiumLink:!!document.querySelector(".coins-conversion-panel a[href='/premium/']"),
+      units:document.querySelectorAll("#benefits .coins-table--priced tbody .coins-unit").length,
+      comparisonUnits:document.querySelectorAll(".coins-compare-table tbody .coins-unit").length,
+      hasCurrencyLabel:/円|JPY|¥/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
+      hasCoinCaption:/コイン/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
       prices
     };
   });
@@ -168,11 +192,20 @@ try {
   ];
   if(coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
      coins.missionAccordions!==4||!coins.loginAccordion||!coins.hasPremiumLink||
+     coins.units!==48||coins.comparisonUnits!==12||coins.hasCurrencyLabel||!coins.hasCoinCaption||
      JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
     log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
   }
   await page.locator("#coin-login-bonus summary").click();
   if(!(await page.locator("#coin-login-bonus").evaluate(el=>el.open)))log("Login reward accordion does not expand");
+  for(const width of [390,1440]){
+    await page.setViewportSize({width,height:900});
+    await page.goto(base+"/coins/",{waitUntil:"networkidle"});
+    await page.evaluate(()=>document.fonts.ready);
+    const layout=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,win:innerWidth}));
+    if(layout.doc>layout.win+2)log("Coins horizontal overflow",width,JSON.stringify(layout));
+    await page.screenshot({path:"artifacts/refresh-2026/coins-"+width+".png",fullPage:true,animations:"disabled"});
+  }
   await page.goto(base+"/premium/",{waitUntil:"networkidle"});
   if(!(await page.locator(".premium-coin-panel a[href='/coins/']").count()))log("Premium to coins cross-link missing");
   await page.goto(base+"/help/",{waitUntil:"networkidle"});
