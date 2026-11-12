@@ -24,7 +24,7 @@ html body :is(h1, h2, h3, h4, h5, h6, dt,
 }
 /* Preserve existing original logotype rather than changing its bespoke lettering. */
 html body :is(.nr-hero-wordmark, .site-logo, .site-logo *, .logo, .logo *) {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: var(--font-serif) !important;
 }
 /* Override the older html:lang(ja) and language-specific Noto Sans
    !important selectors: an unqualified html body rule is not specific enough. */
@@ -48,7 +48,7 @@ html[lang] body.nr-site .nr-main :is(p, li, dd, small, .nr-hero-lead,
 }
 html[lang] body.nr-site .nr-main .nr-hero-wordmark,
 html[lang] body :is(.site-logo, .site-logo *, .logo, .logo *) {
-  font-family: Arial, Helvetica, sans-serif !important;
+  font-family: var(--font-serif) !important;
 }
 /* Capture geometry is responsive, but never distort either source device. */
 html body .nr-shot:not(.nr-shot--pc),
@@ -215,5 +215,5 @@ html body .nr-feature-duo {
   border: 1px solid var(--color-border-strong);
   background: var(--color-surface-soft);
   color: var(--color-text);
-  font: .81rem/1.7 ui-monospace, SFMono-Regular, Consolas, monospace;
+  font: .81rem/1.7 var(--font-sans);
 }

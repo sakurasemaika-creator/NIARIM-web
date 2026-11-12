@@ -55,7 +55,7 @@ body .site-footer {
 body .site-footer::before {
   content: "NIARIM";
   position: absolute; bottom: -0.33em; right: -.02em;
-  font: 900 clamp(7rem, 21vw, 21rem)/1 Arial, Helvetica, sans-serif;
+  font: 900 clamp(7rem, 21vw, 21rem)/1 var(--font-serif);
   letter-spacing: -.085em; white-space: nowrap;
   color: rgba(255,255,255,.035); pointer-events: none;
 }
@@ -383,7 +383,7 @@ html body.nr-site .nr-hero-category::before {
   flex: 0 0 30px; background: currentColor; opacity: .9;
 }
 html body.nr-site .nr-hero-wordmark {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif);
   font-size: clamp(4rem, 7.6vw, 8.35rem) !important;
   letter-spacing: -.09em !important;
   text-wrap: nowrap;
@@ -414,7 +414,7 @@ html body.nr-site .nr-statement {
 html body.nr-site .nr-statement::after {
   content: "01 / THE PROCESS"; position: absolute;
   right: 0; bottom: 26px; color: #82787d;
-  font: 700 .67rem/1.4 Arial, sans-serif; letter-spacing: .19em;
+  font: 700 .67rem/1.4 var(--font-serif); letter-spacing: .19em;
 }
 html body.nr-site .nr-story-card { overflow: hidden; }
 html body.nr-site .nr-story-card .nr-story-media {
@@ -437,7 +437,7 @@ html body.nr-site .nr-feature-band::before {
   content: "NIARIM"; position: absolute; z-index: -1;
   right: -3%; top: 0; pointer-events: none;
   color: rgba(255,255,255,.035);
-  font: 900 clamp(7rem, 22vw, 23rem)/1 Arial, sans-serif;
+  font: 900 clamp(7rem, 22vw, 23rem)/1 var(--font-serif);
   letter-spacing: -.08em;
 }
 html body.nr-site .nr-tools .nr-section-header { align-items: end; }

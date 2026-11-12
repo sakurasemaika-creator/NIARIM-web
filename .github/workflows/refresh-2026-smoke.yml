@@ -16,6 +16,10 @@ on:
       - "public/css/refresh-2026.css"
       - "public/css/niarim-game-site.css"
       - "public/css/brand-direction-2026.css"
+      - "public/css/studio-unification-2026.css"
+      - "public/assets/images/app-captures/community.webp"
+      - "tests/studio-2026-contract.mjs"
+      - "tests/studio-2026-browser.mjs"
       - "public/js/brand-direction.js"
       - "tests/brand-direction-contract.mjs"
       - "public/js/pc-paired-captures.js"
@@ -51,8 +55,12 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-site.log
           exit 1
+      - name: Verify studio typography and real community capture
+        run: node tests/studio-2026-contract.mjs
       - name: Run language, responsive, image and palette smoke checks
         run: node tests/refresh-2026-smoke.mjs
+      - name: Verify editorial fonts, motion and native screenshots in browser
+        run: node tests/studio-2026-browser.mjs
       - name: Test in-place redaction of newly private ranked works
         run: node tests/community-ranking-visibility-browser.mjs
       - name: Capture all website pages top-to-bottom, Japanese PC and mobile
@@ -74,6 +82,8 @@ jobs:
         if: always()
         with:
           name: refreshed-website-mobile-desktop
-          path: artifacts/refresh-2026/
+          path: |
+            artifacts/refresh-2026/
+            artifacts/studio-2026/
           if-no-files-found: warn
           retention-days: 14

@@ -122,3 +122,28 @@ html body :is(.nr-story-copy p,.nr-feature-text p,.nr-plaza p,
     scroll-behavior:auto !important;
   }
 }
+
+/* Keep headings readable across every public page, not just the landing page. */
+html body :is(.site-logo, .site-logo *, .logo, .logo *):not(img) {
+  font-family:var(--font-serif) !important;
+}
+html:lang(ja) body main :is(h1,h2,h3,h4,h5,h6),
+html:lang(ja) body :is(.footer-col h2,.section-title,.feature-title) {
+  letter-spacing: .018em !important;
+  line-height:1.36;
+  text-wrap:pretty;
+}
+html body .site-header :is(a,button) { -webkit-tap-highlight-color:transparent; }
+html body .site-footer :is(p,small,li) { font-family:var(--font-sans) !important; }
+html body .site-footer :is(h2,h3) { font-family:var(--font-serif) !important; }
+/* Prefer a small composited transform over filters and layout animation. */
+@media (max-width:800px) {
+  html body.nr-site .nr-hero-showcase::before { display:none; }
+  html body.nr-site .nr-hero-showcase .nr-shot {
+    box-shadow:0 12px 28px rgba(4,4,9,.24);
+  }
+}
+@media (hover:none), (pointer:coarse) {
+  html body.nr-site .nr-hero-pc-view,
+  html body.nr-site .nr-hero-sp-view { transition:none !important; }
+}
