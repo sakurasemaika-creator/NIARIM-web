@@ -4,10 +4,10 @@ const routes = ["/","/about/","/features/","/help/","/premium/","/community/","/
 const html = route => fs.readFileSync("public"+(route==="/" ? "/index.html":route+"index.html"),"utf8");
 for(const path of routes){
   const content=html(path);
-  assert.match(content,/studio-unification-2026\\.css\\?v=20261112-1/,"Missing unified style: "+path);
+  assert.match(content,/studio-unification-2026\.css\?v=20261112-1/,"Missing unified style: "+path);
 }
 const home=html("/");
-assert.match(home,/assets\\/images\\/app-captures\\/community\\.webp/);
+assert.match(home,/assets\/images\/app-captures\/community\.webp/);
 assert.match(home,/loading="lazy" decoding="async"/);
 assert.doesNotMatch(home,/nr-plaza-illustration|nr-illustration-sun|nr-plaza-window/);
 const css=fs.readFileSync("public/css/studio-unification-2026.css","utf8");
