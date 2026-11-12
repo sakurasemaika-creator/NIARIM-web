@@ -60,6 +60,26 @@ try {
     }
     await context.close();
   }
+  // Exercise motion with normal user preference, not only reduced-motion CSS.
+  const live=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:"no-preference"});
+  const motion=await live.newPage();
+  await motion.goto(base+"/",{waitUntil:"networkidle"});
+  const scene=motion.locator(".nr-hero-showcase");
+  const pc=motion.locator(".nr-hero-pc-view");
+  const startTransform=await pc.evaluate(el=>getComputedStyle(el).transform);
+  await scene.hover();
+  await motion.waitForTimeout(900);
+  const endTransform=await pc.evaluate(el=>getComputedStyle(el).transform);
+  if(startTransform===endTransform)bad.push("Normal-motion hero hover did not change device transform");
+  const bar=motion.locator(".brand-reading-progress");
+  await bar.waitFor({state:"attached"});
+  await motion.evaluate(()=>window.scrollTo(0,Math.min(700,document.documentElement.scrollHeight-innerHeight)));
+  await motion.waitForTimeout(180);
+  const progress=await bar.evaluate(el=>getComputedStyle(el).transform);
+  if(progress==="none"||/^matrix\\(0(?:\\.0+)?,/.test(progress)) {
+    bad.push("Header scroll progress failed to update: "+progress);
+  }
+  await live.close();
 }finally{await browser.close();}
 await fs.writeFile(path.join(output,"report.json"),JSON.stringify({checked:findings.length,findings,bad},null,2));
 if(bad.length){console.error("Studio browser audit failures:\n"+bad.join("\n"));process.exit(1);}
