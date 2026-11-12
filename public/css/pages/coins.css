@@ -1,1 +1,38 @@
 .coins-hero{background:linear-gradient(125deg,#261f2b,#60364d);padding:clamp(85px,9vw,135px) 0;color:#fff}.coins-hero h1{font-size:clamp(2rem,5vw,4.2rem);color:#fff;line-height:1.38;max-width:16em}.coins-hero p:not(.eyebrow){font-family:var(--font-sans);color:#f9e9ee;line-height:1.9;max-width:48em;margin:20px 0 30px}.coins-shortcuts{display:flex;flex-wrap:wrap;gap:12px;padding-block:24px}.coins-shortcuts a{border:1px solid #d2c6cd;border-radius:22px;padding:10px 18px;font-family:var(--font-serif);text-decoration:none;color:#43313e}.coins-main .section{padding:clamp(65px,8vw,110px) 0;scroll-margin-top:90px}.coins-main h2{font-size:clamp(2rem,4vw,3.2rem);margin-bottom:20px}.coins-main .section>div>p{line-height:1.9;max-width:65em}.coins-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}.coins-cards--two{grid-template-columns:repeat(2,minmax(0,1fr))}.coins-cards article{background:#fff;border:1px solid #e2d5db;border-radius:18px;padding:clamp(20px,2.5vw,36px);min-width:0}.coins-cards article h3{font-size:clamp(1.15rem,2vw,1.55rem);line-height:1.5;margin:0 0 14px}.coins-cards article p,.coins-caution,.coins-end p{font-family:var(--font-sans);font-size:.94rem;line-height:1.85;color:#5d535f}.coins-value{display:block;font:800 clamp(2rem,3.5vw,3rem)/1.3 var(--font-serif);color:#ae325a;overflow-wrap:anywhere;margin-bottom:20px}.coins-value small{font-size:.7rem;letter-spacing:.1em}.coins-count{display:flex;align-items:baseline;gap:22px;margin:26px 0;color:#b5325a}.coins-count strong{font:800 clamp(4rem,9vw,7rem)/1 var(--font-serif)}.coins-count span{font-family:var(--font-sans)}.coins-list-title{font-size:clamp(1.4rem,2.6vw,2rem);margin-top:50px;margin-bottom:10px}.coins-scroll{overflow-x:auto;max-width:100%;border:1px solid #e3d5dc;border-radius:15px;background:#fff;margin-top:25px}.coins-table{width:100%;min-width:660px;border-collapse:collapse;font-variant-numeric:tabular-nums}.coins-table :is(th,td){padding:14px 16px;text-align:right;border-bottom:1px solid #e9e0e5;font-family:var(--font-sans);font-size:.87rem}.coins-table thead th{font-family:var(--font-serif);background:#f7eaef}.coins-table th:first-child{text-align:left;min-width:192px}.coins-table tbody tr:last-child :is(th,td){border-bottom:0}.coins-end{border-radius:20px;border:1px solid #e1d2d9;background:#fff;padding:clamp(25px,4vw,55px)}.coins-end p{margin:15px 0 22px}@media(max-width:750px){.coins-cards,.coins-cards--two{grid-template-columns:1fr}}
+/* No JS animation or additional network requests: accordion = native details. */
+.coins-accordion-stack{display:grid;gap:12px;margin:30px 0;}
+.coins-accordion{border:1px solid #dfd2d9;border-radius:15px;background:#fff;overflow:hidden;}
+.coins-accordion summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:20px clamp(18px,2.8vw,30px);font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1rem,1.65vw,1.22rem);line-height:1.55;}
+.coins-accordion summary::-webkit-details-marker{display:none;}
+.coins-accordion summary::after{content:"＋";flex:0 0 auto;color:#a83c60;font-size:1.3rem;}
+.coins-accordion[open] summary::after{content:"−";}
+.coins-accordion summary:focus-visible{outline:3px solid #9c3c65;outline-offset:-4px;}
+.coins-accordion[open] summary{border-bottom:1px solid #ece2e7;background:#fff6f9;}
+.coins-accordion-count{margin-left:auto;padding-inline:10px;color:#725a66;font-size:.75rem;white-space:nowrap;}
+.coins-accordion-content{padding:21px clamp(18px,2.8vw,30px) 26px;font-family:var(--font-sans);line-height:1.9;}
+.coins-accordion-content p{line-height:1.9;max-width:62em;}
+.coins-accordion-content .coins-table--compact{min-width:460px;}
+.coins-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:30px 0 36px;}
+.coins-choice-grid article{border:1px solid #eadbe1;border-radius:16px;background:#fff8fa;padding:clamp(18px,2vw,27px);}
+.coins-choice-grid article>span,.coins-compare-eyebrow,.coins-conversion-kicker,.premium-coin-kicker{font-family:var(--font-sans);font-size:.75rem;letter-spacing:.12em;color:#b04b6d;}
+.coins-choice-grid h3{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.1rem,1.8vw,1.45rem);margin:12px 0;line-height:1.5;}
+.coins-choice-grid p{font-family:var(--font-sans);font-size:.9rem;line-height:1.85;}
+.coins-compare{margin:40px 0 25px;padding:clamp(22px,3.5vw,42px);border-radius:20px;background:#f7e8ee;border:1px solid #edd0db;}
+.coins-compare h3{margin:10px 0 15px;font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.45;}
+.coins-compare-intro p{font-family:var(--font-sans);line-height:1.85;}
+.coins-compare .coins-scroll{margin-top:24px;}
+.coins-compare-best,.coins-compare-saving{font-weight:800!important;color:#9f2c52;}
+.coins-compare-highlight{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";margin:20px 0 10px;font-size:clamp(1.13rem,2vw,1.52rem);line-height:1.6;}
+.coins-conversion{background:#29212d;color:#fff;}
+.coins-conversion-panel,.premium-coin-panel{display:flex;align-items:center;justify-content:space-between;gap:35px;border:1px solid rgba(255,255,255,.2);padding:clamp(25px,4vw,48px);border-radius:21px;}
+.coins-conversion-panel h2,.premium-coin-panel h2{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.5rem,3vw,2.4rem);margin:12px 0 15px;line-height:1.5;}
+.coins-conversion-panel h2{color:#fff;}
+.coins-conversion-panel p,.premium-coin-panel p{font-family:var(--font-sans);line-height:1.9;max-width:52em;}
+.coins-conversion-panel p{color:#f4dfea;}
+.coins-conversion-panel .btn,.premium-coin-panel .btn{flex:0 0 auto;white-space:normal;text-align:center;}
+.premium-coin-crosslink{background:#f9eff3;}
+.premium-coin-panel{background:#fff;border-color:#e7ccd7;}
+.premium-coin-panel h2{color:#322935;}
+.premium-coin-panel p{color:#5c4e57;}
+@media(max-width:830px){.coins-choice-grid{grid-template-columns:1fr;}.coins-conversion-panel,.premium-coin-panel{flex-direction:column;align-items:stretch;}.coins-conversion-panel .btn,.premium-coin-panel .btn{width:100%;}}
+@media(prefers-reduced-motion:reduce){.coins-accordion,.coins-accordion *{transition:none!important;animation:none!important;}}
