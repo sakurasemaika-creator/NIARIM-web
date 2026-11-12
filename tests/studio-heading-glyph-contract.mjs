@@ -20,7 +20,7 @@ function validate(where,s){
  const missing=[...new Set([...plain].filter(c=>c.trim()&&!glyphs.has(c.codePointAt(0))))];
  if(missing.length) problems.push({where,text:plain.slice(0,100),missing:missing.join("")});
 }
-const routes=["","about/","features/","help/","premium/","community/","news/","faq/","contact/","privacy/","terms/","font-licenses/"];
+const routes=["","about/","features/","help/","premium/","coins/","community/","news/","faq/","contact/","privacy/","terms/","font-licenses/"];
 for(const route of routes){
  const path="public/"+route+"index.html";
  const content=fs.readFileSync(path,"utf8");
@@ -45,6 +45,33 @@ for(const n of [0,2,3]){
    if(key.startsWith("meta."))continue;
    validate("i18n:"+key,text);
  }
+}
+
+/* The copy override is loaded after the normal dictionary. Check the actual
+   licensed heading and body font ranges before accepting any new wording. */
+const bodyGlyphs=new Set();
+for(const match of css.matchAll(/@font-face\\s*\\{([\\s\\S]*?)\\}/g)){
+  const face=match[1];
+  if(!/font-family:\\s*"(HakkouMincho|HakkouMinchoCJK)";/.test(face))continue;
+  const range=face.match(/unicode-range:\\s*([\\s\\S]*?);/)?.[1]||"";
+  for(const v of range.matchAll(/U\\+([0-9a-f]{4,6})(?:-([0-9a-f]{4,6}))?/gi)){
+    for(let cp=parseInt(v[1],16);cp<=parseInt(v[2]||v[1],16);cp++)bodyGlyphs.add(cp);
+  }
+}
+assert.ok(bodyGlyphs.size>1000,"HakkouMincho WOFF2 unicode range missing");
+const overlay=fs.readFileSync("public/js/visitor-copy-and-goals.js","utf8");
+const start=overlay.indexOf("var t=")+6;
+const end=overlay.indexOf(";for(var l in t)",start);
+assert.ok(start>5&&end>start,"visitor copy JSON missing");
+const visitor=JSON.parse(overlay.slice(start,end));
+const headingKeys=new Set([
+  "coins.title","coins.catalog","coins.compareTitle",
+  "premium.coinsTitle","coins.toPremiumTitle","refresh.plaza.title"
+]);
+for(const [key,value] of Object.entries(visitor.ja)){
+ const font=headingKeys.has(key)?glyphs:bodyGlyphs;
+ const missing=[...new Set([...value].filter(ch=>ch.trim()&&!font.has(ch.codePointAt(0))))];
+ if(missing.length)problems.push({where:"visitor:"+key,text:value.slice(0,100),missing:missing.join("")});
 }
 if(problems.length) console.error(JSON.stringify(problems,null,2));
 assert.equal(problems.length,0,"Unsupported Kuramubon characters found in Japanese display copy");
