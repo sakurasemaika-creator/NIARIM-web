@@ -4,6 +4,7 @@ on:
     branches: [dev_branch]
     paths:
       - ".github/workflows/publish-community-capture.yml"
+      - "tests/studio-2026-contract.mjs"
   workflow_dispatch:
 permissions:
   contents: write
