@@ -173,3 +173,6 @@ html body.nr-site .nr-pricing-panel strong {
 html body.nr-site .nr-pricing-panel small { font-family:var(--font-serif) !important; }
 html body.nr-site .nr-pricing-panel span { font-family:var(--font-sans) !important; }
 @media(max-width:600px) { html body.nr-site .nr-hero-wordmark {width:min(100%,410px);} }
+
+/* The two official fonts together provide the complete coined navigation label. */
+html body a[data-i18n="nav.coins"] {font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK" !important;}
