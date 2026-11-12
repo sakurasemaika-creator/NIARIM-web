@@ -127,7 +127,7 @@ try {
     await page.close();
   }
   const page=await browsers.newPage({viewport:{width:1280,height:960}});
-  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/community/",".community-banner"]]){
+  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/coins/",".coins-compare-table"],["/help/","#help-search-input"],["/community/",".community-banner"]]){
     page.on("pageerror",e=>log("Interior JS",path,e.message));
     const response=await page.goto(base+path,{waitUntil:"networkidle"});
     if(response?.status()!==200||!(await page.locator(selector).count()))log("Interior missing",path,selector);
@@ -139,6 +139,45 @@ try {
     return {sp:sp.length,bad:bad.length};
   });
   if(featurePairs.sp!==9||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
+  // Check that the priced coin benefits page is actually usable, not just
+  // advertised in landing-page copy, and that the cross-links work both ways.
+  await page.goto(base+"/coins/",{waitUntil:"networkidle"});
+  const coins=await page.evaluate(()=>{
+    const rows=[...document.querySelectorAll("#benefits .coins-table:not(.coins-compare-table) tbody tr")];
+    const comparison=[...document.querySelectorAll(".coins-compare-table tbody tr")];
+    const prices=comparison.map(row=>({
+      kind:row.getAttribute("data-compare"),
+      single:Number(row.querySelector("[data-compare-single]")?.getAttribute("data-compare-single")),
+      full:Number(row.querySelector("[data-compare-full]")?.getAttribute("data-compare-full")),
+      saved:Number(row.querySelector("[data-compare-saving]")?.getAttribute("data-compare-saving"))
+    }));
+    return {
+      benefitRows:rows.length,
+      eachBenefitHasFourDurations:rows.every(row=>row.querySelectorAll("td").length===4),
+      missionAccordions:document.querySelectorAll("#missions details.coins-accordion").length,
+      loginAccordion:!!document.querySelector("#coin-login-bonus:not([open])"),
+      hasPremiumLink:!!document.querySelector(".coins-conversion-panel a[href='/premium/']"),
+      prices
+    };
+  });
+  const expectedCoinComparison=[
+    {kind:"hour",single:1010,full:500,saved:510},
+    {kind:"day",single:4280,full:2500,saved:1780},
+    {kind:"week",single:32200,full:18000,saved:14200},
+    {kind:"month",single:119000,full:55000,saved:64000}
+  ];
+  if(coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
+     coins.missionAccordions!==4||!coins.loginAccordion||!coins.hasPremiumLink||
+     JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
+    log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
+  }
+  await page.locator("#coin-login-bonus summary").click();
+  if(!(await page.locator("#coin-login-bonus").evaluate(el=>el.open)))log("Login reward accordion does not expand");
+  await page.goto(base+"/premium/",{waitUntil:"networkidle"});
+  if(!(await page.locator(".premium-coin-panel a[href='/coins/']").count()))log("Premium to coins cross-link missing");
+  await page.goto(base+"/help/",{waitUntil:"networkidle"});
+  const helpCards=await page.locator("[data-help-card]").count();
+  if(helpCards!==79)log("Help must expose all 79 app topics",helpCards);
   await page.close();
 } catch(error){log("Unexpected error",error.stack||error.message)}
 finally {await browsers.close()}
