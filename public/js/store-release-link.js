@@ -8,7 +8,7 @@
 function init(){
  const button=document.querySelector("[data-play-store-button]");
  if(!button)return;
- const candidate=window.NIARIM_PLAY_STORE_URL;
+ const candidate=window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
  if(typeof candidate!=="string")return;
  let url;try{url=new URL(candidate)}catch(_){return}
  if(url.protocol!=="https:"||url.hostname!=="play.google.com"||url.pathname!=="/store/apps/details"||!url.searchParams.get("id"))return;

@@ -176,3 +176,13 @@ html body.nr-site .nr-pricing-panel span { font-family:var(--font-sans) !importa
 
 /* The two official fonts together provide the complete coined navigation label. */
 html body a[data-i18n="nav.coins"] {font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK" !important;}
+
+/* New creative tools are editorial, static and inexpensive to paint. */
+html body.nr-site .nr-new-features{padding:clamp(70px,8vw,110px) 0;background:#f7f2f3;}
+html body.nr-site .nr-new-features h2{font-size:clamp(2.1rem,4vw,3.4rem);margin:0 0 24px;}
+html body.nr-site .nr-new-features>div>p:not(.nr-kicker){max-width:54em;line-height:1.85;}
+html body.nr-site .nr-new-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin:30px 0 25px;}
+html body.nr-site .nr-new-feature-grid article{background:#fff;border:1px solid #e7d8dd;border-radius:16px;padding:clamp(21px,2.6vw,32px);}
+html body.nr-site .nr-new-feature-grid h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;margin:0 0 17px;}
+html body.nr-site .nr-new-feature-grid p{font-family:var(--font-sans) !important;line-height:1.85;}
+@media(max-width:800px){html body.nr-site .nr-new-feature-grid{grid-template-columns:1fr}}
