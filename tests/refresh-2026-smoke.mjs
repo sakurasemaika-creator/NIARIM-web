@@ -181,6 +181,9 @@ try {
       comparisonUnits:document.querySelectorAll(".coins-compare-table tbody .coins-unit").length,
       hasCurrencyLabel:/円|JPY|¥/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
       hasCoinCaption:/コイン/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
+      hasCoinAmountHeading:/交換に必要なコイン枚数/.test(document.querySelector(".coins-list-title")?.textContent||""),
+      earningShowsFixedRewards:/(?:[0-9０-９][,，0-9０-９]*\s*(?:枚|コイン|coins)|(?:コイン|coins)\s*[0-9０-９])/.test(document.querySelector("#earning")?.textContent||""),
+      marketingExplainsInternals:/(?:サーバー|バックエンド|検証済み|未実装|API|内部処理)/.test(document.querySelector(".coins-main")?.textContent||""),
       prices
     };
   });
@@ -193,6 +196,7 @@ try {
   if(coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
      coins.missionAccordions!==4||!coins.loginAccordion||!coins.hasPremiumLink||
      coins.units!==48||coins.comparisonUnits!==12||coins.hasCurrencyLabel||!coins.hasCoinCaption||
+     !coins.hasCoinAmountHeading||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
      JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
     log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
   }
