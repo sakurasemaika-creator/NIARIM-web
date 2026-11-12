@@ -1,0 +1,69 @@
+name: Publish verified NIARIM community screen
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - ".github/workflows/publish-community-capture.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-community-capture-dev
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+          fetch-depth: 1
+      - name: Download the real Flutter capture from NIARIM dev_branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          endpoint="https://api.github.com/repos/sakurasemaika-creator/NIARIM/actions/artifacts/13910833325/zip"
+          curl --fail --silent --show-error --location --retry 3 "$endpoint" -o /tmp/niarim-capture.zip ||
+            curl --fail --silent --show-error --location --retry 3 \
+              -H "Authorization: Bearer $GH_TOKEN" "$endpoint" -o /tmp/niarim-capture.zip
+          unzip -p /tmp/niarim-capture.zip 10_community.png > /tmp/niarim-community.png
+          printf '%s  %s\n' '538e4d7ad4a4e88c13cb081027bba023d350b716d7f04a681526898cde662d17' '/tmp/niarim-community.png' | sha256sum --check
+      - name: Compress screenshot without inventing UI
+        run: |
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          src=Path('/tmp/niarim-community.png')
+          out=Path('public/assets/images/app-captures/community.webp')
+          image=Image.open(src).convert('RGB')
+          assert image.size==(360,760), f'Unexpected capture size {image.size}'
+          image.save(out,format='WEBP',quality=82,method=6)
+          assert out.stat().st_size>1000
+          assert Image.open(out).size==(360,760)
+          print('Actual community capture published:',out, out.stat().st_size)
+          PY
+          cat > public/assets/images/app-captures/source-community.txt <<'TXT'
+          source_repo=sakurasemaika-creator/NIARIM
+          source_branch=dev_branch
+          source_commit=4a4daa265c936de73ed6d55ac076b58ada733764
+          source_workflow_run=43144886276
+          source_artifact=all-route-screenshot-audit
+          source_screen=10_community.png
+          source_resolution=360x760
+          captured_at=2026-11-12T02:59:14Z
+          TXT
+          node tests/studio-2026-contract.mjs
+      - name: Publish only to NIARIM-web dev_branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/images/app-captures/community.webp public/assets/images/app-captures/source-community.txt
+          if git diff --cached --quiet; then echo "Already published"; exit 0; fi
+          git commit -m "assets(web): publish real Flutter community screenshot"
+          git fetch origin dev_branch
+          git rebase origin/dev_branch || { git rebase --abort; exit 1; }
+          git push origin HEAD:dev_branch
