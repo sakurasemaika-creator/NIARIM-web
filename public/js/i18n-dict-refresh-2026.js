@@ -56,7 +56,7 @@
     "coins.choiceEarnBody": "ログインやミッション、対象広告などで集めたコインを、作品づくりのために使えます。",
     "coins.fullMonthBody": "プレミアムの対象機能をまとめて楽しめる、1か月のセットです。",
     "coins.fullYearBody": "長く使いたい人には1年間のセットも。月ごとに交換するより、必要なコインをおさえられます。",
-    "coins.catalog": "使うコインの数",
+    "coins.catalog": "交換に必要なコイン枚数",
     "coins.catalogCaution": "特典ごとに、利用する期間に応じた必要コイン数をまとめました。",
     "coins.tableCaption": "表の数字はすべて、交換に必要なコイン枚数です",
     "coins.unit": "コイン",
