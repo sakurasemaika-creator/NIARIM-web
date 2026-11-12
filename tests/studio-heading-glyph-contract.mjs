@@ -50,11 +50,11 @@ for(const n of [0,2,3]){
 /* The copy override is loaded after the normal dictionary. Check the actual
    licensed heading and body font ranges before accepting any new wording. */
 const bodyGlyphs=new Set();
-for(const match of css.matchAll(/@font-face\\s*\\{([\\s\\S]*?)\\}/g)){
+for(const match of css.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)){
   const face=match[1];
-  if(!/font-family:\\s*"(HakkouMincho|HakkouMinchoCJK)";/.test(face))continue;
-  const range=face.match(/unicode-range:\\s*([\\s\\S]*?);/)?.[1]||"";
-  for(const v of range.matchAll(/U\\+([0-9a-f]{4,6})(?:-([0-9a-f]{4,6}))?/gi)){
+  if(!/font-family:\s*"(HakkouMincho|HakkouMinchoCJK)";/.test(face))continue;
+  const range=face.match(/unicode-range:\s*([\s\S]*?);/)?.[1]||"";
+  for(const v of range.matchAll(/U\+([0-9a-f]{4,6})(?:-([0-9a-f]{4,6}))?/gi)){
     for(let cp=parseInt(v[1],16);cp<=parseInt(v[2]||v[1],16);cp++)bodyGlyphs.add(cp);
   }
 }
@@ -66,7 +66,9 @@ assert.ok(start>5&&end>start,"visitor copy JSON missing");
 const visitor=JSON.parse(overlay.slice(start,end));
 const headingKeys=new Set([
   "coins.title","coins.catalog","coins.compareTitle",
-  "premium.coinsTitle","coins.toPremiumTitle","refresh.plaza.title"
+  "premium.coinsTitle","coins.toPremiumTitle","refresh.plaza.title",
+  "refresh.story.title","refresh.draw.title","refresh.move.title",
+  "refresh.share.title","refresh.expression.title","refresh.price.title","refresh.launch.title"
 ]);
 for(const [key,value] of Object.entries(visitor.ja)){
  const font=headingKeys.has(key)?glyphs:bodyGlyphs;
