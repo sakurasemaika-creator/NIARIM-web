@@ -1,0 +1,71 @@
+name: Publish app help and Premium screenshots
+on:
+  push:
+    branches: [dev_branch]
+    paths: [".github/workflows/publish-premium-help-captures.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: verified-help-premium-screens-dev
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev_branch
+          fetch-depth: 1
+      - name: Retrieve verified NIARIM Flutter screenshots
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          artifact_url="https://api.github.com/repos/sakurasemaika-creator/NIARIM/actions/artifacts/13916197147/zip"
+          curl --fail --silent --show-error --location --retry 3 "$artifact_url" -o /tmp/niarim-images.zip ||
+            curl --fail --silent --show-error --location --retry 3 -H "Authorization: Bearer $GH_TOKEN" "$artifact_url" -o /tmp/niarim-images.zip
+          unzip -p /tmp/niarim-images.zip 12_premium.png >/tmp/niarim-premium.png
+          unzip -p /tmp/niarim-images.zip 29_help.png >/tmp/niarim-help.png
+          unzip -p /tmp/niarim-images.zip 09_autofill_presets.png >/tmp/niarim-autofill.png
+          printf '%s  %s\n' \
+            'a9ccbcbe5fcbc8fb31014f08b17d52a8e0bc45f46c055c32bfc35255f29aa505' '/tmp/niarim-premium.png' \
+            '378494f13c70776e411e7898d819507cee9c40b27c0ec1c59935d9cc47129035' '/tmp/niarim-help.png' \
+            'dcf5ce2a9e1bf692ec51a928cc94cae20647df893a45115496176b96a0a8722e' '/tmp/niarim-autofill.png' | sha256sum --check
+      - name: Publish lightweight web captures without redrawing UI
+        run: |
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          dst=Path("public/assets/images/app-captures")
+          dst.mkdir(parents=True,exist_ok=True)
+          for key in ("premium","help","autofill"):
+              image=Image.open(f"/tmp/niarim-{key}.png").convert("RGB")
+              assert image.size==(360,760),f"{key} unexpected size {image.size}"
+              output=dst/f"{key}.webp"
+              image.save(output,"WEBP",quality=82,method=6)
+              assert output.stat().st_size>1000
+              print(output,output.stat().st_size)
+          PY
+          cat >public/assets/images/app-captures/source-site-additions.txt <<'TXT'
+          source_repo=sakurasemaika-creator/NIARIM
+          source_branch=dev_branch
+          source_commit=7599a26e58
+          source_run=43156461562
+          source_artifact=13916197147
+          source_screens=12_premium.png,29_help.png,09_autofill_presets.png
+          source_dimensions=360x760
+          TXT
+      - name: Commit exclusively to NIARIM-web dev_branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/images/app-captures/premium.webp public/assets/images/app-captures/help.webp public/assets/images/app-captures/autofill.webp public/assets/images/app-captures/source-site-additions.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "assets(web): verified help, premium and auto-fill app screens"
+          git fetch origin dev_branch
+          git rebase origin/dev_branch || { git rebase --abort; exit 1; }
+          git push origin HEAD:dev_branch
