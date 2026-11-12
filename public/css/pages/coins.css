@@ -100,3 +100,17 @@ html:lang(ja) body .premium-coin-crosslink h2 {
   html body .coins-main .coins-accordion summary {padding:17px 15px;align-items:flex-start;}
   html body .coins-main .coins-accordion-count {margin-left:auto;font-size:.66rem;}
 }
+
+/* Goal conditions, not reward payouts; each label uses one licensed text face. */
+html body .coins-main .coins-goals-guide{margin:18px 0;padding:20px;border-radius:14px;border:1px solid #d9c4ce;background:#fffafb;color:#392a35;font-family:var(--font-sans)}
+html body .coins-main .coins-goals-guide p{color:#4d3c46;font-family:var(--font-sans);line-height:1.8}
+html body .coins-main .coins-detail-label{display:block;font:700 1.1rem/1.6 var(--font-sans);color:#48293b;margin-bottom:10px}
+html body .coins-main .coins-milestone-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:8px;padding:0;margin:18px 0 0}
+html body .coins-main .coins-milestone-grid li{font:650 .9rem/1.5 var(--font-sans);font-variant-numeric:tabular-nums;text-align:center;padding:8px 4px;background:#fff;border:1px solid #d7c1cb;border-radius:9px;color:#3f2c38}
+html body .coins-main .coins-mission-detail-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px;margin-top:18px}
+html body .coins-main .coins-goal-group{min-width:0;background:#fffafb;border:1px solid #e1cdd6;border-radius:12px;padding:15px 17px}
+html body .coins-main .coins-goal-group .coins-goal-group{margin-top:12px;background:#fff}
+html body .coins-main .coins-goal-group strong{display:block;font:700 .95rem/1.7 var(--font-sans);color:#582e44;margin-bottom:7px}
+html body .coins-main .coins-goal-group p{font:.88rem/1.8 var(--font-sans);color:#4c3d47;overflow-wrap:anywhere;margin:0}
+html body .coins-main .coins-goal-values{font-variant-numeric:tabular-nums}
+@media(max-width:550px){html body .coins-main .coins-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}html body .coins-main .coins-mission-detail-list{grid-template-columns:1fr}}
