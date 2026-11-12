@@ -186,3 +186,11 @@ html body.nr-site .nr-new-feature-grid article{background:#fff;border:1px solid 
 html body.nr-site .nr-new-feature-grid h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;margin:0 0 17px;}
 html body.nr-site .nr-new-feature-grid p{font-family:var(--font-sans) !important;line-height:1.85;}
 @media(max-width:800px){html body.nr-site .nr-new-feature-grid{grid-template-columns:1fr}}
+
+/* Exact app-help text is never rewritten merely to fit a heading subset. */
+html body .feature-section [data-help-card] h3,
+html body .coins-main :is(h1,h2,h3),
+html body .coins-main .coins-shortcuts a,
+html body .coins-main .coins-table thead th {
+ font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK" !important;
+}

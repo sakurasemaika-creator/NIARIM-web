@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
-const routes = ["/","/about/","/features/","/help/","/premium/","/community/","/news/","/faq/","/contact/","/privacy/","/terms/","/font-licenses/"];
+const routes = ["/","/about/","/features/","/help/","/premium/","/community/","/news/","/faq/","/contact/","/privacy/","/terms/","/font-licenses/","/coins/"];
 const html = route => fs.readFileSync("public"+(route==="/" ? "/index.html":route+"index.html"),"utf8");
 for(const path of routes){
   const content=html(path);

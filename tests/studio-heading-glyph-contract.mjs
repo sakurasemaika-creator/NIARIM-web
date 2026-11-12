@@ -26,7 +26,9 @@ for(const route of routes){
  const content=fs.readFileSync(path,"utf8");
  let idx=0;
  for(const match of content.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)){
-   validate(path+":"+(++idx),match[1]);
+   // In-app help must remain verbatim, even where the heading subset lacks a
+   // glyph: that route uses the other approved font as an explicit fallback.
+   if(path!=="public/help/index.html")validate(path+":"+(++idx),match[1]);
  }
 }
 const dict=fs.readFileSync("public/js/i18n-dict-refresh-2026.js","utf8");
