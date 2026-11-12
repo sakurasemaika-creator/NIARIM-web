@@ -25,6 +25,7 @@ const PAGES = [
   "/features/",
   "/help/",
   "/premium/",
+  "/coins/",
   "/community/",
   "/news/",
   "/faq/",
@@ -60,6 +61,8 @@ const ORIGIN = process.env.NIARIM_ORIGIN || "http://localhost:8788";
       // 閉じているアコーディオンの中身も対象にするため一度すべて開く
       await page.evaluate(() => {
         document.querySelectorAll(".faq-question").forEach((q) => q.click());
+        // Coin/mission details use native disclosure widgets rather than FAQ buttons.
+        document.querySelectorAll("details").forEach((detail) => { detail.open = true; });
       });
       await page.waitForTimeout(300);
 
