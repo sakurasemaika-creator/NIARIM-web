@@ -1,4 +1,45 @@
-(function(){ "use strict"; var dict=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={});var tables={"ja":{"communityPage.comingSoon":"この作品一覧はNIARIMアプリと同じ公開データを参照します。リリース前のため、作品がまだ投稿されていない場合があります。","communityPage.ranking.note":"新着と累計ブックマーク数のランキングを表示します。期間別ランキングはアプリ側で集計準備中です。","narrative.community.3.body":"NIARIM内のブックマーク数をもとに、累計ランキングを見ることができます。期間別のランキングは集計機能の提供を準備しています。","communityPage.update.body":"新着作品は公開APIの情報を参照します。累計ランキングはNIARIM内のブックマーク数を基準としています。期間別ランキングは今後の対応を予定しています。"},"en":{"communityPage.comingSoon":"This page uses the same public work data as the NIARIM app. There may be no posted works before launch.","communityPage.ranking.note":"Latest works and all-time bookmark rankings are available. Period rankings are not yet supported by the app backend.","narrative.community.3.body":"Discover the all-time ranking by the number of bookmarks within NIARIM. Period-specific rankings are not supported yet.","communityPage.update.body":"New works use the public API. All-time rankings are based on NIARIM bookmarks. Period rankings will be added later."},"zh-Hans":{"communityPage.comingSoon":"本页面与NIARIM应用使用相同的公开作品数据。正式发布前可能还没有投稿。","communityPage.ranking.note":"显示最新作品与累计收藏排行。期间排行尚未在应用后台实现。","narrative.community.3.body":"根据 NIARIM 内的收藏数量查看累计排行。期间排行尚未提供。","communityPage.update.body":"最新作品来自公开 API，累计排行根据 NIARIM 收藏数计算。期间排行将于今后提供。"},"zh-Hant":{"communityPage.comingSoon":"本頁與NIARIM應用程式使用相同的公開作品資料。正式發布前可能尚無投稿。","communityPage.ranking.note":"顯示最新作品與累計書籤排行。期間排行尚未在應用程式後端實作。","narrative.community.3.body":"根據 NIARIM 內的書籤數量查看累計排行。期間排行尚未提供。","communityPage.update.body":"最新作品來自公開 API，累計排行根據 NIARIM 書籤數計算。期間排行日後提供。"},"ko":{"communityPage.comingSoon":"이 페이지는 NIARIM 앱과 같은 공개 작품 데이터를 사용합니다. 출시 전에는 작품이 없을 수 있습니다.","communityPage.ranking.note":"최신 작품과 누적 북마크 순위를 표시합니다. 기간별 순위는 아직 지원되지 않습니다.","narrative.community.3.body":"NIARIM 내 북마크 수 기준 누적 순위를 볼 수 있습니다. 기간별 순위는 준비 중입니다.","communityPage.update.body":"최신 작품은 공개 API에서 가져오며 누적 순위는 NIARIM 북마크 수를 기준으로 합니다. 기간별 순위는 추후 제공됩니다."},"fr":{"communityPage.comingSoon":"Cette page utilise les mêmes œuvres publiques que l’application NIARIM. Il peut ne pas encore y avoir de publications avant le lancement.","communityPage.ranking.note":"Nouveautés et classement général par favoris. Les classements périodiques ne sont pas encore disponibles.","narrative.community.3.body":"Découvrez le classement général selon les favoris NIARIM. Les classements périodiques ne sont pas encore pris en charge.","communityPage.update.body":"Les nouveautés proviennent de l'API publique. Le classement général se base sur les favoris NIARIM. Les classements périodiques seront disponibles plus tard."},"es":{"communityPage.comingSoon":"Esta página usa las mismas obras públicas que la app NIARIM. Es posible que todavía no haya publicaciones antes del lanzamiento.","communityPage.ranking.note":"Novedades y clasificación general por marcadores. Las clasificaciones periódicas aún no están disponibles.","narrative.community.3.body":"Consulta la clasificación general por marcadores de NIARIM. Las clasificaciones periódicas aún no están disponibles.","communityPage.update.body":"Las novedades proceden de la API pública. El ranking general se basa en los marcadores NIARIM. Las clasificaciones periódicas llegarán después."}};Object.keys(tables).forEach(function(lang){dict[lang]=Object.assign(dict[lang]||{},tables[lang]);});})();
-
-/* Same calendar-period ranking definitions in all seven languages. */
-(function(){var d=window.NIARIM_I18N_DICT||{};var entries={"ja":{"communityPage.ranking.note":"アプリと同じデータから、累計・日間・週間・月間・年間のブックマークランキングを表示します。","narrative.community.3.body":"累計は現在のブックマーク数、期間別はその期間に増えたブックマーク数で順位が決まります。期間は日本時間で切り替わります。","communityPage.update.body":"新着とランキングはアプリと共通のAPIから取得します。期間別ランキングは日本時間の各期間で集計します。"},"en":{"communityPage.ranking.note":"The same public data powers the app and the all-time, daily, weekly, monthly and yearly bookmark rankings.","narrative.community.3.body":"All-time ranks by current bookmarks. Period rankings count bookmarks added during each Japan-time calendar window.","communityPage.update.body":"Latest works and rankings use the app's public API. Periods switch at Japan-time calendar boundaries."},"zh-Hans":{"communityPage.ranking.note":"与应用相同的数据提供累计、日、周、月、年收藏排行榜。","narrative.community.3.body":"累计排行依据当前收藏数；期间排行依据日本时间该期间新增的收藏数。","communityPage.update.body":"最新作品与排行榜来自应用公开 API。期间按日本时间划分。"},"zh-Hant":{"communityPage.ranking.note":"與應用程式相同的資料提供累計、日、週、月、年書籤排行榜。","narrative.community.3.body":"累計排行依目前書籤數；期間排行依日本時間該期間新增的書籤數。","communityPage.update.body":"最新作品與排行榜來自應用程式公開 API。期間依日本時間計算。"},"ko":{"communityPage.ranking.note":"앱과 동일한 데이터를 사용해 누적·일간·주간·월간·연간 북마크 순위를 표시합니다.","narrative.community.3.body":"누적 순위는 현재 북마크 수, 기간별 순위는 일본 시간 기준 해당 기간에 추가된 북마크 수로 결정됩니다.","communityPage.update.body":"최신 작품과 랭킹은 앱과 같은 공개 API를 사용하며 기간은 일본 시간으로 구분합니다."},"fr":{"communityPage.ranking.note":"Les classements par favoris — général, quotidien, hebdomadaire, mensuel et annuel — utilisent les données de l’application.","narrative.community.3.body":"Le général utilise les favoris actuels, les classements périodiques les favoris ajoutés durant la période au Japon.","communityPage.update.body":"Œuvres et classements utilisent la même API publique que l’application. Périodes en heure japonaise."},"es":{"communityPage.ranking.note":"Los rankings de marcadores — general, diario, semanal, mensual y anual — usan los mismos datos de la app.","narrative.community.3.body":"El ranking general usa los marcadores actuales. Los rankings por período usan los añadidos durante cada período en Japón.","communityPage.update.body":"Las obras y los rankings usan la API pública de la app. Los períodos siguen la hora de Japón."}};Object.keys(entries).forEach(function(lang){d[lang]=Object.assign(d[lang]||{},entries[lang]);});})();
+/* Audience-focused gallery copy, shared by the seven site languages. */
+(function(){ "use strict"; var translations={
+  "ja": {
+    "communityPage.comingSoon": "NIARIMの作品広場で、新しいアニメに出会いましょう。気になった作品はブックマークして、あとから楽しめます。",
+    "communityPage.ranking.note": "新着作品や、ブックマークで人気を集めた作品を探せます。",
+    "narrative.community.3.body": "たくさんの作品からお気に入りを発見。ブックマークを集めた作品もチェックして、新しいアイデアを見つけよう。",
+    "communityPage.update.body": "新しい作品や人気の作品を探せます。気になる作品を見つけたら、ブックマークして後からゆっくり楽しめます。"
+  },
+  "en": {
+    "communityPage.comingSoon": "Discover animations in the NIARIM gallery. Bookmark your favorites to enjoy again later.",
+    "communityPage.ranking.note": "Discover new works and popular creations based on bookmarks.",
+    "narrative.community.3.body": "Find new inspiration among everyone's creations, including works loved by the community.",
+    "communityPage.update.body": "Explore new and popular works. Bookmark the ones you love and return to them anytime."
+  },
+  "zh-Hans": {
+    "communityPage.comingSoon": "在 NIARIM 作品广场发现新动画。喜欢的作品可以收藏，随时重温。",
+    "communityPage.ranking.note": "探索新作品以及受到大家收藏的热门作品。",
+    "narrative.community.3.body": "在各种作品中寻找灵感，也可以看看大家喜欢收藏的创作。",
+    "communityPage.update.body": "探索新作品和热门作品。发现喜欢的作品就收藏起来，以后再慢慢欣赏。"
+  },
+  "zh-Hant": {
+    "communityPage.comingSoon": "在 NIARIM 作品廣場發現新動畫。喜歡的作品可以加入書籤，隨時重溫。",
+    "communityPage.ranking.note": "探索新作品以及受到大家喜愛的熱門作品。",
+    "narrative.community.3.body": "在各種作品中尋找靈感，也可以看看大家喜愛收藏的創作。",
+    "communityPage.update.body": "探索新作品和熱門作品。發現喜歡的作品就加入書籤，以後再慢慢欣賞。"
+  },
+  "ko": {
+    "communityPage.comingSoon": "NIARIM 작품 광장에서 새로운 애니메이션을 만나 보세요. 마음에 드는 작품을 북마크해 다시 즐길 수 있어요.",
+    "communityPage.ranking.note": "새 작품과 북마크로 사랑받는 인기 작품을 찾아보세요.",
+    "narrative.community.3.body": "다양한 작품에서 영감을 얻고 다른 사람들이 좋아하는 작품도 둘러보세요.",
+    "communityPage.update.body": "새 작품과 인기 작품을 둘러보세요. 마음에 드는 작품을 북마크하고 언제든 다시 감상하세요."
+  },
+  "fr": {
+    "communityPage.comingSoon": "Découvrez des animations dans la galerie NIARIM. Enregistrez vos favorites pour les revoir.",
+    "communityPage.ranking.note": "Découvrez les nouveautés et les créations populaires auprès des utilisateurs.",
+    "narrative.community.3.body": "Trouvez l'inspiration parmi les créations de la communauté et ses œuvres favorites.",
+    "communityPage.update.body": "Parcourez les nouveautés et les œuvres populaires. Enregistrez celles que vous aimez pour y revenir."
+  },
+  "es": {
+    "communityPage.comingSoon": "Descubre animaciones en la galería NIARIM. Guarda tus favoritas para volver a disfrutarlas.",
+    "communityPage.ranking.note": "Descubre obras nuevas y creaciones populares por sus marcadores.",
+    "narrative.community.3.body": "Encuentra inspiración entre las creaciones de la comunidad y sus obras favoritas.",
+    "communityPage.update.body": "Explora obras nuevas y populares. Guarda las que te gusten para volver a verlas cuando quieras."
+  }
+}; var dict=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={}); Object.keys(translations).forEach(function(locale){dict[locale]=Object.assign(dict[locale]||{},translations[locale]);});})();
