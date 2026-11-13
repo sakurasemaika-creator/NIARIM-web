@@ -196,3 +196,9 @@ html body .coins-main .coins-shortcuts a,
 html body .coins-main .coins-table thead th {
  font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK" !important;
 }
+
+/* Preserve the exact in-app help title. This entry needs glyphs that
+   Kuramubon does not ship, so render the entire title in HakkouMincho. */
+html:lang(ja) body [data-help-card] h3[data-i18n="help.entry19.title"] {
+  font-family:var(--font-sans) !important;
+}
