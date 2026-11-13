@@ -35,15 +35,16 @@ const browser = await chromium.launch(launchOptions());
 const findings = [];
 const routeReports = [];
 try {
-  for (const route of routes) {
-    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  for (const width of [390, 1280]) {
+   for (const route of routes) {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
     const response = await page.goto(base + route + "?lang=ja", { waitUntil: "networkidle" });
     if (!response || response.status() !== 200) throw Error("Unavailable page: " + route);
     await page.evaluate(async () => {
       document.querySelectorAll("details").forEach(d => { d.open = true; });
       await document.fonts.ready;
     });
-    const result = await page.evaluate(({ h, b }) => {
+    const result = await page.evaluate(({ h, b, route }) => {
       const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b) };
       const discovered = [];
       const totals = { Kuramubon: 0, HakkouMincho: 0, unknown: 0 };
@@ -73,21 +74,40 @@ try {
           text: node.textContent.trim().slice(0,100)
         });
       }
+      // All footer navigation links share the licensed body font.
+      for (const a of document.querySelectorAll(".site-footer .footer-col a")) {
+        const first = getComputedStyle(a).fontFamily.split(",")[0].trim().replace(/^["\x27]|["\x27]$/g, "");
+        if (!first.startsWith("HakkouMincho")) discovered.push({ family: first, chars: "", where: "footer:" + a.textContent.trim(), text: "Footer font mismatch" });
+      }
+      const navCoin = document.querySelector("header a[data-i18n=\"nav.coins\"]");
+      if (navCoin) {
+        const first = getComputedStyle(navCoin).fontFamily.split(",")[0].trim().replace(/^["\x27]|["\x27]$/g, "");
+        if (!first.startsWith("Kuramubon")) discovered.push({ family: first, chars: "", where: "navigation:coins", text: navCoin.textContent.trim() });
+      }
+      if (route === "/community/") {
+        const labels = [...document.querySelectorAll("[data-community-tab]")].map(x => x.textContent.trim());
+        const expected = ["新着", "1day", "1week", "1month", "1year", "ALL TIME"];
+        if (JSON.stringify(labels) !== JSON.stringify(expected)) discovered.push({ family: "labels", chars: "", where: "community:period-tabs", text: JSON.stringify(labels) });
+      }
+      if (route === "/premium/" && document.querySelector("main")?.textContent.includes("コイン・特典")) {
+        discovered.push({ family: "copy", chars: "", where: "premium:obsolete-coin-navigation", text: "Legacy coin benefit label remains" });
+      }
       return { discovered, totals };
-    }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho] });
+    }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], route });
     const unique = new Map();
     for (const f of result.discovered) {
       const key = f.family + ":" + f.where + ":" + f.chars;
-      if (!unique.has(key)) unique.set(key, { route, ...f });
+      if (!unique.has(key)) unique.set(key, { route, width, ...f });
     }
     findings.push(...unique.values());
-    routeReports.push({ route, ...result.totals, missingGroups: unique.size });
+    routeReports.push({ route, width, ...result.totals, missingGroups: unique.size });
     console.log("FONT_ROUTE", JSON.stringify(routeReports.at(-1)));
     await page.close();
+   }
   }
 } finally {
   await browser.close();
 }
 console.log("FONT_FINDINGS", JSON.stringify(findings.slice(0, 150)));
-console.log("FONT_SUMMARY", JSON.stringify({ missingGroups: findings.length, routes: routes.length, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
+console.log("FONT_SUMMARY", JSON.stringify({ missingGroups: findings.length, routes: routes.length, widths: 2, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
 if (findings.length && process.env.FONT_AUDIT_STRICT === "1") process.exitCode = 1;

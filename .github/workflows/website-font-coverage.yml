@@ -7,8 +7,7 @@ on:
       - "tests/website-glyph-coverage-audit.mjs"
       - "public/**/*.html"
       - "public/css/**"
-      - "public/js/i18n-dict*.js"
-      - "public/js/visitor-copy-and-goals.js"
+      - "public/js/**"
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,5 +29,7 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-font-site.log
           exit 1
-      - name: Inspect all Japanese page glyphs and computed font families
+      - name: Inspect Japanese glyphs, mobile/desktop layout fonts, labels and footer
+        env:
+          FONT_AUDIT_STRICT: "1"
         run: node tests/website-glyph-coverage-audit.mjs
