@@ -132,3 +132,17 @@ html:lang(ja) body .coins-main [data-i18n="coins.week"],
 html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
   font-family:"HakkouMincho","HakkouMinchoCJK",serif !important;
 }
+
+/* Pricing rows share one licensed face; prevent mismatched individual fallback glyphs. */
+html:lang(ja) body .coins-main .coins-table--priced :is(th,td),
+html:lang(ja) body .coins-main .coins-compare-table :is(th,td),
+html:lang(ja) body .coins-main .coins-table--priced .coins-unit,
+html:lang(ja) body .coins-main .coins-compare-table .coins-unit {
+ font-family:"HakkouMincho","HakkouMinchoCJK",serif !important;
+}
+html:lang(ja) body .coins-main .coins-table--priced thead [data-i18n^="coins.table"] {
+ font-family:"Kuramubon","KuramubonCJK",serif !important;white-space:nowrap;
+}
+.coins-main .coins-year-versus-month{font:500 .91rem/1.8 var(--font-sans);margin:20px 0 12px;color:#4f3c46}
+.coins-main .coins-year-versus-month strong{display:block;font-weight:750;color:#8d2b4b;margin-bottom:3px}
+.coins-main .coins-year-versus-month span{display:block}
