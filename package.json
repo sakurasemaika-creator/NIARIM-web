@@ -17,11 +17,12 @@
     "audit:visual-screenshots": "node tests/final-visual-screenshot-audit.mjs",
     "audit:mock-detail": "node tests/mock-detail-audit.mjs",
     "audit:style-source": "node tests/source-style-consistency-audit.mjs",
-    "audit:all": "npm run audit && npm run audit:browser && npm run audit:multilang && npm run audit:intermediate-widths && npm run audit:i18n && npm run audit:visual-final && npm run audit:visual-screenshots && npm run audit:mock-detail && npm run audit:style-source && npm run audit:font-capture",
+    "audit:all": "npm run audit && npm run audit:browser && npm run audit:multilang && npm run audit:intermediate-widths && npm run audit:i18n && npm run audit:visual-final && npm run audit:visual-screenshots && npm run audit:mock-detail && npm run audit:style-source && npm run audit:font-capture && npm run audit:opal",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown",
     "audit:font-capture": "node tests/font-and-captures-contract.mjs",
-    "audit:brand-direction": "node tests/brand-direction-contract.mjs"
+    "audit:brand-direction": "node tests/brand-direction-contract.mjs",
+    "audit:opal": "node tests/opal-brand-contract.mjs"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
