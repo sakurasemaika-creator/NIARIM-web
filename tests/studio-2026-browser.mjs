@@ -35,7 +35,12 @@ try {
           .filter(el=>visible(el)&&!el.closest(".fd-app-screen,.fd-route-screen,.feature-diagram--real"));
         return {
           overflow:document.documentElement.scrollWidth-innerWidth,
-          headings:headings.filter(el=>!getComputedStyle(el).fontFamily.includes("Kuramubon"))
+          headings:headings.filter(el=>
+            !getComputedStyle(el).fontFamily.includes("Kuramubon") &&
+            // Preserve the in-app help title verbatim; this one heading uses
+            // HakkouMincho for missing Kuramubon glyphs, never mixed faces.
+            !(route === "/help/" && el.matches('[data-i18n="help.entry19.title"]') &&
+              getComputedStyle(el).fontFamily.includes("HakkouMincho")))
              .slice(0,6).map(el=>({text:el.textContent.trim().slice(0,50),family:getComputedStyle(el).fontFamily})),
           body:getComputedStyle(document.body).fontFamily
         };
