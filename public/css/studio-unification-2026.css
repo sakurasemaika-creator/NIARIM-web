@@ -208,3 +208,13 @@ html:lang(ja) body [data-help-card] h3[data-i18n="help.entry19.title"] {
 html body .lang-dropdown :is(.lang-trigger,.lang-menu button) {
   font-family:"NotoSerifMenuJP","NotoSerifMenuSC","NotoSerifMenuKR",var(--font-sans) !important;
 }
+
+/* No platform-font islands inside the public Japanese landing page.
+   Editorial actions stay in Kuramubon; small explanatory copy and counters
+   use HakkouMincho, like the remaining 12 public pages. */
+html:lang(ja) body.nr-site .nr-main :is(.nr-hero-feature-link,.nr-story-copy>a) {
+  font-family:var(--font-serif) !important;
+}
+html:lang(ja) body.nr-site .nr-main :is(.nr-preview-footnote,.nr-hero-bottom>span,.nr-hero-bottom>a,.nr-mini-list>span,.nr-gallery-meta>span) {
+  font-family:var(--font-sans) !important;
+}

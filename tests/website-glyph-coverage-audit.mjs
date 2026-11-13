@@ -106,6 +106,7 @@ try {
       const key = f.family + ":" + f.where + ":" + f.chars;
       if (!unique.has(key)) unique.set(key, { route, width, ...f });
     }
+    if (result.totals.unknown) unique.set("unapproved-font", { route, width, family:"unapproved-font", chars:"", where:"unapproved computed font family", text:JSON.stringify(result.unknownDetails).slice(0,250) });
     findings.push(...unique.values());
     routeReports.push({ route, width, ...result.totals, missingGroups: unique.size });
     console.log("FONT_ROUTE", JSON.stringify(routeReports.at(-1)));
