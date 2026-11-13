@@ -48,6 +48,7 @@ try {
     const result = await page.evaluate(({ h, b, m, route }) => {
       const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b), Menu: new Set([...m, ...b]) };
       const discovered = [];
+      const unknownDetails = [];
       const totals = { Kuramubon: 0, HakkouMincho: 0, Menu: 0, unknown: 0 };
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
       let node;
@@ -61,7 +62,11 @@ try {
         const family = firstFont.startsWith("Kuramubon") ? "Kuramubon" :
           firstFont.startsWith("HakkouMincho") ? "HakkouMincho" :
           firstFont.startsWith("NotoSerifMenu") ? "Menu" : null;
-        if (!family) { totals.unknown++; continue; }
+        if (!family) {
+          totals.unknown++;
+          if (unknownDetails.length < 35) unknownDetails.push({ text: node.textContent.trim().slice(0,70), font: style.fontFamily.slice(0,120), tag: el.tagName, className: typeof el.className === "string" ? el.className.slice(0,70) : "" });
+          continue;
+        }
         totals[family]++;
         const missing = [...new Set([...node.textContent].filter(c =>
           c.trim() && !families[family].has(c.codePointAt(0))))].join("");
@@ -94,7 +99,7 @@ try {
       if (route === "/premium/" && document.querySelector("main")?.textContent.includes("コイン・特典")) {
         discovered.push({ family: "copy", chars: "", where: "premium:obsolete-coin-navigation", text: "Legacy coin benefit label remains" });
       }
-      return { discovered, totals };
+      return { discovered, totals, unknownDetails };
     }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], m: [...glyphs.Menu], route });
     const unique = new Map();
     for (const f of result.discovered) {
@@ -104,6 +109,7 @@ try {
     findings.push(...unique.values());
     routeReports.push({ route, width, ...result.totals, missingGroups: unique.size });
     console.log("FONT_ROUTE", JSON.stringify(routeReports.at(-1)));
+    if (result.unknownDetails.length) console.log("FONT_UNKNOWN", JSON.stringify({route,width,details:result.unknownDetails}));
     await page.close();
    }
   }
