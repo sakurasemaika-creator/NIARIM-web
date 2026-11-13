@@ -26,7 +26,7 @@ try {
       const response=await page.goto(base+route,{waitUntil:"domcontentloaded"});
       if(!response || response.status()>=400)bad.push("HTTP "+width+" "+route+" "+response?.status());
       await page.evaluate(()=>document.fonts.ready);
-      const results=await page.evaluate(()=>{
+      const results=await page.evaluate((route)=>{
         const visible=el=>{
           const st=getComputedStyle(el),r=el.getBoundingClientRect();
           return st.display!=="none" && st.visibility!=="hidden" && r.width>0 && r.height>0;
@@ -44,7 +44,7 @@ try {
              .slice(0,6).map(el=>({text:el.textContent.trim().slice(0,50),family:getComputedStyle(el).fontFamily})),
           body:getComputedStyle(document.body).fontFamily
         };
-      });
+      }, route);
       if(results.overflow>3) bad.push("Horizontal overflow "+width+" "+route+" "+results.overflow);
       if(results.headings.length) bad.push("Non-Kuramubon heading "+width+" "+route+" "+JSON.stringify(results.headings));
       if(!results.body.includes("HakkouMincho"))bad.push("Body font "+width+" "+route+" "+results.body);
