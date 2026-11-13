@@ -1,10 +1,8 @@
 /**
  * NIARIM公式サイト プレミアムプランページ 翻訳辞書
  *
- * 価格・機能はNIARIMアプリ(dev_branch)の docs/AI設計書/01_プロジェクト概要.md
- * に記載の設計仕様(月額550円/年額5500円、無料版=全基本機能+広告あり、
- * プレミアム=広告非表示・エンドロゴ編集・ウォーターマーク・トーンカーブ・
- * レベル補正)に基づく。価格は変更の可能性があるため、その旨をページ内に明記している。
+ * 価格や対象機能の変更がある場合は最新のGoogle Play表示を優先する。
+ * この辞書はアプリ公開後の利用者向けの文章のみを掲載する。
  */
 (function () {
   "use strict";
@@ -19,7 +17,7 @@
       "premiumPage.lead":
         "無料版でも動画書き出しを含む基本的な制作機能はすべてご利用いただけます。プレミアムプランでは、広告の非表示や仕上げのための追加機能をご利用いただけます。",
       "premiumPage.priceNote":
-        "表示されている金額は現時点の想定価格です。正式リリース時に変更となる場合があり、その際は本ページも更新します。最新の価格はGoogle Playのアプリページをご確認ください。",
+        "料金や購入条件は変更される場合があります。ご購入前にGoogle Playに表示される最新の料金・条件をご確認ください。",
       "premiumPage.free.title": "無料版",
       "premiumPage.free.price": "0円",
       "premiumPage.free.item1":
@@ -81,7 +79,7 @@
       "premiumPage.lead":
         "Even the free version includes every core creation feature, including video export. The Premium plan removes ads and adds extra tools for finishing your work.",
       "premiumPage.priceNote":
-        "The prices shown are current planned prices and may change at official launch; this page will be updated if they do. Please check the Google Play listing for the latest pricing.",
+        "Prices and purchase terms may change. Please check the latest prices and terms on Google Play before purchasing.",
       "premiumPage.free.title": "Free",
       "premiumPage.free.price": "¥0",
       "premiumPage.free.item1":
@@ -142,7 +140,7 @@
       "premiumPage.lead":
         "即使是免费版，也能使用包括视频导出在内的全部基础创作功能。高级会员方案可移除广告，并提供用于最终润色的附加功能。",
       "premiumPage.priceNote":
-        "所示金额为目前的预计价格，正式上线时可能会有变动，如有变更本页面也会随之更新。最新价格请以 Google Play 应用页面为准。",
+        "价格及购买条件可能调整。购买前请以 Google Play 显示的最新价格及条款为准。",
       "premiumPage.free.title": "免费版",
       "premiumPage.free.price": "0 日元",
       "premiumPage.free.item1": "全部基础创作功能（绘画・动画・编辑・音频）",
@@ -199,7 +197,7 @@
       "premiumPage.lead":
         "即使是免費版，也能使用包括影片匯出在內的全部基礎創作功能。高級會員方案可移除廣告，並提供用於最終潤飾的附加功能。",
       "premiumPage.priceNote":
-        "所示金額為目前的預計價格，正式上線時可能會有變動，如有變更本頁面也會隨之更新。最新價格請以 Google Play 應用程式頁面為準。",
+        "價格及購買條件可能調整。購買前請以 Google Play 顯示的最新價格及條款為準。",
       "premiumPage.free.title": "免費版",
       "premiumPage.free.price": "0 日圓",
       "premiumPage.free.item1": "全部基礎創作功能（繪圖・動畫・編輯・音訊）",
@@ -256,7 +254,7 @@
       "premiumPage.lead":
         "무료 버전에서도 영상 내보내기를 포함한 모든 기본 제작 기능을 이용할 수 있습니다. 프리미엄 플랜에서는 광고가 사라지고, 마무리 작업을 위한 추가 기능을 이용할 수 있습니다.",
       "premiumPage.priceNote":
-        "표시된 금액은 현재 예상 가격입니다. 정식 출시 시 변경될 수 있으며, 그 경우 이 페이지도 업데이트합니다. 최신 가격은 Google Play 앱 페이지를 확인해 주세요.",
+        "요금과 구매 조건은 변경될 수 있습니다. 구매 전에 Google Play에 표시된 최신 요금과 조건을 확인해 주세요.",
       "premiumPage.free.title": "무료 버전",
       "premiumPage.free.price": "0원",
       "premiumPage.free.item1":
@@ -317,7 +315,7 @@
       "premiumPage.lead":
         "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. L'offre Premium supprime les publicités et ajoute des outils supplémentaires pour la finition.",
       "premiumPage.priceNote":
-        "Les prix indiqués sont des prix prévisionnels actuels et pourront changer au lancement officiel ; cette page sera alors mise à jour. Consultez la fiche Google Play pour les tarifs les plus récents.",
+        "Les prix et les conditions d'achat peuvent changer. Vérifiez les tarifs et les conditions en vigueur sur Google Play avant votre achat.",
       "premiumPage.free.title": "Gratuit",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
@@ -380,7 +378,7 @@
       "premiumPage.lead":
         "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de video. El plan Premium elimina los anuncios y añade herramientas adicionales para el acabado.",
       "premiumPage.priceNote":
-        "Los precios mostrados son precios previstos actuales y podrían cambiar en el lanzamiento oficial; esta página se actualizará si es así. Consulta la ficha de Google Play para conocer los precios más recientes.",
+        "Los precios y las condiciones de compra pueden cambiar. Consulta los precios y las condiciones vigentes en Google Play antes de comprar.",
       "premiumPage.free.title": "Gratis",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
