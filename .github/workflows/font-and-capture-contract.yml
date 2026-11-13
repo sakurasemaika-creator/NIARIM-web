@@ -9,6 +9,10 @@ on:
       - public/assets/images/app-captures/**
       - public/assets/fonts/LICENSE.md
       - tests/font-and-captures-contract.mjs
+      - tests/opal-brand-contract.mjs
+      - public/js/opal-ui-naming.js
+      - public/js/visitor-copy-and-goals.js
+      - public/css/pages/coins.css
       - .github/workflows/font-and-capture-contract.yml
   workflow_dispatch:
 permissions:
@@ -24,3 +28,4 @@ jobs:
         with:
           node-version: "22"
       - run: node tests/font-and-captures-contract.mjs
+      - run: node tests/opal-brand-contract.mjs
