@@ -45,7 +45,7 @@ try {
       document.querySelectorAll("details").forEach(d => { d.open = true; });
       await document.fonts.ready;
     });
-    const result = await page.evaluate(({ h, b, route }) => {
+    const result = await page.evaluate(({ h, b, m, route }) => {
       const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b), Menu: new Set([...m, ...b]) };
       const discovered = [];
       const totals = { Kuramubon: 0, HakkouMincho: 0, Menu: 0, unknown: 0 };
