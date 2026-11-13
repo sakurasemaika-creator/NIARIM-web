@@ -125,3 +125,10 @@ html body .coins-main .coins-goal-values{font-variant-numeric:tabular-nums}
 .coins-table--priced .coins-year-standard{color:#574552;}
 .coins-main .coins-goal-values{overflow-wrap:anywhere;line-height:2;}
 @media(max-width:750px){.coins-discount-tag,.coins-saving-badge{font-size:.7rem;}}
+
+/* Full benefit names and the period 週 need the licensed body font;
+   Kuramubon display subset does not include 特・典・週. */
+html:lang(ja) body .coins-main [data-i18n="coins.week"],
+html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
+  font-family:"HakkouMincho","HakkouMinchoCJK",serif !important;
+}
