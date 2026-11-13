@@ -202,3 +202,9 @@ html body .coins-main .coins-table thead th {
 html:lang(ja) body [data-help-card] h3[data-i18n="help.entry19.title"] {
   font-family:var(--font-sans) !important;
 }
+
+/* Language-menu labels span Japanese, Chinese and Korean. Restore the
+   bundled micro-fonts; the generic button heading rule must not override them. */
+html body .lang-dropdown :is(.lang-trigger,.lang-menu button) {
+  font-family:"NotoSerifMenuJP","NotoSerifMenuSC","NotoSerifMenuKR",var(--font-sans) !important;
+}
