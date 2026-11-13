@@ -161,7 +161,7 @@ try {
   if(featurePairs.sp!==9||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
   // Check that the priced coin benefits page is actually usable, not just
   // advertised in landing-page copy, and that the cross-links work both ways.
-  await page.goto(base+"/coins/",{waitUntil:"networkidle"});
+  await page.goto(base+"/coins/?lang=ja",{waitUntil:"networkidle"});
   const coins=await page.evaluate(()=>{
     const rows=[...document.querySelectorAll("#benefits .coins-table:not(.coins-compare-table) tbody tr")];
     const comparison=[...document.querySelectorAll(".coins-compare-table tbody tr")];
@@ -172,6 +172,7 @@ try {
       saved:Number(row.querySelector("[data-compare-saving]")?.getAttribute("data-compare-saving"))
     }));
     return {
+      language:document.documentElement.lang,
       benefitRows:rows.length,
       eachBenefitHasFourDurations:rows.every(row=>row.querySelectorAll("td").length===4),
       missionAccordions:document.querySelectorAll("#missions details.coins-accordion").length,
@@ -195,7 +196,7 @@ try {
     {kind:"week",single:32200,full:18000,saved:14200},
     {kind:"month",single:119000,full:55000,saved:64000}
   ];
-  if(coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
+  if(coins.language!=="ja"||coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
      coins.missionAccordions!==4||coins.loginMilestones!==54||coins.missionGoalSections!==13||!coins.loginAccordion||!coins.hasPremiumLink||
      coins.units!==48||coins.comparisonUnits!==12||coins.hasCurrencyLabel||!coins.hasCoinCaption||
      !coins.hasCoinAmountHeading||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
@@ -206,7 +207,7 @@ try {
   if(!(await page.locator("#coin-login-bonus").evaluate(el=>el.open)))log("Login reward accordion does not expand");
   for(const width of [390,1440]){
     await page.setViewportSize({width,height:900});
-    await page.goto(base+"/coins/",{waitUntil:"networkidle"});
+    await page.goto(base+"/coins/?lang=ja",{waitUntil:"networkidle"});
     await page.evaluate(()=>document.fonts.ready);
     const layout=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,win:innerWidth}));
     if(layout.doc>layout.win+2)log("Coins horizontal overflow",width,JSON.stringify(layout));
