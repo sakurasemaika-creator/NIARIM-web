@@ -165,6 +165,7 @@ try {
   const coins=await page.evaluate(()=>{
     const rows=[...document.querySelectorAll("#benefits .coins-table:not(.coins-compare-table) tbody tr")];
     const comparison=[...document.querySelectorAll(".coins-compare-table tbody tr")];
+    const completePackRow=rows.find(row=>row.querySelector("th[data-i18n='coins.b11']"));
     const prices=comparison.map(row=>({
       kind:row.getAttribute("data-compare"),
       single:Number(row.querySelector("[data-compare-single]")?.getAttribute("data-compare-single")),
@@ -186,6 +187,12 @@ try {
       hasCoinCaption:/コイン/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
       hasCoinAmountHeading:/引き換えに必要なコイン数/.test(document.querySelector(".coins-list-title")?.textContent||""),
       hasCompletePackLabel:/特典コンプリートパック（プレミアム会員と同内容）/.test(document.querySelector(".coins-table--priced tr [data-i18n='coins.b11']")?.textContent||""),
+      completePackDiscounts:[...(completePackRow?.querySelectorAll(".coins-saving-badge")||[])].map(el=>el.textContent.trim()),
+      comparisonDiscounts:comparison.map(row=>row.querySelector(".coins-compare-best .coins-saving-badge")?.textContent.trim()),
+      comparisonSavingsHaveNoBadges:comparison.every(row=>!row.querySelector(".coins-compare-saving .coins-saving-badge")),
+      featuredDiscountCardRemoved:!document.querySelector(".coins-featured-deals,.coins-discount-tag--table"),
+      oldFullPremiumRemoved:!document.querySelector(".coins-main")?.textContent.includes("フルPremium"),
+      accordionTimesJapanese:![...document.querySelectorAll(".coins-accordion-content")].some(el=>/\b\d+(?:day|week|month|h|m)\b/.test(el.textContent)),
       earningShowsFixedRewards:/(?:[0-9０-９][,，0-9０-９]*\s*(?:枚|コイン|coins)|(?:コイン|coins)\s*[0-9０-９])/.test(document.querySelector("#earning")?.textContent||""),
       marketingExplainsInternals:/(?:サーバー|バックエンド|検証済み|未実装|API|内部処理)/.test(document.querySelector(".coins-main")?.textContent||""),
       prices
@@ -202,6 +209,9 @@ try {
      coins.missionAccordions!==4||coins.loginMilestones!==54||coins.missionGoalSections!==13||!coins.loginAccordion||!coins.hasPremiumLink||
      coins.units!==60||coins.comparisonUnits!==15||coins.hasCurrencyLabel||!coins.hasCoinCaption||
      !coins.hasCoinAmountHeading||!coins.hasCompletePackLabel||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
+     JSON.stringify(coins.completePackDiscounts)!==JSON.stringify(["22% OFF","35% OFF","61% OFF","64% OFF","70% OFF"])||
+     JSON.stringify(coins.comparisonDiscounts)!==JSON.stringify(["22% OFF","35% OFF","61% OFF","64% OFF","70% OFF"])||
+     !coins.comparisonSavingsHaveNoBadges||!coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese||
      JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
     log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
   }
@@ -216,6 +226,7 @@ try {
     await page.screenshot({path:"artifacts/refresh-2026/coins-"+width+".png",fullPage:true,animations:"disabled"});
   }
   await page.goto(base+"/premium/",{waitUntil:"networkidle"});
+  if(await page.locator(".about-cta").count())log("Redundant Premium start CTA should be removed");
   if(!(await page.locator(".premium-coin-panel a[href='/coins/']").count()))log("Premium to coins cross-link missing");
 
   // The newly linked stylesheet must really style the Premium -> Coins panel.
