@@ -140,7 +140,7 @@ try {
         technical:/サーバー|SSV|安全性審査|実装済|未実装|本番交換|server validation|security review|backend|servidor|serveur|服务器|伺服器|서버/i.test(main.textContent)
       };
     });
-    if(localizedCoins.language!==lang||localizedCoins.missingKeys.length||localizedCoins.pricedCells!==48||
+    if(localizedCoins.language!==lang||localizedCoins.missingKeys.length||localizedCoins.pricedCells!==60||
        localizedCoins.unitLabels||localizedCoins.numericRewards||localizedCoins.rawJapanese||localizedCoins.technical){
       log("Coins visitor copy / localization",lang,JSON.stringify(localizedCoins));
     }
@@ -174,7 +174,7 @@ try {
     return {
       language:document.documentElement.lang,
       benefitRows:rows.length,
-      eachBenefitHasFourDurations:rows.every(row=>row.querySelectorAll("td").length===4),
+      eachBenefitHasFiveDurations:rows.every(row=>row.querySelectorAll("td").length===5),
       missionAccordions:document.querySelectorAll("#missions details.coins-accordion").length,
       loginMilestones:document.querySelectorAll("#coin-login-bonus .coins-milestone-grid li").length,
       missionGoalSections:document.querySelectorAll("#missions .coins-goal-group").length,
@@ -185,21 +185,23 @@ try {
       hasCurrencyLabel:/円|JPY|¥/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
       hasCoinCaption:/コイン/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
       hasCoinAmountHeading:/引き換えに必要なコイン数/.test(document.querySelector(".coins-list-title")?.textContent||""),
+      hasCompletePackLabel:/特典コンプリートパック（プレミアム会員と同内容）/.test(document.querySelector(".coins-table--priced tr [data-i18n='coins.b11']")?.textContent||""),
       earningShowsFixedRewards:/(?:[0-9０-９][,，0-9０-９]*\s*(?:枚|コイン|coins)|(?:コイン|coins)\s*[0-9０-９])/.test(document.querySelector("#earning")?.textContent||""),
       marketingExplainsInternals:/(?:サーバー|バックエンド|検証済み|未実装|API|内部処理)/.test(document.querySelector(".coins-main")?.textContent||""),
       prices
     };
   });
   const expectedCoinComparison=[
-    {kind:"hour",single:1010,full:500,saved:510},
-    {kind:"day",single:4280,full:2500,saved:1780},
-    {kind:"week",single:32200,full:18000,saved:14200},
-    {kind:"month",single:119000,full:55000,saved:64000}
+    {kind:"hour",single:6400,full:5000,saved:1400},
+    {kind:"day",single:15300,full:10000,saved:5300},
+    {kind:"week",single:76500,full:30000,saved:46500},
+    {kind:"month",single:153000,full:55000,saved:98000},
+    {kind:"year",single:1836000,full:550000,saved:1286000}
   ];
-  if(coins.language!=="ja"||coins.benefitRows!==12||!coins.eachBenefitHasFourDurations||
+  if(coins.language!=="ja"||coins.benefitRows!==12||!coins.eachBenefitHasFiveDurations||
      coins.missionAccordions!==4||coins.loginMilestones!==54||coins.missionGoalSections!==13||!coins.loginAccordion||!coins.hasPremiumLink||
-     coins.units!==48||coins.comparisonUnits!==12||coins.hasCurrencyLabel||!coins.hasCoinCaption||
-     !coins.hasCoinAmountHeading||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
+     coins.units!==60||coins.comparisonUnits!==15||coins.hasCurrencyLabel||!coins.hasCoinCaption||
+     !coins.hasCoinAmountHeading||!coins.hasCompletePackLabel||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
      JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
     log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
   }
