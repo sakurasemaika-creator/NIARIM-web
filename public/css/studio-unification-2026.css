@@ -174,8 +174,10 @@ html body.nr-site .nr-pricing-panel small { font-family:var(--font-serif) !impor
 html body.nr-site .nr-pricing-panel span { font-family:var(--font-sans) !important; }
 @media(max-width:600px) { html body.nr-site .nr-hero-wordmark {width:min(100%,410px);} }
 
-/* The two official fonts together provide the complete coined navigation label. */
-html body a[data-i18n="nav.coins"] {font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK" !important;}
+/* Navigation uses Kuramubon; all footer links, including Coins & Missions,
+   use HakkouMincho consistently. Never mix the two faces inside one label. */
+html body .main-nav a[data-i18n="nav.coins"] {font-family:var(--font-serif) !important;}
+html body .site-footer .footer-col a {font-family:var(--font-sans) !important;}
 
 /* New creative tools are editorial, static and inexpensive to paint. */
 html body.nr-site .nr-new-features{padding:clamp(70px,8vw,110px) 0;background:#f7f2f3;}
