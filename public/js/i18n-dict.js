@@ -149,7 +149,7 @@
       "contact.form.attachments": "画像・動画を添付する（任意）",
       "contact.form.attachmentsHint":
         "画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。",
-      "contact.form.attachmentsButton": "ファイルを選ぶ",
+      "contact.form.attachmentsButton": "データを選ぶ",
       "contact.form.attachmentsEmpty": "ファイルは選択されていません",
       "contact.form.attachmentsCount": "%d件のファイルを選択中",
       "contact.error.attachments":

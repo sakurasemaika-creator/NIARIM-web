@@ -58,7 +58,7 @@
         "一般的なイラスト制作アプリにはあまり見られない、NIARIMならではの機能です。",
       "about.unique.item1.title": "自動塗り・グラデーション塗り",
       "about.unique.item1.body":
-        "線画を自動で判定して着色。グラデーションでの塗りもワンタッチで行え、着色の手間を大きく減らせます。※⁠自動塗りは生成AIを使用した機能ではありません。設定したルールに基づいて色を塗り分けます。",
+        "線画を自動で判定して着色。グラデーションでの塗りもワンタッチで行え、着色の手間を大きく減らせます。※自動塗りは生成AIを使用した機能ではありません。設定したルールに基づいて色を塗り分けます。",
       "about.unique.item2.title":
         "アクセントカラーからパネル背景まで、全部好きな色に",
       "about.unique.item2.body":
@@ -209,7 +209,7 @@
       "about.unique.lead": "一般插画制作应用中较少见的、NIARIM 特有的功能。",
       "about.unique.item1.title": "自动上色・渐变上色",
       "about.unique.item1.body":
-        "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※⁠自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
+        "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
       "about.unique.item2.title": "从主题色到面板背景，颜色全部由你决定",
       "about.unique.item2.body":
         "应用内置了马卡龙色调、莫兰迪色系等多种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
@@ -283,7 +283,7 @@
         "一般繪圖製作應用程式中較少見的、NIARIM 特有的功能。",
       "about.unique.item1.title": "自動上色・漸層上色",
       "about.unique.item1.body":
-        "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※⁠自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
+        "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
       "about.unique.item2.title": "從主題色到面板背景，顏色全部由你決定",
       "about.unique.item2.body":
         "應用內建了粉彩色調、莫蘭迪色系等多種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
@@ -357,7 +357,7 @@
         "일반적인 그림 제작 앱에서는 보기 드문, NIARIM만의 기능입니다.",
       "about.unique.item1.title": "자동 채색・그러데이션 채색",
       "about.unique.item1.body":
-        "선화를 자동으로 판정해 채색합니다. 그러데이션 채색도 한 번의 터치로 가능해, 채색 수고를 크게 줄여줍니다. ※⁠자동 채색은 생성형 AI를 사용하는 기능이 아닙니다. 설정한 규칙에 따라 색을 나누어 칠합니다.",
+        "선화를 자동으로 판정해 채색합니다. 그러데이션 채색도 한 번의 터치로 가능해, 채색 수고를 크게 줄여줍니다. ※자동 채색은 생성형 AI를 사용하는 기능이 아닙니다. 설정한 규칙에 따라 색을 나누어 칠합니다.",
       "about.unique.item2.title":
         "포인트 컬러부터 패널 배경까지, 색은 전부 당신 마음대로",
       "about.unique.item2.body":
@@ -563,7 +563,7 @@
   "use strict";
   var D = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var C = {
-    ja: ["アニメーション制作で何度も繰り返す工程をただ省くのではなく、仕上がりまで自分でこだわるための時短道具に。NIARIMならではの作画・仕上げ機能をまとめました。","自動線画","ラフの線の中心を捉えて、自動で線画を作成。判定許容範囲、線画幅、入り抜き、手振れ補正を調整し、制御点のドラッグで線の流れまで追い込めます。","自動塗り","あらかじめ決めたパーツごとの色・トーン設定を使い、繰り返し描くキャラクターの色塗りを効率化。線画を直したフレームも更新対象として確認できます。※自動塗りは生成AIを使用した機能ではありません。","演出フィルター","複数フレームをまとめて選び、同じ演出フィルターを一括適用。1枚ずつ同じ仕上げを繰り返す手間を減らしながら、作品全体の見た目を揃えられます。","トーン塗り","色だけでなくトーン表現も塗りの工程に組み込み、漫画的な質感や陰影をアニメーションの各フレームへ自然に取り入れられます。","ピクセルモード","ドット絵に適した描画感へ切り替え、手描きアニメーションとピクセル表現を同じ制作環境の中で行き来できます。","外観・テーマ","アクセント、文字、パネル、メニュー、選択色などを細かくカスタマイズ。長く向き合う制作画面そのものを、自分の道具として整えられます。"],
+    ja: ["アニメーション制作で何度も繰り返す工程をただ省くのではなく、仕上がりまで自分でこだわるための時短道具に。NIARIMならではの作画・仕上げ機能をまとめました。","自動線画","ラフの線の中心を捉えて、自動で線画を作成。判定許容範囲、線画幅、線の始まりと終わりの形、手振れ補正を調整し、制御点のドラッグで線の流れまで追い込めます。","自動塗り","あらかじめ決めたパーツごとの色・トーン設定を使い、繰り返し描くキャラクターの色塗りを効率化。線画を直したフレームも更新対象として確認できます。※自動塗りは生成AIを使用した機能ではありません。","演出フィルター","複数フレームをまとめて選び、同じ演出フィルターを一括適用。1枚ずつ同じ仕上げを繰り返す手間を減らしながら、作品全体の見た目を揃えられます。","トーン塗り","色だけでなくトーン表現も塗りの工程に組み込み、漫画的な質感や陰影をアニメーションの各フレームへ自然に取り入れられます。","ピクセルモード","ドット絵に適した描画感へ切り替え、手描きアニメーションとピクセル表現を同じ制作環境の中で行き来できます。","外観・テーマ","アクセント、文字、パネル、メニュー、選択色などを細かくカスタマイズ。長く向き合う制作画面そのものを、自分の道具として整えられます。"],
     en: ["Tools for the steps animation creators repeat again and again—not just shortcuts, but controls you can refine through the final result. Here are NIARIM's distinctive drawing and finishing tools.","Automatic line art","Detect the center of rough strokes and create clean line art automatically. Adjust detection tolerance, line width, tapering and stabilization, then refine the flow by dragging control points.","Automatic coloring","Use predefined colors and tones for each part to speed up coloring recurring characters. Frames whose line art has changed can also be reviewed for updates. Automatic coloring does not use generative AI.","Effect filters","Select multiple frames and apply the same effect filter in one operation, reducing repetitive finishing work while keeping the look consistent.","Tone coloring","Bring tone patterns into the coloring process alongside color, adding manga-like texture and shading naturally across animation frames.","Pixel mode","Switch to drawing behavior suited to pixel art and move between hand-drawn animation and pixel expression in the same workspace.","Appearance & themes","Fine-tune accents, text, panels, menus, selection colors and more, shaping the workspace itself into your own tool."],
     "zh-Hans": ["把动画制作中反复出现的步骤变成不仅省事、还能精细打磨到成片的工具。这里汇集了 NIARIM 独有的绘制与后期功能。","自动线稿","识别草稿线条中心并自动生成线稿。可调整判定容差、线宽、起收笔与防抖，并拖动控制点继续修整线条走向。","自动上色","使用预先设定的部件颜色与网点规则，提高重复角色的上色效率。修改过线稿的帧也可作为更新对象确认。自动上色不使用生成式 AI。","演出滤镜","可一次选择多个帧并批量应用相同滤镜，减少逐帧重复处理，同时统一作品整体视觉。","网点上色","把网点表现和颜色一起纳入上色流程，自然加入漫画式质感与阴影。","像素模式","切换到适合像素画的绘制方式，在同一制作环境中自由往返于手绘动画和像素表现。","外观与主题","细致自定义强调色、文字、面板、菜单、选中颜色等，把长期使用的制作界面调整成自己的工具。"],
     "zh-Hant": ["把動畫製作中反覆出現的步驟變成不只省事、還能精細打磨到成片的工具。這裡整理了 NIARIM 獨有的繪製與後期功能。","自動線稿","辨識草稿線條中心並自動產生線稿。可調整判定容差、線寬、起收筆與防手震，再拖曳控制點修整線條走向。","自動上色","使用預先設定的部件顏色與網點規則，提高重複角色的上色效率。修改過線稿的影格也可作為更新對象確認。自動上色不使用生成式 AI。","演出濾鏡","可一次選取多個影格並批次套用相同濾鏡，減少逐格重複處理，同時統一作品整體視覺。","網點上色","把網點表現和顏色一起納入上色流程，自然加入漫畫式質感與陰影。","像素模式","切換到適合像素畫的繪製方式，在同一製作環境中自由往返於手繪動畫和像素表現。","外觀與主題","細緻自訂強調色、文字、面板、選單、選取顏色等，把長期使用的製作介面調整成自己的工具。"],
