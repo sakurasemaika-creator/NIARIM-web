@@ -8,12 +8,13 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const CSS = fs.readFileSync("public/css/common-base.css", "utf8");
-const glyphs = { Kuramubon: new Set(), HakkouMincho: new Set() };
+const glyphs = { Kuramubon: new Set(), HakkouMincho: new Set(), Menu: new Set() };
 for (const face of CSS.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
   const src = face[1];
   const name = src.match(/font-family:\s*"([^"]+)"/)?.[1] || "";
   const target = name.startsWith("Kuramubon") ? "Kuramubon" :
-    name.startsWith("HakkouMincho") ? "HakkouMincho" : null;
+    name.startsWith("HakkouMincho") ? "HakkouMincho" :
+    name.startsWith("NotoSerifMenu") ? "Menu" : null;
   if (!target) continue;
   const ranges = src.match(/unicode-range:\s*([\s\S]*?);/)?.[1] || "";
   for (const range of ranges.matchAll(/U\+([0-9a-f]{4,6})(?:-([0-9a-f]{4,6}))?/gi)) {
@@ -23,7 +24,7 @@ for (const face of CSS.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
   }
 }
 for (const [name, chars] of Object.entries(glyphs)) {
-  if (chars.size < 500) throw Error(name + " CSS glyph range is incomplete");
+  if (chars.size < (name === "Menu" ? 20 : 500)) throw Error(name + " CSS glyph range is incomplete");
 }
 const routes = [
   "/", "/about/", "/features/", "/help/", "/premium/", "/coins/",
@@ -45,9 +46,9 @@ try {
       await document.fonts.ready;
     });
     const result = await page.evaluate(({ h, b, route }) => {
-      const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b) };
+      const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b), Menu: new Set([...m, ...b]) };
       const discovered = [];
-      const totals = { Kuramubon: 0, HakkouMincho: 0, unknown: 0 };
+      const totals = { Kuramubon: 0, HakkouMincho: 0, Menu: 0, unknown: 0 };
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
       let node;
       while ((node = walker.nextNode())) {
@@ -58,7 +59,8 @@ try {
         if (style.display === "none" || style.visibility === "hidden") continue;
         const firstFont = style.fontFamily.split(",")[0].trim().replace(/^["']|["']$/g, "");
         const family = firstFont.startsWith("Kuramubon") ? "Kuramubon" :
-          firstFont.startsWith("HakkouMincho") ? "HakkouMincho" : null;
+          firstFont.startsWith("HakkouMincho") ? "HakkouMincho" :
+          firstFont.startsWith("NotoSerifMenu") ? "Menu" : null;
         if (!family) { totals.unknown++; continue; }
         totals[family]++;
         const missing = [...new Set([...node.textContent].filter(c =>
@@ -93,7 +95,7 @@ try {
         discovered.push({ family: "copy", chars: "", where: "premium:obsolete-coin-navigation", text: "Legacy coin benefit label remains" });
       }
       return { discovered, totals };
-    }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], route });
+    }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], m: [...glyphs.Menu], route });
     const unique = new Map();
     for (const f of result.discovered) {
       const key = f.family + ":" + f.where + ":" + f.chars;
@@ -109,5 +111,5 @@ try {
   await browser.close();
 }
 console.log("FONT_FINDINGS", JSON.stringify(findings.slice(0, 150)));
-console.log("FONT_SUMMARY", JSON.stringify({ missingGroups: findings.length, routes: routes.length, widths: 2, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
+console.log("FONT_SUMMARY", JSON.stringify({ missingGroups: findings.length, routes: routes.length, widths: 2, menuGlyphs: glyphs.Menu.size, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
 if (findings.length && process.env.FONT_AUDIT_STRICT === "1") process.exitCode = 1;
