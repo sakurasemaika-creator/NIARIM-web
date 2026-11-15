@@ -133,21 +133,25 @@ try {
       return {
         language,
         missingKeys:keys.filter(key=>!Object.hasOwn(dict,key)),
+        priceCaption:main.querySelector(".coins-table--priced caption")?.textContent.trim(),
+        priceRegionName:main.querySelector(".coins-scroll")?.getAttribute("aria-label"),
         pricedCells:main.querySelectorAll(".coins-table--priced .coins-unit").length,
         unitLabels:[...main.querySelectorAll(".coins-table--priced .coins-unit")].filter(el=>!el.textContent.trim()).length,
         numericRewards:/\d[\d,]*\s*(?:COINS?|コイン|金币|金幣|코인|pièces|monedas)/i.test(main.querySelector("#earning")?.textContent||""),
-        rawJapanese:language!=="ja"&&main.querySelector("[data-i18n='coins.earn']")?.textContent.trim()==="コインを集める",
+        rawJapanese:language!=="ja"&&main.querySelector("[data-i18n='coins.earn']")?.textContent.trim()==="オパールを集める",
         technical:/サーバー|SSV|安全性審査|実装済|未実装|本番交換|server validation|security review|backend|servidor|serveur|服务器|伺服器|서버/i.test(main.textContent)
       };
     });
-    if(localizedCoins.language!==lang||localizedCoins.missingKeys.length||localizedCoins.pricedCells!==60||
+    const opalName={ja:"オパール",en:"Opals","zh-Hans":"欧泊","zh-Hant":"歐泊",ko:"오팔",fr:"opales",es:"ópalos"}[lang];
+    if(localizedCoins.language!==lang||localizedCoins.missingKeys.length||localizedCoins.pricedCells!==70||
+       !localizedCoins.priceCaption?.includes(opalName)||localizedCoins.priceRegionName!==localizedCoins.priceCaption||
        localizedCoins.unitLabels||localizedCoins.numericRewards||localizedCoins.rawJapanese||localizedCoins.technical){
       log("Coins visitor copy / localization",lang,JSON.stringify(localizedCoins));
     }
     await page.close();
   }
   const page=await browsers.newPage({viewport:{width:1280,height:960}});
-  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/coins/",".coins-compare-table"],["/help/","#help-search-input"],["/community/",".community-banner"]]){
+  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/coins/","#benefits .coins-table--priced"],["/help/","#help-search-input"],["/community/",".community-banner"]]){
     page.on("pageerror",e=>log("Interior JS",path,e.message));
     const response=await page.goto(base+path,{waitUntil:"networkidle"});
     if(response?.status()!==200||!(await page.locator(selector).count()))log("Interior missing",path,selector);
@@ -163,56 +167,72 @@ try {
   // advertised in landing-page copy, and that the cross-links work both ways.
   await page.goto(base+"/coins/?lang=ja",{waitUntil:"networkidle"});
   const coins=await page.evaluate(()=>{
-    const rows=[...document.querySelectorAll("#benefits .coins-table:not(.coins-compare-table) tbody tr")];
-    const comparison=[...document.querySelectorAll(".coins-compare-table tbody tr")];
-    const completePackRow=rows.find(row=>row.querySelector("th[data-i18n='coins.b11']"));
-    const prices=comparison.map(row=>({
-      kind:row.getAttribute("data-compare"),
-      single:Number(row.querySelector("[data-compare-single]")?.getAttribute("data-compare-single")),
-      full:Number(row.querySelector("[data-compare-full]")?.getAttribute("data-compare-full")),
-      saved:Number(row.querySelector("[data-compare-saving]")?.getAttribute("data-compare-saving"))
-    }));
+    const tables=document.querySelectorAll("#benefits .coins-table--priced");
+    const table=tables[0];
+    const rows=[...table.tBodies[0].rows];
+    const benefitRows=rows.filter(row=>row.querySelector("th[data-i18n]")?.getAttribute("data-i18n").match(/^coins\.b\d+$/));
+    function rowWith(key) {
+      return rows.find(row=>row.querySelector(`th[data-i18n="${key}"]`));
+    }
+    // Read the visible leading number, independently of the unit and badge.
+    function amounts(row) {
+      return [...(row?.querySelectorAll("td")||[])].map(cell=>
+        Number(cell.textContent.trim().match(/^[0-9][0-9,]*/)?.[0].replaceAll(",",""))
+      );
+    }
+    const pack=rowWith("coins.b11");
+    const separate=rowWith("coins.compareSeparate");
+    const saving=rowWith("coins.compareSaving");
+    const selectedSingles=[0,1,2,3,4,5,10].map(i=>amounts(rowWith("coins.b"+i)));
+    const singleTotal=selectedSingles.reduce((sum,prices)=>sum.map((n,i)=>n+prices[i]),[0,0,0,0,0]);
+    const separateAmounts=amounts(separate);
+    const packAmounts=amounts(pack);
+    const savingAmounts=amounts(saving);
     return {
       language:document.documentElement.lang,
-      benefitRows:rows.length,
-      eachBenefitHasFiveDurations:rows.every(row=>row.querySelectorAll("td").length===5),
+      tableCount:tables.length,
+      oldComparisonTable:!!document.querySelector(".coins-compare-table"),
+      rowCount:rows.length,
+      benefitRows:benefitRows.length,
+      eachRowHasFiveDurations:rows.every(row=>row.querySelectorAll("td").length===5),
+      singleTotal,
+      separateAmounts,
+      packAmounts,
+      savingAmounts,
+      expectedSavings:singleTotal.map((price,i)=>price-packAmounts[i]),
+      expectedBadges:singleTotal.map((price,i)=>Math.round((price-packAmounts[i])*100/price)+"% OFF"),
       missionAccordions:document.querySelectorAll("#missions details.coins-accordion").length,
       loginMilestones:document.querySelectorAll("#coin-login-bonus .coins-milestone-grid li").length,
       missionGoalSections:document.querySelectorAll("#missions .coins-goal-group").length,
       loginAccordion:!!document.querySelector("#coin-login-bonus:not([open])"),
       hasPremiumLink:!!document.querySelector(".coins-conversion-panel a[href='/premium/']"),
       units:document.querySelectorAll("#benefits .coins-table--priced tbody .coins-unit").length,
-      comparisonUnits:document.querySelectorAll(".coins-compare-table tbody .coins-unit").length,
-      hasCurrencyLabel:/円|JPY|¥/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
-      hasCoinCaption:/コイン/.test(document.querySelector("#benefits .coins-table--priced caption")?.textContent||""),
-      hasCoinAmountHeading:/引き換えに必要なコイン数/.test(document.querySelector(".coins-list-title")?.textContent||""),
-      hasCompletePackLabel:/特典コンプリートパック（プレミアム会員と同内容）/.test(document.querySelector(".coins-table--priced tr [data-i18n='coins.b11']")?.textContent||""),
-      completePackDiscounts:[...(completePackRow?.querySelectorAll(".coins-saving-badge")||[])].map(el=>el.textContent.trim()),
-      comparisonDiscounts:comparison.map(row=>row.querySelector(".coins-compare-best .coins-saving-badge")?.textContent.trim()),
-      comparisonSavingsHaveNoBadges:comparison.every(row=>!row.querySelector(".coins-compare-saving .coins-saving-badge")),
+      hasCurrencyLabel:/円|JPY|¥/.test(table.caption?.textContent||""),
+      hasOpalCaption:/オパール/.test(table.caption?.textContent||""),
+      hasOpalAmountHeading:/引き換えに必要なオパール数/.test(document.querySelector(".coins-list-title")?.textContent||""),
+      hasCompletePackLabel:pack?.querySelector("th")?.textContent.trim()==="コンプリートパック",
+      completePackDiscounts:[...(pack?.querySelectorAll(".coins-saving-badge")||[])].map(el=>el.textContent.trim()),
+      comparisonSavingsHaveNoBadges:!!separate&&!!saving&&
+        !separate.querySelector(".coins-saving-badge")&&!saving.querySelector(".coins-saving-badge"),
+      hasSeparateYearlyBaseline:/660,000.+550,000.+110,000.+17% OFF/.test(document.querySelector("[data-i18n='coins.yearNote']")?.textContent||""),
       featuredDiscountCardRemoved:!document.querySelector(".coins-featured-deals,.coins-discount-tag--table"),
       oldFullPremiumRemoved:!document.querySelector(".coins-main")?.textContent.includes("フルPremium"),
       accordionTimesJapanese:![...document.querySelectorAll(".coins-accordion-content")].some(el=>/\b\d+(?:day|week|month|h|m)\b/.test(el.textContent)),
       earningShowsFixedRewards:/(?:[0-9０-９][,，0-9０-９]*\s*(?:枚|コイン|coins)|(?:コイン|coins)\s*[0-9０-９])/.test(document.querySelector("#earning")?.textContent||""),
-      marketingExplainsInternals:/(?:サーバー|バックエンド|検証済み|未実装|API|内部処理)/.test(document.querySelector(".coins-main")?.textContent||""),
-      prices
+      marketingExplainsInternals:/(?:サーバー|バックエンド|検証済み|未実装|API|内部処理)/.test(document.querySelector(".coins-main")?.textContent||"")
     };
   });
-  const expectedCoinComparison=[
-    {kind:"hour",single:6400,full:5000,saved:1400},
-    {kind:"day",single:15300,full:10000,saved:5300},
-    {kind:"week",single:76500,full:30000,saved:46500},
-    {kind:"month",single:153000,full:55000,saved:98000},
-    {kind:"year",single:1836000,full:550000,saved:1286000}
-  ];
-  if(coins.language!=="ja"||coins.benefitRows!==12||!coins.eachBenefitHasFiveDurations||
+  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+  if(coins.language!=="ja"||coins.tableCount!==1||coins.oldComparisonTable||coins.rowCount!==14||
+     coins.benefitRows!==12||!coins.eachRowHasFiveDurations||
      coins.missionAccordions!==4||coins.loginMilestones!==54||coins.missionGoalSections!==13||!coins.loginAccordion||!coins.hasPremiumLink||
-     coins.units!==60||coins.comparisonUnits!==15||coins.hasCurrencyLabel||!coins.hasCoinCaption||
-     !coins.hasCoinAmountHeading||!coins.hasCompletePackLabel||coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
-     JSON.stringify(coins.completePackDiscounts)!==JSON.stringify(["22% OFF","35% OFF","61% OFF","64% OFF","70% OFF"])||
-     JSON.stringify(coins.comparisonDiscounts)!==JSON.stringify(["22% OFF","35% OFF","61% OFF","64% OFF","70% OFF"])||
-     !coins.comparisonSavingsHaveNoBadges||!coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese||
-     JSON.stringify(coins.prices)!==JSON.stringify(expectedCoinComparison)){
+     coins.units!==70||coins.hasCurrencyLabel||!coins.hasOpalCaption||
+     !coins.hasOpalAmountHeading||!coins.hasCompletePackLabel||!coins.hasSeparateYearlyBaseline||
+     coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
+     !same(coins.packAmounts,[10000,25000,45000,55000,550000])||
+     !same(coins.separateAmounts,coins.singleTotal)||!same(coins.savingAmounts,coins.expectedSavings)||
+     !same(coins.completePackDiscounts,coins.expectedBadges)||!coins.comparisonSavingsHaveNoBadges||
+     !coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese){
     log("Coin catalog / accordion / pricing contract",JSON.stringify(coins));
   }
   await page.locator("#coin-login-bonus summary").click();

@@ -5,6 +5,7 @@ on:
     paths:
       - ".github/workflows/refresh-2026-smoke.yml"
       - "tests/refresh-2026-smoke.mjs"
+      - "tests/opal-brand-contract.mjs"
       - "tests/community-ranking-visibility-browser.mjs"
       - "tests/community-feed.test.mjs"
       - "public/css/pages/community.css"
@@ -13,6 +14,9 @@ on:
       - "public/features/index.html"
       - "public/community/index.html"
       - "public/premium/index.html"
+      - "public/coins/index.html"
+      - "public/css/pages/coins.css"
+      - "public/js/opal-ui-naming.js"
       - "public/css/refresh-2026.css"
       - "public/css/niarim-game-site.css"
       - "public/css/brand-direction-2026.css"
@@ -47,6 +51,8 @@ jobs:
       - run: npm ci
       - name: Verify brand direction contract across public pages
         run: npm run audit:brand-direction
+      - name: Verify Opal pricing and comparison rules
+        run: npm run audit:opal
       - run: npx playwright install --with-deps chromium
       - name: Test live community API proxy with mock upstream
         run: node --test tests/community-feed.test.mjs
