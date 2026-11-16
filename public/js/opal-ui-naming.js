@@ -26,7 +26,6 @@ Object.assign(d.ja,{
  "coins.lead":"ログインやミッションでオパールを集めれば、プレミアム機能も追加料金なしで使えます。好きな機能と期間を選んで交換できます。",
  "coins.meta.title":"オパール・ミッション | NIARIM",
  "coins.catalog":"引き換えに必要なオパール数",
- "coins.b1":"自分のウォーターマークを追加・編集",
  "coins.b11":"コンプリートパック",
  "coins.compareFull":"コンプリートパック",
  "coins.compareCaption":"制作機能6つ＋全広告非表示を個別交換した場合との比較。表内の%OFFは単品交換が基準",
@@ -58,7 +57,6 @@ Object.keys(labels).forEach(function(locale){
 /* Unified table labels: the comparisons have different denominators. */
 var details={
 en:{
- "coins.b1":"Add and edit your own watermark",
  "coins.rateNote":"Reference only: 100 Opals correspond to ¥1; Opals cannot be cashed out. Daily sign-in grants 10, eligible rewarded ads grant 10 per view, and missions offer more.",
  "coins.catalogCaution":"Compare individual tools and the Complete Pack for each duration.",
  "coins.tableCaption":"Compare the Opals needed for six tools and removing all ads individually, the Complete Pack, and the savings for each duration.",
@@ -68,7 +66,6 @@ en:{
  "coins.compareCaution":"Individual benefits and the annual pack are not yet available to redeem. Check available durations in the app."
 },
 "zh-Hans":{
- "coins.b1":"添加和编辑自己的水印",
  "coins.rateNote":"参考换算为100欧泊约等于1日元，不能兑换现金。每日登录得10欧泊，符合条件的激励广告每次得10欧泊，完成任务还可获得更多。",
  "coins.catalogCaution":"在同一张表中比较单项功能与全功能组合包。",
  "coins.tableCaption":"按使用期限比较六项工具和全部去广告的单项合计、全功能组合包及节省的欧泊数量。",
@@ -78,7 +75,6 @@ en:{
  "coins.compareCaution":"单项权益与年度组合包暂未开放兑换。请在应用内查看可兑换的期间。"
 },
 "zh-Hant":{
- "coins.b1":"新增和編輯自己的浮水印",
  "coins.rateNote":"參考換算為100歐泊約等於1日圓，不能兌換現金。每日登入得10歐泊，符合條件的獎勵廣告每次得10歐泊，完成任務還能獲得更多。",
  "coins.catalogCaution":"在同一表格比較單項功能與全功能組合包。",
  "coins.tableCaption":"依使用期間比較六項工具和全部去廣告的單項總額、全功能組合包及節省的歐泊數量。",
@@ -88,7 +84,6 @@ en:{
  "coins.compareCaution":"單項權益與年度組合包尚未開放兌換。請在應用程式內查看可兌換的期間。"
 },
 ko:{
- "coins.b1":"내 워터마크 추가 및 편집",
  "coins.rateNote":"참고 기준은 100오팔=1엔이며 현금 교환은 불가능합니다. 매일 로그인 10오팔, 대상 보상형 광고 1회당 10오팔, 미션으로도 획득할 수 있습니다.",
  "coins.catalogCaution":"단일 기능과 컴플리트 팩의 기간별 가격을 한 표에서 비교하세요.",
  "coins.tableCaption":"기간별로 제작 도구 6개와 전체 광고 제거의 단품 합계, 컴플리트 팩, 절약하는 오팔 수를 비교한 표.",
@@ -98,7 +93,6 @@ ko:{
  "coins.compareCaution":"단품과 연간 팩은 교환 준비 중입니다. 교환 가능한 기간은 앱에서 확인하세요."
 },
 fr:{
- "coins.b1":"Ajouter et modifier son filigrane",
  "coins.rateNote":"À titre indicatif, 100 opales correspondent à 1 ¥; elles ne sont pas convertibles en argent. Connexion quotidienne : 10 opales, annonce récompensée éligible : 10 opales, plus les missions.",
  "coins.catalogCaution":"Comparez les outils seuls et le Pack complet dans un seul tableau.",
  "coins.tableCaption":"Comparez, pour chaque durée, le coût en opales des six outils et de la suppression des annonces à l’unité, du Pack complet et les économies.",
@@ -108,7 +102,6 @@ fr:{
  "coins.compareCaution":"Les avantages à l’unité et le pack annuel seront disponibles ultérieurement. Consultez les durées disponibles dans l’application."
 },
 es:{
- "coins.b1":"Añadir y editar tu marca de agua",
  "coins.rateNote":"Referencia: 100 ópalos equivalen a 1 ¥; no se pueden cambiar por dinero. Inicio diario: 10 ópalos, anuncio recompensado válido: 10 ópalos y más con misiones.",
  "coins.catalogCaution":"Compara funciones individuales y el Paquete completo en una sola tabla.",
  "coins.tableCaption":"Comparación por duración del coste en ópalos de las seis herramientas y la eliminación de anuncios por separado, el Paquete completo y el ahorro.",
@@ -119,4 +112,19 @@ es:{
 }
 };
 Object.keys(details).forEach(function(locale){Object.assign(d[locale]||(d[locale]={}),details[locale]);});
+var benefitNames={
+ "ja":["自分のウォーターマークを追加・編集","トーンカーブ（描画）","レベル補正（描画）"],
+ "en":["Add and edit your own watermark","Tone Curve (drawing)","Level Correction (drawing)"],
+ "zh-Hans":["添加和编辑自定义水印","色调曲线（绘图）","色阶校正（绘图）"],
+ "zh-Hant":["新增和編輯自訂浮水印","色調曲線（繪圖）","色階校正（繪圖）"],
+ "ko":["내 워터마크 추가 및 편집","톤 커브(그리기)","레벨 보정(그리기)"],
+ "fr":["Ajouter et modifier votre propre filigrane","Courbe de tons (dessin)","Correction des niveaux (dessin)"],
+ "es":["Añadir y editar tu propia marca de agua","Curva de tonos (dibujo)","Corrección de niveles (dibujo)"]
+};
+Object.keys(benefitNames).forEach(function(locale){
+ var t=d[locale],a=benefitNames[locale];
+ t["coins.b1"]=t["premiumPage.premium.item3.title"]=a[0];
+ t["coins.b2"]=t["premiumPage.premium.item4.title"]=a[1];
+ t["coins.b3"]=t["premiumPage.premium.item5.title"]=a[2];
+});
 })();
