@@ -31,5 +31,5 @@ State / inventory / verifier群も、全面監査開始時に現在HEADから確
 3. lock後の新規画面・状態・操作・機能・品質リスクはDiscovery/Deltaへ登録する。
 4. 自動テスト、snapshot、DOM/source reviewだけでは実操作PASSにしない。
 5. 機能・意図挙動・見た目・継続性・製品品質を独立判定する。
-6. 改善は根拠を記録し、修正→再操作→regressionまで行う。
+6. Claudeは一巡目の要修正を[App・Web共通の修正引継ぎ台帳](https://github.com/sakurasemaika-creator/NIARIM/blob/dev_branch/docs/work-audit/state/AUDIT_REPAIR_HANDOFF.md)に記録する。別のGPTセッションが修正・確認を終えた後、Claudeが全対象を二巡目で判定する。
 7. Baseline/Discovery/Delta、未登録Discovery、advisor-pending、必要証拠がすべて完了するまで全面監査完了としない。
