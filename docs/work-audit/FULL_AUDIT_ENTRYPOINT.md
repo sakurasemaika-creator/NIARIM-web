@@ -23,15 +23,21 @@
 
 `docs/AI設計書/**` や日付付きverificationは、現在実装の意図・仕様・過去証拠を確認する補助資料として必要な箇所だけ参照する。
 
+## 監査担当と修正担当の分担（2026-11-16指定）
+
+監査担当は実操作・記録・二巡目の判定を担当する。原因特定、コード修正、回帰テストは別の修正担当へ渡す。現在は[A003の残件](policy/A003_REPAIR_HANDOFF.md)を修正担当へ回し、監査担当はA004以降の一巡目を進める。
+
+一巡目の再開位置は正式な先頭未完了ID `current_id` と区別して記録する。詳しい引継ぎと合格判定は[実行Policy](policy/ASTRA_WORK.md#一巡目修正二巡目の担当分離2026-11-16ユーザー指定)に従う。
+
 ## 実行順
 
 1. 最新HEADを取得し、実装inventoryと開始SHAを記録する。
 2. baseline verifier / delta verifier / full-audit state preflightを実行し、State整合性を確認する。
-3. Baseline current_idから固定順序で監査する。
+3. 監査担当は一巡目の再開位置から実操作を続け、修正担当は引継ぎから着手する。正式Routeの順番・先頭未完了IDは維持する。
 4. 実行中に新規画面・状態・操作・分岐・品質リスクを発見したらDiscoveryへ登録する。
 5. Baseline完了後、Discoveryを番号順に消化し、その後Deltaを番号順に消化する。
 6. Deltaでは最新HEADから、全フィルター、質感変更/質感偏光、Brush Custom、縁取りペン、Hair Fold、髪/前髪preset、Community/API、Help/Tips、保存/export、native/backend連携等を再inventoryし、漏れなく追跡する。
-7. 問題は列挙だけで終わらせず、可能ならroot cause→fix→targeted test→production UI再操作→Visual確認→regressionまで行う。
+7. 修正担当は原因特定・修正・targeted test・回帰を行う。監査担当は二巡目に修正箇所と影響先を実操作・目視で確認する。
 8. 全画面・全visible control・全固有操作を実際に操作する。機能結果、意図挙動、見た目、継続性、製品品質を別々に判定する。
 9. PC/SP、対応7言語、指定responsive widths、theme/appearance、入力方式、権限/free/Premium等の条件差を、該当する全機能で確認する。
 10. 最終Visual closureは最新HEADから再生成し、BEFORE/SETTINGS/AFTER、機能名、preset/mode、主要設定を識別可能にし、全ページrender＋実画像目視を行う。

@@ -6,6 +6,10 @@
 ## 1. 全面監査
 全面監査はテスト実行だけではない。最新dev_branchを取得し、実装inventory→Baseline→Discovery→Delta→横断品質→最終Visual closureまで行う。全画面・全route・全UI surface・全visible control、全機能・全preset・全workflow・全分岐を対象に、実操作→判定→修正→再操作→regressionを行う。
 
+### 1.1 監査と修正の分担
+
+一巡目の実操作と指摘、別担当による原因特定・修正・回帰、監査担当による二巡目の実操作を [実行Policy](../policy/ASTRA_WORK.md) に従って進める。正式doneは既存の証拠条件とVerifierの整合を満たした時点で記録する。
+
 ## 2. 全通り
 ユーザーが到達・操作できる固有の画面、control、状態、分岐、入力方式、離散preset/選択肢は全件実操作する。数値はdefault、min/max、boundary、代表中間、empty/large/invalid、相互作用を確認する。success/error/loading/offline、apply/cancel/back/close、double execution、rapid input、interruption、revisit、undo/redo、save/load/import/export、permission、Free/Premium等も該当する場合は確認する。
 
