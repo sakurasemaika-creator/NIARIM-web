@@ -14,18 +14,18 @@ for(const [key,unit] of Object.entries({tableHour:"1h",tableDay:"1day",tableWeek
  assert.match(table,new RegExp('data-i18n="coins\\.'+key+'">'+unit+'<'));
 }
 const prices=[
- [720,1440,3240,4310,43100],
- [1080,2160,4860,6470,64700],
- [1080,2160,4860,6470,64700],
+ [900,1800,4050,5390,53900],
+ [1350,2700,6070,8090,80900],
+ [1350,2700,6070,8090,80900],
+ [1130,2250,5060,6740,67400],
+ [1880,3750,8430,11240,112400],
+ [1880,3750,8430,11240,112400],
  [900,1800,4050,5390,53900],
  [1500,3000,6750,8990,89900],
- [1500,3000,6750,8990,89900],
- [720,1440,3240,4310,43100],
  [1200,2400,5400,7190,71900],
- [960,1920,4320,5750,57500],
- [600,1200,2700,3590,35900],
- [2400,4800,10790,14380,143800],
- [7340,14690,33040,44000,440000],
+ [750,1500,3370,4490,44900],
+ [3000,5990,13470,17960,179600],
+ [9190,18350,41260,55000,550000],
 ];
 function values(row){
  return [...row.matchAll(/<td\b[^>]*>([\d,]+)/g)]
@@ -34,10 +34,10 @@ function values(row){
 for(const [i,expected] of prices.entries()){
  const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="coins\\.b'+i+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"benefit row "+i);
- assert.deepEqual(values(row),expected,"v6 rate row "+i);
+ assert.deepEqual(values(row),expected,"v7 rate row "+i);
 }
-const separate=[9180,18360,41300,55000,550000];
-const saving=[1840,3670,8260,11000,110000];
+const separate=[11490,22940,51580,68750,687500];
+const saving=[2300,4590,10320,13750,137500];
 for(const [label,expected] of [["coins.compareSeparate",separate],["coins.compareSaving",saving]]){
  const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="'+label.replace(".","\\.")+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"integrated comparison row "+label);
@@ -63,10 +63,10 @@ const d=context.window.NIARIM_I18N_DICT;
 assert.equal(d.ja["coins.title"],"無料でもプレミアム機能が使える！");
 assert.equal(d.ja["coins.unit"],"オパール");
 assert.equal(d.ja["coins.compareFull"],"コンプリートパック");
-assert.match(d.ja["coins.yearNote"],/44,000.+528,000.+440,000.+88,000.+17% OFF/);
+assert.match(d.ja["coins.yearNote"],/55,000.+660,000.+550,000.+110,000.+17%/);
 for(const language of ["ja","en","fr","es","ko","zh-Hans","zh-Hant"]){
  for(const key of ["coins.rateNote","coins.compareSeparate","coins.compareSaving","coins.tableCaption","coins.yearNote"]){
   assert.ok(typeof d[language]?.[key]==="string" && d[language][key].length>5,language+" "+key);
  }
 }
-console.log("Opal v6: one tariff, two baselines, 12 price rows, 7 locales OK");
+console.log("Opal v7: one tariff, two baselines, 12 price rows, 7 locales OK");

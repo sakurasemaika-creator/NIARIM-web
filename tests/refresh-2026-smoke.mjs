@@ -214,7 +214,7 @@ try {
       completePackDiscounts:[...(pack?.querySelectorAll(".coins-saving-badge")||[])].map(el=>el.textContent.trim()),
       comparisonSavingsHaveNoBadges:!!separate&&!!saving&&
         !separate.querySelector(".coins-saving-badge")&&!saving.querySelector(".coins-saving-badge"),
-      hasSeparateYearlyBaseline:/528,000.+440,000.+88,000.+17% OFF/.test(document.querySelector("[data-i18n='coins.yearNote']")?.textContent||""),
+      hasSeparateYearlyBaseline:/660,000.+550,000.+110,000.+17%/.test(document.querySelector("[data-i18n='coins.yearNote']")?.textContent||""),
       featuredDiscountCardRemoved:!document.querySelector(".coins-featured-deals,.coins-discount-tag--table"),
       oldFullPremiumRemoved:!document.querySelector(".coins-main")?.textContent.includes("フルPremium"),
       accordionTimesJapanese:![...document.querySelectorAll(".coins-accordion-content")].some(el=>/\b\d+(?:day|week|month|h|m)\b/.test(el.textContent)),
@@ -229,8 +229,8 @@ try {
      coins.units!==70||coins.hasCurrencyLabel||!coins.hasOpalCaption||
      !coins.hasOpalAmountHeading||!coins.hasCompletePackLabel||!coins.hasSeparateYearlyBaseline||
      coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
-     !same(coins.packAmounts,[7340,14690,33040,44000,440000])||
-     !same(coins.separateAmounts,[9180,18360,41300,55000,550000])||
+     !same(coins.packAmounts,[9190,18350,41260,55000,550000])||
+     !same(coins.separateAmounts,[11490,22940,51580,68750,687500])||
      !same(coins.separateAmounts,coins.singleTotal)||!same(coins.savingAmounts,coins.expectedSavings)||
      !same(coins.completePackDiscounts,coins.expectedBadges)||!coins.comparisonSavingsHaveNoBadges||
      !coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese){
@@ -265,7 +265,7 @@ try {
 
   await page.goto(base+"/help/",{waitUntil:"networkidle"});
   const helpCards=await page.locator("[data-help-card]").count();
-  if(helpCards!==79)log("Help must expose all 79 app topics",helpCards);
+  if(helpCards!==80)log("Help must expose all 80 app topics",helpCards);
   await page.close();
 } catch(error){log("Unexpected error",error.stack||error.message)}
 finally {await browsers.close()}
