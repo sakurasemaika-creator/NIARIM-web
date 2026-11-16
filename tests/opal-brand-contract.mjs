@@ -14,18 +14,18 @@ for(const [key,unit] of Object.entries({tableHour:"1h",tableDay:"1day",tableWeek
  assert.match(table,new RegExp('data-i18n="coins\\.'+key+'">'+unit+'<'));
 }
 const prices=[
- [900,1800,4050,5390,53900],
- [1350,2700,6070,8090,80900],
- [1350,2700,6070,8090,80900],
- [1130,2250,5060,6740,67400],
- [1880,3750,8430,11240,112400],
- [1880,3750,8430,11240,112400],
- [900,1800,4050,5390,53900],
- [1500,3000,6750,8990,89900],
- [1200,2400,5400,7190,71900],
- [750,1500,3370,4490,44900],
- [3000,5990,13470,17960,179600],
- [9190,18350,41260,55000,550000],
+ [1440, 2880, 6470, 8620, 86200],
+ [2160, 4320, 9710, 12940, 129400],
+ [2160, 4320, 9710, 12940, 129400],
+ [1800, 3600, 8090, 10780, 107800],
+ [3000, 6000, 13490, 17980, 179800],
+ [3000, 6000, 13490, 17980, 179800],
+ [1440, 2880, 6470, 8620, 86200],
+ [2400, 4800, 10790, 14380, 143800],
+ [1920, 3840, 8630, 11500, 115000],
+ [1200, 2400, 5390, 7180, 71800],
+ [4820, 9580, 21560, 28760, 287600],
+ [9190, 18350, 41260, 55000, 550000],
 ];
 function values(row){
  return [...row.matchAll(/<td\b[^>]*>([\d,]+)/g)]
@@ -34,16 +34,16 @@ function values(row){
 for(const [i,expected] of prices.entries()){
  const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="coins\\.b'+i+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"benefit row "+i);
- assert.deepEqual(values(row),expected,"v7 rate row "+i);
+ assert.deepEqual(values(row),expected,"v8 rate row "+i);
 }
-const separate=[11490,22940,51580,68750,687500];
-const saving=[2300,4590,10320,13750,137500];
+const separate=[18380, 36700, 82520, 110000, 1100000];
+const saving=[9190, 18350, 41260, 55000, 550000];
 for(const [label,expected] of [["coins.compareSeparate",separate],["coins.compareSaving",saving]]){
  const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="'+label.replace(".","\\.")+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"integrated comparison row "+label);
  assert.deepEqual(values(row),expected);
 }
-const rates=[20,20,20,20,20];
+const rates=[50,50,50,50,50];
 const bundle=table.match(/<tr class="coins-bundle-row">[\s\S]*?<\/tr>/)?.[0];
 assert.ok(bundle);
 assert.deepEqual([...bundle.matchAll(/aria-label="(\d+)% OFF"/g)].map(x=>Number(x[1])),rates);
@@ -69,4 +69,4 @@ for(const language of ["ja","en","fr","es","ko","zh-Hans","zh-Hant"]){
   assert.ok(typeof d[language]?.[key]==="string" && d[language][key].length>5,language+" "+key);
  }
 }
-console.log("Opal v7: one tariff, two baselines, 12 price rows, 7 locales OK");
+console.log("Opal v8: one tariff, two baselines, 12 price rows, 7 locales OK");

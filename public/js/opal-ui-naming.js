@@ -37,7 +37,7 @@ Object.assign(d.ja,{
  "coins.tableCaption":"オパールで交換する制作機能6つと全広告非表示の単品合計、コンプリートパック、節約数を期間別に比較した表",
  "coins.compareSeparate":"制作機能6つ＋全広告非表示の単品合計",
  "coins.compareSaving":"パックで節約できるオパール数",
- "coins.compareIntro":"コンプリートパックは1か月55,000オパール、1年550,000オパールです。制作機能6つと全広告非表示を単品でそろえる場合の合計は、1か月68,750オパール、1年687,500オパールです。表の20% OFFは同じ期間の単品合計との比較です。",
+ "coins.compareIntro":"コンプリートパックは1か月55,000オパール、1年550,000オパールです。制作機能6つと全広告非表示を単品でそろえる場合の合計は、1か月110,000オパール、1年1,100,000オパールです。コンプリートパックは、同じ期間に単品でそろえる場合の半額です。",
  "coins.compareCaution":"単品と1年パックは交換準備中です。現在交換できる期間はアプリで確認できます。"
 
 });
@@ -62,7 +62,7 @@ en:{
  "coins.tableCaption":"Compare the Opals needed for six tools and removing all ads individually, the Complete Pack, and the savings for each duration.",
  "coins.compareSeparate":"Six tools + all ads individually",
  "coins.compareSaving":"Opals saved with pack",
- "coins.compareIntro":"The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 68,750 and 687,500 separately. The table compares the pack with those individual prices for the same period.",
+ "coins.compareIntro":"The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 110,000 and 1,100,000 separately. The table compares the pack with those individual prices for the same period.",
  "coins.compareCaution":"Individual benefits and the annual pack are not yet available to redeem. Check available durations in the app."
 },
 "zh-Hans":{
@@ -71,7 +71,7 @@ en:{
  "coins.tableCaption":"按使用期限比较六项工具和全部去广告的单项合计、全功能组合包及节省的欧泊数量。",
  "coins.compareSeparate":"六项功能＋全部去广告单项合计",
  "coins.compareSaving":"组合包节省的欧泊",
- "coins.compareIntro":"全功能组合包为每月55,000欧泊、每年550,000欧泊；六项工具和全部去广告的单项合计为68,750和687,500欧泊。表中的折扣按相同期间的单项合计计算。",
+ "coins.compareIntro":"全功能组合包为每月55,000欧泊、每年550,000欧泊；六项工具和全部去广告的单项合计为110,000和1,100,000欧泊。表中的折扣按相同期间的单项合计计算。",
  "coins.compareCaution":"单项权益与年度组合包暂未开放兑换。请在应用内查看可兑换的期间。"
 },
 "zh-Hant":{
@@ -80,7 +80,7 @@ en:{
  "coins.tableCaption":"依使用期間比較六項工具和全部去廣告的單項總額、全功能組合包及節省的歐泊數量。",
  "coins.compareSeparate":"六項功能＋全部去廣告單項合計",
  "coins.compareSaving":"組合包省下的歐泊",
- "coins.compareIntro":"全功能組合包為每月55,000歐泊、每年550,000歐泊；六項工具和全部去廣告的單項總額為68,750和687,500歐泊。表中的折扣按相同期間的單項總額計算。",
+ "coins.compareIntro":"全功能組合包為每月55,000歐泊、每年550,000歐泊；六項工具和全部去廣告的單項總額為110,000和1,100,000歐泊。表中的折扣按相同期間的單項總額計算。",
  "coins.compareCaution":"單項權益與年度組合包尚未開放兌換。請在應用程式內查看可兌換的期間。"
 },
 ko:{
@@ -89,7 +89,7 @@ ko:{
  "coins.tableCaption":"기간별로 제작 도구 6개와 전체 광고 제거의 단품 합계, 컴플리트 팩, 절약하는 오팔 수를 비교한 표.",
  "coins.compareSeparate":"제작 도구 6개＋전체 광고 제거 단품 합계",
  "coins.compareSaving":"팩으로 절약하는 오팔",
- "coins.compareIntro":"컴플리트 팩은 한 달 55,000오팔, 1년 550,000오팔입니다. 제작 도구 6개와 전체 광고 제거의 단품 합계는 68,750오팔과 687,500오팔입니다. 할인율은 같은 기간의 단품 합계 기준입니다.",
+ "coins.compareIntro":"컴플리트 팩은 한 달 55,000오팔, 1년 550,000오팔입니다. 제작 도구 6개와 전체 광고 제거의 단품 합계는 110,000오팔과 1,100,000오팔입니다. 할인율은 같은 기간의 단품 합계 기준입니다.",
  "coins.compareCaution":"단품과 연간 팩은 교환 준비 중입니다. 교환 가능한 기간은 앱에서 확인하세요."
 },
 fr:{
@@ -98,7 +98,7 @@ fr:{
  "coins.tableCaption":"Comparez, pour chaque durée, le coût en opales des six outils et de la suppression des annonces à l’unité, du Pack complet et les économies.",
  "coins.compareSeparate":"Six outils + suppression des pubs séparément",
  "coins.compareSaving":"Opales économisées",
- "coins.compareIntro":"Le Pack complet coûte 55 000 opales pour un mois et 550 000 pour un an. Les six outils et la suppression des pubs à l’unité totalisent 68 750 et 687 500 opales. La comparaison porte sur la même durée.",
+ "coins.compareIntro":"Le Pack complet coûte 55 000 opales pour un mois et 550 000 pour un an. Les six outils et la suppression des pubs à l’unité totalisent 110 000 et 1 100 000 opales. La comparaison porte sur la même durée.",
  "coins.compareCaution":"Les avantages à l’unité et le pack annuel seront disponibles ultérieurement. Consultez les durées disponibles dans l’application."
 },
 es:{
@@ -107,7 +107,7 @@ es:{
  "coins.tableCaption":"Comparación por duración del coste en ópalos de las seis herramientas y la eliminación de anuncios por separado, el Paquete completo y el ahorro.",
  "coins.compareSeparate":"Seis funciones + quitar anuncios por separado",
  "coins.compareSaving":"Ópalos ahorrados",
- "coins.compareIntro":"El Paquete completo cuesta 55.000 ópalos al mes y 550.000 al año. Las seis herramientas y la eliminación de anuncios por separado suman 68.750 y 687.500 ópalos. El descuento compara el mismo periodo.",
+ "coins.compareIntro":"El Paquete completo cuesta 55.000 ópalos al mes y 550.000 al año. Las seis herramientas y la eliminación de anuncios por separado suman 110.000 y 1.100.000 ópalos. El descuento compara el mismo periodo.",
  "coins.compareCaution":"Las ventajas individuales y el paquete anual estarán disponibles más adelante. Consulta en la app los periodos disponibles."
 }
 };
