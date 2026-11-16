@@ -26,7 +26,7 @@
       "premiumPage.free.item3": "広告表示あり",
       "premiumPage.free.item4":
         "書き出し時にNIARIM公式エンドロゴを自動追加（編集・削除不可）",
-      "premiumPage.free.item5": "1作品あたり90秒までの書き出し",
+      "premiumPage.free.item5": "無料版では90秒まで尺を伸ばせます。制作済みの長尺作品は全編を書き出せます。",
       "premiumPage.premium.title": "プレミアムプラン",
       "premiumPage.premium.monthly.label": "月額プラン",
       "premiumPage.premium.monthly.price": "550円",
@@ -40,9 +40,8 @@
       "premiumPage.premium.item1.title": "広告非表示",
       "premiumPage.premium.item1.body":
         "アプリ内の広告表示がすべてなくなります。",
-      "premiumPage.premium.item2.title": "エンドロゴの削除・編集",
-      "premiumPage.premium.item2.body":
-        "書き出し時に自動追加されるNIARIM公式エンドロゴを、削除・非表示にしたり、タイムライン上で長さの変更・差し替えができます。",
+      "premiumPage.premium.item2.title": "NIARIMエンドマークの表示切り替え",
+      "premiumPage.premium.item2.body": "特典が有効な間は、タイムラインで作品ごとに公式ロゴの表示を切り替えられます。",
       "premiumPage.premium.item3.title": "ユーザーウォーターマーク",
       "premiumPage.premium.item3.body":
         "画像または文字によるオリジナルのウォーターマークを、作品に追加できます。",
@@ -52,9 +51,8 @@
       "premiumPage.premium.item5.title": "レベル補正",
       "premiumPage.premium.item5.body":
         "黒レベル・白レベル・中間調を調整し、作品の色味を仕上げられます。",
-      "premiumPage.premium.item6.title": "書き出し時間の延長",
-      "premiumPage.premium.item6.body":
-        "1作品あたり最大2時間まで、長尺の作品を制作・書き出しできます。",
+      "premiumPage.premium.item6.title": "最大尺の延長",
+      "premiumPage.premium.item6.body": "最大2時間まで尺を伸ばせます。制作済みの作品は特典終了後も全編を書き出せます。",
       "premiumPage.premium.item7.title": "コミュニティへの投稿数アップ",
       "premiumPage.premium.item7.body":
         "「作品広場」への投稿数が、無料版の1日1作品から1日3作品に増えます。",
@@ -88,7 +86,7 @@
       "premiumPage.free.item3": "Ads are shown",
       "premiumPage.free.item4":
         "The official NIARIM end card is automatically added on export (cannot be edited or removed)",
-      "premiumPage.free.item5": "Export limited to 90 seconds per work",
+      "premiumPage.free.item5": "Extend projects up to 90 seconds. Existing longer projects can be exported in full.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Monthly plan",
       "premiumPage.premium.monthly.price": "¥550",
@@ -101,9 +99,8 @@
       "premiumPage.premium.yearly.fullPrice": "\u00a56,600",
       "premiumPage.premium.item1.title": "No ads",
       "premiumPage.premium.item1.body": "Removes all in-app advertising.",
-      "premiumPage.premium.item2.title": "Remove or edit the end card",
-      "premiumPage.premium.item2.body":
-        "Remove or hide the official NIARIM end card that's added on export, or change its length and replace it on the timeline.",
+      "premiumPage.premium.item2.title": "NIARIM end mark visibility",
+      "premiumPage.premium.item2.body": "While the benefit is active, show or hide the official logo per project from the timeline.",
       "premiumPage.premium.item3.title": "Custom watermark",
       "premiumPage.premium.item3.body":
         "Add your own image or text watermark to your work.",
@@ -113,9 +110,8 @@
       "premiumPage.premium.item5.title": "Levels adjustment",
       "premiumPage.premium.item5.body":
         "Adjust black, white, and midtone levels to finish the coloring of your work.",
-      "premiumPage.premium.item6.title": "Longer export time",
-      "premiumPage.premium.item6.body":
-        "Create and export longer works, up to 2 hours per piece.",
+      "premiumPage.premium.item6.title": "Longer project duration",
+      "premiumPage.premium.item6.body": "Extend a project up to two hours. Existing projects can be exported in full after expiry.",
       "premiumPage.premium.item7.title": "More community posts",
       "premiumPage.premium.item7.body":
         "Post up to 3 works a day to the Gallery, up from 1 a day on the free plan.",
@@ -148,7 +144,7 @@
       "premiumPage.free.item3": "会显示广告",
       "premiumPage.free.item4":
         "导出时自动添加 NIARIM 官方片尾标志（无法编辑或删除）",
-      "premiumPage.free.item5": "单个作品导出时长最多90秒",
+      "premiumPage.free.item5": "可将作品延长到 90 秒。已有长作品可完整导出。",
       "premiumPage.premium.title": "高级会员",
       "premiumPage.premium.monthly.label": "月付方案",
       "premiumPage.premium.monthly.price": "550 日元",
@@ -161,9 +157,8 @@
       "premiumPage.premium.yearly.fullPrice": "6,600 日元",
       "premiumPage.premium.item1.title": "移除广告",
       "premiumPage.premium.item1.body": "移除应用内所有广告显示。",
-      "premiumPage.premium.item2.title": "删除・编辑片尾标志",
-      "premiumPage.premium.item2.body":
-        "可删除或隐藏导出时自动添加的 NIARIM 官方片尾标志，也可在时间轴上更改其长度或替换。",
+      "premiumPage.premium.item2.title": "NIARIM 片尾标志显示设置",
+      "premiumPage.premium.item2.body": "权益有效时可在时间轴上按作品切换官方标志的显示。",
       "premiumPage.premium.item3.title": "自定义水印",
       "premiumPage.premium.item3.body": "可为作品添加自己的图片或文字水印。",
       "premiumPage.premium.item4.title": "色调曲线",
@@ -172,8 +167,8 @@
       "premiumPage.premium.item5.title": "色阶调整",
       "premiumPage.premium.item5.body":
         "调整黑场、白场与中间调，为作品的色彩做最后润色。",
-      "premiumPage.premium.item6.title": "延长导出时长",
-      "premiumPage.premium.item6.body": "单个作品最长可制作并导出2小时的内容。",
+      "premiumPage.premium.item6.title": "延长作品时长",
+      "premiumPage.premium.item6.body": "可将作品延长到 2 小时。权益到期后仍可完整导出已有作品。",
       "premiumPage.premium.item7.title": "增加社区投稿数量",
       "premiumPage.premium.item7.body":
         "「作品广场」的投稿数量从免费版的每天1个提升为每天3个。",
@@ -205,7 +200,7 @@
       "premiumPage.free.item3": "會顯示廣告",
       "premiumPage.free.item4":
         "匯出時自動新增 NIARIM 官方片尾標誌（無法編輯或刪除）",
-      "premiumPage.free.item5": "單一作品匯出時長最多90秒",
+      "premiumPage.free.item5": "可將作品延長至 90 秒。既有的長作品可完整匯出。",
       "premiumPage.premium.title": "高級會員",
       "premiumPage.premium.monthly.label": "月付方案",
       "premiumPage.premium.monthly.price": "550 日圓",
@@ -218,9 +213,8 @@
       "premiumPage.premium.yearly.fullPrice": "6,600 日圓",
       "premiumPage.premium.item1.title": "移除廣告",
       "premiumPage.premium.item1.body": "移除應用程式內所有廣告顯示。",
-      "premiumPage.premium.item2.title": "刪除・編輯片尾標誌",
-      "premiumPage.premium.item2.body":
-        "可刪除或隱藏匯出時自動新增的 NIARIM 官方片尾標誌，也可在時間軸上更改其長度或替換。",
+      "premiumPage.premium.item2.title": "NIARIM 片尾標誌顯示設定",
+      "premiumPage.premium.item2.body": "權益有效時可在時間軸按作品切換官方標誌的顯示。",
       "premiumPage.premium.item3.title": "自訂浮水印",
       "premiumPage.premium.item3.body": "可為作品新增自己的圖片或文字浮水印。",
       "premiumPage.premium.item4.title": "色調曲線",
@@ -229,8 +223,8 @@
       "premiumPage.premium.item5.title": "色階調整",
       "premiumPage.premium.item5.body":
         "調整黑場、白場與中間調，為作品的色彩做最後潤飾。",
-      "premiumPage.premium.item6.title": "延長匯出時長",
-      "premiumPage.premium.item6.body": "單一作品最長可製作並匯出2小時的內容。",
+      "premiumPage.premium.item6.title": "延長作品片長",
+      "premiumPage.premium.item6.body": "可將作品延長至 2 小時。權益到期後仍可完整匯出既有作品。",
       "premiumPage.premium.item7.title": "增加社群投稿數量",
       "premiumPage.premium.item7.body":
         "「作品廣場」的投稿數量從免費版的每天1個提升為每天3個。",
@@ -263,7 +257,7 @@
       "premiumPage.free.item3": "광고가 표시됩니다",
       "premiumPage.free.item4":
         "내보내기 시 NIARIM 공식 엔드 카드가 자동으로 추가됩니다（편집・삭제 불가）",
-      "premiumPage.free.item5": "작품당 최대 90초까지 내보내기 가능",
+      "premiumPage.free.item5": "길이를 90초까지 늘릴 수 있습니다. 만든 긴 작품은 전체를 내보낼 수 있습니다.",
       "premiumPage.premium.title": "프리미엄",
       "premiumPage.premium.monthly.label": "월간 플랜",
       "premiumPage.premium.monthly.price": "550엔",
@@ -276,9 +270,8 @@
       "premiumPage.premium.yearly.fullPrice": "6,600엔",
       "premiumPage.premium.item1.title": "광고 비표시",
       "premiumPage.premium.item1.body": "앱 내 모든 광고 표시가 사라집니다.",
-      "premiumPage.premium.item2.title": "엔드 카드 삭제・편집",
-      "premiumPage.premium.item2.body":
-        "내보내기 시 자동으로 추가되는 NIARIM 공식 엔드 카드를 삭제・비표시로 하거나, 타임라인에서 길이 변경・교체를 할 수 있습니다.",
+      "premiumPage.premium.item2.title": "NIARIM 엔드 마크 표시 설정",
+      "premiumPage.premium.item2.body": "혜택이 유효하면 타임라인에서 작품별로 공식 로고의 표시 여부를 설정할 수 있습니다.",
       "premiumPage.premium.item3.title": "사용자 워터마크",
       "premiumPage.premium.item3.body":
         "이미지 또는 텍스트로 된 나만의 워터마크를 작품에 추가할 수 있습니다.",
@@ -288,9 +281,8 @@
       "premiumPage.premium.item5.title": "레벨 보정",
       "premiumPage.premium.item5.body":
         "블랙 레벨・화이트 레벨・중간톤을 조정해 작품의 색감을 마무리할 수 있습니다.",
-      "premiumPage.premium.item6.title": "내보내기 시간 연장",
-      "premiumPage.premium.item6.body":
-        "작품당 최대 2시간까지 제작・내보내기할 수 있습니다.",
+      "premiumPage.premium.item6.title": "최대 길이 연장",
+      "premiumPage.premium.item6.body": "작품을 2시간까지 늘릴 수 있습니다. 만료 후에도 기존 작품은 전체를 내보낼 수 있습니다.",
       "premiumPage.premium.item7.title": "커뮤니티 게시 수 증가",
       "premiumPage.premium.item7.body":
         "'작품광장'에 게시할 수 있는 작품 수가 무료 버전의 하루 1개에서 하루 3개로 늘어납니다.",
@@ -324,7 +316,7 @@
       "premiumPage.free.item3": "Publicités affichées",
       "premiumPage.free.item4":
         "Le générique de fin officiel de NIARIM est ajouté automatiquement à l'export (non modifiable ni supprimable)",
-      "premiumPage.free.item5": "Export limité à 90 secondes par œuvre",
+      "premiumPage.free.item5": "Prolongez un projet jusqu’à 90 secondes. Les longs projets existants peuvent être exportés en entier.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Forfait mensuel",
       "premiumPage.premium.monthly.price": "550 ¥",
@@ -338,10 +330,8 @@
       "premiumPage.premium.item1.title": "Sans publicité",
       "premiumPage.premium.item1.body":
         "Supprime toutes les publicités dans l'application.",
-      "premiumPage.premium.item2.title":
-        "Suppression / édition du générique de fin",
-      "premiumPage.premium.item2.body":
-        "Supprimez ou masquez le générique de fin officiel de NIARIM ajouté à l'export, ou modifiez sa durée et remplacez-le sur la timeline.",
+      "premiumPage.premium.item2.title": "Affichage du logo final NIARIM",
+      "premiumPage.premium.item2.body": "Tant que l’avantage est actif, affichez ou masquez le logo officiel par projet dans la timeline.",
       "premiumPage.premium.item3.title": "Filigrane personnalisé",
       "premiumPage.premium.item3.body":
         "Ajoutez votre propre filigrane (image ou texte) à votre œuvre.",
@@ -351,9 +341,8 @@
       "premiumPage.premium.item5.title": "Réglage des niveaux",
       "premiumPage.premium.item5.body":
         "Ajustez les niveaux de noir, de blanc et les tons moyens pour finaliser les couleurs de votre œuvre.",
-      "premiumPage.premium.item6.title": "Export plus long",
-      "premiumPage.premium.item6.body":
-        "Créez et exportez des œuvres plus longues, jusqu'à 2 heures chacune.",
+      "premiumPage.premium.item6.title": "Durée du projet prolongée",
+      "premiumPage.premium.item6.body": "Prolongez un projet jusqu’à deux heures. Les projets existants restent exportables en entier après expiration.",
       "premiumPage.premium.item7.title": "Plus de publications communautaires",
       "premiumPage.premium.item7.body":
         "Publiez jusqu'à 3 œuvres par jour dans la Galerie, contre 1 par jour avec le plan gratuit.",
@@ -387,7 +376,7 @@
       "premiumPage.free.item3": "Se muestran anuncios",
       "premiumPage.free.item4":
         "La placa de cierre oficial de NIARIM se añade automáticamente al exportar (no se puede editar ni eliminar)",
-      "premiumPage.free.item5": "Exportación limitada a 90 segundos por obra",
+      "premiumPage.free.item5": "Alarga proyectos hasta 90 segundos. Los proyectos largos existentes se pueden exportar completos.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Plan mensual",
       "premiumPage.premium.monthly.price": "550 ¥",
@@ -401,9 +390,8 @@
       "premiumPage.premium.item1.title": "Sin anuncios",
       "premiumPage.premium.item1.body":
         "Elimina toda la publicidad dentro de la app.",
-      "premiumPage.premium.item2.title": "Eliminar o editar la placa de cierre",
-      "premiumPage.premium.item2.body":
-        "Elimina u oculta la placa de cierre oficial de NIARIM que se añade al exportar, o cambia su duración y reemplázala en la línea de tiempo.",
+      "premiumPage.premium.item2.title": "Visibilidad del logo final de NIARIM",
+      "premiumPage.premium.item2.body": "Mientras el beneficio esté activo, muestra u oculta el logo oficial por proyecto en la línea de tiempo.",
       "premiumPage.premium.item3.title": "Marca de agua personalizada",
       "premiumPage.premium.item3.body":
         "Añade tu propia marca de agua de imagen o texto a tu obra.",
@@ -413,9 +401,8 @@
       "premiumPage.premium.item5.title": "Ajuste de niveles",
       "premiumPage.premium.item5.body":
         "Ajusta los niveles de negro, blanco y medios tonos para dar el acabado final al color de tu obra.",
-      "premiumPage.premium.item6.title": "Exportación más larga",
-      "premiumPage.premium.item6.body":
-        "Crea y exporta obras más largas, de hasta 2 horas cada una.",
+      "premiumPage.premium.item6.title": "Mayor duración de proyecto",
+      "premiumPage.premium.item6.body": "Alarga proyectos hasta dos horas. Los proyectos existentes se pueden exportar completos al caducar.",
       "premiumPage.premium.item7.title": "Más publicaciones en la comunidad",
       "premiumPage.premium.item7.body":
         "Publica hasta 3 obras al día en la Galería, frente a 1 al día en el plan gratuito.",

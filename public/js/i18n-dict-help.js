@@ -159,7 +159,7 @@
         "複数のレイヤーをまとめて1つのキーフレームストリームで動かす機能です。例えば「腕」が肌・袖の2枚の自動塗りパーツで構成されている場合、この2枚をグループ化しておけば、1回のキーフレーム操作でまとめて動かせます。レイヤーパネルで複数選択（チェックボックス）した状態で下部バーの「グループ化」アイコンから作成します。グループの動きは各レイヤー自身のキーフレーム（設定されていれば）に重ねて適用されるため、グループ全体の動き＋個別レイヤーの微調整、という組み合わせも可能です。1つのレイヤーは同時に1つのグループにのみ所属できます。",
       "help.entry44.title": "エンドカード",
       "help.entry44.desc":
-        "動画書き出し時、本編の終わりに自動で追加されるNIARIMロゴの短い動画（約5秒）です。無料版では非表示・削除ができませんが、プレミアム会員になると表示のON/OFF・長さ変更・差し替えができるようになります。",
+        "NIARIMのエンドマークは、MP4・WebM・AVIの本編末尾に付く5秒のロゴです。エンドマーク特典が有効な間は、作品ごとに表示を切り替えられます。期限後も作品の設定は保存されます。GIFには付きません。",
       "help.entry45.title": "自動保存",
       "help.entry45.desc":
         "クラッシュやファイル破損が起きた時のための復元専用の保存です。描画などの変更があるたびに自動で保存され、最大3件まで古い順に上書きされます。手動保存（セーブスロット・セーブツリー）とは完全に別で管理されており、通常の保存の代わりにはなりません。アプリを異常終了した後の再起動時のみ、復元するかどうかを尋ねられます。",
@@ -183,16 +183,16 @@
         "設定・素材・ブラシ・自動塗り設定・テーマ・パレット（カラーピッカー・ドット絵専用）など、アプリ全体の環境を別の端末へまとめて引き継ぐための機能です。引き継ぐ項目はチェックボックスで個別に選べるほか、制作中のプロジェクトも任意で選んで含められます（選択したプロジェクトは素材・フォントも含めて丸ごと引き継がれます）。個別のプロジェクトだけを渡したい場合は「共有（.niashare）」も使えます。",
       "help.entry52.title": "動画書き出し（MP4・WebM・GIF・AVI）",
       "help.entry52.desc":
-        "作品を汎用的なMP4動画として書き出します。無料版は書き出せる長さに上限（90秒）があり、動画の最後にエンドカード（アプリロゴ）が自動で追加されます。 アルファチャンネル（背景の透明部分）を保持したまま書き出せる動画形式です。対応する再生環境でのみ透過再生されます。他のアプリの素材として重ねて使いたい場合などに向いています。 アニメーションGIFとして書き出します。自動でループ再生される形式のため、SNSへの投稿など気軽に共有したい場面に向いています。 互換性を重視したい場合はAVI（Motion JPEG）としても書き出せます。特許・ライセンス面で安全なコーデックを採用していますが、アルファチャンネル（透過）には対応せず、端末によってはアプリ内プレビューが利用できない場合があります（その場合も「共有」から外部プレイヤーで再生できます）。 無料会員はプロジェクトの長さに90秒までの上限があります（プレミアム会員は2時間）。フレーム追加・複製によって上限を超えそうな場合は、ボタンをタップした時点で注意ダイアログが表示され、実際に90秒を超えることはありません。",
+        "MP4・WebM・GIF・AVIで書き出せます。無料版で尺を伸ばせるのは90秒までです。制作済みの長尺作品は全編を書き出せます。書き出す前に本編の長さとエンドマークの有無を確認できます。",
       "help.entry53.title": "書き出し画面",
       "help.entry53.desc":
         "動画・画像の書き出し中は進捗状況が表示され、途中でキャンセルすることもできます。書き出しにかかる時間は端末の性能によって変わります。",
       "help.entry54.title": "ウォーターマーク",
       "help.entry54.desc":
-        "書き出した動画・画像に、自分の署名やロゴを透かしとして入れられるプレミアム限定機能です。位置・大きさ・不透明度を調整できます。タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。",
+        "画像や文字で自分の署名やロゴを作品に追加できます。追加や再編集にはウォーターマーク特典が必要です。配置済みのウォーターマークは期限後も書き出せます。",
       "help.entry55.title": "プレミアム",
       "help.entry55.desc":
-        "プレミアム会員になると、無料版で90秒までに制限されている動画の尺が最大2時間まで拡大され、動画の最後に自動追加されるエンドカード（アプリロゴ）を削除できます。広告も非表示になり、ウォーターマーク・トーンカーブ・レベル補正機能も利用できるようになります。",
+        "最大尺の特典が有効な間は、最大2時間まで尺を伸ばせます。制作済みの長尺作品や適用済みの色補正は、期限後もそのまま書き出せます。エンドマークの表示は書き出し開始時に有効な特典で決まります。",
       "help.entry56.title": "ホーム画面",
       "help.entry56.desc":
         "アプリを起動して最初に表示される画面で、プロジェクト・共有・作品一覧・ゴミ箱の各タブを切り替えて閲覧できます。右上の検索アイコンからプロジェクト名で絞り込み検索もできます。プロジェクトタブでは新規プロジェクト作成とフォルダ作成を画面右下の＋ボタンから選べます。",
@@ -253,7 +253,7 @@
         "アニメ・イラスト作品をYouTube動画としてコミュニティに投稿し、他のユーザーの作品を閲覧できる機能です。「新着」「ランキング」「フォロー中」の3タブで一覧を切り替えられ、作品タイトルまたは投稿者名で検索できるほか、タグ検索モードに切り替えるとタグから作品を絞り込めます。タグは投稿者以外のユーザーも自由に追加・削除でき（投稿者がロックしたタグは投稿者本人にしか外せません）、タグをタップするだけでも同じタグの作品に絞り込めます。作品カードをタップするとドラッグ・リサイズできるフローティングプレビューウィンドウが開き、他の画面を操作しながら視聴を続けられます。「詳細へ」ボタンで作品の詳細画面（投稿者・投稿日・タグ編集・ブックマーク・リポストなど）を開けます。作者名の横の「フォロー」ボタンでフォローすると、「フォロー中」タブでその作者の投稿だけを新着順にまとめて追いかけられます。フォローされると画面右上のベルアイコンの通知一覧に届きます。自分のフォロー中/フォロワー一覧を全体公開するかどうかも設定でき（既定は非公開）、公開設定にしている他のユーザーの一覧も閲覧できます。他者の作品（自分の投稿を除く）は「リポスト」ボタンで再投稿でき、フォロー中の作者が誰かの作品をリポストすると、その作品も「投稿日時」と「リポスト日時」のうちより新しい方を基準に「フォロー中」タブへ混ざって表示されます（カードに「○○さんがリポスト」と表示）。ブックマークした作品はホーム画面の「ブクマ済み」タブにまとめて表示されるほか、投稿者別の作品一覧画面の「ブックマーク」タブでも確認できます。自分のブックマーク一覧はユーザー全体へ公開するかどうかを設定でき（既定は非公開）、公開設定にしている他のユーザーのブックマーク一覧も閲覧できます。不適切な作品は理由を添えて通報でき、送信後にはその投稿者をブロックするか選べます。縦長の動画は「縦画面モード」でTikTok風に連続再生して視聴できます。投稿できる本数には1日あたりの上限があり、無料会員は1日1本、プレミアム会員は1日3本までです。",
       "help.entry75.title": "ウォーターマークの再編集",
       "help.entry75.desc":
-        "タイムラインの共通レイヤートラックに配置したウォーターマークをタップすると、角度・大きさ・不透明度・表示範囲（ループ表示）をいつでも再編集できます。登録時だけでなく、実際にプロジェクト内で使うタイミングで細かく調整できます。",
+        "タイムラインの共通レイヤートラックから角度・大きさ・不透明度・表示範囲を調整できます。特典が終了しても配置済みのウォーターマークは作品や書き出しに残ります。設定の変更には有効な特典が必要です。",
     },
     en: {
       "help.title": "Help",
@@ -404,7 +404,7 @@
         'Moves several layers together with a single keyframe stream. For example, if an "arm" is made up of two autofill parts — skin and sleeve — grouping them lets you move both with one keyframe operation. Create a group by multi-selecting layers (checkboxes) in the layer panel and tapping the "Group" icon in the bottom bar. A group\'s motion is layered on top of each member layer\'s own keyframes (if set), so you can combine the group\'s overall movement with per-layer fine adjustments. A layer can belong to only one group at a time.',
       "help.entry44.title": "End Card (End Logo)",
       "help.entry44.desc":
-        "A short video (about 5 seconds) with the NIARIM logo, automatically added to the end of the main content when exporting a video. The free version cannot hide or remove it, but Premium members can turn it on/off, change its length, or replace it.",
+        "The NIARIM end mark is a five-second logo appended to MP4, WebM, and AVI exports. While the benefit is active, you can show or hide it per project. Project preferences are kept after expiry. GIFs do not include it.",
       "help.entry45.title": "Auto Save",
       "help.entry45.desc":
         "A save dedicated to recovery in case of a crash or file corruption. It saves automatically every time there's a change, such as drawing, and overwrites the oldest of up to 3 saves. It's managed completely separately from manual saves (save slots and the save tree) and is not a substitute for regular saving. You're only asked whether to restore it when relaunching the app after an abnormal exit.",
@@ -428,16 +428,16 @@
         'A feature for transferring your entire app environment — settings, materials, brushes, autofill settings, theme, palettes (color picker and pixel-art), and more — to another device all at once. You can choose individual items to transfer with checkboxes, and optionally include in-progress projects too (selected projects are transferred whole, including their materials and fonts). If you just want to hand over a single project, you can also use "Share (.niashare)".',
       "help.entry52.title": "Video Export (MP4, WebM, GIF, AVI)",
       "help.entry52.desc":
-        "Exports your work as a standard MP4 video. The free version has a length limit (90 seconds) and automatically adds an end card (app logo) at the end of the video. A video format that can be exported while keeping the alpha channel (the transparent parts of the background). Transparent playback only works in compatible playback environments. Good for layering as material in other apps. Exports as an animated GIF. Since it loops automatically, it works well for casual sharing on social media. If compatibility matters most, you can also export as AVI (Motion JPEG). It uses a codec chosen to be safe on patents and licensing, but it doesn't support the alpha channel (transparency), and in-app preview may not work on every device (you can still play it in an external player via Share in that case). Free accounts are capped at a 90-second project length (Premium accounts get 2 hours). If adding or duplicating frames would push you past the limit, a warning dialog appears the moment you tap the button, so you never actually go over 90 seconds.",
+        "Export in MP4, WebM, GIF, or AVI. The free plan lets you extend a project up to 90 seconds. Existing long projects can be exported in full. Check the main video duration and end mark before exporting.",
       "help.entry53.title": "Export screen",
       "help.entry53.desc":
         "Shows progress while exporting a video or image, and lets you cancel partway through. How long it takes depends on your device's performance.",
       "help.entry54.title": "Watermark",
       "help.entry54.desc":
-        "A premium-only feature that lets you add your own signature or logo as a watermark on exported videos and images. You can adjust its position, size, and opacity. Tap the watermark placed on the common-layer track in the timeline to re-edit its angle, size, opacity, and visible range (looping) at any time — not just when you first register it, but whenever you use it in a project.",
+        "Add your own signature or logo with text or an image. Adding or editing a watermark requires the benefit. Placed watermarks can still be exported after expiry.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "Premium membership extends the 90-second video length limit of the free version up to 2 hours and lets you remove the end card (app logo) automatically added at the end of every video. Ads are also hidden, and you gain access to the watermark, tone curve, and level correction features.",
+        "The longer-duration benefit lets you extend a project up to two hours. Existing long projects and applied color corrections can still be exported after expiry. The end mark depends on the benefit active when export starts.",
       "help.entry56.title": "Home screen",
       "help.entry56.desc":
         "The first screen shown when you launch the app, with Projects, Shared, Works, and Trash tabs. The search icon at the top right lets you filter projects by name. On the Projects tab, the + button in the bottom right lets you choose between creating a new project or a new folder.",
@@ -498,7 +498,7 @@
         "Post your animations and illustrations to the community as YouTube videos, and browse works by other users. Switch between the “New”, “Ranking”, and “Following” tabs, and search by work title or creator name. Switch to tag search mode to filter works by tag — anyone (not just the creator) can add or remove tags, though a tag the creator has locked can only be removed by the creator, and tapping a tag instantly filters to matching works. Tapping a work card opens a draggable, resizable floating preview window, so you can keep browsing other screens while it plays. The “View Details” button opens the work's detail screen (creator, post date, tag editing, bookmarking, reposting, and more). Tap the “Follow” button next to a creator's name to follow them — the “Following” tab then gathers just that creator's posts in chronological order. When someone follows you, it shows up in the notification list under the bell icon at the top of the screen. You can choose whether your own following/followers lists are visible to other users (private by default), and view other users' lists if they've made theirs public. You can repost anyone else's work (except your own) with the “Repost” button; when a creator you follow reposts someone else's work, that work also appears in your “Following” tab, sorted by whichever is more recent — its original post date or its repost date (the card shows “Reposted by …”). Bookmarked works appear together under the “Bookmarked” tab on the Home screen, and also under the “Bookmarks” tab on a creator's work list screen. You can choose whether your own bookmark list is visible to other users (private by default), and you can view other users' bookmark lists if they've made theirs public. You can report a work with a reason, and after submitting you'll be asked whether to block that creator. Portrait videos can be watched in “Portrait mode”, which plays them back-to-back like a short-form video feed. There is a daily limit on how many works you can post: 1 per day for free members, 3 per day for Premium members.",
       "help.entry75.title": "Re-editing a watermark",
       "help.entry75.desc":
-        "Tapping a watermark placed on the timeline's common-layer track lets you re-edit its angle, size, opacity, and display range (loop) at any time. You can fine-tune it not just when registering it, but whenever you're actually using it in a project.",
+        "Adjust angle, size, opacity, and display range from the shared-layer track in the timeline. Placed watermarks stay in projects and exports after expiry. An active benefit is required to change these settings.",
     },
     "zh-Hans": {
       "help.title": "帮助",
@@ -649,7 +649,7 @@
         "用同一组关键帧把多个图层一起移动的功能。例如「手臂」由皮肤、袖子两个自动上色部件组成时，把这两个图层分到同一组后，只需一次关键帧操作就能让它们一起移动。在图层面板中多选（勾选框）图层，再点击底部工具栏的「分组」图标即可创建。分组的运动会叠加在每个成员图层自身的关键帧（如果设置了的话）之上，因此可以把分组整体的运动和单个图层的微调结合起来使用。一个图层同一时间只能属于一个分组。",
       "help.entry44.title": "EndCard（片尾标志）",
       "help.entry44.desc":
-        "导出视频时，会在正片结尾自动添加的NIARIM标志短片（约5秒）。免费版无法隐藏或删除，但成为Premium会员后可以开关显示・更改时长・进行替换。",
+        "NIARIM 片尾标志是 MP4、WebM 和 AVI 末尾的 5 秒标志。权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加标志。",
       "help.entry45.title": "自动保存",
       "help.entry45.desc":
         "专用于崩溃或文件损坏时恢复的保存。每次绘图等发生变更时都会自动保存，最多保留3份，按从旧到新的顺序覆盖。它与手动保存（存档槽・存档树）完全分开管理，不能替代常规保存。仅在应用异常退出后重新启动时，才会询问是否要恢复。",
@@ -673,16 +673,16 @@
         "将设置、素材、笔刷、自动上色设置、主题、调色板（取色器・像素画专用）等整个应用环境一次性转移到其他设备的功能。可以通过复选框单独选择要转移的项目，还可以选择性地一并包含制作中的项目（所选项目会连同素材、字体一起完整转移）。如果只想传递单个项目，也可以改用「共享（.niashare）」。",
       "help.entry52.title": "视频导出（MP4・WebM・GIF・AVI）",
       "help.entry52.desc":
-        "将作品导出为通用MP4视频。免费版可导出的时长有上限（90秒），且会在视频结尾自动添加片尾卡（应用Logo）。 可在保留Alpha通道（背景透明部分）的情况下导出的视频格式。仅在支持的播放环境中才能透明播放。适合作为素材叠加到其他应用中使用。 导出为动图GIF。由于会自动循环播放，适合在社交媒体上轻松分享的场景。 如果更看重兼容性，也可以导出为AVI（Motion JPEG）。所采用的编码器在专利和授权方面较为安全，但不支持Alpha通道（透明），部分设备上应用内预览可能无法使用（此时仍可通过「分享」用外部播放器播放）。 免费会员的项目长度上限为90秒（付费会员为2小时）。如果新增或复制帧会超过上限，在点击按钮的瞬间就会显示提示对话框，因此实际上不会超过90秒。",
+        "支持导出 MP4、WebM、GIF 和 AVI。免费版可将作品延长到 90 秒。已制作的长作品仍可完整导出，导出前可查看时长和片尾标志。",
       "help.entry53.title": "导出画面",
       "help.entry53.desc":
         "导出视频、图片期间会显示进度，也可以中途取消。所需时间会因设备性能而异。",
       "help.entry54.title": "水印",
       "help.entry54.desc":
-        "可以在导出的视频・图片上加入自己签名或Logo作为水印的高级会员专属功能。可以调整位置、大小、不透明度。点击时间轴共通图层轨道上放置的水印，随时都能重新编辑其角度、大小、不透明度、显示范围（循环显示）——不仅是首次设置时，在项目中实际使用时也能随时细致调整。",
+        "可以添加自己的签名或标志。添加或编辑需要水印权益。到期后仍可导出已放置的水印。",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "成为高级会员后，免费版限制的90秒视频时长将延长至最长2小时，并可移除每个视频结尾自动添加的片尾卡（应用Logo）。同时广告也会隐藏，还可使用水印、色调曲线、色阶校正功能。",
+        "时长权益有效时可以将作品延长到 2 小时。到期后仍可导出已有的长作品及已应用的调色。片尾标志取决于开始导出时有效的权益。",
       "help.entry56.title": "主页",
       "help.entry56.desc":
         "启动应用后最先显示的画面，可在项目、共享、作品列表、回收站各标签间切换查看。右上角的搜索图标可按项目名称筛选。在项目标签页中，可通过悬浮按钮选择新建项目或新建文件夹。",
@@ -743,7 +743,7 @@
         "可以将动画・插画作品以YouTube视频的形式发布到社区，并浏览其他用户的作品。可以切换「最新」「排行榜」「关注」三个标签页，也可以按作品标题或投稿者名称搜索。切换到标签搜索模式后可按标签筛选作品，标签不仅投稿者本人，其他用户也可以自由添加或删除（投稿者锁定的标签只能由投稿者本人解锁），点击标签即可筛选出相同标签的作品。点击作品卡片会打开可拖动、可调整大小的悬浮预览窗口，可以在继续操作其他画面的同时观看。点击「查看详情」按钮可打开作品详情画面（投稿者、发布日期、标签编辑、收藏、转发等）。点击投稿者名称旁的「关注」按钮即可将其加入关注列表，「关注」标签页会按时间顺序汇总显示该作者的作品。有人关注你时，会显示在画面右上角铃铛图标的通知列表中。你可以分别设置自己的关注列表/粉丝列表是否对所有用户公开（默认非公开），也可以查看已公开的其他用户的列表。除自己发布的作品外，都可以用「转发」按钮转发；当关注的作者转发了他人的作品时，该作品也会以「发布日期」和「转发日期」中较新的一方为基准，混入「关注」标签页中显示（卡片上会显示「○○转发了」）。收藏的作品会汇总显示在主页的「已收藏」标签页中，也可以在投稿者作品列表画面的「收藏」标签页中查看。可以设置自己的收藏列表是否对其他用户公开（默认不公开），也可以查看已设为公开的其他用户的收藏列表。对不当作品可以附上理由进行举报，举报提交后会询问你是否要屏蔽该投稿者。竖屏视频可以在「竖屏模式」中连续播放观看。每日可发布的作品数量有上限，免费会员每天1个，高级会员每天3个。",
       "help.entry75.title": "重新编辑水印",
       "help.entry75.desc":
-        "点击放置在时间轴共同图层轨道上的水印，随时可以重新编辑其角度、大小、不透明度、显示范围（循环显示）。不仅在登记时，在项目中实际使用时也能随时细致调整。",
+        "可在时间轴的共用图层轨道调整角度、大小、不透明度及显示范围。到期后，已放置的水印仍会保留在作品及导出文件中。更改设置需要有效权益。",
     },
     "zh-Hant": {
       "help.title": "說明",
@@ -894,7 +894,7 @@
         "用同一組關鍵影格把多個圖層一起移動的功能。例如「手臂」由皮膚、袖子兩個自動上色部件組成時，把這兩個圖層分到同一群組後，只需一次關鍵影格操作就能讓它們一起移動。在圖層面板中多選（勾選框）圖層，再點擊底部工具列的「群組化」圖示即可建立。群組的運動會疊加在每個成員圖層自身的關鍵影格（如果設定了的話）之上，因此可以把群組整體的運動和單一圖層的微調結合起來使用。一個圖層同時只能屬於一個群組。",
       "help.entry44.title": "EndCard（片尾標誌）",
       "help.entry44.desc":
-        "匯出影片時，會在正片結尾自動加入的NIARIM標誌短片（約5秒）。免費版無法隱藏或刪除，但成為Premium會員後可以開關顯示・變更長度・進行替換。",
+        "NIARIM 片尾標誌是 MP4、WebM 和 AVI 末尾的 5 秒標誌。權益有效時可依作品切換顯示。到期後仍保留設定。GIF 不會加上標誌。",
       "help.entry45.title": "自動儲存",
       "help.entry45.desc":
         "專用於當機或檔案損毀時復原的儲存。每次繪圖等發生變更時都會自動儲存，最多保留3份，依由舊到新的順序覆寫。它與手動儲存（儲存槽・儲存樹）完全分開管理，不能取代一般儲存。僅在App異常結束後重新啟動時，才會詢問是否要復原。",
@@ -918,16 +918,16 @@
         "將設定、素材、筆刷、自動上色設定、主題、調色盤（取色器・像素畫專用）等整個應用程式環境一次性轉移到其他裝置的功能。可以透過核取方塊個別選擇要轉移的項目，還可以選擇性地一併包含製作中的專案（所選專案會連同素材、字型一起完整轉移）。如果只想傳遞單一專案，也可以改用「共用（.niashare）」。",
       "help.entry52.title": "影片匯出（MP4・WebM・GIF・AVI）",
       "help.entry52.desc":
-        "將作品匯出為通用MP4影片。免費版可匯出的長度有上限（90秒），且會在影片結尾自動加入片尾卡（應用程式Logo）。 可在保留Alpha色版（背景透明部分）的情況下匯出的影片格式。僅在支援的播放環境中才能透明播放。適合作為素材疊加到其他App中使用。 匯出為動畫GIF。由於會自動循環播放，適合在社群媒體上輕鬆分享的場景。 如果更重視相容性，也可以匯出為AVI（Motion JPEG）。所採用的編碼器在專利與授權方面較為安全，但不支援Alpha色版（透明），部分裝置上App內預覽可能無法使用（此時仍可透過「分享」用外部播放器播放）。 免費會員的專案長度上限為90秒（付費會員為2小時）。如果新增或複製影格會超過上限，在點擊按鈕的瞬間就會顯示提示對話框，因此實際上不會超過90秒。",
+        "支援匯出 MP4、WebM、GIF 和 AVI。免費版可將作品延長至 90 秒。已製作的長作品仍可完整匯出，匯出前可查看片長及片尾標誌。",
       "help.entry53.title": "匯出畫面",
       "help.entry53.desc":
         "匯出影片、圖片期間會顯示進度，也可以中途取消。所需時間會依裝置效能而異。",
       "help.entry54.title": "浮水印",
       "help.entry54.desc":
-        "可以在匯出的影片・圖片上加入自己簽名或Logo作為浮水印的進階會員專屬功能。可以調整位置、大小、不透明度。點擊時間軸共用圖層軌道上放置的浮水印，隨時都能重新編輯其角度、大小、不透明度、顯示範圍（循環顯示）——不僅是首次設定時，在專案中實際使用時也能隨時細緻調整。",
+        "可新增自己的簽名或標誌。新增或編輯需要浮水印權益。到期後仍可匯出已放置的浮水印。",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "成為進階會員後，免費版限制的90秒影片長度將延長至最長2小時，並可移除每支影片結尾自動加入的片尾卡（應用程式Logo）。同時廣告也會隱藏，還可使用浮水印、色調曲線、色階校正功能。",
+        "片長權益有效時可將作品延長至 2 小時。到期後仍可匯出已有的長作品及已套用的調色。片尾標誌視開始匯出時有效的權益而定。",
       "help.entry56.title": "首頁",
       "help.entry56.desc":
         "啟動App後最先顯示的畫面，可在專案、共用、作品清單、垃圾桶各標籤間切換檢視。右上角的搜尋圖示可依專案名稱篩選。在專案標籤頁中，可透過懸浮按鈕選擇新增專案或新增資料夾。",
@@ -988,7 +988,7 @@
         "可以將動畫・插畫作品以YouTube影片的形式發佈到社群，並瀏覽其他使用者的作品。可以切換「最新」「排行榜」「追蹤」三個分頁，也可以依作品標題或投稿者名稱搜尋。切換到標籤搜尋模式後可依標籤篩選作品，標籤不僅投稿者本人，其他使用者也可以自由新增或刪除（投稿者鎖定的標籤只能由投稿者本人解鎖），點擊標籤即可篩選出相同標籤的作品。點擊作品卡片會開啟可拖曳、可調整大小的浮動預覽視窗，可以在繼續操作其他畫面的同時觀看。點擊「查看詳情」按鈕可開啟作品詳情畫面（投稿者、發佈日期、標籤編輯、收藏、轉發等）。點擊投稿者名稱旁的「追蹤」按鈕即可將其加入追蹤清單，「追蹤」分頁會依時間順序彙整顯示該作者的作品。有人追蹤你時，會顯示在畫面右上角鈴鐺圖示的通知清單中。你可以分別設定自己的追蹤清單/粉絲清單是否對所有使用者公開（預設為非公開），也可以查看已公開的其他使用者的清單。除自己發佈的作品外，都可以用「轉發」按鈕轉發；當追蹤的作者轉發了他人的作品時，該作品也會以「發佈日期」和「轉發日期」中較新的一方為基準，混入「追蹤」分頁中顯示（卡片上會顯示「○○轉發了」）。收藏的作品會彙整顯示在主畫面的「已收藏」分頁中，也可以在投稿者作品清單畫面的「收藏」分頁中查看。可以設定自己的收藏清單是否對其他使用者公開（預設不公開），也可以查看已設為公開的其他使用者的收藏清單。對不當作品可以附上理由進行檢舉，檢舉送出後會詢問你是否要封鎖該投稿者。直向影片可以在「直向模式」中連續播放觀看。每日可發佈的作品數量有上限，免費會員每天1個，進階會員每天3個。",
       "help.entry75.title": "重新編輯浮水印",
       "help.entry75.desc":
-        "點擊放置在時間軸共用圖層軌道上的浮水印，隨時可以重新編輯其角度、大小、不透明度、顯示範圍（循環顯示）。不僅在登記時，在專案中實際使用時也能隨時細部調整。",
+        "可在時間軸的共用圖層軌道調整角度、大小、不透明度及顯示範圍。到期後，已放置的浮水印仍保留在作品與匯出檔案中。更改設定需要有效權益。",
     },
     ko: {
       "help.title": "도움말",
@@ -1139,7 +1139,7 @@
         "여러 레이어를 하나의 키프레임 흐름으로 한꺼번에 움직이는 기능입니다. 예를 들어 「팔」이 피부・소매 2장의 자동 채색 파츠로 이루어져 있다면, 이 2장을 그룹화해두면 한 번의 키프레임 조작으로 함께 움직일 수 있습니다. 레이어 패널에서 여러 개를 선택（체크박스）한 상태로 하단 바의 「그룹화」 아이콘에서 만듭니다. 그룹의 움직임은 각 레이어 자체의 키프레임（설정되어 있다면）에 겹쳐서 적용되므로, 그룹 전체의 움직임과 개별 레이어의 미세 조정을 함께 사용할 수도 있습니다. 하나의 레이어는 동시에 하나의 그룹에만 속할 수 있습니다.",
       "help.entry44.title": "EndCard（엔드 로고）",
       "help.entry44.desc":
-        "동영상 내보내기 시, 본편이 끝난 후 자동으로 추가되는 NIARIM 로고의 짧은 영상（약 5초）입니다. 무료판에서는 숨기거나 삭제할 수 없지만, 프리미엄 회원이 되면 표시 ON/OFF・길이 변경・교체가 가능해집니다.",
+        "NIARIM 엔드 마크는 MP4, WebM, AVI 끝에 붙는 5초 로고입니다. 혜택이 유효하면 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 설정이 저장되며 GIF에는 붙지 않습니다.",
       "help.entry45.title": "자동 저장",
       "help.entry45.desc":
         "충돌이나 파일 손상이 발생했을 때를 위한 복원 전용 저장입니다. 그리기 등의 변경이 있을 때마다 자동으로 저장되며, 최대 3개까지 오래된 순서로 덮어씌워집니다. 수동 저장（세이브 슬롯・세이브 트리）과는 완전히 별도로 관리되며, 일반 저장을 대체하지는 않습니다. 앱이 비정상 종료된 후 재시작할 때만 복원할지 묻습니다.",
@@ -1163,16 +1163,16 @@
         "설정・소재・브러시・자동 채색 설정・테마・팔레트(컬러 피커・도트 그림 전용) 등 앱 전체 환경을 다른 기기로 한꺼번에 이전하는 기능입니다. 이전할 항목은 체크박스로 개별 선택할 수 있으며, 제작 중인 프로젝트도 선택해서 포함할 수 있습니다(선택한 프로젝트는 소재・글꼴까지 통째로 이전됩니다). 개별 프로젝트만 전달하고 싶을 때는 「공유（.niashare）」도 사용할 수 있습니다.",
       "help.entry52.title": "동영상 내보내기（MP4・WebM・GIF・AVI）",
       "help.entry52.desc":
-        "작품을 범용 MP4 동영상으로 내보냅니다. 무료 버전은 내보낼 수 있는 길이에 제한(90초)이 있으며, 동영상 끝에 엔드카드(앱 로고)가 자동으로 추가됩니다. 알파 채널（배경의 투명 부분）을 유지한 채 내보낼 수 있는 동영상 형식입니다. 지원하는 재생 환경에서만 투명하게 재생됩니다. 다른 앱의 소재로 겹쳐서 사용하고 싶을 때 적합합니다. 애니메이션 GIF로 내보냅니다. 자동으로 반복 재생되는 형식이라 SNS 공유 등 가볍게 공유하고 싶을 때 적합합니다. 호환성을 중시한다면 AVI（Motion JPEG）로도 내보낼 수 있습니다. 특허・라이선스 면에서 안전한 코덱을 채택했지만 알파 채널（투명）은 지원하지 않으며, 기기에 따라 앱 내 미리보기가 되지 않을 수 있습니다（그 경우에도 「공유」에서 외부 플레이어로 재생할 수 있습니다）. 무료 회원은 프로젝트 길이에 90초까지의 상한이 있습니다（프리미엄 회원은 2시간）. 프레임 추가・복제로 상한을 넘어설 것 같으면 버튼을 탭한 순간 주의 대화상자가 표시되어, 실제로 90초를 넘지 않도록 되어 있습니다.",
+        "MP4, WebM, GIF, AVI로 내보낼 수 있습니다. 무료 버전에서 작품 길이를 90초까지 늘릴 수 있습니다. 이미 만든 긴 작품은 전체를 내보낼 수 있습니다. 내보내기 전에 길이와 엔드 마크를 확인할 수 있습니다.",
       "help.entry53.title": "내보내기 화면",
       "help.entry53.desc":
         "동영상・이미지를 내보내는 동안 진행 상황이 표시되며, 도중에 취소할 수도 있습니다. 내보내기에 걸리는 시간은 기기 성능에 따라 달라집니다.",
       "help.entry54.title": "워터마크",
       "help.entry54.desc":
-        "내보낸 동영상・이미지에 자신의 서명이나 로고를 워터마크로 넣을 수 있는 프리미엄 전용 기능입니다. 위치・크기・불투명도를 조정할 수 있습니다. 타임라인의 공통 레이어 트랙에 배치한 워터마크를 탭하면 각도・크기・불투명도・표시 범위（루프 표시）를 언제든지 다시 편집할 수 있습니다. 등록할 때뿐 아니라 실제로 프로젝트에서 사용할 때도 세세하게 조정할 수 있습니다.",
+        "이미지나 텍스트로 서명 또는 로고를 넣을 수 있습니다. 추가와 편집에는 혜택이 필요하며 배치한 워터마크는 만료 후에도 내보낼 수 있습니다.",
       "help.entry55.title": "프리미엄",
       "help.entry55.desc":
-        "프리미엄 회원이 되면 무료 버전에서 90초로 제한된 동영상 길이가 최대 2시간까지 늘어나고, 모든 동영상 끝에 자동 추가되는 엔드카드(앱 로고)를 삭제할 수 있습니다. 광고도 숨겨지며, 워터마크, 톤 커브, 레벨 보정 기능도 사용할 수 있게 됩니다.",
+        "최대 길이 혜택이 유효하면 작품 길이를 2시간까지 늘릴 수 있습니다. 만료 후에도 만든 작품과 적용한 색 보정을 그대로 내보낼 수 있습니다. 엔드 마크는 내보내기 시작 시의 혜택에 따라 결정됩니다.",
       "help.entry56.title": "홈 화면",
       "help.entry56.desc":
         "앱을 실행하면 처음 표시되는 화면으로, 프로젝트・공유・작품 목록・휴지통 각 탭을 전환하며 볼 수 있습니다. 오른쪽 위 검색 아이콘으로 프로젝트 이름으로 좁혀 검색할 수도 있습니다. 프로젝트 탭에서는 화면 오른쪽 아래의 ＋ 버튼으로 새 프로젝트 만들기와 새 폴더 만들기를 선택할 수 있습니다.",
@@ -1233,7 +1233,7 @@
         "애니메이션・일러스트 작품을 YouTube 동영상으로 커뮤니티에 게시하고, 다른 사용자의 작품을 둘러볼 수 있는 기능입니다. 「신작」・「랭킹」・「팔로잉」 탭을 전환할 수 있으며, 작품 제목 또는 게시자 이름으로 검색할 수 있습니다. 태그 검색 모드로 전환하면 태그로 작품을 좁혀볼 수 있으며, 태그는 게시자 외의 사용자도 자유롭게 추가・삭제할 수 있습니다（게시자가 잠근 태그는 게시자 본인만 해제할 수 있습니다）. 태그를 탭하기만 해도 같은 태그의 작품으로 좁혀집니다. 작품 카드를 탭하면 드래그・크기 조절이 가능한 플로팅 미리보기 창이 열려 다른 화면을 조작하면서도 계속 시청할 수 있습니다. 「상세보기」 버튼으로 작품의 상세 화면（게시자・게시일・태그 편집・북마크・리포스트 등）을 열 수 있습니다. 게시자 이름 옆의 「팔로우」 버튼을 누르면 팔로우가 되어, 「팔로잉」 탭에서 그 작가의 게시물만 최신순으로 모아 볼 수 있습니다. 누군가 나를 팔로우하면 화면 오른쪽 위 종 모양 아이콘의 알림 목록에 표시됩니다. 자신의 팔로잉/팔로워 목록을 다른 사용자에게 공개할지 여부를 설정할 수 있으며（기본값은 비공개）, 공개로 설정한 다른 사용자의 목록도 볼 수 있습니다. 다른 사람의 작품（자신의 게시물은 제외）은 「리포스트」 버튼으로 재게시할 수 있으며, 팔로우 중인 작가가 누군가의 작품을 리포스트하면 그 작품도 「게시일」과 「리포스트한 날짜」 중 더 최근인 쪽을 기준으로 「팔로잉」 탭에 섞여 표시됩니다（카드에 「○○님이 리포스트함」이라고 표시）. 북마크한 작품은 홈 화면의 「북마크됨」 탭에 모아서 표시되며, 게시자별 작품 목록 화면의 「북마크」 탭에서도 확인할 수 있습니다. 자신의 북마크 목록을 다른 사용자에게 공개할지 여부를 설정할 수 있으며（기본값은 비공개）, 공개로 설정한 다른 사용자의 북마크 목록도 볼 수 있습니다. 부적절한 작품은 사유를 첨부해 신고할 수 있으며, 신고 후에는 해당 게시자를 차단할지 선택할 수 있습니다. 세로로 긴 동영상은 「세로 화면 모드」에서 연속 재생으로 시청할 수 있습니다. 하루에 게시할 수 있는 작품 수에는 상한이 있으며, 무료 회원은 하루 1개, 프리미엄 회원은 하루 3개까지입니다.",
       "help.entry75.title": "워터마크 재편집",
       "help.entry75.desc":
-        "타임라인의 공통 레이어 트랙에 배치한 워터마크를 탭하면 각도・크기・불투명도・표시 범위（루프 표시）를 언제든지 다시 편집할 수 있습니다. 등록할 때뿐 아니라 실제로 프로젝트 안에서 사용할 때 세밀하게 조정할 수 있습니다.",
+        "공통 레이어 트랙에서 각도, 크기, 불투명도, 표시 범위를 조정합니다. 만료 후에도 배치한 워터마크는 작품과 내보내기 결과에 남습니다. 설정을 변경하려면 활성 혜택이 필요합니다.",
     },
     fr: {
       "help.title": "Aide",
@@ -1386,7 +1386,7 @@
         "Déplace plusieurs calques ensemble avec un seul flux d'images clés. Par exemple, si un « bras » est composé de deux parties de remplissage automatique — peau et manche —, les grouper permet de déplacer les deux avec une seule opération d'image clé. Créez un groupe en sélectionnant plusieurs calques (cases à cocher) dans le panneau des calques puis en appuyant sur l'icône « Grouper » de la barre inférieure. Le mouvement du groupe se superpose aux images clés propres à chaque calque membre (si elles existent), ce qui permet de combiner le mouvement global du groupe avec des ajustements fins par calque. Un calque ne peut appartenir qu'à un seul groupe à la fois.",
       "help.entry44.title": "EndCard (logo de fin)",
       "help.entry44.desc":
-        "Une courte vidéo (environ 5 secondes) avec le logo NIARIM, ajoutée automatiquement à la fin du contenu principal lors de l'export d'une vidéo. La version gratuite ne peut pas le masquer ni le supprimer, mais les membres Premium peuvent l'activer/le désactiver, changer sa durée ou le remplacer.",
+        "Le logo final NIARIM de cinq secondes est ajouté aux exports MP4, WebM et AVI. Vous pouvez le masquer par projet tant que l’avantage est actif. Le réglage est conservé après expiration. Les GIF sont exclus.",
       "help.entry45.title": "Enregistrement automatique",
       "help.entry45.desc":
         "Un enregistrement dédié à la récupération en cas de plantage ou de corruption de fichier. Il s'enregistre automatiquement à chaque modification, comme le dessin, et écrase le plus ancien des 3 enregistrements maximum. Il est géré complètement séparément des enregistrements manuels (emplacements de sauvegarde et arbre de sauvegarde) et ne remplace pas l'enregistrement habituel. On ne vous demande de le restaurer que lors du redémarrage de l'application après une fermeture anormale.",
@@ -1410,16 +1410,16 @@
         "Une fonctionnalité permettant de transférer tout l’environnement de l’application — réglages, matériaux, pinceaux, réglages de remplissage automatique, thème, palettes (sélecteur de couleurs et pixel art), et plus — vers un autre appareil en une seule fois. Vous pouvez choisir les éléments individuels à transférer avec des cases à cocher, et inclure en option des projets en cours (les projets sélectionnés sont transférés en entier, avec leurs matériaux et polices). Si vous voulez seulement remettre un projet individuel, vous pouvez aussi utiliser « Partage (.niashare) ».",
       "help.entry52.title": "Export vidéo (MP4, WebM, GIF, AVI)",
       "help.entry52.desc":
-        "Exporte votre oeuvre au format video MP4 standard. La version gratuite a une limite de duree (90 secondes) et ajoute automatiquement une carte de fin (logo de l'application) a la fin de la video. Un format vidéo qui peut être exporté en conservant le canal alpha (les parties transparentes du fond). La lecture transparente ne fonctionne que dans les environnements de lecture compatibles. Idéal pour superposer comme matériau dans d'autres applications. Exporte au format GIF anime. Comme il boucle automatiquement, il convient bien au partage decontracte sur les reseaux sociaux. Si la compatibilité prime, vous pouvez aussi exporter au format AVI (Motion JPEG). Il utilise un codec choisi pour sa sécurité en matière de brevets et de licences, mais ne prend pas en charge le canal alpha (transparence), et l'aperçu dans l'application peut ne pas fonctionner sur tous les appareils (vous pouvez tout de même le lire via un lecteur externe depuis Partager). Les comptes gratuits sont limités à 90 secondes de durée de projet (les comptes Premium ont 2 heures). Si ajouter ou dupliquer des images vous ferait dépasser la limite, une alerte apparaît dès que vous appuyez sur le bouton, donc vous ne dépassez jamais réellement 90 secondes.",
+        "Exportez en MP4, WebM, GIF ou AVI. La version gratuite permet de prolonger un projet jusqu’à 90 secondes. Les longs projets existants restent exportables en entier. Vérifiez la durée et le logo final avant l’export.",
       "help.entry53.title": "Écran d'export",
       "help.entry53.desc":
         "Affiche la progression pendant l'export d'une vidéo ou d'une image, et permet d'annuler en cours de route. Le temps nécessaire dépend des performances de l'appareil.",
       "help.entry54.title": "Filigrane",
       "help.entry54.desc":
-        "Une fonctionnalité réservée aux membres premium qui permet d'ajouter votre propre signature ou logo en filigrane sur les vidéos et images exportées. Vous pouvez ajuster sa position, sa taille et son opacité. Touchez le filigrane placé sur la piste de calque commun de la timeline pour modifier à tout moment son angle, sa taille, son opacité et sa plage d'affichage (bouclage) — pas seulement lors de son enregistrement, mais chaque fois que vous l'utilisez dans un projet.",
+        "Ajoutez une signature ou un logo en texte ou en image. L’avantage est requis pour l’ajout et la modification. Les filigranes déjà placés restent exportables.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "L'abonnement premium porte a 2 heures maximum la limite de 90 secondes de la version gratuite et permet de retirer la carte de fin (logo de l'application) ajoutee automatiquement a la fin de chaque video. Les publicites sont egalement masquees, et vous accedez au filigrane, a la courbe de tons et a la correction des niveaux.",
+        "L’avantage de durée permet de prolonger un projet jusqu’à deux heures. Les projets longs et les corrections appliquées restent exportables après expiration. Le logo final dépend du droit actif au début de l’export.",
       "help.entry56.title": "Écran d'accueil",
       "help.entry56.desc":
         "Le premier écran affiché au lancement de l'app, avec les onglets Projets, Partagés, Œuvres et Corbeille. L'icône de recherche en haut à droite permet de filtrer les projets par nom. Sur l'onglet Projets, le bouton flottant permet de choisir entre créer un nouveau projet ou un nouveau dossier.",
@@ -1481,7 +1481,7 @@
         "Publiez vos animations et illustrations dans la communauté sous forme de vidéos YouTube, et parcourez les œuvres des autres utilisateurs. Basculez entre les onglets « Nouveautés », « Classement » et « Abonnements », et effectuez une recherche par titre d’œuvre ou nom du créateur. Passez en mode recherche par tag pour filtrer les œuvres par tag : n’importe quel utilisateur (pas seulement le créateur) peut ajouter ou retirer des tags, mais un tag verrouillé par le créateur ne peut être retiré que par lui, et toucher un tag filtre instantanément les œuvres correspondantes. Toucher une carte d’œuvre ouvre une fenêtre d’aperçu flottante déplaçable et redimensionnable, pour continuer à naviguer sur d’autres écrans pendant la lecture. Le bouton « Voir les détails » ouvre l’écran de détails de l’œuvre (créateur, date de publication, modification des tags, mise en favori, republication, etc.). Toucher le bouton « Suivre » à côté du nom d’un créateur l’ajoute à vos abonnements : l’onglet « Abonnements » regroupe alors uniquement les publications de ce créateur, triées par date. Lorsque quelqu’un vous suit, cela apparaît dans la liste de notifications sous l’icône de cloche en haut de l’écran. Vous pouvez choisir si vos listes d’abonnements/abonnés sont visibles par les autres utilisateurs (privées par défaut), et consulter les listes des autres utilisateurs si elles sont publiques. Vous pouvez repartager l’œuvre de n’importe qui d’autre (sauf la vôtre) avec le bouton « Repartager » ; lorsqu’un créateur que vous suivez repartage l’œuvre de quelqu’un d’autre, cette œuvre apparaît aussi dans votre onglet « Abonnements », triée selon la date la plus récente — sa date de publication d’origine ou sa date de republication (la carte affiche « Repartagé par… »). Les œuvres mises en favori apparaissent regroupées dans l’onglet « Favoris » de l’écran d’accueil, ainsi que dans l’onglet « Favoris » de l’écran des œuvres d’un créateur. Vous pouvez choisir si votre propre liste de favoris est visible par les autres utilisateurs (privée par défaut), et consulter la liste de favoris des autres utilisateurs si elle est rendue publique. Vous pouvez signaler une œuvre en indiquant un motif, et après l’envoi, il vous sera demandé si vous souhaitez bloquer ce créateur. Les vidéos verticales peuvent être visionnées en « mode vertical », qui les enchaîne comme un flux de vidéos courtes. Le nombre de publications par jour est limité : 1 par jour pour les membres gratuits, 3 par jour pour les membres Premium.",
       "help.entry75.title": "Rééditer un filigrane",
       "help.entry75.desc":
-        "Toucher un filigrane placé sur la piste de calque commun de la timeline permet de rééditer à tout moment son angle, sa taille, son opacité et sa plage d'affichage (boucle). Vous pouvez l'ajuster finement non seulement à l'enregistrement, mais chaque fois que vous l'utilisez réellement dans un projet.",
+        "Modifiez l’angle, la taille, l’opacité et la plage dans la piste des calques partagés. Les filigranes déjà placés restent dans les projets et les exports. Un avantage actif est requis pour modifier ces réglages.",
     },
     es: {
       "help.title": "Ayuda",
@@ -1632,7 +1632,7 @@
         'Mueve varias capas juntas con un único flujo de fotogramas clave. Por ejemplo, si un "brazo" está formado por dos partes de relleno automático —piel y manga—, agruparlas permite mover ambas con una sola operación de fotograma clave. Crea un grupo seleccionando varias capas (casillas) en el panel de capas y tocando el icono "Agrupar" en la barra inferior. El movimiento del grupo se superpone a los fotogramas clave propios de cada capa miembro (si los tiene), por lo que puedes combinar el movimiento general del grupo con ajustes finos por capa. Una capa solo puede pertenecer a un grupo a la vez.',
       "help.entry44.title": "EndCard (logotipo final)",
       "help.entry44.desc":
-        "Un vídeo corto (unos 5 segundos) con el logotipo de NIARIM, añadido automáticamente al final del contenido principal al exportar un vídeo. La versión gratuita no puede ocultarlo ni eliminarlo, pero los miembros Premium pueden activarlo/desactivarlo, cambiar su duración o reemplazarlo.",
+        "El logo final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Puedes ocultarlo por proyecto mientras el beneficio esté activo. El ajuste se conserva al caducar. Los GIF no lo incluyen.",
       "help.entry45.title": "Guardado automático",
       "help.entry45.desc":
         "Un guardado dedicado a la recuperación en caso de fallo o corrupción de archivo. Se guarda automáticamente cada vez que hay un cambio, como dibujar, y sobrescribe el más antiguo de un máximo de 3 guardados. Se gestiona de forma completamente separada de los guardados manuales (ranuras de guardado y árbol de guardado) y no sustituye al guardado habitual. Solo se te pregunta si quieres restaurarlo al reiniciar la aplicación tras un cierre anómalo.",
@@ -1656,16 +1656,16 @@
         'Una función para transferir todo el entorno de la aplicación —ajustes, materiales, pinceles, ajustes de relleno automático, tema, paletas (selector de color y pixel art) y más— a otro dispositivo de una sola vez. Puedes elegir elementos individuales para transferir con casillas de verificación, e incluir opcionalmente proyectos en curso (los proyectos seleccionados se transfieren completos, con sus materiales y fuentes). Si solo quieres entregar un proyecto individual, también puedes usar "Compartir (.niashare)".',
       "help.entry52.title": "Exportación de vídeo (MP4, WebM, GIF, AVI)",
       "help.entry52.desc":
-        "Exporta tu obra como un video MP4 estandar. La version gratuita tiene un limite de duracion (90 segundos) y anade automaticamente una tarjeta final (logotipo de la app) al final del video. Un formato de vídeo que se puede exportar conservando el canal alfa (las partes transparentes del fondo). La reproducción transparente solo funciona en entornos de reproducción compatibles. Ideal para superponer como material en otras aplicaciones. Exporta como GIF animado. Como se reproduce en bucle automaticamente, es ideal para compartir de forma casual en redes sociales. Si la compatibilidad es lo más importante, también puedes exportar como AVI (Motion JPEG). Usa un códec elegido por ser seguro en cuanto a patentes y licencias, pero no admite canal alfa (transparencia), y la vista previa dentro de la app puede no funcionar en todos los dispositivos (aun así puedes reproducirlo con un reproductor externo mediante Compartir). Las cuentas gratuitas tienen un límite de 90 segundos de duración de proyecto (las cuentas Premium tienen 2 horas). Si añadir o duplicar fotogramas te haría superar el límite, aparece un aviso justo al tocar el botón, así que nunca llegas a superar los 90 segundos.",
+        "Exporta en MP4, WebM, GIF o AVI. El plan gratuito permite alargar un proyecto hasta 90 segundos. Los proyectos largos existentes se pueden exportar completos. Comprueba la duración y el logo antes de exportar.",
       "help.entry53.title": "Pantalla de exportación",
       "help.entry53.desc":
         "Muestra el progreso al exportar un vídeo o una imagen, y permite cancelar a mitad de camino. El tiempo que tarda depende del rendimiento del dispositivo.",
       "help.entry54.title": "Marca de agua",
       "help.entry54.desc":
-        "Una función exclusiva de la versión premium que te permite añadir tu propia firma o logotipo como marca de agua en los vídeos e imágenes exportados. Puedes ajustar su posición, tamaño y opacidad. Toca la marca de agua colocada en la pista de capa común de la línea de tiempo para reeditar en cualquier momento su ángulo, tamaño, opacidad y rango visible (bucle), no solo al registrarla, sino cada vez que la uses en un proyecto.",
+        "Añade una firma o un logo de texto o imagen. Necesitas el beneficio para añadirlo o editarlo. Las marcas ya colocadas se pueden seguir exportando.",
       "help.entry55.title": "Premium",
       "help.entry55.desc":
-        "La membresia premium amplia hasta 2 horas el limite de 90 segundos de duracion de video de la version gratuita y te permite quitar la tarjeta final (logotipo de la app) que se anade automaticamente al final de cada video. Tambien se ocultan los anuncios y obtienes acceso a la marca de agua, la curva de tonos y la correccion de niveles.",
+        "El beneficio de duración permite alargar un proyecto hasta dos horas. Al caducar se pueden seguir exportando los proyectos y ajustes aplicados. El logo final depende del beneficio activo al iniciar la exportación.",
       "help.entry56.title": "Pantalla de inicio",
       "help.entry56.desc":
         "La primera pantalla que se muestra al abrir la app, con las pestañas Proyectos, Compartidos, Obras y Papelera. El icono de búsqueda arriba a la derecha permite filtrar proyectos por nombre. En la pestaña Proyectos, el botón flotante permite elegir entre crear un nuevo proyecto o una nueva carpeta.",
@@ -1727,7 +1727,7 @@
         "Publica tus animaciones e ilustraciones en la comunidad como vídeos de YouTube y explora las obras de otros usuarios. Cambia entre las pestañas «Nuevas», «Ranking» y «Siguiendo», y busca por título de la obra o nombre del creador. Cambia al modo de búsqueda por etiquetas para filtrar obras por etiqueta: cualquier usuario (no solo el creador) puede añadir o quitar etiquetas, aunque las etiquetas bloqueadas por el creador solo él puede quitarlas, y tocar una etiqueta filtra al instante las obras con la misma etiqueta. Al tocar una tarjeta de obra se abre una ventana de vista previa flotante que se puede arrastrar y redimensionar, para seguir explorando otras pantallas mientras se reproduce. El botón «Ver detalles» abre la pantalla de detalles de la obra (creador, fecha de publicación, edición de etiquetas, marcador, republicación y más). Toca el botón «Seguir» junto al nombre de un creador para añadirlo a tus seguidos: la pestaña «Siguiendo» reúne entonces solo las publicaciones de ese creador, ordenadas por fecha. Cuando alguien te sigue, aparece en la lista de notificaciones bajo el icono de la campana en la parte superior de la pantalla. Puedes elegir si tus listas de seguidos/seguidores son visibles para otros usuarios (privadas por defecto), y puedes ver las listas de otros usuarios si las han hecho públicas. Puedes republicar la obra de cualquier otra persona (excepto la tuya propia) con el botón «Republicar»; cuando un creador al que sigues republica la obra de otra persona, esa obra también aparece en tu pestaña «Siguiendo», ordenada según lo que sea más reciente —su fecha de publicación original o su fecha de republicación— (la tarjeta muestra «Republicado por…»). Las obras marcadas aparecen juntas en la pestaña «Guardadas» de la pantalla de inicio, y también en la pestaña «Marcadores» de la pantalla de obras de un creador. Puedes elegir si tu propia lista de marcadores es visible para otros usuarios (privada de forma predeterminada), y puedes ver las listas de marcadores de otros usuarios si las han hecho públicas. Puedes denunciar una obra indicando un motivo, y tras enviarla se te preguntará si quieres bloquear a ese creador. Los vídeos verticales se pueden ver en «modo vertical», que los reproduce uno tras otro como un feed de vídeos cortos. Hay un límite diario de publicaciones: 1 al día para miembros gratuitos y 3 al día para miembros Premium.",
       "help.entry75.title": "Reeditar una marca de agua",
       "help.entry75.desc":
-        "Tocar una marca de agua colocada en la pista de capa común de la línea de tiempo permite reeditar en cualquier momento su ángulo, tamaño, opacidad y rango de visualización (bucle). Puedes ajustarla con precisión no solo al registrarla, sino siempre que la estés usando en un proyecto.",
+        "Ajusta el ángulo, tamaño, opacidad e intervalo en la pista de capas compartidas. Las marcas ya colocadas se conservan en el proyecto y las exportaciones. Se requiere un beneficio activo para cambiar estos ajustes.",
     },
   };
   for (var lang in HELP) {

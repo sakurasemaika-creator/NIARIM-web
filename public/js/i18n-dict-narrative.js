@@ -143,8 +143,7 @@
       "narrative.premium.1.body":
         "プレミアムでは、制作だけでなく作品の公開もさらに快適になります。",
       "narrative.premium.2.heading": "",
-      "narrative.premium.2.body":
-        "無料版では、書き出した作品の最後にNIARIMのエンドカードが追加されます。プレミアムなら、作品ごとにエンドカードを削除したり、アプリの共通設定からエンドカードを追加しないように設定できます。コミュニティへの投稿も、無料版の1日1作品から1日3作品へ。たくさんつくって、たくさん届けられます。",
+      "narrative.premium.2.body": "NIARIMのエンドマークは、MP4・WebM・AVIの本編末尾に付く5秒のロゴです。エンドマーク特典が有効な間は、作品ごとに表示を切り替えられます。期限後も作品の設定は保存されます。GIFには付きません。",
 
       "narrative.community.1.heading": "作品広場",
       "narrative.community.1.body":
@@ -307,8 +306,7 @@
       "narrative.premium.1.body":
         "Premium makes not just creating, but also publishing your work, even more comfortable.",
       "narrative.premium.2.heading": "",
-      "narrative.premium.2.body":
-        "In the free version, the NIARIM end card is added to the end of every exported work. With Premium, you can remove the end card per piece, or set it in the app's shared settings so it's never added at all. Community posting also goes from 1 piece a day on the free plan to 3 a day. Make more, and share more.",
+      "narrative.premium.2.body": "The NIARIM end mark is a five-second logo appended to MP4, WebM, and AVI exports. While the benefit is active, you can show or hide it per project. Project preferences are kept after expiry. GIFs do not include it.",
 
       "narrative.community.1.heading": "Gallery",
       "narrative.community.1.body":
@@ -456,8 +454,7 @@
       "narrative.premium.1.heading": "开通高级会员，创作更自由。",
       "narrative.premium.1.body":
         "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
-      "narrative.premium.2.body":
-        "免费版中，导出的作品结尾会自动添加NIARIM的片尾标志。开通高级会员后，可以针对每部作品单独删除片尾标志，也可以在应用的通用设置中设置为不再添加。发布到社区的作品数量，也会从免费版的每天1部提升到每天3部。多多创作，多多分享。",
+      "narrative.premium.2.body": "NIARIM 片尾标志是 MP4、WebM 和 AVI 末尾的 5 秒标志。权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加标志。",
 
       "narrative.community.1.heading": "作品广场",
       "narrative.community.1.body":
@@ -603,8 +600,7 @@
       "narrative.premium.1.heading": "開通高級會員，創作更自由。",
       "narrative.premium.1.body":
         "高級會員不僅能讓創作更舒適，發布作品也會更加輕鬆。",
-      "narrative.premium.2.body":
-        "免費版中，匯出的作品結尾會自動加上NIARIM的片尾標誌。開通高級會員後，可以針對每部作品單獨刪除片尾標誌，也可以在應用程式的通用設定中設定為不再加入。發布到社群的作品數量，也會從免費版的每天1部提升到每天3部。多多創作，多多分享。",
+      "narrative.premium.2.body": "NIARIM 片尾標誌是 MP4、WebM 和 AVI 末尾的 5 秒標誌。權益有效時可依作品切換顯示。到期後仍保留設定。GIF 不會加上標誌。",
 
       "narrative.community.1.heading": "作品廣場",
       "narrative.community.1.body":
@@ -751,8 +747,7 @@
       "narrative.premium.1.heading": "프리미엄으로 더 자유롭게.",
       "narrative.premium.1.body":
         "프리미엄에서는 제작뿐 아니라 작품 공개도 한층 쾌적해집니다.",
-      "narrative.premium.2.body":
-        "무료판에서는 내보낸 작품의 마지막에 NIARIM 엔드 카드가 추가됩니다. 프리미엄이라면 작품별로 엔드 카드를 삭제하거나, 앱의 공통 설정에서 엔드 카드를 추가하지 않도록 설정할 수 있습니다. 커뮤니티 게시도 무료판의 하루 1작품에서 하루 3작품으로. 많이 만들고, 많이 전할 수 있습니다.",
+      "narrative.premium.2.body": "NIARIM 엔드 마크는 MP4, WebM, AVI 끝에 붙는 5초 로고입니다. 혜택이 유효하면 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 설정이 저장되며 GIF에는 붙지 않습니다.",
 
       "narrative.community.1.heading": "NIARIM 작품 광장",
       "narrative.community.1.body":
@@ -914,8 +909,7 @@
       "narrative.premium.1.heading": "Plus de liberté avec Premium.",
       "narrative.premium.1.body":
         "Premium rend non seulement la création, mais aussi la publication de votre travail, encore plus confortable.",
-      "narrative.premium.2.body":
-        "Dans la version gratuite, le générique de fin NIARIM est ajouté à la fin de chaque œuvre exportée. Avec Premium, vous pouvez supprimer le générique de fin œuvre par œuvre, ou le régler dans les paramètres partagés de l'application pour qu'il ne soit jamais ajouté. La publication dans la communauté passe aussi de 1 œuvre par jour dans la version gratuite à 3 par jour. Créez plus, et partagez plus.",
+      "narrative.premium.2.body": "Le logo final NIARIM de cinq secondes est ajouté aux exports MP4, WebM et AVI. Vous pouvez le masquer par projet tant que l’avantage est actif. Le réglage est conservé après expiration. Les GIF sont exclus.",
 
       "narrative.community.1.heading": "Galerie",
       "narrative.community.1.body":
@@ -1072,8 +1066,7 @@
       "narrative.premium.1.heading": "Más libertad con Premium.",
       "narrative.premium.1.body":
         "Premium hace que no solo crear, sino también publicar tu trabajo, sea aún más cómodo.",
-      "narrative.premium.2.body":
-        "En la versión gratuita, la placa de cierre de NIARIM se añade al final de cada obra exportada. Con Premium, puedes eliminar la placa de cierre obra por obra, o configurarla en los ajustes compartidos de la app para que nunca se añada. Publicar en la comunidad también pasa de 1 obra al día en el plan gratuito a 3 al día. Crea más, y comparte más.",
+      "narrative.premium.2.body": "El logo final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Puedes ocultarlo por proyecto mientras el beneficio esté activo. El ajuste se conserva al caducar. Los GIF no lo incluyen.",
 
       "narrative.community.1.heading": "Galería",
       "narrative.community.1.body":
