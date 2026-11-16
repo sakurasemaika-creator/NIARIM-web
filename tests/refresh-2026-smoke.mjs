@@ -214,7 +214,7 @@ try {
       completePackDiscounts:[...(pack?.querySelectorAll(".coins-saving-badge")||[])].map(el=>el.textContent.trim()),
       comparisonSavingsHaveNoBadges:!!separate&&!!saving&&
         !separate.querySelector(".coins-saving-badge")&&!saving.querySelector(".coins-saving-badge"),
-      hasSeparateYearlyBaseline:/660,000.+550,000.+110,000.+17% OFF/.test(document.querySelector("[data-i18n='coins.yearNote']")?.textContent||""),
+      hasSeparateYearlyBaseline:/528,000.+440,000.+88,000.+17% OFF/.test(document.querySelector("[data-i18n='coins.yearNote']")?.textContent||""),
       featuredDiscountCardRemoved:!document.querySelector(".coins-featured-deals,.coins-discount-tag--table"),
       oldFullPremiumRemoved:!document.querySelector(".coins-main")?.textContent.includes("フルPremium"),
       accordionTimesJapanese:![...document.querySelectorAll(".coins-accordion-content")].some(el=>/\b\d+(?:day|week|month|h|m)\b/.test(el.textContent)),
@@ -229,7 +229,8 @@ try {
      coins.units!==70||coins.hasCurrencyLabel||!coins.hasOpalCaption||
      !coins.hasOpalAmountHeading||!coins.hasCompletePackLabel||!coins.hasSeparateYearlyBaseline||
      coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
-     !same(coins.packAmounts,[10000,25000,45000,55000,550000])||
+     !same(coins.packAmounts,[7340,14690,33040,44000,440000])||
+     !same(coins.separateAmounts,[9180,18360,41300,55000,550000])||
      !same(coins.separateAmounts,coins.singleTotal)||!same(coins.savingAmounts,coins.expectedSavings)||
      !same(coins.completePackDiscounts,coins.expectedBadges)||!coins.comparisonSavingsHaveNoBadges||
      !coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese){
