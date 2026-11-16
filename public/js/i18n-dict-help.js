@@ -114,7 +114,7 @@
         "ペン入力設定にある機能で、実際の筆圧の強さと、ブラシの太さ・不透明度への反映のされ方の関係をグラフで自由に調整できます。弱い筆圧でも太く出したい人、逆に強く押さないと太くならないようにしたい人など、手癖に合わせて描き心地を細かくカスタマイズできます。設定変更後はその場で試し書きしながら確認できます。",
       "help.entry29.title": "トーン塗り",
       "help.entry29.desc":
-        "バケツツールの設定でベタ塗りからトーン塗りへ切り替えると、選択した網点・ライン柄などのトーンパターンで塗りつぶせます。ピクセルモード専用の市松模様・格子柄トーンも用意されており、ドット絵の質感を活かした塗りができます。フリルやニット、タイツなど、手描きでは手間のかかる細かい柄も簡単に描けます。オリジナルのトーンを自作して追加したり、ほかの人と共有したりすることも可能です。",
+        "バケツツールの設定でベタ塗りからトーン塗りへ切り替えると、選択した網点・ライン柄などのトーンパターンで塗りつぶせます。ピクセルモード専用の市松模様・格子柄トーンも用意されており、ドット絵の質感を活かした塗りができます。フリルやニット、タイツなど、手描きでは手間のかかる細かい柄も簡単に描けます。オリジナルのトーンを自作して追加したり、ほかの人と共有したりすることも可能です。 トーン一覧では網点・ライン・布柄・ピクセル柄をまとめて表示します。ピクセルディザの名前には目の細かさ、マス目の大きさ、濃度を表示します。",
       "help.entry30.title": "ピクセルモード",
       "help.entry30.desc":
         "ブラシ・フォント・スタンプのそれぞれに用意されている設定で、ONにするとアンチエイリアスを取り除き、くっきりとしたドット絵風の輪郭で描画されます。あえて古いゲームのような質感を出したい時や、低解像度感を演出したい時に使います。配色方式は「色を指定しない」「色を指定する」「色数を指定する」「パレットから選ぶ」の4種類から選べ、ドット絵専用パレットを使った配色もできます。",
@@ -359,7 +359,7 @@
         "A feature in the pen input settings that lets you freely adjust, via a graph, the relationship between actual pen pressure and how it affects brush size and opacity. Whether you want thick lines even with light pressure, or the opposite — needing firm pressure to get thick lines — you can finely customize the feel to match your habits. You can try drawing right there to check the effect after changing the settings.",
       "help.entry29.title": "Tone fill",
       "help.entry29.desc":
-        "Switching the bucket tool's setting from solid fill to tone fill lets you fill with a chosen halftone or line-pattern tone. Pixel-mode-only checker and grid patterns are also available, for fills that fit a pixel-art texture. Great for frills, knitwear, tights, and other fine patterns that are tedious to draw by hand. You can also create and add your own custom tones, or share them with other users.",
+        "Switching the bucket tool's setting from solid fill to screentone fill lets you fill with a chosen halftone or line-pattern screentone. Pixel-mode-only checker and grid patterns are also available, for fills that fit a pixel-art texture. Great for frills, knitwear, tights, and other fine patterns that are tedious to draw by hand. You can also create and add your own custom screentones, or share them with other users. The tone list groups halftones, lines, fabric patterns, and pixel patterns. Pixel dither names show the grain size, matrix size, and coverage.",
       "help.entry30.title": "Pixel mode",
       "help.entry30.desc":
         "A setting available on brushes, fonts, and stamps individually. Turning it on strips anti-aliasing for crisp, pixel-art-style edges. Use it when you want a deliberately old-game feel or a low-resolution look. You can choose from four color modes — no color limit, specify colors, specify color count, or choose from a palette — including a dedicated pixel-art palette.",
@@ -604,7 +604,7 @@
         "笔输入设置中的功能，可通过图表自由调整实际笔压强度与画笔粗细・不透明度反映方式之间的关系。无论是希望轻压也能画出粗线的人，还是相反希望必须用力按压才会变粗的人，都能根据自己的用笔习惯细致自定义画感。更改设置后可当场试写确认效果。",
       "help.entry29.title": "网点上色",
       "help.entry29.desc":
-        "在填充工具的设置中把纯色填充切换为网点填充，就能用选中的网点、线条等网点图案进行填充。还提供像素模式专用的方格纹、格子纹网点，可以做出符合像素画质感的上色效果。荷叶边、针织纹理、连裤袜等手绘起来很费工夫的细致花纹也能轻松画出。还可以自制原创网点并添加使用，或与其他用户分享。",
+        "在填充工具的设置中把纯色填充切换为网点填充，就能用选中的网点、线条等网点图案进行填充。还提供像素模式专用的方格纹、格子纹网点，可以做出符合像素画质感的上色效果。荷叶边、针织纹理、连裤袜等手绘起来很费工夫的细致花纹也能轻松画出。还可以自制原创网点并添加使用，或与其他用户分享。 色调列表按网点、线条、织物图案和像素图案分组。像素抖动的名称会显示颗粒粗细、矩阵大小和覆盖率。",
       "help.entry30.title": "像素模式",
       "help.entry30.desc":
         "笔刷、字体、印章各自都提供的设置，开启后会去除抗锯齿，呈现清晰的像素画风轮廓。想特意做出老游戏般的质感，或想营造低分辨率效果时使用。配色方式可从「不指定颜色」「指定颜色」「指定颜色数」「从调色板选择」4种中选择，也可以使用像素画专用调色板。",
@@ -849,7 +849,7 @@
         "筆輸入設定中的功能，可透過圖表自由調整實際筆壓強度與筆刷粗細・不透明度反映方式之間的關係。無論是希望輕壓也能畫出粗線的人，還是相反希望必須用力按壓才會變粗的人，都能依自己的用筆習慣細緻自訂畫感。變更設定後可當場試畫確認效果。",
       "help.entry29.title": "網點上色",
       "help.entry29.desc":
-        "在填色工具的設定中把純色填滿切換為網點填滿，就能用選中的網點、線條等網點圖案進行填滿。還提供像素模式專用的方格紋、格子紋網點，可以做出符合像素畫質感的上色效果。荷葉邊、針織紋理、褲襪等手繪起來很費工夫的細緻花紋也能輕鬆畫出。還可以自製原創網點並新增使用，或與其他使用者分享。",
+        "在填色工具的設定中把純色填滿切換為網點填滿，就能用選中的網點、線條等網點圖案進行填滿。還提供像素模式專用的方格紋、格子紋網點，可以做出符合像素畫質感的上色效果。荷葉邊、針織紋理、褲襪等手繪起來很費工夫的細緻花紋也能輕鬆畫出。還可以自製原創網點並新增使用，或與其他使用者分享。 網點素材清單將網點、線條、織物與像素圖案分組。像素抖動的名稱會顯示顆粒粗細、矩陣大小與覆蓋率。",
       "help.entry30.title": "像素模式",
       "help.entry30.desc":
         "筆刷、字型、印章各自都提供的設定，開啟後會去除反鋸齒，呈現清晰的像素畫風輪廓。想刻意做出老遊戲般的質感，或想營造低解析度效果時使用。配色方式可從「不指定顏色」「指定顏色」「指定顏色數」「從調色盤選擇」4種中選擇，也可以使用像素畫專用調色盤。",
@@ -1094,7 +1094,7 @@
         "펜 입력 설정에 있는 기능으로, 실제 필압의 세기와 브러시의 굵기・불투명도에 반영되는 방식의 관계를 그래프로 자유롭게 조정할 수 있습니다. 약한 필압에서도 굵게 나오길 원하는 사람, 반대로 강하게 눌러야만 굵어지길 원하는 사람 등, 필기 습관에 맞춰 그리는 느낌을 세밀하게 커스터마이즈할 수 있습니다. 설정 변경 후에는 그 자리에서 시험 삼아 그려보며 확인할 수 있습니다.",
       "help.entry29.title": "톤 채색",
       "help.entry29.desc":
-        "버킷 도구 설정에서 단색 채우기를 톤 채우기로 바꾸면 선택한 망점・선 무늬 등의 톤 패턴으로 채울 수 있습니다. 픽셀 모드 전용 체크무늬・격자무늬 톤도 준비되어 있어, 도트 그림 질감을 살린 채색이 가능합니다. 프릴이나 니트, 타이츠 등 손그림으로는 손이 많이 가는 세밀한 무늬도 간단히 그릴 수 있습니다. 오리지널 톤을 직접 만들어 추가하거나 다른 사용자와 공유할 수도 있습니다.",
+        "버킷 도구 설정에서 단색 채우기를 스크린톤 채우기로 바꾸면 선택한 망점・선 무늬 등의 스크린톤 패턴으로 채울 수 있습니다. 픽셀 모드 전용 체크무늬・격자무늬 스크린톤도 준비되어 있어, 도트 그림 질감을 살린 채색이 가능합니다. 프릴이나 니트, 타이츠 등 손그림으로는 손이 많이 가는 세밀한 무늬도 간단히 그릴 수 있습니다. 오리지널 스크린톤을 직접 만들어 추가하거나 다른 사용자와 공유할 수도 있습니다. 톤 목록은 망점, 선, 직물 무늬와 픽셀 무늬를 모아서 보여 줍니다. 픽셀 디더 이름에는 입자 크기, 행렬 크기와 농도가 표시됩니다.",
       "help.entry30.title": "픽셀 모드",
       "help.entry30.desc":
         "브러시・폰트・스탬프 각각에 준비된 설정으로, 켜면 안티에일리어싱을 제거해 또렷한 도트 그림풍 윤곽으로 그려집니다. 일부러 옛날 게임 같은 질감을 내고 싶을 때나 저해상도 느낌을 연출하고 싶을 때 사용합니다. 색상 모드는 「색을 지정하지 않음」「색을 지정함」「색 수를 지정함」「팔레트에서 선택」의 4가지 중에서 고를 수 있으며, 도트 그림 전용 팔레트도 사용할 수 있습니다.",
@@ -1340,7 +1340,7 @@
         "Une fonctionnalité des réglages de saisie au stylet qui permet d'ajuster librement, via un graphique, la relation entre la pression réelle du stylet et son effet sur la taille et l'opacité du pinceau. Que vous vouliez des lignes épaisses même avec une légère pression, ou l'inverse — nécessitant une pression ferme pour obtenir des lignes épaisses —, vous pouvez personnaliser finement la sensation pour l'adapter à vos habitudes. Vous pouvez essayer de dessiner directement pour vérifier l'effet après avoir modifié les réglages.",
       "help.entry29.title": "Remplissage en trame",
       "help.entry29.desc":
-        "Passer le réglage de l'outil seau du remplissage uni au remplissage en trame permet de remplir avec une trame de demi-teintes ou de lignes choisie. Des trames en damier et en grille réservées au mode pixel sont aussi disponibles, pour des remplissages assortis à une texture pixel art. Idéal pour les volants, le tricot, les collants et autres motifs fins fastidieux à dessiner à la main. Vous pouvez aussi créer et ajouter vos propres trames personnalisées, ou les partager avec d'autres utilisateurs.",
+        "Passer le réglage de l’outil seau du remplissage uni au remplissage en trame permet de remplir avec une trame de demi-teintes ou de lignes choisie. Des trames en damier et en grille réservées au mode pixel sont aussi disponibles, pour des remplissages assortis à une texture pixel art. Idéal pour les volants, le tricot, les collants et autres motifs fins fastidieux à dessiner à la main. Vous pouvez aussi créer et ajouter vos propres trames personnalisées, ou les partager avec d’autres utilisateurs. La liste regroupe les trames, les lignes, les motifs textiles et les motifs pixel. Le nom des trames de dithering indique le grain, la taille de la matrice et la couverture.",
       "help.entry30.title": "Mode pixel",
       "help.entry30.desc":
         "Un réglage disponible séparément sur les pinceaux, les polices et les tampons. L'activer supprime l'anticrénelage pour des contours nets façon pixel art. À utiliser pour un rendu volontairement rétro ou basse résolution. Vous pouvez choisir parmi quatre modes de couleur : sans limite de couleur, couleurs spécifiées, nombre de couleurs spécifié, ou choix depuis une palette, y compris une palette dédiée au pixel art.",
@@ -1587,7 +1587,7 @@
         "Una función en los ajustes de entrada de lápiz que permite ajustar libremente, mediante un gráfico, la relación entre la presión real del lápiz y cómo afecta al tamaño y la opacidad del pincel. Ya sea que quieras líneas gruesas incluso con poca presión, o lo contrario —necesitando presión firme para obtener líneas gruesas—, puedes personalizar finamente la sensación para adaptarla a tus hábitos. Puedes probar a dibujar en el momento para comprobar el efecto tras cambiar los ajustes.",
       "help.entry29.title": "Relleno con tramas",
       "help.entry29.desc":
-        "Cambiar el ajuste de la herramienta de cubo de relleno sólido a relleno con tramas permite rellenar con una trama de semitonos o líneas elegida. También hay tramas de damero y cuadrícula exclusivas del modo píxel, para rellenos que combinan con una textura pixel art. Ideal para volantes, tejidos de punto, medias y otros patrones finos tediosos de dibujar a mano. También puedes crear y añadir tus propias tramas personalizadas, o compartirlas con otros usuarios.",
+        "Cambiar el ajuste de la herramienta de cubo de relleno sólido a relleno con tramas permite rellenar con una trama de semitonos o líneas elegida. También hay tramas de damero y cuadrícula exclusivas del modo píxel, para rellenos que combinan con una textura pixel art. Ideal para volantes, tejidos de punto, medias y otros patrones finos tediosos de dibujar a mano. También puedes crear y añadir tus propias tramas personalizadas, o compartirlas con otros usuarios. La lista agrupa los semitonos, las líneas, los tejidos y los patrones de píxeles. El nombre de cada trama de píxeles indica el tamaño del grano, el de la matriz y la cobertura.",
       "help.entry30.title": "Modo píxel",
       "help.entry30.desc":
         "Un ajuste disponible por separado en pinceles, fuentes y sellos. Al activarlo se elimina el suavizado, dando bordes nítidos al estilo pixel art. Úsalo cuando quieras un aire deliberadamente retro o de baja resolución. Puedes elegir entre cuatro modos de color: sin límite de color, especificar colores, especificar el número de colores o elegir desde una paleta, incluida una paleta específica para pixel art.",
