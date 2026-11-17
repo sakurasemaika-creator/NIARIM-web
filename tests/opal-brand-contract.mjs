@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import vm from "node:vm";
 
 const page=readFileSync(process.argv[2] ?? "public/coins/index.html","utf8");
+if (process.argv[2] && /<title\b[^>]*>[^<]*Cloudflare Access/i.test(page)) {
+  throw new Error("The deployed price page requires a Cloudflare Access session.");
+}
 const premium=readFileSync("public/premium/index.html","utf8");
 const css=readFileSync("public/css/pages/coins.css","utf8");
 const table=page.match(/<table class="coins-table coins-table--priced">[\s\S]*?<\/table>/)?.[0];
