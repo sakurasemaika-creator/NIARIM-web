@@ -39,6 +39,32 @@ on:
 permissions:
   contents: read
 jobs:
+  public-opal-prices:
+    if: github.ref == 'refs/heads/dev_branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        url:
+          - https://niarim.miranima-studio.com/coins/
+          - https://niarim-web.niarim.workers.dev/coins/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify prices on the published site
+        env:
+          OPAL_PRICE_URL: ${{ matrix.url }}
+        run: |
+          set -euo pipefail
+          price_page="$RUNNER_TEMP/niarim-opal-price.html"
+          curl --fail --silent --show-error --location --connect-timeout 10 \
+            --max-time 30 --retry 1 --output "$price_page" "$OPAL_PRICE_URL"
+          npm run audit:opal -- "$price_page"
   smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 18
