@@ -6,7 +6,7 @@ const env={NIARIM_PUBLIC_API_BASE_URL:"https://example.lambda-url.ap-northeast-1
 const valid={
   workId:"dQw4w9WgXcQ",title:"Original animation",channelName:"Creator",
   thumbnailUrl:"https://unsafe.example.invalid/phish",
-  youtubeUrl:"javascript:alert(1)",bookmarkCount:21,isNiarimPublished:true
+  youtubeUrl:"javascript:alert(1)",bookmarkCount:21,repostCount:7,isNiarimPublished:true
 };
 test("latest uses app endpoint and excludes unsafe upstream URLs",async()=>{
  let endpoint="";
@@ -19,8 +19,15 @@ test("latest uses app endpoint and excludes unsafe upstream URLs",async()=>{
  const obj=await res.json();
  assert.equal(obj.works.length,1);
  assert.equal(obj.works[0].title,valid.title);
+ assert.equal(obj.works[0].repostCount,7);
  assert.match(obj.works[0].youtubeUrl,/^https:\/\/www\.youtube\.com\/watch\?v=/);
  assert.match(obj.works[0].thumbnailUrl,/^https:\/\/i\.ytimg\.com\/vi\//);
+});
+test("missing or invalid repost totals display as zero",async()=>{
+ const res=await handleCommunityFeed(new Request("https://test.example/api/community"),env,async()=>{
+   return Response.json({works:[{...valid,repostCount:undefined},{...valid,repostCount:-1}]});
+ });
+ assert.deepEqual((await res.json()).works.map(work=>work.repostCount),[0,0]);
 });
 test("overall ranking uses the same bookmarks endpoint as Flutter",async()=>{
  let endpoint="";
@@ -45,6 +52,7 @@ test("daily, weekly, monthly and yearly use the app's real period ranking",async
   assert.equal(body.metric,"periodBookmarks");
   assert.equal(body.works[0].periodBookmarkCount,5);
   assert.equal(body.works[0].bookmarkCount,21);
+  assert.equal(body.works[0].repostCount,7);
  }
 });
 test("period not implemented is never substituted with made-up ranking",async()=>{

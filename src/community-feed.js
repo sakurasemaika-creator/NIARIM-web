@@ -31,6 +31,8 @@ function publicWork(value) {
     channelName: safeString(value.channelName, 110),
     postedAt: safeString(value.postedAt, 40),
     bookmarkCount: Number.isFinite(value.bookmarkCount) ? Math.max(0, Math.floor(value.bookmarkCount)) : 0,
+    repostCount: Number.isSafeInteger(value.repostCount) && value.repostCount >= 0
+      ? value.repostCount : 0,
     periodBookmarkCount: Number.isSafeInteger(value.periodBookmarkCount) &&
       value.periodBookmarkCount >= 0 ? value.periodBookmarkCount : null,
     thumbnailUrl: "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg",

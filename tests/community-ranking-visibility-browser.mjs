@@ -24,7 +24,7 @@ try{
          .filter(id=>available.get(id)===true)
          .map((id,i)=>({
            workId:id,title:"Artwork "+id,channelName:"Creator "+id,
-           bookmarkCount:100-i,periodBookmarkCount:10-i,
+           bookmarkCount:100-i,repostCount:5-i,periodBookmarkCount:10-i,
            thumbnailUrl:"https://i.ytimg.com/vi/"+id+"/hqdefault.jpg",
            youtubeUrl:"https://www.youtube.com/watch?v="+id,
          }))})});
@@ -38,6 +38,10 @@ try{
  await page.waitForFunction(()=>document.querySelectorAll(
    "[data-community-gallery] .community-card").length===3);
  assert.deepEqual(await page.locator(".community-card .rank-badge").allTextContents(),["1","2","3"]);
+ assert.deepEqual(
+   await page.locator(".community-card").first().locator(".community-counts span").allTextContents(),
+   ["ブックマーク: 100","リポスト: 5","期間内ブックマーク: 10"]
+ );
  assert.equal(checks,0,"A ranking fetch must not trigger a playback check");
 
  // An already-displayed work becomes private. Resuming fetches an entirely

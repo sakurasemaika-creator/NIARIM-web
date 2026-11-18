@@ -19,7 +19,7 @@
       periodCount:"期間内ブックマーク",
       error:"作品データを取得できませんでした。時間をおいて再度ご確認ください。",
       hidden:"この作品は非公開になりました。",
-      count:"ブックマーク",
+      count:"ブックマーク",reposts:"リポスト",
       title:"作品をYouTubeで開く"
     },
     en: {
@@ -29,13 +29,13 @@
       periodCount:"Bookmarks this period",
       error:"Couldn't load published works. Please try again later.",
       hidden:"This work is no longer public.",
-      count:"Bookmarks",title:"Open on YouTube"
+      count:"Bookmarks",reposts:"Reposts",title:"Open on YouTube"
     },
-    "zh-Hans": {hidden:"该作品已设为私密。",periodCount:"本期收藏",loading:"正在读取公开作品……",empty:"暂无可显示的公开作品，发布后将自动出现。",unavailable:"应用尚未提供该期间的排行，请查看累计或最新。",error:"作品加载失败，请稍后重试。",count:"收藏",title:"在 YouTube 打开"},
-    "zh-Hant": {hidden:"這部作品已設為私人。",periodCount:"本期書籤",loading:"正在讀取公開作品……",empty:"目前沒有公開作品，發布後將自動顯示。",unavailable:"應用程式尚未提供這段期間的排行，請查看累計或最新。",error:"作品載入失敗，請稍後再試。",count:"書籤",title:"在 YouTube 開啟"},
-    ko: {hidden:"이 작품은 비공개로 전환되었습니다.",periodCount:"기간 내 북마크",loading:"공개 작품을 불러오는 중...",empty:"아직 공개된 작품이 없습니다. 출시 후 이곳에 표시됩니다.",unavailable:"이 기간의 순위는 아직 제공되지 않습니다. 누적 또는 최신을 확인하세요.",error:"작품을 불러오지 못했습니다. 나중에 다시 시도하세요.",count:"북마크",title:"YouTube에서 열기"},
-    fr: {hidden:"Cette œuvre n’est plus publique.",periodCount:"Favoris de la période",loading:"Chargement des œuvres publiques…",empty:"Aucune œuvre publique pour le moment. Elles apparaîtront ici après le lancement.",unavailable:"Ce classement périodique n'est pas encore disponible. Consultez les nouveautés ou le classement général.",error:"Impossible de charger les œuvres. Réessayez plus tard.",count:"Favoris",title:"Ouvrir sur YouTube"},
-    es: {hidden:"Esta obra ya no es pública.",periodCount:"Marcadores del período",loading:"Cargando obras públicas…",empty:"Aún no hay obras públicas. Aparecerán aquí después del lanzamiento.",unavailable:"Este ranking por período aún no está disponible. Consulta Novedades o Acumulado.",error:"No se pudieron cargar las obras. Inténtalo más tarde.",count:"Marcadores",title:"Abrir en YouTube"}
+    "zh-Hans": {hidden:"该作品已设为私密。",periodCount:"本期收藏",loading:"正在读取公开作品……",empty:"暂无可显示的公开作品，发布后将自动出现。",unavailable:"应用尚未提供该期间的排行，请查看累计或最新。",error:"作品加载失败，请稍后重试。",count:"收藏",reposts:"转发",title:"在 YouTube 打开"},
+    "zh-Hant": {hidden:"這部作品已設為私人。",periodCount:"本期書籤",loading:"正在讀取公開作品……",empty:"目前沒有公開作品，發布後將自動顯示。",unavailable:"應用程式尚未提供這段期間的排行，請查看累計或最新。",error:"作品載入失敗，請稍後再試。",count:"書籤",reposts:"轉發",title:"在 YouTube 開啟"},
+    ko: {hidden:"이 작품은 비공개로 전환되었습니다.",periodCount:"기간 내 북마크",loading:"공개 작품을 불러오는 중...",empty:"아직 공개된 작품이 없습니다. 출시 후 이곳에 표시됩니다.",unavailable:"이 기간의 순위는 아직 제공되지 않습니다. 누적 또는 최신을 확인하세요.",error:"작품을 불러오지 못했습니다. 나중에 다시 시도하세요.",count:"북마크",reposts:"리포스트",title:"YouTube에서 열기"},
+    fr: {hidden:"Cette œuvre n’est plus publique.",periodCount:"Favoris de la période",loading:"Chargement des œuvres publiques…",empty:"Aucune œuvre publique pour le moment. Elles apparaîtront ici après le lancement.",unavailable:"Ce classement périodique n'est pas encore disponible. Consultez les nouveautés ou le classement général.",error:"Impossible de charger les œuvres. Réessayez plus tard.",count:"Favoris",reposts:"Repartages",title:"Ouvrir sur YouTube"},
+    es: {hidden:"Esta obra ya no es pública.",periodCount:"Marcadores del período",loading:"Cargando obras públicas…",empty:"Aún no hay obras públicas. Aparecerán aquí después del lanzamiento.",unavailable:"Este ranking por período aún no está disponible. Consulta Novedades o Acumulado.",error:"No se pudieron cargar las obras. Inténtalo más tarde.",count:"Marcadores",reposts:"Republicaciones",title:"Abrir en YouTube"}
   };
   function copy(){
     const lang=document.documentElement.lang;
@@ -111,13 +111,21 @@
     if(!hidden){
       const author=document.createElement("p");
       author.textContent=work.channelName || "NIARIM";
-      const count=document.createElement("span");count.className="community-count";
+      const counts=document.createElement("div");
+      counts.className="community-counts";
+      const formatter=new Intl.NumberFormat(document.documentElement.lang || "ja");
+      const appendCount=(label,value)=>{
+        const count=document.createElement("span");
+        count.textContent=label+": "+formatter.format(value);
+        counts.append(count);
+      };
+      appendCount(copy().count,work.bookmarkCount);
+      appendCount(copy().reposts,work.repostCount ?? 0);
       const period=["daily","weekly","monthly","yearly"].includes(current);
-      const score=period && Number.isSafeInteger(work.periodBookmarkCount)
-        ? work.periodBookmarkCount : null;
-      count.textContent=(score===null?copy().count:copy().periodCount)+
-        ": "+String(score===null?work.bookmarkCount:score);
-      meta.append(author,count);
+      if(period && Number.isSafeInteger(work.periodBookmarkCount)){
+        appendCount(copy().periodCount,work.periodBookmarkCount);
+      }
+      meta.append(author,counts);
     }
     a.append(thumb,meta);
     return a;

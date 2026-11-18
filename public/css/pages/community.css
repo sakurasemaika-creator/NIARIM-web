@@ -266,7 +266,7 @@
 .community-gallery[data-community-gallery] .community-card .meta{min-width:0}
 .community-gallery[data-community-gallery] .community-card .meta h3{overflow-wrap:anywhere;line-height:1.5}
 .community-gallery[data-community-gallery] .community-card .meta p{overflow-wrap:anywhere;line-height:1.6}
-.community-gallery[data-community-gallery] .community-card .meta .community-count{display:inline-block;margin-top:7px;font-size:.79rem;color:#a34f66}
+.community-gallery[data-community-gallery] .community-card .meta .community-counts{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:7px;font-size:.79rem;color:#a34f66}
 .community-gallery[data-community-gallery] .community-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #2c252c17}
 .community-tabs button:focus-visible{outline:3px solid #e65f88;outline-offset:3px}
 
