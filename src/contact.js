@@ -25,13 +25,13 @@ const MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
 // 別途上限を設ける（動画を1本含めても収まるよう、画像上限×3より大きい値にする）。
 const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
 const ALLOWED_ATTACHMENT_TYPES = new Map([
-  ["image/png", MAX_IMAGE_BYTES],
-  ["image/jpeg", MAX_IMAGE_BYTES],
-  ["image/webp", MAX_IMAGE_BYTES],
-  ["image/gif", MAX_IMAGE_BYTES],
-  ["video/mp4", MAX_VIDEO_BYTES],
-  ["video/quicktime", MAX_VIDEO_BYTES],
-  ["video/webm", MAX_VIDEO_BYTES],
+  ["image/png", [MAX_IMAGE_BYTES, "png"]],
+  ["image/jpeg", [MAX_IMAGE_BYTES, "jpg"]],
+  ["image/webp", [MAX_IMAGE_BYTES, "webp"]],
+  ["image/gif", [MAX_IMAGE_BYTES, "gif"]],
+  ["video/mp4", [MAX_VIDEO_BYTES, "mp4"]],
+  ["video/quicktime", [MAX_VIDEO_BYTES, "mov"]],
+  ["video/webm", [MAX_VIDEO_BYTES, "webm"]],
 ]);
 // 本文(テキスト)のサイズ上限＋添付合計の上限を踏まえたリクエスト全体の上限。
 // multipartのオーバーヘッド分の余裕も持たせる。
@@ -52,6 +52,16 @@ const RATE_LIMIT_DAILY_MAX = 20; // 同一IPにつき1日20通まで
 export async function handleContact(request, env, ctx) {
   if (request.method !== "POST") {
     return jsonResponse(405, { error: "method_not_allowed" });
+  }
+  const expectedOrigin = new URL(env.SITE_ORIGIN || request.url).origin;
+  const origin = request.headers.get("Origin");
+  if (
+    new URL(request.url).origin !== expectedOrigin ||
+    (origin === null
+      ? request.headers.get("Sec-Fetch-Site") !== "same-origin"
+      : origin !== expectedOrigin)
+  ) {
+    return jsonResponse(403, { error: "forbidden_origin" });
   }
 
   const contentType = request.headers.get("Content-Type") || "";
@@ -123,7 +133,7 @@ export async function handleContact(request, env, ctx) {
   }
   let totalAttachmentBytes = 0;
   for (const file of attachmentFiles) {
-    const maxBytes = ALLOWED_ATTACHMENT_TYPES.get(file.type);
+    const [maxBytes] = ALLOWED_ATTACHMENT_TYPES.get(file.type) || [];
     if (!maxBytes || file.size > maxBytes) {
       return jsonResponse(400, {
         error: "validation_error",
@@ -139,13 +149,26 @@ export async function handleContact(request, env, ctx) {
     });
   }
 
-  let attachments;
+  const attachments = [];
+  const attachmentNames = [];
   try {
-    attachments = [];
-    for (const file of attachmentFiles) {
+    for (const [index, file] of attachmentFiles.entries()) {
+      const buffer = await file.arrayBuffer();
+      if (!matchesAttachmentType(new Uint8Array(buffer), file.type)) {
+        return jsonResponse(400, {
+          error: "validation_error",
+          field: "attachments",
+        });
+      }
+      const [, extension] = ALLOWED_ATTACHMENT_TYPES.get(file.type);
+      const filename = `attachment-${index + 1}.${extension}`;
+      attachmentNames.push({
+        filename,
+        originalName: sanitizeFilename(file.name),
+      });
       attachments.push({
-        filename: sanitizeFilename(file.name) || "attachment",
-        content: arrayBufferToBase64(await file.arrayBuffer()),
+        filename,
+        content: arrayBufferToBase64(buffer),
       });
     }
   } catch (err) {
@@ -161,7 +184,7 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(500, { error: "internal_error" });
   }
 
-  const sent = await sendViaResend(env, data, attachments);
+  const sent = await sendViaResend(env, data, attachments, attachmentNames);
   if (!sent.ok) {
     console.error("Resend send failed", sent.status, sent.detail);
     return jsonResponse(502, { error: "mail_send_failed" });
@@ -285,7 +308,49 @@ async function recordSubmission(kv, clientIp) {
 function sanitizeFilename(name) {
   if (typeof name !== "string") return "";
   const base = name.split(/[\\/]/).pop() || "";
-  return base.trim().slice(-100);
+  return base
+    .replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, "")
+    .trim()
+    .slice(-100);
+}
+
+function matchesAttachmentType(bytes, type) {
+  const ascii = (start, end) =>
+    String.fromCharCode(...bytes.subarray(start, end));
+  const hasPrefix = (signature) =>
+    signature.every((byte, index) => bytes[index] === byte);
+  switch (type) {
+    case "image/png":
+      return (
+        hasPrefix([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]) &&
+        ascii(12, 16) === "IHDR"
+      );
+    case "image/jpeg":
+      return hasPrefix([0xff, 0xd8, 0xff]);
+    case "image/gif":
+      return /^GIF8[79]a$/.test(ascii(0, 6));
+    case "image/webp":
+      return ascii(0, 4) === "RIFF" && /^WEBPVP8[ LX]$/.test(ascii(8, 16));
+    case "video/webm":
+      return (
+        hasPrefix([0x1a, 0x45, 0xdf, 0xa3]) &&
+        ascii(4, 64).includes("\x42\x82\x84webm")
+      );
+    case "video/mp4":
+    case "video/quicktime": {
+      if (bytes.length < 16 || ascii(4, 8) !== "ftyp") return false;
+      const length = new DataView(bytes.buffer, bytes.byteOffset).getUint32(0);
+      if (length < 16 || length > bytes.length || length % 4 !== 0)
+        return false;
+      const brand = ascii(8, 12);
+      if (type === "video/quicktime") return brand === "qt  ";
+      return /^(isom|iso[2-9]|mp4[12]|avc1|dash|M4V |MSNV|cmfc|cmfs)$/.test(
+        brand,
+      );
+    }
+    default:
+      return false;
+  }
 }
 
 // Workers環境にはNode.jsのBufferがないため、ArrayBufferを手動でbase64化する。
@@ -313,8 +378,11 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-async function sendViaResend(env, data, attachments) {
+async function sendViaResend(env, data, attachments, attachmentNames) {
   const typeLabel = INQUIRY_TYPE_LABELS[data.type] || data.type;
+  const originals = attachmentNames.map(({ filename, originalName }) =>
+    originalName ? `${filename}: ${originalName}` : filename,
+  );
   const textBody = [
     `お問い合わせ種別: ${typeLabel}`,
     `お名前: ${data.name}`,
@@ -322,6 +390,7 @@ async function sendViaResend(env, data, attachments) {
     "",
     "お問い合わせ内容:",
     data.message,
+    ...(originals.length ? ["", "添付ファイルの元の名前:", ...originals] : []),
   ].join("\n");
 
   const htmlBody = `
@@ -330,6 +399,7 @@ async function sendViaResend(env, data, attachments) {
     <p><strong>メールアドレス:</strong> ${escapeHtml(data.email)}</p>
     <p><strong>お問い合わせ内容:</strong></p>
     <p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>
+    ${originals.length ? `<p>添付ファイルの元の名前:<br>${originals.map(escapeHtml).join("<br>")}</p>` : ""}
   `;
 
   try {

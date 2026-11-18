@@ -9,6 +9,7 @@
   var MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
   var MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
   var MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024; // 添付合計の上限
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var ATTACHMENT_MAX_BYTES_BY_TYPE = {
     "image/png": MAX_IMAGE_BYTES,
     "image/jpeg": MAX_IMAGE_BYTES,
@@ -68,15 +69,14 @@
     var message = form.elements.message;
     var agree = form.elements.agree;
 
-    // required / type=email / maxlength はHTMLが正本。novalidate はブラウザ標準の
-    // 吹き出しUIだけを止める属性なので、ValidityState自体はそのまま利用できる。
-    // 同じ制約をJSの正規表現や数値でもう一度持たず、表示文言だけNIARIM側で制御する。
+    // The server trims these fields and requires a dotted email domain.
+    // Use the HTML validity state for the remaining field constraints.
     [name, email, message].forEach(function (field) {
       var row = field.closest(".form-row");
       var errorEl = row.querySelector(".form-error");
       var state = field.validity;
 
-      if (state.valueMissing) {
+      if (state.valueMissing || !field.value.trim()) {
         errorEl.setAttribute("data-i18n", "contact.error.required");
         errorEl.textContent = t("contact.error.required");
         setFieldError(row, true, field);
@@ -86,7 +86,10 @@
         errorEl.textContent = t("contact.error.tooLong");
         setFieldError(row, true, field);
         valid = false;
-      } else if (field === email && state.typeMismatch) {
+      } else if (
+        field === email &&
+        (state.typeMismatch || !EMAIL_RE.test(email.value.trim()))
+      ) {
         errorEl.setAttribute("data-i18n", "contact.error.email");
         errorEl.textContent = t("contact.error.email");
         setFieldError(row, true, field);
@@ -126,6 +129,21 @@
     }
 
     return valid;
+  }
+
+  function showServerFieldError(form, name) {
+    if (!["name", "email", "message", "agree", "attachments"].includes(name))
+      return false;
+    var field = form.elements[name];
+    var row = field?.closest(".form-row");
+    if (!row) return false;
+    var target =
+      name === "attachments"
+        ? document.getElementById("attachments-trigger") || field
+        : field;
+    setFieldError(row, true, target);
+    target.focus();
+    return true;
   }
 
   function showStatus(statusEl, type, titleKey, bodyKey) {
@@ -260,7 +278,10 @@
               "contact.status.errorTitle",
               "contact.status.rateLimitBody",
             );
-          } else {
+          } else if (
+            result.data.error !== "validation_error" ||
+            !showServerFieldError(form, result.data.field)
+          ) {
             showStatus(
               statusEl,
               "error",

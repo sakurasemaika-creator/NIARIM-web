@@ -2,7 +2,9 @@ import { afterEach, test, mock } from "node:test";
 import assert from "node:assert/strict";
 import { handleContact } from "../src/contact.js";
 
+const origin = "https://example.invalid";
 const env = {
+  SITE_ORIGIN: origin,
   RESEND_API_KEY: "test",
   CONTACT_FROM_EMAIL: "sender@example.invalid",
   CONTACT_TO_EMAIL: "recipient@example.invalid",
@@ -23,6 +25,7 @@ function formRequest(overrides = {}, extra) {
   extra?.(form);
   return new Request("https://example.invalid/api/contact", {
     method: "POST",
+    headers: { Origin: origin },
     body: form,
   });
 }
@@ -71,7 +74,10 @@ test("oversized actual body is rejected without trusting Content-Length", async 
     });
     const request = new Request("https://example.invalid/api/contact", {
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data; boundary=boundary" },
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=boundary",
+        Origin: origin,
+      },
       body: stream,
       duplex: "half",
     });
@@ -141,8 +147,101 @@ test("attachment type and count limits are enforced", async () => {
 test("malformed multipart returns a controlled input error", async () => {
   const request = new Request("https://example.invalid/api/contact", {
     method: "POST",
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: { "Content-Type": "multipart/form-data", Origin: origin },
     body: "broken",
   });
   assert.equal((await handleContact(request, env, ctx)).status, 400);
+});
+
+test("origin checks run before parsing or contacting the mail service", async () => {
+  const send = mock.method(globalThis, "fetch", async () =>
+    Response.json({ id: "test" }),
+  );
+  for (const [source, fetchSite] of [
+    ["https://other.example.invalid", "same-origin"],
+    ["null", "same-origin"],
+    [null, "same-site"],
+    [null, null],
+  ]) {
+    const request = formRequest();
+    if (source === null) request.headers.delete("Origin");
+    else request.headers.set("Origin", source);
+    if (fetchSite) request.headers.set("Sec-Fetch-Site", fetchSite);
+    assert.equal((await handleContact(request, env, ctx)).status, 403);
+    assert.equal(request.bodyUsed, false);
+  }
+  const sameOrigin = formRequest();
+  sameOrigin.headers.delete("Origin");
+  sameOrigin.headers.set("Sec-Fetch-Site", "same-origin");
+  assert.equal((await handleContact(sameOrigin, env, ctx)).status, 200);
+  assert.equal(send.mock.callCount(), 1);
+});
+
+test("valid media types use numbered filenames with the verified extension", async () => {
+  const send = mock.method(globalThis, "fetch", async () =>
+    Response.json({ id: "test" }),
+  );
+  const examples = [
+    [
+      "image/png",
+      "png",
+      new Uint8Array([
+        0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 13, 0x49, 0x48,
+        0x44, 0x52,
+      ]),
+    ],
+    ["image/jpeg", "jpg", new Uint8Array([0xff, 0xd8, 0xff, 0xe0])],
+    ["image/gif", "gif", "GIF89a"],
+    ["image/webp", "webp", "RIFF\x00\x00\x00\x00WEBPVP8L"],
+    ["video/mp4", "mp4", "\x00\x00\x00\x10ftypmp42\x00\x00\x00\x00"],
+    ["video/quicktime", "mov", "\x00\x00\x00\x10ftypqt  \x00\x00\x00\x00"],
+    [
+      "video/webm",
+      "webm",
+      new Uint8Array([
+        0x1a, 0x45, 0xdf, 0xa3, 0x87, 0x42, 0x82, 0x84, 0x77, 0x65, 0x62, 0x6d,
+      ]),
+    ],
+  ];
+  for (const [type, extension, bytes] of examples) {
+    const response = await handleContact(
+      formRequest({}, (form) => {
+        form.append(
+          "attachments",
+          new Blob([bytes], { type }),
+          "元の&添付.data",
+        );
+      }),
+      env,
+      ctx,
+    );
+    assert.equal(response.status, 200, type);
+    const payload = JSON.parse(send.mock.calls.at(-1).arguments[1].body);
+    assert.equal(payload.attachments[0].filename, `attachment-1.${extension}`);
+    assert.match(payload.text, /元の&添付\.data/);
+    assert.match(payload.html, /元の&amp;添付\.data/);
+  }
+});
+
+test("a supported MIME label cannot substitute for matching file contents", async () => {
+  const send = mock.method(globalThis, "fetch", async () =>
+    Response.json({ id: "test" }),
+  );
+  const response = await handleContact(
+    formRequest({}, (form) => {
+      form.append(
+        "attachments",
+        new Blob(["plain text"], { type: "image/png" }),
+        "sample.png",
+      );
+    }),
+    env,
+    ctx,
+  );
+  assert.equal(response.status, 400);
+  assert.deepEqual(await response.json(), {
+    error: "validation_error",
+    field: "attachments",
+  });
+  assert.equal(send.mock.callCount(), 0);
 });
