@@ -24,7 +24,7 @@
         "よく使う素材をスタンプとして登録し、繰り返し配置できます。網点で陰影を表すトーンとは異なり、絵や模様そのものを配置する機能です。",
       "featuresPage.advanced.item4.title": "定規",
       "featuresPage.advanced.item4.body":
-        "直線・平行線などの定規機能で、狙った線を安定して引けます。",
+        "直線・円・楕円の定規を使って、狙った線を安定して引けます。",
       "featuresPage.advanced.item5.title": "テキスト",
       "featuresPage.advanced.item5.body":
         "セリフや文字要素を、フォントを選んで作品に配置できます。",
@@ -69,7 +69,7 @@
         "Register frequently used artwork as stamps and place them repeatedly. Unlike tones, which render shading with dot patterns, stamps place the artwork itself.",
       "featuresPage.advanced.item4.title": "Ruler",
       "featuresPage.advanced.item4.body":
-        "Straight-line and parallel-line rulers help you draw the exact line you're aiming for.",
+        "Use straight-line, circle and ellipse rulers to draw precise lines.",
       "featuresPage.advanced.item5.title": "Text",
       "featuresPage.advanced.item5.body":
         "Place dialogue or text elements in your work, choosing from available fonts.",
@@ -114,7 +114,7 @@
         "可将常用素材注册为图章，反复配置使用。与用网点表现阴影的网点纸不同，图章是配置图案本身的功能。",
       "featuresPage.advanced.item4.title": "尺规",
       "featuresPage.advanced.item4.body":
-        "直线、平行线等尺规功能，帮助稳定地画出想要的线条。",
+        "使用直线、圆形和椭圆尺规，可以准确地画出所需线条。",
       "featuresPage.advanced.item5.title": "文字",
       "featuresPage.advanced.item5.body":
         "可选择字体，将对白或文字元素配置到作品中。",
@@ -158,7 +158,7 @@
         "可將常用素材註冊為圖章，反覆配置使用。與用網點表現陰影的網點紙不同，圖章是配置圖案本身的功能。",
       "featuresPage.advanced.item4.title": "尺規",
       "featuresPage.advanced.item4.body":
-        "直線、平行線等尺規功能，協助穩定地畫出想要的線條。",
+        "使用直線、圓形和橢圓尺規，可以準確畫出所需線條。",
       "featuresPage.advanced.item5.title": "文字",
       "featuresPage.advanced.item5.body":
         "可選擇字型，將對白或文字元素配置到作品中。",
@@ -203,7 +203,7 @@
         "자주 쓰는 소재를 스탬프로 등록해 반복해서 배치할 수 있습니다. 망점으로 음영을 표현하는 톤과 달리, 스탬프는 그림이나 무늬 자체를 배치하는 기능입니다.",
       "featuresPage.advanced.item4.title": "자(눈금자)",
       "featuresPage.advanced.item4.body":
-        "직선·평행선 등 자 기능으로 원하는 선을 안정적으로 그을 수 있습니다.",
+        "직선, 원, 타원 자를 사용해 원하는 선을 정확하게 그릴 수 있습니다.",
       "featuresPage.advanced.item5.title": "텍스트",
       "featuresPage.advanced.item5.body":
         "대사나 문자 요소를 원하는 글꼴로 작품에 배치할 수 있습니다.",
@@ -248,7 +248,7 @@
         "Enregistrez des éléments fréquemment utilisés comme tampons et replacez-les facilement. Contrairement aux trames, qui rendent l'ombre avec des points, les tampons placent l'illustration elle-même.",
       "featuresPage.advanced.item4.title": "Règle",
       "featuresPage.advanced.item4.body":
-        "Des règles (ligne droite, lignes parallèles) pour tracer précisément la ligne voulue.",
+        "Tracez des lignes précises avec les règles pour droites, cercles et ellipses.",
       "featuresPage.advanced.item5.title": "Texte",
       "featuresPage.advanced.item5.body":
         "Placez des dialogues ou du texte dans votre œuvre, en choisissant la police.",
@@ -296,7 +296,7 @@
         "Registra elementos de uso frecuente como sellos y colócalos repetidamente. A diferencia de las tramas, que representan sombras con puntos, los sellos colocan la ilustración en sí.",
       "featuresPage.advanced.item4.title": "Regla",
       "featuresPage.advanced.item4.body":
-        "Reglas de línea recta y líneas paralelas para trazar exactamente la línea deseada.",
+        "Traza líneas con precisión mediante reglas de recta, círculo y elipse.",
       "featuresPage.advanced.item5.title": "Texto",
       "featuresPage.advanced.item5.body":
         "Coloca diálogos o elementos de texto en tu obra eligiendo la fuente.",

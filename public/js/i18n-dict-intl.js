@@ -212,7 +212,7 @@
       "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
     "featuresPage.drawing.item15.title": "素材标签搜索",
     "featuresPage.drawing.item15.body":
-      "笔刷、网点、印章、字体等素材都带有「线稿」「上色」「模糊」「仿手绘」「像素画」「网点」等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
+      "笔刷、网点和印章都带有「线稿」「上色」「模糊」「仿手绘」「像素画」「网点」等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
     "featuresPage.animation.title": "Animation｜动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
@@ -514,7 +514,7 @@
       "淡出、筆畫衰減、混色、筆壓曲線等，可細緻調整筆刷的繪畫手感。",
     "featuresPage.drawing.item15.title": "素材標籤搜尋",
     "featuresPage.drawing.item15.body":
-      "筆刷、網點、印章、字型等素材都帶有「線稿」「上色」「模糊」「仿手繪」「像素畫」「網點」等標籤，即使記不住名稱也能依標籤篩選尋找。關鍵字搜尋與標籤搜尋可一鍵切換，自製素材還能自行加上標籤。",
+      "筆刷、網點和印章都帶有「線稿」「上色」「模糊」「仿手繪」「像素畫」「網點」等標籤，即使記不住名稱也能依標籤篩選尋找。關鍵字搜尋與標籤搜尋可一鍵切換，自製素材還能自行加上標籤。",
 
     "featuresPage.animation.title": "Animation｜動畫",
     "featuresPage.animation.lead": "疊加影格，在時間軸上構築動作。",
@@ -833,7 +833,7 @@
       "페이드・스트로크 감쇠・혼색・필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
     "featuresPage.drawing.item15.title": "소재 태그 검색",
     "featuresPage.drawing.item15.body":
-      "브러시・톤・스탬프・폰트 등의 소재에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
+      "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
 
     "featuresPage.animation.title": "Animation｜애니메이션",
     "featuresPage.animation.lead":
@@ -1177,7 +1177,7 @@
       "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
     "featuresPage.drawing.item15.title": "Recherche par étiquette",
     "featuresPage.drawing.item15.body":
-      "Les pinceaux, trames, tampons et polices portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
+      "Les pinceaux, les trames et les tampons portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
 
     "featuresPage.animation.title": "Animation",
     "featuresPage.animation.lead":
@@ -1522,7 +1522,7 @@
       "Afina la sensación de tu pincel con desvanecido, atenuación del trazo, mezcla de color, curva de presión y más.",
     "featuresPage.drawing.item15.title": "Búsqueda por etiquetas",
     "featuresPage.drawing.item15.body":
-      "Los pinceles, tramas, sellos y fuentes llevan etiquetas como línea, relleno, desenfoque, analógico, pixel art o semitono, así que puedes filtrar por etiqueta aunque no recuerdes un nombre. Un toque alterna entre búsqueda por palabra clave y por etiqueta, y puedes etiquetar tú mismo tus recursos.",
+      "Los pinceles, las tramas y los sellos llevan etiquetas como línea, relleno, desenfoque, analógico, pixel art o semitono, así que puedes filtrar por etiqueta aunque no recuerdes un nombre. Un toque alterna entre búsqueda por palabra clave y por etiqueta, y puedes etiquetar tú mismo tus recursos.",
 
     "featuresPage.animation.title": "Animation | Animación",
     "featuresPage.animation.lead":

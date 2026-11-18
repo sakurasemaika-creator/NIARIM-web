@@ -27,12 +27,12 @@
         "本ページはNIARIM正式リリースに向けて準備中の機能を紹介するページです。仕様は確定していますが、実装は今後行われます。画面キャプチャは後日、実際の画面に差し替えます。",
       "communityPage.login.title": "見るだけならログイン不要",
       "communityPage.login.body":
-        "アニメを描いて遊ぶことはもちろん、作品広場の閲覧・新着・ランキングの表示・作者の作品一覧の閲覧は、ログインなしでお楽しみいただけます。作品の投稿・通報・ブロックにはGoogleアカウントでのログインが必要です。投稿数は無料版で1日1作品まで、プレミアムなら1日3作品まで投稿できます。",
-      "communityPage.tabs.overall": "ALL TIME",
-      "communityPage.tabs.yearly": "1year",
-      "communityPage.tabs.monthly": "1month",
-      "communityPage.tabs.weekly": "1week",
-      "communityPage.tabs.daily": "1day",
+        "アニメを描いて遊ぶことはもちろん、作品広場の閲覧・新着・ランキングの表示・作者の作品一覧の閲覧は、ログインなしでお楽しみいただけます。作品を投稿するにはGoogleアカウントでのログインが必要です。投稿数は無料版で1日1作品まで、プレミアムなら1日3作品まで投稿できます。",
+      "communityPage.tabs.overall": "累計",
+      "communityPage.tabs.yearly": "年間",
+      "communityPage.tabs.monthly": "月間",
+      "communityPage.tabs.weekly": "週間",
+      "communityPage.tabs.daily": "デイリー",
       "communityPage.tabs.latest": "新着",
       "communityPage.ranking.note": "各ランキングはTOP50を表示予定です。",
       "communityPage.search.eyebrow": "Discover",
@@ -93,7 +93,7 @@
         "This page introduces a feature being prepared for NIARIM's official launch. The specification is finalized, but implementation is still to come. Screenshots here will be replaced with the real screens later.",
       "communityPage.login.title": "No login needed just to browse",
       "communityPage.login.body":
-        "Drawing and animating, plus browsing the Gallery, new arrivals, rankings, and an author's work list, are all available without logging in. Posting, reporting, and blocking require signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
+        "Drawing and animating, plus browsing the Gallery, new arrivals, rankings, and an author's work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
       "communityPage.tabs.overall": "All-time",
       "communityPage.tabs.yearly": "Yearly",
       "communityPage.tabs.monthly": "Monthly",
@@ -160,7 +160,7 @@
         "本页面介绍的是为 NIARIM 正式上线而准备中的功能。规格已确定，但具体实现将在今后进行。此处的截图将于日后替换为实际画面。",
       "communityPage.login.title": "仅浏览无需登录",
       "communityPage.login.body":
-        "制作动画、浏览 作品广场、查看新作与排行榜、查看作者作品列表，均无需登录即可使用。投稿作品、举报、屏蔽用户则需要使用 Google 账号登录。免费版每天最多可投稿1个作品，高级会员则最多可投稿3个。",
+        "制作动画、浏览 作品广场、查看新作与排行榜、查看作者作品列表，均无需登录即可使用。发布作品需要使用 Google 账号登录。免费版每天最多可投稿1个作品，高级会员则最多可投稿3个。",
       "communityPage.tabs.overall": "累计",
       "communityPage.tabs.yearly": "年度",
       "communityPage.tabs.monthly": "月度",
@@ -225,7 +225,7 @@
         "本頁面介紹的是為 NIARIM 正式上線而準備中的功能。規格已確定，但具體實作將於今後進行。此處的截圖將於日後替換為實際畫面。",
       "communityPage.login.title": "僅瀏覽無需登入",
       "communityPage.login.body":
-        "製作動畫、瀏覽 作品廣場、查看新作與排行榜、查看作者作品列表，均無需登入即可使用。投稿作品、檢舉、封鎖使用者則需要使用 Google 帳號登入。免費版每天最多可投稿1個作品，高級會員則最多可投稿3個。",
+        "製作動畫、瀏覽 作品廣場、查看新作與排行榜、查看作者作品列表，均無需登入即可使用。發布作品需要使用 Google 帳號登入。免費版每天最多可投稿1個作品，高級會員則最多可投稿3個。",
       "communityPage.tabs.overall": "累計",
       "communityPage.tabs.yearly": "年度",
       "communityPage.tabs.monthly": "月度",
@@ -290,7 +290,7 @@
         "이 페이지는 NIARIM 정식 출시를 위해 준비 중인 기능을 소개하는 페이지입니다. 사양은 확정되었으나 구현은 앞으로 진행됩니다. 화면 캡처는 추후 실제 화면으로 교체됩니다.",
       "communityPage.login.title": "보기만 한다면 로그인 불필요",
       "communityPage.login.body":
-        "애니메이션 제작은 물론, 작품광장 열람・신작・랭킹 표시・작가별 작품 목록 열람은 로그인 없이 즐기실 수 있습니다. 작품 투고・신고・차단에는 Google 계정 로그인이 필요합니다. 투고 수는 무료 버전에서 하루 1개까지, 프리미엄이라면 하루 3개까지 가능합니다.",
+        "애니메이션 제작은 물론, 작품광장 열람・신작・랭킹 표시・작가별 작품 목록 열람은 로그인 없이 즐기실 수 있습니다. 작품을 게시하려면 Google 계정으로 로그인해야 합니다. 투고 수는 무료 버전에서 하루 1개까지, 프리미엄이라면 하루 3개까지 가능합니다.",
       "communityPage.tabs.overall": "누적",
       "communityPage.tabs.yearly": "연간",
       "communityPage.tabs.monthly": "월간",
@@ -356,7 +356,7 @@
       "communityPage.login.title":
         "Aucune connexion nécessaire pour simplement consulter",
       "communityPage.login.body":
-        "Dessiner et animer, ainsi que parcourir la Galerie, les nouveautés, les classements et la liste des œuvres d'un auteur, sont accessibles sans connexion. Publier, signaler et bloquer nécessitent de se connecter avec un compte Google. Vous pouvez publier jusqu'à 1 œuvre par jour avec le plan gratuit, ou jusqu'à 3 avec Premium.",
+        "Dessiner et animer, ainsi que parcourir la Galerie, les nouveautés, les classements et la liste des œuvres d'un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu'à 1 œuvre par jour avec le plan gratuit, ou jusqu'à 3 avec Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Annuel",
       "communityPage.tabs.monthly": "Mensuel",
@@ -427,7 +427,7 @@
       "communityPage.login.title":
         "No hace falta iniciar sesión solo para consultar",
       "communityPage.login.body":
-        "Dibujar y animar, así como consultar la Galería, las novedades, las clasificaciones y la lista de obras de un autor, están disponibles sin iniciar sesión. Publicar, denunciar y bloquear requieren iniciar sesión con una cuenta de Google. Puedes publicar hasta 1 obra al día en el plan gratuito, o hasta 3 con Premium.",
+        "Dibujar y animar, así como consultar la Galería, las novedades, las clasificaciones y la lista de obras de un autor, están disponibles sin iniciar sesión. Para publicar, inicia sesión con una cuenta de Google. Puedes publicar hasta 1 obra al día en el plan gratuito, o hasta 3 con Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Anual",
       "communityPage.tabs.monthly": "Mensual",

@@ -258,6 +258,12 @@
 /* Live community cards are rendered from the same public API as NIARIM.
    Never style skeleton/mock cards to look like real published works. */
 .community-gallery[data-community-gallery] {min-height:240px;align-items:start}
+.community-playback-message {
+  margin: 0 0 var(--space-sm);
+  color: var(--c-text, #5f5762);
+  text-align: center;
+  line-height: 1.6;
+}
 .community-gallery[data-community-gallery] .community-live-message{grid-column:1/-1;margin:0;padding:48px 24px;border-radius:16px;border:1px dashed #d4c7cc;background:#fff9fa;color:#5f5762;text-align:center;line-height:1.9}
 .community-gallery[data-community-gallery] .community-card{display:block;overflow:hidden;text-decoration:none;color:inherit;min-width:0}
 .community-gallery[data-community-gallery] .community-card .thumb{overflow:hidden;background:linear-gradient(135deg,#eee6ed,#e5edf0)}

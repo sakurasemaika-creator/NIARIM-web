@@ -168,7 +168,7 @@
         "完成した作品は、「作品広場」に投稿できます。自分の作品を誰かにみてもらう。誰かが気に入ってブックマークしてくれるかもしれませんし、ランキングに入るかもしれません。無料会員は1日1作品まで。プレミアムなら1日3作品まで投稿できます。作品をつくったら、次は誰かに届けてみましょう。",
       "narrative.community.8.heading": "ログインもシンプルに。",
       "narrative.community.8.body":
-        "NIARIM独自の会員登録は必要ありません。作品投稿、ブックマーク、通報・ブロックは、Googleアカウントでログインすると利用できます。作品をみるだけならログイン不要です。",
+        "NIARIM独自の会員登録は必要ありません。作品の投稿とブックマークは、Googleアカウントでログインすると利用できます。作品をみるだけならログイン不要です。",
       "narrative.community.9.heading": "人から作品へ。作品から人へ。",
       "narrative.community.9.body":
         "誰かの作品をみて、新しいアイデアが生まれる。つくった作品を公開して、また誰かがそれをみる。「自分もつくってみたい」そんな気持ちが、次の作品につながっていきます。あなたの作品が、誰かのお気に入りになる。そして、その作品をみた誰かが、また新しい作品をつくる。",
@@ -331,7 +331,7 @@
         "Finished work can be posted to the Gallery. Let someone else see what you made. Someone might love it enough to bookmark it, and it might even land in the rankings. Free members can post up to 1 piece a day; Premium members up to 3. Once you've made something, it's time to share it with someone.",
       "narrative.community.8.heading": "Logging in stays simple, too.",
       "narrative.community.8.body":
-        "There's no separate NIARIM account to register for. Posting work, bookmarking, and reporting/blocking are available once you log in with a Google account. You don't need to log in at all just to browse.",
+        "There's no separate NIARIM account to register for. Sign in with a Google account to post and bookmark works. You don't need to log in at all just to browse.",
       "narrative.community.9.heading":
         "From people to work. From work to people.",
       "narrative.community.9.body":
@@ -478,7 +478,7 @@
         "完成的作品可以发布到「作品广场」。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
       "narrative.community.8.heading": "登录也很简单。",
       "narrative.community.8.body":
-        "无需注册NIARIM专属账号。发布作品、收藏、举报・屏蔽等功能，只需使用Google账号登录即可使用。仅浏览作品则无需登录。",
+        "无需注册NIARIM专属账号。使用 Google 账号登录后，即可发布和收藏作品。仅浏览作品则无需登录。",
       "narrative.community.9.heading": "从人到作品。从作品到人。",
       "narrative.community.9.body":
         "看到别人的作品，萌生出新的灵感。发布自己创作的作品，又被别人看到。「我也想试着创作」的心情，会延续到下一部作品之中。你的作品，会成为某个人的心头好。而看到这部作品的人，又会去创作全新的作品。",
@@ -624,7 +624,7 @@
         "完成的作品可以發布到「作品廣場」。讓別人看到你創作的作品。也許會有人喜歡並收藏它，甚至進入排行榜。免費會員每天最多可發布1部作品，高級會員每天最多可發布3部。創作完成後，不妨把它分享給某個人。",
       "narrative.community.8.heading": "登入也很簡單。",
       "narrative.community.8.body":
-        "不需要註冊NIARIM專屬帳號。發布作品、收藏、檢舉・封鎖等功能，只需使用Google帳號登入即可使用。僅瀏覽作品則不需要登入。",
+        "不需要註冊NIARIM專屬帳號。使用 Google 帳號登入後，即可發布作品並將作品加入書籤。僅瀏覽作品則不需要登入。",
       "narrative.community.9.heading": "從人到作品。從作品到人。",
       "narrative.community.9.body":
         "看到別人的作品，萌生出新的靈感。發布自己創作的作品，又被別人看到。「我也想試著創作」的心情，會延續到下一部作品之中。你的作品，會成為某個人的心頭好。而看到這部作品的人，又會去創作全新的作品。",
@@ -772,7 +772,7 @@
         "완성된 작품은 「NIARIM 작품 광장」에 게시할 수 있습니다. 자신의 작품을 누군가에게 보여준다. 누군가가 마음에 들어 북마크해 줄지도 모르고, 랭킹에 들어갈지도 모릅니다. 무료 회원은 하루 1작품까지. 프리미엄이라면 하루 3작품까지 게시할 수 있습니다. 작품을 만들었다면, 다음은 누군가에게 전해 보세요.",
       "narrative.community.8.heading": "로그인도 간단하게.",
       "narrative.community.8.body":
-        "NIARIM 자체 회원 가입은 필요하지 않습니다. 작품 게시, 북마크, 신고・차단은 Google 계정으로 로그인하면 이용할 수 있습니다. 작품을 보기만 한다면 로그인이 필요 없습니다.",
+        "NIARIM 자체 회원 가입은 필요하지 않습니다. Google 계정으로 로그인하면 작품을 게시하고 북마크할 수 있습니다. 작품을 보기만 한다면 로그인이 필요 없습니다.",
       "narrative.community.9.heading": "사람에서 작품으로. 작품에서 사람으로.",
       "narrative.community.9.body":
         "누군가의 작품을 보고 새로운 아이디어가 태어난다. 만든 작품을 공개하고, 또 누군가가 그것을 본다. 「나도 만들어 보고 싶다」는 그 마음이 다음 작품으로 이어져 갑니다. 당신의 작품이 누군가의 즐겨찾는 작품이 된다. 그리고 그 작품을 본 누군가가, 또 새로운 작품을 만든다.",
@@ -935,7 +935,7 @@
         "Une œuvre terminée peut être publiée dans la Galerie. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
       "narrative.community.8.heading": "La connexion reste simple, elle aussi.",
       "narrative.community.8.body":
-        "Il n'y a pas de compte NIARIM séparé à créer. Publier des œuvres, les mettre en favori, et signaler/bloquer sont disponibles une fois connecté avec un compte Google. Vous n'avez pas besoin de vous connecter du tout pour simplement parcourir.",
+        "Il n'y a pas de compte NIARIM séparé à créer. Connectez-vous avec un compte Google pour publier des œuvres et les ajouter à vos favoris. Vous n'avez pas besoin de vous connecter du tout pour simplement parcourir.",
       "narrative.community.9.heading":
         "Des personnes vers les œuvres. Des œuvres vers les personnes.",
       "narrative.community.9.body":
@@ -1092,7 +1092,7 @@
         "Una obra terminada se puede publicar en la Galería. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
       "narrative.community.8.heading": "Iniciar sesión también es simple.",
       "narrative.community.8.body":
-        "No hay una cuenta NIARIM separada que crear. Publicar obras, guardar en favoritos y reportar/bloquear están disponibles una vez que inicias sesión con una cuenta de Google. No necesitas iniciar sesión en absoluto solo para explorar.",
+        "No hay una cuenta NIARIM separada que crear. Inicia sesión con una cuenta de Google para publicar obras y guardarlas en favoritos. No necesitas iniciar sesión en absoluto solo para explorar.",
       "narrative.community.9.heading":
         "De las personas a las obras. De las obras a las personas.",
       "narrative.community.9.body":

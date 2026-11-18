@@ -20,7 +20,7 @@
         '書き出した動画ファイルは、お使いの端末やSNSアプリを通じて自由に共有いただけます。また、NIARIMアプリ内から直接YouTubeへ投稿することで、<a href="/community/">「作品広場」</a>に作品を公開することもできます。',
       "faq.q8": "プレミアムプランでは何ができますか？",
       "faq.a8.html":
-        '広告非表示、エンドロゴの編集・削除、ユーザーウォーターマーク、トーンカーブ、レベル補正などをご利用いただけます。詳しくは<a href="/premium/">プレミアムプランのページ</a>をご覧ください。',
+        '広告非表示、公式エンドマークの表示切り替え、ユーザーウォーターマーク、トーンカーブ、レベル補正などをご利用いただけます。詳しくは<a href="/premium/">プレミアムプランのページ</a>をご覧ください。',
       "faq.q9":
         "作品を「作品広場」に公開すると、YouTubeでも誰でも見られてしまいますか？",
       "faq.a9":
@@ -34,7 +34,7 @@
         'You can freely share your exported video files through your device or other apps. You can also publish your work to the <a href="/community/">Gallery</a> by posting it to YouTube directly from within the NIARIM app.',
       "faq.q8": "What can I do with the Premium plan?",
       "faq.a8.html":
-        'Premium removes ads and adds end-card editing/removal, a custom watermark, a tone curve, and levels adjustment. See the <a href="/premium/">Premium plan page</a> for details.',
+        'Premium removes ads and adds the option to hide the official end card, a custom watermark, a tone curve, and levels adjustment. See the <a href="/premium/">Premium plan page</a> for details.',
       "faq.q9":
         "If I publish my work to the Gallery, can anyone see it on YouTube too?",
       "faq.a9":
@@ -47,7 +47,7 @@
         '导出的视频文件可以自由地通过设备或其他应用进行分享。您还可以在 NIARIM 应用内直接将作品投稿至 YouTube，从而发布到 <a href="/community/">「作品广场」</a>。',
       "faq.q8": "高级会员方案能做什么？",
       "faq.a8.html":
-        '可移除广告、编辑或删除片尾标志、使用自定义水印、色调曲线、色阶调整等。详情请参阅<a href="/premium/">高级会员方案页面</a>。',
+        '可移除广告、隐藏官方片尾标志、使用自定义水印、色调曲线、色阶调整等。详情请参阅<a href="/premium/">高级会员方案页面</a>。',
       "faq.q9": "把作品发布到「作品广场」后，在 YouTube 上是不是谁都能看到？",
       "faq.a9":
         "发布到「作品广场」是通过在 NIARIM 应用内将视频上传到 YouTube 来实现的，但作品广场自身的公开/非公开设置与 YouTube 的公开范围是相互独立的。即使将 YouTube 视频设为「不公开列出」，它仍会在 NIARIM 作品广场中正常显示和播放，同时在 YouTube 自身的搜索和推荐中基本不会出现（只有知道链接的人才能在 YouTube 上直接观看）。相反，如果将 YouTube 视频设为「私享」或将其删除，播放链接将失效，因此无论 NIARIM 侧的设置如何，作品广场中的显示都会自动停止（NIARIM 侧的设置本身会被保留，一旦 YouTube 状态恢复，显示也会自动恢复）。如果不希望被知道链接的人评论，建议在 YouTube 侧关闭评论功能。",
@@ -59,7 +59,7 @@
         '匯出的影片檔案可自由地透過裝置或其他應用程式進行分享。您也可以在 NIARIM 應用程式內直接將作品投稿至 YouTube，藉此發布到 <a href="/community/">「作品廣場」</a>。',
       "faq.q8": "高級會員方案能做什麼？",
       "faq.a8.html":
-        '可移除廣告、編輯或刪除片尾標誌、使用自訂浮水印、色調曲線、色階調整等。詳情請參閱<a href="/premium/">高級會員方案頁面</a>。',
+        '可移除廣告、隱藏官方片尾標誌、使用自訂浮水印、色調曲線、色階調整等。詳情請參閱<a href="/premium/">高級會員方案頁面</a>。',
       "faq.q9":
         "把作品發布到「作品廣場」後，在 YouTube 上是不是任何人都能看到？",
       "faq.a9":
@@ -73,7 +73,7 @@
         '내보낸 영상 파일은 사용 중인 기기나 다른 앱을 통해 자유롭게 공유하실 수 있습니다. 또한 NIARIM 앱 안에서 바로 YouTube에 작품을 업로드하여 <a href="/community/">「NIARIM 작품 광장」</a>에 공개할 수도 있습니다.',
       "faq.q8": "프리미엄 플랜으로 무엇을 할 수 있나요?",
       "faq.a8.html":
-        '광고 비표시, 엔드 카드 편집・삭제, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
+        '광고 비표시, 공식 엔드 카드 숨기기, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
       "faq.q9":
         "작품을 「NIARIM 작품 광장」에 공개하면 YouTube에서도 누구나 볼 수 있게 되나요?",
       "faq.a9":
@@ -87,7 +87,7 @@
         "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d'autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Galerie »</a> en la postant directement sur YouTube depuis l'application NIARIM.",
       "faq.q8": "Que puis-je faire avec l'offre Premium ?",
       "faq.a8.html":
-        'Premium supprime les publicités et ajoute l\'édition/suppression du générique de fin, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
+        'Premium supprime les publicités et ajoute la possibilité de masquer la carte de fin officielle, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
       "faq.q9":
         "Si je publie mon œuvre dans la Galerie, tout le monde peut-il la voir aussi sur YouTube ?",
       "faq.a9":
@@ -100,7 +100,7 @@
         'Puedes compartir libremente tus archivos de video exportados a través de tu dispositivo u otras apps. También puedes publicar tu obra en la <a href="/community/">«Galería»</a> subiéndola directamente a YouTube desde la app NIARIM.',
       "faq.q8": "¿Qué puedo hacer con el plan Premium?",
       "faq.a8.html":
-        'Premium elimina los anuncios y añade edición/eliminación de la placa de cierre, marca de agua personalizada, curva de tonos y ajuste de niveles. Consulta la <a href="/premium/">página de Premium</a> para más detalles.',
+        'Premium elimina los anuncios y añade la opción de ocultar la tarjeta final oficial, marca de agua personalizada, curva de tonos y ajuste de niveles. Consulta la <a href="/premium/">página de Premium</a> para más detalles.',
       "faq.q9":
         "Si publico mi obra en la Galería, ¿podrá verla cualquiera también en YouTube?",
       "faq.a9":

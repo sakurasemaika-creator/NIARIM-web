@@ -10,12 +10,19 @@
   let current = buttons.find(b=>b.classList.contains("is-active"))?.dataset.communityTab || "latest";
   let state = {kind:"loading",works:[]};
   let requestCounter = 0;
+  let playbackRequest = 0;
+  let playbackMessage = null;
+  const feedback = document.createElement("p");
+  feedback.className = "community-playback-message";
+  feedback.setAttribute("role", "status");
+  feedback.hidden = true;
+  gallery.before(feedback);
 
   const labels = {
     ja: {
       loading:"公開作品を読み込んでいます。",
       empty:"現在表示できる公開作品はありません。公開後、作品が投稿されるとここに表示されます。",
-      unavailable:"ランキングのデータを準備しています。しばらくしてから再度ご確認ください。",
+      unavailable:"現在、この期間のランキングを取得できません。時間をおいてもう一度お試しください。",
       periodCount:"期間内ブックマーク",
       error:"作品データを取得できませんでした。時間をおいて再度ご確認ください。",
       hidden:"この作品は非公開になりました。",
@@ -25,21 +32,38 @@
     en: {
       loading:"Loading published works...",
       empty:"No published works are available yet. They will appear here after release.",
-      unavailable:"This ranking is not available yet. Please try again later.",
+      unavailable:"We could not load the ranking for this period. Please try again later.",
       periodCount:"Bookmarks this period",
       error:"Couldn't load published works. Please try again later.",
       hidden:"This work is no longer public.",
       count:"Bookmarks",reposts:"Reposts",title:"Open on YouTube"
     },
-    "zh-Hans": {hidden:"该作品已设为私密。",periodCount:"本期收藏",loading:"正在读取公开作品……",empty:"暂无可显示的公开作品，发布后将自动出现。",unavailable:"应用尚未提供该期间的排行，请查看累计或最新。",error:"作品加载失败，请稍后重试。",count:"收藏",reposts:"转发",title:"在 YouTube 打开"},
-    "zh-Hant": {hidden:"這部作品已設為私人。",periodCount:"本期書籤",loading:"正在讀取公開作品……",empty:"目前沒有公開作品，發布後將自動顯示。",unavailable:"應用程式尚未提供這段期間的排行，請查看累計或最新。",error:"作品載入失敗，請稍後再試。",count:"書籤",reposts:"轉發",title:"在 YouTube 開啟"},
-    ko: {hidden:"이 작품은 비공개로 전환되었습니다.",periodCount:"기간 내 북마크",loading:"공개 작품을 불러오는 중...",empty:"아직 공개된 작품이 없습니다. 출시 후 이곳에 표시됩니다.",unavailable:"이 기간의 순위는 아직 제공되지 않습니다. 누적 또는 최신을 확인하세요.",error:"작품을 불러오지 못했습니다. 나중에 다시 시도하세요.",count:"북마크",reposts:"리포스트",title:"YouTube에서 열기"},
-    fr: {hidden:"Cette œuvre n’est plus publique.",periodCount:"Favoris de la période",loading:"Chargement des œuvres publiques…",empty:"Aucune œuvre publique pour le moment. Elles apparaîtront ici après le lancement.",unavailable:"Ce classement périodique n'est pas encore disponible. Consultez les nouveautés ou le classement général.",error:"Impossible de charger les œuvres. Réessayez plus tard.",count:"Favoris",reposts:"Repartages",title:"Ouvrir sur YouTube"},
-    es: {hidden:"Esta obra ya no es pública.",periodCount:"Marcadores del período",loading:"Cargando obras públicas…",empty:"Aún no hay obras públicas. Aparecerán aquí después del lanzamiento.",unavailable:"Este ranking por período aún no está disponible. Consulta Novedades o Acumulado.",error:"No se pudieron cargar las obras. Inténtalo más tarde.",count:"Marcadores",reposts:"Republicaciones",title:"Abrir en YouTube"}
+    "zh-Hans": {hidden:"该作品已设为私密。",periodCount:"本期收藏",loading:"正在读取公开作品……",empty:"暂无可显示的公开作品，发布后将自动出现。",unavailable:"暂时无法加载这段时间的排行，请稍后重试。",error:"作品加载失败，请稍后重试。",count:"收藏",reposts:"转发",title:"在 YouTube 打开"},
+    "zh-Hant": {hidden:"這部作品已設為私人。",periodCount:"本期書籤",loading:"正在讀取公開作品……",empty:"目前沒有公開作品，發布後將自動顯示。",unavailable:"暫時無法載入這段時間的排行，請稍後再試。",error:"作品載入失敗，請稍後再試。",count:"書籤",reposts:"轉發",title:"在 YouTube 開啟"},
+    ko: {hidden:"이 작품은 비공개로 전환되었습니다.",periodCount:"기간 내 북마크",loading:"공개 작품을 불러오는 중...",empty:"아직 공개된 작품이 없습니다. 출시 후 이곳에 표시됩니다.",unavailable:"현재 이 기간의 순위를 불러올 수 없습니다. 잠시 후 다시 시도해 주세요.",error:"작품을 불러오지 못했습니다. 나중에 다시 시도하세요.",count:"북마크",reposts:"리포스트",title:"YouTube에서 열기"},
+    fr: {hidden:"Cette œuvre n’est plus publique.",periodCount:"Favoris de la période",loading:"Chargement des œuvres publiques…",empty:"Aucune œuvre publique pour le moment. Elles apparaîtront ici après le lancement.",unavailable:"Impossible de charger le classement pour cette période. Réessayez plus tard.",error:"Impossible de charger les œuvres. Réessayez plus tard.",count:"Favoris",reposts:"Repartages",title:"Ouvrir sur YouTube"},
+    es: {hidden:"Esta obra ya no es pública.",periodCount:"Marcadores del período",loading:"Cargando obras públicas…",empty:"Aún no hay obras públicas. Aparecerán aquí después del lanzamiento.",unavailable:"No se pudo cargar la clasificación de este período. Inténtalo más tarde.",error:"No se pudieron cargar las obras. Inténtalo más tarde.",count:"Marcadores",reposts:"Republicaciones",title:"Abrir en YouTube"}
+  };
+  const playbackErrors = {
+    ja: "作品を開けませんでした。時間をおいてもう一度お試しください。",
+    en: "Could not open this work. Please try again later.",
+    "zh-Hans": "无法打开此作品，请稍后重试。",
+    "zh-Hant": "無法開啟此作品，請稍後再試。",
+    ko: "작품을 열 수 없습니다. 잠시 후 다시 시도해 주세요.",
+    fr: "Impossible d’ouvrir cette œuvre. Réessayez plus tard.",
+    es: "No se pudo abrir esta obra. Inténtalo más tarde."
   };
   function copy(){
     const lang=document.documentElement.lang;
     return labels[lang] || labels.ja;
+  }
+  function renderFeedback(){
+    feedback.hidden = !playbackMessage;
+    feedback.textContent = playbackMessage === "hidden"
+      ? copy().hidden
+      : playbackMessage === "error"
+        ? playbackErrors[document.documentElement.lang] || playbackErrors.ja
+        : "";
   }
   function clear(){gallery.replaceChildren()}
   function message(kind){
@@ -48,13 +72,12 @@
     p.textContent=copy()[kind] || copy().error;
     clear();gallery.append(p);
   }
-  async function playbackAvailable(id) {
+  async function playbackStatus(id) {
     const response=await fetch("/api/community?playbackId="+encodeURIComponent(id),{
       headers:{"accept":"application/json"},credentials:"omit",cache:"no-store"
     });
-    if (!response.ok) return false;
-    const reply=await response.json();
-    return reply && reply.status==="available";
+    if (!response.ok) throw Error("Playback status "+response.status);
+    return (await response.json())?.status;
   }
   function card(work, index, ranked){
     const hidden=work.isUnavailable===true;
@@ -65,19 +88,31 @@
       a.setAttribute("aria-disabled","true");
     }else{
       a.href=work.youtubeUrl;
-      a.target="_blank";a.rel="noopener noreferrer";
       a.setAttribute("aria-label",copy().title+": "+work.title);
       a.addEventListener("click",async event=>{
         // Guard privacy even between a ranking fetch and the actual click.
         event.preventDefault();
         const requestAtClick=requestCounter;
+        const attempt=++playbackRequest;
+        playbackMessage=null;renderFeedback();
         try{
-          const available=await playbackAvailable(work.workId);
-          if(requestAtClick!==requestCounter)return;
-          if(!available){select(current);return;}
-          window.location.assign(work.youtubeUrl);
+          const status=await playbackStatus(work.workId);
+          if(requestAtClick!==requestCounter || attempt!==playbackRequest)return;
+          if(status==="available"){
+            window.location.assign(work.youtubeUrl);
+            return;
+          }
+          if(status==="private" || status==="deleted" || status==="unavailable"){
+            playbackMessage="hidden";
+            renderFeedback();
+            select(current,{keepFeedback:true});
+            return;
+          }
         }catch(_){
           // Fail closed: never open a stale item when status is unknown.
+        }
+        if(requestAtClick===requestCounter && attempt===playbackRequest){
+          playbackMessage="error";renderFeedback();
         }
       });
     }
@@ -137,8 +172,9 @@
     state.works.forEach((w,i)=>gallery.append(card(w,i,current!=="latest")));
     if(!state.works.length) message("empty");
   }
-  function select(view){
+  function select(view,{keepFeedback=false}={}){
     current=view;
+    if(!keepFeedback){playbackMessage=null;renderFeedback();}
     buttons.forEach(b=>{
       const pressed=b.dataset.communityTab===view;
       b.classList.toggle("is-active",pressed);
@@ -173,6 +209,6 @@
   document.addEventListener("visibilitychange",()=>{
     if(!document.hidden)select(current);
   });
-  document.addEventListener("niarim:langchange",render);
+  document.addEventListener("niarim:langchange",()=>{render();renderFeedback();});
   select(current);
 })();
