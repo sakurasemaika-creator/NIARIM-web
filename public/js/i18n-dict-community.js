@@ -82,18 +82,18 @@
       "communityPage.cta.link": "アプリをダウンロード",
     },
     en: {
-      "meta.community.title": "Gallery",
+      "meta.community.title": "Work Plaza",
       "meta.community.description":
         "Discover works made with NIARIM through new arrivals and rankings — an introduction to the community feature.",
       "communityPage.eyebrow": "Community",
-      "communityPage.title": "Gallery",
+      "communityPage.title": "Work Plaza",
       "communityPage.lead":
         "A community feature for discovering work made with NIARIM. Browsing requires no login, so anyone can enjoy it casually.",
       "communityPage.comingSoon":
         "This page introduces a feature being prepared for NIARIM's official launch. The specification is finalized, but implementation is still to come. Screenshots here will be replaced with the real screens later.",
       "communityPage.login.title": "No login needed just to browse",
       "communityPage.login.body":
-        "Drawing and animating, plus browsing the Gallery, new arrivals, rankings, and an author's work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
+        "Drawing and animating, plus browsing the Work Plaza, new arrivals, rankings, and an author's work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
       "communityPage.tabs.overall": "All-time",
       "communityPage.tabs.yearly": "Yearly",
       "communityPage.tabs.monthly": "Monthly",
@@ -130,7 +130,7 @@
       "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "Even more fun, even more convenient",
       "communityPage.advanced.lead":
-        "Grow tags together, keep a video playing while you browse elsewhere, or breeze through works in your spare moments — extra touches that make the Gallery even more fun to use.",
+        "Grow tags together, keep a video playing while you browse elsewhere, or breeze through works in your spare moments — extra touches that make the Work Plaza even more fun to use.",
       "communityPage.advanced.tags.title": "Tags anyone can help curate",
       "communityPage.advanced.tags.body":
         "Tags aren't just for the poster — anyone can add or remove them. Posters can lock important tags so others can't delete them. Tap a tag to narrow the list down to works that share it.",
@@ -145,7 +145,7 @@
         "Filter the gallery by All, Portrait only, or Landscape only. Portrait works can switch to a full-screen, vertically scrolling viewer with one tap.",
       "communityPage.cta.title": "Your work could be here too.",
       "communityPage.cta.body":
-        "Create a hand-drawn animation with NIARIM, and one day, why not post it to the Gallery for everyone to see?",
+        "Create a hand-drawn animation with NIARIM, and one day, why not post it to the Work Plaza for everyone to see?",
       "communityPage.cta.link": "Download the App",
     },
     "zh-Hans": {
@@ -344,11 +344,11 @@
       "communityPage.cta.link": "앱 다운로드",
     },
     fr: {
-      "meta.community.title": "Galerie",
+      "meta.community.title": "Place des œuvres",
       "meta.community.description":
         "Découvrez les œuvres créées avec NIARIM via les nouveautés et les classements — présentation de la fonctionnalité communautaire.",
       "communityPage.eyebrow": "Community",
-      "communityPage.title": "Galerie",
+      "communityPage.title": "Place des œuvres",
       "communityPage.lead":
         "Une fonctionnalité communautaire pour découvrir les œuvres créées avec NIARIM. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
       "communityPage.comingSoon":
@@ -356,7 +356,7 @@
       "communityPage.login.title":
         "Aucune connexion nécessaire pour simplement consulter",
       "communityPage.login.body":
-        "Dessiner et animer, ainsi que parcourir la Galerie, les nouveautés, les classements et la liste des œuvres d'un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu'à 1 œuvre par jour avec le plan gratuit, ou jusqu'à 3 avec Premium.",
+        "Dessiner et animer, ainsi que parcourir la Place des œuvres, les nouveautés, les classements et la liste des œuvres d'un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu'à 1 œuvre par jour avec le plan gratuit, ou jusqu'à 3 avec Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Annuel",
       "communityPage.tabs.monthly": "Mensuel",
@@ -394,7 +394,7 @@
       "communityPage.advanced.title":
         "Encore plus de plaisir, encore plus pratique",
       "communityPage.advanced.lead":
-        "Faites grandir les tags ensemble, gardez une vidéo en lecture pendant que vous naviguez ailleurs, ou parcourez les œuvres pendant vos moments libres — autant de petits plus qui rendent la Galerie encore plus agréable à utiliser.",
+        "Faites grandir les tags ensemble, gardez une vidéo en lecture pendant que vous naviguez ailleurs, ou parcourez les œuvres pendant vos moments libres — autant de petits plus qui rendent la Place des œuvres encore plus agréable à utiliser.",
       "communityPage.advanced.tags.title":
         "Des tags entretenus par tout le monde",
       "communityPage.advanced.tags.body":
@@ -411,15 +411,15 @@
         "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d'un geste vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
-        "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Galerie pour que tout le monde la voie ?",
+        "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Place des œuvres pour que tout le monde la voie ?",
       "communityPage.cta.link": "Télécharger l'application",
     },
     es: {
-      "meta.community.title": "Galería",
+      "meta.community.title": "Plaza de Obras",
       "meta.community.description":
         "Descubre las obras creadas con NIARIM a través de novedades y clasificaciones: una introducción a la función de comunidad.",
       "communityPage.eyebrow": "Community",
-      "communityPage.title": "Galería",
+      "communityPage.title": "Plaza de Obras",
       "communityPage.lead":
         "Una función de comunidad para descubrir obras creadas con NIARIM. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",
       "communityPage.comingSoon":
@@ -427,7 +427,7 @@
       "communityPage.login.title":
         "No hace falta iniciar sesión solo para consultar",
       "communityPage.login.body":
-        "Dibujar y animar, así como consultar la Galería, las novedades, las clasificaciones y la lista de obras de un autor, están disponibles sin iniciar sesión. Para publicar, inicia sesión con una cuenta de Google. Puedes publicar hasta 1 obra al día en el plan gratuito, o hasta 3 con Premium.",
+        "Dibujar y animar, así como consultar la Plaza de Obras, las novedades, las clasificaciones y la lista de obras de un autor, están disponibles sin iniciar sesión. Para publicar, inicia sesión con una cuenta de Google. Puedes publicar hasta 1 obra al día en el plan gratuito, o hasta 3 con Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Anual",
       "communityPage.tabs.monthly": "Mensual",
@@ -464,7 +464,7 @@
       "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "Aún más diversión, aún más comodidad",
       "communityPage.advanced.lead":
-        "Haz crecer las etiquetas entre todos, mantén un video reproduciéndose mientras navegas por otras pantallas, o recorre las obras en tus ratos libres: pequeños detalles que hacen la Galería aún más divertida de usar.",
+        "Haz crecer las etiquetas entre todos, mantén un video reproduciéndose mientras navegas por otras pantallas, o recorre las obras en tus ratos libres: pequeños detalles que hacen la Plaza de Obras aún más divertida de usar.",
       "communityPage.advanced.tags.title": "Etiquetas que todos pueden cuidar",
       "communityPage.advanced.tags.body":
         "Las etiquetas no son solo cosa del autor: cualquiera puede añadirlas o eliminarlas. El autor puede bloquear las etiquetas importantes para que otros no puedan borrarlas. Toca una etiqueta para filtrar solo las obras que la comparten.",
@@ -480,7 +480,7 @@
         "Filtra la galería por Todo, Solo vertical o Solo horizontal. Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",
       "communityPage.cta.title": "Tu obra también podría estar aquí.",
       "communityPage.cta.body":
-        "Crea una animación dibujada a mano con NIARIM y, algún día, publícala en la Galería para que todos la vean.",
+        "Crea una animación dibujada a mano con NIARIM y, algún día, publícala en la Plaza de Obras para que todos la vean.",
       "communityPage.cta.link": "Descargar la app",
     },
   };

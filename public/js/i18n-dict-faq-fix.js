@@ -23,7 +23,7 @@
     ja: {
       "faq.viewAll": "すべての質問を見る",
       "faq.a2":
-        "無料版でも、動画書き出しを含む全ての基本的な制作機能をご利用いただけます。広告表示およびNIARIM公式エンドロゴの自動追加があります。具体的な料金プランはGoogle Playのアプリページでご確認いただけます。",
+        "無料版でも、動画書き出しを含む全ての基本的な制作機能をご利用いただけます。広告表示およびNIARIMの公式エンドマークの自動追加があります。具体的な料金プランはGoogle Playのアプリページでご確認いただけます。",
       "faq.a3":
         "本アプリはAndroid端末向けに提供されています。板タブ・液晶タブレットの接続や、Galaxy端末のDeXモード・Sペンにも対応しています。対応OSのバージョン等の詳細はGoogle Playのアプリページをご確認ください。",
       "faq.a6":
@@ -34,7 +34,7 @@
     en: {
       "faq.viewAll": "View all questions",
       "faq.a2":
-        "Even the free version includes every core creation feature, including video export. It shows ads and automatically adds the official NIARIM end card. Specific pricing plans are available on the Google Play listing.",
+        "Even the free version includes every core creation feature, including video export. It shows ads and automatically adds the NIARIM Official End Mark. Specific pricing plans are available on the Google Play listing.",
       "faq.a3":
         "The app is provided for Android devices. It also supports connecting a drawing tablet or pen display, as well as Galaxy DeX mode and the S Pen. Please check the Google Play listing for details on supported OS versions.",
       "faq.a6":
@@ -45,7 +45,7 @@
     "zh-Hans": {
       "faq.viewAll": "查看全部问题",
       "faq.a2":
-        "即使是免费版，也可使用包括视频导出在内的全部基础创作功能。免费版会显示广告并自动添加 NIARIM 官方片尾标志。具体资费方案可在 Google Play 应用页面查看。",
+        "即使是免费版，也可使用包括视频导出在内的全部基础创作功能。免费版会显示广告并自动添加 NIARIM 官方片尾标记。具体资费方案可在 Google Play 应用页面查看。",
       "faq.a3":
         "本应用面向 Android 设备提供。同时支持连接数位板、数位屏，以及 Galaxy 设备的 DeX 模式与 S Pen。支持的系统版本等详情请以 Google Play 应用页面为准。",
       "faq.a6":
@@ -56,7 +56,7 @@
     "zh-Hant": {
       "faq.viewAll": "查看全部問題",
       "faq.a2":
-        "即使是免費版，也可使用包括影片匯出在內的全部基礎創作功能。免費版會顯示廣告並自動新增 NIARIM 官方片尾標誌。具體資費方案可在 Google Play 應用程式頁面查看。",
+        "即使是免費版，也可使用包括影片匯出在內的全部基礎創作功能。免費版會顯示廣告並自動新增 NIARIM 官方片尾標記。具體資費方案可在 Google Play 應用程式頁面查看。",
       "faq.a3":
         "本應用程式面向 Android 裝置提供。同時支援連接繪圖板、繪圖螢幕，以及 Galaxy 裝置的 DeX 模式與 S Pen。支援的系統版本等詳情請以 Google Play 應用程式頁面為準。",
       "faq.a6":
@@ -67,7 +67,7 @@
     ko: {
       "faq.viewAll": "모든 질문 보기",
       "faq.a2":
-        "무료 버전에서도 영상 내보내기를 포함한 모든 기본 제작 기능을 이용할 수 있습니다. 무료 버전에는 광고가 표시되며 NIARIM 공식 엔드 카드가 자동으로 추가됩니다. 구체적인 요금제는 Google Play 앱 페이지에서 확인하실 수 있습니다.",
+        "무료 버전에서도 영상 내보내기를 포함한 모든 기본 제작 기능을 이용할 수 있습니다. 무료 버전에는 광고가 표시되며 NIARIM 공식 엔드마크가 자동으로 추가됩니다. 구체적인 요금제는 Google Play 앱 페이지에서 확인하실 수 있습니다.",
       "faq.a3":
         "본 앱은 Android 기기용으로 제공됩니다. 판 타블릿・액정 타블릿 연결과 Galaxy 기기의 DeX 모드・S펜에도 대응합니다. 지원 OS 버전 등 자세한 내용은 Google Play 앱 페이지를 확인해 주세요.",
       "faq.a6":
@@ -78,7 +78,7 @@
     fr: {
       "faq.viewAll": "Voir toutes les questions",
       "faq.a2":
-        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. Elle affiche des publicités et ajoute automatiquement le générique de fin officiel de NIARIM. Les tarifs précis sont disponibles sur la fiche Google Play.",
+        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. Elle affiche des publicités et ajoute automatiquement la marque de fin officielle de NIARIM. Les tarifs précis sont disponibles sur la fiche Google Play.",
       "faq.a3":
         "L'application est proposée pour les appareils Android. Elle prend également en charge la connexion d'une tablette graphique ou d'un écran-tablette, ainsi que le mode Galaxy DeX et le S Pen. Veuillez consulter la fiche Google Play pour le détail des versions du système compatibles.",
       "faq.a6":
@@ -89,7 +89,7 @@
     es: {
       "faq.viewAll": "Ver todas las preguntas",
       "faq.a2":
-        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de video. Muestra anuncios y añade automáticamente la placa de cierre oficial de NIARIM. Los planes de precios concretos están disponibles en la ficha de Google Play.",
+        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de video. Muestra anuncios y añade automáticamente la marca final oficial de NIARIM. Los planes de precios concretos están disponibles en la ficha de Google Play.",
       "faq.a3":
         "La aplicación está disponible para dispositivos Android. También admite la conexión de una tableta gráfica o pantalla-tableta, así como el modo Galaxy DeX y el S Pen. Consulta la ficha de Google Play para conocer el detalle de las versiones del sistema compatibles.",
       "faq.a6":

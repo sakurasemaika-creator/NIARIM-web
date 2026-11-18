@@ -158,10 +158,10 @@
       "about.unique.item9.title": "Even the widgets are yours to style",
       "about.unique.item9.body":
         "There are three home screen widgets. The launch screen widget shows a single frame you pick from your own work, and the “Create” and “Work Plaza” widgets let you either follow the app theme or set any background colour you like. Colours are kept per widget, so all three can sit side by side and still be told apart.",
-      "about.unique.item7.title": "Gallery",
+      "about.unique.item7.title": "Work Plaza",
       "about.unique.item7.body":
         "Discover posted works through new arrivals and rankings. Browsing requires no login, so anyone can enjoy it casually.",
-      "about.unique.item7.link": "Visit the Gallery",
+      "about.unique.item7.link": "Visit the Work Plaza",
       "about.cta.title": "Want to learn more about using NIARIM?",
       "about.cta.body":
         "Search and browse the same content as the app's built-in Help screen, right here on the web.",
@@ -459,10 +459,10 @@
       "about.unique.item9.title": "Jusqu'aux widgets, tout vous appartient",
       "about.unique.item9.body":
         "Il existe trois widgets d'écran d'accueil. Le widget d'écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l'application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
-      "about.unique.item7.title": "Galerie",
+      "about.unique.item7.title": "Place des œuvres",
       "about.unique.item7.body":
         "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
-      "about.unique.item7.link": "Voir la Galerie",
+      "about.unique.item7.link": "Voir la Place des œuvres",
       "about.cta.title":
         "Vous voulez en savoir plus sur l'utilisation de NIARIM ?",
       "about.cta.body":
@@ -537,10 +537,10 @@
       "about.unique.item9.title": "Hasta los widgets son tuyos",
       "about.unique.item9.body":
         "Hay tres widgets de pantalla de inicio. El widget de arranque muestra un fotograma que eliges entre tus propias obras, y los widgets «Crear» y «Plaza de Obras» pueden seguir el tema de la aplicación o usar el color de fondo que prefieras. Los colores se guardan por tipo, así que los tres pueden convivir sin confundirse.",
-      "about.unique.item7.title": "Galería",
+      "about.unique.item7.title": "Plaza de Obras",
       "about.unique.item7.body":
         "Descubre las obras publicadas mediante novedades y clasificaciones. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",
-      "about.unique.item7.link": "Ver la Galería",
+      "about.unique.item7.link": "Ver la Plaza de Obras",
       "about.cta.title": "¿Quieres saber más sobre cómo usar NIARIM?",
       "about.cta.body":
         "Consulta aquí, en la web, el mismo contenido que la pantalla de ayuda integrada en la app.",

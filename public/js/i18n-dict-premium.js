@@ -117,7 +117,7 @@
       "premiumPage.premium.item6.body": "Create and export up to 2 hours. After the benefit ends, your project stays available and you can export its first 90 seconds.",
       "premiumPage.premium.item7.title": "More community posts",
       "premiumPage.premium.item7.body":
-        "Post up to 3 works a day to the Gallery, up from 1 a day on the free plan.",
+        "Post up to 3 works a day to the Work Plaza, up from 1 a day on the free plan.",
       "premiumPage.premium.automation.title":
         "Custom automations (action recording)",
       "premiumPage.premium.automation.body":
@@ -362,7 +362,7 @@
       "premiumPage.premium.item6.body": "Créez et exportez jusqu’à 2 heures. Une fois l’avantage expiré, le projet reste disponible et ses 90 premières secondes peuvent être exportées.",
       "premiumPage.premium.item7.title": "Plus de publications communautaires",
       "premiumPage.premium.item7.body":
-        "Publiez jusqu'à 3 œuvres par jour dans la Galerie, contre 1 par jour avec le plan gratuit.",
+        "Publiez jusqu'à 3 œuvres par jour dans la Place des œuvres, contre 1 par jour avec le plan gratuit.",
       "premiumPage.premium.automation.title":
         "Automatisations personnalisées (enregistrement d’actions)",
       "premiumPage.premium.automation.body":
@@ -426,7 +426,7 @@
       "premiumPage.premium.item6.body": "Crea y exporta hasta 2 horas. Cuando caduque la ventaja, tu proyecto se conserva y puedes exportar sus primeros 90 segundos.",
       "premiumPage.premium.item7.title": "Más publicaciones en la comunidad",
       "premiumPage.premium.item7.body":
-        "Publica hasta 3 obras al día en la Galería, frente a 1 al día en el plan gratuito.",
+        "Publica hasta 3 obras al día en la Plaza de Obras, frente a 1 al día en el plan gratuito.",
       "premiumPage.premium.automation.title":
         "Automatizaciones personalizadas (grabación de acciones)",
       "premiumPage.premium.automation.body":

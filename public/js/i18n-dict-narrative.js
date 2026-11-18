@@ -176,7 +176,7 @@
     en: {
       "narrative.home.cta.heading": "Let's actually make an animation!",
       "narrative.home.cta.body":
-        "The moment you feel like drawing, you can just start. Whether it's a single picture or a piece built from dozens of frames. Animate it by hand. Animate it with keyframes. Combine images and sound. Polish it all the way through and make it truly yours. And once it's done, take it to the Gallery. Make it, publish it, discover it. Let's make an animation with NIARIM!",
+        "The moment you feel like drawing, you can just start. Whether it's a single picture or a piece built from dozens of frames. Animate it by hand. Animate it with keyframes. Combine images and sound. Polish it all the way through and make it truly yours. And once it's done, take it to the Work Plaza. Make it, publish it, discover it. Let's make an animation with NIARIM!",
 
       "narrative.drawing.1.heading": "Draw exactly what you have in mind.",
       "narrative.drawing.1.body":
@@ -308,7 +308,7 @@
       "narrative.premium.2.heading": "",
       "narrative.premium.2.body": "The NIARIM end mark is a five-second logo appended to MP4, WebM, and AVI exports. While the benefit is active, you can show or hide it per project. Project preferences are kept after expiry. GIFs do not include it.",
 
-      "narrative.community.1.heading": "Gallery",
+      "narrative.community.1.heading": "Work Plaza",
       "narrative.community.1.body":
         "A place where anyone can casually browse work made with NIARIM. You can view work without logging in.",
       "narrative.community.2.heading": "Check the newest work, newest first",
@@ -328,7 +328,7 @@
         "Find a piece you like, and you can check out the other work its creator has published, too. Find a favorite creator and follow along as they post new work.",
       "narrative.community.7.heading": "Post your own work.",
       "narrative.community.7.body":
-        "Finished work can be posted to the Gallery. Let someone else see what you made. Someone might love it enough to bookmark it, and it might even land in the rankings. Free members can post up to 1 piece a day; Premium members up to 3. Once you've made something, it's time to share it with someone.",
+        "Finished work can be posted to the Work Plaza. Let someone else see what you made. Someone might love it enough to bookmark it, and it might even land in the rankings. Free members can post up to 1 piece a day; Premium members up to 3. Once you've made something, it's time to share it with someone.",
       "narrative.community.8.heading": "Logging in stays simple, too.",
       "narrative.community.8.body":
         "There's no separate NIARIM account to register for. Sign in with a Google account to post and bookmark works. You don't need to log in at all just to browse.",
@@ -781,7 +781,7 @@
       "narrative.home.cta.heading":
         "Passons à la pratique, créons une animation !",
       "narrative.home.cta.body":
-        "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Galerie. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
+        "Dès que l'envie de dessiner vous prend, vous pouvez commencer tout de suite. Que ce soit un seul dessin ou une œuvre construite à partir de dizaines d'images. Animez-la à la main. Animez-la avec des images clés. Combinez images et son. Peaufinez-la jusqu'au bout pour en faire une œuvre vraiment personnelle. Et une fois terminée, partagez-la dans la Place des œuvres. Créez, publiez, découvrez. Créons une animation avec NIARIM !",
 
       "narrative.drawing.1.heading":
         "Dessinez exactement ce que vous avez en tête.",
@@ -911,7 +911,7 @@
         "Premium rend non seulement la création, mais aussi la publication de votre travail, encore plus confortable.",
       "narrative.premium.2.body": "Le logo final NIARIM de cinq secondes est ajouté aux exports MP4, WebM et AVI. Vous pouvez le masquer par projet tant que l’avantage est actif. Le réglage est conservé après expiration. Les GIF sont exclus.",
 
-      "narrative.community.1.heading": "Galerie",
+      "narrative.community.1.heading": "Place des œuvres",
       "narrative.community.1.body":
         "Un endroit où tout le monde peut parcourir librement les œuvres créées avec NIARIM. Vous pouvez consulter les œuvres sans vous connecter.",
       "narrative.community.2.heading": "Découvrez les œuvres les plus récentes",
@@ -932,7 +932,7 @@
         "Trouvez une œuvre que vous aimez, et vous pouvez découvrir aussi les autres œuvres publiées par son créateur. Trouvez un créateur favori et suivez-le à mesure qu'il publie de nouvelles œuvres.",
       "narrative.community.7.heading": "Publiez votre propre œuvre.",
       "narrative.community.7.body":
-        "Une œuvre terminée peut être publiée dans la Galerie. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
+        "Une œuvre terminée peut être publiée dans la Place des œuvres. Laissez quelqu'un d'autre voir ce que vous avez créé. Quelqu'un pourrait l'adorer au point de la mettre en favori, et elle pourrait même se retrouver dans les classements. Les membres gratuits peuvent publier jusqu'à 1 œuvre par jour ; les membres Premium jusqu'à 3. Une fois que vous avez créé quelque chose, il est temps de le partager avec quelqu'un.",
       "narrative.community.8.heading": "La connexion reste simple, elle aussi.",
       "narrative.community.8.body":
         "Il n'y a pas de compte NIARIM séparé à créer. Connectez-vous avec un compte Google pour publier des œuvres et les ajouter à vos favoris. Vous n'avez pas besoin de vous connecter du tout pour simplement parcourir.",
@@ -944,7 +944,7 @@
     es: {
       "narrative.home.cta.heading": "¡Vamos a hacer una animación de verdad!",
       "narrative.home.cta.body":
-        "En cuanto te den ganas de dibujar, puedes empezar enseguida. Ya sea un solo dibujo o una obra hecha con decenas de fotogramas. Anímala a mano. Anímala con fotogramas clave. Combina imágenes y sonido. Púlela hasta el final y hazla verdaderamente tuya. Y una vez terminada, llévala a la Galería. Crea, publica, descubre. ¡Hagamos una animación con NIARIM!",
+        "En cuanto te den ganas de dibujar, puedes empezar enseguida. Ya sea un solo dibujo o una obra hecha con decenas de fotogramas. Anímala a mano. Anímala con fotogramas clave. Combina imágenes y sonido. Púlela hasta el final y hazla verdaderamente tuya. Y una vez terminada, llévala a la Plaza de Obras. Crea, publica, descubre. ¡Hagamos una animación con NIARIM!",
 
       "narrative.drawing.1.heading":
         "Dibuja exactamente lo que tienes en mente.",
@@ -1068,7 +1068,7 @@
         "Premium hace que no solo crear, sino también publicar tu trabajo, sea aún más cómodo.",
       "narrative.premium.2.body": "El logo final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Puedes ocultarlo por proyecto mientras el beneficio esté activo. El ajuste se conserva al caducar. Los GIF no lo incluyen.",
 
-      "narrative.community.1.heading": "Galería",
+      "narrative.community.1.heading": "Plaza de Obras",
       "narrative.community.1.body":
         "Un lugar donde cualquiera puede navegar tranquilamente las obras hechas con NIARIM. Puedes ver las obras sin iniciar sesión.",
       "narrative.community.2.heading": "Descubre lo más nuevo primero",
@@ -1089,7 +1089,7 @@
         "Encuentra una obra que te guste, y podrás revisar también las demás obras que su creador ha publicado. Encuentra un creador favorito y síguelo a medida que publica nuevas obras.",
       "narrative.community.7.heading": "Publica tu propia obra.",
       "narrative.community.7.body":
-        "Una obra terminada se puede publicar en la Galería. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
+        "Una obra terminada se puede publicar en la Plaza de Obras. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
       "narrative.community.8.heading": "Iniciar sesión también es simple.",
       "narrative.community.8.body":
         "No hay una cuenta NIARIM separada que crear. Inicia sesión con una cuenta de Google para publicar obras y guardarlas en favoritos. No necesitas iniciar sesión en absoluto solo para explorar.",

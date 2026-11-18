@@ -374,7 +374,7 @@
       "hero.lead":
         "NIARIM is an app for creating full hand-drawn animation right from your smartphone. Draw and move one picture at a time, animate with keyframes, or even combine still images into stop motion. From drawing to animation, editing, sound, and export — finish your work in one single app.",
       "hero.bridge.html":
-        "And once it's made, bring it to <a href=\"/community/\">the “Gallery.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
+        "And once it's made, bring it to <a href=\"/community/\">the “Work Plaza.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
       "hero.cta.primary": "Download the App",
       "hero.cta.secondary": "See the Features",
       "hero.note":

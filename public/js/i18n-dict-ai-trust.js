@@ -13,7 +13,7 @@
     },
     en: {
       q: "Is my work used to train AI?",
-      a: "No. NIARIM does not use illustrations, animations, project data, or other works created or published by users as training data for generative AI models. Creation data and video files are not sent to or stored on the developer's servers. When you publish a work to the Gallery, the video file is stored on YouTube; NIARIM manages only information needed to display the work, such as the YouTube video ID and title.",
+      a: "No. NIARIM does not use illustrations, animations, project data, or other works created or published by users as training data for generative AI models. Creation data and video files are not sent to or stored on the developer's servers. When you publish a work to the Work Plaza, the video file is stored on YouTube; NIARIM manages only information needed to display the work, such as the YouTube video ID and title.",
       about:
         "NIARIM does not include generative-AI features, and works or project data created or published by users are not used as training data for generative AI models.",
       privacy:
@@ -49,7 +49,7 @@
     },
     fr: {
       q: "Mes œuvres sont-elles utilisées pour entraîner une IA ?",
-      a: "Non. NIARIM n'utilise pas les illustrations, animations, données de projet ou autres œuvres créées ou publiées par les utilisateurs comme données d'entraînement de modèles d'IA générative. Les données de création et les fichiers vidéo ne sont pas envoyés ni stockés sur les serveurs du développeur. Lorsqu'une œuvre est publiée dans la Galerie, le fichier vidéo est stocké sur YouTube ; NIARIM ne gère que les informations nécessaires à son affichage, telles que l'identifiant de la vidéo YouTube et son titre.",
+      a: "Non. NIARIM n'utilise pas les illustrations, animations, données de projet ou autres œuvres créées ou publiées par les utilisateurs comme données d'entraînement de modèles d'IA générative. Les données de création et les fichiers vidéo ne sont pas envoyés ni stockés sur les serveurs du développeur. Lorsqu'une œuvre est publiée dans la Place des œuvres, le fichier vidéo est stocké sur YouTube ; NIARIM ne gère que les informations nécessaires à son affichage, telles que l'identifiant de la vidéo YouTube et son titre.",
       about:
         "NIARIM n'intègre aucune fonctionnalité d'IA générative et n'utilise pas les œuvres ou données de projet créées ou publiées par les utilisateurs pour entraîner des modèles d'IA générative.",
       privacy:
@@ -58,7 +58,7 @@
     },
     es: {
       q: "¿Se usan mis obras para entrenar IA?",
-      a: "No. NIARIM no utiliza ilustraciones, animaciones, datos de proyectos ni otras obras creadas o publicadas por los usuarios como datos de entrenamiento para modelos de IA generativa. Los datos de creación y los archivos de vídeo tampoco se envían ni almacenan en los servidores del desarrollador. Al publicar una obra en la Galería, el archivo de vídeo se almacena en YouTube; NIARIM solo gestiona la información necesaria para mostrarla, como el ID del vídeo de YouTube y el título.",
+      a: "No. NIARIM no utiliza ilustraciones, animaciones, datos de proyectos ni otras obras creadas o publicadas por los usuarios como datos de entrenamiento para modelos de IA generativa. Los datos de creación y los archivos de vídeo tampoco se envían ni almacenan en los servidores del desarrollador. Al publicar una obra en la Plaza de Obras, el archivo de vídeo se almacena en YouTube; NIARIM solo gestiona la información necesaria para mostrarla, como el ID del vídeo de YouTube y el título.",
       about:
         "NIARIM no incluye funciones de IA generativa ni utiliza las obras o datos de proyectos creados o publicados por los usuarios para entrenar modelos de IA generativa.",
       privacy:

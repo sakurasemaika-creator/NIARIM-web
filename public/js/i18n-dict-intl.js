@@ -978,7 +978,7 @@
     "hero.lead":
       "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
     "hero.bridge.html":
-      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Galerie »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
+      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Place des œuvres »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
     "hero.cta.primary": "Télécharger l'application",
     "hero.cta.secondary": "Voir les fonctionnalités",
     "hero.note":
@@ -1327,7 +1327,7 @@
     "hero.lead":
       "NIARIM es una app que te permite crear animación dibujada a mano de verdad, directamente desde tu smartphone. Dibuja y anima dibujo a dibujo, crea animación por fotogramas clave, o combina imágenes fijas en stop motion. Desde el dibujo hasta la animación, la edición, el sonido y la exportación: termina tu obra en una sola app.",
     "hero.bridge.html":
-      'Y una vez terminada, llévala a <a href="/community/">la «Galería»</a>. Mira la obra de otra persona, y crea la siguiente. De las personas a las obras. De las obras a las personas.',
+      'Y una vez terminada, llévala a <a href="/community/">la «Plaza de Obras»</a>. Mira la obra de otra persona, y crea la siguiente. De las personas a las obras. De las obras a las personas.',
     "hero.cta.primary": "Descargar la app",
     "hero.cta.secondary": "Ver funciones",
     "hero.note":
