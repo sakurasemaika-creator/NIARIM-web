@@ -311,20 +311,51 @@ html:lang(zh-Hant) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
   display: none !important;
 }
 
-/* Let whole navigation items wrap when a translation needs more space. */
+/* Let whole navigation items wrap when a translation needs more space.
+   Applies to every page (it was limited to the top page, body.nr-site, so
+   French and Spanish items broke inside a word on the other pages at
+   1181-1280px). */
 @media (min-width: 1181px) {
-  html body.nr-site .site-header .main-nav > ul {
+  html body .site-header .main-nav > ul {
     flex-wrap: wrap;
     justify-content: flex-end;
     row-gap: 4px;
   }
 
-  html body.nr-site .site-header .main-nav > ul > li,
-  html body.nr-site .site-header .main-nav > :is(.lang-dropdown, .btn) {
+  html body .site-header .main-nav > ul > li,
+  html
+    body
+    .site-header
+    .main-nav
+    > :is(.lang-dropdown, .btn) {
     flex: none;
   }
 
-  html body.nr-site .site-header .main-nav a[data-i18n] {
+  html body .site-header .main-nav a[data-i18n] {
     white-space: nowrap;
+  }
+}
+
+/* French and Spanish labels are long: tighten the gaps so the row fits more
+   often, and keep two rows inside the 68px header when it still wraps
+   (44px links made two rows 92px tall and pushed them past the header). */
+@media (min-width: 1181px) and (max-width: 1439px) {
+  html:is(:lang(fr), :lang(es))
+    body
+    .site-header
+    .main-nav
+    > ul {
+    column-gap: 10px;
+    row-gap: 2px;
+  }
+
+  html:is(:lang(fr), :lang(es))
+    body
+    .site-header
+    .main-nav
+    > ul
+    > li
+    > a {
+    min-height: 30px;
   }
 }
