@@ -1,25 +1,50 @@
-/**
- * Safe release-state toggle. Default is NOT RELEASED.
- * Set window.NIARIM_PLAY_STORE_URL to the verified official Play Store
- * listing after publication; only Google Play app-details links are accepted.
- */
-(function(){
-"use strict";
-function init(){
- const button=document.querySelector("[data-play-store-button]");
- if(!button)return;
- const candidate=window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
- if(typeof candidate!=="string")return;
- let url;try{url=new URL(candidate)}catch(_){return}
- if(url.protocol!=="https:"||url.hostname!=="play.google.com"||url.pathname!=="/store/apps/details"||!url.searchParams.get("id"))return;
- const link=document.createElement("a");
- link.className=button.className+" is-live";
- link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";
- link.innerHTML=button.innerHTML;
- link.querySelector("strong").textContent="Google Playで入手";
- button.replaceWith(link);
- const note=document.querySelector("#nr-store-notice");
- if(note)note.textContent="Google Playにて配信中";
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+/** Reveal the download links once the official NIARIM listing is configured. */
+(function () {
+  "use strict";
+
+  function init() {
+    const candidate =
+      window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
+    if (typeof candidate !== "string" || !candidate) return;
+
+    let url;
+    try {
+      url = new URL(candidate);
+    } catch {
+      return;
+    }
+    if (
+      url.origin !== "https://play.google.com" ||
+      url.pathname !== "/store/apps/details" ||
+      url.searchParams.get("id") !== "com.niarim.niarim"
+    ) {
+      return;
+    }
+
+    document.querySelectorAll("[data-play-release-i18n]").forEach((element) => {
+      const key = element.dataset.playReleaseI18n;
+      element.setAttribute("data-i18n", key);
+      if (window.NIARIM_I18N) {
+        element.textContent = window.NIARIM_I18N.translate(
+          document.documentElement.lang || "ja",
+          key,
+        );
+      }
+    });
+    document.querySelectorAll("[data-play-store-link]").forEach((link) => {
+      link.href = url.href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.hidden = false;
+    });
+    document.querySelectorAll("[data-play-release-only]").forEach((element) => {
+      element.hidden = false;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
 })();

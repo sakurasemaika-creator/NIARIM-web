@@ -305,3 +305,8 @@ html:lang(zh-Hant) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
   font-family: "Noto Sans CJK TC","Noto Sans TC","Microsoft JhengHei",
     "PingFang TC",system-ui,sans-serif !important;
 }
+
+[data-play-store-link][hidden],
+[data-play-release-only][hidden] {
+  display: none !important;
+}
