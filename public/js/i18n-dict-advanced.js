@@ -218,11 +218,11 @@
         "이미지 또는 텍스트 워터마크를 작품에 추가할 수 있습니다（프리미엄 기능）.",
       "featuresPage.advanced.item9.title": "픽셀 모드",
       "featuresPage.advanced.item9.body":
-        "도트 그림처럼 픽셀로 표현한 작품을 만들 수 있는 모드입니다. 전용 도트 그림 팔레트를 만들고 저장해 두었다가, 그리거나 도트 그림 필터를 적용할 때 골라 쓸 수 있습니다. 팔레트는 .niapixelpalette 파일로 내보내기・가져오기할 수 있어 다른 사람과 공유할 수도 있습니다.",
+        "도트 그림처럼 픽셀로 표현한 작품을 만들 수 있는 모드입니다. 전용 도트 그림 팔레트를 만들고 저장해 두었다가, 그리거나 도트 그림 필터를 적용할 때 골라 쓸 수 있습니다. 팔레트는 .niapixelpalette 파일로 내보내기·가져오기할 수 있어 다른 사람과 공유할 수도 있습니다.",
       "featuresPage.advanced.item10.title": "색상 선택기",
       "featuresPage.advanced.item10.body":
         "색상·채도·명도로 그리기 색을 직관적으로 선택할 수 있습니다.",
-      "featuresPage.advanced.item11.title": "빠른 전환 도구・즐겨찾기",
+      "featuresPage.advanced.item11.title": "빠른 전환 도구·즐겨찾기",
       "featuresPage.advanced.item11.body":
         "자주 쓰는 펜·브러시·크기 조합을 등록해두고, 한 번의 탭으로 순서대로 전환할 수 있습니다.",
       "featuresPage.advanced.item12.title": "드로잉 필터와 연출 필터",

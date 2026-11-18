@@ -96,8 +96,8 @@
         "可將設定、筆刷、網點紙、圖章、自動上色預設、主題、調色盤（取色器・像素畫專用）等，僅選擇所需項目打包轉移到其他裝置，還可以選擇性地一併包含製作中的專案。",
     },
     ko: {
-      "featuresPage.nav.save": "저장・공유",
-      "featuresPage.save.title": "Save & Share｜저장・데이터 관리",
+      "featuresPage.nav.save": "저장·공유",
+      "featuresPage.save.title": "Save & Share｜저장·데이터 관리",
       "featuresPage.save.lead":
         "작품을 지키고, 발전시키고, 다른 기기로도 전달한다. 유연한 저장 구조.",
       "featuresPage.save.item1.title": "자동 저장",
@@ -111,10 +111,10 @@
         "저장 횟수 제한 없이, 가지가 갈라지는 이력으로 제작 과정을 남길 수 있습니다.",
       "featuresPage.save.item4.title": "작품 공유(.niashare)",
       "featuresPage.save.item4.body":
-        "사용한 소재・글꼴까지 함께 내보낼 수 있는 공유 파일 형식으로, 다른 기기에서도 그대로 열 수 있습니다.",
+        "사용한 소재·글꼴까지 함께 내보낼 수 있는 공유 파일 형식으로, 다른 기기에서도 그대로 열 수 있습니다.",
       "featuresPage.save.item5.title": "환경 이전(.niatra)",
       "featuresPage.save.item5.body":
-        "설정・브러시・톤・스탬프・오토필 프리셋・테마・팔레트(컬러 피커・도트 그림 전용) 등 원하는 항목만 골라 다른 기기로 한 번에 옮길 수 있으며, 제작 중인 프로젝트도 선택해서 포함할 수 있습니다.",
+        "설정·브러시·톤·스탬프·오토필 프리셋·테마·팔레트(컬러 피커·도트 그림 전용) 등 원하는 항목만 골라 다른 기기로 한 번에 옮길 수 있으며, 제작 중인 프로젝트도 선택해서 포함할 수 있습니다.",
     },
     fr: {
       "featuresPage.nav.save": "Enregistrer et partager",

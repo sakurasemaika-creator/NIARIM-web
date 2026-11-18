@@ -265,11 +265,11 @@
       "premiumPage.free.title": "무료 버전",
       "premiumPage.free.price": "0원",
       "premiumPage.free.item1":
-        "모든 기본 제작 기능（그리기・애니메이션・편집・오디오）",
+        "모든 기본 제작 기능（그리기·애니메이션·편집·오디오）",
       "premiumPage.free.item2": "영상 내보내기（최대 1920×1920）",
       "premiumPage.free.item3": "광고가 표시됩니다",
       "premiumPage.free.item4":
-        "내보내기 시 NIARIM 공식 엔드 카드가 자동으로 추가됩니다（편집・삭제 불가）",
+        "내보내기 시 NIARIM 공식 엔드 카드가 자동으로 추가됩니다（편집·삭제 불가）",
       "premiumPage.free.item5": "무료로 최대 90초까지 만들고 내보낼 수 있습니다. 긴 작품은 처음 90초를 내보낼 수 있습니다.",
       "premiumPage.premium.title": "프리미엄",
       "premiumPage.premium.monthly.label": "월간 플랜",
@@ -293,7 +293,7 @@
         "곡선으로 명암 균형을 세밀하게 조정할 수 있는, 마무리용 색조 보정 기능입니다.",
       "premiumPage.premium.item5.title": "레벨 보정",
       "premiumPage.premium.item5.body":
-        "블랙 레벨・화이트 레벨・중간톤을 조정해 작품의 색감을 마무리할 수 있습니다.",
+        "블랙 레벨·화이트 레벨·중간톤을 조정해 작품의 색감을 마무리할 수 있습니다.",
       "premiumPage.premium.item6.title": "최대 길이 연장",
       "premiumPage.premium.item6.body": "최대 2시간까지 만들고 내보낼 수 있습니다. 혜택이 끝나도 작품은 보관되며 처음 90초는 내보낼 수 있습니다.",
       "premiumPage.premium.item7.title": "커뮤니티 게시 수 증가",
@@ -307,9 +307,9 @@
       "premiumPage.faq.item1":
         "무료 버전에서 이용 중인 기본 제작 기능이 프리미엄 가입으로 인해 제한되는 일은 없습니다.",
       "premiumPage.faq.item2":
-        "구매 후 취소・환불에 대해서는 Google Play의 규정이 적용됩니다.",
+        "구매 후 취소·환불에 대해서는 Google Play의 규정이 적용됩니다.",
       "premiumPage.faq.item3":
-        "제작한 작품（일러스트・애니메이션 등）의 저작권은 무료 버전・프리미엄 버전 어느 쪽을 이용하더라도 권리를 가진 사용자에게 귀속됩니다.",
+        "제작한 작품（일러스트·애니메이션 등）의 저작권은 무료 버전·프리미엄 버전 어느 쪽을 이용하더라도 권리를 가진 사용자에게 귀속됩니다.",
       "premiumPage.cta.title": "NIARIM을 시작해 보세요",
       "premiumPage.cta.body":
         "먼저 무료 버전부터, 당신의 손으로 애니메이션을 그려보지 않으시겠어요?",

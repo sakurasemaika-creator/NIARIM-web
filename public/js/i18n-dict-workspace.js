@@ -123,16 +123,16 @@
         "주로 쓰는 손과 조작 스타일에 맞춰 UI 자체를 커스터마이즈할 수 있습니다.",
       "featuresPage.workspace.item1.title": "워크스페이스",
       "featuresPage.workspace.item1.body":
-        "왼손 모드나 PC・DeX 모드 등의 설정을 한데 모아 이름을 붙여 저장하고, 애니메이션용・선화용・배경용 등 용도별로 전환할 수 있습니다.",
+        "왼손 모드나 PC·DeX 모드 등의 설정을 한데 모아 이름을 붙여 저장하고, 애니메이션용·선화용·배경용 등 용도별로 전환할 수 있습니다.",
       "featuresPage.workspace.item2.title": "왼손 모드",
       "featuresPage.workspace.item2.body":
         "왼손잡이도 편하게 조작할 수 있도록 UI 레이아웃을 반전할 수 있습니다. ※툴바가 화면 하단에 고정되는 스마트폰 모드에서는 이 설정을 사용할 수 없습니다.",
       "featuresPage.workspace.item3.title": "제스처 설정",
       "featuresPage.workspace.item3.body":
-        "두 손가락 탭・세 손가락 탭・두 손가락 스와이프・길게 누르기 등에 실행 취소・다시 실행・프레임 이동・스포이드 같은 동작을 할당할 수 있습니다.",
-      "featuresPage.workspace.item4.title": "테마・외관",
+        "두 손가락 탭·세 손가락 탭·두 손가락 스와이프·길게 누르기 등에 실행 취소·다시 실행·프레임 이동·스포이드 같은 동작을 할당할 수 있습니다.",
+      "featuresPage.workspace.item4.title": "테마·외관",
       "featuresPage.workspace.item4.body":
-        "파스텔 톤이나 뮤트 톤 등 다양한 프리셋을 기본 제공합니다. 그뿐 아니라 포인트 컬러・글자색・패널 배경・선택색, 업데이트 표시 색까지 앱의 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 만들 수 있습니다.",
+        "파스텔 톤이나 뮤트 톤 등 다양한 프리셋을 기본 제공합니다. 그뿐 아니라 포인트 컬러·글자색·패널 배경·선택색, 업데이트 표시 색까지 앱의 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 만들 수 있습니다.",
       "fd.leftHandedMode": "왼손 모드",
       "fd.gestureTwoTap": "두 손가락 탭",
       "fd.gestureThreeTap": "세 손가락 탭",

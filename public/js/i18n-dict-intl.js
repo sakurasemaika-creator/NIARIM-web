@@ -746,9 +746,9 @@
     "contact.form.message": "문의 내용",
     "contact.form.messagePlaceholder": "가능한 한 자세히 작성해 주세요",
     "contact.form.messageHint": "1,000자 이내로 작성해 주세요.",
-    "contact.form.attachments": "이미지・동영상 첨부(선택)",
+    "contact.form.attachments": "이미지·동영상 첨부(선택)",
     "contact.form.attachmentsHint":
-      "이미지는 1장당 최대 5MB, 동영상은 1개당 최대 15MB, 합계 최대 20MB・최대 3개까지 첨부할 수 있습니다(PNG, JPEG, WebP, GIF, MP4, MOV, WebM).",
+      "이미지는 1장당 최대 5MB, 동영상은 1개당 최대 15MB, 합계 최대 20MB·최대 3개까지 첨부할 수 있습니다(PNG, JPEG, WebP, GIF, MP4, MOV, WebM).",
     "contact.form.attachmentsButton": "파일 선택",
     "contact.form.attachmentsEmpty": "선택된 파일이 없습니다",
     "contact.form.attachmentsCount": "%d개의 파일을 선택했습니다",
@@ -802,18 +802,18 @@
     "featuresPage.drawing.item4.title": "사용자 펜",
     "featuresPage.drawing.item4.body":
       "자신에게 맞는 필기감으로 조정할 수 있습니다.",
-    "featuresPage.drawing.item5.title": "색상 선택・투명색",
+    "featuresPage.drawing.item5.title": "색상 선택·투명색",
     "featuresPage.drawing.item5.body":
       "자유로운 색상 선택과, 지우개처럼 사용할 수 있는 투명색을 지원합니다.",
     "featuresPage.drawing.item6.title": "불투명도",
     "featuresPage.drawing.item6.body":
       "브러시의 불투명도를 세밀하게 조절할 수 있습니다.",
-    "featuresPage.drawing.item7.title": "확대・이동",
+    "featuresPage.drawing.item7.title": "확대·이동",
     "featuresPage.drawing.item7.body": "세부까지 확대하여 그릴 수 있습니다.",
     "featuresPage.drawing.item8.title": "지우개",
     "featuresPage.drawing.item8.body":
       "그린 선을 부분적으로 지울 수 있는 표준 지우개입니다.",
-    "featuresPage.drawing.item9.title": "페인트통・올가미 채우기",
+    "featuresPage.drawing.item9.title": "페인트통·올가미 채우기",
     "featuresPage.drawing.item9.body":
       "둘러싸인 영역을 채우는 「페인트통」과, 올가미로 둘러싼 영역을 채우는 「올가미 채우기」를 지원합니다.",
     "featuresPage.drawing.item10.title": "스포이드",
@@ -821,16 +821,16 @@
       "캔버스 위의 색을 추출해 곧바로 그리기 색으로 설정할 수 있습니다.",
     "featuresPage.drawing.item11.title": "선택 도구",
     "featuresPage.drawing.item11.body":
-      "사각형이나 올가미로 범위를 선택해 이동・변형・삭제 등의 편집을 할 수 있습니다.",
+      "사각형이나 올가미로 범위를 선택해 이동·변형·삭제 등의 편집을 할 수 있습니다.",
     "featuresPage.drawing.item12.title": "손가락 도구",
     "featuresPage.drawing.item12.body":
       "손가락으로 문지르듯 그림을 왜곡하거나 가우시안 블러와 모자이크 효과를 직접 그릴 수 있습니다. 길게 누르거나 위로 스와이프해 하위 도구를 전환합니다.",
     "featuresPage.drawing.item13.title": "도형 도구",
     "featuresPage.drawing.item13.body":
-      "직선・원・사각형 등 깔끔한 도형을 한 번에 그릴 수 있습니다.",
+      "직선·원·사각형 등 깔끔한 도형을 한 번에 그릴 수 있습니다.",
     "featuresPage.drawing.item14.title": "브러시 세부 설정",
     "featuresPage.drawing.item14.body":
-      "페이드・스트로크 감쇠・혼색・필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
+      "페이드·스트로크 감쇠·혼색·필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
     "featuresPage.drawing.item15.title": "소재 태그 검색",
     "featuresPage.drawing.item15.body":
       "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
@@ -843,7 +843,7 @@
       "한 장씩 프레임을 추가해 그림을 쌓아갑니다.",
     "featuresPage.animation.item2.title": "타임라인",
     "featuresPage.animation.item2.body":
-      "프레임뿐 아니라 이미지・동영상・음성・공통 레이어・카메라 키프레임 등을 하나의 타임라인에서 관리할 수 있습니다. 장면(씬)을 나누어 작품을 정리할 수도 있습니다.",
+      "프레임뿐 아니라 이미지·동영상·음성·공통 레이어·카메라 키프레임 등을 하나의 타임라인에서 관리할 수 있습니다. 장면(씬)을 나누어 작품을 정리할 수도 있습니다.",
     "featuresPage.animation.item3.title": "프레임 편집",
     "featuresPage.animation.item3.body":
       "원하는 프레임을 선택해 다시 그릴 수 있습니다.",
@@ -852,7 +852,7 @@
       "제작 중인 움직임을 언제든지 확인할 수 있습니다.",
     "featuresPage.animation.item5.title": "카메라 워크(키프레임 애니메이션)",
     "featuresPage.animation.item5.body":
-      "위치・확대・회전을 키프레임으로 지정하면, 부드러운 카메라 워크를 자동으로 보간해 줍니다. 레이어 자체를 다시 그릴 필요가 없습니다.",
+      "위치·확대·회전을 키프레임으로 지정하면, 부드러운 카메라 워크를 자동으로 보간해 줍니다. 레이어 자체를 다시 그릴 필요가 없습니다.",
     "featuresPage.animation.item6.title": "레이어 그룹",
     "featuresPage.animation.item6.body":
       "여러 레이어를 그룹으로 묶으면, 하나의 키프레임으로 한꺼번에 움직일 수 있습니다.",
@@ -863,7 +863,7 @@
     "featuresPage.editing.item1.title":
       "레이어를 나누면 언제든 다시 그릴 수 있어요",
     "featuresPage.editing.item1.body":
-      "선화・색・배경 등을 레이어로 나눠두면, 색만 다시 칠하고 싶을 때도 선화를 건드리지 않고 조정할 수 있습니다.",
+      "선화·색·배경 등을 레이어로 나눠두면, 색만 다시 칠하고 싶을 때도 선화를 건드리지 않고 조정할 수 있습니다.",
     "featuresPage.editing.item2.title": "채우기",
     "featuresPage.editing.item2.body": "닫힌 영역을 빠르게 채울 수 있습니다.",
     "featuresPage.editing.item3.title": "허용값",
@@ -877,11 +877,11 @@
       "배경 등 여러 프레임에서 재사용하고 싶은 그림을 한 장으로 모아두면, 변경 사항이 모든 프레임에 자동으로 반영됩니다.",
     "featuresPage.editing.item6.title": "블렌드 모드",
     "featuresPage.editing.item6.body":
-      "곱하기・스크린 등 레이어끼리 겹치는 방식을 바꿔 표현의 폭을 넓힐 수 있습니다.",
+      "곱하기·스크린 등 레이어끼리 겹치는 방식을 바꿔 표현의 폭을 넓힐 수 있습니다.",
     "featuresPage.editing.item7.title": "클리핑",
     "featuresPage.editing.item7.body":
       "아래 레이어의 형태에 맞춰, 위 레이어의 그리기를 그 범위로만 제한할 수 있습니다.",
-    "featuresPage.editing.item8.title": "자유 변형・메시 변형",
+    "featuresPage.editing.item8.title": "자유 변형·메시 변형",
     "featuresPage.editing.item8.body":
       "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다. 메시 변형은 최대 10×10 격자를 사용해 레이어를 자유롭게 변형합니다.",
 
@@ -894,7 +894,7 @@
     "featuresPage.audio.item3.title": "시작 프레임",
     "featuresPage.audio.item3.body":
       "오디오 재생을 시작할 프레임을 지정할 수 있습니다.",
-    "featuresPage.audio.item4.title": "페이드 인・페이드 아웃",
+    "featuresPage.audio.item4.title": "페이드 인·페이드 아웃",
     "featuresPage.audio.item4.body":
       "음성의 시작과 끝을 부드럽게 조정할 수 있습니다.",
     "featuresPage.audio.item5.title": "타임스탬프",
@@ -917,10 +917,10 @@
       "제작한 작품을 영상 파일로 내보낼 수 있습니다.",
     "featuresPage.export.item4.title": "내보내기 형식",
     "featuresPage.export.item4.body":
-      "MP4・WebM・GIF・AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
-    "featuresPage.export.item5.title": "제작・내보내기 시간 상한",
+      "MP4·WebM·GIF·AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
+    "featuresPage.export.item5.title": "제작·내보내기 시간 상한",
     "featuresPage.export.item5.body":
-      "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작・내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
+      "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작·내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
     "featuresPage.export.item6.title": "스틸 이미지 내보내기",
     "featuresPage.export.item6.body":
       "타임라인에 현재 표시된 프레임 한 장을 PNG 또는 JPEG 이미지로 저장할 수 있습니다.",
