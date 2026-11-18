@@ -54,7 +54,7 @@
         "Bundle just the items you choose — settings, brushes, tones, stamps, auto-fill presets, themes, palettes (color picker and pixel-art) — and move them to another device. You can also choose to include in-progress projects.",
     },
     "zh-Hans": {
-      "featuresPage.nav.save": "保存・共享",
+      "featuresPage.nav.save": "保存、共享",
       "featuresPage.save.title": "Save & Share｜保存与数据管理",
       "featuresPage.save.lead":
         "守护你的作品，让它不断成长，也能带去其他设备。灵活的保存机制。",
@@ -72,10 +72,10 @@
         "一种会将所用素材、字体一并导出的共享文件格式，在其他设备上也能原样打开。",
       "featuresPage.save.item5.title": "迁移环境（.niatra）",
       "featuresPage.save.item5.body":
-        "可将设置、画笔、网点纸、图章、自动上色预设、主题、调色板（取色器・像素画专用）等，仅选择所需项目打包迁移到其他设备，还可以选择性地一并包含制作中的项目。",
+        "可将设置、画笔、网点纸、图章、自动上色预设、主题、调色板（取色器、像素画专用）等，仅选择所需项目打包迁移到其他设备，还可以选择性地一并包含制作中的项目。",
     },
     "zh-Hant": {
-      "featuresPage.nav.save": "保存・共享",
+      "featuresPage.nav.save": "保存、共享",
       "featuresPage.save.title": "Save & Share｜保存與資料管理",
       "featuresPage.save.lead":
         "守護你的作品，讓它不斷成長，也能帶去其他裝置。靈活的保存機制。",
@@ -93,7 +93,7 @@
         "一種會將使用的素材、字型一併匯出的共享檔案格式，在其他裝置上也能原樣開啟。",
       "featuresPage.save.item5.title": "轉移環境（.niatra）",
       "featuresPage.save.item5.body":
-        "可將設定、筆刷、網點紙、圖章、自動上色預設、主題、調色盤（取色器・像素畫專用）等，僅選擇所需項目打包轉移到其他裝置，還可以選擇性地一併包含製作中的專案。",
+        "可將設定、筆刷、網點紙、圖章、自動上色預設、主題、調色盤（取色器、像素畫專用）等，僅選擇所需項目打包轉移到其他裝置，還可以選擇性地一併包含製作中的專案。",
     },
     ko: {
       "featuresPage.nav.save": "저장·공유",

@@ -178,7 +178,7 @@
         "让动画创作变得更贴近生活。让创作者与观众之间的界限变得模糊。任何人、任何时候，都能既是创作者，也是观众。",
       "about.modes.title": "画布模式与时间轴模式",
       "about.modes.body":
-        "NIARIM 分为用于绘图的「画布模式」与用于让画面动起来的「时间轴模式」。无需在绘图应用和视频编辑应用之间来回切换。画好图，直接让它动起来，再配上声音完成作品——整个制作流程都汇集在一个应用中。",
+        "NIARIM 分为用于绘图的“画布模式”与用于让画面动起来的“时间轴模式”。无需在绘图应用和视频编辑应用之间来回切换。画好图，直接让它动起来，再配上声音完成作品——整个制作流程都汇集在一个应用中。",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "NIARIM 重视的事",
       "about.philosophy.item1.title": "人人都能轻松制作动画。",
@@ -207,7 +207,7 @@
       "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "只有 NIARIM 才有的贴心功能",
       "about.unique.lead": "一般插画制作应用中较少见的、NIARIM 特有的功能。",
-      "about.unique.item1.title": "自动上色・渐变上色",
+      "about.unique.item1.title": "自动上色、渐变上色",
       "about.unique.item1.body":
         "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
       "about.unique.item2.title": "从主题色到面板背景，颜色全部由你决定",
@@ -230,14 +230,14 @@
         "主题、工作区、笔刷设置乃至项目数据，几乎所有环境都能作为文件导出、导入。即使更换设备，也能立刻在熟悉的环境中继续创作。",
       "about.unique.item9.title": "连小组件也能随心定制",
       "about.unique.item9.body":
-        "主屏幕小组件共有三种。启动页小组件可以从自己的作品中挑选要显示的一帧，「创作」与「作品广场」两种则可将背景色设为跟随主题或任意指定。颜色按种类独立保存，三种并排摆放也能分辨。",
+        "主屏幕小组件共有三种。启动页小组件可以从自己的作品中挑选要显示的一帧，“创作”与“作品广场”两种则可将背景色设为跟随主题或任意指定。颜色按种类独立保存，三种并排摆放也能分辨。",
       "about.unique.item7.title": "作品广场",
       "about.unique.item7.body":
         "可通过新作与排行榜发现其他人投稿的作品。浏览无需登录，任何人都能轻松享受。",
       "about.unique.item7.link": "前往 作品广场",
       "about.cta.title": "想更详细了解使用方法？",
       "about.cta.body":
-        "与应用内「帮助」画面相同的内容，也可以在网页版的指南页面中搜索、浏览。",
+        "与应用内“帮助”画面相同的内容，也可以在网页版的指南页面中搜索、浏览。",
       "about.cta.link": "查看使用指南",
     },
     "zh-Hant": {
@@ -281,7 +281,7 @@
       "about.unique.title": "只有 NIARIM 才有的貼心功能",
       "about.unique.lead":
         "一般繪圖製作應用程式中較少見的、NIARIM 特有的功能。",
-      "about.unique.item1.title": "自動上色・漸層上色",
+      "about.unique.item1.title": "自動上色、漸層上色",
       "about.unique.item1.body":
         "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
       "about.unique.item2.title": "從主題色到面板背景，顏色全部由你決定",

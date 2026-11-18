@@ -133,12 +133,12 @@
       "featuresPage.advanced.item10.title": "颜色选择器",
       "featuresPage.advanced.item10.body":
         "可通过色相、饱和度、明度直观地选择绘图颜色。",
-      "featuresPage.advanced.item11.title": "快速切换工具・收藏",
+      "featuresPage.advanced.item11.title": "快速切换工具、收藏",
       "featuresPage.advanced.item11.body":
-        "预先注册常用的笔・画笔・尺寸组合，一键即可依次切换。",
+        "预先注册常用的笔、画笔、尺寸组合，一键即可依次切换。",
       "featuresPage.advanced.item12.title": "描绘滤镜与演出滤镜",
       "featuresPage.advanced.item12.body":
-        "分为直接应用于图层的「描绘滤镜」，以及可指定开始・结束帧、按场景或按选中的多个帧批量应用的「演出滤镜」两种。可叠加模糊、色调校正、辉光、雨、类似胶片颗粒的噪点等富有影像感的演出效果。",
+        "分为直接应用于图层的“描绘滤镜”，以及可指定开始、结束帧、按场景或按选中的多个帧批量应用的“演出滤镜”两种。可叠加模糊、色调校正、辉光、雨、类似胶片颗粒的噪点等富有影像感的演出效果。",
       "features.advanced.title": "支撑精细创作的进阶工具",
       "features.advanced.body":
         "洋葱皮、网点纸、图章、尺规、文字等，配备了着眼于最终完成度的绘图辅助工具。",
@@ -177,12 +177,12 @@
       "featuresPage.advanced.item10.title": "顏色選擇器",
       "featuresPage.advanced.item10.body":
         "可透過色相、飽和度、明度直覺地選擇繪圖顏色。",
-      "featuresPage.advanced.item11.title": "快速切換工具・收藏",
+      "featuresPage.advanced.item11.title": "快速切換工具、收藏",
       "featuresPage.advanced.item11.body":
-        "預先註冊常用的筆・畫筆・尺寸組合，點一下即可依序切換。",
+        "預先註冊常用的筆、畫筆、尺寸組合，點一下即可依序切換。",
       "featuresPage.advanced.item12.title": "描繪濾鏡與演出濾鏡",
       "featuresPage.advanced.item12.body":
-        "分為直接套用於圖層的「描繪濾鏡」，以及可指定開始・結束影格、依場景或依所選的多個影格批次套用的「演出濾鏡」兩種。可疊加模糊、色調校正、光暈、雨、類似底片顆粒的雜訊等富有影像感的演出效果。",
+        "分為直接套用於圖層的「描繪濾鏡」，以及可指定開始、結束影格、依場景或依所選的多個影格批次套用的「演出濾鏡」兩種。可疊加模糊、色調校正、光暈、雨、類似底片顆粒的雜訊等富有影像感的演出效果。",
       "features.advanced.title": "支撐精細創作的進階工具",
       "features.advanced.body":
         "洋蔥皮、網點紙、圖章、尺規、文字等，配備了著眼於最終完成度的繪圖輔助工具。",

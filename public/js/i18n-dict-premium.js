@@ -146,7 +146,7 @@
         "价格及购买条件可能调整。购买前请以 Google Play 显示的最新价格及条款为准。",
       "premiumPage.free.title": "免费版",
       "premiumPage.free.price": "0 日元",
-      "premiumPage.free.item1": "全部基础创作功能（绘画・动画・编辑・音频）",
+      "premiumPage.free.item1": "全部基础创作功能（绘画、动画、编辑、音频）",
       "premiumPage.free.item2": "视频导出（最高1920×1920）",
       "premiumPage.free.item3": "会显示广告",
       "premiumPage.free.item4":
@@ -178,7 +178,7 @@
       "premiumPage.premium.item6.body": "最长可制作并完整导出2小时。权益到期后，作品仍会保留，可以导出开头90秒。",
       "premiumPage.premium.item7.title": "增加社区投稿数量",
       "premiumPage.premium.item7.body":
-        "「作品广场」的投稿数量从免费版的每天1个提升为每天3个。",
+        "“作品广场”的投稿数量从免费版的每天1个提升为每天3个。",
       "premiumPage.premium.automation.title": "自定义自动操作（操作录制）",
       "premiumPage.premium.automation.body":
         "录制画布或时间轴上的操作步骤，以便在创作时重复执行。",
@@ -186,7 +186,7 @@
       "premiumPage.faq.item1":
         "免费版中可使用的基础创作功能，不会因订阅高级会员而受到限制。",
       "premiumPage.faq.item2":
-        "购买后的取消・退款，适用 Google Play 的相关规定。",
+        "购买后的取消、退款，适用 Google Play 的相关规定。",
       "premiumPage.faq.item3":
         "无论使用免费版或高级会员版制作，作品（插画、动画等）的著作权均归拥有该权利的用户所有。",
       "premiumPage.cta.title": "开始使用 NIARIM",
@@ -205,7 +205,7 @@
         "價格及購買條件可能調整。購買前請以 Google Play 顯示的最新價格及條款為準。",
       "premiumPage.free.title": "免費版",
       "premiumPage.free.price": "0 日圓",
-      "premiumPage.free.item1": "全部基礎創作功能（繪圖・動畫・編輯・音訊）",
+      "premiumPage.free.item1": "全部基礎創作功能（繪圖、動畫、編輯、音訊）",
       "premiumPage.free.item2": "影片匯出（最高1920×1920）",
       "premiumPage.free.item3": "會顯示廣告",
       "premiumPage.free.item4":
@@ -245,7 +245,7 @@
       "premiumPage.faq.item1":
         "免費版中可使用的基礎創作功能，不會因訂閱高級會員而受到限制。",
       "premiumPage.faq.item2":
-        "購買後的取消・退款，適用 Google Play 的相關規定。",
+        "購買後的取消、退款，適用 Google Play 的相關規定。",
       "premiumPage.faq.item3":
         "無論使用免費版或高級會員版製作，作品（插畫、動畫等）的著作權均歸擁有該權利的使用者所有。",
       "premiumPage.cta.title": "開始使用 NIARIM",

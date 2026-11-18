@@ -340,7 +340,7 @@
     "zh-Hans": {
       "narrative.home.cta.heading": "一起来做一部动画吧！",
       "narrative.home.cta.body":
-        "只要想画，随时都能开始。无论是一张画，还是由几十张帧组成的作品。用手绘让它动起来。用关键帧让它动起来。把图像和声音结合在一起。精心打磨到最后，做成真正属于你自己的作品。完成之后，把它带到「作品广场」。去创作，去发布，去发现。用NIARIM，来做一部动画吧！",
+        "只要想画，随时都能开始。无论是一张画，还是由几十张帧组成的作品。用手绘让它动起来。用关键帧让它动起来。把图像和声音结合在一起。精心打磨到最后，做成真正属于你自己的作品。完成之后，把它带到“作品广场”。去创作，去发布，去发现。用NIARIM，来做一部动画吧！",
 
       "narrative.drawing.1.heading": "把心中所想，如实画出来。",
       "narrative.drawing.1.body":
@@ -389,7 +389,7 @@
       "narrative.advanced.1.heading": "让日常创作更顺畅。",
       "narrative.advanced.2.heading": "快速切换工具",
       "narrative.advanced.2.body":
-        "注册常用的笔刷和工具组合，只需一个按钮即可切换。可以打造「线稿用」「上色用」「精修用」等专属于自己的工作方式。",
+        "注册常用的笔刷和工具组合，只需一个按钮即可切换。可以打造“线稿用”“上色用”“精修用”等专属于自己的工作方式。",
       "narrative.advanced.3.heading": "收藏",
       "narrative.advanced.3.body":
         "将常用的笔刷、图章等注册为收藏。只需要的东西可以立即调出。",
@@ -426,7 +426,7 @@
       "narrative.save.4.body": "由自己选择重要的状态进行保存。",
       "narrative.save.5.heading": "存档树",
       "narrative.save.5.body":
-        "可以从已保存的状态中分支出去，尝试不同的创作方向。当您想「回到这个时间点，尝试另一种展开」时会非常方便。",
+        "可以从已保存的状态中分支出去，尝试不同的创作方向。当您想“回到这个时间点，尝试另一种展开”时会非常方便。",
       "narrative.save.6.heading": "把作品发送到另一台设备。",
       "narrative.save.6.body":
         "将项目导出为 .niashare 文件，即可迁移到其他设备或分享给他人。文件始终包含项目本体。导出时可分别选择是否包含图像、视频、音频和字体。收到文件后，可以将它复制为自己的项目。",
@@ -437,12 +437,12 @@
         "要传递作品，就用.niashare；要迁移创作环境，就用.niatra。可根据用途灵活选用。",
 
       "narrative.workspace.1.heading": "打造属于自己的创作环境。",
-      "narrative.workspace.2.heading": "主题・外观设置",
+      "narrative.workspace.2.heading": "主题、外观设置",
       "narrative.workspace.2.body":
         "可以将应用整体的主题和强调色自定义为自己喜欢的样子。正因为是每天都要用的应用，才更要打造成自己用起来顺手的样子。",
       "narrative.workspace.3.heading": "工作区设置",
       "narrative.workspace.3.body":
-        "提供PC・DeX模式切换等适合不同工作方式的设置。同时也支持左手模式。※左手模式仅在 PC・DeX 模式下可用。",
+        "提供PC/DeX模式切换等适合不同工作方式的设置。同时也支持左手模式。※左手模式仅在 PC/DeX 模式下可用。",
       "narrative.workspace.4.heading": "手势设置",
       "narrative.workspace.4.body":
         "可以为双指点按、三指点按、滑动、长按等手势分配撤销、重做、帧移动、吸管等操作。可以根据自己的使用习惯，自定义常用操作。",
@@ -475,13 +475,13 @@
         "发现喜欢的作品后，还可以查看该作者发布的其他作品。找到喜欢的作者，追更他们的新作品。",
       "narrative.community.7.heading": "发布你自己的作品吧。",
       "narrative.community.7.body":
-        "完成的作品可以发布到「作品广场」。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
+        "完成的作品可以发布到“作品广场”。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
       "narrative.community.8.heading": "登录也很简单。",
       "narrative.community.8.body":
         "无需注册NIARIM专属账号。使用 Google 账号登录后，即可发布和收藏作品。仅浏览作品则无需登录。",
       "narrative.community.9.heading": "从人到作品。从作品到人。",
       "narrative.community.9.body":
-        "看到别人的作品，萌生出新的灵感。发布自己创作的作品，又被别人看到。「我也想试着创作」的心情，会延续到下一部作品之中。你的作品，会成为某个人的心头好。而看到这部作品的人，又会去创作全新的作品。",
+        "看到别人的作品，萌生出新的灵感。发布自己创作的作品，又被别人看到。“我也想试着创作”的心情，会延续到下一部作品之中。你的作品，会成为某个人的心头好。而看到这部作品的人，又会去创作全新的作品。",
     },
     "zh-Hant": {
       "narrative.home.cta.heading": "一起來做一部動畫吧！",
@@ -583,12 +583,12 @@
         "要傳遞作品，就用.niashare；要轉移創作環境，就用.niatra。可依用途靈活選用。",
 
       "narrative.workspace.1.heading": "打造屬於自己的創作環境。",
-      "narrative.workspace.2.heading": "主題・外觀設定",
+      "narrative.workspace.2.heading": "主題、外觀設定",
       "narrative.workspace.2.body":
         "可以將應用程式整體的主題和強調色自訂為自己喜歡的樣子。正因為是每天都要用的應用程式，才更要打造成自己用起來順手的樣子。",
       "narrative.workspace.3.heading": "工作區設定",
       "narrative.workspace.3.body":
-        "提供PC・DeX模式切換等適合不同工作方式的設定。同時也支援左手模式。※左手模式僅在 PC・DeX 模式下可用。",
+        "提供PC/DeX模式切換等適合不同工作方式的設定。同時也支援左手模式。※左手模式僅在 PC/DeX 模式下可用。",
       "narrative.workspace.4.heading": "手勢設定",
       "narrative.workspace.4.body":
         "可以為雙指點按、三指點按、滑動、長按等手勢指定復原、重做、影格移動、滴管等操作。可以依照自己的使用習慣，自訂常用操作。",

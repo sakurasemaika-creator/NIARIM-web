@@ -106,16 +106,16 @@
         "先选作品，再选场景，然后选其中的一帧。帧选择界面会排列实际合成后的预览，无需导出即可按成品效果挑选。",
       "narrative.widget.3.heading": "颜色按种类自由设定",
       "narrative.widget.3.body":
-        "「创作」与「作品广场」两种小组件，背景色可以跟随应用主题，也可以自由指定喜欢的颜色。颜色按种类独立保存，因此三种并排摆放也能一眼分辨。",
+        "“创作”与“作品广场”两种小组件，背景色可以跟随应用主题，也可以自由指定喜欢的颜色。颜色按种类独立保存，因此三种并排摆放也能一眼分辨。",
       "featuresPage.widget.item1.title": "启动页小组件",
       "featuresPage.widget.item1.body":
         "显示所选作品的一帧画面。点按即可打开 NIARIM。",
       "featuresPage.widget.item2.title": "创作小组件",
       "featuresPage.widget.item2.body":
-        "点按即可打开「创作」界面。背景色可跟随主题或使用指定颜色。",
+        "点按即可打开“创作”界面。背景色可跟随主题或使用指定颜色。",
       "featuresPage.widget.item3.title": "作品广场小组件",
       "featuresPage.widget.item3.body":
-        "点按即可打开「作品广场」。背景色可跟随主题或使用指定颜色。",
+        "点按即可打开“作品广场”。背景色可跟随主题或使用指定颜色。",
       "featuresPage.widget.item4.title": "以静止图像显示",
       "featuresPage.widget.item4.body":
         "主屏幕小组件无法播放视频，因此以静止图像显示所选作品的一帧。添加小组件本身请长按主屏幕进行。",

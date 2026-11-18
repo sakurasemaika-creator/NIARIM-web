@@ -37,7 +37,7 @@
     "hero.lead":
       "NIARIM 是一款可以在智能手机上制作正式手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
     "hero.bridge.html":
-      '完成的作品，可以发布到<a href="/community/">「作品广场」</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。',
+      '完成的作品，可以发布到<a href="/community/">“作品广场”</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。',
     "hero.cta.primary": "下载应用",
     "hero.cta.secondary": "查看功能",
     "hero.note": "支持的设备与上架情况，请以 Google Play 页面信息为准。",
@@ -56,7 +56,7 @@
 
     "features.eyebrow": "Core Features",
     "features.title": "主要功能",
-    "features.lead": "只要觉得「有了会很方便」，就毫不妥协地全部加进来。",
+    "features.lead": "只要觉得“有了会很方便”，就毫不妥协地全部加进来。",
     "features.drawing.title": "随心所欲地绘制",
     "features.drawing.body":
       "可在 G 笔、钢笔、喷枪、自定义画笔间自由切换，并调整颜色、透明色与不透明度，配合缩放与平移绘制细节。",
@@ -134,7 +134,7 @@
     "contact.form.message": "咨询内容",
     "contact.form.messagePlaceholder": "请尽量详细地填写",
     "contact.form.messageHint": "请在 1000 字以内填写。",
-    "contact.form.attachments": "添加图片・视频（可选）",
+    "contact.form.attachments": "添加图片、视频（可选）",
     "contact.form.attachmentsHint":
       "图片每张最大 5MB，视频每个最大 15MB，总计最多 20MB、最多 3 个文件（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
     "contact.form.attachmentsButton": "选择文件",
@@ -184,19 +184,19 @@
     "featuresPage.drawing.item3.body": "可表现柔和的渐变效果。",
     "featuresPage.drawing.item4.title": "自定义画笔",
     "featuresPage.drawing.item4.body": "可调整为符合自己习惯的笔触。",
-    "featuresPage.drawing.item5.title": "颜色选择・透明色",
+    "featuresPage.drawing.item5.title": "颜色选择、透明色",
     "featuresPage.drawing.item5.body":
       "支持自由选色，以及类似橡皮擦的透明色绘制。",
     "featuresPage.drawing.item6.title": "不透明度",
     "featuresPage.drawing.item6.body": "可精细调整画笔的不透明度。",
-    "featuresPage.drawing.item7.title": "缩放・平移",
+    "featuresPage.drawing.item7.title": "缩放、平移",
     "featuresPage.drawing.item7.body": "可放大画面，绘制细节部分。",
     "featuresPage.drawing.item8.title": "橡皮擦",
     "featuresPage.drawing.item8.body":
       "可局部擦除已绘制的线条，是标准的橡皮擦工具。",
-    "featuresPage.drawing.item9.title": "油漆桶・套索填色",
+    "featuresPage.drawing.item9.title": "油漆桶、套索填色",
     "featuresPage.drawing.item9.body":
-      "支持填满被线条围住区域的「油漆桶」，以及为套索圈选区域上色的「套索填色」。",
+      "支持填满被线条围住区域的“油漆桶”，以及为套索圈选区域上色的“套索填色”。",
     "featuresPage.drawing.item10.title": "吸管",
     "featuresPage.drawing.item10.body": "可吸取画布上的颜色，直接设为绘图色。",
     "featuresPage.drawing.item11.title": "选择工具",
@@ -212,7 +212,7 @@
       "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
     "featuresPage.drawing.item15.title": "素材标签搜索",
     "featuresPage.drawing.item15.body":
-      "笔刷、网点和印章都带有「线稿」「上色」「模糊」「仿手绘」「像素画」「网点」等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
+      "笔刷、网点和印章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
     "featuresPage.animation.title": "Animation｜动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
@@ -252,7 +252,7 @@
     "featuresPage.editing.item7.title": "剪贴蒙版",
     "featuresPage.editing.item7.body":
       "可让上方图层的绘制内容，仅限于下方图层的形状范围内。",
-    "featuresPage.editing.item8.title": "自由变形・网格变形",
+    "featuresPage.editing.item8.title": "自由变形、网格变形",
     "featuresPage.editing.item8.body":
       "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。网格变形最多可使用10×10的网格，自由地变形图层。",
 
@@ -264,7 +264,7 @@
     "featuresPage.audio.item2.body": "可调整音量大小。",
     "featuresPage.audio.item3.title": "起始帧",
     "featuresPage.audio.item3.body": "可指定音频开始播放的帧位置。",
-    "featuresPage.audio.item4.title": "淡入・淡出",
+    "featuresPage.audio.item4.title": "淡入、淡出",
     "featuresPage.audio.item4.body": "可以让音频的开头和结尾变得平滑。",
     "featuresPage.audio.item5.title": "时间戳",
     "featuresPage.audio.item5.body":
@@ -284,7 +284,7 @@
     "featuresPage.export.item4.title": "导出格式",
     "featuresPage.export.item4.body":
       "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
-    "featuresPage.export.item5.title": "制作・导出时长上限",
+    "featuresPage.export.item5.title": "制作、导出时长上限",
     "featuresPage.export.item5.body":
       "画布尺寸有上限，但在此范围内可根据作品自由设置尺寸与纵横比。免费版每部作品最长90秒，高级版每部作品最长可达2小时进行制作与导出。作品数量本身没有限制。",
     "featuresPage.export.item6.title": "静态图片导出",
@@ -436,7 +436,7 @@
     "contact.form.message": "諮詢內容",
     "contact.form.messagePlaceholder": "請盡量詳細填寫",
     "contact.form.messageHint": "請於 1000 字以內填寫。",
-    "contact.form.attachments": "新增圖片・影片（選填）",
+    "contact.form.attachments": "新增圖片、影片（選填）",
     "contact.form.attachmentsHint":
       "圖片每張最大 5MB，影片每個最大 15MB，總計最多 20MB、最多 3 個檔案（PNG、JPEG、WebP、GIF、MP4、MOV、WebM）。",
     "contact.form.attachmentsButton": "選擇檔案",
@@ -486,17 +486,17 @@
     "featuresPage.drawing.item3.body": "可表現柔和的漸層效果。",
     "featuresPage.drawing.item4.title": "自訂畫筆",
     "featuresPage.drawing.item4.body": "可調整為符合自己習慣的筆觸。",
-    "featuresPage.drawing.item5.title": "顏色選擇・透明色",
+    "featuresPage.drawing.item5.title": "顏色選擇、透明色",
     "featuresPage.drawing.item5.body":
       "支援自由選色，以及類似橡皮擦的透明色繪製。",
     "featuresPage.drawing.item6.title": "不透明度",
     "featuresPage.drawing.item6.body": "可精細調整畫筆的不透明度。",
-    "featuresPage.drawing.item7.title": "縮放・平移",
+    "featuresPage.drawing.item7.title": "縮放、平移",
     "featuresPage.drawing.item7.body": "可放大畫面，繪製細節部分。",
     "featuresPage.drawing.item8.title": "橡皮擦",
     "featuresPage.drawing.item8.body":
       "可局部擦除已繪製的線條，是標準的橡皮擦工具。",
-    "featuresPage.drawing.item9.title": "油漆桶・套索填色",
+    "featuresPage.drawing.item9.title": "油漆桶、套索填色",
     "featuresPage.drawing.item9.body":
       "支援填滿被線條圍住區域的「油漆桶」，以及為套索圈選區域上色的「套索填色」。",
     "featuresPage.drawing.item10.title": "吸管",
@@ -554,7 +554,7 @@
     "featuresPage.editing.item7.title": "剪裁遮罩",
     "featuresPage.editing.item7.body":
       "可讓上方圖層的繪製內容，僅限於下方圖層的形狀範圍內。",
-    "featuresPage.editing.item8.title": "自由變形・網格變形",
+    "featuresPage.editing.item8.title": "自由變形、網格變形",
     "featuresPage.editing.item8.body":
       "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。網格變形最多可使用10×10的網格，自由地變形圖層。",
 
@@ -566,7 +566,7 @@
     "featuresPage.audio.item2.body": "可調整音量大小。",
     "featuresPage.audio.item3.title": "起始影格",
     "featuresPage.audio.item3.body": "可指定音訊開始播放的影格位置。",
-    "featuresPage.audio.item4.title": "淡入・淡出",
+    "featuresPage.audio.item4.title": "淡入、淡出",
     "featuresPage.audio.item4.body": "可以讓音訊的開頭和結尾變得平滑。",
     "featuresPage.audio.item5.title": "時間戳記",
     "featuresPage.audio.item5.body":
@@ -586,7 +586,7 @@
     "featuresPage.export.item4.title": "匯出格式",
     "featuresPage.export.item4.body":
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
-    "featuresPage.export.item5.title": "製作・匯出時長上限",
+    "featuresPage.export.item5.title": "製作、匯出時長上限",
     "featuresPage.export.item5.body":
       "畫布尺寸有上限，但在此範圍內可依作品自由設定尺寸與長寬比。免費版每部作品最長90秒，付費進階版每部作品最長可達2小時進行製作與匯出。作品數量本身沒有限制。",
     "featuresPage.export.item6.title": "靜態圖片匯出",
