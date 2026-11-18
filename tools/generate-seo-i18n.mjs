@@ -17,6 +17,7 @@ const requiredPages = [
   "contact",
   "faq",
   "features",
+  "font-licenses",
   "help",
   "news",
   "premium",

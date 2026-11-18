@@ -49,6 +49,7 @@ const PAGE_KEYS = new Map([
   ["/contact/", "contact"],
   ["/faq/", "faq"],
   ["/features/", "features"],
+  ["/font-licenses/", "font-licenses"],
   ["/help/", "help"],
   ["/news/", "news"],
   ["/premium/", "premium"],

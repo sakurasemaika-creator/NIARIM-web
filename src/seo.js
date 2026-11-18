@@ -14,6 +14,7 @@ export const SEO_PAGE_PATHS = [
   "/contact/",
   "/faq/",
   "/features/",
+  "/font-licenses/",
   "/help/",
   "/news/",
   "/premium/",

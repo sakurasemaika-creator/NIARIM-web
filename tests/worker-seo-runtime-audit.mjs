@@ -155,6 +155,13 @@ for (const pathname of SEO_PAGE_PATHS) {
     const path = lang === "ja" ? pathname : `${pathname}?lang=${lang}`;
     const { response, text } = await fetchText(path);
     assert.equal(response.headers.get("content-language"), lang, path);
+    if (page === "font-licenses") {
+      const license = /<pre[^>]*lang="en"[^>]*>([\s\S]*?)<\/pre\s*>/i;
+      assert.match(text, /<a[^>]*class="skip-link"[^>]*href="#main"/i);
+      assert.match(text, /<nav[^>]*id="main-nav"/i);
+      assert.ok(license.test(template));
+      assert.equal(text.match(license)?.[1], template.match(license)[1], path);
+    }
     const translations = PAGE_TRANSLATIONS[page][lang];
     for (const key of [heading, lead].filter(Boolean)) {
       const value = translations[key];
@@ -180,4 +187,6 @@ for (const pathname of SEO_PAGE_PATHS) {
   }
 }
 
-console.log("Worker SEO runtime audit passed (77 page-language responses)");
+console.log(
+  `Worker SEO runtime audit passed (${SEO_PAGE_PATHS.length * SEO_LANGS.length} page-language responses)`,
+);
