@@ -5,6 +5,7 @@
 (function () {
   "use strict";
 
+  var MAX_MESSAGE_LENGTH = 1000;
   var MAX_ATTACHMENTS = 3;
   var MAX_IMAGE_BYTES = 5 * 1024 * 1024; // 画像1枚あたり5MB
   var MAX_VIDEO_BYTES = 15 * 1024 * 1024; // 動画1本あたり15MB
@@ -62,6 +63,50 @@
     else target.removeAttribute("aria-describedby");
   }
 
+  function renderAttachmentError(field, key, filename) {
+    var row = field.closest(".form-row");
+    var error = row.querySelector(".form-error");
+    error.dataset.errorKey = key || "";
+    error.dataset.filename = filename || "";
+    error.textContent = key
+      ? t(key).replace("%s", function () {
+          return filename || "";
+        })
+      : "";
+    setFieldError(row, !!key, document.getElementById("attachments-trigger"));
+  }
+
+  function validateAttachments(field) {
+    var files = Array.from(field.files || []);
+    var totalBytes = 0;
+    if (files.length > MAX_ATTACHMENTS) {
+      renderAttachmentError(field, "contact.error.attachmentCount");
+      return false;
+    }
+    for (var file of files) {
+      var maxBytes = ATTACHMENT_MAX_BYTES_BY_TYPE[file.type];
+      if (!maxBytes || !file.size) {
+        renderAttachmentError(
+          field,
+          "contact.error.attachmentFormat",
+          file.name,
+        );
+        return false;
+      }
+      if (file.size > maxBytes) {
+        renderAttachmentError(field, "contact.error.attachmentSize", file.name);
+        return false;
+      }
+      totalBytes += file.size;
+    }
+    if (totalBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
+      renderAttachmentError(field, "contact.error.attachmentTotal");
+      return false;
+    }
+    renderAttachmentError(field);
+    return true;
+  }
+
   function validate(form) {
     var valid = true;
     var name = form.elements.name;
@@ -81,7 +126,10 @@
         errorEl.textContent = t("contact.error.required");
         setFieldError(row, true, field);
         valid = false;
-      } else if (state.tooLong) {
+      } else if (
+        state.tooLong ||
+        (field === message && field.value.length > MAX_MESSAGE_LENGTH)
+      ) {
         errorEl.setAttribute("data-i18n", "contact.error.tooLong");
         errorEl.textContent = t("contact.error.tooLong");
         setFieldError(row, true, field);
@@ -108,30 +156,12 @@
     }
 
     var attachments = form.elements.attachments;
-    if (attachments) {
-      var attachmentsRow = attachments.closest(".form-row");
-      var files = Array.prototype.slice.call(attachments.files || []);
-      var totalBytes = 0;
-      var attachmentsInvalid =
-        files.length > MAX_ATTACHMENTS ||
-        files.some(function (file) {
-          var maxBytes = ATTACHMENT_MAX_BYTES_BY_TYPE[file.type];
-          totalBytes += file.size;
-          return !maxBytes || file.size > maxBytes;
-        }) ||
-        totalBytes > MAX_TOTAL_ATTACHMENT_BYTES;
-      setFieldError(
-        attachmentsRow,
-        attachmentsInvalid,
-        document.getElementById("attachments-trigger") || attachments,
-      );
-      if (attachmentsInvalid) valid = false;
-    }
+    if (attachments && !validateAttachments(attachments)) valid = false;
 
     return valid;
   }
 
-  function showServerFieldError(form, name) {
+  function showServerFieldError(form, name, key) {
     if (!["name", "email", "message", "agree", "attachments"].includes(name))
       return false;
     var field = form.elements[name];
@@ -141,7 +171,20 @@
       name === "attachments"
         ? document.getElementById("attachments-trigger") || field
         : field;
-    setFieldError(row, true, target);
+    if (name === "attachments") {
+      renderAttachmentError(field, key || "contact.error.attachmentRejected");
+    } else {
+      var messageKey = {
+        name: "contact.error.required",
+        email: "contact.error.email",
+        message: "contact.error.tooLong",
+        agree: "contact.error.agree",
+      }[name];
+      var error = row.querySelector(".form-error");
+      error.setAttribute("data-i18n", messageKey);
+      error.textContent = t(messageKey);
+      setFieldError(row, true, target);
+    }
     target.focus();
     return true;
   }
@@ -160,39 +203,108 @@
     });
   }
 
-  // 添付ファイル欄。ブラウザ標準のボタン表記はサイトの言語に追随しないため、
-  // 入力自体は視覚的に隠し、押しやすいボタンと選択状況のテキストを用意する。
-  // 言語切り替え時は data-i18n が効くよう、選択が無いときは属性を戻す。
   function initFileField() {
     var input = document.getElementById("attachments");
     var trigger = document.getElementById("attachments-trigger");
+    var list = document.getElementById("attachments-list");
     var status = document.getElementById("attachments-status");
-    if (!input || !trigger || !status) return;
+    if (!input || !trigger || !list || !status) return;
 
     trigger.addEventListener("click", function () {
       input.click();
     });
 
     function updateFileStatus() {
-      var files = Array.prototype.slice.call(input.files || []);
-      if (!files.length) {
-        status.setAttribute("data-i18n", "contact.form.attachmentsEmpty");
-        status.textContent = t("contact.form.attachmentsEmpty");
-        return;
-      }
-      // 選択後はファイル名そのものを出したいので data-i18n の対象から外す。
-      status.removeAttribute("data-i18n");
-      status.textContent =
-        files.length === 1
-          ? files[0].name
-          : t("contact.form.attachmentsCount").replace("%d", files.length);
-    }
-    input.addEventListener("change", updateFileStatus);
-    document.addEventListener("niarim:langchange", updateFileStatus);
-    if (input.form)
-      input.form.addEventListener("reset", function () {
-        queueMicrotask(updateFileStatus);
+      var files = Array.from(input.files || []);
+      status.textContent = files.length
+        ? t("contact.form.attachmentsCount").replace("%d", files.length)
+        : t("contact.form.attachmentsEmpty");
+      list.replaceChildren();
+      files.forEach(function (file, index) {
+        var row = document.createElement("li");
+        var filename = document.createElement("span");
+        filename.textContent = file.name;
+        var remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "form-file-button";
+        remove.textContent = t("contact.form.attachmentRemove");
+        remove.setAttribute(
+          "aria-label",
+          t("contact.form.attachmentRemoveNamed").replace("%s", function () {
+            return file.name;
+          }),
+        );
+        remove.addEventListener("click", function () {
+          var remaining = new DataTransfer();
+          files.forEach(function (entry, entryIndex) {
+            if (entryIndex !== index) remaining.items.add(entry);
+          });
+          input.files = remaining.files;
+          filesChanged();
+          (
+            list.querySelectorAll("button")[index] ||
+            list.querySelector("li:last-child button") ||
+            trigger
+          ).focus();
+        });
+        row.append(filename, remove);
+        list.append(row);
       });
+    }
+
+    function filesChanged() {
+      updateFileStatus();
+      validateAttachments(input);
+    }
+
+    input.addEventListener("change", filesChanged);
+    document.addEventListener("niarim:langchange", function () {
+      updateFileStatus();
+      var error = input.closest(".form-row").querySelector(".form-error");
+      renderAttachmentError(
+        input,
+        error.dataset.errorKey,
+        error.dataset.filename,
+      );
+    });
+    input.form.addEventListener("reset", function () {
+      queueMicrotask(filesChanged);
+    });
+    updateFileStatus();
+  }
+
+  function initMessageCounter(form) {
+    var message = form.elements.message;
+    var counter = document.getElementById("message-count");
+    if (!counter) return;
+    var row = message.closest(".form-row");
+    var error = row.querySelector(".form-error");
+
+    function updateCount() {
+      var length = message.value.length;
+      counter.value =
+        new Intl.NumberFormat(document.documentElement.lang).format(length) +
+        " / " +
+        new Intl.NumberFormat(document.documentElement.lang).format(
+          MAX_MESSAGE_LENGTH,
+        );
+    }
+
+    message.addEventListener("input", function () {
+      updateCount();
+      if (message.value.length > MAX_MESSAGE_LENGTH) {
+        error.setAttribute("data-i18n", "contact.error.tooLong");
+        error.textContent = t("contact.error.tooLong");
+        setFieldError(row, true, message);
+      } else {
+        setFieldError(row, false, message);
+      }
+    });
+    form.addEventListener("reset", function () {
+      queueMicrotask(updateCount);
+    });
+    document.addEventListener("niarim:langchange", updateCount);
+    updateCount();
   }
 
   function initContactForm() {
@@ -203,7 +315,9 @@
     var statusEl = document.getElementById("form-status");
     var submitLabel = submitBtn.querySelector("span");
 
-    form.addEventListener("submit", function (event) {
+    var fields = document.getElementById("contact-fields");
+    initMessageCounter(form);
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
 
       if (submitBtn.disabled) return; // 二重送信防止
@@ -238,6 +352,7 @@
       }
 
       submitBtn.disabled = true;
+      fields.disabled = true;
       submitLabel.setAttribute("data-i18n", "contact.form.submitting");
       submitLabel.textContent = t("contact.form.submitting");
 
@@ -247,63 +362,56 @@
       var timeout = setTimeout(function () {
         controller.abort();
       }, 30000);
-      fetch("/api/contact", {
-        method: "POST",
-        body: payload,
-        signal: controller.signal,
-      })
-        .then(function (res) {
-          return res
-            .json()
-            .catch(function () {
-              return {};
-            })
-            .then(function (data) {
-              return { ok: res.ok, status: res.status, data: data };
-            });
-        })
-        .then(function (result) {
-          if (result.ok) {
-            form.reset();
-            showStatus(
-              statusEl,
-              "success",
-              "contact.status.successTitle",
-              "contact.status.successBody",
-            );
-          } else if (result.status === 429) {
-            showStatus(
-              statusEl,
-              "error",
-              "contact.status.errorTitle",
-              "contact.status.rateLimitBody",
-            );
-          } else if (
-            result.data.error !== "validation_error" ||
-            !showServerFieldError(form, result.data.field)
-          ) {
-            showStatus(
-              statusEl,
-              "error",
-              "contact.status.errorTitle",
-              "contact.status.errorBody",
-            );
-          }
-        })
-        .catch(function () {
-          showStatus(
-            statusEl,
-            "error",
-            "contact.status.errorTitle",
-            "contact.status.errorBody",
-          );
-        })
-        .finally(function () {
-          clearTimeout(timeout);
-          submitBtn.disabled = false;
-          submitLabel.setAttribute("data-i18n", "contact.form.submit");
-          submitLabel.textContent = t("contact.form.submit");
+      var response;
+      var data;
+      try {
+        response = await fetch("/api/contact", {
+          method: "POST",
+          body: payload,
+          signal: controller.signal,
         });
+        data = await response.json().catch(function () {
+          return null;
+        });
+      } catch (_) {
+        // Network failures keep the current draft available for retry.
+      } finally {
+        clearTimeout(timeout);
+        fields.disabled = false;
+        submitBtn.disabled = false;
+        submitLabel.setAttribute("data-i18n", "contact.form.submit");
+        submitLabel.textContent = t("contact.form.submit");
+      }
+
+      if (response?.ok && data?.ok === true) {
+        form.reset();
+        showStatus(
+          statusEl,
+          "success",
+          "contact.status.successTitle",
+          "contact.status.successBody",
+        );
+      } else if (response?.status === 413 && form.elements.attachments) {
+        showServerFieldError(
+          form,
+          "attachments",
+          "contact.error.attachmentTotal",
+        );
+      } else if (
+        !(
+          data?.error === "validation_error" &&
+          showServerFieldError(form, data.field)
+        )
+      ) {
+        showStatus(
+          statusEl,
+          "error",
+          "contact.status.errorTitle",
+          response?.status === 429
+            ? "contact.status.rateLimitBody"
+            : "contact.status.errorBody",
+        );
+      }
     });
   }
 

@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { PAGE_TRANSLATIONS, SEO_LANGS } from "../src/generated/seo-i18n.js";
+import { escapeXml, SEO_PAGE_PATHS } from "../src/seo.js";
 
 const base = String(
   process.env.NIARIM_WORKER_ORIGIN || "http://127.0.0.1:8790",
@@ -132,4 +135,49 @@ assert.ok(
   "sitemap missing x-default alternate",
 );
 
-console.log("Worker SEO runtime audit passed");
+// Fetch the Worker response directly so no browser script can translate it.
+for (const pathname of SEO_PAGE_PATHS) {
+  const template = readFileSync(
+    new URL(`../public${pathname}index.html`, import.meta.url),
+    "utf8",
+  );
+  const main = template.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1];
+  assert.ok(main, pathname);
+  const heading = main.match(/<h1\b[^>]*data-i18n="([^"]+)"/i)?.[1];
+  const lead =
+    pathname === "/"
+      ? "refresh.hero.lead"
+      : main.match(/<p\b[^>]*data-i18n="([^"]+)"/i)?.[1];
+  assert.ok(lead, `${pathname}: translatable paragraph`);
+  const page = pathname.split("/")[1] || "home";
+
+  for (const lang of SEO_LANGS) {
+    const path = lang === "ja" ? pathname : `${pathname}?lang=${lang}`;
+    const { response, text } = await fetchText(path);
+    assert.equal(response.headers.get("content-language"), lang, path);
+    const translations = PAGE_TRANSLATIONS[page][lang];
+    for (const key of [heading, lead].filter(Boolean)) {
+      const value = translations[key];
+      assert.ok(value, `${path}: dictionary entry ${key}`);
+      const bodies = [
+        ...text.matchAll(
+          /<(h1|p)\b[^>]*data-i18n="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/gi,
+        ),
+      ];
+      const expected = escapeXml(
+        value.replace(/<br\s*\/?>|<\/?(?:em|strong)>/gi, ""),
+      );
+      const rendered = bodies
+        .filter(([, , id]) => id === key)
+        .map(([, , , body]) =>
+          body.replace(/<br\s*\/?>|<\/?(?:em|strong)>/gi, ""),
+        );
+      assert.ok(
+        rendered.includes(expected),
+        `${path}: server did not render ${key}`,
+      );
+    }
+  }
+}
+
+console.log("Worker SEO runtime audit passed (77 page-language responses)");

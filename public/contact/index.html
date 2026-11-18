@@ -183,174 +183,174 @@
               novalidate
               enctype="multipart/form-data"
             >
-              <div class="form-row">
-                <label for="type" data-i18n="contact.form.type"
-                  >お問い合わせ種別</label
-                >
-                <select class="form-control" id="type" name="type" required>
-                  <option value="bug" data-i18n="contact.form.type.bug">
-                    不具合報告
-                  </option>
-                  <option value="request" data-i18n="contact.form.type.request">
-                    機能要望
-                  </option>
-                  <option value="usage" data-i18n="contact.form.type.usage">
-                    使い方について
-                  </option>
-                  <option value="account" data-i18n="contact.form.type.account">
-                    アカウントについて
-                  </option>
-                  <option value="other" data-i18n="contact.form.type.other">
-                    その他
-                  </option>
-                </select>
-              </div>
-
-              <div class="form-row">
-                <label for="name"
-                  ><span data-i18n="contact.form.name">お名前</span
-                  ><span class="required">*</span></label
-                >
-                <input
-                  class="form-control"
-                  type="text"
-                  id="name"
-                  name="name"
-                  maxlength="100"
-                  required
-                  data-i18n-attr="placeholder:contact.form.namePlaceholder"
-                />
-                <p class="form-error" data-i18n="contact.error.required">
-                  この項目は必須です。
-                </p>
-              </div>
-
-              <div class="form-row">
-                <label for="email"
-                  ><span data-i18n="contact.form.email">メールアドレス</span
-                  ><span class="required">*</span></label
-                >
-                <input
-                  class="form-control"
-                  type="email"
-                  id="email"
-                  name="email"
-                  maxlength="254"
-                  required
-                  data-i18n-attr="placeholder:contact.form.emailPlaceholder"
-                />
-                <p class="form-error" data-i18n="contact.error.email">
-                  メールアドレスの形式が正しくありません。
-                </p>
-              </div>
-
-              <div class="form-row">
-                <label for="message"
-                  ><span data-i18n="contact.form.message">お問い合わせ内容</span
-                  ><span class="required">*</span></label
-                >
-                <textarea
-                  class="form-control"
-                  id="message"
-                  name="message"
-                  aria-describedby="message-hint"
-                  maxlength="1000"
-                  required
-                  data-i18n-attr="placeholder:contact.form.messagePlaceholder"
-                ></textarea>
-                <p
-                  class="form-hint"
-                  id="message-hint"
-                  data-i18n="contact.form.messageHint"
-                >
-                  1,000文字以内でご記入ください。
-                </p>
-                <p class="form-error" data-i18n="contact.error.tooLong">
-                  文字数が上限を超えています。
-                </p>
-              </div>
-
-              <div class="form-row">
-                <label
-                  for="attachments"
-                  id="attachments-label"
-                  data-i18n="contact.form.attachments"
-                  >画像・動画を添付する（任意）</label
-                >
-                <div class="form-file">
-                  <input
-                    class="form-file-input visually-hidden"
-                    type="file"
-                    id="attachments"
-                    name="attachments"
-                    tabindex="-1"
-                    aria-hidden="true"
-                    accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime,video/webm"
-                    multiple
-                  />
-                  <button
-                    class="form-file-button"
-                    type="button"
-                    id="attachments-trigger"
-                    aria-labelledby="attachments-trigger attachments-label"
-                    aria-describedby="attachments-hint attachments-status"
-                    data-i18n="contact.form.attachmentsButton"
+              <fieldset class="contact-fields" id="contact-fields">
+                <div class="form-row">
+                  <label for="type" data-i18n="contact.form.type"
+                    >お問い合わせ種別</label
                   >
-                    データを選ぶ
-                  </button>
-                  <span
-                    class="form-file-status"
-                    id="attachments-status"
-                    data-i18n="contact.form.attachmentsEmpty"
-                    aria-live="polite"
-                    >ファイルは選択されていません</span
-                  >
+                  <select class="form-control" id="type" name="type" required>
+                    <option value="bug" data-i18n="contact.form.type.bug">
+                      不具合報告
+                    </option>
+                    <option value="request" data-i18n="contact.form.type.request">
+                      機能要望
+                    </option>
+                    <option value="usage" data-i18n="contact.form.type.usage">
+                      使い方について
+                    </option>
+                    <option value="account" data-i18n="contact.form.type.account">
+                      アカウントについて
+                    </option>
+                    <option value="other" data-i18n="contact.form.type.other">
+                      その他
+                    </option>
+                  </select>
                 </div>
-                <p
-                  class="form-hint"
-                  id="attachments-hint"
-                  data-i18n="contact.form.attachmentsHint"
-                >
-                  画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。
-                </p>
-                <p class="form-error" data-i18n="contact.error.attachments">
-                  添付ファイルの件数またはサイズが上限を超えています。
-                </p>
-              </div>
 
-              <!-- honeypot: ボット対策。人間には見えない入力欄 -->
-              <div class="form-honeypot" aria-hidden="true">
-                <label for="company">Company</label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  tabindex="-1"
-                  autocomplete="off"
-                />
-              </div>
-
-              <div class="form-row">
-                <label class="form-checkbox">
-                  <input type="checkbox" id="agree" name="agree" required />
-                  <!-- 3つの断片の間に改行（＝空白1つ）を入れないこと。
-                       日本語・韓国語・中国語は語の間に空白を置かないため、
-                       「プライバシーポリシー に同意のうえ送信する」のように
-                       不自然な隙間が空いてしまう。空白が要る言語では、
-                       翻訳文の側に空白を含めてある。 -->
-                  <span
-                    ><span data-i18n="contact.form.agree.pre"></span
-                    ><a href="/privacy/" data-i18n="contact.form.agree.link"
-                      >プライバシーポリシー</a
-                    ><span data-i18n="contact.form.agree.post"
-                      >に同意のうえ送信する</span
-                    ></span
+                <div class="form-row">
+                  <label for="name"
+                    ><span data-i18n="contact.form.name">お名前</span
+                    ><span class="required">*</span></label
                   >
-                </label>
-                <p class="form-error" data-i18n="contact.error.agree">
-                  プライバシーポリシーへの同意が必要です。
-                </p>
-              </div>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="name"
+                    name="name"
+                    maxlength="100"
+                    required
+                    data-i18n-attr="placeholder:contact.form.namePlaceholder"
+                  />
+                  <p class="form-error" data-i18n="contact.error.required">
+                    この項目は必須です。
+                  </p>
+                </div>
+
+                <div class="form-row">
+                  <label for="email"
+                    ><span data-i18n="contact.form.email">メールアドレス</span
+                    ><span class="required">*</span></label
+                  >
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="email"
+                    name="email"
+                    maxlength="254"
+                    required
+                    data-i18n-attr="placeholder:contact.form.emailPlaceholder"
+                  />
+                  <p class="form-error" data-i18n="contact.error.email">
+                    メールアドレスの形式が正しくありません。
+                  </p>
+                </div>
+
+                <div class="form-row">
+                  <label for="message"
+                    ><span data-i18n="contact.form.message">お問い合わせ内容</span
+                    ><span class="required">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    aria-describedby="message-hint message-count"
+                    required
+                    data-i18n-attr="placeholder:contact.form.messagePlaceholder"
+                  ></textarea>
+                  <p
+                    class="form-hint"
+                    id="message-hint"
+                    data-i18n="contact.form.messageHint"
+                  >
+                    1,000文字以内でご記入ください。
+                  </p>
+                  <output class="form-hint" id="message-count" for="message" aria-live="off">0 / 1,000</output>
+                  <p class="form-error" data-i18n="contact.error.tooLong">
+                    文字数が上限を超えています。
+                  </p>
+                </div>
+
+                <div class="form-row">
+                  <label
+                    for="attachments"
+                    id="attachments-label"
+                    data-i18n="contact.form.attachments"
+                    >画像・動画を添付する（任意）</label
+                  >
+                  <div class="form-file">
+                    <input
+                      class="form-file-input visually-hidden"
+                      type="file"
+                      id="attachments"
+                      name="attachments"
+                      tabindex="-1"
+                      aria-hidden="true"
+                      accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/quicktime,video/webm"
+                      multiple
+                    />
+                    <button
+                      class="form-file-button"
+                      type="button"
+                      id="attachments-trigger"
+                      aria-labelledby="attachments-trigger attachments-label"
+                      aria-describedby="attachments-hint attachments-status"
+                      data-i18n="contact.form.attachmentsButton"
+                    >
+                      データを選ぶ
+                    </button>
+                    <span
+                      class="form-file-status"
+                      id="attachments-status"
+                      aria-live="polite"
+                      >ファイルは選択されていません</span
+                    >
+                  </div>
+                  <ul class="form-file-list" id="attachments-list"></ul>
+                  <p
+                    class="form-hint"
+                    id="attachments-hint"
+                    data-i18n="contact.form.attachmentsHint"
+                  >
+                    画像は1枚5MBまで、動画は1本15MBまで、合計20MB・最大3件まで添付できます（PNG・JPEG・WebP・GIF、MP4・MOV・WebM）。
+                  </p>
+                  <p class="form-error" aria-live="polite"></p>
+                </div>
+
+                <!-- honeypot: ボット対策。人間には見えない入力欄 -->
+                <div class="form-honeypot" aria-hidden="true">
+                  <label for="company">Company</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="agree" name="agree" required />
+                    <!-- 3つの断片の間に改行（＝空白1つ）を入れないこと。
+                         日本語・韓国語・中国語は語の間に空白を置かないため、
+                         「プライバシーポリシー に同意のうえ送信する」のように
+                         不自然な隙間が空いてしまう。空白が要る言語では、
+                         翻訳文の側に空白を含めてある。 -->
+                    <span
+                      ><span data-i18n="contact.form.agree.pre"></span
+                      ><a href="/privacy/" data-i18n="contact.form.agree.link"
+                        >プライバシーポリシー</a
+                      ><span data-i18n="contact.form.agree.post"
+                        >に同意のうえ送信する</span
+                      ></span
+                    >
+                  </label>
+                  <p class="form-error" data-i18n="contact.error.agree">
+                    プライバシーポリシーへの同意が必要です。
+                  </p>
+                </div>
+              </fieldset>
 
               <button
                 class="btn btn-primary form-submit"
@@ -458,6 +458,7 @@
     <script src="/js/config.js"></script>
     <script src="/js/i18n-dict.js"></script>
     <script src="/js/i18n-dict-intl.js"></script>
+    <script src="/js/i18n-dict-contact.js"></script>
     <script src="/js/i18n-dict-nav-extra.js"></script>
     <script src="/js/i18n-dict-refresh-2026.js?v=20261109"></script>
     <script src="/js/opal-ui-naming.js?v=20261113-opal1"></script>

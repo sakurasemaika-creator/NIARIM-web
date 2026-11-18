@@ -327,3 +327,34 @@ textarea.form-control {
     padding: var(--space-md);
   }
 }
+
+.contact-fields {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.form-file-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-xs) 0 0;
+}
+
+.form-file-list:empty {
+  display: none;
+}
+
+.form-file-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.form-file-list li span {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}

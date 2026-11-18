@@ -21,7 +21,7 @@ export const SEO_PAGE_PATHS = [
   "/terms/",
 ];
 
-function escapeXml(value) {
+export function escapeXml(value) {
   return String(value).replace(XML_ESCAPE, (char) => XML_ENTITIES[char]);
 }
 

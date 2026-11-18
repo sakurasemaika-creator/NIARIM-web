@@ -33,10 +33,12 @@ for (const lang of languages) {
         if (result.abort) return route.abort("failed");
         return route.fulfill({
           status: result.status,
-          contentType: "application/json",
-          body: JSON.stringify(
-            result.status === 200 ? { ok: true } : { error: "test" },
-          ),
+          contentType: result.html ? "text/html" : "application/json",
+          body: result.html
+            ? "<h1>Maintenance</h1>"
+            : JSON.stringify(
+                result.status === 200 ? { ok: true } : { error: "test" },
+              ),
         });
       });
       if (hasX) {
@@ -95,6 +97,19 @@ for (const lang of languages) {
           await page.locator("#agree").check();
         };
         await fill();
+        const message = page.locator("#message");
+        const longDraft = "a".repeat(1001);
+        await message.fill(longDraft);
+        assert.equal(await message.inputValue(), longDraft);
+        assert.equal(await message.getAttribute("aria-invalid"), "true");
+        assert.match(
+          await page.locator("#message-count").textContent(),
+          /1.?001/,
+        );
+        await button.click();
+        assert.equal(requests.length, 0);
+        await fill();
+
         await page.locator("#attachments").setInputFiles({
           name: "unsupported.html",
           mimeType: "text/html",
@@ -112,6 +127,15 @@ for (const lang of languages) {
           "true",
         );
         assert.equal(requests.length, 0);
+        const attachmentError = page
+          .locator("#attachments")
+          .locator("xpath=ancestor::*[contains(@class,'form-row')]")
+          .locator(".form-error");
+        assert.match(await attachmentError.textContent(), /unsupported[.]html/);
+        assert.equal(
+          await attachmentError.getAttribute("data-error-key"),
+          "contact.error.attachmentFormat",
+        );
 
         const image = {
           name: "drawing.png",
@@ -130,10 +154,37 @@ for (const lang of languages) {
           0,
           "four attachments must not be submitted",
         );
-        await page.locator("#attachments").setInputFiles(image);
         assert.equal(
-          (await page.locator("#attachments-status").textContent()).trim(),
-          image.name,
+          await attachmentError.getAttribute("data-error-key"),
+          "contact.error.attachmentCount",
+        );
+        await page.locator("#attachments").setInputFiles([
+          image,
+          {
+            name: "too-big.png",
+            mimeType: "image/png",
+            buffer: Buffer.alloc(5 * 1024 * 1024 + 1),
+          },
+        ]);
+        assert.equal(
+          await attachmentError.getAttribute("data-error-key"),
+          "contact.error.attachmentSize",
+        );
+        assert.match(await attachmentError.textContent(), /too-big[.]png/);
+        await page
+          .locator("#attachments-list li")
+          .last()
+          .getByRole("button")
+          .click();
+        assert.deepEqual(
+          await page.locator("#attachments-list li span").allTextContents(),
+          [image.name],
+        );
+        assert.equal(
+          await page
+            .locator("#attachments-trigger")
+            .getAttribute("aria-invalid"),
+          null,
         );
 
         let release;
@@ -144,6 +195,20 @@ for (const lang of languages) {
         await button.click();
         await sent;
         assert.equal(await button.isDisabled(), true);
+        for (const id of [
+          "type",
+          "name",
+          "email",
+          "message",
+          "agree",
+          "attachments-trigger",
+        ]) {
+          assert.equal(await page.locator(`#${id}`).isDisabled(), true);
+        }
+        assert.equal(
+          await page.locator("#attachments-list button").isDisabled(),
+          true,
+        );
         assert.equal(
           await button.locator("span").getAttribute("data-i18n"),
           "contact.form.submitting",
@@ -172,8 +237,10 @@ for (const lang of languages) {
         for (const id of ["name", "email", "message"])
           assert.equal(await page.locator(`#${id}`).inputValue(), "");
         assert.equal(await page.locator("#agree").isChecked(), false);
-        await page.waitForSelector(
-          '#attachments-status[data-i18n="contact.form.attachmentsEmpty"]',
+        assert.equal(await page.locator("#attachments-list li").count(), 0);
+        assert.match(
+          await page.locator("#message-count").textContent(),
+          /^0 \//,
         );
         assert.equal(
           await page
@@ -189,6 +256,7 @@ for (const lang of languages) {
         responseGate = Promise.resolve();
         await fill();
         for (const failure of [
+          { status: 200, html: true },
           { status: 429 },
           { status: 500 },
           { abort: true },
@@ -223,7 +291,19 @@ for (const lang of languages) {
             "translation key must not leak into the UI",
           );
         }
-        assert.equal(requests.length, 4);
+        result = { status: 413 };
+        await page.locator("#attachments").setInputFiles(image);
+        await button.click();
+        await page.waitForSelector(
+          '[data-error-key="contact.error.attachmentTotal"]',
+        );
+        assert.equal(
+          await page.evaluate(() => document.activeElement.id),
+          "attachments-trigger",
+        );
+        assert.equal(await message.isEnabled(), true);
+        assert.equal(await page.locator("#attachments-list li").count(), 1);
+        assert.equal(requests.length, 6);
         if (!hasX && ["fr", "es"].includes(lang))
           await page.screenshot({
             path: `${output}/${caseName}.png`,

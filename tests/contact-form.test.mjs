@@ -8,7 +8,7 @@ const script = readFileSync(
   "utf8",
 );
 
-function fixture(input = {}, reply = { ok: true }) {
+function fixture(input = {}, reply = { ok: true, data: { ok: true } }) {
   const callbacks = {};
   const focused = [];
   const makeElement = () => ({
@@ -25,6 +25,7 @@ function fixture(input = {}, reply = { ok: true }) {
     },
   });
   let sent = 0;
+  let resets = 0;
   const fields = {};
   const rows = [];
   for (const [name, value] of Object.entries({
@@ -72,9 +73,12 @@ function fixture(input = {}, reply = { ok: true }) {
     querySelector() {
       return rows.find((row) => row.error);
     },
-    reset() {},
+    reset() {
+      resets++;
+    },
   };
   const button = { disabled: false, querySelector: () => makeElement() };
+  const fieldset = { disabled: false };
   const status = { querySelector: () => makeElement(), scrollIntoView() {} };
   const document = {
     addEventListener(name, handler) {
@@ -84,6 +88,7 @@ function fixture(input = {}, reply = { ok: true }) {
     getElementById(id) {
       return {
         "contact-form": form,
+        "contact-fields": fieldset,
         "submit-btn": button,
         "form-status": status,
       }[id];
@@ -102,7 +107,11 @@ function fixture(input = {}, reply = { ok: true }) {
       return {
         ok: reply.ok,
         status: reply.status,
-        json: async () => reply.data || {},
+        json: async () => {
+          assert.equal(fieldset.disabled, true);
+          if (reply.invalidJson) throw new SyntaxError("HTML");
+          return reply.data;
+        },
       };
     },
   });
@@ -114,10 +123,14 @@ function fixture(input = {}, reply = { ok: true }) {
     get sent() {
       return sent;
     },
+    get resets() {
+      return resets;
+    },
     async submit() {
       callbacks.submit({ preventDefault() {} });
       await new Promise(setImmediate);
       assert.equal(button.disabled, false);
+      assert.equal(fieldset.disabled, false);
     },
   };
 }
@@ -147,4 +160,30 @@ test("the field named by a validation response receives focus and its inline err
   assert.equal(view.fields.email.getAttribute("aria-invalid"), "true");
   assert.deepEqual(view.focused, ["email"]);
   assert.equal(view.status.className, "form-status");
+});
+
+test("a message over 1,000 characters is retained and cannot be submitted", async () => {
+  const message = "x".repeat(1001);
+  const view = fixture({ message });
+  await view.submit();
+  assert.equal(view.fields.message.value, message);
+  assert.equal(view.sent, 0);
+  assert.deepEqual(view.focused, ["message"]);
+});
+
+test("only explicit JSON success clears the draft", async () => {
+  for (const reply of [
+    { ok: true, status: 200, invalidJson: true },
+    { ok: true, status: 200, data: { ok: false } },
+    { ok: false, status: 503, data: { ok: true } },
+  ]) {
+    const view = fixture({}, reply);
+    await view.submit();
+    assert.match(view.status.className, /is-error/);
+    assert.equal(view.resets, 0);
+  }
+  const view = fixture();
+  await view.submit();
+  assert.match(view.status.className, /is-success/);
+  assert.equal(view.resets, 1);
 });

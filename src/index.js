@@ -5,8 +5,12 @@
  * 翻訳辞書由来のSEO metadataはWrangler custom buildで生成するため、Web本文と
  * title/descriptionの文言が別管理にならない。
  */
-import { SEO_I18N, SEO_LANGS } from "./generated/seo-i18n.js";
-import { robotsTxt, sitemapXml } from "./seo.js";
+import {
+  PAGE_TRANSLATIONS,
+  SEO_I18N,
+  SEO_LANGS,
+} from "./generated/seo-i18n.js";
+import { escapeXml, robotsTxt, sitemapXml } from "./seo.js";
 import { handleContact } from "./contact.js";
 import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
@@ -294,6 +298,33 @@ function registerDiscardedMockContent(rewriter, page) {
   return rewriter;
 }
 
+function localizeElement(element, translations) {
+  const richKey = element.getAttribute("data-i18n-html");
+  const textKey = element.getAttribute("data-i18n");
+  if (richKey && Object.hasOwn(translations, richKey)) {
+    // These values come from the same source-controlled dictionary as the
+    // browser's rich translations.
+    element.setInnerContent(translations[richKey], { html: true });
+  } else if (textKey && Object.hasOwn(translations, textKey)) {
+    const content = translations[textKey]
+      .split(/(<br\s*\/?>|<\/?em>|<\/?strong>)/gi)
+      .map((part) =>
+        /^<(?:br\s*\/?|\/?em|\/?strong)>$/i.test(part) ? part : escapeXml(part),
+      )
+      .join("");
+    element.setInnerContent(content, { html: true });
+  }
+
+  for (const pair of (element.getAttribute("data-i18n-attr") || "").split(
+    "|",
+  )) {
+    const [attribute, key] = pair.split(":");
+    if (attribute && key && Object.hasOwn(translations, key)) {
+      element.setAttribute(attribute, translations[key]);
+    }
+  }
+}
+
 function rewriteSeoHtml(response, request, env) {
   const type = response.headers.get("content-type") || "";
   if (response.status !== 200 || !type.includes("text/html")) return response;
@@ -301,12 +332,13 @@ function rewriteSeoHtml(response, request, env) {
   const metadata = pageMetadata(request);
   if (!metadata) return response;
 
+  const translations = PAGE_TRANSLATIONS[metadata.page][metadata.lang];
+
   const canonical = canonicalUrl(request, env, metadata.lang);
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
   const headPerformance = performanceHeadMarkup(metadata.page);
-  const useLightweightRuntime =
-    metadata.page !== "features";
+  const useLightweightRuntime = metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
     .map(
@@ -320,6 +352,14 @@ function rewriteSeoHtml(response, request, env) {
     .on("html", {
       element(element) {
         element.setAttribute("lang", metadata.lang);
+        if (["en", "fr", "es"].includes(metadata.lang)) {
+          element.setAttribute("data-latin-only", "");
+        }
+      },
+    })
+    .on("[data-i18n], [data-i18n-html], [data-i18n-attr]", {
+      element(element) {
+        localizeElement(element, translations);
       },
     })
     .on("title", {
@@ -376,7 +416,7 @@ function rewriteSeoHtml(response, request, env) {
     .on("script[src]", {
       element(element) {
         const src = element.getAttribute("src") || "";
-        if (/^\/js\/i18n-dict(?:-[\w-]+)?\.js$/.test(src)) {
+        if (/^\/js\/i18n-dict(?:-[\w-]+)?\.js(?:[?#].*)?$/.test(src)) {
           if (!pageBundleInjected) {
             element.setAttribute(
               "src",
