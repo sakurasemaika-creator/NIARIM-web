@@ -312,6 +312,22 @@
     var trigger = dropdown.querySelector("[data-lang-trigger]");
     if (!trigger) return;
 
+    var downloadLink = dropdown.parentElement.querySelector(
+      ':scope > a[data-i18n="nav.download"]',
+    );
+    if (downloadLink) {
+      var mobileNav = window.matchMedia("(max-width: 1180px)");
+      function alignNavOrder() {
+        var next = mobileNav.matches ? dropdown : dropdown.nextElementSibling;
+        if (next === downloadLink || downloadLink.nextElementSibling === next) return;
+        var restoreFocus = document.activeElement === downloadLink;
+        dropdown.parentElement.insertBefore(downloadLink, next);
+        if (restoreFocus) downloadLink.focus({ preventScroll: true });
+      }
+      alignNavOrder();
+      mobileNav.addEventListener("change", alignNavOrder);
+    }
+
     var menu = dropdown.querySelector("[data-lang-menu]");
     if (menu) {
       if (!menu.id) menu.id = "language-menu";
