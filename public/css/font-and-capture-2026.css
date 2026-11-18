@@ -50,6 +50,11 @@ html[lang] body.nr-site .nr-main .nr-hero-wordmark,
 html[lang] body :is(.site-logo, .site-logo *, .logo, .logo *) {
   font-family: var(--font-serif) !important;
 }
+/* User-supplied titles and channel names can use scripts outside the UI subsets. */
+html[lang] body [data-community-gallery] .community-card .meta :is(h3, p) {
+  font-family: system-ui, sans-serif !important;
+}
+
 /* Capture geometry is responsive, but never distort either source device. */
 html body .nr-shot:not(.nr-shot--pc),
 html body .feature-diagram--real:not(.feature-diagram--pc) {

@@ -310,3 +310,21 @@ html:lang(zh-Hant) body :is(h1,h2,h3,h4,p,li):not(.nr-hero-wordmark) {
 [data-play-release-only][hidden] {
   display: none !important;
 }
+
+/* Let whole navigation items wrap when a translation needs more space. */
+@media (min-width: 1181px) {
+  html body.nr-site .site-header .main-nav > ul {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 4px;
+  }
+
+  html body.nr-site .site-header .main-nav > ul > li,
+  html body.nr-site .site-header .main-nav > :is(.lang-dropdown, .btn) {
+    flex: none;
+  }
+
+  html body.nr-site .site-header .main-nav a[data-i18n] {
+    white-space: nowrap;
+  }
+}

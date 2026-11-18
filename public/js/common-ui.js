@@ -3,10 +3,27 @@
  *
  * Pages without app-screen mockups do not need the large mock construction and
  * fitting runtime in main.js. Keep only shared navigation/FAQ/scroll behavior
- * here; Home and Features continue to use main.js.
+ * here. Features still uses main.js for its interactive screen mockups.
  */
 (function () {
   "use strict";
+
+  // Worker responses already include these links. Static Home previews use
+  // the same styles for navigation, phrase wrapping and capture sizing.
+  if (document.body?.classList.contains("nr-site")) {
+    [
+      ["polish", "data-niarim-polish"],
+      ["responsive-consistency", "data-niarim-responsive-consistency"],
+      ["line-break", "data-niarim-line-break"],
+    ].forEach(function ([name, marker]) {
+      if (document.querySelector("link[" + marker + "]")) return;
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "/css/" + name + ".css";
+      link.setAttribute(marker, "");
+      document.head.appendChild(link);
+    });
+  }
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;

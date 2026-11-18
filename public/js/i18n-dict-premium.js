@@ -56,6 +56,9 @@
       "premiumPage.premium.item7.title": "コミュニティへの投稿数アップ",
       "premiumPage.premium.item7.body":
         "「作品広場」への投稿数が、無料版の1日1作品から1日3作品に増えます。",
+      "premiumPage.premium.automation.title": "自動操作（操作記録）",
+      "premiumPage.premium.automation.body":
+        "キャンバスやタイムラインの操作手順を記録し、作業中に繰り返し実行できます。",
       "premiumPage.faq.title": "プレミアムプランについてのご注意",
       "premiumPage.faq.item1":
         "無料版でご利用中の基本制作機能が、プレミアム加入によって制限されることはありません。",
@@ -115,6 +118,10 @@
       "premiumPage.premium.item7.title": "More community posts",
       "premiumPage.premium.item7.body":
         "Post up to 3 works a day to the Gallery, up from 1 a day on the free plan.",
+      "premiumPage.premium.automation.title":
+        "Custom automations (action recording)",
+      "premiumPage.premium.automation.body":
+        "Record a sequence of canvas or timeline actions and replay it while you work.",
       "premiumPage.faq.title": "About the Premium plan",
       "premiumPage.faq.item1":
         "Core creation features available in the free version are never restricted by subscribing to Premium.",
@@ -172,6 +179,9 @@
       "premiumPage.premium.item7.title": "增加社区投稿数量",
       "premiumPage.premium.item7.body":
         "「作品广场」的投稿数量从免费版的每天1个提升为每天3个。",
+      "premiumPage.premium.automation.title": "自定义自动操作（操作录制）",
+      "premiumPage.premium.automation.body":
+        "录制画布或时间轴上的操作步骤，以便在创作时重复执行。",
       "premiumPage.faq.title": "关于高级会员方案的说明",
       "premiumPage.faq.item1":
         "免费版中可使用的基础创作功能，不会因订阅高级会员而受到限制。",
@@ -228,6 +238,9 @@
       "premiumPage.premium.item7.title": "增加社群投稿數量",
       "premiumPage.premium.item7.body":
         "「作品廣場」的投稿數量從免費版的每天1個提升為每天3個。",
+      "premiumPage.premium.automation.title": "自訂自動操作（操作錄製）",
+      "premiumPage.premium.automation.body":
+        "錄製畫布或時間軸上的操作步驟，創作時可重複執行。",
       "premiumPage.faq.title": "關於高級會員方案的說明",
       "premiumPage.faq.item1":
         "免費版中可使用的基礎創作功能，不會因訂閱高級會員而受到限制。",
@@ -286,6 +299,10 @@
       "premiumPage.premium.item7.title": "커뮤니티 게시 수 증가",
       "premiumPage.premium.item7.body":
         "'작품광장'에 게시할 수 있는 작품 수가 무료 버전의 하루 1개에서 하루 3개로 늘어납니다.",
+      "premiumPage.premium.automation.title":
+        "사용자 지정 자동 작업(동작 기록)",
+      "premiumPage.premium.automation.body":
+        "캔버스나 타임라인의 작업 순서를 기록하고 작업 중에 반복 실행할 수 있습니다.",
       "premiumPage.faq.title": "프리미엄 플랜에 대한 안내",
       "premiumPage.faq.item1":
         "무료 버전에서 이용 중인 기본 제작 기능이 프리미엄 가입으로 인해 제한되는 일은 없습니다.",
@@ -346,6 +363,10 @@
       "premiumPage.premium.item7.title": "Plus de publications communautaires",
       "premiumPage.premium.item7.body":
         "Publiez jusqu'à 3 œuvres par jour dans la Galerie, contre 1 par jour avec le plan gratuit.",
+      "premiumPage.premium.automation.title":
+        "Automatisations personnalisées (enregistrement d’actions)",
+      "premiumPage.premium.automation.body":
+        "Enregistrez une suite d’actions sur la toile ou la chronologie, puis rejouez-la pendant votre travail.",
       "premiumPage.faq.title": "À propos de l'offre Premium",
       "premiumPage.faq.item1":
         "Les fonctionnalités de création de base disponibles dans la version gratuite ne sont jamais restreintes par l'abonnement Premium.",
@@ -406,6 +427,10 @@
       "premiumPage.premium.item7.title": "Más publicaciones en la comunidad",
       "premiumPage.premium.item7.body":
         "Publica hasta 3 obras al día en la Galería, frente a 1 al día en el plan gratuito.",
+      "premiumPage.premium.automation.title":
+        "Automatizaciones personalizadas (grabación de acciones)",
+      "premiumPage.premium.automation.body":
+        "Graba una secuencia de acciones en el lienzo o la línea de tiempo y repítela mientras trabajas.",
       "premiumPage.faq.title": "Sobre el plan Premium",
       "premiumPage.faq.item1":
         "Las funciones de creación básicas disponibles en la versión gratuita nunca se ven restringidas por suscribirte a Premium.",
