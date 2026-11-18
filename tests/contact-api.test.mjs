@@ -4,12 +4,17 @@ import { handleContact } from "../src/contact.js";
 
 const origin = "https://example.invalid";
 const env = {
+  CONTACT_RATE_LIMITER: {
+    getByName: () => ({
+      isLimited: async () => false,
+      reserve: async () => true,
+    }),
+  },
   SITE_ORIGIN: origin,
   RESEND_API_KEY: "test",
   CONTACT_FROM_EMAIL: "sender@example.invalid",
   CONTACT_TO_EMAIL: "recipient@example.invalid",
 };
-const ctx = { waitUntil() {} };
 afterEach(() => mock.restoreAll());
 function formRequest(overrides = {}, extra) {
   const form = new FormData();
@@ -37,7 +42,6 @@ test("valid multipart sends one escaped email and keeps reply-to separate", asyn
   const response = await handleContact(
     formRequest({ name: "<Tester>", message: "<script>test</script>" }),
     env,
-    ctx,
   );
   assert.equal(response.status, 200);
   assert.equal(fetch.mock.callCount(), 1);
@@ -82,7 +86,7 @@ test("oversized actual body is rejected without trusting Content-Length", async 
       duplex: "half",
     });
     if (length !== null) request.headers.set("Content-Length", length);
-    const result = await handleContact(request, env, ctx);
+    const result = await handleContact(request, env);
     assert.equal(result.status, 413);
     assert.equal((await result.json()).error, "payload_too_large");
     assert.equal(cancelled, true);
@@ -96,11 +100,12 @@ test("oversized actual body is rejected without trusting Content-Length", async 
 
 test("rate-limited requests are rejected before consuming the upload", async () => {
   const request = formRequest();
-  const response = await handleContact(
-    request,
-    { ...env, RATE_LIMIT_KV: { get: async () => "1" } },
-    ctx,
-  );
+  const response = await handleContact(request, {
+    ...env,
+    CONTACT_RATE_LIMITER: {
+      getByName: () => ({ isLimited: async () => true }),
+    },
+  });
   assert.equal(response.status, 429);
   assert.equal(request.bodyUsed, false);
 });
@@ -110,7 +115,7 @@ test("honeypots and invalid input never send mail", async () => {
     throw new Error("must not send");
   });
   assert.equal(
-    (await handleContact(formRequest({ company: "spam" }), env, ctx)).status,
+    (await handleContact(formRequest({ company: "spam" }), env)).status,
     200,
   );
   for (const invalid of [
@@ -119,10 +124,7 @@ test("honeypots and invalid input never send mail", async () => {
     { name: "a".repeat(101) },
     { message: "" },
   ]) {
-    assert.equal(
-      (await handleContact(formRequest(invalid), env, ctx)).status,
-      400,
-    );
+    assert.equal((await handleContact(formRequest(invalid), env)).status, 400);
   }
   assert.equal(fetch.mock.callCount(), 0);
 });
@@ -139,7 +141,7 @@ test("attachment type and count limits are enforced", async () => {
       for (let i = 0; i < count; i++)
         form.append("attachments", new Blob(["test"], { type }), `file-${i}`);
     });
-    assert.equal((await handleContact(request, env, ctx)).status, 400);
+    assert.equal((await handleContact(request, env)).status, 400);
   }
   assert.equal(fetch.mock.callCount(), 0);
 });
@@ -150,7 +152,7 @@ test("malformed multipart returns a controlled input error", async () => {
     headers: { "Content-Type": "multipart/form-data", Origin: origin },
     body: "broken",
   });
-  assert.equal((await handleContact(request, env, ctx)).status, 400);
+  assert.equal((await handleContact(request, env)).status, 400);
 });
 
 test("origin checks run before parsing or contacting the mail service", async () => {
@@ -167,13 +169,13 @@ test("origin checks run before parsing or contacting the mail service", async ()
     if (source === null) request.headers.delete("Origin");
     else request.headers.set("Origin", source);
     if (fetchSite) request.headers.set("Sec-Fetch-Site", fetchSite);
-    assert.equal((await handleContact(request, env, ctx)).status, 403);
+    assert.equal((await handleContact(request, env)).status, 403);
     assert.equal(request.bodyUsed, false);
   }
   const sameOrigin = formRequest();
   sameOrigin.headers.delete("Origin");
   sameOrigin.headers.set("Sec-Fetch-Site", "same-origin");
-  assert.equal((await handleContact(sameOrigin, env, ctx)).status, 200);
+  assert.equal((await handleContact(sameOrigin, env)).status, 200);
   assert.equal(send.mock.callCount(), 1);
 });
 
@@ -213,7 +215,6 @@ test("valid media types use numbered filenames with the verified extension", asy
         );
       }),
       env,
-      ctx,
     );
     assert.equal(response.status, 200, type);
     const payload = JSON.parse(send.mock.calls.at(-1).arguments[1].body);
@@ -236,7 +237,6 @@ test("a supported MIME label cannot substitute for matching file contents", asyn
       );
     }),
     env,
-    ctx,
   );
   assert.equal(response.status, 400);
   assert.deepEqual(await response.json(), {
@@ -244,4 +244,36 @@ test("a supported MIME label cannot substitute for matching file contents", asyn
     field: "attachments",
   });
   assert.equal(send.mock.callCount(), 0);
+});
+
+test("concurrent calls must reserve a slot before they can send mail", async () => {
+  const send = mock.method(globalThis, "fetch", async () =>
+    Response.json({ id: "test" }),
+  );
+  const clients = new Set();
+  const rateLimited = {
+    ...env,
+    CONTACT_RATE_LIMITER: {
+      getByName: (ip) => ({
+        isLimited: async () => false, // All early checks pass in this test.
+        async reserve() {
+          if (clients.has(ip)) return false;
+          clients.add(ip);
+          return true;
+        },
+      }),
+    },
+  };
+  const submit = (ip) => {
+    const request = formRequest();
+    request.headers.set("CF-Connecting-IP", ip);
+    return handleContact(request, rateLimited);
+  };
+  const replies = await Promise.all(
+    Array.from({ length: 10 }, () => submit("192.0.2.5")),
+  );
+  assert.equal(replies.filter((reply) => reply.status === 200).length, 1);
+  assert.equal(replies.filter((reply) => reply.status === 429).length, 9);
+  assert.equal((await submit("192.0.2.6")).status, 200);
+  assert.equal(send.mock.callCount(), 2);
 });

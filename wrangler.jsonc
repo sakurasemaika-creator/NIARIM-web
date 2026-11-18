@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "niarim-web",
-  "main": "src/index.js",
+  "main": "src/worker.js",
   "compatibility_date": "2026-08-25",
   "build": {
     "command": "node tools/generate-seo-i18n.mjs",
@@ -25,9 +25,16 @@
     "CONTACT_TO_EMAIL": "your-inbox@example.com",
     "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>",
   },
+  "durable_objects": {
+    "bindings": [
+      { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "contact-rate-limiter-v1",
+      "new_sqlite_classes": ["ContactRateLimiter"],
+    },
+  ],
   // RESEND_API_KEY は `npx wrangler secret put RESEND_API_KEY` で設定すること（本ファイルには書かない）。
-  // レート制限用のKV Namespaceを作成した場合は、以下のように kv_namespaces を追加する。
-  // "kv_namespaces": [
-  //   { "binding": "RATE_LIMIT_KV", "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" }
-  // ]
 }

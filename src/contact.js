@@ -46,10 +46,7 @@ const INQUIRY_TYPE_LABELS = {
   other: "その他",
 };
 
-const RATE_LIMIT_WINDOW_SECONDS = 60; // 同一IPにつき60秒に1回まで
-const RATE_LIMIT_DAILY_MAX = 20; // 同一IPにつき1日20通まで
-
-export async function handleContact(request, env, ctx) {
+export async function handleContact(request, env) {
   if (request.method !== "POST") {
     return jsonResponse(405, { error: "method_not_allowed" });
   }
@@ -75,12 +72,10 @@ export async function handleContact(request, env, ctx) {
   }
 
   const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-
-  if (env.RATE_LIMIT_KV) {
-    const limited = await isRateLimited(env.RATE_LIMIT_KV, clientIp);
-    if (limited) {
-      return jsonResponse(429, { error: "rate_limited" });
-    }
+  const limiter = env.CONTACT_RATE_LIMITER?.getByName(clientIp);
+  if (!limiter) return jsonResponse(503, { error: "internal_error" });
+  if (await limiter.isLimited()) {
+    return jsonResponse(429, { error: "rate_limited" });
   }
 
   let form;
@@ -184,14 +179,15 @@ export async function handleContact(request, env, ctx) {
     return jsonResponse(500, { error: "internal_error" });
   }
 
+  // Reserve before calling the mail provider. Simultaneous requests may all
+  // pass the early check, but only one can reserve a slot for the same IP.
+  if (!(await limiter.reserve())) {
+    return jsonResponse(429, { error: "rate_limited" });
+  }
   const sent = await sendViaResend(env, data, attachments, attachmentNames);
   if (!sent.ok) {
     console.error("Resend send failed", sent.status, sent.detail);
     return jsonResponse(502, { error: "mail_send_failed" });
-  }
-
-  if (env.RATE_LIMIT_KV) {
-    ctx.waitUntil(recordSubmission(env.RATE_LIMIT_KV, clientIp));
   }
 
   return jsonResponse(200, { ok: true });
@@ -266,41 +262,6 @@ function validateInput(body) {
   }
 
   return { ok: true, data: { type, name, email, message, agree } };
-}
-
-// 既知の制約: KVには compare-and-swap がないため、ここでのチェックと
-// recordSubmission()での書き込みはアトミックではない。同一IPから
-// ほぼ同時に複数リクエストが届いた場合、レート制限をすり抜ける可能性がある
-// （honeypot・入力バリデーションと合わせた多層防御の一部として許容している）。
-// 厳密な制御が必要になった場合はDurable Objectsへの置き換えを検討すること。
-async function isRateLimited(kv, clientIp) {
-  const shortKey = `contact:short:${clientIp}`;
-  const dailyKey = `contact:daily:${clientIp}`;
-
-  const [shortHit, dailyCountRaw] = await Promise.all([
-    kv.get(shortKey),
-    kv.get(dailyKey),
-  ]);
-
-  if (shortHit) return true;
-
-  const dailyCount = Number(dailyCountRaw || 0);
-  if (dailyCount >= RATE_LIMIT_DAILY_MAX) return true;
-
-  return false;
-}
-
-async function recordSubmission(kv, clientIp) {
-  const shortKey = `contact:short:${clientIp}`;
-  const dailyKey = `contact:daily:${clientIp}`;
-
-  const dailyCountRaw = await kv.get(dailyKey);
-  const dailyCount = Number(dailyCountRaw || 0) + 1;
-
-  await Promise.all([
-    kv.put(shortKey, "1", { expirationTtl: RATE_LIMIT_WINDOW_SECONDS }),
-    kv.put(dailyKey, String(dailyCount), { expirationTtl: 60 * 60 * 24 }),
-  ]);
 }
 
 // パス区切り(../ 等)がメール本文へそのまま渡らないよう、パス部分を

@@ -438,7 +438,7 @@ function withSecurityHeaders(response) {
 }
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
 
     try {
@@ -446,7 +446,7 @@ export default {
         return withSecurityHeaders(await handleCommunityFeed(request, env));
       }
       if (url.pathname === "/api/contact") {
-        const response = await handleContact(request, env, ctx);
+        const response = await handleContact(request, env);
         return withSecurityHeaders(response);
       }
 

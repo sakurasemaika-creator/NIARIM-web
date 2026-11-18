@@ -1,6 +1,6 @@
 # NIARIM 公式サイト
 
-手描きアニメーション制作アプリ「NIARIM」の公式サイトです。Cloudflare Workers Static Assets（静的アセット配信 + Worker）構成で、フロントエンドは Vanilla HTML/CSS/JavaScript、お問い合わせフォームの送信のみ Worker（`src/index.js`）が処理します。
+手描きアニメーション制作アプリ「NIARIM」の公式サイトです。Cloudflare Workers Static Assets（静的アセット配信 + Worker）構成で、フロントエンドは Vanilla HTML/CSS/JavaScript、お問い合わせフォームの送信は Worker（`src/worker.js`）が処理します。
 
 > **初めてこのリポジトリを触る方・AIモデルへ**: まず
 > [`引き継ぎガイド（AI開発者向け）.md`](./引き継ぎガイド（AI開発者向け）.md)
@@ -203,15 +203,11 @@ APIキー・送信先・送信元のいずれかが未設定の場合、`/api/co
 
 送信を受け付けるオリジンは `SITE_ORIGIN` で指定します。ローカルでフォームの送信処理を確認する場合は `npx wrangler dev --var SITE_ORIGIN:http://localhost:8787` で起動し、ブラウザでも同じURLを使用してください。添付は形式の識別情報を点検してから、形式に対応した拡張子で転送します。元の名前はメール本文で確認できます。
 
-## レート制限（KV Namespace）
+## レート制限（Durable Objects）
 
-お問い合わせフォームのスパム対策として、Cloudflare KVで簡易レート制限（同一IPにつき60秒に1回・1日20通まで）を行います。
+同一IPからの送信を60秒に1回、直近24時間で20回に制限します。入力と添付の検査後、メールサービスを呼び出す前に送信枠を確保します。メールサービスの失敗も、送信を試みた1回として数えます。
 
-```bash
-npx wrangler kv namespace create RATE_LIMIT_KV
-```
-
-出力された `id` を `wrangler.jsonc` の `kv_namespaces` に設定してください。KV未設定のままローカル開発する場合、レート制限はスキップされ機能自体は動作します。
+`wrangler.jsonc` の `contact-rate-limiter-v1` でSQLiteを使うDurable Objectを作成します。同時送信の判定と記録はIPごとのデータベースで一度に行います。レコードには時刻だけを保存し、24時間経過後に削除します。以前の `RATE_LIMIT_KV` の記録は作成から最大24時間後に失効します。
 
 ## 多言語対応について
 
@@ -258,11 +254,11 @@ npx wrangler kv namespace create RATE_LIMIT_KV
 ## セキュリティ対策の概要（`/api/contact`）
 
 - HTTPメソッド・Content-Type検証（`multipart/form-data`のみ受け付け）
-- リクエストサイズ上限（添付画像5MB×最大3枚＋テキスト分の余裕を見て約15MB）
+- リクエストサイズ上限（添付合計20MBとフォームの余裕分）
 - 必須項目・文字数上限・メール形式のバリデーション
-- 添付画像のバリデーション（枚数上限3枚、1枚あたり5MB、PNG/JPEG/WebP/GIFのみ許可）
+- 添付は最大3件（画像は1件5MB、動画は1件15MB）。形式の識別情報を確認
 - honeypotによる簡易Bot対策（ボットには成功したように見せかけ、実送信はしない）
-- KVベースのレート制限（同一IPにつき60秒に1回・1日20通まで）
+- Durable Objectで送信枠を確保（同一IPにつき60秒に1回、直近24時間で20回まで）
 - メールヘッダ・本文への改行注入対策（ヘッダインジェクション・メールインジェクション対策）
 - Worker内部のエラー詳細・個人情報をログや応答に含めない
 - 同一オリジンのみを想定し、不要なCORSヘッダーを付与しない
