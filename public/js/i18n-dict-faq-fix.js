@@ -14,8 +14,7 @@
  *   （プロジェクトデータは端末内保存のみ、クラウド同期機能なし）。
  *   ただし作品広場への投稿・公開にはGoogleアカウントでのログインが必要
  *   なため、「制作する上では不要」という書き方に修正した。
- * - faq.a7.html: お問い合わせ導線をcontact.leadと揃え、まず公式Xへ、
- *   個人情報関連のみお問い合わせフォームへ誘導する形に統一した。
+ * - faq.a7.html: 不具合報告・機能要望・使い方の質問をお問い合わせフォームへ案内する。
  */
 (function () {
   "use strict";
@@ -30,7 +29,7 @@
       "faq.a6":
         "作品を制作する上ではアカウント登録は不要です。作成した作品やプロジェクトデータは、開発者のサーバーへ送信されることなく、端末内にのみ保存されます。ただし、作品を公開するにはGoogleアカウントでのログインが必要です。",
       "faq.a7.html":
-        '不具合報告・機能要望・使い方に関するご質問は、まず公式Xへお気軽にご連絡ください。アカウントやメールアドレスなど個人情報に関わるお問い合わせは、Xではお答えできませんので、<a href="/contact/">お問い合わせフォーム</a>からご連絡ください。',
+        "不具合の報告、機能のご要望、使い方についてのご質問は、<a href=\"/contact/\">お問い合わせフォーム</a>からお送りください。",
     },
     en: {
       "faq.viewAll": "View all questions",
@@ -41,7 +40,7 @@
       "faq.a6":
         "No account registration is required to create your work. Your projects and creations are stored only on your device and are never sent to the developer's servers. However, signing in with a Google account is required to publish your work.",
       "faq.a7.html":
-        'For bug reports, feature requests, or how-to questions, please reach out via our official X account first. We can\'t handle inquiries involving personal information (like your account or email address) on X, so please use the <a href="/contact/">contact form</a> for those instead.',
+        "To report a bug, request a feature, or ask how to use the app, please use the <a href=\"/contact/\">contact form</a>.",
     },
     "zh-Hans": {
       "faq.viewAll": "查看全部问题",
@@ -52,7 +51,7 @@
       "faq.a6":
         "在创作作品方面无需注册账号。您创作的作品和项目数据不会发送到开发者的服务器，仅保存在您的设备内。但如果要公开发布作品，则需要使用 Google 账号登录。",
       "faq.a7.html":
-        '如有故障报告、功能建议或使用方法相关的问题，请先通过官方 X 账号联系我们。涉及账号、邮箱等个人信息的咨询无法在 X 上处理，请改用<a href="/contact/">联系表单</a>与我们联系。',
+        "如需报告问题、提出功能建议或咨询使用方法，请填写<a href=\"/contact/\">联系表单</a>。",
     },
     "zh-Hant": {
       "faq.viewAll": "查看全部問題",
@@ -63,7 +62,7 @@
       "faq.a6":
         "在創作作品方面無需註冊帳號。您創作的作品與專案資料不會傳送至開發者的伺服器，僅保存在您的裝置內。但若要公開發布作品，則需要使用 Google 帳號登入。",
       "faq.a7.html":
-        '如有問題回報、功能建議或使用方法相關疑問，請先透過官方 X 帳號與我們聯絡。涉及帳號、電子郵件等個人資料的洽詢無法在 X 上處理，請改用<a href="/contact/">聯絡表單</a>與我們聯絡。',
+        "如需回報問題、提出功能建議或詢問使用方法，請填寫<a href=\"/contact/\">聯絡表單</a>。",
     },
     ko: {
       "faq.viewAll": "모든 질문 보기",
@@ -74,7 +73,7 @@
       "faq.a6":
         "작품을 제작하는 데에는 계정 등록이 필요하지 않습니다. 제작한 작품과 프로젝트 데이터는 개발자의 서버로 전송되지 않고 기기 내에만 저장됩니다. 다만 작품을 공개하려면 Google 계정으로 로그인해야 합니다.",
       "faq.a7.html":
-        '오류 신고, 기능 요청, 사용법 관련 문의는 먼저 공식 X 계정으로 편하게 연락해 주세요. 계정이나 이메일 주소 등 개인정보와 관련된 문의는 X에서 답변드릴 수 없으니, <a href="/contact/">문의 양식</a>을 이용해 주세요.',
+        "오류 신고, 기능 요청, 사용법 관련 문의는 <a href=\"/contact/\">문의 양식</a>을 이용해 주세요.",
     },
     fr: {
       "faq.viewAll": "Voir toutes les questions",
@@ -85,7 +84,7 @@
       "faq.a6":
         "Aucune création de compte n'est nécessaire pour créer votre œuvre. Vos projets et créations restent stockés uniquement sur votre appareil et ne sont jamais envoyés aux serveurs du développeur. Cependant, la connexion avec un compte Google est nécessaire pour publier votre œuvre.",
       "faq.a7.html":
-        "Pour signaler un bug, demander une fonctionnalité ou poser une question sur l'utilisation, contactez-nous d'abord via notre compte X officiel. Nous ne pouvons pas répondre sur X aux demandes impliquant des informations personnelles (comme votre compte ou votre adresse e-mail) — utilisez plutôt le <a href=\"/contact/\">formulaire de contact</a> pour cela.",
+        "Pour signaler un problème, demander une fonctionnalité ou poser une question sur l’utilisation de l’application, utilisez le <a href=\"/contact/\">formulaire de contact</a>.",
     },
     es: {
       "faq.viewAll": "Ver todas las preguntas",
@@ -96,7 +95,7 @@
       "faq.a6":
         "No es necesario registrar una cuenta para crear tu obra. Tus proyectos y creaciones se guardan únicamente en tu dispositivo y nunca se envían a los servidores del desarrollador. Sin embargo, para publicar tu obra necesitas iniciar sesión con una cuenta de Google.",
       "faq.a7.html":
-        'Para reportar errores, solicitar funciones o hacer preguntas sobre el uso, contáctanos primero a través de nuestra cuenta oficial de X. No podemos responder en X a consultas que impliquen información personal (como tu cuenta o correo electrónico); para eso, usa el <a href="/contact/">formulario de contacto</a>.',
+        "Para informar de un error, solicitar una función o preguntar cómo usar la aplicación, utiliza el <a href=\"/contact/\">formulario de contacto</a>.",
     },
   };
   for (var lang in DATA) {
