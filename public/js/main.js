@@ -1258,8 +1258,7 @@
 
     if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
       window.NIARIM_I18N.applyLang(
-        document.documentElement.getAttribute("lang") || "ja",
-        { persist: false },
+        document.documentElement.getAttribute("lang") || "en",
       );
     }
   });

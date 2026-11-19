@@ -21,7 +21,7 @@
     { code: "es", label: "Español" },
   ];
 
-  var STORAGE_KEY = "niarim_lang";
+  var DEFAULT_LANG = "en";
   var DICT = window.NIARIM_I18N_DICT || {};
   var OG_LOCALES = {
     ja: "ja_JP",
@@ -59,62 +59,18 @@
   }
 
   function normalizeLang(value) {
-    return matchSupportedLang(value) || "ja";
-  }
-
-  function getUrlLang() {
-    try {
-      var value = new URL(window.location.href).searchParams.get("lang");
-      var matched = matchSupportedLang(value);
-      return matched && DICT[matched] ? matched : null;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  function getSavedLang() {
-    try {
-      var saved = window.localStorage.getItem(STORAGE_KEY);
-      var matched = matchSupportedLang(saved);
-      return matched && DICT[matched] ? matched : null;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  function detectBrowserLang() {
-    var candidates = [];
-
-    if (navigator.languages && navigator.languages.length) {
-      candidates = Array.prototype.slice.call(navigator.languages);
-    } else if (navigator.language) {
-      candidates = [navigator.language];
-    }
-
-    for (var i = 0; i < candidates.length; i += 1) {
-      var matched = matchSupportedLang(candidates[i]);
-      if (matched && DICT[matched]) return matched;
-    }
-
-    // ブラウザ/端末の優先言語に対応言語が1つもない場合は、
-    // 国際的に理解されやすい英語をサイトの既定言語として使用する。
-    return DICT.en ? "en" : "ja";
+    return matchSupportedLang(value) || DEFAULT_LANG;
   }
 
   function detectLang() {
-    // SEO用の明示URL（?lang=xx）は最優先。検索結果・共有URLと実際の本文言語を
-    // 一致させ、同じURLが閲覧環境によって別言語になる状態を避ける。
-    var urlLang = getUrlLang();
-    if (urlLang) return urlLang;
-
-    // ユーザーが既存の言語切替メニューで明示的に選んだ言語を次に優先する。
-    var saved = getSavedLang();
-    if (saved) return saved;
-
-    // 手動選択がまだない場合だけ、ブラウザ/端末の優先言語一覧を上から確認する。
-    // 自動判定結果は保存しないため、端末側の言語設定を後から変更した場合にも
-    // 次回アクセス時から自然に追従できる。
-    return detectBrowserLang();
+    try {
+      var lang = new URL(window.location.href).searchParams.get("lang");
+      return LANGS.some(function (item) { return item.code === lang; })
+        ? lang
+        : DEFAULT_LANG;
+    } catch (_) {
+      return DEFAULT_LANG;
+    }
   }
 
   function t(lang, key) {
@@ -128,7 +84,7 @@
   function syncCurrentUrl(lang) {
     try {
       var url = new URL(window.location.href);
-      if (lang === "ja") url.searchParams.delete("lang");
+      if (lang === DEFAULT_LANG) url.searchParams.delete("lang");
       else url.searchParams.set("lang", lang);
       window.history.replaceState(
         null,
@@ -146,7 +102,9 @@
         var url = new URL(raw, window.location.href);
         if (url.origin !== window.location.origin) return;
         if (url.pathname.indexOf("/api/") === 0) return;
-        if (lang === "ja") url.searchParams.delete("lang");
+        if (anchor.hasAttribute("download") || /\.[^/]+$/.test(url.pathname) &&
+            !url.pathname.endsWith("/index.html")) return;
+        if (lang === DEFAULT_LANG) url.searchParams.delete("lang");
         else url.searchParams.set("lang", lang);
         anchor.setAttribute("href", url.pathname + url.search + url.hash);
       } catch (_) {}
@@ -155,11 +113,10 @@
 
   function applyLang(lang, options) {
     lang = normalizeLang(lang);
-    if (!DICT[lang]) lang = "ja";
+    if (!DICT[lang]) lang = DICT[DEFAULT_LANG] ? DEFAULT_LANG : "ja";
     options = options || {};
 
     if (options.syncUrl === true) syncCurrentUrl(lang);
-    var hasLocalizedUrl = Boolean(getUrlLang());
 
     document.documentElement.setAttribute("lang", lang);
 
@@ -241,9 +198,7 @@
     var ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute("content", OG_LOCALES[lang] || "ja_JP");
 
-    if (hasLocalizedUrl || options.syncUrl === true) {
-      localizeInternalLinks(lang);
-    }
+    localizeInternalLinks(lang);
 
     document.querySelectorAll("[data-lang-switch]").forEach(function (button) {
       button.setAttribute(
@@ -260,13 +215,6 @@
           break;
         }
       }
-    }
-
-    // 自動検出時は保存せず、既存メニュー等からの明示的な切替だけ記憶する。
-    if (options.persist !== false) {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, lang);
-      } catch (_) {}
     }
 
     document.dispatchEvent(
@@ -297,7 +245,7 @@
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
       button.addEventListener("click", function () {
-        applyLang(lang.code, { persist: true, syncUrl: true });
+        applyLang(lang.code, { syncUrl: true });
         var dropdown = mount.closest("[data-lang-dropdown]");
         if (dropdown) setLangDropdownOpen(dropdown, false, true);
       });
@@ -376,7 +324,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     buildLangMenu();
     initLangDropdownToggle();
-    applyLang(detectLang(), { persist: false });
+    applyLang(detectLang());
   });
 
   window.NIARIM_I18N = {

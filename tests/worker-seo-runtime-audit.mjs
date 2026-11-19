@@ -25,7 +25,10 @@ function attr(html, pattern, label) {
 }
 
 for (const testCase of [
-  { path: "/index.html?lang=en", lang: "en", canonical: "/?lang=en" },
+  { path: "/", lang: "en", canonical: "/" },
+  { path: "/index.html?lang=en", lang: "en", canonical: "/" },
+  { path: "/?lang=de", lang: "en", canonical: "/" },
+  { path: "/?lang=ja", lang: "ja", canonical: "/?lang=ja" },
   {
     path: "/features/index.html?lang=fr",
     lang: "fr",
@@ -152,7 +155,7 @@ for (const pathname of SEO_PAGE_PATHS) {
   const page = pathname.split("/")[1] || "home";
 
   for (const lang of SEO_LANGS) {
-    const path = lang === "ja" ? pathname : `${pathname}?lang=${lang}`;
+    const path = lang === "en" ? pathname : `${pathname}?lang=${lang}`;
     const { response, text } = await fetchText(path);
     assert.equal(response.headers.get("content-language"), lang, path);
     if (page === "font-licenses") {

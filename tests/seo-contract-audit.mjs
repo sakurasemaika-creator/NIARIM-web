@@ -11,10 +11,10 @@ import {
 const langs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const origin = "https://example.test";
 
-assert.equal(localizedUrl(origin, "/features/", "ja"), `${origin}/features/`);
+assert.equal(localizedUrl(origin, "/features/", "ja"), `${origin}/features/?lang=ja`);
 assert.equal(
   localizedUrl(origin, "/features/", "en"),
-  `${origin}/features/?lang=en`,
+  `${origin}/features/`,
 );
 
 const robots = robotsTxt(origin);

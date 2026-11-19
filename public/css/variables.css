@@ -395,3 +395,9 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
 :root:lang(ko) {
   --measure-ch: 0.62em;
 }
+
+/* Keep headings and body text in the same serif family for Chinese and Korean. */
+:root:lang(zh),
+:root:lang(ko) {
+  --font-serif: var(--font-sans);
+}

@@ -10,7 +10,13 @@ import {
   SEO_I18N,
   SEO_LANGS,
 } from "./generated/seo-i18n.js";
-import { escapeXml, robotsTxt, sitemapXml } from "./seo.js";
+import {
+  DEFAULT_LANG,
+  escapeXml,
+  localizedUrl,
+  robotsTxt,
+  sitemapXml,
+} from "./seo.js";
 import { handleContact } from "./contact.js";
 import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
@@ -108,7 +114,7 @@ function siteOrigin(request, env) {
 
 function selectedLang(request) {
   const raw = new URL(request.url).searchParams.get("lang");
-  return SEO_LANGS.includes(raw) ? raw : "ja";
+  return SEO_LANGS.includes(raw) ? raw : DEFAULT_LANG;
 }
 
 function normalizedPagePath(pathname) {
@@ -121,9 +127,7 @@ function normalizedPagePath(pathname) {
 function canonicalUrl(request, env, lang = selectedLang(request)) {
   const requestUrl = new URL(request.url);
   const pathname = normalizedPagePath(requestUrl.pathname);
-  const url = new URL(`${siteOrigin(request, env)}${pathname}`);
-  if (lang !== "ja") url.searchParams.set("lang", lang);
-  return url.toString();
+  return localizedUrl(siteOrigin(request, env), pathname, lang);
 }
 
 function absoluteAssetUrl(value, env, request) {
@@ -270,7 +274,7 @@ function hreflangMarkup(request, env) {
     return `<link rel="alternate" hreflang="${lang}" href="${href}">`;
   });
   links.push(
-    `<link rel="alternate" hreflang="x-default" href="${canonicalUrl(request, env, "ja")}">`,
+    `<link rel="alternate" hreflang="x-default" href="${canonicalUrl(request, env, DEFAULT_LANG)}">`,
   );
   return links.join("");
 }
@@ -437,9 +441,6 @@ function rewriteSeoHtml(response, request, env) {
     .on("head", {
       element(element) {
         element.append(headPerformance, { html: true });
-        element.append('<script src="/js/lang-query-bridge.js"></script>', {
-          html: true,
-        });
         element.append(alternates, { html: true });
         element.append(alternateLocales, { html: true });
         if (schema) {
