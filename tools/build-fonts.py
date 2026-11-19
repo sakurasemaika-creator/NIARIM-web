@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 サイトで実際に使う文字だけを原本フォントから抜き出してwoff2を作り、
-common.css の @font-face ブロック（マーカーで囲んだ範囲）を書き換える。
+common-base.css の @font-face ブロック（マーカーで囲んだ範囲）を書き換える。
 
 ■ なぜこうしているか
   以前は、サブセットに無い文字を Google Fonts のCDN(fonts.googleapis.com)から
@@ -38,7 +38,7 @@ from fontTools.ttLib import TTFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "public/assets/fonts")
-CSS = os.path.join(ROOT, "public/css/common.css")
+CSS = os.path.join(ROOT, "public/css/common-base.css")
 SERIF_CHARS = os.path.join(ROOT, "tools/serif-chars.txt")
 BEGIN = "/* === BEGIN generated font-face (tools/build-fonts.py) === */"
 END = "/* === END generated font-face === */"
@@ -155,6 +155,8 @@ def site_chars():
     # 通常の空白とノーブレークスペースだけは必ず収録する。
     keep = {c for c in chars if c.isprintable() and not c.isspace()}
     keep |= {"\u0020", "\u00a0"}
+    # CSS の text-transform が HTML や辞書にない大文字も画面に描く。
+    keep |= {upper for c in keep if ord(c) < 0x0250 for upper in c.upper()}
     return keep
 
 
@@ -233,6 +235,7 @@ def load_serif_chars(want):
     # 通常の空白とノーブレークスペースだけは必ず収録する。
     keep = {c for c in chars if c.isprintable() and not c.isspace()}
     keep |= {"\u0020", "\u00a0"}
+    keep |= {upper for c in keep if ord(c) < 0x0250 for upper in c.upper()}
     return keep
 
 
@@ -517,7 +520,7 @@ def build():
             flags=re.S,
         )
     open(CSS, "w", encoding="utf-8").write(css)
-    print(f"  common.css の @font-face を更新")
+    print(f"  {os.path.basename(CSS)} の @font-face を更新")
 
 
 if __name__ == "__main__":

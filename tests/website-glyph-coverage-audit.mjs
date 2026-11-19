@@ -26,6 +26,12 @@ for (const face of CSS.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
 for (const [name, chars] of Object.entries(glyphs)) {
   if (chars.size < (name === "Menu" ? 20 : 500)) throw Error(name + " CSS glyph range is incomplete");
 }
+// CSS text-transform also renders French and Spanish labels in uppercase.
+const westernCapitals = "ÀÂÁÇÈÉÊÍÎÏÑÓÔÙÚÛŒ";
+for (const name of ["HakkouMincho", "Kuramubon"]) {
+  const missing = [...westernCapitals].filter(c => !glyphs[name].has(c.codePointAt(0)));
+  if (missing.length) throw Error(`${name} is missing French or Spanish capitals: ${missing.join(" ")}`);
+}
 const routes = [
   "/", "/about/", "/features/", "/help/", "/premium/", "/coins/",
   "/community/", "/faq/", "/contact/", "/privacy/", "/terms/", "/news/",
@@ -93,7 +99,7 @@ try {
       }
       if (route === "/community/") {
         const labels = [...document.querySelectorAll("[data-community-tab]")].map(x => x.textContent.trim());
-        const expected = ["新着", "1day", "1week", "1month", "1year", "ALL TIME"];
+        const expected = ["新着", "デイリー", "週間", "月間", "年間", "累計"];
         if (JSON.stringify(labels) !== JSON.stringify(expected)) discovered.push({ family: "labels", chars: "", where: "community:period-tabs", text: JSON.stringify(labels) });
       }
       if (route === "/premium/" && document.querySelector("main")?.textContent.includes("コイン・特典")) {
