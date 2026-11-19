@@ -1,4 +1,4 @@
-name: Website font coverage (all Japanese pages)
+name: Website font coverage (seven locales)
 on:
   push:
     branches: [dev_branch]
@@ -7,6 +7,7 @@ on:
       - "tests/website-glyph-coverage-audit.mjs"
       - "public/**/*.html"
       - "public/css/**"
+      - "public/assets/fonts/**"
       - "public/js/**"
   workflow_dispatch:
 permissions:
@@ -15,6 +16,10 @@ jobs:
   glyphs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ja, en, zh-Hans, zh-Hant, ko, fr, es]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,7 +34,17 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-font-site.log
           exit 1
-      - name: Inspect Japanese glyphs, mobile/desktop layout fonts, labels and footer
+      - name: Inspect the selected locale on mobile and desktop
         env:
           FONT_AUDIT_STRICT: "1"
-        run: node tests/website-glyph-coverage-audit.mjs
+          FONT_AUDIT_LANG: ${{ matrix.language }}
+        run: |
+          set -o pipefail
+          mkdir -p artifacts/font-coverage
+          node tests/website-glyph-coverage-audit.mjs | tee "artifacts/font-coverage/$FONT_AUDIT_LANG.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: website-font-coverage-${{ matrix.language }}
+          path: artifacts/font-coverage/
+          if-no-files-found: ignore

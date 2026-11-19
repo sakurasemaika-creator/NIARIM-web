@@ -1,5 +1,5 @@
 /**
- * Checks Japanese copy on every public route against the actual shipped WOFF2
+ * Checks localized copy on every public route against the shipped WOFF2
  * unicode-range sets and the font-family computed by Chromium. No screenshots
  * or backend calls are required. Set FONT_AUDIT_STRICT=1 to fail on findings.
  */
@@ -8,6 +8,10 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const CSS = fs.readFileSync("public/css/common-base.css", "utf8");
+const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
+const language = process.env.FONT_AUDIT_LANG || "ja";
+if (!languages.includes(language)) throw Error(`Unsupported audit language: ${language}`);
+const definedFaces = new Map();
 const glyphs = { Kuramubon: new Set(), HakkouMincho: new Set(), Menu: new Set() };
 for (const face of CSS.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
   const src = face[1];
@@ -15,12 +19,17 @@ for (const face of CSS.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
   const target = name.startsWith("Kuramubon") ? "Kuramubon" :
     name.startsWith("HakkouMincho") ? "HakkouMincho" :
     name.startsWith("NotoSerifMenu") ? "Menu" : null;
-  if (!target) continue;
+  if (!name) continue;
+  if (!definedFaces.has(name)) definedFaces.set(name, new Set());
+  const faceGlyphs = definedFaces.get(name);
   const ranges = src.match(/unicode-range:\s*([\s\S]*?);/)?.[1] || "";
   for (const range of ranges.matchAll(/U\+([0-9a-f]{4,6})(?:-([0-9a-f]{4,6}))?/gi)) {
     const lo = parseInt(range[1], 16);
     const hi = parseInt(range[2] || range[1], 16);
-    for (let point = lo; point <= hi; point++) glyphs[target].add(point);
+    for (let point = lo; point <= hi; point++) {
+      faceGlyphs.add(point);
+      if (target) glyphs[target].add(point);
+    }
   }
 }
 for (const [name, chars] of Object.entries(glyphs)) {
@@ -45,13 +54,20 @@ try {
   for (const width of [390, 1280]) {
    for (const route of routes) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
-    const response = await page.goto(base + route + "?lang=ja", { waitUntil: "networkidle" });
+    const url = new URL(route, base);
+    url.searchParams.set("lang", language);
+    const response = await page.goto(url.href, { waitUntil: "networkidle" });
     if (!response || response.status() !== 200) throw Error("Unavailable page: " + route);
+    const renderedLanguage = await page.locator("html").getAttribute("lang");
+    if (renderedLanguage !== language) {
+      throw Error(`${route} requested ${language} and rendered ${renderedLanguage}`);
+    }
     await page.evaluate(async () => {
       document.querySelectorAll("details").forEach(d => { d.open = true; });
       await document.fonts.ready;
     });
-    const result = await page.evaluate(({ h, b, m, route }) => {
+    const result = await page.evaluate(({ h, b, m, route, language, faces }) => {
+      const localFaces = new Map(faces.map(([name, points]) => [name, new Set(points)]));
       const families = { Kuramubon: new Set(h), HakkouMincho: new Set(b), Menu: new Set([...m, ...b]) };
       const discovered = [];
       const unknownDetails = [];
@@ -64,7 +80,32 @@ try {
         if (!el || el.closest("script,style,noscript,template,[hidden],[aria-hidden='true'],[data-community-gallery]")) continue;
         const style = getComputedStyle(el);
         if (style.display === "none" || style.visibility === "hidden") continue;
-        const firstFont = style.fontFamily.split(",")[0].trim().replace(/^["']|["']$/g, "");
+        const stack = style.fontFamily.split(",").map(name => name.trim().replace(/^["']|["']$/g, ""));
+        if (language !== "ja") {
+          const covered = stack.flatMap(name => localFaces.has(name) ? [localFaces.get(name)] : []);
+          if (!covered.length) {
+            totals.unknown++;
+            if (unknownDetails.length < 35) unknownDetails.push({ text: node.textContent.trim().slice(0, 70), font: style.fontFamily });
+            continue;
+          }
+          totals[stack[0].startsWith("Kuramubon") ? "Kuramubon" : stack[0].startsWith("NotoSerifMenu") ? "Menu" : "HakkouMincho"]++;
+          const source = node.textContent;
+          const rendered = style.textTransform === "uppercase" ? source.toLocaleUpperCase(language) :
+            style.textTransform === "lowercase" ? source.toLocaleLowerCase(language) : source;
+          const missing = [...new Set([...rendered].filter(c =>
+            c.trim() && !covered.some(set => set.has(c.codePointAt(0)))))].join("");
+          if (missing) {
+            const anchor = el.closest("[data-i18n],[data-i18n-html]") || el;
+            discovered.push({
+              family: stack[0],
+              chars: missing,
+              where: anchor.getAttribute("data-i18n") || anchor.getAttribute("data-i18n-html") || anchor.tagName,
+              text: rendered.trim().slice(0, 100),
+            });
+          }
+          continue;
+        }
+        const firstFont = stack[0];
         const family = firstFont.startsWith("Kuramubon") ? "Kuramubon" :
           firstFont.startsWith("HakkouMincho") ? "HakkouMincho" :
           firstFont.startsWith("NotoSerifMenu") ? "Menu" : null;
@@ -88,25 +129,28 @@ try {
         });
       }
       // All footer navigation links share the licensed body font.
-      for (const a of document.querySelectorAll(".site-footer .footer-col a")) {
+      if (language === "ja") for (const a of document.querySelectorAll(".site-footer .footer-col a")) {
         const first = getComputedStyle(a).fontFamily.split(",")[0].trim().replace(/^["\x27]|["\x27]$/g, "");
         if (!first.startsWith("HakkouMincho")) discovered.push({ family: first, chars: "", where: "footer:" + a.textContent.trim(), text: "Footer font mismatch" });
       }
       const navCoin = document.querySelector("header a[data-i18n=\"nav.coins\"]");
-      if (navCoin) {
+      if (language === "ja" && navCoin) {
         const first = getComputedStyle(navCoin).fontFamily.split(",")[0].trim().replace(/^["\x27]|["\x27]$/g, "");
         if (!first.startsWith("Kuramubon")) discovered.push({ family: first, chars: "", where: "navigation:coins", text: navCoin.textContent.trim() });
       }
-      if (route === "/community/") {
+      if (language === "ja" && route === "/community/") {
         const labels = [...document.querySelectorAll("[data-community-tab]")].map(x => x.textContent.trim());
         const expected = ["新着", "デイリー", "週間", "月間", "年間", "累計"];
         if (JSON.stringify(labels) !== JSON.stringify(expected)) discovered.push({ family: "labels", chars: "", where: "community:period-tabs", text: JSON.stringify(labels) });
       }
-      if (route === "/premium/" && document.querySelector("main")?.textContent.includes("コイン・特典")) {
+      if (language === "ja" && route === "/premium/" && document.querySelector("main")?.textContent.includes("コイン・特典")) {
         discovered.push({ family: "copy", chars: "", where: "premium:obsolete-coin-navigation", text: "Legacy coin benefit label remains" });
       }
       return { discovered, totals, unknownDetails };
-    }, { h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], m: [...glyphs.Menu], route });
+    }, {
+      h: [...glyphs.Kuramubon], b: [...glyphs.HakkouMincho], m: [...glyphs.Menu],
+      route, language, faces: [...definedFaces].map(([name, points]) => [name, [...points]]),
+    });
     const unique = new Map();
     for (const f of result.discovered) {
       const key = f.family + ":" + f.where + ":" + f.chars;
@@ -114,7 +158,7 @@ try {
     }
     if (result.totals.unknown) unique.set("unapproved-font", { route, width, family:"unapproved-font", chars:"", where:"unapproved computed font family", text:JSON.stringify(result.unknownDetails).slice(0,250) });
     findings.push(...unique.values());
-    routeReports.push({ route, width, ...result.totals, missingGroups: unique.size });
+    routeReports.push({ language, route, width, ...result.totals, missingGroups: unique.size });
     console.log("FONT_ROUTE", JSON.stringify(routeReports.at(-1)));
     if (result.unknownDetails.length) console.log("FONT_UNKNOWN", JSON.stringify({route,width,details:result.unknownDetails}));
     await page.close();
@@ -124,5 +168,5 @@ try {
   await browser.close();
 }
 console.log("FONT_FINDINGS", JSON.stringify(findings.slice(0, 150)));
-console.log("FONT_SUMMARY", JSON.stringify({ missingGroups: findings.length, routes: routes.length, widths: 2, menuGlyphs: glyphs.Menu.size, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
+console.log("FONT_SUMMARY", JSON.stringify({ language, missingGroups: findings.length, routes: routes.length, widths: 2, menuGlyphs: glyphs.Menu.size, headGlyphs: glyphs.Kuramubon.size, bodyGlyphs: glyphs.HakkouMincho.size }));
 if (findings.length && process.env.FONT_AUDIT_STRICT === "1") process.exitCode = 1;
