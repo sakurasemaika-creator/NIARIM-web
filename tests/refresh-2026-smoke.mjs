@@ -1,9 +1,10 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
+import { launchOptions } from "./browser-launch.mjs";
 
 const base = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const browsers = await chromium.launch({headless:true});
+const browsers = await chromium.launch(launchOptions());
 const findings = [];
 const widths = [320, 390, 768, 1280, 1440];
 const langs = ["ja","en","zh-Hans","zh-Hant","ko","fr","es"];
