@@ -17,7 +17,7 @@
         "削除するNIARIMアカウントと同じGoogleアカウントで本人確認してください。",
       "accountDeletion.understood": "削除後に復元できないことを確認しました",
       "accountDeletion.delete": "アカウントを完全に削除する",
-      "accountDeletion.retry": "最初からやり直す",
+      "accountDeletion.retry": "やり直す",
       "accountDeletion.loading": "本人確認を読み込んでいます。",
       "accountDeletion.verified":
         "本人確認が完了しました。表示されたアカウントを確認してください。",
