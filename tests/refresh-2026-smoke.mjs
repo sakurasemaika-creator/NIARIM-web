@@ -253,7 +253,7 @@ try {
      !coins.hasOpalAmountHeading||!coins.hasCompletePackLabel||!coins.hasSeparateYearlyBaseline||
      coins.earningShowsFixedRewards||coins.marketingExplainsInternals||
      !same(coins.packAmounts,[9190,18350,41260,55000,550000])||
-     !same(coins.separateAmounts,[11490,22940,51580,68750,687500])||
+     !same(coins.separateAmounts,[18380,36700,82520,110000,1100000])||
      !same(coins.separateAmounts,coins.singleTotal)||!same(coins.savingAmounts,coins.expectedSavings)||
      !same(coins.completePackDiscounts,coins.expectedBadges)||!coins.comparisonSavingsHaveNoBadges||
      !coins.featuredDiscountCardRemoved||!coins.oldFullPremiumRemoved||!coins.accordionTimesJapanese){
@@ -288,7 +288,8 @@ try {
 
   await page.goto(base+"/help/",{waitUntil:"networkidle"});
   const helpCards=await page.locator("[data-help-card]").count();
-  if(helpCards!==80)log("Help must expose all 80 app topics",helpCards);
+  if(helpCards!==81 || !(await page.locator('[data-help-card] [data-i18n="help.premiumExpiry.title"]').count()))
+    log("Help must expose 81 topics including benefit expiry",helpCards);
   await page.close();
 } catch(error){log("Unexpected error",error.stack||error.message)}
 finally {await browsers.close()}
