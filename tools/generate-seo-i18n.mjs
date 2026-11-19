@@ -62,7 +62,7 @@ function addAttributeKeys(source, keys) {
   const normalized = source.replaceAll('\\"', '"').replaceAll("\\'", "'");
 
   for (const match of normalized.matchAll(
-    /data-i18n(?:-html|-title|-description)?=["']([^"']+)["']/g,
+    /(?:data-i18n(?:-html|-title|-description)?|data-play-release-i18n)=["']([^"']+)["']/g,
   )) {
     keys.add(match[1]);
   }

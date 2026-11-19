@@ -6,6 +6,7 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
     ja: {
+      "nav.releaseInfo": "配信情報",
       "a11y.skipToMain": "本文へスキップ",
       "a11y.globalNav": "グローバルナビゲーション",
       "a11y.openMenu": "メニューを開く",
@@ -29,6 +30,7 @@
       "help.backToTop": "カテゴリ一覧へ戻る",
     },
     en: {
+      "nav.releaseInfo": "Release info",
       "a11y.skipToMain": "Skip to main content",
       "a11y.globalNav": "Global navigation",
       "a11y.openMenu": "Open menu",
@@ -52,6 +54,7 @@
       "help.backToTop": "Back to categories",
     },
     "zh-Hans": {
+      "nav.releaseInfo": "上线信息",
       "a11y.skipToMain": "跳至主要内容",
       "a11y.globalNav": "全局导航",
       "a11y.openMenu": "打开菜单",
@@ -75,6 +78,7 @@
       "help.backToTop": "返回分类列表",
     },
     "zh-Hant": {
+      "nav.releaseInfo": "上線資訊",
       "a11y.skipToMain": "跳至主要內容",
       "a11y.globalNav": "全域導覽",
       "a11y.openMenu": "開啟選單",
@@ -98,6 +102,7 @@
       "help.backToTop": "返回分類列表",
     },
     ko: {
+      "nav.releaseInfo": "출시 안내",
       "a11y.skipToMain": "본문으로 건너뛰기",
       "a11y.globalNav": "전체 내비게이션",
       "a11y.openMenu": "메뉴 열기",
@@ -121,6 +126,7 @@
       "help.backToTop": "카테고리 목록으로 돌아가기",
     },
     fr: {
+      "nav.releaseInfo": "Disponibilité",
       "a11y.skipToMain": "Passer au contenu principal",
       "a11y.globalNav": "Navigation principale",
       "a11y.openMenu": "Ouvrir le menu",
@@ -144,6 +150,7 @@
       "help.backToTop": "Retour aux catégories",
     },
     es: {
+      "nav.releaseInfo": "Disponibilidad",
       "a11y.skipToMain": "Saltar al contenido principal",
       "a11y.globalNav": "Navegación principal",
       "a11y.openMenu": "Abrir el menú",

@@ -6,7 +6,7 @@ import { runInNewContext } from "node:vm";
 const read = (path) => readFileSync(new URL("../public/" + path, import.meta.url), "utf8");
 const html = read("index.html");
 const script = read("js/store-release-link.js");
-const dictionary = read("js/i18n-dict-refresh-2026.js");
+const dictionaries = ["i18n-dict", "i18n-dict-intl", "i18n-dict-nav-extra", "i18n-dict-refresh-2026"].map(name => read("js/" + name + ".js"));
 const listing = "https://play.google.com/store/apps/details?id=com.niarim.niarim";
 
 function storefront(configuredUrl, lang) {
@@ -34,7 +34,7 @@ function storefront(configuredUrl, lang) {
     },
   };
   const window = { NIARIM_CONFIG: { GOOGLE_PLAY_URL: configuredUrl } };
-  runInNewContext(dictionary, { window });
+  for (const dictionary of dictionaries) runInNewContext(dictionary, { window });
   window.NIARIM_I18N = { translate: (locale, key) => window.NIARIM_I18N_DICT[locale][key] };
   runInNewContext(script, { document, window, URL });
   return { fields, links, confirmation, translate: window.NIARIM_I18N.translate };
@@ -47,9 +47,10 @@ test("missing or incorrect store URLs keep both links hidden and show pending co
     "https://play.google.com/store/apps/details?id=com.example.other",
   ]) {
     const { fields, links, confirmation } = storefront(url, "en");
-    assert.equal(fields.length, 4);
+    assert.equal(fields.length, 5);
     assert.equal(links.length, 2);
-    assert.ok(fields.every(({ key }) => key.startsWith("refresh.release.pending.")));
+    assert.ok(fields.some(({ key }) => key === "nav.releaseInfo"));
+    assert.equal(fields.filter(({ key }) => key.startsWith("refresh.release.pending.")).length, 4);
     assert.ok(links.every(({ hidden, href }) => hidden && !href));
     assert.equal(confirmation.hidden, true);
   }
@@ -59,7 +60,7 @@ test("a valid listing shows localized release copy and keeps the locale keys act
   for (const lang of ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"]) {
     const { fields, links, confirmation, translate } = storefront(listing, lang);
     assert.ok(fields.every(({ key, textContent, dataset }) => {
-      return key === dataset.playReleaseI18n && textContent === translate(lang, key);
+      return key === dataset.playReleaseI18n && typeof textContent === "string" && textContent.length > 0 && textContent === translate(lang, key);
     }));
     assert.ok(links.every(({ hidden, href, target, rel }) => {
       return !hidden && href === listing && target === "_blank" && rel === "noopener noreferrer";

@@ -313,7 +313,7 @@
     if (!trigger) return;
 
     var downloadLink = dropdown.parentElement.querySelector(
-      ':scope > a[data-i18n="nav.download"]',
+      ':scope > a[data-play-release-i18n="nav.download"]',
     );
     if (downloadLink) {
       var mobileNav = window.matchMedia("(max-width: 1180px)");

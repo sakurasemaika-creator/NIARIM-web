@@ -109,6 +109,14 @@ try {
     const page=await browsers.newPage({viewport:{width:390,height:844}});
     page.on("pageerror",e=>log("Browser JS",lang,e.message));
     await page.goto(base+"/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
+    const releaseLink = page.locator('header a[data-play-release-i18n="nav.download"]');
+    const releaseLabel = await releaseLink.innerText();
+    const pendingLabel = await page.evaluate(() =>
+      window.NIARIM_I18N.translate(document.documentElement.lang, "nav.releaseInfo"));
+    const releaseUrl = new URL(await releaseLink.getAttribute("href"), base);
+    if (releaseLabel.trim() !== pendingLabel || releaseUrl.pathname !== "/" ||
+        releaseUrl.hash !== "#download" || (releaseUrl.searchParams.get("lang") || "ja") !== lang)
+      log("Release navigation before launch",lang,releaseLabel);
     const viewer = page.locator("#capture-viewer");
     const trigger = page.locator(".nr-gallery-item").first().getByRole("button");
     await page.locator(".nr-palette-button[data-variant='3']").click();
