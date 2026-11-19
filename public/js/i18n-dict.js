@@ -163,7 +163,7 @@
       "contact.error.email": "メールアドレスの形式が正しくありません。",
       "contact.error.tooLong": "文字数が上限を超えています。",
       "contact.error.agree": "プライバシーポリシーへの同意が必要です。",
-      "contact.status.successTitle": "お問い合わせを受け付けました。",
+      "contact.status.successTitle": "お問い合わせをうけつけました。",
       "contact.status.successBody":
         "ご連絡ありがとうございます。内容を確認のうえ、必要に応じてご返信いたします。",
       "contact.status.errorTitle": "送信できませんでした。",

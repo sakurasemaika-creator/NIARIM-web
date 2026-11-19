@@ -233,6 +233,7 @@
                     type="text"
                     id="name"
                     name="name"
+                    autocomplete="name"
                     maxlength="100"
                     required
                     data-i18n-attr="placeholder:contact.form.namePlaceholder"
@@ -252,6 +253,7 @@
                     type="email"
                     id="email"
                     name="email"
+                    autocomplete="email"
                     maxlength="254"
                     required
                     data-i18n-attr="placeholder:contact.form.emailPlaceholder"
@@ -333,12 +335,10 @@
                   <p class="form-error" aria-live="polite"></p>
                 </div>
 
-                <!-- honeypot: ボット対策。人間には見えない入力欄 -->
-                <div class="form-honeypot" aria-hidden="true">
-                  <label for="company">Company</label>
+                <!-- 画面外の配置に加え、hidden でブラウザの自動入力対象から外す。 -->
+                <div class="form-honeypot" aria-hidden="true" hidden>
                   <input
                     type="text"
-                    id="company"
                     name="company"
                     tabindex="-1"
                     autocomplete="off"
