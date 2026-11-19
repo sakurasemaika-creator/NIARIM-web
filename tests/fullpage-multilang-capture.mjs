@@ -12,6 +12,7 @@ const routes = [
   "/about/",
   "/features/",
   "/premium/",
+  "/coins/",
   "/community/",
   "/help/",
   "/faq/",
@@ -19,6 +20,7 @@ const routes = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/font-licenses/",
   "/404.html",
 ];
 const allLangs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
@@ -175,13 +177,13 @@ for (const vp of viewports) {
       viewport: { width: vp.width, height: vp.height },
       locale: lang === "ja" ? "ja-JP" : lang,
     });
-    await context.addInitScript((value) => {
-      localStorage.setItem("niarim_lang", value);
-    }, lang);
     const page = await context.newPage();
 
     for (const route of routes) {
-      await page.goto(baseURL + route, { waitUntil: "networkidle" });
+      const url = new URL(route, baseURL);
+      if (lang !== "en") url.searchParams.set("lang", lang);
+      await page.goto(url.href, { waitUntil: "networkidle" });
+      await page.waitForFunction((expected) => document.documentElement.lang === expected, lang);
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(900);
 

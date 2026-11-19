@@ -16,15 +16,15 @@ const bad=[];
 try {
   for(const width of widths) {
     const context=await browser.newContext({viewport:{width,height:900},reducedMotion:"reduce"});
-    await context.addInitScript(() => localStorage.setItem("niarim_lang","ja"));
     const page=await context.newPage();
     page.on("pageerror", e=>bad.push("JS "+width+" "+e.message));
     page.on("response",r=>{
       if(r.status()>=400 && r.url().includes("/assets/")) bad.push("Asset "+r.status()+" "+r.url());
     });
     for(const route of routes) {
-      const response=await page.goto(base+route,{waitUntil:"domcontentloaded"});
+      const response=await page.goto(base+route+"?lang=ja",{waitUntil:"domcontentloaded"});
       if(!response || response.status()>=400)bad.push("HTTP "+width+" "+route+" "+response?.status());
+      await page.waitForFunction(()=>document.documentElement.lang==="ja");
       await page.evaluate(()=>document.fonts.ready);
       const results=await page.evaluate((route)=>{
         const visible=el=>{
