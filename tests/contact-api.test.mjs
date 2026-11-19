@@ -98,6 +98,25 @@ test("oversized actual body is rejected without trusting Content-Length", async 
   assert.equal(fetch.mock.callCount(), 0);
 });
 
+test("the custom domain can submit its own form without accepting cross-origin posts", async () => {
+  const custom = "https://niarim.miranima-studio.com";
+  const customEnv = { ...env, CONTACT_SITE_ORIGIN: custom };
+  const fetch = mock.method(globalThis, "fetch", async () => new Response("{}"));
+  async function submit(source) {
+    return handleContact(
+      new Request(custom + "/api/contact", {
+        method: "POST",
+        headers: { Origin: source },
+        body: await formRequest().formData(),
+      }),
+      customEnv,
+    );
+  }
+  assert.equal((await submit(origin)).status, 403);
+  assert.equal((await submit(custom)).status, 200);
+  assert.equal(fetch.mock.callCount(), 1);
+});
+
 test("rate-limited requests are rejected before consuming the upload", async () => {
   const request = formRequest();
   const response = await handleContact(request, {

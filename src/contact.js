@@ -50,10 +50,13 @@ export async function handleContact(request, env) {
   if (request.method !== "POST") {
     return jsonResponse(405, { error: "method_not_allowed" });
   }
-  const expectedOrigin = new URL(env.SITE_ORIGIN || request.url).origin;
+  const expectedOrigin = new URL(request.url).origin;
+  const acceptedOrigins = [env.SITE_ORIGIN, env.CONTACT_SITE_ORIGIN]
+    .filter(Boolean)
+    .map((value) => new URL(value).origin);
   const origin = request.headers.get("Origin");
   if (
-    new URL(request.url).origin !== expectedOrigin ||
+    (acceptedOrigins.length > 0 && !acceptedOrigins.includes(expectedOrigin)) ||
     (origin === null
       ? request.headers.get("Sec-Fetch-Site") !== "same-origin"
       : origin !== expectedOrigin)

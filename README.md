@@ -174,34 +174,18 @@ Cloudflare上でメールを送信する方法を検討した結果、以下の�
 | NIARIMでの想定月間利用量 | 個人開発アプリのお問い合わせ窓口として、月間数十〜百通程度を想定。無料枠内で運用可能と見込まれる                            |
 
 - **Cloudflare Email Service**（Workers向け送信機能）は2026年時点でBetaかつ**Workers Paid向け**のため、無料枠を優先する方針から今回はResendを採用しています。
-- **Cloudflare Email Routing**は「受信メールを別のアドレスへ転送する」ためのサービスであり、Workerからの能動的なメール送信（お問い合わせフォームの送信先へのメール送信）には利用できません。今回の用途には合致しないため使用していません。
+- **Cloudflare Email Routing**は設定せず、受信はさくらメールボックスで運用します。
 - Cloudflare公式にも、WorkersからResendを使ってメールを送信する構成のチュートリアルが公開されています。
 
 将来的にCloudflare Email Serviceが無料枠付きで一般提供された場合や、別のメール送信サービスへ移行する場合は、`src/contact.js` の `sendViaResend` 関数を差し替えることで対応できます。フォーム側の窓口（`POST /api/contact`）は変更する必要がありません。
 
 ### セットアップ手順
 
-1. [resend.com](https://resend.com/) でアカウントを作成する
-2. 送信元ドメイン（例: `niarim.example.com`）を登録し、指示されるSPF/DKIMレコードをDNSに設定して認証を完了する（[要確認] 本番ドメイン確定後に実施）
-3. APIキーを発行する
-4. 以下のコマンドでWorkerにシークレットとして設定する（リポジトリには絶対にコミットしない）
-
-```bash
-npx wrangler secret put RESEND_API_KEY
-```
-
-5. `wrangler.jsonc` の `vars` に、送信先・送信元メールアドレスを設定する
-
-```jsonc
-"vars": {
-  "CONTACT_TO_EMAIL": "your-inbox@example.com",
-  "CONTACT_FROM_EMAIL": "NIARIM <noreply@niarim.example.com>"
-}
-```
-
-APIキー・送信先・送信元のいずれかが未設定の場合、`/api/contact` はユーザーには「送信できませんでした」という汎用エラーを返し、詳細はWorkerのログにのみ記録します（ローカル開発時はこの状態で問題なく動作確認できます）。
-
-送信を受け付けるオリジンは `SITE_ORIGIN` で指定します。ローカルでフォームの送信処理を確認する場合は `npx wrangler dev --var SITE_ORIGIN:http://localhost:8787` で起動し、ブラウザでも同じURLを使用してください。添付は形式の識別情報を点検してから、形式に対応した拡張子で転送します。元の名前はメール本文で確認できます。
+- Resendに送信ドメインの `miranima-studio.com` を登録し、提示された送信用DNSレコードを設定します。既存のさくらメールボックスはルートドメインの受信用MXを使用します。Resendの送信用レコードは指示された名前に追加します。
+- 認証済みドメイン向けの送信専用APIキーを発行し、Cloudflareの `niarim-web` Workerに暗号化された `RESEND_API_KEY` として登録します。
+- フォームの送信元と受信先は `support@miranima-studio.com` です。返信先にはフォームに入力されたメールアドレスを使います。MIRANIMA Studioの総合窓口は `contact@miranima-studio.com` です。
+- フォームは `SITE_ORIGIN` と `CONTACT_SITE_ORIGIN` で指定したホストからの同一オリジン送信を受け付けます。ローカル確認では `SITE_ORIGIN` をブラウザと同じローカルURLに設定してください。
+- 有効な送信設定がない場合、フォームは送信エラーを返します。お問い合わせページの直通メールリンクからも連絡できます。
 
 ## レート制限（Durable Objects）
 

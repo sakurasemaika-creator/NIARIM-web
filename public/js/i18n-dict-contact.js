@@ -2,6 +2,8 @@
   const dict = window.NIARIM_I18N_DICT;
   const contact = {
     ja: {
+      "contact.email.support": "NIARIMのサポート",
+      "contact.email.studio": "MIRANIMA Studioの総合窓口",
       "contact.form.attachmentRemove": "外す",
       "contact.form.attachmentRemoveNamed": "%sを外す",
       "contact.error.attachmentCount": "添付は3件までです。",
@@ -15,6 +17,8 @@
         "添付を読み込めませんでした。ファイルが開けることと形式を確認してください。",
     },
     en: {
+      "contact.email.support": "NIARIM support",
+      "contact.email.studio": "MIRANIMA Studio general inquiries",
       "contact.form.attachmentRemove": "Remove",
       "contact.form.attachmentRemoveNamed": "Remove %s",
       "contact.error.attachmentCount": "You can attach up to 3 files.",
@@ -28,6 +32,8 @@
         "An attachment could not be read. Check that each file opens and uses a supported format.",
     },
     "zh-Hans": {
+      "contact.email.support": "NIARIM 支持",
+      "contact.email.studio": "MIRANIMA Studio 综合咨询",
       "contact.form.attachmentRemove": "移除",
       "contact.form.attachmentRemoveNamed": "移除 %s",
       "contact.error.attachmentCount": "最多可添加 3 个附件。",
@@ -39,6 +45,8 @@
         "无法读取附件。请确认每个文件都能打开且格式受支持。",
     },
     "zh-Hant": {
+      "contact.email.support": "NIARIM 支援",
+      "contact.email.studio": "MIRANIMA Studio 一般聯絡",
       "contact.form.attachmentRemove": "移除",
       "contact.form.attachmentRemoveNamed": "移除 %s",
       "contact.error.attachmentCount": "最多可加入 3 個附件。",
@@ -50,6 +58,8 @@
         "無法讀取附件。請確認每個檔案可開啟且格式受支援。",
     },
     ko: {
+      "contact.email.support": "NIARIM 지원",
+      "contact.email.studio": "MIRANIMA Studio 일반 문의",
       "contact.form.attachmentRemove": "제거",
       "contact.form.attachmentRemoveNamed": "%s 제거",
       "contact.error.attachmentCount":
@@ -64,6 +74,8 @@
         "첨부 파일을 읽을 수 없습니다. 파일이 열리는지, 지원되는 형식인지 확인해 주세요.",
     },
     fr: {
+      "contact.email.support": "Assistance NIARIM",
+      "contact.email.studio": "Demandes générales à MIRANIMA Studio",
       "contact.form.attachmentRemove": "Retirer",
       "contact.form.attachmentRemoveNamed": "Retirer %s",
       "contact.error.attachmentCount":
@@ -78,6 +90,8 @@
         "Impossible de lire une pièce jointe. Vérifiez que chaque fichier s’ouvre et que son format est pris en charge.",
     },
     es: {
+      "contact.email.support": "Soporte de NIARIM",
+      "contact.email.studio": "Consultas generales a MIRANIMA Studio",
       "contact.form.attachmentRemove": "Quitar",
       "contact.form.attachmentRemoveNamed": "Quitar %s",
       "contact.error.attachmentCount": "Puedes adjuntar hasta 3 archivos.",
