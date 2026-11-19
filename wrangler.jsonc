@@ -20,12 +20,15 @@
   // 公開サイトの正規URL。独自ドメインへ移行した際はこの1か所を変更する。
   "vars": {
     "SITE_ORIGIN": "https://niarim-web.niarim.workers.dev",
-    // Public read-only AWS Lambda Function URL used by the Flutter community API.
+    // AWS Lambda Function URL for public community reads and verified account deletion.
     "NIARIM_PUBLIC_API_BASE_URL": "https://ibjfhyoqvfanle62ltokgz6sry0fjqfh.lambda-url.ap-northeast-1.on.aws/",
     "CONTACT_SITE_ORIGIN": "https://niarim.miranima-studio.com",
     "CONTACT_TO_EMAIL": "support@miranima-studio.com",
     "CONTACT_FROM_EMAIL": "NIARIM <support@miranima-studio.com>",
   },
+  // To enable the deletion page, set ACCOUNT_DELETION_GOOGLE_CLIENT_ID to the
+  // same public OAuth Web client ID as the backend's GOOGLE_CLIENT_ID.
+  // Register each enabled HTTPS site origin with that Google OAuth client.
   "durable_objects": {
     "bindings": [
       { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" },

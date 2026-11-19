@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>NIARIMアカウントを削除 | NIARIM</title>
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <script src="/js/lang-flag.js"></script>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/pages/legal.css" />
+    <link rel="stylesheet" href="/css/pages/account-deletion.css" />
+    <link rel="stylesheet" href="/css/font-and-capture-2026.css?v=20261110" />
+    <link rel="stylesheet" href="/css/brand-direction-2026.css?v=20261112" />
+    <link
+      rel="stylesheet"
+      href="/css/studio-unification-2026.css?v=20261112-1"
+    />
+    <script defer src="/js/i18n-dict.js"></script>
+    <script defer src="/js/i18n-dict-intl.js"></script>
+    <script defer src="/js/i18n-dict-account-deletion.js"></script>
+    <script defer src="/js/i18n.js"></script>
+    <script defer src="/js/account-deletion.js"></script>
+    <script defer src="/js/brand-direction.js?v=20261112"></script>
+  </head>
+  <body data-i18n-title="accountDeletion.title">
+    <main id="main" class="container account-deletion">
+      <a class="brand" href="/" aria-label="NIARIM">
+        <img src="/assets/icons/favicon.svg" width="40" height="40" alt="" />
+        <span>NIARIM</span>
+      </a>
+      <div class="legal-header">
+        <h1 data-i18n="accountDeletion.title">NIARIMアカウントを削除</h1>
+      </div>
+      <div class="legal-body">
+        <p class="legal-notice" data-i18n="accountDeletion.warning">
+          削除したアカウントと関連データは復元できません。
+        </p>
+        <h2 data-i18n="accountDeletion.removed">削除されるデータ</h2>
+        <ul>
+          <li data-i18n="accountDeletion.profile">
+            プロフィール、作品広場の投稿・ブックマーク・フォロー
+          </li>
+          <li data-i18n="accountDeletion.rewards">
+            オパール残高、交換した特典、ミッションや通知の履歴
+          </li>
+        </ul>
+        <p data-i18n="accountDeletion.elsewhere">
+          端末に保存した作品とYouTube上の動画は手元に残ります。
+        </p>
+        <p>
+          <a
+            href="https://play.google.com/store/account/subscriptions"
+            data-i18n="accountDeletion.subscriptions"
+            >Google Playの定期購入は別途管理してください</a
+          >
+        </p>
+        <div id="delete-sign-in">
+          <p data-i18n="accountDeletion.signIn">
+            削除するNIARIMアカウントと同じGoogleアカウントで本人確認してください。
+          </p>
+          <div id="delete-google"></div>
+        </div>
+        <form id="delete-confirm" hidden>
+          <p id="delete-email" dir="auto"></p>
+          <label>
+            <input type="checkbox" id="delete-understood" required />
+            <span data-i18n="accountDeletion.understood"
+              >削除後に復元できないことを確認しました</span
+            >
+          </label>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="delete-submit"
+            disabled
+            data-i18n="accountDeletion.delete"
+          >
+            アカウントを完全に削除する
+          </button>
+        </form>
+        <p id="delete-status" role="status" aria-live="polite"></p>
+        <button
+          class="btn btn-secondary"
+          type="button"
+          id="delete-retry"
+          hidden
+          data-i18n="accountDeletion.retry"
+        >
+          最初からやり直す
+        </button>
+        <noscript
+          ><p>
+            本人確認と削除を続けるには、ブラウザでJavaScriptを有効にしてください。
+          </p></noscript
+        >
+        <p>
+          <a href="/privacy/" data-i18n="footer.privacy"
+            >プライバシーポリシー</a
+          >
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

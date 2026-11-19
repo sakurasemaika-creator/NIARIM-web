@@ -44,7 +44,7 @@ for (const name of ["HakkouMincho", "Kuramubon"]) {
 const routes = [
   "/", "/about/", "/features/", "/help/", "/premium/", "/coins/",
   "/community/", "/faq/", "/contact/", "/privacy/", "/terms/", "/news/",
-  "/font-licenses/"
+  "/font-licenses/", "/account-deletion/"
 ];
 const base = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const browser = await chromium.launch(launchOptions());

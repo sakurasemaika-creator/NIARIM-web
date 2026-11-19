@@ -8,6 +8,13 @@ on:
       - "tests/opal-brand-contract.mjs"
       - "tests/community-ranking-visibility-browser.mjs"
       - "tests/community-feed.test.mjs"
+      - "tests/account-deletion.test.mjs"
+      - "tests/account-deletion-browser.mjs"
+      - "src/account-deletion.js"
+      - "public/account-deletion/**"
+      - "public/css/pages/account-deletion.css"
+      - "public/js/*account-deletion.js"
+      - "public/privacy/index.html"
       - "public/css/pages/community.css"
       - "public/index.html"
       - "public/404.html"
@@ -105,6 +112,10 @@ jobs:
         run: node tests/studio-2026-browser.mjs
       - name: Test in-place redaction of newly private ranked works
         run: node tests/community-ranking-visibility-browser.mjs
+      - name: Test Google verification and irreversible deletion confirmation with mock identity
+        run: |
+          node --test tests/account-deletion.test.mjs
+          node tests/account-deletion-browser.mjs
       - name: Capture all website pages top-to-bottom, Japanese PC and mobile
         env:
           AUDIT_LANGS: ja

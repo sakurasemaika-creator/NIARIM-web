@@ -1,0 +1,29 @@
+.account-deletion {
+  max-width: 760px;
+  padding-block: var(--space-xl);
+}
+.account-deletion .legal-header {
+  padding-block: var(--space-lg) var(--space-md);
+}
+.account-deletion .legal-body > * + *,
+.account-deletion #delete-google,
+.account-deletion #delete-submit {
+  margin-top: var(--space-md);
+}
+.account-deletion #delete-email {
+  overflow-wrap: anywhere;
+  font-family: system-ui, sans-serif;
+}
+.account-deletion #delete-confirm label {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  margin-top: var(--space-sm);
+}
+.account-deletion #delete-understood {
+  accent-color: var(--color-accent-strong);
+}
+.account-deletion #delete-submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}

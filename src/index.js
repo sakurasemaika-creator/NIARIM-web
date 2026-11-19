@@ -18,6 +18,7 @@ import {
   sitemapXml,
 } from "./seo.js";
 import { handleContact } from "./contact.js";
+import { handleAccountDeletion } from "./account-deletion.js";
 import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
 
@@ -465,10 +466,19 @@ function rewriteSeoHtml(response, request, env) {
   });
 }
 
-function withSecurityHeaders(response) {
+function withSecurityHeaders(response, accountDeletionPage = false) {
   const headers = new Headers(response.headers);
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     headers.set(key, value);
+  }
+  if (accountDeletionPage) {
+    headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+    headers.set("Content-Security-Policy", CSP
+      .replace("script-src 'self'", "script-src 'self' https://accounts.google.com/gsi/client")
+      .replace("style-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style")
+      .replace("connect-src 'self'", "connect-src 'self' https://accounts.google.com/gsi/")
+      + "; frame-src https://accounts.google.com/gsi/");
+    headers.set("X-Robots-Tag", "noindex");
   }
   if (response.status >= 400) {
     headers.set("X-Robots-Tag", "noindex, nofollow");
@@ -491,6 +501,10 @@ export default {
       if (url.pathname === "/api/contact") {
         const response = await handleContact(request, env);
         return withSecurityHeaders(response);
+      }
+      if (url.pathname.startsWith("/api/account-deletion/")) {
+        const action = url.pathname.slice("/api/account-deletion/".length);
+        return withSecurityHeaders(await handleAccountDeletion(request, env, action));
       }
 
       if (url.pathname.startsWith("/api/")) {
@@ -522,7 +536,7 @@ export default {
 
       const assetResponse = await env.ASSETS.fetch(request);
       const seoResponse = rewriteSeoHtml(assetResponse, request, env);
-      return withSecurityHeaders(seoResponse);
+      return withSecurityHeaders(seoResponse, /^\/account-deletion\/(?:index\.html)?$/.test(url.pathname));
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(
