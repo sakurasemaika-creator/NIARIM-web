@@ -73,7 +73,7 @@
 Noto Serif KR・SC・TC の原本は [Google Fonts の固定リビジョン](https://github.com/google/fonts/tree/cc5661d43cd4f9aad5567033a8e15ca28dc35c86/ofl)
 から取得し、`NotoSerifKR.ttf`、`NotoSerifSC.ttf`、`NotoSerifTC.ttf` として同じフォルダに置きます。
 `python tools/build-locale-fonts.py <原本のフォルダ> <NIARIMのチェックアウト>` で、
-既存の字形を保持して地域別フォントとくらむぼんのラテン文字サブセットを更新できます。
+既存の字形を保持して、地域別フォント、白光明朝の本文用フォント、くらむぼんのラテン文字を更新できます。
 実行には FontTools と Brotli が必要です。
 
 サイトの文言を変更したら、収録文字が変わるため再生成が必要です。

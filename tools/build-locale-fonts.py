@@ -26,7 +26,7 @@ def ranges(points):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("originals", type=Path, help="directory with original Noto Serif KR, SC and TC .ttf files")
-    parser.add_argument("app", type=Path, help="NIARIM checkout with the original Kuramubon .otf file")
+    parser.add_argument("app", type=Path, help="NIARIM checkout with the original application fonts")
     arguments = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     font_dir = root / "public/assets/fonts"
@@ -34,11 +34,17 @@ def main():
     css = sheet.read_text(encoding="utf-8")
     supplements = json.loads((root / "tools/locale-font-characters.json").read_text(encoding="utf-8"))
 
+    app_fonts = arguments.app / "assets/fonts"
+    brand_faces = {
+        "Kuramubon": ("Kuramubon-latin.woff2", app_fonts / "Kuramubon.otf"),
+        "HakkouMincho": ("HakkouMincho-latin.woff2", app_fonts / "HakkouMincho.ttf"),
+        "HakkouMinchoCJK": ("HakkouMincho-subset.woff2", app_fonts / "HakkouMincho.ttf"),
+    }
     for family, characters in supplements.items():
-        is_heading = family == "Kuramubon"
-        filename = f"{family}-{'latin' if is_heading else 'subset'}.woff2"
+        filename, source = brand_faces.get(family, (
+            f"{family}-subset.woff2", arguments.originals / f"{family}.ttf",
+        ))
         target = font_dir / filename
-        source = arguments.app / "assets/fonts/Kuramubon.otf" if is_heading else arguments.originals / f"{family}.ttf"
         actual = {ord(character) for character in characters}
         if target.is_file():
             with TTFont(target) as old:
@@ -67,7 +73,7 @@ def main():
         match = pattern.search(css)
         if match:
             face = re.sub(r"unicode-range:\s*[^;]+;", "unicode-range:\n" + ranges(actual) + ";", match[0])
-            if not is_heading:
+            if family not in brand_faces:
                 face = re.sub(r"^  font-weight: [^;]+;\n", "", face, flags=re.M)
             css = css[:match.start()] + face + css[match.end():]
         else:
