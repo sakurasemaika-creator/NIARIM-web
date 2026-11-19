@@ -12,6 +12,7 @@
       "meta.premium.title": "プレミアムプラン | NIARIM",
       "meta.premium.description":
         "NIARIMのプレミアムプランでできることと、無料版との違いをご紹介します。",
+      "premiumPage.compareTitle": "無料版とプレミアムの違い",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "プレミアムプラン",
       "premiumPage.lead":
@@ -36,6 +37,7 @@
       "premiumPage.premium.yearly.unit": "／年（税込）",
       "premiumPage.premium.yearly.badge.pre": "実質",
       "premiumPage.premium.yearly.badge.main": "2か月分無料",
+      "premiumPage.premium.yearly.basis": "月払いを12か月続けた場合",
       "premiumPage.premium.yearly.fullPrice": "6,600円",
       "premiumPage.premium.item1.title": "広告非表示",
       "premiumPage.premium.item1.body":
@@ -75,6 +77,7 @@
       "meta.premium.title": "Premium Plan | NIARIM",
       "meta.premium.description":
         "See what NIARIM's Premium plan offers and how it differs from the free version.",
+      "premiumPage.compareTitle": "Compare Free and Premium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Premium Plan",
       "premiumPage.lead":
@@ -99,6 +102,7 @@
       "premiumPage.premium.yearly.unit": "/year (tax included)",
       "premiumPage.premium.yearly.badge.pre": "Effectively",
       "premiumPage.premium.yearly.badge.main": "2 months free",
+      "premiumPage.premium.yearly.basis": "12 monthly payments",
       "premiumPage.premium.yearly.fullPrice": "\u00a56,600",
       "premiumPage.premium.item1.title": "No ads",
       "premiumPage.premium.item1.body": "Removes all in-app advertising.",
@@ -138,6 +142,7 @@
       "meta.premium.title": "高级会员方案 | NIARIM",
       "meta.premium.description":
         "介绍 NIARIM 高级会员方案能做什么，以及与免费版的区别。",
+      "premiumPage.compareTitle": "免费版与高级版的区别",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "高级会员方案",
       "premiumPage.lead":
@@ -161,6 +166,7 @@
       "premiumPage.premium.yearly.unit": "／年（含税）",
       "premiumPage.premium.yearly.badge.pre": "实质",
       "premiumPage.premium.yearly.badge.main": "2个月免费",
+      "premiumPage.premium.yearly.basis": "按月支付12个月",
       "premiumPage.premium.yearly.fullPrice": "6,600 日元",
       "premiumPage.premium.item1.title": "移除广告",
       "premiumPage.premium.item1.body": "移除应用内所有广告显示。",
@@ -197,6 +203,7 @@
       "meta.premium.title": "高級會員方案 | NIARIM",
       "meta.premium.description":
         "介紹 NIARIM 高級會員方案能做什麼，以及與免費版的差異。",
+      "premiumPage.compareTitle": "免費版與進階版的差異",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "高級會員方案",
       "premiumPage.lead":
@@ -220,6 +227,7 @@
       "premiumPage.premium.yearly.unit": "／年（含稅）",
       "premiumPage.premium.yearly.badge.pre": "實質",
       "premiumPage.premium.yearly.badge.main": "2個月免費",
+      "premiumPage.premium.yearly.basis": "按月支付12個月",
       "premiumPage.premium.yearly.fullPrice": "6,600 日圓",
       "premiumPage.premium.item1.title": "移除廣告",
       "premiumPage.premium.item1.body": "移除應用程式內所有廣告顯示。",
@@ -256,6 +264,7 @@
       "meta.premium.title": "프리미엄 플랜 | NIARIM",
       "meta.premium.description":
         "NIARIM 프리미엄 플랜으로 할 수 있는 것과 무료 버전과의 차이를 소개합니다.",
+      "premiumPage.compareTitle": "무료와 프리미엄 비교",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "프리미엄 플랜",
       "premiumPage.lead":
@@ -280,6 +289,7 @@
       "premiumPage.premium.yearly.unit": "／년（세금 포함）",
       "premiumPage.premium.yearly.badge.pre": "실질",
       "premiumPage.premium.yearly.badge.main": "2개월 무료",
+      "premiumPage.premium.yearly.basis": "월간 플랜 12개월 합계",
       "premiumPage.premium.yearly.fullPrice": "6,600엔",
       "premiumPage.premium.item1.title": "광고 비표시",
       "premiumPage.premium.item1.body": "앱 내 모든 광고 표시가 사라집니다.",
@@ -319,6 +329,7 @@
       "meta.premium.title": "Offre Premium | NIARIM",
       "meta.premium.description":
         "Découvrez ce que propose l'offre Premium de NIARIM et ses différences avec la version gratuite.",
+      "premiumPage.compareTitle": "Comparer les offres gratuite et Premium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Offre Premium",
       "premiumPage.lead":
@@ -343,6 +354,7 @@
       "premiumPage.premium.yearly.unit": "/an (TTC)",
       "premiumPage.premium.yearly.badge.pre": "Soit",
       "premiumPage.premium.yearly.badge.main": "2 mois offerts",
+      "premiumPage.premium.yearly.basis": "12 mensualités",
       "premiumPage.premium.yearly.fullPrice": "6 600 \u00a5",
       "premiumPage.premium.item1.title": "Sans publicité",
       "premiumPage.premium.item1.body":
@@ -383,6 +395,7 @@
       "meta.premium.title": "Plan Premium | NIARIM",
       "meta.premium.description":
         "Descubre lo que ofrece el plan Premium de NIARIM y en qué se diferencia de la versión gratuita.",
+      "premiumPage.compareTitle": "Compara el plan gratuito y el prémium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Plan Premium",
       "premiumPage.lead":
@@ -407,6 +420,7 @@
       "premiumPage.premium.yearly.unit": "/año (impuestos incluidos)",
       "premiumPage.premium.yearly.badge.pre": "Equivale a",
       "premiumPage.premium.yearly.badge.main": "2 meses gratis",
+      "premiumPage.premium.yearly.basis": "12 pagos mensuales",
       "premiumPage.premium.yearly.fullPrice": "6600 \u00a5",
       "premiumPage.premium.item1.title": "Sin anuncios",
       "premiumPage.premium.item1.body":

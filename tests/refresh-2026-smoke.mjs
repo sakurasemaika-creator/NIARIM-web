@@ -108,6 +108,28 @@ try {
     const page=await browsers.newPage({viewport:{width:390,height:844}});
     page.on("pageerror",e=>log("Browser JS",lang,e.message));
     await page.goto(base+"/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
+    const viewer = page.locator("#capture-viewer");
+    const trigger = page.locator(".nr-gallery-item").first().getByRole("button");
+    await page.locator(".nr-palette-button[data-variant='3']").click();
+    await trigger.press("Enter");
+    if (!(await viewer.isVisible())) log("Gallery opens from keyboard",lang);
+    for (const [device, file] of [["phone", "canvas-v3"], ["desktop", "pc-canvas-v3"]]) {
+      await viewer.locator('[data-device="' + device + '"]').click();
+      const image = viewer.locator(".capture-stage img");
+      await image.evaluate(img => img.decode());
+      const current = await image.evaluate(img => new URL(img.currentSrc).pathname);
+      if (!current.includes("/" + file + ".")) log("Viewer lost palette or device", lang, current);
+    }
+    await viewer.locator(".capture-zoom").click();
+    if (await viewer.locator(".capture-zoom").getAttribute("aria-pressed") !== "true")
+      log("Viewer actual-size state",lang);
+    await page.keyboard.press("Escape");
+    if (await viewer.isVisible() || !(await trigger.evaluate(b => b === document.activeElement)))
+      log("Viewer close and focus return",lang);
+    const untranslated = await page.locator(".nr-new-features [data-i18n], .capture-viewer [data-i18n], .capture-open [data-i18n]").evaluateAll(nodes =>
+      nodes.filter(n => n.textContent !== window.NIARIM_I18N.translate(document.documentElement.lang, n.dataset.i18n)).map(n => n.dataset.i18n)
+    );
+    if (untranslated.length) log("Showcase translations",lang,untranslated);
     const status=await page.evaluate(() => {
       const heroHeading=document.querySelector("#nr-hero-title");
       const heroLogo=heroHeading?.querySelector("img");

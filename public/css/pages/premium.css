@@ -88,7 +88,7 @@
 }
 
 .pricing-plan-option .pricing-price .unit {
-  font-size: clamp(0.68rem, 1.8vw, var(--fs-small));
+  font-size: .875rem;
   margin-left: 0;
 }
 
@@ -178,10 +178,7 @@
 .pricing-plan-badge-main {
   font-size: 1.1rem;
   font-weight: 800;
-  background: var(--grad-gold);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: #71420b;
 }
 
 @media (max-width: 520px) {
@@ -239,4 +236,33 @@
   .pricing-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.plan-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem .75rem;
+  margin: 1.25rem auto 0;
+}
+.plan-shortcuts a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: .45rem .95rem;
+  border: 1px solid currentColor;
+  border-radius: .5rem;
+  color: inherit;
+  font: 600 .9375rem/1.4 var(--font-serif);
+}
+.plan-shortcuts a:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: .2em; }
+#free-plan, #premium-plan, #opal-benefits { scroll-margin-block-start: 6rem; }
+.pricing-plan-option .pricing-basis {
+  display: grid;
+  gap: .1rem;
+  margin-top: .75rem;
+  padding-top: .6rem;
+  border-top: 1px solid currentColor;
+  font-size: .875rem;
+  line-height: 1.5;
 }

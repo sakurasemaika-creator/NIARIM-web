@@ -154,30 +154,20 @@
           <p data-i18n="premiumPage.lead">
             無料版でも動画書き出しを含む基本的な制作機能はすべてご利用いただけます。プレミアムプランでは、広告の非表示や仕上げのための追加機能をご利用いただけます。
           </p>
+          <div class="plan-shortcuts">
+            <a href="#free-plan" data-i18n="premiumPage.free.title">無料版</a>
+            <a href="#premium-plan" data-i18n="premiumPage.premium.title">プレミアムプラン</a>
+            <a href="#opal-benefits" data-i18n="nav.coins">オパール・ミッション</a>
+          </div>
         </div>
       </div>
 
       <section class="section">
         <div class="container">
-          <div class="feature-narrative">
-            <div class="feature-narrative-block">
-              <h2 data-i18n="narrative.premium.1.heading">
-                プレミアムで利用できる機能
-              </h2>
-              <p data-i18n="narrative.premium.1.body">
-                プレミアムでは、制作だけでなく作品の公開もさらに快適になります。
-              </p>
-            </div>
-          </div>
-          <p class="pricing-notice reveal" data-i18n="premiumPage.priceNote">
-            価格は変更となる場合があり、その際は本ページも更新します。最新の価格はGoogle
-            Playのアプリページをご確認ください。
-          </p>
-
-          <aside class="nr-notice" data-i18n="refresh.premiumNotice">料金・購入条件はGoogle Playに表示される最新の情報をご確認ください。オパールやミッションの利用条件はアプリ内で確認できます。</aside>
+          <h2 class="pricing-compare-title" data-i18n="premiumPage.compareTitle">無料版とプレミアムの違い</h2>
           <div class="pricing-grid reveal" style="margin-top: var(--space-xl)">
             <div class="pricing-card">
-              <h3 data-i18n="premiumPage.free.title">無料版</h3>
+              <h3 id="free-plan" tabindex="-1" data-i18n="premiumPage.free.title">無料版</h3>
               <div class="pricing-price">
                 <span class="amount" data-i18n="premiumPage.free.price"
                   >0円</span
@@ -200,7 +190,7 @@
             </div>
 
             <div class="pricing-card is-premium">
-              <h3 data-i18n="premiumPage.premium.title">プレミアムプラン</h3>
+              <h3 id="premium-plan" tabindex="-1" data-i18n="premiumPage.premium.title">プレミアムプラン</h3>
 
               <div class="pricing-plan-compare">
                 <div class="pricing-plan-option" data-plan-block="monthly">
@@ -244,11 +234,6 @@
                     >年額プラン</span
                   >
                   <div class="pricing-price-compare">
-                    <span
-                      class="amount-strike"
-                      data-i18n="premiumPage.premium.yearly.fullPrice"
-                      >6,600円</span
-                    >
                     <div class="pricing-price">
                       <span
                         class="amount"
@@ -260,6 +245,10 @@
                         data-i18n="premiumPage.premium.yearly.unit"
                         >／年（税込）</span
                       >
+                    </div>
+                    <div class="pricing-basis">
+                      <span data-i18n="premiumPage.premium.yearly.basis">月払いを12か月続けた場合</span>
+                      <span data-i18n="premiumPage.premium.yearly.fullPrice">6,600円</span>
                     </div>
                   </div>
                 </div>
@@ -338,6 +327,7 @@
               </ul>
             </div>
           </div>
+          <aside class="nr-notice" data-i18n="refresh.premiumNotice">料金・購入条件はGoogle Playに表示される最新の情報をご確認ください。オパールやミッションの利用条件はアプリ内で確認できます。</aside>
           <div class="feature-narrative">
             <div class="feature-narrative-block">
               <p data-i18n="narrative.premium.2.body">NIARIMのエンドマークは、MP4・WebM・AVIの本編末尾に付く5秒のロゴです。エンドマーク特典が有効な間は、作品ごとに表示を切り替えられます。期限後も作品の設定は保存されます。GIFには付きません。
@@ -376,7 +366,7 @@
         </div>
       </section>
 
-    <section class="section premium-coin-crosslink"><div class="container"><div class="premium-coin-panel"><div><p class="premium-coin-kicker">SAVE / CREATE / EARN</p><h2 data-i18n="premium.coinsTitle">オパールを使えばプレミアム機能が無料に！</h2><p data-i18n="premium.coinsBody">ログインやミッションで集めたオパールを使えば、プレミアムの対象機能を追加料金なしで利用できます。必要な機能と期間を選んで使えます。</p></div><a class="btn btn-accent" href="/coins/" data-i18n="premium.coinsCta">オパール・ミッションをチェック</a></div></div></section>
+    <section class="section premium-coin-crosslink"><div class="container"><div class="premium-coin-panel"><div><p class="premium-coin-kicker">SAVE / CREATE / EARN</p><h2 id="opal-benefits" tabindex="-1" data-i18n="premium.coinsTitle">オパールを使えばプレミアム機能が無料に！</h2><p data-i18n="premium.coinsBody">ログインやミッションで集めたオパールを使えば、プレミアムの対象機能を追加料金なしで利用できます。必要な機能と期間を選んで使えます。</p></div><a class="btn btn-accent" href="/coins/" data-i18n="premium.coinsCta">オパール・ミッションをチェック</a></div></div></section>
 </main>
 
     <footer class="site-footer">
