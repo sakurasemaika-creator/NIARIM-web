@@ -5,6 +5,11 @@ on:
     paths:
       - ".github/workflows/refresh-2026-smoke.yml"
       - "tests/refresh-2026-smoke.mjs"
+      - "public/help/index.html"
+      - "public/js/help.js"
+      - "public/css/pages/help.css"
+      - "public/js/i18n-dict-help.js"
+      - "tests/help-interaction-audit.mjs"
       - "tests/opal-brand-contract.mjs"
       - "tests/community-ranking-visibility-browser.mjs"
       - "tests/community-feed.test.mjs"
@@ -102,6 +107,8 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:8787/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/niarim-site.log
           exit 1
+      - name: Verify Help search and disclosure controls across seven languages
+        run: node tests/help-interaction-audit.mjs
       - name: Verify studio typography and real community capture
         run: |
           node tests/studio-2026-contract.mjs

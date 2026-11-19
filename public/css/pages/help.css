@@ -22,6 +22,7 @@
 }
 
 .help-search {
+  position: relative;
   max-width: 480px;
   margin: 0 auto var(--space-xl);
 }
@@ -29,30 +30,38 @@
 .help-search input {
   width: 100%;
   padding: 0.9rem 1.25rem;
+  padding-inline-end: 3.25rem;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--color-gray-300);
   font-size: 1rem;
 }
 
-/* 検索欄のクリア「×」はブラウザ標準のもので、Chromiumでは青系の
-   固定色で描かれ、サイトの配色から浮いていた。同じ形のまま、
-   本文と同じ色で描き直す（機能は標準のまま保つ）。 */
 .help-search input::-webkit-search-cancel-button {
-  -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  background-color: var(--color-text-muted);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
 }
-.help-search input::-webkit-search-cancel-button:hover {
-  background-color: var(--color-text);
+
+.help-search-clear {
+  position: absolute;
+  inset-inline-end: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font: 1.4rem/1 sans-serif;
+}
+
+.help-search-clear:hover,
+.help-search-clear:focus-visible {
+  background: var(--color-sub-tint);
+}
+
+.help-search-clear:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
 }
 
 .help-search input:focus {
@@ -127,10 +136,19 @@
   border-radius: 0;
   background: transparent;
   overflow: visible;
-  cursor: pointer;
 }
 
 [data-help-category] .spec-item::before {
+  display: none;
+}
+
+[data-help-card] > summary {
+  display: block;
+  cursor: pointer;
+  list-style: none;
+}
+
+[data-help-card] > summary::-webkit-details-marker {
   display: none;
 }
 
@@ -143,7 +161,7 @@
 }
 
 [data-help-category] .spec-item h3::after {
-  content: "+";
+  content: "";
   position: absolute;
   top: 50%;
   right: 0.5rem;
@@ -154,29 +172,29 @@
   transform: translateY(-50%);
   border-radius: 50%;
   color: var(--color-accent-strong);
-  background: var(--color-sub-tint);
-  font-family: sans-serif;
-  font-size: 1.15rem;
-  font-weight: 400;
+  background:
+    linear-gradient(currentColor, currentColor) center / 0.72rem 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 0.72rem no-repeat,
+    var(--color-sub-tint);
 }
 
-[data-help-category] .spec-item[aria-expanded="true"] h3::after {
-  content: "−";
+[data-help-category] .spec-item[open] h3::after {
+  background-size: 0.72rem 2px, 0 0;
 }
 
 [data-help-category] .spec-item p {
-  display: none;
   margin: 0;
   padding: 0.1rem 3.25rem 1.25rem 0.25rem;
   color: var(--color-text-muted);
   line-height: 1.9;
 }
 
-[data-help-category] .spec-item[aria-expanded="true"] p {
-  display: block;
+[data-help-category] .spec-item[hidden],
+.help-search-clear[hidden] {
+  display: none;
 }
 
-[data-help-category] .spec-item:focus-visible {
+[data-help-category] summary:focus-visible {
   outline: 2px solid var(--color-brand);
   outline-offset: 3px;
 }

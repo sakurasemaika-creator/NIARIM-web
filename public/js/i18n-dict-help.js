@@ -13,6 +13,7 @@
     ja: {
       "help.title": "ヘルプ",
       "help.searchHint": "検索...",
+      "help.clearSearch": "検索をやめる",
       "help.noResults": "該当する項目が見つかりません",
       "help.category.tool": "ツール",
       "help.category.layer": "レイヤー",
@@ -258,6 +259,7 @@
     en: {
       "help.title": "Help",
       "help.searchHint": "Search...",
+      "help.clearSearch": "Clear search",
       "help.noResults": "No matching items found",
       "help.category.tool": "Tools",
       "help.category.layer": "Layers",
@@ -503,6 +505,7 @@
     "zh-Hans": {
       "help.title": "帮助",
       "help.searchHint": "搜索...",
+      "help.clearSearch": "清除搜索",
       "help.noResults": "未找到相关项目",
       "help.category.tool": "工具",
       "help.category.layer": "图层",
@@ -748,6 +751,7 @@
     "zh-Hant": {
       "help.title": "說明",
       "help.searchHint": "搜尋...",
+      "help.clearSearch": "清除搜尋",
       "help.noResults": "找不到相符的項目",
       "help.category.tool": "工具",
       "help.category.layer": "圖層",
@@ -993,6 +997,7 @@
     ko: {
       "help.title": "도움말",
       "help.searchHint": "검색...",
+      "help.clearSearch": "검색 지우기",
       "help.noResults": "해당하는 항목을 찾을 수 없습니다",
       "help.category.tool": "도구",
       "help.category.layer": "레이어",
@@ -1238,6 +1243,7 @@
     fr: {
       "help.title": "Aide",
       "help.searchHint": "Rechercher...",
+      "help.clearSearch": "Effacer la recherche",
       "help.noResults": "Aucun élément correspondant trouvé",
       "help.category.tool": "Outils",
       "help.category.layer": "Calques",
@@ -1486,6 +1492,7 @@
     es: {
       "help.title": "Ayuda",
       "help.searchHint": "Buscar...",
+      "help.clearSearch": "Borrar búsqueda",
       "help.noResults": "No se encontraron elementos coincidentes",
       "help.category.tool": "Herramientas",
       "help.category.layer": "Capas",

@@ -18,44 +18,18 @@
 
   function initHelpSearch() {
     var input = document.getElementById("help-search-input");
+    var clear = document.getElementById("help-search-clear");
     var noResults = document.getElementById("help-no-results");
     var categories = Array.prototype.slice.call(
       document.querySelectorAll("[data-help-category]"),
     );
     if (!input || !categories.length) return;
 
-    // Match the in-app Help interaction: entries are a single vertical list
-    // and each title toggles its explanation open/closed.
+    // Keep the existing fragment IDs on the explanation of each topic.
     categories.forEach(function (category) {
-      category
-        .querySelectorAll("[data-help-card]")
-        .forEach(function (card, index) {
-          var title = card.querySelector("h3");
-          var body = card.querySelector("p");
-          if (!title || !body) return;
-
-          var panelId = (category.id || "help") + "-entry-" + index;
-          card.setAttribute("role", "button");
-          card.setAttribute("tabindex", "0");
-          card.setAttribute("aria-expanded", "false");
-          card.setAttribute("aria-controls", panelId);
-          body.id = panelId;
-
-          function toggle() {
-            card.setAttribute(
-              "aria-expanded",
-              card.getAttribute("aria-expanded") === "true" ? "false" : "true",
-            );
-          }
-
-          card.addEventListener("click", toggle);
-          card.addEventListener("keydown", function (event) {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              toggle();
-            }
-          });
-        });
+      category.querySelectorAll("[data-help-card] p").forEach(function (body, index) {
+        body.id = (category.id || "help") + "-entry-" + index;
+      });
     });
 
     if (noResults) {
@@ -64,31 +38,27 @@
       noResults.setAttribute("aria-atomic", "true");
     }
 
+    var openBeforeSearch = null;
     function apply() {
       var query = foldSearchText(input.value).trim();
+      var terms = query ? query.split(/\s+/) : [];
       var anyVisible = false;
+      if (query && !openBeforeSearch) {
+        openBeforeSearch = new Set(document.querySelectorAll("[data-help-card][open]"));
+      }
+      if (clear) clear.hidden = input.value.length === 0;
 
       categories.forEach(function (category) {
-        var cards = Array.prototype.slice.call(
-          category.querySelectorAll("[data-help-card]"),
-        );
-        var heading = category.querySelector("h2");
-        var categoryMatches =
-          heading && foldSearchText(heading.textContent).includes(query);
+        var heading = category.querySelector("h2").textContent;
         var categoryHasVisible = false;
-
-        cards.forEach(function (card) {
-          var match =
-            !query ||
-            categoryMatches ||
-            ["h3", "p"].some(function (selector) {
-              var field = card.querySelector(selector);
-              return field && foldSearchText(field.textContent).includes(query);
-            });
+        category.querySelectorAll("[data-help-card]").forEach(function (card) {
+          var text = foldSearchText([
+            heading, card.querySelector("h3").textContent, card.querySelector("p").textContent
+          ].join(" "));
+          var match = terms.every(function (term) { return text.includes(term); });
           card.hidden = !match;
-          // Search results expose matching explanations immediately; clearing
-          // the query restores the normal collapsed app-help presentation.
-          card.setAttribute("aria-expanded", query && match ? "true" : "false");
+          if (query) card.open = match;
+          else if (openBeforeSearch) card.open = openBeforeSearch.has(card);
           if (match) categoryHasVisible = true;
         });
 
@@ -96,10 +66,24 @@
         if (categoryHasVisible) anyVisible = true;
       });
 
+      if (!query) openBeforeSearch = null;
       if (noResults) noResults.classList.toggle("is-visible", !anyVisible);
     }
 
+    function clearSearch() {
+      input.value = "";
+      apply();
+      input.focus();
+    }
+    if (clear) clear.addEventListener("click", clearSearch);
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !event.isComposing && input.value) {
+        event.preventDefault();
+        clearSearch();
+      }
+    });
     input.addEventListener("input", apply);
+    if (input.value) apply();
     // Category navigation leaves the search results and opens the full section.
     // Restore its content before native/smooth anchor scrolling measures it.
     document

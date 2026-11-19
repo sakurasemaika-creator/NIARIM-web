@@ -39,6 +39,28 @@ try {
           `${language}/${mode}: localized search`,
         );
         const heading = (await category.locator("h2").textContent()).trim();
+        const firstTopic = category.locator("[data-help-card]").first();
+        const summary = firstTopic.locator("summary");
+        const clear = page.locator("#help-search-clear");
+        for (const query of [title + "　" + heading, heading + "  " + title]) {
+          await input.fill(query);
+          assert.ok(await firstTopic.isVisible());
+          assert.ok(await firstTopic.locator("p").isVisible());
+        }
+        await clear.press("Enter");
+        assert.equal(await input.inputValue(), "");
+        assert.ok(await input.evaluate(el => el === document.activeElement));
+        await summary.press("Enter");
+        assert.ok(await firstTopic.locator("p").isVisible());
+        await firstTopic.locator("p").click();
+        assert.ok(await firstTopic.locator("p").isVisible());
+        await input.fill(title + " zz-niarim-missing");
+        assert.ok(await page.locator("#help-no-results").isVisible());
+        await input.press("Escape");
+        assert.equal(await input.inputValue(), "");
+        assert.ok(await firstTopic.locator("p").isVisible());
+        await summary.press("Space");
+        assert.equal(await firstTopic.locator("p").isVisible(), false);
         const cardCount = await category.locator("[data-help-card]").count();
         await input.fill(heading);
         assert.equal(
