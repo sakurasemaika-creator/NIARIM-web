@@ -1,0 +1,36 @@
+name: App and Website Help synchronization
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - ".github/workflows/app-help-sync.yml"
+      - "tools/sync-app-help.mjs"
+      - "tools/app-help-topic-map.json"
+      - "public/help/index.html"
+      - "public/js/app-help-sync-2026.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: sakurasemaika-creator/NIARIM
+          ref: dev_branch
+          path: app-help-source
+          persist-credentials: false
+          sparse-checkout: |
+            lib/l10n
+            lib/screens/help
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node tools/sync-app-help.mjs app-help-source --check
