@@ -2,7 +2,7 @@
 /* No JS animation or additional network requests: accordion = native details. */
 .coins-accordion-stack{display:grid;gap:12px;margin:30px 0;}
 .coins-accordion{border:1px solid #dfd2d9;border-radius:15px;background:#fff;overflow:hidden;}
-.coins-accordion summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:20px clamp(18px,2.8vw,30px);font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1rem,1.65vw,1.22rem);line-height:1.55;}
+.coins-accordion summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:20px clamp(18px,2.8vw,30px);font-family:var(--font-display-with-body);font-size:clamp(1rem,1.65vw,1.22rem);line-height:1.55;}
 .coins-accordion summary::-webkit-details-marker{display:none;}
 .coins-accordion summary::after{content:"＋";flex:0 0 auto;color:#a83c60;font-size:1.3rem;}
 .coins-accordion[open] summary::after{content:"−";}
@@ -15,17 +15,17 @@
 .coins-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:30px 0 36px;}
 .coins-choice-grid article{border:1px solid #eadbe1;border-radius:16px;background:#fff8fa;padding:clamp(18px,2vw,27px);}
 .coins-choice-grid article>span,.coins-compare-eyebrow,.coins-conversion-kicker,.premium-coin-kicker{font-family:var(--font-sans);font-size:.75rem;letter-spacing:.12em;color:#b04b6d;}
-.coins-choice-grid h3{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.1rem,1.8vw,1.45rem);margin:12px 0;line-height:1.5;}
+.coins-choice-grid h3{font-family:var(--font-display-with-body);font-size:clamp(1.1rem,1.8vw,1.45rem);margin:12px 0;line-height:1.5;}
 .coins-choice-grid p{font-family:var(--font-sans);font-size:.9rem;line-height:1.85;}
 .coins-compare{margin:40px 0 25px;padding:clamp(22px,3.5vw,42px);border-radius:20px;background:#f7e8ee;border:1px solid #edd0db;}
-.coins-compare h3{margin:10px 0 15px;font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.45;}
+.coins-compare h3{margin:10px 0 15px;font-family:var(--font-display-with-body);font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.45;}
 .coins-compare-intro p{font-family:var(--font-sans);line-height:1.85;}
 .coins-compare .coins-scroll{margin-top:24px;}
 .coins-compare-best,.coins-compare-saving{font-weight:800!important;color:#9f2c52;}
-.coins-compare-highlight{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";margin:20px 0 10px;font-size:clamp(1.13rem,2vw,1.52rem);line-height:1.6;}
+.coins-compare-highlight{font-family:var(--font-display-with-body);margin:20px 0 10px;font-size:clamp(1.13rem,2vw,1.52rem);line-height:1.6;}
 .coins-conversion{background:#29212d;color:#fff;}
 .coins-conversion-panel,.premium-coin-panel{display:flex;align-items:center;justify-content:space-between;gap:35px;border:1px solid rgba(255,255,255,.2);padding:clamp(25px,4vw,48px);border-radius:21px;}
-.coins-conversion-panel h2,.premium-coin-panel h2{font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:clamp(1.5rem,3vw,2.4rem);margin:12px 0 15px;line-height:1.5;}
+.coins-conversion-panel h2,.premium-coin-panel h2{font-family:var(--font-display-with-body);font-size:clamp(1.5rem,3vw,2.4rem);margin:12px 0 15px;line-height:1.5;}
 .coins-conversion-panel h2{color:#fff;}
 .coins-conversion-panel p,.premium-coin-panel p{font-family:var(--font-sans);line-height:1.9;max-width:52em;}
 .coins-conversion-panel p{color:#f4dfea;}
@@ -90,7 +90,7 @@ html body .premium-coin-crosslink .premium-coin-panel p { color:#51424b !importa
 /* The small brand-font subset is completed with the site's licensed body font. */
 html:lang(ja) body .coins-main :is(h1,h2,h3,.coins-accordion summary,.coins-shortcuts a,.coins-compare-highlight),
 html:lang(ja) body .premium-coin-crosslink h2 {
-  font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK","Yu Mincho",serif !important;
+  font-family:var(--font-display-with-body),"Yu Mincho",serif !important;
 }
 @media(max-width:750px) {
   html body .coins-main .coins-compare {padding:22px 15px;}
@@ -117,7 +117,7 @@ html body .coins-main .coins-goal-values{font-variant-numeric:tabular-nums}
 
 /* 2026-11: Annual exchange and percent-saving badges. */
 .coins-year-featured{position:relative;border-color:#db9cb3!important;background:linear-gradient(135deg,#fffafc,#fff0f5)!important;}
-.coins-discount-tag,.coins-saving-badge{display:inline-block;padding:5px 11px;border-radius:999px;background:#9b254e;color:#fff;font-family:"Kuramubon","KuramubonCJK","HakkouMincho","HakkouMinchoCJK";font-size:.8rem;font-weight:700;line-height:1.3;white-space:nowrap;}
+.coins-discount-tag,.coins-saving-badge{display:inline-block;padding:5px 11px;border-radius:999px;background:#9b254e;color:#fff;font-family:var(--font-display-with-body);font-size:.8rem;font-weight:700;line-height:1.3;white-space:nowrap;}
 .coins-year-featured>.coins-discount-tag{margin-bottom:16px;}
 .coins-discount-tag--table{display:block;width:max-content;margin-top:7px;font-size:.7rem;}
 .coins-saving-badge{display:block;width:max-content;margin-top:6px;margin-left:auto;}
@@ -130,7 +130,7 @@ html body .coins-main .coins-goal-values{font-variant-numeric:tabular-nums}
    Kuramubon display subset does not include 特・典・週. */
 html:lang(ja) body .coins-main [data-i18n="coins.week"],
 html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
-  font-family:"HakkouMincho","HakkouMinchoCJK",serif !important;
+  font-family:var(--font-sans) !important;
 }
 
 /* Pricing rows share one licensed face; prevent mismatched individual fallback glyphs. */
@@ -138,10 +138,10 @@ html:lang(ja) body .coins-main .coins-table--priced :is(th,td),
 html:lang(ja) body .coins-main .coins-compare-table :is(th,td),
 html:lang(ja) body .coins-main .coins-table--priced .coins-unit,
 html:lang(ja) body .coins-main .coins-compare-table .coins-unit {
- font-family:"HakkouMincho","HakkouMinchoCJK",serif !important;
+ font-family:var(--font-sans) !important;
 }
 html:lang(ja) body .coins-main .coins-table--priced thead [data-i18n^="coins.table"] {
- font-family:"Kuramubon","KuramubonCJK",serif !important;white-space:nowrap;
+ font-family:var(--font-serif) !important;white-space:nowrap;
 }
 .coins-main .coins-year-versus-month{font:500 .91rem/1.8 var(--font-sans);margin:20px 0 12px;color:#4f3c46}
 .coins-main .coins-year-versus-month strong{display:block;font-weight:750;color:#8d2b4b;margin-bottom:3px}

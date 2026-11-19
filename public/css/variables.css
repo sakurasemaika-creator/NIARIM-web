@@ -397,7 +397,18 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
 }
 
 /* Keep headings and body text in the same serif family for Chinese and Korean. */
+:root {
+  --font-display-with-body:
+    "Kuramubon", "KuramubonCJK", "HakkouMincho", "HakkouMinchoCJK";
+}
+:root:lang(ko) { --font-cjk-locale: "NotoSerifKR"; }
+:root:lang(zh-Hans) { --font-cjk-locale: "NotoSerifSC"; }
+:root:lang(zh-Hant) { --font-cjk-locale: "NotoSerifTC"; }
 :root:lang(zh),
 :root:lang(ko) {
+  --font-sans:
+    "HakkouMincho", var(--font-cjk-locale), "HakkouMinchoCJK",
+    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifSC", serif;
   --font-serif: var(--font-sans);
+  --font-display-with-body: var(--font-sans);
 }

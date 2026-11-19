@@ -56,7 +56,9 @@ assert.match(page,/data-i18n="coins.yearNote"/);
 assert.match(page,/data-i18n="coins.rateNote"/);
 assert.match(page,/無料でもプレミアム機能が使える！/);
 assert.doesNotMatch(premium,/NIARIMを始めよう/);
-assert.match(css,/coins-table--priced[\s\S]*?HakkouMincho/);
+assert.match(css,/coins-table--priced[^{}]*\{[^}]*font-family:\s*var\(--font-sans\)/);
+const typeVariables=readFileSync("public/css/variables.css","utf8");
+assert.match(typeVariables,/--font-sans:\s*"HakkouMincho"/);
 assert.match(css,/Unified Opal price and savings table/);
 const context={window:{NIARIM_I18N_DICT:{}}};
 for(const file of ["public/js/i18n-dict.js","public/js/i18n-dict-intl.js","public/js/i18n-dict-nav-extra.js","public/js/i18n-dict-premium.js","public/js/i18n-dict-narrative.js","public/js/i18n-dict-refresh-2026.js","public/js/visitor-copy-and-goals.js","public/js/opal-ui-naming.js"]){

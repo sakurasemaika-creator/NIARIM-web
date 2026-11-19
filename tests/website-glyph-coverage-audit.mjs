@@ -93,7 +93,7 @@ try {
           const rendered = style.textTransform === "uppercase" ? source.toLocaleUpperCase(language) :
             style.textTransform === "lowercase" ? source.toLocaleLowerCase(language) : source;
           const missing = [...new Set([...rendered].filter(c =>
-            c.trim() && !covered.some(set => set.has(c.codePointAt(0)))))].join("");
+            c.trim() && !/\p{Default_Ignorable_Code_Point}/u.test(c) && !covered.some(set => set.has(c.codePointAt(0)))))].join("");
           if (missing) {
             const anchor = el.closest("[data-i18n],[data-i18n-html]") || el;
             discovered.push({
