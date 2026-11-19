@@ -28,6 +28,7 @@ for (const testCase of [
   { path: "/", lang: "en", canonical: "/" },
   { path: "/index.html?lang=en", lang: "en", canonical: "/" },
   { path: "/?lang=de", lang: "en", canonical: "/" },
+  { path: "/coins/?lang=de", lang: "en", canonical: "/coins/" },
   { path: "/?lang=ja", lang: "ja", canonical: "/?lang=ja" },
   {
     path: "/features/index.html?lang=fr",

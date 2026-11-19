@@ -240,7 +240,10 @@ try {
       loginMilestones:document.querySelectorAll("#coin-login-bonus .coins-milestone-grid li").length,
       missionGoalSections:document.querySelectorAll("#missions .coins-goal-group").length,
       loginAccordion:!!document.querySelector("#coin-login-bonus:not([open])"),
-      hasPremiumLink:!!document.querySelector(".coins-conversion-panel a[href='/premium/']"),
+      hasPremiumLink:[...document.querySelectorAll(".coins-conversion-panel a[href]")].some(link=>{
+        const url=new URL(link.href);
+        return url.pathname==="/premium/"&&url.searchParams.get("lang")==="ja";
+      }),
       units:document.querySelectorAll("#benefits .coins-table--priced tbody .coins-unit").length,
       hasCurrencyLabel:/円|JPY|¥/.test(table.caption?.textContent||""),
       hasOpalCaption:/オパール/.test(table.caption?.textContent||""),

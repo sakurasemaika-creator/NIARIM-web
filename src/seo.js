@@ -12,6 +12,7 @@ export const DEFAULT_LANG = "en";
 export const SEO_PAGE_PATHS = [
   "/",
   "/about/",
+  "/coins/",
   "/community/",
   "/contact/",
   "/faq/",

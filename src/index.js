@@ -51,6 +51,7 @@ const PAGE_KEYS = new Map([
   ["/", "home"],
   ["/index.html", "home"],
   ["/about/", "about"],
+  ["/coins/", "coins"],
   ["/community/", "community"],
   ["/contact/", "contact"],
   ["/faq/", "faq"],

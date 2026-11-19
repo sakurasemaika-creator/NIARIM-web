@@ -13,6 +13,7 @@ const langs = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const requiredPages = [
   "home",
   "about",
+  "coins",
   "community",
   "contact",
   "faq",
@@ -164,7 +165,8 @@ for (const page of requiredPages) {
   for (const lang of langs) {
     for (const field of ["title", "description"]) {
       const key = `meta.${page}.${field}`;
-      const value = window.NIARIM_I18N_DICT[lang]?.[key];
+      const sourceKey = page === "coins" ? `coins.meta.${field}` : key;
+      const value = window.NIARIM_I18N_DICT[lang]?.[sourceKey];
       if (typeof value !== "string" || !value.trim()) {
         throw new Error(`Missing localized SEO key: ${lang} ${key}`);
       }
