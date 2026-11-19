@@ -1,0 +1,36 @@
+name: Web dependency inventory
+on:
+  push:
+    branches: [dev_branch]
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "public/assets/fonts/LICENSE.md"
+      - ".github/workflows/dependency-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Inventory locked dependencies and shipped font licenses
+        run: |
+          set -euo pipefail
+          mkdir -p reports/dependencies
+          npm sbom --sbom-format=cyclonedx --package-lock-only > reports/dependencies/web.cdx.json
+          cp public/assets/fonts/LICENSE.md reports/dependencies/web-font-licenses.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: niarim-web-dependencies-${{ github.sha }}
+          path: reports/dependencies/
+          if-no-files-found: error
