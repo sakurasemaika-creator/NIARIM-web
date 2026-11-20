@@ -54,6 +54,7 @@ assert.deepEqual(prices[11].map((price,i)=>separate[i]-price),saving);
 assert.match(table,/data-i18n="coins.b11">コンプリートパック<\/th>/);
 assert.match(page,/data-i18n="coins.yearNote"/);
 assert.match(page,/data-i18n="coins.rateNote"/);
+assert.match(page,/data-i18n="coins.compareCaution">[^<]*オパール交換画面/);
 assert.match(page,/無料でもプレミアム機能が使える！/);
 assert.doesNotMatch(premium,/NIARIMを始めよう/);
 assert.match(css,/coins-table--priced[^{}]*\{[^}]*font-family:\s*var\(--font-sans\)/);
@@ -70,7 +71,7 @@ assert.equal(d.ja["coins.unit"],"オパール");
 assert.equal(d.ja["coins.compareFull"],"コンプリートパック");
 assert.match(d.ja["coins.yearNote"],/55,000.+660,000.+550,000.+110,000.+17%/);
 for(const language of ["ja","en","fr","es","ko","zh-Hans","zh-Hant"]){
- for(const key of ["coins.rateNote","coins.compareSeparate","coins.compareSaving","coins.tableCaption","coins.yearNote"]){
+ for(const key of ["coins.rateNote","coins.compareSeparate","coins.compareSaving","coins.tableCaption","coins.yearNote","coins.compareCaution"]){
   assert.ok(typeof d[language]?.[key]==="string" && d[language][key].length>5,language+" "+key);
  }
 }

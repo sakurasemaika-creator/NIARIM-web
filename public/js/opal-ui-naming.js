@@ -38,7 +38,7 @@ Object.assign(d.ja,{
  "coins.compareSeparate":"制作機能6つ＋全広告非表示の単品合計",
  "coins.compareSaving":"パックで節約できるオパール数",
  "coins.compareIntro":"コンプリートパックは1か月55,000オパール、1年550,000オパールです。制作機能6つと全広告非表示を単品でそろえる場合の合計は、1か月110,000オパール、1年1,100,000オパールです。コンプリートパックは、同じ期間に単品でそろえる場合の半額です。",
- "coins.compareCaution":"単品と1年パックは交換準備中です。現在交換できる期間はアプリで確認できます。"
+ "coins.compareCaution":"オパールの交換はアプリ内で行えます。交換できる特典と期間は、アプリのオパール交換画面で確認できます。"
 
 });
 var labels={
@@ -63,7 +63,7 @@ en:{
  "coins.compareSeparate":"Six tools + all ads individually",
  "coins.compareSaving":"Opals saved with pack",
  "coins.compareIntro":"The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 110,000 and 1,100,000 separately. The table compares the pack with those individual prices for the same period.",
- "coins.compareCaution":"Individual benefits and the annual pack are not yet available to redeem. Check available durations in the app."
+ "coins.compareCaution":"Redeem Opals in the app. Open the Opal exchange screen to see available benefits and durations."
 },
 "zh-Hans":{
  "coins.rateNote":"参考换算为100欧泊约等于1日元，不能兑换现金。每日登录得10欧泊，符合条件的激励广告每次得10欧泊，完成任务还可获得更多。",
@@ -72,7 +72,7 @@ en:{
  "coins.compareSeparate":"六项功能＋全部去广告单项合计",
  "coins.compareSaving":"组合包节省的欧泊",
  "coins.compareIntro":"全功能组合包为每月55,000欧泊、每年550,000欧泊；六项工具和全部去广告的单项合计为110,000和1,100,000欧泊。表中的折扣按相同期间的单项合计计算。",
- "coins.compareCaution":"单项权益与年度组合包暂未开放兑换。请在应用内查看可兑换的期间。"
+ "coins.compareCaution":"请在应用内兑换欧泊。在欧泊兑换页面查看可兑换的权益和时长。"
 },
 "zh-Hant":{
  "coins.rateNote":"參考換算為100歐泊約等於1日圓，不能兌換現金。每日登入得10歐泊，符合條件的獎勵廣告每次得10歐泊，完成任務還能獲得更多。",
@@ -81,7 +81,7 @@ en:{
  "coins.compareSeparate":"六項功能＋全部去廣告單項合計",
  "coins.compareSaving":"組合包省下的歐泊",
  "coins.compareIntro":"全功能組合包為每月55,000歐泊、每年550,000歐泊；六項工具和全部去廣告的單項總額為110,000和1,100,000歐泊。表中的折扣按相同期間的單項總額計算。",
- "coins.compareCaution":"單項權益與年度組合包尚未開放兌換。請在應用程式內查看可兌換的期間。"
+ "coins.compareCaution":"請在應用程式內兌換歐泊。在歐泊兌換頁面查看可兌換的權益與期間。"
 },
 ko:{
  "coins.rateNote":"참고 기준은 100오팔=1엔이며 현금 교환은 불가능합니다. 매일 로그인 10오팔, 대상 보상형 광고 1회당 10오팔, 미션으로도 획득할 수 있습니다.",
@@ -90,7 +90,7 @@ ko:{
  "coins.compareSeparate":"제작 도구 6개＋전체 광고 제거 단품 합계",
  "coins.compareSaving":"팩으로 절약하는 오팔",
  "coins.compareIntro":"컴플리트 팩은 한 달 55,000오팔, 1년 550,000오팔입니다. 제작 도구 6개와 전체 광고 제거의 단품 합계는 110,000오팔과 1,100,000오팔입니다. 할인율은 같은 기간의 단품 합계 기준입니다.",
- "coins.compareCaution":"단품과 연간 팩은 교환 준비 중입니다. 교환 가능한 기간은 앱에서 확인하세요."
+ "coins.compareCaution":"앱에서 오팔을 교환할 수 있습니다. 오팔 교환 화면에서 교환 가능한 혜택과 기간을 확인하세요."
 },
 fr:{
  "coins.rateNote":"À titre indicatif, 100 opales correspondent à 1 ¥; elles ne sont pas convertibles en argent. Connexion quotidienne : 10 opales, annonce récompensée éligible : 10 opales, plus les missions.",
@@ -99,7 +99,7 @@ fr:{
  "coins.compareSeparate":"Six outils + suppression des pubs séparément",
  "coins.compareSaving":"Opales économisées",
  "coins.compareIntro":"Le Pack complet coûte 55 000 opales pour un mois et 550 000 pour un an. Les six outils et la suppression des pubs à l’unité totalisent 110 000 et 1 100 000 opales. La comparaison porte sur la même durée.",
- "coins.compareCaution":"Les avantages à l’unité et le pack annuel seront disponibles ultérieurement. Consultez les durées disponibles dans l’application."
+ "coins.compareCaution":"Échangez vos opales dans l’application. L’écran d’échange indique les avantages et les durées disponibles."
 },
 es:{
  "coins.rateNote":"Referencia: 100 ópalos equivalen a 1 ¥; no se pueden cambiar por dinero. Inicio diario: 10 ópalos, anuncio recompensado válido: 10 ópalos y más con misiones.",
@@ -108,7 +108,7 @@ es:{
  "coins.compareSeparate":"Seis funciones + quitar anuncios por separado",
  "coins.compareSaving":"Ópalos ahorrados",
  "coins.compareIntro":"El Paquete completo cuesta 55.000 ópalos al mes y 550.000 al año. Las seis herramientas y la eliminación de anuncios por separado suman 110.000 y 1.100.000 ópalos. El descuento compara el mismo periodo.",
- "coins.compareCaution":"Las ventajas individuales y el paquete anual estarán disponibles más adelante. Consulta en la app los periodos disponibles."
+ "coins.compareCaution":"Canjea tus ópalos en la aplicación. Consulta las ventajas y los periodos disponibles en la pantalla de canje."
 }
 };
 Object.keys(details).forEach(function(locale){Object.assign(d[locale]||(d[locale]={}),details[locale]);});
