@@ -46,6 +46,16 @@ try {
         await page.waitForURL(url => url.pathname === "/premium/" && url.hash === "#premium-plan");
         assert.equal(await page.locator("html").getAttribute("lang"), language);
         assert.ok(await page.locator("#premium-plan").isVisible());
+        const prices = page.getByRole("group", { name: await page.locator("#premium-plan").innerText() });
+        assert.equal(await prices.locator("[data-plan-block]").count(), 2);
+        const terms = page.locator("#premium-store-terms");
+        const termsText = await page.evaluate(lang => window.NIARIM_I18N_DICT[lang]["premiumPage.priceNote"], language);
+        assert.equal(await terms.innerText(), termsText);
+        assert.equal(await prices.getAttribute("aria-describedby"), "premium-store-terms");
+        assert.ok(await terms.evaluate(el =>
+          el.previousElementSibling.matches(".pricing-plan-compare") &&
+          el.getBoundingClientRect().right <= innerWidth + 1 && el.scrollWidth <= el.clientWidth + 1
+        ));
         await page.goBack();
         const link = guide.getByRole("link");
         await link.focus();

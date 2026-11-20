@@ -125,6 +125,12 @@
   margin-top: var(--space-md);
 }
 
+.pricing-store-note {
+  margin-block-start: var(--space-sm);
+  font-size: var(--fs-small);
+  line-height: 1.65;
+}
+
 .pricing-plan-option {
   position: relative;
   padding: var(--space-md);
