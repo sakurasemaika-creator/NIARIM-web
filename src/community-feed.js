@@ -39,12 +39,12 @@ function publicWork(value) {
     youtubeUrl: "https://www.youtube.com/watch?v=" + id,
   };
 }
-function json(body, status=200, noStore=false) {
+function json(body, status=200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": noStore ? "no-store" : (status === 200 ? "public, max-age=60" : "no-store"),
+      "cache-control": "no-store",
       "x-content-type-options": "nosniff",
     },
   });
@@ -57,17 +57,17 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
   // Missing IDs and hidden IDs look identical; no title/media can escape.
   const checking = url.searchParams.has("ids");
   const checkingPlayback = url.searchParams.has("playbackId");
-  if (checking && checkingPlayback) return json({error:"invalid_query"},400,true);
+  if (checking && checkingPlayback) return json({error:"invalid_query"},400);
   const ids = checking ? url.searchParams.get("ids")?.split(",") ?? [] : [];
   if (checking && (ids.length < 1 || ids.length > 50 ||
       new Set(ids).size !== ids.length ||
       ids.some(id=>!/^[A-Za-z0-9_-]{11}$/.test(id)))) {
-    return json({error:"invalid_ids"},400,true);
+    return json({error:"invalid_ids"},400);
   }
   const playbackId = checkingPlayback
     ? safeYoutubeVideoId(url.searchParams.get("playbackId")) : "";
   if (checkingPlayback && !playbackId) {
-    return json({error:"invalid_playback_id"},400,true);
+    return json({error:"invalid_playback_id"},400);
   }
   const route = checkingPlayback
     ? "/works/"+playbackId+"/playback-status"
@@ -99,18 +99,18 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
       // Return only a fixed status label, never a work's private metadata.
       const statuses = ["available","private","deleted","unavailable","unknown"];
       if (!payload || !statuses.includes(payload.status)) {
-        return json({error:"bad_response"},502,true);
+        return json({error:"bad_response"},502);
       }
-      return json({status:payload.status},200,true);
+      return json({status:payload.status},200);
     }
     if (checking) {
       if (!payload || typeof payload.visibility !== "object" ||
           payload.visibility === null || Array.isArray(payload.visibility)) {
-        return json({error:"bad_response"},502,true);
+        return json({error:"bad_response"},502);
       }
       const visible=Object.create(null);
       for(const id of ids) visible[id] = payload.visibility[id] === true;
-      return json({visibility:visible},200,true);
+      return json({visibility:visible},200);
     }
     if (!payload || !Array.isArray(payload.works)) return json({error:"bad_response"},502);
     return json({
@@ -121,7 +121,7 @@ export async function handleCommunityFeed(request, env, fetchPublic = fetch) {
       works: payload.works.slice(0,9).map(publicWork).filter(Boolean),
       unavailableReason: payload.unavailableReason === "BOOKMARK_PERIOD_NOT_IMPLEMENTED"
         ? "BOOKMARK_PERIOD_NOT_IMPLEMENTED" : null,
-    },200,view !== "latest");
+    },200);
   } catch (_) {
     return json({error:"bad_response"},502);
   }
