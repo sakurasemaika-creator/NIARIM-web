@@ -280,7 +280,8 @@
     "featuresPage.export.item2.title": "画面比例",
     "featuresPage.export.item2.body": "可自由设置画面比例。",
     "featuresPage.export.item3.title": "查找和分享导出的作品",
-    "featuresPage.export.item3.body": "导出的文件保存在首页的“作品列表”中。要保存到相册或用其他应用打开，请在分享菜单中选择目标应用。",
+    "featuresPage.export.item3.body": "在首页的“作品列表”中，可以按项目名称查找导出的文件。选择“分享”即可将文件保存到相册或用其他应用打开。",
+    "featuresPage.export.filenameExample": "我的第一部动画_20261120-143000.gif",
     "featuresPage.export.item4.title": "导出格式",
     "featuresPage.export.item4.body":
       "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
@@ -582,7 +583,8 @@
     "featuresPage.export.item2.title": "畫面比例",
     "featuresPage.export.item2.body": "可自由設定畫面比例。",
     "featuresPage.export.item3.title": "尋找與分享匯出的作品",
-    "featuresPage.export.item3.body": "匯出的檔案會儲存在首頁的「作品列表」。若要存到「照片」或用其他 App 開啟，請在分享選單中選擇目的地。",
+    "featuresPage.export.item3.body": "在首頁的「作品列表」可用專案名稱搜尋匯出的檔案。選取「分享」即可存到「照片」或用其他 App 開啟。",
+    "featuresPage.export.filenameExample": "我的第一部動畫_20261120-143000.gif",
     "featuresPage.export.item4.title": "匯出格式",
     "featuresPage.export.item4.body":
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
@@ -914,7 +916,8 @@
       "화면 비율을 자유롭게 설정할 수 있습니다.",
     "featuresPage.export.item3.title": "내보낸 작품 찾기 및 공유",
     "featuresPage.export.item3.body":
-      "내보낸 파일은 홈 화면의 작품 목록에 저장됩니다. 사진 앱에 저장하거나 다른 앱에서 열려면 공유 메뉴에서 대상을 선택하세요.",
+      "홈 화면의 작품 목록에서 프로젝트 이름으로 내보낸 파일을 찾을 수 있습니다. 사진 앱에 저장하거나 다른 앱에서 열려면 공유를 선택하세요.",
+    "featuresPage.export.filenameExample": "나의 애니메이션_20261120-143000.gif",
     "featuresPage.export.item4.title": "내보내기 형식",
     "featuresPage.export.item4.body":
       "MP4·WebM·GIF·AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
@@ -1262,7 +1265,8 @@
       "Définissez librement le rapport d'aspect.",
     "featuresPage.export.item3.title": "Retrouver et partager un fichier exporté",
     "featuresPage.export.item3.body":
-      "Les fichiers exportés se trouvent dans Œuvres sur l’écran d’accueil. Pour enregistrer un fichier dans Photos ou l’ouvrir dans une autre application, choisissez une destination dans le menu de partage.",
+      "Dans Œuvres, sur l’écran d’accueil, recherchez le fichier par le nom du projet. Choisissez Partager pour l’enregistrer dans Photos ou l’ouvrir dans une autre application.",
+    "featuresPage.export.filenameExample": "Ma première animation_20261120-143000.gif",
     "featuresPage.export.item4.title": "Formats d'export",
     "featuresPage.export.item4.body":
       "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
@@ -1605,7 +1609,8 @@
       "Define la relación de aspecto libremente.",
     "featuresPage.export.item3.title": "Encuentra y comparte un archivo exportado",
     "featuresPage.export.item3.body":
-      "Los archivos exportados se guardan en Obras, en la pantalla de inicio. Para guardar un archivo en Fotos o abrirlo en otra aplicación, elige un destino en el menú de compartir.",
+      "Busca el archivo por el nombre del proyecto en Obras, en la pantalla de inicio. Elige Compartir para guardarlo en Fotos o abrirlo en otra aplicación.",
+    "featuresPage.export.filenameExample": "Mi primera animación_20261120-143000.gif",
     "featuresPage.export.item4.title": "Formatos de exportación",
     "featuresPage.export.item4.body":
       "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",

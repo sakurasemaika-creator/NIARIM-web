@@ -55,6 +55,17 @@ try {
         assert.ok(await page.locator("#help-export h2").isVisible());
         await page.goBack();
         const sharing = page.locator("#export .export-sharing-link");
+        const filename = page.locator(".export-filename-example");
+        const expectedName = await page.evaluate(lang =>
+          window.NIARIM_I18N_DICT[lang]["featuresPage.export.filenameExample"], language);
+        assert.equal(await filename.innerText(), expectedName);
+        assert.match(expectedName, /_20261120-143000\.gif$/);
+        const card = sharing.locator("xpath=ancestor::*[contains(@class,'spec-item')][1]");
+        await card.scrollIntoViewIfNeeded();
+        assert.ok(await filename.evaluate(el => el.scrollWidth <= el.clientWidth + 1));
+        if (language === "ja") {
+          await card.screenshot({ path: output + "/export-filename-" + width + ".png" });
+        }
         await sharing.focus();
         await sharing.press("Enter");
         await page.waitForURL(url => url.pathname === "/help/" && url.hash === "#help-export-sharing");

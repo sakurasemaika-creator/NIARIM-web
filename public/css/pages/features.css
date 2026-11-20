@@ -199,6 +199,21 @@
   font-family: var(--font-sans);
   line-height: 1.6;
 }
+#export .export-filename-example {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-block-start: .65rem;
+  padding-inline-start: .65rem;
+  border-inline-start: 2px solid var(--color-text);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: .95rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
 .export-format-guide a,
 #export .export-sharing-link,
 #export .export-plan-link {

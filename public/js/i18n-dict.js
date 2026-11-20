@@ -310,7 +310,8 @@
       "featuresPage.export.item2.body": "縦横比を自由に設定できます。",
       "featuresPage.export.item3.title": "書き出した作品の保存先と共有",
       "featuresPage.export.item3.body":
-        "書き出したファイルはホームの「作品一覧」に保存されます。写真アプリに保存したり、ほかのアプリで開いたりするときは、共有先を選んでください。",
+        "書き出した作品はホームの「作品一覧」でプロジェクト名から探せます。写真アプリに保存したり、ほかのアプリで開いたりするには「共有」を選んでください。",
+      "featuresPage.export.filenameExample": "はじめてのアニメ_20261120-143000.gif",
       "featuresPage.export.item4.title": "書き出し形式",
       "featuresPage.export.item4.body":
         "MP4・WebM・GIF・AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
@@ -644,7 +645,8 @@
       "featuresPage.export.item2.body": "Set the aspect ratio freely.",
       "featuresPage.export.item3.title": "Find and share an exported file",
       "featuresPage.export.item3.body":
-        "Find exported files in Works on the home screen. To save a file to Photos or open it in another app, choose a destination in the share menu.",
+        "Find your export by its project name in Works on the home screen. Choose Share to save it to Photos or open it in another app.",
+      "featuresPage.export.filenameExample": "My first animation_20261120-143000.gif",
       "featuresPage.export.item4.title": "Export formats",
       "featuresPage.export.item4.body":
         "Supports MP4, WebM, GIF, and AVI. Transparent WebM lets you use your work as animation material with a see-through background.",
