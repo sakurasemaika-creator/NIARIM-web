@@ -42,10 +42,11 @@ try {
         assert.match(await limit.innerText(), /90/);
         assert.match(await limit.innerText(), /2/);
         const priceLink = page.locator("#export .export-plan-link");
-        const priceUrl = new URL(await priceLink.getAttribute("href"), base);
-        assert.equal(priceUrl.pathname, "/premium/");
-        assert.equal(priceUrl.hash, "#premium-plan");
-        assert.equal(priceUrl.searchParams.get("lang") || "ja", language);
+        await priceLink.click();
+        await page.waitForURL(url => url.pathname === "/premium/" && url.hash === "#premium-plan");
+        assert.equal(await page.locator("html").getAttribute("lang"), language);
+        assert.ok(await page.locator("#premium-plan").isVisible());
+        await page.goBack();
         const link = guide.getByRole("link");
         await link.focus();
         await link.press("Enter");
