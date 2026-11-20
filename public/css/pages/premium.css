@@ -125,8 +125,10 @@
   margin-top: var(--space-md);
 }
 
-.pricing-store-note {
-  margin-block-start: var(--space-sm);
+.pricing-card .pricing-store-note {
+  margin: var(--space-sm) 0 0;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
   font-size: var(--fs-small);
   line-height: 1.65;
 }
