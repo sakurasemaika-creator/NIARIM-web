@@ -286,7 +286,7 @@
       "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
     "featuresPage.export.item5.title": "制作、导出时长上限",
     "featuresPage.export.item5.body":
-      "画布尺寸有上限，但在此范围内可根据作品自由设置尺寸与纵横比。免费版每部作品最长90秒，高级版每部作品最长可达2小时进行制作与导出。作品数量本身没有限制。",
+      "免费版每部作品最长90秒。高级会员或时长延长权益可将制作与导出的上限提高至2小时。没有这些权益时，仍可导出较长作品的开头90秒。作品数量不限。",
     "featuresPage.export.item6.title": "静态图片导出",
     "featuresPage.export.item6.body":
       "可从时间轴将当前显示的一帧保存为PNG或JPEG图片。",
@@ -588,7 +588,7 @@
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
     "featuresPage.export.item5.title": "製作、匯出時長上限",
     "featuresPage.export.item5.body":
-      "畫布尺寸有上限，但在此範圍內可依作品自由設定尺寸與長寬比。免費版每部作品最長90秒，付費進階版每部作品最長可達2小時進行製作與匯出。作品數量本身沒有限制。",
+      "免費版每部作品最長90秒。高級會員或延長片長權益可將製作與匯出的上限提高至2小時。沒有這些權益時，仍可匯出較長作品的開頭90秒。作品數量不限。",
     "featuresPage.export.item6.title": "靜態圖片匯出",
     "featuresPage.export.item6.body":
       "可從時間軸將目前顯示的一個影格儲存為PNG或JPEG圖片。",
@@ -920,7 +920,7 @@
       "MP4·WebM·GIF·AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
     "featuresPage.export.item5.title": "제작·내보내기 시간 상한",
     "featuresPage.export.item5.body":
-      "캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞춰 크기와 화면 비율을 설정할 수 있습니다. 무료 버전은 작품당 90초까지, 프리미엄은 작품당 최대 2시간까지 제작·내보내기할 수 있습니다. 작품 수 자체에는 제한이 없습니다.",
+      "무료로는 작품당 90초까지 제작하고 내보낼 수 있습니다. 프리미엄이나 길이 연장 혜택을 이용하면 최대 2시간까지 가능합니다. 혜택이 없어도 긴 작품의 처음 90초를 내보낼 수 있습니다. 작품 수에는 제한이 없습니다.",
     "featuresPage.export.item6.title": "스틸 이미지 내보내기",
     "featuresPage.export.item6.body":
       "타임라인에 현재 표시된 프레임 한 장을 PNG 또는 JPEG 이미지로 저장할 수 있습니다.",
@@ -1268,7 +1268,7 @@
       "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
     "featuresPage.export.item5.title": "Limite de durée par œuvre",
     "featuresPage.export.item5.body":
-      "La taille du canevas a une limite supérieure, mais vous pouvez, dans cette limite, définir la taille et le format adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium jusqu'à 2 heures par œuvre. Il n'y a aucune limite sur le nombre d'œuvres.",
+      "La limite gratuite est de 90 secondes par projet. Premium ou l’avantage de durée étendue permet de créer et d’exporter jusqu’à 2 heures par projet. Sans cet avantage, vous pouvez exporter les 90 premières secondes d’un projet plus long. Le nombre de projets est illimité.",
     "featuresPage.export.item6.title": "Export d'image fixe",
     "featuresPage.export.item6.body":
       "Enregistrez l'image actuellement affichée dans la timeline au format PNG ou JPEG.",
@@ -1611,7 +1611,7 @@
       "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",
     "featuresPage.export.item5.title": "Límite de duración por obra",
     "featuresPage.export.item5.body":
-      "El tamaño del lienzo tiene un límite superior, pero dentro de él puedes ajustar el tamaño y la proporción según tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium, hasta 2 horas por obra. No hay límite en la cantidad de obras.",
+      "El límite gratuito es de 90 segundos por proyecto. Con Premium o la ventaja de duración ampliada puedes crear y exportar hasta 2 horas por proyecto. Sin esa ventaja, puedes exportar los primeros 90 segundos de un proyecto más largo. No hay límite de proyectos.",
     "featuresPage.export.item6.title": "Exportación de imagen fija",
     "featuresPage.export.item6.body":
       "Guarda el fotograma mostrado actualmente en la línea de tiempo como imagen PNG o JPEG.",

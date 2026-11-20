@@ -34,6 +34,14 @@ try {
         if (language === "ja") {
           await guide.screenshot({ path: output + "/export-formats-" + width + ".png" });
         }
+        const limit = page.locator('#export [data-i18n="featuresPage.export.item5.body"]');
+        assert.match(await limit.innerText(), /90/);
+        assert.match(await limit.innerText(), /2/);
+        const priceLink = page.locator("#export .export-plan-link");
+        const priceUrl = new URL(await priceLink.getAttribute("href"), base);
+        assert.equal(priceUrl.pathname, "/premium/");
+        assert.equal(priceUrl.hash, "#premium-plan");
+        assert.equal(priceUrl.searchParams.get("lang") || "ja", language);
         const link = guide.getByRole("link");
         await link.focus();
         await link.press("Enter");

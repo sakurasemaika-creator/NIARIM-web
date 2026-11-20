@@ -316,7 +316,7 @@
         "MP4・WebM・GIF・AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
       "featuresPage.export.item5.title": "制作・書き出し時間の上限",
       "featuresPage.export.item5.body":
-        "キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで、プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
+        "無料では1作品90秒まで。プレミアムまたは最大尺の特典で、最長2時間まで制作・書き出しできます。特典がない場合も、長い作品の先頭90秒を書き出せます。作品数に上限はありません。",
       "featuresPage.export.item6.title": "静止画書き出し",
       "featuresPage.export.item6.body":
         "タイムラインから、現在表示中のフレーム1枚をPNGまたはJPEGで保存できます。",
@@ -650,7 +650,7 @@
         "Supports MP4, WebM, GIF, and AVI. Transparent WebM lets you use your work as animation material with a see-through background.",
       "featuresPage.export.item5.title": "Time limit per work",
       "featuresPage.export.item5.body":
-        "Canvas size has an upper limit, but within it you can set the size and aspect ratio to fit your work. The free plan supports up to 90 seconds per work; Premium supports up to 2 hours per work. There's no limit on the number of works you can make.",
+        "The free limit is 90 seconds per project. Premium or the extended duration benefit raises this to 2 hours for creation and export. Without either, you can still export the first 90 seconds of a longer project. You can create as many projects as you like.",
       "featuresPage.export.item6.title": "Still image export",
       "featuresPage.export.item6.body":
         "Save the frame currently displayed in the timeline as a PNG or JPEG image.",

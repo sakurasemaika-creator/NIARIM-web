@@ -137,7 +137,7 @@
 
       "narrative.export.1.heading": "つくった作品を、もっと広く届けよう",
       "narrative.export.1.body":
-        "完成した作品は動画として書き出せます。MP4、WebM、GIF、AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。キャンバスサイズには上限がありますが、その範囲内で作品に合わせたサイズや縦横比を設定できます。無料版では1作品あたり90秒まで。プレミアムでは1作品あたり最大2時間まで制作・書き出しできます。作品数そのものに制限はありません。",
+        "完成した動画は、使い道に合わせて4つの形式から選んで書き出せます。1コマを画像にしたいときは、タイムラインからPNGまたはJPEGで保存できます。",
 
       "narrative.premium.1.heading": "プレミアムでもっと自由に。",
       "narrative.premium.1.body":
@@ -300,7 +300,7 @@
 
       "narrative.export.1.heading": "Share your work with more people.",
       "narrative.export.1.body":
-        "Export finished work as video. MP4, WebM, GIF, and AVI are supported. Transparent WebM lets you export animation material with a transparent background. There's an upper limit on canvas size, but within that range you can set a size and aspect ratio that fits your work. The free version allows up to 90 seconds per piece; Premium lets you create and export up to 2 hours per piece. There's no limit on the number of pieces you can make.",
+        "Choose from four formats when exporting a finished animation. To save one frame as an image, export it from the timeline as a PNG or JPEG.",
 
       "narrative.premium.1.heading": "More freedom with Premium.",
       "narrative.premium.1.body":
@@ -449,7 +449,7 @@
 
       "narrative.export.1.heading": "让你的作品被更多人看到",
       "narrative.export.1.body":
-        "完成的作品可以导出为视频。支持MP4、WebM、GIF、AVI格式。选择透明WebM，还能导出背景透明的动画素材。画布尺寸设有上限，但在该范围内可自由设置符合作品需要的尺寸与画面比例。免费版每部作品最多可制作、导出90秒；高级会员每部作品最多可制作、导出2小时。作品数量本身没有限制。",
+        "按用途选择四种格式之一，导出完成的动画。要保存单帧图像，可从时间线导出 PNG 或 JPEG。",
 
       "narrative.premium.1.heading": "开通高级会员，创作更自由。",
       "narrative.premium.1.body":
@@ -595,7 +595,7 @@
 
       "narrative.export.1.heading": "讓你的作品被更多人看到",
       "narrative.export.1.body":
-        "完成的作品可以匯出為影片。支援MP4、WebM、GIF、AVI格式。選擇透明WebM，還能匯出背景透明的動畫素材。畫布尺寸設有上限，但在該範圍內可自由設定符合作品需要的尺寸與畫面比例。免費版每部作品最多可製作、匯出90秒；高級會員每部作品最多可製作、匯出2小時。作品數量本身沒有限制。",
+        "依用途從四種格式中選擇，匯出完成的動畫。要儲存單格影像，可從時間軸匯出 PNG 或 JPEG。",
 
       "narrative.premium.1.heading": "開通高級會員，創作更自由。",
       "narrative.premium.1.body":
@@ -742,7 +742,7 @@
 
       "narrative.export.1.heading": "만든 작품을, 더 널리 전하자",
       "narrative.export.1.body":
-        "완성된 작품은 동영상으로 내보낼 수 있습니다. MP4, WebM, GIF, AVI에 대응. 투명 WebM이라면 배경을 투명하게 한 애니메이션 소재로 이용할 수 있습니다. 캔버스 크기에는 상한이 있지만, 그 범위 안에서 작품에 맞는 크기나 화면 비율을 설정할 수 있습니다. 무료판에서는 작품 하나당 90초까지. 프리미엄에서는 작품 하나당 최대 2시간까지 제작·내보내기가 가능합니다. 작품 수 자체에는 제한이 없습니다.",
+        "완성한 애니메이션은 용도에 맞게 네 가지 형식 중에서 선택해 내보낼 수 있습니다. 한 프레임만 이미지로 저장하려면 타임라인에서 PNG 또는 JPEG로 내보내세요.",
 
       "narrative.premium.1.heading": "프리미엄으로 더 자유롭게.",
       "narrative.premium.1.body":
@@ -904,7 +904,7 @@
       "narrative.export.1.heading":
         "Partagez votre travail avec plus de monde.",
       "narrative.export.1.body":
-        "Exportez votre travail terminé en vidéo. MP4, WebM, GIF et AVI sont pris en charge. Le WebM transparent permet d'exporter du matériel d'animation avec un fond transparent. Il existe une limite supérieure de taille de canevas, mais dans cette limite, vous pouvez définir une taille et un rapport d'aspect adaptés à votre œuvre. La version gratuite permet jusqu'à 90 secondes par œuvre ; Premium permet de créer et d'exporter jusqu'à 2 heures par œuvre. Il n'y a pas de limite au nombre d'œuvres que vous pouvez créer.",
+        "Choisissez parmi quatre formats pour exporter votre animation. Pour enregistrer une seule image, exportez-la depuis la timeline au format PNG ou JPEG.",
 
       "narrative.premium.1.heading": "Plus de liberté avec Premium.",
       "narrative.premium.1.body":
@@ -1061,7 +1061,7 @@
 
       "narrative.export.1.heading": "Comparte tu trabajo con más gente.",
       "narrative.export.1.body":
-        "Exporta el trabajo terminado como video. Se admiten MP4, WebM, GIF y AVI. El WebM transparente te permite exportar material de animación con fondo transparente. Hay un límite superior en el tamaño del lienzo, pero dentro de ese rango puedes definir un tamaño y una relación de aspecto que se ajusten a tu obra. La versión gratuita permite hasta 90 segundos por obra; Premium te permite crear y exportar hasta 2 horas por obra. No hay límite en la cantidad de obras que puedes hacer.",
+        "Elige entre cuatro formatos para exportar tu animación. Para guardar un solo fotograma, expórtalo desde la línea de tiempo en PNG o JPEG.",
 
       "narrative.premium.1.heading": "Más libertad con Premium.",
       "narrative.premium.1.body":

@@ -194,7 +194,8 @@
   font-family: var(--font-sans);
   line-height: 1.6;
 }
-.export-format-guide a {
+.export-format-guide a,
+#export .export-plan-link {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
