@@ -24,6 +24,10 @@ try {
         ), language);
         assert.deepEqual(await guide.locator("dd").allTextContents(), expected);
         assert.equal(await guide.locator("dt").count(), 4);
+        const columns = await guide.locator("dl").evaluate(el =>
+          getComputedStyle(el).gridTemplateColumns.split(/\s+/).length
+        );
+        assert.equal(columns, width === 320 ? 1 : 2);
         for (const row of await guide.locator("dl > div").all()) {
           assert.ok(await row.isVisible());
           assert.ok(await row.evaluate(el => {
