@@ -237,3 +237,7 @@
 [data-help-card] p {
   white-space: pre-line;
 }
+
+[data-help-card] > summary[id] {
+  scroll-margin-block-start: calc(var(--header-height, 4rem) + 6rem);
+}

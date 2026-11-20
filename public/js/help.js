@@ -105,6 +105,20 @@
           }
         });
       });
+    function revealLinkedTopic() {
+      var summary = document.getElementById(window.location.hash.slice(1));
+      if (!summary || !summary.matches("[data-help-card] > summary")) return;
+      if (input.value) {
+        input.value = "";
+        apply();
+      }
+      summary.parentElement.open = true;
+      summary.focus({ preventScroll: true });
+      summary.scrollIntoView({ block: "start" });
+    }
+    window.addEventListener("hashchange", revealLinkedTopic);
+    revealLinkedTopic();
+
     // 言語切り替え後、検索文字列は保持したまま再フィルタする
     document.addEventListener("niarim:langchange", apply);
   }

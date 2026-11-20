@@ -279,8 +279,8 @@
     "featuresPage.export.item1.body": "可导出最高1920×1920分辨率的视频。",
     "featuresPage.export.item2.title": "画面比例",
     "featuresPage.export.item2.body": "可自由设置画面比例。",
-    "featuresPage.export.item3.title": "视频导出",
-    "featuresPage.export.item3.body": "将制作好的作品导出为视频文件。",
+    "featuresPage.export.item3.title": "查找和分享导出的作品",
+    "featuresPage.export.item3.body": "导出的文件保存在首页的“作品列表”中。要保存到相册或用其他应用打开，请在分享菜单中选择目标应用。",
     "featuresPage.export.item4.title": "导出格式",
     "featuresPage.export.item4.body":
       "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
@@ -581,8 +581,8 @@
     "featuresPage.export.item1.body": "可匯出最高1920×1920解析度的影片。",
     "featuresPage.export.item2.title": "畫面比例",
     "featuresPage.export.item2.body": "可自由設定畫面比例。",
-    "featuresPage.export.item3.title": "影片匯出",
-    "featuresPage.export.item3.body": "將製作好的作品匯出為影片檔案。",
+    "featuresPage.export.item3.title": "尋找及分享匯出的作品",
+    "featuresPage.export.item3.body": "匯出的檔案會儲存在首頁的「作品列表」。若要存到相簿或用其他 App 開啟，請在分享選單中選擇目的地。",
     "featuresPage.export.item4.title": "匯出格式",
     "featuresPage.export.item4.body":
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
@@ -912,9 +912,9 @@
     "featuresPage.export.item2.title": "화면 비율",
     "featuresPage.export.item2.body":
       "화면 비율을 자유롭게 설정할 수 있습니다.",
-    "featuresPage.export.item3.title": "영상 내보내기",
+    "featuresPage.export.item3.title": "내보낸 작품 찾기 및 공유",
     "featuresPage.export.item3.body":
-      "제작한 작품을 영상 파일로 내보낼 수 있습니다.",
+      "내보낸 파일은 홈 화면의 작품 목록에 저장됩니다. 사진 앱에 저장하거나 다른 앱에서 열려면 공유 메뉴에서 대상을 선택하세요.",
     "featuresPage.export.item4.title": "내보내기 형식",
     "featuresPage.export.item4.body":
       "MP4·WebM·GIF·AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
@@ -1260,9 +1260,9 @@
     "featuresPage.export.item2.title": "Rapport d'aspect",
     "featuresPage.export.item2.body":
       "Définissez librement le rapport d'aspect.",
-    "featuresPage.export.item3.title": "Export vidéo",
+    "featuresPage.export.item3.title": "Retrouver et partager un fichier exporté",
     "featuresPage.export.item3.body":
-      "Exportez votre travail terminé sous forme de fichier vidéo.",
+      "Les fichiers exportés se trouvent dans Œuvres sur l’écran d’accueil. Pour enregistrer un fichier dans Photos ou l’ouvrir dans une autre application, choisissez une destination dans le menu de partage.",
     "featuresPage.export.item4.title": "Formats d'export",
     "featuresPage.export.item4.body":
       "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
@@ -1603,9 +1603,9 @@
     "featuresPage.export.item2.title": "Relación de aspecto",
     "featuresPage.export.item2.body":
       "Define la relación de aspecto libremente.",
-    "featuresPage.export.item3.title": "Exportación de video",
+    "featuresPage.export.item3.title": "Encuentra y comparte un archivo exportado",
     "featuresPage.export.item3.body":
-      "Exporta tu trabajo terminado como archivo de video.",
+      "Los archivos exportados se guardan en Obras, en la pantalla de inicio. Para guardar un archivo en Fotos o abrirlo en otra aplicación, elige un destino en el menú de compartir.",
     "featuresPage.export.item4.title": "Formatos de exportación",
     "featuresPage.export.item4.body":
       "Compatible con MP4, WebM, GIF y AVI. Con WebM transparente puedes usar tu obra como material de animación con fondo transparente.",

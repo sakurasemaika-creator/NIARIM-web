@@ -308,9 +308,9 @@
         "最大1920×1920までの解像度で書き出せます。",
       "featuresPage.export.item2.title": "縦横比",
       "featuresPage.export.item2.body": "縦横比を自由に設定できます。",
-      "featuresPage.export.item3.title": "動画書き出し",
+      "featuresPage.export.item3.title": "書き出した作品の保存先と共有",
       "featuresPage.export.item3.body":
-        "制作した作品を動画ファイルとして書き出せます。",
+        "書き出したファイルはホームの「作品一覧」に保存されます。写真アプリに保存したり、ほかのアプリで開いたりするときは、共有先を選んでください。",
       "featuresPage.export.item4.title": "書き出し形式",
       "featuresPage.export.item4.body":
         "MP4・WebM・GIF・AVIに対応。透過WebMなら、背景を透明にしたアニメーション素材として利用できます。",
@@ -642,9 +642,9 @@
         "Export at resolutions up to 1920×1920.",
       "featuresPage.export.item2.title": "Aspect ratio",
       "featuresPage.export.item2.body": "Set the aspect ratio freely.",
-      "featuresPage.export.item3.title": "Video export",
+      "featuresPage.export.item3.title": "Find and share an exported file",
       "featuresPage.export.item3.body":
-        "Export your finished work as a video file.",
+        "Find exported files in Works on the home screen. To save a file to Photos or open it in another app, choose a destination in the share menu.",
       "featuresPage.export.item4.title": "Export formats",
       "featuresPage.export.item4.body":
         "Supports MP4, WebM, GIF, and AVI. Transparent WebM lets you use your work as animation material with a see-through background.",

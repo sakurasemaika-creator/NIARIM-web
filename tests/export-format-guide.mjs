@@ -53,6 +53,24 @@ try {
         await page.waitForURL(url => url.pathname === "/help/" && url.hash === "#help-export");
         assert.equal(await page.locator("html").getAttribute("lang"), language);
         assert.ok(await page.locator("#help-export h2").isVisible());
+        await page.goBack();
+        const sharing = page.locator("#export .export-sharing-link");
+        await sharing.focus();
+        await sharing.press("Enter");
+        await page.waitForURL(url => url.pathname === "/help/" && url.hash === "#help-export-sharing");
+        const topic = page.locator("#help-export-sharing");
+        await topic.locator("..").locator("p").waitFor({ state: "visible" });
+        assert.ok(await topic.evaluate(el => el.parentElement.open && document.activeElement === el));
+        const description = topic.locator("..").locator("p");
+        await page.waitForFunction(lang => document.documentElement.lang === lang &&
+          !!window.NIARIM_I18N_DICT[lang]?.["help.entry60.desc"], language);
+        const expectedText = await page.evaluate(lang =>
+          window.NIARIM_I18N_DICT[lang]["help.entry60.desc"], language);
+        assert.equal(await description.innerText(), expectedText);
+        assert.ok(await topic.evaluate(el => el.getBoundingClientRect().right <= innerWidth + 1));
+        if (language === "ja") {
+          await topic.locator("..").screenshot({ path: output + "/export-sharing-" + width + ".png" });
+        }
       } finally {
         await page.close();
       }
