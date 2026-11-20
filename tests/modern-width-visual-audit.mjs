@@ -8,6 +8,14 @@ const widths=[320,360,390,430,768,1024,1280,1440];
 const languages=["ja","en","zh-Hans","zh-Hant","ko","fr","es"];
 const issues=[];
 const metrics=[];
+const slowNetworkMetrics=[];
+const slowNetwork = {
+  offline: false,
+  latency: 150,
+  downloadThroughput: 200000,
+  uploadThroughput: 93750,
+  connectionType: "cellular4g",
+};
 const browser=await chromium.launch({headless:true});
 const dir="artifacts/modern-width-audit";
 await fs.mkdir(dir,{recursive:true});
@@ -64,6 +72,73 @@ async function measure(page,route,width,lang){
  metrics.push({lang,route,width,...v});
  if(route==="/"&&v.resources>100)issue(lang,route,width,"too_many_home_resources",v.resources);
 }
+async function measureSlowNetwork(route) {
+  const context = await browser.newContext({
+    viewport: {width: 390, height: 844},
+    isMobile: true,
+    hasTouch: true,
+    reducedMotion: "reduce",
+  });
+  try {
+    await context.route("**/api/community?**", request =>
+      request.fulfill({json: {works: [], unavailableReason: null}}),
+    );
+    const page = await context.newPage();
+    const client = await context.newCDPSession(page);
+    await client.send("Network.enable");
+    await client.send("Network.setCacheDisabled", {cacheDisabled: true});
+    await client.send("Network.emulateNetworkConditions", slowNetwork);
+    await page.addInitScript(() => {
+      const timing = {lcp: null, layoutShifts: []};
+      window.niarimAuditTiming = timing;
+      new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) timing.lcp = entry.startTime;
+      }).observe({type: "largest-contentful-paint", buffered: true});
+      new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+          if (!entry.hadRecentInput) timing.layoutShifts.push([entry.startTime, entry.value]);
+        }
+      }).observe({type: "layout-shift", buffered: true});
+    });
+    const response = await page.goto(base + route + "?lang=ja", {
+      waitUntil: "networkidle",
+      timeout: 45000,
+    });
+    if (!response?.ok()) throw new Error("HTTP " + response?.status());
+    await page.evaluate(() => document.fonts.ready);
+    const result = await page.evaluate(() => {
+      const {lcp, layoutShifts} = window.niarimAuditTiming;
+      let largest = 0;
+      let sum = 0;
+      let first = null;
+      let last = null;
+      for (const [time, value] of layoutShifts) {
+        if (first === null || time - last > 1000 || time - first > 5000) {
+          first = time;
+          sum = 0;
+        }
+        last = time;
+        sum += value;
+        largest = Math.max(largest, sum);
+      }
+      const navigation = performance.getEntriesByType("navigation")[0];
+      return {
+        lcpMs: lcp === null ? null : Math.round(lcp),
+        cls: Number(largest.toFixed(3)),
+        loadMs: Math.round(navigation.loadEventEnd),
+        transferBytes: performance.getEntriesByType("resource")
+          .reduce((sum, entry) => sum + entry.transferSize, navigation.transferSize),
+      };
+    });
+    if (result.lcpMs === null) throw new Error("No LCP measurement");
+    slowNetworkMetrics.push({route, ...result});
+  } catch (error) {
+    issue("slow_network", route, error.message);
+  } finally {
+    await context.close();
+  }
+}
+
 try{
  for(const width of widths){
    const page=await browser.newPage({viewport:{width,height:width<=430?844:960},reducedMotion:"reduce",deviceScaleFactor:1});
@@ -118,8 +193,11 @@ try{
    if(await page.locator("[data-community-gallery] .community-card").count())issue("community",view,"fabricated_card");
  }
  await page.close();
+ for (const route of ["/", "/help/", "/community/", "/coins/"]) {
+   await measureSlowNetwork(route);
+ }
 } catch(e){issue("audit_fatal",e.stack||e.message)}
 finally{await browser.close();}
-await fs.writeFile(path.join(dir,"report.json"),JSON.stringify({time:new Date().toISOString(),issues,metrics},null,2));
-console.log(JSON.stringify({pages:pages.length,widths:widths.length,langs:languages.length,checks:metrics.length,issues:issues.slice(0,35)},null,2));
+await fs.writeFile(path.join(dir,"report.json"),JSON.stringify({time:new Date().toISOString(),issues,metrics,slowNetwork,slowNetworkMetrics},null,2));
+console.log(JSON.stringify({pages:pages.length,widths:widths.length,langs:languages.length,checks:metrics.length,slowNetworkMetrics,issues:issues.slice(0,35)},null,2));
 if(issues.length)process.exit(1);
