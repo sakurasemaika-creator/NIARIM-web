@@ -59,7 +59,7 @@ try {
         const expectedName = await page.evaluate(lang =>
           window.NIARIM_I18N_DICT[lang]["featuresPage.export.filenameExample"], language);
         assert.equal(await filename.innerText(), expectedName);
-        assert.match(expectedName, /_20261120-143000\.gif$/);
+        assert.match(expectedName, / 20261120-143000\.gif$/);
         const card = sharing.locator("xpath=ancestor::*[contains(@class,'spec-item')][1]");
         await card.scrollIntoViewIfNeeded();
         assert.ok(await filename.evaluate(el => el.scrollWidth <= el.clientWidth + 1));
