@@ -581,8 +581,8 @@
     "featuresPage.export.item1.body": "可匯出最高1920×1920解析度的影片。",
     "featuresPage.export.item2.title": "畫面比例",
     "featuresPage.export.item2.body": "可自由設定畫面比例。",
-    "featuresPage.export.item3.title": "尋找及分享匯出的作品",
-    "featuresPage.export.item3.body": "匯出的檔案會儲存在首頁的「作品列表」。若要存到相簿或用其他 App 開啟，請在分享選單中選擇目的地。",
+    "featuresPage.export.item3.title": "尋找與分享匯出的作品",
+    "featuresPage.export.item3.body": "匯出的檔案會儲存在首頁的「作品列表」。若要存到「照片」或用其他 App 開啟，請在分享選單中選擇目的地。",
     "featuresPage.export.item4.title": "匯出格式",
     "featuresPage.export.item4.body":
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
