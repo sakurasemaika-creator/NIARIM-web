@@ -20,7 +20,7 @@ function validate(where,s){
  const missing=[...new Set([...plain].filter(c=>c.trim()&&!glyphs.has(c.codePointAt(0))))];
  if(missing.length) problems.push({where,text:plain.slice(0,100),missing:missing.join("")});
 }
-const routes=["","about/","features/","help/","premium/","coins/","community/","news/","faq/","contact/","privacy/","terms/","font-licenses/"];
+const routes=["","about/","features/","help/","premium/","opals/","community/","news/","faq/","contact/","privacy/","terms/","font-licenses/"];
 for(const route of routes){
  const path="public/"+route+"index.html";
  const content=fs.readFileSync(path,"utf8");
