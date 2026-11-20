@@ -5,7 +5,7 @@
   "ja": {
     "viewer.open": "拡大する",
     "viewer.phone": "スマートフォン",
-    "viewer.desktop": "PC / DeX",
+    "viewer.desktop": "PCモード（DeX）",
     "viewer.close": "閉じる",
     "viewer.zoom": "原寸表示",
     "feature.title": "線の表情も、カメラの動きも。",

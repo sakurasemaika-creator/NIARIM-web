@@ -32,7 +32,7 @@ function pairFigure(figure){
  pc.className="nr-shot nr-shot--pc";
  pc.setAttribute("data-capture-pc",name);
  pc.style.setProperty("--capture-accent",accent[name]);
- pc.append(desktopPicture(name,variantFor(raw),"NIARIM PC版 "+name+" 画面"));
+ pc.append(desktopPicture(name,variantFor(raw),"NIARIM PCモード版 "+name+" 画面"));
  duo.append(pc);
  const mobile=label("SMARTPHONE");const desktop=label("PC / DEX");
  mobile.classList.add("nr-device-label--sp");desktop.classList.add("nr-device-label--pc");
@@ -49,7 +49,7 @@ function pairFeature(diagram){
  pc.className="feature-diagram feature-diagram--real feature-diagram--pc";
  pc.setAttribute("data-capture-theme",name);
  pc.style.setProperty("--capture-frame",accent[name]);
- const picture=desktopPicture(name,variantFor(raw),"NIARIM PC版 "+name+" 画面");
+ const picture=desktopPicture(name,variantFor(raw),"NIARIM PCモード版 "+name+" 画面");
  picture.className="real-app-capture";
  pc.append(picture);
  duo.append(pc);
@@ -62,7 +62,7 @@ function pairScroller(picture){
  if(!match)return;
  const duo=document.createElement("div");duo.className="nr-feature-duo nr-scroller-duo";
  picture.before(duo);duo.append(picture);
- const pc=desktopPicture(match[1],match[2]||"","NIARIM PC版 "+match[1]+" 画面");
+ const pc=desktopPicture(match[1],match[2]||"","NIARIM PCモード版 "+match[1]+" 画面");
  pc.className="real-app-capture real-app-capture--pc";
  duo.append(pc);
 }

@@ -107,7 +107,7 @@
         "低品質・中品質・高品質から選べるだけでなく、カスタム設定にも対応。保存方式やUndo回数、オニオンスキン、傾き検知など、端末の容量やスペックに合わせて細かな項目を調整できます。「容量を優先したい」「動作を軽くしたい」「Undoをもっと残したい」そんな使い方に合わせて、自分の環境を調整できます。",
       "narrative.save.3.heading": "自動保存",
       "narrative.save.3.body":
-        "万が一アプリが異常終了した場合に備えて、復元用の自動保存を行います。",
+        "編集を始めると前回の作業を開きます。作品ファイルが壊れている場合は、自動保存から復旧します。",
       "narrative.save.4.heading": "セーブスロット",
       "narrative.save.4.body": "重要な状態を自分で選んで保存。",
       "narrative.save.5.heading": "セーブツリー",
@@ -269,7 +269,7 @@
         "Choose from Low, Medium, or High quality, or use a custom setting. Fine-tune things like the save method, undo count, onion skin, and tilt detection to match your device's storage and specs. Whether you want to prioritize storage space, lighten performance, or keep more undo history, you can tune your own environment to fit.",
       "narrative.save.3.heading": "Autosave",
       "narrative.save.3.body":
-        "In case the app ever closes unexpectedly, NIARIM autosaves for recovery.",
+        "When you open the editor, your work resumes where you left off. If the project file is damaged, NIARIM recovers it from an autosave.",
       "narrative.save.4.heading": "Save slots",
       "narrative.save.4.body":
         "Choose important states yourself and save them.",
@@ -421,7 +421,7 @@
         "除了可以从低画质、中画质、高画质中选择外，还支持自定义设置。可以根据设备的容量和性能，细致调整保存方式、撤销次数、洋葱皮、倾斜检测等各项参数。无论是想优先节省容量、想让运行更轻快，还是想保留更多撤销记录，都能按照自己的使用方式调整环境设置。",
       "narrative.save.3.heading": "自动保存",
       "narrative.save.3.body":
-        "以备应用意外终止时使用，用于恢复的自动保存功能。",
+        "打开编辑器后可继续上次的工作。如果作品文件损坏，NIARIM 会从自动保存恢复。",
       "narrative.save.4.heading": "存档槽位",
       "narrative.save.4.body": "由自己选择重要的状态进行保存。",
       "narrative.save.5.heading": "存档树",
@@ -567,7 +567,7 @@
         "除了可以從低畫質、中畫質、高畫質中選擇外，還支援自訂設定。可以根據裝置的容量和效能，細緻調整儲存方式、復原次數、洋蔥皮、傾斜偵測等各項參數。無論是想優先節省容量、想讓運作更輕快，還是想保留更多復原紀錄，都能依照自己的使用方式調整環境設定。",
       "narrative.save.3.heading": "自動儲存",
       "narrative.save.3.body":
-        "以備應用程式意外終止時使用，用於復原的自動儲存功能。",
+        "開啟編輯器後可繼續上次的工作。如果作品檔案損毀，NIARIM 會從自動儲存復原。",
       "narrative.save.4.heading": "存檔槽位",
       "narrative.save.4.body": "由自己選擇重要的狀態進行儲存。",
       "narrative.save.5.heading": "存檔樹",
@@ -714,7 +714,7 @@
         "저품질·중품질·고품질 중에서 고를 수 있을 뿐만 아니라, 커스텀 설정에도 대응합니다. 저장 방식이나 실행 취소 횟수, 어니언 스킨, 기울기 감지 등을 기기의 용량이나 사양에 맞춰 세세하게 조정할 수 있습니다. 「용량을 우선하고 싶다」「동작을 가볍게 하고 싶다」「실행 취소를 더 남기고 싶다」, 이런 사용 방식에 맞춰 자신의 환경을 조정할 수 있습니다.",
       "narrative.save.3.heading": "자동 저장",
       "narrative.save.3.body":
-        "혹시라도 앱이 비정상 종료될 경우에 대비해, 복원용 자동 저장을 실행합니다.",
+        "편집기를 열면 이전 작업을 이어서 할 수 있습니다. 작품 파일이 손상되면 자동 저장본에서 복구합니다.",
       "narrative.save.4.heading": "세이브 슬롯",
       "narrative.save.4.body": "중요한 상태를 스스로 골라 저장.",
       "narrative.save.5.heading": "세이브 트리",
@@ -871,7 +871,7 @@
         "Choisissez entre qualité basse, moyenne ou haute, ou utilisez un réglage personnalisé. Ajustez finement des éléments comme la méthode de sauvegarde, le nombre d'annulations, la pelure d'oignon et la détection d'inclinaison pour correspondre au stockage et aux caractéristiques de votre appareil. Que vous souhaitiez privilégier l'espace de stockage, alléger les performances, ou conserver plus d'historique d'annulation, vous pouvez ajuster votre propre environnement en conséquence.",
       "narrative.save.3.heading": "Sauvegarde automatique",
       "narrative.save.3.body":
-        "Au cas où l'application se fermerait de façon inattendue, NIARIM effectue une sauvegarde automatique pour la récupération.",
+        "En ouvrant l’éditeur, vous reprenez là où vous en étiez. Si le fichier du projet est endommagé, NIARIM le récupère depuis une sauvegarde automatique.",
       "narrative.save.4.heading": "Emplacements de sauvegarde",
       "narrative.save.4.body":
         "Choisissez vous-même les états importants et enregistrez-les.",
@@ -1032,7 +1032,7 @@
         "Elige entre calidad baja, media o alta, o usa un ajuste personalizado. Ajusta con precisión cosas como el método de guardado, el número de deshacer, la piel de cebolla y la detección de inclinación para adaptarse al almacenamiento y las especificaciones de tu dispositivo. Ya sea que quieras priorizar el espacio de almacenamiento, aligerar el rendimiento o conservar más historial de deshacer, puedes ajustar tu propio entorno para que se adapte.",
       "narrative.save.3.heading": "Guardado automático",
       "narrative.save.3.body":
-        "Por si la app se cierra inesperadamente, NIARIM guarda automáticamente para la recuperación.",
+        "Al abrir el editor, retomas el trabajo donde lo dejaste. Si el archivo del proyecto está dañado, NIARIM lo recupera desde un guardado automático.",
       "narrative.save.4.heading": "Ranuras de guardado",
       "narrative.save.4.body":
         "Elige tú mismo los estados importantes y guárdalos.",

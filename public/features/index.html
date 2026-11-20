@@ -144,7 +144,7 @@
     </header>
 
     <main id="main">
-<section class="nr-curated" aria-labelledby="nr-curated-title"><span class="nr-kicker">MAKE IT MOVE</span><h2 id="nr-curated-title" data-i18n="refresh.curated.title">スマホ版・PC版で使える制作機能</h2><p data-i18n="refresh.curated.lead">描画から仕上げまで、制作の中心になる画面をご紹介します。</p><div class="nr-curated-grid"><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="canvas" style="--capture-accent:#3AA6FF"><picture><source type="image/avif" srcset="/assets/images/app-captures/canvas.avif"><img src="/assets/images/app-captures/canvas.webp" alt="手描きとレイヤー" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.draw">手描きとレイヤー</h3><p><a class="nr-text-link" href="#drawing" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="timeline" style="--capture-accent:#2E9B4F"><picture><source type="image/avif" srcset="/assets/images/app-captures/timeline.avif"><img src="/assets/images/app-captures/timeline.webp" alt="フレームとタイムライン" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.move">フレームとタイムライン</h3><p><a class="nr-text-link" href="#animation" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="export" style="--capture-accent:#0086C9"><picture><source type="image/avif" srcset="/assets/images/app-captures/export.avif"><img src="/assets/images/app-captures/export.webp" alt="完成まで、このアプリで" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.finish">完成まで、このアプリで</h3><p><a class="nr-text-link" href="#export" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article></div></section>
+<section class="nr-curated" aria-labelledby="nr-curated-title"><span class="nr-kicker">MAKE IT MOVE</span><h2 id="nr-curated-title" data-i18n="refresh.curated.title">スマホ版・PCモード版で使える制作機能</h2><p data-i18n="refresh.curated.lead">描画から仕上げまで、制作の中心になる画面をご紹介します。</p><div class="nr-curated-grid"><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="canvas" style="--capture-accent:#3AA6FF"><picture><source type="image/avif" srcset="/assets/images/app-captures/canvas.avif"><img src="/assets/images/app-captures/canvas.webp" alt="手描きとレイヤー" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.draw">手描きとレイヤー</h3><p><a class="nr-text-link" href="#drawing" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="timeline" style="--capture-accent:#2E9B4F"><picture><source type="image/avif" srcset="/assets/images/app-captures/timeline.avif"><img src="/assets/images/app-captures/timeline.webp" alt="フレームとタイムライン" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.move">フレームとタイムライン</h3><p><a class="nr-text-link" href="#animation" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article><article class="nr-curated-item"><div class="nr-curated-picture"><figure class="nr-shot " data-capture="export" style="--capture-accent:#0086C9"><picture><source type="image/avif" srcset="/assets/images/app-captures/export.avif"><img src="/assets/images/app-captures/export.webp" alt="完成まで、このアプリで" width="320" height="569" loading="lazy" decoding="async"></picture></figure></div><div class="nr-curated-copy"><h3 data-i18n="refresh.curated.finish">完成まで、このアプリで</h3><p><a class="nr-text-link" href="#export" data-i18n="refresh.tools.all">全機能を見る</a></p></div></article></div></section>
       <div class="container">
         <div class="features-header reveal">
           <span class="eyebrow" data-i18n="featuresPage.eyebrow">Features</span>
@@ -1303,7 +1303,7 @@
             <div class="feature-narrative-block">
               <h3 data-i18n="narrative.save.3.heading">自動保存</h3>
               <p data-i18n="narrative.save.3.body">
-                万が一アプリが異常終了した場合に備えて、復元用の自動保存を行います。
+                編集を始めると前回の作業を開きます。作品ファイルが壊れている場合は、自動保存から復旧します。
               </p>
             </div>
             <div class="feature-narrative-block">
@@ -1341,7 +1341,7 @@
           <!-- save_tree_service.dart / project_service.dart / niapro_serializer.dart /
            niatra_serializer.dart の実装に基づく概念図（特定の設定画面の
            ピクセル再現ではない）。セーブスロットは既定10、セーブツリーは
-           保存数制限なしの分岐履歴、自動保存はクラッシュ復元専用で
+           保存数制限なしの分岐履歴、自動保存は作品ファイルが破損した場合の復旧に使い
            両者と別領域。.niashareは素材・フォント同梱の共有用、.niatraは
            設定・ブラシ・トーン・スタンプ・オートフィル・テーマの引き継ぎ用。 -->
           <div class="feature-diagram" aria-hidden="true">
@@ -1521,7 +1521,7 @@
             <div class="spec-item">
               <h3 data-i18n="featuresPage.save.item1.title">自動保存</h3>
               <p data-i18n="featuresPage.save.item1.body">
-                不意にアプリが終了しても、直前の状態からすぐ復帰できるクラッシュ復元専用の保存です。
+                自動保存と手動保存は保存データの一覧で切り替えられます。作品ファイルが破損した場合は、読み込める最新の自動保存から復旧します。
               </p>
             </div>
             <div class="spec-item">

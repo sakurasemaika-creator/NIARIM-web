@@ -2,7 +2,7 @@
  * NIARIM公式サイト Features「保存・共有」セクション 翻訳辞書
  *
  * save_tree_service.dart（セーブスロット/セーブツリー）・project_service.dart
- * （自動保存はクラッシュ復元専用）・niapro_serializer.dart（.niashare は
+ * （自動保存からの復旧）・niapro_serializer.dart（.niashare は
  * 素材・フォント同梱の共有形式）・niatra_serializer.dart（.niatra は設定・
  * ブラシ・トーン・スタンプ・オートフィルプリセット・テーマの引き継ぎ形式）
  * の実装に基づく。
@@ -18,7 +18,7 @@
         "作品を守り、育て、別の端末へも届ける。柔軟な保存のしくみ。",
       "featuresPage.save.item1.title": "自動保存",
       "featuresPage.save.item1.body":
-        "不意にアプリが終了しても、直前の状態からすぐ復帰できるクラッシュ復元専用の保存です。",
+        "自動保存と手動保存は保存データの一覧で切り替えられます。作品ファイルが破損した場合は、読み込める最新の自動保存から復旧します。",
       "featuresPage.save.item2.title": "セーブスロット",
       "featuresPage.save.item2.body":
         "決まった数のスロットに保存し、好きなタイミングで呼び出せます。",
@@ -39,7 +39,7 @@
         "Protect your work, grow it over time, and bring it to another device — a flexible way to save.",
       "featuresPage.save.item1.title": "Autosave",
       "featuresPage.save.item1.body":
-        "A crash-recovery-only save that lets you pick right back up from the last moment, even if the app closes unexpectedly.",
+        "Switch between autosaves and manual saves in the save list. If a work file is damaged, NIARIM recovers it from the latest readable autosave.",
       "featuresPage.save.item2.title": "Save slots",
       "featuresPage.save.item2.body":
         "Save to a fixed number of slots and load any of them whenever you like.",
@@ -60,7 +60,7 @@
         "守护你的作品，让它不断成长，也能带去其他设备。灵活的保存机制。",
       "featuresPage.save.item1.title": "自动保存",
       "featuresPage.save.item1.body":
-        "即使应用意外退出，也能立即从上一刻的状态恢复，是专用于崩溃恢复的保存。",
+        "可在保存列表中切换自动保存与手动保存。作品文件损坏时，会从最新的可读取自动保存恢复。",
       "featuresPage.save.item2.title": "存档栏位",
       "featuresPage.save.item2.body":
         "保存到固定数量的栏位中，可在任意时刻调出。",
@@ -81,7 +81,7 @@
         "守護你的作品，讓它不斷成長，也能帶去其他裝置。靈活的保存機制。",
       "featuresPage.save.item1.title": "自動保存",
       "featuresPage.save.item1.body":
-        "即使應用程式意外結束，也能立即從上一刻的狀態恢復，是專用於當機復原的保存。",
+        "可在儲存列表中切換自動儲存與手動儲存。作品檔案損毀時，會從最新可讀取的自動儲存復原。",
       "featuresPage.save.item2.title": "存檔欄位",
       "featuresPage.save.item2.body":
         "保存到固定數量的欄位中，可在任意時刻叫出。",
@@ -102,7 +102,7 @@
         "작품을 지키고, 발전시키고, 다른 기기로도 전달한다. 유연한 저장 구조.",
       "featuresPage.save.item1.title": "자동 저장",
       "featuresPage.save.item1.body":
-        "앱이 갑자기 종료되어도 직전 상태에서 바로 복구할 수 있는, 크래시 복원 전용 저장입니다.",
+        "저장 목록에서 자동 저장과 수동 저장을 전환할 수 있습니다. 작품 파일이 손상되면 읽을 수 있는 최신 자동 저장본에서 복구합니다.",
       "featuresPage.save.item2.title": "세이브 슬롯",
       "featuresPage.save.item2.body":
         "정해진 수의 슬롯에 저장해두고, 원하는 시점에 불러올 수 있습니다.",
@@ -123,7 +123,7 @@
         "Protégez votre travail, faites-le grandir, et emportez-le sur un autre appareil — un système d'enregistrement flexible.",
       "featuresPage.save.item1.title": "Sauvegarde automatique",
       "featuresPage.save.item1.body":
-        "Une sauvegarde réservée à la récupération après un arrêt inattendu de l'application, pour reprendre aussitôt là où vous en étiez.",
+        "Passez des sauvegardes automatiques aux sauvegardes manuelles dans la liste. Si le fichier du projet est endommagé, NIARIM le récupère depuis la sauvegarde automatique lisible la plus récente.",
       "featuresPage.save.item2.title": "Emplacements de sauvegarde",
       "featuresPage.save.item2.body":
         "Enregistrez dans un nombre fixe d'emplacements et rappelez-les quand vous le souhaitez.",
@@ -145,7 +145,7 @@
         "Protege tu obra, hazla crecer y llévala a otro dispositivo: un sistema de guardado flexible.",
       "featuresPage.save.item1.title": "Guardado automático",
       "featuresPage.save.item1.body":
-        "Un guardado exclusivo para recuperarte de un cierre inesperado de la app, retomando justo desde el último momento.",
+        "Alterna entre los guardados automáticos y los manuales en la lista. Si el archivo del proyecto está dañado, NIARIM lo recupera desde el guardado automático más reciente que se pueda leer.",
       "featuresPage.save.item2.title": "Ranuras de guardado",
       "featuresPage.save.item2.body":
         "Guarda en un número fijo de ranuras y recupéralas cuando quieras.",
