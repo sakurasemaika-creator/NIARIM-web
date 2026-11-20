@@ -117,9 +117,8 @@ try {
     const pendingLabel = await page.evaluate(() =>
       window.NIARIM_I18N.translate(document.documentElement.lang, "nav.releaseInfo"));
     const releaseUrl = new URL(await releaseLink.getAttribute("href"), base);
-    const expectedLangParam = lang === "en" ? null : lang;
     if (releaseLabel.trim() !== pendingLabel || releaseUrl.pathname !== "/" ||
-        releaseUrl.hash !== "#download" || releaseUrl.searchParams.get("lang") !== expectedLangParam)
+        releaseUrl.hash !== "#download" || releaseUrl.searchParams.get("lang") !== lang)
       log("Release navigation before launch",lang,JSON.stringify({releaseLabel,pendingLabel,url:releaseUrl.href}));
     await navigation.click();
     const viewer = page.locator("#capture-viewer");
