@@ -59,7 +59,7 @@
 
   function initStaggerGrids() {
     var grids = document.querySelectorAll(
-      ".spec-grid, .community-gallery, .faq-list, .pricing-list",
+      ".spec-grid:not([data-help-category] .spec-grid), .community-gallery, .faq-list, .pricing-list",
     );
     if (!grids.length) return;
 

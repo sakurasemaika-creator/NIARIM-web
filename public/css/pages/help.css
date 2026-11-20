@@ -21,6 +21,23 @@
   word-break: normal;
 }
 
+/* Keep the sticky category rail in one row while the locale and fonts load. */
+.feature-nav.feature-nav.help-category-nav {
+  flex-wrap: nowrap;
+  justify-content: safe center;
+  overflow-x: auto;
+}
+
+.help-category-nav a {
+  min-block-size: 44px;
+}
+
+@media (max-width: 640px) {
+  .help-header p {
+    min-block-size: 3lh;
+  }
+}
+
 .help-search {
   position: relative;
   max-width: 480px;
@@ -84,6 +101,13 @@
   font-size: var(--fs-small);
   color: var(--color-text-muted);
   font-weight: 400;
+}
+
+/* The closed Help topics are lightweight. Lay them out immediately so the
+   first category doesn't pop into view when the browser replaces an estimate. */
+[data-help-category].feature-section {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
 }
 
 /* Long help pages need stronger wayfinding than the feature catalogue. Each

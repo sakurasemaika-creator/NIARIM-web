@@ -111,7 +111,36 @@
     });
   }
 
+  var helpRequest = 0;
+  var helpLanguage;
+
   function applyLang(lang, options) {
+    var help = window.NIARIM_HELP_TRANSLATIONS;
+    if (!help) return renderLang(lang, options);
+
+    lang = normalizeLang(lang);
+    var request = ++helpRequest;
+    if (!helpLanguage &&
+        lang === document.documentElement.getAttribute("data-help-locale")) {
+      helpLanguage = renderLang(lang, options);
+      return Promise.resolve(helpLanguage);
+    }
+    return help.load(lang).then(function (topics) {
+      if (request !== helpRequest) return helpLanguage;
+      Object.assign(DICT[lang] || (DICT[lang] = {}), topics);
+      helpLanguage = renderLang(lang, options);
+      return helpLanguage;
+    }, function () {
+      // The document contains a complete Japanese fallback. If a later
+      // request fails, keep the last rendered language and allow retry.
+      if (request === helpRequest && !helpLanguage) {
+        helpLanguage = renderLang("ja");
+      }
+      return helpLanguage;
+    });
+  }
+
+  function renderLang(lang, options) {
     lang = normalizeLang(lang);
     if (!DICT[lang]) lang = DICT[DEFAULT_LANG] ? DEFAULT_LANG : "ja";
     options = options || {};

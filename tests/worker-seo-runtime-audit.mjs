@@ -112,6 +112,23 @@ for (const testCase of [
   );
 }
 
+for (const lang of SEO_LANGS) {
+  const { text } = await fetchText(`/help/?lang=${lang}`);
+  assert.match(text, new RegExp(`<html[^>]+data-help-locale="${lang}"`));
+  const topics = JSON.parse(
+    readFileSync(
+      new URL(`../public/js/help-topics/${lang}.json`, import.meta.url),
+      "utf8",
+    ),
+  );
+  for (const key of ["help.entry0.title", "help.entry80.desc"]) {
+    assert.ok(
+      text.includes(`data-i18n="${key}">${escapeXml(topics[key])}`),
+      `${lang}: ${key} must be translated before scripts run`,
+    );
+  }
+}
+
 const robots = await fetchText("/robots.txt");
 assert.match(
   robots.text,

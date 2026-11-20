@@ -1256,7 +1256,8 @@
       });
     }
 
-    if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang) {
+    if (window.NIARIM_I18N && window.NIARIM_I18N.applyLang &&
+        !window.NIARIM_HELP_TRANSLATIONS) {
       window.NIARIM_I18N.applyLang(
         document.documentElement.getAttribute("lang") || "en",
       );

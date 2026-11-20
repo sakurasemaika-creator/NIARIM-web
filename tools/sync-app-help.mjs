@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -46,15 +46,13 @@ if (missingAppTopics.length || missingPageTopics.length || removedTopics.length 
 const categories = [...new Set(
   [...page.matchAll(/data-i18n="help\.category\.(\w+)"/g)].map(match => match[1]),
 )];
-const bundlePath = resolve(root, "public/js/app-help-sync-2026.js");
-const bundle = read(bundlePath);
-const table = bundle.match(/var tables=(\{[\s\S]*\});var store=/);
-if (!table) throw Error("Cannot find the website Help translation tables");
-const current = JSON.parse(table[1]);
+const topicsDir = resolve(root, "public/js/help-topics");
+if (mode === "--write") mkdirSync(topicsDir, { recursive: true });
 const mismatches = [];
-const next = {};
 
 for (const [locale, arbLocale] of Object.entries(locales)) {
+  const tablePath = resolve(topicsDir, `${locale}.json`);
+  const current = existsSync(tablePath) ? JSON.parse(read(tablePath)) : {};
   const arb = JSON.parse(read(resolve(app, `lib/l10n/app_${arbLocale}.arb`)));
   const expected = {};
   function add(key, arbKey) {
@@ -72,26 +70,14 @@ for (const [locale, arbLocale] of Object.entries(locales)) {
     add(`${key}.title`, title);
     add(`${key}.desc`, description);
   }
-  const keys = new Set([...Object.keys(current[locale] || {}), ...Object.keys(expected)]);
+  const keys = new Set([...Object.keys(current), ...Object.keys(expected)]);
   for (const key of keys) {
-    if (current[locale]?.[key] !== expected[key]) mismatches.push(`${locale} ${key}`);
+    if (current[key] !== expected[key]) mismatches.push(`${locale} ${key}`);
   }
-  next[locale] = Object.fromEntries(
-    [...keys].filter(key => Object.hasOwn(expected, key)).map(key => [key, expected[key]]),
-  );
+  if (mode === "--write") writeFileSync(tablePath, JSON.stringify(expected, null, 2) + "\n");
 }
 
-if (mode === "--write") {
-  if (mismatches.length) {
-    const start = table.index + "var tables=".length;
-    const updated = bundle.slice(0, start) + JSON.stringify(next) +
-      bundle.slice(start + table[1].length);
-    writeFileSync(bundlePath, updated.replace(
-      /^\/\*[\s\S]*?\*\//,
-      "/* Generated from NIARIM Help and ARB files by tools/sync-app-help.mjs. */",
-    ));
-  }
-} else if (mismatches.length) {
+if (mode === "--check" && mismatches.length) {
   console.error(mismatches.join("\n"));
   throw Error(`Synchronize ${mismatches.length} website Help strings with --write.`);
 }

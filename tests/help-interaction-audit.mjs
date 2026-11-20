@@ -49,7 +49,7 @@ try {
         }
         await clear.press("Enter");
         assert.equal(await input.inputValue(), "");
-        assert.ok(await input.evaluate(el => el === document.activeElement));
+        assert.ok(await input.evaluate((el) => el === document.activeElement));
         await summary.press("Enter");
         assert.ok(await firstTopic.locator("p").isVisible());
         await firstTopic.locator("p").click();
@@ -138,6 +138,60 @@ try {
         await context.close();
       }
     }
+  }
+
+  const page = await browser.newPage();
+  try {
+    const requested = [];
+    page.on("request", (request) => {
+      const topic = new URL(request.url()).pathname.match(
+        /^\/js\/help-topics\/(.+)\.json$/,
+      );
+      if (topic) requested.push(topic[1]);
+    });
+    let rejectFrench = true;
+    await page.route("**/js/help-topics/fr.json", (route) =>
+      rejectFrench
+        ? route.fulfill({ status: 503, body: "" })
+        : route.continue(),
+    );
+    await page.goto(`${base}/help/`, { waitUntil: "networkidle" });
+    await page.waitForFunction(() => document.documentElement.lang === "en");
+    const heading = page.locator('[data-i18n="help.entry1.title"]');
+    const initialTitle = await heading.textContent();
+    assert.deepEqual(requested, ["en"]);
+
+    async function selectLanguage(lang) {
+      await page.locator("[data-lang-trigger]").click();
+      await page.locator(`[data-lang-switch="${lang}"]`).click();
+      await page.waitForFunction(
+        (lang) => document.documentElement.lang === lang,
+        lang,
+      );
+    }
+
+    assert.equal(
+      await page.evaluate(() =>
+        window.NIARIM_I18N.applyLang("fr", { syncUrl: true }),
+      ),
+      "en",
+    );
+    assert.equal(await page.locator("html").getAttribute("lang"), "en");
+    assert.equal(await heading.textContent(), initialTitle);
+    assert.equal(new URL(page.url()).searchParams.get("lang"), null);
+
+    rejectFrench = false;
+    await selectLanguage("fr");
+    assert.equal(await page.locator("html").getAttribute("lang"), "fr");
+    assert.notEqual(await heading.textContent(), initialTitle);
+    assert.equal(new URL(page.url()).searchParams.get("lang"), "fr");
+
+    await selectLanguage("en");
+    assert.equal(await heading.textContent(), initialTitle);
+    assert.deepEqual(requested, ["en", "fr", "fr"]);
+    console.log("PASS Help loads one locale on demand, retries, and reuses it");
+  } finally {
+    await page.close();
   }
 } finally {
   await browser.close();

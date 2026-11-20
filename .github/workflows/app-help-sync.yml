@@ -7,7 +7,7 @@ on:
       - "tools/sync-app-help.mjs"
       - "tools/app-help-topic-map.json"
       - "public/help/index.html"
-      - "public/js/app-help-sync-2026.js"
+      - "public/js/help-topics/**"
   workflow_dispatch:
 
 permissions:

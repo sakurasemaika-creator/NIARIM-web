@@ -359,6 +359,9 @@ function rewriteSeoHtml(response, request, env) {
     .on("html", {
       element(element) {
         element.setAttribute("lang", metadata.lang);
+        if (metadata.page === "help") {
+          element.setAttribute("data-help-locale", metadata.lang);
+        }
         if (["en", "fr", "es"].includes(metadata.lang)) {
           element.setAttribute("data-latin-only", "");
         }

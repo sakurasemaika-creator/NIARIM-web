@@ -178,15 +178,27 @@ for (const page of requiredPages) {
   addAttributeKeys(html, htmlKeys);
   const dictionary = window.NIARIM_I18N_DICT;
   pageTranslations[page] = Object.fromEntries(
-    langs.map((lang) => [
-      lang,
-      Object.fromEntries(
-        [...htmlKeys].flatMap((key) => {
-          const value = dictionary[lang]?.[key] ?? dictionary.ja?.[key];
-          return typeof value === "string" ? [[key, value]] : [];
-        }),
-      ),
-    ]),
+    langs.map((lang) => {
+      const topics =
+        page === "help"
+          ? JSON.parse(
+              fs.readFileSync(
+                path.join(jsDir, "help-topics", `${lang}.json`),
+                "utf8",
+              ),
+            )
+          : {};
+      return [
+        lang,
+        Object.fromEntries(
+          [...htmlKeys].flatMap((key) => {
+            const value =
+              topics[key] ?? dictionary[lang]?.[key] ?? dictionary.ja?.[key];
+            return typeof value === "string" ? [[key, value]] : [];
+          }),
+        ),
+      ];
+    }),
   );
   const pageKeys = collectPageKeys(page, html, dictionary);
   pageBundleStats.push(await makePageBundle(page, dictionary, pageKeys));
