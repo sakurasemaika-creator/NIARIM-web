@@ -170,6 +170,39 @@
     transform var(--duration-base, 0.4s) var(--ease-out);
 }
 
+#export .export-format-guide {
+  grid-column: 1 / -1;
+}
+.export-format-guide dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  column-gap: var(--space-lg);
+  margin: var(--space-sm) 0 0;
+}
+.export-format-guide dl > div {
+  border-top: 1px solid var(--color-border);
+  padding: 0.75rem 0;
+}
+.export-format-guide dt {
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-weight: 700;
+}
+.export-format-guide dd {
+  margin: 0.25rem 0 0;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+.export-format-guide a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .spec-item::before {
   content: "";
   position: absolute;
