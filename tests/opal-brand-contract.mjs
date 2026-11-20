@@ -2,7 +2,7 @@ import {readFileSync} from "node:fs";
 import assert from "node:assert/strict";
 import vm from "node:vm";
 
-const page=readFileSync(process.argv[2] ?? "public/coins/index.html","utf8");
+const page=readFileSync(process.argv[2] ?? "public/opals/index.html","utf8");
 if (process.argv[2] && /<title\b[^>]*>[^<]*Cloudflare Access/i.test(page)) {
   throw new Error("The deployed price page requires a Cloudflare Access session.");
 }

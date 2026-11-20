@@ -160,7 +160,7 @@ try {
       };
     });
     if(status.lang!==lang || !status.title || !status.heroName.includes("NIARIM") || !status.heroLogoSrc || status.heroLogoSrc!==status.headerLogoSrc || status.missing.length)log("Localization",lang,JSON.stringify(status));
-    await page.goto(base+"/coins/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
+    await page.goto(base+"/opals/?lang="+encodeURIComponent(lang),{waitUntil:"networkidle"});
     const localizedCoins=await page.evaluate(()=>{
       const language=document.documentElement.lang;
       const dict=window.NIARIM_I18N_DICT?.[language]||{};
@@ -187,7 +187,7 @@ try {
     await page.close();
   }
   const page=await browsers.newPage({viewport:{width:1280,height:960}});
-  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/coins/","#benefits .coins-table--priced"],["/help/","#help-search-input"],["/community/",".community-banner"]]){
+  for(const [path,selector] of [["/features/",".nr-curated"],["/premium/",".nr-notice"],["/opals/","#benefits .coins-table--priced"],["/help/","#help-search-input"],["/community/",".community-banner"]]){
     page.on("pageerror",e=>log("Interior JS",path,e.message));
     const response=await page.goto(base+path,{waitUntil:"networkidle"});
     if(response?.status()!==200||!(await page.locator(selector).count()))log("Interior missing",path,selector);
@@ -201,7 +201,7 @@ try {
   if(featurePairs.sp!==9||featurePairs.bad)log("Feature PC pairing incomplete",JSON.stringify(featurePairs));
   // Check that the priced coin benefits page is actually usable, not just
   // advertised in landing-page copy, and that the cross-links work both ways.
-  await page.goto(base+"/coins/?lang=ja",{waitUntil:"networkidle"});
+  await page.goto(base+"/opals/?lang=ja",{waitUntil:"networkidle"});
   const coins=await page.evaluate(()=>{
     const tables=document.querySelectorAll("#benefits .coins-table--priced");
     const table=tables[0];
@@ -279,7 +279,7 @@ try {
   if(!(await page.locator("#coin-login-bonus").evaluate(el=>el.open)))log("Login reward accordion does not expand");
   for(const width of [390,1440]){
     await page.setViewportSize({width,height:900});
-    await page.goto(base+"/coins/?lang=ja",{waitUntil:"networkidle"});
+    await page.goto(base+"/opals/?lang=ja",{waitUntil:"networkidle"});
     await page.evaluate(()=>document.fonts.ready);
     const layout=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,win:innerWidth}));
     if(layout.doc>layout.win+2)log("Coins horizontal overflow",width,JSON.stringify(layout));
@@ -287,7 +287,7 @@ try {
   }
   await page.goto(base+"/premium/",{waitUntil:"networkidle"});
   if(await page.locator(".about-cta").count())log("Redundant Premium start CTA should be removed");
-  if(!(await page.locator(".premium-coin-panel a[href='/coins/']").count()))log("Premium to coins cross-link missing");
+  if(!(await page.locator(".premium-coin-panel a[href='/opals/']").count()))log("Premium to coins cross-link missing");
 
   // The newly linked stylesheet must really style the Premium -> Coins panel.
   const premiumContrast=await page.evaluate(()=>{

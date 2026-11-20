@@ -12,7 +12,6 @@ export const DEFAULT_LANG = "en";
 export const SEO_PAGE_PATHS = [
   "/",
   "/about/",
-  "/coins/",
   "/community/",
   "/contact/",
   "/faq/",
@@ -20,6 +19,7 @@ export const SEO_PAGE_PATHS = [
   "/font-licenses/",
   "/help/",
   "/news/",
+  "/opals/",
   "/premium/",
   "/privacy/",
   "/terms/",
@@ -31,7 +31,7 @@ export function escapeXml(value) {
 
 export function localizedUrl(origin, pathname, lang) {
   const url = new URL(pathname, `${String(origin).replace(/\/$/, "")}/`);
-  if (lang && lang !== DEFAULT_LANG) url.searchParams.set("lang", lang);
+  if (lang) url.searchParams.set("lang", lang);
   return url.toString();
 }
 
@@ -54,7 +54,7 @@ export function sitemapXml(origin, langs) {
           `<xhtml:link rel="alternate" hreflang="${escapeXml(lang)}" href="${escapeXml(localizedUrl(origin, pathname, lang))}" />`,
       )
       .join("");
-    const xDefault = `<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localizedUrl(origin, pathname, DEFAULT_LANG))}" />`;
+    const xDefault = `<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localizedUrl(origin, pathname))}" />`;
 
     return langs.map(
       (lang) =>

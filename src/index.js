@@ -52,7 +52,6 @@ const PAGE_KEYS = new Map([
   ["/", "home"],
   ["/index.html", "home"],
   ["/about/", "about"],
-  ["/coins/", "coins"],
   ["/community/", "community"],
   ["/contact/", "contact"],
   ["/faq/", "faq"],
@@ -60,6 +59,7 @@ const PAGE_KEYS = new Map([
   ["/font-licenses/", "font-licenses"],
   ["/help/", "help"],
   ["/news/", "news"],
+  ["/opals/", "opals"],
   ["/premium/", "premium"],
   ["/privacy/", "privacy"],
   ["/terms/", "terms"],
@@ -114,19 +114,45 @@ function siteOrigin(request, env) {
   );
 }
 
-function selectedLang(request) {
-  const raw = new URL(request.url).searchParams.get("lang");
-  return SEO_LANGS.includes(raw) ? raw : DEFAULT_LANG;
+function explicitLang(url) {
+  const lang = url.searchParams.get("lang");
+  return SEO_LANGS.includes(lang) ? lang : null;
+}
+
+function preferredLang(request) {
+  const cookie = (request.headers.get("Cookie") || "")
+    .match(/(?:^|;\s*)niarim_lang=([^;]*)/)?.[1];
+  if (SEO_LANGS.includes(cookie)) return cookie;
+
+  const accepted = (request.headers.get("Accept-Language") || "")
+    .split(",")
+    .map((entry) => {
+      const [tag, weight] = entry.trim().toLowerCase().split(/;\s*q\s*=\s*/);
+      return { tag: tag.trim(), quality: weight === undefined ? 1 : Number(weight) };
+    })
+    .filter(({ quality }) => quality > 0 && quality <= 1)
+    .sort((a, b) => b.quality - a.quality);
+
+  for (const { tag } of accepted) {
+    const [language, ...subtags] = tag.split("-");
+    if (language === "zh") {
+      if (subtags.includes("hans")) return "zh-Hans";
+      return subtags.some((part) => ["hant", "tw", "hk", "mo"].includes(part))
+        ? "zh-Hant"
+        : "zh-Hans";
+    }
+    if (SEO_LANGS.includes(language)) return language;
+  }
+  return DEFAULT_LANG;
 }
 
 function normalizedPagePath(pathname) {
-  const value = String(pathname || "/");
-  return value.endsWith("/index.html")
-    ? value.slice(0, -"index.html".length)
-    : value;
+  const path = pathname.replace(/\/index\.html$/, "/");
+  if (PAGE_KEYS.has(path)) return path;
+  return PAGE_KEYS.has(path + "/") ? path + "/" : path;
 }
 
-function canonicalUrl(request, env, lang = selectedLang(request)) {
+function canonicalUrl(request, env, lang) {
   const requestUrl = new URL(request.url);
   const pathname = normalizedPagePath(requestUrl.pathname);
   return localizedUrl(siteOrigin(request, env), pathname, lang);
@@ -138,10 +164,12 @@ function absoluteAssetUrl(value, env, request) {
 }
 
 function pageMetadata(request) {
-  const pathname = normalizedPagePath(new URL(request.url).pathname);
+  const url = new URL(request.url);
+  const pathname = normalizedPagePath(url.pathname);
   const page = PAGE_KEYS.get(pathname);
   if (!page) return null;
-  const lang = selectedLang(request);
+  const explicit = explicitLang(url);
+  const lang = explicit || preferredLang(request);
   const table = SEO_I18N[lang] || SEO_I18N.ja || {};
   const fallback = SEO_I18N.ja || {};
   const titleKey = `meta.${page}.title`;
@@ -149,6 +177,7 @@ function pageMetadata(request) {
   return {
     page,
     lang,
+    negotiated: !explicit,
     title: table[titleKey] || fallback[titleKey] || "NIARIM",
     description: table[descriptionKey] || fallback[descriptionKey] || "",
   };
@@ -276,7 +305,7 @@ function hreflangMarkup(request, env) {
     return `<link rel="alternate" hreflang="${lang}" href="${href}">`;
   });
   links.push(
-    `<link rel="alternate" hreflang="x-default" href="${canonicalUrl(request, env, DEFAULT_LANG)}">`,
+    `<link rel="alternate" hreflang="x-default" href="${canonicalUrl(request, env)}">`,
   );
   return links.join("");
 }
@@ -332,11 +361,10 @@ function localizeElement(element, translations) {
   }
 }
 
-function rewriteSeoHtml(response, request, env) {
+function rewriteSeoHtml(response, request, env, metadata) {
   const type = response.headers.get("content-type") || "";
   if (response.status !== 200 || !type.includes("text/html")) return response;
 
-  const metadata = pageMetadata(request);
   if (!metadata) return response;
 
   const translations = PAGE_TRANSLATIONS[metadata.page][metadata.lang];
@@ -359,6 +387,7 @@ function rewriteSeoHtml(response, request, env) {
     .on("html", {
       element(element) {
         element.setAttribute("lang", metadata.lang);
+        element.setAttribute("data-niarim-locale", metadata.lang);
         if (metadata.page === "help") {
           element.setAttribute("data-help-locale", metadata.lang);
         }
@@ -462,6 +491,13 @@ function rewriteSeoHtml(response, request, env) {
   const transformed = rewriter.transform(response);
   const headers = new Headers(transformed.headers);
   headers.set("Content-Language", metadata.lang);
+  // The asset's validators describe the template, not the translated HTML.
+  headers.delete("ETag");
+  headers.delete("Last-Modified");
+  if (metadata.negotiated) {
+    headers.append("Vary", "Accept-Language, Cookie");
+    headers.set("Cache-Control", "private, no-store");
+  }
   return new Response(transformed.body, {
     status: transformed.status,
     statusText: transformed.statusText,
@@ -537,8 +573,14 @@ export default {
         );
       }
 
-      const assetResponse = await env.ASSETS.fetch(request);
-      const seoResponse = rewriteSeoHtml(assetResponse, request, env);
+      const metadata = pageMetadata(request);
+      const assetRequest = metadata ? new Request(request) : request;
+      if (metadata) {
+        assetRequest.headers.delete("If-None-Match");
+        assetRequest.headers.delete("If-Modified-Since");
+      }
+      const assetResponse = await env.ASSETS.fetch(assetRequest);
+      const seoResponse = rewriteSeoHtml(assetResponse, request, env, metadata);
       return withSecurityHeaders(seoResponse, /^\/account-deletion\/(?:index\.html)?$/.test(url.pathname));
     } catch (err) {
       console.error("Unhandled error", err);

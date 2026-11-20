@@ -193,7 +193,7 @@ try{
    if(await page.locator("[data-community-gallery] .community-card").count())issue("community",view,"fabricated_card");
  }
  await page.close();
- for (const route of ["/", "/help/", "/community/", "/coins/"]) {
+ for (const route of ["/", "/help/", "/community/", "/opals/"]) {
    await measureSlowNetwork(route);
  }
 } catch(e){issue("audit_fatal",e.stack||e.message)}

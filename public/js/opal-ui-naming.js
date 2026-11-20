@@ -1,4 +1,4 @@
-/* UI-only naming: existing API fields, wallet, /coins URL remain stable. */
+/* UI-only naming: Keep existing API fields, wallet keys, and translation IDs. */
 (function(){
 "use strict";
 var d=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={});

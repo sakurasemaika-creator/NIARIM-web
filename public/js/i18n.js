@@ -63,14 +63,7 @@
   }
 
   function detectLang() {
-    try {
-      var lang = new URL(window.location.href).searchParams.get("lang");
-      return LANGS.some(function (item) { return item.code === lang; })
-        ? lang
-        : DEFAULT_LANG;
-    } catch (_) {
-      return DEFAULT_LANG;
-    }
+    return normalizeLang(window.NIARIM_INITIAL_LOCALE);
   }
 
   function t(lang, key) {
@@ -84,8 +77,7 @@
   function syncCurrentUrl(lang) {
     try {
       var url = new URL(window.location.href);
-      if (lang === DEFAULT_LANG) url.searchParams.delete("lang");
-      else url.searchParams.set("lang", lang);
+      url.searchParams.set("lang", lang);
       window.history.replaceState(
         null,
         "",
@@ -95,6 +87,10 @@
   }
 
   function localizeInternalLinks(lang) {
+    var current = new URL(window.location.href).searchParams.get("lang");
+    // Keep automatically negotiated navigation URLs shareable without a
+    // language override. A chosen language follows explicit links.
+    if (!LANGS.some(function (item) { return item.code === current; })) return;
     document.querySelectorAll("a[href]").forEach(function (anchor) {
       var raw = anchor.getAttribute("href");
       if (!raw || raw.charAt(0) === "#") return;
@@ -104,8 +100,7 @@
         if (url.pathname.indexOf("/api/") === 0) return;
         if (anchor.hasAttribute("download") || /\.[^/]+$/.test(url.pathname) &&
             !url.pathname.endsWith("/index.html")) return;
-        if (lang === DEFAULT_LANG) url.searchParams.delete("lang");
-        else url.searchParams.set("lang", lang);
+        url.searchParams.set("lang", lang);
         anchor.setAttribute("href", url.pathname + url.search + url.hash);
       } catch (_) {}
     });
@@ -146,6 +141,13 @@
     options = options || {};
 
     if (options.syncUrl === true) syncCurrentUrl(lang);
+    if (options.remember === true) {
+      try {
+        document.cookie = "niarim_lang=" + lang +
+          "; Path=/; Max-Age=31536000; SameSite=Lax" +
+          (window.location.protocol === "https:" ? "; Secure" : "");
+      } catch (_) {}
+    }
 
     document.documentElement.setAttribute("lang", lang);
 
@@ -274,7 +276,7 @@
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
       button.addEventListener("click", function () {
-        applyLang(lang.code, { syncUrl: true });
+        applyLang(lang.code, { syncUrl: true, remember: true });
         var dropdown = mount.closest("[data-lang-dropdown]");
         if (dropdown) setLangDropdownOpen(dropdown, false, true);
       });

@@ -14,6 +14,7 @@ on:
       - "public/css/pages/features.css"
       - "public/js/i18n-dict-features-diagram.js"
       - "tests/opal-brand-contract.mjs"
+      - "tests/i18n-browser-detection-audit.mjs"
       - "tests/community-ranking-visibility-browser.mjs"
       - "tests/community-feed.test.mjs"
       - "tests/account-deletion.test.mjs"
@@ -29,9 +30,11 @@ on:
       - "public/features/index.html"
       - "public/community/index.html"
       - "public/premium/index.html"
-      - "public/coins/index.html"
+      - "public/opals/index.html"
       - "public/css/pages/coins.css"
       - "public/js/opal-ui-naming.js"
+      - "public/js/lang-flag.js"
+      - "public/js/i18n.js"
       - "public/css/refresh-2026.css"
       - "public/css/niarim-game-site.css"
       - "public/css/brand-direction-2026.css"
@@ -69,8 +72,8 @@ jobs:
       fail-fast: false
       matrix:
         url:
-          - https://niarim.miranima-studio.com/coins/
-          - https://niarim-web.niarim.workers.dev/coins/
+          - https://niarim.miranima-studio.com/opals/
+          - https://niarim-web.niarim.workers.dev/opals/
     steps:
       - uses: actions/checkout@v4
         with:
@@ -112,6 +115,8 @@ jobs:
           exit 1
       - name: Verify Help search and disclosure controls across seven languages
         run: node tests/help-interaction-audit.mjs
+      - name: Verify initial and saved browser languages
+        run: node tests/i18n-browser-detection-audit.mjs
       - name: Verify export format descriptions and contextual guide links
         run: node tests/export-format-guide.mjs
       - name: Verify studio typography and real community capture

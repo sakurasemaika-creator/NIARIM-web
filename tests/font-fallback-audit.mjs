@@ -23,7 +23,7 @@ const ROUTES = [
   "/about/",
   "/help/",
   "/premium/",
-  "/coins/",
+  "/opals/",
   "/community/",
   "/faq/",
   "/contact/",

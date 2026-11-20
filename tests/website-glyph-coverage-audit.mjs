@@ -42,7 +42,7 @@ for (const name of ["HakkouMincho", "Kuramubon"]) {
   if (missing.length) throw Error(`${name} is missing French or Spanish capitals: ${missing.join(" ")}`);
 }
 const routes = [
-  "/", "/about/", "/features/", "/help/", "/premium/", "/coins/",
+  "/", "/about/", "/features/", "/help/", "/premium/", "/opals/",
   "/community/", "/faq/", "/contact/", "/privacy/", "/terms/", "/news/",
   "/font-licenses/", "/account-deletion/"
 ];

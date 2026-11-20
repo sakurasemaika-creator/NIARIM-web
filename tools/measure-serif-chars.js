@@ -25,7 +25,7 @@ const PAGES = [
   "/features/",
   "/help/",
   "/premium/",
-  "/coins/",
+  "/opals/",
   "/community/",
   "/news/",
   "/faq/",

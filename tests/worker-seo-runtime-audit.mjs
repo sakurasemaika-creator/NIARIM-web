@@ -11,8 +11,8 @@ const siteOrigin = String(process.env.NIARIM_SITE_ORIGIN || base).replace(
   "",
 );
 
-async function fetchText(pathname) {
-  const response = await fetch(`${base}${pathname}`, { redirect: "follow" });
+async function fetchText(pathname, headers) {
+  const response = await fetch(`${base}${pathname}`, { headers });
   const text = await response.text();
   assert.equal(response.status, 200, `${pathname}: expected HTTP 200`);
   return { response, text };
@@ -25,10 +25,21 @@ function attr(html, pattern, label) {
 }
 
 for (const testCase of [
-  { path: "/", lang: "en", canonical: "/" },
-  { path: "/index.html?lang=en", lang: "en", canonical: "/" },
-  { path: "/?lang=de", lang: "en", canonical: "/" },
-  { path: "/coins/?lang=de", lang: "en", canonical: "/coins/" },
+  { path: "/", lang: "en", canonical: "/?lang=en" },
+  { path: "/", lang: "ja", canonical: "/?lang=ja",
+    headers: { "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.8" } },
+  { path: "/index.html?lang=en", lang: "en", canonical: "/?lang=en",
+    headers: { "Accept-Language": "ja-JP", Cookie: "niarim_lang=ja" } },
+  { path: "/?lang=de", lang: "en", canonical: "/?lang=en",
+    headers: { "Accept-Language": "de-DE,ja;q=0" } },
+  { path: "/opals/", lang: "ja", canonical: "/opals/?lang=ja",
+    headers: { "Accept-Language": "en;q=0.3, ja-JP ;q=0.9" } },
+  { path: "/opals/?lang=de", lang: "fr", canonical: "/opals/?lang=fr",
+    headers: { "Accept-Language": "de-DE,fr-FR;q=0.8,en;q=0.6" } },
+  { path: "/opals/", lang: "zh-Hant", canonical: "/opals/?lang=zh-Hant",
+    headers: { "Accept-Language": "zh-TW" } },
+  { path: "/opals/", lang: "en", canonical: "/opals/?lang=en",
+    headers: { "Accept-Language": "ja-JP", Cookie: "other=1; niarim_lang=en" } },
   { path: "/?lang=ja", lang: "ja", canonical: "/?lang=ja" },
   {
     path: "/features/index.html?lang=fr",
@@ -41,12 +52,19 @@ for (const testCase of [
     canonical: "/features/?lang=zh-Hant",
   },
 ]) {
-  const { response, text } = await fetchText(testCase.path);
+  const { response, text } = await fetchText(testCase.path, testCase.headers);
   assert.equal(
     response.headers.get("content-language"),
     testCase.lang,
     `${testCase.path}: Content-Language`,
   );
+  assert.match(text, new RegExp(`<html[^>]*data-niarim-locale="${testCase.lang}"`));
+  assert.equal(response.headers.get("etag"), null);
+  if (!SEO_LANGS.includes(new URL(testCase.path, base).searchParams.get("lang"))) {
+    assert.match(response.headers.get("vary"), /accept-language/i);
+    assert.match(response.headers.get("vary"), /cookie/i);
+    assert.match(response.headers.get("cache-control"), /private.*no-store/i);
+  }
   assert.equal(
     attr(text, /<html[^>]*\blang="([^"]+)"/i, "html lang"),
     testCase.lang,
@@ -112,6 +130,13 @@ for (const testCase of [
   );
 }
 
+for (const path of ["/coins", "/coins/", "/coins/index.html"]) {
+  const retiredPage = await fetch(`${base}${path}`, {
+    redirect: "manual",
+  });
+  assert.equal(retiredPage.status, 404);
+}
+
 for (const lang of SEO_LANGS) {
   const { text } = await fetchText(`/help/?lang=${lang}`);
   assert.match(text, new RegExp(`<html[^>]+data-help-locale="${lang}"`));
@@ -143,6 +168,8 @@ assert.ok(
   !sitemap.text.includes("index.html"),
   "sitemap must not expose index.html URLs",
 );
+assert.ok(sitemap.text.includes(`${siteOrigin}/opals/?lang=ja`));
+assert.ok(!sitemap.text.includes("/coins/"));
 assert.ok(
   !sitemap.text.includes("niarim.example.com"),
   "sitemap must not expose placeholder origin",
@@ -173,7 +200,7 @@ for (const pathname of SEO_PAGE_PATHS) {
   const page = pathname.split("/")[1] || "home";
 
   for (const lang of SEO_LANGS) {
-    const path = lang === "en" ? pathname : `${pathname}?lang=${lang}`;
+    const path = `${pathname}?lang=${lang}`;
     const { response, text } = await fetchText(path);
     assert.equal(response.headers.get("content-language"), lang, path);
     if (page === "font-licenses") {

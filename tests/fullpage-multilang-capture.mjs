@@ -12,7 +12,7 @@ const routes = [
   "/about/",
   "/features/",
   "/premium/",
-  "/coins/",
+  "/opals/",
   "/community/",
   "/help/",
   "/faq/",

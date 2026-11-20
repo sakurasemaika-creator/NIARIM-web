@@ -14,7 +14,13 @@ const origin = "https://example.test";
 assert.equal(localizedUrl(origin, "/features/", "ja"), `${origin}/features/?lang=ja`);
 assert.equal(
   localizedUrl(origin, "/features/", "en"),
-  `${origin}/features/`,
+  `${origin}/features/?lang=en`,
+);
+assert.ok(SEO_PAGE_PATHS.includes("/opals/"));
+assert.ok(!SEO_PAGE_PATHS.includes("/coins/"));
+assert.match(
+  sitemapXml(origin, langs),
+  /hreflang="x-default" href="https:\/\/example\.test\/opals\/"/,
 );
 
 const robots = robotsTxt(origin);

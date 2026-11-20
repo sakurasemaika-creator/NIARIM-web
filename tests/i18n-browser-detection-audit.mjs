@@ -6,23 +6,29 @@ const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const browser = await chromium.launch(launchOptions());
 
 try {
-  for (const locale of ["ja-JP", "fr-FR", "de-DE"]) {
+  for (const [locale, automaticLang] of [
+    ["ja-JP", "ja"],
+    ["fr-FR", "fr"],
+    ["zh-TW", "zh-Hant"],
+    ["de-DE", "en"],
+  ]) {
     const context = await browser.newContext({ locale });
-    await context.addInitScript(() => localStorage.setItem("niarim_lang", "ja"));
     const page = await context.newPage();
 
-    for (const [query, lang] of [
-      ["", "en"],
-      ["?lang=de", "en"],
-      ["?lang=ja", "ja"],
-      ["?lang=zh-Hant", "zh-Hant"],
+    for (const [path, lang] of [
+      ["/", automaticLang],
+      ["/opals/", automaticLang],
+      ["/opals/?lang=de", automaticLang],
+      ["/opals/?lang=ja", "ja"],
+      ["/opals/?lang=en", "en"],
+      ["/?lang=zh-Hant", "zh-Hant"],
     ]) {
-      await page.goto(baseURL + "/" + query);
+      await page.goto(baseURL + path);
       await page.waitForFunction(() => window.NIARIM_I18N);
       assert.equal(await page.locator("html").getAttribute("lang"), lang);
       assert.equal(
         await page.locator("html").getAttribute("data-latin-only"),
-        lang === "en" ? "" : null,
+        ["en", "fr", "es"].includes(lang) ? "" : null,
       );
     }
 
@@ -35,7 +41,14 @@ try {
     await page.reload();
     assert.equal(await page.locator("html").getAttribute("lang"), "ja");
     await page.locator("[data-lang-switch=en]").evaluate((button) => button.click());
+    assert.equal(new URL(page.url()).searchParams.get("lang"), "en");
+    await page.goto(baseURL + "/opals/");
+    assert.equal(await page.locator("html").getAttribute("lang"), "en");
     assert.equal(new URL(page.url()).searchParams.get("lang"), null);
+    await page.goto(baseURL + "/opals/?lang=ja");
+    assert.equal(await page.locator("html").getAttribute("lang"), "ja");
+    await page.goto(baseURL + "/");
+    assert.equal(await page.locator("html").getAttribute("lang"), "en");
     await context.close();
   }
 } finally {
