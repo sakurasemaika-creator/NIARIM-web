@@ -158,6 +158,7 @@ console.log(
         "theme guard is final import",
         "legacy strong aliases resolve to active theme accent",
         "interactive selectors are guarded by the active theme token",
+        "keyboard focus indicator follows the active theme accent token",
         "50x50 frame invariants exist",
         "generated selected frame is centered",
         "gallery trailing space invariant exists",
