@@ -257,13 +257,13 @@ for (const pathname of SEO_PAGE_PATHS) {
         return attribute === "alt" && key ? [key] : [];
       }),
     );
-    const imageTags = [...text.matchAll(/<img\\b[^>]*>/gi)].map(([tag]) => tag);
+    const imageTags = [...text.matchAll(/<img\b[^>]*>/gi)].map(([tag]) => tag);
     for (const key of new Set(altKeys)) {
       const value = translations[key];
       assert.ok(value, `${path}: missing alt dictionary entry ${key}`);
       const image = imageTags.find((tag) => tag.includes('data-i18n-attr="alt:' + key + '"'));
       assert.ok(image, `${path}: missing localized image ${key}`);
-      const alt = image.match(/\\balt="([^"]*)"/i)?.[1];
+      const alt = image.match(/\balt="([^"]*)"/i)?.[1];
       assert.notEqual(alt, undefined, `${path}: missing alt attribute ${key}`);
       assert.equal(decodeHtmlAttribute(alt), value, `${path}: server did not localize alt ${key}`);
     }
