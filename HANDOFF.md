@@ -394,3 +394,10 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
 持ち越しタスクが発生するたびに追記していくこと。日々の細かい変更履歴は
 `git log` を参照すれば十分なので、ここにすべてのコミットを書き写す
 必要はない。
+
+
+## 2026-11-21 — 公開オパール価格ページのlive contract test
+
+- Cloudflare Access Worker app `niarim-web - Cloudflare Workers` を `preview_worker` destination に変更。Cloudflare account members のallow policyは維持し、プレビューのみ認証、本番のcustom domain / workers.devは公開対象にする。
+- Smoke run `44881603970` attempt 3では両公開URLともAccess challengeを返さなくなり、`audit:opal` のHTML契約テストまで進行。そこでテストが日本語の静的fallback文言（`コンプリートパック`、`オパール交換画面`、見出し）をlive HTMLに直書きで要求していることが判明。実際のHTMLはAccept-Languageに応じてWorkerで翻訳されるため、言語に依存しないHTMLではi18n keyの存在を検証し、日本語文言は辞書 `d.ja` で検証するよう変更。
+- 価格行・金額・割引率の構造検証はそのまま維持。次のWeb smokeで再確認する。
