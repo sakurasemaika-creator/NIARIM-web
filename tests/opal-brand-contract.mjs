@@ -31,7 +31,7 @@ const prices=[
  [9190, 18350, 41260, 55000, 550000],
 ];
 function values(row){
- return [...row.matchAll(/<td\b[^>]*>([\d,]+)/g)]
+ return [...row.matchAll(/<td\b[^>]*>\s*([\d,]+)/g)]
    .map(x=>Number(x[1].replaceAll(",","")));
 }
 for(const [i,expected] of prices.entries()){
