@@ -401,3 +401,11 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
 - Cloudflare Access Worker app `niarim-web - Cloudflare Workers` を `preview_worker` destination に変更。Cloudflare account members のallow policyは維持し、プレビューのみ認証、本番のcustom domain / workers.devは公開対象にする。
 - Smoke run `44881603970` attempt 3では両公開URLともAccess challengeを返さなくなり、`audit:opal` のHTML契約テストまで進行。そこでテストが日本語の静的fallback文言（`コンプリートパック`、`オパール交換画面`、見出し）をlive HTMLに直書きで要求していることが判明。実際のHTMLはAccept-Languageに応じてWorkerで翻訳されるため、言語に依存しないHTMLではi18n keyの存在を検証し、日本語文言は辞書 `d.ja` で検証するよう変更。
 - 価格行・金額・割引率の構造検証はそのまま維持。次のWeb smokeで再確認する。
+
+
+## 2026-11-21 — 公開価格ページ・全体smoke成功
+
+- Smoke Run `44912871784`（commit `8af5225066d72e063cc51a5f020551bd3394bd4b`）はsuccess。公開オパール価格ページはcustom domain `https://niarim.miranima-studio.com/opals/` と `https://niarim-web.niarim.workers.dev/opals/` の両方でlive price contractを通過。
+- Smoke内のブランド契約、価格比較ルール、全Web unit tests、7言語Help/search/disclosure、mobile menu focus/scroll、初期・保存言語、export guide、studio typography/community capture、responsive/image/palette、editorial fonts/motion/browser screenshots、非公開化redaction、Google verification/account deletion mock identity、全ページの日本語PC/mobile captureがすべてsuccess。
+- Evidence artifacts: `refreshed-website-mobile-desktop`（ID `14710901412`、10,117,725 bytes）、`site-all-pages-japanese-full-height`（ID `14710801678`、31,047,040 bytes）。GitHub Actions上に保存済み（14日保持）。Google Drive連携はこの実行環境で利用できず、Driveへの複製は未実施。
+- Cloudflare Access app `niarim-web - Cloudflare Workers` はdestination `preview_worker`、account-member allow policyを維持。previewのみ認証し、本番custom domain / workers.devの公開確認が成功した。
