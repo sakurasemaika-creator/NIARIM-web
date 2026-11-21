@@ -395,19 +395,7 @@ html body.nr-site .nr-hero-showcase::before {
   background: radial-gradient(ellipse, rgba(255, 182, 199, .21), transparent 66%);
   filter: blur(16px);
 }
-html body.nr-site .nr-hero-pc-view,
-html body.nr-site .nr-hero-sp-view {
-  transition: transform .65s var(--nr-ease);
-  backface-visibility: hidden;
-}
-@media (hover: hover) and (pointer: fine) {
-  html body.nr-site .nr-hero-showcase:hover .nr-hero-pc-view {
-    transform: translate(-5px, -7px) rotate(-1deg);
-  }
-  html body.nr-site .nr-hero-showcase:hover .nr-hero-sp-view {
-    transform: translate(3px, -10px) rotate(3deg);
-  }
-}
+/* Hero product imagery is intentionally static: the showcase is informational, not an interactive control. */
 html body.nr-site .nr-statement {
   position: relative; border-bottom: 1px solid var(--nr-rule);
 }
@@ -481,9 +469,4 @@ html body.nr-site .nr-feature-text > p { max-width: 37em; }
   html body.nr-site .nr-statement::after { font-size: .57rem; }
   html body.nr-site .nr-tool-grid article::before { left: 14px; right: 14px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  html body.nr-site .nr-hero-pc-view,
-  html body.nr-site .nr-hero-sp-view { transition: none !important; }
-  html body.nr-site .nr-hero-showcase:hover .nr-hero-pc-view { transform: rotate(-2deg); }
-  html body.nr-site .nr-hero-showcase:hover .nr-hero-sp-view { transform: rotate(4deg); }
-}
+
