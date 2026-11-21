@@ -273,7 +273,7 @@ for (const pathname of SEO_PAGE_PATHS) {
       ]) {
         const value = translations[key];
         assert.ok(value, `${path}: missing eyebrow dictionary entry ${key}`);
-        const paragraph = [...text.matchAll(/<p\\b[^>]*data-i18n="([^"]+)"[^>]*>([\\s\\S]*?)<\\/p>/gi)]
+        const paragraph = [...text.matchAll(/<p\b[^>]*data-i18n="([^"]+)"[^>]*>([\s\S]*?)<\/p>/gi)]
           .find(([, id]) => id === key);
         assert.ok(paragraph, `${path}: missing localized eyebrow ${key}`);
         assert.equal(paragraph[2].trim(), escapeXml(value), `${path}: server did not localize eyebrow ${key}`);
