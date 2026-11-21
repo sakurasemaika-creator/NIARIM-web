@@ -1,0 +1,1 @@
+Run the one-time Prettier formatting pass on NIARIM-web/dev_branch. The workflow removes this marker after formatting and all checks pass.
