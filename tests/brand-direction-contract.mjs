@@ -21,6 +21,13 @@ const css = readFileSync(fsRoot("css/brand-direction-2026.css"), "utf8");
 const script = readFileSync(fsRoot("js/brand-direction.js"), "utf8");
 assert.match(css, /prefers-reduced-motion/);
 assert.match(css, /focus-visible/);
+// The hero device previews are static product imagery, not interactive controls.
+// Keep decorative hover transforms from implying a false affordance.
+assert.doesNotMatch(
+  css,
+  /\.nr-hero-showcase:hover\s+\.nr-hero-(?:pc|sp)-view/,
+  "static hero device previews must not move on hover",
+);
 assert.doesNotMatch(css, /\.fd-[\w-]+\s*\{/);
 assert.match(script, /requestAnimationFrame/);
 assert.doesNotMatch(script, /fetch\s*\(/);
