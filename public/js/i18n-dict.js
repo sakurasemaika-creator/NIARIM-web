@@ -22,6 +22,8 @@
       "nav.contact": "お問い合わせ",
       "nav.download": "ダウンロード",
       "lang.switch": "言語を切り替える",
+      "common.menuOpen": "メニューを開く",
+      "common.menuClose": "メニューを閉じる",
 
       "common.readMore": "詳しく見る",
       "common.backHome": "ホームへ戻る",
@@ -359,6 +361,8 @@
       "nav.contact": "Contact",
       "nav.download": "Download",
       "lang.switch": "Change language",
+      "common.menuOpen": "Open menu",
+      "common.menuClose": "Close menu",
 
       "common.readMore": "Learn more",
       "common.backHome": "Back to home",
