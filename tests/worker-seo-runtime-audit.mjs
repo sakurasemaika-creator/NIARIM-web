@@ -42,6 +42,11 @@ for (const testCase of [
     headers: { "Accept-Language": "ja-JP", Cookie: "other=1; niarim_lang=en" } },
   { path: "/?lang=ja", lang: "ja", canonical: "/?lang=ja" },
   {
+    path: "/font-licenses/?lang=es",
+    lang: "es",
+    canonical: "/font-licenses/?lang=es",
+  },
+  {
     path: "/features/index.html?lang=fr",
     lang: "fr",
     canonical: "/features/?lang=fr",
@@ -131,10 +136,13 @@ for (const testCase of [
 }
 
 for (const path of ["/coins", "/coins/", "/coins/index.html"]) {
-  const retiredPage = await fetch(`${base}${path}`, {
-    redirect: "manual",
-  });
-  assert.equal(retiredPage.status, 404);
+  for (const lang of SEO_LANGS) {
+    const retiredPage = await fetch(`${base}${path}?lang=${lang}`, {
+      redirect: "manual",
+    });
+    assert.equal(retiredPage.status, 308);
+    assert.equal(retiredPage.headers.get("location"), `${base}/opals/?lang=${lang}`);
+  }
 }
 
 for (const lang of SEO_LANGS) {
