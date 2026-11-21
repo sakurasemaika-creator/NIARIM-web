@@ -2,3 +2,4 @@ Run the one-time Prettier formatting pass on NIARIM-web/dev_branch. The workflow
 Syntax blocker fixed; rerun the canonical format and verification pass.
 Retry after completing paragraph and image-regex checks.
 Prettier excludes the locked canonical route; retry the formatting and verification pass.
+Pricing row parser now accepts Prettier line breaks; rerun canonical format verification.
