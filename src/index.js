@@ -21,6 +21,7 @@ import { handleContact } from "./contact.js";
 import { handleAccountDeletion } from "./account-deletion.js";
 import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
+import { canonicalRedirect } from "./canonical-host.js";
 
 const CSP = [
   "default-src 'self'",
@@ -560,6 +561,9 @@ export default {
     const url = new URL(request.url);
 
     try {
+      const canonical = canonicalRedirect(request, env);
+      if (canonical) return withSecurityHeaders(canonical);
+
       if (
         url.pathname === "/coins" ||
         url.pathname === "/coins/" ||

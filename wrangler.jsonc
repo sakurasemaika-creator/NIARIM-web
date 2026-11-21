@@ -17,9 +17,10 @@
     // (未指定だと本文が空のまま404が返り、ブランドに沿った404ページが表示されない)
     "not_found_handling": "404-page",
   },
-  // 公開サイトの正規URL。独自ドメインへ移行した際はこの1か所を変更する。
+  // 公開サイトの正規URL（所有者の決定 2026-11-13：niarim.miranima-studio.com）。
+  // 旧い Workers の既定のホストで開かれたページはここへ恒久転送する（src/canonical-host.js）。
   "vars": {
-    "SITE_ORIGIN": "https://niarim-web.niarim.workers.dev",
+    "SITE_ORIGIN": "https://niarim.miranima-studio.com",
     // AWS Lambda Function URL for public community reads and verified account deletion.
     "NIARIM_PUBLIC_API_BASE_URL": "https://ibjfhyoqvfanle62ltokgz6sry0fjqfh.lambda-url.ap-northeast-1.on.aws/",
     "CONTACT_SITE_ORIGIN": "https://niarim.miranima-studio.com",

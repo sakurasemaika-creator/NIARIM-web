@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://niarim-web.niarim.workers.dev/sitemap.xml
+Sitemap: https://niarim.miranima-studio.com/sitemap.xml

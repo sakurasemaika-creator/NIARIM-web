@@ -4,7 +4,7 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "..");
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
 const findings = [];
-const origin = "https://niarim-web.niarim.workers.dev";
+const origin = "https://niarim.miranima-studio.com";
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const routes = [
   ["public/index.html", "/"],

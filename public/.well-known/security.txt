@@ -1,4 +1,4 @@
-Contact: https://niarim-web.niarim.workers.dev/contact/
-Canonical: https://niarim-web.niarim.workers.dev/.well-known/security.txt
+Contact: https://niarim.miranima-studio.com/contact/
+Canonical: https://niarim.miranima-studio.com/.well-known/security.txt
 Preferred-Languages: ja, en
 Expires: 2027-09-08T00:00:00Z
