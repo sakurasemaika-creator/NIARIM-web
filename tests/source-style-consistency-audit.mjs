@@ -56,11 +56,16 @@ const polishClean = stripComments(polish);
 const focusRule = polishClean.match(
   /:where\(a, button, input, textarea, select\):focus-visible\s*\{([^}]*)\}/,
 );
-if (!focusRule || !/outline:\s*3px solid var\(--color-accent-strong\)/.test(focusRule[1])) {
+if (!focusRule || !/outline:\s*3px solid var\(--color-accent-text\)/.test(focusRule[1])) {
   failures.push("keyboard focus indicator must use the active theme accent token");
 }
 if (focusRule && /#[0-9a-f]{3,8}|rgba?\(/i.test(focusRule[1])) {
   failures.push("keyboard focus indicator must not hard-code a color");
+}
+
+const mainJs = await read("public/js/main.js");
+if (!/prefers-reduced-motion:\s*reduce/.test(mainJs) || !/behavior:\s*window\.matchMedia/.test(mainJs)) {
+  failures.push("main page scroll-to-top must respect prefers-reduced-motion");
 }
 
 const guardClean = stripComments(themeGuard);
@@ -158,7 +163,8 @@ console.log(
         "theme guard is final import",
         "legacy strong aliases resolve to active theme accent",
         "interactive selectors are guarded by the active theme token",
-        "keyboard focus indicator follows the active theme accent token",
+        "keyboard focus indicator follows the contrast-safe theme text token",
+        "main page scroll-to-top respects reduced-motion preference",
         "50x50 frame invariants exist",
         "generated selected frame is centered",
         "gallery trailing space invariant exists",
