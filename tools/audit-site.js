@@ -171,6 +171,40 @@ const WIDTHS = [320, 375, 768, 1024, 1280];
       return out;
     });
 
+    // The mobile navigation toggle must announce the action available in its
+    // current state, in every supported locale (not only aria-expanded).
+    await page.setViewportSize({ width: 390, height: 800 });
+    const menuToggle = page.locator(".nav-toggle");
+    if (await menuToggle.count()) {
+      const menuLabels = {
+        ja: ["メニューを開く", "メニューを閉じる"],
+        en: ["Open menu", "Close menu"],
+        "zh-Hans": ["打开菜单", "关闭菜单"],
+        "zh-Hant": ["開啟選單", "關閉選單"],
+        ko: ["메뉴 열기", "메뉴 닫기"],
+        fr: ["Ouvrir le menu", "Fermer le menu"],
+        es: ["Abrir menú", "Cerrar menú"],
+      };
+      for (const [lang, labels] of Object.entries(menuLabels)) {
+        await page.evaluate((value) => window.NIARIM_I18N.applyLang(value), lang);
+        const initialLabel = await menuToggle.getAttribute("aria-label");
+        if (initialLabel !== labels[0])
+          note(path, "メニュー開くラベル", lang + ": " + initialLabel);
+        await menuToggle.click();
+        const openState = await menuToggle.getAttribute("aria-expanded");
+        const openLabel = await menuToggle.getAttribute("aria-label");
+        if (openState !== "true" || openLabel !== labels[1])
+          note(path, "メニュー開状態", lang + ": " + openState + " / " + openLabel);
+        await menuToggle.click();
+        const closedState = await menuToggle.getAttribute("aria-expanded");
+        const closedLabel = await menuToggle.getAttribute("aria-label");
+        if (closedState !== "false" || closedLabel !== labels[0])
+          note(path, "メニュー閉状態", lang + ": " + closedState + " / " + closedLabel);
+      }
+    } else {
+      note(path, "モバイルメニューなし", ".nav-toggle がありません");
+    }
+
     if (errors.length) note(path, "JSエラー", errors.join(" | "));
     if (failed.length) note(path, "リクエスト失敗", failed.join(" | "));
     if (external.length)
