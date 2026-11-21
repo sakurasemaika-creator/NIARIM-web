@@ -247,6 +247,10 @@ for (const pathname of SEO_PAGE_PATHS) {
         .map(([, , , body]) =>
           body.replace(/<br\s*\/?>|<\/?(?:em|strong)>/gi, ""),
         );
+      assert.equal(rendered.length, 1, `${path}: missing localized paragraph ${key}`);
+      assert.equal(rendered[0].trim(), expected, `${path}: server did not localize ${key}`);
+    }
+
     const altKeys = [...template.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap(([, value]) =>
       value.split("|").flatMap((pair) => {
         const [attribute, key] = pair.split(":");
