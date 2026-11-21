@@ -124,6 +124,12 @@
   );
 }
 
+[data-help-category] .feature-section-head .feature-section-icon {
+  color: var(--color-brand-dark);
+  background: var(--color-sub-tint);
+  box-shadow: none;
+}
+
 [data-help-category] .feature-section-head::before {
   margin-bottom: 0.45rem;
 }

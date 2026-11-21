@@ -31,6 +31,9 @@ try {
         const topicOrder = () => page.locator("[data-help-card] h3").evaluateAll(nodes => nodes.map(el => el.dataset.i18n));
         const originalCategories = await categoryOrder();
         const originalTopics = await topicOrder();
+        const symbols = await page.locator("[data-help-category] .feature-section-icon use")
+          .evaluateAll(nodes => nodes.map(el => el.getAttribute("href")));
+        assert.equal(new Set(symbols).size, originalCategories.length);
         const resultCount = page.locator("#help-result-count");
         const pressure = await page.locator('[data-i18n="help.entry34.title"]').innerText();
         await input.fill(pressure);
