@@ -1,0 +1,2 @@
+# Locked audit route is an authoritative state artifact; do not rewrite it during repository-wide formatting.
+docs/work-audit/state/AUDIT_ROUTE.md
