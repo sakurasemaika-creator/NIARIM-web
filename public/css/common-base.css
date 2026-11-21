@@ -989,7 +989,7 @@ p {
 
   /* Mobile navigation is a reading list: align every item to one clear
      left edge instead of centering each 44px-or-larger hit target. */
-  .main-nav > ul > li > a {
+  .main-nav > ul > li > a:not(.btn) {
     justify-content: flex-start;
     text-align: left;
   }
