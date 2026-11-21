@@ -917,6 +917,18 @@
       return nav.classList.contains("is-open");
     }
 
+    // Keep the accessible name in sync with the actual disclosure state and
+    // the currently selected site language. aria-expanded alone communicates
+    // state, but a matching action label is clearer in screen-reader controls.
+    function applyToggleLabel(lang) {
+      var activeLang = lang || document.documentElement.lang || "ja";
+      var key = isOpen() ? "common.menuClose" : "common.menuOpen";
+      var fallback = isOpen() ? "メニューを閉じる" : "メニューを開く";
+      var label = window.NIARIM_I18N &&
+        window.NIARIM_I18N.translate(activeLang, key);
+      toggle.setAttribute("aria-label", label && label !== key ? label : fallback);
+    }
+
     function close(returnFocus) {
       if (!isOpen()) return;
       toggle.setAttribute("aria-expanded", "false");
@@ -924,8 +936,14 @@
       document.documentElement.classList.remove("mobile-nav-open");
       changed.forEach(function (element) { element.inert = false; });
       changed = [];
+      applyToggleLabel();
       if (returnFocus && narrow.matches) toggle.focus();
     }
+
+    applyToggleLabel();
+    document.addEventListener("niarim:langchange", function (event) {
+      applyToggleLabel(event.detail && event.detail.lang);
+    });
 
     toggle.addEventListener("click", function () {
       if (isOpen()) {
@@ -940,6 +958,7 @@
       document.documentElement.classList.add("mobile-nav-open");
       toggle.setAttribute("aria-expanded", "true");
       nav.classList.add("is-open");
+      applyToggleLabel();
       toggle.focus();
     });
     narrow.addEventListener("change", function () {
