@@ -154,23 +154,30 @@
           </p>
         </div>
 
-        <div class="help-search">
-          <label
-            for="help-search-input"
-            class="visually-hidden"
-            data-i18n="help.searchHint"
-            >キーワードで検索</label
-          >
-          <input
-            type="search"
-            id="help-search-input"
-            data-i18n-attr="placeholder:help.searchHint"
-            placeholder="キーワードで検索"
-          />
-          <button type="button" class="help-search-clear" id="help-search-clear"
-            aria-label="検索をやめる" data-i18n-attr="aria-label:help.clearSearch" hidden>
-            <span aria-hidden="true">×</span>
-          </button>
+        <div class="help-search-panel">
+          <div class="help-search">
+            <label
+              for="help-search-input"
+              class="visually-hidden"
+              data-i18n="help.searchHint"
+              >キーワードで検索</label
+            >
+            <input
+              type="search"
+              id="help-search-input"
+              data-i18n-attr="placeholder:help.searchHint"
+              placeholder="キーワードで検索"
+            />
+            <button type="button" class="help-search-clear" id="help-search-clear"
+              aria-label="検索をやめる" data-i18n-attr="aria-label:help.clearSearch" hidden>
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <div class="help-search-status" role="status" aria-live="polite" aria-atomic="true">
+            <span id="help-result-count"></span>
+            <span id="help-no-results" data-i18n="help.noResults" hidden>該当する項目が見つかりません</span>
+          </div>
         </div>
 
         <nav class="feature-nav help-category-nav" aria-label="カテゴリ一覧" data-i18n-attr="aria-label:a11y.categoryList">
@@ -317,13 +324,7 @@
   <details class="spec-item" data-help-card><summary><h3 data-i18n="help.entry77.title">容量削減</h3></summary><p data-i18n="help.entry77.desc">端末容量に対するNIARIMの使用量と、NIARIM内部（プロジェクト・素材・書き出し済みファイル・自作ブラシ/トーン/スタンプ/フォント・キャッシュ・ゴミ箱）の内訳を円グラフで確認できます。キャッシュの削除・未使用素材の一括削除（全プロジェクト）・ゴミ箱を空にする・プロジェクトの整理・全データ削除（初期化）が行えます。</p></details>
   <details class="spec-item" data-help-card><summary><h3 data-i18n="help.entry78.title">ホーム画面ウィジェット</h3></summary><p data-i18n="help.entry78.desc">スマホのホーム画面に置ける3種類のウィジェット（作品の1コマ表示／作品をつくる／作品広場）の設定です。ウィジェット自体の追加はホーム画面の長押しから行います（アプリ内には追加ボタンはありません）。「作品を選ぶ」では、プロジェクト一覧タブと同じ並び替え・表示方法・検索・お気に入り絞り込みを使って作品を選び、再生コントロール付きのプレビューで表示するフレームまで選べます。「作品をつくる」「作品広場」ウィジェットは、背景色をアプリのテーマに合わせるか個別に指定するかを選べます。</p></details>
 </div></section>
-<p
-          class="help-no-results"
-          id="help-no-results"
-          data-i18n="help.noResults"
-        >
-          該当する項目が見つかりませんでした。
-        </p>
+
       </div>
     </main>
 

@@ -38,10 +38,13 @@
   }
 }
 
-.help-search {
-  position: relative;
+.help-search-panel {
   max-width: 480px;
   margin: 0 auto var(--space-xl);
+}
+
+.help-search {
+  position: relative;
 }
 
 .help-search input {
@@ -86,15 +89,12 @@
   box-shadow: 0 0 0 4px var(--color-sub-tint);
 }
 
-.help-no-results {
-  text-align: center;
-  padding: var(--space-2xl) var(--space-lg);
-  color: var(--color-text-muted);
-  display: none;
-}
-
-.help-no-results.is-visible {
+.help-search-status > span:not(:empty):not([hidden]) {
   display: block;
+  margin-block-start: 0.5rem;
+  padding-inline: 0.75rem;
+  color: var(--color-text);
+  font-size: var(--fs-small);
 }
 
 .help-category-count {

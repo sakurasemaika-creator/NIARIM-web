@@ -11,7 +11,7 @@ try {
   for (const language of languages) {
     for (const mode of ["pc", "sp"]) {
       const context = await browser.newContext({
-        viewport: { width: mode === "pc" ? 1280 : 390, height: 900 },
+        viewport: { width: mode === "pc" ? 1280 : 320, height: 900 },
         isMobile: mode === "sp",
         hasTouch: mode === "sp",
         locale: language,
@@ -27,6 +27,24 @@ try {
           language,
         );
         const input = page.locator("#help-search-input");
+        const categoryOrder = () => page.locator("[data-help-category]").evaluateAll(nodes => nodes.map(el => el.id));
+        const topicOrder = () => page.locator("[data-help-card] h3").evaluateAll(nodes => nodes.map(el => el.dataset.i18n));
+        const originalCategories = await categoryOrder();
+        const originalTopics = await topicOrder();
+        const resultCount = page.locator("#help-result-count");
+        const pressure = await page.locator('[data-i18n="help.entry34.title"]').innerText();
+        await input.fill(pressure);
+        const visibleTopics = page.locator("[data-help-card]:visible");
+        assert.equal(await visibleTopics.first().locator("h3").innerText(), pressure);
+        assert.ok(await visibleTopics.first().locator("p").isVisible());
+        assert.equal(await page.locator("[data-help-card][open]").count(), 1);
+        const countFormat = await page.evaluate(lang => window.NIARIM_I18N.translate(lang, "help.resultCount"), language);
+        assert.equal(await resultCount.innerText(), countFormat.replace("{count}", String(await visibleTopics.count())));
+        assert.ok(await input.evaluate(el => el === document.activeElement));
+        await input.press("Escape");
+        assert.equal(await resultCount.textContent(), "");
+        assert.deepEqual(await categoryOrder(), originalCategories);
+        assert.deepEqual(await topicOrder(), originalTopics);
         const category = page.locator("#help-save");
         const title = (
           await category.locator("[data-help-card] h3").first().textContent()
@@ -45,6 +63,9 @@ try {
         for (const query of [title + "　" + heading, heading + "  " + title]) {
           await input.fill(query);
           assert.ok(await firstTopic.isVisible());
+          if (!(await firstTopic.locator("p").isVisible())) {
+            await summary.press("Enter");
+          }
           assert.ok(await firstTopic.locator("p").isVisible());
         }
         await clear.press("Enter");
@@ -69,6 +90,8 @@ try {
           `${language}/${mode}: a category name matches every entry it contains`,
         );
 
+        assert.ok(await page.locator("[data-help-card][open]").count() <= 1);
+        assert.equal(await resultCount.innerText(), countFormat.replace("{count}", String(await visibleTopics.count())));
         const folded = page.locator("#help-brush");
         await input.fill("ブラシ");
         if (language === "ja") {
