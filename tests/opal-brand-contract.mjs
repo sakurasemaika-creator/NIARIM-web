@@ -35,14 +35,14 @@ function values(row){
    .map(x=>Number(x[1].replaceAll(",","")));
 }
 for(const [i,expected] of prices.entries()){
- const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="coins\\.b'+i+'">[\\s\\S]*?<\\/tr>'))?.[0];
+ const row=table.match(new RegExp('<tr[^>]*>\\s*<th scope="row" data-i18n="coins\\.b'+i+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"benefit row "+i);
  assert.deepEqual(values(row),expected,"v8 rate row "+i);
 }
 const separate=[18380, 36700, 82520, 110000, 1100000];
 const saving=[9190, 18350, 41260, 55000, 550000];
 for(const [label,expected] of [["coins.compareSeparate",separate],["coins.compareSaving",saving]]){
- const row=table.match(new RegExp('<tr[^>]*><th scope="row" data-i18n="'+label.replace(".","\\.")+'">[\\s\\S]*?<\\/tr>'))?.[0];
+ const row=table.match(new RegExp('<tr[^>]*>\\s*<th scope="row" data-i18n="'+label.replace(".","\\.")+'">[\\s\\S]*?<\\/tr>'))?.[0];
  assert.ok(row,"integrated comparison row "+label);
  assert.deepEqual(values(row),expected);
 }
