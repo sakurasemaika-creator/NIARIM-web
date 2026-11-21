@@ -3,6 +3,10 @@ import { readFileSync } from "node:fs";
 import { PAGE_TRANSLATIONS, SEO_LANGS } from "../src/generated/seo-i18n.js";
 import { escapeXml, SEO_PAGE_PATHS } from "../src/seo.js";
 
+const fontCss = readFileSync(new URL("../public/css/common-base.css", import.meta.url), "utf8");
+assert.match(fontCss, /font-family:\s*"HakkouMincho";\s*font-display:\s*optional;/);
+assert.match(fontCss, /font-family:\s*"Kuramubon";\s*font-display:\s*optional;/);
+assert.match(fontCss, /font-family:\s*"HakkouMinchoCJK";\s*font-display:\s*swap;/);
 const base = String(
   process.env.NIARIM_WORKER_ORIGIN || "http://127.0.0.1:8790",
 ).replace(/\/$/, "");
@@ -22,6 +26,14 @@ function attr(html, pattern, label) {
   const match = html.match(pattern);
   assert.ok(match, `missing ${label}`);
   return match[1];
+}
+function decodeHtmlAttribute(value) {
+  return String(value)
+    .replace(/&quot;/g, '"')
+    .replace(/&#0*39;|&#x0*27;|&apos;/gi, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
 }
 
 for (const testCase of [
@@ -235,10 +247,43 @@ for (const pathname of SEO_PAGE_PATHS) {
         .map(([, , , body]) =>
           body.replace(/<br\s*\/?>|<\/?(?:em|strong)>/gi, ""),
         );
-      assert.ok(
-        rendered.includes(expected),
-        `${path}: server did not render ${key}`,
-      );
+    const altKeys = [...template.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap(([, value]) =>
+      value.split("|").flatMap((pair) => {
+        const [attribute, key] = pair.split(":");
+        return attribute === "alt" && key ? [key] : [];
+      }),
+    );
+    const imageTags = [...text.matchAll(/<img\\b[^>]*>/gi)].map(([tag]) => tag);
+    for (const key of new Set(altKeys)) {
+      const value = translations[key];
+      assert.ok(value, `${path}: missing alt dictionary entry ${key}`);
+      const image = imageTags.find((tag) => tag.includes('data-i18n-attr="alt:' + key + '"'));
+      assert.ok(image, `${path}: missing localized image ${key}`);
+      const alt = image.match(/\\balt="([^"]*)"/i)?.[1];
+      assert.notEqual(alt, undefined, `${path}: missing alt attribute ${key}`);
+      assert.equal(decodeHtmlAttribute(alt), value, `${path}: server did not localize alt ${key}`);
+    }
+
+    if (page === "opals") {
+      for (const key of [
+        "coins.eyebrowHero",
+        "coins.eyebrowEarn",
+        "coins.eyebrowMissions",
+        "coins.eyebrowBenefits",
+      ]) {
+        const value = translations[key];
+        assert.ok(value, `${path}: missing eyebrow dictionary entry ${key}`);
+        const paragraph = [...text.matchAll(/<p\\b[^>]*data-i18n="([^"]+)"[^>]*>([\\s\\S]*?)<\\/p>/gi)]
+          .find(([, id]) => id === key);
+        assert.ok(paragraph, `${path}: missing localized eyebrow ${key}`);
+        assert.equal(paragraph[2].trim(), escapeXml(value), `${path}: server did not localize eyebrow ${key}`);
+      }
+    }
+
+    if (page === "home" && ["en", "fr", "es"].includes(lang)) {
+      for (const font of ["HakkouMincho-latin.woff2", "Kuramubon-latin.woff2"]) {
+        assert.ok(text.includes('href="/assets/fonts/' + font + '"'), `${path}: missing early font preload ${font}`);
+      }
     }
   }
 }

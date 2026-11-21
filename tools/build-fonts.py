@@ -432,9 +432,11 @@ def build():
                 # 必ず転送されてしまう（実測でDOMContentLoadedの約380ms前）。
                 # family名を分けておけば、ラテン系の言語のときだけ
                 # font-familyのスタックからCJK側を外せる（variables.css参照）。
-                for out_name, out_dst, out_family in (
-                    (latin_out, latin_dst, family),
-                    (outname, rest_dst, family + "CJK"),
+                # Preloaded Latin faces use optional display so late font downloads
+                # cannot shift the English/French/Spanish hero. CJK faces keep swap.
+                for out_name, out_dst, out_family, display in (
+                    (latin_out, latin_dst, family, "optional"),
+                    (outname, rest_dst, family + "CJK", "swap"),
                 ):
                     blocks.append(
                         "\n".join(
@@ -442,7 +444,7 @@ def build():
                                 f"/* {role} */",
                                 "@font-face {",
                                 f'  font-family: "{out_family}";',
-                                "  font-display: swap;",
+                                f"  font-display: {display};",
                                 f'  src: url("/assets/fonts/{out_name}") format("woff2");',
                                 f"  unicode-range: {unicode_ranges(out_dst)};",
                                 "}",

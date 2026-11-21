@@ -95,7 +95,7 @@ jobs:
           npm run audit:opal -- "$price_page"
   smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

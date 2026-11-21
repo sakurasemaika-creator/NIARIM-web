@@ -183,8 +183,15 @@ function pageMetadata(request) {
   };
 }
 
-function performanceHeadMarkup(page) {
+function performanceHeadMarkup(page, lang) {
   const hasScreenMocks = page === "features";
+  const fontPreloadMarkup =
+    page === "home" && ["en", "fr", "es"].includes(lang)
+      ? [
+          '<link rel="preload" href="/assets/fonts/HakkouMincho-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
+          '<link rel="preload" href="/assets/fonts/Kuramubon-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
+        ].join("")
+      : "";
   const preloads = hasScreenMocks
     ? COMMON_STYLE_PRELOADS.concat(MOCK_STYLE_PRELOADS)
     : COMMON_STYLE_PRELOADS;
@@ -203,6 +210,7 @@ function performanceHeadMarkup(page) {
 
   if (!hasScreenMocks) {
     return (
+      fontPreloadMarkup +
       preloadMarkup +
       scriptPreloads +
       globalLayers +
@@ -213,6 +221,7 @@ function performanceHeadMarkup(page) {
   }
 
   return (
+    fontPreloadMarkup +
     preloadMarkup +
     scriptPreloads +
     globalLayers +
@@ -372,7 +381,7 @@ function rewriteSeoHtml(response, request, env, metadata) {
   const canonical = canonicalUrl(request, env, metadata.lang);
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
-  const headPerformance = performanceHeadMarkup(metadata.page);
+  const headPerformance = performanceHeadMarkup(metadata.page, metadata.lang);
   const useLightweightRuntime = metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)

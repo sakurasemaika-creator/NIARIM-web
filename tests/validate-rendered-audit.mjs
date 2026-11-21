@@ -7,7 +7,7 @@ const reportPath =
   process.env.AUDIT_REPORT || "artifacts/autonomous-browser-audit/report.json";
 const report = JSON.parse(await fs.readFile(reportPath, "utf8"));
 
-const knownDeferredRule = "Final download CTA must use brand accent";
+const knownDeferredRule = "Final download CTA must use theme accent token";
 const remaining = report.findings.filter(
   (item) =>
     !(

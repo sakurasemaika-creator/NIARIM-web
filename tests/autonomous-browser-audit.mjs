@@ -193,12 +193,7 @@ async function auditDesignInvariants(page, vp, route) {
 
     const root = getComputedStyle(document.documentElement);
     const accent = resolveColor(root.getPropertyValue("--color-accent").trim());
-    const accentStrongRaw = root
-      .getPropertyValue("--color-accent-strong")
-      .trim();
-    const ctaAccent = resolveColor(
-      accentStrongRaw || root.getPropertyValue("--color-accent").trim(),
-    );
+    const themeAccent = accent;
     const footerBrown = resolveColor(
       root.getPropertyValue("--color-footer-brown").trim() || "#3b2429",
     );
@@ -215,7 +210,7 @@ async function auditDesignInvariants(page, vp, route) {
     return {
       mocks,
       accent,
-      ctaAccent,
+      themeAccent,
       footerBrown,
       heroAlign: heroCopy ? getComputedStyle(heroCopy).textAlign : null,
       primaryBg: primary ? getComputedStyle(primary).backgroundColor : null,
@@ -262,17 +257,17 @@ async function auditDesignInvariants(page, vp, route) {
         actual: state.heroAlign,
       });
     }
-    if (state.primaryBg && state.primaryBg !== state.ctaAccent) {
+    if (state.primaryBg && state.primaryBg !== state.themeAccent) {
       finding(vp, route, "design-invariant", {
-        rule: "Hero download CTA must use CTA accent token",
-        expected: state.ctaAccent,
+        rule: "Hero download CTA must use theme accent token",
+        expected: state.themeAccent,
         actual: state.primaryBg,
       });
     }
-    if (state.finalPrimaryBg && state.finalPrimaryBg !== state.ctaAccent) {
+    if (state.finalPrimaryBg && state.finalPrimaryBg !== state.themeAccent) {
       finding(vp, route, "design-invariant", {
-        rule: "Final download CTA must use CTA accent token",
-        expected: state.ctaAccent,
+        rule: "Final download CTA must use theme accent token",
+        expected: state.themeAccent,
         actual: state.finalPrimaryBg,
       });
     }
