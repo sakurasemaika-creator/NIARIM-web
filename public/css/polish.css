@@ -119,7 +119,7 @@ main {
 
 :where(a, button, input, textarea, select):focus-visible {
   /* Focus indication follows the active brand token and remains fully visible. */
-  outline: 3px solid var(--color-accent-strong);
+  outline: 3px solid var(--color-accent-text);
   outline-offset: 3px;
 }
 
