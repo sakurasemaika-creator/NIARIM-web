@@ -75,7 +75,10 @@ try {
   await scene.hover();
   await motion.waitForTimeout(900);
   const endTransform=await pc.evaluate(el=>getComputedStyle(el).transform);
-  if(startTransform===endTransform)bad.push("Normal-motion hero hover did not change device transform");
+  // The refreshed hero uses authentic, static app captures. Hover must not
+  // invent a perspective/scale animation that makes the screenshots look
+  // interactive when they are not. Motion is tested on actual controls below.
+  if(startTransform!==endTransform)bad.push("Static hero capture changed transform on hover");
   const bar=motion.locator(".brand-reading-progress");
   await bar.waitFor({state:"attached"});
   await motion.evaluate(()=>window.scrollTo(0,Math.min(700,document.documentElement.scrollHeight-innerHeight)));
