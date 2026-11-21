@@ -22,6 +22,8 @@
     "nav.contact": "联系我们",
     "nav.download": "下载",
     "lang.switch": "切换语言",
+    "common.menuOpen": "打开菜单",
+    "common.menuClose": "关闭菜单",
 
     "common.readMore": "了解更多",
     "common.backHome": "返回首页",
@@ -325,6 +327,8 @@
     "nav.contact": "聯絡我們",
     "nav.download": "下載",
     "lang.switch": "切換語言",
+    "common.menuOpen": "開啟選單",
+    "common.menuClose": "關閉選單",
 
     "common.readMore": "了解更多",
     "common.backHome": "返回首頁",
@@ -628,6 +632,8 @@
     "nav.contact": "문의하기",
     "nav.download": "다운로드",
     "lang.switch": "언어 변경",
+    "common.menuOpen": "메뉴 열기",
+    "common.menuClose": "메뉴 닫기",
 
     "common.readMore": "자세히 보기",
     "common.backHome": "홈으로 돌아가기",
@@ -965,6 +971,8 @@
     "nav.contact": "Contact",
     "nav.download": "Télécharger",
     "lang.switch": "Changer de langue",
+    "common.menuOpen": "Ouvrir le menu",
+    "common.menuClose": "Fermer le menu",
 
     "common.readMore": "En savoir plus",
     "common.backHome": "Retour à l'accueil",
@@ -1315,6 +1323,8 @@
     "nav.contact": "Contacto",
     "nav.download": "Descargar",
     "lang.switch": "Cambiar idioma",
+    "common.menuOpen": "Abrir menú",
+    "common.menuClose": "Cerrar menú",
 
     "common.readMore": "Saber más",
     "common.backHome": "Volver al inicio",
