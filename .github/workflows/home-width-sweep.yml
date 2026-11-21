@@ -5,6 +5,16 @@ on:
     paths:
       - ".github/workflows/home-width-sweep.yml"
       - "tests/modern-width-visual-audit.mjs"
+      - "tests/home-cls-audit.mjs"
+      - "public/css/common-base.css"
+      - "public/css/variables.css"
+      - "public/css/common.css"
+      - "public/css/refresh-2026.css"
+      - "public/css/brand-direction-2026.css"
+      - "public/js/i18n.js"
+      - "public/js/i18n-dict-refresh-2026.js"
+      - "public/js/common-ui.js"
+      - "public/js/animations.js"
       - "public/index.html"
       - "public/404.html"
       - "public/**/index.html"
@@ -42,11 +52,16 @@ jobs:
           exit 1
       - name: Audit all pages at eight widths and three key pages in seven languages
         run: node tests/modern-width-visual-audit.mjs
+      - name: Measure desktop first-load CLS across locales
+        if: always()
+        run: node tests/home-cls-audit.mjs
       - name: Publish top-to-bottom review, page metrics and errors
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: fullsite-modern-width-visual-audit
-          path: artifacts/modern-width-audit/
+          path: |
+            artifacts/modern-width-audit/
+            artifacts/home-cls/
           if-no-files-found: warn
           retention-days: 14
