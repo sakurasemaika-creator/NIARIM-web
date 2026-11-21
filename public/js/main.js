@@ -897,7 +897,12 @@
     document.addEventListener("niarim:langchange", applyLabel);
     window.addEventListener("scroll", requestScrollState, { passive: true });
     btn.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
     });
   }
 
