@@ -1,2 +1,3 @@
 Run the one-time Prettier formatting pass on NIARIM-web/dev_branch. The workflow removes this marker after formatting and all checks pass.
 Syntax blocker fixed; rerun the canonical format and verification pass.
+Retry after completing paragraph and image-regex checks.
