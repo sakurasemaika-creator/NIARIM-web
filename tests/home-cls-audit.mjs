@@ -159,7 +159,7 @@ try {
           maxWindow,
           fonts: performance
             .getEntriesByType("resource")
-            .filter((entry) => /\\.woff2(?:\\?|$)/i.test(entry.name))
+            .filter((entry) => /\.woff2(?:\?|$)/i.test(entry.name))
             .map((entry) => ({
               name: entry.name.split("/").pop(),
               durationMs: Math.round(entry.duration),
