@@ -145,7 +145,6 @@
   }
 }
 
-
 /* Guide entries intentionally use an app-help-like accordion instead of the
    feature catalogue cards. This makes the two pages' roles visually distinct:
    Features = overview/catalogue, Guide = open one instruction at a time. */
@@ -209,7 +208,9 @@
 }
 
 [data-help-category] .spec-item[open] h3::after {
-  background-size: 0.72rem 2px, 0 0;
+  background-size:
+    0.72rem 2px,
+    0 0;
 }
 
 [data-help-category] .spec-item p {

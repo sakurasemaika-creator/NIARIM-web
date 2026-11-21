@@ -27,23 +27,41 @@ try {
           language,
         );
         const input = page.locator("#help-search-input");
-        const categoryOrder = () => page.locator("[data-help-category]").evaluateAll(nodes => nodes.map(el => el.id));
-        const topicOrder = () => page.locator("[data-help-card] h3").evaluateAll(nodes => nodes.map(el => el.dataset.i18n));
+        const categoryOrder = () =>
+          page
+            .locator("[data-help-category]")
+            .evaluateAll((nodes) => nodes.map((el) => el.id));
+        const topicOrder = () =>
+          page
+            .locator("[data-help-card] h3")
+            .evaluateAll((nodes) => nodes.map((el) => el.dataset.i18n));
         const originalCategories = await categoryOrder();
         const originalTopics = await topicOrder();
-        const symbols = await page.locator("[data-help-category] .feature-section-icon use")
-          .evaluateAll(nodes => nodes.map(el => el.getAttribute("href")));
+        const symbols = await page
+          .locator("[data-help-category] .feature-section-icon use")
+          .evaluateAll((nodes) => nodes.map((el) => el.getAttribute("href")));
         assert.equal(new Set(symbols).size, originalCategories.length);
         const resultCount = page.locator("#help-result-count");
-        const pressure = await page.locator('[data-i18n="help.entry34.title"]').innerText();
+        const pressure = await page
+          .locator('[data-i18n="help.entry34.title"]')
+          .innerText();
         await input.fill(pressure);
         const visibleTopics = page.locator("[data-help-card]:visible");
-        assert.equal(await visibleTopics.first().locator("h3").innerText(), pressure);
+        assert.equal(
+          await visibleTopics.first().locator("h3").innerText(),
+          pressure,
+        );
         assert.ok(await visibleTopics.first().locator("p").isVisible());
         assert.equal(await page.locator("[data-help-card][open]").count(), 1);
-        const countFormat = await page.evaluate(lang => window.NIARIM_I18N.translate(lang, "help.resultCount"), language);
-        assert.equal(await resultCount.innerText(), countFormat.replace("{count}", String(await visibleTopics.count())));
-        assert.ok(await input.evaluate(el => el === document.activeElement));
+        const countFormat = await page.evaluate(
+          (lang) => window.NIARIM_I18N.translate(lang, "help.resultCount"),
+          language,
+        );
+        assert.equal(
+          await resultCount.innerText(),
+          countFormat.replace("{count}", String(await visibleTopics.count())),
+        );
+        assert.ok(await input.evaluate((el) => el === document.activeElement));
         await input.press("Escape");
         assert.equal(await resultCount.textContent(), "");
         assert.deepEqual(await categoryOrder(), originalCategories);
@@ -93,8 +111,11 @@ try {
           `${language}/${mode}: a category name matches every entry it contains`,
         );
 
-        assert.ok(await page.locator("[data-help-card][open]").count() <= 1);
-        assert.equal(await resultCount.innerText(), countFormat.replace("{count}", String(await visibleTopics.count())));
+        assert.ok((await page.locator("[data-help-card][open]").count()) <= 1);
+        assert.equal(
+          await resultCount.innerText(),
+          countFormat.replace("{count}", String(await visibleTopics.count())),
+        );
         const folded = page.locator("#help-brush");
         await input.fill("ブラシ");
         if (language === "ja") {

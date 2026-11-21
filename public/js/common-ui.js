@@ -80,9 +80,11 @@
 
     var narrow = window.matchMedia("(max-width: 1180px)");
     var header = toggle.closest(".site-header");
-    var covered = Array.from(document.querySelectorAll(
-      "main, footer, .skip-link, .back-to-top, .site-header .brand"
-    ));
+    var covered = Array.from(
+      document.querySelectorAll(
+        "main, footer, .skip-link, .back-to-top, .site-header .brand",
+      ),
+    );
     var changed = [];
 
     function isOpen() {
@@ -94,9 +96,12 @@
       var activeLang = lang || document.documentElement.lang || "ja";
       var key = isOpen() ? "common.menuClose" : "common.menuOpen";
       var fallback = isOpen() ? "メニューを閉じる" : "メニューを開く";
-      var label = window.NIARIM_I18N &&
-        window.NIARIM_I18N.translate(activeLang, key);
-      toggle.setAttribute("aria-label", label && label !== key ? label : fallback);
+      var label =
+        window.NIARIM_I18N && window.NIARIM_I18N.translate(activeLang, key);
+      toggle.setAttribute(
+        "aria-label",
+        label && label !== key ? label : fallback,
+      );
     }
 
     function close(returnFocus) {
@@ -104,7 +109,9 @@
       toggle.setAttribute("aria-expanded", "false");
       nav.classList.remove("is-open");
       document.documentElement.classList.remove("mobile-nav-open");
-      changed.forEach(function (element) { element.inert = false; });
+      changed.forEach(function (element) {
+        element.inert = false;
+      });
       changed = [];
       applyToggleLabel();
       if (returnFocus && narrow.matches) toggle.focus();
@@ -124,7 +131,9 @@
       changed = covered.filter(function (element) {
         return !element.inert && !element.contains(header);
       });
-      changed.forEach(function (element) { element.inert = true; });
+      changed.forEach(function (element) {
+        element.inert = true;
+      });
       document.documentElement.classList.add("mobile-nav-open");
       toggle.setAttribute("aria-expanded", "true");
       nav.classList.add("is-open");
@@ -144,17 +153,22 @@
         close(true);
       }
       if (event.key !== "Tab") return;
-      var links = Array.from(nav.querySelectorAll(
-        "a[href], button:not(:disabled), [tabindex='0']"
-      )).filter(function (element) {
-        return element.tabIndex >= 0 && element.getClientRects().length > 0 &&
-          getComputedStyle(element).visibility === "visible";
+      var links = Array.from(
+        nav.querySelectorAll("a[href], button:not(:disabled), [tabindex='0']"),
+      ).filter(function (element) {
+        return (
+          element.tabIndex >= 0 &&
+          element.getClientRects().length > 0 &&
+          getComputedStyle(element).visibility === "visible"
+        );
       });
       var ring = [toggle].concat(links);
       var focused = ring.indexOf(document.activeElement);
       event.preventDefault();
-      var next = focused < 0 ? 0 :
-        (focused + (event.shiftKey ? -1 : 1) + ring.length) % ring.length;
+      var next =
+        focused < 0
+          ? 0
+          : (focused + (event.shiftKey ? -1 : 1) + ring.length) % ring.length;
       ring[next].focus();
     });
   }

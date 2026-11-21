@@ -97,7 +97,6 @@ python3 tools/build-fonts.py --measure
 
 common.css の `@font-face` ブロック（BEGIN/ENDマーカーの間）も自動更新されます。
 
-
 ## SIL Open Font License 1.1（全文）
 
 ```

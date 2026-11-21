@@ -3,7 +3,10 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
-const script = readFileSync(new URL("../public/js/community.js", import.meta.url), "utf8");
+const script = readFileSync(
+  new URL("../public/js/community.js", import.meta.url),
+  "utf8",
+);
 const work = {
   workId: "aaaaaaaaaaa",
   title: "Public work",
@@ -15,11 +18,21 @@ function element() {
     attributes: {},
     children: [],
     handlers: {},
-    append(...children) { this.children.push(...children); },
-    before(sibling) { this.sibling = sibling; },
-    replaceChildren() { this.children = []; },
-    setAttribute(key, value) { this.attributes[key] = value; },
-    addEventListener(name, callback) { this.handlers[name] = callback; },
+    append(...children) {
+      this.children.push(...children);
+    },
+    before(sibling) {
+      this.sibling = sibling;
+    },
+    replaceChildren() {
+      this.children = [];
+    },
+    setAttribute(key, value) {
+      this.attributes[key] = value;
+    },
+    addEventListener(name, callback) {
+      this.handlers[name] = callback;
+    },
   };
 }
 
@@ -58,7 +71,11 @@ async function load({ status = "available", playbackHttpStatus = 200 } = {}) {
     navigations,
     async click() {
       let prevented = false;
-      await card.handlers.click({ preventDefault: () => { prevented = true; } });
+      await card.handlers.click({
+        preventDefault: () => {
+          prevented = true;
+        },
+      });
       assert.equal(prevented, true);
       await new Promise(setImmediate);
     },
@@ -78,15 +95,24 @@ test("a private work stays closed and refreshes the list with feedback", async (
   await feed.click();
   assert.deepEqual(feed.navigations, []);
   assert.equal(feed.gallery.sibling.attributes.role, "status");
-  assert.equal(feed.gallery.sibling.textContent, "This work is no longer public.");
-  assert.equal(feed.gallery.children.some((node) => node.href), false);
+  assert.equal(
+    feed.gallery.sibling.textContent,
+    "This work is no longer public.",
+  );
+  assert.equal(
+    feed.gallery.children.some((node) => node.href),
+    false,
+  );
 });
 
 test("a failed check leaves the list available and localizes the retry message", async () => {
   const feed = await load({ playbackHttpStatus: 502 });
   await feed.click();
   assert.deepEqual(feed.navigations, []);
-  assert.equal(feed.gallery.sibling.textContent, "Could not open this work. Please try again later.");
+  assert.equal(
+    feed.gallery.sibling.textContent,
+    "Could not open this work. Please try again later.",
+  );
   assert.equal(feed.gallery.children[0].href, work.youtubeUrl);
   feed.document.documentElement.lang = "ja";
   feed.document.handlers["niarim:langchange"]();

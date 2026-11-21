@@ -56,15 +56,23 @@ const polishClean = stripComments(polish);
 const focusRule = polishClean.match(
   /:where\(a, button, input, textarea, select\):focus-visible\s*\{([^}]*)\}/,
 );
-if (!focusRule || !/outline:\s*3px solid var\(--color-accent-text\)/.test(focusRule[1])) {
-  failures.push("keyboard focus indicator must use the active theme accent token");
+if (
+  !focusRule ||
+  !/outline:\s*3px solid var\(--color-accent-text\)/.test(focusRule[1])
+) {
+  failures.push(
+    "keyboard focus indicator must use the active theme accent token",
+  );
 }
 if (focusRule && /#[0-9a-f]{3,8}|rgba?\(/i.test(focusRule[1])) {
   failures.push("keyboard focus indicator must not hard-code a color");
 }
 
 const mainJs = await read("public/js/main.js");
-if (!/prefers-reduced-motion:\s*reduce/.test(mainJs) || !/behavior:\s*window\.matchMedia/.test(mainJs)) {
+if (
+  !/prefers-reduced-motion:\s*reduce/.test(mainJs) ||
+  !/behavior:\s*window\.matchMedia/.test(mainJs)
+) {
   failures.push("main page scroll-to-top must respect prefers-reduced-motion");
 }
 

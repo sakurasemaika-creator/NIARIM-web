@@ -168,7 +168,6 @@ for (const width of widths) {
   if (state.screenshotCount !== 5) {
     failures.push({ width, kind: "screenshot-count", state });
   }
-
 }
 
 await browser.close();

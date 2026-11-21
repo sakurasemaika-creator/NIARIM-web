@@ -9,12 +9,37 @@
       project: "星降る夜",
       onionNext: "次フレーム",
     },
-    en: { community: "Create an animation with NIARIM and share it in the Gallery.", project: "Starlit Night", onionNext: "Next frame" },
-    "zh-Hans": { community: "用 NIARIM 制作动画，并投稿到作品广场吧。", project: "星夜", onionNext: "后一帧" },
-    "zh-Hant": { community: "用 NIARIM 製作動畫，並投稿到作品廣場吧。", project: "星夜", onionNext: "後一幀" },
-    ko: { community: "NIARIM으로 애니메이션을 만들어 작품광장에 올려 보세요.", project: "별이 내리는 밤", onionNext: "다음 프레임" },
-    fr: { community: "Créez une animation avec NIARIM et publiez-la dans la Galerie.", project: "Nuit étoilée", onionNext: "Image suivante" },
-    es: { community: "Crea una animación con NIARIM y publícala en la Galería.", project: "Noche estrellada", onionNext: "Fotograma siguiente" },
+    en: {
+      community: "Create an animation with NIARIM and share it in the Gallery.",
+      project: "Starlit Night",
+      onionNext: "Next frame",
+    },
+    "zh-Hans": {
+      community: "用 NIARIM 制作动画，并投稿到作品广场吧。",
+      project: "星夜",
+      onionNext: "后一帧",
+    },
+    "zh-Hant": {
+      community: "用 NIARIM 製作動畫，並投稿到作品廣場吧。",
+      project: "星夜",
+      onionNext: "後一幀",
+    },
+    ko: {
+      community: "NIARIM으로 애니메이션을 만들어 작품광장에 올려 보세요.",
+      project: "별이 내리는 밤",
+      onionNext: "다음 프레임",
+    },
+    fr: {
+      community:
+        "Créez une animation avec NIARIM et publiez-la dans la Galerie.",
+      project: "Nuit étoilée",
+      onionNext: "Image suivante",
+    },
+    es: {
+      community: "Crea una animación con NIARIM y publícala en la Galería.",
+      project: "Noche estrellada",
+      onionNext: "Fotograma siguiente",
+    },
   };
 
   function lang() {
@@ -39,37 +64,46 @@
      これにより本文は再現図の左隣、spec-gridは本文の直下から始まり、
      再現図の下端を越えた行から自然に右端まで広がる。 */
   function pairFeatureNarratives(root) {
-    (root || document).querySelectorAll?.(".feature-section").forEach(function (section) {
-      if (section.querySelector(":scope > .feature-pair")) return;
-      var narrative = section.querySelector(":scope > .feature-narrative");
-      var diagrams = Array.from(section.querySelectorAll(":scope > .feature-diagram"));
-      if (!narrative || !diagrams.length) return;
-      var pair = document.createElement("div");
-      pair.className = "feature-pair";
-      var copyColumn = document.createElement("div");
-      copyColumn.className = "feature-copy-column";
-      var stack = document.createElement("div");
-      stack.className = "feature-diagram-stack";
-      narrative.before(pair);
-      pair.append(copyColumn, stack);
-      copyColumn.append(narrative);
-      diagrams.forEach(function (diagram) { stack.append(diagram); });
-      // Keep the spec grid outside the two-column pair. It then spans the
-      // section's full desktop width instead of being trapped in the left half.
-    });
+    (root || document)
+      .querySelectorAll?.(".feature-section")
+      .forEach(function (section) {
+        if (section.querySelector(":scope > .feature-pair")) return;
+        var narrative = section.querySelector(":scope > .feature-narrative");
+        var diagrams = Array.from(
+          section.querySelectorAll(":scope > .feature-diagram"),
+        );
+        if (!narrative || !diagrams.length) return;
+        var pair = document.createElement("div");
+        pair.className = "feature-pair";
+        var copyColumn = document.createElement("div");
+        copyColumn.className = "feature-copy-column";
+        var stack = document.createElement("div");
+        stack.className = "feature-diagram-stack";
+        narrative.before(pair);
+        pair.append(copyColumn, stack);
+        copyColumn.append(narrative);
+        diagrams.forEach(function (diagram) {
+          stack.append(diagram);
+        });
+        // Keep the spec grid outside the two-column pair. It then spans the
+        // section's full desktop width instead of being trapped in the left half.
+      });
   }
 
   function upgradeLegacyFrameModeControls(root) {
-    (root || document).querySelectorAll(".fd-frame-strip-mode").forEach(function (old) {
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "fd-frame-mode";
-      button.tabIndex = -1;
-      button.setAttribute("aria-label", "タイムライン");
-      button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
-      button.innerHTML = '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
-      old.replaceWith(button);
-    });
+    (root || document)
+      .querySelectorAll(".fd-frame-strip-mode")
+      .forEach(function (old) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "fd-frame-mode";
+        button.tabIndex = -1;
+        button.setAttribute("aria-label", "タイムライン");
+        button.setAttribute("data-i18n-attr", "aria-label:fd.timelineMode");
+        button.innerHTML =
+          '<svg class="ic" aria-hidden="true"><use href="/assets/icons/ui/sprite.svg#ic-movie_filter"></use></svg>';
+        old.replaceWith(button);
+      });
   }
 
   function localizeFd(root) {
@@ -77,26 +111,35 @@
     if (!api || !api.translate) return;
     var code = lang();
     var nodes = [];
-    if (root && root.matches && root.matches('[data-i18n^="fd."]')) nodes.push(root);
-    (root || document).querySelectorAll?.('[data-i18n^="fd."]').forEach(function (el) { nodes.push(el); });
+    if (root && root.matches && root.matches('[data-i18n^="fd."]'))
+      nodes.push(root);
+    (root || document)
+      .querySelectorAll?.('[data-i18n^="fd."]')
+      .forEach(function (el) {
+        nodes.push(el);
+      });
     nodes.forEach(function (el) {
       var key = el.getAttribute("data-i18n");
-      var translated = key === "fd.projectName" ? copy[code].project : key === "fd.onionNext" ? copy[code].onionNext : api.translate(code, key);
+      var translated =
+        key === "fd.projectName"
+          ? copy[code].project
+          : key === "fd.onionNext"
+            ? copy[code].onionNext
+            : api.translate(code, key);
       if (translated && translated !== key) el.textContent = translated;
     });
   }
 
-
   var captureGeometry = {
-    "canvas": [320, 569],
-    "timeline": [320, 569],
-    "layers": [320, 569],
+    canvas: [320, 569],
+    timeline: [320, 569],
+    layers: [320, 569],
     "onion-skin": [320, 569],
-    "export": [320, 569],
+    export: [320, 569],
     "audio-editor": [320, 569],
     "save-tree": [320, 569],
-    "workspace": [320, 569],
-    "widget": [320, 569],
+    workspace: [320, 569],
+    widget: [320, 569],
   };
 
   function captureBaseName(name) {
@@ -139,22 +182,33 @@
     Object.keys(featureMap).forEach(function (id) {
       var section = scope.querySelector?.("#" + id);
       if (!section) return;
-      var diagrams = Array.prototype.slice.call(section.querySelectorAll(".feature-diagram:not(.feature-diagram--pc)"));
+      var diagrams = Array.prototype.slice.call(
+        section.querySelectorAll(".feature-diagram:not(.feature-diagram--pc)"),
+      );
       if (!diagrams.length) return;
       var primary = diagrams[0];
       primary.className = "feature-diagram feature-diagram--real";
       primary.dataset.captureTheme = featureMap[id][0];
-      primary.dataset.captureAccent = ({
-        canvas: "#3AA6FF", timeline: "#2E9B4F", layers: "#FF8A3D",
-        "onion-skin": "#E85D75", "audio-editor": "#4B8FDC",
-        "save-tree": "#C15F35", workspace: "#E65F2B",
-        widget: "#00796B", export: "#0086C9"
-      })[featureMap[id][0]];
+      primary.dataset.captureAccent = {
+        canvas: "#3AA6FF",
+        timeline: "#2E9B4F",
+        layers: "#FF8A3D",
+        "onion-skin": "#E85D75",
+        "audio-editor": "#4B8FDC",
+        "save-tree": "#C15F35",
+        workspace: "#E65F2B",
+        widget: "#00796B",
+        export: "#0086C9",
+      }[featureMap[id][0]];
       primary.removeAttribute("data-mock-theme");
       primary.removeAttribute("style");
-      if (!primary.querySelector(".real-app-capture") ||
-          primary.dataset.captureTheme !== featureMap[id][0]) {
-        primary.replaceChildren(realCapture(featureMap[id][0], featureMap[id][1]));
+      if (
+        !primary.querySelector(".real-app-capture") ||
+        primary.dataset.captureTheme !== featureMap[id][0]
+      ) {
+        primary.replaceChildren(
+          realCapture(featureMap[id][0], featureMap[id][1]),
+        );
       }
       // A feature section represents one app screen. Remove every leftover
       // coded reproduction/concept mock in that section so the site never
@@ -179,28 +233,30 @@
       row4: "onion-skin-v2",
       row5: "export-v2",
     };
-    scope.querySelectorAll?.(".feature-row[data-mock-theme]").forEach(function (row) {
-      var name = homeMap[row.dataset.mockTheme];
-      var media = row.querySelector(":scope > .feature-media");
-      if (!name || !media || media.querySelector(".real-app-capture")) return;
-      var diagram = media.querySelector(":scope > .feature-diagram");
-      if (diagram) {
-        diagram.className = "feature-diagram feature-diagram--real";
-        diagram.dataset.captureTheme = name;
-        diagram.removeAttribute("data-mock-theme");
-        diagram.removeAttribute("style");
-        diagram.replaceChildren(realCapture(name, ""));
-        return;
-      }
-      // main.js reuses the Hero mock for Home row1 and therefore removes the
-      // original .feature-diagram wrapper. Replace that legacy clone directly
-      // so every Home feature uses the same lightweight real app capture path.
-      var wrapper = document.createElement("div");
-      wrapper.className = "feature-diagram feature-diagram--real";
-      wrapper.dataset.captureTheme = name;
-      wrapper.replaceChildren(realCapture(name, ""));
-      media.replaceChildren(wrapper);
-    });
+    scope
+      .querySelectorAll?.(".feature-row[data-mock-theme]")
+      .forEach(function (row) {
+        var name = homeMap[row.dataset.mockTheme];
+        var media = row.querySelector(":scope > .feature-media");
+        if (!name || !media || media.querySelector(".real-app-capture")) return;
+        var diagram = media.querySelector(":scope > .feature-diagram");
+        if (diagram) {
+          diagram.className = "feature-diagram feature-diagram--real";
+          diagram.dataset.captureTheme = name;
+          diagram.removeAttribute("data-mock-theme");
+          diagram.removeAttribute("style");
+          diagram.replaceChildren(realCapture(name, ""));
+          return;
+        }
+        // main.js reuses the Hero mock for Home row1 and therefore removes the
+        // original .feature-diagram wrapper. Replace that legacy clone directly
+        // so every Home feature uses the same lightweight real app capture path.
+        var wrapper = document.createElement("div");
+        wrapper.className = "feature-diagram feature-diagram--real";
+        wrapper.dataset.captureTheme = name;
+        wrapper.replaceChildren(realCapture(name, ""));
+        media.replaceChildren(wrapper);
+      });
 
     var previewMap = {
       shot1: "canvas-v3",
@@ -210,7 +266,9 @@
       shot6: "workspace-v2",
     };
     scope
-      .querySelectorAll?.(".screenshot-scroller .screenshot-card[data-mock-theme]")
+      .querySelectorAll?.(
+        ".screenshot-scroller .screenshot-card[data-mock-theme]",
+      )
       .forEach(function (card) {
         var name = previewMap[card.dataset.mockTheme];
         // shot4 was a second timeline-style card in the legacy gallery. The
@@ -234,7 +292,9 @@
     var scope = root || document;
     var files = Array.prototype.map.call(
       scope.querySelectorAll(".real-app-capture img"),
-      function (img) { return img.src.split("/").pop().split("?")[0]; }
+      function (img) {
+        return img.src.split("/").pop().split("?")[0];
+      },
     );
     var seen = new Set();
     var duplicates = files.filter(function (file) {
@@ -242,8 +302,14 @@
       seen.add(file);
       return false;
     });
-    if (duplicates.length && /(?:localhost|127\.0\.0\.1)/.test(location.hostname)) {
-      console.error("Duplicate real capture theme placements:", Array.from(new Set(duplicates)));
+    if (
+      duplicates.length &&
+      /(?:localhost|127\.0\.0\.1)/.test(location.hostname)
+    ) {
+      console.error(
+        "Duplicate real capture theme placements:",
+        Array.from(new Set(duplicates)),
+      );
     }
   }
 
@@ -259,7 +325,9 @@
     var code = lang();
     var finalBody = document.querySelector('.final-cta [data-i18n="cta.body"]');
     if (finalBody && code === "ja") finalBody.innerHTML = copy.ja.ctaBody;
-    var communityBody = document.querySelector('[data-i18n="communityPage.cta.body"]');
+    var communityBody = document.querySelector(
+      '[data-i18n="communityPage.cta.body"]',
+    );
     if (communityBody) communityBody.textContent = copy[code].community;
     localizeFd(document);
     upgradeLegacyFrameModeControls(document);
@@ -273,7 +341,9 @@
     requestAnimationFrame(applyRequestedCopy);
   }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startRequestedCopy, {once: true});
+    document.addEventListener("DOMContentLoaded", startRequestedCopy, {
+      once: true,
+    });
   } else {
     startRequestedCopy();
   }
@@ -283,11 +353,16 @@
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (node.nodeType !== 1) return;
-        var scope = node.matches?.(".fd-frame-strip-mode") ? node.parentElement : node;
+        var scope = node.matches?.(".fd-frame-strip-mode")
+          ? node.parentElement
+          : node;
         upgradeLegacyFrameModeControls(scope);
         localizeFd(node);
       });
     });
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
 })();

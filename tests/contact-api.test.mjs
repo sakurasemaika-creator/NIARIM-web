@@ -101,7 +101,11 @@ test("oversized actual body is rejected without trusting Content-Length", async 
 test("the custom domain can submit its own form without accepting cross-origin posts", async () => {
   const custom = "https://niarim.miranima-studio.com";
   const customEnv = { ...env, CONTACT_SITE_ORIGIN: custom };
-  const fetch = mock.method(globalThis, "fetch", async () => new Response("{}"));
+  const fetch = mock.method(
+    globalThis,
+    "fetch",
+    async () => new Response("{}"),
+  );
   async function submit(source) {
     return handleContact(
       new Request(custom + "/api/contact", {

@@ -15,6 +15,5 @@ window.NIARIM_CONFIG = {
   X_URL: "",
 };
 
-
 // The legacy three-mock hero loader was removed when the production SP+PC
 // capture-led landing page replaced it. No additional JavaScript is needed.

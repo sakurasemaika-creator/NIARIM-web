@@ -183,7 +183,10 @@ for (const vp of viewports) {
       const url = new URL(route, baseURL);
       if (lang !== "en") url.searchParams.set("lang", lang);
       await page.goto(url.href, { waitUntil: "networkidle" });
-      await page.waitForFunction((expected) => document.documentElement.lang === expected, lang);
+      await page.waitForFunction(
+        (expected) => document.documentElement.lang === expected,
+        lang,
+      );
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(900);
 

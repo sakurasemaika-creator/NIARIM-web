@@ -218,7 +218,11 @@ for (const width of widths) {
         if (frame.outer.width <= 1 || frame.outer.height <= 1)
           findings.push({ id, kind: "real-capture-collapsed", frame });
         if (!["hidden", "clip"].includes(frame.overflowX))
-          findings.push({ id, kind: "real-capture-clipping-regression", frame });
+          findings.push({
+            id,
+            kind: "real-capture-clipping-regression",
+            frame,
+          });
       } else if (frame.kind === "hero-embedded-source") {
         const edge = frame.heroHostEdge;
         if (

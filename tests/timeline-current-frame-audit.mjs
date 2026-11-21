@@ -38,9 +38,11 @@ for (const viewport of viewports) {
       // The feature image is lazy-loaded. In narrow layouts it can sit far
       // below the fold, so force the canonical Animation capture to load
       // instead of relying on intersection timing.
-      const timelineImage = page.locator(
-        '#animation .real-app-capture img[src*="/assets/images/app-captures/timeline."]',
-      ).first();
+      const timelineImage = page
+        .locator(
+          '#animation .real-app-capture img[src*="/assets/images/app-captures/timeline."]',
+        )
+        .first();
       await timelineImage.waitFor({ state: "attached" });
       await timelineImage.evaluate((img) => {
         img.loading = "eager";

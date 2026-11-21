@@ -29,7 +29,12 @@ for (const width of widths) {
     localStorage.setItem("niarim-lang", "ja");
     window.dispatchEvent(new Event("resize"));
   });
-  await page.waitForSelector(".hero-showcase--real", { state: "attached", timeout: 2000 }).catch(() => {});
+  await page
+    .waitForSelector(".hero-showcase--real", {
+      state: "attached",
+      timeout: 2000,
+    })
+    .catch(() => {});
   await page.waitForTimeout(100);
 
   const row = await page.evaluate(() => {
@@ -204,7 +209,6 @@ for (const width of widths) {
       });
     }
   }
-
 
   metrics.push(row);
 

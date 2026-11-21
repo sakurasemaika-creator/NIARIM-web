@@ -186,7 +186,10 @@ const WIDTHS = [320, 375, 768, 1024, 1280];
         es: ["Abrir menú", "Cerrar menú"],
       };
       for (const [lang, labels] of Object.entries(menuLabels)) {
-        await page.evaluate((value) => window.NIARIM_I18N.applyLang(value), lang);
+        await page.evaluate(
+          (value) => window.NIARIM_I18N.applyLang(value),
+          lang,
+        );
         const initialLabel = await menuToggle.getAttribute("aria-label");
         if (initialLabel !== labels[0])
           note(path, "メニュー開くラベル", lang + ": " + initialLabel);
@@ -194,12 +197,20 @@ const WIDTHS = [320, 375, 768, 1024, 1280];
         const openState = await menuToggle.getAttribute("aria-expanded");
         const openLabel = await menuToggle.getAttribute("aria-label");
         if (openState !== "true" || openLabel !== labels[1])
-          note(path, "メニュー開状態", lang + ": " + openState + " / " + openLabel);
+          note(
+            path,
+            "メニュー開状態",
+            lang + ": " + openState + " / " + openLabel,
+          );
         await menuToggle.click();
         const closedState = await menuToggle.getAttribute("aria-expanded");
         const closedLabel = await menuToggle.getAttribute("aria-label");
         if (closedState !== "false" || closedLabel !== labels[0])
-          note(path, "メニュー閉状態", lang + ": " + closedState + " / " + closedLabel);
+          note(
+            path,
+            "メニュー閉状態",
+            lang + ": " + closedState + " / " + closedLabel,
+          );
       }
     } else {
       note(path, "モバイルメニューなし", ".nav-toggle がありません");

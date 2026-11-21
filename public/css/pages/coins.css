@@ -1,183 +1,814 @@
-.coins-hero{background:linear-gradient(125deg,#261f2b,#60364d);padding:clamp(85px,9vw,135px) 0;color:#fff}.coins-hero h1{font-size:clamp(2rem,5vw,4.2rem);color:#fff;line-height:1.38;max-width:16em}.coins-hero p:not(.eyebrow){font-family:var(--font-sans);color:#f9e9ee;line-height:1.9;max-width:48em;margin:20px 0 30px}.coins-shortcuts{display:flex;flex-wrap:wrap;gap:12px;padding-block:24px}.coins-shortcuts a{border:1px solid #d2c6cd;border-radius:22px;padding:10px 18px;font-family:var(--font-serif);text-decoration:none;color:#43313e}.coins-main .section{padding:clamp(65px,8vw,110px) 0;scroll-margin-top:90px}.coins-main h2{font-size:clamp(2rem,4vw,3.2rem);margin-bottom:20px}.coins-main .section>div>p{line-height:1.9;max-width:65em}.coins-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}.coins-cards--two{grid-template-columns:repeat(2,minmax(0,1fr))}.coins-cards article{background:#fff;border:1px solid #e2d5db;border-radius:18px;padding:clamp(20px,2.5vw,36px);min-width:0}.coins-cards article h3{font-size:clamp(1.15rem,2vw,1.55rem);line-height:1.5;margin:0 0 14px}.coins-cards article p,.coins-caution,.coins-end p{font-family:var(--font-sans);font-size:.94rem;line-height:1.85;color:#5d535f}.coins-value{display:block;font:800 clamp(2rem,3.5vw,3rem)/1.3 var(--font-serif);color:#ae325a;overflow-wrap:anywhere;margin-bottom:20px}.coins-value small{font-size:.7rem;letter-spacing:.1em}.coins-count{display:flex;align-items:baseline;gap:22px;margin:26px 0;color:#b5325a}.coins-count strong{font:800 clamp(4rem,9vw,7rem)/1 var(--font-serif)}.coins-count span{font-family:var(--font-sans)}.coins-list-title{font-size:clamp(1.4rem,2.6vw,2rem);margin-top:50px;margin-bottom:10px}.coins-scroll{overflow-x:auto;max-width:100%;border:1px solid #e3d5dc;border-radius:15px;background:#fff;margin-top:25px}.coins-table{width:100%;min-width:660px;border-collapse:collapse;font-variant-numeric:tabular-nums}.coins-table :is(th,td){padding:14px 16px;text-align:right;border-bottom:1px solid #e9e0e5;font-family:var(--font-sans);font-size:.87rem}.coins-table thead th{font-family:var(--font-serif);background:#f7eaef}.coins-table th:first-child{text-align:left;min-width:192px}.coins-table tbody tr:last-child :is(th,td){border-bottom:0}.coins-end{border-radius:20px;border:1px solid #e1d2d9;background:#fff;padding:clamp(25px,4vw,55px)}.coins-end p{margin:15px 0 22px}@media(max-width:750px){.coins-cards,.coins-cards--two{grid-template-columns:1fr}}
+.coins-hero {
+  background: linear-gradient(125deg, #261f2b, #60364d);
+  padding: clamp(85px, 9vw, 135px) 0;
+  color: #fff;
+}
+.coins-hero h1 {
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  color: #fff;
+  line-height: 1.38;
+  max-width: 16em;
+}
+.coins-hero p:not(.eyebrow) {
+  font-family: var(--font-sans);
+  color: #f9e9ee;
+  line-height: 1.9;
+  max-width: 48em;
+  margin: 20px 0 30px;
+}
+.coins-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-block: 24px;
+}
+.coins-shortcuts a {
+  border: 1px solid #d2c6cd;
+  border-radius: 22px;
+  padding: 10px 18px;
+  font-family: var(--font-serif);
+  text-decoration: none;
+  color: #43313e;
+}
+.coins-main .section {
+  padding: clamp(65px, 8vw, 110px) 0;
+  scroll-margin-top: 90px;
+}
+.coins-main h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: 20px;
+}
+.coins-main .section > div > p {
+  line-height: 1.9;
+  max-width: 65em;
+}
+.coins-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+.coins-cards--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.coins-cards article {
+  background: #fff;
+  border: 1px solid #e2d5db;
+  border-radius: 18px;
+  padding: clamp(20px, 2.5vw, 36px);
+  min-width: 0;
+}
+.coins-cards article h3 {
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+.coins-cards article p,
+.coins-caution,
+.coins-end p {
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  line-height: 1.85;
+  color: #5d535f;
+}
+.coins-value {
+  display: block;
+  font: 800 clamp(2rem, 3.5vw, 3rem) / 1.3 var(--font-serif);
+  color: #ae325a;
+  overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+.coins-value small {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+.coins-count {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  margin: 26px 0;
+  color: #b5325a;
+}
+.coins-count strong {
+  font: 800 clamp(4rem, 9vw, 7rem) / 1 var(--font-serif);
+}
+.coins-count span {
+  font-family: var(--font-sans);
+}
+.coins-list-title {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+.coins-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  border: 1px solid #e3d5dc;
+  border-radius: 15px;
+  background: #fff;
+  margin-top: 25px;
+}
+.coins-table {
+  width: 100%;
+  min-width: 660px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.coins-table :is(th, td) {
+  padding: 14px 16px;
+  text-align: right;
+  border-bottom: 1px solid #e9e0e5;
+  font-family: var(--font-sans);
+  font-size: 0.87rem;
+}
+.coins-table thead th {
+  font-family: var(--font-serif);
+  background: #f7eaef;
+}
+.coins-table th:first-child {
+  text-align: left;
+  min-width: 192px;
+}
+.coins-table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.coins-end {
+  border-radius: 20px;
+  border: 1px solid #e1d2d9;
+  background: #fff;
+  padding: clamp(25px, 4vw, 55px);
+}
+.coins-end p {
+  margin: 15px 0 22px;
+}
+@media (max-width: 750px) {
+  .coins-cards,
+  .coins-cards--two {
+    grid-template-columns: 1fr;
+  }
+}
 /* No JS animation or additional network requests: accordion = native details. */
-.coins-accordion-stack{display:grid;gap:12px;margin:30px 0;}
-.coins-accordion{border:1px solid #dfd2d9;border-radius:15px;background:#fff;overflow:hidden;}
-.coins-accordion summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:20px clamp(18px,2.8vw,30px);font-family:var(--font-display-with-body);font-size:clamp(1rem,1.65vw,1.22rem);line-height:1.55;}
-.coins-accordion summary::-webkit-details-marker{display:none;}
-.coins-accordion summary::after{content:"＋";flex:0 0 auto;color:#a83c60;font-size:1.3rem;}
-.coins-accordion[open] summary::after{content:"−";}
-.coins-accordion summary:focus-visible{outline:3px solid #9c3c65;outline-offset:-4px;}
-.coins-accordion[open] summary{border-bottom:1px solid #ece2e7;background:#fff6f9;}
-.coins-accordion-count{margin-left:auto;padding-inline:10px;color:#725a66;font-size:.75rem;white-space:nowrap;}
-.coins-accordion-content{padding:21px clamp(18px,2.8vw,30px) 26px;font-family:var(--font-sans);line-height:1.9;}
-.coins-accordion-content p{line-height:1.9;max-width:62em;}
-.coins-accordion-content .coins-table--compact{min-width:460px;}
-.coins-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:30px 0 36px;}
-.coins-choice-grid article{border:1px solid #eadbe1;border-radius:16px;background:#fff8fa;padding:clamp(18px,2vw,27px);}
-.coins-choice-grid article>span,.coins-compare-eyebrow,.coins-conversion-kicker,.premium-coin-kicker{font-family:var(--font-sans);font-size:.75rem;letter-spacing:.12em;color:#b04b6d;}
-.coins-choice-grid h3{font-family:var(--font-display-with-body);font-size:clamp(1.1rem,1.8vw,1.45rem);margin:12px 0;line-height:1.5;}
-.coins-choice-grid p{font-family:var(--font-sans);font-size:.9rem;line-height:1.85;}
-.coins-compare{margin:40px 0 25px;padding:clamp(22px,3.5vw,42px);border-radius:20px;background:#f7e8ee;border:1px solid #edd0db;}
-.coins-compare h3{margin:10px 0 15px;font-family:var(--font-display-with-body);font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.45;}
-.coins-compare-intro p{font-family:var(--font-sans);line-height:1.85;}
-.coins-compare .coins-scroll{margin-top:24px;}
-.coins-compare-best,.coins-compare-saving{font-weight:800!important;color:#9f2c52;}
-.coins-compare-highlight{font-family:var(--font-display-with-body);margin:20px 0 10px;font-size:clamp(1.13rem,2vw,1.52rem);line-height:1.6;}
-.coins-conversion{background:#29212d;color:#fff;}
-.coins-conversion-panel,.premium-coin-panel{display:flex;align-items:center;justify-content:space-between;gap:35px;border:1px solid rgba(255,255,255,.2);padding:clamp(25px,4vw,48px);border-radius:21px;}
-.coins-conversion-panel h2,.premium-coin-panel h2{font-family:var(--font-display-with-body);font-size:clamp(1.5rem,3vw,2.4rem);margin:12px 0 15px;line-height:1.5;}
-.coins-conversion-panel h2{color:#fff;}
-.coins-conversion-panel p,.premium-coin-panel p{font-family:var(--font-sans);line-height:1.9;max-width:52em;}
-.coins-conversion-panel p{color:#f4dfea;}
-.coins-conversion-panel .btn,.premium-coin-panel .btn{flex:0 0 auto;white-space:normal;text-align:center;}
-.premium-coin-crosslink{background:#f9eff3;}
-.premium-coin-panel{background:#fff;border-color:#e7ccd7;}
-.premium-coin-panel h2{color:#322935;}
-.premium-coin-panel p{color:#5c4e57;}
-@media(max-width:830px){.coins-choice-grid{grid-template-columns:1fr;}.coins-conversion-panel,.premium-coin-panel{flex-direction:column;align-items:stretch;}.coins-conversion-panel .btn,.premium-coin-panel .btn{width:100%;}}
-@media(prefers-reduced-motion:reduce){.coins-accordion,.coins-accordion *{transition:none!important;animation:none!important;}}
-
+.coins-accordion-stack {
+  display: grid;
+  gap: 12px;
+  margin: 30px 0;
+}
+.coins-accordion {
+  border: 1px solid #dfd2d9;
+  border-radius: 15px;
+  background: #fff;
+  overflow: hidden;
+}
+.coins-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  list-style: none;
+  padding: 20px clamp(18px, 2.8vw, 30px);
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1rem, 1.65vw, 1.22rem);
+  line-height: 1.55;
+}
+.coins-accordion summary::-webkit-details-marker {
+  display: none;
+}
+.coins-accordion summary::after {
+  content: "＋";
+  flex: 0 0 auto;
+  color: #a83c60;
+  font-size: 1.3rem;
+}
+.coins-accordion[open] summary::after {
+  content: "−";
+}
+.coins-accordion summary:focus-visible {
+  outline: 3px solid #9c3c65;
+  outline-offset: -4px;
+}
+.coins-accordion[open] summary {
+  border-bottom: 1px solid #ece2e7;
+  background: #fff6f9;
+}
+.coins-accordion-count {
+  margin-left: auto;
+  padding-inline: 10px;
+  color: #725a66;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+.coins-accordion-content {
+  padding: 21px clamp(18px, 2.8vw, 30px) 26px;
+  font-family: var(--font-sans);
+  line-height: 1.9;
+}
+.coins-accordion-content p {
+  line-height: 1.9;
+  max-width: 62em;
+}
+.coins-accordion-content .coins-table--compact {
+  min-width: 460px;
+}
+.coins-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 30px 0 36px;
+}
+.coins-choice-grid article {
+  border: 1px solid #eadbe1;
+  border-radius: 16px;
+  background: #fff8fa;
+  padding: clamp(18px, 2vw, 27px);
+}
+.coins-choice-grid article > span,
+.coins-compare-eyebrow,
+.coins-conversion-kicker,
+.premium-coin-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #b04b6d;
+}
+.coins-choice-grid h3 {
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.coins-choice-grid p {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.85;
+}
+.coins-compare {
+  margin: 40px 0 25px;
+  padding: clamp(22px, 3.5vw, 42px);
+  border-radius: 20px;
+  background: #f7e8ee;
+  border: 1px solid #edd0db;
+}
+.coins-compare h3 {
+  margin: 10px 0 15px;
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  line-height: 1.45;
+}
+.coins-compare-intro p {
+  font-family: var(--font-sans);
+  line-height: 1.85;
+}
+.coins-compare .coins-scroll {
+  margin-top: 24px;
+}
+.coins-compare-best,
+.coins-compare-saving {
+  font-weight: 800 !important;
+  color: #9f2c52;
+}
+.coins-compare-highlight {
+  font-family: var(--font-display-with-body);
+  margin: 20px 0 10px;
+  font-size: clamp(1.13rem, 2vw, 1.52rem);
+  line-height: 1.6;
+}
+.coins-conversion {
+  background: #29212d;
+  color: #fff;
+}
+.coins-conversion-panel,
+.premium-coin-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: clamp(25px, 4vw, 48px);
+  border-radius: 21px;
+}
+.coins-conversion-panel h2,
+.premium-coin-panel h2 {
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  margin: 12px 0 15px;
+  line-height: 1.5;
+}
+.coins-conversion-panel h2 {
+  color: #fff;
+}
+.coins-conversion-panel p,
+.premium-coin-panel p {
+  font-family: var(--font-sans);
+  line-height: 1.9;
+  max-width: 52em;
+}
+.coins-conversion-panel p {
+  color: #f4dfea;
+}
+.coins-conversion-panel .btn,
+.premium-coin-panel .btn {
+  flex: 0 0 auto;
+  white-space: normal;
+  text-align: center;
+}
+.premium-coin-crosslink {
+  background: #f9eff3;
+}
+.premium-coin-panel {
+  background: #fff;
+  border-color: #e7ccd7;
+}
+.premium-coin-panel h2 {
+  color: #322935;
+}
+.premium-coin-panel p {
+  color: #5c4e57;
+}
+@media (max-width: 830px) {
+  .coins-choice-grid {
+    grid-template-columns: 1fr;
+  }
+  .coins-conversion-panel,
+  .premium-coin-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .coins-conversion-panel .btn,
+  .premium-coin-panel .btn {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coins-accordion,
+  .coins-accordion * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 /* Visitor-facing coins: keep the warm paper palette legible on light and dark sections. */
-html body .coins-main { background:#f7f4f3; color:#28242c; }
-html body .coins-main .section { background:#f7f4f3; color:#28242c; }
-html body .coins-main .section.section-tint { background:#f3e7eb; }
-html body .coins-main .section.coins-conversion { background:#29212d; color:#fff; }
-html body .coins-main :is(.coins-hero,.coins-conversion) .eyebrow,
-html body .coins-main .coins-hero .eyebrow { color:#ffd1df !important; }
-html body .coins-main .coins-hero :is(h1,h2,h3) { color:#fff !important; }
-html body .coins-main .coins-hero p:not(.eyebrow) { color:#f9ecf0 !important; }
-html body .coins-main .coins-conversion .coins-conversion-kicker { color:#ffbed0; }
-html body .coins-main .coins-conversion :is(h2,h3) { color:#fff !important; }
-html body .coins-main .coins-conversion p { color:#f4dfea !important; }
-html body .coins-main .coins-conversion-panel { background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.34); }
-html body .coins-main .coins-compare { background:#f5e5ea; color:#302530; border-color:#e4bbc9; }
-html body .coins-main .coins-compare :is(h2,h3,.coins-compare-highlight) { color:#302530 !important; }
-html body .coins-main :is(.coins-compare-eyebrow,.coins-choice-grid article>span) { color:#882e4d; }
-html body .coins-main .coins-cards article { color:#302530; background:#fffdfd; border-color:#dbccd3; }
-html body .coins-main .coins-card-icon { display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;margin:0 0 20px;border:1px solid #e9b8c9;border-radius:15px;color:#9f294e;background:#fff0f5;font:800 1.55rem/1 system-ui,sans-serif; }
-html body .coins-main .coins-shortcuts a { background:#fff; color:#402b38; }
-html body .coins-main .coins-shortcuts a:hover { color:#882e4d; background:#fff0f5; border-color:#aa7189; }
-html body .coins-main .coins-shortcuts a:focus-visible,
-html body .coins-main .coins-scroll:focus-visible { outline:3px solid #a82e55;outline-offset:3px; }
-html body .coins-main .coins-accordion summary { color:#302530; background:#fff; }
-html body .coins-main .coins-accordion[open] summary { background:#fff1f6; }
-html body .coins-main .coins-accordion-count { color:#654250; background:#f9edf1; border-radius:5px;padding:5px 9px; }
-html body .coins-main .coins-accordion-content { color:#3f333c; }
-html body .coins-main .coins-detail-note { margin-top:14px;color:#614651; }
-html body .coins-main .coins-choice-grid article { background:#fffafb; border-color:#dfcdd4; }
-html body .coins-main .coins-choice-grid p { color:#4e424b; }
-html body .coins-main .coins-list-title { color:#302530; }
-html body .coins-main .coins-scroll { border-color:#d9c8d0; }
-html body .coins-main .coins-table { min-width:760px; color:#302530; }
-html body .coins-main .coins-table caption { caption-side:top;text-align:left;padding:17px 18px 10px;color:#66394c;font:650 .87rem/1.6 var(--font-sans); }
-html body .coins-main .coins-table thead th { color:#392733; background:#f0dce4; border-bottom:2px solid #ceafb9; }
-html body .coins-main .coins-table tbody th { color:#332630; font-weight:700; background:#fffdfd; }
-html body .coins-main .coins-table tbody tr:nth-child(even) td { background:#fcf6f8; }
-html body .coins-main .coins-table :is(td,th) { vertical-align:middle; }
-html body .coins-main .coins-unit { display:inline-block; margin-left:3px;font-family:var(--font-sans);font-weight:500;font-size:.72em;color:#684e5b;white-space:nowrap; }
-html body .coins-main .coins-compare-best { color:#92294e !important;background:#fff2f6; }
-html body .coins-main .coins-compare-saving { color:#92294e !important; }
-html body .coins-main .coins-featured-deals .coins-value { font-variant-numeric:tabular-nums; }
-html body .coins-main .coins-caution { color:#594750; }
-html body .coins-main .coins-end { background:#fff; border-color:#dfcad2; }
-html body .coins-main .coins-end :is(h2,h3) { color:#302530; }
-html body .premium-coin-crosslink { background:#f4e7ec; }
-html body .premium-coin-crosslink .premium-coin-panel { background:#fff; border-color:#dbc7cf; }
-html body .premium-coin-crosslink .premium-coin-kicker { color:#862c4c; }
-html body .premium-coin-crosslink .premium-coin-panel h2 { color:#302530 !important; }
-html body .premium-coin-crosslink .premium-coin-panel p { color:#51424b !important; }
-/* The small brand-font subset is completed with the site's licensed body font. */
-html:lang(ja) body .coins-main :is(h1,h2,h3,.coins-accordion summary,.coins-shortcuts a,.coins-compare-highlight),
-html:lang(ja) body .premium-coin-crosslink h2 {
-  font-family:var(--font-display-with-body),"Yu Mincho",serif !important;
+html body .coins-main {
+  background: #f7f4f3;
+  color: #28242c;
 }
-@media(max-width:750px) {
-  html body .coins-main .coins-compare {padding:22px 15px;}
-  html body .coins-main .coins-table {min-width:700px;}
-  html body .coins-main .coins-shortcuts {gap:8px;padding-block:18px;}
-  html body .coins-main .coins-shortcuts a {padding:9px 13px;}
-  html body .coins-main .coins-accordion summary {padding:17px 15px;align-items:flex-start;}
-  html body .coins-main .coins-accordion-count {margin-left:auto;font-size:.66rem;}
+html body .coins-main .section {
+  background: #f7f4f3;
+  color: #28242c;
+}
+html body .coins-main .section.section-tint {
+  background: #f3e7eb;
+}
+html body .coins-main .section.coins-conversion {
+  background: #29212d;
+  color: #fff;
+}
+html body .coins-main :is(.coins-hero, .coins-conversion) .eyebrow,
+html body .coins-main .coins-hero .eyebrow {
+  color: #ffd1df !important;
+}
+html body .coins-main .coins-hero :is(h1, h2, h3) {
+  color: #fff !important;
+}
+html body .coins-main .coins-hero p:not(.eyebrow) {
+  color: #f9ecf0 !important;
+}
+html body .coins-main .coins-conversion .coins-conversion-kicker {
+  color: #ffbed0;
+}
+html body .coins-main .coins-conversion :is(h2, h3) {
+  color: #fff !important;
+}
+html body .coins-main .coins-conversion p {
+  color: #f4dfea !important;
+}
+html body .coins-main .coins-conversion-panel {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+html body .coins-main .coins-compare {
+  background: #f5e5ea;
+  color: #302530;
+  border-color: #e4bbc9;
+}
+html body .coins-main .coins-compare :is(h2, h3, .coins-compare-highlight) {
+  color: #302530 !important;
+}
+html
+  body
+  .coins-main
+  :is(.coins-compare-eyebrow, .coins-choice-grid article > span) {
+  color: #882e4d;
+}
+html body .coins-main .coins-cards article {
+  color: #302530;
+  background: #fffdfd;
+  border-color: #dbccd3;
+}
+html body .coins-main .coins-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin: 0 0 20px;
+  border: 1px solid #e9b8c9;
+  border-radius: 15px;
+  color: #9f294e;
+  background: #fff0f5;
+  font:
+    800 1.55rem/1 system-ui,
+    sans-serif;
+}
+html body .coins-main .coins-shortcuts a {
+  background: #fff;
+  color: #402b38;
+}
+html body .coins-main .coins-shortcuts a:hover {
+  color: #882e4d;
+  background: #fff0f5;
+  border-color: #aa7189;
+}
+html body .coins-main .coins-shortcuts a:focus-visible,
+html body .coins-main .coins-scroll:focus-visible {
+  outline: 3px solid #a82e55;
+  outline-offset: 3px;
+}
+html body .coins-main .coins-accordion summary {
+  color: #302530;
+  background: #fff;
+}
+html body .coins-main .coins-accordion[open] summary {
+  background: #fff1f6;
+}
+html body .coins-main .coins-accordion-count {
+  color: #654250;
+  background: #f9edf1;
+  border-radius: 5px;
+  padding: 5px 9px;
+}
+html body .coins-main .coins-accordion-content {
+  color: #3f333c;
+}
+html body .coins-main .coins-detail-note {
+  margin-top: 14px;
+  color: #614651;
+}
+html body .coins-main .coins-choice-grid article {
+  background: #fffafb;
+  border-color: #dfcdd4;
+}
+html body .coins-main .coins-choice-grid p {
+  color: #4e424b;
+}
+html body .coins-main .coins-list-title {
+  color: #302530;
+}
+html body .coins-main .coins-scroll {
+  border-color: #d9c8d0;
+}
+html body .coins-main .coins-table {
+  min-width: 760px;
+  color: #302530;
+}
+html body .coins-main .coins-table caption {
+  caption-side: top;
+  text-align: left;
+  padding: 17px 18px 10px;
+  color: #66394c;
+  font: 650 0.87rem/1.6 var(--font-sans);
+}
+html body .coins-main .coins-table thead th {
+  color: #392733;
+  background: #f0dce4;
+  border-bottom: 2px solid #ceafb9;
+}
+html body .coins-main .coins-table tbody th {
+  color: #332630;
+  font-weight: 700;
+  background: #fffdfd;
+}
+html body .coins-main .coins-table tbody tr:nth-child(even) td {
+  background: #fcf6f8;
+}
+html body .coins-main .coins-table :is(td, th) {
+  vertical-align: middle;
+}
+html body .coins-main .coins-unit {
+  display: inline-block;
+  margin-left: 3px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.72em;
+  color: #684e5b;
+  white-space: nowrap;
+}
+html body .coins-main .coins-compare-best {
+  color: #92294e !important;
+  background: #fff2f6;
+}
+html body .coins-main .coins-compare-saving {
+  color: #92294e !important;
+}
+html body .coins-main .coins-featured-deals .coins-value {
+  font-variant-numeric: tabular-nums;
+}
+html body .coins-main .coins-caution {
+  color: #594750;
+}
+html body .coins-main .coins-end {
+  background: #fff;
+  border-color: #dfcad2;
+}
+html body .coins-main .coins-end :is(h2, h3) {
+  color: #302530;
+}
+html body .premium-coin-crosslink {
+  background: #f4e7ec;
+}
+html body .premium-coin-crosslink .premium-coin-panel {
+  background: #fff;
+  border-color: #dbc7cf;
+}
+html body .premium-coin-crosslink .premium-coin-kicker {
+  color: #862c4c;
+}
+html body .premium-coin-crosslink .premium-coin-panel h2 {
+  color: #302530 !important;
+}
+html body .premium-coin-crosslink .premium-coin-panel p {
+  color: #51424b !important;
+}
+/* The small brand-font subset is completed with the site's licensed body font. */
+html:lang(ja)
+  body
+  .coins-main
+  :is(
+    h1,
+    h2,
+    h3,
+    .coins-accordion summary,
+    .coins-shortcuts a,
+    .coins-compare-highlight
+  ),
+html:lang(ja) body .premium-coin-crosslink h2 {
+  font-family: var(--font-display-with-body), "Yu Mincho", serif !important;
+}
+@media (max-width: 750px) {
+  html body .coins-main .coins-compare {
+    padding: 22px 15px;
+  }
+  html body .coins-main .coins-table {
+    min-width: 700px;
+  }
+  html body .coins-main .coins-shortcuts {
+    gap: 8px;
+    padding-block: 18px;
+  }
+  html body .coins-main .coins-shortcuts a {
+    padding: 9px 13px;
+  }
+  html body .coins-main .coins-accordion summary {
+    padding: 17px 15px;
+    align-items: flex-start;
+  }
+  html body .coins-main .coins-accordion-count {
+    margin-left: auto;
+    font-size: 0.66rem;
+  }
 }
 
 /* Goal conditions, not reward payouts; each label uses one licensed text face. */
-html body .coins-main .coins-goals-guide{margin:18px 0;padding:20px;border-radius:14px;border:1px solid #d9c4ce;background:#fffafb;color:#392a35;font-family:var(--font-sans)}
-html body .coins-main .coins-goals-guide p{color:#4d3c46;font-family:var(--font-sans);line-height:1.8}
-html body .coins-main .coins-detail-label{display:block;font:700 1.1rem/1.6 var(--font-sans);color:#48293b;margin-bottom:10px}
-html body .coins-main .coins-milestone-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:8px;padding:0;margin:18px 0 0}
-html body .coins-main .coins-milestone-grid li{font:650 .9rem/1.5 var(--font-sans);font-variant-numeric:tabular-nums;text-align:center;padding:8px 4px;background:#fff;border:1px solid #d7c1cb;border-radius:9px;color:#3f2c38}
-html body .coins-main .coins-mission-detail-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px;margin-top:18px}
-html body .coins-main .coins-goal-group{min-width:0;background:#fffafb;border:1px solid #e1cdd6;border-radius:12px;padding:15px 17px}
-html body .coins-main .coins-goal-group .coins-goal-group{margin-top:12px;background:#fff}
-html body .coins-main .coins-goal-group strong{display:block;font:700 .95rem/1.7 var(--font-sans);color:#582e44;margin-bottom:7px}
-html body .coins-main .coins-goal-group p{font:.88rem/1.8 var(--font-sans);color:#4c3d47;overflow-wrap:anywhere;margin:0}
-html body .coins-main .coins-goal-values{font-variant-numeric:tabular-nums}
-@media(max-width:550px){html body .coins-main .coins-milestone-grid{grid-template-columns:repeat(3,minmax(0,1fr))}html body .coins-main .coins-mission-detail-list{grid-template-columns:1fr}}
+html body .coins-main .coins-goals-guide {
+  margin: 18px 0;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #d9c4ce;
+  background: #fffafb;
+  color: #392a35;
+  font-family: var(--font-sans);
+}
+html body .coins-main .coins-goals-guide p {
+  color: #4d3c46;
+  font-family: var(--font-sans);
+  line-height: 1.8;
+}
+html body .coins-main .coins-detail-label {
+  display: block;
+  font: 700 1.1rem/1.6 var(--font-sans);
+  color: #48293b;
+  margin-bottom: 10px;
+}
+html body .coins-main .coins-milestone-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: 8px;
+  padding: 0;
+  margin: 18px 0 0;
+}
+html body .coins-main .coins-milestone-grid li {
+  font: 650 0.9rem/1.5 var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  padding: 8px 4px;
+  background: #fff;
+  border: 1px solid #d7c1cb;
+  border-radius: 9px;
+  color: #3f2c38;
+}
+html body .coins-main .coins-mission-detail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 13px;
+  margin-top: 18px;
+}
+html body .coins-main .coins-goal-group {
+  min-width: 0;
+  background: #fffafb;
+  border: 1px solid #e1cdd6;
+  border-radius: 12px;
+  padding: 15px 17px;
+}
+html body .coins-main .coins-goal-group .coins-goal-group {
+  margin-top: 12px;
+  background: #fff;
+}
+html body .coins-main .coins-goal-group strong {
+  display: block;
+  font: 700 0.95rem/1.7 var(--font-sans);
+  color: #582e44;
+  margin-bottom: 7px;
+}
+html body .coins-main .coins-goal-group p {
+  font: 0.88rem/1.8 var(--font-sans);
+  color: #4c3d47;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+html body .coins-main .coins-goal-values {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 550px) {
+  html body .coins-main .coins-milestone-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  html body .coins-main .coins-mission-detail-list {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* 2026-11: Annual exchange and percent-saving badges. */
-.coins-year-featured{position:relative;border-color:#db9cb3!important;background:linear-gradient(135deg,#fffafc,#fff0f5)!important;}
-.coins-discount-tag,.coins-saving-badge{display:inline-block;padding:5px 11px;border-radius:999px;background:#9b254e;color:#fff;font-family:var(--font-display-with-body);font-size:.8rem;font-weight:700;line-height:1.3;white-space:nowrap;}
-.coins-year-featured>.coins-discount-tag{margin-bottom:16px;}
-.coins-discount-tag--table{display:block;width:max-content;margin-top:7px;font-size:.7rem;}
-.coins-saving-badge{display:block;width:max-content;margin-top:6px;margin-left:auto;}
-.coins-table--priced .coins-year-best{font-weight:800;color:#95294f;background:#fff0f5;}
-.coins-table--priced .coins-year-standard{color:#574552;}
-.coins-main .coins-goal-values{overflow-wrap:anywhere;line-height:2;}
-@media(max-width:750px){.coins-discount-tag,.coins-saving-badge{font-size:.7rem;}}
+.coins-year-featured {
+  position: relative;
+  border-color: #db9cb3 !important;
+  background: linear-gradient(135deg, #fffafc, #fff0f5) !important;
+}
+.coins-discount-tag,
+.coins-saving-badge {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #9b254e;
+  color: #fff;
+  font-family: var(--font-display-with-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.coins-year-featured > .coins-discount-tag {
+  margin-bottom: 16px;
+}
+.coins-discount-tag--table {
+  display: block;
+  width: max-content;
+  margin-top: 7px;
+  font-size: 0.7rem;
+}
+.coins-saving-badge {
+  display: block;
+  width: max-content;
+  margin-top: 6px;
+  margin-left: auto;
+}
+.coins-table--priced .coins-year-best {
+  font-weight: 800;
+  color: #95294f;
+  background: #fff0f5;
+}
+.coins-table--priced .coins-year-standard {
+  color: #574552;
+}
+.coins-main .coins-goal-values {
+  overflow-wrap: anywhere;
+  line-height: 2;
+}
+@media (max-width: 750px) {
+  .coins-discount-tag,
+  .coins-saving-badge {
+    font-size: 0.7rem;
+  }
+}
 
 /* Full benefit names and the period 週 need the licensed body font;
    Kuramubon display subset does not include 特・典・週. */
 html:lang(ja) body .coins-main [data-i18n="coins.week"],
 html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
-  font-family:var(--font-sans) !important;
+  font-family: var(--font-sans) !important;
 }
 
 /* Pricing rows share one licensed face; prevent mismatched individual fallback glyphs. */
-html:lang(ja) body .coins-main .coins-table--priced :is(th,td),
-html:lang(ja) body .coins-main .coins-compare-table :is(th,td),
+html:lang(ja) body .coins-main .coins-table--priced :is(th, td),
+html:lang(ja) body .coins-main .coins-compare-table :is(th, td),
 html:lang(ja) body .coins-main .coins-table--priced .coins-unit,
 html:lang(ja) body .coins-main .coins-compare-table .coins-unit {
- font-family:var(--font-sans) !important;
+  font-family: var(--font-sans) !important;
 }
-html:lang(ja) body .coins-main .coins-table--priced thead [data-i18n^="coins.table"] {
- font-family:var(--font-serif) !important;white-space:nowrap;
+html:lang(ja)
+  body
+  .coins-main
+  .coins-table--priced
+  thead
+  [data-i18n^="coins.table"] {
+  font-family: var(--font-serif) !important;
+  white-space: nowrap;
 }
-.coins-main .coins-year-versus-month{font:500 .91rem/1.8 var(--font-sans);margin:20px 0 12px;color:#4f3c46}
-.coins-main .coins-year-versus-month strong{display:block;font-weight:750;color:#8d2b4b;margin-bottom:3px}
-.coins-main .coins-year-versus-month span{display:block}
+.coins-main .coins-year-versus-month {
+  font: 500 0.91rem/1.8 var(--font-sans);
+  margin: 20px 0 12px;
+  color: #4f3c46;
+}
+.coins-main .coins-year-versus-month strong {
+  display: block;
+  font-weight: 750;
+  color: #8d2b4b;
+  margin-bottom: 3px;
+}
+.coins-main .coins-year-versus-month span {
+  display: block;
+}
 
 /* Unified Opal price and savings table: one scrollable comparison, not two cards. */
-html body .coins-main .coins-table--priced .coins-price-baseline :is(th,td) {
-  background:#f3edf0; color:#3e313a;font-weight:700;
+html body .coins-main .coins-table--priced .coins-price-baseline :is(th, td) {
+  background: #f3edf0;
+  color: #3e313a;
+  font-weight: 700;
 }
-html body .coins-main .coins-table--priced .coins-bundle-row :is(th,td) {
-  background:#ffeff5; color:#832348;font-weight:800;
+html body .coins-main .coins-table--priced .coins-bundle-row :is(th, td) {
+  background: #ffeff5;
+  color: #832348;
+  font-weight: 800;
 }
-html body .coins-main .coins-table--priced .coins-price-saving :is(th,td) {
-  background:#f9f0f4; color:#93244c;font-weight:750;
+html body .coins-main .coins-table--priced .coins-price-saving :is(th, td) {
+  background: #f9f0f4;
+  color: #93244c;
+  font-weight: 750;
 }
-html body .coins-main .coins-table--priced .coins-saving-badge { margin-top:7px; }
+html body .coins-main .coins-table--priced .coins-saving-badge {
+  margin-top: 7px;
+}
 html body .coins-main .coins-table--priced .coins-caption-a11y {
-  position:absolute!important;width:1px!important;height:1px!important;
-  padding:0!important;margin:-1px!important;overflow:hidden!important;
-  clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 html body .coins-main .coins-bundle-details {
-  margin-top:25px;padding:18px 0 3px;border-top:1px solid #dec8d0;
+  margin-top: 25px;
+  padding: 18px 0 3px;
+  border-top: 1px solid #dec8d0;
 }
 html body .coins-main .coins-bundle-details h3 {
-  margin:0 0 10px;font-size:clamp(1.1rem,2.2vw,1.65rem);
+  margin: 0 0 10px;
+  font-size: clamp(1.1rem, 2.2vw, 1.65rem);
 }
 html body .coins-main .coins-bundle-details p {
-  max-width:75em;font-size:.93rem;line-height:1.8;
+  max-width: 75em;
+  font-size: 0.93rem;
+  line-height: 1.8;
 }
 html body .coins-main .coins-rate-note {
-  margin:12px 0 18px;font:500 .9rem/1.85 var(--font-sans);color:#5d4552;
+  margin: 12px 0 18px;
+  font: 500 0.9rem/1.85 var(--font-sans);
+  color: #5d4552;
 }
-html body .coins-main .coins-table--priced :is(td,th) { min-width:0; }
-html body .coins-main .coins-table--priced th:first-child { min-width:210px; }
-@media(max-width:750px){
-  html body .coins-main .coins-table--priced th:first-child { min-width:182px; }
-  html body .coins-main .coins-bundle-details { margin-top:18px; }
+html body .coins-main .coins-table--priced :is(td, th) {
+  min-width: 0;
+}
+html body .coins-main .coins-table--priced th:first-child {
+  min-width: 210px;
+}
+@media (max-width: 750px) {
+  html body .coins-main .coins-table--priced th:first-child {
+    min-width: 182px;
+  }
+  html body .coins-main .coins-bundle-details {
+    margin-top: 18px;
+  }
 }

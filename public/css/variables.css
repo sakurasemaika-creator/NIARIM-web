@@ -401,9 +401,15 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
   --font-display-with-body:
     "Kuramubon", "KuramubonCJK", "HakkouMincho", "HakkouMinchoCJK";
 }
-:root:lang(ko) { --font-cjk-locale: "NotoSerifKR"; }
-:root:lang(zh-Hans) { --font-cjk-locale: "NotoSerifSC"; }
-:root:lang(zh-Hant) { --font-cjk-locale: "NotoSerifTC"; }
+:root:lang(ko) {
+  --font-cjk-locale: "NotoSerifKR";
+}
+:root:lang(zh-Hans) {
+  --font-cjk-locale: "NotoSerifSC";
+}
+:root:lang(zh-Hant) {
+  --font-cjk-locale: "NotoSerifTC";
+}
 :root:lang(zh),
 :root:lang(ko) {
   --font-sans:

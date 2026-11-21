@@ -90,7 +90,12 @@
     var current = new URL(window.location.href).searchParams.get("lang");
     // Keep automatically negotiated navigation URLs shareable without a
     // language override. A chosen language follows explicit links.
-    if (!LANGS.some(function (item) { return item.code === current; })) return;
+    if (
+      !LANGS.some(function (item) {
+        return item.code === current;
+      })
+    )
+      return;
     document.querySelectorAll("a[href]").forEach(function (anchor) {
       var raw = anchor.getAttribute("href");
       if (!raw || raw.charAt(0) === "#") return;
@@ -98,8 +103,12 @@
         var url = new URL(raw, window.location.href);
         if (url.origin !== window.location.origin) return;
         if (url.pathname.indexOf("/api/") === 0) return;
-        if (anchor.hasAttribute("download") || /\.[^/]+$/.test(url.pathname) &&
-            !url.pathname.endsWith("/index.html")) return;
+        if (
+          anchor.hasAttribute("download") ||
+          (/\.[^/]+$/.test(url.pathname) &&
+            !url.pathname.endsWith("/index.html"))
+        )
+          return;
         url.searchParams.set("lang", lang);
         anchor.setAttribute("href", url.pathname + url.search + url.hash);
       } catch (_) {}
@@ -115,24 +124,29 @@
 
     lang = normalizeLang(lang);
     var request = ++helpRequest;
-    if (!helpLanguage &&
-        lang === document.documentElement.getAttribute("data-help-locale")) {
+    if (
+      !helpLanguage &&
+      lang === document.documentElement.getAttribute("data-help-locale")
+    ) {
       helpLanguage = renderLang(lang, options);
       return Promise.resolve(helpLanguage);
     }
-    return help.load(lang).then(function (topics) {
-      if (request !== helpRequest) return helpLanguage;
-      Object.assign(DICT[lang] || (DICT[lang] = {}), topics);
-      helpLanguage = renderLang(lang, options);
-      return helpLanguage;
-    }, function () {
-      // The document contains a complete Japanese fallback. If a later
-      // request fails, keep the last rendered language and allow retry.
-      if (request === helpRequest && !helpLanguage) {
-        helpLanguage = renderLang("ja");
-      }
-      return helpLanguage;
-    });
+    return help.load(lang).then(
+      function (topics) {
+        if (request !== helpRequest) return helpLanguage;
+        Object.assign(DICT[lang] || (DICT[lang] = {}), topics);
+        helpLanguage = renderLang(lang, options);
+        return helpLanguage;
+      },
+      function () {
+        // The document contains a complete Japanese fallback. If a later
+        // request fails, keep the last rendered language and allow retry.
+        if (request === helpRequest && !helpLanguage) {
+          helpLanguage = renderLang("ja");
+        }
+        return helpLanguage;
+      },
+    );
   }
 
   function renderLang(lang, options) {
@@ -143,7 +157,9 @@
     if (options.syncUrl === true) syncCurrentUrl(lang);
     if (options.remember === true) {
       try {
-        document.cookie = "niarim_lang=" + lang +
+        document.cookie =
+          "niarim_lang=" +
+          lang +
           "; Path=/; Max-Age=31536000; SameSite=Lax" +
           (window.location.protocol === "https:" ? "; Secure" : "");
       } catch (_) {}
@@ -170,17 +186,25 @@
         if (/<br\s*\/?>|<\/?(?:em|strong)>/i.test(translated)) {
           var fragment = document.createDocumentFragment();
           var stack = [fragment];
-          translated.split(/(<br\s*\/?>|<\/?em>|<\/?strong>)/gi).forEach(function (part) {
-            if (/^<br\s*\/?>$/i.test(part)) stack[stack.length - 1].appendChild(document.createElement("br"));
-            else if (/^<(em|strong)>$/i.test(part)) {
-              var tag = part.slice(1, -1).toLowerCase();
-              var item = document.createElement(tag);
-              stack[stack.length - 1].appendChild(item);
-              stack.push(item);
-            } else if (/^<\/(em|strong)>$/i.test(part)) {
-              if (stack.length > 1) stack.pop();
-            } else if (part) stack[stack.length - 1].appendChild(document.createTextNode(part));
-          });
+          translated
+            .split(/(<br\s*\/?>|<\/?em>|<\/?strong>)/gi)
+            .forEach(function (part) {
+              if (/^<br\s*\/?>$/i.test(part))
+                stack[stack.length - 1].appendChild(
+                  document.createElement("br"),
+                );
+              else if (/^<(em|strong)>$/i.test(part)) {
+                var tag = part.slice(1, -1).toLowerCase();
+                var item = document.createElement(tag);
+                stack[stack.length - 1].appendChild(item);
+                stack.push(item);
+              } else if (/^<\/(em|strong)>$/i.test(part)) {
+                if (stack.length > 1) stack.pop();
+              } else if (part)
+                stack[stack.length - 1].appendChild(
+                  document.createTextNode(part),
+                );
+            });
           el.replaceChildren(fragment);
         } else el.textContent = translated;
       }
@@ -298,7 +322,8 @@
       var mobileNav = window.matchMedia("(max-width: 1180px)");
       function alignNavOrder() {
         var next = mobileNav.matches ? dropdown : dropdown.nextElementSibling;
-        if (next === downloadLink || downloadLink.nextElementSibling === next) return;
+        if (next === downloadLink || downloadLink.nextElementSibling === next)
+          return;
         var restoreFocus = document.activeElement === downloadLink;
         dropdown.parentElement.insertBefore(downloadLink, next);
         if (restoreFocus) downloadLink.focus({ preventScroll: true });

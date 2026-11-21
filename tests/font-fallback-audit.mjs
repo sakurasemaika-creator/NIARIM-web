@@ -63,7 +63,11 @@ for (const lang of LANGS) {
       .catch(() => null);
     if (!res || res.status() >= 400) continue;
     await page.waitForTimeout(900);
-    await page.evaluate(() => { document.querySelectorAll("details").forEach(d => { d.open = true; }); });
+    await page.evaluate(() => {
+      document.querySelectorAll("details").forEach((d) => {
+        d.open = true;
+      });
+    });
 
     // 1文字ずつ span に包む。CSS.getPlatformFontsForNode は要素単位でしか
     // 答えないので、こうしないと「その要素のどの文字が落ちたか」が分からない。

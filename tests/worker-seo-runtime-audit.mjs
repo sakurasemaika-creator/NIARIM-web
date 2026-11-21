@@ -3,10 +3,22 @@ import { readFileSync } from "node:fs";
 import { PAGE_TRANSLATIONS, SEO_LANGS } from "../src/generated/seo-i18n.js";
 import { escapeXml, SEO_PAGE_PATHS } from "../src/seo.js";
 
-const fontCss = readFileSync(new URL("../public/css/common-base.css", import.meta.url), "utf8");
-assert.match(fontCss, /font-family:\s*"HakkouMincho";\s*font-display:\s*optional;/);
-assert.match(fontCss, /font-family:\s*"Kuramubon";\s*font-display:\s*optional;/);
-assert.match(fontCss, /font-family:\s*"HakkouMinchoCJK";\s*font-display:\s*swap;/);
+const fontCss = readFileSync(
+  new URL("../public/css/common-base.css", import.meta.url),
+  "utf8",
+);
+assert.match(
+  fontCss,
+  /font-family:\s*"HakkouMincho";\s*font-display:\s*optional;/,
+);
+assert.match(
+  fontCss,
+  /font-family:\s*"Kuramubon";\s*font-display:\s*optional;/,
+);
+assert.match(
+  fontCss,
+  /font-family:\s*"HakkouMinchoCJK";\s*font-display:\s*swap;/,
+);
 const base = String(
   process.env.NIARIM_WORKER_ORIGIN || "http://127.0.0.1:8790",
 ).replace(/\/$/, "");
@@ -38,20 +50,48 @@ function decodeHtmlAttribute(value) {
 
 for (const testCase of [
   { path: "/", lang: "en", canonical: "/?lang=en" },
-  { path: "/", lang: "ja", canonical: "/?lang=ja",
-    headers: { "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.8" } },
-  { path: "/index.html?lang=en", lang: "en", canonical: "/?lang=en",
-    headers: { "Accept-Language": "ja-JP", Cookie: "niarim_lang=ja" } },
-  { path: "/?lang=de", lang: "en", canonical: "/?lang=en",
-    headers: { "Accept-Language": "de-DE,ja;q=0" } },
-  { path: "/opals/", lang: "ja", canonical: "/opals/?lang=ja",
-    headers: { "Accept-Language": "en;q=0.3, ja-JP ;q=0.9" } },
-  { path: "/opals/?lang=de", lang: "fr", canonical: "/opals/?lang=fr",
-    headers: { "Accept-Language": "de-DE,fr-FR;q=0.8,en;q=0.6" } },
-  { path: "/opals/", lang: "zh-Hant", canonical: "/opals/?lang=zh-Hant",
-    headers: { "Accept-Language": "zh-TW" } },
-  { path: "/opals/", lang: "en", canonical: "/opals/?lang=en",
-    headers: { "Accept-Language": "ja-JP", Cookie: "other=1; niarim_lang=en" } },
+  {
+    path: "/",
+    lang: "ja",
+    canonical: "/?lang=ja",
+    headers: { "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.8" },
+  },
+  {
+    path: "/index.html?lang=en",
+    lang: "en",
+    canonical: "/?lang=en",
+    headers: { "Accept-Language": "ja-JP", Cookie: "niarim_lang=ja" },
+  },
+  {
+    path: "/?lang=de",
+    lang: "en",
+    canonical: "/?lang=en",
+    headers: { "Accept-Language": "de-DE,ja;q=0" },
+  },
+  {
+    path: "/opals/",
+    lang: "ja",
+    canonical: "/opals/?lang=ja",
+    headers: { "Accept-Language": "en;q=0.3, ja-JP ;q=0.9" },
+  },
+  {
+    path: "/opals/?lang=de",
+    lang: "fr",
+    canonical: "/opals/?lang=fr",
+    headers: { "Accept-Language": "de-DE,fr-FR;q=0.8,en;q=0.6" },
+  },
+  {
+    path: "/opals/",
+    lang: "zh-Hant",
+    canonical: "/opals/?lang=zh-Hant",
+    headers: { "Accept-Language": "zh-TW" },
+  },
+  {
+    path: "/opals/",
+    lang: "en",
+    canonical: "/opals/?lang=en",
+    headers: { "Accept-Language": "ja-JP", Cookie: "other=1; niarim_lang=en" },
+  },
   { path: "/?lang=ja", lang: "ja", canonical: "/?lang=ja" },
   {
     path: "/font-licenses/?lang=es",
@@ -75,9 +115,14 @@ for (const testCase of [
     testCase.lang,
     `${testCase.path}: Content-Language`,
   );
-  assert.match(text, new RegExp(`<html[^>]*data-niarim-locale="${testCase.lang}"`));
+  assert.match(
+    text,
+    new RegExp(`<html[^>]*data-niarim-locale="${testCase.lang}"`),
+  );
   assert.equal(response.headers.get("etag"), null);
-  if (!SEO_LANGS.includes(new URL(testCase.path, base).searchParams.get("lang"))) {
+  if (
+    !SEO_LANGS.includes(new URL(testCase.path, base).searchParams.get("lang"))
+  ) {
     assert.match(response.headers.get("vary"), /accept-language/i);
     assert.match(response.headers.get("vary"), /cookie/i);
     assert.match(response.headers.get("cache-control"), /private.*no-store/i);
@@ -153,7 +198,10 @@ for (const path of ["/coins", "/coins/", "/coins/index.html"]) {
       redirect: "manual",
     });
     assert.equal(retiredPage.status, 308);
-    assert.equal(retiredPage.headers.get("location"), `${base}/opals/?lang=${lang}`);
+    assert.equal(
+      retiredPage.headers.get("location"),
+      `${base}/opals/?lang=${lang}`,
+    );
   }
 }
 
@@ -247,25 +295,40 @@ for (const pathname of SEO_PAGE_PATHS) {
         .map(([, , , body]) =>
           body.replace(/<br\s*\/?>|<\/?(?:em|strong)>/gi, ""),
         );
-      assert.equal(rendered.length, 1, `${path}: missing localized paragraph ${key}`);
-      assert.equal(rendered[0].trim(), expected, `${path}: server did not localize ${key}`);
+      assert.equal(
+        rendered.length,
+        1,
+        `${path}: missing localized paragraph ${key}`,
+      );
+      assert.equal(
+        rendered[0].trim(),
+        expected,
+        `${path}: server did not localize ${key}`,
+      );
     }
 
-    const altKeys = [...template.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap(([, value]) =>
-      value.split("|").flatMap((pair) => {
-        const [attribute, key] = pair.split(":");
-        return attribute === "alt" && key ? [key] : [];
-      }),
+    const altKeys = [...template.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap(
+      ([, value]) =>
+        value.split("|").flatMap((pair) => {
+          const [attribute, key] = pair.split(":");
+          return attribute === "alt" && key ? [key] : [];
+        }),
     );
     const imageTags = [...text.matchAll(/<img\b[^>]*>/gi)].map(([tag]) => tag);
     for (const key of new Set(altKeys)) {
       const value = translations[key];
       assert.ok(value, `${path}: missing alt dictionary entry ${key}`);
-      const image = imageTags.find((tag) => tag.includes('data-i18n-attr="alt:' + key + '"'));
+      const image = imageTags.find((tag) =>
+        tag.includes('data-i18n-attr="alt:' + key + '"'),
+      );
       assert.ok(image, `${path}: missing localized image ${key}`);
       const alt = image.match(/\balt="([^"]*)"/i)?.[1];
       assert.notEqual(alt, undefined, `${path}: missing alt attribute ${key}`);
-      assert.equal(decodeHtmlAttribute(alt), value, `${path}: server did not localize alt ${key}`);
+      assert.equal(
+        decodeHtmlAttribute(alt),
+        value,
+        `${path}: server did not localize alt ${key}`,
+      );
     }
 
     if (page === "opals") {
@@ -277,16 +340,29 @@ for (const pathname of SEO_PAGE_PATHS) {
       ]) {
         const value = translations[key];
         assert.ok(value, `${path}: missing eyebrow dictionary entry ${key}`);
-        const paragraph = [...text.matchAll(/<p\b[^>]*data-i18n="([^"]+)"[^>]*>([\s\S]*?)<\/p>/gi)]
-          .find(([, id]) => id === key);
+        const paragraph = [
+          ...text.matchAll(
+            /<p\b[^>]*data-i18n="([^"]+)"[^>]*>([\s\S]*?)<\/p>/gi,
+          ),
+        ].find(([, id]) => id === key);
         assert.ok(paragraph, `${path}: missing localized eyebrow ${key}`);
-        assert.equal(paragraph[2].trim(), escapeXml(value), `${path}: server did not localize eyebrow ${key}`);
+        assert.equal(
+          paragraph[2].trim(),
+          escapeXml(value),
+          `${path}: server did not localize eyebrow ${key}`,
+        );
       }
     }
 
     if (page === "home" && ["en", "fr", "es"].includes(lang)) {
-      for (const font of ["HakkouMincho-latin.woff2", "Kuramubon-latin.woff2"]) {
-        assert.ok(text.includes('href="/assets/fonts/' + font + '"'), `${path}: missing early font preload ${font}`);
+      for (const font of [
+        "HakkouMincho-latin.woff2",
+        "Kuramubon-latin.woff2",
+      ]) {
+        assert.ok(
+          text.includes('href="/assets/fonts/' + font + '"'),
+          `${path}: missing early font preload ${font}`,
+        );
       }
     }
   }

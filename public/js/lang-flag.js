@@ -38,21 +38,32 @@
       if (subtags.includes("hans")) return "zh-Hans";
       return subtags.some(function (part) {
         return ["hant", "tw", "hk", "mo"].includes(part);
-      }) ? "zh-Hant" : "zh-Hans";
+      })
+        ? "zh-Hant"
+        : "zh-Hans";
     }
     return supported.includes(language) ? language : null;
   }
 
-  var preferences = navigator.languages && navigator.languages.length
-    ? navigator.languages
-    : [navigator.language || ""];
-  var lang = [query, locale, saved && saved[1]].find(function (candidate) {
-    return supported.includes(candidate);
-  }) || preferences.map(matchBrowserLanguage).find(Boolean) || "en";
+  var preferences =
+    navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || ""];
+  var lang =
+    [query, locale, saved && saved[1]].find(function (candidate) {
+      return supported.includes(candidate);
+    }) ||
+    preferences.map(matchBrowserLanguage).find(Boolean) ||
+    "en";
 
   window.NIARIM_INITIAL_LOCALE = lang;
   root.setAttribute("lang", lang);
-  if (lang === "ja" || lang === "ko" || lang === "zh-Hans" || lang === "zh-Hant") {
+  if (
+    lang === "ja" ||
+    lang === "ko" ||
+    lang === "zh-Hans" ||
+    lang === "zh-Hant"
+  ) {
     root.removeAttribute("data-latin-only");
   } else {
     root.setAttribute("data-latin-only", "");

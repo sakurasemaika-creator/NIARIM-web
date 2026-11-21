@@ -948,7 +948,6 @@
   justify-content: flex-start;
 }
 
-
 /* Real app captures must use the capture's native 320x569 geometry.
    Legacy coded-mock aspect ratios/chrome must never create letterboxing. */
 .hero-visual.hero-visual--real {
@@ -1004,7 +1003,6 @@
   overflow: hidden;
 }
 
-
 /* Real captures still sit inside a visible device/frame treatment. The frame
    is decoration only; the capture itself keeps its native 320:569 ratio. */
 .feature-row[data-mock-theme] .feature-media:has(.real-app-capture) {
@@ -1012,23 +1010,45 @@
   border: 5px solid var(--capture-frame, var(--color-ink));
   border-radius: var(--radius-lg);
 }
-.feature-row[data-mock-theme="row1"] { --capture-frame: #F2B90F; }
-.feature-row[data-mock-theme="row2"] { --capture-frame: #D45AA6; }
-.feature-row[data-mock-theme="row3"] { --capture-frame: #5C6BFF; }
-.feature-row[data-mock-theme="row4"] { --capture-frame: #00A6A6; }
-.feature-row[data-mock-theme="row5"] { --capture-frame: #E08B00; }
+.feature-row[data-mock-theme="row1"] {
+  --capture-frame: #f2b90f;
+}
+.feature-row[data-mock-theme="row2"] {
+  --capture-frame: #d45aa6;
+}
+.feature-row[data-mock-theme="row3"] {
+  --capture-frame: #5c6bff;
+}
+.feature-row[data-mock-theme="row4"] {
+  --capture-frame: #00a6a6;
+}
+.feature-row[data-mock-theme="row5"] {
+  --capture-frame: #e08b00;
+}
 
 .screenshot-card:has(.real-app-capture) {
   box-sizing: content-box;
   border: 5px solid var(--capture-frame, var(--color-ink));
   border-radius: var(--radius-lg);
 }
-.screenshot-card[data-mock-theme="shot1"] { --capture-frame: #B15CFF; }
-.screenshot-card[data-mock-theme="shot2"] { --capture-frame: #567D46; }
-.screenshot-card[data-mock-theme="shot3"] { --capture-frame: #D8A0A6; }
-.screenshot-card[data-mock-theme="shot4"] { --capture-frame: #9A4FD0; }
-.screenshot-card[data-mock-theme="shot5"] { --capture-frame: #6678B8; }
-.screenshot-card[data-mock-theme="shot6"] { --capture-frame: #485CC7; }
+.screenshot-card[data-mock-theme="shot1"] {
+  --capture-frame: #b15cff;
+}
+.screenshot-card[data-mock-theme="shot2"] {
+  --capture-frame: #567d46;
+}
+.screenshot-card[data-mock-theme="shot3"] {
+  --capture-frame: #d8a0a6;
+}
+.screenshot-card[data-mock-theme="shot4"] {
+  --capture-frame: #9a4fd0;
+}
+.screenshot-card[data-mock-theme="shot5"] {
+  --capture-frame: #6678b8;
+}
+.screenshot-card[data-mock-theme="shot6"] {
+  --capture-frame: #485cc7;
+}
 
 .hero-showcase--real .hero-preview-card {
   overflow: hidden;
@@ -1036,9 +1056,15 @@
   border-width: 5px;
   border-style: solid;
 }
-.hero-showcase--real .hero-preview-canvas { border-color: #10B981; }
-.hero-showcase--real .hero-preview-timeline { border-color: #EF6C57; }
-.hero-showcase--real .hero-preview-workspace { border-color: #C76C8A; }
+.hero-showcase--real .hero-preview-canvas {
+  border-color: #10b981;
+}
+.hero-showcase--real .hero-preview-timeline {
+  border-color: #ef6c57;
+}
+.hero-showcase--real .hero-preview-workspace {
+  border-color: #c76c8a;
+}
 .hero-showcase--real .hero-real-capture,
 .hero-showcase--real .hero-real-capture > img {
   display: block;
@@ -1048,7 +1074,6 @@
 .hero-showcase--real .hero-real-capture > img {
   object-fit: cover;
 }
-
 
 /* Real gallery captures define their own vertical geometry. The frame wraps the
    decoded 320x569 image instead of imposing the old mock-card ratio, so no
@@ -1060,8 +1085,13 @@
   aspect-ratio: auto;
   overflow: hidden;
 }
-.screenshot-scroller .screenshot-card:has(> .real-app-capture) > .real-app-capture,
-.screenshot-scroller .screenshot-card:has(> .real-app-capture) > .real-app-capture > img {
+.screenshot-scroller
+  .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+.screenshot-scroller
+  .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
   display: block;
   width: 100%;
   height: auto;

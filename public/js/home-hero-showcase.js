@@ -67,7 +67,6 @@
     Array.prototype.forEach.call(cards, fitHeroPreview);
   }
 
-
   function buildPreviewCard(className, capture, themeClass) {
     var card = document.createElement("div");
     card.className = "hero-preview-card " + className + " " + themeClass;
@@ -81,7 +80,8 @@
     var source = document.createElement("source");
     source.type = "image/avif";
     var revision = "b506876f";
-    source.srcset = "/assets/images/app-captures/" + name + ".avif?v=" + revision;
+    source.srcset =
+      "/assets/images/app-captures/" + name + ".avif?v=" + revision;
     var img = document.createElement("img");
     img.src = "/assets/images/app-captures/" + name + ".webp?v=" + revision;
     img.alt = alt || "";
@@ -102,7 +102,10 @@
 
     var canvas = buildRealCapture("canvas-v4", "NIARIM canvas");
     var timeline = buildRealCapture("timeline-v4", "NIARIM timeline");
-    var workspace = buildRealCapture("workspace-v3", "NIARIM workspace settings");
+    var workspace = buildRealCapture(
+      "workspace-v3",
+      "NIARIM workspace settings",
+    );
 
     var originalHeroVisual = container.querySelector(":scope > .hero-visual");
     if (originalHeroVisual) originalHeroVisual.remove();
@@ -117,7 +120,11 @@
       buildPreviewCard("hero-preview-timeline", timeline, "hero-theme-sand"),
     );
     showcase.appendChild(
-      buildPreviewCard("hero-preview-workspace", workspace, "hero-theme-violet"),
+      buildPreviewCard(
+        "hero-preview-workspace",
+        workspace,
+        "hero-theme-violet",
+      ),
     );
     container.appendChild(showcase);
 

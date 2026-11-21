@@ -203,12 +203,12 @@
   display: block;
   width: fit-content;
   max-width: 100%;
-  margin-block-start: .65rem;
-  padding-inline-start: .65rem;
+  margin-block-start: 0.65rem;
+  padding-inline-start: 0.65rem;
   border-inline-start: 2px solid var(--color-text);
   color: var(--color-text);
   font-family: var(--font-sans);
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.55;
   overflow-wrap: anywhere;
@@ -1231,7 +1231,6 @@
   }
 }
 
-
 /* User-requested Features layout: on desktop, narrative copy occupies the left
    column while the app reproduction sits as a portrait screen on the right.
    The spec cards stay in normal flow below both columns, so once they pass the
@@ -1283,7 +1282,6 @@
   }
 }
 
-
 /* Real application captures replace the legacy coded reproductions.
    The frame is exactly the rendered capture box: no padding, forced minimum
    height, or alternate aspect ratio may leak in from .feature-diagram. */
@@ -1321,7 +1319,6 @@
   }
 }
 
-
 /* Canonical real-capture frame palette. Each frame uses the exact accent
    configured in the app capture artifact; the image remains native 320:569. */
 .feature-diagram--real[data-capture-theme] {
@@ -1329,16 +1326,33 @@
   border: 5px solid var(--capture-frame);
   border-radius: var(--radius-lg);
 }
-.feature-diagram--real[data-capture-theme="canvas"] { --capture-frame: #3AA6FF; }
-.feature-diagram--real[data-capture-theme="timeline"] { --capture-frame: #2E9B4F; }
-.feature-diagram--real[data-capture-theme="layers"] { --capture-frame: #FF8A3D; }
-.feature-diagram--real[data-capture-theme="onion-skin"] { --capture-frame: #E85D75; }
-.feature-diagram--real[data-capture-theme="audio-editor"] { --capture-frame: #4B8FDC; }
-.feature-diagram--real[data-capture-theme="save-tree"] { --capture-frame: #C15F35; }
-.feature-diagram--real[data-capture-theme="workspace"] { --capture-frame: #E65F2B; }
-.feature-diagram--real[data-capture-theme="export"] { --capture-frame: #0086C9; }
-.feature-diagram--real[data-capture-theme="widget"] { --capture-frame: #00796B; }
-
+.feature-diagram--real[data-capture-theme="canvas"] {
+  --capture-frame: #3aa6ff;
+}
+.feature-diagram--real[data-capture-theme="timeline"] {
+  --capture-frame: #2e9b4f;
+}
+.feature-diagram--real[data-capture-theme="layers"] {
+  --capture-frame: #ff8a3d;
+}
+.feature-diagram--real[data-capture-theme="onion-skin"] {
+  --capture-frame: #e85d75;
+}
+.feature-diagram--real[data-capture-theme="audio-editor"] {
+  --capture-frame: #4b8fdc;
+}
+.feature-diagram--real[data-capture-theme="save-tree"] {
+  --capture-frame: #c15f35;
+}
+.feature-diagram--real[data-capture-theme="workspace"] {
+  --capture-frame: #e65f2b;
+}
+.feature-diagram--real[data-capture-theme="export"] {
+  --capture-frame: #0086c9;
+}
+.feature-diagram--real[data-capture-theme="widget"] {
+  --capture-frame: #00796b;
+}
 
 /* Desktop real-capture feature sections: use the full content width.
    Legacy coded diagrams used a narrow right column; real portrait captures
@@ -1362,7 +1376,6 @@
     grid-column: 1 / -1;
   }
 }
-
 
 @media (min-width: 900px) {
   .feature-section > .feature-pair {
@@ -1388,7 +1401,6 @@
   }
 }
 
-
 @media (min-width: 900px) {
   /* user-request-fixes.js owns the desktop two-column pair. Disable the older
      section-level grid or the pair itself is auto-placed into column 1 and
@@ -1405,7 +1417,6 @@
     margin-top: var(--space-lg);
   }
 }
-
 
 @media (min-width: 900px) {
   /* Final desktop contract: the runtime pair itself is the two-column row. */

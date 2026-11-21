@@ -128,7 +128,6 @@
   color: var(--color-accent-strong);
 }
 
-
 /* Keep the Only in NIARIM heading as a distinct introduction block.
    The shared .spec-grid has no top margin, so without page-local spacing
    the first tile row visually collides with the heading/lead at some widths. */
@@ -156,7 +155,6 @@
     margin-bottom: var(--space-lg);
   }
 }
-
 
 /* One editorial block owns the complete Only in NIARIM story. Do not nest a
    second feature panel around the first six items: every feature appears once

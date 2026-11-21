@@ -62,7 +62,9 @@ const ORIGIN = process.env.NIARIM_ORIGIN || "http://localhost:8788";
       await page.evaluate(() => {
         document.querySelectorAll(".faq-question").forEach((q) => q.click());
         // Coin/mission details use native disclosure widgets rather than FAQ buttons.
-        document.querySelectorAll("details").forEach((detail) => { detail.open = true; });
+        document.querySelectorAll("details").forEach((detail) => {
+          detail.open = true;
+        });
       });
       await page.waitForTimeout(300);
 

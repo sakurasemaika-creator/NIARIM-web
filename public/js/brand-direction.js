@@ -3,7 +3,8 @@
 (() => {
   "use strict";
   const start = () => {
-    if (!document.body || document.querySelector(".brand-reading-progress")) return;
+    if (!document.body || document.querySelector(".brand-reading-progress"))
+      return;
     const header = document.querySelector(".site-header");
     if (!header) return;
     const bar = document.createElement("div");
@@ -17,7 +18,8 @@
       pending = false;
       const doc = document.documentElement;
       const span = Math.max(0, doc.scrollHeight - doc.clientHeight);
-      const ratio = span > 0 ? Math.min(1, Math.max(0, window.scrollY / span)) : 0;
+      const ratio =
+        span > 0 ? Math.min(1, Math.max(0, window.scrollY / span)) : 0;
       bar.style.transform = `scaleX(${ratio})`;
       document.body.classList.toggle("brand-has-scrolled", window.scrollY > 18);
     };

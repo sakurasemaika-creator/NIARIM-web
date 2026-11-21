@@ -32,15 +32,22 @@ try {
       );
     }
 
-    await page.locator("[data-lang-switch=ja]").evaluate((button) => button.click());
+    await page
+      .locator("[data-lang-switch=ja]")
+      .evaluate((button) => button.click());
     assert.equal(new URL(page.url()).searchParams.get("lang"), "ja");
     assert.equal(
-      await page.locator('a[data-i18n="nav.features"]').first().getAttribute("href"),
+      await page
+        .locator('a[data-i18n="nav.features"]')
+        .first()
+        .getAttribute("href"),
       "/features/?lang=ja",
     );
     await page.reload();
     assert.equal(await page.locator("html").getAttribute("lang"), "ja");
-    await page.locator("[data-lang-switch=en]").evaluate((button) => button.click());
+    await page
+      .locator("[data-lang-switch=en]")
+      .evaluate((button) => button.click());
     assert.equal(new URL(page.url()).searchParams.get("lang"), "en");
     await page.goto(baseURL + "/opals/");
     assert.equal(await page.locator("html").getAttribute("lang"), "en");

@@ -120,15 +120,22 @@ function explicitLang(url) {
 }
 
 function preferredLang(request) {
-  const cookie = (request.headers.get("Cookie") || "")
-    .match(/(?:^|;\s*)niarim_lang=([^;]*)/)?.[1];
+  const cookie = (request.headers.get("Cookie") || "").match(
+    /(?:^|;\s*)niarim_lang=([^;]*)/,
+  )?.[1];
   if (SEO_LANGS.includes(cookie)) return cookie;
 
   const accepted = (request.headers.get("Accept-Language") || "")
     .split(",")
     .map((entry) => {
-      const [tag, weight] = entry.trim().toLowerCase().split(/;\s*q\s*=\s*/);
-      return { tag: tag.trim(), quality: weight === undefined ? 1 : Number(weight) };
+      const [tag, weight] = entry
+        .trim()
+        .toLowerCase()
+        .split(/;\s*q\s*=\s*/);
+      return {
+        tag: tag.trim(),
+        quality: weight === undefined ? 1 : Number(weight),
+      };
     })
     .filter(({ quality }) => quality > 0 && quality <= 1)
     .sort((a, b) => b.quality - a.quality);
@@ -521,11 +528,21 @@ function withSecurityHeaders(response, accountDeletionPage = false) {
   }
   if (accountDeletionPage) {
     headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-    headers.set("Content-Security-Policy", CSP
-      .replace("script-src 'self'", "script-src 'self' https://accounts.google.com/gsi/client")
-      .replace("style-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style")
-      .replace("connect-src 'self'", "connect-src 'self' https://accounts.google.com/gsi/")
-      + "; frame-src https://accounts.google.com/gsi/");
+    headers.set(
+      "Content-Security-Policy",
+      CSP.replace(
+        "script-src 'self'",
+        "script-src 'self' https://accounts.google.com/gsi/client",
+      )
+        .replace(
+          "style-src 'self' 'unsafe-inline'",
+          "style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style",
+        )
+        .replace(
+          "connect-src 'self'",
+          "connect-src 'self' https://accounts.google.com/gsi/",
+        ) + "; frame-src https://accounts.google.com/gsi/",
+    );
     headers.set("X-Robots-Tag", "noindex");
   }
   if (response.status >= 400) {
@@ -561,7 +578,9 @@ export default {
       }
       if (url.pathname.startsWith("/api/account-deletion/")) {
         const action = url.pathname.slice("/api/account-deletion/".length);
-        return withSecurityHeaders(await handleAccountDeletion(request, env, action));
+        return withSecurityHeaders(
+          await handleAccountDeletion(request, env, action),
+        );
       }
 
       if (url.pathname.startsWith("/api/")) {
@@ -599,7 +618,10 @@ export default {
       }
       const assetResponse = await env.ASSETS.fetch(assetRequest);
       const seoResponse = rewriteSeoHtml(assetResponse, request, env, metadata);
-      return withSecurityHeaders(seoResponse, /^\/account-deletion\/(?:index\.html)?$/.test(url.pathname));
+      return withSecurityHeaders(
+        seoResponse,
+        /^\/account-deletion\/(?:index\.html)?$/.test(url.pathname),
+      );
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(

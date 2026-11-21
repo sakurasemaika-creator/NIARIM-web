@@ -2,25 +2,76 @@
  * No external fonts, JS animation framework or decorative image requests.
  * The language-specific CJK fallbacks are retained for glyphs that neither
  * Japanese font covers in Korean/Simplified Chinese translations. */
-:root:lang(ja), :root:lang(en), :root:lang(fr), :root:lang(es) {
+:root:lang(ja),
+:root:lang(en),
+:root:lang(fr),
+:root:lang(es) {
   --font-sans: "HakkouMincho", "HakkouMinchoCJK";
   --font-serif: "Kuramubon", "KuramubonCJK";
 }
-html body { font-family:var(--font-sans) !important; }
-html body :is(h1,h2,h3,h4,h5,h6,dt,button,.btn,.nr-btn,
- .nav-toggle,.main-nav a,.site-header .btn,
- .nr-text-link,.nr-step,.nr-kicker,.eyebrow,.section-kicker,
- .section-label,.nr-store-label strong,.faq-question,.tab,
- [role="tab"],.nr-tool-number,.nr-gallery-meta h3,
- .nr-image-caption,.nr-hero-overline,.nr-hero-highlights,
- .footer-col h2) {
-  font-family:var(--font-serif) !important;
+html body {
+  font-family: var(--font-sans) !important;
 }
-html body :is(p,li,dd,blockquote,small,time,figcaption,label,
- input,textarea,select,.description,.notice,.caption,
- .faq-answer,.legal-content,.nr-hero-lead,.nr-store-notice,
- .nr-gallery-description,.nr-plaza-capture figcaption) {
-  font-family:var(--font-sans) !important;
+html
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nav-toggle,
+    .main-nav a,
+    .site-header .btn,
+    .nr-text-link,
+    .nr-step,
+    .nr-kicker,
+    .eyebrow,
+    .section-kicker,
+    .section-label,
+    .nr-store-label strong,
+    .faq-question,
+    .tab,
+    [role="tab"],
+    .nr-tool-number,
+    .nr-gallery-meta h3,
+    .nr-image-caption,
+    .nr-hero-overline,
+    .nr-hero-highlights,
+    .footer-col h2
+  ) {
+  font-family: var(--font-serif) !important;
+}
+html
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    small,
+    time,
+    figcaption,
+    label,
+    input,
+    textarea,
+    select,
+    .description,
+    .notice,
+    .caption,
+    .faq-answer,
+    .legal-content,
+    .nr-hero-lead,
+    .nr-store-notice,
+    .nr-gallery-description,
+    .nr-plaza-capture figcaption
+  ) {
+  font-family: var(--font-sans) !important;
 }
 /* The actual logomark remains an SVG asset; the typographic wordmark and
  * decorative letterforms must never fall back to an unrelated Arial face. */
@@ -28,193 +79,311 @@ html body.nr-site .nr-hero-wordmark,
 html body .site-footer::before,
 html body.nr-site .nr-feature-band::before,
 html body.nr-site .nr-statement::after {
-  font-family:var(--font-serif) !important;
+  font-family: var(--font-serif) !important;
 }
-html body :is(code,pre,kbd,samp) { font-family:var(--font-sans) !important; }
-html:lang(ja) body :is(h1,h2,h3,h4,h5,h6,.nr-btn,.btn,
- .main-nav a,.nr-text-link,.nr-gallery-meta h3) {
-  letter-spacing: .012em !important;
+html body :is(code, pre, kbd, samp) {
+  font-family: var(--font-sans) !important;
+}
+html:lang(ja)
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .nr-btn,
+    .btn,
+    .main-nav a,
+    .nr-text-link,
+    .nr-gallery-meta h3
+  ) {
+  letter-spacing: 0.012em !important;
   word-break: normal;
   overflow-wrap: anywhere;
   font-kerning: normal;
 }
 html:lang(ja) body.nr-site .nr-hero-wordmark {
-  letter-spacing:-.042em !important;
-  overflow-wrap:normal;
+  letter-spacing: -0.042em !important;
+  overflow-wrap: normal;
 }
 html body.nr-site .nr-plaza h2 {
-  font-size:clamp(2rem,3.9vw,4.2rem);
-  line-height:1.35;
-  text-wrap:pretty;
-  max-width:10.6em;
+  font-size: clamp(2rem, 3.9vw, 4.2rem);
+  line-height: 1.35;
+  text-wrap: pretty;
+  max-width: 10.6em;
 }
-html body.nr-site .nr-plaza-grid > div:first-child { min-width:0; }
+html body.nr-site .nr-plaza-grid > div:first-child {
+  min-width: 0;
+}
 html body.nr-site .nr-plaza-art {
-  min-width:0;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:clamp(12px,2.2vw,26px);
-  border:1px solid rgba(70,45,55,.11);
-  border-radius:20px;
-  background:linear-gradient(160deg,rgba(255,255,255,.46),rgba(245,225,229,.32));
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 2.2vw, 26px);
+  border: 1px solid rgba(70, 45, 55, 0.11);
+  border-radius: 20px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.46),
+    rgba(245, 225, 229, 0.32)
+  );
 }
 html body.nr-site .nr-plaza-capture {
-  margin:0;
-  width:min(100%,304px);
-  text-align:center;
+  margin: 0;
+  width: min(100%, 304px);
+  text-align: center;
 }
 html body.nr-site .nr-plaza-capture-device {
-  border:7px solid #25212b;
-  border-radius:23px;
-  overflow:hidden;
-  background:#fff;
-  box-shadow:0 18px 45px rgba(47,30,42,.17);
+  border: 7px solid #25212b;
+  border-radius: 23px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(47, 30, 42, 0.17);
 }
 html body.nr-site .nr-plaza-capture-image {
-  display:block;
-  width:100%;
-  height:auto;
-  aspect-ratio:360/760;
-  object-fit:contain;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 360/760;
+  object-fit: contain;
 }
 html body.nr-site .nr-plaza-capture figcaption {
-  margin:13px 0 0;
-  font-size:.69rem;
-  letter-spacing:.09em;
-  color:#65525a;
-  line-height:1.5;
+  margin: 13px 0 0;
+  font-size: 0.69rem;
+  letter-spacing: 0.09em;
+  color: #65525a;
+  line-height: 1.5;
 }
 html body.nr-site .nr-plaza .nr-btn {
-  min-height:50px;
-  font-size:clamp(.93rem,1.2vw,1.05rem);
-  line-height:1.35;
-  padding-inline:1.4rem;
+  min-height: 50px;
+  font-size: clamp(0.93rem, 1.2vw, 1.05rem);
+  line-height: 1.35;
+  padding-inline: 1.4rem;
 }
 html body.nr-site .nr-hero-showcase::before {
-  filter:none;
-  background:radial-gradient(ellipse,rgba(255,182,199,.15),transparent 65%);
+  filter: none;
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 182, 199, 0.15),
+    transparent 65%
+  );
 }
-html body.nr-site .nr-story-card .nr-story-media::before { opacity:.55; }
-html body.nr-site :is(.nr-story-media,.nr-gallery-visual) img {
-  max-width:100%;
-  height:auto;
+html body.nr-site .nr-story-card .nr-story-media::before {
+  opacity: 0.55;
 }
-html body :is(.nr-story-copy p,.nr-feature-text p,.nr-plaza p,
- .nr-workspace-copy p,.nr-gallery-description) { line-height:1.85; }
-@media (max-width:800px) {
-  html body.nr-site .nr-plaza-grid { gap:clamp(24px,5vw,40px); }
-  html body.nr-site .nr-plaza-art { padding:18px; }
-  html body.nr-site .nr-plaza-capture { width:min(100%,278px); }
+html body.nr-site :is(.nr-story-media, .nr-gallery-visual) img {
+  max-width: 100%;
+  height: auto;
 }
-@media (max-width:560px) {
-  html body.nr-site .nr-plaza-capture { width:min(100%,248px); }
-  html body.nr-site .nr-plaza h2 { font-size:clamp(1.85rem,8vw,2.65rem); }
-  html body.nr-site .nr-plaza .nr-btn { width:100%; max-width:320px; }
+html
+  body
+  :is(
+    .nr-story-copy p,
+    .nr-feature-text p,
+    .nr-plaza p,
+    .nr-workspace-copy p,
+    .nr-gallery-description
+  ) {
+  line-height: 1.85;
 }
-@media (prefers-reduced-motion:reduce) {
-  html { scroll-behavior:auto !important; }
-  html body *,html body *::before,html body *::after {
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
-    scroll-behavior:auto !important;
+@media (max-width: 800px) {
+  html body.nr-site .nr-plaza-grid {
+    gap: clamp(24px, 5vw, 40px);
+  }
+  html body.nr-site .nr-plaza-art {
+    padding: 18px;
+  }
+  html body.nr-site .nr-plaza-capture {
+    width: min(100%, 278px);
+  }
+}
+@media (max-width: 560px) {
+  html body.nr-site .nr-plaza-capture {
+    width: min(100%, 248px);
+  }
+  html body.nr-site .nr-plaza h2 {
+    font-size: clamp(1.85rem, 8vw, 2.65rem);
+  }
+  html body.nr-site .nr-plaza .nr-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  html body *,
+  html body *::before,
+  html body *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 /* Keep headings readable across every public page, not just the landing page. */
 html body :is(.site-logo, .site-logo *, .logo, .logo *):not(img) {
-  font-family:var(--font-serif) !important;
+  font-family: var(--font-serif) !important;
 }
-html:lang(ja) body main :is(h1,h2,h3,h4,h5,h6),
-html:lang(ja) body :is(.footer-col h2,.section-title,.feature-title) {
-  letter-spacing: .018em !important;
-  line-height:1.36;
-  text-wrap:pretty;
+html:lang(ja) body main :is(h1, h2, h3, h4, h5, h6),
+html:lang(ja) body :is(.footer-col h2, .section-title, .feature-title) {
+  letter-spacing: 0.018em !important;
+  line-height: 1.36;
+  text-wrap: pretty;
 }
-html body .site-header :is(a,button) { -webkit-tap-highlight-color:transparent; }
-html body .site-footer :is(p,small,li) { font-family:var(--font-sans) !important; }
-html body .site-footer :is(h2,h3) { font-family:var(--font-serif) !important; }
+html body .site-header :is(a, button) {
+  -webkit-tap-highlight-color: transparent;
+}
+html body .site-footer :is(p, small, li) {
+  font-family: var(--font-sans) !important;
+}
+html body .site-footer :is(h2, h3) {
+  font-family: var(--font-serif) !important;
+}
 /* Prefer a small composited transform over filters and layout animation. */
-@media (max-width:800px) {
-  html body.nr-site .nr-hero-showcase::before { display:none; }
+@media (max-width: 800px) {
+  html body.nr-site .nr-hero-showcase::before {
+    display: none;
+  }
   html body.nr-site .nr-hero-showcase .nr-shot {
-    box-shadow:0 12px 28px rgba(4,4,9,.24);
+    box-shadow: 0 12px 28px rgba(4, 4, 9, 0.24);
   }
 }
-@media (hover:none), (pointer:coarse) {
+@media (hover: none), (pointer: coarse) {
   html body.nr-site .nr-hero-pc-view,
-  html body.nr-site .nr-hero-sp-view { transition:none !important; }
+  html body.nr-site .nr-hero-sp-view {
+    transition: none !important;
+  }
 }
 
 /* The hero uses the same real SVG wordmark as the site header. */
 html body.nr-site .nr-hero-wordmark {
-  width:min(100%, 610px);
-  max-width:100%;
-  margin-block:clamp(12px,2vw,25px);
-  line-height:1;
+  width: min(100%, 610px);
+  max-width: 100%;
+  margin-block: clamp(12px, 2vw, 25px);
+  line-height: 1;
 }
 html body.nr-site .nr-hero-brand-logo {
-  display:block;
-  width:100%;
-  height:auto;
-  max-height:clamp(90px,14vw,155px);
-  object-fit:contain;
-  object-position:left center;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(90px, 14vw, 155px);
+  object-fit: contain;
+  object-position: left center;
 }
 html body.nr-site .nr-pricing-panel strong {
-  font-family:var(--font-serif) !important;
-  font-size:clamp(1.32rem,2.4vw,2rem);
-  letter-spacing:.025em;
-  line-height:1.35;
-  overflow-wrap:anywhere;
+  font-family: var(--font-serif) !important;
+  font-size: clamp(1.32rem, 2.4vw, 2rem);
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
-html body.nr-site .nr-pricing-panel small { font-family:var(--font-serif) !important; }
-html body.nr-site .nr-pricing-panel span { font-family:var(--font-sans) !important; }
-@media(max-width:600px) { html body.nr-site .nr-hero-wordmark {width:min(100%,410px);} }
+html body.nr-site .nr-pricing-panel small {
+  font-family: var(--font-serif) !important;
+}
+html body.nr-site .nr-pricing-panel span {
+  font-family: var(--font-sans) !important;
+}
+@media (max-width: 600px) {
+  html body.nr-site .nr-hero-wordmark {
+    width: min(100%, 410px);
+  }
+}
 
 /* Navigation uses Kuramubon; all footer links, including Coins & Missions,
    use HakkouMincho consistently. Never mix the two faces inside one label. */
-html body .main-nav a[data-i18n="nav.coins"] {font-family:var(--font-serif) !important;}
-html body .site-footer .footer-col a {font-family:var(--font-sans) !important;}
+html body .main-nav a[data-i18n="nav.coins"] {
+  font-family: var(--font-serif) !important;
+}
+html body .site-footer .footer-col a {
+  font-family: var(--font-sans) !important;
+}
 
 /* New creative tools are editorial, static and inexpensive to paint. */
-html body.nr-site .nr-new-features{padding:clamp(70px,8vw,110px) 0;background:#f7f2f3;}
-html body.nr-site .nr-new-features h2{font-size:clamp(2.1rem,4vw,3.4rem);margin:0 0 24px;}
-html body.nr-site .nr-new-features>div>p:not(.nr-kicker){max-width:54em;line-height:1.85;}
-html body.nr-site .nr-new-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin:30px 0 25px;}
-html body.nr-site .nr-new-feature-grid article{background:#fff;border:1px solid #e7d8dd;border-radius:16px;padding:clamp(21px,2.6vw,32px);}
-html body.nr-site .nr-new-feature-grid h3{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;margin:0 0 17px;}
-html body.nr-site .nr-new-feature-grid p{font-family:var(--font-sans) !important;line-height:1.85;}
-@media(max-width:800px){html body.nr-site .nr-new-feature-grid{grid-template-columns:1fr}}
+html body.nr-site .nr-new-features {
+  padding: clamp(70px, 8vw, 110px) 0;
+  background: #f7f2f3;
+}
+html body.nr-site .nr-new-features h2 {
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  margin: 0 0 24px;
+}
+html body.nr-site .nr-new-features > div > p:not(.nr-kicker) {
+  max-width: 54em;
+  line-height: 1.85;
+}
+html body.nr-site .nr-new-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+  margin: 30px 0 25px;
+}
+html body.nr-site .nr-new-feature-grid article {
+  background: #fff;
+  border: 1px solid #e7d8dd;
+  border-radius: 16px;
+  padding: clamp(21px, 2.6vw, 32px);
+}
+html body.nr-site .nr-new-feature-grid h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  line-height: 1.45;
+  margin: 0 0 17px;
+}
+html body.nr-site .nr-new-feature-grid p {
+  font-family: var(--font-sans) !important;
+  line-height: 1.85;
+}
+@media (max-width: 800px) {
+  html body.nr-site .nr-new-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Exact app-help text is never rewritten merely to fit a heading subset. */
 html body .feature-section [data-help-card] h3,
-html body .coins-main :is(h1,h2,h3),
+html body .coins-main :is(h1, h2, h3),
 html body .coins-main .coins-shortcuts a,
 html body .coins-main .coins-table thead th {
- font-family:var(--font-display-with-body) !important;
+  font-family: var(--font-display-with-body) !important;
 }
 
 /* Preserve the exact in-app help title. This entry needs glyphs that
    Kuramubon does not ship, so render the entire title in HakkouMincho. */
 html:lang(ja) body [data-help-card] h3[data-i18n="help.entry19.title"] {
-  font-family:var(--font-sans) !important;
+  font-family: var(--font-sans) !important;
 }
 
 /* Language-menu labels span Japanese, Chinese and Korean. Restore the
    bundled micro-fonts; the generic button heading rule must not override them. */
-html body .lang-dropdown :is(.lang-trigger,.lang-menu button) {
-  font-family:"NotoSerifMenuJP","NotoSerifMenuSC","NotoSerifMenuKR",var(--font-sans) !important;
+html body .lang-dropdown :is(.lang-trigger, .lang-menu button) {
+  font-family:
+    "NotoSerifMenuJP", "NotoSerifMenuSC", "NotoSerifMenuKR", var(--font-sans) !important;
 }
 
 /* No platform-font islands inside the public Japanese landing page.
    Editorial actions stay in Kuramubon; small explanatory copy and counters
    use HakkouMincho, like the remaining 12 public pages. */
-html:lang(ja) body.nr-site .nr-main :is(.nr-hero-feature-link,.nr-story-copy>a) {
-  font-family:var(--font-serif) !important;
+html:lang(ja)
+  body.nr-site
+  .nr-main
+  :is(.nr-hero-feature-link, .nr-story-copy > a) {
+  font-family: var(--font-serif) !important;
 }
-html:lang(ja) body.nr-site .nr-main :is(.nr-preview-footnote,.nr-hero-bottom>span,.nr-hero-bottom>a,.nr-mini-list>span,.nr-gallery-meta>span) {
-  font-family:var(--font-sans) !important;
+html:lang(ja)
+  body.nr-site
+  .nr-main
+  :is(
+    .nr-preview-footnote,
+    .nr-hero-bottom > span,
+    .nr-hero-bottom > a,
+    .nr-mini-list > span,
+    .nr-gallery-meta > span
+  ) {
+  font-family: var(--font-sans) !important;
 }

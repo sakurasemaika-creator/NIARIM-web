@@ -46,11 +46,9 @@ GPTはユーザーから監査指摘の修正を明示された場合に限り�
 
 この境界は、通常タスクが全面監査専用Route/Stateをcontinuationとして読んだり、未監査TODOを勝手に監査済み扱いしたり、全面監査セッションが通常タスクの成果を監査正史へ無検証で取り込んだりすることを防ぐ恒久ルールとする。
 
-
 ## 4. 全面監査のlock後delta
 
 全面監査モードでは、locked Baseline A001–A104の後段にある追加監査対象を `docs/work-audit/state/AUDIT_DELTA_ROUTE.md` で確認する。D001以降はA/WのBaseline IDではなくlock後delta専用IDであり、Baselineのlock order/definition hashを変更しない。ユーザーが「NIARIMの全面監査をしてください」と明示した場合は、Policyの実行契約に従い、Baseline→Discovery→Delta→最終Visual/coverageまで実行する。
-
 
 ## 5. 承認済みの外部操作
 

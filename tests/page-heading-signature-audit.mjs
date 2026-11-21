@@ -109,7 +109,9 @@ for (const width of widths) {
     state: "attached",
     timeout: 10000,
   });
-  await page.locator("#advanced .real-app-capture img").scrollIntoViewIfNeeded();
+  await page
+    .locator("#advanced .real-app-capture img")
+    .scrollIntoViewIfNeeded();
   await page.waitForFunction(() => {
     const img = document.querySelector("#advanced .real-app-capture img");
     return img?.complete && img.naturalWidth > 0 && img.naturalHeight > 0;
@@ -150,7 +152,9 @@ for (const width of widths) {
     };
   });
   const captureRatio =
-    feature.capture.height > 0 ? feature.capture.width / feature.capture.height : 0;
+    feature.capture.height > 0
+      ? feature.capture.width / feature.capture.height
+      : 0;
   if (
     !feature.capture.src.includes("/assets/images/app-captures/onion-skin.") ||
     feature.capture.naturalWidth <= 0 ||

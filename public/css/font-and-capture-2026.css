@@ -7,19 +7,66 @@ html[lang] body,
 html[lang] body.nr-site {
   font-family: var(--font-sans) !important;
 }
-html body :is(p, li, dd, blockquote, figcaption, small, time, textarea,
-  input, .caption, .description, .notice, .legal-content,
-  .nr-hero-lead, .nr-story-copy p, .nr-curated-copy p,
-  .nr-gallery-description, .nr-gallery-note, .feature-narrative p,
-  .spec-grid p, .faq-answer, .nr-launch-status) {
+html
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    figcaption,
+    small,
+    time,
+    textarea,
+    input,
+    .caption,
+    .description,
+    .notice,
+    .legal-content,
+    .nr-hero-lead,
+    .nr-story-copy p,
+    .nr-curated-copy p,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .feature-narrative p,
+    .spec-grid p,
+    .faq-answer,
+    .nr-launch-status
+  ) {
   font-family: var(--font-sans) !important;
 }
-html body :is(h1, h2, h3, h4, h5, h6, dt,
-  button, .btn, .nr-btn, .nr-text-link, .nr-kicker, .eyebrow,
-  .nr-step, .section-label, .section-kicker, .nr-tool-number,
-  .nav-link, .main-nav a, .site-nav a, .feature-nav a,
-  .community-tabs button, [role="tab"], .tab, .tabs a,
-  .faq-question, .nr-gallery-meta h3, .nr-store-label) {
+html
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nr-text-link,
+    .nr-kicker,
+    .eyebrow,
+    .nr-step,
+    .section-label,
+    .section-kicker,
+    .nr-tool-number,
+    .nav-link,
+    .main-nav a,
+    .site-nav a,
+    .feature-nav a,
+    .community-tabs button,
+    [role="tab"],
+    .tab,
+    .tabs a,
+    .faq-question,
+    .nr-gallery-meta h3,
+    .nr-store-label
+  ) {
   font-family: var(--font-serif) !important;
 }
 /* Preserve existing original logotype rather than changing its bespoke lettering. */
@@ -28,22 +75,95 @@ html body :is(.nr-hero-wordmark, .site-logo, .site-logo *, .logo, .logo *) {
 }
 /* Override the older html:lang(ja) and language-specific Noto Sans
    !important selectors: an unqualified html body rule is not specific enough. */
-html[lang] body :is(h1, h2, h3, h4, h5, h6, dt, button, .btn,
-  .nr-btn, .nr-kicker, .nr-step, .nr-text-link, .eyebrow, .section-label,
-  .section-kicker, .nav-link, .main-nav a, .site-nav a, .feature-nav a,
-  .community-tabs button, [role="tab"], .tab, .tabs a, .faq-question),
-html[lang] body.nr-site .nr-main :is(h1, h2, h3, h4, h5, h6, button,
-  .nr-kicker, .nr-step, .nr-text-link, .nr-tool-number, .nr-store-label,
-  [role="tab"], .tab) {
+html[lang]
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nr-kicker,
+    .nr-step,
+    .nr-text-link,
+    .eyebrow,
+    .section-label,
+    .section-kicker,
+    .nav-link,
+    .main-nav a,
+    .site-nav a,
+    .feature-nav a,
+    .community-tabs button,
+    [role="tab"],
+    .tab,
+    .tabs a,
+    .faq-question
+  ),
+html[lang]
+  body.nr-site
+  .nr-main
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    button,
+    .nr-kicker,
+    .nr-step,
+    .nr-text-link,
+    .nr-tool-number,
+    .nr-store-label,
+    [role="tab"],
+    .tab
+  ) {
   font-family: var(--font-serif) !important;
 }
-html[lang] body :is(p, li, dd, blockquote, figcaption, small, time, textarea,
-  input, .caption, .description, .notice, .legal-content,
-  .nr-hero-lead, .nr-gallery-description, .nr-gallery-note,
-  .feature-narrative p, .spec-grid p, .faq-answer, .nr-launch-status),
-html[lang] body.nr-site .nr-main :is(p, li, dd, small, .nr-hero-lead,
-  .nr-story-copy p, .nr-curated-copy p, .nr-gallery-description,
-  .nr-gallery-note, .nr-launch-status) {
+html[lang]
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    figcaption,
+    small,
+    time,
+    textarea,
+    input,
+    .caption,
+    .description,
+    .notice,
+    .legal-content,
+    .nr-hero-lead,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .feature-narrative p,
+    .spec-grid p,
+    .faq-answer,
+    .nr-launch-status
+  ),
+html[lang]
+  body.nr-site
+  .nr-main
+  :is(
+    p,
+    li,
+    dd,
+    small,
+    .nr-hero-lead,
+    .nr-story-copy p,
+    .nr-curated-copy p,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .nr-launch-status
+  ) {
   font-family: var(--font-sans) !important;
 }
 html[lang] body.nr-site .nr-main .nr-hero-wordmark,
@@ -149,10 +269,20 @@ html body .nr-feature-duo {
     width: 100% !important;
     max-width: 680px !important;
   }
-  html body .feature-section .feature-diagram-stack .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+  html
+    body
+    .feature-section
+    .feature-diagram-stack
+    .nr-feature-duo
+    > .feature-diagram--real:not(.feature-diagram--pc) {
     width: min(35%, 235px) !important;
   }
-  html body .feature-section .feature-diagram-stack .nr-feature-duo > .feature-diagram--pc {
+  html
+    body
+    .feature-section
+    .feature-diagram-stack
+    .nr-feature-duo
+    > .feature-diagram--pc {
     width: min(64%, 420px) !important;
   }
 }
@@ -164,7 +294,11 @@ html body .nr-feature-duo {
     width: min(100%, 760px) !important;
     margin: 22px auto 0;
   }
-  html body .feature-section .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+  html
+    body
+    .feature-section
+    .nr-feature-duo
+    > .feature-diagram--real:not(.feature-diagram--pc) {
     width: min(31%, 235px) !important;
   }
   html body .feature-section .nr-feature-duo > .feature-diagram--pc {
@@ -172,23 +306,50 @@ html body .nr-feature-duo {
   }
 }
 @media (max-width: 759px) {
-  html body .nr-gallery-grid { grid-template-columns: 1fr !important; }
-  html body .nr-gallery-visual { min-height: 230px; }
-  html body .nr-curated .nr-curated-item { display: block !important; }
-  html body .nr-curated .nr-curated-picture { padding: 12px; }
-  html body .nr-curated .nr-duo { flex-direction: row !important; flex-wrap: nowrap !important; }
-  html body .nr-curated .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 32% !important; }
-  html body .nr-curated .nr-duo > .nr-shot--pc { width: 64% !important; }
-  html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 33% !important; }
-  html body .nr-story-media .nr-duo > .nr-shot--pc { width: 63% !important; }
+  html body .nr-gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+  html body .nr-gallery-visual {
+    min-height: 230px;
+  }
+  html body .nr-curated .nr-curated-item {
+    display: block !important;
+  }
+  html body .nr-curated .nr-curated-picture {
+    padding: 12px;
+  }
+  html body .nr-curated .nr-duo {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+  }
+  html body .nr-curated .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 32% !important;
+  }
+  html body .nr-curated .nr-duo > .nr-shot--pc {
+    width: 64% !important;
+  }
+  html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 33% !important;
+  }
+  html body .nr-story-media .nr-duo > .nr-shot--pc {
+    width: 63% !important;
+  }
   html body .nr-feature-visual .nr-duo > .nr-shot--pc,
-  html body .nr-workspace-media .nr-duo > .nr-shot--pc { width: min(100%, 300px) !important; }
-  html body .nr-hero-sp-view { width: clamp(100px, 28vw, 175px) !important; }
+  html body .nr-workspace-media .nr-duo > .nr-shot--pc {
+    width: min(100%, 300px) !important;
+  }
+  html body .nr-hero-sp-view {
+    width: clamp(100px, 28vw, 175px) !important;
+  }
   html body .feature-section > .feature-pair > .feature-diagram-stack {
     width: 100% !important;
     max-width: none !important;
   }
-  html body .feature-section .nr-feature-duo > .feature-diagram--real:not(.feature-diagram--pc) {
+  html
+    body
+    .feature-section
+    .nr-feature-duo
+    > .feature-diagram--real:not(.feature-diagram--pc) {
     width: min(34%, 190px) !important;
   }
   html body .feature-section .nr-feature-duo > .feature-diagram--pc {
@@ -197,10 +358,18 @@ html body .nr-feature-duo {
 }
 @media (max-width: 359px) {
   html body .nr-gallery-visual .nr-duo,
-  html body .nr-curated .nr-duo { gap: 7px !important; }
-  html body .nr-gallery-visual { padding-inline: 8px; }
-  html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) { width: 31% !important; }
-  html body .nr-gallery-visual .nr-duo > .nr-shot--pc { width: 65% !important; }
+  html body .nr-curated .nr-duo {
+    gap: 7px !important;
+  }
+  html body .nr-gallery-visual {
+    padding-inline: 8px;
+  }
+  html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 31% !important;
+  }
+  html body .nr-gallery-visual .nr-duo > .nr-shot--pc {
+    width: 65% !important;
+  }
 }
 .font-license-access {
   width: min(100% - 32px, 1216px);
@@ -208,10 +377,17 @@ html body .nr-feature-duo {
   padding: 10px 0 18px;
   text-align: center;
   font-family: var(--font-sans);
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
-.font-license-access a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.font-license-document { width: min(100% - 32px, 960px); margin: 3rem auto; }
+.font-license-access a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.font-license-document {
+  width: min(100% - 32px, 960px);
+  margin: 3rem auto;
+}
 .font-license-document pre {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -220,5 +396,5 @@ html body .nr-feature-duo {
   border: 1px solid var(--color-border-strong);
   background: var(--color-surface-soft);
   color: var(--color-text);
-  font: .81rem/1.7 var(--font-sans);
+  font: 0.81rem/1.7 var(--font-sans);
 }

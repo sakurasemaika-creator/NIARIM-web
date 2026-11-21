@@ -1,2 +1,9 @@
-# Locked audit route is an authoritative state artifact; do not rewrite it during repository-wide formatting.
-docs/work-audit/state/AUDIT_ROUTE.md
+# Audit and product-audit documents are mirrored byte-for-byte from the App
+# repository (the audit verifiers and the App/Web comparison require identical
+# files), so repository-wide formatting must not rewrite them.
+docs/work-audit/
+docs/product-audit/
+# Translation dictionaries are compact data read by tools/generate-seo-i18n.mjs
+# and by the source contract tests; keep their one-entry-per-key layout.
+public/js/i18n-dict*.js
+public/js/help-translations.js
