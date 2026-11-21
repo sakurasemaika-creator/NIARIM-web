@@ -51,6 +51,18 @@ if (guardIndex < 0) {
   );
 }
 
+const polish = await read("public/css/polish.css");
+const polishClean = stripComments(polish);
+const focusRule = polishClean.match(
+  /:where\(a, button, input, textarea, select\):focus-visible\s*\{([^}]*)\}/,
+);
+if (!focusRule || !/outline:\s*3px solid var\(--color-accent-strong\)/.test(focusRule[1])) {
+  failures.push("keyboard focus indicator must use the active theme accent token");
+}
+if (focusRule && /#[0-9a-f]{3,8}|rgba?\(/i.test(focusRule[1])) {
+  failures.push("keyboard focus indicator must not hard-code a color");
+}
+
 const guardClean = stripComments(themeGuard);
 for (const token of ["--color-accent-strong", "--color-accent-strong-dark"]) {
   const required = `${token}: var(--color-accent)`;
