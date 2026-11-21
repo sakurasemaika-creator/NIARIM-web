@@ -7,7 +7,7 @@
     "communityPage.update.body": "新しい作品や人気の作品を探せます。気になる作品を見つけたら、ブックマークして後からゆっくり楽しめます。"
   },
   "en": {
-    "communityPage.comingSoon": "Discover animations in the NIARIM gallery. Bookmark your favorites to enjoy again later.",
+    "communityPage.comingSoon": "Discover animations in the NIARIM Work Plaza. Bookmark your favorites to enjoy again later.",
     "communityPage.ranking.note": "Discover new works and popular creations based on bookmarks.",
     "narrative.community.3.body": "Find new inspiration among everyone's creations, including works loved by the community.",
     "communityPage.update.body": "Explore new and popular works. Bookmark the ones you love and return to them anytime."

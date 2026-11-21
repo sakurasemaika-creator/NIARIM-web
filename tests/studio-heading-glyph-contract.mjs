@@ -59,10 +59,10 @@ for(const match of css.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)){
   }
 }
 assert.ok(bodyGlyphs.size>1000,"HakkouMincho WOFF2 unicode range missing");
-const overlay=fs.readFileSync("public/js/visitor-copy-and-goals.js","utf8");
-const start=overlay.indexOf("var t=")+6;
-const end=overlay.indexOf(";for(var l in t)",start);
-assert.ok(start>5&&end>start,"visitor copy JSON missing");
+const overlay=fs.readFileSync("public/js/i18n-dict-visitor-copy-goals.js","utf8");
+const start=overlay.indexOf("const strings = ")+16;
+const end=overlay.indexOf(";\n  for (const [locale, entries]",start);
+assert.ok(start>15&&end>start,"visitor copy JSON missing");
 const visitor=JSON.parse(overlay.slice(start,end));
 const headingKeys=new Set([
   "coins.title","coins.catalog","coins.compareTitle",

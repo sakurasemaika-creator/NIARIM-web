@@ -62,7 +62,7 @@ const typeVariables=readFileSync("public/css/variables.css","utf8");
 assert.match(typeVariables,/--font-sans:\s*"HakkouMincho"/);
 assert.match(css,/Unified Opal price and savings table/);
 const context={window:{NIARIM_I18N_DICT:{}}};
-for(const file of ["public/js/i18n-dict.js","public/js/i18n-dict-intl.js","public/js/i18n-dict-nav-extra.js","public/js/i18n-dict-premium.js","public/js/i18n-dict-narrative.js","public/js/i18n-dict-refresh-2026.js","public/js/visitor-copy-and-goals.js","public/js/opal-ui-naming.js"]){
+for(const file of ["public/js/i18n-dict.js","public/js/i18n-dict-intl.js","public/js/i18n-dict-nav-extra.js","public/js/i18n-dict-premium.js","public/js/i18n-dict-narrative.js","public/js/i18n-dict-refresh-2026.js","public/js/i18n-dict-opals.js","public/js/i18n-dict-visitor-copy-goals.js"]){
  vm.runInNewContext(readFileSync(file,"utf8"),context,{filename:file});
 }
 const d=context.window.NIARIM_I18N_DICT;
@@ -71,6 +71,10 @@ assert.equal(d.ja["coins.unit"],"オパール");
 assert.equal(d.ja["coins.compareFull"],"コンプリートパック");
 assert.match(d.ja["coins.yearNote"],/55,000.+660,000.+550,000.+110,000.+17%/);
 for(const language of ["ja","en","fr","es","ko","zh-Hans","zh-Hant"]){
+ for(const value of Object.values(d[language])) {
+  if (typeof value === "string") assert.doesNotMatch(value, /opales? jointes?|las ópalos|오팔으로/);
+ }
+ assert.match(d[language]["coins.meta.title"], /^(?:[A-ZÁÉÓ]|[^\u0000-\u007f])/);
  for(const key of ["coins.rateNote","coins.compareSeparate","coins.compareSaving","coins.tableCaption","coins.yearNote","coins.compareCaution"]){
   assert.ok(typeof d[language]?.[key]==="string" && d[language][key].length>5,language+" "+key);
  }

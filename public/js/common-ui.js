@@ -78,25 +78,67 @@
     var nav = document.querySelector(".main-nav");
     if (!toggle || !nav) return;
 
+    var narrow = window.matchMedia("(max-width: 1180px)");
+    var header = toggle.closest(".site-header");
+    var covered = Array.from(document.querySelectorAll(
+      "main, footer, .skip-link, .back-to-top, .site-header .brand"
+    ));
+    var changed = [];
+
+    function isOpen() {
+      return nav.classList.contains("is-open");
+    }
+
     function close(returnFocus) {
-      var wasOpen = nav.classList.contains("is-open");
+      if (!isOpen()) return;
       toggle.setAttribute("aria-expanded", "false");
       nav.classList.remove("is-open");
-      if (returnFocus && wasOpen) toggle.focus();
+      document.documentElement.classList.remove("mobile-nav-open");
+      changed.forEach(function (element) { element.inert = false; });
+      changed = [];
+      if (returnFocus && narrow.matches) toggle.focus();
     }
 
     toggle.addEventListener("click", function () {
-      var isOpen = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      nav.classList.toggle("is-open", !isOpen);
+      if (isOpen()) {
+        close(true);
+        return;
+      }
+      if (!narrow.matches) return;
+      changed = covered.filter(function (element) {
+        return !element.inert && !element.contains(header);
+      });
+      changed.forEach(function (element) { element.inert = true; });
+      document.documentElement.classList.add("mobile-nav-open");
+      toggle.setAttribute("aria-expanded", "true");
+      nav.classList.add("is-open");
+      toggle.focus();
     });
-
+    narrow.addEventListener("change", function () {
+      if (!narrow.matches) close(false);
+    });
     nav.addEventListener("click", function (event) {
-      if (event.target.closest && event.target.closest("a")) close(false);
+      if (event.target.closest && event.target.closest("a[href]")) close(false);
     });
-
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") close(true);
+      if (!isOpen()) return;
+      if (event.key === "Escape" && !event.defaultPrevented) {
+        event.preventDefault();
+        close(true);
+      }
+      if (event.key !== "Tab") return;
+      var links = Array.from(nav.querySelectorAll(
+        "a[href], button:not(:disabled), [tabindex='0']"
+      )).filter(function (element) {
+        return element.tabIndex >= 0 && element.getClientRects().length > 0 &&
+          getComputedStyle(element).visibility === "visible";
+      });
+      var ring = [toggle].concat(links);
+      var focused = ring.indexOf(document.activeElement);
+      event.preventDefault();
+      var next = focused < 0 ? 0 :
+        (focused + (event.shiftKey ? -1 : 1) + ring.length) % ring.length;
+      ring[next].focus();
     });
   }
 

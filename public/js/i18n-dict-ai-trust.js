@@ -9,7 +9,6 @@
         "本アプリには生成AI機能を実装していません。また、ユーザーが作成・投稿した作品やプロジェクトデータを、生成AIモデルの学習データとして使用することもありません。",
       privacy:
         "開発者は、ユーザーが作成または投稿したコンテンツ、プロジェクトデータその他の制作データを、生成AIモデルその他の機械学習モデルの学習データとして利用しません。",
-      updated: "最終更新日：2026年9月4日",
     },
     en: {
       q: "Is my work used to train AI?",
@@ -18,7 +17,6 @@
         "NIARIM does not include generative-AI features, and works or project data created or published by users are not used as training data for generative AI models.",
       privacy:
         "The developer does not use content created or published by users, project data, or other creation data as training data for generative AI models or other machine-learning models.",
-      updated: "Last updated: September 4, 2026",
     },
     "zh-Hans": {
       q: "我的作品会被用于训练 AI 吗？",
@@ -27,7 +25,6 @@
         "本应用未实现生成式 AI 功能，也不会将用户创作或发布的作品及项目数据用于生成式 AI 模型的训练。",
       privacy:
         "开发者不会将用户创作或发布的内容、项目数据及其他创作数据用于生成式 AI 模型或其他机器学习模型的训练。",
-      updated: "最后更新：2026年9月4日",
     },
     "zh-Hant": {
       q: "我的作品會被用於訓練 AI 嗎？",
@@ -36,7 +33,6 @@
         "本應用程式未實作生成式 AI 功能，也不會將使用者創作或發布的作品及專案資料用於生成式 AI 模型的訓練。",
       privacy:
         "開發者不會將使用者創作或發布的內容、專案資料及其他創作資料用於生成式 AI 模型或其他機器學習模型的訓練。",
-      updated: "最後更新：2026年9月4日",
     },
     ko: {
       q: "작품이 AI 학습에 사용되나요?",
@@ -45,7 +41,6 @@
         "본 앱에는 생성형 AI 기능이 구현되어 있지 않으며, 사용자가 제작하거나 공개한 작품 및 프로젝트 데이터를 생성형 AI 모델의 학습 데이터로 사용하지도 않습니다.",
       privacy:
         "개발자는 사용자가 제작하거나 공개한 콘텐츠, 프로젝트 데이터 및 기타 제작 데이터를 생성형 AI 모델이나 다른 머신러닝 모델의 학습 데이터로 사용하지 않습니다.",
-      updated: "최종 업데이트: 2026년 9월 4일",
     },
     fr: {
       q: "Mes œuvres sont-elles utilisées pour entraîner une IA ?",
@@ -54,7 +49,6 @@
         "NIARIM n'intègre aucune fonctionnalité d'IA générative et n'utilise pas les œuvres ou données de projet créées ou publiées par les utilisateurs pour entraîner des modèles d'IA générative.",
       privacy:
         "Le développeur n'utilise pas les contenus créés ou publiés par les utilisateurs, les données de projet ni les autres données de création comme données d'entraînement pour des modèles d'IA générative ou d'autres modèles d'apprentissage automatique.",
-      updated: "Dernière mise à jour : 4 septembre 2026",
     },
     es: {
       q: "¿Se usan mis obras para entrenar IA?",
@@ -63,7 +57,6 @@
         "NIARIM no incluye funciones de IA generativa ni utiliza las obras o datos de proyectos creados o publicados por los usuarios para entrenar modelos de IA generativa.",
       privacy:
         "El desarrollador no utiliza el contenido creado o publicado por los usuarios, los datos de proyectos ni otros datos de creación como datos de entrenamiento para modelos de IA generativa u otros modelos de aprendizaje automático.",
-      updated: "Última actualización: 4 de septiembre de 2026",
     },
   };
 
@@ -135,9 +128,6 @@
       .forEach(function (el) {
         el.textContent = text.privacy;
       });
-    document.querySelectorAll(".updated-at").forEach(function (el) {
-      el.textContent = text.updated;
-    });
   }
 
   if (document.readyState === "loading")

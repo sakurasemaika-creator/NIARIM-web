@@ -1,8 +1,9 @@
+import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const browser = await chromium.launch(launchOptions);
+const browser = await chromium.launch(launchOptions());
 const issues = [];
 
 for (const width of [320, 390, 768, 1024, 1180]) {
@@ -37,6 +38,30 @@ for (const width of [320, 390, 768, 1024, 1180]) {
       if (Math.abs(link.left - left) > 2)
         issues.push({ width, index, kind: "mobile-nav-left-axis-drift", link, expectedLeft: left });
     });
+  }
+  if (await toggle.isVisible()) {
+    const before = await page.evaluate(() => scrollY);
+    assert.equal(await page.locator("main").evaluate((main) => main.inert), true);
+    for (const key of [
+      ...Array(16).fill("Tab"),
+      ...Array(16).fill("Shift+Tab"),
+    ]) {
+      await page.keyboard.press(key);
+      assert.ok(
+        await page.evaluate(() =>
+          Boolean(document.activeElement?.closest(".main-nav, .nav-toggle")),
+        ),
+        `focus left the mobile menu at ${width}px on ${key}`,
+      );
+    }
+    await page.mouse.move(width / 2, 400);
+    await page.mouse.wheel(0, 1600);
+    await page.waitForTimeout(180);
+    assert.equal(await page.evaluate(() => scrollY), before);
+    await page.keyboard.press("Escape");
+    assert.equal(await toggle.getAttribute("aria-expanded"), "false");
+    assert.ok(await toggle.evaluate((button) => button === document.activeElement));
+    assert.equal(await page.locator("main").evaluate((main) => main.inert), false);
   }
   await context.close();
 }

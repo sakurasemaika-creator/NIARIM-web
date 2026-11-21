@@ -16,8 +16,8 @@ on:
       - "tests/opal-brand-contract.mjs"
       - "tests/i18n-browser-detection-audit.mjs"
       - "tests/community-ranking-visibility-browser.mjs"
-      - "tests/community-feed.test.mjs"
-      - "tests/account-deletion.test.mjs"
+      - "tests/*.test.mjs"
+      - "tests/mobile-nav-density-alignment-audit.mjs"
       - "tests/account-deletion-browser.mjs"
       - "src/account-deletion.js"
       - "public/account-deletion/**"
@@ -32,7 +32,8 @@ on:
       - "public/premium/index.html"
       - "public/opals/index.html"
       - "public/css/pages/coins.css"
-      - "public/js/opal-ui-naming.js"
+      - "public/js/i18n-dict-opals.js"
+      - "public/js/i18n-dict-visitor-copy-goals.js"
       - "public/js/lang-flag.js"
       - "public/js/i18n.js"
       - "public/css/refresh-2026.css"
@@ -53,6 +54,8 @@ on:
       - "public/css/pages/premium.css"
       - "public/css/capture-viewer.css"
       - "public/css/common-base.css"
+      - "public/js/common-ui.js"
+      - "public/js/main.js"
       - "public/assets/fonts/**"
       - "public/js/community.js"
       - "public/js/i18n-dict-community-live.js"
@@ -105,8 +108,8 @@ jobs:
       - name: Verify Opal pricing and comparison rules
         run: npm run audit:opal
       - run: npx playwright install --with-deps chromium
-      - name: Test live community API proxy with mock upstream
-        run: node --test tests/community-feed.test.mjs
+      - name: Run all Web unit tests
+        run: node --test tests/*.test.mjs
       - name: Start static site
         run: |
           python3 -m http.server 8787 --directory public > /tmp/niarim-site.log 2>&1 &
@@ -115,6 +118,8 @@ jobs:
           exit 1
       - name: Verify Help search and disclosure controls across seven languages
         run: node tests/help-interaction-audit.mjs
+      - name: Verify mobile menu focus and scrolling
+        run: node tests/mobile-nav-density-alignment-audit.mjs
       - name: Verify initial and saved browser languages
         run: node tests/i18n-browser-detection-audit.mjs
       - name: Verify export format descriptions and contextual guide links
@@ -130,9 +135,7 @@ jobs:
       - name: Test in-place redaction of newly private ranked works
         run: node tests/community-ranking-visibility-browser.mjs
       - name: Test Google verification and irreversible deletion confirmation with mock identity
-        run: |
-          node --test tests/account-deletion.test.mjs
-          node tests/account-deletion-browser.mjs
+        run: node tests/account-deletion-browser.mjs
       - name: Capture all website pages top-to-bottom, Japanese PC and mobile
         env:
           AUDIT_LANGS: ja

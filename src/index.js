@@ -534,6 +534,15 @@ export default {
     const url = new URL(request.url);
 
     try {
+      if (
+        url.pathname === "/coins" ||
+        url.pathname === "/coins/" ||
+        url.pathname === "/coins/index.html"
+      ) {
+        url.pathname = "/opals/";
+        return withSecurityHeaders(Response.redirect(url, 308));
+      }
+
       if (url.pathname === "/api/community") {
         return withSecurityHeaders(await handleCommunityFeed(request, env));
       }

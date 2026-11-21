@@ -27,3 +27,7 @@
   opacity: 0.55;
   cursor: default;
 }
+
+.account-deletion .legal-body :is(h2, a) {
+  color: var(--color-accent-text);
+}

@@ -396,3 +396,65 @@
     dictionary[locale] = Object.assign(dictionary[locale] || {}, translations[locale]);
   });
 })();
+
+// Accessible labels for the four preview palette choices.
+(function () {
+  const dict = window.NIARIM_I18N_DICT;
+  const names = {
+    ja: "配色", en: "Palette", "zh-Hans": "配色", "zh-Hant": "配色",
+    ko: "색상 팔레트", fr: "Palette de couleurs", es: "Paleta de colores",
+  };
+  for (const [locale, name] of Object.entries(names)) {
+    for (let palette = 1; palette <= 4; palette++) {
+      dict[locale][`refresh.gallery.palette${palette}`] = `${name} ${palette}`;
+    }
+  }
+})();
+
+// Alternative text for screenshots whose context is not captured by the screen name.
+(function () {
+  const captions = {
+  "ja": [
+    "PCモード版のキャンバス画面",
+    "スマホ版のキャンバス画面",
+    "作品広場の新着カード、検索、並べ替え、ブックマークの操作"
+  ],
+  "en": [
+    "Canvas in PC mode",
+    "Canvas on a phone",
+    "Work Plaza showing new works, search, sorting and bookmarks"
+  ],
+  "fr": [
+    "Canevas en mode PC",
+    "Canevas sur téléphone",
+    "Place des œuvres avec les nouveautés, la recherche, le tri et les favoris"
+  ],
+  "es": [
+    "Lienzo en modo PC",
+    "Lienzo en el teléfono",
+    "Plaza de Obras con novedades, búsqueda, orden y marcadores"
+  ],
+  "zh-Hans": [
+    "电脑模式下的画布",
+    "手机上的画布",
+    "作品广场的新作品、搜索、排序和收藏"
+  ],
+  "zh-Hant": [
+    "電腦模式下的畫布",
+    "手機上的畫布",
+    "作品廣場的新作品、搜尋、排序與書籤"
+  ],
+  "ko": [
+    "PC 모드의 캔버스",
+    "스마트폰의 캔버스",
+    "신작, 검색, 정렬 및 북마크를 보여 주는 작품 광장"
+  ]
+};
+  for (const [locale, [desktop, phone, plaza]] of Object.entries(captions)) {
+    Object.assign(window.NIARIM_I18N_DICT[locale], {
+      "refresh.gallery.altDesktop": desktop,
+      "refresh.gallery.altPhone": phone,
+      "refresh.gallery.altWorkPlaza": plaza,
+    });
+  }
+})();
