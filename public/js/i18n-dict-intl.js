@@ -303,7 +303,7 @@
 
     "meta.privacy.title": "隐私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方网站及应用程序的隐私政策。",
-    "legal.updated": "最后更新日期：2026年11月18日",
+    "legal.updated": "最后更新日期：2026年11月22日",
     "legal.notice.privacy":
       "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
     "legal.notice.terms":
@@ -608,7 +608,7 @@
 
     "meta.privacy.title": "隱私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私政策。",
-    "legal.updated": "最後更新日期：2026年11月18日",
+    "legal.updated": "最後更新日期：2026年11月22日",
     "legal.notice.privacy":
       "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
     "legal.notice.terms":
@@ -947,7 +947,7 @@
     "meta.privacy.title": "개인정보처리방침 | NIARIM",
     "meta.privacy.description":
       "NIARIM 공식 사이트 및 앱의 개인정보처리방침입니다.",
-    "legal.updated": "최종 업데이트: 2026년 11월 18일",
+    "legal.updated": "최종 업데이트: 2026년 11월 22일",
     "legal.notice.privacy":
       "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
     "legal.notice.terms":
@@ -1298,7 +1298,7 @@
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
     "meta.privacy.description":
       "La politique de confidentialité du site officiel et de l'application NIARIM.",
-    "legal.updated": "Dernière mise à jour : 18 novembre 2026",
+    "legal.updated": "Dernière mise à jour : 22 novembre 2026",
     "legal.notice.privacy":
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
     "legal.notice.terms":
@@ -1644,7 +1644,7 @@
     "meta.privacy.title": "Política de privacidad | NIARIM",
     "meta.privacy.description":
       "La política de privacidad del sitio oficial y la app de NIARIM.",
-    "legal.updated": "Última actualización: 18 de noviembre de 2026",
+    "legal.updated": "Última actualización: 22 de noviembre de 2026",
     "legal.notice.privacy":
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
     "legal.notice.terms":

@@ -68,7 +68,7 @@
         "タグは投稿者だけでなく誰でも追加・削除できます。投稿者は大事なタグをロックして、ほかの人が削除できないようにすることも可能です。タグをタップすれば、そのタグを持つ作品だけに絞り込んで探せます。",
       "communityPage.advanced.follow.title": "フォローとリポスト",
       "communityPage.advanced.follow.body":
-        "気に入った作者は「フォロー」できます。「フォロー中」タブに切り替えると、その作者の新着だけをまとめて追いかけられます。他の人の作品は「リポスト」で紹介でき、フォロー中の作者が誰かの作品をリポストすると、その作品も「○○さんがリポスト」と表示されて「フォロー中」タブに並びます。フォロー中のユーザーとブックマークした作品の一覧は、本人だけが閲覧できます。フォロワーの氏名・表示名や一覧は表示せず、フォロー数とフォロワー数を表示します。フォロー、ブックマークまたはリポストを行っても、相手にその操作を知らせる個別通知は送信されません。",
+        "気に入った作者は「フォロー」できます。「フォロー中」タブに切り替えると、その作者の新着だけをまとめて追いかけられます。他の人の作品は「リポスト」で紹介でき、フォロー中の作者が誰かの作品をリポストすると、その作品も「○○さんがリポスト」と表示されて「フォロー中」タブに並びます。フォロー中のユーザー、フォロワー、ブックマークした作品の一覧は、本人だけが閲覧できます。他のユーザーには、フォロー数とフォロワー数だけを表示します。フォロー、ブックマークまたはリポストを行っても、相手にその操作を知らせる個別通知は送信されません。",
       "communityPage.advanced.preview.title":
         "フローティングプレビュー・作品詳細",
       "communityPage.advanced.preview.body":
@@ -136,7 +136,7 @@
         "Tags aren't just for the poster — anyone can add or remove them. Posters can lock important tags so others can't delete them. Tap a tag to narrow the list down to works that share it.",
       "communityPage.advanced.follow.title": "Follows and reposts",
       "communityPage.advanced.follow.body":
-        "You can follow the creators you like. Switch to the \"Following\" tab to catch up on just their new work. You can share other people’s work with \"Repost\", and when someone you follow reposts a work it appears in your Following tab too, labelled \"Reposted by …\". Only you can view the lists of users you follow and works you have bookmarked. Follower identities and lists are hidden. Following and follower counts are displayed. Following, bookmarking, or reposting does not send the other user an individual notification about that action.",
+        "You can follow the creators you like. Switch to the \"Following\" tab to catch up on just their new work. You can share other people’s work with \"Repost\", and when someone you follow reposts a work it appears in your Following tab too, labelled \"Reposted by …\". Only you can view the lists of users you follow, your followers, and works you have bookmarked. Other users see only your following and follower counts. Following, bookmarking, or reposting does not send the other user an individual notification about that action.",
       "communityPage.advanced.preview.title": "Floating preview & work details",
       "communityPage.advanced.preview.body":
         'Tapping a work card doesn\'t jump straight to another screen. A small preview window appears in the corner, letting the video keep playing while you browse elsewhere. Drag it around or resize it freely. Tap "Details" to see the full work-detail screen with post date, author, tags, and bookmark count.',
@@ -201,7 +201,7 @@
         "标签不仅限于投稿者，任何人都可以添加或删除。投稿者可以锁定重要标签，防止他人删除。点击标签即可只筛选出带有该标签的作品。",
       "communityPage.advanced.follow.title": "关注与转发",
       "communityPage.advanced.follow.body":
-        "可以关注喜欢的作者。切换到“关注中”标签，即可只追看该作者的新作品。他人的作品可通过“转发”介绍出去；关注的作者转发了某个作品时，该作品也会标注“○○转发”并出现在“关注中”标签中。仅本人可查看关注的用户列表和已收藏的作品列表。不显示粉丝身份和粉丝列表，仅显示关注数和粉丝数。关注、收藏或转发时，系统不会向对方发送有关该操作的单独通知。",
+        "可以关注喜欢的作者。切换到“关注中”标签，即可只追看该作者的新作品。他人的作品可通过“转发”介绍出去；关注的作者转发了某个作品时，该作品也会标注“○○转发”并出现在“关注中”标签中。仅本人可查看关注的用户列表、粉丝列表和已收藏的作品列表。其他用户只能看到关注数和粉丝数。关注、收藏或转发时，系统不会向对方发送有关该操作的单独通知。",
       "communityPage.advanced.preview.title": "悬浮预览与作品详情",
       "communityPage.advanced.preview.body":
         "点击作品卡片不会立即跳转到其他画面。屏幕角落会出现一个小型预览窗口，让视频继续播放的同时可以浏览其他画面。可自由拖动、调整大小。点击“查看详情”即可看到汇总了投稿日期、投稿者、标签、收藏数等信息的作品详情画面。",
@@ -266,7 +266,7 @@
         "標籤不僅限於投稿者，任何人都可以新增或刪除。投稿者可以鎖定重要標籤，防止其他人刪除。點擊標籤即可只篩選出帶有該標籤的作品。",
       "communityPage.advanced.follow.title": "追蹤與轉發",
       "communityPage.advanced.follow.body":
-        "可以追蹤喜歡的作者。切換到「追蹤中」分頁，即可只追看該作者的新作品。他人的作品可透過「轉發」介紹出去；追蹤的作者轉發了某個作品時，該作品也會標註「○○轉發」並出現在「追蹤中」分頁中。僅本人可查看追蹤的使用者清單與已收藏的作品清單。不顯示粉絲身分與粉絲清單，僅顯示追蹤數與粉絲數。追蹤、收藏或轉發時，系統不會向對方傳送有關該操作的個別通知。",
+        "可以追蹤喜歡的作者。切換到「追蹤中」分頁，即可只追看該作者的新作品。他人的作品可透過「轉發」介紹出去；追蹤的作者轉發了某個作品時，該作品也會標註「○○轉發」並出現在「追蹤中」分頁中。僅本人可查看追蹤的使用者清單、粉絲清單與已收藏的作品清單。其他使用者僅能看到追蹤數與粉絲數。追蹤、收藏或轉發時，系統不會向對方傳送有關該操作的個別通知。",
       "communityPage.advanced.preview.title": "浮動預覽與作品詳情",
       "communityPage.advanced.preview.body":
         "點擊作品卡片不會立即跳轉到其他畫面。螢幕角落會出現一個小型預覽視窗，讓影片繼續播放的同時可以瀏覽其他畫面。可自由拖曳、調整大小。點擊「查看詳情」即可看到彙整了投稿日期、投稿者、標籤、收藏數等資訊的作品詳情畫面。",
@@ -331,7 +331,7 @@
         "태그는 투고자뿐만 아니라 누구나 추가·삭제할 수 있습니다. 투고자는 중요한 태그를 잠가 다른 사람이 삭제하지 못하게 할 수도 있습니다. 태그를 탭하면 해당 태그를 가진 작품만 좁혀서 찾을 수 있습니다.",
       "communityPage.advanced.follow.title": "팔로우와 리포스트",
       "communityPage.advanced.follow.body":
-        "마음에 드는 작가를 팔로우할 수 있습니다. 「팔로잉」 탭으로 전환하면 그 작가의 새 작품만 모아서 볼 수 있습니다. 다른 사람의 작품은 「리포스트」로 소개할 수 있으며, 팔로우 중인 작가가 어떤 작품을 리포스트하면 그 작품도 「○○님이 리포스트」로 표시되어 「팔로잉」 탭에 함께 나타납니다. 팔로잉 목록과 북마크한 작품 목록은 본인만 볼 수 있습니다. 팔로워의 신원과 목록은 표시하지 않으며, 팔로잉 수와 팔로워 수를 표시합니다. 팔로우, 북마크 또는 리포스트를 해도 상대방에게 해당 작업에 대한 개별 알림이 전송되지 않습니다.",
+        "마음에 드는 작가를 팔로우할 수 있습니다. 「팔로잉」 탭으로 전환하면 그 작가의 새 작품만 모아서 볼 수 있습니다. 다른 사람의 작품은 「리포스트」로 소개할 수 있으며, 팔로우 중인 작가가 어떤 작품을 리포스트하면 그 작품도 「○○님이 리포스트」로 표시되어 「팔로잉」 탭에 함께 나타납니다. 팔로잉 목록, 팔로워 목록, 북마크한 작품 목록은 본인만 볼 수 있습니다. 다른 사용자에게는 팔로잉 수와 팔로워 수만 표시합니다. 팔로우, 북마크 또는 리포스트를 해도 상대방에게 해당 작업에 대한 개별 알림이 전송되지 않습니다.",
       "communityPage.advanced.preview.title": "플로팅 미리보기·작품 상세",
       "communityPage.advanced.preview.body":
         "작품 카드를 탭해도 바로 다른 화면으로 전환되지 않습니다. 화면 구석에 작은 미리보기 창이 표시되어, 영상을 재생한 채로 다른 화면을 둘러볼 수 있습니다. 드래그로 이동하거나 자유롭게 크기를 조절할 수 있습니다. 「상세보기」를 탭하면 게시일·작가·태그·북마크 수 등을 정리한 작품 상세 화면을 확인할 수 있습니다.",
@@ -401,7 +401,7 @@
         "Les tags ne sont pas réservés à l'auteur : tout le monde peut en ajouter ou en supprimer. L'auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
       "communityPage.advanced.follow.title": "Abonnements et republications",
       "communityPage.advanced.follow.body":
-        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vous seul pouvez consulter les listes des personnes que vous suivez et des œuvres que vous avez mises en favori. L’identité et la liste de vos abonnés sont masquées. Le nombre d’abonnements et d’abonnés est affiché. Suivre une personne, mettre une œuvre en favori ou la repartager ne déclenche aucune notification individuelle à l’autre utilisateur concernant cette action.",
+        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vous seul pouvez consulter les listes des personnes que vous suivez, de vos abonnés et des œuvres que vous avez mises en favori. Les autres utilisateurs ne voient que le nombre d’abonnements et d’abonnés. Suivre une personne, mettre une œuvre en favori ou la repartager ne déclenche aucune notification individuelle à l’autre utilisateur concernant cette action.",
       "communityPage.advanced.preview.title":
         "Aperçu flottant et détails de l'œuvre",
       "communityPage.advanced.preview.body":
@@ -470,7 +470,7 @@
         "Las etiquetas no son solo cosa del autor: cualquiera puede añadirlas o eliminarlas. El autor puede bloquear las etiquetas importantes para que otros no puedan borrarlas. Toca una etiqueta para filtrar solo las obras que la comparten.",
       "communityPage.advanced.follow.title": "Seguimientos y republicaciones",
       "communityPage.advanced.follow.body":
-        "Puedes seguir a los autores que te gusten. En la pestaña «Siguiendo» verás solo sus novedades. Con «Republicar» puedes dar a conocer la obra de otra persona: si un autor al que sigues republica una obra, esta también aparece en tu pestaña Siguiendo con la nota «Republicado por…». Solo tú puedes ver las listas de usuarios a los que sigues y de obras que has guardado. Las identidades y la lista de seguidores se mantienen ocultas. Se muestran las cifras de seguidos y seguidores. Seguir, guardar o republicar no envía al otro usuario una notificación individual sobre esa acción.",
+        "Puedes seguir a los autores que te gusten. En la pestaña «Siguiendo» verás solo sus novedades. Con «Republicar» puedes dar a conocer la obra de otra persona: si un autor al que sigues republica una obra, esta también aparece en tu pestaña Siguiendo con la nota «Republicado por…». Solo tú puedes ver las listas de usuarios a los que sigues, de tus seguidores y de obras que has guardado. Los demás usuarios solo ven las cifras de seguidos y seguidores. Seguir, guardar o republicar no envía al otro usuario una notificación individual sobre esa acción.",
       "communityPage.advanced.preview.title":
         "Vista previa flotante y detalles de la obra",
       "communityPage.advanced.preview.body":
