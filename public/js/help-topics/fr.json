@@ -140,7 +140,7 @@
   "help.entry51.title": "Marque de fin",
   "help.entry51.desc": "La marque de fin NIARIM de cinq secondes est ajoutée aux exports MP4, WebM et AVI. Vous pouvez la masquer par projet tant que l’avantage est actif. Le réglage est conservé après expiration. Les GIF sont exclus.",
   "help.entry59.title": "Export vidéo (MP4, WebM, GIF, AVI)",
-  "help.entry59.desc": "Exportez en MP4, WebM, GIF ou AVI. L’export intégral d’un projet de plus de 90 secondes nécessite Premium ou l’avantage de durée étendue. Vous pouvez exporter les 90 premières secondes. Changer la cadence d’export conserve la durée de lecture. Vérifiez la durée et le logo final avant l’export.",
+  "help.entry59.desc": "Exportez en MP4, WebM, GIF ou AVI. L’export intégral d’un projet de plus de 90 secondes nécessite Premium ou l’avantage de durée étendue. Vous pouvez exporter les 90 premières secondes. Changer la cadence d’export conserve la durée de lecture. Vérifiez la durée et le logo final avant l’export. Les sons de la chronologie et le son des vidéos de matériel sont inclus dans les fichiers MP4, WebM et AVI (le GIF n’a pas de son).",
   "help.entry60.title": "Écran d’export",
   "help.entry60.desc": "Dans « Préréglage », choisissez « Standard », « Haute qualité » ou « Personnalisé ». Le mode « Personnalisé » permet de régler les images par seconde (i/s). Affiche la progression pendant l’export d’une vidéo ou d’une image, et permet d’annuler en cours de route. Le temps nécessaire dépend des performances de l’appareil. Dans Œuvres, sur l’écran d’accueil, recherchez le fichier par le nom du projet. Choisissez Partager pour l’enregistrer dans Photos ou l’ouvrir dans une autre application.",
   "help.entry61.title": "Place des œuvres",

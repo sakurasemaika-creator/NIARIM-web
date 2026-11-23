@@ -140,7 +140,7 @@
   "help.entry51.title": "Marca final",
   "help.entry51.desc": "La marca final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Puedes ocultarla por proyecto mientras el beneficio esté activo. El ajuste se conserva al caducar. Los GIF no la incluyen.",
   "help.entry59.title": "Exportación de vídeo (MP4, WebM, GIF, AVI)",
-  "help.entry59.desc": "Exporta en MP4, WebM, GIF o AVI. Para exportar por completo un proyecto de más de 90 segundos necesitas Premium o la ventaja de duración ampliada. Puedes exportar los primeros 90 segundos. Cambiar los FPS de exportación conserva el tiempo de reproducción. Comprueba la duración y el logo antes de exportar.",
+  "help.entry59.desc": "Exporta en MP4, WebM, GIF o AVI. Para exportar por completo un proyecto de más de 90 segundos necesitas Premium o la ventaja de duración ampliada. Puedes exportar los primeros 90 segundos. Cambiar los FPS de exportación conserva el tiempo de reproducción. Comprueba la duración y el logo antes de exportar. Los sonidos de la línea de tiempo y el sonido de los vídeos de material se incluyen en MP4, WebM y AVI (GIF no tiene sonido).",
   "help.entry60.title": "Pantalla de exportación",
   "help.entry60.desc": "En «Preajuste», elige «Estándar», «Alta calidad» o «Personalizado». Con «Personalizado» puedes ajustar los fotogramas por segundo (FPS). Muestra el progreso al exportar un vídeo o una imagen, y permite cancelar a mitad de camino. El tiempo que tarda depende del rendimiento del dispositivo. Busca el archivo por el nombre del proyecto en Obras, en la pantalla de inicio. Elige Compartir para guardarlo en Fotos o abrirlo en otra aplicación.",
   "help.entry61.title": "Plaza de Obras",

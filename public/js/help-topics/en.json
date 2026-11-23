@@ -140,7 +140,7 @@
   "help.entry51.title": "End Mark",
   "help.entry51.desc": "The NIARIM end mark is a five-second logo appended to MP4, WebM, and AVI exports. While the benefit is active, you can show or hide it per project. Project preferences are kept after expiry. GIFs do not include it.",
   "help.entry59.title": "Video Export (MP4, WebM, GIF, AVI)",
-  "help.entry59.desc": "Export in MP4, WebM, GIF, or AVI. Exporting all of a project longer than 90 seconds requires Premium or the extended duration benefit. You can export the first 90 seconds. Changing the export FPS preserves the original play time. Check the main video duration and end mark before exporting.",
+  "help.entry59.desc": "Export in MP4, WebM, GIF, or AVI. Exporting all of a project longer than 90 seconds requires Premium or the extended duration benefit. You can export the first 90 seconds. Changing the export FPS preserves the original play time. Check the main video duration and end mark before exporting. Sounds on the timeline and the sound of video materials go into MP4, WebM and AVI (GIF has no sound).",
   "help.entry60.title": "Export screen",
   "help.entry60.desc": "Choose “Standard”, “High Quality”, or “Custom” under “Preset”. With “Custom”, you can adjust the FPS. Shows progress while exporting a video or image, and lets you cancel partway through. How long it takes depends on your device’s performance. Find your export by its project name in Works on the home screen. Choose Share to save it to Photos or open it in another app.",
   "help.entry61.title": "Work Plaza",
