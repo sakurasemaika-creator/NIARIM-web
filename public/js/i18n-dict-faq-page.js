@@ -34,7 +34,7 @@
         'You can freely share your exported video files through your device or other apps. You can also publish your work to the <a href="/community/">Work Plaza</a> by posting it to YouTube directly from within the NIARIM app.',
       "faq.q8": "What can I do with the Premium plan?",
       "faq.a8.html":
-        'Premium removes ads and adds the option to hide the official end card, a custom watermark, a tone curve, and levels adjustment. See the <a href="/premium/">Premium plan page</a> for details.',
+        'Premium removes ads and adds the option to hide the official end mark, a custom watermark, a tone curve, and levels adjustment. See the <a href="/premium/">Premium plan page</a> for details.',
       "faq.q9":
         "If I publish my work to the Work Plaza, can anyone see it on YouTube too?",
       "faq.a9":
@@ -73,7 +73,7 @@
         '내보낸 영상 파일은 사용 중인 기기나 다른 앱을 통해 자유롭게 공유하실 수 있습니다. 또한 NIARIM 앱 안에서 바로 YouTube에 작품을 업로드하여 <a href="/community/">「NIARIM 작품 광장」</a>에 공개할 수도 있습니다.',
       "faq.q8": "프리미엄 플랜으로 무엇을 할 수 있나요?",
       "faq.a8.html":
-        '광고 비표시, 공식 엔드 카드 숨기기, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
+        '광고 비표시, 공식 엔드마크 숨기기, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
       "faq.q9":
         "작품을 「NIARIM 작품 광장」에 공개하면 YouTube에서도 누구나 볼 수 있게 되나요?",
       "faq.a9":
@@ -87,7 +87,7 @@
         "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d'autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Place des œuvres »</a> en la postant directement sur YouTube depuis l'application NIARIM.",
       "faq.q8": "Que puis-je faire avec l'offre Premium ?",
       "faq.a8.html":
-        'Premium supprime les publicités et ajoute la possibilité de masquer la carte de fin officielle, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
+        'Premium supprime les publicités et ajoute la possibilité de masquer la marque de fin officielle, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
       "faq.q9":
         "Si je publie mon œuvre dans la Place des œuvres, tout le monde peut-il la voir aussi sur YouTube ?",
       "faq.a9":
@@ -100,7 +100,7 @@
         'Puedes compartir libremente tus archivos de video exportados a través de tu dispositivo u otras apps. También puedes publicar tu obra en la <a href="/community/">«Plaza de Obras»</a> subiéndola directamente a YouTube desde la app NIARIM.',
       "faq.q8": "¿Qué puedo hacer con el plan Premium?",
       "faq.a8.html":
-        'Premium elimina los anuncios y añade la opción de ocultar la tarjeta final oficial, marca de agua personalizada, curva de tonos y ajuste de niveles. Consulta la <a href="/premium/">página de Premium</a> para más detalles.',
+        'Premium elimina los anuncios y añade la opción de ocultar la marca final oficial, marca de agua personalizada, curva de tonos y ajuste de niveles. Consulta la <a href="/premium/">página de Premium</a> para más detalles.',
       "faq.q9":
         "Si publico mi obra en la Plaza de Obras, ¿podrá verla cualquiera también en YouTube?",
       "faq.a9":

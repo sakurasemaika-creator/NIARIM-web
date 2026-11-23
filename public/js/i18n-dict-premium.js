@@ -91,7 +91,7 @@
       "premiumPage.free.item2": "Video export (up to 1920×1920)",
       "premiumPage.free.item3": "Ads are shown",
       "premiumPage.free.item4":
-        "The official NIARIM end card is automatically added on export (cannot be edited or removed)",
+        "The official NIARIM end mark is automatically added on export (cannot be edited or removed)",
       "premiumPage.free.item5": "Create and export up to 90 seconds for free. For longer projects, you can export the first 90 seconds.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Monthly plan",
@@ -278,7 +278,7 @@
       "premiumPage.free.item2": "영상 내보내기（최대 1920×1920）",
       "premiumPage.free.item3": "광고가 표시됩니다",
       "premiumPage.free.item4":
-        "내보내기 시 NIARIM 공식 엔드 카드가 자동으로 추가됩니다（편집·삭제 불가）",
+        "내보내기 시 NIARIM 공식 엔드마크가 자동으로 추가됩니다（편집·삭제 불가）",
       "premiumPage.free.item5": "무료로 최대 90초까지 만들고 내보낼 수 있습니다. 긴 작품은 처음 90초를 내보낼 수 있습니다.",
       "premiumPage.premium.title": "프리미엄",
       "premiumPage.premium.monthly.label": "월간 플랜",

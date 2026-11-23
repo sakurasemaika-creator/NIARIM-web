@@ -100,7 +100,19 @@ function collectPageKeys(page, html, dictionary) {
   for (const file of new Set(runtimeFiles)) {
     const filePath = path.join(jsDir, file);
     if (!fs.existsSync(filePath)) continue;
-    addAttributeKeys(readScript(file), keys);
+    const source = readScript(file);
+    addAttributeKeys(source, keys);
+    // Keys a script picks at runtime (`var key = open ? "common.menuClose" :
+    // "common.menuOpen"; translate(lang, key)`) are not written next to the
+    // call. Any string literal in the script that names a dictionary key is
+    // carried, so such labels are not left in Japanese on other languages.
+    for (const match of source.matchAll(
+      /["']([A-Za-z][\w-]*(?:\.[\w-]+)+)["']/g,
+    )) {
+      if (Object.prototype.hasOwnProperty.call(dictionary.ja || {}, match[1])) {
+        keys.add(match[1]);
+      }
+    }
   }
 
   keys.add(`meta.${page}.title`);

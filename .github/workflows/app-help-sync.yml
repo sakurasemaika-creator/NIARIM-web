@@ -8,6 +8,11 @@ on:
       - "tools/app-help-topic-map.json"
       - "public/help/index.html"
       - "public/js/help-topics/**"
+  # The App's Help text changes in the App repository, which does not run this
+  # check. Check every day as well, so an App change that leaves the website
+  # behind fails here instead of going unnoticed.
+  schedule:
+    - cron: "41 2 * * *"
   workflow_dispatch:
 
 permissions:

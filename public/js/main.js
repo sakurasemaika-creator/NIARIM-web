@@ -487,7 +487,7 @@
       // 示す（再生位置を貫く縦線は存在しない）。
       '<span class="fd-frame-cursor is-error" aria-hidden="true"></span>' +
       "</div></div>" +
-      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドカードトラック</span>' +
+      '<div class="fd-timeline-row fd-end-card-row"><small data-i18n="fd.trackEnd">終</small><span data-i18n="fd.endCardTrack">エンドマークトラック</span>' +
       icon("ic-lock", "fd-lock-mark") +
       "</div>" +
       "</div>"
