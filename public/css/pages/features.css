@@ -219,7 +219,9 @@
 #export .export-plan-link {
   display: inline-flex;
   align-items: center;
+  /* 44px both ways: a one-word link ("Guide") was 32-43px wide. */
   min-height: 44px;
+  min-width: 44px;
   color: var(--color-text);
   text-decoration: underline;
   text-underline-offset: 0.2em;

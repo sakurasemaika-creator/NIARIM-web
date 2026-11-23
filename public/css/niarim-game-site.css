@@ -996,17 +996,13 @@ html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li):not(.nr-hero-wordmark) {
   }
 }
 
-/* French and Spanish labels are long: tighten the gaps so the row fits more
-   often, and keep two rows inside the 68px header when it still wraps
-   (44px links made two rows 92px tall and pushed them past the header). */
+/* French and Spanish labels are long: tighten the gaps so the whole row
+   fits on one line from 1181px (checked in all seven languages at
+   1181-1280px), keeping the 44px touch target of every link. */
 @media (min-width: 1181px) and (max-width: 1439px) {
   html:is(:lang(fr), :lang(es)) body .site-header .main-nav > ul {
     column-gap: 10px;
     row-gap: 2px;
-  }
-
-  html:is(:lang(fr), :lang(es)) body .site-header .main-nav > ul > li > a {
-    min-height: 30px;
   }
 }
 
