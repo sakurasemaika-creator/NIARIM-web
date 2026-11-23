@@ -21,7 +21,40 @@
     return m ? "-v" + m[1] : "";
   };
   const canonical = (name) => String(name || "").replace(/-v[234]$/, "");
-  function desktopPicture(name, variant, alt) {
+  // Screen names are looked up in the page dictionary, written out in full so
+  // the page bundle generator carries every key (and the device name).
+  const screenKeys = {
+    canvas: "refresh.screen.canvas",
+    timeline: "refresh.screen.timeline",
+    layers: "refresh.screen.layers",
+    "onion-skin": "refresh.screen.onion-skin",
+    "audio-editor": "refresh.screen.audio-editor",
+    "save-tree": "refresh.screen.save-tree",
+    export: "refresh.screen.export",
+    workspace: "refresh.screen.workspace",
+    widget: "refresh.screen.widget",
+  };
+  const desktopKey = "refresh.screen.pcDevice";
+  // The alt text of a PC capture in the page's language ("Canvas · PC / DeX").
+  // It was written in Japanese for every language.
+  function desktopAlt(name) {
+    const lang = document.documentElement.lang || "ja";
+    const i18n = window.NIARIM_I18N;
+    const translate = (key) => {
+      const value = i18n && i18n.translate(lang, key);
+      return value && value !== key ? value : "";
+    };
+    const screen = translate(screenKeys[name]) || name;
+    const device = translate(desktopKey) || "PC / DeX";
+    return screen + " · " + device;
+  }
+  function localizeDesktopAlts() {
+    document.querySelectorAll("img[data-pc-capture-alt]").forEach((img) => {
+      img.alt = desktopAlt(img.dataset.pcCaptureAlt);
+    });
+  }
+  document.addEventListener("niarim:langchange", localizeDesktopAlts);
+  function desktopPicture(name, variant) {
     const p = document.createElement("picture");
     const base = root + "pc-" + name + variant;
     const source = document.createElement("source");
@@ -29,7 +62,8 @@
     source.srcset = base + ".avif";
     const img = document.createElement("img");
     img.src = base + ".webp";
-    img.alt = alt;
+    img.dataset.pcCaptureAlt = name;
+    img.alt = desktopAlt(name);
     img.width = 1440;
     img.height = 900;
     img.loading = "lazy";
@@ -57,13 +91,7 @@
     pc.className = "nr-shot nr-shot--pc";
     pc.setAttribute("data-capture-pc", name);
     pc.style.setProperty("--capture-accent", accent[name]);
-    pc.append(
-      desktopPicture(
-        name,
-        variantFor(raw),
-        "NIARIM PCモード版 " + name + " 画面",
-      ),
-    );
+    pc.append(desktopPicture(name, variantFor(raw)));
     duo.append(pc);
     const mobile = label("SMARTPHONE");
     const desktop = label("PC / DEX");
@@ -86,11 +114,7 @@
     pc.className = "feature-diagram feature-diagram--real feature-diagram--pc";
     pc.setAttribute("data-capture-theme", name);
     pc.style.setProperty("--capture-frame", accent[name]);
-    const picture = desktopPicture(
-      name,
-      variantFor(raw),
-      "NIARIM PCモード版 " + name + " 画面",
-    );
+    const picture = desktopPicture(name, variantFor(raw));
     picture.className = "real-app-capture";
     pc.append(picture);
     duo.append(pc);
@@ -112,11 +136,7 @@
     duo.className = "nr-feature-duo nr-scroller-duo";
     picture.before(duo);
     duo.append(picture);
-    const pc = desktopPicture(
-      match[1],
-      match[2] || "",
-      "NIARIM PCモード版 " + match[1] + " 画面",
-    );
+    const pc = desktopPicture(match[1], match[2] || "");
     pc.className = "real-app-capture real-app-capture--pc";
     duo.append(pc);
   }

@@ -48,3 +48,36 @@ test("every page bundle names the menu button in each language", () => {
     }
   }
 });
+
+// The PC captures paired with the phone ones on the top page and /features/
+// get their alt text ("Canvas · PC / DeX") from the page dictionary. It was a
+// Japanese string ("NIARIM PCモード版 canvas 画面") in every language.
+test("PC capture alt text is localized on the pages that pair captures", () => {
+  const source = fs.readFileSync(
+    path.join(root, "public", "js", "pc-paired-captures.js"),
+    "utf8",
+  );
+  assert.doesNotMatch(source, /[぀-ヿ一-鿿]/);
+  const screens = [
+    "canvas",
+    "timeline",
+    "layers",
+    "onion-skin",
+    "audio-editor",
+    "save-tree",
+    "export",
+    "workspace",
+    "widget",
+  ];
+  for (const page of ["home", "features"]) {
+    const dict = bundleOf(page);
+    for (const lang of ["ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"]) {
+      for (const key of [
+        "refresh.screen.pcDevice",
+        ...screens.map((screen) => "refresh.screen." + screen),
+      ]) {
+        assert.ok(dict[lang]?.[key], `${page}: ${lang} ${key}`);
+      }
+    }
+  }
+});

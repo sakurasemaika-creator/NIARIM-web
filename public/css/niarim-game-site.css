@@ -983,3 +983,12 @@ html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li):not(.nr-hero-wordmark) {
     min-height: 30px;
   }
 }
+
+/* Japanese has nine items, too: at 1181-1279px the last one (お問い合わせ)
+   alone dropped to a second row and the header grew from 68px to 93px.
+   A slightly smaller gap keeps the whole row on one line. */
+@media (min-width: 1181px) and (max-width: 1279px) {
+  html:lang(ja) body .site-header .main-nav > ul {
+    column-gap: 12px;
+  }
+}

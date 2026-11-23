@@ -99,6 +99,24 @@
     grids.forEach(function (grid) {
       observer.observe(grid);
     });
+
+    // Items put into a grid after it was revealed (the community cards
+    // re-rendered when a ranking tab is chosen, an FAQ entry added by a
+    // script) would otherwise stay at opacity 0: the reveal above only marks
+    // the children present when the grid first came into view.
+    if ("MutationObserver" in window) {
+      var added = new MutationObserver(function (records) {
+        records.forEach(function (record) {
+          if (!record.target.classList.contains("is-visible")) return;
+          record.addedNodes.forEach(function (node) {
+            if (node.nodeType === 1) node.classList.add("is-visible");
+          });
+        });
+      });
+      grids.forEach(function (grid) {
+        added.observe(grid, { childList: true });
+      });
+    }
   }
 
   function initFeatureNavSpy() {

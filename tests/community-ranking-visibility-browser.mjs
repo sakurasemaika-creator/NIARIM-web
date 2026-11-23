@@ -78,6 +78,13 @@ try {
     ["ブックマーク: 100", "リポスト: 5", "期間内ブックマーク: 10"],
   );
   assert.equal(checks, 0, "A ranking fetch must not trigger a playback check");
+  // Cards rendered by a tab switch are shown, not left at the reveal
+  // animation's opacity 0 (only the first render used to be revealed).
+  await page.waitForFunction(() =>
+    [
+      ...document.querySelectorAll("[data-community-gallery] .community-card"),
+    ].every((card) => getComputedStyle(card).opacity === "1"),
+  );
 
   // An already-displayed work becomes private. Resuming fetches an entirely
   // new public-only order, with no placeholder and no extra visibility request.
