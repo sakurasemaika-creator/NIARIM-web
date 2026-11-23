@@ -42,7 +42,7 @@
       unavailable:
         "We could not load the ranking for this period. Please try again later.",
       periodCount: "Bookmarks this period",
-      error: "Couldn't load published works. Please try again later.",
+      error: "Couldn’t load published works. Please try again later.",
       hidden: "This work is no longer public.",
       count: "Bookmarks",
       reposts: "Reposts",

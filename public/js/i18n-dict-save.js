@@ -120,23 +120,23 @@
       "featuresPage.nav.save": "Enregistrer et partager",
       "featuresPage.save.title": "Save & Share | Gestion des données",
       "featuresPage.save.lead":
-        "Protégez votre travail, faites-le grandir, et emportez-le sur un autre appareil — un système d'enregistrement flexible.",
+        "Protégez votre travail, faites-le grandir, et emportez-le sur un autre appareil — un système d’enregistrement flexible.",
       "featuresPage.save.item1.title": "Sauvegarde automatique",
       "featuresPage.save.item1.body":
         "Passez des sauvegardes automatiques aux sauvegardes manuelles dans la liste. Si le fichier du projet est endommagé, NIARIM le récupère depuis la sauvegarde automatique lisible la plus récente.",
       "featuresPage.save.item2.title": "Emplacements de sauvegarde",
       "featuresPage.save.item2.body":
-        "Enregistrez dans un nombre fixe d'emplacements et rappelez-les quand vous le souhaitez.",
+        "Enregistrez dans un nombre fixe d’emplacements et rappelez-les quand vous le souhaitez.",
       "featuresPage.save.item3.title": "Arbre de sauvegardes",
       "featuresPage.save.item3.body":
-        "Conservez l'historique de votre travail sous forme d'arbre ramifié, sans limite du nombre d'enregistrements.",
+        "Conservez l’historique de votre travail sous forme d’arbre ramifié, sans limite du nombre d’enregistrements.",
       "featuresPage.save.item4.title": "Partager votre œuvre (.niashare)",
       "featuresPage.save.item4.body":
-        "Un format de fichier de partage qui embarque aussi les éléments et polices utilisés, pour s'ouvrir tel quel sur un autre appareil.",
+        "Un format de fichier de partage qui embarque aussi les éléments et polices utilisés, pour s’ouvrir tel quel sur un autre appareil.",
       "featuresPage.save.item5.title":
         "Transférer votre configuration (.niatra)",
       "featuresPage.save.item5.body":
-        "Regroupez uniquement les éléments que vous choisissez — réglages, pinceaux, trames, tampons, préréglages de remplissage automatique, thèmes, palettes (sélecteur de couleurs et pixel art) — pour les transférer vers un autre appareil. Vous pouvez aussi choisir d'inclure des projets en cours.",
+        "Regroupez uniquement les éléments que vous choisissez — réglages, pinceaux, trames, tampons, préréglages de remplissage automatique, thèmes, palettes (sélecteur de couleurs et pixel art) — pour les transférer vers un autre appareil. Vous pouvez aussi choisir d’inclure des projets en cours.",
     },
     es: {
       "featuresPage.nav.save": "Guardar y compartir",

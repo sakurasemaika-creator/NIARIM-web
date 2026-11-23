@@ -210,7 +210,10 @@ try {
             const missing = [
               ...new Set(
                 [...node.textContent].filter(
-                  (c) => c.trim() && !families[family].has(c.codePointAt(0)),
+                  (c) =>
+                    c.trim() &&
+                    !/\p{Default_Ignorable_Code_Point}/u.test(c) &&
+                    !families[family].has(c.codePointAt(0)),
                 ),
               ),
             ].join("");

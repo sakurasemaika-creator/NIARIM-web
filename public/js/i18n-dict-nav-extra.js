@@ -49,12 +49,12 @@
       "nav.help": "Guide",
       "meta.about.title": "About NIARIM | NIARIM",
       "meta.about.description":
-        "Learn about NIARIM's concept, supported environments, and the features that set it apart.",
+        "Learn about NIARIM’s concept, supported environments, and the features that set it apart.",
       "meta.help.title": "Guide | NIARIM",
       "meta.help.description":
-        "Search and browse the same content as the app's built-in Help screen, right from the web.",
+        "Search and browse the same content as the app’s built-in Help screen, right from the web.",
       "help.lead":
-        "This mirrors the app's built-in Help screen. Type a keyword to search.",
+        "This mirrors the app’s built-in Help screen. Type a keyword to search.",
       "help.backToTop": "Back to categories",
     },
     "zh-Hans": {
@@ -156,9 +156,9 @@
         "Découvrez le concept de NIARIM, les environnements pris en charge et les fonctionnalités qui le distinguent.",
       "meta.help.title": "Guide | NIARIM",
       "meta.help.description":
-        "Recherchez et parcourez depuis le web le même contenu que l'écran d'aide intégré à l'application.",
+        "Recherchez et parcourez depuis le web le même contenu que l’écran d’aide intégré à l’application.",
       "help.lead":
-        "Ce contenu reprend l'écran d'aide intégré à l'application. Saisissez un mot-clé pour rechercher.",
+        "Ce contenu reprend l’écran d’aide intégré à l’application. Saisissez un mot-clé pour rechercher.",
       "help.backToTop": "Retour aux catégories",
     },
     es: {

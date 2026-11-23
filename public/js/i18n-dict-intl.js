@@ -975,10 +975,10 @@
     "common.menuClose": "Fermer le menu",
 
     "common.readMore": "En savoir plus",
-    "common.backHome": "Retour à l'accueil",
+    "common.backHome": "Retour à l’accueil",
 
     "meta.home.title":
-      "NIARIM | Une application de création d'animation : dessiner, animer, raconter",
+      "NIARIM | Une application de création d’animation : dessiner, animer, raconter",
     "meta.home.description":
       "NIARIM est une application de création qui transforme les images que vous dessinez, image par image, en une animation que vous exportez vous-même. Dessin, timeline et calques donnent vie à votre histoire.",
 
@@ -987,21 +987,21 @@
     "hero.title.line2": "Découvrez.",
     "hero.subtitle": "Estomper la frontière entre créateurs et spectateurs.",
     "hero.lead":
-      "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l'animation, en passant par le montage, le son et l'export : terminez votre œuvre dans une seule application.",
+      "NIARIM est une application qui permet de créer une véritable animation dessinée à la main, directement depuis votre smartphone. Dessinez et animez image par image, créez des animations par images clés, ou combinez des images fixes en stop motion. Du dessin à l’animation, en passant par le montage, le son et l’export : terminez votre œuvre dans une seule application.",
     "hero.bridge.html":
-      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Place des œuvres »</a>. Regardez le travail de quelqu'un d'autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
-    "hero.cta.primary": "Télécharger l'application",
+      "Et une fois terminée, retrouvez votre œuvre dans <a href=\"/community/\">la « Place des œuvres »</a>. Regardez le travail de quelqu’un d’autre, et créez le suivant. Des personnes vers les œuvres. Des œuvres vers les personnes.",
+    "hero.cta.primary": "Télécharger l’application",
     "hero.cta.secondary": "Voir les fonctionnalités",
     "hero.note":
       "Veuillez consulter la page Google Play pour les appareils compatibles et la disponibilité.",
 
     "intro.eyebrow": "About NIARIM",
-    "intro.title": "Qu'est-ce que NIARIM",
+    "intro.title": "Qu’est-ce que NIARIM",
     "intro.lead":
-      "Donnez vie, de vos propres mains, à chaque image que vous dessinez. Du premier trait jusqu'à l'animation finale, tout se fait avec vos mains.",
+      "Donnez vie, de vos propres mains, à chaque image que vous dessinez. Du premier trait jusqu’à l’animation finale, tout se fait avec vos mains.",
     "intro.card1.title": "Drawing (Dessin)",
     "intro.card1.body":
-      "Plusieurs pinceaux, ainsi que la couleur, l'opacité, le zoom et le panoramique : chaque étape du dessin est soignée.",
+      "Plusieurs pinceaux, ainsi que la couleur, l’opacité, le zoom et le panoramique : chaque étape du dessin est soignée.",
     "intro.card2.title": "Animation",
     "intro.card2.body":
       "Empilez des images, modifiez-les sur une timeline et prévisualisez le mouvement au fur et à mesure.",
@@ -1012,26 +1012,26 @@
     "features.eyebrow": "Core Features",
     "features.title": "Fonctionnalités principales",
     "features.lead":
-      "Toute fonctionnalité qui nous semblait utile, on l'a ajoutée sans compromis.",
+      "Toute fonctionnalité qui nous semblait utile, on l’a ajoutée sans compromis.",
     "features.drawing.title": "Dessinez exactement comme vous le souhaitez",
     "features.drawing.body":
-      "Passez du stylo G au stylo, à l'aérographe et à un pinceau personnalisable. Ajustez la couleur, la transparence et l'opacité, et zoomez ou déplacez-vous pour les détails.",
+      "Passez du stylo G au stylo, à l’aérographe et à un pinceau personnalisable. Ajustez la couleur, la transparence et l’opacité, et zoomez ou déplacez-vous pour les détails.",
     "features.animation.title":
       "Construisez le mouvement en empilant des images",
     "features.animation.body":
-      "Ajoutez et modifiez des images sur une timeline, et prévisualisez l'animation pendant que vous travaillez.",
+      "Ajoutez et modifiez des images sur une timeline, et prévisualisez l’animation pendant que vous travaillez.",
     "features.editing.title":
       "La liberté de recommencer autant de fois que vous le souhaitez",
     "features.editing.body":
-      "Le remplissage avec tolérance réglable et la gestion par calques séparés vous permettent d'affiner jusqu'à ce que ce soit parfait.",
+      "Le remplissage avec tolérance réglable et la gestion par calques séparés vous permettent d’affiner jusqu’à ce que ce soit parfait.",
     "features.export.title": "Exportez et partagez votre travail",
     "features.export.body":
-      "Exportez jusqu'à une résolution de 1920×1920, avec un rapport d'aspect librement configurable.",
+      "Exportez jusqu’à une résolution de 1920×1920, avec un rapport d’aspect librement configurable.",
     "features.linkAll": "Voir toutes les fonctionnalités",
 
     "screenshots.eyebrow": "App Preview",
-    "screenshots.title": "Aperçu de l'application",
-    "screenshots.placeholder": "Captures d'écran à venir",
+    "screenshots.title": "Aperçu de l’application",
+    "screenshots.placeholder": "Captures d’écran à venir",
 
     "download.title": "Commencez à créer avec NIARIM.",
     "download.body":
@@ -1041,7 +1041,7 @@
 
     "faq.eyebrow": "FAQ",
     "faq.title": "Questions fréquentes",
-    "faq.q1": "Quel type d'application est NIARIM ?",
+    "faq.q1": "Quel type d’application est NIARIM ?",
     "faq.a1":
       "NIARIM est une application mobile permettant de créer une animation à partir de dessins que vous réalisez et animez vous-même.",
     "faq.q2": "Est-ce gratuit ?",
@@ -1050,10 +1050,10 @@
     "faq.q3": "Quels appareils sont compatibles ?",
     "faq.a3":
       "Veuillez consulter la fiche Google Play pour connaître les systèmes et appareils compatibles.",
-    "faq.q4": "Puis-je exporter ce que j'ai créé ?",
+    "faq.q4": "Puis-je exporter ce que j’ai créé ?",
     "faq.a4":
-      "Oui. Vous pouvez exporter votre travail en vidéo, jusqu'à une résolution de 1920×1920, avec un rapport d'aspect librement configurable.",
-    "faq.q5": "Puis-je partager ce que j'ai créé ?",
+      "Oui. Vous pouvez exporter votre travail en vidéo, jusqu’à une résolution de 1920×1920, avec un rapport d’aspect librement configurable.",
+    "faq.q5": "Puis-je partager ce que j’ai créé ?",
     "faq.q6": "Dois-je créer un compte ?",
     "faq.a6":
       "Veuillez vous référer aux spécifications du lancement officiel à ce sujet.",
@@ -1069,26 +1069,26 @@
     "footer.support": "Support",
     "footer.legal": "Legal",
     "footer.privacy": "Politique de confidentialité",
-    "footer.terms": "Conditions d'utilisation",
+    "footer.terms": "Conditions d’utilisation",
     "footer.x": "X (anciennement Twitter)",
     "footer.rights": "Tous droits réservés.",
 
     "contact.eyebrow": "Contact",
     "contact.title": "Nous contacter",
     "contact.lead":
-      "Pour un bug, une demande de fonctionnalité ou une question sur l'utilisation, contactez-nous d'abord sur X.",
-    "contact.channel.title": "Contactez-nous d'abord sur X",
+      "Pour un bug, une demande de fonctionnalité ou une question sur l’utilisation, contactez-nous d’abord sur X.",
+    "contact.channel.title": "Contactez-nous d’abord sur X",
     "contact.channel.body":
-      "Pour un bug, une demande de fonctionnalité ou une question sur l'utilisation, répondez ou envoyez-nous un message direct sur notre compte X officiel.",
+      "Pour un bug, une demande de fonctionnalité ou une question sur l’utilisation, répondez ou envoyez-nous un message direct sur notre compte X officiel.",
     "contact.channel.link": "Nous contacter sur X",
     "contact.personalNote":
-      "Nous ne pouvons pas traiter sur X les demandes impliquant des informations personnelles (compte, adresse e-mail, etc.). Merci d'utiliser le formulaire à droite.",
+      "Nous ne pouvons pas traiter sur X les demandes impliquant des informations personnelles (compte, adresse e-mail, etc.). Merci d’utiliser le formulaire à droite.",
     "contact.personalNote.formNote":
       "※ Les messages envoyés via ce formulaire sont reçus par e-mail.",
     "contact.form.type": "Type de demande",
     "contact.form.type.bug": "Signalement de bug",
     "contact.form.type.request": "Demande de fonctionnalité",
-    "contact.form.type.usage": "Question sur l'utilisation",
+    "contact.form.type.usage": "Question sur l’utilisation",
     "contact.form.type.account": "À propos de votre compte",
     "contact.form.type.other": "Autre",
     "contact.form.name": "Nom",
@@ -1102,15 +1102,15 @@
       "Veuillez rester dans la limite de 1 000 caractères.",
     "contact.form.attachments": "Joindre des images ou vidéos (facultatif)",
     "contact.form.attachmentsHint":
-      "5 Mo maximum par image, 15 Mo maximum par vidéo, 20 Mo au total, jusqu'à 3 fichiers (PNG, JPEG, WebP, GIF, MP4, MOV ou WebM).",
+      "5 Mo maximum par image, 15 Mo maximum par vidéo, 20 Mo au total, jusqu’à 3 fichiers (PNG, JPEG, WebP, GIF, MP4, MOV ou WebM).",
     "contact.form.attachmentsButton": "Choisir des fichiers",
     "contact.form.attachmentsEmpty": "Aucun fichier sélectionné",
     "contact.form.attachmentsCount": "%d fichier(s) sélectionné(s)",
     "contact.error.attachments":
       "Trop de fichiers, ou la taille totale dépasse la limite.",
-    "contact.form.agree.pre": "J'accepte la ",
+    "contact.form.agree.pre": "J’accepte la ",
     "contact.form.agree.link": "politique de confidentialité",
-    "contact.form.agree.post": " et consens à l'envoi de ce formulaire",
+    "contact.form.agree.post": " et consens à l’envoi de ce formulaire",
     "contact.form.submit": "Envoyer",
     "contact.form.submitting": "Envoi en cours...",
     "contact.error.required": "Ce champ est obligatoire.",
@@ -1124,19 +1124,19 @@
     "contact.status.errorTitle": "Une erreur est survenue.",
     "contact.status.errorBody": "Veuillez patienter un moment et réessayer.",
     "contact.status.rateLimitBody":
-      "Trop d'envois en peu de temps. Veuillez patienter avant de réessayer.",
+      "Trop d’envois en peu de temps. Veuillez patienter avant de réessayer.",
 
     "meta.contact.title": "Contact | NIARIM",
     "meta.contact.description":
-      "Contactez l'équipe NIARIM pour un signalement de bug, une demande de fonctionnalité ou une question d'utilisation.",
+      "Contactez l’équipe NIARIM pour un signalement de bug, une demande de fonctionnalité ou une question d’utilisation.",
 
     "meta.features.title": "Fonctionnalités | NIARIM",
     "meta.features.description":
-      "Découvrez les fonctionnalités de dessin, d'animation, d'édition, audio et d'export de NIARIM.",
+      "Découvrez les fonctionnalités de dessin, d’animation, d’édition, audio et d’export de NIARIM.",
     "featuresPage.eyebrow": "Features",
     "featuresPage.title": "Ce que vous pouvez faire avec NIARIM",
     "featuresPage.lead":
-      "Du dessin à l'animation jusqu'à l'export : NIARIM accompagne chaque étape de la création.",
+      "Du dessin à l’animation jusqu’à l’export : NIARIM accompagne chaque étape de la création.",
     "featuresPage.nav.drawing": "Dessin",
     "featuresPage.nav.animation": "Animation",
     "featuresPage.nav.editing": "Édition",
@@ -1161,7 +1161,7 @@
     "featuresPage.drawing.item5.body":
       "Choix de couleur libre, plus une couleur transparente façon gomme.",
     "featuresPage.drawing.item6.title": "Opacité",
-    "featuresPage.drawing.item6.body": "Ajustez finement l'opacité du pinceau.",
+    "featuresPage.drawing.item6.body": "Ajustez finement l’opacité du pinceau.",
     "featuresPage.drawing.item7.title": "Zoom et panoramique",
     "featuresPage.drawing.item7.body": "Zoomez pour travailler les détails.",
     "featuresPage.drawing.item8.title": "Gomme",
@@ -1182,13 +1182,13 @@
       "Déformez le dessin comme avec le doigt, ou peignez directement des effets de flou gaussien et de mosaïque. Maintenez ou balayez vers le haut pour changer de sous-outil.",
     "featuresPage.drawing.item13.title": "Outil formes",
     "featuresPage.drawing.item13.body":
-      "Tracez lignes droites, cercles et rectangles nets d'un simple geste.",
+      "Tracez lignes droites, cercles et rectangles nets d’un simple geste.",
     "featuresPage.drawing.item14.title": "Réglages détaillés du pinceau",
     "featuresPage.drawing.item14.body":
-      "Affinez le rendu de votre pinceau avec le fondu, l'atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
+      "Affinez le rendu de votre pinceau avec le fondu, l’atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
     "featuresPage.drawing.item15.title": "Recherche par étiquette",
     "featuresPage.drawing.item15.body":
-      "Les pinceaux, les trames et les tampons portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d'un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
+      "Les pinceaux, les trames et les tampons portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d’un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
 
     "featuresPage.animation.title": "Animation",
     "featuresPage.animation.lead":
@@ -1198,24 +1198,24 @@
       "Ajoutez les images une à une pour construire le dessin.",
     "featuresPage.animation.item2.title": "Timeline",
     "featuresPage.animation.item2.body":
-      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l'organiser.",
-    "featuresPage.animation.item3.title": "Édition d'image",
+      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l’organiser.",
+    "featuresPage.animation.item3.title": "Édition d’image",
     "featuresPage.animation.item3.body":
-      "Sélectionnez n'importe quelle image et redessinez-la.",
-    "featuresPage.animation.item4.title": "Aperçu de l'animation",
+      "Sélectionnez n’importe quelle image et redessinez-la.",
+    "featuresPage.animation.item4.title": "Aperçu de l’animation",
     "featuresPage.animation.item4.body":
       "Vérifiez le mouvement à tout moment pendant le travail.",
     "featuresPage.animation.item5.title":
       "Mouvement de caméra (animation par images clés)",
     "featuresPage.animation.item5.body":
-      "Définissez la position, le zoom et la rotation sous forme d'images clés : l'application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
+      "Définissez la position, le zoom et la rotation sous forme d’images clés : l’application interpole en douceur le mouvement de caméra, sans avoir à redessiner le calque lui-même.",
     "featuresPage.animation.item6.title": "Groupes de calques",
     "featuresPage.animation.item6.body":
       "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
 
     "featuresPage.editing.title": "Editing | Édition",
     "featuresPage.editing.lead":
-      "La liberté de recommencer jusqu'à ce que ce soit parfait.",
+      "La liberté de recommencer jusqu’à ce que ce soit parfait.",
     "featuresPage.editing.item1.title":
       "Redessinez librement grâce aux calques séparés",
     "featuresPage.editing.item1.body":
@@ -1231,16 +1231,16 @@
       "Gérez les éléments séparément grâce aux calques.",
     "featuresPage.editing.item5.title": "Calques communs",
     "featuresPage.editing.item5.body":
-      "Regroupez sur un seul calque ce que vous réutilisez d'une image à l'autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
+      "Regroupez sur un seul calque ce que vous réutilisez d’une image à l’autre (un décor, par exemple) : toute modification se répercute automatiquement sur toutes les images.",
     "featuresPage.editing.item6.title": "Modes de fusion",
     "featuresPage.editing.item6.body":
-      "Changez la façon dont les calques se superposent (produit, écran, etc.) pour élargir vos possibilités d'expression.",
+      "Changez la façon dont les calques se superposent (produit, écran, etc.) pour élargir vos possibilités d’expression.",
     "featuresPage.editing.item7.title": "Écrêtage (clipping)",
     "featuresPage.editing.item7.body":
-      "Limitez le dessin d'un calque à la forme du calque situé en dessous.",
+      "Limitez le dessin d’un calque à la forme du calque situé en dessous.",
     "featuresPage.editing.item8.title": "Transformation libre et par maillage",
     "featuresPage.editing.item8.body":
-      "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage. Celle-ci utilise une grille pouvant aller jusqu'à 10×10 pour déformer librement un calque.",
+      "Ajustez finement la forme de votre dessin avec la transformation libre et la transformation par maillage. Celle-ci utilise une grille pouvant aller jusqu’à 10×10 pour déformer librement un calque.",
 
     "featuresPage.audio.title": "Audio",
     "featuresPage.audio.lead":
@@ -1251,39 +1251,39 @@
     "featuresPage.audio.item2.body": "Ajustez le volume.",
     "featuresPage.audio.item3.title": "Image de départ",
     "featuresPage.audio.item3.body":
-      "Indiquez à partir de quelle image l'audio commence à jouer.",
-    "featuresPage.audio.item4.title": "Fondu d'entrée et de sortie",
+      "Indiquez à partir de quelle image l’audio commence à jouer.",
+    "featuresPage.audio.item4.title": "Fondu d’entrée et de sortie",
     "featuresPage.audio.item4.body":
       "Adoucissez le début et la fin de votre piste audio.",
     "featuresPage.audio.item5.title": "Horodatages",
     "featuresPage.audio.item5.body":
       "Placez un repère commenté sur une image précise — pratique pour synchroniser un mouvement de bouche ou une action avec le son.",
-    "featuresPage.audio.item6.title": "Affichage de la forme d'onde",
+    "featuresPage.audio.item6.title": "Affichage de la forme d’onde",
     "featuresPage.audio.item6.body":
-      "Les clips audio affichent une forme d'onde en surimpression légère, pour ajuster leur placement sur la timeline tout en voyant l'intensité du son.",
+      "Les clips audio affichent une forme d’onde en surimpression légère, pour ajuster leur placement sur la timeline tout en voyant l’intensité du son.",
 
     "featuresPage.export.title": "Export",
     "featuresPage.export.lead":
       "Livrez votre travail terminé sous forme de vidéo.",
     "featuresPage.export.item1.title": "Résolution",
     "featuresPage.export.item1.body":
-      "Exportez jusqu'à une résolution de 1920×1920.",
-    "featuresPage.export.item2.title": "Rapport d'aspect",
+      "Exportez jusqu’à une résolution de 1920×1920.",
+    "featuresPage.export.item2.title": "Rapport d’aspect",
     "featuresPage.export.item2.body":
-      "Définissez librement le rapport d'aspect.",
+      "Définissez librement le rapport d’aspect.",
     "featuresPage.export.item3.title": "Retrouver et partager un fichier exporté",
     "featuresPage.export.item3.body":
       "Dans Œuvres, sur l’écran d’accueil, recherchez le fichier par le nom du projet. Choisissez Partager pour l’enregistrer dans Photos ou l’ouvrir dans une autre application.",
     "featuresPage.export.filenameExample": "Ma première animation 20261120-143000.gif",
-    "featuresPage.export.item4.title": "Formats d'export",
+    "featuresPage.export.item4.title": "Formats d’export",
     "featuresPage.export.item4.body":
-      "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d'utiliser votre œuvre comme élément d'animation à fond transparent.",
+      "Prend en charge MP4, WebM, GIF et AVI. Le WebM transparent permet d’utiliser votre œuvre comme élément d’animation à fond transparent.",
     "featuresPage.export.item5.title": "Limite de durée par œuvre",
     "featuresPage.export.item5.body":
       "La limite gratuite est de 90 secondes par projet. Premium ou l’avantage de durée étendue permet de créer et d’exporter jusqu’à 2 heures par projet. Sans cet avantage, vous pouvez exporter les 90 premières secondes d’un projet plus long. Le nombre de projets est illimité.",
-    "featuresPage.export.item6.title": "Export d'image fixe",
+    "featuresPage.export.item6.title": "Export d’image fixe",
     "featuresPage.export.item6.body":
-      "Enregistrez l'image actuellement affichée dans la timeline au format PNG ou JPEG.",
+      "Enregistrez l’image actuellement affichée dans la timeline au format PNG ou JPEG.",
 
     "meta.news.title": "Actualités | NIARIM",
     "meta.news.description":
@@ -1297,23 +1297,23 @@
 
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
     "meta.privacy.description":
-      "La politique de confidentialité du site officiel et de l'application NIARIM.",
+      "La politique de confidentialité du site officiel et de l’application NIARIM.",
     "legal.updated": "Dernière mise à jour : 23 novembre 2026",
     "legal.notice.privacy":
-      "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
+      "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d’affichage sélectionnée.",
     "legal.notice.terms":
-      "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d'affichage sélectionnée.",
+      "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d’affichage sélectionnée.",
 
-    "meta.terms.title": "Conditions d'utilisation | NIARIM",
+    "meta.terms.title": "Conditions d’utilisation | NIARIM",
     "meta.terms.description":
-      "Les conditions d'utilisation du site officiel et de l'application NIARIM.",
+      "Les conditions d’utilisation du site officiel et de l’application NIARIM.",
 
     "meta.404.title": "Page introuvable | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "Cette image n'a pas pu être trouvée.",
+    "error404.title": "Cette image n’a pas pu être trouvée.",
     "error404.body":
-      "La page que vous recherchez a peut-être été déplacée ou supprimée. Veuillez vérifier l'URL ou recommencer depuis la page d'accueil.",
-    "error404.cta": "Retour à l'accueil",
+      "La page que vous recherchez a peut-être été déplacée ou supprimée. Veuillez vérifier l’URL ou recommencer depuis la page d’accueil.",
+    "error404.cta": "Retour à l’accueil",
   });
 
   DICT["es"] = Object.assign(DICT["es"] || {}, {

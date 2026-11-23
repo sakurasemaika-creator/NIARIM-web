@@ -237,15 +237,15 @@
       "featuresPage.advanced.title": "Outils avancés",
       "featuresPage.advanced.lead":
         "Un cran au-dessus pour le dessin et la finition.",
-      "featuresPage.advanced.item1.title": "Pelure d'oignon (onion skin)",
+      "featuresPage.advanced.item1.title": "Pelure d’oignon (onion skin)",
       "featuresPage.advanced.item1.body":
-        "Affichez les images précédentes et suivantes en semi-transparence : vérifiez-les tout en dessinant pour garder la continuité du mouvement. Réglez le nombre d'images affichées, ainsi que leur couleur et leur opacité.",
+        "Affichez les images précédentes et suivantes en semi-transparence : vérifiez-les tout en dessinant pour garder la continuité du mouvement. Réglez le nombre d’images affichées, ainsi que leur couleur et leur opacité.",
       "featuresPage.advanced.item2.title": "Trames (tone)",
       "featuresPage.advanced.item2.body":
-        "Appliquez des trames façon manga, qui rendent ombres et dégradés avec des motifs de points — un rôle différent des tampons, qui placent l'illustration elle-même.",
+        "Appliquez des trames façon manga, qui rendent ombres et dégradés avec des motifs de points — un rôle différent des tampons, qui placent l’illustration elle-même.",
       "featuresPage.advanced.item3.title": "Tampons",
       "featuresPage.advanced.item3.body":
-        "Enregistrez des éléments fréquemment utilisés comme tampons et replacez-les facilement. Contrairement aux trames, qui rendent l'ombre avec des points, les tampons placent l'illustration elle-même.",
+        "Enregistrez des éléments fréquemment utilisés comme tampons et replacez-les facilement. Contrairement aux trames, qui rendent l’ombre avec des points, les tampons placent l’illustration elle-même.",
       "featuresPage.advanced.item4.title": "Règle",
       "featuresPage.advanced.item4.body":
         "Tracez des lignes précises avec les règles pour droites, cercles et ellipses.",
@@ -254,10 +254,10 @@
         "Placez des dialogues ou du texte dans votre œuvre, en choisissant la police.",
       "featuresPage.advanced.item6.title": "Filtres",
       "featuresPage.advanced.item6.body":
-        "Ajustez le rendu final avec des filtres d'effet et de correction des couleurs.",
+        "Ajustez le rendu final avec des filtres d’effet et de correction des couleurs.",
       "featuresPage.advanced.item7.title": "Bibliothèque de polices",
       "featuresPage.advanced.item7.body":
-        "En plus des polices intégrées, parcourez et ajoutez des polices gratuites depuis l'écran des paramètres.",
+        "En plus des polices intégrées, parcourez et ajoutez des polices gratuites depuis l’écran des paramètres.",
       "featuresPage.advanced.item8.title": "Filigrane",
       "featuresPage.advanced.item8.body":
         "Ajoutez un filigrane (image ou texte) à votre œuvre (fonctionnalité premium).",
@@ -270,15 +270,15 @@
       "featuresPage.advanced.item11.title":
         "Outils à changement rapide & favoris",
       "featuresPage.advanced.item11.body":
-        "Enregistrez vos combinaisons favorites de stylo, pinceau et taille, puis passez de l'une à l'autre d'un seul geste.",
+        "Enregistrez vos combinaisons favorites de stylo, pinceau et taille, puis passez de l’une à l’autre d’un seul geste.",
       "featuresPage.advanced.item12.title":
-        "Filtres de dessin et filtres d'effet",
+        "Filtres de dessin et filtres d’effet",
       "featuresPage.advanced.item12.body":
-        "Deux types de filtres : les « filtres de dessin », appliqués directement à un calque, et les « filtres d'effet », que vous pouvez caler sur une image de début et de fin — sur une scène entière ou sur un lot d'images sélectionnées. Superposez des touches cinématographiques : flou, correction des couleurs, lueur, pluie, grain façon pellicule, et plus encore.",
+        "Deux types de filtres : les « filtres de dessin », appliqués directement à un calque, et les « filtres d’effet », que vous pouvez caler sur une image de début et de fin — sur une scène entière ou sur un lot d’images sélectionnées. Superposez des touches cinématographiques : flou, correction des couleurs, lueur, pluie, grain façon pellicule, et plus encore.",
       "features.advanced.title":
         "Des outils qui vont plus loin pour la finition",
       "features.advanced.body":
-        "Pelure d'oignon, trames, tampons, règles, texte : des outils pensés jusqu'à la finition.",
+        "Pelure d’oignon, trames, tampons, règles, texte : des outils pensés jusqu’à la finition.",
     },
     es: {
       "featuresPage.nav.advanced": "Herramientas pro",

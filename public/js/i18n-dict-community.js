@@ -90,10 +90,10 @@
       "communityPage.lead":
         "A community feature for discovering work made with NIARIM. Browsing requires no login, so anyone can enjoy it casually.",
       "communityPage.comingSoon":
-        "This page introduces a feature being prepared for NIARIM's official launch. The specification is finalized, but implementation is still to come. Screenshots here will be replaced with the real screens later.",
+        "This page introduces a feature being prepared for NIARIM’s official launch. The specification is finalized, but implementation is still to come. Screenshots here will be replaced with the real screens later.",
       "communityPage.login.title": "No login needed just to browse",
       "communityPage.login.body":
-        "Drawing and animating, plus browsing the Work Plaza, new arrivals, rankings, and an author's work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
+        "Drawing and animating, plus browsing the Work Plaza, new arrivals, rankings, and an author’s work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
       "communityPage.tabs.overall": "All-time",
       "communityPage.tabs.yearly": "Yearly",
       "communityPage.tabs.monthly": "Monthly",
@@ -111,14 +111,14 @@
         "Search for a word that interests you to find related works.",
       "communityPage.search.tag.title": "Browse by tag",
       "communityPage.search.tag.body":
-        "Find works by tags for genres and topics you're interested in — follow what's trending or dig deeper into your favorite genre.",
+        "Find works by tags for genres and topics you’re interested in — follow what’s trending or dig deeper into your favorite genre.",
       "communityPage.search.author.title": "Find by author",
       "communityPage.search.author.body":
         "Found a work you like? Check out the other works that author has posted. Find your favorite creators and follow their new work.",
       "communityPage.update.title":
         "Updated daily, built to be a gathering place",
       "communityPage.update.body":
-        "New arrivals appear as soon as they're posted. Rankings are planned to update twice a day (up to 4 times as the number of works grows), so there's something new to discover whenever you visit — a place people want to come back to every day.",
+        "New arrivals appear as soon as they’re posted. Rankings are planned to update twice a day (up to 4 times as the number of works grows), so there’s something new to discover whenever you visit — a place people want to come back to every day.",
       "communityPage.bookmark.title": "Bookmarks",
       "communityPage.bookmark.body":
         "Bookmark your favorite works to find them again later (bookmarking requires signing in).",
@@ -133,13 +133,13 @@
         "Grow tags together, keep a video playing while you browse elsewhere, or breeze through works in your spare moments — extra touches that make the Work Plaza even more fun to use.",
       "communityPage.advanced.tags.title": "Tags anyone can help curate",
       "communityPage.advanced.tags.body":
-        "Tags aren't just for the poster — anyone can add or remove them. Posters can lock important tags so others can't delete them. Tap a tag to narrow the list down to works that share it.",
+        "Tags aren’t just for the poster — anyone can add or remove them. Posters can lock important tags so others can’t delete them. Tap a tag to narrow the list down to works that share it.",
       "communityPage.advanced.follow.title": "Follows and reposts",
       "communityPage.advanced.follow.body":
         "You can follow the creators you like. Switch to the \"Following\" tab to catch up on just their new work. You can share other people’s work with \"Repost\", and when someone you follow reposts a work it appears in your Following tab too, labelled \"Reposted by …\". Only you can view the lists of users you follow, your followers, and works you have bookmarked. Other users see only your following and follower counts. Following, bookmarking, or reposting does not send the other user an individual notification about that action.",
       "communityPage.advanced.preview.title": "Floating preview & work details",
       "communityPage.advanced.preview.body":
-        'Tapping a work card doesn\'t jump straight to another screen. A small preview window appears in the corner, letting the video keep playing while you browse elsewhere. Drag it around or resize it freely. Tap "Details" to see the full work-detail screen with post date, author, tags, and bookmark count.',
+        'Tapping a work card doesn’t jump straight to another screen. A small preview window appears in the corner, letting the video keep playing while you browse elsewhere. Drag it around or resize it freely. Tap "Details" to see the full work-detail screen with post date, author, tags, and bookmark count.',
       "communityPage.advanced.shorts.title": "Vertical mode",
       "communityPage.advanced.shorts.body":
         "Filter the gallery by All, Portrait only, or Landscape only. Portrait works can switch to a full-screen, vertically scrolling viewer with one tap.",
@@ -352,11 +352,11 @@
       "communityPage.lead":
         "Une fonctionnalité communautaire pour découvrir les œuvres créées avec NIARIM. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
       "communityPage.comingSoon":
-        "Cette page présente une fonctionnalité en préparation pour le lancement officiel de NIARIM. Le cahier des charges est finalisé, mais le développement reste à venir. Les captures d'écran ici seront remplacées plus tard par les écrans réels.",
+        "Cette page présente une fonctionnalité en préparation pour le lancement officiel de NIARIM. Le cahier des charges est finalisé, mais le développement reste à venir. Les captures d’écran ici seront remplacées plus tard par les écrans réels.",
       "communityPage.login.title":
         "Aucune connexion nécessaire pour simplement consulter",
       "communityPage.login.body":
-        "Dessiner et animer, ainsi que parcourir la Place des œuvres, les nouveautés, les classements et la liste des œuvres d'un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu'à 1 œuvre par jour avec le plan gratuit, ou jusqu'à 3 avec Premium.",
+        "Dessiner et animer, ainsi que parcourir la Place des œuvres, les nouveautés, les classements et la liste des œuvres d’un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu’à 1 œuvre par jour avec le plan gratuit, ou jusqu’à 3 avec Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Annuel",
       "communityPage.tabs.monthly": "Mensuel",
@@ -381,14 +381,14 @@
       "communityPage.update.title":
         "Mise à jour quotidienne, pensée comme un lieu de rendez-vous",
       "communityPage.update.body":
-        "Les nouveautés apparaissent dès leur publication. Les classements devraient être mis à jour deux fois par jour (jusqu'à 4 fois selon le nombre d'œuvres), pour qu'il y ait toujours quelque chose de nouveau à découvrir — un lieu où l'on a envie de revenir chaque jour.",
+        "Les nouveautés apparaissent dès leur publication. Les classements devraient être mis à jour deux fois par jour (jusqu’à 4 fois selon le nombre d'œuvres), pour qu’il y ait toujours quelque chose de nouveau à découvrir — un lieu où l’on a envie de revenir chaque jour.",
       "communityPage.bookmark.title": "Favoris",
       "communityPage.bookmark.body":
         "Ajoutez vos œuvres préférées en favoris pour les retrouver plus tard (nécessite une connexion).",
-      "communityPage.placeholder.label": "Emplacement d'une œuvre",
+      "communityPage.placeholder.label": "Emplacement d’une œuvre",
       "communityPage.placeholder.title": "Titre de l'œuvre",
-      "communityPage.placeholder.author": "Nom de l'auteur",
-      "communityPage.moreInApp.body": "Voir la suite dans l'appli",
+      "communityPage.placeholder.author": "Nom de l’auteur",
+      "communityPage.moreInApp.body": "Voir la suite dans l’appli",
       "communityPage.moreInApp.link": "Télécharger NIARIM",
       "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title":
@@ -398,21 +398,21 @@
       "communityPage.advanced.tags.title":
         "Des tags entretenus par tout le monde",
       "communityPage.advanced.tags.body":
-        "Les tags ne sont pas réservés à l'auteur : tout le monde peut en ajouter ou en supprimer. L'auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
+        "Les tags ne sont pas réservés à l’auteur : tout le monde peut en ajouter ou en supprimer. L’auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
       "communityPage.advanced.follow.title": "Abonnements et republications",
       "communityPage.advanced.follow.body":
         "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vous seul pouvez consulter les listes des personnes que vous suivez, de vos abonnés et des œuvres que vous avez mises en favori. Les autres utilisateurs ne voient que le nombre d’abonnements et d’abonnés. Suivre une personne, mettre une œuvre en favori ou la repartager ne déclenche aucune notification individuelle à l’autre utilisateur concernant cette action.",
       "communityPage.advanced.preview.title":
         "Aperçu flottant et détails de l'œuvre",
       "communityPage.advanced.preview.body":
-        "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d'aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d'autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l'écran complet avec la date de publication, l'auteur, les tags et le nombre de favoris.",
+        "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d’aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d’autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l’écran complet avec la date de publication, l’auteur, les tags et le nombre de favoris.",
       "communityPage.advanced.shorts.title": "Mode portrait",
       "communityPage.advanced.shorts.body":
-        "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d'un geste vers un lecteur plein écran à défilement vertical.",
+        "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d’un geste vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
         "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Place des œuvres pour que tout le monde la voie ?",
-      "communityPage.cta.link": "Télécharger l'application",
+      "communityPage.cta.link": "Télécharger l’application",
     },
     es: {
       "meta.community.title": "Plaza de Obras",

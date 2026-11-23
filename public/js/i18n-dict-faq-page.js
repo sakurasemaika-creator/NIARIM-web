@@ -38,7 +38,7 @@
       "faq.q9":
         "If I publish my work to the Work Plaza, can anyone see it on YouTube too?",
       "faq.a9":
-        "Publishing to the Work Plaza happens by uploading a video to YouTube from within the NIARIM app, but the Work Plaza's own public/private setting is independent of YouTube's visibility setting. Even if the YouTube video is set to \"Unlisted,\" it still displays and plays normally in the Work Plaza, while staying largely hidden from YouTube's own search and recommendations (only people with the direct link can view it there). Conversely, if the YouTube video is set to \"Private\" or deleted, its playback URL stops working, so display in the Work Plaza is automatically suspended regardless of your NIARIM-side setting (your NIARIM setting itself is preserved, so display resumes automatically if the YouTube status is restored). If you don't want comments from people who have the link, you can disable comments on the YouTube side for peace of mind.",
+        "Publishing to the Work Plaza happens by uploading a video to YouTube from within the NIARIM app, but the Work Plaza’s own public/private setting is independent of YouTube’s visibility setting. Even if the YouTube video is set to \"Unlisted,\" it still displays and plays normally in the Work Plaza, while staying largely hidden from YouTube’s own search and recommendations (only people with the direct link can view it there). Conversely, if the YouTube video is set to \"Private\" or deleted, its playback URL stops working, so display in the Work Plaza is automatically suspended regardless of your NIARIM-side setting (your NIARIM setting itself is preserved, so display resumes automatically if the YouTube status is restored). If you don’t want comments from people who have the link, you can disable comments on the YouTube side for peace of mind.",
     },
     "zh-Hans": {
       "meta.faq.title": "常见问题 | NIARIM",
@@ -84,14 +84,14 @@
       "meta.faq.description":
         "Questions fréquentes et réponses à propos de NIARIM.",
       "faq.a5.html":
-        "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d'autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Place des œuvres »</a> en la postant directement sur YouTube depuis l'application NIARIM.",
-      "faq.q8": "Que puis-je faire avec l'offre Premium ?",
+        "Vous pouvez partager librement vos fichiers vidéo exportés via votre appareil ou d’autres applications. Vous pouvez aussi publier votre œuvre dans la <a href=\"/community/\">« Place des œuvres »</a> en la postant directement sur YouTube depuis l’application NIARIM.",
+      "faq.q8": "Que puis-je faire avec l’offre Premium ?",
       "faq.a8.html":
         'Premium supprime les publicités et ajoute la possibilité de masquer la marque de fin officielle, un filigrane personnalisé, une courbe de tons et le réglage des niveaux. Voir la <a href="/premium/">page Premium</a> pour plus de détails.',
       "faq.q9":
         "Si je publie mon œuvre dans la Place des œuvres, tout le monde peut-il la voir aussi sur YouTube ?",
       "faq.a9":
-        "La publication dans la Place des œuvres se fait en mettant en ligne une vidéo sur YouTube depuis l'application NIARIM, mais le réglage public/privé de la Place des œuvres elle-même est indépendant du réglage de visibilité de YouTube. Même si la vidéo YouTube est définie sur « Non répertoriée », elle continue de s'afficher et de se lire normalement dans la Place des œuvres, tout en restant largement invisible dans la recherche et les recommandations de YouTube (seules les personnes disposant du lien direct peuvent la visionner là-bas). À l'inverse, si la vidéo YouTube est définie sur « Privée » ou supprimée, son URL de lecture cesse de fonctionner, donc l'affichage dans la Place des œuvres est automatiquement suspendu quel que soit votre réglage côté NIARIM (votre réglage NIARIM lui-même est conservé, donc l'affichage reprend automatiquement si le statut YouTube est rétabli). Si vous ne voulez pas de commentaires de la part des personnes ayant le lien, vous pouvez désactiver les commentaires côté YouTube par précaution.",
+        "La publication dans la Place des œuvres se fait en mettant en ligne une vidéo sur YouTube depuis l’application NIARIM, mais le réglage public/privé de la Place des œuvres elle-même est indépendant du réglage de visibilité de YouTube. Même si la vidéo YouTube est définie sur « Non répertoriée », elle continue de s’afficher et de se lire normalement dans la Place des œuvres, tout en restant largement invisible dans la recherche et les recommandations de YouTube (seules les personnes disposant du lien direct peuvent la visionner là-bas). À l’inverse, si la vidéo YouTube est définie sur « Privée » ou supprimée, son URL de lecture cesse de fonctionner, donc l’affichage dans la Place des œuvres est automatiquement suspendu quel que soit votre réglage côté NIARIM (votre réglage NIARIM lui-même est conservé, donc l’affichage reprend automatiquement si le statut YouTube est rétabli). Si vous ne voulez pas de commentaires de la part des personnes ayant le lien, vous pouvez désactiver les commentaires côté YouTube par précaution.",
     },
     es: {
       "meta.faq.title": "Preguntas frecuentes | NIARIM",
@@ -134,7 +134,7 @@
     "faq.a6": "계정 등록 없이도 작품을 만들 수 있어요. 작품과 프로젝트는 기기에 저장됩니다. 작품 광장에 게시하려면 Google 계정 로그인이 필요해요."
   },
   "fr": {
-    "faq.a6": "Aucun compte n'est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la galerie."
+    "faq.a6": "Aucun compte n’est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la galerie."
   },
   "es": {
     "faq.a6": "Puedes crear sin registrarte. Tus obras y proyectos se guardan en el dispositivo. Para publicar en la galería, debes iniciar sesión con una cuenta de Google."

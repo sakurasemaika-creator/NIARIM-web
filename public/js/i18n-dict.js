@@ -379,7 +379,7 @@
       "hero.lead":
         "NIARIM is an app for creating full hand-drawn animation right from your smartphone. Draw and move one picture at a time, animate with keyframes, or even combine still images into stop motion. From drawing to animation, editing, sound, and export — finish your work in one single app.",
       "hero.bridge.html":
-        "And once it's made, bring it to <a href=\"/community/\">the “Work Plaza.”</a> See someone else's work, and make your next one. From people to work. From work to people.",
+        "And once it’s made, bring it to <a href=\"/community/\">the “Work Plaza.”</a> See someone else’s work, and make your next one. From people to work. From work to people.",
       "hero.cta.primary": "Download the App",
       "hero.cta.secondary": "See the Features",
       "hero.note":
@@ -397,7 +397,7 @@
         "Stack frames, edit them on a timeline, and preview the motion as you build it.",
       "intro.card3.title": "Export",
       "intro.card3.body":
-        "Export what you've drawn as a video, finish it in your own hands, and share it.",
+        "Export what you’ve drawn as a video, finish it in your own hands, and share it.",
 
       "features.eyebrow": "Core Features",
       "features.title": "Core Features",
@@ -411,7 +411,7 @@
         "Add and edit frames on a timeline, and preview the animation as you work.",
       "features.editing.title": "Freedom to redo as many times as you like",
       "features.editing.body":
-        "Fill with adjustable tolerance and layer-separated management let you keep refining until it's right.",
+        "Fill with adjustable tolerance and layer-separated management let you keep refining until it’s right.",
       "features.export.title": "Export and share your work",
       "features.export.body":
         "Export at resolutions up to 1920×1920, with a freely configurable aspect ratio.",
@@ -423,7 +423,7 @@
 
       "download.title": "Start creating with NIARIM.",
       "download.body":
-        "Turn what you've drawn into animation, with your own hands. Download NIARIM now and start moving your story.",
+        "Turn what you’ve drawn into animation, with your own hands. Download NIARIM now and start moving your story.",
       "download.cta.googlePlay": "Get it on Google Play",
       "download.cta.notReady": "Coming soon",
 
@@ -437,10 +437,10 @@
       "faq.q3": "Which devices are supported?",
       "faq.a3":
         "Please check the Google Play listing for supported OS versions and devices.",
-      "faq.q4": "Can I export what I've made?",
+      "faq.q4": "Can I export what I’ve made?",
       "faq.a4":
         "Yes. You can export your work as video, at resolutions up to 1920×1920, with a freely configurable aspect ratio.",
-      "faq.q5": "Can I share what I've made?",
+      "faq.q5": "Can I share what I’ve made?",
       "faq.q6": "Do I need to create an account?",
       "faq.a6": "Please check the official launch specification for this.",
       "faq.q7": "Where can I report a bug or request a feature?",
@@ -468,7 +468,7 @@
         "For bug reports, feature requests, or questions about how to use the app, feel free to reply or send a direct message to our official X account.",
       "contact.channel.link": "Contact us on X",
       "contact.personalNote":
-        "We can't handle inquiries involving personal information, such as your account or email address, on X. Please use the form on the right instead.",
+        "We can’t handle inquiries involving personal information, such as your account or email address, on X. Please use the form on the right instead.",
       "contact.personalNote.formNote": "※ Submissions are received by email.",
       "contact.form.type": "Inquiry type",
       "contact.form.type.bug": "Bug report",
@@ -503,7 +503,7 @@
       "contact.error.agree": "You must agree to the Privacy Policy.",
       "contact.status.successTitle": "Your message has been received.",
       "contact.status.successBody":
-        "Thank you for reaching out. We'll review your message and reply if needed.",
+        "Thank you for reaching out. We’ll review your message and reply if needed.",
       "contact.status.errorTitle": "Something went wrong.",
       "contact.status.errorBody": "Please wait a moment and try again.",
       "contact.status.rateLimitBody":
@@ -515,7 +515,7 @@
 
       "meta.features.title": "Features | NIARIM",
       "meta.features.description":
-        "Explore NIARIM's drawing, animation, editing, audio, and export features.",
+        "Explore NIARIM’s drawing, animation, editing, audio, and export features.",
       "featuresPage.eyebrow": "Features",
       "featuresPage.title": "What You Can Do with NIARIM",
       "featuresPage.lead":
@@ -549,7 +549,7 @@
       "featuresPage.drawing.item7.body": "Zoom in for fine detail work.",
       "featuresPage.drawing.item8.title": "Eraser",
       "featuresPage.drawing.item8.body":
-        "A standard eraser for removing parts of what you've drawn.",
+        "A standard eraser for removing parts of what you’ve drawn.",
       "featuresPage.drawing.item9.title": "Bucket & lasso fill",
       "featuresPage.drawing.item9.body":
         "Fill an enclosed area with the “bucket,” or a lassoed area with “lasso fill.”",
@@ -570,7 +570,7 @@
         "Fine-tune your brush feel with fade, stroke decay, color mixing, pressure curves, and more.",
       "featuresPage.drawing.item15.title": "Tag search for assets",
       "featuresPage.drawing.item15.body":
-        "Brushes, tones and stamps carry tags such as line art, fill, blur, analogue, pixel art and halftone, so you can narrow things down by tag even when you can't remember a name. One tap switches between keyword and tag search, and you can tag your own assets yourself.",
+        "Brushes, tones and stamps carry tags such as line art, fill, blur, analogue, pixel art and halftone, so you can narrow things down by tag even when you can’t remember a name. One tap switches between keyword and tag search, and you can tag your own assets yourself.",
 
       "featuresPage.animation.title": "Animation",
       "featuresPage.animation.lead":
@@ -615,7 +615,7 @@
         "Change how layers combine, with modes like multiply and screen, to broaden your range of expression.",
       "featuresPage.editing.item7.title": "Clipping",
       "featuresPage.editing.item7.body":
-        "Restrict a layer's drawing to the shape of the layer beneath it.",
+        "Restrict a layer’s drawing to the shape of the layer beneath it.",
       "featuresPage.editing.item8.title": "Free & mesh transform",
       "featuresPage.editing.item8.body":
         "Fine-tune the shape of your artwork with free transform and mesh transform. Mesh transform uses a grid of up to 10×10 to freely reshape a layer.",
@@ -638,7 +638,7 @@
         "Drop a commented marker on a specific frame — handy as a reference point for lip-syncing or timing movement to sound.",
       "featuresPage.audio.item6.title": "Waveform display",
       "featuresPage.audio.item6.body":
-        "Audio clips show a faint waveform overlay, letting you adjust their placement on the timeline while seeing the sound's loudness.",
+        "Audio clips show a faint waveform overlay, letting you adjust their placement on the timeline while seeing the sound’s loudness.",
 
       "featuresPage.export.title": "Export",
       "featuresPage.export.lead": "Deliver your finished work as a video.",
@@ -686,9 +686,9 @@
 
       "meta.404.title": "Page Not Found | NIARIM",
       "error404.eyebrow": "404",
-      "error404.title": "This frame couldn't be found.",
+      "error404.title": "This frame couldn’t be found.",
       "error404.body":
-        "The page you're looking for may have been moved or removed. Please check the URL, or start again from the home page.",
+        "The page you’re looking for may have been moved or removed. Please check the URL, or start again from the home page.",
       "error404.cta": "Back to home",
     },
   };

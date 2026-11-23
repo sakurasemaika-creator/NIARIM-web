@@ -9,7 +9,7 @@
   "en": {
     "communityPage.comingSoon": "Discover animations in the NIARIM Work Plaza. Bookmark your favorites to enjoy again later.",
     "communityPage.ranking.note": "Discover new works and popular creations based on bookmarks.",
-    "narrative.community.3.body": "Find new inspiration among everyone's creations, including works loved by the community.",
+    "narrative.community.3.body": "Find new inspiration among everyone’s creations, including works loved by the community.",
     "communityPage.update.body": "Explore new and popular works. Bookmark the ones you love and return to them anytime."
   },
   "zh-Hans": {
@@ -33,7 +33,7 @@
   "fr": {
     "communityPage.comingSoon": "Découvrez des animations dans la galerie NIARIM. Enregistrez vos favorites pour les revoir.",
     "communityPage.ranking.note": "Découvrez les nouveautés et les créations populaires auprès des utilisateurs.",
-    "narrative.community.3.body": "Trouvez l'inspiration parmi les créations de la communauté et ses œuvres favorites.",
+    "narrative.community.3.body": "Trouvez l’inspiration parmi les créations de la communauté et ses œuvres favorites.",
     "communityPage.update.body": "Parcourez les nouveautés et les œuvres populaires. Enregistrez celles que vous aimez pour y revenir."
   },
   "es": {

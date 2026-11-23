@@ -94,22 +94,22 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "About NIARIM",
       "about.lead":
-        "Anyone can make animation, easily. Anyone can become a creator. NIARIM is a hand-drawn animation app built for people of every age to enjoy making animation easily. We've focused on intuitive, approachable controls while also offering plenty of creative freedom to dig into the details.",
+        "Anyone can make animation, easily. Anyone can become a creator. NIARIM is a hand-drawn animation app built for people of every age to enjoy making animation easily. We’ve focused on intuitive, approachable controls while also offering plenty of creative freedom to dig into the details.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "What does “NIARIM” mean?",
       "about.name.body":
         "Bringing animation closer to everyone. Blurring the line between creators and viewers. Anyone, anytime, can be both the one who makes and the one who watches.",
       "about.modes.title": "Canvas Mode and Timeline Mode",
       "about.modes.body":
-        "NIARIM is split into a “Canvas Mode” for drawing and a “Timeline Mode” for bringing it to motion. There's no need to bounce between a drawing app and a video editor. Draw a picture, animate it right away, and finish it off in sync with sound — the whole workflow lives in one app.",
+        "NIARIM is split into a “Canvas Mode” for drawing and a “Timeline Mode” for bringing it to motion. There’s no need to bounce between a drawing app and a video editor. Draw a picture, animate it right away, and finish it off in sync with sound — the whole workflow lives in one app.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "What NIARIM values",
       "about.philosophy.item1.title": "Animation, made easy for everyone.",
       "about.philosophy.item1.body":
-        "No specialized knowledge or special tools required. Just a smartphone — and anyone can become a creator. That's the world NIARIM is building toward.",
+        "No specialized knowledge or special tools required. Just a smartphone — and anyone can become a creator. That’s the world NIARIM is building toward.",
       "about.philosophy.item2.title": "Working to keep the app lightweight",
       "about.philosophy.item2.body":
-        "Animation work tends to get heavier as frame and layer counts grow. Alongside common layers, cache management, and storage-reduction tools, we've also added performance settings that let you choose a quality preset — or tune individual settings — to match your device, all as part of easing the load it carries. You don't need any special equipment to start creating seriously.",
+        "Animation work tends to get heavier as frame and layer counts grow. Alongside common layers, cache management, and storage-reduction tools, we’ve also added performance settings that let you choose a quality preset — or tune individual settings — to match your device, all as part of easing the load it carries. You don’t need any special equipment to start creating seriously.",
       "about.philosophy.item3.title": "No compromise on creative freedom",
       "about.philosophy.item3.body":
         "While keeping things approachable, we also provide the depth — layers, brushes, finishing filters — for those who want to dig in and craft their work in detail.",
@@ -130,7 +130,7 @@
       "about.device.item3.body":
         "Supports desktop-like operation via Galaxy DeX mode, plus pressure and tilt detection with the S Pen.",
       "about.unique.eyebrow": "Only in NIARIM",
-      "about.unique.title": "Features you'll love, found only in NIARIM",
+      "about.unique.title": "Features you’ll love, found only in NIARIM",
       "about.unique.lead":
         "Features not commonly found in typical illustration apps.",
       "about.unique.item1.title": "Auto-fill & gradient fill",
@@ -139,7 +139,7 @@
       "about.unique.item2.title":
         "From accent color to panel background — every color, your choice",
       "about.unique.item2.body":
-        "A wide range of presets is included, from pastel to muted tones, but they're just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
+        "A wide range of presets is included, from pastel to muted tones, but they’re just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
       "about.unique.item3.title": "In-app Tips",
       "about.unique.item3.body":
         "Search and learn practical tips and techniques right inside the app.",
@@ -154,7 +154,7 @@
         "Enable pixel mode in brush customization to create work with pixel-art style expression. Combine it with the screentone feature for easy dithering.",
       "about.unique.item8.title": "Carry your setup anywhere",
       "about.unique.item8.body":
-        "Export and import almost your entire setup as files — themes, workspace layout, brush settings, even project data. Switch to a new device and pick up right where you left off, in the environment you're used to.",
+        "Export and import almost your entire setup as files — themes, workspace layout, brush settings, even project data. Switch to a new device and pick up right where you left off, in the environment you’re used to.",
       "about.unique.item9.title": "Even the widgets are yours to style",
       "about.unique.item9.body":
         "There are three home screen widgets. The launch screen widget shows a single frame you pick from your own work, and the “Create” and “Work Plaza” widgets let you either follow the app theme or set any background colour you like. Colours are kept per widget, so all three can sit side by side and still be told apart.",
@@ -164,7 +164,7 @@
       "about.unique.item7.link": "Visit the Work Plaza",
       "about.cta.title": "Want to learn more about using NIARIM?",
       "about.cta.body":
-        "Search and browse the same content as the app's built-in Help screen, right here on the web.",
+        "Search and browse the same content as the app’s built-in Help screen, right here on the web.",
       "about.cta.link": "View the guide",
     },
     "zh-Hans": {
@@ -393,60 +393,60 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "À propos de NIARIM",
       "about.lead":
-        "Créer de l'animation, facilement, pour tous. Faire de chacun un créateur. NIARIM est une application de création d'animation dessinée à la main, pensée pour que chacun, quel que soit son âge, puisse profiter facilement de la création d'animation. Nous mettons l'accent sur une prise en main intuitive, tout en offrant une grande liberté créative pour peaufiner chaque détail.",
+        "Créer de l’animation, facilement, pour tous. Faire de chacun un créateur. NIARIM est une application de création d’animation dessinée à la main, pensée pour que chacun, quel que soit son âge, puisse profiter facilement de la création d’animation. Nous mettons l’accent sur une prise en main intuitive, tout en offrant une grande liberté créative pour peaufiner chaque détail.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "Que signifie « NIARIM » ?",
       "about.name.body":
-        "Rapprocher l'animation de tout le monde. Estomper la frontière entre créateurs et spectateurs. Chacun, à tout moment, peut être à la fois créateur et spectateur.",
+        "Rapprocher l’animation de tout le monde. Estomper la frontière entre créateurs et spectateurs. Chacun, à tout moment, peut être à la fois créateur et spectateur.",
       "about.modes.title": "Mode Canevas et Mode Chronologie",
       "about.modes.body":
         "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Chronologie » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Ce à quoi NIARIM tient",
-      "about.philosophy.item1.title": "L'animation, facile pour tous.",
+      "about.philosophy.item1.title": "L’animation, facile pour tous.",
       "about.philosophy.item1.body":
-        "Aucune connaissance ni outil spécialisé requis. Un simple smartphone suffit pour que chacun devienne créateur. C'est le monde vers lequel NIARIM tend.",
+        "Aucune connaissance ni outil spécialisé requis. Un simple smartphone suffit pour que chacun devienne créateur. C’est le monde vers lequel NIARIM tend.",
       "about.philosophy.item2.title":
-        "Des efforts pour garder l'application légère",
+        "Des efforts pour garder l’application légère",
       "about.philosophy.item2.body":
-        "La création d'animation a tendance à alourdir les données à mesure que le nombre d'images et de calques augmente. En plus des calques communs, de la gestion du cache et des outils de libération d'espace, nous avons aussi ajouté des réglages de performance qui permettent de choisir un préréglage de qualité — ou d'ajuster chaque paramètre individuellement — selon votre appareil, pour alléger la charge qu'il supporte. Pas besoin d'équipement particulier pour vous lancer sérieusement.",
+        "La création d’animation a tendance à alourdir les données à mesure que le nombre d’images et de calques augmente. En plus des calques communs, de la gestion du cache et des outils de libération d’espace, nous avons aussi ajouté des réglages de performance qui permettent de choisir un préréglage de qualité — ou d’ajuster chaque paramètre individuellement — selon votre appareil, pour alléger la charge qu’il supporte. Pas besoin d’équipement particulier pour vous lancer sérieusement.",
       "about.philosophy.item3.title": "Aucun compromis sur la liberté créative",
       "about.philosophy.item3.body":
         "Tout en restant accessible, NIARIM offre aussi la profondeur — calques, pinceaux, filtres de finition — pour celles et ceux qui veulent peaufiner leur œuvre dans le détail.",
-      "about.aiStance.title": "À propos de l'IA générative",
+      "about.aiStance.title": "À propos de l’IA générative",
       "about.aiStance.body":
-        "NIARIM n'intègre aucune fonctionnalité d'IA générative.",
+        "NIARIM n’intègre aucune fonctionnalité d’IA générative.",
       "about.device.eyebrow": "Supported Environment",
       "about.device.title": "Environnements pris en charge",
       "about.device.lead":
-        "NIARIM fonctionne aussi bien sur smartphone seul qu'avec des périphériques externes pour une configuration plus poussée.",
+        "NIARIM fonctionne aussi bien sur smartphone seul qu’avec des périphériques externes pour une configuration plus poussée.",
       "about.device.item1.title": "Appareils Android en général",
       "about.device.item1.body":
-        "NIARIM prend en charge un large éventail d'appareils Android.",
+        "NIARIM prend en charge un large éventail d’appareils Android.",
       "about.device.item2.title": "Tablette graphique / écran-tablette",
       "about.device.item2.body":
         "Connectez une tablette graphique ou un écran-tablette externe pour une configuration de dessin plus poussée.",
       "about.device.item3.title": "Mode Galaxy DeX et S Pen",
       "about.device.item3.body":
-        "Prend en charge une utilisation façon bureau via le mode DeX de Galaxy, ainsi que la détection de la pression et de l'inclinaison du S Pen.",
+        "Prend en charge une utilisation façon bureau via le mode DeX de Galaxy, ainsi que la détection de la pression et de l’inclinaison du S Pen.",
       "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title":
-        "Des fonctionnalités qu'on ne trouve que dans NIARIM",
+        "Des fonctionnalités qu’on ne trouve que dans NIARIM",
       "about.unique.lead":
         "Des fonctionnalités rarement présentes dans les applications de dessin classiques.",
       "about.unique.item1.title": "Remplissage automatique et en dégradé",
       "about.unique.item1.body":
-        "Détectez automatiquement le trait et colorez-le. Appliquez un remplissage en dégradé en un geste, réduisant nettement le travail de coloriage. Remarque : le remplissage automatique n'utilise pas d'IA générative, il colorie selon des règles que vous définissez.",
+        "Détectez automatiquement le trait et colorez-le. Appliquez un remplissage en dégradé en un geste, réduisant nettement le travail de coloriage. Remarque : le remplissage automatique n’utilise pas d’IA générative, il colorie selon des règles que vous définissez.",
       "about.unique.item2.title":
-        "De la couleur d'accent au fond des panneaux, chaque couleur est votre choix",
+        "De la couleur d’accent au fond des panneaux, chaque couleur est votre choix",
       "about.unique.item2.body":
-        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds, mais ce n'est qu'un point de départ. Couleur d'accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l'application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
+        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds, mais ce n’est qu’un point de départ. Couleur d’accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l’application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
       "about.unique.item3.title": "Astuces intégrées",
       "about.unique.item3.body":
-        "Recherchez et apprenez des astuces et techniques pratiques directement dans l'application.",
+        "Recherchez et apprenez des astuces et techniques pratiques directement dans l’application.",
       "about.unique.item4.title": "Filtres de mise en scène",
       "about.unique.item4.body":
-        "Superposez des effets cinématographiques — flou, correction des couleurs, halo, pluie, grain façon pellicule, et plus — sur une scène entière ou sur un lot d'images sélectionnées.",
+        "Superposez des effets cinématographiques — flou, correction des couleurs, halo, pluie, grain façon pellicule, et plus — sur une scène entière ou sur un lot d’images sélectionnées.",
       "about.unique.item5.title": "Remplissage en trame",
       "about.unique.item5.body":
         "Finalisez votre œuvre avec un rendu façon trame de manga. Idéal pour les volants, le tricot, les collants et autres motifs fins fastidieux à dessiner à la main — vous pouvez aussi créer et partager vos propres trames personnalisées.",
@@ -455,18 +455,18 @@
         "Activez le mode pixel dans la personnalisation des pinceaux pour créer des œuvres avec une expression façon pixel art. Combinez-le avec la fonction de trame pour un dithering facile.",
       "about.unique.item8.title": "Emportez votre environnement partout",
       "about.unique.item8.body":
-        "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l'espace de travail, réglages de pinceaux, et même les données de projet. Changez d'appareil et reprenez immédiatement dans l'environnement que vous connaissez.",
-      "about.unique.item9.title": "Jusqu'aux widgets, tout vous appartient",
+        "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l’espace de travail, réglages de pinceaux, et même les données de projet. Changez d’appareil et reprenez immédiatement dans l’environnement que vous connaissez.",
+      "about.unique.item9.title": "Jusqu’aux widgets, tout vous appartient",
       "about.unique.item9.body":
-        "Il existe trois widgets d'écran d'accueil. Le widget d'écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l'application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
+        "Il existe trois widgets d’écran d’accueil. Le widget d’écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l’application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
       "about.unique.item7.title": "Place des œuvres",
       "about.unique.item7.body":
         "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
       "about.unique.item7.link": "Voir la Place des œuvres",
       "about.cta.title":
-        "Vous voulez en savoir plus sur l'utilisation de NIARIM ?",
+        "Vous voulez en savoir plus sur l’utilisation de NIARIM ?",
       "about.cta.body":
-        "Retrouvez ici, sur le web, le même contenu que l'écran d'aide intégré à l'application.",
+        "Retrouvez ici, sur le web, le même contenu que l’écran d’aide intégré à l’application.",
       "about.cta.link": "Voir le guide",
     },
     es: {
@@ -564,11 +564,11 @@
   var D = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var C = {
     ja: ["アニメーション制作で何度も繰り返す工程をただ省くのではなく、仕上がりまで自分でこだわるための時短道具に。NIARIMならではの作画・仕上げ機能をまとめました。","自動線画","ラフの線の中心を捉えて、自動で線画を作成。判定許容範囲、線画幅、線の始まりと終わりの形、手振れ補正を調整し、制御点のドラッグで線の流れまで追い込めます。","自動塗り","あらかじめ決めたパーツごとの色・トーン設定を使い、繰り返し描くキャラクターの色塗りを効率化。線画を直したフレームも更新対象として確認できます。※自動塗りは生成AIを使用した機能ではありません。","演出フィルター","複数フレームをまとめて選び、同じ演出フィルターを一括適用。1枚ずつ同じ仕上げを繰り返す手間を減らしながら、作品全体の見た目を揃えられます。","トーン塗り","色だけでなくトーン表現も塗りの工程に組み込み、漫画的な質感や陰影をアニメーションの各フレームへ自然に取り入れられます。","ピクセルモード","ドット絵に適した描画感へ切り替え、手描きアニメーションとピクセル表現を同じ制作環境の中で行き来できます。","外観・テーマ","アクセント、文字、パネル、メニュー、選択色などを細かくカスタマイズ。長く向き合う制作画面そのものを、自分の道具として整えられます。"],
-    en: ["Tools for the steps animation creators repeat again and again—not just shortcuts, but controls you can refine through the final result. Here are NIARIM's distinctive drawing and finishing tools.","Automatic line art","Detect the center of rough strokes and create clean line art automatically. Adjust detection tolerance, line width, tapering and stabilization, then refine the flow by dragging control points.","Automatic coloring","Use predefined colors and tones for each part to speed up coloring recurring characters. Frames whose line art has changed can also be reviewed for updates. Automatic coloring does not use generative AI.","Effect filters","Select multiple frames and apply the same effect filter in one operation, reducing repetitive finishing work while keeping the look consistent.","Tone coloring","Bring tone patterns into the coloring process alongside color, adding manga-like texture and shading naturally across animation frames.","Pixel mode","Switch to drawing behavior suited to pixel art and move between hand-drawn animation and pixel expression in the same workspace.","Appearance & themes","Fine-tune accents, text, panels, menus, selection colors and more, shaping the workspace itself into your own tool."],
+    en: ["Tools for the steps animation creators repeat again and again—not just shortcuts, but controls you can refine through the final result. Here are NIARIM’s distinctive drawing and finishing tools.","Automatic line art","Detect the center of rough strokes and create clean line art automatically. Adjust detection tolerance, line width, tapering and stabilization, then refine the flow by dragging control points.","Automatic coloring","Use predefined colors and tones for each part to speed up coloring recurring characters. Frames whose line art has changed can also be reviewed for updates. Automatic coloring does not use generative AI.","Effect filters","Select multiple frames and apply the same effect filter in one operation, reducing repetitive finishing work while keeping the look consistent.","Tone coloring","Bring tone patterns into the coloring process alongside color, adding manga-like texture and shading naturally across animation frames.","Pixel mode","Switch to drawing behavior suited to pixel art and move between hand-drawn animation and pixel expression in the same workspace.","Appearance & themes","Fine-tune accents, text, panels, menus, selection colors and more, shaping the workspace itself into your own tool."],
     "zh-Hans": ["把动画制作中反复出现的步骤变成不仅省事、还能精细打磨到成片的工具。这里汇集了 NIARIM 独有的绘制与后期功能。","自动线稿","识别草稿线条中心并自动生成线稿。可调整判定容差、线宽、起收笔与防抖，并拖动控制点继续修整线条走向。","自动上色","使用预先设定的部件颜色与网点规则，提高重复角色的上色效率。修改过线稿的帧也可作为更新对象确认。自动上色不使用生成式 AI。","演出滤镜","可一次选择多个帧并批量应用相同滤镜，减少逐帧重复处理，同时统一作品整体视觉。","网点上色","把网点表现和颜色一起纳入上色流程，自然加入漫画式质感与阴影。","像素模式","切换到适合像素画的绘制方式，在同一制作环境中自由往返于手绘动画和像素表现。","外观与主题","细致自定义强调色、文字、面板、菜单、选中颜色等，把长期使用的制作界面调整成自己的工具。"],
     "zh-Hant": ["把動畫製作中反覆出現的步驟變成不只省事、還能精細打磨到成片的工具。這裡整理了 NIARIM 獨有的繪製與後期功能。","自動線稿","辨識草稿線條中心並自動產生線稿。可調整判定容差、線寬、起收筆與防手震，再拖曳控制點修整線條走向。","自動上色","使用預先設定的部件顏色與網點規則，提高重複角色的上色效率。修改過線稿的影格也可作為更新對象確認。自動上色不使用生成式 AI。","演出濾鏡","可一次選取多個影格並批次套用相同濾鏡，減少逐格重複處理，同時統一作品整體視覺。","網點上色","把網點表現和顏色一起納入上色流程，自然加入漫畫式質感與陰影。","像素模式","切換到適合像素畫的繪製方式，在同一製作環境中自由往返於手繪動畫和像素表現。","外觀與主題","細緻自訂強調色、文字、面板、選單、選取顏色等，把長期使用的製作介面調整成自己的工具。"],
     ko: ["애니메이션 제작에서 반복되는 작업을 단순히 줄이는 데 그치지 않고 결과물까지 직접 다듬을 수 있는 도구로 만들었습니다. NIARIM만의 작화·마무리 기능을 모았습니다.","자동 선화","러프 선의 중심을 감지해 선화를 자동 생성합니다. 판정 허용 범위, 선 굵기, 시작·끝 테이퍼와 손떨림 보정을 조절하고 제어점을 드래그해 흐름까지 다듬을 수 있습니다.","자동 채색","파트별로 미리 정한 색과 톤 설정을 사용해 반복해서 그리는 캐릭터의 채색을 효율화합니다. 선화를 수정한 프레임도 업데이트 대상으로 확인할 수 있습니다. 생성형 AI는 사용하지 않습니다.","연출 필터","여러 프레임을 한꺼번에 선택해 같은 연출 필터를 일괄 적용합니다. 반복 마무리 작업을 줄이면서 작품 전체의 인상을 맞출 수 있습니다.","톤 채색","색뿐 아니라 톤 표현도 채색 과정에 포함해 만화적인 질감과 음영을 각 프레임에 자연스럽게 더할 수 있습니다.","픽셀 모드","픽셀 아트에 맞는 그리기 방식으로 전환해 같은 제작 환경에서 손그림 애니메이션과 픽셀 표현을 오갈 수 있습니다.","외관·테마","강조색, 글자, 패널, 메뉴, 선택 색상 등을 세밀하게 꾸며 오래 사용하는 제작 화면 자체를 나만의 도구로 만들 수 있습니다."],
-    fr: ["Des outils pensés pour les étapes répétitives de l'animation : pas seulement pour aller plus vite, mais pour garder la maîtrise jusqu'au rendu final. Voici les fonctions de dessin et de finition propres à NIARIM.","Line art automatique","Repère le centre des traits du rough et génère automatiquement le line art. Réglez la tolérance, l'épaisseur, les effilés et la stabilisation, puis affinez le tracé en déplaçant les points de contrôle.","Colorisation automatique","Utilisez des couleurs et trames prédéfinies par élément pour accélérer la mise en couleur des personnages récurrents. Les images dont le line art a changé peuvent aussi être vérifiées. Cette fonction n'utilise pas d'IA générative.","Filtres d'effets","Sélectionnez plusieurs images et appliquez le même filtre en une fois afin de réduire les finitions répétitives tout en harmonisant l'ensemble.","Colorisation en trames","Intégrez les trames au processus de colorisation pour ajouter naturellement textures et ombres de style manga aux images de l'animation.","Mode pixel","Passez à un dessin adapté au pixel art et alternez entre animation dessinée à la main et expression pixel dans le même environnement.","Apparence et thèmes","Personnalisez accents, texte, panneaux, menus, couleurs de sélection et plus encore pour faire de l'espace de travail votre propre outil."],
+    fr: ["Des outils pensés pour les étapes répétitives de l’animation : pas seulement pour aller plus vite, mais pour garder la maîtrise jusqu’au rendu final. Voici les fonctions de dessin et de finition propres à NIARIM.","Line art automatique","Repère le centre des traits du rough et génère automatiquement le line art. Réglez la tolérance, l’épaisseur, les effilés et la stabilisation, puis affinez le tracé en déplaçant les points de contrôle.","Colorisation automatique","Utilisez des couleurs et trames prédéfinies par élément pour accélérer la mise en couleur des personnages récurrents. Les images dont le line art a changé peuvent aussi être vérifiées. Cette fonction n’utilise pas d’IA générative.","Filtres d’effets","Sélectionnez plusieurs images et appliquez le même filtre en une fois afin de réduire les finitions répétitives tout en harmonisant l’ensemble.","Colorisation en trames","Intégrez les trames au processus de colorisation pour ajouter naturellement textures et ombres de style manga aux images de l’animation.","Mode pixel","Passez à un dessin adapté au pixel art et alternez entre animation dessinée à la main et expression pixel dans le même environnement.","Apparence et thèmes","Personnalisez accents, texte, panneaux, menus, couleurs de sélection et plus encore pour faire de l’espace de travail votre propre outil."],
     es: ["Herramientas para los pasos que se repiten una y otra vez al animar: no solo para ahorrar trabajo, sino para conservar el control hasta el acabado final. Estas son las funciones de dibujo y acabado propias de NIARIM.","Line art automático","Detecta el centro de los trazos del boceto y genera el line art automáticamente. Ajusta tolerancia, grosor, entrada y salida y estabilización, y perfecciona el flujo arrastrando puntos de control.","Coloreado automático","Usa colores y tramas predefinidos por parte para agilizar el coloreado de personajes recurrentes. También puedes revisar los fotogramas cuyo line art haya cambiado. No utiliza IA generativa.","Filtros de efectos","Selecciona varios fotogramas y aplica el mismo filtro de una vez, reduciendo acabados repetitivos y manteniendo una apariencia coherente.","Coloreado con tramas","Integra las tramas junto al color para añadir de forma natural texturas y sombras de estilo manga a los fotogramas.","Modo píxel","Cambia a un comportamiento de dibujo pensado para pixel art y alterna entre animación dibujada a mano y expresión pixelada en el mismo entorno.","Apariencia y temas","Personaliza acentos, texto, paneles, menús, colores de selección y más para convertir el propio espacio de trabajo en tu herramienta."]
   };
   var keys = ["coreLead","core1.title","core1.body","core2.title","core2.body","core3.title","core3.body","core4.title","core4.body","core5.title","core5.body","core6.title","core6.body"];

@@ -78,7 +78,7 @@
     en: {
       "meta.premium.title": "Premium Plan | NIARIM",
       "meta.premium.description":
-        "See what NIARIM's Premium plan offers and how it differs from the free version.",
+        "See what NIARIM’s Premium plan offers and how it differs from the free version.",
       "premiumPage.compareTitle": "Compare Free and Premium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Premium Plan",
@@ -132,7 +132,7 @@
       "premiumPage.faq.item1":
         "Core creation features available in the free version are never restricted by subscribing to Premium.",
       "premiumPage.faq.item2":
-        "Cancellations and refunds after purchase are governed by Google Play's policies.",
+        "Cancellations and refunds after purchase are governed by Google Play’s policies.",
       "premiumPage.faq.item3":
         "Copyright for work you create (illustrations, animation, etc.) belongs to the rights-holding user, whether made with the free or Premium version.",
       "premiumPage.cta.title": "Start with NIARIM",
@@ -330,22 +330,22 @@
     fr: {
       "meta.premium.title": "Offre Premium | NIARIM",
       "meta.premium.description":
-        "Découvrez ce que propose l'offre Premium de NIARIM et ses différences avec la version gratuite.",
+        "Découvrez ce que propose l’offre Premium de NIARIM et ses différences avec la version gratuite.",
       "premiumPage.compareTitle": "Comparer les offres gratuite et Premium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Offre Premium",
       "premiumPage.lead":
-        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. L'offre Premium supprime les publicités et ajoute des outils supplémentaires pour la finition.",
+        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l’export vidéo. L’offre Premium supprime les publicités et ajoute des outils supplémentaires pour la finition.",
       "premiumPage.priceNote":
-        "Les prix et les conditions d'achat peuvent changer. Vérifiez les tarifs et les conditions en vigueur sur Google Play avant votre achat.",
+        "Les prix et les conditions d’achat peuvent changer. Vérifiez les tarifs et les conditions en vigueur sur Google Play avant votre achat.",
       "premiumPage.free.title": "Gratuit",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
         "Toutes les fonctionnalités de création essentielles (dessin, animation, édition, audio)",
-      "premiumPage.free.item2": "Export vidéo (jusqu'à 1920×1920)",
+      "premiumPage.free.item2": "Export vidéo (jusqu’à 1920×1920)",
       "premiumPage.free.item3": "Publicités affichées",
       "premiumPage.free.item4":
-        "Le générique de fin officiel de NIARIM est ajouté automatiquement à l'export (non modifiable ni supprimable)",
+        "Le générique de fin officiel de NIARIM est ajouté automatiquement à l’export (non modifiable ni supprimable)",
       "premiumPage.free.item5": "Créez et exportez gratuitement jusqu’à 90 secondes. Pour les projets longs, vous pouvez exporter les 90 premières secondes.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Forfait mensuel",
@@ -360,7 +360,7 @@
       "premiumPage.premium.yearly.fullPrice": "6 600 \u00a5",
       "premiumPage.premium.item1.title": "Sans publicité",
       "premiumPage.premium.item1.body":
-        "Supprime toutes les publicités dans l'application.",
+        "Supprime toutes les publicités dans l’application.",
       "premiumPage.premium.item2.title": "Affichage du logo final NIARIM",
       "premiumPage.premium.item2.body": "Tant que l’avantage est actif, affichez ou masquez le logo officiel par projet dans la timeline.",
       "premiumPage.premium.item3.title": "Filigrane personnalisé",
@@ -368,7 +368,7 @@
         "Ajoutez votre propre filigrane (image ou texte) à votre œuvre.",
       "premiumPage.premium.item4.title": "Courbe de tons",
       "premiumPage.premium.item4.body":
-        "Un outil de correction des couleurs pour la finition, permettant d'ajuster finement l'équilibre des tons clairs/foncés via une courbe.",
+        "Un outil de correction des couleurs pour la finition, permettant d’ajuster finement l’équilibre des tons clairs/foncés via une courbe.",
       "premiumPage.premium.item5.title": "Réglage des niveaux",
       "premiumPage.premium.item5.body":
         "Ajustez les niveaux de noir, de blanc et les tons moyens pour finaliser les couleurs de votre œuvre.",
@@ -376,22 +376,22 @@
       "premiumPage.premium.item6.body": "Créez et exportez jusqu’à 2 heures. Une fois l’avantage expiré, le projet reste disponible et ses 90 premières secondes peuvent être exportées.",
       "premiumPage.premium.item7.title": "Plus de publications communautaires",
       "premiumPage.premium.item7.body":
-        "Publiez jusqu'à 3 œuvres par jour dans la Place des œuvres, contre 1 par jour avec le plan gratuit.",
+        "Publiez jusqu’à 3 œuvres par jour dans la Place des œuvres, contre 1 par jour avec le plan gratuit.",
       "premiumPage.premium.automation.title":
         "Automatisations personnalisées (enregistrement d’actions)",
       "premiumPage.premium.automation.body":
         "Enregistrez une suite d’actions sur la toile ou la chronologie, puis rejouez-la pendant votre travail.",
-      "premiumPage.faq.title": "À propos de l'offre Premium",
+      "premiumPage.faq.title": "À propos de l’offre Premium",
       "premiumPage.faq.item1":
-        "Les fonctionnalités de création de base disponibles dans la version gratuite ne sont jamais restreintes par l'abonnement Premium.",
+        "Les fonctionnalités de création de base disponibles dans la version gratuite ne sont jamais restreintes par l’abonnement Premium.",
       "premiumPage.faq.item2":
         "Les annulations et remboursements après achat sont régis par les règles de Google Play.",
       "premiumPage.faq.item3":
-        "Les droits d'auteur des œuvres créées (illustrations, animations, etc.) appartiennent à l'utilisateur titulaire des droits, que ce soit avec la version gratuite ou Premium.",
+        "Les droits d’auteur des œuvres créées (illustrations, animations, etc.) appartiennent à l’utilisateur titulaire des droits, que ce soit avec la version gratuite ou Premium.",
       "premiumPage.cta.title": "Commencez avec NIARIM",
       "premiumPage.cta.body":
         "Pourquoi ne pas commencer à animer de vos propres mains, dès la version gratuite ?",
-      "premiumPage.cta.link": "Télécharger l'application",
+      "premiumPage.cta.link": "Télécharger l’application",
     },
     es: {
       "meta.premium.title": "Plan Premium | NIARIM",

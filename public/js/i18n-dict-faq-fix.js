@@ -38,7 +38,7 @@
       "faq.a3":
         "The app is provided for Android devices. It also supports connecting a drawing tablet or pen display, as well as Galaxy DeX mode and the S Pen. Please check the Google Play listing for details on supported OS versions.",
       "faq.a6":
-        "No account registration is required to create your work. Your projects and creations are stored only on your device and are never sent to the developer's servers. However, signing in with a Google account is required to publish your work.",
+        "No account registration is required to create your work. Your projects and creations are stored only on your device and are never sent to the developer’s servers. However, signing in with a Google account is required to publish your work.",
       "faq.a7.html":
         "To report a bug, request a feature, or ask how to use the app, please use the <a href=\"/contact/\">contact form</a>.",
     },
@@ -78,11 +78,11 @@
     fr: {
       "faq.viewAll": "Voir toutes les questions",
       "faq.a2":
-        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l'export vidéo. Elle affiche des publicités et ajoute automatiquement la marque de fin officielle de NIARIM. Les tarifs précis sont disponibles sur la fiche Google Play.",
+        "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l’export vidéo. Elle affiche des publicités et ajoute automatiquement la marque de fin officielle de NIARIM. Les tarifs précis sont disponibles sur la fiche Google Play.",
       "faq.a3":
-        "L'application est proposée pour les appareils Android. Elle prend également en charge la connexion d'une tablette graphique ou d'un écran-tablette, ainsi que le mode Galaxy DeX et le S Pen. Veuillez consulter la fiche Google Play pour le détail des versions du système compatibles.",
+        "L’application est proposée pour les appareils Android. Elle prend également en charge la connexion d’une tablette graphique ou d’un écran-tablette, ainsi que le mode Galaxy DeX et le S Pen. Veuillez consulter la fiche Google Play pour le détail des versions du système compatibles.",
       "faq.a6":
-        "Aucune création de compte n'est nécessaire pour créer votre œuvre. Vos projets et créations restent stockés uniquement sur votre appareil et ne sont jamais envoyés aux serveurs du développeur. Cependant, la connexion avec un compte Google est nécessaire pour publier votre œuvre.",
+        "Aucune création de compte n’est nécessaire pour créer votre œuvre. Vos projets et créations restent stockés uniquement sur votre appareil et ne sont jamais envoyés aux serveurs du développeur. Cependant, la connexion avec un compte Google est nécessaire pour publier votre œuvre.",
       "faq.a7.html":
         "Pour signaler un problème, demander une fonctionnalité ou poser une question sur l’utilisation de l’application, utilisez le <a href=\"/contact/\">formulaire de contact</a>.",
     },
