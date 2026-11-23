@@ -189,6 +189,27 @@
 .nr-store-button.is-live:hover {
   transform: translateY(-2px);
 }
+/* Google's official badge is shown as is: no frame, shadow or recolouring
+   (Google Play badge guidelines). The PNG carries its own clear space. */
+.nr-play-badge-link {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 10px;
+}
+.nr-play-badge-link:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+.nr-play-badge {
+  display: block;
+  width: auto;
+  height: 72px;
+}
+.nr-play-trademark {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
 .nr-hero-feature-link {
   color: #fff !important;
   text-decoration: underline;

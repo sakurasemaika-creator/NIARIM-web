@@ -205,19 +205,18 @@
             </div>
             <div class="nr-store-row">
               <a
-                class="nr-store-button"
+                class="nr-play-badge-link"
                 hidden
                 aria-describedby="nr-store-notice"
                 data-play-store-link
-              >
-                <span class="nr-play-mark" aria-hidden="true">▶</span>
-                <span class="nr-store-label"
-                  ><small>Google Play</small
-                  ><strong data-i18n="refresh.hero.storeSoon"
-                    >Google Playで入手</strong
-                  ></span
-                >
-              </a>
+                ><img
+                  class="nr-play-badge"
+                  data-play-badge
+                  alt=""
+                  width="646"
+                  height="250"
+                  decoding="async"
+              /></a>
               <a
                 href="/features/"
                 class="nr-hero-feature-link"
@@ -232,6 +231,14 @@
               data-play-release-i18n="refresh.hero.storeNote"
             >
               Google Playでの配信を準備しています。
+            </p>
+            <p
+              class="nr-play-trademark"
+              data-play-release-only
+              hidden
+              data-i18n="refresh.playBadge.trademark"
+            >
+              Google Play および Google Play ロゴは Google LLC の商標です。
             </p>
           </div>
           <div
@@ -1021,12 +1028,14 @@
             配信が始まり次第、ここにGoogle Playへのリンクを掲載します。
           </p>
           <div class="nr-actions nr-actions-center">
-            <a
-              class="nr-btn nr-btn-primary"
-              hidden
-              data-play-store-link
-              data-i18n="refresh.hero.storeSoon"
-              >Google Playで入手</a
+            <a class="nr-play-badge-link" hidden data-play-store-link
+              ><img
+                class="nr-play-badge"
+                data-play-badge
+                alt=""
+                width="646"
+                height="250"
+                decoding="async" /></a
             ><a
               class="nr-btn nr-btn-secondary"
               href="/features/"

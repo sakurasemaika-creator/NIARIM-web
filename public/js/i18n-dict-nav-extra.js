@@ -7,6 +7,8 @@
   var DATA = {
     ja: {
       "nav.releaseInfo": "配信情報",
+      "refresh.playBadge.alt": "Google Play で手に入れよう",
+      "refresh.playBadge.trademark": "Google Play および Google Play ロゴは Google LLC の商標です。",
       "a11y.skipToMain": "本文へスキップ",
       "a11y.globalNav": "グローバルナビゲーション",
       "a11y.openMenu": "メニューを開く",
@@ -31,6 +33,8 @@
     },
     en: {
       "nav.releaseInfo": "Release info",
+      "refresh.playBadge.alt": "Get it on Google Play",
+      "refresh.playBadge.trademark": "Google Play and the Google Play logo are trademarks of Google LLC.",
       "a11y.skipToMain": "Skip to main content",
       "a11y.globalNav": "Global navigation",
       "a11y.openMenu": "Open menu",
@@ -55,6 +59,8 @@
     },
     "zh-Hans": {
       "nav.releaseInfo": "上线信息",
+      "refresh.playBadge.alt": "下载应用，请到 Google Play",
+      "refresh.playBadge.trademark": "Google Play 和 Google Play 徽标是 Google LLC 的商标。",
       "a11y.skipToMain": "跳至主要内容",
       "a11y.globalNav": "全局导航",
       "a11y.openMenu": "打开菜单",
@@ -79,6 +85,8 @@
     },
     "zh-Hant": {
       "nav.releaseInfo": "上線資訊",
+      "refresh.playBadge.alt": "立即前往 Google Play 下載",
+      "refresh.playBadge.trademark": "Google Play 和 Google Play 標誌是 Google LLC 的商標。",
       "a11y.skipToMain": "跳至主要內容",
       "a11y.globalNav": "全域導覽",
       "a11y.openMenu": "開啟選單",
@@ -103,6 +111,8 @@
     },
     ko: {
       "nav.releaseInfo": "출시 안내",
+      "refresh.playBadge.alt": "Google Play에서 다운로드",
+      "refresh.playBadge.trademark": "Google Play 및 Google Play 로고는 Google LLC의 상표입니다.",
       "a11y.skipToMain": "본문으로 건너뛰기",
       "a11y.globalNav": "전체 내비게이션",
       "a11y.openMenu": "메뉴 열기",
@@ -127,6 +137,8 @@
     },
     fr: {
       "nav.releaseInfo": "Disponibilité",
+      "refresh.playBadge.alt": "Disponible sur Google Play",
+      "refresh.playBadge.trademark": "Google Play et le logo Google Play sont des marques de Google LLC.",
       "a11y.skipToMain": "Passer au contenu principal",
       "a11y.globalNav": "Navigation principale",
       "a11y.openMenu": "Ouvrir le menu",
@@ -151,6 +163,8 @@
     },
     es: {
       "nav.releaseInfo": "Disponibilidad",
+      "refresh.playBadge.alt": "Disponible en Google Play",
+      "refresh.playBadge.trademark": "Google Play y el logotipo de Google Play son marcas comerciales de Google LLC.",
       "a11y.skipToMain": "Saltar al contenido principal",
       "a11y.globalNav": "Navegación principal",
       "a11y.openMenu": "Abrir el menú",
