@@ -72,6 +72,13 @@
   line-height: 1.85;
 }
 
+/* 条文は項・号ごとに改行した1つの文（アプリの文と同じ）。翻訳した本文の
+   改行をそのまま出す（出さないと「1.」「2.」「・」が1つの段落に続いた）。 */
+.legal-body p[data-i18n],
+.legal-body p[data-i18n-html] {
+  white-space: pre-line;
+}
+
 /* 既定ではaはcolor:inheritのため、本文中の「こちら」等のリンクが
    周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */
 .legal-body a {

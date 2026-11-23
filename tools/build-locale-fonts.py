@@ -39,6 +39,7 @@ def main():
         "Kuramubon": ("Kuramubon-latin.woff2", app_fonts / "Kuramubon.otf"),
         "HakkouMincho": ("HakkouMincho-latin.woff2", app_fonts / "HakkouMincho.ttf"),
         "HakkouMinchoCJK": ("HakkouMincho-subset.woff2", app_fonts / "HakkouMincho.ttf"),
+        "KuramubonCJK": ("Kuramubon-subset.woff2", app_fonts / "Kuramubon.otf"),
     }
     for family, characters in supplements.items():
         filename, source = brand_faces.get(family, (
