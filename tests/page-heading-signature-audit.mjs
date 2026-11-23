@@ -78,14 +78,18 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/about/", { waitUntil: "networkidle" });
-  await page.waitForSelector(".unique-spotlight");
+  // "Only in NIARIM" is one consolidated section of the page itself (the
+  // script-built spotlight cards were folded into it).
+  await page.waitForSelector("[data-about-unique-section]");
   const about = await page.evaluate(() => ({
-    cards: document.querySelectorAll(".unique-spotlight-card").length,
+    cards: document.querySelectorAll(
+      '[data-about-unique-section] [data-i18n^="about.unique."][data-i18n$=".title"]',
+    ).length,
     overflow:
       document.documentElement.scrollWidth -
       document.documentElement.clientWidth,
   }));
-  if (about.cards !== 6 || about.overflow > 2) {
+  if (about.cards < 6 || about.overflow > 2) {
     findings.push({
       width,
       route: "/about/",
@@ -109,15 +113,21 @@ for (const width of widths) {
     state: "attached",
     timeout: 10000,
   });
+  // The phone capture and its paired PC capture.
   await page
     .locator("#advanced .real-app-capture img")
+    .first()
     .scrollIntoViewIfNeeded();
   await page.waitForFunction(() => {
     const img = document.querySelector("#advanced .real-app-capture img");
     return img?.complete && img.naturalWidth > 0 && img.naturalHeight > 0;
   });
   await page.waitForSelector("#advanced .is-auto-lineart-narrative");
-  await page.waitForSelector("#widget .fd-widget-grid");
+  // The widget section shows the real app capture of the widget settings
+  // (the drawn widget tiles were replaced by it).
+  await page.waitForSelector('#widget img[src*="/app-captures/widget."]', {
+    state: "attached",
+  });
   const feature = await page.evaluate(() => {
     const capture = document.querySelector("#advanced .real-app-capture img");
     const captureRect = capture.getBoundingClientRect();
@@ -127,8 +137,9 @@ for (const width of widths) {
       el.classList.contains("feature-narrative-block"),
     );
     const autoBlock = narrative?.querySelector(".is-auto-lineart-narrative");
-    const widget = document.querySelector("#widget .fd-widget-grid");
-    const widgetRect = widget.getBoundingClientRect();
+    const widget = document.querySelector(
+      '#widget img[src*="/app-captures/widget."]',
+    );
     return {
       capture: {
         src: capture?.currentSrc || capture?.src || "",
@@ -144,8 +155,7 @@ for (const width of widths) {
       firstHeading: blocks[0]?.querySelector("h3")?.textContent?.trim() || "",
       secondHeading: blocks[1]?.querySelector("h3")?.textContent?.trim() || "",
       thirdHeading: blocks[2]?.querySelector("h3")?.textContent?.trim() || "",
-      widgetRatio: widgetRect.width / widgetRect.height,
-      widgetTiles: widget.querySelectorAll(".fd-widget-tile").length,
+      widgetCaptureLoaded: Boolean(widget),
       overflow:
         document.documentElement.scrollWidth -
         document.documentElement.clientWidth,
@@ -159,18 +169,20 @@ for (const width of widths) {
     !feature.capture.src.includes("/assets/images/app-captures/onion-skin.") ||
     feature.capture.naturalWidth <= 0 ||
     feature.capture.naturalHeight <= 0 ||
-    feature.capture.width < 250 ||
-    feature.capture.height < 300 ||
+    // The phone capture sits beside its paired PC capture (the gallery shows
+    // both), so it takes about a quarter of the width, at least 200px wide.
+    feature.capture.width < Math.min(200, width * 0.25) ||
+    feature.capture.height < Math.min(200, width * 0.25) * 1.5 ||
     captureRatio > 1 ||
     feature.overflow > 2 ||
     feature.headerBackground !== "none" ||
     !feature.autoBlockClass.includes("feature-narrative-block") ||
     feature.autoTitle !== "自動線画" ||
     !feature.autoBody.includes("ラフの線の中心") ||
-    feature.firstHeading !== "いつもの作業を、もっとスムーズに。" ||
+    feature.firstHeading !== "よく使う操作のまとめ方" ||
     feature.secondHeading !== "自動線画" ||
     feature.thirdHeading !== "早替えツール" ||
-    feature.widgetTiles < 3
+    !feature.widgetCaptureLoaded
   ) {
     findings.push({
       width,

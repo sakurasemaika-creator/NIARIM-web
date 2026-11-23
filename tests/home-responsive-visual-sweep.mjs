@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 
 const widths = [
   320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760, 900,
@@ -13,7 +14,7 @@ const outDir = path.resolve(
 
 await fs.mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({ locale: "ja-JP" });
 const page = await context.newPage();
 const metrics = [];

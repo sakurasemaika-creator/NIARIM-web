@@ -4,7 +4,7 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const widths = [1024, 1180, 1280, 1440, 1920];
 const issues = [];
-const browser = await chromium.launch(launchOptions);
+const browser = await chromium.launch(launchOptions());
 
 for (const width of widths) {
   const context = await browser.newContext({
@@ -13,6 +13,61 @@ for (const width of widths) {
   });
   const page = await context.newPage();
   await page.goto(baseURL + "/", { waitUntil: "networkidle" });
+  // The home rebuilt on 2026-11-09 (ea80ca47) shows the real captures as
+  // phone + PC pairs in #nr-gallery (no mock rows to install captures into).
+  if ((await page.locator("#nr-gallery").count()) > 0) {
+    const cards = await page.evaluate(async () => {
+      const items = [
+        ...document.querySelectorAll("#nr-gallery .nr-gallery-item"),
+      ];
+      const out = [];
+      for (const item of items) {
+        item.scrollIntoView({ block: "center" });
+        const visual = item.querySelector(".nr-gallery-visual");
+        const shots = [...item.querySelectorAll(".nr-shot")];
+        for (const img of item.querySelectorAll("img"))
+          await img.decode().catch(() => {});
+        const vr = visual?.getBoundingClientRect();
+        const box = (el) => {
+          const r = el.getBoundingClientRect();
+          return { left: r.left, right: r.right, width: r.width };
+        };
+        const shotBoxes = shots.map(box);
+        out.push({
+          name: item.querySelector("[data-capture]")?.dataset.capture || "",
+          visual: vr
+            ? { left: vr.left, right: vr.right, width: vr.width }
+            : null,
+          shots: shotBoxes,
+          loaded: [...item.querySelectorAll("img")].every(
+            (img) => img.complete && img.naturalWidth > 0,
+          ),
+        });
+      }
+      return out;
+    });
+    if (cards.length !== 9)
+      issues.push({ width, kind: "home-gallery-count", actual: cards.length });
+    for (const card of cards) {
+      if (!card.visual || !card.shots.length) {
+        issues.push({ width, kind: "home-gallery-capture-missing", card });
+        continue;
+      }
+      if (!card.loaded)
+        issues.push({ width, kind: "home-gallery-capture-not-loaded", card });
+      if (card.visual.left < 0 || card.visual.right > width + 1)
+        issues.push({ width, kind: "home-media-outside", card });
+      const left = Math.min(...card.shots.map((shot) => shot.left));
+      const right = Math.max(...card.shots.map((shot) => shot.right));
+      if (left < card.visual.left - 2 || right > card.visual.right + 2)
+        issues.push({ width, kind: "home-capture-outside-media", card });
+      const visualCenter = (card.visual.left + card.visual.right) / 2;
+      if (Math.abs(visualCenter - (left + right) / 2) > 3)
+        issues.push({ width, kind: "home-capture-center-axis-drift", card });
+    }
+    await context.close();
+    continue;
+  }
   await page.waitForFunction(() =>
     [...document.scripts].some((script) =>
       script.src.includes("/js/user-request-fixes.js"),

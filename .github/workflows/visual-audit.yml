@@ -91,6 +91,11 @@ jobs:
         run: node tests/help-interaction-audit.mjs
       - name: Audit intermediate Home widths and capture complete hero sections
         run: AUDIT_HERO_DIR=artifacts/intermediate-width-home node tests/intermediate-width-home-audit.mjs
+      - name: Audit Home at every breakpoint-adjacent width in seven languages
+        env:
+          AUDIT_PAGES: /
+          AUDIT_WIDTHS: 320,339,360,375,390,414,480,520,543,559,560,600,640,641,642,700,732,733,759,760,768,834,900,901,1023,1024,1100,1199,1200,1279,1280,1366,1440,1600,1920
+        run: node tests/modern-width-visual-audit.mjs
       - name: Audit latest AI trust additions with real captures
         run: node tests/ai-trust-visual-audit.mjs
       - name: Run autonomous section-by-section interaction audit
@@ -144,6 +149,7 @@ jobs:
           path: |
             artifacts/autonomous-browser-audit/
             artifacts/intermediate-width-home/
+            artifacts/modern-width-audit/
           if-no-files-found: error
           retention-days: 14
 

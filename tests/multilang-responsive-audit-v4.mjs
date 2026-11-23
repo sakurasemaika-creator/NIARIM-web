@@ -44,9 +44,12 @@ report.findings = report.findings.filter((finding) => {
     removedLegacyHero += 1;
     return false;
   }
+  // 7: the seventh legacy preview card. 0: the home rebuilt on 2026-11-09
+  // (ea80ca47) has no preview scroller; its nine real captures are checked
+  // by mock-detail-audit.
   if (
     finding.kind === "app-preview-card-count" &&
-    finding.detail?.actual === 7
+    (finding.detail?.actual === 7 || finding.detail?.actual === 0)
   ) {
     removedLegacyGalleryCount += 1;
     return false;

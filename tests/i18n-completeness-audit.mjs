@@ -21,6 +21,12 @@ const routes = [
   "/404.html",
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
+// Empty on purpose: in Japanese and Korean the link comes first in the
+// sentence ("プライバシーポリシーに同意のうえ送信する").
+const intentionallyEmpty = {
+  ja: ["contact.form.agree.pre"],
+  ko: ["contact.form.agree.pre"],
+};
 
 const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({
@@ -91,8 +97,10 @@ for (const route of routes) {
       });
     }
     for (const key of state.missing) add(route, language, "missing-key", key);
-    for (const key of state.empty)
-      add(route, language, "empty-translation", key);
+    for (const key of state.empty) {
+      if (!intentionallyEmpty[language]?.includes(key))
+        add(route, language, "empty-translation", key);
+    }
   }
 }
 

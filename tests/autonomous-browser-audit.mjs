@@ -251,7 +251,9 @@ async function auditDesignInvariants(page, vp, route) {
   }
 
   if (route === "/") {
-    if (vp === "sp" && state.heroAlign !== "left") {
+    // The legacy hero copy and keyword marquee were removed when the home
+    // was rebuilt on 2026-11-09; check them only where they still exist.
+    if (vp === "sp" && state.heroAlign !== null && state.heroAlign !== "left") {
       finding(vp, route, "design-invariant", {
         rule: "SP hero must remain left aligned",
         actual: state.heroAlign,
@@ -272,8 +274,9 @@ async function auditDesignInvariants(page, vp, route) {
       });
     }
     if (
-      state.marqueeAnimationName !== "marquee-scroll" ||
-      state.marqueeAnimationDuration === "0s"
+      state.marqueeAnimationName !== null &&
+      (state.marqueeAnimationName !== "marquee-scroll" ||
+        state.marqueeAnimationDuration === "0s")
     ) {
       finding(vp, route, "design-invariant", {
         rule: "Feature marquee must animate",
@@ -305,9 +308,11 @@ async function auditDesignInvariants(page, vp, route) {
       actual: state.footerBg,
     });
   }
-  if (route === "/community/" && state.communityCards !== 9) {
+  // The Work Plaza shows only works the server has; the static audit server
+  // answers with an empty catalog, so no fabricated tiles may appear.
+  if (route === "/community/" && state.communityCards !== 0) {
     finding(vp, route, "design-invariant", {
-      rule: "Community preview must show nine ranked tiles",
+      rule: "Work Plaza must not show tiles the server did not send",
       actual: state.communityCards,
     });
   }
@@ -453,6 +458,15 @@ for (const vp of viewports) {
     locale: "ja-JP",
     reducedMotion: "no-preference",
   });
+  // The static server has no Worker API: answer the Work Plaza's request
+  // with an empty public catalog, as the maintained width audit does.
+  await context.route("**/api/community?**", (request) =>
+    request.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ works: [], unavailableReason: null }),
+    }),
+  );
   const page = await context.newPage();
   let currentRoute = "";
   page.on("pageerror", (err) =>

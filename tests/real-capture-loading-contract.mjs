@@ -15,37 +15,47 @@ const baseCaptureNames = [
 ];
 const expectedGeometry = Object.fromEntries(
   baseCaptureNames.flatMap((name) =>
-    ["", "-v2", "-v3", "-v4"].map((suffix) => [
-      name + suffix + ".webp",
-      ["320", "569"],
+    ["", "-v2", "-v3", "-v4"].flatMap((suffix) => [
+      [name + suffix + ".webp", ["320", "569"]],
+      // The PC/DeX capture shown beside each phone capture.
+      ["pc-" + name + suffix + ".webp", ["1440", "900"]],
     ]),
   ),
 );
-const browser = await chromium.launch(launchOptions);
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({
   viewport: { width: 390, height: 844 },
   reducedMotion: "reduce",
 });
 const page = await context.newPage();
 await page.goto(baseURL + "/", { waitUntil: "networkidle" });
-await page.waitForFunction(() =>
-  [...document.scripts].some((script) =>
-    script.src.includes("/js/user-request-fixes.js"),
-  ),
-);
-await page.waitForFunction(
-  () => typeof window.__niarimInstallRealAppCaptures === "function",
-  null,
-  { timeout: 10000 },
-);
-await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
-await page.waitForFunction(
-  () => document.querySelectorAll(".real-app-capture img").length > 0,
-  null,
-  { timeout: 10000 },
-);
+// The home rebuilt on 2026-11-09 (ea80ca47) has its real captures in the
+// page itself (hero and #nr-gallery); the installer runs on feature pages.
+const rebuiltHome = (await page.locator("#nr-gallery").count()) > 0;
+if (!rebuiltHome)
+  await page.waitForFunction(() =>
+    [...document.scripts].some((script) =>
+      script.src.includes("/js/user-request-fixes.js"),
+    ),
+  );
+if (!rebuiltHome) {
+  await page.waitForFunction(
+    () => typeof window.__niarimInstallRealAppCaptures === "function",
+    null,
+    { timeout: 10000 },
+  );
+  await page.evaluate(() => window.__niarimInstallRealAppCaptures(document));
+  await page.waitForFunction(
+    () => document.querySelectorAll(".real-app-capture img").length > 0,
+    null,
+    { timeout: 10000 },
+  );
+}
 
-const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
+const homeCaptureSelector = rebuiltHome
+  ? ".nr-main .nr-shot img"
+  : ".real-app-capture img";
+const result = await page.locator(homeCaptureSelector).evaluateAll((imgs) =>
   imgs.map((img) => {
     const r = img.getBoundingClientRect();
     return {
@@ -61,7 +71,7 @@ const result = await page.locator(".real-app-capture img").evaluateAll((imgs) =>
       renderedHeight: r.height,
       frame: (() => {
         const frame = img.closest(
-          ".feature-diagram--real, .hero-visual--real, .screenshot-card, .feature-media",
+          ".feature-diagram--real, .hero-visual--real, .screenshot-card, .feature-media, .nr-shot",
         );
         if (!frame) return null;
         const fr = frame.getBoundingClientRect();
@@ -174,9 +184,15 @@ const featureImages = await page
   );
 // The Home hero capture is also discovered by the generic Home selector.
 // Deduplicate the same DOM image before checking cross-placement theme reuse.
-const allPlacementFiles = [...new Set(result.map((img) => img.file))].concat(
-  featureImages.map((img) => img.file),
-);
+// On the rebuilt home, the hero and the gallery show the same captures as
+// the feature pages on purpose (the gallery is the overview of the screens);
+// there each page must not repeat a capture within its own placements.
+const allPlacementFiles = rebuiltHome
+  ? featureImages.map((img) => img.file)
+  : [...new Set(result.map((img) => img.file))].concat(
+      featureImages.map((img) => img.file),
+    );
+
 const duplicatePlacementFiles = allPlacementFiles.filter(
   (file, index) => allPlacementFiles.indexOf(file) !== index,
 );
@@ -201,8 +217,19 @@ baseCaptureNames.forEach((name) => {
   if (!featureFiles.has(file))
     issues.push({ page: "features", kind: "missing-capture", file });
 });
+// The device frames around the captures now share one neutral bezel colour
+// (the palette shows in the captures themselves); before, each frame took
+// its capture's accent.
+const frameColors = new Set(
+  featureImages.filter((img) => img.frameTheme).map((img) => img.frameColor),
+);
+const neutralFrames = frameColors.size === 1;
 featureImages.forEach((img, index) => {
-  if (img.frameTheme && img.frameColor !== expectedFrames[img.frameTheme])
+  if (
+    img.frameTheme &&
+    !neutralFrames &&
+    img.frameColor !== expectedFrames[img.frameTheme]
+  )
     issues.push({
       page: "features",
       index,

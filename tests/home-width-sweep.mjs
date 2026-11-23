@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -15,7 +16,7 @@ const outDir = path.resolve(
 );
 await fs.mkdir(outDir, { recursive: true });
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const context = await browser.newContext({ locale: "ja-JP" });
 const page = await context.newPage();
 const metrics = [];

@@ -63,6 +63,119 @@ for (const width of widths) {
     }, language);
     await page.waitForTimeout(180);
 
+    // The home rebuilt on 2026-11-09 (ea80ca47): a copy column and a
+    // showcase of the real PC and phone captures, then the bottom bar.
+    const rebuilt = await page.evaluate(() => {
+      const rectOf = (el) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left,
+          right: r.right,
+          top: r.top + scrollY,
+          bottom: r.bottom + scrollY,
+          width: r.width,
+          height: r.height,
+        };
+      };
+      if (!document.querySelector("#nr-hero-title")) return null;
+      const de = document.documentElement;
+      const inside = (selector) =>
+        [...document.querySelectorAll(selector)]
+          .filter((el) => {
+            const r = el.getBoundingClientRect();
+            return r.width > 0 && (r.left < -2 || r.right > innerWidth + 2);
+          })
+          .map((el) => el.className.toString() || el.tagName);
+      return {
+        hero: rectOf(document.querySelector(".nr-hero")),
+        title: rectOf(document.querySelector("#nr-hero-title")),
+        lead: rectOf(document.querySelector(".nr-hero-lead")),
+        copy: rectOf(document.querySelector(".nr-hero-copy")),
+        action: rectOf(document.querySelector(".nr-hero-feature-link")),
+        showcase: rectOf(document.querySelector(".nr-hero-showcase")),
+        pc: rectOf(document.querySelector(".nr-hero-pc-view")),
+        phone: rectOf(document.querySelector(".nr-hero-sp-view")),
+        outside: inside(".nr-hero *"),
+        clientWidth: de.clientWidth,
+        scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),
+        viewportHeight: innerHeight,
+      };
+    });
+    if (rebuilt) {
+      const id = `${width}px/${language}`;
+      if (captureWidths.has(width)) {
+        const file = `${width}px-${language}-home-hero-section.png`;
+        await page.locator(".nr-hero").screenshot({
+          path: path.join(outDir, file),
+          animations: "disabled",
+        });
+        screenshots.push(file);
+      }
+      if (firstFoldWidths.has(width)) {
+        const file = `first-fold-${width}px-${language}.png`;
+        await page.screenshot({
+          path: path.join(outDir, file),
+          animations: "disabled",
+          fullPage: false,
+        });
+        screenshots.push(file);
+      }
+      const parts = ["hero", "title", "lead", "copy", "action", "showcase"];
+      const missing = parts.filter((part) => !rebuilt[part]?.width);
+      if (missing.length) {
+        failures.push({ id, kind: "missing-hero-part", missing });
+        continue;
+      }
+      if (rebuilt.scrollWidth > rebuilt.clientWidth + 2)
+        failures.push({ id, kind: "horizontal-overflow", state: rebuilt });
+      if (rebuilt.outside.length)
+        failures.push({
+          id,
+          kind: "hero-part-outside-viewport",
+          parts: rebuilt.outside.slice(0, 6),
+        });
+      // The name and the way to the features are in the first screen.
+      if (rebuilt.title.bottom > rebuilt.viewportHeight)
+        failures.push({ id, kind: "title-below-first-fold", state: rebuilt });
+      if (firstFoldWidths.has(width) && rebuilt.action.top > 2 * 667)
+        failures.push({ id, kind: "action-too-far-down", state: rebuilt });
+      // Side by side, the captures stay beside the copy; stacked, below it.
+      const sideBySide = rebuilt.showcase.left >= rebuilt.copy.right - 2;
+      if (sideBySide) {
+        if (overlaps(rebuilt.copy, rebuilt.showcase))
+          failures.push({
+            id,
+            kind: "copy-showcase-collision",
+            state: rebuilt,
+          });
+      } else if (rebuilt.showcase.top < rebuilt.copy.bottom - 2) {
+        failures.push({ id, kind: "showcase-over-copy", state: rebuilt });
+      }
+      if (rebuilt.pc && rebuilt.pc.width < Math.min(260, width * 0.6))
+        failures.push({ id, kind: "pc-capture-too-small", state: rebuilt });
+      if (rebuilt.phone && rebuilt.phone.width < Math.min(90, width * 0.2))
+        failures.push({ id, kind: "phone-capture-too-small", state: rebuilt });
+      // One pixel across a breakpoint must not jump the captures' size.
+      const previous = statesByLanguage.get(language);
+      if (
+        previous?.rebuilt &&
+        width - previous.width <= 2 &&
+        previous.state.pc &&
+        rebuilt.pc &&
+        ratioJump(previous.state.pc.width, rebuilt.pc.width) > 0.35
+      ) {
+        failures.push({
+          id,
+          kind: "breakpoint-capture-size-jump",
+          previous: previous.state.pc.width,
+          current: rebuilt.pc.width,
+        });
+      }
+      statesByLanguage.set(language, { width, state: rebuilt, rebuilt: true });
+      continue;
+    }
+
     const state = await page.evaluate(() => {
       const rectOf = (el) => {
         if (!el) return null;

@@ -1,4 +1,5 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import assert from "node:assert/strict";
 
 const base = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
@@ -6,7 +7,7 @@ const ids = ["aaaaaaaaaaa", "bbbbbbbbbbb", "ccccccccccc"];
 const available = new Map(ids.map((id) => [id, true]));
 let checks = 0;
 let rankingReads = 0;
-const app = await chromium.launch({ headless: true });
+const app = await chromium.launch(launchOptions());
 try {
   const page = await app.newPage({
     viewport: { width: 390, height: 844 },

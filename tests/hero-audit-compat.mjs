@@ -153,10 +153,14 @@ export async function auditCanonicalHeroRatio(
             visible(".hero-preview-card > .hero-app-preview-source") ||
             visible(".hero-visual.fd-app-screen") ||
             visible(".hero-visual");
-          if (!element) return null;
+          // The home rebuilt on 2026-11-09 (ea80ca47) has no reconstructed
+          // app screen in its hero; it shows the real captures in #nr-gallery.
+          if (!element)
+            return document.querySelector("#nr-hero-title") ? "rebuilt" : null;
           return element.getBoundingClientRect().toJSON();
         });
         const id = `${viewport.name}/${language}/`;
+        if (hero === "rebuilt") continue;
         if (!hero) {
           failures.push({ id, kind: "hero-missing" });
           continue;

@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const page = await browser.newPage();
 const widths = [
   320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760, 900,

@@ -90,7 +90,12 @@ try {
     throw new Error("Japanese text remains in English privacy AI clause");
   if (/[ぁ-んァ-ン一-龯]/.test(updated))
     throw new Error("Japanese text remains in English updated date");
-  if (!updated.includes("September 4, 2026"))
+  // The date of the current text, written the English way.
+  if (
+    !/^Last updated: (January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}$/.test(
+      updated,
+    )
+  )
     throw new Error(`Unexpected English updated date: ${updated}`);
   await page.screenshot({
     path: `${out}/pc-privacy-ai-training-en.png`,

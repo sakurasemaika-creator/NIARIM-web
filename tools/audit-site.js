@@ -57,6 +57,15 @@ const WIDTHS = [320, 375, 768, 1024, 1280];
     const errors = [];
     const failed = [];
     const external = [];
+    // The static server has no Worker API: answer the Work Plaza's request
+    // with an empty public catalog, as the browser audits do.
+    await page.route("**/api/community?**", (request) =>
+      request.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ works: [], unavailableReason: null }),
+      }),
+    );
     page.on("console", (m) => {
       if (m.type() === "error") errors.push(m.text());
     });

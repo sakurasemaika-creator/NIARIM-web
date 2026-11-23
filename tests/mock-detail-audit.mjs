@@ -24,6 +24,14 @@ for (const viewport of viewports) {
         window.NIARIM_I18N?.applyLang?.(lang, { persist: false });
       }, language);
       await page.waitForTimeout(250);
+      // Lazily loaded captures load once they are scrolled into view.
+      await page.evaluate(async () => {
+        for (const img of document.querySelectorAll(".nr-gallery-item img")) {
+          img.scrollIntoView({ block: "center" });
+          await img.decode().catch(() => {});
+        }
+        scrollTo(0, 0);
+      });
 
       const state = await page.evaluate(() => {
         const rawRect = (el) => {
@@ -204,6 +212,17 @@ for (const viewport of viewports) {
               }
             : null,
           galleryCount: cards.length,
+          // The home rebuilt on 2026-11-09 shows nine real app captures in
+          // .nr-gallery instead of the hero mock and the six-card scroller.
+          realGallery: [...document.querySelectorAll(".nr-gallery-item")].map(
+            (item) => {
+              const img = item.querySelector("img");
+              return {
+                loaded: Boolean(img?.complete && img.naturalWidth > 0),
+                src: img?.currentSrc || img?.getAttribute("src") || "",
+              };
+            },
+          ),
         };
       });
 
@@ -291,7 +310,20 @@ for (const viewport of viewports) {
           failures.push({ id, kind: "screen-reproduction-ad-visible", screen });
         }
       }
-      if (route === "/") {
+      if (route === "/" && state.realGallery.length) {
+        if (state.realGallery.length !== 9) {
+          failures.push({
+            id,
+            kind: "real-gallery-count",
+            actual: state.realGallery.length,
+          });
+        }
+        for (const item of state.realGallery) {
+          if (!item.loaded) {
+            failures.push({ id, kind: "real-gallery-capture-missing", item });
+          }
+        }
+      } else if (route === "/") {
         if (!state.hero) {
           failures.push({ id, kind: "hero-screen-missing" });
         } else {
@@ -367,8 +399,8 @@ console.log(
         "slider geometry",
         "unique theme accent/bezel",
         "no ads in screen reproductions",
-        "hero screen/theme/artwork",
-        "six-card gallery",
+        "home: nine real captures load (legacy hero screen/theme/artwork)",
+        "gallery count",
         "gallery end visibility",
         "horizontal overflow",
       ],

@@ -113,14 +113,23 @@ for (const width of widths) {
     if (card.index >= 2 && card.childRadius !== null && card.childRadius < 10)
       findings.push({ width, kind: "screenshot-inner-radius", card });
   });
-  if (!state.bodyBackgroundImage || state.bodyBackgroundImage === "none")
+  // The page background depth, the surfaced footer columns and the final CTA
+  // card belong to the home before its rebuild on 2026-11-09 (ea80ca47; the
+  // feature rows and screenshot cards above are gone too). Check them only
+  // on that layout; the overflow and feature navigation checks below apply
+  // to every layout.
+  const legacyHome = state.rows.length > 0 || state.cards.length > 0;
+  if (
+    legacyHome &&
+    (!state.bodyBackgroundImage || state.bodyBackgroundImage === "none")
+  )
     findings.push({
       width,
       kind: "background-depth",
       actual: state.bodyBackgroundImage,
     });
   if (!state.footer) findings.push({ width, kind: "footer-missing" });
-  else {
+  else if (legacyHome) {
     // The separator is a purely visual surface. Chromium may normalize generated
     // text content to `none`; audit the rendered 1px gradient (or real border)
     // instead of coupling visual correctness to pseudo-element text serialization.
@@ -140,9 +149,9 @@ for (const width of widths) {
         footer: state.footer,
       });
   }
-  if (!state.finalCta)
-    findings.push({ width, kind: "final-cta-surface-missing" });
-  else {
+  if (!state.finalCta) {
+    if (legacyHome) findings.push({ width, kind: "final-cta-surface-missing" });
+  } else {
     const minCtaPadding = width <= 640 ? 20 : 24;
     if (
       state.finalCta.paddingLeft < minCtaPadding ||

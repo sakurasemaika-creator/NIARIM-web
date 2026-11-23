@@ -12,16 +12,19 @@ const widths = [
   834, 900, 1024, 1180, 1280, 1366, 1440, 1600, 1920,
 ];
 const targets = [
-  { route: "/", name: "home-hero", selector: ".hero" },
+  // The home rebuilt on 2026-11-09 (ea80ca47): hero, gallery of the real
+  // captures and the closing download section (the old selectors still
+  // apply if that layout comes back).
+  { route: "/", name: "home-hero", selector: ".nr-hero, .hero" },
   {
     route: "/",
     name: "home-gallery",
-    selector: ".screenshot-scroller",
+    selector: "#nr-gallery, .screenshot-scroller",
   },
   {
     route: "/",
     name: "home-final-cta",
-    selector: ".final-cta .container",
+    selector: "#download, .final-cta .container",
   },
   { route: "/features/", name: "features-drawing", selector: "#drawing" },
   {

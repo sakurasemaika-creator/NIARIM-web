@@ -179,15 +179,21 @@ for (const vp of viewports) {
     });
     screenshots.push(`${prefix}__home__full.png`);
     await shot(page.locator(".hero-visual"), `${prefix}__home__hero.png`);
-    const cards = page.locator(".screenshot-scroller > .screenshot-card");
+    // The home rebuilt on 2026-11-09 (ea80ca47) shows nine real captures in
+    // #nr-gallery instead of the seven-card preview scroller.
+    const rebuilt = (await page.locator("#nr-gallery").count()) > 0;
+    const cards = rebuilt
+      ? page.locator("#nr-gallery .nr-gallery-item")
+      : page.locator(".screenshot-scroller > .screenshot-card");
+    const expectedCards = rebuilt ? 9 : expectedGalleryCards;
     const cardCount = await cards.count();
-    if (cardCount !== expectedGalleryCards)
+    if (cardCount !== expectedCards)
       failures.push({
         kind: "gallery-card-count",
         viewport: vp.name,
         language,
         actual: cardCount,
-        expected: expectedGalleryCards,
+        expected: expectedCards,
       });
     await shot(
       page.locator(".screenshot-scroller"),
@@ -196,7 +202,7 @@ for (const vp of viewports) {
     for (let i = 0; i < cardCount; i++) {
       await shot(cards.nth(i), `${prefix}__home__gallery-card-${i + 1}.png`);
     }
-    if (cardCount) {
+    if (cardCount && !rebuilt) {
       await cards.last().scrollIntoViewIfNeeded();
       await page.waitForTimeout(100);
       const end = await page

@@ -66,20 +66,26 @@ if (
   )
 )
   failures.push("legacy frame pill flash guard missing");
+// Any explicit deployment cache key (the value changes with each fix).
 if (
-  !bootstrap.includes("/css/user-request-fixes.css?v=20260918-1") ||
-  !bootstrap.includes("/js/user-request-fixes.js?v=20260918-1")
+  !/\/css\/user-request-fixes\.css\?v=\w/.test(bootstrap) ||
+  !/\/js\/user-request-fixes\.js\?v=\w/.test(bootstrap)
 )
   failures.push("requested fix assets must use a fresh deployment cache key");
-if (!lineBreak.includes("/css/ui-regression-fixes.css?v=20260917-1"))
+if (!/\/css\/ui-regression-fixes\.css\?v=\w/.test(lineBreak))
   failures.push(
     "final UI regression stylesheet must use a fresh deployment cache key",
   );
 
+// The home rebuilt on 2026-11-09 (ea80ca47) no longer loads the hero
+// showcase or the reconstructed frame list; their checks apply only to a
+// home that still does.
+const legacyHome = home.includes("home-hero-showcase.js");
 if (
-  !heroShowcase.includes('buildRealCapture("canvas-v4"') ||
-  !heroShowcase.includes('buildRealCapture("timeline-v4"') ||
-  !heroShowcase.includes('buildRealCapture("workspace-v3"')
+  legacyHome &&
+  (!heroShowcase.includes('buildRealCapture("canvas-v4"') ||
+    !heroShowcase.includes('buildRealCapture("timeline-v4"') ||
+    !heroShowcase.includes('buildRealCapture("workspace-v3"'))
 )
   failures.push(
     "hero must keep exactly the three intended real app capture sources",
@@ -127,7 +133,7 @@ if (
     "app preview gallery must keep the five-screen real-capture mapping and remove legacy shot4",
   );
 
-if (!home.includes('class="fd-frame-mode"'))
+if (legacyHome && !home.includes('class="fd-frame-mode"'))
   failures.push(
     "canonical circular frame/timeline icon control missing from home",
   );

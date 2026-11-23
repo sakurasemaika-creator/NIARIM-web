@@ -1,9 +1,10 @@
 import { chromium } from "playwright";
+import { launchOptions } from "./browser-launch.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 
 const base = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const pages = [
+const allPages = [
   "/",
   "/about/",
   "/features/",
@@ -17,7 +18,19 @@ const pages = [
   "/terms/",
   "/404.html",
 ];
-const widths = [320, 360, 390, 430, 768, 1024, 1280, 1440];
+// AUDIT_PAGES and AUDIT_WIDTHS (comma separated) narrow or widen the sweep,
+// e.g. the home page at every breakpoint-adjacent width.
+const listFromEnv = (name) =>
+  (process.env[name] || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+const pages = listFromEnv("AUDIT_PAGES").length
+  ? listFromEnv("AUDIT_PAGES")
+  : allPages;
+const widths = listFromEnv("AUDIT_WIDTHS").length
+  ? listFromEnv("AUDIT_WIDTHS").map(Number)
+  : [320, 360, 390, 430, 768, 1024, 1280, 1440];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const issues = [];
 const metrics = [];
@@ -29,7 +42,7 @@ const slowNetwork = {
   uploadThroughput: 93750,
   connectionType: "cellular4g",
 };
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch(launchOptions());
 const dir = "artifacts/modern-width-audit";
 await fs.mkdir(dir, { recursive: true });
 function issue(...parts) {
