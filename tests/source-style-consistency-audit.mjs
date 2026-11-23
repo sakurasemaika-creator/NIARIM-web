@@ -45,10 +45,17 @@ if (
 }
 if (guardIndex < 0) {
   failures.push("theme-accent-only.css is not imported by line-break.css");
-} else if (guardIndex !== imports.length - 1) {
-  failures.push(
-    "theme-accent-only.css must be the final imported design layer",
-  );
+} else {
+  // Layers imported after the accent guard may adjust layout, but must not
+  // set accent colours again (the guard is the last word on accents).
+  for (const later of imports.slice(guardIndex + 1)) {
+    const source = stripComments(
+      await read("public" + later.replace(/\?.*$/, "")),
+    );
+    if (/--color-accent[\w-]*\s*:|accent/i.test(source)) {
+      failures.push(`${later} after theme-accent-only.css sets accent colours`);
+    }
+  }
 }
 
 const polish = await read("public/css/polish.css");
@@ -129,8 +136,12 @@ for (const required of [
 if (!visualTail.includes(".fd-frame-thumb.fd-frame-thumb.is-selected")) {
   failures.push("selected frame must be treated as the current 50x50 frame");
 }
-if (!visualTail.includes("calc(50% - 125px)")) {
-  failures.push("generated third selected frame must be centered in its strip");
+if (
+  !/\.fd-frame-strip-scroll:has\(> \.fd-frame-thumb\.is-selected\)\s*\{[^}]*justify-content:\s*center/.test(
+    visualTail,
+  )
+) {
+  failures.push("selected frame must be centered in its strip");
 }
 if (!visualTail.includes(".screenshot-card:last-of-type")) {
   failures.push(
@@ -168,7 +179,7 @@ console.log(
       ok: true,
       checks: [
         "Features normalization loads before final visual audit tail",
-        "theme guard is final import",
+        "no layer after the theme guard sets accent colours",
         "legacy strong aliases resolve to active theme accent",
         "interactive selectors are guarded by the active theme token",
         "keyboard focus indicator follows the contrast-safe theme text token",

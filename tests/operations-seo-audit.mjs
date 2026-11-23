@@ -50,7 +50,8 @@ for (const needle of [
   expect(worker.includes(needle), "edge-seo-rewriter", needle);
 }
 expect(
-  worker.includes('value.endsWith("/index.html")'),
+  worker.includes('value.endsWith("/index.html")') ||
+    worker.includes('pathname.replace(/\\/index\\.html$/, "/")'),
   "index-html-normalization",
   "suffix",
 );
@@ -60,7 +61,10 @@ expect(
   "canonical",
 );
 expect(
-  worker.includes("normalizedPagePath(new URL(request.url).pathname)"),
+  worker.includes("normalizedPagePath(new URL(request.url).pathname)") ||
+    /const url = new URL\(request\.url\);\s*const pathname = normalizedPagePath\(url\.pathname\);/.test(
+      worker,
+    ),
   "index-html-normalization",
   "metadata",
 );

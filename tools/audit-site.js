@@ -125,11 +125,12 @@ const WIDTHS = [320, 375, 768, 1024, 1280];
       out.dead = [...document.querySelectorAll('a[href="#"], a[href=""]')]
         .filter((a) => !isHidden(a))
         .map((a) => accName(a).slice(0, 30) || a.id || "?");
-      // ラベルの無いフォーム部品
+      // ラベルの無いフォーム部品（読み上げからも隠したスパム除けの欄は除く）
       out.unlabeled = [...document.querySelectorAll("input,select,textarea")]
         .filter(
           (el) =>
             el.type !== "hidden" &&
+            !el.closest('[hidden], [aria-hidden="true"]') &&
             !el.getAttribute("aria-label") &&
             !el.getAttribute("aria-labelledby") &&
             !(
