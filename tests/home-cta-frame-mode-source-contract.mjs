@@ -62,10 +62,10 @@ expect(
     dict.includes(body),
   "Japanese shared CTA dictionary must contain the requested title and body",
 );
-for (const [name, html] of [
-  ["home", home],
-  ["faq", faq],
-]) {
+// The home page was rebuilt for the prelaunch site on 2026-11-09 (ea80ca47)
+// without this CTA block or the static canvas mock; the requested CTA copy
+// lives on the FAQ page.
+for (const [name, html] of [["faq", faq]]) {
   expect(
     html.includes('data-i18n="cta.title"') &&
       html.includes(title) &&
@@ -81,10 +81,8 @@ expect(
   "Home must not retain the duplicate feature-narrative CTA block",
 );
 expect(
-  !home.includes("fd-frame-strip-mode") &&
-    (home.match(/class="fd-frame-mode"/g) || []).length >= 2 &&
-    home.includes("sprite.svg#ic-movie_filter"),
-  "Static home canvas fallbacks must use circular fd-frame-mode controls with the movie_filter sprite",
+  !home.includes("fd-frame-strip-mode"),
+  "Home must not bring back the legacy frame-strip mode pill",
 );
 expect(
   !finishCss.includes(".site-footer::before") &&

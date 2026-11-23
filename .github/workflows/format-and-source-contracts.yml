@@ -29,5 +29,7 @@ jobs:
           npm run audit:font-capture
           node tests/studio-2026-contract.mjs
           node tests/studio-heading-glyph-contract.mjs
+          node tests/home-cta-frame-mode-source-contract.mjs
+          node tests/screen-mock-i18n-key-leak-contract.mjs
       - name: Worker bundle
         run: npx wrangler deploy --dry-run --outdir "$RUNNER_TEMP/niarim-worker-build"
