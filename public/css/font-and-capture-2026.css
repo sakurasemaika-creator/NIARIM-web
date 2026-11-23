@@ -252,6 +252,14 @@ html body .nr-hero-pc-view {
   width: min(100%, 650px) !important;
   max-width: 650px !important;
 }
+/* The narrower layouts pulled the PC view left (-8%, -18px) when it was 81-91%
+   wide; at the full width set above that pushed its tilted left edge and the
+   "PC / DEX MODE" label past the screen (12px at 600-640px). */
+@media (max-width: 740px) {
+  html body .nr-hero-pc-view {
+    margin-left: 0 !important;
+  }
+}
 html body .nr-hero-sp-view {
   width: clamp(155px, 17vw, 245px) !important;
 }
@@ -374,7 +382,7 @@ html body .nr-feature-duo {
 .font-license-access {
   width: min(100% - 32px, 1216px);
   margin: 0 auto;
-  padding: 10px 0 18px;
+  padding: 0 0 6px;
   text-align: center;
   font-family: var(--font-sans);
   font-size: 0.8rem;
@@ -383,6 +391,10 @@ html body .nr-feature-duo {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
+  /* A 44px touch target (the padding above made room for it). */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .font-license-document {
   width: min(100% - 32px, 960px);

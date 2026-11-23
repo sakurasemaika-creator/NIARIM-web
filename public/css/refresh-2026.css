@@ -289,11 +289,15 @@
 .nr-story-copy a,
 .nr-text-link {
   display: inline-flex;
+  /* A 44px touch target; the text and its underline stay where they were
+     (the extra height is taken from the space above). */
+  min-height: 44px;
+  align-items: flex-end;
   color: #a84058;
   text-decoration: none;
   border-bottom: 1px solid currentColor;
   padding-bottom: 5px;
-  margin-top: 20px;
+  margin-top: 7px;
   font-size: 0.93rem;
   font-weight: 750;
 }

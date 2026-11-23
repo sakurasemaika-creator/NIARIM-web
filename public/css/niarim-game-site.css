@@ -236,6 +236,11 @@
   color: #fbafc4;
   text-decoration: none;
   font-size: 0.72rem;
+  /* A 44px touch target without making the bar taller. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block: -12px;
 }
 .nr-hero-showcase {
   width: 100%;
