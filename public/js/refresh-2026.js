@@ -28,7 +28,7 @@
   function apply(variant) {
     const n = Math.max(1, Math.min(4, Number(variant) || 1));
     const suffix = n === 1 ? "" : "-v" + n;
-    const revision = "b506876f";
+    const revision = "08eb5dac";
     document
       .querySelectorAll(
         "[data-capture], [data-capture-pc], .feature-diagram--real[data-capture-theme]",
