@@ -14,7 +14,9 @@
         "NIARIMのプレミアムプランでできることと、無料版との違いをご紹介します。",
       "premiumPage.compareTitle": "無料版とプレミアムの違い",
       "premiumPage.eyebrow": "Premium",
-      "premiumPage.title": "プレミアムプラン",
+      // A break point between the two words, so a narrow screen breaks
+      // between them instead of leaving 「ン」 alone on the second line.
+      "premiumPage.title": "プレミアム\u200bプラン",
       "premiumPage.lead":
         "無料版でも動画書き出しを含む基本的な制作機能はすべてご利用いただけます。プレミアムプランでは、広告の非表示や仕上げのための追加機能をご利用いただけます。",
       "premiumPage.priceNote":
