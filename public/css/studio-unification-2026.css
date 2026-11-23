@@ -6,8 +6,8 @@
 :root:lang(en),
 :root:lang(fr),
 :root:lang(es) {
-  --font-sans: "HakkouMincho", "HakkouMinchoCJK";
-  --font-serif: "Kuramubon", "KuramubonCJK";
+  --font-sans: "HakkouMincho", "HakkouMinchoCJK", "HakkouMinchoCJKFallback";
+  --font-serif: "Kuramubon", "KuramubonCJK", "KuramubonCJKFallback";
 }
 html body {
   font-family: var(--font-sans) !important;

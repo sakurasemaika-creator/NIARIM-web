@@ -87,6 +87,15 @@ def main():
             )
             marker = "/* === END generated font-face === */"
             css = css.replace(marker, face + marker, 1)
+        # The device-font stand-in used until this subset arrives covers exactly
+        # the same characters (common-base.css explains why).
+        fallback = re.compile(
+            r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family + "Fallback") + r'";[^}]*?\}'
+        )
+        stand_in = fallback.search(css)
+        if stand_in:
+            updated = re.sub(r"unicode-range:\s*[^;]+;", "unicode-range:\n" + ranges(actual) + ";", stand_in[0])
+            css = css[:stand_in.start()] + updated + css[stand_in.end():]
         print(f"{family}: {len(actual)} characters, {target.stat().st_size:,} bytes")
     sheet.write_text(css, encoding="utf-8")
 

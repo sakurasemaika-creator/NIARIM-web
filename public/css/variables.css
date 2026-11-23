@@ -75,13 +75,14 @@
      見出しらしい太さと、見出し／本文のメリハリを保つ。
      末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
   --font-sans:
-    "HakkouMincho", "HakkouMinchoCJK", "NotoSerifMenuKR", "NotoSerifMenuSC",
-    "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif",
-    "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-serif:
-    "Kuramubon", "KuramubonCJK", "NotoSansHeadKR", "NotoSansHeadSC",
+    "HakkouMincho", "HakkouMinchoCJK", "HakkouMinchoCJKFallback",
     "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC",
-    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+    "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif:
+    "Kuramubon", "KuramubonCJK", "KuramubonCJKFallback", "NotoSansHeadKR",
+    "NotoSansHeadSC", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR",
+    "NotoSerifSC", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
+    sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
@@ -399,7 +400,8 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
 /* Keep headings and body text in the same serif family for Chinese and Korean. */
 :root {
   --font-display-with-body:
-    "Kuramubon", "KuramubonCJK", "HakkouMincho", "HakkouMinchoCJK";
+    "Kuramubon", "KuramubonCJK", "KuramubonCJKFallback", "HakkouMincho",
+    "HakkouMinchoCJK", "HakkouMinchoCJKFallback";
 }
 :root:lang(ko) {
   --font-cjk-locale: "NotoSerifKR";
