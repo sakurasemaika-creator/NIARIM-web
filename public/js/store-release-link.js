@@ -4,8 +4,10 @@
 
   // Google's official "Get it on Google Play" badges, unaltered, one per
   // language (downloaded from https://play.google.com/intl/en_us/badges/ and
-  // placed here before release). A link is shown only after its badge image
-  // has loaded, so a missing file never shows a broken image or an imitation.
+  // placed here before release). The badge image is created only once the
+  // listing is configured (an <img> without a source is invalid HTML), and the
+  // link is shown only after it has loaded, so a missing file never shows a
+  // broken image or an imitation.
   const BADGE_DIR = "/assets/badges/google-play/";
   const BADGE_LANGS = ["ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"];
 
@@ -57,11 +59,16 @@
       link.href = url.href;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      const badge = link.querySelector?.("img[data-play-badge]");
-      if (!badge) {
+      if (!link.hasAttribute?.("data-play-badge")) {
         link.hidden = false;
         return;
       }
+      const badge = document.createElement("img");
+      badge.className = "nr-play-badge";
+      badge.width = 646;
+      badge.height = 250;
+      badge.decoding = "async";
+      link.appendChild(badge);
       badges.push(badge);
       badge.addEventListener("load", () => {
         link.hidden = false;

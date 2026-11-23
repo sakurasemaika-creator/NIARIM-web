@@ -30,29 +30,34 @@ function storefront(configuredUrl, lang) {
   );
   const links = Array.from(
     html.matchAll(/<a\b[^>]*\bdata-play-store-link\b[^>]*>([\s\S]*?)<\/a\s*>/g),
-    ([tag, inner]) => {
-      const badge = /<img\b[^>]*\bdata-play-badge\b/.test(inner)
-        ? {
-            src: "",
-            alt: "",
-            listeners: {},
-            addEventListener(type, listener) {
-              this.listeners[type] = listener;
-            },
-          }
-        : null;
+    ([tag]) => {
+      const opening = tag.slice(0, tag.indexOf(">"));
       return {
-        hidden: /\bhidden\b/.test(tag.slice(0, tag.indexOf(">"))),
+        hidden: /\bhidden\b/.test(opening),
         href: tag.match(/\bhref="([^"]+)"/)?.[1],
-        badge,
-        querySelector: (selector) =>
-          selector === "img[data-play-badge]" ? badge : null,
+        badge: null,
+        hasAttribute: (name) =>
+          name === "data-play-badge" && /\bdata-play-badge\b/.test(opening),
+        appendChild(child) {
+          this.badge = child;
+        },
       };
     },
   );
   const confirmation = { hidden: /data-play-release-only\s+hidden/.test(html) };
   const document = {
     readyState: "complete",
+    createElement(tag) {
+      assert.equal(tag, "img");
+      return {
+        src: "",
+        alt: "",
+        listeners: {},
+        addEventListener(type, listener) {
+          this.listeners[type] = listener;
+        },
+      };
+    },
     documentElement: { lang },
     querySelectorAll(selector) {
       return {
@@ -84,6 +89,7 @@ test("missing or incorrect store URLs keep both links hidden and show pending co
     "https://play.google.com/store/apps/details?id=com.example.other",
   ]) {
     const { fields, links, confirmation } = storefront(url, "en");
+    assert.ok(links.every(({ badge }) => badge === null));
     assert.equal(fields.length, 5);
     assert.equal(links.length, 2);
     assert.ok(fields.some(({ key }) => key === "nav.releaseInfo"));
@@ -117,6 +123,9 @@ test("a valid listing shows localized release copy and keeps the locale keys act
     // shown only once the badge image has loaded.
     assert.ok(links.every(({ badge }) => badge));
     for (const link of links) {
+      assert.equal(link.badge.className, "nr-play-badge");
+      assert.equal(link.badge.width, 646);
+      assert.equal(link.badge.height, 250);
       assert.equal(link.badge.src, `/assets/badges/google-play/${lang}.png`);
       assert.equal(link.badge.alt, translate(lang, "refresh.playBadge.alt"));
       assert.ok(link.badge.alt.includes("Google Play"));
@@ -153,9 +162,15 @@ test("the store link is Google's badge, not an imitation of it", () => {
   for (const [, inner] of html.matchAll(
     /<a\b[^>]*\bdata-play-store-link\b[^>]*>([\s\S]*?)<\/a\s*>/g,
   )) {
-    assert.match(inner, /<img\b[^>]*\bdata-play-badge\b/);
-    assert.doesNotMatch(inner.replace(/<img\b[^>]*>/g, ""), /\S/);
+    // The badge image is made by the script once the listing is configured
+    // (an <img> without a source is invalid HTML and reads as broken).
+    assert.doesNotMatch(inner, /\S/);
   }
+  assert.equal(
+    html.match(/data-play-store-link\s+data-play-badge\b/g).length,
+    2,
+  );
+  assert.doesNotMatch(html, /<img\b(?![^>]*\bsrc=)[^>]*>/);
   assert.match(
     html,
     /data-play-release-only\s+hidden\s+data-i18n="refresh\.playBadge\.trademark"/,
