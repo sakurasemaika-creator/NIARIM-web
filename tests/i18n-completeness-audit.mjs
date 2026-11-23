@@ -37,7 +37,12 @@ for (const route of routes) {
   await page.goto(baseURL + route, { waitUntil: "networkidle" });
 
   for (const language of languages) {
-    const state = await page.evaluate((lang) => {
+    const state = await page.evaluate(async (lang) => {
+      // Switch first: the help page loads its topics into the dictionary
+      // before switching (applyLang returns a promise there).
+      if (window.NIARIM_I18N?.applyLang) {
+        await window.NIARIM_I18N.applyLang(lang, { persist: false });
+      }
       const dict = window.NIARIM_I18N_DICT || {};
       const table = dict[lang] || {};
       const has = (key) => Object.prototype.hasOwnProperty.call(table, key);
@@ -70,10 +75,6 @@ for (const route of routes) {
       const empty = [...requested]
         .filter((key) => has(key) && String(table[key]).trim() === "")
         .sort();
-
-      if (window.NIARIM_I18N?.applyLang) {
-        window.NIARIM_I18N.applyLang(lang, { persist: false });
-      }
 
       return {
         actualLang: document.documentElement.lang,
