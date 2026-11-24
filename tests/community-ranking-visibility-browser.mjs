@@ -80,7 +80,10 @@ try {
   );
   assert.equal(checks, 0, "A ranking fetch must not trigger a playback check");
   // Cards rendered by a tab switch are shown, not left at the reveal
-  // animation's opacity 0 (only the first render used to be revealed).
+  // animation's opacity 0 (only the first render used to be revealed). The
+  // tabs now sit right under the page's opening lines, so the cards start
+  // below a phone's first screen: bring them into view as a visitor would.
+  await page.locator("[data-community-gallery]").scrollIntoViewIfNeeded();
   await page.waitForFunction(() =>
     [
       ...document.querySelectorAll("[data-community-gallery] .community-card"),

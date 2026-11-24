@@ -4,10 +4,12 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 // Page openings are left-aligned editorial headers sharing the content's left
 // edge (owner, 2026-11-24: no centred-everything layouts, one header pattern
-// for every page). Section headings inside the pages are still centred.
+// for every page). Section headings inside the pages start at the same left
+// edge too; only a page's closing invitation is centred.
 const widths = [320, 390, 560, 760, 1024, 1440];
 const routes = [
   ["/about/", ".about-hero"],
+  ["/community/", ".about-hero"],
   ["/features/", ".features-header"],
   ["/help/", ".help-header"],
   ["/faq/", ".about-hero"],
@@ -36,11 +38,7 @@ for (const width of widths) {
           const r = head.getBoundingClientRect();
           const parent = head.parentElement?.getBoundingClientRect();
           return {
-            centerDelta: parent
-              ? Math.abs(
-                  r.left + r.width / 2 - (parent.left + parent.width / 2),
-                )
-              : 999,
+            leftDelta: parent ? Math.abs(r.left - parent.left) : 999,
             textAlign: getComputedStyle(head).textAlign,
           };
         },
@@ -70,11 +68,11 @@ for (const width of widths) {
       findings.push({ width, route, kind: "page-heading-not-aligned", state });
     }
     state.heads.forEach((head, index) => {
-      if (head.centerDelta > 2 || head.textAlign !== "center") {
+      if (head.leftDelta > 2 || !["left", "start"].includes(head.textAlign)) {
         findings.push({
           width,
           route,
-          kind: "section-heading-not-centered",
+          kind: "section-heading-not-left-aligned",
           index,
           head,
         });

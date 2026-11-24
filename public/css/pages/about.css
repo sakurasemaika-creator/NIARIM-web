@@ -150,8 +150,6 @@
    featured tools and the Features page, where each feature has one home. */
 .section-head.about-pointer {
   max-width: calc(72 * var(--measure-ch));
-  margin-inline: auto;
-  text-align: center;
 }
 
 .section-head.about-pointer p {
@@ -161,7 +159,6 @@
 .section-head.about-pointer .about-pointer-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0 var(--space-lg);
   margin-top: var(--space-sm);
 }

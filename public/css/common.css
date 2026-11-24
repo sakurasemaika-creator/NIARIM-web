@@ -103,13 +103,12 @@
   margin-inline: auto;
 }
 
-/* Section headings use a constrained reading width, but that box itself must
-   sit on the page centre line. The decorative film-strip mark and glow were
-   previously pinned to the left edge, which made centered headings look
-   visually shifted even when their text-align was correct. */
+/* Section headings start at the content's left edge like every other
+   heading on the site (home sections, Features sections, ruled lists); only a
+   page's closing invitation is centred. */
 .section-head {
-  margin-inline: auto;
-  text-align: center;
+  margin-inline: 0;
+  text-align: start;
 }
 
 /* Feature/help category headings are navigational sub-sections with an icon,

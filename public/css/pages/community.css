@@ -78,7 +78,6 @@
   margin-top: var(--space-sm);
   color: var(--ink-2);
   font-size: var(--fs-small);
-  text-align: center;
 }
 
 /* ---- Feed ---- */
@@ -357,4 +356,18 @@
     font-size: 0.75rem;
     letter-spacing: 0;
   }
+}
+
+/* The tabs follow the three lines above them directly (there was a 186px
+   band of empty paper between the list's last rule and the tabs). */
+#main > .container:has(+ .community-feed-section) > .feature-narrative {
+  margin-bottom: 0;
+}
+
+#main .community-feed-section {
+  padding-top: var(--space-lg);
+}
+
+#main .community-feed-section .community-tabs {
+  margin-top: 0;
 }
