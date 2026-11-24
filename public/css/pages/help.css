@@ -14,7 +14,7 @@
 
 .help-header p {
   margin-top: var(--space-sm);
-  color: var(--color-text-muted);
+  color: var(--ink-2);
   max-width: calc(56 * var(--measure-ch));
   margin-inline: auto;
   overflow-wrap: normal;
@@ -52,7 +52,7 @@
   padding: 0.9rem 1.25rem;
   padding-inline-end: 3.25rem;
   border-radius: var(--radius-pill);
-  border: 1.5px solid var(--color-gray-300);
+  border: 1.5px solid var(--rule-strong);
   font-size: 1rem;
 }
 
@@ -69,7 +69,7 @@
   height: 2.75rem;
   border: 0;
   border-radius: 50%;
-  color: var(--color-text);
+  color: var(--ink);
   cursor: pointer;
   /* A drawn cross (the "×" in the markup is hidden): the system sans-serif
      glyph was the one character of the page not in the site's faces. */
@@ -93,11 +93,11 @@
 
 .help-search-clear:hover,
 .help-search-clear:focus-visible {
-  background-color: var(--color-sub-tint);
+  background-color: color-mix(in srgb, var(--ink) 6%, transparent);
 }
 
 .help-search-clear:focus-visible {
-  outline: 2px solid var(--color-accent-text);
+  outline: 2px solid var(--pencil-ink);
 }
 
 /* Same outline buttons as the premium page's section shortcuts. */
@@ -120,7 +120,7 @@
   padding: 0.45rem 0.95rem;
   border: 1px solid currentColor;
   border-radius: 0.5rem;
-  color: var(--color-text);
+  color: var(--ink);
   font: 600 0.9375rem/1.4 var(--font-serif);
   text-decoration: none;
 }
@@ -131,21 +131,21 @@
 }
 
 .help-search input:focus {
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 4px var(--color-sub-tint);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pencil) 22%, transparent);
 }
 
 .help-search-status > span:not(:empty):not([hidden]) {
   display: block;
   margin-block-start: 0.5rem;
   padding-inline: 0.75rem;
-  color: var(--color-text);
+  color: var(--ink);
   font-size: var(--fs-small);
 }
 
 .help-category-count {
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  color: var(--ink-2);
   font-weight: 400;
 }
 
@@ -167,12 +167,6 @@
   background: none;
 }
 
-[data-help-category] .feature-section-head .feature-section-icon {
-  color: var(--color-brand-dark);
-  background: var(--color-sub-tint);
-  box-shadow: none;
-}
-
 [data-help-category] .feature-section-head::before {
   margin-bottom: 0.45rem;
 }
@@ -188,7 +182,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--rule);
 }
 
 [data-help-category] .spec-item {
@@ -197,7 +191,7 @@
   width: 100%;
   padding: 0;
   border: 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--rule);
   border-radius: 0;
   background: transparent;
   overflow: visible;
@@ -235,8 +229,8 @@
   display: grid;
   place-items: center;
   transform: translateY(-50%);
-  /* the FAQ's mark: a drawn 14px plus, no tinted disc */
-  color: var(--color-accent-text);
+  /* the FAQ's mark: a drawn 14px plus in the secondary ink */
+  color: var(--ink-2);
   background:
     linear-gradient(currentColor, currentColor) center / 14px 2px no-repeat,
     linear-gradient(currentColor, currentColor) center / 2px 14px no-repeat;
@@ -251,7 +245,7 @@
 [data-help-category] .spec-item p {
   margin: 0;
   padding: 0.1rem 3.25rem 1.25rem 0.25rem;
-  color: var(--color-text-muted);
+  color: var(--ink-2);
   line-height: 1.9;
 }
 
@@ -261,7 +255,7 @@
 }
 
 [data-help-category] summary:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: 2px solid var(--pencil-ink);
   outline-offset: 3px;
 }
 
@@ -292,7 +286,7 @@
   align-items: center;
   gap: 0.25rem 1rem;
   margin: 0.75rem 0 0;
-  color: var(--color-text-sub, #5d5460);
+  color: var(--ink-2);
   font-size: var(--fs-small);
 }
 
@@ -303,7 +297,7 @@
   min-width: 44px;
   justify-content: center;
   align-items: center;
-  color: var(--color-accent-text, #b8264a);
+  color: var(--pencil-ink);
   font: 600 0.9375rem/1.4 var(--font-serif);
   text-decoration: underline;
   text-underline-offset: 0.2em;

@@ -37,10 +37,12 @@ try {
             .evaluateAll((nodes) => nodes.map((el) => el.dataset.i18n));
         const originalCategories = await categoryOrder();
         const originalTopics = await topicOrder();
-        const symbols = await page
-          .locator("[data-help-category] .feature-section-icon use")
-          .evaluateAll((nodes) => nodes.map((el) => el.getAttribute("href")));
-        assert.equal(new Set(symbols).size, originalCategories.length);
+        // Each category is told apart by its own heading (the categories
+        // have no icon boxes any more).
+        const headings = await page
+          .locator("[data-help-category] .feature-section-head h2")
+          .evaluateAll((nodes) => nodes.map((el) => el.textContent.trim()));
+        assert.equal(new Set(headings).size, originalCategories.length);
         const resultCount = page.locator("#help-result-count");
         const pressure = await page
           .locator('[data-i18n="help.entry34.title"]')

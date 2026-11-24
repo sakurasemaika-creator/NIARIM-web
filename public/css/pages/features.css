@@ -117,23 +117,6 @@
    (前述の見出しサブテキスト用ルールが、同じ.feature-section-head内の
    アイコン用spanにも意図せず適用されていた)ため、詳細度を上げて
    確実に上書きする。ついでにアイコンも少し拡大する。 */
-.feature-section-head .feature-section-icon {
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: var(--grad-brand);
-  box-shadow: var(--shadow-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-}
-
-.feature-section-icon .ic {
-  width: 30px;
-  height: 30px;
-}
 
 .feature-section-head h2 {
   font-size: var(--fs-h2);
@@ -1444,11 +1427,11 @@
   counter-reset: feature-section;
 }
 
-#main .feature-section:not([data-help-category]) {
+#main .feature-section {
   counter-increment: feature-section;
 }
 
-#main .feature-section:not([data-help-category]) .feature-section-head::before {
+#main .feature-section .feature-section-head::before {
   content: counter(feature-section, decimal-leading-zero) / "";
   width: auto;
   height: auto;
@@ -1461,7 +1444,7 @@
   letter-spacing: 0.08em;
 }
 
-#main .feature-section:not([data-help-category]) .feature-section-head > span {
+#main .feature-section .feature-section-head > span {
   color: var(--ink-2);
 }
 
@@ -1473,6 +1456,11 @@
   border-radius: 0;
   background: var(--paper);
   box-shadow: none;
+}
+
+/* The fade that says more links are off to the side ends in the paper. */
+#main .feature-nav::after {
+  background: linear-gradient(90deg, transparent, var(--paper) 82%);
 }
 
 #main .feature-nav a {

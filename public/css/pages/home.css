@@ -124,8 +124,7 @@
   .hero-underline-line {
     animation: none;
     transform: scaleX(1);
-  }
-}
+  }}
 
 .hero-lead {
   margin-top: var(--space-md);
@@ -188,8 +187,7 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-  }
-}
+  }}
 
 /* Hero visual: 手描きストロークが描かれ、フレームが切り替わる演出 */
 .hero-visual::before {
@@ -227,8 +225,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-visual::before {
     animation: none;
-  }
-}
+  }}
 
 .hero-visual {
   position: relative;
@@ -250,8 +247,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-visual {
     transition: none;
-  }
-}
+  }}
 
 .hero-visual .frame-mock {
   position: relative;
@@ -333,8 +329,7 @@
   .hero-visual .stroke-path {
     animation: none;
     stroke-dashoffset: 0;
-  }
-}
+  }}
 
 @media (max-width: 900px) {
   .hero .container {
@@ -344,8 +339,7 @@
   .hero-visual {
     max-width: 380px;
     margin-inline: auto;
-  }
-}
+  }}
 
 /* ---- Marquee（機能キーワードの無限スクロール帯） ---- */
 .marquee-section {
@@ -391,8 +385,7 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
-  }
-}
+  }}
 
 /* ---- Intro (NIARIMとは) ---- */
 .intro-grid {
@@ -445,8 +438,7 @@
 @media (max-width: 860px) {
   .intro-grid {
     grid-template-columns: 1fr;
-  }
-}
+  }}
 
 /* ---- Feature showcase ---- */
 .feature-row {
@@ -513,8 +505,7 @@
     clip-path: none;
     transform: none;
     transition: none;
-  }
-}
+  }}
 
 .feature-media img {
   width: 100%;
@@ -548,8 +539,7 @@
   .feature-row.is-reverse .feature-media {
     grid-template-columns: 1fr;
     order: initial;
-  }
-}
+  }}
 
 /* ---- Screenshot gallery ---- */
 .screenshot-scroller {
@@ -711,8 +701,7 @@
 @media (max-width: 480px) {
   .faq-question {
     font-size: 1rem;
-  }
-}
+  }}
 
 .faq-question .icon {
   flex-shrink: 0;

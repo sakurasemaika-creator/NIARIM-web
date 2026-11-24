@@ -428,12 +428,6 @@ main {
   margin-bottom: 2rem;
 }
 
-.feature-section-head .feature-section-icon {
-  width: 48px;
-  height: 48px;
-  box-shadow: 0 8px 24px rgba(255, 92, 122, 0.18);
-}
-
 .spec-grid {
   gap: 0.85rem;
 }
