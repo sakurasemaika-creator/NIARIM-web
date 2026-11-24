@@ -72,7 +72,11 @@ jobs:
           node-version: "22"
       - name: Install Playwright
         run: |
-          npm install --no-save playwright@1.55.0 pngjs@7.0.0
+          # The Playwright of package-lock (its library and its browser
+          # installer must be the same version); pngjs is used by the
+          # screenshot audits only.
+          npm ci
+          npm install --no-save pngjs@7.0.0
           npx playwright install --with-deps chromium
       - name: Start static server
         run: |
@@ -163,7 +167,11 @@ jobs:
           node-version: "22"
       - name: Install Playwright
         run: |
-          npm install --no-save playwright@1.55.0 pngjs@7.0.0
+          # The Playwright of package-lock (its library and its browser
+          # installer must be the same version); pngjs is used by the
+          # screenshot audits only.
+          npm ci
+          npm install --no-save pngjs@7.0.0
           npx playwright install --with-deps chromium
       - name: Start static server
         run: |
@@ -215,7 +223,11 @@ jobs:
           node-version: "22"
       - name: Install Playwright
         run: |
-          npm install --no-save playwright@1.55.0 pngjs@7.0.0
+          # The Playwright of package-lock (its library and its browser
+          # installer must be the same version); pngjs is used by the
+          # screenshot audits only.
+          npm ci
+          npm install --no-save pngjs@7.0.0
           npx playwright install --with-deps chromium
       - name: Start static server
         run: |
