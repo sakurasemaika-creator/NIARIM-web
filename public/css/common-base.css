@@ -1360,19 +1360,18 @@ p {
      揃えてあり、この大きさの文字には薄すぎる（淡色背景上で3.2〜3.6:1）。
      文字専用の濃い赤を使う。 */
   color: var(--color-accent-text);
-  background: linear-gradient(120deg, var(--color-sub-tint), transparent 85%);
-  border: 1px solid rgba(255, 92, 122, 0.25);
-  padding: 0.3rem 0.9rem;
-  border-radius: var(--radius-pill);
   margin-bottom: var(--space-sm);
 }
 
+/* A section label is a line of small capitals led by a short rule, the same
+   mark as the home page's category line. It used to be a tinted pill with a
+   gradient dot, repeated above almost every section heading. */
 .eyebrow::before {
   content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--grad-brand);
+  width: 24px;
+  height: 1px;
+  margin-right: 0.35em;
+  background: currentColor;
   flex-shrink: 0;
 }
 
@@ -1467,7 +1466,7 @@ p {
   font-family: var(--font-serif);
   font-size: var(--fs-small);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.62);
   margin-bottom: var(--space-sm);
   letter-spacing: 0.06em;
 }
@@ -1495,7 +1494,7 @@ p {
   gap: var(--space-sm);
   padding-top: var(--space-lg);
   font-size: var(--fs-small);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.66);
 }
 
 .footer-social {

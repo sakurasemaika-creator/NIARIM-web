@@ -40,7 +40,7 @@
 
 .help-search-panel {
   max-width: 480px;
-  margin: 0 auto var(--space-xl);
+  margin: var(--space-lg) 0 var(--space-xl);
 }
 
 .help-search {

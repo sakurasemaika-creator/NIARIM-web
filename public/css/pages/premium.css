@@ -249,9 +249,9 @@
 .plan-shortcuts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.5rem 0.75rem;
-  margin: 1.25rem auto 0;
+  margin: 1.5rem 0 0;
 }
 .plan-shortcuts a {
   display: inline-flex;

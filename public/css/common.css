@@ -25,6 +25,56 @@
   min-height: 44px;
 }
 
+/* Footer navigation: 44px targets, with the list's whitespace moved into the
+   links, on every page. These rules used to live in visual-finish.css, which
+   the home page does not load, so its footer links were 14px tall. */
+.site-footer .footer-col ul {
+  gap: 0.1rem;
+}
+
+.site-footer .footer-col a {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  transition:
+    color 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.site-footer .footer-social a {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer .footer-col a:hover {
+    transform: translateX(2px);
+  }
+}
+
+/* Two columns on phones: the seven Product links take the left column and
+   the short Support and Legal lists stack in the right one, instead of Legal
+   starting a third row under Product (about 150px less to scroll). */
+@media (max-width: 780px) {
+  .site-footer .footer-grid > .footer-col:nth-child(2) {
+    grid-row: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .footer-col a {
+    transition: none;
+  }
+
+  .site-footer .footer-col a:hover {
+    transform: none;
+  }
+}
+
 /* Shared page introductions are editorial hero blocks, not left-column copy.
    Keep the whole block optically centered at every width. */
 :where(

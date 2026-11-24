@@ -9,7 +9,7 @@
   color: var(--color-brand-dark);
   font-size: var(--fs-small);
   max-width: 880px;
-  margin-inline: auto;
+  margin: var(--space-lg) 0 0;
 }
 
 .community-tabs {

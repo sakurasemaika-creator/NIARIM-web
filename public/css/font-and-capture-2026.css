@@ -379,13 +379,21 @@ html body .nr-feature-duo {
     width: 65% !important;
   }
 }
+/* Sits on the footer's left edge under the copyright (it was centred while
+   everything above it is left-aligned). Same width as .container. */
 .font-license-access {
-  width: min(100% - 32px, 1216px);
-  margin: 0 auto;
-  padding: 0 0 6px;
-  text-align: center;
+  width: min(100% - var(--container-padding) * 2, var(--container-width));
+  margin: -6px auto 0;
+  padding: 0 0 10px;
+  text-align: left;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+@media (max-width: 640px) {
+  .font-license-access {
+    width: min(100% - 2.25rem, var(--container-width));
+  }
 }
 .font-license-access a {
   color: inherit;

@@ -21,24 +21,11 @@
   --niarim-shadow-soft: 0 16px 44px rgba(59, 36, 41, 0.075);
 }
 
+/* One flat canvas, the DESIGN.md page colour (#f7f4f3) the home page
+   already uses. The three pink/brown glows that were painted across the body
+   of every other page were haze without a subject. */
 body {
-  background:
-    radial-gradient(
-      circle at 7% 8%,
-      rgba(255, 92, 122, 0.075),
-      transparent 25rem
-    ),
-    radial-gradient(
-      circle at 94% 25%,
-      rgba(59, 36, 41, 0.052),
-      transparent 31rem
-    ),
-    radial-gradient(
-      circle at 14% 72%,
-      rgba(255, 92, 122, 0.038),
-      transparent 27rem
-    ),
-    var(--niarim-paper);
+  background: var(--color-bg);
 }
 
 main {
@@ -188,15 +175,17 @@ main {
 
 .eyebrow {
   min-height: 0;
-  padding: 0.32rem 0.72rem;
-  border: 1px solid rgba(255, 92, 122, 0.2);
-  border-radius: 999px;
-  background: rgba(255, 92, 122, 0.065);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
   box-shadow: none;
   /* 11.5pxの太字が淡い地に載るので、装飾用の赤（--color-accent-dark は
      3.2〜3.6:1）では読めない。文字専用の濃い赤を使う。 */
   color: var(--color-accent-text);
-  font-size: 0.72rem;
+  /* Without the pill it is a plain line of capitals: set at the size of
+     the header navigation instead of 11.5px. */
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
 }

@@ -2,6 +2,9 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
+// Page openings are left-aligned editorial headers sharing the content's left
+// edge (owner, 2026-11-24: no centred-everything layouts, one header pattern
+// for every page). Section headings inside the pages are still centred.
 const widths = [320, 390, 560, 760, 1024, 1440];
 const routes = [
   ["/about/", ".about-hero"],
@@ -42,14 +45,13 @@ for (const width of widths) {
           };
         },
       );
+      // The page opening shares the left edge of the page's content column
+      // (its parent .container), like the home hero.
+      const column = hero?.parentElement?.getBoundingClientRect();
       return {
         hero: heroRect
           ? {
-              centerDelta: Math.abs(
-                heroRect.left +
-                  heroRect.width / 2 -
-                  document.documentElement.clientWidth / 2,
-              ),
+              leftDelta: column ? Math.abs(heroRect.left - column.left) : 999,
               textAlign: getComputedStyle(hero).textAlign,
             }
           : null,
@@ -59,10 +61,13 @@ for (const width of widths) {
     if (!state.hero) {
       findings.push({ width, route, kind: "missing-page-heading" });
     } else if (
-      state.hero.centerDelta > 2 ||
-      state.hero.textAlign !== "center"
+      // The features index heading still opens its section centred.
+      selector === ".features-header"
+        ? state.hero.textAlign !== "center"
+        : state.hero.leftDelta > 2 ||
+          !["left", "start"].includes(state.hero.textAlign)
     ) {
-      findings.push({ width, route, kind: "page-heading-not-centered", state });
+      findings.push({ width, route, kind: "page-heading-not-aligned", state });
     }
     state.heads.forEach((head, index) => {
       if (head.centerDelta > 2 || head.textAlign !== "center") {

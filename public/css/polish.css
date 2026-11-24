@@ -158,12 +158,7 @@ main {
 }
 
 .eyebrow {
-  min-height: 30px;
-  padding: 0.35rem 0.85rem;
   letter-spacing: 0.12em;
-  background: rgba(255, 255, 255, 0.62);
-  border-color: rgba(255, 92, 122, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .section-dark {
@@ -578,11 +573,8 @@ main {
     var(--color-ink);
 }
 
-@media (min-width: 781px) {
-  .site-footer {
-    border-radius: 32px 32px 0 0;
-  }
-}
+/* The footer runs square to the edges: a 32px rounded "island" top was the
+   only element on the site rounded that far (DESIGN.md 5). */
 
 /* ---- Responsive: deliberately recompose, don't just shrink ---- */
 @media (max-width: 1180px) {
@@ -789,9 +781,11 @@ main {
 }
 
 /* FAQは質問・回答とも左右に呼吸できる余白を確保する。 */
+/* Left edge shared with the page header (the list was centred under a
+   left-aligned title). */
 .faq-list {
   width: min(100%, 980px);
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 .faq-question {
