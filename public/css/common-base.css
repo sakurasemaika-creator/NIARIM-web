@@ -802,6 +802,12 @@ body {
         数字の途中で改行される副作用があったため。 */
   word-break: keep-all;
   overflow-wrap: break-word;
+  /* 全角の括弧・句読点を詰めない（Firefox・Safariと同じ組み方）。Chromeの
+     既定（normal）は行末の閉じ括弧を半角に詰めて行に収めることがあり、
+     版によって詰めた幅で行を決めたまま詰める前の幅で描き、「第2条（…）」の
+     括弧が欄の外へはみ出した（韓国語の360〜390px、Chrome 151）。どの
+     ブラウザ・版でも同じ所で折り返すよう、いつも全角で数える。 */
+  text-spacing-trim: space-all;
 }
 
 h1,

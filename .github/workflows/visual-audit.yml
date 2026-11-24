@@ -197,7 +197,7 @@ jobs:
           for vp in pc sp; do
             node tools/shot.mjs "#drawing .feature-diagram" --vp $vp --langs ja,en,fr --dir artifacts/final-matrix/shots
             node tools/shot.mjs "#animation .feature-diagram" --vp $vp --langs ja,en,fr --dir artifacts/final-matrix/shots
-            node tools/shot.mjs "#workspace [data-mock-screen='theme']" --vp $vp --langs ja,en,fr --dir artifacts/final-matrix/shots
+            node tools/shot.mjs "#workspace .feature-diagram--real" --vp $vp --langs ja,en,fr --dir artifacts/final-matrix/shots
           done
       - name: Upload final matrix evidence
         if: always()
