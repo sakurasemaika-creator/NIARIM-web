@@ -12,53 +12,40 @@ function stripComments(text) {
   return text.replace(/\/\*[\s\S]*?\*\//g, "");
 }
 
-const lineBreak = await read("public/css/line-break.css");
-const themeGuard = await read("public/css/theme-accent-only.css");
-const visualTail = await read("public/css/visual-audit-tail.css");
-const visualFinish = await read("public/css/visual-finish.css");
-const uiRegression = await read("public/css/ui-regression-fixes.css");
-const featuresNormalization = await read(
-  "public/css/features-source-normalization.css",
-);
+import { allCss, cssBlocks, layer, readCss } from "./css-sections.mjs";
 
-const imports = [
-  ...lineBreak.matchAll(/@import\s+url\(["']([^"']+)["']\)/g),
-].map((m) => m[1]);
-const normalizationIndex = imports.indexOf(
-  "/css/features-source-normalization.css",
-);
-const tailIndex = imports.indexOf("/css/visual-audit-tail.css");
-const guardIndex = imports.indexOf("/css/theme-accent-only.css");
-
-if (normalizationIndex < 0) {
-  failures.push(
-    "features-source-normalization.css is not imported by line-break.css",
-  );
-}
-if (
-  tailIndex < 0 ||
-  (normalizationIndex >= 0 && normalizationIndex > tailIndex)
-) {
-  failures.push(
-    "Features normalization must load before final visual audit tail",
-  );
-}
-if (guardIndex < 0) {
-  failures.push("theme-accent-only.css is not imported by line-break.css");
+// site.css keeps the former layers in their cascade order (marker comments).
+const site = readCss("site.css");
+const blocks = cssBlocks(site);
+const themeGuard = layer(site, "theme-accent-only.css");
+const visualFinish = layer(site, "visual-finish.css");
+const uiRegression = layer(site, "ui-regression-fixes.css");
+const guardAt = blocks.findIndex((b) => b.from === "theme-accent-only.css");
+if (guardAt < 0) {
+  failures.push("site.css lost the theme accent guard (theme-accent-only.css)");
 } else {
-  // Layers imported after the accent guard may adjust layout, but must not
-  // set accent colours again (the guard is the last word on accents).
-  for (const later of imports.slice(guardIndex + 1)) {
-    const source = stripComments(
-      await read("public" + later.replace(/\?.*$/, "")),
-    );
-    if (/--color-accent[\w-]*\s*:|accent/i.test(source)) {
-      failures.push(`${later} after theme-accent-only.css sets accent colours`);
+  // Layers after the accent guard may adjust layout, but must not set accent
+  // colours again (the guard is the last word on accents).
+  for (const later of blocks.slice(guardAt + 1)) {
+    if (/--color-accent[\w-]*\s*:|accent/i.test(stripComments(later.text))) {
+      failures.push(
+        `${later.from} after theme-accent-only.css sets accent colours`,
+      );
     }
   }
 }
+// The page files load after site.css: they must not redefine the accent
+// tokens the guard resolves.
+const STANDALONE = ["404.css", "account-deletion.css", "font-licenses.css"];
+for (const file of await fs.readdir("public/css/pages")) {
+  if (STANDALONE.includes(file)) continue; // they do not load site.css
+  const text = stripComments(readCss("pages/" + file));
+  if (/--color-accent[\w-]*\s*:/.test(text)) {
+    failures.push(`pages/${file} redefines an accent token after site.css`);
+  }
+}
 
-const polish = await read("public/css/polish.css");
+const polish = layer(site, "polish.css");
 const polishClean = stripComments(polish);
 const focusRule = polishClean.match(
   /:where\(a, button, input, textarea, select\):focus-visible\s*\{([^}]*)\}/,
@@ -98,10 +85,21 @@ for (const selector of [
   ".btn.btn-accent",
   ".scroll-top-btn",
   ".community-tabs button.is-active",
-  ".feature-nav a.is-active",
 ]) {
   if (!themeGuard.includes(selector)) {
     failures.push(`final theme guard does not cover ${selector}`);
+  }
+}
+
+// The Features and Help section tabs mark the current section with the red
+// pencil token (paper/ink redesign), not the accent fill.
+for (const file of ["features.css", "help.css"]) {
+  if (
+    !/\.feature-nav a\.is-active\s*\{[^}]*var\(--pencil\)/.test(
+      readCss("pages/" + file),
+    )
+  ) {
+    failures.push(`pages/${file}: the current section tab must use --pencil`);
   }
 }
 
@@ -118,43 +116,12 @@ if (!/border-color:\s*var\(--color-accent\)\s*!important/.test(guardClean)) {
    preset accent. Runtime audits compare interactive surfaces to the computed
    --color-accent value, which is the actual source of truth. */
 
-for (const required of [
-  "width: 50px",
-  "height: 50px",
-  "min-width: 50px",
-  "min-height: 50px",
-  "aspect-ratio: 1 / 1",
-]) {
-  if (
-    !featuresNormalization.includes(required) &&
-    !visualTail.includes(required)
-  ) {
-    failures.push(`missing frame invariant: ${required}`);
-  }
-}
-
-if (!visualTail.includes(".fd-frame-thumb.fd-frame-thumb.is-selected")) {
-  failures.push("selected frame must be treated as the current 50x50 frame");
-}
-if (
-  !/\.fd-frame-strip-scroll:has\(> \.fd-frame-thumb\.is-selected\)\s*\{[^}]*justify-content:\s*center/.test(
-    visualTail,
-  )
-) {
-  failures.push("selected frame must be centered in its strip");
-}
-if (!visualTail.includes(".screenshot-card:last-of-type")) {
-  failures.push(
-    "visual-audit-tail.css must preserve explicit trailing gallery space",
-  );
-}
-if (
-  !featuresNormalization.includes(".fd-sheet-slider") ||
-  !featuresNormalization.includes("height: 4px")
-) {
-  failures.push(
-    "Features slider normalization must enforce the shared 4px track",
-  );
+/* The 50x50 frame-thumbnail, gallery-card and sheet-slider invariants styled
+   the hand-drawn screen mocks and the old screenshot gallery. Neither reaches
+   any page any more (real app captures replaced them), so their rules matched
+   nothing and were dropped when the stylesheets were merged (2026-11-24). */
+if (/\.fd-frame-thumb\.fd-frame-thumb|\.fd-sheet-slider/.test(allCss())) {
+  failures.push("mock frame/slider rules came back without a mock to style");
 }
 
 for (const [name, source] of [
@@ -178,16 +145,12 @@ console.log(
     {
       ok: true,
       checks: [
-        "Features normalization loads before final visual audit tail",
         "no layer after the theme guard sets accent colours",
         "legacy strong aliases resolve to active theme accent",
         "interactive selectors are guarded by the active theme token",
         "keyboard focus indicator follows the contrast-safe theme text token",
         "main page scroll-to-top respects reduced-motion preference",
-        "50x50 frame invariants exist",
-        "generated selected frame is centered",
-        "gallery trailing space invariant exists",
-        "slider geometry normalization exists",
+        "no rules for the removed frame/slider mocks",
         "removed footer separator has no source definition or downstream hide override",
       ],
     },

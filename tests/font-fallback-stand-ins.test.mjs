@@ -30,7 +30,7 @@ for (const [subset, standIn, sizeAdjust] of [
   ["KuramubonCJK", "KuramubonCJKFallback", null],
 ]) {
   test(`${standIn} covers exactly the characters of ${subset}`, () => {
-    const sheet = css("common-base.css");
+    const sheet = css("site.css");
     assert.equal(faceRange(sheet, standIn), faceRange(sheet, subset));
     const face = sheet.match(
       new RegExp(`@font-face\\s*\\{[^}]*font-family:\\s*"${standIn}";[^}]*\\}`),
@@ -44,7 +44,13 @@ for (const [subset, standIn, sizeAdjust] of [
 
   test(`every stack naming ${subset} names ${standIn} right after it`, () => {
     const offenders = [];
-    for (const file of fs.readdirSync(path.join(root, "public", "css"))) {
+    const files = [
+      "site.css",
+      ...fs
+        .readdirSync(path.join(root, "public", "css", "pages"))
+        .map((f) => "pages/" + f),
+    ];
+    for (const file of files) {
       if (!file.endsWith(".css")) continue;
       const sheet = css(file).replace(/\/\*[\s\S]*?\*\//g, "");
       for (const match of sheet.matchAll(

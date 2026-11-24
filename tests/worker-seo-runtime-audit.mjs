@@ -4,7 +4,7 @@ import { PAGE_TRANSLATIONS, SEO_LANGS } from "../src/generated/seo-i18n.js";
 import { escapeXml, SEO_PAGE_PATHS } from "../src/seo.js";
 
 const fontCss = readFileSync(
-  new URL("../public/css/common-base.css", import.meta.url),
+  new URL("../public/css/site.css", import.meta.url),
   "utf8",
 );
 // The Latin faces swap in (with metric-matched stand-ins while they load),

@@ -1,9 +1,3645 @@
+/* ---- from the former reset.css ---- */
+/* ==========================================================================
+   NIARIM reset.css
+   最小限のモダンリセット。ブラウザ間の初期スタイル差異を吸収する。
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* SP幅でのカードグリッド等の横はみ出し対策。common.cssのbodyに
+     word-break: keep-all を指定しているため、日本語の文章は「1つの巨大な
+     単語」として扱われる。CSS Grid/Flexboxの子要素はデフォルトで
+     min-width: auto（＝中身のmin-content幅）が自動的な最小サイズとなり、
+     かつoverflow-wrap: break-wordはこのmin-content計算に反映されない仕様
+     のため、対策なしでは長い日本語文を含むgrid/flexアイテムがコンテナ幅
+     を超えてはみ出し、ページ全体が横スクロールしてしまう
+     （about/premium/faq/contact等、複数ページで発生していた表示崩れの
+     共通原因）。全要素の自動最小幅を0にリセットすることで、
+     overflow-wrap: break-wordが実際に効くようにする。
+     ※ white-space: nowrap を明示している価格表示（¥5,500等）や
+     バッジ文言はnowrap自体がその要素の最小内容幅を決めるため、この
+     リセットによる悪影響は受けない。 */
+  min-width: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100svh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+/* hidden属性はUAスタイルシートの display: none で効いているだけなので、
+   .footer-social a { display: inline-flex } のように display を明示した
+   ルールがあると詳細度で負けて要素が消えない（実際に、未設定の公式X
+   アイコンを config-links.js が hidden にしても表示され続けていた）。
+   属性セレクタで確実に打ち消す。 */
+[hidden] {
+  display: none !important;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word;
+}
+/* フォーカス表示もブランドのテーマカラーへ統一する。
+   ダーク面では既存の淡いサブカラーへ切り替えて視認性を保つ。 */
+:focus-visible {
+  outline: 3px solid var(--color-accent, #ff5c7a);
+  outline-offset: 3px;
+}
+
+.site-footer :focus-visible,
+.feature-diagram :focus-visible {
+  outline-color: var(--color-sub, #ffc3ce);
+}
+
+/* ---- from the former variables.css ---- */
+/* ========================================================================== 
+   NIARIM variables.css
+   ブランドカラー・タイポグラフィ・余白などのデザイントークン。
+   全ページで色とスペーシングの意味を統一するため、必ずここを参照する。
+
+   2026-09 design polish:
+   DESIGN.md型の「見た目をルールとして固定する」考え方を導入。
+   NIARIM固有の #FF5C7A・アプリ由来フォント・ロゴを軸に、
+   暖かい紙色のキャンバス / 白いサーフェス / hairline border /
+   控えめなelevationで、制作ツールらしい落ち着きと遊び心を両立する。
+   ========================================================================== */
+
+:root {
+  --color-brand: #4a4636;
+  --color-brand-dark: #322f24;
+  --color-sub: #ffc3ce;
+  --color-sub-tint: #fff0f3;
+  --color-accent: #ff5c7a;
+  --color-accent-dark: #e8425f;
+  /* 面をテーマカラーで塗る箇所（ボタン等）に使う名前。利用者の指示は
+     「赤系のボタンはロゴでも使っているテーマカラーの明るいピンクに白文字」
+     なので、装飾用と同じ #ff5c7a をそのまま使う（ロゴ favicon.svg も
+     #FF5C7A の面に白抜き）。押したときだけ一段濃い側へ沈ませる。 */
+  /* 小さな文字に使う赤。ボタンの面は明るいテーマカラー(#ff5c7a)で
+     固定だが、eyebrow や必須マークのような「淡い地の上の小さな文字」は
+     同じ色だと 2.6〜3.6:1 にしかならず読めない。同じ色相のまま、
+     サイト内のどの淡い地（#ffffff / #fff4f6 / #f6e5e6 / #fff1fa）でも
+     4.5:1 以上になる濃さをここで持つ。面には使わない。 */
+  --color-accent-text: #b8264a;
+  --color-accent-strong: var(--color-accent);
+  --color-accent-strong-dark: var(--color-accent-dark);
+  /* 本文の行長を決める単位。
+     ch はフォントの「0」の幅なので、全角の日本語・中国語・韓国語では
+     実際の1文字よりずっと狭く、ラテン語基準の文字数をそのまま使うと
+     器の半分ほどしか使わない痩せた段組みになっていた。
+     全角1文字はおおよそ1emなので、読みやすい行長（35〜40字前後）に
+     なる係数を言語ごとに切り替える。 */
+  --measure-ch: 1ch;
+  --color-white: #ffffff;
+  --color-black: #17161c;
+  --color-ink: #28242c;
+  --color-gray-900: #302c34;
+  --color-gray-700: #55505a;
+  /* 本文の補助テキスト(--color-text-muted)として多用するため、
+     このパレットの全サーフェス上で WCAG 2.1 AA の 4.5:1 を満たす濃さにする。
+     #7d7781 では白背景で4.35:1、紙色の地(#f7f4f3)で3.97:1と基準未達だった。 */
+  --color-gray-500: #6e6873;
+  --color-gray-300: #cbc5cc;
+  --color-gray-100: #e9e4e7;
+  --color-gray-50: #faf8f9;
+  --color-bg: #f7f4f3;
+  --color-bg-tint: var(--color-sub-tint);
+  --color-bg-dark: var(--color-black);
+  --color-surface: var(--color-white);
+  --color-surface-soft: #fbf9f8;
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-on-dark: var(--color-gray-50);
+  --color-border: rgba(40, 36, 44, 0.09);
+  --color-border-strong: rgba(40, 36, 44, 0.16);
+  --color-success: #2f9e6e;
+  --color-error: #e5484d;
+  /* 自前配信のフォントのみで完結させ、外部CDN(Google Fonts)へのリクエストを
+     一切発生させない（閲覧者のIPを第三者に送信しないため）。
+     NotoSerifKR / NotoSerifSC は、白光明朝・くらむぼんに収録が無い
+     ハングルと簡体字だけを埋めるための自前サブセット。unicode-rangeを
+     付けてあるので、その言語の本文が出ないページでは転送されない。
+     NotoSerifMenu* は、言語切替メニューに常時出る「한국어」「简体中文」の
+     4文字だけを持つ極小フォント(計3KB)。これを分けておかないと、
+     日本語しか読まない利用者にも上記KR/SC(計134KB)が毎回転送されてしまう。
+     見出し(--font-serif)には NotoSansHead* を明朝の補完より前に置く。
+     くらむぼんは超極太ゴシックのため、未収録のハングル・簡体字を明朝で
+     補うと「550엔」のように同じ単語内で極太の数字と細い明朝が並んで
+     明らかに浮く。太さの近い Noto Sans Black で先に受けることで、
+     見出しらしい太さと、見出し／本文のメリハリを保つ。
+     末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
+  --font-sans:
+    "HakkouMincho", "HakkouMinchoLatinFallback", "HakkouMinchoCJK",
+    "HakkouMinchoCJKFallback", "NotoSerifMenuKR", "NotoSerifMenuSC",
+    "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif:
+    "Kuramubon", "KuramubonLatinFallback", "KuramubonCJK",
+    "KuramubonCJKFallback", "NotoSansHeadKR", "NotoSansHeadSC",
+    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC",
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+  --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
+  --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
+  --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
+  --fs-h3: clamp(1.2rem, 1.2vw + 1rem, 1.6rem);
+  /* common.css の .feature-narrative-block が参照していたが未定義で、
+     常にフォールバック値にしか解決されていなかったため実体を追加する。 */
+  --fs-h4: 1.1rem;
+  --fs-body: clamp(1rem, 0.24vw + 0.94rem, 1.1rem);
+  --fs-small: 0.875rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  /* 大きい余白の2つだけは画面幅に追従させる。固定の64px/96pxのままだと、
+     390px幅の端末で左右に64pxずつ＝画面の3分の1が余白になり、見出しが
+     不自然に折り返していた（例: ダウンロード導線の見出しが4行になる）。
+     大きい画面での見え方は変えたくないので、上限は従来値のまま。 */
+  --space-xl: clamp(2rem, 8vw, 4rem);
+  --space-2xl: clamp(3rem, 12vw, 6rem);
+  --space-3xl: 8.5rem;
+  --container-width: 1220px;
+  --container-padding: clamp(1.25rem, 4vw, 2.75rem);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --duration-fast: 180ms;
+  --duration-base: 360ms;
+  --duration-slow: 760ms;
+  --shadow-sm:
+    0 1px 2px rgba(30, 26, 34, 0.035), 0 4px 14px rgba(30, 26, 34, 0.035);
+  --shadow-md: 0 10px 30px rgba(30, 26, 34, 0.08);
+  --shadow-lg: 0 24px 70px rgba(30, 26, 34, 0.14);
+  --shadow-glow: 0 10px 42px rgba(255, 92, 122, 0.24);
+  --grad-brand: linear-gradient(120deg, var(--color-accent) 0%, #ffad66 100%);
+  --grad-ink: linear-gradient(160deg, #25222b 0%, #302d48 58%, #1b1928 100%);
+  --grad-gold: linear-gradient(120deg, #ffd76a 0%, #ff9f5c 100%);
+  --header-height: 72px;
+}
+/* ラテン系の言語（英語・フランス語・スペイン語）を選んでいる閲覧者向け。
+
+   HTMLには初期表示用の日本語がそのまま書かれており、i18nがそれを置き換える
+   のはDOMContentLoadedの後になる。それまでの一瞬だけ日本語が描画されるため、
+   font-familyにCJKサブセットが載っていると、英語のページでも漢字フォント
+   (合計845KB)が必ず転送されてしまう（実測：DOMContentLoadedの約380ms前に要求）。
+   CJK側は *CJK という別のfamily名にしてあるので、ここでスタックから外す。
+   置き換わるまでのごく短い間、その日本語はOS標準の明朝/ゴシックで描かれる。
+   ページの言語がCJKのときはこの指定は当たらないので、表示は従来どおり。
+   属性は <head> のインラインスクリプトが第一描画より前に付ける。 */
+:root[data-latin-only] {
+  --font-sans:
+    "HakkouMincho", "HakkouMinchoLatinFallback", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif:
+    "Kuramubon", "KuramubonLatinFallback", "Zen Kaku Gothic New",
+    "Hiragino Kaku Gothic ProN", sans-serif;
+}
+/* Home closing flow: FAQ→読み物→最終CTAで通常sectionの上下余白が二重に積み上がり、
+   PC/SPとも内容のない空白が長く続いて見えていた。各セクション自体の余白感は
+   保ちつつ、連続する終盤3ブロックだけリズムを詰めて視線を次のCTAへつなぐ。 */
+body[data-i18n-title="meta.home.title"] #faq {
+  padding-bottom: var(--space-xl);
+}
+body[data-i18n-title="meta.home.title"] #faq + .section {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+@media (max-width: 860px) {
+  body[data-i18n-title="meta.home.title"] #faq {
+    padding-bottom: var(--space-lg);
+  }
+  body[data-i18n-title="meta.home.title"] #faq + .section {
+    padding-block: var(--space-md);
+  }
+}
+/* 全角言語では ch ではなく em 基準で行長を決める。 */
+:root:lang(ja),
+:root:lang(zh-Hans),
+:root:lang(zh-Hant),
+:root:lang(ko) {
+  --measure-ch: 0.62em;
+}
+/* Keep headings and body text in the same serif family for Chinese and Korean. */
+:root {
+  --font-display-with-body:
+    "Kuramubon", "KuramubonLatinFallback", "KuramubonCJK",
+    "KuramubonCJKFallback", "HakkouMincho", "HakkouMinchoLatinFallback",
+    "HakkouMinchoCJK", "HakkouMinchoCJKFallback";
+}
+:root:lang(ko) {
+  --font-cjk-locale: "NotoSerifKR";
+}
+:root:lang(zh-Hans) {
+  --font-cjk-locale: "NotoSerifSC";
+}
+:root:lang(zh-Hant) {
+  --font-cjk-locale: "NotoSerifTC";
+}
+:root:lang(zh),
+:root:lang(ko) {
+  --font-sans:
+    "HakkouMincho", "HakkouMinchoLatinFallback", var(--font-cjk-locale),
+    "HakkouMinchoCJK", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifSC",
+    serif;
+  --font-serif: var(--font-sans);
+  --font-display-with-body: var(--font-sans);
+}
+/* Paper, ink and red pencil — the 2026-11 redesign.
+   One paper ground for every page, white only for sheets laid on it (cards,
+   tables, forms), one ink for text and lines, and the brand pink used the way
+   an animator uses a red pencil: the primary action, the current place,
+   links and small marks such as frame numbers. New rules read only these. */
+:root {
+  --paper: var(--color-bg);
+  --sheet: var(--color-white);
+  --ink: var(--color-ink);
+  --ink-2: #5f5864;
+  --rule: rgba(40, 36, 44, 0.14);
+  --rule-strong: rgba(40, 36, 44, 0.32);
+  --pencil: var(--color-accent);
+  --pencil-dark: var(--color-accent-dark);
+  --pencil-ink: var(--color-accent-text);
+  --radius-control: 8px;
+  --radius-sheet: 14px;
+  --shadow-device:
+    0 1px 2px rgba(40, 36, 44, 0.14), 0 28px 56px -24px rgba(40, 36, 44, 0.42);
+}
+
+/* ---- from the former common-base.css ---- */
+/* ==========================================================================
+   NIARIM common.css
+   全ページ共通のベーススタイル・ヘッダー・フッター・汎用コンポーネント。
+   ========================================================================== */
+/* === BEGIN generated font-face (tools/build-fonts.py) === */
+/* このブロックは tools/build-fonts.py が生成する。手で編集しないこと。
+   フォントは全て自前配信で、外部CDNへのリクエストは発生しない
+   （閲覧者のIPを第三者に送信しないため。詳細はビルドスクリプトの説明を参照）。
+   ライセンスは /assets/fonts/LICENSE.md にまとめている。 */
+/* 本文用（白光明朝／lavsic氏・Noto Serif JP派生） */
+@font-face {
+  font-family: "HakkouMincho";
+  font-display: swap;
+  src: url("/assets/fonts/HakkouMincho-latin.woff2") format("woff2");
+  unicode-range:
+    U+0020-005F, U+0061-007E, U+00A0-00A1, U+00A5, U+00A9, U+00AB, U+00B0-00B1,
+    U+00B7, U+00BA-00BB, U+00BF-00C2, U+00C7-00CA, U+00CD-00CF, U+00D1,
+    U+00D3-00D4, U+00D7, U+00D9-00DB, U+00E0-00E2, U+00E7-00EA, U+00ED-00EF,
+    U+00F1, U+00F3-00F4, U+00F9-00FB, U+0152-0153, U+2011, U+2013-2014, U+2019,
+    U+201C-201D, U+2022, U+2026, U+203B, U+2192, U+2194, U+2212, U+25A0, U+25A3,
+    U+25C6, U+25CB, U+2605-2606, U+2713;
+}
+/* 本文用（白光明朝／lavsic氏・Noto Serif JP派生） */
+@font-face {
+  font-family: "HakkouMinchoCJK";
+  font-display: swap;
+  src: url("/assets/fonts/HakkouMincho-subset.v3.woff2") format("woff2");
+  unicode-range:
+    U+03B1, U+25B6, U+3001-3002, U+3005, U+3007, U+300A-300D, U+3010-3011,
+    U+301C, U+3042, U+3044, U+3046, U+3048, U+304A-3061, U+3063-306B,
+    U+306D-3076, U+3078-3079, U+307B-307C, U+307E-3084, U+3086-308D, U+308F,
+    U+3092-3093, U+30A1-30A4, U+30A6-30AD, U+30AF-30BD, U+30BF-30C1,
+    U+30C3-30C4, U+30C6-30CB, U+30CD-30E7, U+30E9-30ED, U+30EF, U+30F3,
+    U+30FB-30FC, U+4E00, U+4E03, U+4E07, U+4E09-4E0B, U+4E0D-4E0E, U+4E14,
+    U+4E16, U+4E21, U+4E24, U+4E26, U+4E2A, U+4E2D, U+4E30, U+4E38, U+4E3B,
+    U+4E43, U+4E45, U+4E48, U+4E4B, U+4E4E, U+4E57-4E58, U+4E5F, U+4E7E, U+4E86,
+    U+4E88-4E89, U+4E8B-4E8C, U+4E8E, U+4E91-4E92, U+4E94, U+4E9B, U+4EA4,
+    U+4EA6, U+4EAB-4EAC, U+4EAE, U+4EBA, U+4EC0, U+4ECA-4ECB, U+4ECD-4ECE,
+    U+4ED5-4ED6, U+4ED8, U+4EE3-4EE5, U+4EEE, U+4EF6-4EF7, U+4EFB, U+4EFD,
+    U+4EFF, U+4F01, U+4F11, U+4F17, U+4F1A, U+4F1D, U+4F34, U+4F38, U+4F3A,
+    U+4F3C, U+4F46, U+4F48, U+4F4D-4F4F, U+4F53-4F55, U+4F59, U+4F5C, U+4F60,
+    U+4F75, U+4F7F, U+4F86, U+4F8B, U+4F9B, U+4F9D, U+4FA1, U+4FB5, U+4FBF,
+    U+4FC2, U+4FD7, U+4FDD, U+4FE1, U+4FEE-4FEF, U+500B, U+500D, U+5011-5012,
+    U+5019, U+5024, U+5047, U+504F, U+505A, U+505C, U+5074-5075, U+507D, U+5099,
+    U+50B3, U+50B7, U+50BE, U+50C5, U+50CF, U+50F9, U+511F, U+512A, U+5132,
+    U+513F-5141, U+5143-5145, U+5148-5149, U+514B, U+514D, U+5152, U+5165,
+    U+5167-5169, U+516B-516D, U+5171, U+5173-5174, U+5176-5178, U+517B-517C,
+    U+5185-5186, U+518A, U+518C-518D, U+5192, U+5199, U+51B3, U+51B5, U+51C6,
+    U+51CF, U+51E0, U+51E6, U+51F8-51FA, U+5206-5207, U+5212, U+5217, U+521D,
+    U+5224-5225, U+5229-522B, U+5230, U+5236-5237, U+523B, U+5247, U+524A,
+    U+524D, U+525B, U+5269-526A, U+526F, U+5272, U+5275, U+5283, U+529B,
+    U+529F-52A0, U+52A9-52AA, U+52B9, U+52D2, U+52D5, U+52D9, U+52DD, U+52E2,
+    U+52E7, U+52FB, U+52FE, U+5300, U+5305, U+5316, U+532F, U+5339-533A,
+    U+5340-5341, U+5347-5348, U+534A, U+5354, U+5357-5358, U+5360-5361, U+5370,
+    U+5373, U+5378, U+539A, U+539F, U+53BB, U+53C2-53C3, U+53C8-53CA,
+    U+53CC-53CE, U+53D6-53D7, U+53E0, U+53E3-53E6, U+53EA-53EB, U+53EF-53F0,
+    U+53F2-53F3, U+53F6-53F8, U+5404, U+5408, U+540C-540E, U+5411, U+5426-5427,
+    U+542B, U+542F, U+5438-5439, U+5448, U+544A, U+5468, U+5473, U+547C-547D,
+    U+548C, U+54A8, U+54C1, U+54CD, U+54E1, U+54EA, U+5546, U+554F, U+5584,
+    U+559C, U+55AE, U+55B6, U+55CE, U+5617, U+5634, U+5668, U+566A, U+5674,
+    U+56DB, U+56DE, U+56E0, U+56F0, U+56F2-56F3, U+56FA, U+56FD, U+5708, U+570B,
+    U+570D, U+5713, U+5716, U+5718, U+5727-5728, U+5730, U+573E, U+5740, U+5747,
+    U+574F, U+5783, U+578B, U+57CB, U+57DF, U+57F7, U+57F9-57FA, U+5802, U+5831,
+    U+5834, U+584A, U+5857, U+586B, U+5883, U+5897, U+589E, U+58A8, U+58CA,
+    U+58D3, U+58DE, U+58EB, U+58F0, U+58F2, U+5909, U+590D, U+5916, U+591A,
+    U+591C, U+5927, U+5929-592B, U+592E, U+5931, U+5939, U+593E, U+594F, U+5951,
+    U+5957, U+5965, U+5968, U+5973, U+597D, U+5982, U+59A5, U+59A8, U+59BB,
+    U+59CB, U+59D3-59D4, U+5A92, U+5ACC, U+5B50, U+5B54, U+5B57-5B58, U+5B66,
+    U+5B69, U+5B78, U+5B83, U+5B88-5B89, U+5B8C, U+5B98, U+5B9A-5B9B, U+5B9F,
+    U+5BA2-5BA3, U+5BB3, U+5BB6, U+5BB9, U+5BC4, U+5BC6, U+5BCC, U+5BDD, U+5BDF,
+    U+5BE6, U+5BE9, U+5BEB-5BEC, U+5BF8, U+5BFE, U+5C01-5C02, U+5C04,
+    U+5C06-5C08, U+5C0B, U+5C0D-5C0F, U+5C11, U+5C16, U+5C1A, U+5C31, U+5C3A,
+    U+5C3D-5C3E, U+5C40, U+5C4A, U+5C4F, U+5C55, U+5C5E, U+5C64-5C65, U+5C6C,
+    U+5C71, U+5C90, U+5D29, U+5DDE, U+5DE1, U+5DE5-5DE7, U+5DEE, U+5DF1-5DF2,
+    U+5DF4, U+5DFB, U+5E02-5E03, U+5E0C, U+5E2E-5E30, U+5E33, U+5E36, U+5E38,
+    U+5E45, U+5E55, U+5E63, U+5E6B, U+5E72-5E74, U+5E76, U+5E7E-5E7F, U+5E83,
+    U+5E8F, U+5E95, U+5E97, U+5EA6, U+5EAB, U+5ED3, U+5EE3, U+5EF6, U+5EFA,
+    U+5F00-5F02, U+5F0F, U+5F15, U+5F1F, U+5F27, U+5F31, U+5F35, U+5F37, U+5F3A,
+    U+5F3E, U+5F48, U+5F53, U+5F59, U+5F62, U+5F69, U+5F71, U+5F79, U+5F7C,
+    U+5F80, U+5F84-5F85, U+5F88, U+5F8B-5F8C, U+5F90-5F93, U+5F97, U+5F9E,
+    U+5FA1, U+5FA9-5FAA, U+5FAE, U+5FB4, U+5FC3, U+5FC5, U+5FD7, U+5FDC, U+5FEB,
+    U+5FF5, U+600E, U+601D, U+6025, U+6027, U+6050, U+6052, U+6062, U+606F,
+    U+6089, U+60A8, U+60C5, U+60DF, U+60F3, U+610F, U+611F, U+613F, U+614B,
+    U+6163, U+6167, U+61B6, U+61C9, U+61F8, U+6210-6211, U+6216, U+622A,
+    U+6232-6233, U+6236, U+623B, U+623F-6241, U+624B, U+624D, U+6253, U+6255,
+    U+626D, U+6271, U+6279, U+627E-6280, U+628A, U+6291, U+6293, U+6295-6298,
+    U+629C, U+629E, U+62B9, U+62BC-62BD, U+62C5-62C6, U+62C9, U+62D3, U+62D6,
+    U+62DB, U+62E0-62E1, U+62EC, U+62FE, U+6301-6302, U+6307, U+6309, U+6311,
+    U+6316, U+632F, U+633F, U+6349, U+634F, U+6355, U+6357, U+636E, U+6377,
+    U+6388, U+638C, U+6392, U+6398, U+639B, U+63A1-63A2, U+63A5, U+63A7-63A8,
+    U+63AA, U+63B2, U+63C3, U+63CF-63D0, U+63D2, U+63DB, U+63E1, U+63F4, U+640D,
+    U+641C, U+642D, U+643A, U+6490-6491, U+64A4, U+64AD, U+64C1, U+64C7, U+64CA,
+    U+64CD, U+64D4, U+64DA, U+64E0, U+64E6, U+64F4, U+64F7, U+64FA, U+64FE,
+    U+651C-651D, U+652C, U+652F, U+6536, U+6539, U+653E-653F, U+6545, U+6548,
+    U+6551, U+6557, U+6559, U+6563, U+6570, U+6574, U+6578, U+6587, U+6599,
+    U+659C, U+65AD, U+65AF-65B0, U+65B7, U+65B9, U+65BC-65BD, U+65C1, U+65CB,
+    U+65E0, U+65E2, U+65E5-65E9, U+6607, U+660E, U+6613, U+661F-6620, U+6627,
+    U+662F, U+6642, U+666E-6670, U+6676, U+667A, U+6688, U+6697, U+66A2, U+66AB,
+    U+66D6, U+66DC, U+66F2-66F4, U+66F8, U+66FE-6700, U+6703, U+6708-6709,
+    U+670D, U+671B, U+671D, U+671F, U+6728, U+672A-672C, U+673A, U+6743, U+6750,
+    U+6756, U+675F, U+6761, U+6765, U+6771, U+677E-677F, U+6781, U+6784, U+6790,
+    U+679A, U+679C-679D, U+67A0, U+67B6, U+67C4, U+67D0, U+67D3-67D4, U+67FB,
+    U+6821, U+6838-6839, U+683C, U+6846, U+6848, U+684C, U+6863, U+6876, U+687F,
+    U+689D, U+68B0-68B1, U+68D2, U+691C, U+6955, U+696D, U+6975, U+697D, U+6982,
+    U+699C, U+69CB, U+69CD, U+69D8, U+69FD, U+6A02, U+6A19, U+6A21, U+6A23,
+    U+6A29-6A2A, U+6A39, U+6A59, U+6A5F, U+6A61-6A62, U+6A6B, U+6A94, U+6AA2,
+    U+6B04, U+6B0A, U+6B21, U+6B27, U+6B32, U+6B3E, U+6B50, U+6B61-6B65,
+    U+6B69-6B6A, U+6B72-6B74, U+6B77-6B78, U+6B8A-6B8B, U+6BB5, U+6BC0,
+    U+6BCD-6BCF, U+6BD4, U+6BDB, U+6BEB, U+6C0F, U+6C17, U+6C1B, U+6C34, U+6C38,
+    U+6C42, U+6C4E, U+6C7A, U+6C88-6C89, U+6C92, U+6CA1-6CA2, U+6CB9, U+6CBF,
+    U+6CC1, U+6CD5, U+6CDB, U+6CE2, U+6CE8, U+6D01, U+6D0B, U+6D32, U+6D3B,
+    U+6D3D-6D3E, U+6D41, U+6D45, U+6D6E, U+6D82, U+6D88-6D89, U+6DB2, U+6DE1,
+    U+6DF1, U+6DF7, U+6DFA-6DFB, U+6E05, U+6E08, U+6E1B, U+6E21, U+6E2C, U+6E38,
+    U+6E7F-6E80, U+6E90, U+6E96, U+6E9C, U+6EA2, U+6EAF, U+6ED1, U+6EDA, U+6EDE,
+    U+6EF2, U+6EF4, U+6EFE-6EFF, U+6F06, U+6F0F, U+6F14, U+6F22, U+6F2B, U+6F38,
+    U+6F54, U+6F5B-6F5C, U+6F64, U+6F80, U+6FA4, U+6FC3, U+6FD5, U+6FDF, U+6FEB,
+    U+6FFE, U+700F, U+706B, U+7070, U+7075, U+70AD, U+70B9-70BA, U+70C8, U+7121,
+    U+7126, U+7136, U+713C, U+7167, U+7169, U+717D, U+719F, U+71B1, U+71D2,
+    U+71DF, U+720D, U+722D, U+7247-7248, U+724C, U+7269, U+7279, U+72B6, U+72C0,
+    U+72D9, U+72EC-72ED, U+7368, U+7372, U+7387, U+73A9, U+73E0, U+73FE, U+7403,
+    U+7406, U+7422, U+7455, U+745E, U+74B0, U+751A, U+751F, U+7522-7523, U+7528,
+    U+7530-7531, U+7533, U+7537, U+753B, U+754C, U+7559, U+7565, U+756A-756B,
+    U+7570, U+7573, U+7576, U+7578, U+758A, U+7591, U+75B5, U+7656, U+767A-767D,
+    U+7684, U+7686, U+76AE, U+76CA, U+76D6, U+76E1, U+76E3-76E4, U+76EE, U+76F4,
+    U+76F8, U+7701, U+770B, U+771F, U+773A, U+773C, U+773E, U+7740, U+7763,
+    U+77AC, U+77B0, U+77B3, U+77E2, U+77E5, U+77E9, U+77ED, U+7802, U+7834,
+    U+786C, U+786E, U+788D-788E, U+78BA, U+78BC, U+78E8, U+790E, U+7919, U+793A,
+    U+793E, U+7956, U+7981, U+79BB, U+79C1, U+79CD, U+79D2, U+79F0, U+79FB,
+    U+7A05, U+7A0B, U+7A0D-7A0E, U+7A2E, U+7A31-7A32, U+7A3F, U+7A4D, U+7A4F,
+    U+7A69, U+7A7A, U+7A81, U+7A93, U+7A97, U+7AC5, U+7ACB, U+7AD9, U+7AE0,
+    U+7AE5, U+7AEF, U+7B14, U+7B26, U+7B2C, U+7B46, U+7B49, U+7B4B, U+7B54,
+    U+7B56, U+7B87, U+7B97, U+7BA1, U+7BB1, U+7BC0, U+7BC4, U+7BC9, U+7BE9,
+    U+7C21, U+7C3D, U+7C64, U+7C73, U+7C7B, U+7C89, U+7C92, U+7C97, U+7CBE,
+    U+7CCA, U+7CFB, U+7D00, U+7D04-7D05, U+7D0B, U+7D0D, U+7D10, U+7D14,
+    U+7D19-7D1B, U+7D20, U+7D22, U+7D2B, U+7D2F-7D30, U+7D39, U+7D42, U+7D44,
+    U+7D4C, U+7D50, U+7D5E, U+7D61, U+7D66, U+7D71-7D72, U+7D75-7D76, U+7D93,
+    U+7D99-7D9A, U+7DAD, U+7DB2, U+7DBA, U+7DCA, U+7DCF, U+7DD1-7DD2, U+7DDA,
+    U+7DE3, U+7DE8-7DE9, U+7DF4, U+7DFB, U+7E01, U+7E04, U+7E1E, U+7E26, U+7E2B,
+    U+7E2E, U+7E31, U+7E3D, U+7E41, U+7E4B, U+7E54, U+7E6A-7E6B, U+7E70, U+7E73,
+    U+7E7C, U+7E8C, U+7F51, U+7F69, U+7F6E, U+7F72, U+7FA4, U+7FA9, U+7FD2,
+    U+7FFB, U+8001, U+8003, U+8005, U+800C, U+8017, U+805A, U+806F, U+8072,
+    U+8074, U+8089, U+808C, U+8096, U+80A2, U+80A4, U+80B2, U+80CC, U+80F6,
+    U+80FD, U+8155, U+8166, U+819A, U+81A0, U+81C2, U+81EA, U+81F3-81F4, U+81FA,
+    U+8207-820A, U+8212, U+822A, U+822C, U+826F, U+8272, U+8292, U+82B1,
+    U+82E5-82E6, U+82F1, U+8303, U+8349, U+8350, U+8352, U+8377, U+83AB, U+83DC,
+    U+83F1, U+840C, U+843D, U+8449, U+8457, U+8471, U+8490, U+8499, U+84CB,
+    U+8525, U+8535, U+853D, U+8584, U+85A6, U+85C9, U+85CF, U+862D, U+8655,
+    U+865A-865B, U+865F, U+8679, U+86CD, U+878D, U+87A2, U+884C, U+8853, U+8861,
+    U+8868, U+8870, U+8896, U+889C, U+88AB, U+88C1, U+88C5, U+88D5, U+88DC-88DD,
+    U+88E1, U+88FD, U+8907, U+8932, U+896A, U+897F, U+8981, U+8986, U+898B,
+    U+898F, U+8996, U+899A, U+89A7, U+89AA, U+89B3, U+89BA, U+89BD, U+89C0-89C1,
+    U+89D2, U+89E3, U+89E6, U+89F8, U+8A00, U+8A02, U+8A08, U+8A0A, U+8A0E,
+    U+8A13, U+8A18, U+8A1F, U+8A23, U+8A2A, U+8A2D, U+8A31, U+8A33-8A34,
+    U+8A3B-8A3C, U+8A5E, U+8A62, U+8A66, U+8A70-8A73, U+8A8C-8A8D, U+8A98,
+    U+8A9E, U+8AA4, U+8AAA, U+8AAC-8AAD, U+8AB0, U+8AB2, U+8AB9, U+8ABF, U+8AC7,
+    U+8ACB, U+8AD6, U+8AEE, U+8AFE, U+8B02, U+8B17, U+8B1B, U+8B1D, U+8B49,
+    U+8B58, U+8B66, U+8B6F-8B70, U+8B72, U+8B77, U+8B80, U+8B8A, U+8B93, U+8C4A,
+    U+8C50, U+8C61, U+8CA0-8CA1, U+8CA9, U+8CAB-8CAC, U+8CAF, U+8CB7,
+    U+8CBB-8CBC, U+8CC7, U+8CDB, U+8CE0, U+8CEA, U+8CFC-8CFD, U+8D64, U+8D70,
+    U+8D77, U+8D85, U+8D8A, U+8DA3, U+8DB3, U+8DDD, U+8DDF, U+8DE8, U+8DEF,
+    U+8DF3, U+8DF5, U+8E0F, U+8E2A, U+8E64, U+8EAB, U+8ECC, U+8EDF, U+8EE2,
+    U+8EF8, U+8EFD, U+8F03, U+8F09, U+8F14-8F15, U+8F1D, U+8F2A, U+8F2F, U+8F38,
+    U+8F44, U+8F49, U+8F9E, U+8FA6, U+8FA8, U+8FBA, U+8FBC, U+8FBE-8FBF, U+8FC1,
+    U+8FCE, U+8FD0-8FD1, U+8FD4, U+8FEA, U+8FF0, U+8FF7, U+8FFD, U+9000-9002,
+    U+9006, U+900F-9010, U+9014, U+9019-901A, U+901F-9020, U+9023, U+9031-9032,
+    U+9045, U+9047, U+904A-904B, U+904E, U+9053-9055, U+905E, U+9060-9061,
+    U+9069, U+906D-906E, U+9075, U+9078, U+907A, U+907F, U+9084, U+908A, U+90A3,
+    U+90CE, U+90E8, U+90ED, U+90F5, U+90FD, U+9130, U+914D, U+916C, U+91C7-91C8,
+    U+91CB-91CD, U+91CF, U+91D1, U+91DD, U+9215, U+9234, U+925B, U+929C, U+92B3,
+    U+92ED, U+92F8, U+92FC, U+9304, U+932F, U+9332, U+9375, U+9396, U+93E1,
+    U+943A, U+9577, U+957F-9580, U+9583, U+9589, U+958B, U+9593, U+95A2,
+    U+95B1-95B2, U+95BE, U+95DC, U+95E8, U+9632, U+9634, U+9644, U+964D, U+9650,
+    U+9662-9664, U+9670, U+967A, U+9685, U+968A, U+968E-968F, U+9694, U+9699,
+    U+969B-969C, U+96A0, U+96A3, U+96A8, U+96B1, U+96BB, U+96C6, U+96D1, U+96D9,
+    U+96DC, U+96E2-96E3, U+96E8, U+96F0, U+96F2, U+96F6, U+96FB, U+9700, U+9748,
+    U+9752, U+9759, U+975C, U+975E, U+9760, U+9762, U+97D3, U+97F3, U+97F5,
+    U+97FB, U+97FF, U+9801-9802, U+9805-9806, U+9808, U+9810, U+9818,
+    U+982C-982D, U+983B-983C, U+9846, U+984C-984D, U+984F, U+9858, U+985E,
+    U+9867, U+986F, U+9875, U+98A8, U+98CE, U+98DB, U+98DE-98DF, U+98FD-98FE,
+    U+9905, U+990A, U+9918, U+9996, U+99AC, U+99B4, U+9A37, U+9A57, U+9A6C,
+    U+9AD4, U+9AD8, U+9AEA, U+9B06, U+9B54, U+9B5A, U+9BAE, U+9C7C, U+9CF4,
+    U+9E97, U+9EA5, U+9EBB-9EBC, U+9EC3-9EC4, U+9ED1-9ED2, U+9ED8, U+9EDE,
+    U+9F20, U+9F52, U+9F61, U+9F7F, U+9F99, U+FF01, U+FF08-FF09, U+FF0B-FF0C,
+    U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
+}
+/* 白光明朝・くらむぼんの日本語が届くまでの代わり（端末の日本語の書体）。
+   届く前の字を端末の書体で描くと、白光明朝のかな・漢字（字幅0.65em）は
+   1.5倍の幅で折れ、くらむぼん（1em）の見出し・ボタンは白光明朝へ落ちて
+   0.65emで折れ、届いたときに段落・見出しの行数が変わって下の部分が動いた
+   （遅い回線のスマホの/opals/でCLS 0.31）。代わりの字の幅を届く書体と同じに
+   して、届いても行の折れ方が変わらないようにする。代わりが受け持つ字は、
+   それぞれの部分フォントと同じ範囲だけ（部分フォントに無い字は今までどおり
+   次の書体へ。tools/build-locale-fonts.py が範囲を合わせる）。 */
+@font-face {
+  font-family: "HakkouMinchoCJKFallback";
+  src:
+    local("Noto Serif CJK JP"), local("Noto Serif CJK JP Regular"),
+    local("NotoSerifCJKjp-Regular"), local("Noto Serif JP Regular"),
+    local("NotoSerifJP-Regular"), local("Hiragino Mincho ProN W3"),
+    local("HiraMinProN-W3"), local("Yu Mincho Regular"),
+    local("YuMincho-Regular"), local("MS Mincho"), local("Noto Sans CJK JP"),
+    local("Noto Sans CJK JP Regular"), local("NotoSansCJKjp-Regular"),
+    local("Hiragino Sans W3"), local("HiraginoSans-W3"),
+    local("Yu Gothic Regular"), local("YuGothic-Regular"), local("Meiryo"),
+    local("Droid Sans Fallback"), local("DroidSansFallback"),
+    local("IPAGothic"), local("IPAPGothic");
+  size-adjust: 65%;
+  unicode-range:
+    U+03B1, U+25B6, U+3001-3002, U+3005, U+3007, U+300A-300D, U+3010-3011,
+    U+301C, U+3042, U+3044, U+3046, U+3048, U+304A-3061, U+3063-306B,
+    U+306D-3076, U+3078-3079, U+307B-307C, U+307E-3084, U+3086-308D, U+308F,
+    U+3092-3093, U+30A1-30A4, U+30A6-30AD, U+30AF-30BD, U+30BF-30C1,
+    U+30C3-30C4, U+30C6-30CB, U+30CD-30E7, U+30E9-30ED, U+30EF, U+30F3,
+    U+30FB-30FC, U+4E00, U+4E03, U+4E07, U+4E09-4E0B, U+4E0D-4E0E, U+4E14,
+    U+4E16, U+4E21, U+4E24, U+4E26, U+4E2A, U+4E2D, U+4E30, U+4E38, U+4E3B,
+    U+4E43, U+4E45, U+4E48, U+4E4B, U+4E4E, U+4E57-4E58, U+4E5F, U+4E7E, U+4E86,
+    U+4E88-4E89, U+4E8B-4E8C, U+4E8E, U+4E91-4E92, U+4E94, U+4E9B, U+4EA4,
+    U+4EA6, U+4EAB-4EAC, U+4EAE, U+4EBA, U+4EC0, U+4ECA-4ECB, U+4ECD-4ECE,
+    U+4ED5-4ED6, U+4ED8, U+4EE3-4EE5, U+4EEE, U+4EF6-4EF7, U+4EFB, U+4EFD,
+    U+4EFF, U+4F01, U+4F11, U+4F17, U+4F1A, U+4F1D, U+4F34, U+4F38, U+4F3A,
+    U+4F3C, U+4F46, U+4F48, U+4F4D-4F4F, U+4F53-4F55, U+4F59, U+4F5C, U+4F60,
+    U+4F75, U+4F7F, U+4F86, U+4F8B, U+4F9B, U+4F9D, U+4FA1, U+4FB5, U+4FBF,
+    U+4FC2, U+4FD7, U+4FDD, U+4FE1, U+4FEE-4FEF, U+500B, U+500D, U+5011-5012,
+    U+5019, U+5024, U+5047, U+504F, U+505A, U+505C, U+5074-5075, U+507D, U+5099,
+    U+50B3, U+50B7, U+50BE, U+50C5, U+50CF, U+50F9, U+511F, U+512A, U+5132,
+    U+513F-5141, U+5143-5145, U+5148-5149, U+514B, U+514D, U+5152, U+5165,
+    U+5167-5169, U+516B-516D, U+5171, U+5173-5174, U+5176-5178, U+517B-517C,
+    U+5185-5186, U+518A, U+518C-518D, U+5192, U+5199, U+51B3, U+51B5, U+51C6,
+    U+51CF, U+51E0, U+51E6, U+51F8-51FA, U+5206-5207, U+5212, U+5217, U+521D,
+    U+5224-5225, U+5229-522B, U+5230, U+5236-5237, U+523B, U+5247, U+524A,
+    U+524D, U+525B, U+5269-526A, U+526F, U+5272, U+5275, U+5283, U+529B,
+    U+529F-52A0, U+52A9-52AA, U+52B9, U+52D2, U+52D5, U+52D9, U+52DD, U+52E2,
+    U+52E7, U+52FB, U+52FE, U+5300, U+5305, U+5316, U+532F, U+5339-533A,
+    U+5340-5341, U+5347-5348, U+534A, U+5354, U+5357-5358, U+5360-5361, U+5370,
+    U+5373, U+5378, U+539A, U+539F, U+53BB, U+53C2-53C3, U+53C8-53CA,
+    U+53CC-53CE, U+53D6-53D7, U+53E0, U+53E3-53E6, U+53EA-53EB, U+53EF-53F0,
+    U+53F2-53F3, U+53F6-53F8, U+5404, U+5408, U+540C-540E, U+5411, U+5426-5427,
+    U+542B, U+542F, U+5438-5439, U+5448, U+544A, U+5468, U+5473, U+547C-547D,
+    U+548C, U+54A8, U+54C1, U+54CD, U+54E1, U+54EA, U+5546, U+554F, U+5584,
+    U+559C, U+55AE, U+55B6, U+55CE, U+5617, U+5634, U+5668, U+566A, U+5674,
+    U+56DB, U+56DE, U+56E0, U+56F0, U+56F2-56F3, U+56FA, U+56FD, U+5708, U+570B,
+    U+570D, U+5713, U+5716, U+5718, U+5727-5728, U+5730, U+573E, U+5740, U+5747,
+    U+574F, U+5783, U+578B, U+57CB, U+57DF, U+57F7, U+57F9-57FA, U+5802, U+5831,
+    U+5834, U+584A, U+5857, U+586B, U+5883, U+5897, U+589E, U+58A8, U+58CA,
+    U+58D3, U+58DE, U+58EB, U+58F0, U+58F2, U+5909, U+590D, U+5916, U+591A,
+    U+591C, U+5927, U+5929-592B, U+592E, U+5931, U+5939, U+593E, U+594F, U+5951,
+    U+5957, U+5965, U+5968, U+5973, U+597D, U+5982, U+59A5, U+59A8, U+59BB,
+    U+59CB, U+59D3-59D4, U+5A92, U+5ACC, U+5B50, U+5B54, U+5B57-5B58, U+5B66,
+    U+5B69, U+5B78, U+5B83, U+5B88-5B89, U+5B8C, U+5B98, U+5B9A-5B9B, U+5B9F,
+    U+5BA2-5BA3, U+5BB3, U+5BB6, U+5BB9, U+5BC4, U+5BC6, U+5BCC, U+5BDD, U+5BDF,
+    U+5BE6, U+5BE9, U+5BEB-5BEC, U+5BF8, U+5BFE, U+5C01-5C02, U+5C04,
+    U+5C06-5C08, U+5C0B, U+5C0D-5C0F, U+5C11, U+5C16, U+5C1A, U+5C31, U+5C3A,
+    U+5C3D-5C3E, U+5C40, U+5C4A, U+5C4F, U+5C55, U+5C5E, U+5C64-5C65, U+5C6C,
+    U+5C71, U+5C90, U+5D29, U+5DDE, U+5DE1, U+5DE5-5DE7, U+5DEE, U+5DF1-5DF2,
+    U+5DF4, U+5DFB, U+5E02-5E03, U+5E0C, U+5E2E-5E30, U+5E33, U+5E36, U+5E38,
+    U+5E45, U+5E55, U+5E63, U+5E6B, U+5E72-5E74, U+5E76, U+5E7E-5E7F, U+5E83,
+    U+5E8F, U+5E95, U+5E97, U+5EA6, U+5EAB, U+5ED3, U+5EE3, U+5EF6, U+5EFA,
+    U+5F00-5F02, U+5F0F, U+5F15, U+5F1F, U+5F27, U+5F31, U+5F35, U+5F37, U+5F3A,
+    U+5F3E, U+5F48, U+5F53, U+5F59, U+5F62, U+5F69, U+5F71, U+5F79, U+5F7C,
+    U+5F80, U+5F84-5F85, U+5F88, U+5F8B-5F8C, U+5F90-5F93, U+5F97, U+5F9E,
+    U+5FA1, U+5FA9-5FAA, U+5FAE, U+5FB4, U+5FC3, U+5FC5, U+5FD7, U+5FDC, U+5FEB,
+    U+5FF5, U+600E, U+601D, U+6025, U+6027, U+6050, U+6052, U+6062, U+606F,
+    U+6089, U+60A8, U+60C5, U+60DF, U+60F3, U+610F, U+611F, U+613F, U+614B,
+    U+6163, U+6167, U+61B6, U+61C9, U+61F8, U+6210-6211, U+6216, U+622A,
+    U+6232-6233, U+6236, U+623B, U+623F-6241, U+624B, U+624D, U+6253, U+6255,
+    U+626D, U+6271, U+6279, U+627E-6280, U+628A, U+6291, U+6293, U+6295-6298,
+    U+629C, U+629E, U+62B9, U+62BC-62BD, U+62C5-62C6, U+62C9, U+62D3, U+62D6,
+    U+62DB, U+62E0-62E1, U+62EC, U+62FE, U+6301-6302, U+6307, U+6309, U+6311,
+    U+6316, U+632F, U+633F, U+6349, U+634F, U+6355, U+6357, U+636E, U+6377,
+    U+6388, U+638C, U+6392, U+6398, U+639B, U+63A1-63A2, U+63A5, U+63A7-63A8,
+    U+63AA, U+63B2, U+63C3, U+63CF-63D0, U+63D2, U+63DB, U+63E1, U+63F4, U+640D,
+    U+641C, U+642D, U+643A, U+6490-6491, U+64A4, U+64AD, U+64C1, U+64C7, U+64CA,
+    U+64CD, U+64D4, U+64DA, U+64E0, U+64E6, U+64F4, U+64F7, U+64FA, U+64FE,
+    U+651C-651D, U+652C, U+652F, U+6536, U+6539, U+653E-653F, U+6545, U+6548,
+    U+6551, U+6557, U+6559, U+6563, U+6570, U+6574, U+6578, U+6587, U+6599,
+    U+659C, U+65AD, U+65AF-65B0, U+65B7, U+65B9, U+65BC-65BD, U+65C1, U+65CB,
+    U+65E0, U+65E2, U+65E5-65E9, U+6607, U+660E, U+6613, U+661F-6620, U+6627,
+    U+662F, U+6642, U+666E-6670, U+6676, U+667A, U+6688, U+6697, U+66A2, U+66AB,
+    U+66D6, U+66DC, U+66F2-66F4, U+66F8, U+66FE-6700, U+6703, U+6708-6709,
+    U+670D, U+671B, U+671D, U+671F, U+6728, U+672A-672C, U+673A, U+6743, U+6750,
+    U+6756, U+675F, U+6761, U+6765, U+6771, U+677E-677F, U+6781, U+6784, U+6790,
+    U+679A, U+679C-679D, U+67A0, U+67B6, U+67C4, U+67D0, U+67D3-67D4, U+67FB,
+    U+6821, U+6838-6839, U+683C, U+6846, U+6848, U+684C, U+6863, U+6876, U+687F,
+    U+689D, U+68B0-68B1, U+68D2, U+691C, U+6955, U+696D, U+6975, U+697D, U+6982,
+    U+699C, U+69CB, U+69CD, U+69D8, U+69FD, U+6A02, U+6A19, U+6A21, U+6A23,
+    U+6A29-6A2A, U+6A39, U+6A59, U+6A5F, U+6A61-6A62, U+6A6B, U+6A94, U+6AA2,
+    U+6B04, U+6B0A, U+6B21, U+6B27, U+6B32, U+6B3E, U+6B50, U+6B61-6B65,
+    U+6B69-6B6A, U+6B72-6B74, U+6B77-6B78, U+6B8A-6B8B, U+6BB5, U+6BC0,
+    U+6BCD-6BCF, U+6BD4, U+6BDB, U+6BEB, U+6C0F, U+6C17, U+6C1B, U+6C34, U+6C38,
+    U+6C42, U+6C4E, U+6C7A, U+6C88-6C89, U+6C92, U+6CA1-6CA2, U+6CB9, U+6CBF,
+    U+6CC1, U+6CD5, U+6CDB, U+6CE2, U+6CE8, U+6D01, U+6D0B, U+6D32, U+6D3B,
+    U+6D3D-6D3E, U+6D41, U+6D45, U+6D6E, U+6D82, U+6D88-6D89, U+6DB2, U+6DE1,
+    U+6DF1, U+6DF7, U+6DFA-6DFB, U+6E05, U+6E08, U+6E1B, U+6E21, U+6E2C, U+6E38,
+    U+6E7F-6E80, U+6E90, U+6E96, U+6E9C, U+6EA2, U+6EAF, U+6ED1, U+6EDA, U+6EDE,
+    U+6EF2, U+6EF4, U+6EFE-6EFF, U+6F06, U+6F0F, U+6F14, U+6F22, U+6F2B, U+6F38,
+    U+6F54, U+6F5B-6F5C, U+6F64, U+6F80, U+6FA4, U+6FC3, U+6FD5, U+6FDF, U+6FEB,
+    U+6FFE, U+700F, U+706B, U+7070, U+7075, U+70AD, U+70B9-70BA, U+70C8, U+7121,
+    U+7126, U+7136, U+713C, U+7167, U+7169, U+717D, U+719F, U+71B1, U+71D2,
+    U+71DF, U+720D, U+722D, U+7247-7248, U+724C, U+7269, U+7279, U+72B6, U+72C0,
+    U+72D9, U+72EC-72ED, U+7368, U+7372, U+7387, U+73A9, U+73E0, U+73FE, U+7403,
+    U+7406, U+7422, U+7455, U+745E, U+74B0, U+751A, U+751F, U+7522-7523, U+7528,
+    U+7530-7531, U+7533, U+7537, U+753B, U+754C, U+7559, U+7565, U+756A-756B,
+    U+7570, U+7573, U+7576, U+7578, U+758A, U+7591, U+75B5, U+7656, U+767A-767D,
+    U+7684, U+7686, U+76AE, U+76CA, U+76D6, U+76E1, U+76E3-76E4, U+76EE, U+76F4,
+    U+76F8, U+7701, U+770B, U+771F, U+773A, U+773C, U+773E, U+7740, U+7763,
+    U+77AC, U+77B0, U+77B3, U+77E2, U+77E5, U+77E9, U+77ED, U+7802, U+7834,
+    U+786C, U+786E, U+788D-788E, U+78BA, U+78BC, U+78E8, U+790E, U+7919, U+793A,
+    U+793E, U+7956, U+7981, U+79BB, U+79C1, U+79CD, U+79D2, U+79F0, U+79FB,
+    U+7A05, U+7A0B, U+7A0D-7A0E, U+7A2E, U+7A31-7A32, U+7A3F, U+7A4D, U+7A4F,
+    U+7A69, U+7A7A, U+7A81, U+7A93, U+7A97, U+7AC5, U+7ACB, U+7AD9, U+7AE0,
+    U+7AE5, U+7AEF, U+7B14, U+7B26, U+7B2C, U+7B46, U+7B49, U+7B4B, U+7B54,
+    U+7B56, U+7B87, U+7B97, U+7BA1, U+7BB1, U+7BC0, U+7BC4, U+7BC9, U+7BE9,
+    U+7C21, U+7C3D, U+7C64, U+7C73, U+7C7B, U+7C89, U+7C92, U+7C97, U+7CBE,
+    U+7CCA, U+7CFB, U+7D00, U+7D04-7D05, U+7D0B, U+7D0D, U+7D10, U+7D14,
+    U+7D19-7D1B, U+7D20, U+7D22, U+7D2B, U+7D2F-7D30, U+7D39, U+7D42, U+7D44,
+    U+7D4C, U+7D50, U+7D5E, U+7D61, U+7D66, U+7D71-7D72, U+7D75-7D76, U+7D93,
+    U+7D99-7D9A, U+7DAD, U+7DB2, U+7DBA, U+7DCA, U+7DCF, U+7DD1-7DD2, U+7DDA,
+    U+7DE3, U+7DE8-7DE9, U+7DF4, U+7DFB, U+7E01, U+7E04, U+7E1E, U+7E26, U+7E2B,
+    U+7E2E, U+7E31, U+7E3D, U+7E41, U+7E4B, U+7E54, U+7E6A-7E6B, U+7E70, U+7E73,
+    U+7E7C, U+7E8C, U+7F51, U+7F69, U+7F6E, U+7F72, U+7FA4, U+7FA9, U+7FD2,
+    U+7FFB, U+8001, U+8003, U+8005, U+800C, U+8017, U+805A, U+806F, U+8072,
+    U+8074, U+8089, U+808C, U+8096, U+80A2, U+80A4, U+80B2, U+80CC, U+80F6,
+    U+80FD, U+8155, U+8166, U+819A, U+81A0, U+81C2, U+81EA, U+81F3-81F4, U+81FA,
+    U+8207-820A, U+8212, U+822A, U+822C, U+826F, U+8272, U+8292, U+82B1,
+    U+82E5-82E6, U+82F1, U+8303, U+8349, U+8350, U+8352, U+8377, U+83AB, U+83DC,
+    U+83F1, U+840C, U+843D, U+8449, U+8457, U+8471, U+8490, U+8499, U+84CB,
+    U+8525, U+8535, U+853D, U+8584, U+85A6, U+85C9, U+85CF, U+862D, U+8655,
+    U+865A-865B, U+865F, U+8679, U+86CD, U+878D, U+87A2, U+884C, U+8853, U+8861,
+    U+8868, U+8870, U+8896, U+889C, U+88AB, U+88C1, U+88C5, U+88D5, U+88DC-88DD,
+    U+88E1, U+88FD, U+8907, U+8932, U+896A, U+897F, U+8981, U+8986, U+898B,
+    U+898F, U+8996, U+899A, U+89A7, U+89AA, U+89B3, U+89BA, U+89BD, U+89C0-89C1,
+    U+89D2, U+89E3, U+89E6, U+89F8, U+8A00, U+8A02, U+8A08, U+8A0A, U+8A0E,
+    U+8A13, U+8A18, U+8A1F, U+8A23, U+8A2A, U+8A2D, U+8A31, U+8A33-8A34,
+    U+8A3B-8A3C, U+8A5E, U+8A62, U+8A66, U+8A70-8A73, U+8A8C-8A8D, U+8A98,
+    U+8A9E, U+8AA4, U+8AAA, U+8AAC-8AAD, U+8AB0, U+8AB2, U+8AB9, U+8ABF, U+8AC7,
+    U+8ACB, U+8AD6, U+8AEE, U+8AFE, U+8B02, U+8B17, U+8B1B, U+8B1D, U+8B49,
+    U+8B58, U+8B66, U+8B6F-8B70, U+8B72, U+8B77, U+8B80, U+8B8A, U+8B93, U+8C4A,
+    U+8C50, U+8C61, U+8CA0-8CA1, U+8CA9, U+8CAB-8CAC, U+8CAF, U+8CB7,
+    U+8CBB-8CBC, U+8CC7, U+8CDB, U+8CE0, U+8CEA, U+8CFC-8CFD, U+8D64, U+8D70,
+    U+8D77, U+8D85, U+8D8A, U+8DA3, U+8DB3, U+8DDD, U+8DDF, U+8DE8, U+8DEF,
+    U+8DF3, U+8DF5, U+8E0F, U+8E2A, U+8E64, U+8EAB, U+8ECC, U+8EDF, U+8EE2,
+    U+8EF8, U+8EFD, U+8F03, U+8F09, U+8F14-8F15, U+8F1D, U+8F2A, U+8F2F, U+8F38,
+    U+8F44, U+8F49, U+8F9E, U+8FA6, U+8FA8, U+8FBA, U+8FBC, U+8FBE-8FBF, U+8FC1,
+    U+8FCE, U+8FD0-8FD1, U+8FD4, U+8FEA, U+8FF0, U+8FF7, U+8FFD, U+9000-9002,
+    U+9006, U+900F-9010, U+9014, U+9019-901A, U+901F-9020, U+9023, U+9031-9032,
+    U+9045, U+9047, U+904A-904B, U+904E, U+9053-9055, U+905E, U+9060-9061,
+    U+9069, U+906D-906E, U+9075, U+9078, U+907A, U+907F, U+9084, U+908A, U+90A3,
+    U+90CE, U+90E8, U+90ED, U+90F5, U+90FD, U+9130, U+914D, U+916C, U+91C7-91C8,
+    U+91CB-91CD, U+91CF, U+91D1, U+91DD, U+9215, U+9234, U+925B, U+929C, U+92B3,
+    U+92ED, U+92F8, U+92FC, U+9304, U+932F, U+9332, U+9375, U+9396, U+93E1,
+    U+943A, U+9577, U+957F-9580, U+9583, U+9589, U+958B, U+9593, U+95A2,
+    U+95B1-95B2, U+95BE, U+95DC, U+95E8, U+9632, U+9634, U+9644, U+964D, U+9650,
+    U+9662-9664, U+9670, U+967A, U+9685, U+968A, U+968E-968F, U+9694, U+9699,
+    U+969B-969C, U+96A0, U+96A3, U+96A8, U+96B1, U+96BB, U+96C6, U+96D1, U+96D9,
+    U+96DC, U+96E2-96E3, U+96E8, U+96F0, U+96F2, U+96F6, U+96FB, U+9700, U+9748,
+    U+9752, U+9759, U+975C, U+975E, U+9760, U+9762, U+97D3, U+97F3, U+97F5,
+    U+97FB, U+97FF, U+9801-9802, U+9805-9806, U+9808, U+9810, U+9818,
+    U+982C-982D, U+983B-983C, U+9846, U+984C-984D, U+984F, U+9858, U+985E,
+    U+9867, U+986F, U+9875, U+98A8, U+98CE, U+98DB, U+98DE-98DF, U+98FD-98FE,
+    U+9905, U+990A, U+9918, U+9996, U+99AC, U+99B4, U+9A37, U+9A57, U+9A6C,
+    U+9AD4, U+9AD8, U+9AEA, U+9B06, U+9B54, U+9B5A, U+9BAE, U+9C7C, U+9CF4,
+    U+9E97, U+9EA5, U+9EBB-9EBC, U+9EC3-9EC4, U+9ED1-9ED2, U+9ED8, U+9EDE,
+    U+9F20, U+9F52, U+9F61, U+9F7F, U+9F99, U+FF01, U+FF08-FF09, U+FF0B-FF0C,
+    U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
+}
+
+@font-face {
+  font-family: "KuramubonCJKFallback";
+  font-weight: 100 900;
+  src:
+    local("Noto Sans CJK JP Black"), local("NotoSansCJKjp-Black"),
+    local("Noto Sans CJK JP Bold"), local("NotoSansCJKjp-Bold"),
+    local("Noto Sans JP Black"), local("NotoSansJP-Black"),
+    local("Hiragino Sans W8"), local("HiraginoSans-W8"),
+    local("Hiragino Sans W6"), local("HiraginoSans-W6"),
+    local("Hiragino Kaku Gothic ProN W6"), local("HiraKakuProN-W6"),
+    local("Yu Gothic Bold"), local("YuGothic-Bold"), local("Meiryo Bold"),
+    local("Meiryo-Bold"), local("Noto Sans CJK JP"),
+    local("Droid Sans Fallback"), local("DroidSansFallback"),
+    local("IPAGothic"), local("IPAPGothic");
+  unicode-range:
+    U+3001-3002, U+300C-300D, U+3042, U+3044, U+3046, U+3048, U+304A-3055,
+    U+3057-305B, U+305D, U+305F-3060, U+3063-306B, U+306D-3070, U+3072, U+3076,
+    U+3078, U+307E-307F, U+3081-3084, U+3088-308D, U+308F, U+3092-3093,
+    U+30A2-30A4, U+30A6-30AD, U+30AF-30B1, U+30B3-30BB, U+30BF-30C1,
+    U+30C3-30C4, U+30C6-30C9, U+30CB, U+30CD, U+30D0-30D1, U+30D3-30D7,
+    U+30D9-30DB, U+30DD-30E7, U+30E9-30ED, U+30EF, U+30F3, U+30FB-30FC, U+4E00,
+    U+4E09-4E0A, U+4E0D-4E0E, U+4E2A, U+4E2D, U+4E3B, U+4E4B, U+4E5F, U+4E86,
+    U+4E8B, U+4E8E, U+4EA4, U+4EAB, U+4EBA, U+4EC0, U+4ECA-4ECB, U+4ECE, U+4ED5,
+    U+4ED8, U+4EE5, U+4EF6, U+4EFB, U+4F1A, U+4F4D, U+4F53, U+4F55, U+4F5C,
+    U+4F7F, U+4F86, U+4F8B, U+4F9B, U+4F9D, U+4FBF, U+4FDD, U+4FE1, U+4FEE,
+    U+500B, U+5011, U+5024, U+505A, U+505C, U+5075, U+5099, U+50B3, U+50BE,
+    U+50C5, U+50CF, U+5132, U+513F, U+5143, U+5145, U+5148, U+514D, U+5152,
+    U+5165, U+5168, U+516C, U+5171, U+5177-5178, U+5185-5186, U+518A,
+    U+518C-518D, U+51B3, U+51C6, U+51FA, U+5206-5207, U+5217, U+5224-5225,
+    U+5229-522A, U+5230, U+5236-5237, U+524A, U+524D, U+526A, U+5275, U+529B,
+    U+529F-52A0, U+52B9, U+52D5, U+52D9, U+52E2, U+5316, U+532F, U+533A, U+5340,
+    U+5354, U+5357-5358, U+5370, U+539F, U+53CD, U+53D6, U+53E3, U+53EA,
+    U+53EF-53F0, U+53F7, U+5408, U+540C-540E, U+542B, U+5438, U+544A, U+5473,
+    U+548C, U+54A8, U+54C1, U+54E1, U+554F, U+55AE, U+5668, U+5674, U+56DE,
+    U+56F2-56F3, U+570D, U+5713, U+5716, U+5727-5728, U+5730, U+578B, U+57DF,
+    U+57FA, U+5831, U+5834, U+5857, U+586B, U+5883, U+589E, U+58A8, U+58D3,
+    U+58F0, U+5909, U+5916, U+591A, U+5927, U+593E, U+5957, U+597D, U+5982,
+    U+59A5, U+59CB, U+5B50, U+5B57-5B58, U+5B66, U+5B8C, U+5B98, U+5B9A, U+5B9F,
+    U+5BB6, U+5BB9, U+5BE6, U+5BF8, U+5BFE, U+5C01, U+5C08, U+5C0B, U+5C0F,
+    U+5C31, U+5C3A, U+5C3E, U+5C4A, U+5C4F, U+5C55, U+5C5E, U+5C64, U+5C6C,
+    U+5DE5-5DE6, U+5DEE, U+5DF1, U+5E03, U+5E33, U+5E36, U+5E38, U+5E55,
+    U+5E73-5E74, U+5E7F, U+5E83, U+5E8F, U+5EA6, U+5EE3, U+5EF6, U+5EFA, U+5F0F,
+    U+5F15, U+5F62, U+5F69, U+5F71, U+5F88, U+5F8C, U+5F97, U+5F9E, U+5FA9,
+    U+5FC3, U+5FC5, U+5FD7, U+5FDC, U+5FEB, U+600E, U+601D, U+6027, U+606F,
+    U+60C5, U+60F3, U+610F, U+611F, U+614B, U+61C9, U+6210-6211, U+6216, U+622A,
+    U+6233, U+623B, U+6240, U+624B, U+624D, U+6253, U+6271, U+6279, U+627E,
+    U+6280, U+628A, U+6295, U+6298, U+629E, U+62BC, U+62D3, U+62E0-62E1, U+62EC,
+    U+6301, U+6307, U+6309, U+636E, U+6377, U+6392, U+63A2, U+63A5, U+63CF-63D0,
+    U+63DB, U+63F4, U+641C, U+643A, U+64A4, U+64C7, U+64CD, U+64DA, U+64E6,
+    U+651C-651D, U+652F, U+6536, U+6539, U+653E-653F, U+6545, U+6548, U+6570,
+    U+6574, U+6578, U+6587, U+6599, U+659C, U+65B0, U+65B9, U+65BC, U+65E0,
+    U+65E5, U+65E9, U+660E, U+662F, U+6642, U+666F, U+6676, U+66A2, U+66F2,
+    U+66F4, U+66F8, U+66FF-6700, U+6703, U+6708-6709, U+670D, U+671B, U+671F,
+    U+672A-672C, U+673A, U+6750, U+6761, U+6765, U+677E-677F, U+6790, U+683C,
+    U+6848, U+6863, U+6876, U+689D, U+68B1, U+691C, U+696D, U+697D, U+699C,
+    U+69CB, U+69CD, U+69D8, U+69FD, U+6A02, U+6A19, U+6A21, U+6A23, U+6A29-6A2A,
+    U+6A39, U+6A5F, U+6A61, U+6B04, U+6B0A, U+6B21, U+6B32, U+6B3E, U+6B62-6B63,
+    U+6B69-6B6A, U+6BB5, U+6BCE, U+6BD4, U+6BEB, U+6C17, U+6C34, U+6C42, U+6C7A,
+    U+6CB9, U+6CD5, U+6CE2, U+6CE8, U+6D0B, U+6D3B, U+6D41, U+6D6E, U+6D88,
+    U+6DB2, U+6DE1, U+6DF7, U+6DFB, U+6E05, U+6E1B, U+6E2C, U+6E96, U+6E9C,
+    U+6ED1, U+6EF4, U+6F06, U+6F14, U+6F38, U+6FFE, U+700F, U+70B9-70BA, U+7121,
+    U+71B1, U+7247-7248, U+7269, U+7279, U+72EC, U+7387, U+73FE, U+7406, U+74B0,
+    U+751F, U+7528, U+7531, U+753B, U+756B, U+7573, U+758A, U+767B-767C, U+7684,
+    U+76AE, U+76CA, U+76EE, U+76F4, U+76F8, U+770B, U+7740, U+77E5, U+78BA,
+    U+793A, U+793E, U+7981, U+79C1, U+79F0, U+79FB, U+7A0B, U+7A0E, U+7A2E,
+    U+7A31, U+7A3F, U+7A7A, U+7A93, U+7A97, U+7AD9, U+7AE0, U+7AE5, U+7AEF,
+    U+7B2C, U+7B46, U+7B49, U+7B56, U+7BA1, U+7BB1, U+7BC4, U+7BC9, U+7C21,
+    U+7C64, U+7CBE, U+7CFB, U+7D04, U+7D19-7D1A, U+7D20, U+7D22, U+7D2F-7D30,
+    U+7D39, U+7D42, U+7D44, U+7D61, U+7D66, U+7D75, U+7D99-7D9A, U+7DAD, U+7DB2,
+    U+7DDA, U+7DE8, U+7DF4, U+7E04, U+7E26, U+7E2E, U+7E6A, U+7F51, U+7F69,
+    U+7F6E, U+7FA4, U+7FD2, U+8005, U+805A, U+806F, U+8072, U+80CC, U+80FD,
+    U+81EA, U+81F4, U+8207, U+8212, U+8272, U+82E6, U+8471, U+8490, U+8499,
+    U+85CF, U+8655, U+865F, U+87A2, U+884C, U+8853, U+8868, U+8870, U+88AB,
+    U+88C1, U+88DC-88DD, U+88E1, U+88FD, U+8907, U+8981, U+8986, U+898B, U+898F,
+    U+8996, U+89A7, U+89B3, U+89BD, U+89C0, U+89E3, U+89E6, U+89F8, U+8A02,
+    U+8A08, U+8A0A, U+8A13, U+8A18, U+8A2D, U+8A31, U+8A3B, U+8A62, U+8A71,
+    U+8A73, U+8A8C-8A8D, U+8A9E, U+8AAD, U+8AB0, U+8AB2, U+8ABF, U+8ACB, U+8AEE,
+    U+8B77, U+8B80, U+8B8A, U+8B93, U+8CAC, U+8CBB-8CBC, U+8CC7, U+8CEA, U+8D70,
+    U+8D77, U+8D8A, U+8DA3, U+8DDF, U+8DE8, U+8E2A, U+8E64, U+8EAB, U+8EE2,
+    U+8EF8, U+8EFD, U+8F15, U+8F2F, U+8F38, U+8F44, U+8F49, U+8FA8, U+8FBC,
+    U+8FFD, U+9001, U+900F, U+9019-901A, U+901F-9020, U+9023, U+9031-9032,
+    U+9047, U+904B, U+904E, U+9055, U+9069, U+906E, U+9078, U+90E8, U+90FD,
+    U+914D, U+91CB-91CD, U+91CF, U+91D1, U+92FC, U+9332, U+9375, U+93E1, U+9577,
+    U+9580, U+9589, U+958B, U+9593, U+95DC, U+9650, U+9662, U+9664, U+968E-968F,
+    U+969B, U+96A8, U+96B1, U+96C6, U+9700, U+9759, U+975C, U+975E, U+9762,
+    U+97F3, U+9801, U+9805-9806, U+9810, U+9818, U+984C-984D, U+984F, U+985E,
+    U+986F, U+98A8, U+9996, U+9AD8, U+9B06, U+9EBC, U+9EDE, U+FF01, U+FF08-FF09,
+    U+FF0C, U+FF0F, U+FF1A, U+FF1F, U+FF5C;
+}
+/* 見出し用（くらむぼん／フロップデザイン・Dela Gothic派生） */
+@font-face {
+  font-family: "Kuramubon";
+  font-display: swap;
+  src: url("/assets/fonts/Kuramubon-latin.woff2") format("woff2");
+  unicode-range:
+    U+0020-007E, U+00A0-00A1, U+00A5, U+00AB, U+00BA-00BB, U+00BF-00C2,
+    U+00C7-00CA, U+00CD-00CF, U+00D1, U+00D3-00D4, U+00D9-00DB, U+00E0-00E2,
+    U+00E7-00EA, U+00ED-00EE, U+00F1, U+00F3-00F4, U+00F9-00FB, U+0152-0153,
+    U+2014, U+2019, U+201C-201D;
+}
+/* 見出し用（くらむぼん／フロップデザイン・Dela Gothic派生） */
+@font-face {
+  font-family: "KuramubonCJK";
+  font-display: swap;
+  src: url("/assets/fonts/Kuramubon-subset.v2.woff2") format("woff2");
+  unicode-range:
+    U+3001-3002, U+300C-300D, U+3042, U+3044, U+3046, U+3048, U+304A-3055,
+    U+3057-305B, U+305D, U+305F-3060, U+3063-306B, U+306D-3070, U+3072, U+3076,
+    U+3078, U+307E-307F, U+3081-3084, U+3088-308D, U+308F, U+3092-3093,
+    U+30A2-30A4, U+30A6-30AD, U+30AF-30B1, U+30B3-30BB, U+30BF-30C1,
+    U+30C3-30C4, U+30C6-30C9, U+30CB, U+30CD, U+30D0-30D1, U+30D3-30D7,
+    U+30D9-30DB, U+30DD-30E7, U+30E9-30ED, U+30EF, U+30F3, U+30FB-30FC, U+4E00,
+    U+4E09-4E0A, U+4E0D-4E0E, U+4E2A, U+4E2D, U+4E3B, U+4E4B, U+4E5F, U+4E86,
+    U+4E8B, U+4E8E, U+4EA4, U+4EAB, U+4EBA, U+4EC0, U+4ECA-4ECB, U+4ECE, U+4ED5,
+    U+4ED8, U+4EE5, U+4EF6, U+4EFB, U+4F1A, U+4F4D, U+4F53, U+4F55, U+4F5C,
+    U+4F7F, U+4F86, U+4F8B, U+4F9B, U+4F9D, U+4FBF, U+4FDD, U+4FE1, U+4FEE,
+    U+500B, U+5011, U+5024, U+505A, U+505C, U+5075, U+5099, U+50B3, U+50BE,
+    U+50C5, U+50CF, U+5132, U+513F, U+5143, U+5145, U+5148, U+514D, U+5152,
+    U+5165, U+5168, U+516C, U+5171, U+5177-5178, U+5185-5186, U+518A,
+    U+518C-518D, U+51B3, U+51C6, U+51FA, U+5206-5207, U+5217, U+5224-5225,
+    U+5229-522A, U+5230, U+5236-5237, U+524A, U+524D, U+526A, U+5275, U+529B,
+    U+529F-52A0, U+52B9, U+52D5, U+52D9, U+52E2, U+5316, U+532F, U+533A, U+5340,
+    U+5354, U+5357-5358, U+5370, U+539F, U+53CD, U+53D6, U+53E3, U+53EA,
+    U+53EF-53F0, U+53F7, U+5408, U+540C-540E, U+542B, U+5438, U+544A, U+5473,
+    U+548C, U+54A8, U+54C1, U+54E1, U+554F, U+55AE, U+5668, U+5674, U+56DE,
+    U+56F2-56F3, U+570D, U+5713, U+5716, U+5727-5728, U+5730, U+578B, U+57DF,
+    U+57FA, U+5831, U+5834, U+5857, U+586B, U+5883, U+589E, U+58A8, U+58D3,
+    U+58F0, U+5909, U+5916, U+591A, U+5927, U+593E, U+5957, U+597D, U+5982,
+    U+59A5, U+59CB, U+5B50, U+5B57-5B58, U+5B66, U+5B8C, U+5B98, U+5B9A, U+5B9F,
+    U+5BB6, U+5BB9, U+5BE6, U+5BF8, U+5BFE, U+5C01, U+5C08, U+5C0B, U+5C0F,
+    U+5C31, U+5C3A, U+5C3E, U+5C4A, U+5C4F, U+5C55, U+5C5E, U+5C64, U+5C6C,
+    U+5DE5-5DE6, U+5DEE, U+5DF1, U+5E03, U+5E33, U+5E36, U+5E38, U+5E55,
+    U+5E73-5E74, U+5E7F, U+5E83, U+5E8F, U+5EA6, U+5EE3, U+5EF6, U+5EFA, U+5F0F,
+    U+5F15, U+5F62, U+5F69, U+5F71, U+5F88, U+5F8C, U+5F97, U+5F9E, U+5FA9,
+    U+5FC3, U+5FC5, U+5FD7, U+5FDC, U+5FEB, U+600E, U+601D, U+6027, U+606F,
+    U+60C5, U+60F3, U+610F, U+611F, U+614B, U+61C9, U+6210-6211, U+6216, U+622A,
+    U+6233, U+623B, U+6240, U+624B, U+624D, U+6253, U+6271, U+6279, U+627E,
+    U+6280, U+628A, U+6295, U+6298, U+629E, U+62BC, U+62D3, U+62E0-62E1, U+62EC,
+    U+6301, U+6307, U+6309, U+636E, U+6377, U+6392, U+63A2, U+63A5, U+63CF-63D0,
+    U+63DB, U+63F4, U+641C, U+643A, U+64A4, U+64C7, U+64CD, U+64DA, U+64E6,
+    U+651C-651D, U+652F, U+6536, U+6539, U+653E-653F, U+6545, U+6548, U+6570,
+    U+6574, U+6578, U+6587, U+6599, U+659C, U+65B0, U+65B9, U+65BC, U+65E0,
+    U+65E5, U+65E9, U+660E, U+662F, U+6642, U+666F, U+6676, U+66A2, U+66F2,
+    U+66F4, U+66F8, U+66FF-6700, U+6703, U+6708-6709, U+670D, U+671B, U+671F,
+    U+672A-672C, U+673A, U+6750, U+6761, U+6765, U+677E-677F, U+6790, U+683C,
+    U+6848, U+6863, U+6876, U+689D, U+68B1, U+691C, U+696D, U+697D, U+699C,
+    U+69CB, U+69CD, U+69D8, U+69FD, U+6A02, U+6A19, U+6A21, U+6A23, U+6A29-6A2A,
+    U+6A39, U+6A5F, U+6A61, U+6B04, U+6B0A, U+6B21, U+6B32, U+6B3E, U+6B62-6B63,
+    U+6B69-6B6A, U+6BB5, U+6BCE, U+6BD4, U+6BEB, U+6C17, U+6C34, U+6C42, U+6C7A,
+    U+6CB9, U+6CD5, U+6CE2, U+6CE8, U+6D0B, U+6D3B, U+6D41, U+6D6E, U+6D88,
+    U+6DB2, U+6DE1, U+6DF7, U+6DFB, U+6E05, U+6E1B, U+6E2C, U+6E96, U+6E9C,
+    U+6ED1, U+6EF4, U+6F06, U+6F14, U+6F38, U+6FFE, U+700F, U+70B9-70BA, U+7121,
+    U+71B1, U+7247-7248, U+7269, U+7279, U+72EC, U+7387, U+73FE, U+7406, U+74B0,
+    U+751F, U+7528, U+7531, U+753B, U+756B, U+7573, U+758A, U+767B-767C, U+7684,
+    U+76AE, U+76CA, U+76EE, U+76F4, U+76F8, U+770B, U+7740, U+77E5, U+78BA,
+    U+793A, U+793E, U+7981, U+79C1, U+79F0, U+79FB, U+7A0B, U+7A0E, U+7A2E,
+    U+7A31, U+7A3F, U+7A7A, U+7A93, U+7A97, U+7AD9, U+7AE0, U+7AE5, U+7AEF,
+    U+7B2C, U+7B46, U+7B49, U+7B56, U+7BA1, U+7BB1, U+7BC4, U+7BC9, U+7C21,
+    U+7C64, U+7CBE, U+7CFB, U+7D04, U+7D19-7D1A, U+7D20, U+7D22, U+7D2F-7D30,
+    U+7D39, U+7D42, U+7D44, U+7D61, U+7D66, U+7D75, U+7D99-7D9A, U+7DAD, U+7DB2,
+    U+7DDA, U+7DE8, U+7DF4, U+7E04, U+7E26, U+7E2E, U+7E6A, U+7F51, U+7F69,
+    U+7F6E, U+7FA4, U+7FD2, U+8005, U+805A, U+806F, U+8072, U+80CC, U+80FD,
+    U+81EA, U+81F4, U+8207, U+8212, U+8272, U+82E6, U+8471, U+8490, U+8499,
+    U+85CF, U+8655, U+865F, U+87A2, U+884C, U+8853, U+8868, U+8870, U+88AB,
+    U+88C1, U+88DC-88DD, U+88E1, U+88FD, U+8907, U+8981, U+8986, U+898B, U+898F,
+    U+8996, U+89A7, U+89B3, U+89BD, U+89C0, U+89E3, U+89E6, U+89F8, U+8A02,
+    U+8A08, U+8A0A, U+8A13, U+8A18, U+8A2D, U+8A31, U+8A3B, U+8A62, U+8A71,
+    U+8A73, U+8A8C-8A8D, U+8A9E, U+8AAD, U+8AB0, U+8AB2, U+8ABF, U+8ACB, U+8AEE,
+    U+8B77, U+8B80, U+8B8A, U+8B93, U+8CAC, U+8CBB-8CBC, U+8CC7, U+8CEA, U+8D70,
+    U+8D77, U+8D8A, U+8DA3, U+8DDF, U+8DE8, U+8E2A, U+8E64, U+8EAB, U+8EE2,
+    U+8EF8, U+8EFD, U+8F15, U+8F2F, U+8F38, U+8F44, U+8F49, U+8FA8, U+8FBC,
+    U+8FFD, U+9001, U+900F, U+9019-901A, U+901F-9020, U+9023, U+9031-9032,
+    U+9047, U+904B, U+904E, U+9055, U+9069, U+906E, U+9078, U+90E8, U+90FD,
+    U+914D, U+91CB-91CD, U+91CF, U+91D1, U+92FC, U+9332, U+9375, U+93E1, U+9577,
+    U+9580, U+9589, U+958B, U+9593, U+95DC, U+9650, U+9662, U+9664, U+968E-968F,
+    U+969B, U+96A8, U+96B1, U+96C6, U+9700, U+9759, U+975C, U+975E, U+9762,
+    U+97F3, U+9801, U+9805-9806, U+9810, U+9818, U+984C-984D, U+984F, U+985E,
+    U+986F, U+98A8, U+9996, U+9AD8, U+9B06, U+9EBC, U+9EDE, U+FF01, U+FF08-FF09,
+    U+FF0C, U+FF0F, U+FF1A, U+FF1F, U+FF5C;
+}
+/* 見出しのハングル補完（Noto Sans KR Black） */
+@font-face {
+  font-family: "NotoSansHeadKR";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSansHeadKR-subset.woff2") format("woff2");
+  unicode-range:
+    U+5167, U+53E6, U+573E, U+6490-6491, U+64CA, U+6A94, U+6BCF, U+7A05, U+8525,
+    U+89C1, U+8AAA, U+8FD0, U+9002, U+957F, U+95E8, U+9875, U+AC00-AC01, U+AC04,
+    U+AC10, U+AC12, U+AC1C, U+AC70, U+AC80-AC81, U+AC83, U+AC8C, U+ACA8-ACA9,
+    U+ACAC, U+ACB0, U+ACBD, U+ACC4, U+ACE0-ACE1, U+ACF3, U+ACF5, U+ACFC, U+AD00,
+    U+AD04, U+AD11, U+AD6C-AD6D, U+AD8C, U+ADF8, U+AE00, U+AE08-AE09, U+AE30,
+    U+AE38, U+AE4C, U+AEBC, U+AED8, U+AF34, U+AFB8, U+B08C, U+B098, U+B0B4,
+    U+B0BC, U+B110, U+B113, U+B144, U+B178, U+B204, U+B208, U+B290, U+B294,
+    U+B2A5, U+B2C8, U+B2D9, U+B2E4, U+B2E8, U+B2EC, U+B2F9, U+B300, U+B354,
+    U+B370, U+B3C4, U+B3D9, U+B418, U+B429, U+B450, U+B4A4, U+B4B7, U+B4DC-B4DD,
+    U+B4E0, U+B4E4, U+B4F1, U+B514, U+B5A4, U+B77C-B77D, U+B780, U+B78C, U+B79C,
+    U+B7AD, U+B7C9, U+B7EC, U+B808, U+B80C, U+B825, U+B85C-B85D, U+B86D, U+B86F,
+    U+B8CC, U+B8F9, U+B958, U+B974, U+B978, U+B97C, U+B984, U+B9AC, U+B9B0,
+    U+B9B4, U+B9BC-B9BD, U+B9BF, U+B9C8, U+B9CC, U+B9DE, U+B9E4, U+BA3C, U+BA54,
+    U+BA74, U+BA85, U+BA87, U+BAA8-BAA9, U+BB34, U+BB38, U+BB3B, U+BBA4, U+BBF8,
+    U+BC0D, U+BC14, U+BC18, U+BC1B-BC1C, U+BC29, U+BC30, U+BC84, U+BC88,
+    U+BC94-BC95, U+BCA8, U+BCC0, U+BCC4, U+BCCD, U+BCF4, U+BCF8, U+BCFC,
+    U+BD80-BD81, U+BD88, U+BE0C, U+BE14, U+BE44, U+BE60, U+C0AC-C0AD, U+C0C1,
+    U+C0C8-C0C9, U+C0DD, U+C11C, U+C120, U+C124, U+C131, U+C138, U+C140, U+C14B,
+    U+C158, U+C18C, U+C190, U+C1E0, U+C218, U+C21C, U+C220, U+C27D, U+C2A4,
+    U+C2AC, U+C2B5, U+C2DC-C2DD, U+C2E0, U+C2E4, U+C2F6, U+C313, U+C4F4, U+C4F8,
+    U+C52C, U+C544, U+C548, U+C54A, U+C54C, U+C555, U+C55E, U+C560-C561, U+C571,
+    U+C57C-C57D, U+C591, U+C5B4, U+C5B8, U+C5C4-C5C7, U+C5D0, U+C5D4,
+    U+C5EC-C5ED, U+C5F0, U+C601, U+C624, U+C62C, U+C640, U+C644, U+C65C, U+C678,
+    U+C67C, U+C694, U+C6A9, U+C6B0, U+C6B4, U+C6B8, U+C6C0, U+C6C3, U+C6CC,
+    U+C6D0, U+C6D4, U+C704, U+C720, U+C728, U+C73C, U+C740, U+C744, U+C74C,
+    U+C751, U+C758, U+C774, U+C778, U+C77C, U+C784-C785, U+C788-C789,
+    U+C790-C791, U+C7A5, U+C7AC, U+C800-C801, U+C804, U+C811, U+C815,
+    U+C81C-C81D, U+C82F, U+C838, U+C870, U+C885, U+C8FC, U+C900, U+C911, U+C988,
+    U+C990, U+C99D, U+C9C0-C9C1, U+C9C8, U+C9D1, U+C9F8, U+CC3E, U+CC44-CC45,
+    U+CC98, U+CCAD, U+CD5C, U+CD94, U+CD9C, U+CDB0, U+CDE8, U+CE20, U+CE58,
+    U+CE68, U+CE74, U+CE94, U+CEE4, U+CEEC, U+CEF7, U+CF58, U+CF8C, U+CFE0,
+    U+D06C, U+D074, U+D0A4, U+D0A8, U+D0B7, U+D0B9, U+D0C0, U+D0D0, U+D0DC-D0DD,
+    U+D0EC-D0ED, U+D130, U+D140, U+D14C-D14D, U+D150, U+D1A4, U+D1B1, U+D1B5,
+    U+D22C, U+D234, U+D2B8, U+D2F0, U+D2F8, U+D305, U+D30C, U+D310, U+D314,
+    U+D328, U+D398, U+D39C, U+D3B8, U+D3C9, U+D3EC, U+D3F0, U+D3F4, U+D45C,
+    U+D488, U+D504, U+D50C, U+D53C-D53D, U+D544, U+D551, U+D558-D559, U+D55C,
+    U+D560, U+D568, U+D56D, U+D574, U+D589, U+D5A5, U+D5C8, U+D604, U+D611,
+    U+D615, U+D63C, U+D648, U+D654-D655, U+D658, U+D65C, U+D69F, U+D6A8, U+D734,
+    U+D788, U+D78C;
+}
+/* 見出しの簡体字補完（Noto Sans SC Black） */
+@font-face {
+  font-family: "NotoSansHeadSC";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSansHeadSC-subset.woff2") format("woff2");
+  unicode-range:
+    U+4E13, U+4E3A, U+4E48-4E49, U+4E50, U+4EC5, U+4EEC, U+4F60, U+503C, U+503E,
+    U+5173, U+51CF, U+51FB, U+521B, U+5220, U+52A1, U+52A8, U+52BF, U+534F,
+    U+5355, U+538B, U+53D1, U+53D8, U+53E0, U+5417, U+5427, U+542F, U+5458,
+    U+54EA, U+555F, U+55B7, U+55CE, U+56FE, U+573A, U+5783, U+5904, U+5907,
+    U+590D, U+5939, U+5B9E, U+5BFC, U+5C42, U+5E26-5E27, U+5E94, U+5F00, U+5F55,
+    U+6001, U+60AC, U+626D, U+62A4, U+62E9, U+6362, U+6444, U+65F6, U+663E,
+    U+672F, U+6743, U+6784, U+67AA, U+67E5, U+6807, U+680F, U+6811, U+6837,
+    U+68C0, U+6D4B, U+6D4F, U+6E10, U+6EE4, U+70ED, U+73AF-73B0, U+7545, U+79CD,
+    U+7AD6, U+7B14, U+7B7E, U+7B80, U+7C7B, U+7EA7, U+7EB8, U+7EBF, U+7EC3-7EC4,
+    U+7EC6, U+7EC8, U+7ED8-7ED9, U+7EF4, U+7F16, U+7F29, U+8054, U+83B7, U+89C2,
+    U+89C4, U+89C6, U+89C8, U+8BA9, U+8BAD, U+8BBE, U+8BCD, U+8BE2, U+8BE6,
+    U+8BF4, U+8BF7, U+8BFB, U+8C01, U+8C03, U+8D23, U+8D26, U+8D28, U+8D34,
+    U+8D39, U+8D44, U+8F6C, U+8F74, U+8F7B, U+8F91, U+8F93, U+8F96, U+8FC1,
+    U+8FC7, U+8FD9, U+8FDB, U+8FDE, U+9009, U+91CA, U+94A2, U+9500, U+952E,
+    U+955C, U+95EE, U+95F4, U+9636, U+9690, U+9879-987A, U+9884, U+9891, U+9898,
+    U+989C, U+9988;
+}
+/* 言語切替メニューの「日本語」「繁體中文」用（全ページで表示） */
+@font-face {
+  font-family: "NotoSerifMenuJP";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifMenuJP-subset.woff2") format("woff2");
+  unicode-range:
+    U+0045-0046, U+0061, U+0067-0069, U+006C, U+006E-0070, U+0072-0073, U+00E7,
+    U+00F1, U+4E2D, U+4F53, U+6587, U+65E5, U+672C, U+7E41, U+8A9E, U+9AD4;
+}
+/* 言語切替メニューの「한국어」用（全ページで表示） */
+@font-face {
+  font-family: "NotoSerifMenuKR";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifMenuKR-subset.woff2") format("woff2");
+  unicode-range: U+AD6D, U+C5B4, U+D55C;
+}
+/* 言語切替メニューの「简体中文」用（全ページで表示） */
+@font-face {
+  font-family: "NotoSerifMenuSC";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifMenuSC-subset.woff2") format("woff2");
+  unicode-range: U+7B80;
+}
+/* 韓国語の補完（Noto Serif KR） */
+@font-face {
+  font-family: "NotoSerifKR";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifKR-subset.v3.woff2") format("woff2");
+  unicode-range:
+    U+2018, U+2194, U+25A3, U+2713, U+3002, U+300C-300D, U+3010-3011, U+3042,
+    U+3044, U+3046, U+304A, U+304D, U+3051, U+3058-3059, U+3063, U+3066, U+3068,
+    U+306F, U+307E, U+3088, U+4E24, U+4E2D, U+4E30, U+4EFD, U+4EFF, U+4F48,
+    U+4F53-4F54, U+5167, U+52FB, U+5361, U+53E3, U+53E6, U+573E, U+5BF9, U+5E6B,
+    U+5F3A, U+6236, U+62D6, U+6490-6491, U+64CA, U+6587, U+65E5, U+672C, U+6A94,
+    U+6B65, U+6B72, U+6B77, U+6BCF, U+6C89, U+6D82, U+6D89, U+72C0, U+7522,
+    U+773E, U+786E, U+79BB, U+7A05, U+7A33, U+7DE3, U+7E41, U+8525, U+865B,
+    U+89C1, U+8A9E, U+8AAA, U+8FA6, U+8FD0, U+9002, U+92B3, U+9304, U+957F,
+    U+95B1, U+95E8, U+9875, U+98CE, U+98DE, U+9A6C, U+9AD4, U+9C7C, U+9EC3,
+    U+9F7F, U+9F99, U+AC00-AC01, U+AC04, U+AC08, U+AC10-AC12, U+AC15-AC16,
+    U+AC19, U+AC1C-AC1D, U+AC20, U+AC2F, U+AC31, U+AC70-AC71, U+AC74, U+AC78,
+    U+AC80-AC81, U+AC83, U+AC8C, U+ACA0, U+ACA8-ACA9, U+ACAC, U+ACB0, U+ACB9,
+    U+ACBC-ACBD, U+ACC4, U+ACE0-ACE1, U+ACE7-ACE8, U+ACF1, U+ACF3, U+ACF5,
+    U+ACFC-ACFD, U+AD00, U+AD04, U+AD11, U+AD34, U+AD50, U+AD6C-AD6D, U+AD70,
+    U+AD75, U+AD7D, U+AD81, U+AD8C, U+ADC0, U+ADDC, U+ADE0, U+ADF8, U+ADFC,
+    U+AE00, U+AE08-AE09, U+AE0B, U+AE30, U+AE34, U+AE38, U+AE40-AE41, U+AE4A,
+    U+AE4C, U+AE54, U+AE5C-AE5D, U+AE65, U+AEBC, U+AEBE, U+AED8, U+AF2D, U+AF34,
+    U+AF43, U+AFB8, U+AFBC, U+AFC0, U+AFC9, U+AFD4, U+B00C, U+B01D, U+B044,
+    U+B04A, U+B04C, U+B054, U+B05D, U+B07C, U+B084, U+B08C, U+B098, U+B09C,
+    U+B0A0, U+B0A8-B0A9, U+B0AE, U+B0B4, U+B0B8, U+B0BC, U+B0C4-B0C5, U+B0C8,
+    U+B108, U+B110, U+B113, U+B118, U+B123-B124, U+B140, U+B144, U+B150,
+    U+B178-B179, U+B18D, U+B192-B193, U+B204, U+B208, U+B20C, U+B215, U+B220,
+    U+B258, U+B274, U+B290, U+B294, U+B298, U+B2A5, U+B2AC, U+B2C8-B2C9,
+    U+B2D8-B2D9, U+B2DD, U+B2E4-B2E5, U+B2E8, U+B2EB-B2EC, U+B2F4-B2F5, U+B2F7,
+    U+B2F9, U+B2FF-B300, U+B313, U+B354, U+B358, U+B35C, U+B367, U+B36E,
+    U+B370-B371, U+B378, U+B3C4-B3C5, U+B3CC, U+B3D5, U+B3D9, U+B3FC, U+B410,
+    U+B418, U+B41C, U+B420, U+B428-B429, U+B450, U+B454, U+B458, U+B461, U+B465,
+    U+B4A4, U+B4B7, U+B4DC-B4DD, U+B4E0, U+B4E4, U+B4EC-B4ED, U+B4EF, U+B4F1,
+    U+B514-B515, U+B530, U+B54C, U+B5A4, U+B5A8, U+B5BB-B5BC, U+B610, U+B6F0,
+    U+B728, U+B73B, U+B744, U+B77C-B77D, U+B780, U+B78C-B78D, U+B790-B791,
+    U+B798-B799, U+B79C, U+B7A8, U+B7AB, U+B7AD, U+B7C9, U+B7EC, U+B7F0,
+    U+B7FC-B7FD, U+B807-B809, U+B80C, U+B81B, U+B824-B825, U+B828, U+B82C,
+    U+B834, U+B837-B839, U+B840, U+B85C-B85D, U+B860, U+B864, U+B86D, U+B86F,
+    U+B8B0, U+B8CC, U+B8E8-B8E9, U+B8F9, U+B958, U+B960, U+B974, U+B978, U+B97C,
+    U+B984-B985, U+B987, U+B9AC-B9AD, U+B9B0, U+B9B4, U+B9BC-B9BD, U+B9BF,
+    U+B9C1, U+B9C8-B9C9, U+B9CC, U+B9CE, U+B9D0, U+B9DD-B9DE, U+B9E4, U+B9E8,
+    U+BA38-BA39, U+BA3C, U+BA48, U+BA54, U+BA58, U+BA5C, U+BA70, U+BA74, U+BA85,
+    U+BA87, U+BAA8-BAA9, U+BAB0, U+BABB, U+BB34, U+BB36, U+BB38, U+BB3B-BB3C,
+    U+BBA4, U+BBC0, U+BBF8-BBF9, U+BC00, U+BC0D, U+BC0F, U+BC11, U+BC14-BC16,
+    U+BC18, U+BC1B-BC1D, U+BC24, U+BC29, U+BC30-BC31, U+BC84, U+BC88, U+BC8C,
+    U+BC94-BC95, U+BC97, U+BCA1, U+BCA8, U+BCBC-BCBD, U+BCC0, U+BCC4, U+BCCD,
+    U+BCD1, U+BCF4-BCF5, U+BCF8, U+BCFC, U+BD80-BD81, U+BD84, U+BD88, U+BD93,
+    U+BD99, U+BE0C, U+BE14, U+BE44, U+BE48, U+BE4C, U+BE57, U+BE59, U+BE5B,
+    U+BE60-BE61, U+BE68, U+BE7C, U+BE80, U+BED7, U+BFB0, U+BFD0, U+C090,
+    U+C0AC-C0AD, U+C0B0, U+C0B4, U+C0BC, U+C0C1, U+C0C8-C0C9, U+C0D8, U+C0DD,
+    U+C0E4, U+C11C-C11E, U+C120, U+C124, U+C12F, U+C131, U+C138, U+C140,
+    U+C148-C149, U+C14B, U+C154, U+C158, U+C18C-C18D, U+C190, U+C1A1, U+C1E0,
+    U+C1FC, U+C218-C219, U+C21C, U+C220, U+C228, U+C22B, U+C26C, U+C27C-C27D,
+    U+C288, U+C2A4, U+C2AC, U+C2B5, U+C2B7, U+C2B9, U+C2DC-C2DD, U+C2E0, U+C2E4,
+    U+C2EC-C2ED, U+C2F1, U+C2F6, U+C2F8, U+C2FC, U+C300, U+C313, U+C368, U+C378,
+    U+C4F0, U+C4F4, U+C4F8, U+C501, U+C50C, U+C528-C529, U+C52C, U+C544-C545,
+    U+C548-C54A, U+C54C, U+C554-C555, U+C558-C559, U+C55E, U+C560-C561, U+C564,
+    U+C571, U+C57C-C57D, U+C587, U+C591, U+C595, U+C5B4-C5B5, U+C5B8,
+    U+C5BB-C5BC, U+C5C4-C5C8, U+C5D0, U+C5D4, U+C5E3, U+C5EC-C5ED, U+C5F0,
+    U+C5F4, U+C5FD, U+C601, U+C605-C606, U+C608, U+C610, U+C61B, U+C624, U+C628,
+    U+C62C, U+C62E, U+C635, U+C640, U+C644, U+C654, U+C65C, U+C678, U+C67C,
+    U+C694, U+C6A9, U+C6B0-C6B1, U+C6B4, U+C6B8, U+C6C0-C6C1, U+C6C3, U+C6CC,
+    U+C6D0, U+C6D4, U+C6E0, U+C6E8, U+C6F9, U+C704, U+C720-C721, U+C724, U+C728,
+    U+C73C, U+C740, U+C744, U+C74C, U+C751, U+C758, U+C774-C775, U+C778,
+    U+C77C-C77D, U+C784-C785, U+C787-C789, U+C78E, U+C790-C791, U+C794, U+C798,
+    U+C7A0-C7A1, U+C7A5, U+C7AC, U+C7C1, U+C800-C801, U+C804, U+C808,
+    U+C810-C811, U+C815-C816, U+C81C-C81D, U+C820, U+C82F, U+C838, U+C870-C871,
+    U+C874, U+C881, U+C885, U+C88B-C88C, U+C8FC, U+C900, U+C904, U+C90C-C90D,
+    U+C911, U+C988-C989, U+C990, U+C998, U+C99D, U+C9C0-C9C1, U+C9C4, U+C9C8,
+    U+C9D0-C9D1, U+C9D3, U+C9D5, U+C9DC-C9DD, U+C9E7, U+C9F8, U+CABD, U+CC0D,
+    U+CC28-CC29, U+CC2C, U+CC38, U+CC3D-CC3E, U+CC44-CC45, U+CC98, U+CC9C,
+    U+CCA0, U+CCA8, U+CCAB, U+CCAD, U+CCB4, U+CCD0, U+CD08-CD09, U+CD1D, U+CD2C,
+    U+CD5C, U+CD94-CD95, U+CD98, U+CD9C, U+CDA4-CDA5, U+CDA9, U+CDB0, U+CDE8,
+    U+CE20-CE21, U+CE35, U+CE58-CE59, U+CE5C, U+CE60, U+CE68-CE69, U+CE6D,
+    U+CE74, U+CE78, U+CE90, U+CE94, U+CE98, U+CEA1, U+CEE4, U+CEE8, U+CEEC,
+    U+CEF4, U+CEF7, U+CF00, U+CF1C, U+CF20, U+CF54, U+CF58, U+CF8C, U+CFC4,
+    U+CFE0, U+D06C, U+D070, U+D074, U+D07C, U+D0A4, U+D0A8, U+D0B5, U+D0B7,
+    U+D0B9, U+D0C0, U+D0C4, U+D0D0-D0D1, U+D0D5, U+D0DC-D0DD, U+D0EC-D0ED,
+    U+D130, U+D134, U+D138, U+D140, U+D14C-D14D, U+D150, U+D154, U+D15C, U+D1A0,
+    U+D1A4, U+D1A8, U+D1B1, U+D1B5, U+D22C, U+D234, U+D280, U+D295, U+D29C,
+    U+D2B8-D2B9, U+D2BC, U+D2C0, U+D2C8, U+D2F0, U+D2F8, U+D300-D301, U+D305,
+    U+D30C, U+D310, U+D314, U+D31D, U+D328-D329, U+D32C, U+D37C, U+D398-D399,
+    U+D39C, U+D3B4, U+D3B8, U+D3BC, U+D3C9, U+D3EC-D3ED, U+D3F0, U+D3F4, U+D3FC,
+    U+D45C, U+D478, U+D480, U+D488, U+D48D, U+D504, U+D508, U+D50C, U+D53C-D53D,
+    U+D540, U+D544, U+D551, U+D558-D559, U+D55C, U+D560, U+D568-D569, U+D56D,
+    U+D574, U+D578, U+D588-D589, U+D5A5, U+D5C8, U+D5D8, U+D5E4, U+D600, U+D604,
+    U+D611, U+D614-D615, U+D61C, U+D638-D639, U+D63C, U+D640, U+D648, U+D64D,
+    U+D654-D655, U+D658, U+D65C, U+D669, U+D68C-D68D, U+D69F, U+D6A8, U+D6C4,
+    U+D6D1, U+D720, U+D734, U+D750, U+D769, U+D770, U+D788, U+D78C, U+D790,
+    U+D798, U+FF08-FF09, U+FF0B, U+FF0F, U+FF1A, U+FF1D, U+FF5C;
+}
+/* 簡体字中国語の補完（Noto Serif SC） */
+@font-face {
+  font-family: "NotoSerifSC";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifSC-subset.v4.woff2") format("woff2");
+  unicode-range:
+    U+25B2, U+3001-3002, U+300A-300B, U+3010-3011, U+3042, U+3044, U+3046,
+    U+304A, U+304D, U+3051, U+3058-3059, U+3063, U+3066, U+3068, U+306F, U+307E,
+    U+3088, U+4E00, U+4E03, U+4E09-4E0B, U+4E0D-4E0E, U+4E13-4E14, U+4E16,
+    U+4E1A, U+4E1C-4E1D, U+4E22, U+4E24, U+4E2A, U+4E2D, U+4E30, U+4E32, U+4E34,
+    U+4E3A-4E3B, U+4E3E, U+4E43, U+4E45, U+4E48-4E49, U+4E4B, U+4E4E, U+4E50,
+    U+4E5F-4E60, U+4E66, U+4E70, U+4E86, U+4E88, U+4E8B-4E8C, U+4E8E,
+    U+4E91-4E92, U+4E94, U+4E9B, U+4EA4, U+4EA7, U+4EAB-4EAC, U+4EAE, U+4EB2,
+    U+4EBA, U+4EC0, U+4EC5, U+4ECA-4ECB, U+4ECD-4ECE, U+4ED6, U+4ED8,
+    U+4EE3-4EE5, U+4EEC, U+4EF0, U+4EF6-4EF7, U+4EFB, U+4EFD, U+4EFF, U+4F01,
+    U+4F17-4F18, U+4F1A, U+4F20, U+4F2A, U+4F30, U+4F38, U+4F3C-4F3D, U+4F46,
+    U+4F4D-4F4F, U+4F53, U+4F55, U+4F59, U+4F5C, U+4F60, U+4F7F, U+4F8B, U+4F9B,
+    U+4F9D, U+4FA7, U+4FB5, U+4FBF, U+4FD7, U+4FDD, U+4FE1, U+4FEE-4FEF, U+500D,
+    U+5019, U+503C, U+503E, U+5047, U+504F, U+505A, U+505C, U+507F, U+50A8,
+    U+50CF, U+513F, U+5141, U+5143, U+5145, U+5148-5149, U+514B, U+514D, U+5151,
+    U+5165, U+5168, U+516B-516D, U+5170-5171, U+5173-5174, U+5176-5178,
+    U+517B-517C, U+5185, U+518C-518D, U+5192, U+5199, U+51B3, U+51B5, U+51C6,
+    U+51CF, U+51E0, U+51ED, U+51F8-51FB, U+5206-5207, U+5212, U+5217-521B,
+    U+521D, U+5220, U+5224, U+5229, U+522B, U+5230, U+5236-5237, U+523B, U+524D,
+    U+5269-526A, U+526F, U+5272, U+529B, U+529E-52A1, U+52A8-52AA, U+52B1,
+    U+52BF, U+52D2, U+52FE, U+5300, U+5305, U+5316, U+5339-533A, U+5341,
+    U+5347-5348, U+534A, U+534F, U+5355, U+5357, U+5360-5361, U+5370, U+5373,
+    U+5377-5378, U+5386, U+538B, U+539A, U+539F, U+53BB, U+53C2, U+53C8-53CA,
+    U+53CC-53CD, U+53D1, U+53D6-53D8, U+53E0, U+53E3-53E4, U+53E6, U+53EA,
+    U+53EF-53F0, U+53F2-53F3, U+53F6-53F8, U+5404, U+5408, U+540C-540E, U+5411,
+    U+5417, U+5426-5427, U+542B, U+542F, U+5438, U+5448, U+544A, U+5458, U+5468,
+    U+547D, U+548C, U+54A8, U+54C1, U+54CD, U+54EA, U+552E, U+5546, U+554A,
+    U+555F, U+559C, U+55B7, U+55CE, U+5634, U+5668, U+566A, U+56DB, U+56DE,
+    U+56E0, U+56E2, U+56F4, U+56FA, U+56FD-56FE, U+5706, U+5708, U+5728, U+5730,
+    U+573A, U+5740, U+5747, U+574F, U+5757, U+5783, U+578B, U+57DF, U+57F9-57FA,
+    U+586B, U+5883, U+589E, U+58A8, U+58EB, U+58F0, U+5904, U+5907, U+590D,
+    U+5916, U+591A, U+591C, U+5927, U+5929-592B, U+592E, U+5931, U+5934, U+5939,
+    U+594F, U+5956-5957, U+5973, U+597D, U+5982, U+59A5, U+59A8, U+59CB,
+    U+59D3-59D4, U+5B50, U+5B54, U+5B57-5B58, U+5B66, U+5B69, U+5B83,
+    U+5B88-5B89, U+5B8B-5B8C, U+5B98, U+5B9A, U+5B9E, U+5BA1, U+5BA3-5BA4,
+    U+5BB3, U+5BB6, U+5BB9, U+5BBD, U+5BC6, U+5BCC, U+5BDF, U+5BF8-5BF9,
+    U+5BFB-5BFC, U+5C01, U+5C04, U+5C06, U+5C0F, U+5C11, U+5C16, U+5C1A, U+5C1D,
+    U+5C31, U+5C3A, U+5C3D-5C3E, U+5C40, U+5C42, U+5C45, U+5C4F, U+5C55, U+5C5E,
+    U+5C65, U+5C71, U+5C81, U+5CED, U+5D29, U+5D4C, U+5DDE, U+5DE5-5DE7, U+5DEE,
+    U+5DF1-5DF2, U+5E01, U+5E03, U+5E0C, U+5E26-5E27, U+5E2E, U+5E38, U+5E45,
+    U+5E55, U+5E72-5E74, U+5E76, U+5E7F, U+5E8F, U+5E93-5E95, U+5E97, U+5EA6,
+    U+5ED3, U+5EF6, U+5EFA, U+5F00, U+5F02-5F03, U+5F0F, U+5F15, U+5F20, U+5F27,
+    U+5F2F, U+5F31, U+5F39-5F3A, U+5F52-5F53, U+5F55, U+5F62, U+5F69, U+5F71,
+    U+5F7B, U+5F80, U+5F84-5F85, U+5F88, U+5F8B, U+5F97, U+5FAA, U+5FAE, U+5FBD,
+    U+5FC3, U+5FC5, U+5FD7, U+5FEB, U+5FF5, U+6000-6001, U+600E, U+601D, U+6025,
+    U+6027, U+603B, U+6062, U+606F, U+6089, U+60A8, U+60AC, U+60C5, U+60CA,
+    U+60E0, U+60EF, U+60F3, U+610F, U+611F, U+613F, U+6162, U+620F-6211, U+6216,
+    U+6218, U+622A, U+6233, U+6237, U+6240-6241, U+624B, U+624D, U+6253, U+6263,
+    U+6267, U+6269, U+626B, U+626D, U+6270, U+6279, U+627E-6280, U+628A, U+6293,
+    U+6295-6298, U+62A2, U+62A4-62A5, U+62AC, U+62B9, U+62C5-62C6, U+62C9,
+    U+62CD, U+62D3, U+62D6, U+62DB, U+62DF, U+62E2, U+62E5, U+62E9, U+62EC,
+    U+62FE, U+6301, U+6307, U+6309, U+6311, U+6316, U+6324, U+632F, U+634F,
+    U+635F, U+6362, U+636E, U+6377, U+6388-6389, U+638C, U+6392, U+6398, U+63A2,
+    U+63A5, U+63A7-63A8, U+63AA, U+63CF-63D0, U+63D2, U+63E1, U+63FD, U+641C,
+    U+642C-642D, U+643A, U+6444, U+6446-6447, U+6478-6479, U+6491, U+64A4,
+    U+64AD, U+64CD-64CE, U+64E6, U+64F7, U+6512, U+652F, U+6536, U+6539,
+    U+653E-653F, U+6545, U+6548, U+6551, U+6563, U+6570, U+6574, U+6587, U+6591,
+    U+6599, U+659C, U+65AD, U+65AF-65B0, U+65B9, U+65BD, U+65CB, U+65E0, U+65E2,
+    U+65E5-65E7, U+65E9, U+65F6, U+660E, U+6613, U+661F-6620, U+662F, U+663E,
+    U+6655, U+666E-6670, U+667A, U+6682, U+6697, U+66F2, U+66F4, U+66FE-6700,
+    U+6708-6709, U+670D, U+6717, U+671B, U+671D, U+671F, U+672A-672C, U+672F,
+    U+6735, U+673A, U+6742-6743, U+6750, U+675F, U+6761, U+6765, U+677E-677F,
+    U+6781, U+6784, U+6790, U+679C, U+67AA, U+67B6, U+67C4, U+67D0, U+67D3-67D4,
+    U+67E5, U+6807, U+680F, U+6811, U+6821, U+6837-6839, U+683C, U+6846, U+6848,
+    U+684C, U+6863, U+6876, U+68C0, U+68CB, U+68D2, U+68D5, U+68F1, U+692D,
+    U+6982, U+699C, U+69FD, U+6A21, U+6A2A, U+6A59, U+6A61, U+6B21-6B23, U+6B27,
+    U+6B32, U+6B3E, U+6B62-6B65, U+6B8A, U+6BB5, U+6BCD, U+6BCF, U+6BD4, U+6BDB,
+    U+6BEB, U+6C14, U+6C1B, U+6C34, U+6C38, U+6C42, U+6C47, U+6C89, U+6CA1,
+    U+6CB9, U+6CBE-6CBF, U+6CCA, U+6CD5, U+6CDB, U+6CE1-6CE2, U+6CE8, U+6CFD,
+    U+6D01, U+6D0B, U+6D32, U+6D3B, U+6D41, U+6D45, U+6D4B, U+6D4E-6D4F, U+6D53,
+    U+6D6A, U+6D6E, U+6D77, U+6D82, U+6D88-6D89, U+6DA6, U+6DA9, U+6DE1, U+6DF1,
+    U+6DF7, U+6DFB, U+6E05, U+6E10, U+6E17, U+6E21, U+6E29, U+6E38, U+6E7F,
+    U+6E83, U+6E90, U+6EA2, U+6ED1, U+6EDA, U+6EE1, U+6EE4-6EE5, U+6EF4, U+6F06,
+    U+6F0F, U+6F14, U+6F2B, U+6F5C, U+6FC0, U+706F-7070, U+7075, U+70AD, U+70B9,
+    U+70C1, U+70E6-70E7, U+70ED, U+7126, U+7136, U+7167, U+719F, U+7231,
+    U+7247-7248, U+724C, U+7259, U+7262, U+7269, U+7279, U+72B6, U+72EC, U+7387,
+    U+73A9, U+73AF-73B0, U+73CD, U+73E0, U+7403, U+7406, U+7455, U+745E, U+7490,
+    U+751A, U+751F, U+7528, U+7530-7531, U+7535, U+7537, U+753B, U+7545, U+754C,
+    U+7559, U+7565, U+7578, U+75B5, U+75D5, U+767B, U+767D-767E, U+7684, U+76AE,
+    U+76CA, U+76D1, U+76D6, U+76D8, U+76EE, U+76F4, U+76F8, U+7701, U+770B,
+    U+771F, U+773C, U+7740, U+775B, U+77B3, U+77E5, U+77E9, U+77ED, U+7801-7802,
+    U+7816, U+7840, U+786E, U+788D-788E, U+7891, U+78E8, U+793A, U+793C, U+793E,
+    U+7981, U+79BB, U+79C1, U+79CD, U+79D2, U+79EF-79F0, U+79FB, U+7A0B,
+    U+7A0D-7A0E, U+7A33, U+7A3F, U+7A7A, U+7A7F, U+7A81, U+7A84, U+7A8D, U+7A97,
+    U+7ACB, U+7AD6, U+7AD9, U+7AE0, U+7AE5, U+7AEF, U+7B14, U+7B26, U+7B2C,
+    U+7B49, U+7B52, U+7B54, U+7B56, U+7B5B, U+7B79, U+7B7E, U+7B80, U+7B97,
+    U+7BA1, U+7BAD, U+7BB1, U+7BC7, U+7C7B, U+7C89, U+7C92, U+7C97-7C98, U+7CBE,
+    U+7CCA, U+7CD9, U+7CFB, U+7D20, U+7D22, U+7D27, U+7D2B, U+7D2F, U+7E41,
+    U+7E73, U+7EA0, U+7EA2, U+7EA6-7EA7, U+7EAF, U+7EB3, U+7EB5, U+7EB7-7EB9,
+    U+7EBF, U+7EC3-7EC4, U+7EC6-7EC8, U+7ECD, U+7ECF, U+7ED1, U+7ED3,
+    U+7ED8-7ED9, U+7EDC, U+7EDF, U+7EE7, U+7EED, U+7EF4, U+7EFC, U+7EFF, U+7F13,
+    U+7F16, U+7F18, U+7F1D, U+7F29, U+7F3A, U+7F51, U+7F6E, U+7F8E, U+7FA4,
+    U+7FBD, U+7FFB, U+8001, U+8003, U+8005, U+800C, U+8017, U+8054, U+805A,
+    U+8096, U+80A4, U+80CC, U+80F6, U+80FD, U+8111, U+8138, U+819C, U+81EA,
+    U+81F3-81F4, U+820D, U+8212, U+822A, U+822C, U+826F, U+8272-8273, U+8282,
+    U+82B1, U+82E5, U+82F1, U+8303, U+8349, U+8350, U+8367, U+8377, U+83AB,
+    U+83B7, U+83DC, U+83F1, U+840C, U+8425, U+843D, U+8457, U+8471, U+8499,
+    U+84C4, U+84DD, U+853D, U+85CF, U+865A, U+8679, U+878D, U+884C-884D, U+8854,
+    U+8861, U+8863, U+8865, U+8868, U+886C, U+8870, U+889C, U+88AB, U+88C1,
+    U+88C5, U+88D5, U+88E4, U+8910, U+8932, U+897F, U+8981, U+8986, U+89C1-89C2,
+    U+89C4, U+89C6, U+89C8-89C9, U+89D2, U+89E3, U+89E6, U+8A00, U+8A9E, U+8B66,
+    U+8BA1-8BA2, U+8BA4, U+8BA9, U+8BAD-8BAE, U+8BB0, U+8BB8, U+8BBA, U+8BBC,
+    U+8BBE-8BBF, U+8BC1, U+8BC4, U+8BC6, U+8BC9, U+8BCD, U+8BD1, U+8BD5, U+8BDD,
+    U+8BE2, U+8BE5-8BE6, U+8BED, U+8BEF, U+8BF4, U+8BF7, U+8BFB, U+8BFD, U+8C01,
+    U+8C03, U+8C13, U+8C22, U+8C24, U+8C61, U+8D1F, U+8D23, U+8D25-8D26, U+8D28,
+    U+8D2D, U+8D2F, U+8D34, U+8D39, U+8D44, U+8D4F, U+8D54, U+8D5A-8D5B, U+8D70,
+    U+8D77, U+8D85, U+8D8A, U+8DA3, U+8DB3, U+8DD1, U+8DDD, U+8DDF, U+8DE8,
+    U+8DF3, U+8E2A, U+8EAB, U+8F68, U+8F6C, U+8F6E-8F6F, U+8F74, U+8F7B, U+8F7D,
+    U+8F83, U+8F85, U+8F89, U+8F91, U+8F93, U+8F96, U+8FA8, U+8FB9, U+8FBE,
+    U+8FC1, U+8FC7, U+8FCE, U+8FD0-8FD1, U+8FD4, U+8FD8-8FD9, U+8FDB-8FDE,
+    U+8FEA, U+8FF0, U+8FFD, U+9000-9002, U+9006, U+9009, U+900F-9010, U+9012,
+    U+9014, U+9017, U+901A-901B, U+901F-9020, U+9047, U+9053, U+906D, U+9075,
+    U+907F, U+90A3, U+90AE, U+90BB, U+90CE, U+90E8, U+90FD, U+914D, U+91C7,
+    U+91CA, U+91CC-91CD, U+91CF, U+91D1, U+9488, U+949F, U+94A2, U+94AE, U+94C3,
+    U+94C5, U+94DB, U+94F6, U+94FE, U+9500-9501, U+9510, U+9519, U+952E-952F,
+    U+955C, U+957F, U+95E8, U+95EA, U+95ED-95EE, U+95F4, U+9605, U+9608, U+961F,
+    U+9632, U+9634-9636, U+9644-9645, U+964D, U+9650, U+9661-9662, U+9664,
+    U+9669-966A, U+968F-9690, U+9694, U+9699, U+969C, U+96BE, U+96C6, U+96E8,
+    U+96F6, U+96FE, U+9700, U+9713, U+9752, U+9759, U+975E, U+9760, U+9762,
+    U+978B, U+97E9, U+97F3, U+9875-9876, U+9879-987B, U+987E, U+9881, U+9884,
+    U+9886, U+988A, U+9891, U+9897-9898, U+989C-989D, U+98CE, U+98DE, U+9910,
+    U+9970-9971, U+997C, U+9988, U+9996, U+9A6C, U+9A73, U+9A8C, U+9A9A, U+9AA4,
+    U+9AD4, U+9AD8, U+9B54, U+9C7C, U+9C9C, U+9EC4, U+9ECE, U+9ED1, U+9ED8,
+    U+9F13, U+9F20, U+9F50, U+9F7F, U+9F84, U+9F99, U+FF01, U+FF08-FF09,
+    U+FF0B-FF0C, U+FF0F, U+FF1A-FF1B, U+FF1F, U+FF5C, U+FF5E;
+}
+@font-face {
+  font-family: "NotoSerifTC";
+  font-display: swap;
+  src: url("/assets/fonts/NotoSerifTC-subset.v4.woff2") format("woff2");
+  unicode-range:
+    U+25B2, U+3001-3002, U+300A-300D, U+3010-3011, U+3042, U+3044, U+3046,
+    U+304A, U+304D, U+3051, U+3058-3059, U+3063, U+3066, U+3068, U+306F, U+307E,
+    U+3088, U+4E00, U+4E03, U+4E09-4E0B, U+4E0D, U+4E14, U+4E16, U+4E26, U+4E2D,
+    U+4E32, U+4E39, U+4E3B, U+4E43, U+4E45, U+4E4B, U+4E4E, U+4E5F, U+4E7E,
+    U+4E86, U+4E88, U+4E8B-4E8C, U+4E94, U+4E9B, U+4EA4, U+4EA6, U+4EAB-4EAC,
+    U+4EAE, U+4EBA, U+4EC0, U+4ECA-4ECB, U+4ECD, U+4ED6, U+4ED8, U+4EE3-4EE5,
+    U+4EF0, U+4EF6, U+4EFB, U+4EFD, U+4EFF, U+4F01, U+4F30, U+4F38, U+4F3A,
+    U+4F3C-4F3D, U+4F46, U+4F48, U+4F4D-4F4F, U+4F53-4F55, U+4F5C, U+4F60,
+    U+4F75, U+4F7F, U+4F86, U+4F8B, U+4F9B, U+4F9D, U+4FB5, U+4FBF, U+4FC2,
+    U+4FD7, U+4FDD, U+4FE1, U+4FEE-4FEF, U+500B, U+500D, U+5011-5012, U+5019,
+    U+503C, U+5047, U+504F, U+505A, U+505C, U+5074-5075, U+507D, U+5099, U+50B3,
+    U+50BE, U+50C5, U+50CF, U+50F9, U+511F, U+512A, U+5132, U+5141, U+5143,
+    U+5145, U+5148-5149, U+514B-514D, U+5152, U+5165, U+5167-5169, U+516B-516D,
+    U+5171, U+5176-5178, U+517C, U+518A, U+518D, U+5192, U+51F8-51FA, U+51FD,
+    U+5206-5207, U+5212, U+5217, U+521D, U+5224-5225, U+5229-522A, U+5230,
+    U+5236-5237, U+523B, U+5247, U+524D, U+525B, U+5269-526A, U+526F, U+5272,
+    U+5275, U+5283, U+529B, U+529F-52A0, U+52A9-52AA, U+52D2, U+52D5, U+52D9,
+    U+52E2, U+52F5, U+52FB, U+52FE, U+5305, U+5316, U+532F, U+5339, U+5340-5341,
+    U+5347-5348, U+534A, U+5354, U+5357, U+5361, U+5370, U+5373, U+539A, U+539F,
+    U+53BB, U+53C3, U+53C8-53CA, U+53CD, U+53D6-53D7, U+53E3-53E4, U+53E6,
+    U+53EA-53EB, U+53EF-53F0, U+53F2-53F3, U+5404, U+5408, U+540C-540D, U+5411,
+    U+5426-5427, U+542B, U+5438, U+5448, U+544A, U+5475, U+547D, U+548C, U+54C1,
+    U+54E1, U+54EA, U+552E, U+5546, U+554A, U+554F, U+555F, U+5584, U+559C,
+    U+55AE, U+55CE, U+5617, U+5634, U+5668, U+5674, U+56DB, U+56DE, U+56E0,
+    U+56FA, U+5708, U+570B, U+570D, U+5713, U+5716, U+5718, U+5728, U+5730,
+    U+573E, U+5740, U+5747, U+5783, U+578B, U+57DF, U+57F7, U+57F9-57FA, U+5831,
+    U+5834, U+584A, U+5857, U+586B, U+5883, U+589E, U+58A8, U+58D3, U+58DE,
+    U+58EB, U+5916, U+591A, U+591C, U+5927, U+5929-592B, U+592E, U+5931, U+593E,
+    U+594F, U+5951, U+5957, U+5973, U+597D, U+5982, U+59A5, U+59A8, U+59CB,
+    U+59D3-59D4, U+5B50, U+5B54, U+5B57-5B58, U+5B78, U+5B83, U+5B88-5B89,
+    U+5B8C, U+5B98, U+5B9A, U+5BA3-5BA4, U+5BB3, U+5BB6, U+5BB9, U+5BC6, U+5BCC,
+    U+5BDF, U+5BE6, U+5BE9, U+5BEB-5BEC, U+5BF8, U+5C01, U+5C04, U+5C07-5C08,
+    U+5C0B, U+5C0D-5C0F, U+5C11, U+5C16, U+5C1A, U+5C31, U+5C3A, U+5C3E, U+5C40,
+    U+5C45, U+5C4F, U+5C55, U+5C64-5C65, U+5C6C, U+5C71, U+5C94, U+5CED, U+5DDE,
+    U+5DE2, U+5DE5-5DE7, U+5DEE, U+5DF1-5DF2, U+5DF4, U+5E03, U+5E0C, U+5E33,
+    U+5E36, U+5E38, U+5E40, U+5E45, U+5E55, U+5E63, U+5E6B, U+5E73-5E74, U+5E7E,
+    U+5E8F, U+5E95, U+5E97, U+5EA6, U+5EAB, U+5ED3, U+5EE3, U+5EF6, U+5EFA,
+    U+5F0F, U+5F15, U+5F27, U+5F31, U+5F35, U+5F37, U+5F48, U+5F4E, U+5F59,
+    U+5F62, U+5F69, U+5F71, U+5F7C, U+5F80, U+5F85, U+5F88, U+5F8B-5F8C, U+5F91,
+    U+5F97, U+5F9E, U+5FA9-5FAA, U+5FAE, U+5FB9, U+5FC3, U+5FC5, U+5FEB, U+5FF5,
+    U+600E, U+601D, U+6025, U+6027, U+6062, U+606F, U+6089, U+60A8, U+60C5,
+    U+60DF-60E0, U+60F3, U+610F, U+611B, U+611F, U+614B, U+6162-6163, U+6167,
+    U+6191, U+61B6, U+61C9, U+61F7, U+6210-6211, U+6216, U+622A, U+6230,
+    U+6232-6233, U+6236, U+6240-6241, U+624B, U+624D, U+6253, U+6263, U+626D,
+    U+6279, U+627E, U+6280, U+628A, U+6293, U+6295-6298, U+62AC, U+62B9, U+62C6,
+    U+62C9, U+62CD, U+62D3, U+62D6, U+62DB, U+62EC, U+62FE, U+6301, U+6307,
+    U+6309, U+6311, U+6316, U+632F, U+634F, U+6368, U+6372, U+6377, U+6383,
+    U+6388-6389, U+638C, U+6392, U+6398, U+63A1-63A2, U+63A5, U+63A7-63A8,
+    U+63AA, U+63CF-63D0, U+63D2, U+63DB, U+63E1, U+63EE, U+63F4, U+640D, U+641C,
+    U+642C-642D, U+6436, U+6479-647A, U+6490, U+64A4, U+64AD, U+64C1, U+64C7,
+    U+64CA, U+64CD-64CE, U+64D4, U+64DA, U+64E6, U+64F4, U+64F7, U+64FA, U+64FE,
+    U+650F, U+651C-651D, U+652C, U+652F, U+6536, U+6539, U+653E-653F, U+6545,
+    U+6548, U+6551, U+6557, U+6563, U+6574, U+6578, U+6587, U+6591, U+6599,
+    U+659C, U+65AF-65B0, U+65B7, U+65B9, U+65BC-65BD, U+65CB, U+65E2,
+    U+65E5-65E6, U+65E9, U+660E, U+6613, U+661F-6620, U+662F, U+6642,
+    U+666E-6670, U+667A, U+6688, U+6697, U+66A2, U+66AB, U+66F2-66F4, U+66F8,
+    U+66FE-6700, U+6703, U+6708-6709, U+670D, U+6717, U+671B, U+671D, U+671F,
+    U+672A-672C, U+6735, U+6750, U+6756, U+675F, U+6771, U+677F, U+6790, U+679C,
+    U+67B6, U+67D0, U+67D3-67D4, U+67E5, U+6821, U+6838-6839, U+683C, U+6846,
+    U+6848, U+684C, U+6876, U+687F, U+689D, U+68C4, U+68CB, U+68D2, U+68D5,
+    U+696D, U+6975, U+6982, U+699C, U+69CB, U+69CD, U+69FD, U+6A02, U+6A19,
+    U+6A21, U+6A23, U+6A39, U+6A59, U+6A5F, U+6A61-6A62, U+6A6B, U+6A94, U+6AA2,
+    U+6B04, U+6B0A, U+6B21, U+6B23, U+6B32, U+6B3E, U+6B50, U+6B61-6B65, U+6B72,
+    U+6B77-6B78, U+6B8A, U+6BB5, U+6BC0, U+6BCD, U+6BCF, U+6BD4, U+6BDB, U+6BEB,
+    U+6C1B, U+6C23, U+6C34, U+6C38, U+6C42, U+6C7A, U+6C89, U+6C92, U+6CB9,
+    U+6CBE-6CBF, U+6CC1, U+6CCA, U+6CD5, U+6CDB, U+6CE1-6CE2, U+6CE8, U+6D0B,
+    U+6D32, U+6D3B, U+6D41, U+6D6A, U+6D6E, U+6D77, U+6D88-6D89, U+6DB5, U+6DE1,
+    U+6DF1, U+6DF7, U+6DFA-6DFB, U+6E05, U+6E1B, U+6E21, U+6E2C, U+6E90, U+6E96,
+    U+6EA2, U+6EAB, U+6ED1, U+6EF4, U+6EFF, U+6F06, U+6F0F, U+6F14, U+6F2B,
+    U+6F38, U+6F54, U+6F5B, U+6F64, U+6FA4, U+6FC3, U+6FD5, U+6FDF, U+6FEB,
+    U+6FFE, U+700F, U+7070, U+70AD, U+70BA, U+7121, U+7126, U+7136, U+7167,
+    U+719F, U+71B1, U+71C8, U+71DF, U+722D, U+7247-7248, U+7259, U+7269, U+7279,
+    U+72C0, U+734E, U+7368, U+7372, U+7387, U+73A9, U+73CD, U+73E0, U+73FE,
+    U+7403, U+7406, U+7422, U+7455, U+745E, U+746A, U+7490, U+74B0, U+751A,
+    U+751F, U+7522, U+7528, U+7530-7531, U+7533, U+7537, U+754C, U+7559, U+7565,
+    U+756B, U+7570, U+7576, U+7578, U+758A, U+75B5, U+75D5, U+767B-767E, U+7684,
+    U+7686, U+76AE, U+76CA, U+76E1, U+76E3-76E4, U+76EE, U+76F4, U+76F8, U+7701,
+    U+770B, U+771F, U+773C, U+773E, U+775B, U+77B3, U+77E5, U+77E9, U+77ED,
+    U+7802, U+788E, U+7891, U+78BA, U+78BC, U+78DA, U+78E8, U+790E, U+7919,
+    U+793A, U+793E, U+7981, U+79AE, U+79C1, U+79D2, U+79FB, U+7A05, U+7A0B,
+    U+7A0D, U+7A1C, U+7A2E, U+7A31, U+7A3F, U+7A4D, U+7A7A, U+7A7F, U+7A81,
+    U+7A84, U+7A97, U+7AC5, U+7ACB, U+7AD9, U+7AE0, U+7AE5, U+7AEF, U+7B26,
+    U+7B2C, U+7B46, U+7B49, U+7B52, U+7B54, U+7B56, U+7B97, U+7BA1, U+7BAD,
+    U+7BB1, U+7BC0, U+7BC4, U+7BC7, U+7BC9, U+7BE9, U+7C21, U+7C3D, U+7C3F,
+    U+7C4C, U+7C64, U+7C89, U+7C92, U+7C97, U+7CBE, U+7CCA, U+7CD9, U+7CFB,
+    U+7D00, U+7D04-7D05, U+7D0B, U+7D0D, U+7D14, U+7D19-7D1B, U+7D20, U+7D22,
+    U+7D2B, U+7D2F-7D30, U+7D39, U+7D42, U+7D44, U+7D50, U+7D61, U+7D66,
+    U+7D71-7D72, U+7D81, U+7D93, U+7D9C, U+7DA0, U+7DAD, U+7DB2, U+7DCA, U+7DDA,
+    U+7DDE, U+7DE3, U+7DE8-7DE9, U+7DF4, U+7DFB, U+7E2B, U+7E2E, U+7E31, U+7E3D,
+    U+7E41, U+7E54, U+7E6A-7E6B, U+7E73, U+7E7C, U+7E8C, U+7F3A, U+7F69, U+7F6E,
+    U+7F8E, U+7FA4, U+7FBD, U+7FD2, U+7FFB, U+8001, U+8003, U+8005, U+800C,
+    U+8017, U+805A, U+806F, U+8072, U+8096, U+80CC, U+80FD, U+8166, U+819A,
+    U+819C, U+81A0, U+81C9, U+81EA, U+81F3-81F4, U+8207-820A, U+8212, U+822A,
+    U+822C, U+826F, U+8272, U+82B1, U+82E5, U+82F1, U+8349, U+8377, U+83AB,
+    U+83F1, U+840C, U+843D, U+8449, U+8457, U+8490, U+84C4, U+84CB, U+8525,
+    U+85A6, U+85C9, U+85CD, U+85CF, U+862D, U+8655, U+865B, U+865F, U+8679,
+    U+878D, U+87A2, U+884C-884D, U+8853, U+8861, U+8863, U+8868, U+8870, U+88AB,
+    U+88C1, U+88D5, U+88DC-88DD, U+88E1, U+88FD, U+8907, U+8910, U+8932, U+896A,
+    U+896F, U+897F, U+8981, U+8986, U+898B, U+898F, U+8996, U+89AA, U+89BA,
+    U+89BD, U+89C0, U+89D2, U+89E3, U+89F8, U+8A00, U+8A02, U+8A08, U+8A0A,
+    U+8A13, U+8A18, U+8A1F, U+8A23, U+8A2A, U+8A2D, U+8A31, U+8A34, U+8A3B,
+    U+8A5E, U+8A62, U+8A66, U+8A71-8A73, U+8A8C-8A8D, U+8A9E, U+8AA4, U+8AAA,
+    U+8AB9, U+8ABF, U+8ACB, U+8AD6, U+8AEE, U+8B02, U+8B17, U+8B1D, U+8B49,
+    U+8B58, U+8B66, U+8B6F-8B70, U+8B77, U+8B80, U+8B8A, U+8B93, U+8C4E, U+8C50,
+    U+8C54, U+8C61, U+8CA0-8CA1, U+8CAB-8CAC, U+8CB7, U+8CBB-8CBC, U+8CC7,
+    U+8CDE, U+8CE0, U+8CEA, U+8CFA, U+8CFC-8CFD, U+8D70, U+8D77, U+8D85, U+8D8A,
+    U+8DA3, U+8DB3, U+8DD1, U+8DDD, U+8DDF, U+8DE8, U+8DEF, U+8DF3, U+8E64,
+    U+8EAB, U+8ECC, U+8EDF, U+8EF8, U+8F03, U+8F09, U+8F14-8F15, U+8F1D, U+8F2A,
+    U+8F2F, U+8F38, U+8F44, U+8F49, U+8FA6, U+8FA8, U+8FCE, U+8FD1, U+8FD4,
+    U+8FEA, U+8FF0, U+8FFD, U+9000-9001, U+9006, U+900F-9010, U+9014, U+9017,
+    U+9019-901A, U+901F-9020, U+9023, U+9031-9032, U+9047, U+904A-904B, U+904E,
+    U+9053-9055, U+905E, U+9060, U+9069, U+906D-906E, U+9075, U+9078, U+907A,
+    U+9084, U+908A, U+90A3, U+90CE, U+90E8, U+90F5, U+90FD, U+914D, U+91CB-91CD,
+    U+91CF, U+91D1, U+91DD, U+9215, U+9251, U+925B, U+9280, U+92B3, U+92B7,
+    U+92F8, U+92FC, U+9304, U+932F, U+934A, U+9375, U+9396, U+93C8, U+93E1,
+    U+9418, U+9577, U+9580, U+9583, U+9589, U+958B, U+9593, U+95B1, U+95BE,
+    U+95DC, U+9632, U+9644, U+964D, U+9650, U+9661-9664, U+9670, U+968A, U+968E,
+    U+9694, U+9699, U+969B-969C, U+96A8, U+96AA, U+96B1, U+96C6, U+96D9, U+96DC,
+    U+96E2, U+96E8, U+96F2, U+96F6, U+96FB, U+9700, U+9707, U+9713, U+9727,
+    U+9748, U+9752, U+975C, U+975E, U+9760, U+9762, U+978B, U+97D3, U+97F3,
+    U+97FF, U+9801-9802, U+9805-9806, U+9808, U+9810, U+9818, U+982D, U+9830,
+    U+983B, U+9846, U+984C-984D, U+984F, U+9858, U+985E, U+9867, U+986F, U+98A8,
+    U+98DB, U+98FD-98FE, U+990A, U+9910, U+9918, U+9996, U+99AC, U+99C1, U+9A37,
+    U+9A57, U+9A5A, U+9A5F, U+9AD4, U+9AD8, U+9AEE, U+9B06, U+9B54, U+9B5A,
+    U+9BAE, U+9EA5, U+9EBC, U+9EC3, U+9ECE, U+9ED1, U+9EDE, U+9F13, U+9F4A,
+    U+9F52, U+9F61, U+FF01, U+FF08-FF09, U+FF0B-FF0C, U+FF0F, U+FF1A-FF1B,
+    U+FF1F, U+FF5C, U+FF5E;
+}
+/* === END generated font-face === */
+/* Stand-ins for the Latin faces while they load (font-display: swap): a
+   device font scaled to the same width and line metrics, so the swap does
+   not move the text. Values measured in Chromium against Liberation Sans /
+   Liberation Serif (the metrics of Arial / Times New Roman). */
+@font-face {
+  font-family: "KuramubonLatinFallback";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"),
+    local("Helvetica");
+  size-adjust: 123.3%;
+  ascent-override: 71.37%;
+  descent-override: 9.73%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0020-007E, U+00A0-00A1, U+00A5, U+00AB, U+00BA-00BB, U+00BF-00C2,
+    U+00C7-00CA, U+00CD-00CF, U+00D1, U+00D3-00D4, U+00D9-00DB, U+00E0-00E2,
+    U+00E7-00EA, U+00ED-00EE, U+00F1, U+00F3-00F4, U+00F9-00FB, U+0152-0153,
+    U+2014, U+2019, U+201C-201D;
+}
+
+@font-face {
+  font-family: "HakkouMinchoLatinFallback";
+  src:
+    local("Times New Roman"), local("TimesNewRomanPSMT"),
+    local("Liberation Serif"), local("Times");
+  size-adjust: 82.02%;
+  ascent-override: 107.29%;
+  descent-override: 14.63%;
+  line-gap-override: 0%;
+  unicode-range:
+    U+0020-005F, U+0061-007E, U+00A0-00A1, U+00A5, U+00A9, U+00AB, U+00B0-00B1,
+    U+00B7, U+00BA-00BB, U+00BF-00C2, U+00C7-00CA, U+00CD-00CF, U+00D1,
+    U+00D3-00D4, U+00D7, U+00D9-00DB, U+00E0-00E2, U+00E7-00EA, U+00ED-00EF,
+    U+00F1, U+00F3-00F4, U+00F9-00FB, U+0152-0153, U+2011, U+2013-2014, U+2019,
+    U+201C-201D, U+2022, U+2026, U+203B, U+2192, U+2194, U+2212, U+25A0, U+25A3,
+    U+25C6, U+25CB, U+2605-2606, U+2713;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  /* 日本語・中国語・韓国語では単語の途中で改行されないようにし、
+     やむを得ない場合（長いURL等）のみ折り返す。
+     見出し等の短いキャッチコピーが変な位置で泣き別れしないよう
+     text-wrap: balance も合わせて指定する。
+     ※ overflow-wrap は "anywhere" ではなく "break-word" を使う。
+        anywhereはflex/grid内の最小コンテンツ幅の計算方法まで変えてしまい、
+        価格表示など本来折り返したくない短い文字列（¥5,500 等）まで
+        数字の途中で改行される副作用があったため。 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  /* 全角の括弧・句読点を詰めない（Firefox・Safariと同じ組み方）。Chromeの
+     既定（normal）は行末の閉じ括弧を半角に詰めて行に収めることがあり、
+     版によって詰めた幅で行を決めたまま詰める前の幅で描き、「第2条（…）」の
+     括弧が欄の外へはみ出した（韓国語の360〜390px、Chrome 151）。どの
+     ブラウザ・版でも同じ所で折り返すよう、いつも全角で数える。 */
+  text-spacing-trim: space-all;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+/* body側のoverflow-wrap: break-word（flex/gridアイテムの横はみ出し対策。
+   reset.cssのmin-width:0の説明を参照）と word-break: keep-all の組み
+   合わせは、明示的な幅(max-width: Nch)を持つ通常の段落テキストでは
+   2つの不具合を起こすことがあった。
+   (1) 「。」などの句読点が行頭に来る禁則処理違反。
+   (2) 見た目には正しく折り返されているのに、水平方向にスクロール
+       できてしまう(空白ページ分の余白が見える)謎のはみ出し。
+   どちらもkeep-allが定義する「分割禁止のかたまり」をoverflow-wrapの
+   フォールバックが処理する際の癖に起因する。
+   見出しの短いキャッチコピーや¥5,500のような価格表示は元々の狙い
+   通りkeep-allの恩恵を受けるべきだが、通常の長文段落は元々分かち書き
+   の概念がなく、文字単位で折り返しても不自然ではない日本語の性質上、
+   このパターンに該当する各所（.about-hero p、.hero-lead 等、
+   max-width: Nch を指定している段落）では overflow-wrap: normal と
+   word-break: normal の両方を個別に上書きしている。ただし
+   .spec-item 等グリッド/フレックスアイテム内の（明示的な幅を持たない）
+   縮小フィット系テキストからは外すこと。外すとreset.cssに記載の
+   横はみ出しが再発する。 */
+/* NIARIMアプリ本体と全く同じアイコン(Material Icons / Font Awesome Free)を
+   使用する場合の共通スタイル。アイコン本体は /assets/icons/ui/sprite.svg
+   （詳細は同ディレクトリのLICENSE.md参照）。 */
+.ic {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: -0.15em;
+}
+
+.container {
+  width: min(100% - var(--container-padding) * 2, var(--container-width));
+  margin-inline: auto;
+}
+/* ---- Skip link（アクセシビリティ） ---- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-sm);
+  z-index: 200;
+  background: var(--color-ink);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+/* ---- Header ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+/* すりガラス風の背景は疑似要素に持たせる。backdrop-filterをsite-header自体に
+   付けると、その内部にあるmodal-nav（position: fixed）の containing block が
+   ヘッダーの小さな箱に変わってしまい、SP版メニューの全画面背景が正しく
+   表示されなくなるため（フィルタ系プロパティはfixed要素の基準を変える仕様）。 */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.brand img.brand-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.brand img.brand-title {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+/* 子孫セレクタ（.main-nav ul）だとナビ本来の<ul>だけでなく、.lang-dropdown
+   の中に入れ子になっている.lang-menu（同じく<ul>）まで一致してしまい、
+   SP幅で「言語切替メニューが閉じているはずなのに常にdisplay:flexで開いた
+   ように見えてしまう」原因になっていた（.lang-menu側のdisplay:noneより
+   このルールの方が詳細度が高く勝ってしまうため）。直下の子要素のみに
+   絞る子コンビネータへ変更し、.lang-menuを意図せず巻き込まないようにする。 */
+.main-nav > ul {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.main-nav a {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--color-gray-700);
+  position: relative;
+  padding-block: 0.25rem;
+}
+/* .btn-accent(0-1-0)は.main-nav a(0-1-1)より詳細度が低く負けてしまい、
+   背景色付きボタンなのに文字がグレーで読みにくくなっていたための上書き。 */
+.main-nav a.btn-accent {
+  color: var(--color-white);
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width var(--duration-fast) var(--ease-out);
+}
+
+.main-nav a:hover::after,
+.main-nav a[aria-current]::after {
+  width: 100%;
+}
+/* ---- Language dropdown ---- */
+.lang-dropdown {
+  position: relative;
+}
+
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-gray-300);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  min-height: 44px;
+}
+
+.lang-trigger::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-dropdown[data-open="true"] .lang-trigger::after {
+  transform: rotate(225deg) translateY(2px);
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 160px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 0.4rem;
+  display: grid;
+  gap: 0.15rem;
+  opacity: 0;
+  transform: translateY(-6px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    visibility 0s linear var(--duration-fast);
+  z-index: 10;
+}
+
+.lang-dropdown[data-open="true"] .lang-menu {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+/* 言語切替メニューは全ページのヘッダーに出るうえ、他言語の名前を
+   その言語の文字で表示する（日本語 / 简体中文 / 繁體中文 / 한국어）。
+   ここで本文用・見出し用のCJKフォントを参照してしまうと、英語だけを
+   読む利用者にも800KB超の漢字サブセットが必ず転送されてしまう。
+   メニュー専用の極小フォント（各言語名の数文字だけを収録、合計数KB）を
+   先頭に並べ、そこで解決させる。ラテン文字の言語名（English / Français /
+   Español）は極小フォントのunicode-rangeから外れるので、通常の本文用
+   フォントへ自然に落ちる。 */
+.lang-trigger,
+.lang-menu button {
+  font-family:
+    "NotoSerifMenuJP", "NotoSerifMenuSC", "NotoSerifMenuKR", var(--font-sans);
+}
+
+.lang-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+}
+
+.lang-menu button:hover {
+  background: var(--color-bg-tint);
+}
+/* The current language: HakkouMincho has one weight, so bold alone did not
+   show which one was selected. A drawn tick (not the "✓" glyph, which reads
+   as a root sign in this face) and the text red mark it. */
+.lang-menu button[aria-pressed="true"] {
+  color: var(--color-accent-text);
+  font-weight: 700;
+}
+
+.lang-menu button[aria-pressed="true"]::after {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 5px;
+  margin: 0 2px 3px 0;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+@media (max-width: 900px) {
+  .lang-dropdown {
+    order: 3;
+    margin-top: var(--space-sm);
+  }
+
+  .lang-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    display: none;
+  }
+
+  .lang-dropdown[data-open="true"] .lang-menu {
+    display: grid;
+  }
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.nav-toggle .bar,
+.nav-toggle .bar::before,
+.nav-toggle .bar::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-ink);
+  position: relative;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-out);
+}
+
+.nav-toggle .bar::before {
+  position: absolute;
+  top: -7px;
+}
+
+.nav-toggle .bar::after {
+  position: absolute;
+  top: 7px;
+}
+
+.nav-toggle[aria-expanded="true"] .bar {
+  background: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .bar::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .bar::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+@media (max-width: 900px) {
+  html.mobile-nav-open {
+    overflow: hidden;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    /* 以前は inset: var(--header-height) 0 0 0; （bottom: 0）で高さを
+       決めていたが、モバイルブラウザはアドレスバーの表示/非表示で実際の
+       表示領域（visual viewport）が変動し、bottom: 0 は必ずしもそれに
+       追従しないため、メニューの縦幅が端末の画面と合わない（下が切れる／
+       逆に余白が残る）ことがあった。動的ビューポート高さ（dvh）を使って
+       実際に見えている領域ぴったりの高さを明示的に指定することで解消する。
+       内容がその高さを超える場合（言語切替メニューを開いた状態＋項目数が
+       多い等）は内部スクロールできるようにしておく。 */
+    height: calc(100dvh - var(--header-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* ヘッダーの面と同じ色にする。純白のままだと、ヘッダー
+       （#fffaf8）との境目に色の段差ができ、メニューとヘッダーの
+       あいだに細い隙間が空いているように見えていた。 */
+    background: #faf7f6;
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-lg) var(--container-padding);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out),
+      visibility 0s linear var(--duration-base);
+  }
+
+  .main-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out);
+  }
+
+  .main-nav > ul {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  /* メニュー全体のフェードに加え、項目を上から順に少しずつ間をおいて
+     表示する。CSSのnth-childだけで完結させ、JS側の状態管理を増やさない。 */
+  .main-nav > ul > li {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .main-nav.is-open > ul > li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .main-nav.is-open > ul > li:nth-child(1) {
+    transition-delay: 0.04s;
+  }
+  .main-nav.is-open > ul > li:nth-child(2) {
+    transition-delay: 0.08s;
+  }
+  .main-nav.is-open > ul > li:nth-child(3) {
+    transition-delay: 0.12s;
+  }
+  .main-nav.is-open > ul > li:nth-child(4) {
+    transition-delay: 0.16s;
+  }
+  .main-nav.is-open > ul > li:nth-child(5) {
+    transition-delay: 0.2s;
+  }
+  .main-nav.is-open > ul > li:nth-child(6) {
+    transition-delay: 0.24s;
+  }
+  .main-nav.is-open > ul > li:nth-child(7) {
+    transition-delay: 0.28s;
+  }
+  .main-nav.is-open > ul > li:nth-child(8) {
+    transition-delay: 0.32s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .main-nav > ul > li {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .main-nav a {
+    font-size: 1.1rem;
+  }
+  /* Mobile navigation is a reading list: align every item to one clear
+     left edge instead of centering each 44px-or-larger hit target. */
+  .main-nav > ul > li > a:not(.btn) {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+}
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+  min-height: 48px;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+/* 白文字を載せるため、装飾用の --color-accent(#ff5c7a、白文字だと2.97:1)
+   ではなくコントラスト確保用の --color-accent-strong を背景に使う。 */
+.btn-accent {
+  background: var(--color-accent-strong);
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-strong-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+/* config.js のURLが未設定（正式リリース前）のリンク。config-links.js が
+   href を外したうえでこのクラスを付ける。押しても何も起きないリンクを
+   「押せそうな見た目」のまま置かないための状態表示。 */
+.is-unavailable {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none;
+}
+/* ---- Section utilities ---- */
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.section-tint {
+  background: var(--color-bg-tint);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: var(--space-xl);
+}
+
+.section-head h2 {
+  position: relative;
+}
+/* ---- Reveal animation hooks（animations.jsが操作） ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* .reveal内の見出しは、ブロック全体のフェード＋スライドに加えて
+   左から右へワイプするような見え方にする（clip-pathで開いていく）。
+   ディセンダー(g/y等)が欠けないよう下側は少し余裕を持たせる。 */
+.reveal h2 {
+  clip-path: inset(0 100% -0.2em 0);
+  transition: clip-path var(--duration-slow) var(--ease-out) 0.12s;
+}
+
+.reveal.is-visible h2 {
+  clip-path: inset(0 0 -0.2em 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reveal h2 {
+    clip-path: none;
+    transition: none;
+  }
+}
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--color-ink);
+  color: var(--color-text-on-dark);
+  padding-block: var(--space-2xl) var(--space-lg);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-brand .brand {
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+/* brand-iconはフッター専用の app_logo_footer.svg
+   （テーマカラーではなくフッターの暗色に馴染む半透明の角丸正方形＋
+   白抜きモノグラム）を使っているため、invertするとその配色ごと
+   真っ白に潰れてしまう。ワードマーク(brand-title)側だけを白へ反転する。 */
+.footer-brand .brand-title {
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: var(--fs-small);
+  max-width: calc(32 * var(--measure-ch));
+  overflow-wrap: normal;
+  word-break: normal;
+}
+/* フッター各列の見出し。ページ本文に h2 が無い場合（/news/ 等）に
+   h1 から h3 へ飛ぶ見出し階層になってしまっていたため h2 にした。 */
+.footer-col h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.06em;
+}
+
+.footer-col ul {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.footer-col a {
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.86);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer-col a:hover {
+  color: var(--color-sub);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-top: var(--space-lg);
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.footer-social a:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+@media (max-width: 780px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+/* ---- Scroll-to-top button (全ページ共通、main.jsが生成) ---- */
+.scroll-top-btn {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  z-index: 90;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(12px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent);
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top-btn {
+    transition: opacity var(--duration-fast) linear;
+  }
+}
+/* ---- Visually hidden ---- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+/* ---- Stagger grid（カード・リストの1枚ずつ間をおいた表示） ----
+   animations.js の initStaggerGrids() が画面内進入時に1枚ずつ間をおいて
+   .is-visible を付与する。JSが動かない/prefers-reduced-motion環境では
+   即座に is-visible が付与されるため、常時表示にフォールバックする。
+   transitionは各要素側(.spec-item / .screenshot-card / .faq-item等)で
+   定義し、ここでは初期状態のopacity/transformのみを設定する。
+   全ページ共通で使うため features.css ではなく common.css に置く。 */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.stagger-grid > *.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* ---- 見出し＋本文の読み物形式ブロック（Features/Premium/Community/Home等） ---- */
+.feature-narrative {
+  margin: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+/* 読み物ブロックの見出しは、そのページでの階層に応じて h2 / h3 を
+   使い分ける（h1直下に置く /premium/・/community/ の先頭ブロックは h2、
+   セクション見出し(h2)の下に入る /features/ 等は h3）。
+   見出しレベルが変わっても見た目は同じになるよう、両方に同じ指定をする。 */
+.feature-narrative-block h2,
+.feature-narrative-block h3 {
+  font-size: var(--fs-h4, 1.1rem);
+  margin-bottom: 0.4rem;
+}
+
+.feature-narrative-block p {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+@media (max-width: 900px) {
+  /* スマホのメニュー内では言語一覧は絶対配置ではなく流し込みで並ぶ。
+   切替ボタンがパネル下端付近にあるため、開いた直後は一覧の大半が
+   画面の外にあり「言語が3つしかない」ように見えていた。
+   パネル自体はスクロールできるので、開いたら見える位置まで送る処理を
+   i18n.js に入れてある。ここでは一覧が伸びすぎないよう上限だけ設ける。 */
+  .main-nav .lang-menu {
+    max-height: min(60vh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* ---- from the former reference-polish.css ---- */
+/* Curated interaction polish
+   --------------------------
+   General principles distilled from contemporary navigation, CTA, motion,
+   landing-page and product-UI references. Nothing here copies a reference
+   composition, asset or signature effect. NIARIM's own app UI, typography,
+   colors and frame/timeline metaphors remain the source of truth. */
+/* Native cross-document transitions are essentially free progressive enhancement:
+   unsupported browsers ignore this block and reduced-motion users get no motion. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand {
+  view-transition-name: niarim-brand;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-accent) 26%, white);
+}
+
+:where(h1, h2, h3) {
+  text-wrap: balance;
+}
+@media (hover: hover) and (pointer: fine) {
+  /* Navigation: a short drawn underline communicates location/intent without
+   turning the header into a generic SaaS pill navigation. */
+  .main-nav > ul > li > a {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .main-nav > ul > li > a::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: 5px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 180ms ease-out;
+  }
+
+  .main-nav > ul > li > a:hover::after,
+  .main-nav > ul > li > a:focus-visible::after,
+  .main-nav > ul > li > a[aria-current]::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+@supports (animation-timeline: scroll()) {
+  /* Long NIARIM pages benefit from a quiet sense of location. Supporting browsers
+   render this with the compositor-driven root scroll timeline; there is no JS,
+   polling or layout work on scroll. */
+  @keyframes niarim-page-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .site-header::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--color-accent), #ffad66);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: niarim-page-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+/* Mobile-menu state change: animate only the actual control. */
+.nav-toggle .bar,
+.nav-toggle .bar::before,
+.nav-toggle .bar::after {
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms var(--ease-out),
+    top 180ms var(--ease-out);
+}
+
+.nav-toggle[aria-expanded="true"] .bar::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .bar::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+#features .hero-visual-reuse::before {
+  content: none !important;
+  animation: none !important;
+  filter: none !important;
+}
+/* CTA feedback: tactile first, decorative second. The sheen only runs on a real
+   interactive control and uses transform/opacity so it stays GPU-friendly. */
+.btn,
+button,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn {
+  position: relative;
+  transition:
+    transform 180ms ease-out,
+    box-shadow 180ms ease-out,
+    background-color 180ms ease-out,
+    border-color 180ms ease-out,
+    color 180ms ease-out;
+}
+
+.btn-primary,
+.btn-accent {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::after,
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -34%;
+  width: 28%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transform: translateX(-220%) skewX(-16deg);
+  opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:hover::after,
+  .btn-primary:focus-visible::after,
+  .btn-accent:hover::after,
+  .btn-accent:focus-visible::after {
+    opacity: 0.78;
+    transform: translateX(620%) skewX(-16deg);
+    transition:
+      transform 520ms var(--ease-out),
+      opacity 120ms ease-out;
+  }
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: 90ms;
+}
+/* One consistent keyboard-focus language across links and controls. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 42%, transparent);
+  outline-offset: 3px;
+}
+@supports (animation-timeline: view()) {
+  /* Modern browsers can draw the feature rail as the chapter enters the viewport.
+   No JavaScript, no layout reads and no continuous main-thread loop are needed. */
+  @keyframes niarim-feature-rail-draw {
+    from {
+      transform: scaleY(0.14);
+      opacity: 0.2;
+    }
+    to {
+      transform: scaleY(1);
+      opacity: 0.72;
+    }
+  }
+}
+/* Footer: translate the app's film/frame language into a lightweight divider. */
+.site-footer {
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.72) 0 8px,
+      transparent 8px 15px
+    ),
+    var(--color-accent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.site-footer a:not(.btn) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+  text-decoration-color: color-mix(in srgb, currentColor 28%, transparent);
+  transition:
+    color 180ms ease-out,
+    text-decoration-color 180ms ease-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-footer a:not(.btn):hover {
+    text-decoration-color: currentColor;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Respect motion preferences for every refinement in this layer. The Home marquee
+   remains the separate always-on product requirement owned elsewhere. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+
+  .site-header::after,
+  .main-nav > ul > li > a::after,
+  .nav-toggle .bar,
+  .nav-toggle .bar::before,
+  .nav-toggle .bar::after,
+  .btn,
+  .site-footer a:not(.btn) {
+    transition-duration: 0.01ms !important;
+  }
+
+  .site-header::after {
+    animation: none !important;
+    transform: scaleX(1) !important;
+  }
+
+  .btn:hover,
+  .btn:active {
+    transform: none !important;
+  }
+
+  .btn-primary::after,
+  .btn-accent::after {
+    display: none !important;
+  }
+}
+
+/* ---- from the former common.css ---- */
+/* Interactive target sizing: keep the existing visual scale while ensuring the
+   full clickable area meets the 44px minimum used by the responsive audit. */
+.brand {
+  min-height: 44px;
+}
+
+.main-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.feature-nav a {
+  min-height: 44px;
+}
+/* Footer navigation: 44px targets, with the list's whitespace moved into the
+   links, on every page. These rules used to live in visual-finish.css, which
+   the home page does not load, so its footer links were 14px tall. */
+.site-footer .footer-col ul {
+  gap: 0.1rem;
+}
+
+.site-footer .footer-col a {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  transition:
+    color 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.site-footer .footer-social a {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-footer .footer-col a:hover {
+    transform: translateX(2px);
+  }
+}
+@media (max-width: 780px) {
+  /* Two columns on phones: the seven Product links take the left column and
+   the short Support and Legal lists stack in the right one, instead of Legal
+   starting a third row under Product (about 150px less to scroll). */
+  .site-footer .footer-grid > .footer-col:nth-child(2) {
+    grid-row: span 2;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .footer-col a {
+    transition: none;
+  }
+
+  .site-footer .footer-col a:hover {
+    transform: none;
+  }
+}
+/* Shared page introductions are editorial hero blocks, not left-column copy.
+   Keep the whole block optically centered at every width. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+  text-align: center;
+}
+
+:where(
+    .about-hero,
+    .features-header,
+    .help-header,
+    .faq-header,
+    .news-header,
+    .legal-header
+  )
+  > p {
+  margin-inline: auto;
+}
+/* Feature/help category headings are navigational sub-sections with an icon,
+   not page-title heroes, so their local left-aligned rhythm stays intact. */
+.feature-section-head {
+  text-align: left;
+}
+/* Section headings start at the content's left edge like every other
+   heading on the site (home sections, Features sections, ruled lists); only a
+   page's closing invitation is centred. */
+.section-head {
+  margin-inline: 0;
+  text-align: start;
+}
+@media (max-width: 559px) {
+  /* Hero responsive composition
+   ---------------------------
+   The hero uses continuous density bands instead of letting unrelated
+   component breakpoints decide its layout:
+   - <=559px: true SP stack
+   - 560-759px: compact split composition
+   - 760-1023px: tablet / narrow-window split composition
+   - >=1024px: desktop split composition with a bounded visual scale
+
+   pages/home.css is loaded after this file, so structural ownership uses
+   !important where needed. Values inside each band stay fluid and adjacent
+   bands meet at similar sizes to avoid visible density jumps. */
+  .hero {
+    padding-top: clamp(1.4rem, 5.5vw, 2rem) !important;
+    padding-bottom: clamp(1.35rem, 4.8vw, 1.85rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    gap: clamp(1.2rem, 4.5vw, 1.7rem) !important;
+  }
+  /* Long horizontal category bars should communicate that they can scroll.
+     Keep a clean edge-to-edge rail with a deliberate partial-next-item cue. */
+  .feature-nav.feature-nav {
+    gap: 0.55rem;
+    padding-inline: var(--container-padding);
+    scroll-padding-inline: var(--container-padding);
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .feature-nav.feature-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature-nav.feature-nav a {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
+}
+@media (min-width: 560px) and (max-width: 759px) {
+  /* Compact landscape phones / small tablets. Keep copy and product screen in one
+   visual unit; both columns scale continuously from 560 to 759px. */
+  .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+}
+@media (min-width: 760px) and (max-width: 1023px) {
+  /* Tablet / narrow desktop windows. The phone grows with the viewport instead of
+   jumping directly from the compact 180px mock to the desktop composition. */
+  .hero {
+    padding-top: clamp(2.15rem, 3.8vw, 2.8rem) !important;
+    padding-bottom: clamp(2rem, 3.4vw, 2.6rem) !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr) !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1.4rem, 2.8vw, 2.15rem) !important;
+  }
+}
+@media (min-width: 1024px) {
+  /* Desktop keeps the same information density instead of resetting to the
+   oversized legacy home.css hero at exactly 1024px. */
+  .hero {
+    padding-top: clamp(2.8rem, 4.2vw, 4rem) !important;
+    padding-bottom: clamp(2.6rem, 3.8vw, 3.7rem) !important;
+  }
+
+  .hero .container {
+    width: min(calc(100% - 3rem), 1240px) !important;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr) !important;
+    align-items: center !important;
+    gap: clamp(1.8rem, 3vw, 3rem) !important;
+  }
+}
+@media (max-width: 339px) {
+  /* Very narrow phones need a separate density floor. 320–339px must not inherit
+   390px-era padding/font assumptions or force CTA text into awkward fragments. */
+  .hero {
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+
+  .hero .container {
+    gap: 1.1rem !important;
+  }
+
+  .feature-nav.feature-nav a {
+    padding-inline: 0.85rem;
+  }
+}
+@media (min-width: 901px) {
+  /* Desktop header: preserve the airy composition while avoiding undersized,
+   low-authority navigation text on wide canvases. */
+  /* Desktop navigation only: from 1024px to 1180px the menu is the drawer,
+   whose links are 1.1rem (common-base.css); this rule used to shrink them to
+   12.5px there. */
+  .main-nav > ul > li > a {
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+  }
+  /* Japanese, Korean and Chinese labels are compact, so they grow with the
+     viewport: 12.5px at 1181px (the row must fit one line there), 13.8px at
+     1440px, 14px from 1475px. Kuramubon's Latin letters are already wide and
+     the French and Spanish rows are long, so Latin languages stay at 12.5px
+     (at 13.8px the Spanish row folded even at 1920px). */
+  html:is(:lang(ja), :lang(ko), :lang(zh-Hans), :lang(zh-Hant))
+    .main-nav
+    > ul
+    > li
+    > a {
+    font-size: clamp(0.78rem, 0.6vw + 0.32rem, 0.875rem);
+  }
+}
+
+@keyframes niarim-subtitle-underline {
+  to {
+    background-size: 100% 3px;
+  }
+}
+/* A word kept on one line inside a heading (i18n.js). */
+.nw {
+  white-space: nowrap;
+}
+/* Headings break between phrases and never start a line with a closing
+   bracket, small kana or prolonged sound mark (pages without line-break.css
+   included). */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-break: strict;
+}
+
+:root:lang(ja) :is(h1, h2, h3, h4, h5, h6) {
+  word-break: auto-phrase;
+}
+
+/* ---- from the former refresh-2026.css ---- */
+.nr-site .site-header {
+  background: rgba(252, 250, 248, 0.95);
+  border-bottom: 1px solid #e9e3df;
+  backdrop-filter: blur(16px);
+}
+
+/* ---- from the former pages/contact.css ---- */
+/* ========================================================================== 
+   NIARIM contact.css - お問い合わせページ専用スタイル
+   ========================================================================== */
+
+.contact-panel {
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  margin-block: var(--space-xl);
+  background: var(--color-bg-tint);
+}
+
+/* ---- from the former pages/features.css ---- */
+/* スクロールに追従するタブ型ナビ（Clip Studio公式サイト等を参照）。
+   scroll-spyでの現在地ハイライトは animations.js が付与する is-active で切替。 */
+.feature-nav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-block: var(--space-md);
+  margin-bottom: var(--space-lg);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feature-nav a {
+  /* デフォルトのinline要素のままだとbodyのline-height: 1.7がそのまま
+     効いてしまい、フォントの内部の余白（行送り）が上下非対称なぶん、
+     文字がピルの中で下寄り／上寄りに見えてしまう。.btn等サイト内の
+     他のピル型ボタンと同じくinline-flexで上下中央揃えにする。 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  /* 親.feature-navのflexコンテナ内で縮小されてボタンが文字数に対して
+     窮屈にならないよう、常に内容分の幅を確保する。 */
+  flex: 0 0 auto;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-gray-300);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.feature-nav a:hover {
+  border-color: var(--color-accent);
+  /* 枠線は装飾用アクセントのまま、文字だけコントラストを満たす濃色にする。 */
+  color: var(--color-accent-text);
+}
+
+.feature-nav a.is-active {
+  background: var(--grad-brand);
+  border-color: transparent;
+  color: var(--color-white);
+}
+
+.feature-section {
+  padding-block: var(--space-xl);
+  /* ヘッダーぶんの余白は html の scroll-padding-top が既に見ている。
+     ここでさらに --header-height を足していたため二重に効き、タブを
+     押すと節の上に110pxの空白が残っていた。ここで足すのは、ヘッダーの
+     下に貼り付く節タブの高さぶんだけでよい。 */
+  scroll-margin-top: 3.4rem;
+}
+
+.feature-section-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+/* ---- from the former pages/home.css ---- */
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+  /* リスト全体のフェード(.reveal)に加えて、質問を上から順に少しずつ
+     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+/* ---- from the former pages/contact.css ---- */
+
+.contact-personal-note {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.contact-form {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- from the former pages/home.css ---- */
+/* ---- Intro (NIARIMとは) ---- */
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+/* クリックできる要素ではないため、ホバーで動く演出は付けない
+   （クリックできると誤認させないため）。 */
+.intro-card {
+  padding: var(--space-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* ---- from the former pages/features.css ---- */
+
+.spec-grid {
+  display: grid;
+  /* 200pxだと広い画面で5〜6列になり、全角の説明文が1行13文字ほどで
+     折り返して読みにくかった。1行あたり16〜18文字を確保できる幅を
+     下限にする。 */
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
+  gap: var(--space-md);
+}
+
+.spec-item {
+  /* クリックできる要素ではないため、ホバーで動く演出は付けない
+     （クリックできると誤認させないため）。表示自体の
+     フェードイン（.stagger-grid側）にのみtransitionを使う。 */
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-md) 1.3rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  overflow: hidden;
+  transition:
+    opacity var(--duration-base, 0.4s) var(--ease-out),
+    transform var(--duration-base, 0.4s) var(--ease-out);
+}
+
+#export .export-format-guide {
+  grid-column: 1 / -1;
+}
+
+/* ---- from the former pages/contact.css ---- */
+@media (max-width: 900px) {
+  .contact-form {
+    padding: var(--space-lg);
+  }
+}
+@media (max-width: 640px) {
+  .contact-panel {
+    padding: var(--space-lg) var(--space-sm);
+    margin-block: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-form {
+    padding: var(--space-md);
+  }
+}
+
+/* ---- from the former pages/about.css ---- */
+
+.about-name {
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+}
+
+.about-not-supported {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-border);
+}
+
+.about-cta {
+  text-align: center;
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  background: linear-gradient(135deg, var(--color-ink), #2b2950);
+  color: var(--color-white);
+}
+
+#main .intro-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+}
+
+/* ---- from the former pages/premium.css ---- */
+
+.pricing-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- from the former pages/community.css ---- */
+
+.community-tabs button:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+/* ---- from the former pages/help.css ---- */
+
+.help-search input {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  padding-inline-end: 3.25rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--rule-strong);
+  font-size: 1rem;
+}
+
+/* ---- from the former niarim-game-site.css ---- */
+/* Google's official badge is shown as is: no frame, shadow or recolouring
+   (Google Play badge guidelines). The PNG carries its own clear space. */
+.nr-play-badge-link {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 10px;
+}
+.nr-play-badge-link:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+.nr-play-badge {
+  display: block;
+  width: auto;
+  height: 72px;
+}
+/* Shared presentation on informational tabs; policy text remains readable. */
+.nr-enhanced .site-header {
+  background: #fffbfbf5;
+  box-shadow: 0 1px 0 #f1e4e8;
+}
+/* The page openings (.about-hero) are drawn in brand-direction-2026.css:
+   the dark card with a rotated outline square that used to be here is gone. */
+.nr-enhanced .section-head h2 {
+  letter-spacing: -0.025em;
+}
+.nr-enhanced :is(.intro-card, .feature-narrative-block) {
+  border-radius: 13px;
+  box-shadow: 0 8px 25px #2c20300a;
+}
+.nr-enhanced .intro-card {
+  border: 1px solid #eee4e8;
+}
+.nr-enhanced .section-head {
+  margin-bottom: 26px;
+}
+.nr-enhanced :is(a, button):focus-visible {
+  outline: 3px solid #d14871;
+  outline-offset: 3px;
+}
+/* Full-coverage CJK typography for all public content pages.
+   Older headings used a custom Kuramubon subset and paragraphs used a
+   HakkouMincho subset. Their fallback was visibly different *inside words*,
+   especially for new product headings and release-related vocabulary.
+   Keep the original NIARIM brand logo and latin hero wordmark intact. */
+html:lang(ja) body,
+html:lang(ja) body :is(p, li, dt, dd, summary, input, textarea, select, button),
+html:lang(ja) body :is(h1, h2, h3, h4),
+html:lang(ja) body :is(.eyebrow, .badge, .btn, .section-label, .section-kicker),
+html:lang(ja) body :is(.nav-link, .site-nav a, .feature-nav a) {
+  font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Meiryo", system-ui, sans-serif !important;
+}
+html:lang(ja) body :is(h1, h2, h3, h4) {
+  font-synthesis: none;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.4;
+}
+html:lang(ja) body :is(p, li, dt, dd) {
+  font-synthesis: none;
+  letter-spacing: normal;
+  line-height: 1.85;
+}
+html:lang(ja) body .logo,
+html:lang(ja) body .logo * {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+/* Other CJK languages should not fall back through Japanese subset fonts. */
+html:lang(ko) body :is(h1, h2, h3, h4, p, li) {
+  font-family:
+    "Noto Sans CJK KR", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif !important;
+}
+html:lang(zh-Hans) body :is(h1, h2, h3, h4, p, li) {
+  font-family:
+    "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei", "PingFang SC",
+    system-ui, sans-serif !important;
+}
+html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li) {
+  font-family:
+    "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei", "PingFang TC",
+    system-ui, sans-serif !important;
+}
+
+[data-play-store-link][hidden],
+[data-play-release-only][hidden] {
+  display: none !important;
+}
+@media (min-width: 901px) {
+  /* Let whole navigation items wrap when a translation needs more space.
+   Applies to every page (it was limited to the top page, body.nr-site, so
+   French and Spanish items broke inside a word on the other pages at
+   1181-1280px). */
+  html body .site-header .main-nav > ul {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 4px;
+    /* The space between labels comes from each link's own padding. */
+    column-gap: 0;
+  }
+
+  html body .site-header .main-nav > ul > li,
+  html body .site-header .main-nav > :is(.lang-dropdown, .btn) {
+    flex: none;
+  }
+
+  html body .site-header .main-nav a[data-i18n] {
+    white-space: nowrap;
+  }
+  /* One rhythm for the whole row. With a gap on the list, the 44px minimum
+     box centred short labels ("FAQ", "機能", "소개") in extra space, so the
+     visible space between labels ran from 16px to 42px in one row. Now each
+     link has the same inline padding and the list no gap: the space between
+     any two labels is twice the padding, 12px at 1181px growing to 20px.
+     Korean and Chinese, whose labels are short, use a padding wide enough
+     that no label falls back to the 44px box. (Measured with the web fonts
+     loaded: Kuramubon's Latin letters are wide, so French and Spanish still
+     fold to a second row below 1366px, as they did before; Spanish used to
+     fold at every width.) */
+  html body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: clamp(6px, 1.1vw - 7px, 10px);
+    padding-inline: var(--nav-pad);
+  }
+  html:lang(ko) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: 11px;
+  }
+  /* The header container stops growing at 1320px, so the longest rows keep
+     a narrower ceiling: French 9px, Spanish 6px (one row from 1366px). */
+  html:lang(fr) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: clamp(6px, 1.1vw - 7px, 9px);
+  }
+  html:lang(es) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: 6px;
+  }
+  html:is(:lang(zh-Hans), :lang(zh-Hant))
+    body
+    .site-header
+    .main-nav
+    > ul
+    > li
+    > a:not(.btn) {
+    --nav-pad: 12px;
+  }
+}
+
+/* ---- from the former font-and-capture-2026.css ---- */
+/* NIARIM web typography + screenshot readability (2026-11)
+   Final stylesheet intentionally overrides old Noto Sans fallback rules.
+   Display / navigation / labels: Kuramubon, body / help / notices: HakkouMincho.
+   Both are self-hosted; CJK fallback families remain in variables.css. */
+html body,
+html[lang] body,
+html[lang] body.nr-site {
+  font-family: var(--font-sans) !important;
+}
+html
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    figcaption,
+    small,
+    time,
+    textarea,
+    input,
+    .caption,
+    .description,
+    .notice,
+    .legal-content,
+    .nr-story-copy p,
+    .nr-curated-copy p,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .feature-narrative p,
+    .spec-grid p,
+    .faq-answer,
+    .nr-launch-status
+  ) {
+  font-family: var(--font-sans) !important;
+}
+html
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nr-text-link,
+    .nr-kicker,
+    .eyebrow,
+    .nr-step,
+    .section-label,
+    .section-kicker,
+    .nr-tool-number,
+    .nav-link,
+    .main-nav a,
+    .site-nav a,
+    .feature-nav a,
+    .community-tabs button,
+    [role="tab"],
+    .tab,
+    .tabs a,
+    .faq-question,
+    .nr-gallery-meta h3,
+    .nr-store-label
+  ) {
+  font-family: var(--font-serif) !important;
+}
+/* Override the older html:lang(ja) and language-specific Noto Sans
+   !important selectors: an unqualified html body rule is not specific enough. */
+html[lang]
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nr-kicker,
+    .nr-step,
+    .nr-text-link,
+    .eyebrow,
+    .section-label,
+    .section-kicker,
+    .nav-link,
+    .main-nav a,
+    .site-nav a,
+    .feature-nav a,
+    .community-tabs button,
+    [role="tab"],
+    .tab,
+    .tabs a,
+    .faq-question
+  ),
+html[lang]
+  body.nr-site
+  .nr-main
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    button,
+    .nr-kicker,
+    .nr-step,
+    .nr-text-link,
+    .nr-tool-number,
+    .nr-store-label,
+    [role="tab"],
+    .tab
+  ) {
+  font-family: var(--font-serif) !important;
+}
+html[lang]
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    figcaption,
+    small,
+    time,
+    textarea,
+    input,
+    .caption,
+    .description,
+    .notice,
+    .legal-content,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .feature-narrative p,
+    .spec-grid p,
+    .faq-answer,
+    .nr-launch-status
+  ),
+html[lang]
+  body.nr-site
+  .nr-main
+  :is(
+    p,
+    li,
+    dd,
+    small,
+    .nr-story-copy p,
+    .nr-curated-copy p,
+    .nr-gallery-description,
+    .nr-gallery-note,
+    .nr-launch-status
+  ) {
+  font-family: var(--font-sans) !important;
+}
+/* Capture geometry is responsive, but never distort either source device. */
+html body .nr-shot:not(.nr-shot--pc),
+html body .feature-diagram--real:not(.feature-diagram--pc) {
+  aspect-ratio: 320 / 569;
+  max-width: 100%;
+}
+html body .nr-shot--pc,
+html body .feature-diagram--pc {
+  aspect-ratio: 1440 / 900 !important;
+  max-width: 100%;
+}
+html body :is(.nr-shot, .feature-diagram--real) :is(picture, img) {
+  display: block;
+  max-width: 100%;
+}
+html body .nr-shot img,
+html body .feature-diagram--real img {
+  object-fit: contain;
+}
+
+/* ---- from the former brand-direction-2026.css ---- */
+/* NIARIM art direction — November 2026.
+   A considered editorial product identity, not a recreation of reference sites.
+   All visuals remain the NIARIM app's own UI and branding.
+   Intentionally separate from app-screen fidelity selectors (.fd-*). */
+:root {
+  --nr-ink: var(--color-black, #17161c);
+  --nr-paper: var(--color-bg, #f7f4f3);
+  --nr-accent: var(--color-accent, #ff5c7a);
+  --nr-rule: rgba(40, 36, 44, 0.14);
+  --nr-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+html {
+  scroll-padding-top: calc(var(--header-height, 72px) + 18px);
+}
+body {
+  -webkit-font-smoothing: antialiased;
+}
+body .site-header {
+  z-index: 100;
+  border-bottom: 1px solid var(--nr-rule);
+  background: rgba(250, 247, 246, 0.96);
+  /* Keep filters on ::before: filtering the header itself would turn
+     position:fixed mobile navigation into a header-relative element. */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition:
+    box-shadow 0.28s ease,
+    background-color 0.28s ease;
+}
+body .site-header::before {
+  background: rgba(250, 247, 246, 0.96);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+}
+body.brand-has-scrolled .site-header {
+  background: rgba(250, 247, 246, 0.98);
+  box-shadow: 0 10px 35px rgba(23, 22, 28, 0.055);
+}
+@media (min-width: 901px) {
+  /* Desktop header geometry from the first paint. On the static build the
+   final values (polish.css, responsive-foundation.css) arrive only after the
+   page is shown, so the header changed from a 72px band with a 1220px
+   container and a 40px nav gap to 68px / 1320px / 20px while the page loaded:
+   the row of links wrapped and unwrapped (most of the home page's layout
+   shift on a slow connection). Same values as those layers, so nothing moves
+   when they arrive. */
+  body .site-header {
+    height: auto;
+    min-height: 68px;
+  }
+  body .site-header .container {
+    width: min(calc(100% - 48px), 1320px);
+  }
+  body .site-header .main-nav {
+    gap: 1.25rem;
+  }
+  body .site-header .main-nav > .btn {
+    min-height: 46px;
+    padding-inline: 1.4rem;
+    border-radius: 11px;
+    font-size: 0.82rem;
+  }
+}
+.site-header .brand {
+  transition: opacity 0.25s ease;
+}
+.site-header .brand:hover {
+  opacity: 0.78;
+}
+.site-header .main-nav a:not(.btn) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 7px;
+}
+/* The focus ring uses the text red (#b8264a), like the rest of the page:
+   the accent pink is 2.7:1 on the header, under the 3:1 a focus indicator
+   needs. */
+.site-header .main-nav a:not(.btn):focus-visible,
+.site-header .brand:focus-visible {
+  outline: 2px solid var(--color-accent-text, #b8264a);
+  outline-offset: 5px;
+}
+.brand-reading-progress {
+  position: absolute;
+  z-index: 110;
+  inset: auto 0 0 0;
+  pointer-events: none;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--nr-accent), #e88d8d);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+body .site-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: #f7f4f3;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+body .site-footer .container {
+  position: relative;
+  z-index: 1;
+}
+body .site-footer a {
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+body .site-footer a:hover {
+  color: #ff9ab0;
+}
+body .site-footer a:focus-visible {
+  outline: 2px solid #ff9ab0;
+  outline-offset: 4px;
+}
+/* Page openings — About, FAQ, Premium, Community, Guide, News and the legal
+   pages share one editorial header: on the paper, set from the left edge of
+   the content like the home hero, and closed by one hairline rule (the
+   decorative tick ruler was dropped on 2026-11-24). They used to be three
+   different things: a centred dark card with a rotated outline square
+   (About/FAQ/Premium/Community), a centred title under a pink glow
+   (Guide/News), and a centred legal title above left-aligned articles. */
+body :is(.about-hero, .help-header, .news-header, .legal-header) {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(48px, 6.5vw, 104px) 0 clamp(32px, 3.8vw, 54px);
+  text-align: left;
+  color: inherit;
+  background: linear-gradient(var(--nr-rule), var(--nr-rule)) 0 100% / 100% 1px
+    no-repeat;
+}
+body :is(.about-hero, .help-header, .news-header, .legal-header)::before,
+body :is(.about-hero, .help-header, .news-header, .legal-header)::after {
+  content: none;
+}
+body :is(.about-hero, .help-header, .news-header, .legal-header) h1 {
+  max-width: 18em;
+  margin: 0;
+  /* Below 366px the floor follows the viewport (33.6px at 320px), so the
+     longest single word of a title ("confidentialité", "개인정보처리방침")
+     fits the column without waiting for the script that shrinks headings. */
+  font-size: clamp(min(2.4rem, 10.5vw), 3.6vw + 0.6rem, 3.55rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+body :is(.about-hero, .help-header, .news-header, .legal-header) > p {
+  max-width: 36em;
+  margin: 20px 0 0;
+  color: var(--color-gray-700);
+  text-align: left;
+}
+/* Legal pages read in a 760px column; the header shares its left edge. */
+body .legal-header {
+  max-width: 760px;
+}
+body main :is(.pricing-card, .faq-item, .intro-card, .contact-panel) {
+  box-shadow: none;
+}
+body main :is(.pricing-card, .faq-item, .intro-card, .contact-panel) {
+  border-color: var(--nr-rule);
+}
+body main :is(.pricing-card, .contact-panel) {
+  border-radius: 16px;
+}
+body main :is(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-accent-text, #b8264a);
+  outline-offset: 3px;
+}
+/* Interior layouts retain their existing semantics and app-faithful diagrams. */
+body main .feature-section {
+  scroll-margin-top: 95px;
+}
+body main .feature-section:not(:last-child) {
+  border-bottom-color: var(--nr-rule);
+}
+html body.nr-site .nr-statement h2 {
+  max-width: 850px;
+  margin-bottom: 28px;
+  font-size: clamp(2.35rem, 4.8vw, 4.75rem);
+  line-height: 1.3;
+  letter-spacing: -0.055em;
+}
+html body.nr-site .nr-story-copy h3 {
+  font-size: clamp(1.8rem, 3.15vw, 3.14rem);
+  letter-spacing: -0.047em;
+  line-height: 1.38;
+}
+@media (max-width: 560px) {
+  html body.nr-site .nr-statement h2 {
+    font-size: clamp(2rem, 9.2vw, 3rem);
+  }
+  html body.nr-site .nr-story-copy h3 {
+    font-size: clamp(1.52rem, 7vw, 2.3rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .site-header a,
+  .nr-main a,
+  .nr-main button,
+  .brand-reading-progress {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+  .brand-reading-progress {
+    will-change: auto;
+  }
+}
+
+/* ---- from the former studio-unification-2026.css ---- */
+/* NIARIM / Studio typography & product presentation, November 2026.
+ * No external fonts, JS animation framework or decorative image requests.
+ * The language-specific CJK fallbacks are retained for glyphs that neither
+ * Japanese font covers in Korean/Simplified Chinese translations. */
+:root:lang(ja),
+:root:lang(en),
+:root:lang(fr),
+:root:lang(es) {
+  --font-sans:
+    "HakkouMincho", "HakkouMinchoLatinFallback", "HakkouMinchoCJK",
+    "HakkouMinchoCJKFallback";
+  --font-serif:
+    "Kuramubon", "KuramubonLatinFallback", "KuramubonCJK",
+    "KuramubonCJKFallback";
+}
+html body {
+  font-family: var(--font-sans) !important;
+}
+html
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt,
+    button,
+    .btn,
+    .nr-btn,
+    .nav-toggle,
+    .main-nav a,
+    .site-header .btn,
+    .nr-text-link,
+    .nr-step,
+    .nr-kicker,
+    .eyebrow,
+    .section-kicker,
+    .section-label,
+    .nr-store-label strong,
+    .faq-question,
+    .tab,
+    [role="tab"],
+    .nr-tool-number,
+    .nr-gallery-meta h3,
+    .footer-col h2
+  ) {
+  font-family: var(--font-serif) !important;
+}
+html
+  body
+  :is(
+    p,
+    li,
+    dd,
+    blockquote,
+    small,
+    time,
+    figcaption,
+    label,
+    input,
+    textarea,
+    select,
+    .description,
+    .notice,
+    .caption,
+    .faq-answer,
+    .legal-content,
+    .nr-store-notice,
+    .nr-gallery-description,
+    .nr-plaza-capture figcaption
+  ) {
+  font-family: var(--font-sans) !important;
+}
+/* The actual logomark remains an SVG asset; the typographic wordmark and
+ * decorative letterforms must never fall back to an unrelated Arial face. */
+
+html body .site-footer::before {
+  font-family: var(--font-serif) !important;
+}
+html:lang(ja)
+  body
+  :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .nr-btn,
+    .btn,
+    .main-nav a,
+    .nr-text-link,
+    .nr-gallery-meta h3
+  ) {
+  letter-spacing: 0.012em !important;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  font-kerning: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  html body *,
+  html body *::before,
+  html body *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html:lang(ja) body main :is(h1, h2, h3, h4, h5, h6),
+html:lang(ja) body :is(.footer-col h2, .section-title, .feature-title) {
+  letter-spacing: 0.018em !important;
+  line-height: 1.36;
+  text-wrap: pretty;
+}
+html body .site-header :is(a, button) {
+  -webkit-tap-highlight-color: transparent;
+}
+html body .site-footer :is(p, small, li) {
+  font-family: var(--font-sans) !important;
+}
+html body .site-footer :is(h2, h3) {
+  font-family: var(--font-serif) !important;
+}
+/* Navigation uses Kuramubon; all footer links, including Coins & Missions,
+   use HakkouMincho consistently. Never mix the two faces inside one label. */
+html body .main-nav a[data-i18n="nav.coins"] {
+  font-family: var(--font-serif) !important;
+}
+html body .site-footer .footer-col a {
+  font-family: var(--font-sans) !important;
+}
+/* Exact app-help text is never rewritten merely to fit a heading subset. */
+html body .feature-section [data-help-card] h3,
+html body .coins-main :is(h1, h2, h3),
+html body .coins-main .coins-shortcuts a {
+  font-family: var(--font-display-with-body) !important;
+}
+/* Language-menu labels span Japanese, Chinese and Korean. Restore the
+   bundled micro-fonts; the generic button heading rule must not override them. */
+html body .lang-dropdown :is(.lang-trigger, .lang-menu button) {
+  font-family:
+    "NotoSerifMenuJP", "NotoSerifMenuSC", "NotoSerifMenuKR", var(--font-sans) !important;
+}
+
+/* ---- from the former capture-viewer.css ---- */
+@media (max-width: 600px) {
+  /* Phones: the title takes the first row whole (it was squeezed beside the
+   buttons and broke inside words), previous/next and close share the second.
+   The title never breaks inside a word. */
+  .capture-viewer .capture-bar h2 {
+    flex-basis: 100%;
+    font-size: 1.125rem;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+
+/* ---- from the former visual-finish.css ---- */
+
+.feature-nav a:hover {
+  background: rgba(255, 92, 122, 0.075);
+  color: var(--color-ink);
+}
+@media (max-width: 640px) {
+  /* The footer rules that lived here (a pink glow that a later layer always
+   hid, card boxes around each list, 44px link targets, a narrower grid gap)
+   are gone or moved to common.css: this file is not loaded on the home page,
+   so every other page had a different footer from the top page. */
+  .section {
+    padding-block: 4rem;
+  }
+
+  .section-head {
+    margin-bottom: 1.8rem;
+  }
+}
+
+/* ---- from the former site.css ---- */
 /*
  * Shared parts of the 2026-11 redesign (paper, ink and red pencil), loaded
  * on every page after the page's own stylesheets. Colours come only from
  * the tokens in variables.css.
  */
-
 /* ---- Header: the release link is quiet, so that each page's own primary
    action is the only pink fill in the first view. ---- */
 .site-header .main-nav a.nav-release {
@@ -43,7 +3679,6 @@
   outline: 2px solid var(--pencil-ink);
   outline-offset: 3px;
 }
-
 @media (max-width: 900px) {
   html body .site-header .main-nav > a.nav-release {
     align-self: flex-start;
@@ -57,11 +3692,10 @@
     font-size: 0.9375rem;
   }
 }
-
-/* With five items the header stays one row from 901px (the drawer starts at
+@media (min-width: 901px) {
+  /* With five items the header stays one row from 901px (the drawer starts at
    900px). The list must not fold into a second row while the logo side still
    has room. */
-@media (min-width: 901px) {
   html body .site-header .main-nav > ul {
     flex-wrap: nowrap;
   }
@@ -70,7 +3704,6 @@
     white-space: nowrap;
   }
 }
-
 /* A quiet text action: the page has one pink filled action per view,
    others are underlined links in ink. */
 #main .nr-text-link {
@@ -95,7 +3728,6 @@
   outline: 2px solid var(--pencil-ink);
   outline-offset: 3px;
 }
-
 /* ---- Ruled rows: a list of "name | what it does" on the paper, like the
    rows of an exposure sheet. Used for every list of short facts (features'
    tool lists, the plaza's search ways and extra functions) instead of a grid
@@ -136,17 +3768,12 @@
   max-width: 44em;
 }
 
-#main .ruled-rows > * > :not(h3) ~ :not(h3) {
-  margin-top: 10px;
-}
-
 #main .ruled-rows > * > p {
   margin: 0;
   color: var(--ink-2);
   font-size: var(--fs-body);
   line-height: 1.9;
 }
-
 @media (max-width: 760px) {
   #main .ruled-rows > * {
     grid-template-columns: minmax(0, 1fr);
@@ -164,10 +3791,1285 @@
     margin-top: var(--space-xs);
   }
 }
-
 /* ---- The footer follows the last section's own bottom padding (an older
    layer added a 64px margin on top of it, so every page ended in a band of
    bare paper above the footer). ---- */
 html body .site-footer {
   margin-top: 0;
+}
+
+/* ---- from the former polish.css ---- */
+/* ========================================================================
+   NIARIM site-wide visual polish
+   Referoの複数デザインシステムから「設計原理」だけを抽出し、NIARIM向けに
+   再構成した最終オーバーライド。既存ページ固有CSSの後に main.js から読み込む。
+   ======================================================================== */
+/* ---- Canvas / reading rhythm ---- */
+html {
+  scroll-padding-top: calc(var(--header-height) + 28px);
+}
+
+body {
+  background:
+    radial-gradient(
+      900px 520px at 8% -8%,
+      rgba(255, 92, 122, 0.055),
+      transparent 68%
+    ),
+    radial-gradient(
+      760px 500px at 96% 20%,
+      rgba(255, 173, 102, 0.045),
+      transparent 70%
+    ),
+    var(--color-bg);
+}
+
+main {
+  overflow: clip;
+}
+
+::selection {
+  background: rgba(255, 92, 122, 0.2);
+  color: var(--color-ink);
+}
+@media (min-width: 901px) {
+  /* ---- Floating editorial header: desktop only ---- */
+  .site-header {
+    top: 10px;
+    width: min(calc(100% - 24px), 1400px);
+    height: 64px;
+    margin-inline: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    box-shadow: 0 8px 26px rgba(40, 36, 44, 0.045);
+  }
+
+  .site-header::before {
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(150%) blur(18px);
+    -webkit-backdrop-filter: saturate(150%) blur(18px);
+  }
+
+  .site-header.is-scrolled {
+    border-color: var(--color-border-strong);
+    box-shadow: 0 14px 42px rgba(40, 36, 44, 0.09);
+  }
+
+  .site-header .container {
+    width: min(100% - 32px, 1328px);
+  }
+
+  .main-nav {
+    gap: 1.25rem;
+  }
+
+  .main-nav > ul {
+    gap: 1.05rem;
+  }
+
+  .main-nav a {
+    font-size: 0.82rem;
+  }
+}
+/* ---- Interaction language ---- */
+.btn {
+  position: relative;
+  border-width: 1px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary,
+.btn-accent {
+  box-shadow: 0 8px 22px rgba(40, 36, 44, 0.1);
+}
+
+.btn-primary::before,
+.btn-accent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.17) 48%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 560ms var(--ease-out);
+}
+
+.btn-primary:hover::before,
+.btn-accent:hover::before {
+  transform: translateX(120%);
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  /* Focus indication follows the active brand token and remains fully visible. */
+  outline: 3px solid var(--color-accent-text);
+  outline-offset: 3px;
+}
+/* ---- Section system ---- */
+.section {
+  position: relative;
+  padding-block: clamp(4.75rem, 8vw, 7.5rem);
+}
+
+.section-tint {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.16),
+      transparent 18%,
+      transparent 82%,
+      rgba(255, 255, 255, 0.14)
+    ),
+    var(--color-bg-tint);
+  border-block: 1px solid rgba(255, 92, 122, 0.07);
+}
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: clamp(2.25rem, 5vw, 4rem);
+}
+
+.section-head h2,
+.feature-section-head h2 {
+  letter-spacing: -0.018em;
+}
+
+.section-head h2 {
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 1.18;
+}
+/* ---- Home hero: clearer hierarchy + product-first composition ---- */
+.hero {
+  min-height: min(850px, calc(100svh - 34px));
+  display: grid;
+  align-items: center;
+  padding-top: clamp(6.5rem, 11vw, 9rem);
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+  background:
+    radial-gradient(
+      70% 70% at 86% 12%,
+      rgba(255, 92, 122, 0.15),
+      transparent 66%
+    ),
+    radial-gradient(
+      55% 65% at 7% 94%,
+      rgba(255, 173, 102, 0.1),
+      transparent 68%
+    ),
+    var(--color-bg);
+}
+
+.hero::before {
+  opacity: 0.58;
+  background-size: 32px 32px;
+  mask-image: radial-gradient(68% 70% at 50% 32%, black 0%, transparent 78%);
+}
+
+.hero .container {
+  grid-template-columns: minmax(0, 0.92fr) minmax(440px, 1.08fr);
+  gap: clamp(3rem, 7vw, 6.5rem);
+}
+/* ---- Home information cards ---- */
+.intro-grid {
+  gap: 1rem;
+}
+
+.intro-card {
+  position: relative;
+  min-height: 100%;
+  padding: clamp(1.5rem, 2.6vw, 2.35rem);
+  background: rgba(255, 255, 255, 0.86);
+  border-color: var(--color-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+
+.intro-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -54px;
+  bottom: -62px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 92, 122, 0.09),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.intro-card .icon {
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 8px 24px rgba(255, 92, 122, 0.18);
+}
+/* ---- Shared page heroes ---- */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  position: relative;
+  padding-block: clamp(5.5rem, 10vw, 8rem) clamp(3.5rem, 7vw, 5rem);
+  background:
+    radial-gradient(
+      520px 280px at 50% 0%,
+      rgba(255, 92, 122, 0.1),
+      transparent 72%
+    ),
+    transparent;
+}
+
+:where(
+    .about-hero,
+    .features-header,
+    .help-header,
+    .faq-header,
+    .news-header,
+    .legal-header
+  )
+  h1 {
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+/* ---- Feature index ---- */
+.feature-nav {
+  top: calc(var(--header-height) + 16px);
+  width: min(calc(100% - 24px), 1120px);
+  margin-inline: auto;
+  margin-bottom: 2rem;
+  padding: 0.72rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 10px 34px rgba(40, 36, 44, 0.055);
+}
+
+.feature-nav a {
+  border-color: transparent;
+  background: rgba(40, 36, 44, 0.035);
+}
+
+.feature-section {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.feature-section-head {
+  margin-bottom: 2rem;
+}
+
+.spec-grid {
+  gap: 0.85rem;
+}
+
+.spec-item {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: var(--color-border);
+}
+/* ---- About / legal / utility surfaces ---- */
+.about-name,
+.about-not-supported,
+.contact-personal-note {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: var(--color-border);
+}
+/* ---- Contact: calm split editorial form ---- */
+.contact-panel {
+  position: relative;
+  background:
+    radial-gradient(
+      520px 300px at 0% 0%,
+      rgba(255, 92, 122, 0.08),
+      transparent 70%
+    ),
+    rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--color-border);
+}
+
+.contact-form {
+  border-radius: 20px;
+  box-shadow: 0 18px 54px rgba(40, 36, 44, 0.075);
+}
+
+.about-name,
+.about-not-supported {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.about-cta {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      480px 220px at 15% 0%,
+      rgba(255, 92, 122, 0.18),
+      transparent 70%
+    ),
+    linear-gradient(145deg, #24212a, #322f42 62%, #201e29);
+  box-shadow: 0 28px 70px rgba(40, 36, 44, 0.15);
+}
+/* ---- FAQ / news / help generic refinement ---- */
+.faq-item {
+  border-color: var(--color-border);
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.pricing-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.pricing-card.is-premium::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -100px;
+  bottom: -120px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+/* ---- Footer as a distinct final island ---- */
+.site-footer {
+  position: relative;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  background:
+    radial-gradient(
+      620px 260px at 10% 0%,
+      rgba(255, 92, 122, 0.12),
+      transparent 72%
+    ),
+    var(--color-ink);
+}
+@media (max-width: 900px) {
+  /* The footer runs square to the edges: a 32px rounded "island" top was the
+   only element on the site rounded that far (DESIGN.md 5). */
+  /* ---- Responsive: deliberately recompose, don't just shrink ---- */
+  .site-header {
+    border-bottom-color: var(--color-border);
+  }
+
+  .site-header::before {
+    background: rgba(247, 244, 243, 0.9);
+  }
+
+  .feature-nav {
+    top: var(--header-height);
+    width: 100%;
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-top: clamp(4.5rem, 12vw, 6rem);
+  }
+
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 3.25rem;
+  }
+}
+@media (max-width: 640px) {
+  .section {
+    padding-block: 4.25rem;
+  }
+
+  .container {
+    width: min(100% - 2.25rem, var(--container-width));
+  }
+
+  .hero {
+    padding-top: 3.75rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .hero .container {
+    gap: 2.6rem;
+  }
+
+  .feature-nav {
+    padding: 0.6rem var(--container-padding);
+    box-shadow: 0 8px 24px rgba(40, 36, 44, 0.05);
+  }
+
+  .feature-nav a {
+    padding: 0.48rem 0.9rem;
+  }
+
+  .pricing-card,
+  .contact-form {
+    padding: 1.4rem;
+    border-radius: 16px;
+  }
+
+  .section-head {
+    margin-bottom: 2rem;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.85rem, 9vw, 2.55rem);
+  }
+
+  .intro-card {
+    padding: 1.45rem;
+  }
+
+  .site-footer {
+    margin-top: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::before,
+  .btn-accent::before {
+    display: none;
+  }
+}
+/* ---- Performance: expensive always-on effectsを静的な奥行きへ置き換える ---- */
+.site-header::before,
+.feature-nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-header::before {
+  background: rgba(250, 248, 249, 0.96);
+}
+/* backdrop-filter を切っている以上、半透明のままだと下の文字が
+   ぼけずに透けてしまう。ヘッダーと同じく不透明で塗る。 */
+.feature-nav {
+  background: #ffffff;
+}
+@supports (content-visibility: auto) {
+  /* 画面外の大きなセクションは必要になるまで描画を遅延。非対応ブラウザでは通常表示。 */
+  .section,
+  .feature-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+  /* ページ内リンクを押した時点で見積りをやめ、実寸で並べ直す
+     （main.js の initAnchorNav が is-anchor-nav を付ける）。
+     見積りのままだと目的の見出しより手前で止まってしまうため。 */
+  html.is-anchor-nav .section,
+  html.is-anchor-nav .feature-section {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
+  }
+}
+
+/* ---- from the former responsive-foundation.css ---- */
+/* ========================================================================== 
+   NIARIM final responsive / brand-quality layer
+   - PC/SPで必要な差だけを残す
+   - NIARIMの色・Kuramubon・フレーム/タイムライン感を優先
+   - JSを増やさず、現代CSSで軽量に品質を上げる
+   ========================================================================== */
+
+:root {
+  --color-footer-brown: #3b2429;
+  --niarim-paper: #fffaf8;
+  --niarim-surface: #fffdfc;
+  --niarim-soft: #f8f3f1;
+  --niarim-ink: #28242c;
+  --niarim-muted: #746d71;
+  --niarim-line: rgba(59, 36, 41, 0.14);
+  --niarim-line-strong: rgba(59, 36, 41, 0.24);
+  --niarim-accent-soft: rgba(255, 92, 122, 0.08);
+  --niarim-accent-faint: rgba(255, 92, 122, 0.045);
+  /* DESIGN.md 5: standard cards 14px. */
+  --niarim-radius: 14px;
+  --niarim-device-radius: 22px;
+  --niarim-shadow-soft: 0 16px 44px rgba(59, 36, 41, 0.075);
+}
+/* One flat canvas, the DESIGN.md page colour (#f7f4f3) the home page
+   already uses. The three pink/brown glows that were painted across the body
+   of every other page were haze without a subject. */
+body {
+  background: var(--color-bg);
+}
+
+main {
+  background: transparent;
+}
+
+.section:not(.section-tint):not(.section-dark),
+.hero,
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  background-color: transparent;
+}
+
+.section-tint {
+  background: rgba(248, 243, 241, 0.88);
+  border-block: 1px solid var(--niarim-line);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--niarim-line);
+  box-shadow: none;
+}
+/* ヘッダーは不透明にする。
+   backdrop-filter（すりガラス）は負荷が高いため polish.css で無効にしてある。
+   ぼかしが無いまま半透明にすると、背後の本文やボタンがそのまま薄く透けて
+   帯が汚れて見えるだけで、意匠上の利点が無い（スクロール時に
+   ヒーローのボタンや画面図がヘッダーへ滲んで見えていた）。 */
+.site-header::before {
+  background: #fffaf8;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+@media (min-width: 901px) {
+  .site-header {
+    top: 0;
+    width: 100%;
+    height: auto;
+    min-height: 68px;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid var(--niarim-line);
+    border-radius: 0;
+  }
+  .site-header::before {
+    border-radius: 0;
+  }
+  .site-header.is-scrolled {
+    border-color: var(--niarim-line-strong);
+    box-shadow: 0 8px 24px rgba(59, 36, 41, 0.045);
+  }
+  .site-header .container {
+    width: min(calc(100% - 48px), 1320px);
+  }
+}
+
+.main-nav a::after {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+:where(h1, h2, h3, h4) {
+  color: var(--color-footer-brown);
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+:where(p, li) {
+  line-height: 1.82;
+}
+:where(p) {
+  text-wrap: pretty;
+}
+
+.pricing-card.is-premium :where(h1, h2, h3, h4),
+.about-cta :where(h1, h2, h3, h4),
+.site-footer :where(h1, h2, h3, h4) {
+  color: #fff;
+}
+
+.section-head,
+.feature-section-head {
+  position: relative;
+  z-index: 0;
+}
+
+.section-head::before,
+.feature-section-head::before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 8px;
+  margin-bottom: 0.9rem;
+  /* .feature-section-head は display:flex なので、この飾りも横並びの
+     1要素になってしまい、機能ページ・使い方ガイドだけ見出しが飾りの
+     右に並んでいた。トップと同じく飾りの下で改行させる。
+     箱は1行ぶん占めるが、塗りは42pxで止める。 */
+  flex: 0 0 100%;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0 10px,
+    transparent 10px 15px,
+    rgba(255, 92, 122, 0.48) 15px 25px,
+    transparent 25px 30px,
+    rgba(59, 36, 41, 0.28) 30px 40px
+  );
+  /* 箱は1行ぶん占めるが、塗りは42pxで止める。
+     background ショートハンドが size/repeat を初期化するため、
+     この2行は必ずショートハンドより後ろに置く。 */
+  background-repeat: no-repeat;
+  background-size: 42px 8px;
+}
+/* Section headings carry their label (.eyebrow, a rule and capitals) and
+   nothing else: the pale pink panel that sat behind them was offset from
+   centred headings, and the three-segment mark above duplicated the
+   label's rule. The mark stays on feature/help category headings, which
+   have no label. */
+.section-head::before {
+  content: none;
+}
+
+.btn {
+  min-height: 46px;
+  padding-inline: 1.4rem;
+  border-radius: 11px;
+  box-shadow: none;
+  font-weight: 650;
+}
+
+.btn::before {
+  display: none !important;
+}
+.btn-primary,
+.btn-accent {
+  box-shadow: 0 7px 18px rgba(255, 92, 122, 0.16);
+}
+
+.hero {
+  min-height: auto;
+  padding-top: clamp(7rem, 10vw, 9.2rem);
+  padding-bottom: clamp(4.8rem, 7vw, 6.8rem);
+  border-bottom: 1px solid var(--niarim-line);
+}
+.hero::before {
+  content: none;
+  display: none;
+}
+.hero .container {
+  grid-template-columns: minmax(0, 0.92fr) minmax(390px, 1.08fr);
+  gap: clamp(3rem, 7vw, 7rem);
+}
+.hero-visual-reuse {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-inline: auto;
+  justify-self: center;
+}
+
+.section {
+  padding-block: clamp(4.25rem, 7vw, 6.75rem);
+}
+.section-head {
+  max-width: 760px;
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+.section-head h2 {
+  font-size: clamp(2rem, 3.4vw, 3.05rem);
+  line-height: 1.13;
+}
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+) {
+  max-width: 760px;
+  padding-block: clamp(6.5rem, 10vw, 8rem) clamp(3rem, 5vw, 4.5rem);
+}
+:where(
+    .about-hero,
+    .features-header,
+    .help-header,
+    .faq-header,
+    .news-header,
+    .legal-header
+  )
+  h1 {
+  font-size: clamp(2.75rem, 5.2vw, 5.05rem);
+  line-height: 1.03;
+}
+
+.intro-card,
+.spec-item,
+.pricing-card,
+.faq-item,
+.contact-panel,
+.about-name,
+.about-not-supported,
+.contact-personal-note {
+  border-color: var(--niarim-line);
+  border-radius: var(--niarim-radius);
+}
+.intro-card,
+.spec-item,
+.pricing-card,
+.faq-item {
+  background: rgba(255, 253, 252, 0.94);
+}
+.intro-card,
+.faq-item {
+  box-shadow: 0 10px 28px rgba(59, 36, 41, 0.045);
+}
+
+.feature-nav {
+  top: calc(var(--header-height) + 10px);
+  /* The full width of the content column, so the rail's edges line up with
+     the header, the search field and the lists (it was inset 40px at 1440px
+     and 12px on phones). */
+  width: 100%;
+  padding: 0.55rem;
+  border: 1px solid var(--niarim-line);
+  border-radius: 12px;
+  background: #fffaf8;
+  box-shadow: 0 10px 28px rgba(59, 36, 41, 0.045);
+}
+.feature-nav a {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--niarim-muted);
+}
+.feature-nav a:hover {
+  background: var(--niarim-accent-soft);
+  color: var(--color-footer-brown);
+}
+.feature-section {
+  padding-block: clamp(3.25rem, 5.5vw, 5rem);
+  border-bottom: 1px solid var(--niarim-line);
+}
+.intro-card {
+  position: relative;
+  overflow: hidden;
+}
+/* Cards are a hairline and a surface (DESIGN.md 7); the 3px pink edge on
+   every card spent the accent on repetition. */
+.intro-card::before {
+  content: none;
+}
+.intro-card::after,
+.pricing-card.is-premium::after {
+  content: none;
+  display: none;
+}
+.spec-grid {
+  gap: 0.8rem;
+}
+.spec-item {
+  padding: clamp(1.15rem, 2vw, 1.6rem);
+}
+/* Same as .intro-card: no pink edge on every card. */
+.spec-item::before {
+  content: none;
+}
+input,
+textarea,
+select {
+  border-radius: 11px;
+  border-color: var(--niarim-line-strong);
+  background: var(--niarim-surface);
+  box-shadow: none;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(255, 92, 122, 0.1);
+}
+.about-cta {
+  background: var(--niarim-ink);
+  box-shadow: none;
+}
+.site-footer {
+  /* The one dark surface of the site, in the ink of the text. */
+  background: var(--ink) !important;
+  background-image: none !important;
+}
+@supports (color: color-mix(in srgb, white 50%, black)) {
+  .section-tint {
+    background: color-mix(
+      in srgb,
+      var(--niarim-paper) 76%,
+      var(--color-footer-brown) 4%
+    );
+  }
+  .intro-card,
+  .faq-item {
+    border-color: color-mix(
+      in srgb,
+      var(--color-footer-brown) 14%,
+      transparent
+    );
+  }
+  .feature-nav a:hover {
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
+}
+@supports (content-visibility: auto) {
+  .feature-section,
+  .community-gallery,
+  .faq-list {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid rgba(255, 92, 122, 0.28);
+  outline-offset: 3px;
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* タブレット帯では機能タブが折り返して、2行目が1個だけの「孤児」に
+   なりやすい（834pxで8個＋1個）。ピルの左右の余白と間隔をわずかに
+   詰めて、この帯でも1行に収まるようにする。収まらない言語では従来
+   どおり折り返す。 */
+  .feature-nav {
+    gap: 0.35rem;
+  }
+  .feature-nav a {
+    padding: 0.5rem 0.78rem;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  /* タブレット帯（641〜900px）。ヒーローは1カラムに畳まれるが、本文は
+   読みやすい行長で止めているため、左寄せのままだと画面の右半分が
+   まるごと空いて「置き忘れ」のように見える。文章そのものは左寄せの
+   まま、カラムごと中央に置く（引用ブロックの左罫線の意味も保てる）。
+   640px以下は別途モバイル専用の構成があるため対象外。 */
+  .hero .container {
+    justify-items: center;
+  }
+}
+@media (max-width: 900px) {
+  .hero {
+    padding-top: 6.2rem;
+    padding-bottom: 4.25rem;
+  }
+  .hero .container {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+  }
+  .hero-visual-reuse {
+    width: min(100%, 340px);
+  }
+  .section {
+    padding-block: 4rem;
+  }
+  .feature-nav {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+}
+@media (max-width: 860px) {
+  /* メニューを開いているあいだは、ヘッダーとメニューを一続きの面として
+   見せる。境界線が残っていると、同じ色にしても細い隙間のように見える。 */
+  .site-header:has(.main-nav.is-open) {
+    border-bottom-color: transparent;
+  }
+}
+
+/* ---- from the former manual-visual-audit-continuation.css ---- */
+
+html
+  body
+  :is(
+    .feature-section,
+    .feature-section-head,
+    .feature-media,
+    .feature-diagram,
+    .screenshot-card
+  ) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+/* 赤系のボタンは、ロゴでも使っているテーマカラーの明るいピンク
+   (--color-accent = #ff5c7a) を不透明で敷き、文字は白（利用者の指示）。
+   ロゴ（favicon.svg）も同じ #FF5C7A の面に白抜きなので、面と文字の
+   組み合わせはロゴと揃う。 */
+html body .btn.btn-primary,
+html body .btn.btn-accent,
+html body .scroll-top-btn,
+html body .community-tabs button.is-active {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+html body .btn.btn-primary:hover,
+html body .btn.btn-accent:hover,
+html body .scroll-top-btn:hover,
+html body .community-tabs button.is-active:hover {
+  background: var(--color-accent-dark) !important;
+  border-color: var(--color-accent-dark) !important;
+  color: #fff !important;
+}
+
+html body .btn.is-unavailable {
+  opacity: 1 !important;
+}
+@media (max-width: 640px) {
+  html body .btn {
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+  }
+
+  html body .feature-nav {
+    max-width: 100vw !important;
+    padding-inline: var(--container-padding) !important;
+    scroll-padding-inline: var(--container-padding) !important;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+  html body .feature-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---- from the former screen-mock-contrast-palettes.css ---- */
+html body [data-mock-theme="row1"] {
+  --fd-bezel: #94502f;
+}
+html body [data-mock-theme="row2"] {
+  --fd-bezel: #60429c;
+}
+html body [data-mock-theme="row3"] {
+  --fd-bezel: #8d762d;
+}
+html body [data-mock-theme="row4"] {
+  --fd-bezel: #3b76a0;
+}
+html body [data-mock-theme="row5"] {
+  --fd-bezel: #307653;
+}
+html body [data-mock-theme="shot1"] {
+  --fd-bezel: #245d72;
+}
+html body [data-mock-theme="shot2"] {
+  --fd-bezel: #354d9c;
+}
+html body [data-mock-theme="shot3"] {
+  --fd-bezel: #704499;
+}
+html body [data-mock-theme="shot4"] {
+  --fd-bezel: #a64d83;
+}
+html body [data-mock-theme="shot5"] {
+  --fd-bezel: #8c592b;
+}
+html body [data-mock-theme="shot6"] {
+  --fd-bezel: #a94759;
+}
+/* main.js reuses the hero DOM for the first feature row and first gallery card.
+   The clone keeps data-mock-theme="hero" on itself, which would otherwise beat the
+   row1/shot1 variables inherited from the parent. Force the destination preset onto
+   those reused hero screens so the first card no longer looks like the hero. */
+html body [data-mock-theme="row1"] [data-mock-theme="hero"].hero-visual-reuse {
+  --fd-accent: #ff7b39;
+  --fd-bg: #25150f;
+  --fd-surface: #25150f;
+  --fd-panel: #3c2419;
+  --fd-panel-2: #593522;
+  --fd-text: #fff5ee;
+  --fd-ink: #fff5ee;
+  --fd-muted: #c4b6ae;
+  --fd-bezel: #94502f;
+  --fd-outside: #3b2b25;
+  --fd-accent-fill: #ff7b39;
+  --fd-on-accent: #25150f;
+}
+html body [data-mock-theme="shot1"] [data-mock-theme="hero"].hero-visual-reuse {
+  --fd-accent: #28d7ff;
+  --fd-bg: #101c25;
+  --fd-surface: #101c25;
+  --fd-panel: #17303e;
+  --fd-panel-2: #21495b;
+  --fd-text: #edfaff;
+  --fd-ink: #edfaff;
+  --fd-muted: #adbdc5;
+  --fd-bezel: #245d72;
+  --fd-outside: #26323b;
+  --fd-accent-fill: #28d7ff;
+  --fd-on-accent: #101c25;
+}
+
+/* ---- from the former visual-audit-tail.css ---- */
+/* main.js marks the third cell is-selected in a five-cell strip. Do not use
+   asymmetric padding/scroll offsets: center the row itself. This avoids the
+   previous offset fighting with justify-content and producing misalignment. */
+html body .fd-frame-strip-scroll:has(> .fd-frame-thumb.is-selected) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  scroll-padding-left: 0 !important;
+  scroll-padding-right: 0 !important;
+  justify-content: center !important;
+}
+
+/* ---- from the former mobile-first-view.css ---- */
+@media (max-width: 759px) {
+  /* Mobile first-view composition: show NIARIM's product UI immediately instead of a text-only opening. */
+  /* Keep this compact two-column composition through 759px. At 640px the old
+   breakpoint ended and 641px abruptly fell back to the tall tablet stack,
+   nearly doubling the hero height. 760px is the intentional next composition
+   boundary, so 559/560, 640/641 and 759/760 remain visually deliberate. */
+  .hero {
+    padding-top: 1.35rem !important;
+    padding-bottom: 1.15rem !important;
+  }
+
+  .hero .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) clamp(164px, 43vw, 196px) !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
+    column-gap: 0.85rem !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+  }
+}
+@media (max-width: 360px) {
+  .hero {
+    padding-top: 1.2rem !important;
+  }
+
+  .hero .container {
+    grid-template-columns: minmax(0, 1fr) 146px !important;
+    column-gap: 0.58rem !important;
+  }
+}
+
+/* ---- from the former theme-accent-only.css ---- */
+/* Final brand guard: all legacy strong/dark accent aliases and interactive surfaces resolve to the active theme accent only. */
+:root {
+  --color-accent-strong: var(--color-accent);
+  --color-accent-strong-dark: var(--color-accent);
+}
+
+html
+  body
+  :is(
+    .btn.btn-primary,
+    .btn.btn-accent,
+    .hero .hero-actions .btn.btn-primary,
+    .final-cta .hero-actions .btn.btn-primary,
+    .download-actions .btn.btn-primary,
+    .download-actions .btn.btn-accent,
+    .scroll-top-btn,
+    .community-tabs button.is-active
+  ) {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+html
+  body
+  :is(
+    .btn.btn-primary,
+    .btn.btn-accent,
+    .hero .hero-actions .btn.btn-primary,
+    .final-cta .hero-actions .btn.btn-primary,
+    .download-actions .btn.btn-primary,
+    .download-actions .btn.btn-accent,
+    .scroll-top-btn,
+    .community-tabs button.is-active
+  ):hover {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* ---- from the former home-hero-responsive-final.css ---- */
+@media (max-width: 559px) {
+  /* Final responsive ownership for the Home hero.
+   Loaded after the legacy fidelity/fit layers. These rules intentionally own
+   the structural breakpoints so older display:contents/grid-row overrides do
+   not leak across viewport bands. Audit thresholds stay in tests, not here. */
+  html body .hero {
+    padding-top: clamp(0.9rem, 3.4vw, 1.2rem) !important;
+    padding-bottom: clamp(0.8rem, 3vw, 1.05rem) !important;
+  }
+
+  html body .hero .container {
+    position: relative !important;
+    width: calc(100% - 1.5rem) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(112px, 38%) !important;
+    grid-template-rows: auto auto auto auto auto auto !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    column-gap: clamp(0.55rem, 2.6vw, 0.8rem) !important;
+    row-gap: clamp(0.42rem, 1.8vw, 0.62rem) !important;
+  }
+}
+@media (max-width: 339px) {
+  html body .hero .container {
+    width: calc(100% - 1.1rem) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(104px, 37%) !important;
+    column-gap: 0.48rem !important;
+    row-gap: 0.38rem !important;
+  }
+}
+@media (min-width: 560px) and (max-width: 732px) {
+  html body .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
+  }
+
+  html body .hero .container {
+    width: calc(100% - 2rem) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.28fr) minmax(150px, 0.72fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+}
+@media (min-width: 733px) and (max-width: 759px) {
+  /* 733–759px is a deliberate transition band: keep one preview card, but
+   let it grow before the two-card tablet composition begins at 760px. */
+  html body .hero {
+    padding-top: clamp(1.75rem, 4vw, 2.25rem) !important;
+    padding-bottom: clamp(1.6rem, 3.6vw, 2.05rem) !important;
+  }
+
+  html body .hero .container {
+    width: calc(100% - 2rem) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.72fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1rem, 2.6vw, 1.5rem) !important;
+  }
+}
+@media (min-width: 760px) and (max-width: 1023px) {
+  html body .hero {
+    padding-top: clamp(2.15rem, 3.8vw, 2.8rem) !important;
+    padding-bottom: clamp(2rem, 3.4vw, 2.6rem) !important;
+  }
+
+  html body .hero .container {
+    width: min(calc(100% - 2rem), 1360px) !important;
+    display: grid !important;
+    /* Two cards need room, but 320px at the first tablet pixel caused both the
+       copy and artwork to jump. 300px still gives two readable ~147px cards. */
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr) !important;
+    grid-template-rows: none !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    gap: clamp(1.4rem, 2.8vw, 2.15rem) !important;
+  }
+}
+@media (min-width: 1024px) {
+  html body .hero .container {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 44%) !important;
+    align-items: center !important;
+    gap: clamp(1.5rem, 2.4vw, 2rem) !important;
+  }
+}
+
+/* ---- from the former ui-regression-fixes.css ---- */
+/* User-requested regression fixes.
+   Loaded last from line-break.css so stale fidelity layers cannot reintroduce
+   synthetic controls, misaligned navigation decoration, or oversized consent UI. */
+/* Header navigation underline follows the actual label center instead of the
+   left edge of the 44px minimum hit target. */
+.main-nav a:not(.btn)::after {
+  left: 50% !important;
+  right: auto !important;
+  bottom: 4px !important;
+  width: 0 !important;
+  transform: translateX(-50%) !important;
+  transform-origin: center !important;
+}
+.main-nav a:not(.btn):hover::after,
+.main-nav a:not(.btn)[aria-current]::after {
+  /* --nav-pad: the desktop link padding (niarim-game-site.css). */
+  width: calc(100% - 2 * var(--nav-pad, 0.5rem)) !important;
+}
+@media (max-width: 900px) {
+  /* In the drawer each link is a full-width row with its label on the left,
+   so the current-page mark is a short bar under the start of the label
+   (it ran across the whole row, starting 8px right of the text). */
+  .main-nav a:not(.btn)::after {
+    left: 0 !important;
+    transform: none !important;
+  }
+  .main-nav a:not(.btn):hover::after,
+  .main-nav a:not(.btn)[aria-current]::after {
+    width: 28px !important;
+  }
+}
+
+/* ---- from the former line-break.css ---- */
+/* ---- 単語の途中での改行を防ぐ ---- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+dt,
+dd,
+label,
+.btn,
+.eyebrow,
+a {
+  word-break: auto-phrase !important;
+  line-break: strict;
+}
+
+:root:lang(ko) h1,
+:root:lang(ko) h2,
+:root:lang(ko) h3,
+:root:lang(ko) h4,
+:root:lang(ko) h5,
+:root:lang(ko) h6,
+:root:lang(ko) p,
+:root:lang(ko) li,
+:root:lang(ko) label,
+:root:lang(ko) .btn,
+:root:lang(ko) a {
+  word-break: keep-all !important;
+  overflow-wrap: break-word;
+}
+@media (min-width: 700px) and (max-width: 759px) and (max-height: 680px) {
+  html body .hero {
+    min-height: 518.8px !important;
+    height: 518.8px !important;
+  }
+}
+@media (max-width: 559px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) clamp(128px, 40vw, 146px) !important;
+  }
+}
+@media (min-width: 360px) and (max-width: 559px) {
+  html body .hero .container {
+    grid-template-columns: minmax(0, 1fr) minmax(146px, 50%) !important;
+  }
+}
+/* Explicit session requirements: no decorative stripe above the footer and no
+   synthetic delete/trash affordance beside the Timeline scrubber. Keep these in
+   the last-loaded layer so older visual-polish imports cannot reintroduce them. */
+html body .site-footer::before {
+  content: none !important;
+  display: none !important;
 }

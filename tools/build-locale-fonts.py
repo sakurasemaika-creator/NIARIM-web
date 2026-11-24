@@ -40,7 +40,10 @@ def main():
     arguments = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     font_dir = root / "public/assets/fonts"
-    sheet = root / "public/css/common-base.css"
+    sheet = root / "public/css/site.css"
+    # The standalone pages (404, account deletion, font licenses) do not load
+    # site.css; they carry the same generated @font-face block.
+    standalone = [root / "public/css/pages" / name for name in ("404.css", "account-deletion.css", "font-licenses.css")]
     css = sheet.read_text(encoding="utf-8")
     supplements = json.loads((root / "tools/locale-font-characters.json").read_text(encoding="utf-8"))
 
@@ -122,7 +125,7 @@ def main():
             marker = "/* === END generated font-face === */"
             css = css.replace(marker, face + marker, 1)
         # The device-font stand-in used until this subset arrives covers exactly
-        # the same characters (common-base.css explains why).
+        # the same characters (site.css explains why).
         fallback = re.compile(
             r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family + "Fallback") + r'";[^}]*?\}'
         )
@@ -132,6 +135,13 @@ def main():
             css = css[:stand_in.start()] + updated + css[stand_in.end():]
         print(f"{family}: {len(actual)} characters, {target.stat().st_size:,} bytes")
     sheet.write_text(css, encoding="utf-8")
+    begin, end = "/* === BEGIN generated font-face", "/* === END generated font-face === */"
+    block = css[css.index(begin) : css.index(end) + len(end)]
+    for page in standalone:
+        text = page.read_text(encoding="utf-8")
+        if begin in text:
+            text = text[: text.index(begin)] + block + text[text.index(end) + len(end) :]
+            page.write_text(text, encoding="utf-8")
     manifest_file.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
 

@@ -20,7 +20,7 @@ NIARIMは、AIが自動で作品を生成するアプリではありません。
 本サイトのロゴ・プライバシーポリシー・利用規約・機能紹介は、NIARIMアプリ本体リポジトリ（`sakurasemaika-creator/NIARIM`、`dev_branch`）の実データを確認したうえで反映しています。
 
 - **ロゴ**: `public/assets/images/logo/app_logo.svg` は、アプリリポジトリの `assets/logo/app_logo.svg` をそのまま使用しています（favicon も同一データ）。
-- **配色**: `public/css/variables.css` のブランドカラーは、アプリのデフォルトUIテーマ（`lib/models/app_theme_preset.dart` の `accentColor #FF5C7A`）およびロゴの配色（`#4A4636`）に合わせています。
+- **配色**: `public/css/site.css` のトークン（もとの variables.css）のブランドカラーは、アプリのデフォルトUIテーマ（`lib/models/app_theme_preset.dart` の `accentColor #FF5C7A`）およびロゴの配色（`#4A4636`）に合わせています。
 - **プライバシーポリシー・利用規約**: `public/js/i18n-dict-legal.js` に、アプリ本体の `lib/l10n/app_*.arb`（7言語）に定義されている実際の条文をそのまま転記しています。アプリ側で既にAI翻訳・逆翻訳照合を経ていますが、専門家（弁護士等）による正式な法的確認は経ていない点はアプリ側と同様です。プライバシーポリシー第9条（お問い合わせ）のみ、アプリ側では連絡先未確定のプレースホルダーのままですが、本サイトには実際に機能するお問い合わせフォームがあるため、そちらへ案内する文言に差し替えています。
 - **機能紹介**: `public/js/i18n-dict-advanced.js` に、アプリの `lib/engine/`・`lib/models/` に実装が確認できる機能（オニオンスキン・トーン・スタンプ・定規・テキスト・フィルター・フォント管理・ウォーターマーク）を追加しています。逆に、コミュニティ（作品共有）機能はUI・ダミーデータのみでバックエンド未実装であることを確認したため、既存の通り「[要確認]」のままとし、実装済みと断定していません。
 - **FAQの訂正**: `public/js/i18n-dict-faq-fix.js` にて、当初「[要確認]」としていた2項目を、アプリの実データに基づき確定情報へ更新しました。
@@ -66,8 +66,8 @@ NIARIM-web/
 │   │   ├── icons/              # favicon.svg / apple-touch-icon.png
 │   │   └── fonts/
 │   ├── css/
-│   │   ├── reset.css / variables.css / common.css
-│   │   └── pages/ (home.css / contact.css / legal.css / features.css / news.css / about.css / help.css)
+│   │   ├── site.css（全ページ共通）
+│   │   └── pages/（ページごとの1枚：home.css / features.css / legal.css …）
 │   └── js/
 │       ├── config.js           # サイト内の変更可能な値を集約（URL等）
 │       ├── i18n.js              # 多言語切り替えロジック
@@ -90,7 +90,7 @@ NIARIM-web/
 │   ├── contact.js          # /api/contact の処理ロジック（Resend連携）
 │   └── utils.js            # Worker共通ユーティリティ
 ├── tools/                  # 開発用スクリプト（本番配信には含まれない）
-│   ├── build-fonts.py      # フォントのサブセット生成 + common.cssの@font-face更新
+│   ├── build-fonts.py      # フォントのサブセット生成 + site.cssの@font-face更新
 │   ├── measure-serif-chars.js  # 見出しフォントで実際に使う文字の実測（Playwright）
 │   ├── serif-chars.txt     # 上の実測結果（先頭行が対象ファイルの指紋）
 │   └── audit-site.js       # 全ページの回帰チェック（`npm run audit`）

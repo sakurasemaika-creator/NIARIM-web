@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 サイトで実際に使う文字だけを原本フォントから抜き出してwoff2を作り、
-common-base.css の @font-face ブロック（マーカーで囲んだ範囲）を書き換える。
+site.css の @font-face ブロック（マーカーで囲んだ範囲）を書き換え、単独のページのファイルへ写す。
 
 ■ なぜこうしているか
   以前は、サブセットに無い文字を Google Fonts のCDN(fonts.googleapis.com)から
@@ -40,7 +40,13 @@ from font_strays import drop_stray_contours
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "public/assets/fonts")
-CSS = os.path.join(ROOT, "public/css/common-base.css")
+CSS = os.path.join(ROOT, "public/css/site.css")
+# 単独で読み込むページ（404・アカウント削除・フォントのライセンス）は site.css を
+# 読まず、同じ @font-face ブロックを自分のファイルに持つ。書き換えたら写す。
+STANDALONE_CSS = [
+    os.path.join(ROOT, "public/css/pages", name)
+    for name in ("404.css", "account-deletion.css", "font-licenses.css")
+]
 SERIF_CHARS = os.path.join(ROOT, "tools/serif-chars.txt")
 BEGIN = "/* === BEGIN generated font-face (tools/build-fonts.py) === */"
 END = "/* === END generated font-face === */"
@@ -91,7 +97,7 @@ FONTS = [
     # 大きいCJKサブセット（合計800KB超）でしか描けない。メニューは全ページの
     # ヘッダーに出るため、英語だけを読む利用者にもその800KBが必ず転送されていた。
     # 白光明朝から該当の数文字だけを切り出した極小フォントを用意し、
-    # メニューのfont-familyはこの極小フォント群だけを指す（common.css参照）。
+    # メニューのfont-familyはこの極小フォント群だけを指す（site.css参照）。
     (
         "NotoSerifMenuJP",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
@@ -179,9 +185,9 @@ def menu_chars():
 def content_fingerprint():
     """サブセット対象になるテキストの指紋。見出し実測結果の鮮度判定に使う。
 
-    common.css の生成ブロック（@font-face）はこのスクリプト自身の出力なので
+    site.css などの生成ブロック（@font-face）はこのスクリプト自身の出力なので
     指紋から除外する。含めてしまうと、ビルドするたびに自分が書き換えた
-    common.css で指紋がずれ、次回必ず「実測結果が古い」と誤判定して
+    CSS で指紋がずれ、次回必ず「実測結果が古い」と誤判定して
     安全側（全文字収録）へ倒れてしまう（＝毎回600KB以上太る）。
     指紋が見るべきなのは「どの文字が必要か」を決める入力だけ。
     """
@@ -193,7 +199,7 @@ def content_fingerprint():
     ):
         for path in sorted(glob.glob(os.path.join(ROOT, pattern), recursive=True)):
             data = open(path, "rb").read()
-            if os.path.abspath(path) == os.path.abspath(CSS):
+            if path.endswith(".css") and BEGIN.encode() in data:
                 text = data.decode("utf-8")
                 i, j = text.find(BEGIN), text.find(END)
                 if i != -1 and j != -1:
@@ -445,7 +451,7 @@ def build():
                 # font-familyのスタックからCJK側を外せる（variables.css参照）。
                 # Latin faces swap (never left in a device font, owner's rule);
                 # the metric-matched *LatinFallback faces after the generated
-                # block in common-base.css keep the swap from moving text.
+                # block in site.css keep the swap from moving text.
                 for out_name, out_dst, out_family, display in (
                     (latin_out, latin_dst, family, "swap"),
                     (outname, rest_dst, family + "CJK", "swap"),
@@ -536,6 +542,24 @@ def build():
         )
     open(CSS, "w", encoding="utf-8").write(css)
     print(f"  {os.path.basename(CSS)} の @font-face を更新")
+    copy_font_block(css)
+
+
+def copy_font_block(css):
+    """site.css の生成ブロックを、単独のページのファイルへそのまま写す。"""
+    block = re.search(re.escape(BEGIN) + r".*?" + re.escape(END), css, flags=re.S)
+    for path in STANDALONE_CSS:
+        text = open(path, encoding="utf-8").read()
+        if BEGIN not in text:
+            continue
+        text = re.sub(
+            re.escape(BEGIN) + r".*?" + re.escape(END),
+            lambda _: block[0],
+            text,
+            flags=re.S,
+        )
+        open(path, "w", encoding="utf-8").write(text)
+        print(f"  pages/{os.path.basename(path)} の @font-face を写した")
 
 
 if __name__ == "__main__":

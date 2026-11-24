@@ -9,17 +9,6 @@
 (function () {
   "use strict";
 
-  function ensureFidelityStyles() {
-    if (document.querySelector("link[data-niarim-feature-fidelity-style]"))
-      return;
-
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "/css/features-fidelity.css";
-    link.setAttribute("data-niarim-feature-fidelity-style", "true");
-    document.head.appendChild(link);
-  }
-
   function syncSaveTreeConnectors() {
     var rows = document.querySelectorAll(
       ".fd-tree-list--bottom-up .fd-tree-row2",
@@ -77,7 +66,6 @@
     ) {
       return;
     }
-    ensureFidelityStyles();
     syncSaveTreeConnectors();
     syncArtworkWidgetSummary();
   }

@@ -62,7 +62,7 @@ NIARIM は手描きアニメーション制作アプリです。サイトも「A
 
 - Body: `HakkouMincho`
 - Heading: `Kuramubon`
-- Fallback は既存 `variables.css` の指定を使用
+- Fallback は既存のトークン（`site.css` の「from the former variables.css」）の指定を使用
 
 ### Hierarchy
 
@@ -266,7 +266,7 @@ UIを新規作成・修正するAIは、実装前後に以下を確認してく�
 
 - `README.md` と `HANDOFF.md` を読んだか
 - この `DESIGN.md` を読んだか
-- `variables.css` の既存トークンを再利用したか
+- `site.css` の既存トークン（もとの variables.css）を再利用したか
 - 新しい色・radius・shadowを勝手に増やしていないか
 - 非クリック要素へhoverを付けていないか
 - 絵文字を追加していないか

@@ -1,3 +1,44 @@
+/* ---- from the former user-request-fixes.css ---- */
+@media (max-width: 900px) {
+  .main-nav {
+    padding: clamp(0.85rem, 3vh, 1.35rem) var(--container-padding) !important;
+  }
+  .main-nav > ul {
+    gap: clamp(0.2rem, 1.1vh, 0.55rem) !important;
+  }
+  .main-nav > ul > li {
+    width: 100% !important;
+  }
+  .main-nav a:not(.btn) {
+    width: 100% !important;
+    /* 44px touch targets in the drawer too (42px before). */
+    min-height: 44px !important;
+    padding-block: 0.25rem !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-dropdown {
+    width: 100% !important;
+    margin-top: 0.35rem !important;
+  }
+  .main-nav .lang-trigger {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-menu button {
+    text-align: left !important;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  /* On tablets the drawer's column keeps a phone-like measure instead of
+   stretching the button and the language field across 940px. */
+  .main-nav > :is(ul, .btn, .lang-dropdown) {
+    width: min(100%, 520px) !important;
+  }
+}
+
+/* ---- from the former pages/news.css ---- */
 /* ==========================================================================
    NIARIM news.css - お知らせページ専用スタイル
    Paper and ink (2026-11 redesign): the news is a ruled list on the paper
@@ -71,7 +112,6 @@
   font-size: 1rem;
   font-weight: 600;
 }
-
 /* Nothing published yet: one plain line in the ruled list. */
 #main .news-empty {
   padding: var(--space-lg) 0;
@@ -83,11 +123,179 @@
   max-width: 46ch;
   line-height: 1.8;
 }
-
 @media (max-width: 640px) {
   #main .news-item {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 0.4rem;
   }
+}
+
+/* ---- from the former screen-mock-accuracy-base.css ---- */
+.hero-visual-reuse {
+  transform: none !important;
+}
+
+/* ---- from the former visual-finish.css ---- */
+/* NIARIM final visual refinement layer */
+/* Keep the finish quiet: stronger hierarchy, cleaner surfaces, and tactile states. */
+:root {
+  --finish-hairline: rgba(40, 36, 44, 0.095);
+  --finish-shadow: 0 18px 50px rgba(40, 36, 44, 0.075);
+  --finish-shadow-hover: 0 22px 58px rgba(40, 36, 44, 0.115);
+}
+/* Navigation: current location should read before hover decoration. */
+.main-nav a[aria-current] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.lang-trigger {
+  background: rgba(255, 255, 255, 0.64);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-trigger:hover {
+  background: #fff;
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent-strong);
+}
+/* Shared inner-page hero gets a subtle bottom transition instead of ending abruptly. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(40, 36, 44, 0.12) 16%,
+    rgba(255, 92, 122, 0.16) 50%,
+    rgba(40, 36, 44, 0.12) 84%,
+    transparent
+  );
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  /* Keep the persistent shortcut useful without covering small-screen content. */
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lang-trigger,
+  .feature-nav a,
+  .faq-item {
+    transition: none;
+  }
+
+  .btn:hover,
+  .lang-trigger:hover,
+  .feature-nav a:hover {
+    transform: none;
+  }
+}
+
+/* ---- from the former manual-visual-audit-fixes.css ---- */
+/* Real-capture gallery cards: the image, not the retired coded-mock phone
+   ratio, owns the content height. Keep the 6px bezel outside that 320:569
+   viewport so frame and capture end on the same vertical edge. */
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 320 / 569 !important;
+}
+
+/* ---- from the former screen-mock-palette.css ---- */
+[data-mock-theme="hero"] {
+  --fd-bezel: #783b4a;
+}
+[data-mock-theme="row1"] {
+  --fd-bezel: #784f3b;
+}
+[data-mock-theme="row2"] {
+  --fd-bezel: #78733b;
+}
+[data-mock-theme="row3"] {
+  --fd-bezel: #59783b;
+}
+[data-mock-theme="row4"] {
+  --fd-bezel: #3b7840;
+}
+[data-mock-theme="row5"] {
+  --fd-bezel: #3b7863;
+}
+[data-mock-theme="shot1"] {
+  --fd-bezel: #3b6878;
+}
+[data-mock-theme="shot2"] {
+  --fd-bezel: #3b4778;
+}
+[data-mock-theme="shot3"] {
+  --fd-bezel: #4d3b78;
+}
+[data-mock-theme="shot4"] {
+  --fd-bezel: #683b78;
+}
+[data-mock-theme="shot5"] {
+  --fd-bezel: #783b6d;
+}
+[data-mock-theme="shot6"] {
+  --fd-bezel: #783b59;
+}
+
+/* ---- from the former screen-mock-layout-fix.css ---- */
+/* ---- 7. 画面全体を枠に合わせて縮める ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを積んでいるため、
+   枠が低いとタイムラインの段などが下にはみ出して切れていた。
+   main.js の fitMockScreens() が収まらない画面だけを測って縮める。
+   幅・高さ・transform は他レイヤーの !important に勝つ必要があるため
+   JS側からインラインで指定している。ここでは目印のクラスだけ。 */
+.is-fit-scaled {
+  transform-origin: top left;
+}
+/* ---- 13. 枠に収める倍率はアニメーションさせない ----
+   モックには transform のトランジションが掛かっている。収まる倍率を
+   当てるときにこれが効くと、0.36秒かけて大きさが動き、その間の寸法で
+   測り直しが走って倍率が付いたり消えたりする。倍率の適用だけは即時に。 */
+.is-fit-scaled {
+  transition: none !important;
 }

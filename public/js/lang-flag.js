@@ -12,10 +12,6 @@
   var currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
   var modernHome = currentPath === "/" || currentPath === "/index.html";
   if (!modernHome) {
-    var fixStyle = document.createElement("link");
-    fixStyle.rel = "stylesheet";
-    fixStyle.href = "/css/user-request-fixes.css?v=20261109";
-    document.head.appendChild(fixStyle);
     var fixScript = document.createElement("script");
     fixScript.src = "/js/user-request-fixes.js?v=20261109";
     fixScript.defer = true;

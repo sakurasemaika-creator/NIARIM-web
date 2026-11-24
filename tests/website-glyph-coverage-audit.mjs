@@ -7,7 +7,7 @@ import fs from "node:fs";
 import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
-const CSS = fs.readFileSync("public/css/common-base.css", "utf8");
+const CSS = fs.readFileSync("public/css/site.css", "utf8");
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const language = process.env.FONT_AUDIT_LANG || "ja";
 if (!languages.includes(language))

@@ -1,1111 +1,2400 @@
-/* ==========================================================================
-   NIARIM home.css - トップページ専用スタイル
-   ========================================================================== */
-
-/* ---- Hero ----
-   ゲーム公式サイトを参照し、単なる背景色ではなく複数の
-   放射グラデーション（メッシュ）と浮遊するグロー・粒子で
-   奥行きと高揚感を演出する。 */
-.hero {
-  position: relative;
-  padding-top: clamp(3.5rem, 10vw, 7.5rem);
-  padding-bottom: var(--space-3xl);
+/* ---- from the former refresh-2026.css ---- */
+/* NIARIM editorial refresh 2026 — homepage and curated feature additions */
+.nr-site {
+  background: #f7f4f1;
+  color: #27242b;
+}
+.nr-main {
+  font-family: var(--font-body, "HakkouMincho", serif);
   overflow: hidden;
-  background:
-    radial-gradient(
-      120% 90% at 88% -12%,
-      rgba(255, 92, 122, 0.16) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      90% 80% at 8% 108%,
-      rgba(255, 177, 92, 0.14) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      60% 60% at 50% 40%,
-      var(--color-sub-tint) 0%,
-      transparent 70%
-    ),
-    var(--color-bg);
+}
+.nr-wrap {
+  width: min(1216px, calc(100% - 48px));
+  margin-inline: auto;
+}
+.nr-main h1,
+.nr-main h2,
+.nr-main h3 {
+  letter-spacing: -0.045em;
+  line-height: 1.34;
+  color: #242127;
+}
+.nr-main a:focus-visible,
+.nr-main button:focus-visible {
+  outline: 3px solid #ec5675;
+  outline-offset: 4px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: radial-gradient(
-    rgba(74, 70, 54, 0.09) 1.4px,
-    transparent 1.4px
-  );
-  background-size: 28px 28px;
-  mask-image: radial-gradient(80% 70% at 50% 20%, black 0%, transparent 75%);
-  pointer-events: none;
-}
-
-.hero .container {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  gap: var(--space-xl);
-}
-
-.hero-copy .eyebrow {
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.05s forwards;
-}
-
-.hero-title {
-  font-size: clamp(2.8rem, 7.5vw + 1rem, 6.4rem);
-  line-height: 1.12;
-  color: var(--color-ink);
-  /* body既定のoverflow-wrap:break-wordのフォールバックにより、
-     "Discover."のような短い単語+ピリオドの間で改行され、ピリオドだけが
-     次の行に取り残される問題があったため、見出しでは単語途中の改行を
-     許可しない。 */
-  overflow-wrap: normal;
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.15s forwards;
-}
-
-.hero-title .accent {
-  background: var(--grad-brand);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.hero-subtitle {
-  margin-top: var(--space-sm);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--color-ink);
-  max-width: calc(42 * var(--measure-ch));
-  overflow-wrap: normal;
-  word-break: normal;
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.22s forwards;
-}
-
-/* 下線はCSS固定幅のSVGではなく、JS(animations.js の initHeroUnderline)が
-   実際にレンダリングされた行ごとの Range.getClientRects() を計測して
-   1行につき1本の .hero-underline-line を生成する。言語によって文言の
-   長さが変わっても実テキスト幅にぴったり沿い、2行以上に折り返す言語でも
-   行ごとに正しい位置・幅の下線が引かれる(1本のSVGを100%幅で伸ばす方式
-   だと、折り返した場合に最後の行の下にしか出ない・幅が実テキストと
-   合わない問題があったため)。 */
-.hero-subtitle-text {
-  position: relative;
-  display: inline-block;
-}
-
-.hero-underline-line {
-  position: absolute;
-  height: 3px;
-  border-radius: var(--radius-pill);
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  animation: hero-underline-draw 0.9s var(--ease-out) forwards;
-  animation-delay: 1.05s;
-  pointer-events: none;
-}
-
-@keyframes hero-underline-draw {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-underline-line {
-    animation: none;
-    transform: scaleX(1);
-  }
-}
-
-.hero-lead {
-  margin-top: var(--space-md);
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
-  max-width: calc(52 * var(--measure-ch));
-  overflow-wrap: normal;
-  word-break: normal;
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.3s forwards;
-}
-
-.hero-actions {
+.nr-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-lg);
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.42s forwards;
+  gap: 12px;
+  margin-top: 30px;
 }
-
-.hero-bridge {
-  margin-top: var(--space-md);
-  font-size: var(--fs-small);
-  color: var(--color-text-muted);
-  max-width: calc(46 * var(--measure-ch));
-  overflow-wrap: normal;
-  word-break: normal;
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.48s forwards;
-}
-
-.hero-bridge a {
-  color: var(--color-brand);
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.hero-note {
-  margin-top: var(--space-sm);
-  font-size: var(--fs-small);
-  color: var(--color-text-muted);
-  opacity: 0;
-  animation: hero-fade-up var(--duration-slow) var(--ease-out) 0.56s forwards;
-}
-
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-copy * {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-/* Hero visual: 手描きストロークが描かれ、フレームが切り替わる演出 */
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: -22%;
-  z-index: -1;
-  background: conic-gradient(
-    from 0deg,
-    var(--color-accent),
-    #ffb15c,
-    var(--color-sub),
-    var(--color-accent)
-  );
-  opacity: 0.4;
-  filter: blur(60px);
-  animation: hero-glow-pulse 8s linear infinite;
-}
-
-@keyframes hero-glow-pulse {
-  0% {
-    opacity: 0.3;
-    transform: scale(0.96) rotate(0deg);
-  }
-  50% {
-    opacity: 0.48;
-    transform: scale(1.06) rotate(180deg);
-  }
-  100% {
-    opacity: 0.3;
-    transform: scale(0.96) rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual::before {
-    animation: none;
-  }
-}
-
-.hero-visual {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  background: var(--grad-ink);
-  box-shadow:
-    var(--shadow-lg),
-    var(--shadow-glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
-  transition: transform var(--duration-base) var(--ease-out);
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual {
-    transition: none;
-  }
-}
-
-.hero-visual .frame-mock {
-  position: relative;
-  width: 78%;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-md);
-  /* kCanvasOutsideColor = #3A3A3A を再現。
-     ツールバー・ブラシスライダー・フレームストリップの背景色と一致させる。 */
-  --fd-panel: #201f27;
-  --fd-text: #f5f1f0;
-  --fd-accent: #ff5c7a;
-  background: #3a3a3a;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  overflow: hidden;
-  /* アイコン・テキスト色を白系に統一 */
-  color: var(--fd-text);
-  display: flex;
-  flex-direction: column;
-}
-
-/* canvas_screen.dart再現のfeature-diagramをフレーム全体に収める */
-.hero-visual .feature-diagram {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-/* 上部バーだけ左右パディングを確保 */
-.hero-visual .fd-topbar {
-  padding: 2px 4px;
-  background: transparent;
-}
-
-/* 描画キャンバス部分のみ白背景 */
-.hero-visual .fd-canvas {
-  flex: 1;
-  height: 0;
-  background: #fff;
-  min-height: 0;
-  border-radius: 0;
-  margin-inline: 8%;
-}
-
-.hero-visual .stroke-path {
-  fill: none;
-  stroke: var(--color-brand);
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-dasharray: 390;
-  stroke-dashoffset: 390;
-  animation: draw-stroke 2.6s var(--ease-out) 0.4s infinite;
-}
-
-@keyframes draw-stroke {
-  0% {
-    stroke-dashoffset: 390;
-  }
-  55% {
-    stroke-dashoffset: 0;
-  }
-  85% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  100% {
-    stroke-dashoffset: -390;
-    opacity: 0.4;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual .stroke-path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-}
-
-@media (max-width: 900px) {
-  .hero .container {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-visual {
-    max-width: 380px;
-    margin-inline: auto;
-  }
-}
-
-/* ---- Marquee（機能キーワードの無限スクロール帯） ---- */
-.marquee-section {
-  position: relative;
-  padding-block: var(--space-md);
-  background: var(--color-ink);
-  overflow: hidden;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 32s linear infinite;
-}
-
-.marquee-track span {
+.nr-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
-  padding-inline: var(--space-lg);
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.85);
-  white-space: nowrap;
-}
-
-.marquee-track span::after {
-  content: "◆";
-  font-size: 0.6em;
-  color: var(--color-accent);
-}
-
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
-
-/* ---- Intro (NIARIMとは) ---- */
-.intro-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
-
-/* クリックできる要素ではないため、ホバーで動く演出は付けない
-   （クリックできると誤認させないため）。 */
-.intro-card {
-  padding: var(--space-lg);
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
-
-/* 角丸の四角をテーマカラー(グラデーション)で塗りつぶし、アイコンは
-   白抜きで重ねる(Features/Helpページの.feature-section-iconと
-   同じ考え方に統一)。 */
-.intro-card .icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-sm);
-  background: var(--grad-brand);
-  box-shadow: var(--shadow-glow);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-md);
-  color: var(--color-white);
-}
-
-/* 絵文字ではなく、アプリ本体と同じアイコン(sprite.svg)を使用する。 */
-.intro-card .icon .ic {
-  width: 22px;
-  height: 22px;
-}
-
-.intro-card h3 {
-  margin-bottom: var(--space-xs);
-  font-size: var(--fs-h3);
-}
-
-.intro-card p {
-  color: var(--color-text-muted);
-  font-size: var(--fs-small);
-}
-
-@media (max-width: 860px) {
-  .intro-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---- Feature showcase ---- */
-.feature-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
-  padding-block: var(--space-xl);
-}
-
-.feature-row:not(:last-child) {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.feature-row.is-reverse .feature-media {
-  order: 2;
-}
-
-.feature-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: var(--space-md);
-}
-
-.feature-tags li {
-  font-size: var(--fs-small);
-  padding: 0.4rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background: var(--color-sub-tint);
-  color: var(--color-brand-dark);
-}
-
-/* 機能図パネルは、行全体のフェードとは別に「画面の電源が入る」ような
-   見え方(内側から少しずつ開いて拡大する)にする。見出しの左右ワイプとは
-   方向・質感を変え、単なる使い回しにならないようにしている。 */
-.feature-media {
-  aspect-ratio: 16 / 11;
-  border-radius: var(--radius-md);
-  background: var(--color-gray-50);
-  border: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  opacity: 0;
-  clip-path: inset(8% round var(--radius-md));
-  transform: scale(0.94);
+  padding: 14px 23px;
+  min-height: 52px;
+  border-radius: 9px;
+  text-decoration: none !important;
+  font-weight: 750;
+  font-size: 0.95rem;
   transition:
-    opacity var(--duration-slow) var(--ease-out) 0.1s,
-    clip-path var(--duration-slow) var(--ease-out) 0.1s,
-    transform var(--duration-slow) var(--ease-out) 0.1s;
+    background 0.2s,
+    transform 0.2s;
 }
-
-.reveal.is-visible .feature-media {
-  opacity: 1;
-  clip-path: inset(0% round var(--radius-md));
-  transform: scale(1);
+.nr-btn:hover {
+  transform: translateY(-2px);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .feature-media {
-    opacity: 1;
-    clip-path: none;
-    transform: none;
-    transition: none;
-  }
+.nr-btn-secondary {
+  background: #ffffffbb;
+  border: 1px solid #a69da0;
+  color: #252129 !important;
 }
-
-.feature-media img {
+.nr-btn-secondary:hover {
+  background: #fff;
+}
+.nr-shot {
+  position: relative;
+  width: min(100%, 260px);
+  margin: 0;
+  border: 5px solid var(--capture-accent, #e3587a);
+  background: color-mix(in srgb, var(--capture-accent) 14%, white);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 26px 55px #3b304023;
+  aspect-ratio: 320/569;
+  flex: none;
+}
+.nr-shot picture {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
-
-.feature-media .placeholder-label {
-  font-size: var(--fs-small);
-  color: var(--color-gray-300);
-  letter-spacing: 0.08em;
-}
-
-/* アプリの実装(canvas_screen.dart等)に基づくfeature-diagram(features.css)を
-   埋め込む場合は、16:11固定枠ではなく図の実寸に合わせて高さを決める。 */
-.feature-media:has(.feature-diagram) {
-  aspect-ratio: auto;
-  background: transparent;
-  border: none;
-  padding: 0;
+.nr-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
-.feature-media .feature-diagram {
-  width: 100%;
-  margin-bottom: 0;
+.nr-statement {
+  text-align: center;
+  padding-top: 125px;
+  padding-bottom: 105px;
 }
-
-@media (max-width: 860px) {
-  .feature-row,
-  .feature-row.is-reverse .feature-media {
-    grid-template-columns: 1fr;
-    order: initial;
+.nr-statement h2 {
+  font-size: clamp(2.4rem, 4.8vw, 4.6rem);
+  line-height: 1.4;
+  margin: 0 auto 30px;
+}
+.nr-statement > p:last-child {
+  max-width: 665px;
+  margin: auto;
+  font-size: 1.05rem;
+  line-height: 2;
+  color: #5b545c;
+}
+.nr-story {
+  display: grid;
+  gap: 26px;
+  padding-bottom: 115px;
+}
+.nr-story-card {
+  min-height: 440px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #e9e0dd;
+  border-radius: 20px;
+  background: #f3e9e6;
+}
+.nr-story-card:nth-child(even) {
+  background: #ecede8;
+}
+.nr-story-card:nth-child(3) {
+  background: #eaf0f2;
+}
+.nr-story-media {
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px;
+  position: relative;
+  background: radial-gradient(circle at 40% 60%, #fff9 0%, transparent 68%);
+}
+.nr-story-media .nr-shot {
+  width: 190px;
+  transform: rotate(-4deg);
+  box-shadow: 0 18px 34px #22142225;
+}
+.nr-story-card:nth-child(even) .nr-story-media {
+  order: 2;
+}
+.nr-story-card:nth-child(even) .nr-shot {
+  transform: rotate(5deg);
+}
+.nr-story-copy {
+  padding: clamp(25px, 5vw, 72px);
+}
+.nr-step {
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.16em;
+  color: #bd6473;
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+.nr-story-copy h3 {
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  margin: 24px 0 18px;
+}
+.nr-story-copy p {
+  color: #5d555c;
+  line-height: 2;
+  max-width: 440px;
+}
+.nr-story-copy a,
+.nr-text-link {
+  display: inline-flex;
+  /* A 44px touch target; the text and its underline stay where they were
+     (the extra height is taken from the space above). */
+  min-height: 44px;
+  align-items: flex-end;
+  color: #a84058;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 5px;
+  margin-top: 7px;
+  font-size: 0.93rem;
+  font-weight: 750;
+}
+.nr-workspace h2,
+.nr-plaza h2,
+.nr-pricing h2,
+.nr-launch h2 {
+  font-size: clamp(2.3rem, 4.3vw, 4.3rem);
+  margin: 0 0 26px;
+}
+.nr-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 44px;
+}
+.nr-section-header h2 {
+  font-size: clamp(2rem, 3.6vw, 3.6rem);
+  margin: 0;
+}
+.nr-workspace {
+  background: #efebe6;
+  padding: 95px 0;
+}
+.nr-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 70px;
+}
+.nr-workspace-media {
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.nr-workspace-media .nr-shot {
+  width: 211px;
+  transform: translate(-48px, -7px) rotate(-7deg);
+}
+.nr-workspace-media .nr-shot + .nr-shot {
+  position: absolute;
+  transform: translate(90px, 17px) rotate(6deg);
+}
+.nr-workspace-copy p:not(.nr-kicker) {
+  line-height: 2;
+  color: #5e565d;
+}
+.nr-plaza {
+  background: #f5d4d9;
+  padding: 110px 0;
+}
+.nr-plaza-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 70px;
+}
+.nr-plaza h2 {
+  margin-bottom: 28px;
+}
+.nr-plaza p:not(.nr-kicker) {
+  line-height: 2;
+  color: #57444c;
+  max-width: 475px;
+}
+.nr-plaza-art {
+  min-height: 370px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.nr-gallery {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+.nr-gallery-description {
+  max-width: 690px;
+  color: #676069;
+  font-size: 0.94rem;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+.nr-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.nr-gallery-item {
+  background: #fffdfa;
+  border: 1px solid #e6dddc;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.nr-gallery-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: #f2e8e4;
+}
+.nr-gallery-visual .nr-shot {
+  width: 160px;
+  border-width: 4px;
+  border-radius: 17px;
+  box-shadow: 0 12px 26px #41334116;
+}
+/* The screen's name leads on the left and its position sits on the right,
+   at every width (the name used to be on the right on desktop and below
+   the number on phones). */
+.nr-gallery-meta {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 18px 20px;
+  gap: 8px 12px;
+}
+.nr-gallery-meta > span {
+  /* 12px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  white-space: nowrap;
+}
+.nr-gallery-meta h3 {
+  min-width: 0;
+  font-size: 1rem;
+  margin: 0;
+}
+.nr-gallery-note {
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
+  text-align: right;
+  margin-top: 18px;
+}
+.nr-pricing {
+  padding: 100px 0;
+  background: #e9ece7;
+}
+.nr-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+.nr-pricing p:not(.nr-kicker) {
+  color: #5b5c5b;
+  line-height: 1.9;
+}
+.nr-pricing-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.nr-pricing-panel > div {
+  border: 1px solid #cbd3c8;
+  background: #fffefd;
+  border-radius: 12px;
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+.nr-pricing-panel small {
+  letter-spacing: 0.12em;
+  color: #9b6372;
+  font-weight: 800;
+}
+.nr-pricing-panel strong {
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  color: #2b262b;
+}
+.nr-pricing-panel span {
+  line-height: 1.7;
+  font-size: 0.82rem;
+  color: #6c646a;
+}
+/* The closing release note sits on the paper like every section; the
+   footer below is the only dark surface. */
+.nr-launch {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+  padding: 104px 0 96px;
+}
+.nr-launch h2 {
+  color: var(--ink);
+}
+.nr-launch p:not(.nr-kicker) {
+  color: var(--ink-2);
+  line-height: 2;
+}
+.nr-launch .nr-btn-secondary {
+  background: transparent;
+  border-color: var(--rule-strong);
+  color: var(--ink) !important;
+}
+.nr-actions-center {
+  justify-content: center;
+}
+.nr-launch-status {
+  margin-top: 24px;
+  font-size: 0.83rem;
+}
+@media (max-width: 1000px) {
+  .nr-plaza-grid {
+    gap: 28px;
   }
 }
+@media (max-width: 740px) {
+  .nr-wrap {
+    width: min(100% - 32px, 600px);
+  }
 
-/* ---- Screenshot gallery ---- */
-.screenshot-scroller {
-  display: flex;
-  gap: var(--space-md);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-sm);
-  margin: 0 calc(var(--container-padding) * -1);
-  padding-inline: var(--container-padding);
+  .nr-story-card,
+  .nr-workspace-grid,
+  .nr-plaza-grid,
+  .nr-pricing-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nr-statement {
+    padding-top: 75px;
+    padding-bottom: 66px;
+  }
+  .nr-story {
+    padding-bottom: 70px;
+    gap: 18px;
+  }
+  .nr-story-card {
+    min-height: 0;
+  }
+  .nr-story-media {
+    height: 325px;
+    min-height: 0;
+    padding: 20px;
+  }
+  .nr-story-media .nr-shot {
+    width: 150px;
+  }
+  .nr-story-card:nth-child(even) .nr-story-media {
+    order: 0;
+  }
+  .nr-story-copy {
+    padding: 30px 24px 38px;
+  }
+  .nr-workspace,
+  .nr-plaza,
+  .nr-pricing {
+    padding: 75px 0;
+  }
+  .nr-workspace-media {
+    height: 350px;
+  }
+  .nr-workspace-media .nr-shot {
+    width: 150px;
+  }
+  .nr-plaza-art {
+    min-height: 330px;
+  }
+  .nr-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .nr-gallery {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .nr-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .nr-gallery-visual {
+    padding: 22px 10px;
+  }
+  .nr-gallery-visual .nr-shot {
+    width: 132px;
+  }
+  .nr-gallery-meta {
+    padding: 14px 16px;
+  }
+  .nr-gallery-meta h3 {
+    font-size: 0.9375rem;
+  }
+  .nr-pricing-grid {
+    gap: 30px;
+  }
+  .nr-launch {
+    padding: 83px 0;
+  }
 }
+@media (max-width: 430px) {
+  .nr-pricing-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nr-gallery-visual .nr-shot {
+    width: 112px;
+  }
 
-.screenshot-scroller::-webkit-scrollbar {
-  height: 6px;
+  .nr-btn {
+    width: 100%;
+  }
 }
-
-.screenshot-scroller::-webkit-scrollbar-thumb {
-  background: var(--color-gray-300);
-  border-radius: var(--radius-pill);
+@media (prefers-reduced-motion: reduce) {
+  .nr-btn {
+    transition: none;
+  }
+  .nr-btn:hover {
+    transform: none;
+  }
 }
-
-.screenshot-card {
-  flex: 0 0 auto;
-  width: min(72vw, 280px);
-  aspect-ratio: 9 / 19.5;
-  scroll-snap-align: start;
-  border-radius: var(--radius-lg);
-  background: var(--color-ink);
-  border: 6px solid var(--color-ink);
+/* 2026-11 glyph and screenshot alignment pass.
+   The display-font WOFF2 is a purpose-made subset for older copy. Newly
+   written Japanese/Chinese/Korean headlines may contain characters absent
+   from that subset, causing visibly mixed font weights within one word.
+   Use full-coverage platform CJK families for the new editorial headings. */
+.nr-main {
+  font-family: var(--font-sans);
+}
+html:lang(ja) .nr-main :is(h1, h2, h3) {
+  font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Meiryo", sans-serif;
+  font-weight: 800;
+  font-synthesis: none;
+  letter-spacing: -0.045em;
+}
+html:lang(ko) .nr-main :is(h1, h2, h3) {
+  font-family: "Noto Sans CJK KR", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-weight: 800;
+}
+html:lang(zh-Hans) .nr-main :is(h1, h2, h3) {
+  font-family:
+    "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei", "PingFang SC",
+    sans-serif;
+  font-weight: 800;
+}
+html:lang(zh-Hant) .nr-main :is(h1, h2, h3) {
+  font-family:
+    "Noto Sans CJK TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+    sans-serif;
+  font-weight: 800;
+}
+/* A screenshot is exactly 320 x 569. Padding or border on that ratio box
+   shrinks the image content and creates white gutters or mismatched corners.
+   Put the theme ring OUTSIDE the image rather than consuming image pixels. */
+.nr-main .nr-shot {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  aspect-ratio: 320 / 569;
+  height: auto;
+  border-radius: 14px;
   overflow: hidden;
-  position: relative;
-  box-shadow: var(--shadow-md);
+  background: transparent;
+  box-shadow:
+    0 0 0 4px var(--capture-accent, #e3587a),
+    0 22px 45px rgba(39, 29, 42, 0.18);
 }
-
-/* スクロールで画面に入ったとき、端末画面が1枚ずつ軽く傾きながら
-   置かれていくように表示する(animations.jsのstagger-grid機構を利用)。
-   機能図パネルの「電源が入る」演出、見出しの左右ワイプとも質感を変え、
-   横スクロールギャラリーらしい「カードが並んでいく」動きにしている。 */
-.screenshot-scroller.stagger-grid > .screenshot-card {
-  transform: translateY(20px) rotate(-3deg);
-  transition:
-    opacity var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-}
-
-.screenshot-scroller.stagger-grid > .screenshot-card:nth-child(even) {
-  transform: translateY(20px) rotate(3deg);
-}
-
-.screenshot-scroller.stagger-grid > .screenshot-card.is-visible {
-  transform: none;
-}
-
-.screenshot-card img {
+.nr-main .nr-shot picture,
+.nr-main .nr-shot img {
+  display: block;
   width: 100%;
   height: 100%;
+  min-width: 0;
+  aspect-ratio: 320 / 569;
   object-fit: cover;
 }
-
-.screenshot-card .placeholder-label {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-gray-500);
-  background: var(--color-gray-50);
-  font-size: var(--fs-small);
-  text-align: center;
-  padding: var(--space-sm);
+.nr-main .nr-shot img {
+  vertical-align: top;
 }
-
-/* 実装(canvas_screen.dart等)に基づくfeature-diagramを、実機のような
-   縦長画面(9:19.5)の枠に収めて表示する。 */
-.screenshot-card .feature-diagram {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border-radius: 0;
-  box-shadow: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--space-md);
+.nr-main .nr-story-media {
+  isolation: isolate;
 }
-
-.screenshot-card .fd-canvas {
-  flex: 1;
-  height: auto;
-  min-height: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ---- Download CTA ---- */
-.download-panel {
-  border-radius: var(--radius-lg);
-  padding: var(--space-2xl) var(--space-xl);
-  text-align: center;
-  background: linear-gradient(135deg, var(--color-ink), #2b2950);
-  color: var(--color-white);
-}
-
-.download-panel h2 {
-  font-size: var(--fs-h1);
-  /* 日本語版のdownload.titleは句読点なしの2行見出し（"NIARIMを"改行
-     "はじめよう"）として辞書側に\nを埋め込んでいるため、これをそのまま
-     改行として描画する（他言語は\nを含まない1行見出しのため影響なし）。 */
-  white-space: pre-line;
-}
-
-.download-panel p {
-  margin-top: var(--space-sm);
-  color: rgba(255, 255, 255, 0.72);
-  max-width: calc(52 * var(--measure-ch));
-  margin-inline: auto;
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
-.download-actions {
-  margin-top: var(--space-lg);
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-/* ---- FAQ accordion ---- */
-.faq-list {
-  border-top: 1px solid var(--color-border);
-}
-
-.faq-item {
-  border-bottom: 1px solid var(--color-border);
-  /* リスト全体のフェード(.reveal)に加えて、質問を上から順に少しずつ
-     間をおいて表示する(animations.jsのstagger-grid機構を利用)。 */
-  transition:
-    opacity var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
-}
-
-.faq-question {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding: var(--space-md) 0;
-  font-family: var(--font-serif);
-  text-align: left;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-/* スマホ幅では、質問文が1行に収まりきらず「？」だけが次の行に
-   取り残されることがあった。少しだけ文字を小さくして、文節の
-   切れ目で自然に折り返せる余裕を持たせる。 */
-@media (max-width: 480px) {
-  .faq-question {
-    font-size: 1rem;
+@media (max-width: 740px) {
+  .nr-main .nr-story-copy h3 {
+    line-height: 1.45;
+  }
+  .nr-main .nr-story-copy {
+    min-width: 0;
   }
 }
 
-/* Each question is a white sheet with a hairline rule (the same as the
-   opals accordions), not a card with a shadow. */
-#main .faq-item {
-  border: 1px solid var(--rule);
-  border-radius: var(--radius-sheet);
-  background: var(--sheet);
-  box-shadow: none;
+/* ---- from the former niarim-game-site.css ---- */
+/* NIARIM product-first, game-site-inspired lightweight 2026 design.
+ * Static gradients and existing real app captures only; no large video or web font. */
+.nr-site .nr-main {
+  background: #f8f6f5;
 }
 
-.faq-question .icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+.nr-store-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.nr-play-trademark {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.nr-store-notice {
+  max-width: 510px;
+  margin: 15px 0 0;
+  font-size: 0.75rem;
+  color: #d8cad7;
+  line-height: 1.7;
+}
+
+.nr-duo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+.nr-duo > .nr-shot {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  flex: none;
+}
+.nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(30%, 130px) !important;
+}
+.nr-duo > .nr-shot--pc {
+  width: min(63%, 325px) !important;
+  aspect-ratio: 1440/900 !important;
+  border-radius: 11px;
+}
+.nr-duo > .nr-shot--pc picture,
+.nr-duo > .nr-shot--pc img {
+  aspect-ratio: 1440/900 !important;
+}
+.nr-duo .nr-device-label {
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  color: #6f5965;
+  white-space: nowrap;
+}
+.nr-duo > .nr-device-label--sp {
+  order: 0;
+  align-self: flex-end;
+}
+.nr-duo > .nr-shot:not(.nr-shot--pc) {
+  order: 1;
+}
+.nr-duo > .nr-shot--pc {
+  order: 2;
+}
+.nr-duo > .nr-device-label--pc {
+  order: 3;
+  align-self: flex-end;
+}
+.nr-story-media {
+  padding: 18px !important;
+}
+.nr-story-media .nr-duo {
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(30%, 130px) !important;
+}
+.nr-story-media .nr-duo > .nr-shot--pc {
+  width: min(53%, 285px) !important;
+}
+.nr-story-media .nr-device-label {
+  display: none;
+}
+.nr-workspace-media {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.nr-workspace-media .nr-duo {
+  flex-direction: column;
+  gap: 10px;
+}
+.nr-workspace-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: 110px !important;
+}
+.nr-workspace-media .nr-duo > .nr-shot--pc {
+  width: min(100%, 225px) !important;
+}
+.nr-workspace-media .nr-device-label {
+  display: none;
+}
+.nr-gallery-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.nr-gallery-visual {
+  min-height: 285px;
+  display: flex;
+}
+.nr-gallery-visual .nr-duo {
+  flex-direction: column;
+  gap: 17px;
+}
+.nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: 102px !important;
+}
+.nr-gallery-visual .nr-duo > .nr-shot--pc {
+  width: 225px !important;
+  max-width: 95%;
+}
+.nr-gallery-visual .nr-duo > .nr-device-label {
+  display: none;
+}
+@media (max-width: 740px) {
+  .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 115px !important;
+  }
+  .nr-story-media .nr-duo > .nr-shot--pc {
+    width: 210px !important;
+  }
+  .nr-workspace-media {
+    height: auto !important;
+    min-height: 310px;
+  }
+  .nr-workspace-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 80px !important;
+  }
+  .nr-workspace-media .nr-duo > .nr-shot--pc {
+    width: 145px !important;
+  }
+  .nr-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .nr-gallery-visual .nr-duo > .nr-shot--pc {
+    width: 170px !important;
+  }
+  .nr-gallery-visual {
+    min-height: 255px;
+    padding: 17px 8px;
+  }
+}
+@media (max-width: 430px) {
+  .nr-store-row {
+    gap: 6px;
+  }
+
+  .nr-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nr-gallery-visual .nr-duo > .nr-shot--pc {
+    width: 225px !important;
+  }
+  .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 100px !important;
+  }
+  .nr-gallery-visual {
+    min-height: 275px;
+  }
+}
+/* Final responsive polish after reviewing full-height PC and SP screenshots. */
+html:lang(ja) .nr-main {
+  font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", "Yu Gothic", "Meiryo", system-ui,
+    sans-serif;
+}
+html:lang(ja) .nr-site .nr-main p:not(.nr-kicker) {
+  font-synthesis: none;
+}
+
+.nr-site .nr-store-notice {
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+/* ---- from the former font-and-capture-2026.css ---- */
+html body .nr-gallery-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2.2vw, 30px);
+}
+html body .nr-gallery-visual {
+  padding: clamp(10px, 1.5vw, 22px);
+  min-height: clamp(310px, 33vw, 450px);
+}
+html body .nr-gallery-visual .nr-duo {
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  align-items: center;
+  gap: clamp(9px, 1.4vw, 20px);
+}
+html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(33%, 195px) !important;
+  flex: 0 1 auto !important;
+}
+html body .nr-gallery-visual .nr-duo > .nr-shot--pc {
+  width: min(64%, 385px) !important;
+  flex: 1 1 auto !important;
+}
+html body .nr-story-media .nr-duo {
+  width: 100%;
+  flex-wrap: nowrap;
+}
+html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(32%, 220px) !important;
+  flex: 0 1 auto;
+}
+html body .nr-story-media .nr-duo > .nr-shot--pc {
+  width: min(65%, 470px) !important;
+  flex: 1 1 auto;
+}
+html body .nr-workspace-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+  width: min(43%, 220px) !important;
+}
+html body .nr-workspace-media .nr-duo > .nr-shot--pc {
+  width: min(100%, 480px) !important;
+}
+@media (max-width: 759px) {
+  html body .nr-gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+  html body .nr-gallery-visual {
+    min-height: 230px;
+  }
+  html body .nr-story-media .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 33% !important;
+  }
+  html body .nr-story-media .nr-duo > .nr-shot--pc {
+    width: 63% !important;
+  }
+  html body .nr-workspace-media .nr-duo > .nr-shot--pc {
+    width: min(100%, 300px) !important;
+  }
+}
+@media (max-width: 359px) {
+  html body .nr-gallery-visual .nr-duo {
+    gap: 7px !important;
+  }
+  html body .nr-gallery-visual {
+    padding-inline: 8px;
+  }
+  html body .nr-gallery-visual .nr-duo > .nr-shot:not(.nr-shot--pc) {
+    width: 31% !important;
+  }
+  html body .nr-gallery-visual .nr-duo > .nr-shot--pc {
+    width: 65% !important;
+  }
+}
+
+/* ---- from the former brand-direction-2026.css ---- */
+/* Hero: one powerful identity, one proof-of-product visual, no ornamental stock art. */
+/* The large arc that used to sit bottom-right had no relation to the app and
+   pulled the eye away from the captures; the light-table grid (::before) is
+   the only backdrop the hero needs. */
+/* On tall desktop screens (1920x1080 and up) the stage grows with the
+   viewport, so the hero ends at the fold instead of leaving a strip of
+   empty paper under it. Shorter screens keep the previous height. */
+/* The three chips repeated the strap (brush/layer/timeline, PC mode) in a
+   third typographic voice; without them the lead leads straight to the
+   action and the phone capture rises into the first screen on mobile. */
+
+html body.nr-site .nr-store-row {
+  margin-top: 35px;
+  gap: 20px;
+}
+/* The closing rule of the hero is drawn as a timeline ruler: a frame tick
+   every 12px and a longer tick every sixth frame, the same rhythm as the
+   app's timeline. The two English filler labels it used to carry
+   ("OFFICIAL WEBSITE", "HAND-DRAWN ANIMATION") said nothing the page does
+   not already say, so only the jump to the screenshots remains. */
+/* Editorial rhythm: large type, alternating product media, restrained rules. */
+html body.nr-site .nr-main {
+  background: var(--nr-paper);
+}
+html body.nr-site .nr-statement {
+  padding-top: clamp(90px, 10vw, 158px);
+  padding-bottom: clamp(75px, 9vw, 128px);
+}
+html body.nr-site .nr-statement > p:last-child {
+  max-width: 590px;
+}
+html body.nr-site .nr-story {
+  gap: 0;
+  padding-bottom: 100px;
+}
+html body.nr-site .nr-story-card {
+  min-height: 480px;
+  grid-template-columns: minmax(0, 1.07fr) minmax(0, 0.93fr);
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-color: rgba(40, 36, 44, 0.12);
+  background: #f0e8e5;
+}
+html body.nr-site .nr-story-card + .nr-story-card {
+  border-top: 0;
+}
+html body.nr-site .nr-story-card:nth-child(2) {
+  background: #eeede9;
+}
+html body.nr-site .nr-story-card:nth-child(3) {
+  background: #e9edef;
+}
+html body.nr-site .nr-story-media {
+  min-height: 480px;
+  background: radial-gradient(
+    circle at 53% 47%,
+    rgba(255, 255, 255, 0.85),
+    transparent 70%
+  );
+}
+html body.nr-site .nr-story-copy {
+  padding: clamp(33px, 5.2vw, 78px);
+}
+html body.nr-site .nr-step {
+  color: #93304e;
+  letter-spacing: 0.14em;
+  display: inline-block;
+  padding-bottom: 14px;
+  border-bottom: 1px solid currentColor;
+}
+html body.nr-site .nr-story-copy a,
+html body.nr-site .nr-text-link {
+  text-decoration: none;
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease;
+}
+html body.nr-site .nr-story-copy a:hover,
+html body.nr-site .nr-text-link:hover {
+  color: var(--nr-ink);
+}
+html body.nr-site .nr-workspace {
+  background: #efebe8;
+  padding-block: clamp(85px, 9vw, 135px);
+}
+html body.nr-site .nr-plaza {
+  background: #f2dfe3;
+  padding-block: clamp(85px, 9vw, 135px);
+}
+html body.nr-site .nr-gallery {
+  padding-top: clamp(90px, 9vw, 140px);
+  padding-bottom: clamp(80px, 9vw, 140px);
+}
+html body.nr-site .nr-gallery-item {
+  border-color: var(--nr-rule);
+  border-radius: 10px;
+  background: #fffdfb;
+}
+html body.nr-site .nr-gallery-visual {
+  background: #f2eeeb;
+}
+@media (min-width: 960px) {
+  html body.nr-site .nr-story-card:nth-child(even) {
+    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+  }
+}
+@media (max-width: 800px) {
+  html body.nr-site .nr-story-card,
+  html body.nr-site .nr-story-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+  html body.nr-site .nr-story-card:nth-child(even) .nr-story-media {
+    order: 0;
+  }
+  html body.nr-site .nr-story-media {
+    min-height: 345px;
+  }
+  html body.nr-site .nr-story-copy {
+    padding: 28px 32px 46px;
+  }
+  html body.nr-site .nr-story-copy h3 {
+    margin-top: 17px;
+  }
+  html body.nr-site .nr-workspace-grid,
+  html body.nr-site .nr-plaza-grid {
+    gap: 35px;
+  }
+}
+@media (max-width: 560px) {
+  html body.nr-site .nr-wrap {
+    width: calc(100% - 36px);
+  }
+
+  html body.nr-site .nr-store-row {
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  html body.nr-site .nr-statement {
+    padding-top: 76px;
+    padding-bottom: 65px;
+  }
+  html body.nr-site .nr-story {
+    padding-bottom: 72px;
+  }
+  html body.nr-site .nr-story-media {
+    min-height: 275px;
+    padding: 15px;
+  }
+  html body.nr-site .nr-story-copy {
+    padding: 25px 22px 40px;
+  }
+  html body.nr-site .nr-section-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  html body.nr-site .nr-gallery {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  html body.nr-site .nr-gallery-grid {
+    gap: 18px;
+  }
+}
+/* Studio-grade composition refinement — 2026-11-12 */
+/* A deliberate product presentation: one hero stage, tangible studio details,
+   and a consistent editorial rhythm across the product story. */
+/* No coloured glow blobs behind the stage: the captures carry the colour.
+   A quiet warm lift toward the captures keeps the dark from going flat. */
+/* "Hand-drawn animation app" is the first answer to "what is this?", so it
+   is set at a reading size (it was 11.7px). */
+/* Hero product imagery is intentionally static: the showcase is informational, not an interactive control. */
+html body.nr-site .nr-statement {
   position: relative;
+  border-bottom: 1px solid var(--nr-rule);
 }
-
-/* One open/close mark for every disclosure on the site (FAQ, the opals
-   accordions, the guide's entries): a drawn 14px plus that loses its
-   vertical stroke when open, in the secondary ink. */
-.faq-question .icon::before,
-.faq-question .icon::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: var(--ink-2);
-  transform: translate(-50%, -50%);
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.faq-question .icon::before {
-  width: 14px;
-  height: 2px;
-}
-
-.faq-question .icon::after {
-  width: 2px;
-  height: 14px;
-}
-
-.faq-item.is-open .faq-question .icon::after {
-  transform: translate(-50%, -50%) rotate(90deg) scale(0);
-}
-
-/* max-height:0 + overflow:hidden だけでは「見えていないのに存在はしている」
-   状態のままで、閉じているアコーディオンの中のリンクにもTabキーで
-   フォーカスが移り、スクリーンリーダーからも読み上げられてしまっていた
-   （実際に /faq/ で3件のリンクが該当）。visibility:hidden を併用して
-   アクセシビリティツリーとタブ順から確実に外す。開くときは即座に
-   visibleへ戻し、閉じるときは高さのアニメーションが終わってから
-   hiddenにする（transition-delay）ことで、見た目の動きは維持する。 */
-.faq-answer {
+/* The "01 / THE PROCESS" label that sat here repeated the "01 — DRAW"
+   step label below it in untranslated English. */
+html body.nr-site .nr-story-card {
   overflow: hidden;
-  max-height: 0;
-  visibility: hidden;
-  transition:
-    max-height var(--duration-base) var(--ease-out),
-    visibility 0s linear var(--duration-base);
+}
+html body.nr-site .nr-story-card .nr-story-media {
+  position: relative;
+  isolation: isolate;
+}
+/* No ring behind the captures: the app screens are the subject. */
+html body.nr-site .nr-story-copy h3 {
+  max-width: 13em;
+  text-wrap: pretty;
+}
+html body.nr-site .nr-story-copy p {
+  max-width: 35em;
+}
+html body.nr-site .nr-gallery-grid {
+  align-items: stretch;
+}
+html body.nr-site .nr-gallery-item {
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+html body.nr-site .nr-gallery-meta {
+  border-top: 1px solid var(--nr-rule);
+}
+html body.nr-site .nr-gallery-meta > span {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.13em;
+}
+html body.nr-site .nr-gallery-description {
+  max-width: 44em;
+}
+html body.nr-site .nr-workspace-copy {
+  min-width: 0;
+}
+html body.nr-site .nr-workspace-copy > p {
+  max-width: 37em;
 }
 
-.faq-item.is-open .faq-answer {
-  visibility: visible;
-  transition:
-    max-height var(--duration-base) var(--ease-out),
-    visibility 0s linear 0s;
-}
+/* ---- from the former studio-unification-2026.css ---- */
 
-.faq-answer p {
-  padding-bottom: var(--space-md);
-  color: var(--color-text-muted);
-  max-width: calc(62 * var(--measure-ch));
-  overflow-wrap: normal;
-  word-break: normal;
+html body.nr-site .nr-plaza h2 {
+  font-size: clamp(2rem, 3.9vw, 4.2rem);
+  line-height: 1.35;
+  text-wrap: pretty;
+  max-width: 10.6em;
 }
-
-/* ---- Final CTA ---- */
-.final-cta {
+html body.nr-site .nr-plaza-grid > div:first-child {
+  min-width: 0;
+}
+html body.nr-site .nr-plaza-art {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 2.2vw, 26px);
+  border: 1px solid rgba(70, 45, 55, 0.11);
+  border-radius: 20px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.46),
+    rgba(245, 225, 229, 0.32)
+  );
+}
+html body.nr-site .nr-plaza-capture {
+  margin: 0;
+  width: min(100%, 304px);
   text-align: center;
 }
-
-.final-cta h2 {
-  font-size: var(--fs-h1);
-}
-
-.final-cta p {
-  margin-top: var(--space-sm);
-  color: var(--color-text-muted);
-}
-
-.final-cta .hero-actions {
-  justify-content: center;
-  animation: none;
-  opacity: 1;
-}
-
-.fd-tree-list {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-.fd-layer-panel-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 62%;
-  background: rgba(0, 0, 0, 0.15);
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
+html body.nr-site .nr-plaza-capture-device {
+  border: 7px solid #25212b;
+  border-radius: 23px;
   overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(47, 30, 42, 0.17);
+}
+html body.nr-site .nr-plaza-capture-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 360/760;
+  object-fit: contain;
+}
+html body.nr-site .nr-plaza-capture figcaption {
+  margin: 13px 0 0;
+  font-size: 0.69rem;
+  letter-spacing: 0.09em;
+  color: #65525a;
+  line-height: 1.5;
+}
+html body.nr-site .nr-plaza .nr-btn {
+  min-height: 50px;
+  font-size: clamp(0.93rem, 1.2vw, 1.05rem);
+  line-height: 1.35;
+  padding-inline: 1.4rem;
+}
+html body.nr-site :is(.nr-story-media, .nr-gallery-visual) img {
+  max-width: 100%;
+  height: auto;
+}
+html
+  body
+  :is(
+    .nr-story-copy p,
+    .nr-feature-text p,
+    .nr-plaza p,
+    .nr-workspace-copy p,
+    .nr-gallery-description
+  ) {
+  line-height: 1.85;
+}
+@media (max-width: 800px) {
+  html body.nr-site .nr-plaza-grid {
+    gap: clamp(24px, 5vw, 40px);
+  }
+  html body.nr-site .nr-plaza-art {
+    padding: 18px;
+  }
+  html body.nr-site .nr-plaza-capture {
+    width: min(100%, 278px);
+  }
+}
+@media (max-width: 560px) {
+  html body.nr-site .nr-plaza-capture {
+    width: min(100%, 248px);
+  }
+  html body.nr-site .nr-plaza h2 {
+    font-size: clamp(1.85rem, 8vw, 2.65rem);
+  }
+  html body.nr-site .nr-plaza .nr-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+/* The hero uses the same real SVG wordmark as the site header. */
+
+html body.nr-site .nr-pricing-panel strong {
+  font-family: var(--font-serif) !important;
+  font-size: clamp(1.32rem, 2.4vw, 2rem);
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+html body.nr-site .nr-pricing-panel small {
+  font-family: var(--font-serif) !important;
+}
+html body.nr-site .nr-pricing-panel span {
+  font-family: var(--font-sans) !important;
+}
+/* No platform-font islands inside the public Japanese landing page.
+   Editorial actions stay in Kuramubon; small explanatory copy and counters
+   use HakkouMincho, like the remaining 12 public pages. */
+html:lang(ja) body.nr-site .nr-main :is(.nr-story-copy > a) {
+  font-family: var(--font-serif) !important;
+}
+html:lang(ja)
+  body.nr-site
+  .nr-main
+  :is(.nr-mini-list > span, .nr-gallery-meta > span) {
+  font-family: var(--font-sans) !important;
+}
+
+/* ---- from the former capture-viewer.css ---- */
+.nr-gallery-visual {
+  position: relative;
+}
+.capture-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  cursor: zoom-in;
+}
+.capture-open > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #29242d;
+  border: 1px solid #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 2rem;
+  font: 600 0.875rem/1.4 var(--font-serif);
+}
+.capture-open .ic {
+  width: 1rem;
+  height: 1rem;
+}
+.capture-open:hover > span {
+  background: #74304b;
+}
+.capture-open:focus-visible {
+  outline: 3px solid #772c4c;
+  outline-offset: -4px;
+}
+body:has(.capture-viewer[open]) {
+  overflow: hidden;
+}
+.capture-viewer {
+  margin: auto;
+  width: min(68rem, calc(100% - 1.5rem));
+  max-width: none;
+  max-height: calc(100dvh - 1.5rem);
+  padding: 0;
+  border: 1px solid #746976;
+  border-radius: 1rem;
+  color: #29242d;
+  background: #fbf8f7;
+  overflow: auto;
+}
+.capture-viewer[open] {
   display: flex;
   flex-direction: column;
 }
-
-/* ---- ツールバー（画面下部の横並びバー、toolbar_widget.dart再現） ---- */
-/* fd-toolbar-overlay は features.css 側でキャンバスオーバーレイとして定義済み。
-   ヒーロー・screenshot-card 内では fd-toolbar として独立した横バーを使う。 */
-.fd-toolbar {
+.capture-viewer::backdrop {
+  background: rgb(19 17 24 / 0.82);
+}
+.capture-bar,
+.capture-tools {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  height: 32px;
-  background: transparent;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  flex-shrink: 0;
-  gap: 1px;
-  padding: 0 2px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem clamp(0.75rem, 3vw, 1.5rem);
 }
-.fd-toolbar::-webkit-scrollbar {
-  display: none;
+.capture-bar {
+  border-bottom: 1px solid #ded6d8;
+}
+.capture-bar h2 {
+  font: 700 clamp(1.25rem, 3vw, 1.75rem) / 1.3 var(--font-serif);
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* Previous / next screen: two 44px buttons around the position, "02 / 09"
+   (the same numbering as the gallery cards). Chevrons are drawn, not glyphs. */
+.capture-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.capture-viewer .capture-step {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  padding: 0;
+  border-color: transparent;
+}
+.capture-viewer .capture-step:hover {
+  border-color: #ded6d8;
+}
+.capture-chevron {
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+.capture-chevron.is-prev {
+  transform: translateX(2px) rotate(-135deg);
+}
+.capture-chevron.is-next {
+  transform: translateX(-2px) rotate(45deg);
+}
+@media (max-width: 600px) {
+  .capture-viewer .capture-bar form {
+    margin-left: auto;
+  }
+}
+.capture-count {
+  min-width: 4.6em;
+  text-align: center;
+  color: #5d5460;
+  font: 600 0.8125rem/1 var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+.capture-viewer button {
+  min-height: 44px;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #746976;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #29242d;
+  font: 600 0.9375rem/1.4 var(--font-serif);
+  cursor: pointer;
+}
+.capture-devices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.capture-viewer button[aria-pressed="true"] {
+  color: #fff;
+  background: #372b37;
+  border-color: #372b37;
+}
+.capture-viewer :focus-visible {
+  outline: 3px solid #a22b51;
+  outline-offset: 2px;
+}
+.capture-stage:not(.is-native-size) {
+  /* horizontal swipes browse the screens (capture-viewer.js) */
+  touch-action: pan-y;
+}
+.capture-stage {
+  min-height: 6rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+  background: #211e26;
+  text-align: center;
+}
+.capture-stage:focus-visible {
+  outline-offset: -4px;
+}
+.capture-stage picture {
+  display: block;
+}
+.capture-stage img {
+  display: block;
+  margin-inline: auto;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(68dvh, 50rem);
+  object-fit: contain;
+}
+.capture-stage.is-native-size img {
+  max-width: none;
+  max-height: none;
+}
+.capture-stage.is-native-size picture {
+  width: max-content;
+  min-width: 100%;
 }
 
-/* ---- BrushSizeSlider（ツールバー直上の折りたたみ帯） ---- */
-.fd-brush-slider {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 20px;
-  background: transparent;
-  padding: 0 6px;
-  gap: 3px;
-  flex-shrink: 0;
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.85);
+/* ---- from the former pages/top.css ---- */
+/*
+ * Home (トップページ).
+ *
+ * Rules are scoped under #main, the page root every page has, so that the
+ * element-level rules of the older stylesheets (h1–h4, p, li with long
+ * html/body/:lang() chains) cannot reach the parts rebuilt here. When those
+ * stylesheets are folded away the #main prefix can be dropped.
+ */
+/* ---- Hero: paper, the wordmark, one sentence, one action, the real phone */
+#main .nr-hero {
+  position: relative;
+  margin: 0;
+  padding: clamp(28px, 3.6vw, 52px) 0 0;
+  overflow: visible;
+  background: var(--paper);
+  color: var(--ink);
 }
-.fd-brush-dot {
-  width: 7px;
-  height: 7px;
+
+#main .nr-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(32px, 6vw, 104px);
+  align-items: center;
+}
+
+#main .nr-hero-copy {
+  min-width: 0;
+  max-width: 640px;
+}
+
+#main .nr-hero-wordmark {
+  margin: 0;
+  line-height: 0;
+}
+
+#main .nr-hero-brand-logo {
+  display: block;
+  width: clamp(200px, 24vw, 336px);
+  height: auto;
+}
+
+#main .nr-hero-name {
+  margin: 12px 0 0;
+  color: var(--ink-2);
+  font: 400 0.875rem / 1.5 var(--font-sans);
+  letter-spacing: 0.08em;
+}
+/* The concept line the owner chose, quiet under the reading. */
+#main .nr-hero-concept {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+  font: 400 0.9375rem / 1.6 var(--font-sans);
+}
+
+#main .nr-hero-strap {
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  color: var(--ink);
+  font: 400 clamp(1.5rem, 1.05rem + 1.55vw, 2.3rem) / 1.36 var(--font-serif);
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+#main .nr-hero-lead {
+  max-width: 34em;
+  margin: 18px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.9 var(--font-sans);
+}
+
+#main .nr-hero .nr-store-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin: 28px 0 0;
+}
+
+#main .nr-hero-feature-link {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  border-radius: var(--radius-control);
+  background: var(--pencil);
+  color: var(--color-white);
+  font: 400 1rem / 1.2 var(--font-serif);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+#main .nr-hero-feature-link:hover {
+  background: var(--pencil-dark);
+}
+
+#main .nr-hero-screens-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--ink);
+  font: 400 0.9375rem / 1.4 var(--font-serif);
+  text-decoration: underline;
+  text-decoration-color: var(--pencil);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+}
+
+#main .nr-hero-screens-link:hover {
+  color: var(--pencil-ink);
+}
+
+#main :is(.nr-hero-feature-link, .nr-hero-screens-link):focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+#main .nr-hero .nr-store-notice,
+#main .nr-hero .nr-play-trademark {
+  margin: 16px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.6 var(--font-sans);
+}
+
+#main .nr-hero .nr-play-trademark {
+  margin-top: 6px;
+  font-size: 0.75rem;
+}
+/* The one floating object on the page: the phone, upright, with its own
+   shadow. */
+#main .nr-hero-showcase {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin: 0;
+}
+/* The capture fills its frame exactly at every width; the bezel is a ring
+   drawn outside it (and the margin keeps the ring's room in the layout). */
+#main .nr-shot.nr-hero-phone {
+  width: clamp(190px, calc(17vw - 18px), 234px);
+  margin: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 27px;
+  background: var(--ink);
+  box-shadow:
+    0 0 0 9px var(--ink),
+    var(--shadow-device);
+}
+
+#main .nr-hero-phone :is(picture, img) {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 27px;
+}
+
+#main .nr-hero-caption {
+  max-width: 20em;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.6 var(--font-sans);
+  text-align: center;
+}
+/* ---- Frame strip: the bouncing ball, numbered like an exposure sheet ---- */
+#main .nr-frames {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: 16px clamp(16px, 2.4vw, 32px);
+  align-items: start;
+  margin-block: clamp(28px, 3.4vw, 44px) 0;
+  padding: 20px 0 clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--rule-strong);
+}
+/* Only holds the drawings the frames reuse; it must take no room (the rule
+   below for the frames' drawings is more specific than a class alone). */
+#main .nr-frames svg.nr-frames-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#main .nr-frames svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#main .nr-frames-preview {
+  display: grid;
+  gap: 8px;
+}
+
+#main .nr-frames-sheet {
+  margin-top: calc(0.8125rem + 8px);
+}
+
+#main .nr-frames-preview svg {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+}
+
+#main :is(.nr-frames-label, .nr-frame-no) {
+  color: var(--pencil-ink);
+  font: 400 0.8125rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+#main .nr-frames-sheet {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  list-style: none;
+}
+
+#main .nr-frame {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 8px 6px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--sheet);
+}
+/* The key frame is circled in red pencil, as an animator marks a drawing. */
+#main .nr-frame.is-key .nr-frame-no {
+  display: inline-grid;
+  width: 1.75em;
+  height: 1.75em;
+  place-items: center;
+  margin: -0.3em 0 -0.15em -0.3em;
+  border: 1.5px solid var(--pencil);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  flex-shrink: 0;
 }
-.fd-brush-size,
-.fd-brush-opacity {
-  font-size: 9px;
-  line-height: 1;
+
+#main .nr-ball-shadow {
+  fill: rgba(40, 36, 44, 0.14);
 }
-.fd-brush-opacity-ic {
-  width: 10px;
-  height: 10px;
-  opacity: 0.8;
-}
-.fd-brush-toggle {
-  font-size: 8px;
+/* Onion skin as the app draws it: the previous frame in red, the next in
+   blue, both faint. */
+#main .nr-onion {
   opacity: 0.6;
 }
 
-/* ---- フレームストリップ（ツールバー直下、frame_strip_widget.dart再現） ---- */
-.fd-frame-strip {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 52px;
-  background: rgba(0, 0, 0, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 4px;
-  gap: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-  position: relative;
+#main .nr-frames-caption {
+  grid-column: 2;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.7 var(--font-sans);
 }
-/* 中央固定枠（現在フレームを示す。常に左右中央に表示） */
-.fd-frame-strip::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 4px;
-  bottom: 4px;
-  width: 36px;
-  transform: translateX(-50%);
-  border: 2.5px solid #ffb020;
-  border-radius: 3px;
-  pointer-events: none;
-  z-index: 1;
+/* Playback: each drawing shows for one eighth of a second, like 8 fps. */
+#main .nr-flip {
+  visibility: hidden;
+  animation: nr-flip 1s steps(1, end) infinite;
+  animation-delay: calc(var(--i) * 0.125s);
 }
-.fd-frame-strip-scroll {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2px;
-  overflow: hidden;
-  height: 100%;
-  justify-content: center;
-}
-.fd-frame-thumb {
-  flex-shrink: 0;
-  width: 36px;
-  height: 44px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  overflow: hidden;
-}
-.fd-frame-add {
-  flex-shrink: 0;
-  width: 36px;
-  height: 44px;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.4);
-}
-.fd-frame-add .ic {
-  width: 14px;
-  height: 14px;
-}
-.fd-frame-strip-mode {
-  margin-left: auto;
-  flex-shrink: 0;
-  font-size: 8px;
-  color: rgba(255, 255, 255, 0.5);
-  padding: 2px 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  white-space: nowrap;
+/* Before the animation starts, in screenshots, with reduced motion and when
+   animations are switched off, the first drawing stands still, so the box is
+   never empty. */
+#main .nr-flip:first-of-type {
+  visibility: visible;
 }
 
-/* screenshot-card 内の feature-diagram は上から順に積む（justify-content: flex-start） */
-.screenshot-card .feature-diagram {
-  justify-content: flex-start;
+@keyframes nr-flip {
+  0% {
+    visibility: visible;
+  }
+  12.5%,
+  100% {
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main .nr-flip {
+    animation: none;
+  }
+}
+@media (max-width: 820px) {
+  /* Stacked, the frame strip comes straight after the action so that the
+     playing animation is in the first screen; the phone follows it. */
+  #main .nr-hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #main .nr-hero-grid {
+    display: contents;
+  }
+
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: min(1216px, calc(100% - 48px));
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  #main .nr-frames {
+    order: 1;
+    margin-block: 32px 0;
+    padding-bottom: 32px;
+  }
+
+  #main .nr-hero-showcase {
+    order: 2;
+    margin-bottom: clamp(40px, 8vw, 64px);
+  }
+
+  #main .nr-hero-showcase {
+    justify-self: start;
+    justify-items: start;
+  }
+
+  #main .nr-hero-caption {
+    text-align: left;
+  }
+
+  #main .nr-frames {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .nr-frames-preview {
+    max-width: 320px;
+  }
+
+  #main .nr-frames-caption {
+    grid-column: 1;
+  }
+}
+@media (max-width: 740px) {
+  /* Same column as .nr-wrap at these widths. */
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: min(100% - 32px, 600px);
+  }
+}
+@media (max-width: 560px) {
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: calc(100% - 36px);
+  }
+}
+@media (max-width: 480px) {
+  #main .nr-hero-feature-link {
+    width: 100%;
+  }
+
+  #main .nr-frame {
+    padding: 6px 4px 4px;
+  }
+}
+/* ---- Body sections: one paper, numbered like a timesheet ---- */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing
+  ) {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  background-image: none;
+  color: var(--ink);
+}
+/* One section rhythm: every section after the frames has the same space
+   above and below its rule (the workspace, plaza, gallery, pricing and
+   closing sections had kept their old band paddings: 100–130px on desktops
+   and 72–85px on phones against 104px and 56px for the others). */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing,
+    .nr-launch
+  ) {
+  padding-block: clamp(56px, 7vw, 104px);
+}
+/* Every numbered section heading has the same size and sits on the left,
+   like the entries of one sheet (they were 4–5rem, centred in the first one,
+   and the workspace heading broke into four lines at 1440px). */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing
+  )
+  h2 {
+  max-width: 30em;
+  margin: 0 0 14px;
+  color: var(--ink);
+  font: 400 clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem) / 1.3 var(--font-serif);
+  letter-spacing: 0.01em;
 }
 
-/* Real app captures must use the capture's native 320x569 geometry.
-   Legacy coded-mock aspect ratios/chrome must never create letterboxing. */
-.hero-visual.hero-visual--real {
-  width: min(100%, 320px);
-  aspect-ratio: 320 / 569;
+#main .nr-statement {
+  text-align: left;
+}
+
+#main .nr-statement > p:last-child {
+  max-width: 44em;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.8 var(--font-sans);
+}
+/* The three steps of the flow: the step number in red pencil (it was an
+   English label, 「01 — DRAW」), the step name one size below the section
+   heading. */
+#main .nr-story {
+  padding-bottom: 0;
+}
+
+#main .nr-story-card:last-child {
+  border-bottom: 0;
+}
+
+#main .nr-story-copy .nr-step {
+  display: block;
   padding: 0;
   border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: hidden;
+  color: var(--pencil-ink);
+  font: 400 0.875rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
 }
-.hero-visual.hero-visual--real::before {
-  content: none;
+
+#main .nr-story-copy h3 {
+  margin: 12px 0 0;
+  color: var(--ink);
+  font: 400 clamp(1.35rem, 1rem + 1vw, 1.75rem) / 1.35 var(--font-serif);
+  letter-spacing: 0.01em;
 }
-.hero-visual--real > .real-app-capture,
-.hero-visual--real > .real-app-capture > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.hero-visual--real > .real-app-capture > img {
-  object-fit: contain;
-}
-.screenshot-card:has(.real-app-capture) {
-  width: min(72vw, 320px);
-  aspect-ratio: 320 / 569;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-.screenshot-card:has(.real-app-capture) > .real-app-capture,
-.screenshot-card:has(.real-app-capture) > .real-app-capture > img,
-.feature-media:has(.real-app-capture) > .real-app-capture,
-.feature-media:has(.real-app-capture) > .real-app-capture > img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.screenshot-card:has(.real-app-capture) img,
-.feature-media:has(.real-app-capture) img {
-  object-fit: contain;
-}
-.feature-media:has(.real-app-capture) {
-  width: min(100%, 320px);
-  aspect-ratio: 320 / 569;
+/* Work Plaza: the phone stands on the paper, without a tinted panel. */
+#main .nr-plaza-art {
   padding: 0;
   border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  background: none;
+}
+/* Plan names in the price summary are words in the reader's language, set
+   like the other small labels (they were English capitals in pink). */
+#main .nr-pricing-panel small {
+  color: var(--ink-2);
+  font: 400 0.8125rem / 1.4 var(--font-sans);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+#main .tp-index {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--pencil-ink);
+  font: 400 0.875rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+/* Every capture sits in the same neutral frame (no per-screen colours). */
+#main .nr-shot {
+  --capture-accent: var(--ink);
+}
+/* ---- NIARIM-only features, each shown with the engine's real output ---- */
+#main .tp-head {
+  max-width: 44em;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+}
+
+#main .tp-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem) / 1.3 var(--font-serif);
+}
+
+#main .tp-head p {
+  margin: 14px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.8 var(--font-sans);
+}
+
+#main .tp-unique-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 56px) clamp(20px, 3vw, 40px);
+}
+
+#main .tp-feature {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  margin: 0;
+}
+
+#main .tp-feature h3 {
+  margin: 18px 0 0;
+  color: var(--ink);
+  font: 400 1.125rem / 1.4 var(--font-serif);
+}
+
+#main .tp-feature p {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-figure {
+  display: flex;
+  height: clamp(200px, 22vw, 280px);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 16px;
   overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
 }
 
-/* Real captures still sit inside a visible device/frame treatment. The frame
-   is decoration only; the capture itself keeps its native 320:569 ratio. */
-.feature-row[data-mock-theme] .feature-media:has(.real-app-capture) {
-  box-sizing: content-box;
-  border: 5px solid var(--capture-frame, var(--color-ink));
-  border-radius: var(--radius-lg);
-}
-.feature-row[data-mock-theme="row1"] {
-  --capture-frame: #f2b90f;
-}
-.feature-row[data-mock-theme="row2"] {
-  --capture-frame: #d45aa6;
-}
-.feature-row[data-mock-theme="row3"] {
-  --capture-frame: #5c6bff;
-}
-.feature-row[data-mock-theme="row4"] {
-  --capture-frame: #00a6a6;
-}
-.feature-row[data-mock-theme="row5"] {
-  --capture-frame: #e08b00;
+#main .tp-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
 
-.screenshot-card:has(.real-app-capture) {
-  box-sizing: content-box;
-  border: 5px solid var(--capture-frame, var(--color-ink));
-  border-radius: var(--radius-lg);
+#main .tp-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
-.screenshot-card[data-mock-theme="shot1"] {
-  --capture-frame: #b15cff;
-}
-.screenshot-card[data-mock-theme="shot2"] {
-  --capture-frame: #567d46;
-}
-.screenshot-card[data-mock-theme="shot3"] {
-  --capture-frame: #d8a0a6;
-}
-.screenshot-card[data-mock-theme="shot4"] {
-  --capture-frame: #9a4fd0;
-}
-.screenshot-card[data-mock-theme="shot5"] {
-  --capture-frame: #6678b8;
-}
-.screenshot-card[data-mock-theme="shot6"] {
-  --capture-frame: #485cc7;
+/* Before / after: two equal panels side by side, each with its own name
+   underneath, so the two can be compared at a glance. */
+#main
+  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
+  figure {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
 }
 
-.hero-showcase--real .hero-preview-card {
-  overflow: hidden;
-  background: transparent;
-  border-width: 5px;
-  border-style: solid;
+#main .tp-pair figure {
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
 }
-.hero-showcase--real .hero-preview-canvas {
-  border-color: #10b981;
+
+#main .tp-pair img {
+  align-self: center;
+  max-height: 100%;
+  object-fit: contain;
 }
-.hero-showcase--real .hero-preview-timeline {
-  border-color: #ef6c57;
+
+#main
+  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
+  figcaption {
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.4 var(--font-sans);
+  text-align: center;
 }
-.hero-showcase--real .hero-preview-workspace {
-  border-color: #c76c8a;
+
+#main .tp-strips {
+  display: grid;
+  align-content: center;
+  gap: 14px;
 }
-.hero-showcase--real .hero-real-capture,
-.hero-showcase--real .hero-real-capture > img {
+
+#main .tp-strips figure {
+  justify-items: start;
+  width: 100%;
+}
+
+#main .tp-strips img {
+  width: 100%;
+}
+/* Custom brushes: one sheet, three labelled groups (the fold types of the
+   ribbon brush, the hair presets, pixel mode off and on). */
+#main .tp-feature--wide {
+  grid-column: 1 / -1;
+}
+
+#main .tp-brush-sheet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px clamp(24px, 4vw, 64px);
+  padding: 24px clamp(16px, 2.6vw, 36px) 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-brush-group {
+  min-width: 0;
+}
+
+#main .tp-brush-group--fold {
+  grid-column: 1 / -1;
+}
+
+#main .tp-brush-label {
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font: 400 0.8125rem / 1.4 var(--font-sans);
+}
+
+#main .tp-brush-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 16px 24px;
+}
+
+#main .tp-brush-group--fold .tp-brush-items {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+/* Every picture sits in a box of the same height, so the names below line
+   up across the groups. */
+#main .tp-brush-items figure {
+  --brush-box: 250px;
+  display: grid;
+  grid-template-rows: var(--brush-box) auto;
+  justify-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
+#main .tp-brush-group--fold figure {
+  --brush-box: 300px;
+}
+
+#main .tp-brush-items img {
+  display: block;
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: var(--brush-box);
+}
+/* The hearts are 32 px canvases shown at a whole multiple of their size,
+   nearest neighbour, so every pixel stays square. */
+#main .tp-brush-group--pixel img {
+  width: 192px;
+  max-width: none;
+  height: 192px;
+  image-rendering: pixelated;
+}
+
+#main .tp-filter-grid img[src*="dither-o"] {
+  image-rendering: pixelated;
+}
+/* Auto fill: the settings, the line art, the colour separation and the
+   result, in the order they happen. */
+#main :is(.tp-fill, .tp-filters) {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+
+#main .tp-fill-text {
+  max-width: 44em;
+}
+
+#main .tp-fill-text h3 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 1.125rem / 1.4 var(--font-serif);
+}
+
+#main .tp-fill-text p {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-fill-text .tp-note {
+  font-size: 0.75rem;
+}
+
+#main :is(.tp-steps, .tp-filter-grid) {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main .tp-steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+#main .tp-steps > li,
+#main .tp-filter-grid > li {
+  min-width: 0;
+  margin: 0;
+}
+
+#main :is(.tp-steps, .tp-filter-grid) img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
 }
-.hero-showcase--real .hero-real-capture > img {
+/* The first step is a phone screen: the same width as the drawings, its
+   top part shown so that the parts and their colours read. */
+#main .tp-step-capture img {
+  aspect-ratio: 346 / 464;
   object-fit: cover;
+  object-position: top;
 }
 
-/* Real gallery captures define their own vertical geometry. The frame wraps the
-   decoded 320x569 image instead of imposing the old mock-card ratio, so no
-   extra strip can appear above or below the capture. */
-.screenshot-scroller .screenshot-card:has(> .real-app-capture) {
-  box-sizing: content-box;
-  width: min(72vw, 320px);
-  height: auto;
-  aspect-ratio: auto;
-  overflow: hidden;
+#main .tp-steps figcaption {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: flex-start;
+  text-align: left;
 }
-.screenshot-scroller
-  .screenshot-card:has(> .real-app-capture)
-  > .real-app-capture,
-.screenshot-scroller
-  .screenshot-card:has(> .real-app-capture)
-  > .real-app-capture
-  > img {
+/* Step numbers in red pencil, like the frame numbers above. */
+#main .tp-step-no {
+  color: var(--pencil-ink);
+  font: 400 0.8125rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+}
+/* The colour marks of step 3: each name beside the line and tint used for
+   it in the picture. */
+#main .tp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.5 var(--font-sans);
+}
+
+#main .tp-legend li {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+#main .tp-legend li::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border: 2px solid;
+  border-radius: 2px;
+}
+
+#main .tp-legend .is-shadow::before {
+  border-color: #2f6bdb;
+  background: #bde6f6;
+}
+
+#main .tp-legend .is-highlight::before {
+  border-color: #e5394b;
+  background: #fff07a;
+}
+
+#main .tp-legend .is-deep::before {
+  border-color: #d23bae;
+  background: #f6b5e2;
+}
+/* Share and save tree: a real capture beside its text. */
+/* App screens (phone captures) laid on the sheet one after another, at a
+   width where the app's labels can be read. */
+#main .tp-filter-grid.tp-screen-grid {
+  grid-template-columns: repeat(auto-fill, minmax(0, 340px));
+  max-width: none;
+}
+@media (min-width: 1180px) {
+  /* Saving and sharing: on a wide screen the text sits beside the phone
+   captures, so the row is used across its width (the captures alone filled
+   a little over half of it). Narrower screens stack them. */
+  #main :is(.tp-save, .tp-share) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: clamp(40px, 4vw, 72px);
+  }
+
+  #main :is(.tp-save, .tp-share) .tp-fill-text {
+    max-width: 30em;
+  }
+
+  #main :is(.tp-save, .tp-share) .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: repeat(auto-fill, 340px);
+    margin-top: 0;
+  }
+
+  #main .tp-save .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: repeat(2, 340px);
+  }
+  /* One capture: it stays next to its text. */
+  #main .tp-share {
+    grid-template-columns: minmax(0, 30em) auto;
+    justify-content: start;
+  }
+}
+/* Home screen widgets: the pictures the app makes, at their own size
+   (150 px tiles with a 10 px shadow margin), grouped by how the colour is
+   chosen. */
+#main .tp-widget-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px clamp(24px, 4vw, 64px);
+  margin-top: 24px;
+  padding: 24px clamp(16px, 2.6vw, 36px);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-widget-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+#main .tp-widget-items img {
+  display: block;
+  width: 170px;
+  height: auto;
+}
+
+#main .tp-widget-items img.is-wide {
+  width: 320px;
+}
+/* The same screen in four themes and the colour settings, in one row. */
+#main .tp-filter-grid.tp-theme-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: none;
+}
+
+#main .tp-screen-grid img,
+#main .tp-theme-grid img {
+  border-radius: 10px;
+}
+
+#main .tp-subhead {
+  margin: 36px 0 0;
+  color: var(--ink);
+  font: 400 1rem / 1.4 var(--font-serif);
+}
+
+#main .tp-subnote {
+  max-width: 44em;
+  margin: 6px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-subnote + .tp-filter-grid {
+  margin-top: 16px;
+}
+
+#main .tp-tone-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 760px;
+}
+
+#main .tp-filter-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1000px;
+}
+
+#main .tp-texture-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 1160px;
+}
+/* A wide timeline capture: full width on large screens; on narrow ones it
+   keeps a readable size and scrolls sideways inside its frame. */
+#main .tp-wide-capture {
+  margin: 24px 0 0;
+}
+
+#main .tp-wide-capture-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-wide-capture-scroll:focus-visible {
+  outline: 2px solid var(--pencil);
+  outline-offset: 2px;
+}
+
+#main .tp-wide-capture img {
   display: block;
   width: 100%;
+  min-width: 860px;
   height: auto;
-  aspect-ratio: 320 / 569;
+}
+
+#main .tp-wide-capture figcaption {
+  max-width: 52em;
+  margin-top: 8px;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.6 var(--font-sans);
+}
+@media (max-width: 1023px) {
+  #main .tp-unique-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-brush-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .tp-texture-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #main .tp-filter-grid.tp-theme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #main .tp-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 599px) {
+  #main .tp-unique-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .tp-figure {
+    height: 240px;
+  }
+
+  #main .tp-brush-sheet {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px 14px;
+  }
+
+  #main .tp-brush-group--fold .tp-brush-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-brush-items figure,
+  #main .tp-brush-group--fold figure {
+    --brush-box: 220px;
+  }
+
+  #main .tp-brush-group--pixel img {
+    width: 128px;
+    height: 128px;
+  }
+
+  #main .tp-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: minmax(0, 360px);
+  }
+
+  #main .tp-filter-grid.tp-theme-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-widget-items img {
+    width: 140px;
+  }
+
+  #main .tp-widget-items img.is-wide {
+    width: 264px;
+  }
+}
+@media (max-width: 359px) {
+  #main .tp-brush-group--pixel img {
+    width: 96px;
+    height: 96px;
+  }
+}
+/* Captures: one neutral frame (the per-screen colour comes in through an
+   inline custom property, so the shadow itself is replaced). */
+#main .nr-shot {
+  box-shadow:
+    0 0 0 1px var(--rule-strong),
+    0 18px 36px -22px rgba(40, 36, 44, 0.4);
+}
+
+#main .nr-story-card {
+  background: transparent;
+  box-shadow: none;
+}
+
+#main :is(.nr-gallery-visual, .nr-story-media, .nr-workspace-media) {
+  background: transparent;
+}
+/* The workspace captures set the height of their column (it kept the 480px
+   of the coloured box it used to be, which left up to 120px of bare paper
+   above and below the captures at tablet widths). */
+#main .nr-workspace-media {
+  height: auto;
+}
+/* Closing: the owner's invitation, then where to get the app. */
+#main .nr-launch h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 var(--fs-h2) / 1.4 var(--font-serif);
+}
+
+#main .nr-launch .nr-launch-body {
+  max-width: 36em;
+  margin: 20px auto 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 2 var(--font-sans);
+  text-wrap: pretty;
+}
+
+#main .nr-launch .nr-launch-release {
+  margin: 40px 0 0;
+  color: var(--ink);
+  font: 400 1rem / 1.5 var(--font-serif);
+}
+
+#main .nr-launch .nr-launch-release-body {
+  margin: 6px auto 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+/* The wide brush text keeps a readable line length. */
+#main .tp-feature--wide > p {
+  max-width: 44em;
 }

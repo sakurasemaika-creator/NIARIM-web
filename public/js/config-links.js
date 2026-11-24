@@ -94,15 +94,6 @@
     document.head.appendChild(script);
   }
 
-  function addStyleOnce(href, marker) {
-    if (document.querySelector("link[" + marker + "]")) return;
-    var link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    link.setAttribute(marker, "true");
-    document.head.appendChild(link);
-  }
-
   // Features: the auto line art paragraph in "作画支援" is added by
   // advanced-narrative-normalizer.js. (The drawn stand-in screens that used to
   // be loaded here were always replaced by the real app captures.)

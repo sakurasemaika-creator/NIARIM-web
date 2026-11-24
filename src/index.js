@@ -77,18 +77,6 @@ const OG_LOCALES = {
   es: "es_ES",
 };
 
-const COMMON_STYLE_PRELOADS = [
-  "/css/common-base.css",
-  "/css/reference-polish.css",
-  "/css/responsive-foundation.css",
-];
-
-const MOCK_STYLE_PRELOADS = [
-  "/css/screen-mock-accuracy-base.css",
-  "/css/visual-finish.css",
-  "/css/screen-mock-fidelity.css",
-];
-
 const HOME_REPLACED_MEDIA_SELECTORS = [
   '#features .feature-row[data-mock-theme="row1"] .feature-media',
   '#features .feature-row[data-mock-theme="row2"] .feature-media',
@@ -201,43 +189,13 @@ function performanceHeadMarkup(page, lang) {
           '<link rel="preload" href="/assets/fonts/Kuramubon-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
         ].join("")
       : "";
-  const preloads = hasScreenMocks
-    ? COMMON_STYLE_PRELOADS.concat(MOCK_STYLE_PRELOADS)
-    : COMMON_STYLE_PRELOADS;
-  const preloadMarkup = preloads
-    .map((href) => `<link rel="preload" href="${href}" as="style">`)
-    .join("");
+  // The page's stylesheets (site.css and its own file) are already in the
+  // <head>; only the scripts are preloaded here.
   const runtime = hasScreenMocks ? "/js/main.js" : "/js/common-ui.js";
   const scriptPreloads =
     `<link rel="preload" href="/js/generated/i18n-${page}.js" as="script">` +
     `<link rel="preload" href="${runtime}" as="script">`;
-
-  const globalLayers =
-    '<link rel="stylesheet" href="/css/polish.css" data-niarim-polish>' +
-    '<link rel="stylesheet" href="/css/responsive-consistency.css" data-niarim-responsive-consistency>' +
-    '<link rel="stylesheet" href="/css/line-break.css" data-niarim-line-break>';
-
-  if (!hasScreenMocks) {
-    return (
-      fontPreloadMarkup +
-      preloadMarkup +
-      scriptPreloads +
-      globalLayers +
-      "<link data-niarim-screen-mock-accuracy>" +
-      "<link data-niarim-mock-palette>" +
-      "<link data-niarim-mock-layout>"
-    );
-  }
-
-  return (
-    fontPreloadMarkup +
-    preloadMarkup +
-    scriptPreloads +
-    globalLayers +
-    '<link rel="stylesheet" href="/css/screen-mock-accuracy.css" data-niarim-screen-mock-accuracy>' +
-    '<link rel="stylesheet" href="/css/screen-mock-palette.css" data-niarim-mock-palette>' +
-    '<link rel="stylesheet" href="/css/screen-mock-layout-fix.css" data-niarim-mock-layout>'
-  );
+  return fontPreloadMarkup + scriptPreloads;
 }
 
 function structuredData(request, env, metadata) {

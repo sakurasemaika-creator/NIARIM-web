@@ -1,10 +1,8 @@
 import fs from "node:fs/promises";
 
-const [behavior, home, features, css] = await Promise.all([
+const [behavior, features] = await Promise.all([
   fs.readFile("public/js/popup-mock-interactions.js", "utf8").catch(() => ""),
-  fs.readFile("public/index.html", "utf8"),
   fs.readFile("public/features/index.html", "utf8"),
-  fs.readFile("public/css/popup-close-affordance.css", "utf8"),
 ]);
 
 const failures = [];
@@ -21,17 +19,14 @@ expect(
     behavior.includes('panel.classList.add("is-dismissed")'),
   "Screen mocks must dismiss the floating tool panel from the close affordance or an outside canvas tap without dismissing from an inside-panel tap",
 );
-expect(
-  css.includes(".fd-app-overlay-panel.is-dismissed") &&
-    css.includes("display: none !important"),
-  "Dismissed mock panels must be hidden by the final popup parity layer",
-);
-for (const [name, html] of [
-  ["home", home],
-  ["features", features],
-]) {
+// The CSS that hid dismissed mock panels (popup-close-affordance.css) went
+// with the stylesheet consolidation on 2026-11-24: the panel mocks are
+// replaced by real app captures before they are shown, so it matched nothing.
+// The home page was rebuilt without main.js (2026-11-09); only Features
+// still loads the mock runtime.
+for (const [name, html] of [["features", features]]) {
   expect(
-    html.includes('<script src="/js/main.js"></script>') &&
+    /<script src="\/js\/main\.js(?:\?v=[\w-]+)?"><\/script>/.test(html) &&
       html.includes('<script src="/js/popup-mock-interactions.js"></script>') &&
       html.indexOf("/js/popup-mock-interactions.js") >
         html.indexOf("/js/main.js"),

@@ -1,3 +1,86 @@
+/* ---- from the former user-request-fixes.css ---- */
+html body #widget .fd-widget-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  align-items: start !important;
+  align-content: start !important;
+  grid-auto-rows: min-content !important;
+  gap: 8px !important;
+  padding: 12px !important;
+}
+html body #widget .fd-widget-grid > .fd-widget-tile {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 104px !important;
+  max-height: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  padding: 10px !important;
+}
+@media (max-width: 900px) {
+  .main-nav {
+    padding: clamp(0.85rem, 3vh, 1.35rem) var(--container-padding) !important;
+  }
+  .main-nav > ul {
+    gap: clamp(0.2rem, 1.1vh, 0.55rem) !important;
+  }
+  .main-nav > ul > li {
+    width: 100% !important;
+  }
+  .main-nav a:not(.btn) {
+    width: 100% !important;
+    /* 44px touch targets in the drawer too (42px before). */
+    min-height: 44px !important;
+    padding-block: 0.25rem !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-dropdown {
+    width: 100% !important;
+    margin-top: 0.35rem !important;
+  }
+  .main-nav .lang-trigger {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-menu button {
+    text-align: left !important;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  /* On tablets the drawer's column keeps a phone-like measure instead of
+   stretching the button and the language field across 940px. */
+  .main-nav > :is(ul, .btn, .lang-dropdown) {
+    width: min(100%, 520px) !important;
+  }
+}
+@media (max-width: 560px) {
+  html body #widget .fd-widget-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* Real NIARIM captures are the source of truth for app-screen previews.
+   Intrinsic image dimensions determine height, preventing CSS mock collapse. */
+.feature-diagram.feature-diagram--real {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+  overflow: hidden;
+  background: transparent !important;
+}
+.feature-diagram--real .real-app-capture,
+.feature-diagram--real .real-app-capture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.feature-diagram--real .real-app-capture img {
+  object-fit: contain;
+}
+
+/* ---- from the former pages/features.css ---- */
 /* ==========================================================================
    NIARIM features.css - 機能紹介ページ専用スタイル
    ========================================================================== */
@@ -28,81 +111,9 @@
   word-break: normal;
 }
 
-/* スクロールに追従するタブ型ナビ（Clip Studio公式サイト等を参照）。
-   scroll-spyでの現在地ハイライトは animations.js が付与する is-active で切替。 */
-.feature-nav {
-  position: sticky;
-  top: var(--header-height);
-  z-index: 50;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  padding-block: var(--space-md);
-  margin-bottom: var(--space-lg);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.feature-nav a {
-  /* デフォルトのinline要素のままだとbodyのline-height: 1.7がそのまま
-     効いてしまい、フォントの内部の余白（行送り）が上下非対称なぶん、
-     文字がピルの中で下寄り／上寄りに見えてしまう。.btn等サイト内の
-     他のピル型ボタンと同じくinline-flexで上下中央揃えにする。 */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.2;
-  /* 親.feature-navのflexコンテナ内で縮小されてボタンが文字数に対して
-     窮屈にならないよう、常に内容分の幅を確保する。 */
-  flex: 0 0 auto;
-  padding: 0.5rem 1.1rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-gray-300);
-  font-size: var(--fs-small);
-  font-weight: 600;
-  white-space: nowrap;
-  transition:
-    background var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
-}
-
-.feature-nav a:hover {
-  border-color: var(--color-accent);
-  /* 枠線は装飾用アクセントのまま、文字だけコントラストを満たす濃色にする。 */
-  color: var(--color-accent-text);
-}
-
-.feature-nav a.is-active {
-  background: var(--grad-brand);
-  border-color: transparent;
-  color: var(--color-white);
-}
-
-.feature-section {
-  padding-block: var(--space-xl);
-  /* ヘッダーぶんの余白は html の scroll-padding-top が既に見ている。
-     ここでさらに --header-height を足していたため二重に効き、タブを
-     押すと節の上に110pxの空白が残っていた。ここで足すのは、ヘッダーの
-     下に貼り付く節タブの高さぶんだけでよい。 */
-  scroll-margin-top: 3.4rem;
-}
-
 .feature-section:not(:last-child) {
   border-bottom: 1px solid var(--color-border);
 }
-
-.feature-section-head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
-  flex-wrap: wrap;
-}
-
 /* 各セクションの見出し左には、絵文字ではなくアプリ本体と同じアイコン
    (sprite.svg)を白抜きで配置する(.feature-section-icon、HTML側で
    #ic-*を指定)。 */
@@ -116,7 +127,6 @@
 .feature-section-head h2 {
   font-size: var(--fs-h2);
 }
-
 /* Only the lead line beside the heading: the words that i18n.js keeps
    together inside the h2 are spans as well, and took this small grey style
    (the section names shrank to a 14px label, 「作画支援ツール」 on three lines). */
@@ -125,34 +135,6 @@
   font-size: var(--fs-small);
   color: var(--color-text-muted);
   margin-top: 0.15rem;
-}
-
-.spec-grid {
-  display: grid;
-  /* 200pxだと広い画面で5〜6列になり、全角の説明文が1行13文字ほどで
-     折り返して読みにくかった。1行あたり16〜18文字を確保できる幅を
-     下限にする。 */
-  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
-  gap: var(--space-md);
-}
-
-.spec-item {
-  /* クリックできる要素ではないため、ホバーで動く演出は付けない
-     （クリックできると誤認させないため）。表示自体の
-     フェードイン（.stagger-grid側）にのみtransitionを使う。 */
-  position: relative;
-  padding: var(--space-md) var(--space-md) var(--space-md) 1.3rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
-  overflow: hidden;
-  transition:
-    opacity var(--duration-base, 0.4s) var(--ease-out),
-    transform var(--duration-base, 0.4s) var(--ease-out);
-}
-
-#export .export-format-guide {
-  grid-column: 1 / -1;
 }
 .export-format-guide dl {
   display: grid;
@@ -218,7 +200,6 @@
   font-size: var(--fs-small);
   color: var(--color-text-muted);
 }
-
 @media (max-width: 640px) {
   .feature-nav {
     justify-content: flex-start;
@@ -226,7 +207,6 @@
     flex-wrap: nowrap;
   }
 }
-
 /* ==========================================================================
    機能図解（feature-diagram）
    px単位まで実際のアプリのソースに合わせた図解。以下のファイルで確認した
@@ -270,495 +250,6 @@
   overflow: hidden;
 }
 
-/* ---- 共通：CanvasIconButton方式のアイコン ----
-   実装(canvas_icon_button.dart)は背景を持たず、アイコンをmenuBg色で
-   8方向へ1pxずつオフセット重ね描きして縁取りにする。CSSでは
-   drop-shadowを4方向に重ねて同じ見た目を近似する。 */
-.fd-icon-btn {
-  --fd-icon-size: 20px; /* CanvasIconButton.iconSize の既定値 */
-  --fd-btn-size: calc(var(--fd-icon-size) + 12px); /* 内側パディング6×2 */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--fd-btn-size);
-  height: var(--fd-btn-size);
-  flex-shrink: 0;
-  color: var(--fd-text);
-}
-
-.fd-icon-btn .ic {
-  width: var(--fd-icon-size);
-  height: var(--fd-icon-size);
-  filter: drop-shadow(1px 0 0 var(--fd-panel))
-    drop-shadow(-1px 0 0 var(--fd-panel)) drop-shadow(0 1px 0 var(--fd-panel))
-    drop-shadow(0 -1px 0 var(--fd-panel)) drop-shadow(1px 1px 0 var(--fd-panel))
-    drop-shadow(-1px -1px 0 var(--fd-panel))
-    drop-shadow(1px -1px 0 var(--fd-panel))
-    drop-shadow(-1px 1px 0 var(--fd-panel));
-}
-
-.fd-icon-btn.is-active {
-  color: var(--fd-accent);
-}
-
-/* ---- 描画：キャンバス＋下部フローティングツールバー ---- */
-.fd-canvas {
-  position: relative;
-  height: 220px;
-  border-radius: var(--radius-md);
-  background: #fff;
-  overflow: hidden;
-}
-
-/* timeline_screen.dart _buildPreviewContent(): AppBar(戻る・undo等)の
-   直下にプレビュー本体が来る。タイムライン系モックアップでは
-   トップバーと再生コントロールの間にこの高さを抑えた版を挟む。 */
-.fd-canvas.fd-preview-mini {
-  height: 90px;
-  margin-top: var(--space-sm);
-}
-
-.fd-canvas.fd-preview-mini svg {
-  width: 60px;
-  height: 60px;
-  margin-inline: auto;
-  display: block;
-}
-
-.fd-canvas svg {
-  width: 100%;
-  height: 100%;
-}
-
-.fd-canvas .fd-stroke {
-  fill: none;
-  stroke: var(--color-ink);
-  stroke-width: 5;
-  stroke-linecap: round;
-}
-
-/* toolbar_widget.dart: Container(height:40, padding: horizontal 4)を
-   SingleChildScrollView(horizontal)でラップしたもの。実画面と同じく
-   背景を持たせず、キャンバスの下端に直接重ねる。項目数が多く画面幅に
-   収まらないため、実際のアプリと同様に横スクロールで全項目を表示する。 */
-.fd-toolbar-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 40px;
-  padding-inline: 4px;
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.fd-toolbar-overlay::-webkit-scrollbar {
-  display: none;
-}
-
-/* toolbar_widget.dart の色インジケーター（丸型、直径28px、枠線2px）。 */
-.fd-color-swatch {
-  display: inline-flex;
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-inline: 6px;
-  border: 2px solid var(--fd-panel);
-  background: var(--fd-accent);
-}
-
-/* canvas_screen.dart _buildTopBar(): padding horizontal 8 / vertical 4、
-   左詰めUndo・Redo→Spacer→右詰め定規・設定・ヘルプ。 */
-.fd-topbar {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  color: var(--fd-text);
-}
-
-.fd-topbar .fd-spacer {
-  flex: 1;
-}
-
-.fd-topbar .fd-icon-btn {
-  --fd-icon-size: 20px;
-}
-
-/* timeline_screen.dart _buildTopBar()内のプロジェクト名表示(Expanded、
-   Kuramubon 16px)。 */
-.fd-timeline-title {
-  flex: 1;
-  min-width: 0;
-  padding-inline: 4px;
-  font-family: "Kuramubon", var(--font-serif);
-  font-size: 0.9rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* timeline_screen.dart _buildToolbar(): 高さ40・spaceEvenly。
-   動画・音声・ウォーターマーク・演出フィルター・カメラキーフレーム・
-   タイムスタンプ・書き出しの7項目を常設。 */
-.fd-timeline-toolbar {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 40px;
-  padding-inline: 8px;
-  background: var(--fd-panel);
-  border-radius: var(--radius-md);
-}
-
-.fd-timeline-toolbar .fd-icon-btn {
-  --fd-icon-size: 18px;
-}
-
-/* ---- アニメーション（タイムライン） ---- */
-/* frame_strip_widget.dart: ストリップ高さ64、サムネイル48×56 */
-.fd-frames {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  height: 64px;
-  padding-inline: 8px;
-  background: var(--fd-panel);
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-}
-
-.fd-frame {
-  flex: 0 0 auto;
-  width: 48px;
-  height: 56px;
-  border-radius: 4px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: var(--color-gray-500);
-  border: 1px solid transparent;
-}
-
-.fd-frame.is-active {
-  border-width: 2px;
-  border-color: var(--fd-accent);
-  color: var(--fd-accent);
-  font-weight: 700;
-}
-
-/* timeline_screen.dart _buildPlaybackControls(): IconButton×5を
-   mainAxisAlignment.centerで並べるのみ。再生ボタンだけを丸く強調する
-   実装は無いため、5つとも同じ見た目にする（前回の丸背景は誤り）。 */
-.fd-transport {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: 8px;
-}
-
-.fd-transport .fd-icon-btn {
-  --fd-icon-size: 24px; /* IconButton既定のアイコンサイズ */
-  --fd-btn-size: 48px; /* IconButtonの既定タップ領域 */
-}
-
-/* ---- 編集（レイヤーパネル） ---- */
-/* layer_panel.dart: ListTile(dense: true)の1行あたりの高さは
-   Material仕様のdense一行=48px。 */
-.fd-layers {
-  background: var(--fd-panel);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-/* layer_panel.dart build()冒頭のヘッダー行：タイトル→Spacer→
-   全レイヤー結合(merge_type)・ヘルプ(help_outline)・検索(search)。 */
-.fd-layer-header {
-  display: flex;
-  align-items: center;
-  height: 32px;
-  padding-inline: 8px;
-  gap: 2px;
-  color: var(--fd-text);
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.fd-layer-header .fd-spacer {
-  flex: 1;
-}
-
-.fd-layer-header .fd-icon-btn {
-  --fd-icon-size: 16px;
-  --fd-btn-size: 24px;
-}
-
-/* レイヤー一覧の直上にある4分割ショートカット行：
-   新規レイヤー(add)・新規フォルダ(folder)・追加(library_add)・
-   画像読み込み(photo→ic-image流用)。 */
-.fd-layer-shortcuts {
-  display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.fd-layer-shortcuts .fd-shortcut-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding-block: 6px;
-  color: var(--fd-text);
-}
-
-.fd-layer-shortcuts .fd-shortcut-btn .ic {
-  width: 14px;
-  height: 14px;
-}
-
-.fd-layer-shortcuts .fd-shortcut-btn span {
-  font-size: 0.55rem;
-  white-space: nowrap;
-}
-
-.fd-layer-row {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  padding-inline: 12px;
-  gap: 4px;
-  color: var(--fd-text);
-  font-size: 0.8rem;
-}
-
-.fd-layer-row:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.fd-layer-row.is-active {
-  background: rgba(255, 92, 122, 0.18);
-}
-
-.fd-layer-row .ic-eye {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-
-.fd-layer-row .ic-type {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-}
-
-/* レイヤー種別アイコンの実配色（layer_panel.dart _layerTypeIcon）。
-   通常レイヤーはアイコン無し（12px分の空白のみ）。 */
-.fd-layer-row .ic-type.is-autofill-lineart {
-  color: #ff9800; /* Colors.orange */
-}
-.fd-layer-row .ic-type.is-autofill {
-  color: #4caf50; /* Colors.green */
-}
-.fd-layer-row .ic-type.is-common {
-  color: #2196f3; /* Colors.blue */
-}
-.fd-layer-row .ic-type.is-folder {
-  color: #ffc107; /* Colors.amber */
-}
-
-.fd-layer-thumb {
-  width: 24px;
-  height: 24px;
-  border-radius: 2px;
-  background: #fff;
-  flex-shrink: 0;
-  margin-inline-start: 4px;
-}
-
-.fd-layer-name {
-  flex: 1;
-  min-width: 0;
-  margin-inline-start: 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.fd-layer-row .ic-drag {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  margin-inline-start: 8px;
-  opacity: 0.6;
-}
-
-/* ---- 作画支援（上部バー＋オニオンスキン） ---- */
-.fd-canvas .fd-stroke-prev {
-  fill: none;
-  stroke: #ff0000; /* OnionSkinSettings.prevColor の既定値 */
-  stroke-width: 4;
-  stroke-linecap: round;
-  opacity: 0.35;
-}
-
-.fd-canvas .fd-stroke-next {
-  fill: none;
-  stroke: #0000ff; /* OnionSkinSettings.nextColor の既定値 */
-  stroke-width: 4;
-  stroke-linecap: round;
-  opacity: 0.35;
-}
-
-.fd-onion-legend {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-sm);
-  font-size: var(--fs-small);
-  color: var(--fd-text);
-}
-
-.fd-onion-legend .dot {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  margin-right: 0.3em;
-}
-
-.fd-onion-legend .dot.prev {
-  background: #ff0000;
-}
-
-.fd-onion-legend .dot.next {
-  background: #0000ff;
-}
-
-/* ---- 音声 ----
-   timeline_screen.dart には波形表示は存在しない（音声クリップは
-   Icons.audiotrack付きのトラックとして表示される）ため、波形イラストは
-   使わず実際の構成要素（トラック・音量ラベルとスライダー）のみを示す。 */
-.fd-audio-track {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 48px;
-  padding-inline: 12px;
-  background: var(--fd-panel);
-  border-radius: var(--radius-md);
-  color: var(--fd-text);
-  font-size: 0.85rem;
-  overflow: hidden;
-}
-
-/* AudioWaveformService(ffmpeg showwavespic)が生成する波形PNGを、
-   実機と同じ「不透明度0.5でクリップ帯に重ねる」見た目でCSSのみで再現。 */
-.fd-waveform {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  padding-inline: 12px;
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.fd-waveform i {
-  flex: 1 1 auto;
-  width: 2px;
-  border-radius: 1px;
-  background: var(--fd-text);
-}
-
-.fd-waveform i:nth-child(4n + 1) {
-  height: 40%;
-}
-.fd-waveform i:nth-child(4n + 2) {
-  height: 85%;
-}
-.fd-waveform i:nth-child(4n + 3) {
-  height: 55%;
-}
-.fd-waveform i:nth-child(4n) {
-  height: 70%;
-}
-
-.fd-audio-track .ic {
-  width: 18px; /* timeline_screen.dart Icons.audiotrack, size: 18 */
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.fd-audio-controls {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-top: var(--space-sm);
-  color: var(--fd-text);
-  font-size: var(--fs-small);
-}
-
-/* ---- 書き出し ---- */
-/* export_screen.dart: SegmentedButton（3択）、RadioListTile×3（二行）、
-   FilledButton.icon(minimumSize: Size.fromHeight(48))。 */
-/* exportPresetSection・exportFormatSectionの見出しラベル(Bold, Kuramubon)。 */
-.fd-section-label {
-  font-family: "Kuramubon", var(--font-serif);
-  font-weight: 700;
-  font-size: 0.8rem;
-  color: var(--fd-text);
-  margin-bottom: 6px;
-}
-
-.fd-segmented {
-  display: flex;
-  height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-}
-
-.fd-segment {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: var(--fd-text);
-}
-
-.fd-segment:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.fd-segment.is-active {
-  background: var(--fd-accent);
-  color: var(--color-white);
-  font-weight: 700;
-}
-
-.fd-format-list {
-  margin-top: var(--space-md);
-}
-
-.fd-format-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 72px; /* Material二行ListTileの既定高さ */
-  padding-inline: 4px;
-}
-
-.fd-format-row:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
 .fd-radio {
   position: relative;
   width: 20px;
@@ -779,340 +270,6 @@
   border-radius: 50%;
   background: var(--fd-accent);
 }
-
-.fd-format-text strong {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--fd-text);
-}
-
-.fd-format-text span {
-  display: block;
-  font-size: 0.78rem;
-  color: rgba(245, 241, 240, 0.6);
-  margin-top: 2px;
-}
-
-.fd-export-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  height: 48px; /* FilledButton.styleFrom(minimumSize: Size.fromHeight(48)) */
-  margin-top: var(--space-md);
-  border-radius: var(--radius-pill);
-  background: var(--grad-brand);
-  color: var(--color-white);
-  font-weight: 700;
-  font-size: var(--fs-small);
-}
-
-.fd-export-btn .ic {
-  width: 20px;
-  height: 20px;
-}
-
-.fd-slider {
-  flex: 1;
-  height: 4px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.2);
-  position: relative;
-}
-
-.fd-slider span {
-  position: absolute;
-  inset: 0 40% 0 0;
-  background: var(--fd-accent);
-  border-radius: var(--radius-pill);
-}
-
-@media (max-width: 640px) {
-  .fd-canvas {
-    height: 150px;
-  }
-}
-
-/* ---- 保存・共有 ----
-   特定の設定画面のピクセル再現ではなく、セーブスロット／セーブツリー／
-   共有ファイル形式(.niashare)・引き継ぎファイル形式(.niatra)の考え方を
-   示す概念図。 */
-.fd-diagram-label {
-  margin-top: var(--space-sm);
-  font-size: var(--fs-small);
-  color: var(--fd-text);
-  opacity: 0.7;
-}
-
-/* セーブスロット: 実際の画面(save_tree_screen.dart _SlotTile)は番号入りの
-   チップ(タイムラインのフレーム一覧と同じ見た目)ではなく、サムネイル+
-   スロット名+日時+保存/復元アイコンを横並びにしたリスト行(ListTile)。 */
-.fd-slot-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.fd-slot-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 10px;
-  border-radius: var(--radius-md);
-  background: var(--fd-panel);
-}
-
-.fd-slot-thumb {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--color-gray-300);
-}
-
-.fd-slot-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.fd-slot-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--fd-text);
-}
-
-.fd-slot-date {
-  font-size: 0.7rem;
-  color: var(--fd-text-muted);
-}
-
-.fd-slot-actions {
-  flex-shrink: 0;
-  display: flex;
-  gap: 8px;
-  color: var(--fd-text);
-  opacity: 0.75;
-}
-
-.fd-slot-actions .ic {
-  width: 16px;
-  height: 16px;
-}
-
-/* セーブツリー: 実際の画面(_TreeConnectorPainter / ListView reverse:true)と
-   同じく「下から上に伸びる木」として表示する。
-   DFS順のフラットリストをflexbox column-reverseで逆順表示することで
-   rootが最下部・子孫が上に積み上がる見た目を再現する。
-   各行の左には_TreeConnectorPainterと同じ罫線（縦線＋横線）をSVGで描画。 */
-.fd-tree-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  font-size: 0.8rem;
-  color: var(--fd-text);
-}
-
-/* reverse:true相当: DFS順（配色A→配色B→線画修正→初稿）を
-   column-reverseで逆表示し、初稿が最下部になる */
-.fd-tree-list--bottom-up {
-  flex-direction: column-reverse;
-}
-
-/* column-reverseで積み上げ方向を反転すると、各行の隣接関係も反転する
-   （DOM上の前の兄弟＝親が、今度は下ではなく上に来てしまう）。
-   罫線SVGは「親は上」を前提に描いているため、上下反転(scaleY)して
-   「親は下」の向きに合わせる。ドット・文字は反転させない。 */
-.fd-tree-list--bottom-up .fd-tree-connector {
-  transform: scaleY(-1);
-}
-
-.fd-tree-row2 {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 36px;
-}
-
-/* _TreeConnectorPainter相当: SVGで罫線を描画。
-   各列并20px、行高36px。列数はviewBoxの幅で制御。 */
-.fd-tree-connector {
-  flex-shrink: 0;
-  display: block;
-}
-
-.fd-tree-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--fd-mark);
-  flex-shrink: 0;
-}
-
-.fd-tree-dot.is-accent {
-  background: var(--fd-accent);
-}
-
-.fd-tree-text {
-  flex: 1;
-}
-
-.fd-tree-date {
-  font-size: 0.7rem;
-  color: var(--fd-text-muted);
-}
-
-.fd-share-formats {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-}
-
-.fd-format-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--fd-panel);
-  color: var(--fd-text);
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.8rem;
-}
-
-.fd-share-arrow {
-  color: var(--fd-text-muted);
-}
-
-/* ---- 作業環境設定 ----
-   settings_service.dart（左手モード）・gesture_settings_screen.dart
-   （ジェスチャー割り当て）・workspace_preset_service.dart（ワークスペース
-   プリセット）の実装に基づく概念図。 */
-.fd-setting-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  padding: 10px 12px;
-  color: var(--fd-text);
-  font-size: 0.85rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.fd-setting-row:last-child {
-  border-bottom: none;
-}
-
-.fd-toggle {
-  --fd-toggle-w: 36px;
-  --fd-toggle-h: 20px;
-  position: relative;
-  width: var(--fd-toggle-w);
-  height: var(--fd-toggle-h);
-  border-radius: var(--fd-toggle-h);
-  background: rgba(255, 255, 255, 0.18);
-  flex-shrink: 0;
-}
-
-.fd-toggle.is-on {
-  background: var(--fd-accent);
-}
-
-.fd-toggle::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(var(--fd-toggle-h) - 4px);
-  height: calc(var(--fd-toggle-h) - 4px);
-  border-radius: 50%;
-  background: #fff;
-  transition: left var(--duration-fast) var(--ease-out);
-}
-
-.fd-toggle.is-on::after {
-  left: calc(var(--fd-toggle-w) - var(--fd-toggle-h) + 2px);
-}
-
-.fd-gesture-map {
-  color: var(--fd-text-muted);
-}
-
-.fd-gesture-map strong {
-  color: var(--fd-text);
-  font-weight: 600;
-}
-
-/* ---- レイヤーパネルのオーバーレイ表示 ----
-   canvas_screen.dartの実装通り、レイヤーパネルは画面を置き換えるのでは
-   なく、Positioned(top:0, bottom:0, width:250)でキャンバス側の右側
-   (左利き設定時は左側)に画面いっぱいの高さで重なって表示される。
-   キャンバスの絵はパネルの背後にそのまま表示され続ける。 */
-.fd-layer-panel-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 58%;
-  max-width: 200px;
-  box-shadow: -6px 0 16px rgba(0, 0, 0, 0.4);
-}
-
-.fd-layer-panel-overlay .fd-layers {
-  height: 100%;
-  border-radius: 0;
-}
-
-/* ---- タイムラインの素材トラック ----
-   timeline_screen.dartの実装通り、フレーム一覧の下に共通レイヤー・
-   動画・音源・カメラなどの各トラックが、中身が追加された分だけ
-   縦に並んで表示される。 */
-.fd-material-track {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding-inline: 10px;
-  background: var(--fd-panel);
-  border-radius: var(--radius-sm);
-  color: var(--fd-text);
-  font-size: 0.75rem;
-}
-
-.fd-material-track .ic {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  color: var(--fd-text);
-  opacity: 0.7;
-}
-
-.fd-material-track .fd-clip {
-  flex: 1;
-  height: 26px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  padding-inline: 8px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.92);
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.fd-material-track.is-video .fd-clip {
-  background: #1d5fd6;
-}
-
-.fd-material-track.is-audio .fd-clip {
-  background: #c2660a;
-}
-
 /* ---- ホーム画面ウィジェット ----
    widget_settings_screen.dart の実構成に基づく概念図。ウィジェットは3種類で、
    起動画面ウィジェットだけが作品のフレームを表示し背景色の指定を持たない。
@@ -1146,7 +303,6 @@
      いずれも図解の地色(--fd-bg)に対して十分な明度差を持たせている。 */
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 /* 2枚目・3枚目は「色を自分で選べる」ことを示す濃色。地の色に関係なく
    濃いので、この2枚の中の文字だけは明るい色に固定する。 */
 .fd-widget-tile--create {
@@ -1166,7 +322,6 @@
 .fd-widget-tile--plaza .fd-widget-sub {
   color: rgba(246, 242, 244, 0.72);
 }
-
 /* 起動画面ウィジェットが表示する「選んだフレーム」。実際の作品の代わりに
    面だけを置く（サイト側で特定の作品を勝手に例示しないため）。 */
 .fd-widget-frame {
@@ -1194,9 +349,8 @@
   font-size: 0.7rem;
   line-height: 1.3;
 }
-
-/* 狭い画面では3列だと1枚あたりが読めない幅になるため縦積みへ切り替える。 */
 @media (max-width: 560px) {
+  /* 狭い画面では3列だと1枚あたりが読めない幅になるため縦積みへ切り替える。 */
   .fd-widget-grid {
     grid-template-columns: 1fr;
   }
@@ -1205,13 +359,12 @@
     min-height: 0;
   }
 }
-
-/* User-requested Features layout: on desktop, narrative copy occupies the left
+@media (min-width: 900px) {
+  /* User-requested Features layout: on desktop, narrative copy occupies the left
    column while the app reproduction sits as a portrait screen on the right.
    The spec cards stay in normal flow below both columns, so once they pass the
    screen bottom they can use the full section width. No HTML restructuring is
    required: CSS grid places the existing three siblings explicitly. */
-@media (min-width: 900px) {
   .feature-section {
     display: grid;
     grid-template-columns: minmax(0, 1fr) clamp(320px, 34vw, 430px);
@@ -1245,10 +398,9 @@
     margin-top: var(--space-lg);
   }
 }
-
-/* Mobile feature tabs are a horizontally scrollable list; keep the first item
-   flush with the content edge instead of visually centering the scroll strip. */
 @media (max-width: 899px) {
+  /* Mobile feature tabs are a horizontally scrollable list; keep the first item
+   flush with the content edge instead of visually centering the scroll strip. */
   .feature-nav {
     justify-content: flex-start;
     flex-wrap: nowrap;
@@ -1256,7 +408,6 @@
     scroll-padding-inline: 0;
   }
 }
-
 /* Real application captures replace the legacy coded reproductions.
    The frame is exactly the rendered capture box: no padding, forced minimum
    height, or alternate aspect ratio may leak in from .feature-diagram. */
@@ -1280,20 +431,12 @@
 .feature-diagram--real > .real-app-capture > img {
   object-fit: contain;
 }
-@media (min-width: 900px) {
-  .feature-section > .feature-diagram.feature-diagram--real,
-  .feature-diagram-stack > .feature-diagram.feature-diagram--real {
-    width: min(100%, 320px);
-    min-height: 0;
-  }
-}
 @media (max-width: 899px) {
   .feature-diagram.feature-diagram--real {
     width: min(100%, 320px);
     margin-inline: auto;
   }
 }
-
 /* Canonical real-capture frame palette. Each frame uses the exact accent
    configured in the app capture artifact; the image remains native 320:569. */
 .feature-diagram--real[data-capture-theme] {
@@ -1328,12 +471,11 @@
 .feature-diagram--real[data-capture-theme="widget"] {
   --capture-frame: #00796b;
 }
-
-/* Desktop real-capture feature sections: use the full content width.
+@media (min-width: 900px) {
+  /* Desktop real-capture feature sections: use the full content width.
    Legacy coded diagrams used a narrow right column; real portrait captures
    should sit beside copy while the section itself continues to span the
    container, rather than leaving the right half visually empty. */
-@media (min-width: 900px) {
   .feature-section:has(> .feature-diagram--real) {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
     column-gap: clamp(28px, 4vw, 56px);
@@ -1351,31 +493,6 @@
     grid-column: 1 / -1;
   }
 }
-
-@media (min-width: 900px) {
-  .feature-section > .feature-pair {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-    gap: clamp(28px, 4vw, 56px);
-    width: 100%;
-    align-items: start;
-  }
-  .feature-pair > .feature-copy-column {
-    min-width: 0;
-    width: 100%;
-  }
-  .feature-pair > .feature-diagram-stack {
-    min-width: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .feature-section > .feature-pair + .spec-grid {
-    width: 100%;
-    margin-top: var(--space-lg);
-  }
-}
-
 @media (min-width: 900px) {
   /* user-request-fixes.js owns the desktop two-column pair. Disable the older
      section-level grid or the pair itself is auto-placed into column 1 and
@@ -1392,33 +509,9 @@
     margin-top: var(--space-lg);
   }
 }
-
-@media (min-width: 900px) {
-  /* Final desktop contract: the runtime pair itself is the two-column row. */
-  .feature-section > .feature-pair {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 320px !important;
-    column-gap: clamp(32px, 5vw, 72px) !important;
-    align-items: start !important;
-  }
-  .feature-section > .feature-pair > .feature-copy-column {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    min-width: 0 !important;
-  }
-  .feature-section > .feature-pair > .feature-diagram-stack {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-    display: block !important;
-    width: 320px !important;
-    justify-self: end !important;
-  }
-}
-
 /* ---- Paper and ink (2026-11 redesign). Scoped under #main so the older
    site-wide layers cannot override it. Colours come only from the tokens
    in variables.css. ---- */
-
 /* The section index is a frame number in red pencil (01, 02 …), in place
    of the old three-bar mark and the gradient icon boxes. */
 #main {
@@ -1428,7 +521,6 @@
 #main .feature-section {
   counter-increment: feature-section;
 }
-
 /* Each section opens like the numbered sections of the home page: the
    frame number is a quiet kicker, the section name is the heading at the
    site's section-heading size, and its one-line description is the lead
@@ -1453,7 +545,6 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
 }
-
 /* Same size as the home's section headings; the weight stays the one of the
    sub-headings under it (one weight in Kuramubon, semibold in the Korean and
    Chinese serif, where 400 made the section name lighter than its h3s). */
@@ -1472,13 +563,11 @@
   color: var(--ink-2);
   font: 400 var(--fs-body) / 1.8 var(--font-sans);
 }
-
 /* The heading's own bottom margin is the gap to the section's text, which
    then starts level with the capture beside it. */
 #main .feature-section > .feature-narrative {
   margin-top: 0;
 }
-
 /* Section links: one quiet row on the paper under a rule; the current
    section is ink with a red-pencil underline. */
 #main .feature-nav {
@@ -1488,7 +577,6 @@
   background: var(--paper);
   box-shadow: none;
 }
-
 /* The fade that says more links are off to the side ends in the paper. */
 #main .feature-nav::after {
   background: linear-gradient(90deg, transparent, var(--paper) 82%);
@@ -1518,11 +606,984 @@
   outline: 2px solid var(--pencil-ink);
   outline-offset: -2px;
 }
-
 /* Every capture sits in the same neutral frame (the per-screen colour comes
    in through an inline custom property, so the shadow itself is replaced). */
 #main .feature-diagram.feature-diagram--real {
   box-shadow:
     0 0 0 1px var(--rule-strong),
     0 18px 36px -22px color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+/* ---- from the former refresh-2026.css ---- */
+/* The older feature diagrams have the same inset-border problem. */
+html body .feature-diagram.feature-diagram--real[data-capture-theme] {
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+  aspect-ratio: 320 / 569;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 4px var(--capture-frame),
+    0 16px 34px rgba(29, 27, 35, 0.13);
+}
+html
+  body
+  .feature-diagram.feature-diagram--real[data-capture-theme]
+  > .real-app-capture,
+html
+  body
+  .feature-diagram.feature-diagram--real[data-capture-theme]
+  > .real-app-capture
+  > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 320 / 569;
+  object-fit: cover;
+}
+html
+  body
+  .feature-diagram.feature-diagram--real[data-capture-theme]
+  > .real-app-capture
+  > img {
+  max-width: none;
+}
+
+/* ---- from the former niarim-game-site.css ---- */
+html body .feature-section:has(.nr-feature-duo) {
+  grid-template-columns: minmax(0, 1fr) minmax(460px, 55%);
+}
+html body .feature-section > .nr-feature-duo {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+html body .feature-section .nr-feature-duo > .feature-diagram--real {
+  width: min(42%, 220px) !important;
+  flex: none !important;
+}
+html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+  width: min(54%, 315px) !important;
+  flex: none !important;
+  aspect-ratio: 1440/900 !important;
+}
+html body .feature-section .nr-feature-duo > .feature-diagram--pc picture,
+html body .feature-section .nr-feature-duo > .feature-diagram--pc img {
+  aspect-ratio: 1440/900 !important;
+  object-fit: cover !important;
+}
+@media (max-width: 1150px) {
+  html body .feature-section:has(.nr-feature-duo) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 740px) {
+  html body .feature-section:has(.nr-feature-duo) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html body .feature-section > .nr-feature-duo {
+    gap: 12px;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--real {
+    width: min(40%, 160px) !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+    width: min(55%, 235px) !important;
+  }
+}
+/* Legible full-CJK feature text instead of mixed glyphs from old subset fonts. */
+html:lang(ja)
+  body[data-i18n-title="meta.features.title"]
+  .feature-section
+  :is(h2, h3, p),
+html:lang(ja)
+  body[data-i18n-title="meta.features.title"]
+  .feature-narrative
+  :is(h2, h3, p),
+html:lang(ja)
+  body[data-i18n-title="meta.features.title"]
+  .spec-grid
+  :is(h2, h3, p) {
+  font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Meiryo", sans-serif;
+  font-synthesis: none;
+}
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section p,
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-narrative p,
+html:lang(ja) body[data-i18n-title="meta.features.title"] .spec-grid p {
+  color: #49454c;
+  font-weight: 400;
+  line-height: 1.85;
+}
+html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section h3 {
+  font-weight: 800;
+  line-height: 1.45;
+}
+@media (max-width: 740px) {
+  html:lang(ja) body[data-i18n-title="meta.features.title"] .feature-section p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+  }
+}
+
+/* ---- from the former font-and-capture-2026.css ---- */
+
+html body .nr-feature-duo {
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 760px) and (max-width: 1099px) {
+  html
+    body
+    .feature-section
+    .nr-feature-duo
+    > .feature-diagram--real:not(.feature-diagram--pc) {
+    width: min(31%, 235px) !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+    width: min(65%, 460px) !important;
+  }
+}
+@media (max-width: 759px) {
+  html
+    body
+    .feature-section
+    .nr-feature-duo
+    > .feature-diagram--real:not(.feature-diagram--pc) {
+    width: min(34%, 190px) !important;
+  }
+  html body .feature-section .nr-feature-duo > .feature-diagram--pc {
+    width: min(64%, 400px) !important;
+  }
+}
+
+/* ---- from the former brand-direction-2026.css ---- */
+body :is(.features-header, .faq-header) h1 {
+  text-wrap: pretty;
+}
+body :is(.features-header, .faq-header) {
+  position: relative;
+  isolation: isolate;
+}
+
+/* ---- from the former studio-unification-2026.css ---- */
+html body :is(code, pre, kbd, samp) {
+  font-family: var(--font-sans) !important;
+}
+
+/* ---- from the former site.css ---- */
+
+#main .ruled-rows > * > :not(h3) ~ :not(h3) {
+  margin-top: 10px;
+}
+
+/* ---- from the former polish.css ---- */
+
+.feature-diagram {
+  isolation: isolate;
+}
+
+/* ---- from the former responsive-foundation.css ---- */
+.feature-section > .feature-diagram {
+  width: min(100%, 360px);
+  aspect-ratio: 9 / 16;
+  min-height: 0;
+  margin-inline: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-clip: padding-box;
+}
+
+/* ---- from the former responsive-consistency.css ---- */
+/* Screen mocks are visually self-contained. Keep their paint invalidation local
+   and avoid text selection without mutating each node from JavaScript. */
+html body :is(.feature-diagram, .frame-mock, .fd-app-screen, .fd-route-screen) {
+  contain: paint;
+  user-select: none;
+}
+
+/* ---- from the former screen-mock-contrast-palettes.css ---- */
+/* Features page: alternate dark/light presets and widely separated hues. */
+html body #drawing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #27d37f;
+  --fd-bg: #10241b;
+  --fd-surface: #10241b;
+  --fd-panel: #183728;
+  --fd-panel-2: #24503b;
+  --fd-text: #edfff5;
+  --fd-ink: #edfff5;
+  --fd-muted: #adc3b8;
+  --fd-bezel: #2f7652;
+  --fd-outside: #263a31;
+  --fd-accent-fill: #27d37f;
+  --fd-on-accent: #10241b;
+}
+html body #animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #8756e8;
+  --fd-bg: #f5f1ff;
+  --fd-surface: #f5f1ff;
+  --fd-panel: #e2d8fa;
+  --fd-panel-2: #cdbcf2;
+  --fd-text: #321f59;
+  --fd-ink: #321f59;
+  --fd-muted: #675789;
+  --fd-bezel: #62439d;
+  --fd-outside: #e2dcee;
+  --fd-accent-fill: #8756e8;
+  --fd-on-accent: #ffffff;
+}
+html body #editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #ffb42b;
+  --fd-bg: #2a210e;
+  --fd-surface: #2a210e;
+  --fd-panel: #433718;
+  --fd-panel-2: #604e20;
+  --fd-text: #fff9e9;
+  --fd-ink: #fff9e9;
+  --fd-muted: #c7bfaa;
+  --fd-bezel: #8f702c;
+  --fd-outside: #3f3724;
+  --fd-accent-fill: #ffb42b;
+  --fd-on-accent: #2a210e;
+}
+html body #advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #278be8;
+  --fd-bg: #eff8ff;
+  --fd-surface: #eff8ff;
+  --fd-panel: #d4eafa;
+  --fd-panel-2: #b9daf2;
+  --fd-text: #163b59;
+  --fd-ink: #163b59;
+  --fd-muted: #476883;
+  --fd-bezel: #39769f;
+  --fd-outside: #d9e5ee;
+  --fd-accent-fill: #1676d0;
+  --fd-on-accent: #ffffff;
+}
+html body #audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #20d8d0;
+  --fd-bg: #0f2727;
+  --fd-surface: #0f2727;
+  --fd-panel: #183d3d;
+  --fd-panel-2: #225757;
+  --fd-text: #ecffff;
+  --fd-ink: #ecffff;
+  --fd-muted: #acc5c5;
+  --fd-bezel: #2d7471;
+  --fd-outside: #253d3d;
+  --fd-accent-fill: #20d8d0;
+  --fd-on-accent: #0f2727;
+}
+html body #save :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #e34c8b;
+  --fd-bg: #fff1f7;
+  --fd-surface: #fff1f7;
+  --fd-panel: #f5d5e3;
+  --fd-panel-2: #eab9cf;
+  --fd-text: #542039;
+  --fd-ink: #542039;
+  --fd-muted: #815369;
+  --fd-bezel: #a74770;
+  --fd-outside: #eedce4;
+  --fd-accent-fill: #dd2974;
+  --fd-on-accent: #ffffff;
+}
+html body #workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #536dff;
+  --fd-bg: #11162d;
+  --fd-surface: #11162d;
+  --fd-panel: #1c2749;
+  --fd-panel-2: #2a3967;
+  --fd-text: #f1f4ff;
+  --fd-ink: #f1f4ff;
+  --fd-muted: #b1b6c8;
+  --fd-bezel: #405598;
+  --fd-outside: #272c42;
+  --fd-accent-fill: #5d76ff;
+  --fd-on-accent: #11162d;
+}
+html body #widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #f06a2f;
+  --fd-bg: #fff4ef;
+  --fd-surface: #fff4ef;
+  --fd-panel: #f5ddd1;
+  --fd-panel-2: #eac3b0;
+  --fd-text: #552b1b;
+  --fd-ink: #552b1b;
+  --fd-muted: #7f594a;
+  --fd-bezel: #a95636;
+  --fd-outside: #eee0da;
+  --fd-accent-fill: #ce490f;
+  --fd-on-accent: #ffffff;
+}
+html body #export :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #20b6d8;
+  --fd-bg: #0f2229;
+  --fd-surface: #0f2229;
+  --fd-panel: #183640;
+  --fd-panel-2: #234d5a;
+  --fd-text: #ecfbff;
+  --fd-ink: #ecfbff;
+  --fd-muted: #acc0c6;
+  --fd-bezel: #2c6d7d;
+  --fd-outside: #25383e;
+  --fd-accent-fill: #20b6d8;
+  --fd-on-accent: #0f2229;
+}
+/* Widget uses its own static settings reconstruction, so push the preset into
+   those tiles explicitly instead of leaving the old fixed navy backgrounds. */
+html body #widget .fd-widget-grid {
+  background: var(--fd-bg) !important;
+  color: var(--fd-text) !important;
+}
+html body #widget .fd-widget-tile {
+  color: var(--fd-text) !important;
+  border-color: color-mix(in srgb, var(--fd-text) 18%, transparent) !important;
+}
+html body #widget .fd-widget-tile--art {
+  background: var(--fd-panel) !important;
+}
+html body #widget .fd-widget-tile--create {
+  background: var(--fd-panel-2) !important;
+}
+html body #widget .fd-widget-tile--plaza {
+  background: color-mix(
+    in srgb,
+    var(--fd-accent) 16%,
+    var(--fd-panel)
+  ) !important;
+}
+html body #widget .fd-widget-name {
+  color: var(--fd-text) !important;
+}
+html body #widget .fd-widget-sub {
+  /* タイルはテーマの面色ではなく彩度の高い独自色なので、--fd-muted だと
+     3.8:1 にしか届かない。タイルの上では本文色に近い濃さにする。 */
+  color: color-mix(in srgb, var(--fd-text) 88%, transparent) !important;
+}
+html body #widget .fd-radio.is-active {
+  border-color: var(--fd-accent) !important;
+  background: var(--fd-accent) !important;
+  box-shadow: inset 0 0 0 3px var(--fd-bg) !important;
+}
+/* Ensure the device border always adopts the preset even when older accuracy rules win. */
+html
+  body
+  :is(
+    #drawing,
+    #animation,
+    #editing,
+    #advanced,
+    #audio,
+    #save,
+    #workspace,
+    #widget,
+    #export
+  )
+  > .feature-diagram {
+  border-color: var(--fd-bezel) !important;
+  background: var(--fd-bg) !important;
+  color: var(--fd-text) !important;
+}
+
+/* ---- from the former features-source-normalization.css ---- */
+/* widget_settings_screen.dart uses a 44x44 ArtworkFrameThumbnail inside a
+   ListTile-style summary. Preserve the existing translated labels, but match
+   the native thumbnail and trailing-chevron geometry. */
+.feature-diagram .fd-widget-tile--art.is-settings-summary {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 18px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 10px;
+  min-height: 64px;
+}
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-frame {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 6px;
+}
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-name {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  min-width: 0;
+}
+.feature-diagram .fd-widget-tile--art.is-settings-summary .fd-widget-sub {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  min-width: 0;
+}
+
+/* ---- from the former screen-mock-accuracy-base.css ---- */
+/* ========================================================================== 
+   NIARIM screen mock accuracy layer
+   実アプリ Visual Smoke (320 logical px) を正本にした画面再現図専用。
+   画像を貼らず、DOM/CSSだけで同じUI構成を再現する。
+   ========================================================================== */
+
+.fd-route-screen {
+  --fd-accent: var(--fd-accent, #ff5c7a);
+  --fd-ink: var(--fd-ink, #28242c);
+  --fd-outside: var(--fd-outside, #3a3a3a);
+  --fd-surface: var(--fd-surface, #fffafa);
+  --fd-panel: var(--fd-panel, #f8e3e6);
+  --fd-panel-2: var(--fd-panel, #f5dadd);
+  position: relative !important;
+  width: min(100%, 320px) !important;
+  height: auto !important;
+  aspect-ratio: 320/569 !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+  border: 4px solid var(--fd-ink) !important;
+  border-radius: 20px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  background: var(--fd-surface) !important;
+  color: var(--fd-ink) !important;
+  box-shadow: 0 12px 28px rgba(40, 36, 44, 0.12) !important;
+  contain: layout paint;
+}
+.fd-route-screen * {
+  box-sizing: border-box;
+}
+.fd-route-screen .ic {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+  color: currentColor;
+}
+/* ── Route screens common ───────────────────────────────────────────── */
+.fd-route-screen {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  background: var(--fd-surface, #fff8f9) !important;
+  color: var(--fd-ink) !important;
+}
+.hero-visual-reuse {
+  transform: none !important;
+}
+@media (max-width: 640px) {
+  .fd-route-screen {
+    width: min(100%, 320px) !important;
+    border-width: 4px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* ---- from the former visual-finish.css ---- */
+/* NIARIM final visual refinement layer */
+/* Keep the finish quiet: stronger hierarchy, cleaner surfaces, and tactile states. */
+:root {
+  --finish-hairline: rgba(40, 36, 44, 0.095);
+  --finish-shadow: 0 18px 50px rgba(40, 36, 44, 0.075);
+  --finish-shadow-hover: 0 22px 58px rgba(40, 36, 44, 0.115);
+}
+
+:where(.section-head, .feature-section-head) h2 {
+  text-wrap: balance;
+}
+
+:where(
+  .intro-card,
+  .spec-item,
+  .news-card,
+  .help-category,
+  .help-item,
+  .faq-item,
+  .pricing-card,
+  .contact-form
+) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+/* Navigation: current location should read before hover decoration. */
+.main-nav a[aria-current] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.lang-trigger {
+  background: rgba(255, 255, 255, 0.64);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-trigger:hover {
+  background: #fff;
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent-strong);
+}
+/* Shared inner-page hero gets a subtle bottom transition instead of ending abruptly. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(40, 36, 44, 0.12) 16%,
+    rgba(255, 92, 122, 0.16) 50%,
+    rgba(40, 36, 44, 0.12) 84%,
+    transparent
+  );
+  pointer-events: none;
+}
+/* Features index: clearer horizontal affordance on compact screens. */
+.feature-nav {
+  isolation: isolate;
+}
+
+.feature-nav a {
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.feature-nav a:hover {
+  background: rgba(255, 92, 122, 0.075);
+  color: var(--color-ink);
+}
+@media (max-width: 640px) {
+  /* Keep the original sticky behavior; the pseudo-element is only a visual
+     cue that more horizontal tabs are available. */
+  .feature-nav {
+    position: sticky;
+  }
+
+  .feature-nav::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 34px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.97) 82%
+    );
+    pointer-events: none;
+  }
+
+  .feature-nav a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Keep the persistent shortcut useful without covering small-screen content. */
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lang-trigger,
+  .feature-nav a,
+  .faq-item {
+    transition: none;
+  }
+
+  .btn:hover,
+  .lang-trigger:hover,
+  .feature-nav a:hover {
+    transform: none;
+  }
+}
+
+/* ---- from the former screen-mock-theme-showcase.css ---- */
+/*
+ * Screen-mock theme showcase
+ * Every reconstructed NIARIM screen gets an explicit preset palette.
+ * This file normalises the device bezel, frame-strip geometry,
+ * and slider appearance so the screenshots communicate customisability
+ * without drifting from one mock implementation to another.
+ */
+/* ---------- shared device treatment ---------- */
+.feature-section > .feature-diagram {
+  --fd-bezel: var(--fd-outside, #4a3b41);
+  border: 6px solid var(--fd-bezel) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fd-bezel) 72%, #000 28%),
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
+}
+/* Legacy feature-diagram mocks use --fd-bg/--fd-text while the rebuilt
+   app screens use --fd-surface/--fd-ink. Bridge both token sets so the
+   section preset reaches every reconstruction, old and new. */
+.feature-section > .feature-diagram {
+  --fd-bg: var(--fd-surface, #fff8fa);
+  --fd-text: var(--fd-ink, #30262d);
+  background: var(--fd-surface, #fff8fa) !important;
+  color: var(--fd-ink, #30262d) !important;
+}
+
+/* ---- from the former manual-visual-audit-fixes.css ---- */
+/* 節ごとの配色は screen-mock-palette.css に一本化した。 */
+.feature-section > .feature-diagram {
+  border: 6px solid var(--fd-bezel) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+  background: var(--fd-bg) !important;
+  color: var(--fd-text) !important;
+}
+@media (max-width: 640px) {
+  /* SP safety: prevent reconstructed screens and their inner rows from causing page-level horizontal clipping. */
+  .feature-section,
+  .feature-section > .feature-diagram {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+/* Real-capture gallery cards: the image, not the retired coded-mock phone
+   ratio, owns the content height. Keep the 6px bezel outside that 320:569
+   viewport so frame and capture end on the same vertical edge. */
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 320 / 569 !important;
+}
+
+/* ---- from the former manual-visual-audit-final.css ---- */
+/* 節ごとの配色は screen-mock-palette.css に一本化した。 */
+
+.feature-section > .feature-diagram {
+  background: var(--fd-bg) !important;
+  color: var(--fd-text) !important;
+  border: 6px solid var(--fd-bezel) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+}
+
+/* ---- from the former screen-mock-fidelity.css ---- */
+/* All app/route reproductions follow the exact current app reference viewport:
+   320x569 pixels. Keep the website reproduction on the same outer geometry as
+   the checked-in reference captures; internal 360px calibration stays separate. */
+.fd-route-screen {
+  aspect-ratio: 320 / 569 !important;
+}
+
+/* ---- from the former screen-mock-accuracy.css ---- */
+/* Screen mocks are self-contained miniature UIs; keep their style/layout/paint
+   work from invalidating the surrounding page. */
+.fd-route-screen {
+  contain: layout paint style;
+}
+
+/* ---- from the former screen-mock-palette.css ---- */
+[data-mock-theme="hero"] {
+  --fd-bezel: #783b4a;
+}
+[data-mock-theme="row1"] {
+  --fd-bezel: #784f3b;
+}
+[data-mock-theme="row2"] {
+  --fd-bezel: #78733b;
+}
+[data-mock-theme="row3"] {
+  --fd-bezel: #59783b;
+}
+[data-mock-theme="row4"] {
+  --fd-bezel: #3b7840;
+}
+[data-mock-theme="row5"] {
+  --fd-bezel: #3b7863;
+}
+[data-mock-theme="shot1"] {
+  --fd-bezel: #3b6878;
+}
+[data-mock-theme="shot2"] {
+  --fd-bezel: #3b4778;
+}
+[data-mock-theme="shot3"] {
+  --fd-bezel: #4d3b78;
+}
+[data-mock-theme="shot4"] {
+  --fd-bezel: #683b78;
+}
+[data-mock-theme="shot5"] {
+  --fd-bezel: #783b6d;
+}
+[data-mock-theme="shot6"] {
+  --fd-bezel: #783b59;
+}
+/* 描画 (色相 150) */
+#drawing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1daf66;
+  --fd-ink: #1e382b;
+  --fd-muted: #526c5f;
+  --fd-outside: #ddebe4;
+  --fd-bezel: #3b7859;
+  --fd-surface: #f3fcf7;
+  --fd-panel: #d6f0e3;
+  --fd-panel-2: #bee4d1;
+  --fd-bg: #f3fcf7;
+  --fd-text: #1e382b;
+  --fd-accent-fill: #16884f;
+  --fd-on-accent: #ffffff;
+}
+/* アニメーション (色相 265) */
+#animation :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #5a1daf;
+  --fd-ink: #291e38;
+  --fd-muted: #60556f;
+  --fd-outside: #e3ddeb;
+  --fd-bezel: #543b78;
+  --fd-surface: #f7f3fc;
+  --fd-panel: #e1d6f0;
+  --fd-panel-2: #cebee4;
+  --fd-bg: #f7f3fc;
+  --fd-text: #291e38;
+  --fd-accent-fill: #5a1daf;
+  --fd-on-accent: #ffffff;
+}
+/* 編集 (色相 38) */
+#editing :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af7a1d;
+  --fd-ink: #382f1e;
+  --fd-muted: #6f6655;
+  --fd-outside: #ebe6dd;
+  --fd-bezel: #78613b;
+  --fd-surface: #fcf9f3;
+  --fd-panel: #f0e6d6;
+  --fd-panel-2: #e4d6be;
+  --fd-bg: #fcf9f3;
+  --fd-text: #382f1e;
+  --fd-accent-fill: #996b19;
+  --fd-on-accent: #ffffff;
+}
+/* 作画支援 (色相 205) */
+#advanced :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1d72af;
+  --fd-ink: #1e2e38;
+  --fd-muted: #55656f;
+  --fd-outside: #dde5eb;
+  --fd-bezel: #3b5e78;
+  --fd-surface: #f3f8fc;
+  --fd-panel: #d6e5f0;
+  --fd-panel-2: #bed4e4;
+  --fd-bg: #f3f8fc;
+  --fd-text: #1e2e38;
+  --fd-accent-fill: #1d72af;
+  --fd-on-accent: #ffffff;
+}
+/* 音声 (色相 172) */
+#audio :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1daf9c;
+  --fd-ink: #1e3835;
+  --fd-muted: #526c68;
+  --fd-outside: #ddebe9;
+  --fd-bezel: #3b7870;
+  --fd-surface: #f3fcfb;
+  --fd-panel: #d6f0ec;
+  --fd-panel-2: #bee4df;
+  --fd-bg: #f3fcfb;
+  --fd-text: #1e3835;
+  --fd-accent-fill: #168375;
+  --fd-on-accent: #ffffff;
+}
+/* 保存 (色相 325) */
+#save :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af1d72;
+  --fd-ink: #381e2e;
+  --fd-muted: #6f5565;
+  --fd-outside: #ebdde5;
+  --fd-bezel: #783b5e;
+  --fd-surface: #fcf3f8;
+  --fd-panel: #f0d6e5;
+  --fd-panel-2: #e4bed4;
+  --fd-bg: #fcf3f8;
+  --fd-text: #381e2e;
+  --fd-accent-fill: #af1d72;
+  --fd-on-accent: #ffffff;
+}
+/* ワークスペース (色相 245) */
+#workspace :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #291daf;
+  --fd-ink: #211e38;
+  --fd-muted: #58556f;
+  --fd-outside: #deddeb;
+  --fd-bezel: #403b78;
+  --fd-surface: #f3f3fc;
+  --fd-panel: #d8d6f0;
+  --fd-panel-2: #c1bee4;
+  --fd-bg: #f3f3fc;
+  --fd-text: #211e38;
+  --fd-accent-fill: #291daf;
+  --fd-on-accent: #ffffff;
+}
+/* ウィジェット (色相 15) */
+#widget :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #af411d;
+  --fd-ink: #38251e;
+  --fd-muted: #6f5c55;
+  --fd-outside: #ebe1dd;
+  --fd-bezel: #784a3b;
+  --fd-surface: #fcf5f3;
+  --fd-panel: #f0dcd6;
+  --fd-panel-2: #e4c7be;
+  --fd-bg: #fcf5f3;
+  --fd-text: #38251e;
+  --fd-accent-fill: #af411d;
+  --fd-on-accent: #ffffff;
+}
+/* 書き出し (色相 190) */
+#export :is(.feature-diagram, .fd-app-screen, .fd-route-screen) {
+  --fd-accent: #1d97af;
+  --fd-ink: #1e3438;
+  --fd-muted: #556b6f;
+  --fd-outside: #dde9eb;
+  --fd-bezel: #3b6d78;
+  --fd-surface: #f3fbfc;
+  --fd-panel: #d6ecf0;
+  --fd-panel-2: #bedee4;
+  --fd-bg: #f3fbfc;
+  --fd-text: #1e3438;
+  --fd-accent-fill: #198095;
+  --fd-on-accent: #ffffff;
+}
+/* ---- ベゼル（端末の外枠）----
+   モック自身が枠を描くものと、画面紹介のようにカード側が枠を描くものが
+   あるので、両方を同じ --fd-bezel で塗る。以前は画面紹介のカードだけ
+   共通の濃い色のままで、中身のテーマ色と揃っていなかった。 */
+.fd-route-screen,
+.feature-section > .feature-diagram {
+  border: 6px solid var(--fd-bezel, #4a3b41) !important;
+  border-radius: 22px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fd-bezel, #4a3b41) 72%, #000 28%),
+    0 16px 34px rgba(25, 20, 28, 0.15) !important;
+}
+
+/* ---- from the former screen-mock-layout-fix.css ---- */
+/*
+ * 画面再現図の表示崩れ修正
+ *
+ * ここで直しているのは、モック1枚ごとの飾りではなく「端末の画面として
+ * 成立していない」箇所。
+ *  - 各行が画面幅いっぱいに広がらず中央に寄っていた（元に戻す／進むが
+ *    左上ではなく中央にあるように見えていた原因）
+ *  - 端末のベゼルが描かれていないモックがあった
+ *  - フレーム一覧の現在地枠が画面の中央に来ていなかった
+ *  - はみ出して文字やアイコンが途切れていた
+ */
+/* ---- 1. 画面の各行を必ず横いっぱいに ----
+   ヒーローのモックは .hero-visual 自身が画面本体を兼ねており、
+   home.css の .hero-visual { align-items: center } を受けてしまう。
+   その結果アプリバーやツールバーが内容幅に縮み、中央寄せに見えていた。 */
+.fd-route-screen,
+.feature-diagram {
+  align-items: stretch !important;
+}
+
+.fd-route-screen > *,
+.feature-diagram > * {
+  align-self: stretch !important;
+  max-width: 100% !important;
+}
+/* 画面内のテキストは切り落とさず、収まらなければ折り返す。 */
+.fd-route-screen :is(strong, span, p, h3) {
+  min-width: 0 !important;
+}
+/* ---- 5. 狭いモックでの切れ対策 ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを並べているため、
+   幅の足りない画面では右端で要素が半分だけ切れて壊れて見えていた。 */
+.fd-route-screen {
+  container-type: inline-size;
+}
+/* ---- 7. 画面全体を枠に合わせて縮める ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを積んでいるため、
+   枠が低いとタイムラインの段などが下にはみ出して切れていた。
+   main.js の fitMockScreens() が収まらない画面だけを測って縮める。
+   幅・高さ・transform は他レイヤーの !important に勝つ必要があるため
+   JS側からインラインで指定している。ここでは目印のクラスだけ。 */
+.is-fit-scaled {
+  transform-origin: top left;
+}
+/* ---- 13. 枠に収める倍率はアニメーションさせない ----
+   モックには transform のトランジションが掛かっている。収まる倍率を
+   当てるときにこれが効くと、0.36秒かけて大きさが動き、その間の寸法で
+   測り直しが走って倍率が付いたり消えたりする。倍率の適用だけは即時に。 */
+.is-fit-scaled {
+  transition: none !important;
+}
+/* ---- 20. ホーム画面ウィジェットの図 ----
+   図解の枠は端末の形（9:16）で揃えているが、ここに並ぶのは端末の
+   1画面ではなくホーム画面に置くウィジェット3種。端末比のままだと
+   中身が上から22%しか埋まらず、下に500pxの空白が残っていた。
+   この図だけ内容の高さに合わせる。 */
+.feature-section > .feature-diagram.fd-widget-grid {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 16px 14px !important;
+}
+
+/* ---- from the former features-fidelity.css ---- */
+/* widget_settings_screen.dart uses a real frame composite thumbnail. The web
+   mock has no user project to render, so use the app's image-placeholder state
+   rather than a featureless color slab. */
+.feature-diagram .fd-widget-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--fd-panel, #f7e3e6);
+  border: 1px solid var(--fd-outline, rgba(255, 255, 255, 0.35));
 }

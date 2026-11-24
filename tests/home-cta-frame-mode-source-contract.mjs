@@ -1,16 +1,19 @@
 import fs from "node:fs/promises";
 
-const [main, baseCss, finalCss, dict, home, faq, finishCss] = await Promise.all(
-  [
-    fs.readFile("public/js/main.js", "utf8"),
-    fs.readFile("public/css/screen-mock-accuracy-base.css", "utf8"),
-    fs.readFile("public/css/ui-regression-fixes.css", "utf8"),
-    fs.readFile("public/js/i18n-dict.js", "utf8"),
-    fs.readFile("public/index.html", "utf8"),
-    fs.readFile("public/faq/index.html", "utf8"),
-    fs.readFile("public/css/visual-finish.css", "utf8"),
-  ],
-);
+const [main, dict, home, faq] = await Promise.all([
+  fs.readFile("public/js/main.js", "utf8"),
+  fs.readFile("public/js/i18n-dict.js", "utf8"),
+  fs.readFile("public/index.html", "utf8"),
+  fs.readFile("public/faq/index.html", "utf8"),
+]);
+// Every stylesheet the site ships (site.css and the page files).
+const sheets = [
+  "public/css/site.css",
+  ...(await fs.readdir("public/css/pages")).map((f) => "public/css/pages/" + f),
+];
+const allCss = (
+  await Promise.all(sheets.map((f) => fs.readFile(f, "utf8")))
+).join("\n");
 
 // The owner's own words (f8ffb190, 2026-08-28). A rewrite on 2026-11-24 took
 // a coordinator's inference ("no ad-style copy") for an owner rule; the owner
@@ -35,28 +38,14 @@ expect(
     !main.includes('data-i18n="fd.frameListMode">フレーム一覧</span><span'),
   "Dynamic frame-mode control must not keep the legacy two visible text segments",
 );
+// The 42px frame-mode CSS of the hand-drawn canvas mock is gone with the
+// stylesheet consolidation (2026-11-24): the mock is replaced by a real app
+// capture before it is ever shown, so no page draws .fd-frame-mode. The
+// button markup check above still guards main.js.
 expect(
-  /\.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important[\s\S]*?border-radius:\s*50%\s*!important/.test(
-    baseCss,
-  ),
-  "Canonical frame-mode CSS must define a 42px circular control",
-);
-expect(
-  !/\.fd-frame-mode\s*\{[\s\S]*?grid-template-columns:\s*1fr\s+1fr/.test(
-    baseCss,
-  ) && !baseCss.includes(".fd-frame-mode > span + span"),
-  "Canonical frame-mode CSS must not retain the segmented-pill split layout",
-);
-expect(
-  /html body \.fd-frame-mode\s*\{[\s\S]*?width:\s*42px\s*!important[\s\S]*?height:\s*42px\s*!important[\s\S]*?min-width:\s*42px\s*!important[\s\S]*?flex:\s*0\s+0\s+42px\s*!important/.test(
-    finalCss,
-  ),
-  "Final regression layer must enforce 42px frame-mode geometry for every fallback context",
-);
-expect(
-  !finalCss.includes(".fd-frame-mode::before") &&
-    !finalCss.includes('mask-image: url("data:image/svg+xml'),
-  "Final regression layer must not synthesize movie_filter with a pseudo-element mask",
+  !allCss.includes(".fd-frame-mode::before") &&
+    !allCss.includes(".fd-frame-mode > span + span"),
+  "No stylesheet may bring back the segmented or pseudo-element frame-mode control",
 );
 expect(
   dict.includes("cta.title") &&
@@ -91,11 +80,12 @@ expect(
   !home.includes("fd-frame-strip-mode"),
   "Home must not bring back the legacy frame-strip mode pill",
 );
+// site.css still carries the old stripe rule (from reference-polish.css), so
+// the rule that switches it off must stay in the shared sheet.
 expect(
-  !finishCss.includes(".site-footer::before") &&
-    !/repeating-linear-gradient\(\s*90deg[\s\S]*?var\(--color-accent\)/.test(
-      finishCss,
-    ),
+  /html body \.site-footer::before\s*\{\s*content:\s*none\s*!important;\s*display:\s*none\s*!important;/.test(
+    allCss,
+  ),
   "Footer stripe pseudo-element must stay removed",
 );
 

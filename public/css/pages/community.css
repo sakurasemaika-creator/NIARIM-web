@@ -1,10 +1,288 @@
+/* ---- from the former user-request-fixes.css ---- */
+@media (max-width: 900px) {
+  .main-nav {
+    padding: clamp(0.85rem, 3vh, 1.35rem) var(--container-padding) !important;
+  }
+  .main-nav > ul {
+    gap: clamp(0.2rem, 1.1vh, 0.55rem) !important;
+  }
+  .main-nav > ul > li {
+    width: 100% !important;
+  }
+  .main-nav a:not(.btn) {
+    width: 100% !important;
+    /* 44px touch targets in the drawer too (42px before). */
+    min-height: 44px !important;
+    padding-block: 0.25rem !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-dropdown {
+    width: 100% !important;
+    margin-top: 0.35rem !important;
+  }
+  .main-nav .lang-trigger {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-menu button {
+    text-align: left !important;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  /* On tablets the drawer's column keeps a phone-like measure instead of
+   stretching the button and the language field across 940px. */
+  .main-nav > :is(ul, .btn, .lang-dropdown) {
+    width: min(100%, 520px) !important;
+  }
+}
+
+/* ---- from the former pages/home.css ---- */
+/* ==========================================================================
+   NIARIM home.css - トップページ専用スタイル
+   ========================================================================== */
+/* ---- Hero ----
+   ゲーム公式サイトを参照し、単なる背景色ではなく複数の
+   放射グラデーション（メッシュ）と浮遊するグロー・粒子で
+   奥行きと高揚感を演出する。 */
+.hero {
+  position: relative;
+  padding-top: clamp(3.5rem, 10vw, 7.5rem);
+  padding-bottom: var(--space-3xl);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      120% 90% at 88% -12%,
+      rgba(255, 92, 122, 0.16) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 80% at 8% 108%,
+      rgba(255, 177, 92, 0.14) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      60% 60% at 50% 40%,
+      var(--color-sub-tint) 0%,
+      transparent 70%
+    ),
+    var(--color-bg);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(
+    rgba(74, 70, 54, 0.09) 1.4px,
+    transparent 1.4px
+  );
+  background-size: 28px 28px;
+  mask-image: radial-gradient(80% 70% at 50% 20%, black 0%, transparent 75%);
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+@keyframes hero-underline-draw {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-glow-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.96) rotate(0deg);
+  }
+  50% {
+    opacity: 0.48;
+    transform: scale(1.06) rotate(180deg);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.96) rotate(360deg);
+  }
+}
+
+@keyframes draw-stroke {
+  0% {
+    stroke-dashoffset: 390;
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -390;
+    opacity: 0.4;
+  }
+}
+@media (max-width: 900px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* 角丸の四角をテーマカラー(グラデーション)で塗りつぶし、アイコンは
+   白抜きで重ねる(Features/Helpページの.feature-section-iconと
+   同じ考え方に統一)。 */
+.intro-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--grad-brand);
+  box-shadow: var(--shadow-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--color-white);
+}
+/* 絵文字ではなく、アプリ本体と同じアイコン(sprite.svg)を使用する。 */
+.intro-card .icon .ic {
+  width: 22px;
+  height: 22px;
+}
+
+.intro-card h3 {
+  margin-bottom: var(--space-xs);
+  font-size: var(--fs-h3);
+}
+
+.intro-card p {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+@media (max-width: 860px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Real gallery captures define their own vertical geometry. The frame wraps the
+   decoded 320x569 image instead of imposing the old mock-card ratio, so no
+   extra strip can appear above or below the capture. */
+.screenshot-scroller .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box;
+  width: min(72vw, 320px);
+  height: auto;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+.screenshot-scroller
+  .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+.screenshot-scroller
+  .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 320 / 569;
+}
+
+/* ---- from the former pages/about.css ---- */
+/* ==========================================================================
+   NIARIM about.css - NIARIMとはページ専用スタイル
+   （philosophy / spec-grid 等の基本レイアウトは home.css / features.css を再利用）
+   ========================================================================== */
+
+.about-hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-size: var(--fs-h1);
+}
+
+.about-hero p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: calc(62 * var(--measure-ch));
+  margin-inline: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.about-cta h2 {
+  font-size: var(--fs-h2);
+}
+
+.about-cta p {
+  margin-top: var(--space-sm);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.about-cta .btn {
+  margin-top: var(--space-lg);
+}
+/* The closing call (about, plaza, FAQ) is the page's last section: its rule
+   is the section boundary and one section padding leads to the heading, as
+   between the other sections. It had kept the 96px padding of the dark box it
+   used to be on top of the section's own, so the paper above and below it
+   was about twice the gap between the other sections. */
+#main .section:has(> .container > .about-cta) {
+  padding-top: 0;
+}
+
+#main .about-cta {
+  padding: clamp(4.25rem, 7vw, 6.75rem) var(--space-xl) 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+#main .about-cta h2 {
+  color: var(--ink);
+}
+
+#main .about-cta p {
+  color: var(--ink-2);
+}
+
+/* ---- from the former pages/community.css ---- */
 /* ==========================================================================
    NIARIM community.css - 作品広場ページ専用スタイル
    Paper and ink (2026-11 redesign): one paper ground, white sheets with a
    hairline rule, ink text. The brand pink marks the current tab and the
    ranks. Colours come only from the tokens in variables.css.
    ========================================================================== */
-
 /* ---- What the plaza is: ruled rows, no floating shadows ---- */
 #main .feature-narrative {
   margin-top: var(--space-lg);
@@ -22,7 +300,6 @@
 #main .feature-narrative-block:last-child {
   border-bottom: 1px solid var(--rule);
 }
-
 /* Right under the page title's rule, the first row needs no second rule. */
 #main .about-hero + * .feature-narrative,
 #main .container:has(> .about-hero) + .container .feature-narrative {
@@ -35,7 +312,6 @@
   .feature-narrative-block:first-child {
   border-top: 0;
 }
-
 /* ---- Feed tabs ---- */
 .community-tabs {
   display: flex;
@@ -69,17 +345,11 @@
   transform: translateY(1px);
 }
 
-.community-tabs button:focus-visible {
-  outline: 2px solid var(--pencil-ink);
-  outline-offset: 3px;
-}
-
 .community-ranking-note {
   margin-top: var(--space-sm);
   color: var(--ink-2);
   font-size: var(--fs-small);
 }
-
 /* ---- Feed ---- */
 .community-gallery {
   display: grid;
@@ -87,14 +357,12 @@
   gap: var(--space-md);
   margin-top: var(--space-xl);
 }
-
 /* Live community cards are rendered from the same public API as NIARIM.
    Never style skeleton/mock cards to look like real published works. */
 .community-gallery[data-community-gallery] {
   min-height: 240px;
   align-items: start;
 }
-
 /* The height kept for the cards is only for loading: once the feed shows a
    message instead (before the release, empty, an error) it is as tall as the
    message (the empty rest of the 240px added ~100px of bare paper under it). */
@@ -174,7 +442,6 @@
   color: var(--ink-2);
   font-size: 2.4rem;
 }
-
 /* The rank, written like a frame number in red pencil on a paper tab. */
 .community-card .rank-badge {
   position: absolute;
@@ -231,7 +498,6 @@
   font-size: 0.79rem;
   font-variant-numeric: tabular-nums;
 }
-
 /* Non-interactive tombstone preserves original rank in an already fetched
    list. No thumbnail, private title, author or detail link is emitted. */
 .community-gallery[data-community-gallery] .community-card--unavailable {
@@ -264,42 +530,6 @@
   color: var(--ink-2);
   font-weight: 600;
 }
-
-.community-card.is-more-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.community-card.is-more-cta .thumb {
-  flex-direction: column;
-  gap: var(--space-sm);
-  width: 100%;
-  height: 100%;
-  min-height: 180px;
-  aspect-ratio: auto;
-  padding: var(--space-md);
-  background: var(--sheet);
-  color: var(--ink-2);
-  text-align: center;
-}
-
-.community-card.is-more-cta .thumb p {
-  font-size: var(--fs-small);
-  font-weight: 600;
-}
-
-.community-card.is-more-cta .btn {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  padding-inline: var(--space-sm);
-  line-height: 1.35;
-  overflow-wrap: anywhere;
-  text-align: center;
-  white-space: normal;
-}
-
 @media (max-width: 600px) {
   .community-tabs {
     flex-wrap: nowrap;
@@ -346,7 +576,6 @@
     font-size: 0.92rem;
   }
 }
-
 @media (max-width: 375px) {
   .community-tabs {
     gap: 0.4rem;
@@ -355,18 +584,7 @@
   .community-tabs button {
     padding-inline: 0.85rem;
   }
-
-  .community-card.is-more-cta .thumb {
-    padding: var(--space-sm);
-  }
-
-  .community-card.is-more-cta .btn {
-    padding: 0.7rem 0.45rem;
-    font-size: 0.75rem;
-    letter-spacing: 0;
-  }
 }
-
 /* The tabs follow the three lines above them directly (there was a 186px
    band of empty paper between the list's last rule and the tabs). */
 #main > .container:has(+ .community-feed-section) > .feature-narrative {
@@ -380,9 +598,287 @@
 #main .community-feed-section .community-tabs {
   margin-top: 0;
 }
-
 /* A section that is only a list of short blocks starts and ends with the
    section's own padding (the list's 40px margins added to it). */
 #main .section > .container > .feature-narrative {
   margin-block: 0;
+}
+
+/* ---- from the former niarim-game-site.css ---- */
+html:lang(ja) body :is(.community-gallery, .community-tabs) {
+  font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", "Yu Gothic", "Meiryo", system-ui,
+    sans-serif !important;
+}
+
+/* ---- from the former font-and-capture-2026.css ---- */
+/* User-supplied titles and channel names can use scripts outside the UI subsets. */
+html[lang] body [data-community-gallery] .community-card .meta :is(h3, p) {
+  font-family: system-ui, sans-serif !important;
+}
+
+/* ---- from the former screen-mock-accuracy-base.css ---- */
+.hero-visual-reuse {
+  transform: none !important;
+}
+
+/* ---- from the former visual-finish.css ---- */
+/* NIARIM final visual refinement layer */
+/* Keep the finish quiet: stronger hierarchy, cleaner surfaces, and tactile states. */
+:root {
+  --finish-hairline: rgba(40, 36, 44, 0.095);
+  --finish-shadow: 0 18px 50px rgba(40, 36, 44, 0.075);
+  --finish-shadow-hover: 0 22px 58px rgba(40, 36, 44, 0.115);
+}
+/* Typography and reading rhythm */
+:where(.section-head, .feature-section-head) > p {
+  max-width: calc(62 * var(--measure-ch));
+  line-height: 1.85;
+}
+
+:where(.section-head, .feature-section-head) h2 {
+  text-wrap: balance;
+}
+
+:where(
+  .intro-card,
+  .spec-item,
+  .news-card,
+  .help-category,
+  .help-item,
+  .faq-item,
+  .pricing-card,
+  .contact-form
+) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+/* Navigation: current location should read before hover decoration. */
+.main-nav a[aria-current] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.lang-trigger {
+  background: rgba(255, 255, 255, 0.64);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-trigger:hover {
+  background: #fff;
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+/* Buttons: make the primary action feel intentional without becoming flashy. */
+.btn {
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent-strong);
+}
+/* Shared inner-page hero gets a subtle bottom transition instead of ending abruptly. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(40, 36, 44, 0.12) 16%,
+    rgba(255, 92, 122, 0.16) 50%,
+    rgba(40, 36, 44, 0.12) 84%,
+    transparent
+  );
+  pointer-events: none;
+}
+/* Community: keep the explanatory copy connected to the ranking it introduces. */
+section.section:has(.community-tabs) {
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+@media (max-width: 640px) {
+  /* Keep the persistent shortcut useful without covering small-screen content. */
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lang-trigger,
+  .feature-nav a,
+  .faq-item {
+    transition: none;
+  }
+
+  .btn:hover,
+  .lang-trigger:hover,
+  .feature-nav a:hover {
+    transform: none;
+  }
+}
+
+/* ---- from the former manual-visual-audit-fixes.css ---- */
+/* Real-capture gallery cards: the image, not the retired coded-mock phone
+   ratio, owns the content height. Keep the 6px bezel outside that 320:569
+   viewport so frame and capture end on the same vertical edge. */
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 320 / 569 !important;
+}
+
+/* ---- from the former screen-mock-palette.css ---- */
+[data-mock-theme="hero"] {
+  --fd-bezel: #783b4a;
+}
+[data-mock-theme="row1"] {
+  --fd-bezel: #784f3b;
+}
+[data-mock-theme="row2"] {
+  --fd-bezel: #78733b;
+}
+[data-mock-theme="row3"] {
+  --fd-bezel: #59783b;
+}
+[data-mock-theme="row4"] {
+  --fd-bezel: #3b7840;
+}
+[data-mock-theme="row5"] {
+  --fd-bezel: #3b7863;
+}
+[data-mock-theme="shot1"] {
+  --fd-bezel: #3b6878;
+}
+[data-mock-theme="shot2"] {
+  --fd-bezel: #3b4778;
+}
+[data-mock-theme="shot3"] {
+  --fd-bezel: #4d3b78;
+}
+[data-mock-theme="shot4"] {
+  --fd-bezel: #683b78;
+}
+[data-mock-theme="shot5"] {
+  --fd-bezel: #783b6d;
+}
+[data-mock-theme="shot6"] {
+  --fd-bezel: #783b59;
+}
+
+/* ---- from the former screen-mock-layout-fix.css ---- */
+/* ---- 7. 画面全体を枠に合わせて縮める ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを積んでいるため、
+   枠が低いとタイムラインの段などが下にはみ出して切れていた。
+   main.js の fitMockScreens() が収まらない画面だけを測って縮める。
+   幅・高さ・transform は他レイヤーの !important に勝つ必要があるため
+   JS側からインラインで指定している。ここでは目印のクラスだけ。 */
+.is-fit-scaled {
+  transform-origin: top left;
+}
+/* ---- 13. 枠に収める倍率はアニメーションさせない ----
+   モックには transform のトランジションが掛かっている。収まる倍率を
+   当てるときにこれが効くと、0.36秒かけて大きさが動き、その間の寸法で
+   測り直しが走って倍率が付いたり消えたりする。倍率の適用だけは即時に。 */
+.is-fit-scaled {
+  transition: none !important;
+}
+
+/* ---- from the former responsive-foundation.css ---- */
+.community-tabs {
+  justify-content: flex-start;
+  gap: 0.4rem;
+}
+.community-tabs button {
+  border-color: var(--niarim-line);
+  border-radius: 10px;
+  background: var(--niarim-surface);
+}
+.community-tabs button.is-active {
+  /* 選択中タブは白文字なのでコントラスト確保用のアクセントを使う。 */
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: #fff;
+}
+.community-gallery {
+  gap: 0.9rem;
+}
+@media (max-width: 900px) {
+  /* 期間タブは横スクロールにしているが、右端でちょうど文字が半分
+     切れると「壊れている」ように見える。端をぼかして「まだ続く」ことが
+     分かる見え方にする（機能ページのタブや画面再現図のツールバーと同じ
+     考え方）。スクロールし切ったときに端が消えないよう、右端に少しだけ
+     余白も足す。 */
+  .community-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    padding-inline-end: 0.75rem;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 28px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 0,
+      #000 calc(100% - 28px),
+      transparent 100%
+    );
+  }
+  .community-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .community-tabs button {
+    flex: 0 0 auto;
+  }
 }

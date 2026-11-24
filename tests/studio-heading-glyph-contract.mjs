@@ -2,7 +2,7 @@
  * Uses the actual deployed WOFF2 unicode-range catalog, not OS fallback fonts. */
 import fs from "node:fs";
 import assert from "node:assert/strict";
-const css = fs.readFileSync("public/css/common-base.css", "utf8");
+const css = fs.readFileSync("public/css/site.css", "utf8");
 const glyphs = new Set();
 for (const match of css.matchAll(/@font-face\s*\{([\s\S]*?)\}/g)) {
   const face = match[1];

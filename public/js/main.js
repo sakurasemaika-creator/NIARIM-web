@@ -4,75 +4,11 @@
 (function () {
   "use strict";
 
-  function loadDesignLayers() {
-    var styles = [
-      ["/css/polish.css?v=20260918-1", "data-niarim-polish"],
-      [
-        "/css/responsive-consistency.css?v=20260918-1",
-        "data-niarim-responsive-consistency",
-      ],
-      [
-        "/css/screen-mock-accuracy.css?v=20260918-1",
-        "data-niarim-screen-mock-accuracy",
-      ],
-      ["/css/screen-mock-palette.css?v=20260918-1", "data-niarim-mock-palette"],
-      [
-        "/css/screen-mock-layout-fix.css?v=20260918-1",
-        "data-niarim-mock-layout",
-      ],
-      // 改行位置の調整は各ページCSSの word-break 指定より後に効かせたいので最後。
-      ["/css/line-break.css?v=20260918-1", "data-niarim-line-break"],
-    ];
-    styles.forEach(function (entry) {
-      var href = entry[0],
-        marker = entry[1];
-      if (document.querySelector("link[" + marker + "]")) return;
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.setAttribute(marker, "true");
-      designLayersPending += 1;
-      link.addEventListener("load", onDesignLayerSettled);
-      // 読み込みに失敗しても、待ち続けて何も起きないより先へ進める。
-      link.addEventListener("error", onDesignLayerSettled);
-      document.head.appendChild(link);
-    });
-    if (!designLayersPending) markDesignLayersReady();
-  }
-
-  /* これらのCSSは後から足すので、適用された時点でレイアウトが変わる。
-     画面再現図の「枠に収まる倍率」を測る処理は、変わり切る前に走ると
-     空振りする（実際、スマホのヒーローでツールバーとコマ一覧が枠の下から
-     はみ出したまま＝ベゼルで切れたまま表示されていた）。
-     全部読み終わったことを知らせて、測り直せるようにしておく。 */
-  var designLayersPending = 0;
-  var designLayersReady = false;
-  var designLayersWaiting = [];
-
-  function markDesignLayersReady() {
-    if (designLayersReady) return;
-    designLayersReady = true;
-    var queue = designLayersWaiting;
-    designLayersWaiting = [];
-    queue.forEach(function (fn) {
-      fn();
-    });
-  }
-
-  function onDesignLayerSettled() {
-    designLayersPending -= 1;
-    if (designLayersPending <= 0) markDesignLayersReady();
-  }
-
+  /* Every stylesheet is linked in the page's <head> (site.css and the page's
+     own file), so the layout is final before any measuring code runs. */
   function whenDesignLayersReady(fn) {
-    if (designLayersReady) {
-      fn();
-      return;
-    }
-    designLayersWaiting.push(fn);
+    fn();
   }
-
-  loadDesignLayers();
 
   var ICON_SPRITE = "/assets/icons/ui/sprite.svg#";
   function icon(name, extraClass) {

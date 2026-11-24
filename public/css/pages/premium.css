@@ -1,32 +1,102 @@
+/* ---- from the former user-request-fixes.css ---- */
+@media (max-width: 900px) {
+  .main-nav {
+    padding: clamp(0.85rem, 3vh, 1.35rem) var(--container-padding) !important;
+  }
+  .main-nav > ul {
+    gap: clamp(0.2rem, 1.1vh, 0.55rem) !important;
+  }
+  .main-nav > ul > li {
+    width: 100% !important;
+  }
+  .main-nav a:not(.btn) {
+    width: 100% !important;
+    /* 44px touch targets in the drawer too (42px before). */
+    min-height: 44px !important;
+    padding-block: 0.25rem !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-dropdown {
+    width: 100% !important;
+    margin-top: 0.35rem !important;
+  }
+  .main-nav .lang-trigger {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .main-nav .lang-menu button {
+    text-align: left !important;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  /* On tablets the drawer's column keeps a phone-like measure instead of
+   stretching the button and the language field across 940px. */
+  .main-nav > :is(ul, .btn, .lang-dropdown) {
+    width: min(100%, 520px) !important;
+  }
+}
+
+/* ---- from the former pages/about.css ---- */
 /* ==========================================================================
-   NIARIM premium.css - プレミアムプランページ専用スタイル
+   NIARIM about.css - NIARIMとはページ専用スタイル
+   （philosophy / spec-grid 等の基本レイアウトは home.css / features.css を再利用）
    ========================================================================== */
 
-.pricing-notice {
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--color-gray-50);
-  border: 1px solid var(--color-border);
-  color: var(--color-gray-700);
-  font-size: var(--fs-small);
-  max-width: 760px;
-  margin-inline: auto;
+.about-hero {
+  padding-block: var(--space-2xl) var(--space-xl);
+  text-align: center;
 }
+
+.about-hero h1 {
+  font-size: var(--fs-h1);
+}
+
+.about-hero p {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: calc(62 * var(--measure-ch));
+  margin-inline: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.about-not-supported h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-sm);
+}
+/* ---- Paper and ink (2026-11 redesign): one paper ground, sections split
+   by a hairline rule, white only for sheets, no tinted bands, no dark
+   gradient panel, no pink icon boxes. Scoped under #main so the older
+   site-wide layers cannot override it. */
+#main .section-tint {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+#main :is(.about-name, .about-not-supported) {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+}
+/* The closing call (about, plaza, FAQ) is the page's last section: its rule
+   is the section boundary and one section padding leads to the heading, as
+   between the other sections. It had kept the 96px padding of the dark box it
+   used to be on top of the section's own, so the paper above and below it
+   was about twice the gap between the other sections. */
+#main .section:has(> .container > .about-cta) {
+  padding-top: 0;
+}
+
+/* ---- from the former pages/premium.css ---- */
 
 .pricing-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: var(--space-lg);
   align-items: stretch;
-}
-
-.pricing-card {
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column;
 }
 
 .pricing-card.is-premium {
@@ -39,7 +109,6 @@
 .pricing-card h3 {
   font-size: var(--fs-h3);
 }
-
 /* 金額そのもの（¥5,500）は途中で折り返させたくないが、単位の
    「／年（税込）」は言語によってかなり長くなる（例: スペイン語の
    "/año (impuestos incluidos)"、英語の "/month (tax included)"）。
@@ -72,12 +141,10 @@
   flex-shrink: 1;
   margin-left: 0.12rem;
 }
-
 /* 月額/年額を並べる狭いカラムでは、価格の桁数に応じて縮小する。 */
 .pricing-plan-option .pricing-price .amount {
   font-size: clamp(1.25rem, 4.6vw, 1.9rem);
 }
-
 /* 単位は必ず金額の下の行に置く。桁数や言語によって、片方だけ横並び・
    片方だけ折り返しになり2枚のカードで揃わなかったため、どちらも
    同じ組み方にする。長い訳語（/año (impuestos incluidos) 等）でも崩れない。 */
@@ -91,23 +158,12 @@
   font-size: 0.875rem;
   margin-left: 0;
 }
-
 /* 年額プランの通常価格（月額×12ヶ月分）に取り消し線を引き、
    実際の価格を大きく強調する。 */
 .pricing-price-compare {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-}
-
-.pricing-price-compare .amount-strike {
-  font-size: 1.3rem;
-  font-family: var(--font-serif);
-  color: rgba(255, 255, 255, 0.55);
-  text-decoration: line-through;
-  text-decoration-color: var(--fd-mark, #ffb020);
-  text-decoration-thickness: 2px;
-  white-space: nowrap;
 }
 
 .pricing-price-compare .pricing-price {
@@ -188,7 +244,6 @@
   font-weight: 800;
   color: #71420b;
 }
-
 @media (max-width: 520px) {
   .pricing-plan-compare {
     grid-template-columns: 1fr;
@@ -212,7 +267,6 @@
     opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out);
 }
-
 /* The tick is drawn with two borders, like the screen mocks (DESIGN.md,
    screen-mock-layout-fix.css 24): HakkouMincho's "✓" reads as a root sign
    (√) at this size. Limits of the free version (ads, the fixed end logo,
@@ -256,7 +310,6 @@
 .pricing-card.is-premium .pricing-list li::before {
   color: var(--color-sub);
 }
-
 @media (max-width: 860px) {
   .pricing-grid {
     grid-template-columns: 1fr;
@@ -299,7 +352,6 @@
   font-size: 0.875rem;
   line-height: 1.5;
 }
-
 /* How to start Premium: the purchase path in the app, in three steps.
    It continues the plans above, so it does not open a full section gap. */
 .section.premium-start {
@@ -365,23 +417,20 @@
   color: var(--color-text-muted);
   font-size: var(--fs-small);
 }
-
 @media (max-width: 860px) {
   .premium-steps {
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
-/* While the long Premium list scrolls by, the short free column stays in
-   view beside it, so the two can be compared line by line. */
 @media (min-width: 861px) {
+  /* While the long Premium list scrolls by, the short free column stays in
+   view beside it, so the two can be compared line by line. */
   .pricing-grid > .pricing-card:not(.is-premium) {
     position: sticky;
     top: calc(var(--header-height) + 24px);
     align-self: start;
   }
 }
-
 /* ---- Paper and ink (2026-11 redesign). Two white sheets side by side; the
    premium sheet is told apart by an ink outline, not a dark fill. Its two
    prices sit in one ruled row (no cards inside the card), the yearly saving
@@ -531,7 +580,6 @@
   background: transparent;
   box-shadow: none;
 }
-
 @media (max-width: 520px) {
   #main .pricing-card .pricing-plan-compare {
     grid-template-columns: 1fr;
@@ -541,5 +589,357 @@
     padding-left: 0;
     border-top: 1px solid var(--rule);
     border-left: 0;
+  }
+}
+
+/* ---- from the former refresh-2026.css ---- */
+.nr-notice {
+  padding: 18px 21px;
+  border-left: 4px solid #e4718e;
+  background: #fff7f7;
+  color: #584951;
+  line-height: 1.8;
+  margin: 24px 0;
+}
+/* The free-plan card should hug its content; it must not appear as a largely
+   empty slab merely because the Premium card alongside it is much taller. */
+.pricing-grid {
+  align-items: start;
+}
+.pricing-grid .pricing-card:not(.is-premium) {
+  align-self: start;
+  min-height: 0;
+}
+
+/* ---- from the former brand-direction-2026.css ---- */
+body main .pricing-card {
+  transition: border-color 0.22s ease;
+}
+body main .pricing-card:focus-within {
+  border-color: var(--nr-accent);
+}
+
+/* ---- from the former pages/coins.css ---- */
+/* ---- Closing: premium as the other way, on the paper under a rule ---- */
+html body .coins-main .coins-conversion-panel,
+html body .premium-coin-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) h2 {
+  margin: 0 0 15px;
+  color: var(--ink);
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.5;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) p {
+  max-width: 52em;
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  line-height: 1.9;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) .btn {
+  flex: 0 0 auto;
+  text-align: center;
+  white-space: normal;
+}
+
+html body .premium-coin-crosslink {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+}
+@media (max-width: 830px) {
+  html body .coins-main .coins-conversion-panel,
+  html body .premium-coin-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) .btn {
+    width: 100%;
+  }
+}
+/* The small brand-font subset is completed with the site's licensed body font. */
+html:lang(ja)
+  body
+  .coins-main
+  :is(h1, h2, h3, .coins-accordion summary, .coins-shortcuts a),
+html:lang(ja) body .premium-coin-crosslink h2 {
+  font-family: var(--font-display-with-body), "Yu Mincho", serif !important;
+}
+
+/* ---- from the former screen-mock-accuracy-base.css ---- */
+.hero-visual-reuse {
+  transform: none !important;
+}
+
+/* ---- from the former visual-finish.css ---- */
+/* NIARIM final visual refinement layer */
+/* Keep the finish quiet: stronger hierarchy, cleaner surfaces, and tactile states. */
+:root {
+  --finish-hairline: rgba(40, 36, 44, 0.095);
+  --finish-shadow: 0 18px 50px rgba(40, 36, 44, 0.075);
+  --finish-shadow-hover: 0 22px 58px rgba(40, 36, 44, 0.115);
+}
+
+:where(
+  .intro-card,
+  .spec-item,
+  .news-card,
+  .help-category,
+  .help-item,
+  .faq-item,
+  .pricing-card,
+  .contact-form
+) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+/* Navigation: current location should read before hover decoration. */
+.main-nav a[aria-current] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.lang-trigger {
+  background: rgba(255, 255, 255, 0.64);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.lang-trigger:hover {
+  background: #fff;
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+/* Buttons: make the primary action feel intentional without becoming flashy. */
+.btn {
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--color-accent-strong);
+}
+/* Shared inner-page hero gets a subtle bottom transition instead of ending abruptly. */
+:where(
+  .about-hero,
+  .features-header,
+  .help-header,
+  .faq-header,
+  .news-header,
+  .legal-header
+)::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(40, 36, 44, 0.12) 16%,
+    rgba(255, 92, 122, 0.16) 50%,
+    rgba(40, 36, 44, 0.12) 84%,
+    transparent
+  );
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  /* Keep the persistent shortcut useful without covering small-screen content. */
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lang-trigger,
+  .feature-nav a,
+  .faq-item {
+    transition: none;
+  }
+
+  .btn:hover,
+  .lang-trigger:hover,
+  .feature-nav a:hover {
+    transform: none;
+  }
+}
+
+/* ---- from the former manual-visual-audit-fixes.css ---- */
+/* Real-capture gallery cards: the image, not the retired coded-mock phone
+   ratio, owns the content height. Keep the 6px bezel outside that 320:569
+   viewport so frame and capture end on the same vertical edge. */
+html body .screenshot-scroller > .screenshot-card:has(> .real-app-capture) {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture,
+html
+  body
+  .screenshot-scroller
+  > .screenshot-card:has(> .real-app-capture)
+  > .real-app-capture
+  > img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 320 / 569 !important;
+}
+
+/* ---- from the former screen-mock-palette.css ---- */
+[data-mock-theme="hero"] {
+  --fd-bezel: #783b4a;
+}
+[data-mock-theme="row1"] {
+  --fd-bezel: #784f3b;
+}
+[data-mock-theme="row2"] {
+  --fd-bezel: #78733b;
+}
+[data-mock-theme="row3"] {
+  --fd-bezel: #59783b;
+}
+[data-mock-theme="row4"] {
+  --fd-bezel: #3b7840;
+}
+[data-mock-theme="row5"] {
+  --fd-bezel: #3b7863;
+}
+[data-mock-theme="shot1"] {
+  --fd-bezel: #3b6878;
+}
+[data-mock-theme="shot2"] {
+  --fd-bezel: #3b4778;
+}
+[data-mock-theme="shot3"] {
+  --fd-bezel: #4d3b78;
+}
+[data-mock-theme="shot4"] {
+  --fd-bezel: #683b78;
+}
+[data-mock-theme="shot5"] {
+  --fd-bezel: #783b6d;
+}
+[data-mock-theme="shot6"] {
+  --fd-bezel: #783b59;
+}
+
+/* ---- from the former screen-mock-layout-fix.css ---- */
+/* ---- 7. 画面全体を枠に合わせて縮める ----
+   再現図は実機より小さい枠に実機と同じ寸法のUIを積んでいるため、
+   枠が低いとタイムラインの段などが下にはみ出して切れていた。
+   main.js の fitMockScreens() が収まらない画面だけを測って縮める。
+   幅・高さ・transform は他レイヤーの !important に勝つ必要があるため
+   JS側からインラインで指定している。ここでは目印のクラスだけ。 */
+.is-fit-scaled {
+  transform-origin: top left;
+}
+/* ---- 13. 枠に収める倍率はアニメーションさせない ----
+   モックには transform のトランジションが掛かっている。収まる倍率を
+   当てるときにこれが効くと、0.36秒かけて大きさが動き、その間の寸法で
+   測り直しが走って倍率が付いたり消えたりする。倍率の適用だけは即時に。 */
+.is-fit-scaled {
+  transition: none !important;
+}
+
+/* ---- from the former polish.css ---- */
+/* ---- Premium: product tier instead of generic pricing cards ---- */
+.pricing-grid {
+  gap: clamp(1rem, 2.8vw, 2rem);
+}
+
+.pricing-card.is-premium {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      440px 220px at 90% -5%,
+      rgba(255, 92, 122, 0.22),
+      transparent 66%
+    ),
+    linear-gradient(150deg, #24212a, #302d46 64%, #1d1b25);
+  box-shadow: 0 26px 68px rgba(40, 36, 44, 0.18);
+}
+
+.pricing-plan-option {
+  background: rgba(255, 255, 255, 0.035);
+}
+/* Premiumの機能名は月額・年額の札と同じ金色の単色、説明は完全な白。
+   （グラデーションで塗った文字は、太さの違う字ごとに色がずれて読みにくく、
+   見た目も飾りに寄るためやめた。） */
+.pricing-card.is-premium .pricing-list li strong {
+  display: inline-block;
+  width: fit-content;
+  color: #ffd76a;
+}
+
+.pricing-card.is-premium .pricing-list li span {
+  color: #fff;
+  opacity: 1;
+}
+
+/* ---- from the former responsive-foundation.css ---- */
+
+.pricing-card {
+  border-radius: 18px;
+}
+.pricing-card.is-premium {
+  background: var(--niarim-ink);
+  box-shadow: none;
+}
+.pricing-plan-option {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- from the former manual-visual-audit-continuation.css ---- */
+@media (max-width: 520px) {
+  html body .pricing-plan-badge {
+    max-width: calc(100% - (var(--space-md) * 2)) !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+  html
+    body
+    .pricing-plan-badge
+    :is(.pricing-plan-badge-pre, .pricing-plan-badge-main) {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
   }
 }

@@ -658,7 +658,7 @@ try {
       (Math.max(lum(a), lum(b)) + 0.05) / (Math.min(lum(a), lum(b)) + 0.05);
     return {
       hasStylesheet: !!document.querySelector(
-        'link[href*="/css/pages/coins.css"]',
+        'link[href="/css/pages/premium.css"]',
       ),
       panelBg,
       headingFg,

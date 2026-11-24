@@ -9,7 +9,9 @@ if (process.argv[2] && /<title\b[^>]*>[^<]*Cloudflare Access/i.test(page)) {
   );
 }
 const premium = readFileSync("public/premium/index.html", "utf8");
-const css = readFileSync("public/css/pages/coins.css", "utf8");
+// The Opal price table rules (formerly pages/coins.css) live in the Opals
+// page stylesheet; the type tokens (formerly variables.css) in site.css.
+const css = readFileSync("public/css/pages/opals.css", "utf8");
 const table = page.match(
   /<table class="coins-table coins-table--priced">[\s\S]*?<\/table>/,
 )?.[0];
@@ -124,7 +126,7 @@ assert.match(
   css,
   /coins-table--priced[^{}]*\{[^}]*font-family:\s*var\(--font-sans\)/,
 );
-const typeVariables = readFileSync("public/css/variables.css", "utf8");
+const typeVariables = readFileSync("public/css/site.css", "utf8");
 assert.match(typeVariables, /--font-sans:\s*"HakkouMincho"/);
 assert.match(css, /Unified Opal price and savings table/);
 const context = { window: { NIARIM_I18N_DICT: {} } };

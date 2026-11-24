@@ -20,7 +20,9 @@ const pages = [
     "terms",
   ].map((name) => `public/${name}/index.html`),
 ];
-const css = read("public/css/font-and-capture-2026.css");
+// The font and capture-frame rules (formerly font-and-capture-2026.css) are
+// part of the shared site.css; 404 links its own standalone file.
+const css = read("public/css/site.css");
 assert.match(css, /--font-serif/);
 assert.match(css, /--font-sans/);
 assert.match(css, /html\[lang\] body/);
@@ -28,11 +30,9 @@ assert.match(css, /1440 \/ 900/);
 assert.match(css, /320 \/ 569/);
 for (const name of pages) {
   const html = read(name);
-  const font = html.indexOf("/css/font-and-capture-2026.css");
-  const lastLegacy = html.lastIndexOf(
-    'rel="stylesheet"',
-    html.indexOf("</head>"),
-  );
+  const font = name.endsWith("404.html")
+    ? html.indexOf("/css/pages/404.css")
+    : html.indexOf("/css/site.css");
   assert(font > 0 && font < html.indexOf("</head>"), name + " lacks font CSS");
   assert(html.includes('href="/font-licenses/"'), name + " lacks font credit");
   assert(

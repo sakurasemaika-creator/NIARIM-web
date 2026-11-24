@@ -1,10 +1,6 @@
 import fs from "node:fs/promises";
 
-const [main, css, lineBreak] = await Promise.all([
-  fs.readFile("public/js/main.js", "utf8"),
-  fs.readFile("public/css/popup-close-affordance.css", "utf8"),
-  fs.readFile("public/css/line-break.css", "utf8"),
-]);
+const main = await fs.readFile("public/js/main.js", "utf8");
 
 const failures = [];
 const expect = (condition, message) => {
@@ -18,29 +14,10 @@ expect(
   "Screen mocks must keep the shared close affordance markup",
 );
 
-expect(
-  /\.fd-panel-close-bar\s*\{[\s\S]*?justify-content:\s*flex-end\s*!important/.test(
-    css,
-  ),
-  "Mock popup close bar must align the close affordance to the right",
-);
-
-expect(
-  /\.fd-panel-close\s*\{[\s\S]*?width:\s*14px\s*!important[\s\S]*?height:\s*14px\s*!important/.test(
-    css,
-  ),
-  "Mock popup close glyph must stay visually compact",
-);
-
-expect(
-  /\.fd-panel-close-bar\s*\{[\s\S]*?padding:\s*0\s+8px\s*!important/.test(css),
-  "Mock popup close affordance must keep a comfortable right-side hit area",
-);
-
-expect(
-  lineBreak.includes("/css/popup-close-affordance.css?v=20260914-1"),
-  "Popup close affordance parity layer must load after the regression fixes",
-);
+// The close-bar CSS (popup-close-affordance.css) went with the stylesheet
+// consolidation on 2026-11-24: the hand-drawn panel mocks are replaced by real
+// app captures before they are shown, so no page draws .fd-panel-close-bar
+// and the rules matched nothing. The real popups are in the captures.
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));

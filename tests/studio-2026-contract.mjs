@@ -20,11 +20,16 @@ const html = (route) =>
     "public" + (route === "/" ? "/index.html" : route + "index.html"),
     "utf8",
   );
+// The unified studio styles (formerly studio-unification-2026.css) are part
+// of site.css; /font-licenses/ links its own standalone file with them.
 for (const path of routes) {
   const content = html(path);
-  assert.match(
-    content,
-    /studio-unification-2026\.css\?v=20261112-1/,
+  const sheet =
+    path === "/font-licenses/"
+      ? "/css/pages/font-licenses.css"
+      : "/css/site.css";
+  assert.ok(
+    content.includes(`href="${sheet}"`),
     "Missing unified style: " + path,
   );
 }
@@ -35,7 +40,12 @@ assert.doesNotMatch(
   home,
   /nr-plaza-illustration|nr-illustration-sun|nr-plaza-window/,
 );
-const css = fs.readFileSync("public/css/studio-unification-2026.css", "utf8");
+const css = fs
+  .readFileSync("public/css/site.css", "utf8")
+  .split("---- from the former studio-unification-2026.css ----")
+  .slice(1)
+  .map((block) => block.split("---- from the former ")[0])
+  .join("\n");
 assert.match(css, /Kuramubon/);
 assert.match(css, /HakkouMincho/);
 assert.match(css, /prefers-reduced-motion/);

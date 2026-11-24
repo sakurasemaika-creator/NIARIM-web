@@ -320,72 +320,51 @@ NIARIM_APP_DIR=/tmp/niarim npm run verify:env
 **書いた場所が悪い（読み込み順で負けている）** か
 **詳細度が足りない** のどちらかです。
 
-### 7.1 実際の読み込み順（実測）
+### 7.1 読み込むCSS（2026-11-24 にまとめた）
 
-`<head>` の4枚だけが静的で、残りは `public/js/main.js` の
-`loadDesignLayers()` が実行時に `<link>` を足しています。さらに `@import`
-があるので、最終的な順序は次のとおりです（ブラウザの
-`document.styleSheets` を辿って実測した結果）。
+以前は1ページで27〜43枚（`@import`・`main.js` の `loadDesignLayers()`・
+Worker が `<head>` の末尾に足す3枚を含む）を読んでいました。いまは
+**どのページも `<head>` に書いた2枚だけ**です。スクリプトも Worker も
+CSS を足しません（`tests/design-layers-static.test.mjs` が見張る）。
 
 ```
- 1  reset.css
- 2  variables.css                    ← デザイントークンの定義
- 3  common.css                       ← @font-face（build-fonts.py が生成）
- 4  pages/<そのページ>.css
- 5  polish.css
- 6  responsive-consistency.css
- 7  screen-mock-accuracy.css
- 7a   ├ screen-mock-accuracy-base.css     ← 再現図の土台
- 7b   ├ visual-finish.css
- 7c   └ screen-mock-fidelity.css
- 7c1      ├ mobile-first-view.css
- 7c2      ├ screen-mock-theme-showcase.css
- 7c3      ├ manual-visual-audit-fixes.css
- 7c4      ├ manual-visual-audit-final.css
- 7c5      └ manual-visual-audit-continuation.css
- 8  screen-mock-palette.css          ← 節ごとの配色（#drawing など）
- 9  screen-mock-layout-fix.css
-10  line-break.css
-10a   ├ manual-visual-audit-continuation.css   ← ★2回目
-10b   ├ screen-mock-contrast-palettes.css      ← 配色の最終上書き
-10c   ├ features-source-normalization.css
-10d   ├ visual-audit-tail.css
-10e   ├ mobile-first-view.css                  ← ★2回目
-10f   └ theme-accent-only.css
+1  /css/site.css            ← 全ページ共通（リセット・トークン・@font-face・部品・共通の上書き）
+2  /css/pages/<ページ>.css  ← そのページだけで効くルール
 ```
 
-**後にあるほど強い**（同じ詳細度なら後勝ち）。
+- トップは `pages/home.css`、プライバシーと利用規約は `pages/legal.css` を共有。
+- 404・アカウント削除・フォントのライセンスの3ページは以前から読む層が
+  違ったので、`site.css` を読まず `pages/404.css` などの1枚だけで完結して
+  います（`@font-face` の生成ブロックも各ファイルに入っている。
+  `tools/build-fonts.py`・`build-locale-fonts.py` が site.css を書き換えた後に
+  そのまま写す）。
+- まとめるときは、各ページの実際の読み込み順（`document.styleSheets` の実測）を
+  崩さずに並べ、どのページのどの状態（7言語・スマホ/PC・メニューやタブを
+  開いた状態・スクロール位置）でも一度も当たらないルールだけを外しました。
+  前後で全ページの計算済みスタイルが同じこと、全ページの画面が1画素も
+  変わらないことを確かめています。
+- 各ブロックの先頭に `/* ---- from the former polish.css ---- */` のような
+  印があり、もとの層の名前と順番が残っています。テストはこの印で層を
+  読みます（`tests/css-sections.mjs`）。
 
-**罠1: `@import` は「そのファイルの先頭」に巻き上がる。**
-`@import` はファイルのどこに書いても、**そのファイルの全ルールより前**に
-適用されます。つまり `line-break.css` の中に自分でルールを書いても、
-同じファイルが `@import` している `visual-audit-tail.css` より**後**に
-なります。
-
-**罠2: 同じファイルが2回読まれている。**
-`manual-visual-audit-continuation.css` と `mobile-first-view.css` は
-2か所から `@import` されています。**後の位置（10a / 10e）が有効**です。
-
-**罠3: `loadDesignLayers()` は非同期。**
-`<head>` の4枚が当たった状態で一度描画され、そのあと 5〜10 が届きます。
-撮影・測定でここを踏むと途中状態が写ります。
+**後にあるほど強い**（同じ詳細度なら後勝ち）のは同じです。`site.css` の中は
+もとの層の順番どおりなので、共通のルールを直すときは、そのルールの
+ブロックの位置（後ろのブロックに上書きされていないか）を確かめてください。
+ページのファイルは `site.css` の後に読まれるので、ページだけの調整は
+ページのファイルの末尾に足せば勝ちます。
 
 ### 7.2 どこに書けばいいか
 
-| 直したいもの                                 | 書く場所                                                                                |
-| -------------------------------------------- | --------------------------------------------------------------------------------------- |
-| デザイントークン（色・余白・フォントの定義） | `variables.css`                                                                         |
-| ページ固有のレイアウト                       | `pages/<page>.css`                                                                      |
-| 全ページ共通の部品                           | `common.css`                                                                            |
-| 画面再現図の**構造・寸法**                   | `screen-mock-layout-fix.css`（末尾に節番号を振って追記）                                |
-| 画面再現図の**配色**                         | `screen-mock-palette.css`（節ごと）／ `screen-mock-contrast-palettes.css`（最終上書き） |
-| レスポンシブの調整                           | `responsive-consistency.css`                                                            |
+| 直したいもの                                 | 書く場所                                                           |
+| -------------------------------------------- | ------------------------------------------------------------------ |
+| デザイントークン（色・余白・フォントの定義） | `site.css` の「from the former variables.css」のブロック           |
+| 全ページ共通の部品・見た目                   | `site.css`（効かせたい層のブロックの中、または末尾）               |
+| ページ固有のレイアウト                       | `pages/<page>.css`（404・アカウント削除・ライセンスはそれぞれ1枚） |
+| フォントの `@font-face`                      | 手で書かない（`tools/build-fonts.py` が生成）                      |
 
-**新しいCSSファイルを増やさないこと。** 増やすと読み込み順の管理が
-さらに難しくなります。`screen-mock-layout-fix.css` は末尾に
-`/* ---- NN. 見出し ---- */` を付けて追記していく運用です（現在25節まで）。
-**何を直したのか・なぜそうしたのかをコメントに書く**のがこのリポジトリの
-慣習です。後から読む人が同じ罠を踏まないための記録です。
+**新しいCSSファイルを増やさないこと。** 1ページ2枚の形を崩すと、
+また読み込み順の管理が難しくなります。**何を直したのか・なぜそうしたのかを
+コメントに書く**のがこのリポジトリの慣習です。
 
 ### 7.3 詳細度の実際
 

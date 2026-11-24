@@ -8,23 +8,6 @@
 (function () {
   "use strict";
 
-  // Worker responses already include these links. Static Home previews use
-  // the same styles for navigation, phrase wrapping and capture sizing.
-  if (document.body?.classList.contains("nr-site")) {
-    [
-      ["polish", "data-niarim-polish"],
-      ["responsive-consistency", "data-niarim-responsive-consistency"],
-      ["line-break", "data-niarim-line-break"],
-    ].forEach(function ([name, marker]) {
-      if (document.querySelector("link[" + marker + "]")) return;
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "/css/" + name + ".css";
-      link.setAttribute(marker, "");
-      document.head.appendChild(link);
-    });
-  }
-
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }

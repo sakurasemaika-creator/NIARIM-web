@@ -136,7 +136,7 @@ Web内のアプリ画面再現（`.feature-diagram`・`.frame-mock`・
 ### 3.1 `word-break: keep-all` + `overflow-wrap: break-word` の組み合わせ
 
 `body`に設定している`word-break: keep-all`（数字・URLの途中改行を防ぐ）と
-`overflow-wrap: break-word`（`reset.css`の`min-width:0`とセットで、
+`overflow-wrap: break-word`（`site.css`のリセット部分〔もとの`reset.css`〕の`min-width:0`とセットで、
 グリッド/フレックスアイテムの横はみ出しを防ぐための対策）の組み合わせは、
 **明示的な幅（`max-width: Nch`）を持つ「普通の段落」に対しては2つの不具合
 を引き起こす**:
@@ -163,9 +163,9 @@ overflow-wrap: normal;
 word-break: normal;
 ```
 
-を上書きしている（`public/css/common.css` の該当コメント、および
-`about.css` / `contact.css` / `features.css` / `help.css` / `home.css`
-の各セレクタを参照）。**新しく同じパターンの段落（センタリングされた
+を上書きしている（`public/css/site.css` の「from the former common.css」の該当コメント、および
+もとの `about.css` / `contact.css` / `features.css` / `help.css` / `home.css`
+のブロックの各セレクタを参照）。**新しく同じパターンの段落（センタリングされた
 `max-width: Nch` の長文リード文）を追加するときは、同じ2行を必ず
 セットで追加すること**（`overflow-wrap`だけだと上記(2)のバグが再発する。
 実際に一度、`overflow-wrap: normal`だけを先に適用して(1)は直ったが
@@ -173,7 +173,7 @@ word-break: normal;
 
 逆に、**`.spec-item`・`.intro-card` 等、グリッド/フレックスの
 縮小フィット（intrinsic sizing）に依存しているカード内テキストには、
-このオーバーライドを絶対に適用しないこと**。`reset.css`に記載されている
+このオーバーライドを絶対に適用しないこと**。`site.css`のリセット部分（もとの`reset.css`）に記載されている
 「日本語の長い文字列を含むgrid/flexアイテムがコンテナ幅を超えてはみ出す」
 という別の（過去に実際に発生した）不具合が再発する。判別基準は
 「そのテキストが明示的な`max-width`を持つブロック要素か、それとも
@@ -207,7 +207,7 @@ spec-item＋長い説明文でページ内最長）がこのバグで表示さ�
 
 ### 3.4 Playwrightでの検証時の注意
 
-- `scroll-behavior: smooth`（`reset.css`）がグローバルに効いているため、
+- `scroll-behavior: smooth`（`site.css`のリセット部分）がグローバルに効いているため、
   `page.evaluate(() => window.scrollTo(0, y))` で大きくジャンプすると
   アニメーション中の状態をキャプチャしてしまい、意図した位置の
   スクリーンショットにならないことがある。フルページを分割撮影する
