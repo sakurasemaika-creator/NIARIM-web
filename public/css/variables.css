@@ -75,14 +75,15 @@
      見出しらしい太さと、見出し／本文のメリハリを保つ。
      末尾のOSフォントは、上記いずれにも無い文字（↺ ▾ ❗ 等の記号）用の保険。 */
   --font-sans:
-    "HakkouMincho", "HakkouMinchoCJK", "HakkouMinchoCJKFallback",
-    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC",
-    "Noto Serif JP", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    "HakkouMincho", "HakkouMinchoLatinFallback", "HakkouMinchoCJK",
+    "HakkouMinchoCJKFallback", "NotoSerifMenuKR", "NotoSerifMenuSC",
+    "NotoSerifKR", "NotoSerifSC", "Noto Serif JP", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-serif:
-    "Kuramubon", "KuramubonCJK", "KuramubonCJKFallback", "NotoSansHeadKR",
-    "NotoSansHeadSC", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR",
-    "NotoSerifSC", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN",
-    sans-serif;
+    "Kuramubon", "KuramubonLatinFallback", "KuramubonCJK",
+    "KuramubonCJKFallback", "NotoSansHeadKR", "NotoSansHeadSC",
+    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifKR", "NotoSerifSC",
+    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
   --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
   --fs-h1: clamp(2.05rem, 3.4vw + 1rem, 3.55rem);
   --fs-h2: clamp(1.55rem, 2vw + 1rem, 2.5rem);
@@ -137,9 +138,11 @@
    属性は <head> のインラインスクリプトが第一描画より前に付ける。 */
 :root[data-latin-only] {
   --font-sans:
-    "HakkouMincho", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    "HakkouMincho", "HakkouMinchoLatinFallback", "Noto Serif",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-serif:
-    "Kuramubon", "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+    "Kuramubon", "KuramubonLatinFallback", "Zen Kaku Gothic New",
+    "Hiragino Kaku Gothic ProN", sans-serif;
 }
 
 /* 面はロゴと同じ明るいテーマカラー、文字は白（利用者の指示）。 */
@@ -400,7 +403,8 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
 /* Keep headings and body text in the same serif family for Chinese and Korean. */
 :root {
   --font-display-with-body:
-    "Kuramubon", "KuramubonCJK", "KuramubonCJKFallback", "HakkouMincho",
+    "Kuramubon", "KuramubonLatinFallback", "KuramubonCJK",
+    "KuramubonCJKFallback", "HakkouMincho", "HakkouMinchoLatinFallback",
     "HakkouMinchoCJK", "HakkouMinchoCJKFallback";
 }
 :root:lang(ko) {
@@ -415,8 +419,9 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
 :root:lang(zh),
 :root:lang(ko) {
   --font-sans:
-    "HakkouMincho", var(--font-cjk-locale), "HakkouMinchoCJK",
-    "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifSC", serif;
+    "HakkouMincho", "HakkouMinchoLatinFallback", var(--font-cjk-locale),
+    "HakkouMinchoCJK", "NotoSerifMenuKR", "NotoSerifMenuSC", "NotoSerifSC",
+    serif;
   --font-serif: var(--font-sans);
   --font-display-with-body: var(--font-sans);
 }
