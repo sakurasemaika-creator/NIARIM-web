@@ -83,18 +83,24 @@ for (const width of widths) {
   }
 
   await page.goto(baseURL + "/about/", { waitUntil: "networkidle" });
-  // "Only in NIARIM" is one consolidated section of the page itself (the
-  // script-built spotlight cards were folded into it).
+  // "What you can do in NIARIM" is one short section of the page itself that
+  // points to the home page's featured tools and the Features page.
   await page.waitForSelector("[data-about-unique-section]");
   const about = await page.evaluate(() => ({
-    cards: document.querySelectorAll(
-      '[data-about-unique-section] [data-i18n^="about.unique."][data-i18n$=".title"]',
-    ).length,
+    sections: document.querySelectorAll("[data-about-unique-section]").length,
+    links: [
+      ...document.querySelectorAll("[data-about-unique-section] a[href]"),
+    ].map((a) => a.getAttribute("href")),
     overflow:
       document.documentElement.scrollWidth -
       document.documentElement.clientWidth,
   }));
-  if (about.cards < 6 || about.overflow > 2) {
+  if (
+    about.sections !== 1 ||
+    !about.links.includes("/#tp-unique-title") ||
+    !about.links.includes("/features/") ||
+    about.overflow > 2
+  ) {
     findings.push({
       width,
       route: "/about/",

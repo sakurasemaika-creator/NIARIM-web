@@ -1314,45 +1314,6 @@
       );
     }
 
-    // Aboutの統合セクションは、見出しと最終10カードだけを所有する。
-    // 旧ランタイムが同じsection内へ「見出し+6カード」のパネルを再挿入しても
-    // 公開DOMに残さない。ソースHTMLの直下2要素をcanonicalとする。
-    function flattenAboutUniqueSection() {
-      var section = document.querySelector("[data-about-unique-section]");
-      if (!section) return;
-      var container = section.querySelector(":scope > .container");
-      if (!container) return;
-      var canonicalHead = container.querySelector(
-        ":scope > [data-about-unique]",
-      );
-      var canonicalGrid = container.querySelector(":scope > .spec-grid");
-      if (!canonicalHead || !canonicalGrid) return;
-      Array.prototype.slice.call(container.children).forEach(function (child) {
-        if (child !== canonicalHead && child !== canonicalGrid) child.remove();
-      });
-    }
-    flattenAboutUniqueSection();
-    requestAnimationFrame(flattenAboutUniqueSection);
-    setTimeout(flattenAboutUniqueSection, 250);
-
-    // Aboutの機能の節は常に1セクションだけにする。
-    // 旧HTMLがCDN/ブラウザに残った状態で新しい統合セクションと混在しても、
-    // 同じ見出しを二重表示しない。
-    var uniqueHeads = Array.prototype.slice.call(
-      document.querySelectorAll('[data-i18n="about.unique.eyebrow"]'),
-    );
-    if (uniqueHeads.length > 1) {
-      var keepHead =
-        uniqueHeads.find(function (node) {
-          return node.closest("[data-about-unique]");
-        }) || uniqueHeads[0];
-      uniqueHeads.forEach(function (node) {
-        if (node === keepHead) return;
-        var section = node.closest("section");
-        if (section) section.remove();
-      });
-    }
-
     if (
       window.NIARIM_I18N &&
       window.NIARIM_I18N.applyLang &&

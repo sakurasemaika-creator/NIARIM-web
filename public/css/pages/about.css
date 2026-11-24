@@ -146,44 +146,27 @@
   color: var(--color-accent-dark);
 }
 
-/* Keep the Only in NIARIM heading as a distinct introduction block.
-   The shared .spec-grid has no top margin, so without page-local spacing
-   the first tile row visually collides with the heading/lead at some widths. */
-.section-head[data-about-unique] {
+/* "What you can do in NIARIM" is a short pointer to the home page's
+   featured tools and the Features page, where each feature has one home. */
+.section-head.about-pointer {
   max-width: calc(72 * var(--measure-ch));
   margin-inline: auto;
-  margin-bottom: var(--space-xl);
   text-align: center;
 }
 
-.section-head[data-about-unique] h2 {
-  margin-top: var(--space-xs);
-}
-
-.section-head[data-about-unique] p {
+.section-head.about-pointer p {
   margin-top: var(--space-sm);
 }
 
-.section-head[data-about-unique] + .spec-grid {
-  margin-top: 0;
+.section-head.about-pointer .about-pointer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 var(--space-lg);
+  margin-top: var(--space-sm);
 }
 
-@media (max-width: 640px) {
-  .section-head[data-about-unique] {
-    margin-bottom: var(--space-lg);
-  }
-}
-
-/* One editorial block owns the complete Only in NIARIM story. Do not nest a
-   second feature panel around the first six items: every feature appears once
-   in the same grid beneath one heading. */
-.about-unique-panel {
-  width: 100%;
-}
-.about-unique-panel > .section-head[data-about-unique] {
-  margin-bottom: var(--space-xl);
-}
-.about-unique-panel > .spec-grid {
+.section-head.about-pointer .about-pointer-links .nr-text-link {
   margin-top: 0;
 }
 

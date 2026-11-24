@@ -378,7 +378,7 @@ body main .nr-curated {
 body main .nr-curated-item {
   border-color: var(--nr-rule);
 }
-body main :is(.about-name, .about-unique-panel, .community-banner) {
+body main :is(.about-name, .community-banner) {
   border-color: var(--nr-rule);
 }
 body main .news-item {

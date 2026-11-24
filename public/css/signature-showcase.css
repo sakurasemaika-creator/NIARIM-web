@@ -3,90 +3,6 @@
   background: transparent;
 }
 
-.unique-spotlight {
-  position: relative;
-  max-width: 1120px;
-  margin: 0 auto clamp(2.75rem, 6vw, 5.5rem);
-  padding: clamp(1.65rem, 4vw, 3.2rem);
-  border: 1px solid rgba(255, 92, 122, 0.18);
-  border-radius: 28px;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.97),
-    rgba(255, 247, 245, 0.92)
-  );
-  box-shadow: 0 24px 64px rgba(59, 36, 41, 0.07);
-}
-.unique-spotlight-head {
-  max-width: 760px;
-  margin: 0 auto 2rem;
-  text-align: center;
-}
-.unique-spotlight-kicker {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0.35rem 0.82rem;
-  border-radius: 999px;
-  background: var(--color-ink);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-}
-.unique-spotlight-head h3 {
-  margin-top: 1rem;
-  font-family: var(--font-serif);
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
-  line-height: 1.15;
-}
-.unique-spotlight-head p {
-  max-width: 62ch;
-  margin: 0.9rem auto 0;
-  color: var(--color-text-muted);
-  line-height: 1.85;
-}
-.unique-spotlight-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
-}
-.unique-spotlight-card {
-  position: relative;
-  min-width: 0;
-  padding: 1.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 17px;
-  background: rgba(255, 255, 255, 0.9);
-}
-.unique-spotlight-card::before {
-  content: attr(data-index);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-bottom: 0.75rem;
-  border-radius: 9px;
-  background: rgba(255, 92, 122, 0.1);
-  color: var(--color-accent-text);
-  font-size: 0.7rem;
-  font-weight: 800;
-}
-.unique-spotlight-card strong {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 1.06rem;
-  color: var(--color-ink);
-}
-.unique-spotlight-card span {
-  display: block;
-  margin-top: 0.45rem;
-  color: var(--color-text-muted);
-  font-size: var(--fs-small);
-  line-height: 1.75;
-}
-
 /* Advanced uses the same .feature-narrative-block hierarchy as every other
    Features section. The former promotional layout must never become visible. */
 .signature-feature-layout,
@@ -265,22 +181,4 @@
 .fd-autolineart-apply {
   background: var(--fd-accent-fill);
   color: var(--fd-on-accent);
-}
-
-@media (max-width: 820px) {
-  .unique-spotlight-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 520px) {
-  .unique-spotlight {
-    padding: 1rem;
-    border-radius: 20px;
-  }
-  .unique-spotlight-grid {
-    grid-template-columns: 1fr;
-  }
-  .unique-spotlight-card {
-    padding: 1rem;
-  }
 }

@@ -54,42 +54,14 @@
       "about.device.item3.title": "Galaxy DeXモード・Sペン",
       "about.device.item3.body":
         "Galaxy端末のDeXモードでのデスクトップ的な操作や、Sペンでの筆圧・傾き検知に対応しています。",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "NIARIMでできること",
-      "about.unique.lead":
-        "絵を描く・動かす・仕上げる作業を助ける、NIARIMのおすすめ機能です。",
-      "about.unique.item1.title": "自動塗り・グラデーション塗り",
-      "about.unique.item1.body":
-        "線画を自動で判定して着色。グラデーションでの塗りもワンタッチで行え、着色の手間を大きく減らせます。※自動塗りは生成AIを使用した機能ではありません。設定したルールに基づいて色を塗り分けます。",
-      "about.unique.item2.title":
-        "アクセントカラーからパネル背景まで、全部好きな色に",
-      "about.unique.item2.body":
-        "パステル調やくすみカラーなど、多彩なプリセットを収録していますが、それはあくまで出発点。アクセントカラー・文字色・パネル背景・メニュー背景・選択色・更新マークまで、アプリで使われるほぼすべての色を、カラーピッカーで自由に組み合わせて自分だけのテーマに編集できます。作ったテーマは名前を付けて保存・複製・エクスポートも可能です。",
-      "about.unique.item3.title": "活用Tips",
-      "about.unique.item3.body":
-        "アプリ内で、実践的な使い方のコツやテクニックをキーワード検索しながら学べます。",
-      "about.unique.item4.title": "演出フィルター",
-      "about.unique.item4.body":
-        "ぼかし・色調補正・グロー・雨・フィルムのような粒状ノイズなど、シーン単位だけでなく複数フレームを選択しての一括適用にも対応した映像的な演出を重ねられます。",
-      "about.unique.item5.title": "トーン塗り",
-      "about.unique.item5.body":
-        "漫画のようなスクリーントーン表現で作品を仕上げられます。フリルやニット、タイツなど手描きでは手間のかかる細かい柄も簡単に描け、オリジナルのトーンを自作して共有することもできます。",
-      "about.unique.item6.title": "ピクセルモード",
-      "about.unique.item6.body":
-        "ブラシカスタムでピクセルモードを有効にすることで、ドット絵のようなピクセル表現で作品を制作できます。スクリーントーン機能と組み合わせれば、手軽にディザリングも可能です。",
-      "about.unique.item8.title": "設定・ブラシ・プロジェクトの引き継ぎ",
-      "about.unique.item8.body":
-        "テーマやワークスペース、ブラシ設定からプロジェクトデータまで、環境のほとんどをファイルとして書き出し・読み込みできます。端末を機種変更しても、使い慣れた環境ですぐに作業を再開できます。",
-      "about.unique.item9.title": "ウィジェットまで自分好みに",
-      "about.unique.item9.body":
-        "ホーム画面ウィジェットは3種類。起動画面ウィジェットには自分の作品の中から表示するフレームを1枚選べ、「作品をつくる」「作品広場」の2種類は背景色をテーマ追従か任意の色かで指定できます。色は種類ごとに独立しているので、3種を並べて置いても見分けられます。",
-      "about.unique.item7.title": "作品広場",
-      "about.unique.item7.body":
-        "投稿された作品を新着・ランキングから発見できるコミュニティ機能です。閲覧はログイン不要で、誰でも気軽に楽しめます。",
-      "about.unique.item7.link": "作品広場を見る",
+      "about.unique.pointer": "主な機能は、トップページの「おすすめ機能」で、実際の画面と描いた結果を見せながら紹介しています。機能ページには、種類ごとの詳しい説明があります。",
+      "about.unique.linkHome": "おすすめ機能を見る",
+      "about.unique.linkFeatures": "機能ページを見る",
       "about.cta.title": "使い方をもっと詳しく知りたい方へ",
       "about.cta.body":
         "アプリ内のヘルプと同じ内容を、ウェブ上のガイドページでも検索・閲覧いただけます。",
+      "about.cta.tips": "アプリの中の「活用Tips」では、実践的な使い方のコツをキーワードで検索しながら読めます。",
       "about.cta.link": "使い方ガイドを見る",
     },
     en: {
@@ -108,7 +80,7 @@
         "NIARIM is split into a “Canvas Mode” for drawing and a “Timeline Mode” for bringing it to motion. There’s no need to bounce between a drawing app and a video editor. Draw a picture, animate it right away, and finish it off in sync with sound — the whole workflow lives in one app.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "What NIARIM values",
-      "about.philosophy.item1.title": "Animation, made easy for everyone.",
+      "about.philosophy.item1.title": "Anyone can make animation with ease.",
       "about.philosophy.item1.body":
         "No specialized knowledge or special tools required. Just a smartphone — and anyone can become a creator. That’s the world NIARIM is building toward.",
       "about.philosophy.item2.title": "Working to keep the app lightweight",
@@ -133,42 +105,14 @@
       "about.device.item3.title": "Galaxy DeX mode & S Pen",
       "about.device.item3.body":
         "Supports desktop-like operation via Galaxy DeX mode, plus pressure and tilt detection with the S Pen.",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "What you can do in NIARIM",
-      "about.unique.lead":
-        "Recommended NIARIM tools for drawing, animating and finishing.",
-      "about.unique.item1.title": "Auto-fill & gradient fill",
-      "about.unique.item1.body":
-        "Automatically detect line art and fill it with color. Apply gradient fills with a single tap, cutting down coloring work significantly. Note: auto-fill does not use generative AI — it colors based on rules you set.",
-      "about.unique.item2.title":
-        "From accent color to panel background — every color, your choice",
-      "about.unique.item2.body":
-        "A wide range of presets is included, from pastel to muted tones, but they’re just a starting point. Accent color, text color, panel background, menu background, selection color, and even the update-mark color — almost every color used in the app can be freely combined with a color picker to build your own theme. Your custom themes can be named, saved, duplicated, and exported.",
-      "about.unique.item3.title": "In-app Tips",
-      "about.unique.item3.body":
-        "Search and learn practical tips and techniques right inside the app.",
-      "about.unique.item4.title": "Effect filters",
-      "about.unique.item4.body":
-        "Layer cinematic effects — blur, color correction, glow, rain, film-like grain noise, and more — across a whole scene or a batch of selected frames.",
-      "about.unique.item5.title": "Tone fill",
-      "about.unique.item5.body":
-        "Finish your work with manga-style screentone expression. Great for frills, knitwear, tights, and other fine patterns that are tedious to draw by hand — and you can create and share your own custom tones.",
-      "about.unique.item6.title": "Pixel mode",
-      "about.unique.item6.body":
-        "Enable pixel mode in brush customization to create work with pixel-art style expression. Combine it with the screentone feature for easy dithering.",
-      "about.unique.item8.title": "Carry your setup anywhere",
-      "about.unique.item8.body":
-        "Export and import almost your entire setup as files — themes, workspace layout, brush settings, even project data. Switch to a new device and pick up right where you left off, in the environment you’re used to.",
-      "about.unique.item9.title": "Even the widgets are yours to style",
-      "about.unique.item9.body":
-        "There are three home screen widgets. The launch screen widget shows a single frame you pick from your own work, and the “Create” and “Work Plaza” widgets let you either follow the app theme or set any background colour you like. Colours are kept per widget, so all three can sit side by side and still be told apart.",
-      "about.unique.item7.title": "Work Plaza",
-      "about.unique.item7.body":
-        "Discover posted works through new arrivals and rankings. Browsing requires no login, so anyone can enjoy it casually.",
-      "about.unique.item7.link": "Visit the Work Plaza",
+      "about.unique.pointer": "The home page’s “Featured tools in NIARIM” shows the main features with real screens and drawn results. The Features page explains them in detail, area by area.",
+      "about.unique.linkHome": "See the featured tools",
+      "about.unique.linkFeatures": "See the Features page",
       "about.cta.title": "Want to learn more about using NIARIM?",
       "about.cta.body":
         "Search and browse the same content as the app’s built-in Help screen, right here on the web.",
+      "about.cta.tips": "In the app, the Tips screen lets you search practical tips and techniques by keyword.",
       "about.cta.link": "View the guide",
     },
     "zh-Hans": {
@@ -210,40 +154,14 @@
       "about.device.item3.title": "Galaxy DeX 模式与 S Pen",
       "about.device.item3.body":
         "支持 Galaxy 设备 DeX 模式下的桌面式操作，以及 S Pen 的压感与倾斜检测。",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "在 NIARIM 中可以做的事",
-      "about.unique.lead": "帮助绘制、制作动画和后期处理的 NIARIM 推荐功能。",
-      "about.unique.item1.title": "自动上色、渐变上色",
-      "about.unique.item1.body":
-        "自动判定线稿并上色。渐变上色也可一键完成，大幅减少上色的工时。※自动上色并非使用生成式AI的功能，而是根据设定的规则进行分色。",
-      "about.unique.item2.title": "从主题色到面板背景，颜色全部由你决定",
-      "about.unique.item2.body":
-        "应用内置了马卡龙色调、莫兰迪色系等多种预设主题，但这只是一个起点。主题色、文字颜色、面板背景、菜单背景、选中色，甚至更新标记颜色——应用中几乎所有的颜色都可以通过取色器自由组合，打造专属于你的主题。自定义的主题还可以命名保存、复制与导出。",
-      "about.unique.item3.title": "活用 Tips",
-      "about.unique.item3.body":
-        "可在应用内通过关键词搜索，学习实用的使用技巧与窍门。",
-      "about.unique.item4.title": "演出滤镜",
-      "about.unique.item4.body":
-        "模糊、色调修正、辉光、雨、胶片颗粒噪点等演出效果，不仅可按场景叠加，也可选中多个帧一并批量应用。",
-      "about.unique.item5.title": "网点上色",
-      "about.unique.item5.body":
-        "可用漫画风格的网点表现来完成作品。荷叶边、针织纹理、连裤袜等手绘费工夫的细致花纹也能轻松画出，还能自制并分享原创网点。",
-      "about.unique.item6.title": "像素模式",
-      "about.unique.item6.body":
-        "在笔刷自定义中启用像素模式，即可用像素画风格制作作品。与网点功能结合，还能轻松实现抖动（Dithering）效果。",
-      "about.unique.item8.title": "环境与项目可随身携带",
-      "about.unique.item8.body":
-        "主题、工作区、笔刷设置乃至项目数据，几乎所有环境都能作为文件导出、导入。即使更换设备，也能立刻在熟悉的环境中继续创作。",
-      "about.unique.item9.title": "连小组件也能随心定制",
-      "about.unique.item9.body":
-        "主屏幕小组件共有三种。启动页小组件可以从自己的作品中挑选要显示的一帧，“创作”与“作品广场”两种则可将背景色设为跟随主题或任意指定。颜色按种类独立保存，三种并排摆放也能分辨。",
-      "about.unique.item7.title": "作品广场",
-      "about.unique.item7.body":
-        "可通过新作与排行榜发现其他人投稿的作品。浏览无需登录，任何人都能轻松享受。",
-      "about.unique.item7.link": "前往 作品广场",
+      "about.unique.pointer": "首页的“NIARIM 的推荐功能”用实际画面和绘制结果介绍主要功能。功能页面按类别详细说明。",
+      "about.unique.linkHome": "查看推荐功能",
+      "about.unique.linkFeatures": "查看功能页面",
       "about.cta.title": "想更详细了解使用方法？",
       "about.cta.body":
         "与应用内“帮助”画面相同的内容，也可以在网页版的指南页面中搜索、浏览。",
+      "about.cta.tips": "在应用的“使用技巧”画面中，可以用关键词搜索并阅读实用的使用技巧。",
       "about.cta.link": "查看使用指南",
     },
     "zh-Hant": {
@@ -285,41 +203,14 @@
       "about.device.item3.title": "Galaxy DeX 模式與 S Pen",
       "about.device.item3.body":
         "支援 Galaxy 裝置 DeX 模式下的桌面式操作，以及 S Pen 的壓感與傾斜偵測。",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "在 NIARIM 中可以做的事",
-      "about.unique.lead":
-        "幫助繪製、製作動畫和後期處理的 NIARIM 推薦功能。",
-      "about.unique.item1.title": "自動上色、漸層上色",
-      "about.unique.item1.body":
-        "自動判定線稿並上色。漸層上色也可一鍵完成，大幅減少上色的工時。※自動上色並非使用生成式AI的功能，而是根據設定的規則進行分色。",
-      "about.unique.item2.title": "從主題色到面板背景，顏色全部由你決定",
-      "about.unique.item2.body":
-        "應用內建了粉彩色調、莫蘭迪色系等多種預設主題，但這只是一個起點。主題色、文字顏色、面板背景、選單背景、選取色，甚至更新標記顏色——應用中幾乎所有的顏色都可以透過取色器自由組合，打造專屬於你的主題。自訂的主題還可以命名保存、複製與匯出。",
-      "about.unique.item3.title": "活用 Tips",
-      "about.unique.item3.body":
-        "可在應用程式內透過關鍵字搜尋，學習實用的使用技巧與訣竅。",
-      "about.unique.item4.title": "演出濾鏡",
-      "about.unique.item4.body":
-        "模糊、色調修正、輝光、雨、底片顆粒雜訊等演出效果，不僅可依場景疊加，也可選取多個影格一併批次套用。",
-      "about.unique.item5.title": "網點上色",
-      "about.unique.item5.body":
-        "可用漫畫風格的網點表現來完成作品。荷葉邊、針織紋理、褲襪等手繪費工夫的細緻花紋也能輕鬆畫出，還能自製並分享原創網點。",
-      "about.unique.item6.title": "像素模式",
-      "about.unique.item6.body":
-        "在筆刷自訂中啟用像素模式，即可用像素畫風格製作作品。與網點功能結合，還能輕鬆實現抖動（Dithering）效果。",
-      "about.unique.item8.title": "環境與專案可隨身攜帶",
-      "about.unique.item8.body":
-        "主題、工作區、筆刷設定乃至專案資料，幾乎所有環境都能作為檔案匯出、匯入。即使更換裝置，也能立刻在熟悉的環境中繼續創作。",
-      "about.unique.item9.title": "連小工具也能隨心定製",
-      "about.unique.item9.body":
-        "主畫面小工具共有三種。啟動頁小工具可以從自己的作品中挑選要顯示的一格，「創作」與「作品廣場」兩種則可將背景色設為跟隨主題或任意指定。顏色依種類獨立保存，三種並排擺放也能分辨。",
-      "about.unique.item7.title": "作品廣場",
-      "about.unique.item7.body":
-        "可透過新作與排行榜發現其他人投稿的作品。瀏覽無需登入，任何人都能輕鬆享受。",
-      "about.unique.item7.link": "前往 作品廣場",
+      "about.unique.pointer": "首頁的「NIARIM 的推薦功能」用實際畫面和繪製結果介紹主要功能。功能頁面按類別詳細說明。",
+      "about.unique.linkHome": "查看推薦功能",
+      "about.unique.linkFeatures": "查看功能頁面",
       "about.cta.title": "想更詳細了解使用方法？",
       "about.cta.body":
         "與應用程式內「說明」畫面相同的內容，也可以在網頁版的指南頁面中搜尋、瀏覽。",
+      "about.cta.tips": "在應用程式的「使用技巧」畫面中，可以用關鍵字搜尋並閱讀實用的使用技巧。",
       "about.cta.link": "查看使用指南",
     },
     ko: {
@@ -338,7 +229,7 @@
         "NIARIM은 그림을 그리기 위한 「캔버스 모드」와, 움직이기 위한 「타임라인 모드」로 나뉘어 있습니다. 그림 앱과 영상 편집 앱을 오갈 필요가 없습니다. 그림을 그리고, 그대로 움직이고, 소리를 맞춰 완성한다. 제작의 흐름을 하나의 앱에 담았습니다.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "NIARIM이 소중히 여기는 것",
-      "about.philosophy.item1.title": "누구나 손쉽게, 애니메이션을.",
+      "about.philosophy.item1.title": "누구나 손쉽게, 애니메이션을 만들 수 있다.",
       "about.philosophy.item1.body":
         "전문적인 지식이나 특별한 도구는 필요 없습니다. 스마트폰 하나로, 누구나 크리에이터가 된다. NIARIM이 지향하는 세상입니다.",
       "about.philosophy.item2.title": "앱 경량화를 위한 노력",
@@ -361,42 +252,14 @@
       "about.device.item3.title": "Galaxy DeX 모드·S펜",
       "about.device.item3.body":
         "Galaxy 기기의 DeX 모드를 통한 데스크톱 방식 조작과, S펜의 필압·기울기 감지를 지원합니다.",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "NIARIM으로 할 수 있는 것",
-      "about.unique.lead":
-        "그리기, 움직이기, 마무리 작업을 돕는 NIARIM의 추천 기능입니다.",
-      "about.unique.item1.title": "자동 채색·그러데이션 채색",
-      "about.unique.item1.body":
-        "선화를 자동으로 판정해 채색합니다. 그러데이션 채색도 한 번의 터치로 가능해, 채색 수고를 크게 줄여줍니다. ※자동 채색은 생성형 AI를 사용하는 기능이 아닙니다. 설정한 규칙에 따라 색을 나누어 칠합니다.",
-      "about.unique.item2.title":
-        "포인트 컬러부터 패널 배경까지, 색은 전부 당신 마음대로",
-      "about.unique.item2.body":
-        "파스텔 톤이나 뮤트 톤 등 다양한 프리셋을 기본 제공하지만, 이는 어디까지나 출발점입니다. 포인트 컬러·글자색·패널 배경·메뉴 배경·선택색, 그리고 업데이트 표시 색까지 앱에서 사용하는 거의 모든 색을 컬러 피커로 자유롭게 조합해 나만의 테마로 편집할 수 있습니다. 만든 테마는 이름을 붙여 저장·복제·내보내기도 가능합니다.",
-      "about.unique.item3.title": "활용 Tips",
-      "about.unique.item3.body":
-        "앱 내에서 키워드로 검색하며 실전적인 사용 요령과 테크닉을 배울 수 있습니다.",
-      "about.unique.item4.title": "연출 필터",
-      "about.unique.item4.body":
-        "흐림, 색조 보정, 글로우, 비, 필름 같은 입자 노이즈 등의 연출 효과를 장면 단위뿐 아니라 여러 프레임을 선택해 한꺼번에 적용할 수도 있습니다.",
-      "about.unique.item5.title": "톤 채색",
-      "about.unique.item5.body":
-        "만화 같은 스크린톤 표현으로 작품을 마무리할 수 있습니다. 프릴이나 니트, 타이츠 등 손그림으로는 손이 많이 가는 세밀한 무늬도 간단히 그릴 수 있고, 오리지널 톤을 직접 만들어 공유할 수도 있습니다.",
-      "about.unique.item6.title": "픽셀 모드",
-      "about.unique.item6.body":
-        "브러시 커스텀에서 픽셀 모드를 활성화하면 도트 그림 같은 픽셀 표현으로 작품을 제작할 수 있습니다. 스크린톤 기능과 조합하면 손쉽게 디더링도 가능합니다.",
-      "about.unique.item8.title": "설정도 작업 환경도 그대로 이어서",
-      "about.unique.item8.body":
-        "테마, 작업 공간, 브러시 설정부터 프로젝트 데이터까지, 거의 모든 환경을 파일로 내보내고 불러올 수 있습니다. 기기를 바꿔도 익숙한 환경에서 바로 작업을 이어갈 수 있습니다.",
-      "about.unique.item9.title": "위젯까지 내 취향대로",
-      "about.unique.item9.body":
-        "홈 화면 위젯은 세 종류입니다. 시작 화면 위젯은 내 작품 중에서 표시할 컷을 한 장 고를 수 있고, 「작품 만들기」와 「작품 광장」 두 종류는 배경색을 테마 연동 또는 원하는 색으로 지정할 수 있습니다. 색은 종류별로 따로 저장되므로 세 가지를 나란히 두어도 구별됩니다.",
-      "about.unique.item7.title": "작품광장",
-      "about.unique.item7.body":
-        "게시된 작품을 신작·랭킹에서 발견할 수 있는 커뮤니티 기능입니다. 열람은 로그인 없이 가능해 누구나 부담 없이 즐길 수 있습니다.",
-      "about.unique.item7.link": "작품광장 보기",
+      "about.unique.pointer": "홈페이지의 ‘NIARIM의 추천 기능’에서 주요 기능을 실제 화면과 그린 결과로 소개합니다. 기능 페이지에는 분야별로 자세한 설명이 있습니다.",
+      "about.unique.linkHome": "추천 기능 보기",
+      "about.unique.linkFeatures": "기능 페이지 보기",
       "about.cta.title": "사용법을 더 자세히 알고 싶다면",
       "about.cta.body":
         "앱 내 도움말과 동일한 내용을 웹 가이드 페이지에서도 검색·열람하실 수 있습니다.",
+      "about.cta.tips": "앱의 ‘활용 팁’ 화면에서는 실전적인 사용 요령과 테크닉을 키워드로 검색하며 읽을 수 있습니다.",
       "about.cta.link": "이용 가이드 보기",
     },
     fr: {
@@ -415,7 +278,7 @@
         "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Chronologie » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Ce à quoi NIARIM tient",
-      "about.philosophy.item1.title": "L’animation, facile pour tous.",
+      "about.philosophy.item1.title": "Tout le monde peut faire de l’animation facilement.",
       "about.philosophy.item1.body":
         "Aucune connaissance ni outil spécialisé requis. Un simple smartphone suffit pour que chacun devienne créateur. C’est le monde vers lequel NIARIM tend.",
       "about.philosophy.item2.title":
@@ -441,44 +304,16 @@
       "about.device.item3.title": "Mode Galaxy DeX et S Pen",
       "about.device.item3.body":
         "Prend en charge une utilisation façon bureau via le mode DeX de Galaxy, ainsi que la détection de la pression et de l’inclinaison du S Pen.",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title":
         "Ce que vous pouvez faire dans NIARIM",
-      "about.unique.lead":
-        "Des fonctions de NIARIM recommandées pour dessiner, animer et finaliser.",
-      "about.unique.item1.title": "Remplissage automatique et en dégradé",
-      "about.unique.item1.body":
-        "Détectez automatiquement le trait et colorez-le. Appliquez un remplissage en dégradé en un geste, réduisant nettement le travail de coloriage. Remarque : le remplissage automatique n’utilise pas d’IA générative, il colorie selon des règles que vous définissez.",
-      "about.unique.item2.title":
-        "De la couleur d’accent au fond des panneaux, chaque couleur est votre choix",
-      "about.unique.item2.body":
-        "De nombreux préréglages sont inclus, des tons pastel aux tons sourds, mais ce n’est qu’un point de départ. Couleur d’accent, couleur du texte, fond des panneaux, fond des menus, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs utilisées dans l’application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème. Vos thèmes personnalisés peuvent être nommés, enregistrés, dupliqués et exportés.",
-      "about.unique.item3.title": "Astuces intégrées",
-      "about.unique.item3.body":
-        "Recherchez et apprenez des astuces et techniques pratiques directement dans l’application.",
-      "about.unique.item4.title": "Filtres de mise en scène",
-      "about.unique.item4.body":
-        "Superposez des effets cinématographiques — flou, correction des couleurs, halo, pluie, grain façon pellicule, et plus — sur une scène entière ou sur un lot d’images sélectionnées.",
-      "about.unique.item5.title": "Remplissage en trame",
-      "about.unique.item5.body":
-        "Finalisez votre œuvre avec un rendu façon trame de manga. Idéal pour les volants, le tricot, les collants et autres motifs fins fastidieux à dessiner à la main — vous pouvez aussi créer et partager vos propres trames personnalisées.",
-      "about.unique.item6.title": "Mode pixel",
-      "about.unique.item6.body":
-        "Activez le mode pixel dans la personnalisation des pinceaux pour créer des œuvres avec une expression façon pixel art. Combinez-le avec la fonction de trame pour un dithering facile.",
-      "about.unique.item8.title": "Emportez votre environnement partout",
-      "about.unique.item8.body":
-        "Exportez et importez la quasi-totalité de votre environnement sous forme de fichiers : thèmes, disposition de l’espace de travail, réglages de pinceaux, et même les données de projet. Changez d’appareil et reprenez immédiatement dans l’environnement que vous connaissez.",
-      "about.unique.item9.title": "Jusqu’aux widgets, tout vous appartient",
-      "about.unique.item9.body":
-        "Il existe trois widgets d’écran d’accueil. Le widget d’écran de démarrage affiche une image que vous choisissez parmi vos propres œuvres, et les widgets « Créer » et « Place des œuvres » suivent le thème de l’application ou prennent la couleur de fond de votre choix. Les couleurs sont mémorisées par type : les trois peuvent voisiner sans se confondre.",
-      "about.unique.item7.title": "Place des œuvres",
-      "about.unique.item7.body":
-        "Découvrez les œuvres publiées via les nouveautés et les classements. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
-      "about.unique.item7.link": "Voir la Place des œuvres",
+      "about.unique.pointer": "Sur la page d’accueil, « Fonctions phares de NIARIM » présente les fonctions principales avec de vrais écrans et des résultats dessinés. La page Fonctions les explique en détail, par domaine.",
+      "about.unique.linkHome": "Voir les fonctions phares",
+      "about.unique.linkFeatures": "Voir la page Fonctions",
       "about.cta.title":
         "Vous voulez en savoir plus sur l’utilisation de NIARIM ?",
       "about.cta.body":
         "Retrouvez ici, sur le web, le même contenu que l’écran d’aide intégré à l’application.",
+      "about.cta.tips": "Dans l’application, l’écran Astuces permet de rechercher des astuces et techniques pratiques par mot-clé.",
       "about.cta.link": "Voir le guide",
     },
     es: {
@@ -497,7 +332,7 @@
         "NIARIM se divide en un «Modo Lienzo» para dibujar y un «Modo Línea de Tiempo» para dar movimiento. No hace falta ir y venir entre una app de dibujo y un editor de vídeo. Dibuja, anímalo al instante y remátalo con sonido: todo el flujo de creación cabe en una sola app.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Lo que valora NIARIM",
-      "about.philosophy.item1.title": "Animación fácil para todos.",
+      "about.philosophy.item1.title": "Cualquiera puede hacer animación con facilidad.",
       "about.philosophy.item1.body":
         "No hace falta conocimiento ni herramientas especializadas. Con solo un smartphone, cualquiera puede ser creador. Ese es el mundo al que aspira NIARIM.",
       "about.philosophy.item2.title": "Trabajando para mantener la app ligera",
@@ -522,42 +357,14 @@
       "about.device.item3.title": "Modo Galaxy DeX y S Pen",
       "about.device.item3.body":
         "Compatible con un uso tipo escritorio mediante el modo DeX de Galaxy, además de la detección de presión e inclinación del S Pen.",
-      "about.unique.eyebrow": "Only in NIARIM",
       "about.unique.title": "Lo que puedes hacer en NIARIM",
-      "about.unique.lead":
-        "Funciones recomendadas de NIARIM para dibujar, animar y terminar.",
-      "about.unique.item1.title": "Relleno automático y en degradado",
-      "about.unique.item1.body":
-        "Detecta automáticamente el trazo y rellénalo de color. Aplica también un relleno en degradado con un solo toque, reduciendo mucho el trabajo de coloreado. Nota: el relleno automático no utiliza IA generativa, colorea según reglas que tú defines.",
-      "about.unique.item2.title":
-        "Del color de acento al fondo de los paneles, cada color a tu elección",
-      "about.unique.item2.body":
-        "Se incluye una amplia variedad de ajustes preestablecidos, de tonos pastel a tonos apagados, pero son solo un punto de partida. Color de acento, color de texto, fondo de paneles, fondo de menús, color de selección e incluso el color de la marca de actualización: casi todos los colores usados en la app se pueden combinar libremente con un selector de color para crear tu propio tema. Tus temas personalizados se pueden nombrar, guardar, duplicar y exportar.",
-      "about.unique.item3.title": "Consejos integrados",
-      "about.unique.item3.body":
-        "Busca y aprende consejos y técnicas prácticas directamente dentro de la app.",
-      "about.unique.item4.title": "Filtros de puesta en escena",
-      "about.unique.item4.body":
-        "Superpone efectos cinematográficos —desenfoque, corrección de color, resplandor, lluvia, grano tipo película y más— en una escena completa o en un lote de fotogramas seleccionados.",
-      "about.unique.item5.title": "Relleno de tramas",
-      "about.unique.item5.body":
-        "Da los últimos retoques a tu obra con un acabado de tramas al estilo manga. Ideal para volantes, tejidos de punto, medias y otros patrones finos tediosos de dibujar a mano; también puedes crear y compartir tus propias tramas personalizadas.",
-      "about.unique.item6.title": "Modo píxel",
-      "about.unique.item6.body":
-        "Activa el modo píxel en la personalización de pinceles para crear obras con una expresión al estilo pixel art. Combínalo con la función de tramas para lograr un dithering sencillo.",
-      "about.unique.item8.title": "Lleva tu entorno a cualquier dispositivo",
-      "about.unique.item8.body":
-        "Exporta e importa casi todo tu entorno como archivos: temas, diseño del espacio de trabajo, ajustes de pinceles e incluso datos de proyecto. Cambia de dispositivo y retoma el trabajo de inmediato en el entorno al que estás acostumbrado.",
-      "about.unique.item9.title": "Hasta los widgets son tuyos",
-      "about.unique.item9.body":
-        "Hay tres widgets de pantalla de inicio. El widget de arranque muestra un fotograma que eliges entre tus propias obras, y los widgets «Crear» y «Plaza de Obras» pueden seguir el tema de la aplicación o usar el color de fondo que prefieras. Los colores se guardan por tipo, así que los tres pueden convivir sin confundirse.",
-      "about.unique.item7.title": "Plaza de Obras",
-      "about.unique.item7.body":
-        "Descubre las obras publicadas mediante novedades y clasificaciones. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",
-      "about.unique.item7.link": "Ver la Plaza de Obras",
+      "about.unique.pointer": "En la página de inicio, «Funciones destacadas de NIARIM» muestra las funciones principales con pantallas reales y resultados dibujados. La página Funciones las explica en detalle, por áreas.",
+      "about.unique.linkHome": "Ver las funciones destacadas",
+      "about.unique.linkFeatures": "Ver la página Funciones",
       "about.cta.title": "¿Quieres saber más sobre cómo usar NIARIM?",
       "about.cta.body":
         "Consulta aquí, en la web, el mismo contenido que la pantalla de ayuda integrada en la app.",
+      "about.cta.tips": "En la app, la pantalla Consejos te permite buscar consejos y técnicas prácticas por palabra clave.",
       "about.cta.link": "Ver la guía",
     },
   };
@@ -568,26 +375,4 @@
       DICT[lang][key] = entries[key];
     }
   }
-})();
-
-
-/* Consolidated feature section of the About page: keep the six core cards translated
-   together so the unified layout never falls back to a different language. */
-(function () {
-  "use strict";
-  var D = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
-  var C = {
-    ja: ["アニメーション制作で何度も繰り返す工程をただ省くのではなく、仕上がりまで自分でこだわるための時短道具に。NIARIMのおすすめの作画・仕上げ機能をまとめました。","自動線画","ラフの線の中心を捉えて、自動で線画を作成。判定許容範囲、線画幅、線の始まりと終わりの形、手振れ補正を調整し、制御点のドラッグで線の流れまで追い込めます。","自動塗り","あらかじめ決めたパーツごとの色・トーン設定を使い、繰り返し描くキャラクターの色塗りを効率化。線画を直したフレームも更新対象として確認できます。※自動塗りは生成AIを使用した機能ではありません。","演出フィルター","複数フレームをまとめて選び、同じ演出フィルターを一括適用。1枚ずつ同じ仕上げを繰り返す手間を減らしながら、作品全体の見た目を揃えられます。","トーン塗り","色だけでなくトーン表現も塗りの工程に組み込み、漫画的な質感や陰影をアニメーションの各フレームへ自然に取り入れられます。","ピクセルモード","ドット絵に適した描画感へ切り替え、手描きアニメーションとピクセル表現を同じ制作環境の中で行き来できます。","外観・テーマ","アクセント、文字、パネル、メニュー、選択色などを細かくカスタマイズ。長く向き合う制作画面そのものを、自分の道具として整えられます。"],
-    en: ["Tools for the steps animation creators repeat again and again—not just shortcuts, but controls you can refine through the final result. Here are some of NIARIM’s drawing and finishing tools.","Automatic line art","Detect the center of rough strokes and create clean line art automatically. Adjust detection tolerance, line width, tapering and stabilization, then refine the flow by dragging control points.","Automatic coloring","Use predefined colors and tones for each part to speed up coloring recurring characters. Frames whose line art has changed can also be reviewed for updates. Automatic coloring does not use generative AI.","Effect filters","Select multiple frames and apply the same effect filter in one operation, reducing repetitive finishing work while keeping the look consistent.","Tone coloring","Bring tone patterns into the coloring process alongside color, adding manga-like texture and shading naturally across animation frames.","Pixel mode","Switch to drawing behavior suited to pixel art and move between hand-drawn animation and pixel expression in the same workspace.","Appearance & themes","Fine-tune accents, text, panels, menus, selection colors and more, shaping the workspace itself into your own tool."],
-    "zh-Hans": ["把动画制作中反复出现的步骤变成不仅省事、还能精细打磨到成片的工具。这里汇集了 NIARIM 推荐的绘制与后期功能。","自动线稿","识别草稿线条中心并自动生成线稿。可调整判定容差、线宽、起收笔与防抖，并拖动控制点继续修整线条走向。","自动上色","使用预先设定的部件颜色与网点规则，提高重复角色的上色效率。修改过线稿的帧也可作为更新对象确认。自动上色不使用生成式 AI。","演出滤镜","可一次选择多个帧并批量应用相同滤镜，减少逐帧重复处理，同时统一作品整体视觉。","网点上色","把网点表现和颜色一起纳入上色流程，自然加入漫画式质感与阴影。","像素模式","切换到适合像素画的绘制方式，在同一制作环境中自由往返于手绘动画和像素表现。","外观与主题","细致自定义强调色、文字、面板、菜单、选中颜色等，把长期使用的制作界面调整成自己的工具。"],
-    "zh-Hant": ["把動畫製作中反覆出現的步驟變成不只省事、還能精細打磨到成片的工具。這裡整理了 NIARIM 推薦的繪製與後期功能。","自動線稿","辨識草稿線條中心並自動產生線稿。可調整判定容差、線寬、起收筆與防手震，再拖曳控制點修整線條走向。","自動上色","使用預先設定的部件顏色與網點規則，提高重複角色的上色效率。修改過線稿的影格也可作為更新對象確認。自動上色不使用生成式 AI。","演出濾鏡","可一次選取多個影格並批次套用相同濾鏡，減少逐格重複處理，同時統一作品整體視覺。","網點上色","把網點表現和顏色一起納入上色流程，自然加入漫畫式質感與陰影。","像素模式","切換到適合像素畫的繪製方式，在同一製作環境中自由往返於手繪動畫和像素表現。","外觀與主題","細緻自訂強調色、文字、面板、選單、選取顏色等，把長期使用的製作介面調整成自己的工具。"],
-    ko: ["애니메이션 제작에서 반복되는 작업을 단순히 줄이는 데 그치지 않고 결과물까지 직접 다듬을 수 있는 도구로 만들었습니다. NIARIM의 추천 작화·마무리 기능을 모았습니다.","자동 선화","러프 선의 중심을 감지해 선화를 자동 생성합니다. 판정 허용 범위, 선 굵기, 시작·끝 테이퍼와 손떨림 보정을 조절하고 제어점을 드래그해 흐름까지 다듬을 수 있습니다.","자동 채색","파트별로 미리 정한 색과 톤 설정을 사용해 반복해서 그리는 캐릭터의 채색을 효율화합니다. 선화를 수정한 프레임도 업데이트 대상으로 확인할 수 있습니다. 생성형 AI는 사용하지 않습니다.","연출 필터","여러 프레임을 한꺼번에 선택해 같은 연출 필터를 일괄 적용합니다. 반복 마무리 작업을 줄이면서 작품 전체의 인상을 맞출 수 있습니다.","톤 채색","색뿐 아니라 톤 표현도 채색 과정에 포함해 만화적인 질감과 음영을 각 프레임에 자연스럽게 더할 수 있습니다.","픽셀 모드","픽셀 아트에 맞는 그리기 방식으로 전환해 같은 제작 환경에서 손그림 애니메이션과 픽셀 표현을 오갈 수 있습니다.","외관·테마","강조색, 글자, 패널, 메뉴, 선택 색상 등을 세밀하게 꾸며 오래 사용하는 제작 화면 자체를 나만의 도구로 만들 수 있습니다."],
-    fr: ["Des outils pensés pour les étapes répétitives de l’animation : pas seulement pour aller plus vite, mais pour garder la maîtrise jusqu’au rendu final. Voici quelques fonctions de dessin et de finition de NIARIM.","Line art automatique","Repère le centre des traits du rough et génère automatiquement le line art. Réglez la tolérance, l’épaisseur, les effilés et la stabilisation, puis affinez le tracé en déplaçant les points de contrôle.","Colorisation automatique","Utilisez des couleurs et trames prédéfinies par élément pour accélérer la mise en couleur des personnages récurrents. Les images dont le line art a changé peuvent aussi être vérifiées. Cette fonction n’utilise pas d’IA générative.","Filtres d’effets","Sélectionnez plusieurs images et appliquez le même filtre en une fois afin de réduire les finitions répétitives tout en harmonisant l’ensemble.","Colorisation en trames","Intégrez les trames au processus de colorisation pour ajouter naturellement textures et ombres de style manga aux images de l’animation.","Mode pixel","Passez à un dessin adapté au pixel art et alternez entre animation dessinée à la main et expression pixel dans le même environnement.","Apparence et thèmes","Personnalisez accents, texte, panneaux, menus, couleurs de sélection et plus encore pour faire de l’espace de travail votre propre outil."],
-    es: ["Herramientas para los pasos que se repiten una y otra vez al animar: no solo para ahorrar trabajo, sino para conservar el control hasta el acabado final. Estas son algunas funciones de dibujo y acabado de NIARIM.","Line art automático","Detecta el centro de los trazos del boceto y genera el line art automáticamente. Ajusta tolerancia, grosor, entrada y salida y estabilización, y perfecciona el flujo arrastrando puntos de control.","Coloreado automático","Usa colores y tramas predefinidos por parte para agilizar el coloreado de personajes recurrentes. También puedes revisar los fotogramas cuyo line art haya cambiado. No utiliza IA generativa.","Filtros de efectos","Selecciona varios fotogramas y aplica el mismo filtro de una vez, reduciendo acabados repetitivos y manteniendo una apariencia coherente.","Coloreado con tramas","Integra las tramas junto al color para añadir de forma natural texturas y sombras de estilo manga a los fotogramas.","Modo píxel","Cambia a un comportamiento de dibujo pensado para pixel art y alterna entre animación dibujada a mano y expresión pixelada en el mismo entorno.","Apariencia y temas","Personaliza acentos, texto, paneles, menús, colores de selección y más para convertir el propio espacio de trabajo en tu herramienta."]
-  };
-  var keys = ["coreLead","core1.title","core1.body","core2.title","core2.body","core3.title","core3.body","core4.title","core4.body","core5.title","core5.body","core6.title","core6.body"];
-  Object.keys(C).forEach(function (lang) {
-    if (!D[lang]) D[lang] = {};
-    keys.forEach(function (key, i) { D[lang]["about.unique." + key] = C[lang][i]; });
-  });
 })();

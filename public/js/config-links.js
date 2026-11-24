@@ -104,7 +104,7 @@
   }
 
   function loadSignatureShowcase() {
-    if (!document.querySelector(".about-hero, .features-header")) return;
+    if (!document.querySelector(".features-header")) return;
     addStyleOnce(
       "/css/signature-showcase.css",
       "data-niarim-signature-showcase-style",

@@ -3,35 +3,6 @@
 
   var COPY = {
     ja: {
-      kicker: "NIARIM",
-      title: "NIARIMだけの、うれしい機能。",
-      lead: "アニメーション制作で何度も繰り返す工程を、ただ省くのではなく、仕上がりまで自分で追い込める道具に。NIARIMのおすすめの作画・仕上げ機能をまとめました。",
-      cards: [
-        [
-          "自動線画",
-          "ラフの線の中心を捉えて、自動で線画を作成。判定許容範囲、線画幅、入り抜き、手振れ補正を調整し、制御点のドラッグで線の流れまで追い込めます。",
-        ],
-        [
-          "自動塗り",
-          "あらかじめ決めたパーツごとの色・トーン設定を使い、繰り返し描くキャラクターの色塗りを効率化。線画を直したフレームも更新対象として確認できます。",
-        ],
-        [
-          "演出フィルター",
-          "複数フレームをまとめて選び、同じ演出フィルターを一括適用。1枚ずつ同じ仕上げを繰り返す手間を減らしながら、作品全体の見た目を揃えられます。",
-        ],
-        [
-          "トーン塗り",
-          "色だけでなくトーン表現も塗りの工程に組み込み、漫画的な質感や陰影をアニメーションの各フレームへ自然に取り入れられます。",
-        ],
-        [
-          "ピクセルモード",
-          "ドット絵に適した描画感へ切り替え、手描きアニメーションとピクセル表現を同じ制作環境の中で行き来できます。",
-        ],
-        [
-          "外観・テーマ",
-          "アクセント、文字、パネル、メニュー、選択色などを細かくカスタマイズ。長く向き合う制作画面そのものを、自分の道具として整えられます。",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "ラフから線画へ。調整まで、ひとつの画面で。",
       autoLead:
@@ -55,35 +26,6 @@
       apply: "適用",
     },
     en: {
-      kicker: "NIARIM",
-      title: "Small details that make NIARIM feel different.",
-      lead: "NIARIM turns repetitive animation work into tools you can still shape by hand—saving steps without giving up control over the final look.",
-      cards: [
-        [
-          "Auto lineart",
-          "Find the centre of rough strokes and build editable lineart automatically. Tune detection tolerance, line width, taper and stabilization, then drag control points to refine the flow.",
-        ],
-        [
-          "Auto fill",
-          "Reuse part-by-part colour and tone rules across repeated character drawings, with clear indicators when a frame needs recalculation after lineart changes.",
-        ],
-        [
-          "Bulk effect filters",
-          "Select multiple frames and apply the same finishing effect in one pass, keeping the look consistent without repeating the same operation frame by frame.",
-        ],
-        [
-          "Tone fill",
-          "Bring manga-style tone textures and shading directly into the colouring workflow for animation frames.",
-        ],
-        [
-          "Pixel mode",
-          "Switch to a pixel-focused drawing feel while staying in the same animation workspace.",
-        ],
-        [
-          "Appearance & themes",
-          "Tune accent, text, panels, menus and selection colours so the workspace itself feels like your own tool.",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle:
         "From rough sketch to lineart, with the controls still in your hands.",
@@ -108,29 +50,6 @@
       apply: "Apply",
     },
     "zh-Hans": {
-      kicker: "NIARIM",
-      title: "只有 NIARIM 才有的贴心功能。",
-      lead: "把动画制作中反复出现的步骤做成既省事、又能继续细调的工具。减少机械操作，同时把最终效果牢牢掌握在自己手里。",
-      cards: [
-        [
-          "自动线稿",
-          "沿草稿线条的中心自动生成线稿，可调判定容差、线宽、收笔与防抖，并可拖动控制点继续修整线条走向。",
-        ],
-        [
-          "自动上色",
-          "复用角色各部位的颜色与网点规则，减少重复逐帧上色；线稿修改后也能看出哪些帧需要重新计算。",
-        ],
-        [
-          "批量演出滤镜",
-          "一次选择多个帧并应用同一种演出效果，减少逐帧重复操作，同时保持整体视觉一致。",
-        ],
-        ["网点上色", "把漫画式网点和阴影直接纳入动画帧的上色流程。"],
-        ["像素模式", "在同一动画工作区中切换到更适合像素画的绘制体验。"],
-        [
-          "外观与主题",
-          "从强调色、文字到面板、菜单和选中色都可以细调，让工作区真正变成自己的工具。",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "从草稿到线稿，自动生成，也能自己细调。",
       autoLead:
@@ -154,29 +73,6 @@
       apply: "应用",
     },
     "zh-Hant": {
-      kicker: "NIARIM",
-      title: "只有 NIARIM 才有的貼心功能。",
-      lead: "把動畫製作中反覆出現的步驟做成既省事、又能繼續細調的工具。減少機械操作，同時把最後效果掌握在自己手裡。",
-      cards: [
-        [
-          "自動線稿",
-          "沿草稿線條的中心自動產生線稿，可調判定容差、線寬、收筆與防手震，並可拖曳控制點繼續修整線條走向。",
-        ],
-        [
-          "自動上色",
-          "重複使用角色各部位的顏色與網點規則，減少逐格上色；線稿修改後也能看出哪些影格需要重新計算。",
-        ],
-        [
-          "批次演出濾鏡",
-          "一次選取多個影格並套用同一種演出效果，減少逐格重複操作，同時保持整體視覺一致。",
-        ],
-        ["網點上色", "把漫畫式網點與陰影直接納入動畫影格的上色流程。"],
-        ["像素模式", "在同一動畫工作區中切換到更適合像素畫的繪製體驗。"],
-        [
-          "外觀與主題",
-          "從強調色、文字到面板、選單與選取色都能細調，讓工作區真正成為自己的工具。",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "從草稿到線稿，自動產生，也能自己細調。",
       autoLead:
@@ -200,35 +96,6 @@
       apply: "套用",
     },
     ko: {
-      kicker: "NIARIM",
-      title: "NIARIM이라서 더 반가운 기능들.",
-      lead: "애니메이션 제작에서 반복되는 과정을 줄이되, 결과를 직접 다듬는 감각은 그대로 남겼습니다. 빠르게 만들고, 원하는 만큼 세밀하게 조정할 수 있습니다.",
-      cards: [
-        [
-          "자동 선화",
-          "러프 선의 중심을 따라 선화를 자동 생성하고 판정 허용 범위, 선 굵기, 테이퍼, 손떨림 보정을 조절한 뒤 제어점을 드래그해 흐름까지 다듬습니다.",
-        ],
-        [
-          "자동 채색",
-          "캐릭터 파츠별 색상·톤 규칙을 반복 프레임에 재사용하고, 선화 수정 뒤 다시 계산해야 할 프레임도 쉽게 확인합니다.",
-        ],
-        [
-          "일괄 연출 필터",
-          "여러 프레임을 한 번에 선택해 같은 연출 효과를 적용하고, 반복 작업 없이 작품 전체의 인상을 맞춥니다.",
-        ],
-        [
-          "톤 채색",
-          "만화식 톤과 명암 표현을 애니메이션 프레임의 채색 흐름에 바로 넣을 수 있습니다.",
-        ],
-        [
-          "픽셀 모드",
-          "같은 애니메이션 작업 공간에서 픽셀 아트에 맞는 드로잉 감각으로 전환합니다.",
-        ],
-        [
-          "외관·테마",
-          "강조색, 글자, 패널, 메뉴, 선택색까지 세밀하게 꾸며 작업 공간 자체를 나만의 도구로 만들 수 있습니다.",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "러프에서 선화까지. 자동으로 만들고, 직접 다듬습니다.",
       autoLead:
@@ -252,35 +119,6 @@
       apply: "적용",
     },
     fr: {
-      kicker: "NIARIM",
-      title: "Ces petits plus qui rendent NIARIM unique.",
-      lead: "NIARIM accélère les étapes répétitives de l’animation sans retirer le contrôle créatif : moins d’actions mécaniques, plus de temps pour affiner le résultat.",
-      cards: [
-        [
-          "Lineart automatique",
-          "Suit le centre des traits du rough pour créer un lineart éditable. Réglez tolérance, épaisseur, effilement et stabilisation, puis déplacez les points de contrôle.",
-        ],
-        [
-          "Colorisation automatique",
-          "Réutilisez des règles de couleur et de trame par partie du personnage, avec un repère clair pour les images à recalculer après une retouche du lineart.",
-        ],
-        [
-          "Filtres d’effet en lot",
-          "Sélectionnez plusieurs images et appliquez le même effet en une seule fois pour conserver une finition cohérente.",
-        ],
-        [
-          "Remplissage tramé",
-          "Intégrez directement des trames et ombrages de type manga au flux de colorisation des images d’animation.",
-        ],
-        [
-          "Mode pixel",
-          "Passez à une sensation de dessin pensée pour le pixel art sans quitter le même espace d’animation.",
-        ],
-        [
-          "Apparence et thèmes",
-          "Réglez accent, texte, panneaux, menus et sélection afin que l’espace de travail devienne réellement le vôtre.",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "Du rough au lineart, automatiquement — sans perdre la main.",
       autoLead:
@@ -304,35 +142,6 @@
       apply: "Appliquer",
     },
     es: {
-      kicker: "NIARIM",
-      title: "Pequeñas funciones que hacen diferente a NIARIM.",
-      lead: "NIARIM reduce las tareas repetitivas de la animación sin quitarte el control: menos pasos mecánicos y más tiempo para perfeccionar el resultado.",
-      cards: [
-        [
-          "Lineart automático",
-          "Sigue el centro de los trazos del boceto para crear lineart editable. Ajusta tolerancia, grosor, remate y estabilización, y arrastra los puntos de control.",
-        ],
-        [
-          "Relleno automático",
-          "Reutiliza reglas de color y trama por partes del personaje y detecta qué fotogramas deben recalcularse después de cambiar el lineart.",
-        ],
-        [
-          "Filtros de efecto por lotes",
-          "Selecciona varios fotogramas y aplica el mismo acabado de una sola vez para mantener una apariencia coherente.",
-        ],
-        [
-          "Relleno de trama",
-          "Integra tramas y sombras de estilo manga directamente en el flujo de color de la animación.",
-        ],
-        [
-          "Modo píxel",
-          "Cambia a una experiencia pensada para pixel art sin salir del mismo espacio de animación.",
-        ],
-        [
-          "Apariencia y temas",
-          "Personaliza acento, texto, paneles, menús y selección para convertir el espacio de trabajo en tu propia herramienta.",
-        ],
-      ],
       autoEyebrow: "AUTO LINEART",
       autoTitle: "Del boceto al lineart, automáticamente y con control total.",
       autoLead:
@@ -360,44 +169,6 @@
   function copy() {
     var lang = document.documentElement.lang || "ja";
     return COPY[lang] || COPY.en;
-  }
-
-  function renderAbout() {
-    var heading = document.querySelector('[data-i18n="about.unique.title"]');
-    if (!heading) return;
-    var section = heading.closest("section");
-    var grid = section && section.querySelector(".spec-grid");
-    if (!grid) return;
-
-    var old = section.querySelector(".unique-spotlight");
-    if (old) old.remove();
-
-    var c = copy();
-    var el = document.createElement("div");
-    el.className = "unique-spotlight";
-    el.innerHTML =
-      '<div class="unique-spotlight-head"><span class="unique-spotlight-kicker">' +
-      c.kicker +
-      "</span><h3>" +
-      c.title +
-      "</h3><p>" +
-      c.lead +
-      '</p></div><div class="unique-spotlight-grid">' +
-      c.cards
-        .map(function (item, i) {
-          return (
-            '<article class="unique-spotlight-card" data-index="0' +
-            (i + 1) +
-            '"><strong>' +
-            item[0] +
-            "</strong><span>" +
-            item[1] +
-            "</span></article>"
-          );
-        })
-        .join("") +
-      "</div>";
-    grid.parentNode.insertBefore(el, grid);
   }
 
   function screenMarkup(c) {
@@ -480,7 +251,6 @@
   }
 
   function render() {
-    renderAbout();
     renderFeatures();
   }
 

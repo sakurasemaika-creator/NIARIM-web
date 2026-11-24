@@ -96,33 +96,24 @@ if (/buildCommunityMini|clonePreviewCard|workCard\(/.test(heroShowcase))
   failures.push(
     "unused coded app/community preview builders must stay removed",
   );
+// "What you can do in NIARIM" on About is one short section that points to
+// the home page's featured tools and the Features page, where each feature
+// has its one home; it must not grow a second copy of the feature cards.
 if (
   (about.match(/data-about-unique-section/g) || []).length !== 1 ||
   (about.match(/data-about-unique>/g) || []).length !== 1
 )
   failures.push(
-    "About Only in NIARIM must be one consolidated section with one heading",
+    "About must keep one consolidated feature section with one heading",
   );
-for (const key of [
-  "core1",
-  "core2",
-  "core3",
-  "core4",
-  "core5",
-  "core6",
-  "item3",
-  "item8",
-  "item9",
-  "item7",
-]) {
-  const count = (
-    about.match(
-      new RegExp('data-i18n="about\\.unique\\.' + key + '\\.title"', "g"),
-    ) || []
-  ).length;
-  if (count !== 1)
-    failures.push("About unique feature must appear exactly once: " + key);
-}
+if (
+  !about.includes('href="/#tp-unique-title"') ||
+  !about.includes('href="/features/"') ||
+  /data-i18n="about\.unique\.(?:core|item)\d/.test(about)
+)
+  failures.push(
+    "About feature section must point to the home featured tools and the Features page instead of repeating feature cards",
+  );
 if (
   !fixJs.includes('shot1: "canvas-v3"') ||
   !fixJs.includes('shot2: "timeline-v3"') ||
