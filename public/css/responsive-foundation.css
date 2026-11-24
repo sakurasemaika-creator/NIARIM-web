@@ -16,7 +16,8 @@
   --niarim-line-strong: rgba(59, 36, 41, 0.24);
   --niarim-accent-soft: rgba(255, 92, 122, 0.08);
   --niarim-accent-faint: rgba(255, 92, 122, 0.045);
-  --niarim-radius: 18px;
+  /* DESIGN.md 5: standard cards 14px. */
+  --niarim-radius: 14px;
   --niarim-device-radius: 22px;
   --niarim-shadow-soft: 0 16px 44px rgba(59, 36, 41, 0.075);
 }
@@ -155,22 +156,13 @@ main {
   background-size: 42px 8px;
 }
 
-.section-head::after,
-.feature-section-head::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -1rem;
-  top: -0.9rem;
-  width: min(21rem, 72vw);
-  height: 5.3rem;
-  border-radius: 1.2rem;
-  background: linear-gradient(
-    115deg,
-    rgba(255, 92, 122, 0.05),
-    transparent 78%
-  );
-  pointer-events: none;
+/* Section headings carry their label (.eyebrow, a rule and capitals) and
+   nothing else: the pale pink panel that sat behind them was offset from
+   centred headings, and the three-segment mark above duplicated the
+   label's rule. The mark stays on feature/help category headings, which
+   have no label. */
+.section-head::before {
+  content: none;
 }
 
 .eyebrow {
@@ -546,13 +538,10 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   position: relative;
   overflow: hidden;
 }
+/* Cards are a hairline and a surface (DESIGN.md 7); the 3px pink edge on
+   every card spent the accent on repetition. */
 .intro-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: var(--color-accent);
-  opacity: 0.72;
+  content: none;
 }
 .intro-card::after,
 .pricing-card.is-premium::after {
@@ -590,11 +579,9 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
 .spec-item {
   padding: clamp(1.15rem, 2vw, 1.6rem);
 }
+/* Same as .intro-card: no pink edge on every card. */
 .spec-item::before {
-  width: 3px;
-  border-radius: 999px;
-  background: var(--color-accent);
-  opacity: 0.7;
+  content: none;
 }
 
 .pricing-card {

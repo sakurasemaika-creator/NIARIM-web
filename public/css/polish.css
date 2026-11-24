@@ -443,10 +443,6 @@ main {
   border-color: var(--color-border);
 }
 
-.spec-item::before {
-  width: 3px;
-}
-
 /* ---- About / legal / utility surfaces ---- */
 .about-name,
 .about-not-supported,

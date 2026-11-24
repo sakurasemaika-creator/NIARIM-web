@@ -112,15 +112,6 @@
   text-align: center;
 }
 
-.section-head::before {
-  margin-inline: auto;
-}
-
-.section-head::after {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 /* Feature/help category headings are navigational sub-sections with an icon,
    not page-title heroes, so their local left-aligned rhythm stays intact. */
 .feature-section-head {
