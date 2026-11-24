@@ -23,11 +23,6 @@
       "communityPage.title": "作品広場",
       "communityPage.lead":
         "NIARIMで制作された作品を発見できるコミュニティ機能です。閲覧はログイン不要で、誰でも気軽に楽しめます。",
-      "communityPage.comingSoon":
-        "本ページはNIARIM正式リリースに向けて準備中の機能を紹介するページです。仕様は確定していますが、実装は今後行われます。画面キャプチャは後日、実際の画面に差し替えます。",
-      "communityPage.login.title": "見るだけならログイン不要",
-      "communityPage.login.body":
-        "アニメを描いて遊ぶことはもちろん、作品広場の閲覧・新着・ランキングの表示・作者の作品一覧の閲覧は、ログインなしでお楽しみいただけます。作品を投稿するにはGoogleアカウントでのログインが必要です。投稿数は無料版で1日1作品まで、プレミアムなら1日3作品まで投稿できます。",
       "communityPage.tabs.overall": "累計",
       "communityPage.tabs.yearly": "年間",
       "communityPage.tabs.monthly": "月間",
@@ -48,18 +43,11 @@
       "communityPage.search.author.title": "作者から探す",
       "communityPage.search.author.body":
         "気になる作品を見つけたら、その作者が公開しているほかの作品もチェックできます。お気に入りの作者を見つけて、新しい作品を追いかけましょう。",
-      "communityPage.update.title": "毎日更新される、集まる場所に",
-      "communityPage.update.body":
-        "新着は投稿され次第すぐに反映されます。ランキングは1日2回（作品数に応じて最大4回）更新を予定しており、いつ訪れても新しい発見がある、毎日集まりたくなる場所を目指しています。",
-      "communityPage.bookmark.title": "ブックマーク機能",
-      "communityPage.bookmark.body":
-        "お気に入りの作品はブックマークして、あとから見返せます。（ブックマークにはログインが必要です。）",
       "communityPage.placeholder.label": "作品プレースホルダー",
       "communityPage.placeholder.title": "作品タイトル",
       "communityPage.placeholder.author": "作者名",
       "communityPage.moreInApp.body": "続きはアプリで",
       "communityPage.moreInApp.link": "NIARIMをダウンロードする",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "もっと楽しく、もっと便利に",
       "communityPage.advanced.lead":
         "みんなでタグを育てたり、動画を流したまま画面を移動したり、スキマ時間にサクサク見たり。作品広場をもっと楽しむための工夫です。",
@@ -89,11 +77,6 @@
       "communityPage.title": "Work Plaza",
       "communityPage.lead":
         "A community feature for discovering work made with NIARIM. Browsing requires no login, so anyone can enjoy it casually.",
-      "communityPage.comingSoon":
-        "This page introduces a feature being prepared for NIARIM’s official launch. The specification is finalized, but implementation is still to come. Screenshots here will be replaced with the real screens later.",
-      "communityPage.login.title": "No login needed just to browse",
-      "communityPage.login.body":
-        "Drawing and animating, plus browsing the Work Plaza, new arrivals, rankings, and an author’s work list, are all available without logging in. Posting requires signing in with a Google account. You can post up to 1 work a day on the free plan, or up to 3 a day with Premium.",
       "communityPage.tabs.overall": "All-time",
       "communityPage.tabs.yearly": "Yearly",
       "communityPage.tabs.monthly": "Monthly",
@@ -115,19 +98,11 @@
       "communityPage.search.author.title": "Find by author",
       "communityPage.search.author.body":
         "Found a work you like? Check out the other works that author has posted. Find your favorite creators and follow their new work.",
-      "communityPage.update.title":
-        "Updated daily, built to be a gathering place",
-      "communityPage.update.body":
-        "New arrivals appear as soon as they’re posted. Rankings are planned to update twice a day (up to 4 times as the number of works grows), so there’s something new to discover whenever you visit — a place people want to come back to every day.",
-      "communityPage.bookmark.title": "Bookmarks",
-      "communityPage.bookmark.body":
-        "Bookmark your favorite works to find them again later (bookmarking requires signing in).",
       "communityPage.placeholder.label": "Work placeholder",
       "communityPage.placeholder.title": "Artwork title",
       "communityPage.placeholder.author": "Creator name",
       "communityPage.moreInApp.body": "See more in the app",
       "communityPage.moreInApp.link": "Download NIARIM",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "Even more fun, even more convenient",
       "communityPage.advanced.lead":
         "Grow tags together, keep a video playing while you browse elsewhere, or breeze through works in your spare moments — extra touches that make the Work Plaza even more fun to use.",
@@ -156,11 +131,6 @@
       "communityPage.title": "作品广场",
       "communityPage.lead":
         "可发现使用 NIARIM 制作的作品的社区功能。浏览无需登录，任何人都能轻松享受。",
-      "communityPage.comingSoon":
-        "本页面介绍的是为 NIARIM 正式上线而准备中的功能。规格已确定，但具体实现将在今后进行。此处的截图将于日后替换为实际画面。",
-      "communityPage.login.title": "仅浏览无需登录",
-      "communityPage.login.body":
-        "制作动画、浏览 作品广场、查看新作与排行榜、查看作者作品列表，均无需登录即可使用。发布作品需要使用 Google 账号登录。免费版每天最多可投稿1个作品，高级会员则最多可投稿3个。",
       "communityPage.tabs.overall": "累计",
       "communityPage.tabs.yearly": "年度",
       "communityPage.tabs.monthly": "月度",
@@ -181,18 +151,11 @@
       "communityPage.search.author.title": "按作者查找",
       "communityPage.search.author.body":
         "发现感兴趣的作品后，还可以查看该作者发布的其他作品。找到喜欢的创作者，持续追踪其新作品。",
-      "communityPage.update.title": "每日更新，打造大家聚集的场所",
-      "communityPage.update.body":
-        "新作一经投稿即会立即显示。排行榜预计每日更新2次（视作品数量最多可达4次），无论何时造访都能有新发现，力求打造让大家每天都想来的场所。",
-      "communityPage.bookmark.title": "收藏功能",
-      "communityPage.bookmark.body":
-        "可将喜欢的作品加入收藏，方便日后查看（收藏功能需要登录）。",
       "communityPage.placeholder.label": "作品预留位",
       "communityPage.placeholder.title": "作品标题",
       "communityPage.placeholder.author": "作者名",
       "communityPage.moreInApp.body": "更多内容请在应用内查看",
       "communityPage.moreInApp.link": "下载 NIARIM",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "更多乐趣，更多便利",
       "communityPage.advanced.lead":
         "大家一起培养标签、边播放视频边浏览其他画面、利用零碎时间轻松浏览——这些都是让作品广场更好玩的巧思。",
@@ -221,11 +184,6 @@
       "communityPage.title": "作品廣場",
       "communityPage.lead":
         "可發現使用 NIARIM 製作的作品的社群功能。瀏覽無需登入，任何人都能輕鬆享受。",
-      "communityPage.comingSoon":
-        "本頁面介紹的是為 NIARIM 正式上線而準備中的功能。規格已確定，但具體實作將於今後進行。此處的截圖將於日後替換為實際畫面。",
-      "communityPage.login.title": "僅瀏覽無需登入",
-      "communityPage.login.body":
-        "製作動畫、瀏覽 作品廣場、查看新作與排行榜、查看作者作品列表，均無需登入即可使用。發布作品需要使用 Google 帳號登入。免費版每天最多可投稿1個作品，高級會員則最多可投稿3個。",
       "communityPage.tabs.overall": "累計",
       "communityPage.tabs.yearly": "年度",
       "communityPage.tabs.monthly": "月度",
@@ -246,18 +204,11 @@
       "communityPage.search.author.title": "從作者查找",
       "communityPage.search.author.body":
         "發現感興趣的作品後，還可以查看該作者發布的其他作品。找到喜歡的創作者，持續追蹤其新作品。",
-      "communityPage.update.title": "每日更新，打造大家聚集的場所",
-      "communityPage.update.body":
-        "新作一經投稿即會立即顯示。排行榜預計每日更新2次（視作品數量最多可達4次），無論何時造訪都能有新發現，力求打造讓大家每天都想來的場所。",
-      "communityPage.bookmark.title": "收藏功能",
-      "communityPage.bookmark.body":
-        "可將喜歡的作品加入收藏，方便日後查看（收藏功能需要登入）。",
       "communityPage.placeholder.label": "作品預留位",
       "communityPage.placeholder.title": "作品標題",
       "communityPage.placeholder.author": "作者名",
       "communityPage.moreInApp.body": "更多內容請在應用程式內查看",
       "communityPage.moreInApp.link": "下載 NIARIM",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "更多樂趣，更多便利",
       "communityPage.advanced.lead":
         "大家一起培養標籤、邊播放影片邊瀏覽其他畫面、利用零碎時間輕鬆瀏覽——這些都是讓作品廣場更好玩的巧思。",
@@ -286,11 +237,6 @@
       "communityPage.title": "작품광장",
       "communityPage.lead":
         "NIARIM으로 제작된 작품을 발견할 수 있는 커뮤니티 기능입니다. 열람은 로그인 없이 가능해 누구나 부담 없이 즐길 수 있습니다.",
-      "communityPage.comingSoon":
-        "이 페이지는 NIARIM 정식 출시를 위해 준비 중인 기능을 소개하는 페이지입니다. 사양은 확정되었으나 구현은 앞으로 진행됩니다. 화면 캡처는 추후 실제 화면으로 교체됩니다.",
-      "communityPage.login.title": "보기만 한다면 로그인 불필요",
-      "communityPage.login.body":
-        "애니메이션 제작은 물론, 작품광장 열람·신작·랭킹 표시·작가별 작품 목록 열람은 로그인 없이 즐기실 수 있습니다. 작품을 게시하려면 Google 계정으로 로그인해야 합니다. 투고 수는 무료 버전에서 하루 1개까지, 프리미엄이라면 하루 3개까지 가능합니다.",
       "communityPage.tabs.overall": "누적",
       "communityPage.tabs.yearly": "연간",
       "communityPage.tabs.monthly": "월간",
@@ -311,18 +257,11 @@
       "communityPage.search.author.title": "작가로 찾기",
       "communityPage.search.author.body":
         "마음에 드는 작품을 발견했다면 그 작가가 공개한 다른 작품도 확인할 수 있습니다. 좋아하는 작가를 찾아 새 작품을 계속 따라가 보세요.",
-      "communityPage.update.title": "매일 업데이트되는, 모두가 모이는 공간으로",
-      "communityPage.update.body":
-        "신작은 투고되는 즉시 반영됩니다. 랭킹은 하루 2회（작품 수에 따라 최대 4회） 업데이트를 예정하고 있어, 언제 방문해도 새로운 발견이 있는, 매일 찾고 싶어지는 공간을 목표로 합니다.",
-      "communityPage.bookmark.title": "북마크 기능",
-      "communityPage.bookmark.body":
-        "마음에 드는 작품은 북마크해 두고 나중에 다시 볼 수 있습니다（북마크에는 로그인이 필요합니다）.",
       "communityPage.placeholder.label": "작품 플레이스홀더",
       "communityPage.placeholder.title": "작품 제목",
       "communityPage.placeholder.author": "작성자 이름",
       "communityPage.moreInApp.body": "이어서 앱에서 보기",
       "communityPage.moreInApp.link": "NIARIM 다운로드",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "더 즐겁게, 더 편리하게",
       "communityPage.advanced.lead":
         "모두 함께 태그를 가꾸거나, 영상을 재생한 채로 다른 화면을 둘러보거나, 자투리 시간에 가볍게 훑어보거나. 작품광장을 더 즐겁게 만드는 장치들입니다.",
@@ -351,12 +290,6 @@
       "communityPage.title": "Place des œuvres",
       "communityPage.lead":
         "Une fonctionnalité communautaire pour découvrir les œuvres créées avec NIARIM. La consultation ne nécessite aucune connexion, pour que chacun en profite facilement.",
-      "communityPage.comingSoon":
-        "Cette page présente une fonctionnalité en préparation pour le lancement officiel de NIARIM. Le cahier des charges est finalisé, mais le développement reste à venir. Les captures d’écran ici seront remplacées plus tard par les écrans réels.",
-      "communityPage.login.title":
-        "Aucune connexion nécessaire pour simplement consulter",
-      "communityPage.login.body":
-        "Dessiner et animer, ainsi que parcourir la Place des œuvres, les nouveautés, les classements et la liste des œuvres d’un auteur, sont accessibles sans connexion. Pour publier, il faut se connecter avec un compte Google. Vous pouvez publier jusqu’à 1 œuvre par jour avec le plan gratuit, ou jusqu’à 3 avec Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Annuel",
       "communityPage.tabs.monthly": "Mensuel",
@@ -378,19 +311,11 @@
       "communityPage.search.author.title": "Rechercher par auteur",
       "communityPage.search.author.body":
         "Vous avez trouvé une œuvre qui vous plaît\u00a0? Consultez les autres œuvres publiées par cet auteur. Repérez vos créateurs préférés et suivez leurs nouvelles publications.",
-      "communityPage.update.title":
-        "Mise à jour quotidienne, pensée comme un lieu de rendez-vous",
-      "communityPage.update.body":
-        "Les nouveautés apparaissent dès leur publication. Les classements devraient être mis à jour deux fois par jour (jusqu’à 4 fois selon le nombre d'œuvres), pour qu’il y ait toujours quelque chose de nouveau à découvrir — un lieu où l’on a envie de revenir chaque jour.",
-      "communityPage.bookmark.title": "Favoris",
-      "communityPage.bookmark.body":
-        "Ajoutez vos œuvres préférées en favoris pour les retrouver plus tard (nécessite une connexion).",
       "communityPage.placeholder.label": "Emplacement d’une œuvre",
       "communityPage.placeholder.title": "Titre de l'œuvre",
       "communityPage.placeholder.author": "Nom de l’auteur",
       "communityPage.moreInApp.body": "Voir la suite dans l’appli",
       "communityPage.moreInApp.link": "Télécharger NIARIM",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title":
         "Encore plus de plaisir, encore plus pratique",
       "communityPage.advanced.lead":
@@ -422,12 +347,6 @@
       "communityPage.title": "Plaza de Obras",
       "communityPage.lead":
         "Una función de comunidad para descubrir obras creadas con NIARIM. Consultar no requiere iniciar sesión, así que cualquiera puede disfrutarlo con facilidad.",
-      "communityPage.comingSoon":
-        "Esta página presenta una función en preparación para el lanzamiento oficial de NIARIM. Las especificaciones están definidas, pero la implementación aún está por llegar. Las capturas aquí se sustituirán más adelante por las pantallas reales.",
-      "communityPage.login.title":
-        "No hace falta iniciar sesión solo para consultar",
-      "communityPage.login.body":
-        "Dibujar y animar, así como consultar la Plaza de Obras, las novedades, las clasificaciones y la lista de obras de un autor, están disponibles sin iniciar sesión. Para publicar, inicia sesión con una cuenta de Google. Puedes publicar hasta 1 obra al día en el plan gratuito, o hasta 3 con Premium.",
       "communityPage.tabs.overall": "Total",
       "communityPage.tabs.yearly": "Anual",
       "communityPage.tabs.monthly": "Mensual",
@@ -449,19 +368,11 @@
       "communityPage.search.author.title": "Buscar por autor",
       "communityPage.search.author.body":
         "¿Encontraste una obra que te gusta? Consulta las demás obras publicadas por ese autor. Encuentra a tus creadores favoritos y sigue sus nuevas obras.",
-      "communityPage.update.title":
-        "Actualizada a diario, pensada como lugar de encuentro",
-      "communityPage.update.body":
-        "Las novedades aparecen en cuanto se publican. Las clasificaciones se actualizarán previsiblemente dos veces al día (hasta 4 veces según crezca el número de obras), para que siempre haya algo nuevo que descubrir: un lugar al que apetece volver cada día.",
-      "communityPage.bookmark.title": "Marcadores",
-      "communityPage.bookmark.body":
-        "Guarda tus obras favoritas como marcador para volver a verlas más tarde (requiere iniciar sesión).",
       "communityPage.placeholder.label": "Espacio reservado para una obra",
       "communityPage.placeholder.title": "Título de la obra",
       "communityPage.placeholder.author": "Nombre del autor",
       "communityPage.moreInApp.body": "Ver más en la app",
       "communityPage.moreInApp.link": "Descargar NIARIM",
-      "communityPage.advanced.eyebrow": "More",
       "communityPage.advanced.title": "Aún más diversión, aún más comodidad",
       "communityPage.advanced.lead":
         "Haz crecer las etiquetas entre todos, mantén un video reproduciéndose mientras navegas por otras pantallas, o recorre las obras en tus ratos libres: pequeños detalles que hacen la Plaza de Obras aún más divertida de usar.",

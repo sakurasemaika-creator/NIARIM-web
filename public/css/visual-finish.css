@@ -184,23 +184,6 @@ section.section:has(.community-tabs) {
 }
 
 /* Community ranking: top cards should feel special without looking like ads. */
-.community-card {
-  box-shadow: 0 10px 32px rgba(40, 36, 44, 0.045);
-}
-
-.community-gallery .community-card:nth-child(1) {
-  box-shadow:
-    0 0 0 1px #ffd76a,
-    0 18px 48px rgba(40, 36, 44, 0.09);
-}
-
-.community-card .thumb {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.76),
-    rgba(247, 244, 243, 0.92)
-  );
-}
 
 /* Forms: clearer focus and quieter default surface. */
 .form-control:hover:not(:focus) {

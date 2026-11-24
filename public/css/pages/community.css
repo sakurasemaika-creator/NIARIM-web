@@ -1,17 +1,42 @@
-/* ========================================================================== 
-   NIARIM community.css - みんなの作品を見るページ専用スタイル
+/* ==========================================================================
+   NIARIM community.css - 作品広場ページ専用スタイル
+   Paper and ink (2026-11 redesign): one paper ground, white sheets with a
+   hairline rule, ink text. The brand pink marks the current tab and the
+   ranks. Colours come only from the tokens in variables.css.
    ========================================================================== */
 
-.community-banner {
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--color-sub-tint);
-  color: var(--color-brand-dark);
-  font-size: var(--fs-small);
-  max-width: 880px;
-  margin: var(--space-lg) 0 0;
+/* ---- What the plaza is: ruled rows, no floating shadows ---- */
+#main .feature-narrative {
+  margin-top: var(--space-lg);
 }
 
+#main .feature-narrative-block {
+  padding: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#main .feature-narrative-block:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Right under the page title's rule, the first row needs no second rule. */
+#main .about-hero + * .feature-narrative,
+#main .container:has(> .about-hero) + .container .feature-narrative {
+  margin-top: 0;
+}
+
+#main
+  .container:has(> .about-hero)
+  + .container
+  .feature-narrative-block:first-child {
+  border-top: 0;
+}
+
+/* ---- Feed tabs ---- */
 .community-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -23,11 +48,11 @@
 .community-tabs button {
   min-height: 44px;
   padding: 0.55rem 1.2rem;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid var(--color-gray-300);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  color: var(--ink);
   font-size: var(--fs-small);
   font-weight: 600;
-  color: var(--color-gray-700);
   transition:
     background var(--duration-fast) var(--ease-out),
     color var(--duration-fast) var(--ease-out),
@@ -36,135 +61,218 @@
 }
 
 .community-tabs button:hover:not(.is-active) {
-  border-color: var(--color-ink);
-  color: var(--color-ink);
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .community-tabs button:active {
   transform: translateY(1px);
 }
 
-.community-tabs button.is-active {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-white);
+.community-tabs button:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
 }
 
 .community-ranking-note {
-  text-align: center;
   margin-top: var(--space-sm);
+  color: var(--ink-2);
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  text-align: center;
 }
 
+/* ---- Feed ---- */
 .community-gallery {
-  margin-top: var(--space-xl);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+/* Live community cards are rendered from the same public API as NIARIM.
+   Never style skeleton/mock cards to look like real published works. */
+.community-gallery[data-community-gallery] {
+  min-height: 240px;
+  align-items: start;
+}
+
+.community-gallery[data-community-gallery] .community-live-message {
+  grid-column: 1/-1;
+  margin: 0;
+  padding: 48px 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  color: var(--ink-2);
+  line-height: 1.9;
+  text-align: center;
+}
+
+.community-playback-message {
+  margin: 0 0 var(--space-sm);
+  color: var(--ink-2);
+  line-height: 1.6;
+  text-align: center;
 }
 
 .community-card {
-  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
-  box-shadow: 0 8px 24px rgba(62, 37, 43, 0.035);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
   transition:
     opacity var(--duration-base) var(--ease-out),
     transform var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.community-gallery[data-community-gallery] .community-card {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+}
+
+.community-gallery[data-community-gallery] .community-card:hover {
+  border-color: var(--rule-strong);
+  transform: translateY(-2px);
 }
 
 .community-card .thumb {
-  aspect-ratio: 16 / 9;
-  background: var(--color-gray-50);
   display: flex;
+  position: relative;
+  aspect-ratio: 16 / 9;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink-2);
   font-size: var(--fs-small);
-  position: relative;
 }
 
+.community-gallery[data-community-gallery] .community-card .thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.community-gallery[data-community-gallery]
+  .community-card
+  .thumb
+  .community-thumb-fallback {
+  color: var(--ink-2);
+  font-size: 2.4rem;
+}
+
+/* The rank, written like a frame number in red pencil on a paper tab. */
 .community-card .rank-badge {
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
-  background: var(--color-ink);
-  color: var(--color-white);
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
   min-width: 1.9rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   text-align: center;
 }
 
-.community-gallery .community-card:nth-child(1) {
-  border-color: #ffd76a;
-  box-shadow:
-    0 0 0 2px #ffd76a,
-    var(--shadow-md);
-}
-
-.community-gallery .community-card:nth-child(1) .rank-badge {
-  background: var(--grad-gold);
-  color: var(--color-brand-dark);
-}
-
-.community-gallery .community-card:nth-child(2) .rank-badge {
-  background: linear-gradient(120deg, #e3e6ee, #b9c0cf);
-  color: var(--color-ink);
-}
-
-.community-gallery .community-card:nth-child(3) .rank-badge {
-  background: linear-gradient(120deg, #e3a97a, #b9773f);
-  color: var(--color-white);
+.community-gallery .community-card:nth-child(-n + 3) .rank-badge {
+  color: var(--pencil-ink);
 }
 
 .community-card .meta {
+  min-width: 0;
   padding: var(--space-sm) var(--space-md);
 }
 
 .community-card .meta h3 {
+  color: var(--ink);
   font-family: var(--font-serif);
   font-size: 1rem;
-  line-height: 1.35;
   font-weight: 700;
-  color: var(--color-text);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .community-card .meta p {
   margin-top: 0.3rem;
+  color: var(--ink-2);
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.community-gallery[data-community-gallery]
+  .community-card
+  .meta
+  .community-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 10px;
+  margin-top: 7px;
+  color: var(--ink-2);
+  font-size: 0.79rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Non-interactive tombstone preserves original rank in an already fetched
+   list. No thumbnail, private title, author or detail link is emitted. */
+.community-gallery[data-community-gallery] .community-card--unavailable {
+  border-color: var(--rule);
+  background: var(--paper);
+  box-shadow: none;
+  cursor: default;
+}
+
+.community-gallery[data-community-gallery] .community-card--unavailable:hover {
+  border-color: var(--rule);
+  transform: none;
+}
+
+.community-gallery[data-community-gallery] .community-card--unavailable .thumb {
+  background: var(--paper);
+}
+
+.community-gallery[data-community-gallery]
+  .community-card--unavailable
+  .community-thumb-fallback {
+  color: var(--ink-2);
+  font-size: 2rem;
+}
+
+.community-gallery[data-community-gallery]
+  .community-card--unavailable
+  .meta
+  h3 {
+  color: var(--ink-2);
+  font-weight: 600;
 }
 
 .community-card.is-more-cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-color: rgba(255, 92, 122, 0.18);
 }
 
 .community-card.is-more-cta .thumb {
-  aspect-ratio: auto;
+  flex-direction: column;
+  gap: var(--space-sm);
   width: 100%;
   height: 100%;
   min-height: 180px;
-  flex-direction: column;
-  gap: var(--space-sm);
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(255, 92, 122, 0.09),
-      transparent 55%
-    ),
-    var(--color-bg-tint);
-  color: var(--color-text-muted);
+  aspect-ratio: auto;
   padding: var(--space-md);
+  background: var(--sheet);
+  color: var(--ink-2);
   text-align: center;
 }
 
@@ -178,23 +286,55 @@
   max-width: 100%;
   min-width: 0;
   padding-inline: var(--space-sm);
-  white-space: normal;
-  overflow-wrap: anywhere;
   line-height: 1.35;
+  overflow-wrap: anywhere;
   text-align: center;
+  white-space: normal;
+}
+
+/* ---- More of the plaza: a ruled list (name | what it does) ---- */
+#main .community-rows {
+  margin-top: var(--space-lg);
+  border-bottom: 1px solid var(--rule);
+}
+
+#main .community-row {
+  display: grid;
+  grid-template-columns: minmax(0, 18em) minmax(0, 1fr);
+  gap: var(--space-xs) var(--space-lg);
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+}
+
+#main .community-row h3 {
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+#main .community-row p {
+  max-width: 44em;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+
+@media (max-width: 760px) {
+  #main .community-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
   .community-tabs {
     flex-wrap: nowrap;
     justify-content: flex-start;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: none;
-    scroll-padding-inline: var(--container-padding);
     margin-inline: calc(-1 * var(--container-padding));
     padding-inline: var(--container-padding);
     padding-bottom: 0.2rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--container-padding);
+    scrollbar-width: none;
   }
 
   .community-tabs::-webkit-scrollbar {
@@ -217,9 +357,9 @@
   .community-card .rank-badge {
     top: 0.35rem;
     left: 0.35rem;
-    font-size: 0.95rem;
     min-width: 1.5rem;
-    padding: 0.15rem 0.5rem;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.95rem;
   }
 
   .community-card .meta {
@@ -232,10 +372,6 @@
 }
 
 @media (max-width: 375px) {
-  .community-banner {
-    padding-inline: var(--space-md);
-  }
-
   .community-tabs {
     gap: 0.4rem;
   }
@@ -253,111 +389,4 @@
     font-size: 0.75rem;
     letter-spacing: 0;
   }
-}
-
-/* Live community cards are rendered from the same public API as NIARIM.
-   Never style skeleton/mock cards to look like real published works. */
-.community-gallery[data-community-gallery] {
-  min-height: 240px;
-  align-items: start;
-}
-.community-playback-message {
-  margin: 0 0 var(--space-sm);
-  color: var(--c-text, #5f5762);
-  text-align: center;
-  line-height: 1.6;
-}
-.community-gallery[data-community-gallery] .community-live-message {
-  grid-column: 1/-1;
-  margin: 0;
-  padding: 48px 24px;
-  border-radius: 16px;
-  border: 1px dashed #d4c7cc;
-  background: #fff9fa;
-  color: #5f5762;
-  text-align: center;
-  line-height: 1.9;
-}
-.community-gallery[data-community-gallery] .community-card {
-  display: block;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  min-width: 0;
-}
-.community-gallery[data-community-gallery] .community-card .thumb {
-  overflow: hidden;
-  background: linear-gradient(135deg, #eee6ed, #e5edf0);
-}
-.community-gallery[data-community-gallery] .community-card .thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.community-gallery[data-community-gallery]
-  .community-card
-  .thumb
-  .community-thumb-fallback {
-  font-size: 2.4rem;
-  color: #ba8aa1;
-}
-.community-gallery[data-community-gallery] .community-card .meta {
-  min-width: 0;
-}
-.community-gallery[data-community-gallery] .community-card .meta h3 {
-  overflow-wrap: anywhere;
-  line-height: 1.5;
-}
-.community-gallery[data-community-gallery] .community-card .meta p {
-  overflow-wrap: anywhere;
-  line-height: 1.6;
-}
-.community-gallery[data-community-gallery]
-  .community-card
-  .meta
-  .community-counts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px 10px;
-  margin-top: 7px;
-  font-size: 0.79rem;
-  color: #a34f66;
-}
-.community-gallery[data-community-gallery] .community-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px #2c252c17;
-}
-.community-tabs button:focus-visible {
-  outline: 3px solid #e65f88;
-  outline-offset: 3px;
-}
-
-/* Non-interactive tombstone preserves original rank in an already fetched
-   list. No thumbnail, private title, author or detail link is emitted. */
-.community-gallery[data-community-gallery] .community-card--unavailable {
-  cursor: default;
-  background: #f7f4f6;
-  border-color: #d8d1d7;
-  box-shadow: none;
-}
-.community-gallery[data-community-gallery] .community-card--unavailable:hover {
-  transform: none;
-  box-shadow: none;
-}
-.community-gallery[data-community-gallery] .community-card--unavailable .thumb {
-  background: #e6e2e6;
-}
-.community-gallery[data-community-gallery]
-  .community-card--unavailable
-  .community-thumb-fallback {
-  font-size: 2rem;
-  color: #827a83;
-}
-.community-gallery[data-community-gallery]
-  .community-card--unavailable
-  .meta
-  h3 {
-  font-weight: 600;
-  color: #6a626a;
 }

@@ -414,7 +414,7 @@ try {
     ["/premium/", ".nr-notice"],
     ["/opals/", "#benefits .coins-table--priced"],
     ["/help/", "#help-search-input"],
-    ["/community/", ".community-banner"],
+    ["/community/", "[data-community-gallery]"],
   ]) {
     page.on("pageerror", (e) => log("Interior JS", path, e.message));
     const response = await page.goto(base + path, { waitUntil: "networkidle" });

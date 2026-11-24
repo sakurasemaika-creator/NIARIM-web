@@ -374,9 +374,7 @@ html body .screenshot-card .nr-scroller-duo > picture.real-app-capture--pc img {
 .nr-enhanced .intro-card {
   border: 1px solid #eee4e8;
 }
-.nr-enhanced .community-gallery .community-card {
-  border-radius: 13px;
-}
+
 .nr-enhanced .faq-item {
   border-radius: var(--niarim-radius, 14px);
 }

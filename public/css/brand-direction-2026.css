@@ -165,9 +165,7 @@ body :is(.features-header, .faq-header) {
   position: relative;
   isolation: isolate;
 }
-body
-  main
-  :is(.pricing-card, .faq-item, .intro-card, .contact-panel, .community-card) {
+body main :is(.pricing-card, .faq-item, .intro-card, .contact-panel) {
   box-shadow: none;
 }
 body main :is(.pricing-card, .faq-item, .intro-card, .contact-panel) {
@@ -378,7 +376,7 @@ body main .nr-curated {
 body main .nr-curated-item {
   border-color: var(--nr-rule);
 }
-body main :is(.about-name, .community-banner) {
+body main :is(.about-name) {
   border-color: var(--nr-rule);
 }
 body main .news-item {
