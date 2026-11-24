@@ -94,7 +94,13 @@ assert.ok(bundle);
 // pack row's header (owner, 2026-11-24: one badge under the 1h column read as
 // applying to 1h only). Each period's rate is checked from the numbers.
 assert.equal((bundle.match(/data-i18n="coins\.packTag"/g) || []).length, 1);
-assert.match(bundle, /data-i18n="coins\.packTag"\s*>[^<]*50% OFF/);
+// The deployed page can be served in any of the seven languages, so the tag's
+// text is checked against the dictionary below (not against one language).
+const packTag = bundle
+  .match(/data-i18n="coins\.packTag"\s*>([^<]*)</)?.[1]
+  ?.replace(/\s+/g, " ")
+  .trim();
+assert.ok(packTag, "pack tag");
 assert.doesNotMatch(bundle, /coins-saving-badge/);
 assert.deepEqual(
   prices[11].map((price, i) => Math.round((1 - price / separate[i]) * 100)),
@@ -135,6 +141,12 @@ for (const file of [
   vm.runInNewContext(readFileSync(file, "utf8"), context, { filename: file });
 }
 const d = context.window.NIARIM_I18N_DICT;
+assert.ok(
+  Object.values(d).some((strings) => strings["coins.packTag"] === packTag),
+  "pack tag text is one of the dictionary's: " + packTag,
+);
+assert.match(d.ja["coins.packTag"], /50% OFF/);
+assert.match(d.en["coins.packTag"], /50% off/);
 assert.equal(d.ja["coins.title"], "集めたオパールでプレミアムの機能を使えます");
 assert.equal(d.ja["coins.unit"], "オパール");
 assert.equal(d.ja["coins.compareFull"], "コンプリートパック");
