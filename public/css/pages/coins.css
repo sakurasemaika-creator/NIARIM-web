@@ -100,38 +100,7 @@
   margin-top: 50px;
   margin-bottom: 10px;
 }
-.coins-scroll {
-  overflow-x: auto;
-  max-width: 100%;
-  border: 1px solid #e3d5dc;
-  border-radius: 15px;
-  background: #fff;
-  margin-top: 25px;
-}
-.coins-table {
-  width: 100%;
-  min-width: 660px;
-  border-collapse: collapse;
-  font-variant-numeric: tabular-nums;
-}
-.coins-table :is(th, td) {
-  padding: 14px 16px;
-  text-align: right;
-  border-bottom: 1px solid #e9e0e5;
-  font-family: var(--font-sans);
-  font-size: 0.87rem;
-}
-.coins-table thead th {
-  font-family: var(--font-serif);
-  background: #f7eaef;
-}
-.coins-table th:first-child {
-  text-align: left;
-  min-width: 192px;
-}
-.coins-table tbody tr:last-child :is(th, td) {
-  border-bottom: 0;
-}
+
 .coins-end {
   border-radius: 20px;
   border: 1px solid #e1d2d9;
@@ -208,9 +177,7 @@
   line-height: 1.9;
   max-width: 62em;
 }
-.coins-accordion-content .coins-table--compact {
-  min-width: 460px;
-}
+
 .coins-choice-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -260,9 +227,7 @@
   font-family: var(--font-sans);
   line-height: 1.85;
 }
-.coins-compare .coins-scroll {
-  margin-top: 24px;
-}
+
 .coins-compare-best,
 .coins-compare-saving {
   font-weight: 800 !important;
@@ -430,8 +395,7 @@ html body .coins-main .coins-shortcuts a:hover {
   background: #fff0f5;
   border-color: #aa7189;
 }
-html body .coins-main .coins-shortcuts a:focus-visible,
-html body .coins-main .coins-scroll:focus-visible {
+html body .coins-main .coins-shortcuts a:focus-visible {
   outline: 3px solid #a82e55;
   outline-offset: 3px;
 }
@@ -457,46 +421,7 @@ html body .coins-main .coins-choice-grid p {
 html body .coins-main .coins-list-title {
   color: #302530;
 }
-html body .coins-main .coins-scroll {
-  border-color: #d9c8d0;
-}
-html body .coins-main .coins-table {
-  min-width: 760px;
-  color: #302530;
-}
-html body .coins-main .coins-table caption {
-  caption-side: top;
-  text-align: left;
-  padding: 17px 18px 10px;
-  color: #66394c;
-  font: 650 0.87rem/1.6 var(--font-sans);
-}
-html body .coins-main .coins-table thead th {
-  color: #392733;
-  background: #f0dce4;
-  border-bottom: 2px solid #ceafb9;
-}
-html body .coins-main .coins-table tbody th {
-  color: #332630;
-  font-weight: 700;
-  background: #fffdfd;
-}
-html body .coins-main .coins-table tbody tr:nth-child(even) td {
-  background: #fcf6f8;
-}
-html body .coins-main .coins-table :is(td, th) {
-  vertical-align: middle;
-}
-html body .coins-main .coins-unit {
-  display: inline-block;
-  margin-left: 3px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  /* 12px in the 14px table cells (10px before). */
-  font-size: 0.86em;
-  color: #684e5b;
-  white-space: nowrap;
-}
+
 html body .coins-main .coins-compare-best {
   color: #92294e !important;
   background: #fff2f6;
@@ -552,9 +477,7 @@ html:lang(ja) body .premium-coin-crosslink h2 {
   html body .coins-main .coins-compare {
     padding: 22px 15px;
   }
-  html body .coins-main .coins-table {
-    min-width: 700px;
-  }
+
   html body .coins-main .coins-shortcuts {
     gap: 8px;
     padding-block: 18px;
@@ -648,56 +571,10 @@ html body .coins-main .coins-goal-values {
 }
 
 /* 2026-11: Annual exchange and percent-saving badges. */
-.coins-year-featured {
-  position: relative;
-  border-color: #db9cb3 !important;
-  background: linear-gradient(135deg, #fffafc, #fff0f5) !important;
-}
-.coins-discount-tag,
-.coins-saving-badge {
-  display: inline-block;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: #9b254e;
-  color: #fff;
-  font-family: var(--font-display-with-body);
-  font-size: 0.8rem;
-  font-weight: 700;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.coins-year-featured > .coins-discount-tag {
-  margin-bottom: 16px;
-}
-.coins-discount-tag--table {
-  display: block;
-  width: max-content;
-  margin-top: 7px;
-  font-size: 0.7rem;
-}
-.coins-saving-badge {
-  display: block;
-  width: max-content;
-  margin-top: 6px;
-  margin-left: auto;
-}
-.coins-table--priced .coins-year-best {
-  font-weight: 800;
-  color: #95294f;
-  background: #fff0f5;
-}
-.coins-table--priced .coins-year-standard {
-  color: #574552;
-}
+
 .coins-main .coins-goal-values {
   overflow-wrap: anywhere;
   line-height: 2;
-}
-@media (max-width: 750px) {
-  .coins-discount-tag,
-  .coins-saving-badge {
-    font-size: 0.7rem;
-  }
 }
 
 /* Full benefit names and the period 週 need the licensed body font;
@@ -708,21 +585,11 @@ html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
 }
 
 /* Pricing rows share one licensed face; prevent mismatched individual fallback glyphs. */
-html:lang(ja) body .coins-main .coins-table--priced :is(th, td),
-html:lang(ja) body .coins-main .coins-compare-table :is(th, td),
-html:lang(ja) body .coins-main .coins-table--priced .coins-unit,
-html:lang(ja) body .coins-main .coins-compare-table .coins-unit {
+
+html:lang(ja) body .coins-main .coins-compare-table :is(th, td) {
   font-family: var(--font-sans) !important;
 }
-html:lang(ja)
-  body
-  .coins-main
-  .coins-table--priced
-  thead
-  [data-i18n^="coins.table"] {
-  font-family: var(--font-serif) !important;
-  white-space: nowrap;
-}
+
 .coins-main .coins-year-versus-month {
   font: 500 0.91rem/1.8 var(--font-sans);
   margin: 20px 0 12px;
@@ -739,35 +606,7 @@ html:lang(ja)
 }
 
 /* Unified Opal price and savings table: one scrollable comparison, not two cards. */
-html body .coins-main .coins-table--priced .coins-price-baseline :is(th, td) {
-  background: #f3edf0;
-  color: #3e313a;
-  font-weight: 700;
-}
-html body .coins-main .coins-table--priced .coins-bundle-row :is(th, td) {
-  background: #ffeff5;
-  color: #832348;
-  font-weight: 800;
-}
-html body .coins-main .coins-table--priced .coins-price-saving :is(th, td) {
-  background: #f9f0f4;
-  color: #93244c;
-  font-weight: 750;
-}
-html body .coins-main .coins-table--priced .coins-saving-badge {
-  margin-top: 7px;
-}
-html body .coins-main .coins-table--priced .coins-caption-a11y {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
+
 html body .coins-main .coins-bundle-details {
   margin-top: 25px;
   padding: 18px 0 3px;
@@ -787,17 +626,157 @@ html body .coins-main .coins-rate-note {
   font: 500 0.9rem/1.85 var(--font-sans);
   color: #5d4552;
 }
-html body .coins-main .coins-table--priced :is(td, th) {
-  min-width: 0;
-}
-html body .coins-main .coins-table--priced th:first-child {
-  min-width: 210px;
-}
+
 @media (max-width: 750px) {
-  html body .coins-main .coins-table--priced th:first-child {
-    min-width: 182px;
-  }
   html body .coins-main .coins-bundle-details {
     margin-top: 18px;
+  }
+}
+/*
+ * Price tables (2026-11 redesign): one white ruled sheet on the paper.
+ * Ink text, 1px row rules, no zebra or pink rows; every number in the same
+ * ink with tabular figures, right-aligned. The unit is named once in the
+ * heading above the table ("引き換えに必要なオパール数"), so the unit in each
+ * cell is kept for screen readers only. The pack discount is the same in
+ * every column, so it is shown once; the complete pack row is marked with a
+ * 2px red-pencil rule on its left edge. Scoped under #main so the older
+ * element-level rules cannot reach it.
+ */
+#main .coins-scroll {
+  overflow-x: auto;
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  /* Shadows at the edges say that more columns are off to the side. */
+  background:
+    linear-gradient(to right, var(--sheet) 30%, rgba(255, 255, 255, 0)) left /
+      32px 100% no-repeat local,
+    linear-gradient(to left, var(--sheet) 30%, rgba(255, 255, 255, 0)) right /
+      32px 100% no-repeat local,
+    linear-gradient(to right, rgba(40, 36, 44, 0.14), rgba(40, 36, 44, 0))
+      left / 12px 100% no-repeat scroll,
+    linear-gradient(to left, rgba(40, 36, 44, 0.14), rgba(40, 36, 44, 0))
+      right / 12px 100% no-repeat scroll,
+    var(--sheet);
+  box-shadow: none;
+}
+
+#main .coins-scroll:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+#main .coins-table {
+  width: 100%;
+  min-width: 600px;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  background: transparent;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+#main .coins-table :is(th, td) {
+  padding: 13px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font: 400 0.9375rem / 1.45 var(--font-sans);
+  letter-spacing: 0;
+  text-align: right;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+#main .coins-table thead th {
+  border-bottom-color: var(--rule-strong);
+  color: var(--ink-2);
+  font: 400 0.8125rem / 1.3 var(--font-serif);
+  letter-spacing: 0.04em;
+}
+
+#main .coins-table :is(thead, tbody) th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 10.5em;
+  max-width: 15em;
+  background: var(--sheet);
+  text-align: left;
+  white-space: normal;
+}
+
+#main .coins-table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+#main :is(.coins-unit, .coins-caption-a11y) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Bought one by one: the total the pack is compared with. */
+#main .coins-table--priced .coins-price-baseline :is(th, td) {
+  border-top: 1px solid var(--rule-strong);
+  color: var(--ink-2);
+}
+
+#main .coins-table--priced .coins-price-baseline td {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* Numbers stay in the body face (owner font rule); the pack row is set
+   apart by size, the label face and the red-pencil rule. */
+#main .coins-table--priced :is(th, td) {
+  font-family: var(--font-sans);
+}
+
+#main .coins-table--priced .coins-bundle-row td {
+  font-size: 1.0625rem;
+}
+
+#main .coins-table--priced .coins-bundle-row th {
+  font-family: var(--font-serif);
+}
+
+#main .coins-table--priced .coins-bundle-row th:first-child {
+  box-shadow: inset 2px 0 0 var(--pencil);
+}
+
+#main .coins-table--priced .coins-price-saving :is(th, td) {
+  color: var(--ink-2);
+}
+
+#main .coins-saving-badge {
+  display: block;
+  margin: 2px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pencil-ink);
+  font: 400 0.75rem / 1.2 var(--font-serif);
+  letter-spacing: 0.04em;
+}
+
+#main .coins-bundle-row td:not(:nth-child(2)) .coins-saving-badge {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  #main .coins-table :is(th, td) {
+    padding: 11px 12px;
+    font-size: 0.875rem;
   }
 }
