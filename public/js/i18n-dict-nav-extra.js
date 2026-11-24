@@ -87,7 +87,7 @@
       "nav.help": "使用指南",
       "meta.about.title": "关于 NIARIM | NIARIM",
       "meta.about.description":
-        "介绍手绘动画制作应用 NIARIM 的理念、支持环境以及独有的特色功能。",
+        "介绍手绘动画制作应用 NIARIM 的理念、支持环境以及推荐功能。",
       "meta.help.title": "使用指南 | NIARIM",
       "meta.help.description":
         "可在网页上搜索、浏览与应用内“帮助”画面几乎相同的内容。",
@@ -117,7 +117,7 @@
       "nav.help": "使用指南",
       "meta.about.title": "關於 NIARIM | NIARIM",
       "meta.about.description":
-        "介紹手繪動畫製作應用程式 NIARIM 的理念、支援環境以及獨有的特色功能。",
+        "介紹手繪動畫製作應用程式 NIARIM 的理念、支援環境以及推薦功能。",
       "meta.help.title": "使用指南 | NIARIM",
       "meta.help.description":
         "可在網頁上搜尋、瀏覽與應用程式內「說明」畫面幾乎相同的內容。",

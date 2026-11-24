@@ -1335,7 +1335,7 @@
     requestAnimationFrame(flattenAboutUniqueSection);
     setTimeout(flattenAboutUniqueSection, 250);
 
-    // Aboutの「Only in NIARIM」は常に1セクションだけにする。
+    // Aboutの機能の節は常に1セクションだけにする。
     // 旧HTMLがCDN/ブラウザに残った状態で新しい統合セクションと混在しても、
     // 同じ見出しを二重表示しない。
     var uniqueHeads = Array.prototype.slice.call(

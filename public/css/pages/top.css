@@ -595,9 +595,10 @@
 
 #main .tp-ribbons {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px 16px;
-  padding: 20px 20px 14px;
+  grid-template-columns: repeat(2, minmax(0, 220px));
+  justify-content: center;
+  gap: 8px clamp(32px, 6vw, 96px);
+  padding: 24px 20px 16px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-sheet);
   background: var(--sheet);
@@ -738,20 +739,42 @@
   border-top: 1px solid var(--rule);
 }
 
+/* Share and save tree: the capture above its text, large enough that the
+   app's labels can be read. */
 #main .tp-feature--capture {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  grid-template-rows: auto;
-  gap: 24px;
-  align-items: start;
+  grid-template-rows: auto auto 1fr;
 }
 
 #main .tp-feature--capture .tp-figure {
-  height: auto;
+  height: clamp(260px, 30vw, 380px);
   padding: 12px;
 }
 
-#main .tp-feature--capture h3 {
-  margin-top: 0;
+#main .tp-feature--capture .tp-figure img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+#main .tp-subhead {
+  margin: 36px 0 0;
+  color: var(--ink);
+  font: 400 1rem / 1.4 var(--font-serif);
+}
+
+#main .tp-subnote {
+  max-width: 44em;
+  margin: 6px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-subnote + .tp-filter-grid {
+  margin-top: 16px;
+}
+
+#main .tp-tone-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 760px;
 }
 
 #main .tp-filter-grid {
@@ -788,17 +811,11 @@
   }
 
   #main .tp-ribbons {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 14px;
   }
 
   #main .tp-filter-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  #main .tp-feature--capture {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-    gap: 16px;
   }
 }
 

@@ -3,9 +3,9 @@
 
   var COPY = {
     ja: {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "NIARIMだけの、うれしい機能。",
-      lead: "アニメーション制作で何度も繰り返す工程を、ただ省くのではなく、仕上がりまで自分で追い込める道具に。NIARIMならではの作画・仕上げ機能をまとめました。",
+      lead: "アニメーション制作で何度も繰り返す工程を、ただ省くのではなく、仕上がりまで自分で追い込める道具に。NIARIMのおすすめの作画・仕上げ機能をまとめました。",
       cards: [
         [
           "自動線画",
@@ -55,7 +55,7 @@
       apply: "適用",
     },
     en: {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "Small details that make NIARIM feel different.",
       lead: "NIARIM turns repetitive animation work into tools you can still shape by hand—saving steps without giving up control over the final look.",
       cards: [
@@ -108,7 +108,7 @@
       apply: "Apply",
     },
     "zh-Hans": {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "只有 NIARIM 才有的贴心功能。",
       lead: "把动画制作中反复出现的步骤做成既省事、又能继续细调的工具。减少机械操作，同时把最终效果牢牢掌握在自己手里。",
       cards: [
@@ -154,7 +154,7 @@
       apply: "应用",
     },
     "zh-Hant": {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "只有 NIARIM 才有的貼心功能。",
       lead: "把動畫製作中反覆出現的步驟做成既省事、又能繼續細調的工具。減少機械操作，同時把最後效果掌握在自己手裡。",
       cards: [
@@ -200,7 +200,7 @@
       apply: "套用",
     },
     ko: {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "NIARIM이라서 더 반가운 기능들.",
       lead: "애니메이션 제작에서 반복되는 과정을 줄이되, 결과를 직접 다듬는 감각은 그대로 남겼습니다. 빠르게 만들고, 원하는 만큼 세밀하게 조정할 수 있습니다.",
       cards: [
@@ -252,7 +252,7 @@
       apply: "적용",
     },
     fr: {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "Ces petits plus qui rendent NIARIM unique.",
       lead: "NIARIM accélère les étapes répétitives de l’animation sans retirer le contrôle créatif : moins d’actions mécaniques, plus de temps pour affiner le résultat.",
       cards: [
@@ -304,7 +304,7 @@
       apply: "Appliquer",
     },
     es: {
-      kicker: "ONLY IN NIARIM",
+      kicker: "NIARIM",
       title: "Pequeñas funciones que hacen diferente a NIARIM.",
       lead: "NIARIM reduce las tareas repetitivas de la animación sin quitarte el control: menos pasos mecánicos y más tiempo para perfeccionar el resultado.",
       cards: [
