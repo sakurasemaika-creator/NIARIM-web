@@ -164,3 +164,10 @@
     margin-top: var(--space-xs);
   }
 }
+
+/* ---- The footer follows the last section's own bottom padding (an older
+   layer added a 64px margin on top of it, so every page ended in a band of
+   bare paper above the footer). ---- */
+html body .site-footer {
+  margin-top: 0;
+}

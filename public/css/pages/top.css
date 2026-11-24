@@ -384,6 +384,23 @@
   color: var(--ink);
 }
 
+/* One section rhythm: every section after the frames has the same space
+   above and below its rule (the workspace, plaza, gallery, pricing and
+   closing sections had kept their old band paddings: 100–130px on desktops
+   and 72–85px on phones against 104px and 56px for the others). */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing,
+    .nr-launch
+  ) {
+  padding-block: clamp(56px, 7vw, 104px);
+}
+
 /* Every numbered section heading has the same size and sits on the left,
    like the entries of one sheet (they were 4–5rem, centred in the first one,
    and the workspace heading broke into four lines at 1440px). */
@@ -405,7 +422,6 @@
 }
 
 #main .nr-statement {
-  padding-block: clamp(56px, 7vw, 104px);
   text-align: left;
 }
 
@@ -475,10 +491,6 @@
 }
 
 /* ---- NIARIM-only features, each shown with the engine's real output ---- */
-#main .tp-unique {
-  padding-block: clamp(56px, 7vw, 104px);
-}
-
 #main .tp-head {
   max-width: 44em;
   margin: 0 0 clamp(28px, 4vw, 48px);
@@ -1035,6 +1047,13 @@
 
 #main :is(.nr-gallery-visual, .nr-story-media, .nr-workspace-media) {
   background: transparent;
+}
+
+/* The workspace captures set the height of their column (it kept the 480px
+   of the coloured box it used to be, which left up to 120px of bare paper
+   above and below the captures at tablet widths). */
+#main .nr-workspace-media {
+  height: auto;
 }
 
 /* Closing: the owner's invitation, then where to get the app. */

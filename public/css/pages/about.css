@@ -190,7 +190,17 @@
   box-shadow: none;
 }
 
+/* The closing call (about, plaza, FAQ) is the page's last section: its rule
+   is the section boundary and one section padding leads to the heading, as
+   between the other sections. It had kept the 96px padding of the dark box it
+   used to be on top of the section's own, so the paper above and below it
+   was about twice the gap between the other sections. */
+#main .section:has(> .container > .about-cta) {
+  padding-top: 0;
+}
+
 #main .about-cta {
+  padding: clamp(4.25rem, 7vw, 6.75rem) var(--space-xl) 0;
   border: 0;
   border-top: 1px solid var(--rule);
   border-radius: 0;

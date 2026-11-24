@@ -95,6 +95,15 @@
   align-items: start;
 }
 
+/* The height kept for the cards is only for loading: once the feed shows a
+   message instead (before the release, empty, an error) it is as tall as the
+   message (the empty rest of the 240px added ~100px of bare paper under it). */
+.community-gallery[data-community-gallery][aria-busy="false"]:has(
+    > .community-live-message:only-child
+  ) {
+  min-height: 0;
+}
+
 .community-gallery[data-community-gallery] .community-live-message {
   grid-column: 1/-1;
   margin: 0;
@@ -370,4 +379,10 @@
 
 #main .community-feed-section .community-tabs {
   margin-top: 0;
+}
+
+/* A section that is only a list of short blocks starts and ends with the
+   section's own padding (the list's 40px margins added to it). */
+#main .section > .container > .feature-narrative {
+  margin-block: 0;
 }
