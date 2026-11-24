@@ -40,9 +40,6 @@ html
     [role="tab"],
     .nr-tool-number,
     .nr-gallery-meta h3,
-    .nr-image-caption,
-    .nr-hero-overline,
-    .nr-hero-highlights,
     .footer-col h2
   ) {
   font-family: var(--font-serif) !important;
@@ -66,7 +63,6 @@ html
     .caption,
     .faq-answer,
     .legal-content,
-    .nr-hero-lead,
     .nr-store-notice,
     .nr-gallery-description,
     .nr-plaza-capture figcaption
@@ -75,7 +71,7 @@ html
 }
 /* The actual logomark remains an SVG asset; the typographic wordmark and
  * decorative letterforms must never fall back to an unrelated Arial face. */
-html body.nr-site .nr-hero-wordmark,
+
 html body .site-footer::before,
 html body.nr-site .nr-feature-band::before {
   font-family: var(--font-serif) !important;
@@ -103,10 +99,7 @@ html:lang(ja)
   overflow-wrap: anywhere;
   font-kerning: normal;
 }
-html:lang(ja) body.nr-site .nr-hero-wordmark {
-  letter-spacing: -0.042em !important;
-  overflow-wrap: normal;
-}
+
 html body.nr-site .nr-plaza h2 {
   font-size: clamp(2rem, 3.9vw, 4.2rem);
   line-height: 1.35;
@@ -234,40 +227,9 @@ html body .site-footer :is(p, small, li) {
 html body .site-footer :is(h2, h3) {
   font-family: var(--font-serif) !important;
 }
-/* Prefer a small composited transform over filters and layout animation. */
-@media (max-width: 800px) {
-  html body.nr-site .nr-hero-showcase::before {
-    display: none;
-  }
-  html body.nr-site .nr-hero-showcase .nr-shot {
-    box-shadow: 0 12px 28px rgba(4, 4, 9, 0.24);
-  }
-}
-@media (hover: none), (pointer: coarse) {
-  html body.nr-site .nr-hero-pc-view,
-  html body.nr-site .nr-hero-sp-view {
-    transition: none !important;
-  }
-}
 
 /* The hero uses the same real SVG wordmark as the site header. */
-html body.nr-site .nr-hero-wordmark {
-  width: min(100%, 610px);
-  max-width: 100%;
-  margin-block: clamp(12px, 2vw, 25px);
-  line-height: 1;
-}
-html body.nr-site .nr-hero-brand-logo {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: clamp(90px, 14vw, 155px);
-  object-fit: contain;
-  object-position: left center;
-  /* Optical alignment: the SVG's viewBox starts 60 units (of 3470) left of
-     the N stem, which left the wordmark 9px right of the text column. */
-  translate: calc(-60 / 3470 * 100%) 0;
-}
+
 html body.nr-site .nr-pricing-panel strong {
   font-family: var(--font-serif) !important;
   font-size: clamp(1.32rem, 2.4vw, 2rem);
@@ -280,11 +242,6 @@ html body.nr-site .nr-pricing-panel small {
 }
 html body.nr-site .nr-pricing-panel span {
   font-family: var(--font-sans) !important;
-}
-@media (max-width: 600px) {
-  html body.nr-site .nr-hero-wordmark {
-    width: min(100%, 410px);
-  }
 }
 
 /* Navigation uses Kuramubon; all footer links, including Coins & Missions,
@@ -364,21 +321,12 @@ html body .lang-dropdown :is(.lang-trigger, .lang-menu button) {
 /* No platform-font islands inside the public Japanese landing page.
    Editorial actions stay in Kuramubon; small explanatory copy and counters
    use HakkouMincho, like the remaining 12 public pages. */
-html:lang(ja)
-  body.nr-site
-  .nr-main
-  :is(.nr-hero-feature-link, .nr-story-copy > a) {
+html:lang(ja) body.nr-site .nr-main :is(.nr-story-copy > a) {
   font-family: var(--font-serif) !important;
 }
 html:lang(ja)
   body.nr-site
   .nr-main
-  :is(
-    .nr-preview-footnote,
-    .nr-hero-bottom > span,
-    .nr-hero-bottom > a,
-    .nr-mini-list > span,
-    .nr-gallery-meta > span
-  ) {
+  :is(.nr-mini-list > span, .nr-gallery-meta > span) {
   font-family: var(--font-sans) !important;
 }

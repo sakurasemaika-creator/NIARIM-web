@@ -114,11 +114,14 @@ try {
           bad.push(
             "Native community capture " + width + " " + JSON.stringify(size),
           );
+        // The hero's moving part is now the frame-strip playback; with
+        // reduced motion it must stand still on one drawing.
         const reduced = await page
-          .locator(".nr-hero-pc-view")
-          .evaluate((el) => getComputedStyle(el).transitionDuration);
-        if (reduced.split(",").some((v) => parseFloat(v) > 0.01))
-          bad.push("Reduced-motion transition " + width + " " + reduced);
+          .locator(".nr-flip")
+          .first()
+          .evaluate((el) => getComputedStyle(el).animationName);
+        if (reduced !== "none")
+          bad.push("Reduced-motion playback " + width + " " + reduced);
         await page.screenshot({
           path: path.join(output, "home-" + width + ".png"),
           fullPage: true,
@@ -149,7 +152,7 @@ try {
   const motion = await live.newPage();
   await motion.goto(base + "/", { waitUntil: "networkidle" });
   const scene = motion.locator(".nr-hero-showcase");
-  const pc = motion.locator(".nr-hero-pc-view");
+  const pc = motion.locator(".nr-hero-phone");
   const startTransform = await pc.evaluate(
     (el) => getComputedStyle(el).transform,
   );

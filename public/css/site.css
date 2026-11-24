@@ -1,0 +1,53 @@
+/*
+ * Shared parts of the 2026-11 redesign (paper, ink and red pencil), loaded
+ * on every page after the page's own stylesheets. Colours come only from
+ * the tokens in variables.css.
+ */
+
+/* ---- Header: the release link is quiet, so that each page's own primary
+   action is the only pink fill in the first view. ---- */
+.site-header .main-nav a.nav-release {
+  display: inline-flex;
+  position: relative;
+  flex: none;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 4px;
+  padding: 0 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+  font: 400 0.8125rem / 1.2 var(--font-serif);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
+}
+
+.site-header .main-nav a.nav-release::after {
+  content: none;
+  display: none;
+}
+
+.site-header .main-nav a.nav-release:hover {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.site-header .main-nav a.nav-release:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1180px) {
+  .site-header .main-nav > a.nav-release {
+    width: min(100%, 520px);
+    min-height: 48px;
+    margin: 8px 0 0;
+    font-size: 0.9375rem;
+  }
+}

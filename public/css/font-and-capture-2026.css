@@ -23,7 +23,6 @@ html
     .description,
     .notice,
     .legal-content,
-    .nr-hero-lead,
     .nr-story-copy p,
     .nr-curated-copy p,
     .nr-gallery-description,
@@ -70,7 +69,7 @@ html
   font-family: var(--font-serif) !important;
 }
 /* Preserve existing original logotype rather than changing its bespoke lettering. */
-html body :is(.nr-hero-wordmark, .site-logo, .site-logo *, .logo, .logo *) {
+html body :is(.site-logo, .site-logo *, .logo, .logo *) {
   font-family: var(--font-serif) !important;
 }
 /* Override the older html:lang(ja) and language-specific Noto Sans
@@ -141,7 +140,6 @@ html[lang]
     .description,
     .notice,
     .legal-content,
-    .nr-hero-lead,
     .nr-gallery-description,
     .nr-gallery-note,
     .feature-narrative p,
@@ -157,7 +155,6 @@ html[lang]
     li,
     dd,
     small,
-    .nr-hero-lead,
     .nr-story-copy p,
     .nr-curated-copy p,
     .nr-gallery-description,
@@ -166,7 +163,7 @@ html[lang]
   ) {
   font-family: var(--font-sans) !important;
 }
-html[lang] body.nr-site .nr-main .nr-hero-wordmark,
+
 html[lang] body :is(.site-logo, .site-logo *, .logo, .logo *) {
   font-family: var(--font-serif) !important;
 }
@@ -248,21 +245,7 @@ html body .nr-feature-visual .nr-duo > .nr-shot--pc,
 html body .nr-workspace-media .nr-duo > .nr-shot--pc {
   width: min(100%, 480px) !important;
 }
-html body .nr-hero-pc-view {
-  width: min(100%, 650px) !important;
-  max-width: 650px !important;
-}
-/* The narrower layouts pulled the PC view left (-8%, -18px) when it was 81-91%
-   wide; at the full width set above that pushed its tilted left edge and the
-   "PC / DEX MODE" label past the screen (12px at 600-640px). */
-@media (max-width: 740px) {
-  html body .nr-hero-pc-view {
-    margin-left: 0 !important;
-  }
-}
-html body .nr-hero-sp-view {
-  width: clamp(155px, 17vw, 245px) !important;
-}
+
 html body .nr-feature-duo {
   width: 100%;
   min-width: 0;
@@ -346,9 +329,7 @@ html body .nr-feature-duo {
   html body .nr-workspace-media .nr-duo > .nr-shot--pc {
     width: min(100%, 300px) !important;
   }
-  html body .nr-hero-sp-view {
-    width: clamp(100px, 28vw, 175px) !important;
-  }
+
   html body .feature-section > .feature-pair > .feature-diagram-stack {
     width: 100% !important;
     max-width: none !important;

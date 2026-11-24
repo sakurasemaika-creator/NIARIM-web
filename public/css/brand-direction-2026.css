@@ -210,87 +210,18 @@ body main :is(a, button, input, textarea, select):focus-visible {
   outline-offset: 3px;
 }
 /* Hero: one powerful identity, one proof-of-product visual, no ornamental stock art. */
-html body.nr-site .nr-hero {
-  overflow: hidden;
-  min-height: auto;
-  padding: clamp(48px, 5vw, 86px) 0 26px;
-}
-html body.nr-site .nr-hero::before {
-  opacity: 0.21;
-  background-image:
-    linear-gradient(
-      90deg,
-      transparent calc(100% - 1px),
-      rgba(255, 255, 255, 0.35) calc(100% - 1px)
-    ),
-    linear-gradient(
-      0deg,
-      transparent calc(100% - 1px),
-      rgba(255, 255, 255, 0.35) calc(100% - 1px)
-    );
-  background-size: 104px 104px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
-  mask-image: linear-gradient(90deg, transparent, #000 70%);
-}
+
 /* The large arc that used to sit bottom-right had no relation to the app and
    pulled the eye away from the captures; the light-table grid (::before) is
    the only backdrop the hero needs. */
 /* On tall desktop screens (1920x1080 and up) the stage grows with the
    viewport, so the hero ends at the fold instead of leaving a strip of
    empty paper under it. Shorter screens keep the previous height. */
-html body.nr-site .nr-hero-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
-  gap: clamp(32px, 4vw, 64px);
-  min-height: max(clamp(590px, 54vw, 720px), min(calc(100svh - 224px), 880px));
-  align-items: center;
-}
-html body.nr-site .nr-hero-copy {
-  max-width: 615px;
-  padding: 16px 0 36px;
-}
-html body.nr-site .nr-hero-overline {
-  border: 0;
-  background: none;
-  border-radius: 0;
-  padding: 0;
-  color: #e9e1e6;
-  letter-spacing: 0.12em;
-}
-html body.nr-site .nr-hero-pulse {
-  box-shadow: none;
-}
-html body.nr-site .nr-hero-category {
-  margin-top: clamp(20px, 2.4vw, 34px);
-  color: #ff9aad;
-  letter-spacing: 0.1em;
-}
-html body.nr-site .nr-hero-wordmark {
-  font-size: clamp(4rem, 8vw, 8.35rem) !important;
-  font-weight: 900 !important;
-  line-height: 0.94 !important;
-  letter-spacing: -0.088em !important;
-  text-shadow: none;
-}
-html body.nr-site .nr-hero-name {
-  margin: 9px 0 33px;
-}
-html body.nr-site .nr-hero-strap {
-  font-size: clamp(1.35rem, 2.2vw, 2.14rem);
-  line-height: 1.55;
-  letter-spacing: -0.035em;
-  max-width: 20em;
-}
-html body.nr-site .nr-hero-lead {
-  max-width: 490px;
-  line-height: 1.9;
-  color: #e5dfe7;
-}
+
 /* The three chips repeated the strap (brush/layer/timeline, PC mode) in a
    third typographic voice; without them the lead leads straight to the
    action and the phone capture rises into the first screen on mobile. */
-html body.nr-site .nr-hero-highlights {
-  display: none;
-}
+
 html body.nr-site .nr-store-row {
   margin-top: 35px;
   gap: 20px;
@@ -304,91 +235,13 @@ html body.nr-site .nr-store-button {
 html body.nr-site .nr-store-button.is-live:hover {
   transform: translateY(-2px);
 }
-html body.nr-site .nr-hero-feature-link {
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.72);
-  transition:
-    color 0.22s ease,
-    border-color 0.22s ease;
-}
-html body.nr-site .nr-hero-feature-link:hover {
-  color: #ffb7c6 !important;
-  border-color: #ffb7c6;
-}
-html body.nr-site .nr-hero-showcase {
-  min-height: 560px;
-  transform: translateY(4px);
-}
-html body.nr-site .nr-hero-pc-view {
-  width: min(100%, 575px);
-  transform: rotate(-2deg);
-}
-html body.nr-site .nr-hero-sp-view {
-  width: clamp(130px, 13.1vw, 183px);
-  right: -1%;
-  bottom: 3%;
-  transform: rotate(4deg);
-}
-html body.nr-site .nr-preview-outline {
-  border-radius: 15px;
-}
-html body.nr-site .nr-hero-showcase .nr-shot {
-  border-radius: 12px;
-  box-shadow: 0 28px 75px rgba(4, 4, 9, 0.45);
-}
-html body.nr-site .nr-hero-showcase .nr-shot--sp {
-  border-radius: 16px;
-}
-html body.nr-site .nr-image-caption {
-  border-radius: 3px;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-}
-html body.nr-site .nr-preview-footnote {
-  bottom: -14px;
-  left: 3%;
-  font-size: 0.75rem;
-}
+
 /* The closing rule of the hero is drawn as a timeline ruler: a frame tick
    every 12px and a longer tick every sixth frame, the same rhythm as the
    app's timeline. The two English filler labels it used to carry
    ("OFFICIAL WEBSITE", "HAND-DRAWN ANIMATION") said nothing the page does
    not already say, so only the jump to the screenshots remains. */
-html body.nr-site .nr-hero-bottom {
-  border-top: 0;
-  padding-top: 22px;
-  justify-content: flex-end;
-  color: #d1cad6;
-  letter-spacing: 0.08em;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.24)) 0 0 /
-      100% 1px no-repeat,
-    repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.2) 0 1px,
-        transparent 1px 12px
-      )
-      0 0 / 100% 5px no-repeat,
-    repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.42) 0 1px,
-        transparent 1px 72px
-      )
-      0 0 / 100% 10px no-repeat;
-}
-html body.nr-site .nr-hero-bottom > span {
-  display: none;
-}
-html body.nr-site .nr-hero-bottom a {
-  font-size: 0.8125rem;
-}
-/* Stacked hero (the grid becomes one column at 1150px, niarim-game-site.css):
-   the capture footnote hangs below the showcase, so the ruler starts below it. */
-@media (max-width: 1150px) {
-  html body.nr-site .nr-hero-bottom {
-    margin-top: 34px;
-  }
-}
+
 /* Editorial rhythm: large type, alternating product media, restrained rules. */
 html body.nr-site .nr-main {
   background: var(--nr-paper);
@@ -563,15 +416,6 @@ body main .news-item:focus-within {
   }
 }
 @media (max-width: 1080px) {
-  html body.nr-site .nr-hero-grid {
-    gap: 28px;
-  }
-  html body.nr-site .nr-hero-copy {
-    padding-bottom: 28px;
-  }
-  html body.nr-site .nr-hero-showcase {
-    min-height: 485px;
-  }
   html body.nr-site .nr-tool-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -583,43 +427,6 @@ body main .news-item:focus-within {
   }
 }
 @media (max-width: 800px) {
-  html body.nr-site .nr-hero {
-    padding: 42px 0 25px;
-  }
-  html body.nr-site .nr-hero-grid {
-    grid-template-columns: minmax(0, 1fr);
-    min-height: 0;
-    gap: 8px;
-  }
-  html body.nr-site .nr-hero-copy {
-    max-width: 660px;
-    padding: 12px 0 16px;
-  }
-  html body.nr-site .nr-hero-category {
-    margin-top: 20px;
-  }
-  html body.nr-site .nr-hero-wordmark {
-    font-size: clamp(3.6rem, 11vw, 6rem) !important;
-  }
-  html body.nr-site .nr-hero-name {
-    margin-bottom: 23px;
-  }
-  html body.nr-site .nr-hero-showcase {
-    min-height: 440px;
-    max-width: 630px;
-    margin-inline: auto;
-  }
-  html body.nr-site .nr-hero-pc-view {
-    width: min(83%, 495px);
-  }
-  html body.nr-site .nr-hero-sp-view {
-    width: 144px;
-    right: 3%;
-    bottom: 4%;
-  }
-  html body.nr-site .nr-hero-bottom {
-    font-size: 0.6rem;
-  }
   html body.nr-site .nr-story-card,
   html body.nr-site .nr-story-card:nth-child(even) {
     grid-template-columns: 1fr;
@@ -646,18 +453,7 @@ body main .news-item:focus-within {
   html body.nr-site .nr-wrap {
     width: calc(100% - 36px);
   }
-  html body.nr-site .nr-hero {
-    padding-top: 30px;
-  }
-  html body.nr-site .nr-hero-wordmark {
-    font-size: clamp(3.15rem, 13vw, 4.65rem) !important;
-  }
-  html body.nr-site .nr-hero-strap {
-    font-size: clamp(1.18rem, 5vw, 1.5rem);
-  }
-  html body.nr-site .nr-hero-lead {
-    font-size: 0.9rem;
-  }
+
   html body.nr-site .nr-store-row {
     gap: 10px;
     margin-top: 26px;
@@ -666,29 +462,7 @@ body main .news-item:focus-within {
     padding: 10px 15px;
     min-height: 60px;
   }
-  html body.nr-site .nr-hero-showcase {
-    min-height: 315px;
-    width: 100%;
-  }
-  html body.nr-site .nr-hero-pc-view {
-    width: 81%;
-    margin: 0 0 0 -18px;
-  }
-  html body.nr-site .nr-hero-sp-view {
-    width: min(30vw, 115px);
-    right: 0;
-    bottom: 0;
-  }
-  html body.nr-site .nr-image-caption {
-    font-size: 0.625rem;
-    letter-spacing: 0.1em;
-    padding: 4px 6px;
-  }
-  html body.nr-site .nr-preview-footnote {
-    left: 0;
-    bottom: -18px;
-    font-size: 0.6875rem;
-  }
+
   html body.nr-site .nr-statement {
     padding-top: 76px;
     padding-bottom: 65px;
@@ -760,46 +534,10 @@ body main .news-item:focus-within {
    and a consistent editorial rhythm across the product story. */
 /* No coloured glow blobs behind the stage: the captures carry the colour.
    A quiet warm lift toward the captures keeps the dark from going flat. */
-html body.nr-site .nr-hero {
-  background: linear-gradient(122deg, #15151d 0%, #221e26 52%, #16161d 100%);
-}
-html body.nr-site .nr-hero-grid {
-  position: relative;
-}
-html body.nr-site .nr-hero-copy {
-  position: relative;
-  z-index: 3;
-}
+
 /* "Hand-drawn animation app" is the first answer to "what is this?", so it
    is set at a reading size (it was 11.7px). */
-html body.nr-site .nr-hero-category {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  font-size: 0.875rem;
-  font-weight: 750;
-}
-html body.nr-site .nr-hero-category::before {
-  content: "";
-  display: block;
-  width: 30px;
-  height: 1px;
-  flex: 0 0 30px;
-  background: currentColor;
-  opacity: 0.9;
-}
-html body.nr-site .nr-hero-wordmark {
-  font-family: var(--font-serif);
-  font-size: clamp(4rem, 7.6vw, 8.35rem) !important;
-  letter-spacing: -0.09em !important;
-  text-wrap: nowrap;
-}
-html body.nr-site .nr-hero-showcase {
-  isolation: isolate;
-}
-html body.nr-site .nr-hero-showcase::before {
-  content: none;
-}
+
 /* Hero product imagery is intentionally static: the showcase is informational, not an interactive control. */
 html body.nr-site .nr-statement {
   position: relative;
@@ -883,22 +621,7 @@ html body.nr-site .nr-workspace-copy > p,
 html body.nr-site .nr-feature-text > p {
   max-width: 37em;
 }
-@media (max-width: 800px) {
-  html body.nr-site .nr-hero-wordmark {
-    font-size: clamp(3.6rem, 11vw, 6rem) !important;
-  }
-}
 @media (max-width: 560px) {
-  html body.nr-site .nr-hero-wordmark {
-    font-size: clamp(3.15rem, 13vw, 4.65rem) !important;
-  }
-  html body.nr-site .nr-hero-category {
-    gap: 9px;
-  }
-  html body.nr-site .nr-hero-category::before {
-    width: 18px;
-    flex-basis: 18px;
-  }
   html body.nr-site .nr-tool-grid article::before {
     left: 14px;
     right: 14px;

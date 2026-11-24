@@ -94,8 +94,9 @@ for (const width of widths) {
         copy: rectOf(document.querySelector(".nr-hero-copy")),
         action: rectOf(document.querySelector(".nr-hero-feature-link")),
         showcase: rectOf(document.querySelector(".nr-hero-showcase")),
-        pc: rectOf(document.querySelector(".nr-hero-pc-view")),
-        phone: rectOf(document.querySelector(".nr-hero-sp-view")),
+        // 2026-11 redesign: the hero shows one upright phone; PC mode has
+        // its own section further down.
+        phone: rectOf(document.querySelector(".nr-hero-phone")),
         outside: inside(".nr-hero *"),
         clientWidth: de.clientWidth,
         scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),
@@ -152,8 +153,6 @@ for (const width of widths) {
       } else if (rebuilt.showcase.top < rebuilt.copy.bottom - 2) {
         failures.push({ id, kind: "showcase-over-copy", state: rebuilt });
       }
-      if (rebuilt.pc && rebuilt.pc.width < Math.min(260, width * 0.6))
-        failures.push({ id, kind: "pc-capture-too-small", state: rebuilt });
       if (rebuilt.phone && rebuilt.phone.width < Math.min(90, width * 0.2))
         failures.push({ id, kind: "phone-capture-too-small", state: rebuilt });
       // One pixel across a breakpoint must not jump the captures' size.
@@ -161,15 +160,15 @@ for (const width of widths) {
       if (
         previous?.rebuilt &&
         width - previous.width <= 2 &&
-        previous.state.pc &&
-        rebuilt.pc &&
-        ratioJump(previous.state.pc.width, rebuilt.pc.width) > 0.35
+        previous.state.phone &&
+        rebuilt.phone &&
+        ratioJump(previous.state.phone.width, rebuilt.phone.width) > 0.35
       ) {
         failures.push({
           id,
           kind: "breakpoint-capture-size-jump",
-          previous: previous.state.pc.width,
-          current: rebuilt.pc.width,
+          previous: previous.state.phone.width,
+          current: rebuilt.phone.width,
         });
       }
       statesByLanguage.set(language, { width, state: rebuilt, rebuilt: true });

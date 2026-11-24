@@ -3,6 +3,8 @@
   const dictionary = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   const copy = {
   "ja": {
+    "top.frames.play": "再生",
+    "top.frames.caption": "ボールが弾むアニメを1フレームずつ並べました。5フレーム目には、前後のフレームがオニオンスキンで薄く重なっています。",
     "viewer.open": "拡大する",
     "viewer.phone": "スマートフォン",
     "viewer.desktop": "PCモード（DeX）",
@@ -20,6 +22,8 @@
     "feature.cameraBody": "カメラの位置とタイミングを指定して、シーンに動きを付けられます。"
   },
   "en": {
+    "top.frames.play": "Playback",
+    "top.frames.caption": "A bouncing ball, one frame at a time. Frame 5 shows the frames before and after it in onion skin.",
     "viewer.open": "Enlarge",
     "viewer.phone": "Phone",
     "viewer.desktop": "PC / DeX",
@@ -37,6 +41,8 @@
     "feature.cameraBody": "Set camera positions and timing to give a scene its movement."
   },
   "zh-Hans": {
+    "top.frames.play": "播放",
+    "top.frames.caption": "把弹跳的球按帧排开。第5帧用洋葱皮淡淡显示前后两帧。",
     "viewer.open": "放大查看",
     "viewer.phone": "手机",
     "viewer.desktop": "PC / DeX",
@@ -54,6 +60,8 @@
     "feature.cameraBody": "设置镜头位置和时间，让画面动起来。"
   },
   "zh-Hant": {
+    "top.frames.play": "播放",
+    "top.frames.caption": "把彈跳的球按影格排開。第5格以洋蔥皮淡淡顯示前後兩格。",
     "viewer.open": "放大查看",
     "viewer.phone": "手機",
     "viewer.desktop": "PC / DeX",
@@ -71,6 +79,8 @@
     "feature.cameraBody": "設定鏡頭位置與時間，讓畫面動起來。"
   },
   "ko": {
+    "top.frames.play": "재생",
+    "top.frames.caption": "튀는 공을 한 프레임씩 늘어놓았습니다. 5번째 프레임에는 앞뒤 프레임이 어니언 스킨으로 옅게 겹쳐 있습니다.",
     "viewer.open": "확대하기",
     "viewer.phone": "스마트폰",
     "viewer.desktop": "PC / DeX",
@@ -88,6 +98,8 @@
     "feature.cameraBody": "카메라 위치와 타이밍을 정해 장면에 움직임을 더하세요."
   },
   "fr": {
+    "top.frames.play": "Lecture",
+    "top.frames.caption": "Une balle qui rebondit, image par image. L’image 5 montre la précédente et la suivante en papier calque.",
     "viewer.open": "Agrandir",
     "viewer.phone": "Téléphone",
     "viewer.desktop": "PC / DeX",
@@ -105,6 +117,8 @@
     "feature.cameraBody": "Placez la caméra à différents instants pour mettre la scène en mouvement."
   },
   "es": {
+    "top.frames.play": "Reproducción",
+    "top.frames.caption": "Una pelota que rebota, fotograma a fotograma. En el fotograma 5, el papel cebolla muestra el anterior y el siguiente.",
     "viewer.open": "Ampliar",
     "viewer.phone": "Móvil",
     "viewer.desktop": "PC / DeX",

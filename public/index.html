@@ -80,6 +80,8 @@
       href="/css/studio-unification-2026.css?v=20261112-1"
     />
     <link rel="stylesheet" href="/css/capture-viewer.css" />
+    <link rel="stylesheet" href="/css/pages/top.css" />
+    <link rel="stylesheet" href="/css/site.css" />
   </head>
   <body
     class="nr-site"
@@ -136,7 +138,7 @@
             <ul class="lang-menu" data-lang-menu></ul>
           </div>
           <a
-            class="btn btn-accent"
+            class="nav-release"
             href="/#download"
             data-i18n="nav.releaseInfo"
             data-play-release-i18n="nav.download"
@@ -157,19 +159,8 @@
 
     <main id="main" class="nr-main">
       <section class="nr-hero" aria-labelledby="nr-hero-title">
-        <div class="nr-hero-grid nr-wrap">
+        <div class="nr-wrap nr-hero-grid">
           <div class="nr-hero-copy">
-            <div class="nr-hero-overline">
-              <span class="nr-hero-pulse"></span
-              ><span
-                data-i18n="refresh.release.pending.badge"
-                data-play-release-i18n="refresh.hero.badge"
-                >ANDROID / 配信前</span
-              >
-            </div>
-            <p class="nr-hero-category" data-i18n="refresh.hero.type">
-              手描きアニメーション制作アプリ
-            </p>
             <h1 id="nr-hero-title" class="nr-hero-wordmark">
               <img
                 class="nr-hero-brand-logo"
@@ -190,11 +181,6 @@
             <p class="nr-hero-lead" data-i18n="refresh.hero.lead">
               描画、フレーム編集、音声編集、動画の書き出しは無料で使えます。画面の広い端末では、パネルを並べて使えるPCモードに自動で切り替わります。
             </p>
-            <div class="nr-hero-highlights">
-              <span data-i18n="refresh.hero.tag1">手描きフレームアニメ</span
-              ><span data-i18n="refresh.hero.tag2">音声・タイムライン編集</span
-              ><span data-i18n="refresh.hero.tag3">PCモード対応</span>
-            </div>
             <div class="nr-store-row">
               <a
                 class="nr-play-badge-link"
@@ -207,7 +193,13 @@
                 href="/features/"
                 class="nr-hero-feature-link"
                 data-i18n="refresh.action.explore"
-                >機能を見る <span aria-hidden="true">↗</span></a
+                >機能を見る</a
+              >
+              <a
+                href="#nr-gallery"
+                class="nr-hero-screens-link"
+                data-i18n="refresh.hero.viewScreens"
+                >アプリ画面を見る</a
               >
             </div>
             <p
@@ -227,70 +219,342 @@
               Google Play および Google Play ロゴは Google LLC の商標です。
             </p>
           </div>
-          <div
-            class="nr-hero-showcase"
-            data-i18n-attr="aria-label:refresh.gallery.title"
-            aria-label="スマートフォンとPCのアプリ画面"
-          >
-            <span class="nr-preview-outline nr-preview-outline-a"></span>
-            <span class="nr-preview-outline nr-preview-outline-b"></span>
-            <div class="nr-hero-pc-view">
-              <span class="nr-image-caption">PC / DEX MODE</span>
-              <figure
-                class="nr-shot nr-shot--pc nr-hero-pc-shot"
-                data-capture-pc="canvas"
-                style="--capture-accent: #3aa6ff"
-              >
-                <picture
-                  ><source
-                    type="image/avif"
-                    srcset="/assets/images/app-captures/pc-canvas.avif" />
-                  <img
-                    src="/assets/images/app-captures/pc-canvas.webp"
-                    alt="NIARIM PCモード版のキャンバス画面"
-                    data-i18n-attr="alt:refresh.gallery.altDesktop"
-                    width="1440"
-                    height="900"
-                    decoding="async"
-                    fetchpriority="high"
-                /></picture>
-              </figure>
-            </div>
-            <div class="nr-hero-sp-view">
-              <span class="nr-image-caption">SMARTPHONE</span>
-              <figure
-                class="nr-shot nr-shot--sp nr-hero-sp-shot"
-                data-capture="canvas"
-                style="--capture-accent: #3aa6ff"
-              >
-                <picture
-                  ><source
-                    type="image/avif"
-                    srcset="/assets/images/app-captures/canvas.avif" />
-                  <img
-                    src="/assets/images/app-captures/canvas.webp"
-                    alt="NIARIM スマホ版のキャンバス画面"
-                    data-i18n-attr="alt:refresh.gallery.altPhone"
-                    width="320"
-                    height="569"
-                    decoding="async"
-                    fetchpriority="high"
-                /></picture>
-              </figure>
-            </div>
-            <span
-              class="nr-preview-footnote"
-              data-i18n="refresh.hero.captureNote"
-              >実際のアプリ画面 / プレミアム表示</span
+          <div class="nr-hero-showcase">
+            <figure
+              class="nr-shot nr-shot--sp nr-hero-phone"
+              data-capture="onion-skin"
             >
+              <picture
+                ><source
+                  type="image/avif"
+                  srcset="/assets/images/app-captures/onion-skin.avif" />
+                <img
+                  src="/assets/images/app-captures/onion-skin.webp"
+                  alt="NIARIM スマホ版のキャンバス画面"
+                  data-i18n-attr="alt:refresh.gallery.altPhone"
+                  width="640"
+                  height="1138"
+                  decoding="async"
+                  fetchpriority="high"
+              /></picture>
+            </figure>
+            <p class="nr-hero-caption" data-i18n="refresh.hero.captureNote">
+              実際のアプリ画面です。アップデートにより表示が異なる場合があります。
+            </p>
           </div>
         </div>
-        <div class="nr-hero-bottom nr-wrap">
-          <span>NIARIM / OFFICIAL WEBSITE</span><span>HAND-DRAWN ANIMATION</span
-          ><a href="#nr-gallery" data-i18n="refresh.hero.viewScreens"
-            >SCREENSHOTS</a
+        <figure class="nr-wrap nr-frames">
+          <svg
+            class="nr-frames-defs"
+            width="0"
+            height="0"
+            aria-hidden="true"
+            focusable="false"
           >
-        </div>
+            <defs>
+              <clipPath id="nr-ball-clip"><circle r="10" /></clipPath>
+              <g id="nr-ball">
+                <circle r="10" fill="#f06858" />
+                <g clip-path="url(#nr-ball-clip)">
+                  <rect
+                    x="-3.4"
+                    y="-14"
+                    width="6.8"
+                    height="28"
+                    fill="#f8e0a0"
+                  />
+                  <path
+                    d="M-3.4 -14v28M3.4 -14v28"
+                    stroke="#282838"
+                    stroke-width="1.1"
+                    vector-effect="non-scaling-stroke"
+                  />
+                </g>
+                <ellipse
+                  cx="-5"
+                  cy="-4.6"
+                  rx="2.8"
+                  ry="1.3"
+                  fill="#fff"
+                  opacity=".6"
+                />
+                <circle
+                  r="10"
+                  fill="none"
+                  stroke="#282838"
+                  stroke-width="1.6"
+                  vector-effect="non-scaling-stroke"
+                />
+              </g>
+              <circle id="nr-ghost-prev" r="10" fill="#ff9aa2" />
+              <circle id="nr-ghost-next" r="10" fill="#9fa8f5" />
+              <g id="nr-ground">
+                <path d="M4 80H116" stroke="#282838" stroke-width="1.2" />
+                <path
+                  d="M14 80l-1.5-3M16 80v-3.4M18 80l1.5-3M100 80l-1.5-3M102 80v-3.4M104 80l1.5-3"
+                  stroke="#282838"
+                  stroke-width=".8"
+                  stroke-linecap="round"
+                />
+              </g>
+            </defs>
+          </svg>
+          <div class="nr-frames-preview">
+            <span class="nr-frames-label" data-i18n="top.frames.play"
+              >再生</span
+            >
+            <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+              <use href="#nr-ground" />
+              <g class="nr-flip" style="--i: 0">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="18"
+                  cy="81"
+                  rx="5"
+                  ry="1.6"
+                />
+                <use href="#nr-ball" transform="translate(18 18) rotate(-40)" />
+              </g>
+              <g class="nr-flip" style="--i: 1">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="31"
+                  cy="81"
+                  rx="6"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(31 32) rotate(-28) scale(.96 1.06)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 2">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="43"
+                  cy="81"
+                  rx="7.5"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(43 49) rotate(-16) scale(.92 1.12)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 3">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="53"
+                  cy="81"
+                  rx="9"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(53 64) rotate(-6) scale(.92 1.1)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 4">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="62"
+                  cy="81"
+                  rx="15"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(62 73.4) scale(1.45 .66) rotate(8)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 5">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="72"
+                  cy="81"
+                  rx="9"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(72 60) rotate(20) scale(.92 1.12)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 6">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="84"
+                  cy="81"
+                  rx="7"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(84 44) rotate(34) scale(.96 1.05)"
+                />
+              </g>
+              <g class="nr-flip" style="--i: 7">
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="97"
+                  cy="81"
+                  rx="6"
+                  ry="1.6"
+                />
+                <use href="#nr-ball" transform="translate(97 32) rotate(46)" />
+              </g>
+            </svg>
+          </div>
+          <ol class="nr-frames-sheet">
+            <li class="nr-frame">
+              <span class="nr-frame-no">1</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="18"
+                  cy="81"
+                  rx="5"
+                  ry="1.6"
+                />
+                <use href="#nr-ball" transform="translate(18 18) rotate(-40)" />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">2</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="31"
+                  cy="81"
+                  rx="6"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(31 32) rotate(-28) scale(.96 1.06)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">3</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="43"
+                  cy="81"
+                  rx="7.5"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(43 49) rotate(-16) scale(.92 1.12)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">4</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="53"
+                  cy="81"
+                  rx="9"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(53 64) rotate(-6) scale(.92 1.1)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame is-key">
+              <span class="nr-frame-no">5</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="62"
+                  cy="81"
+                  rx="15"
+                  ry="1.6"
+                />
+                <use
+                  class="nr-onion"
+                  href="#nr-ghost-prev"
+                  transform="translate(53 64) rotate(-6) scale(.92 1.1)"
+                />
+                <use
+                  class="nr-onion"
+                  href="#nr-ghost-next"
+                  transform="translate(72 60) rotate(20) scale(.92 1.12)"
+                />
+                <path
+                  class="nr-impact"
+                  d="M47 70l-4-4M48 74l-6-1M77 70l4-4M76 74l6-1"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(62 73.4) scale(1.45 .66) rotate(8)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">6</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="72"
+                  cy="81"
+                  rx="9"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(72 60) rotate(20) scale(.92 1.12)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">7</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="84"
+                  cy="81"
+                  rx="7"
+                  ry="1.6"
+                />
+                <use
+                  href="#nr-ball"
+                  transform="translate(84 44) rotate(34) scale(.96 1.05)"
+                />
+              </svg>
+            </li>
+            <li class="nr-frame">
+              <span class="nr-frame-no">8</span>
+              <svg viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+                <use href="#nr-ground" />
+                <ellipse
+                  class="nr-ball-shadow"
+                  cx="97"
+                  cy="81"
+                  rx="6"
+                  ry="1.6"
+                />
+                <use href="#nr-ball" transform="translate(97 32) rotate(46)" />
+              </svg>
+            </li>
+          </ol>
+          <figcaption class="nr-frames-caption" data-i18n="top.frames.caption">
+            ボールが弾むアニメを1フレームずつ並べました。5フレーム目には、前後のフレームがオニオンスキンで薄く重なっています。
+          </figcaption>
+        </figure>
       </section>
       <section
         class="nr-statement nr-wrap"

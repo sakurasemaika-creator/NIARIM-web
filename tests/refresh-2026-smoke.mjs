@@ -62,12 +62,8 @@ try {
       .locator(".nr-hero-showcase")
       .evaluate((el) => ({
         sp: [
-          el.querySelector("[data-capture='canvas'] img")?.naturalWidth,
-          el.querySelector("[data-capture='canvas'] img")?.naturalHeight,
-        ],
-        pc: [
-          el.querySelector("[data-capture-pc='canvas'] img")?.naturalWidth,
-          el.querySelector("[data-capture-pc='canvas'] img")?.naturalHeight,
+          el.querySelector("[data-capture] img")?.naturalWidth,
+          el.querySelector("[data-capture] img")?.naturalHeight,
         ],
       }));
     if (imageDimensions.sp[0] !== 640 || imageDimensions.sp[1] !== 1138)
@@ -75,12 +71,6 @@ try {
         "SP screenshot native size",
         width,
         JSON.stringify(imageDimensions.sp),
-      );
-    if (imageDimensions.pc[0] !== 1440 || imageDimensions.pc[1] !== 900)
-      log(
-        "PC screenshot native size",
-        width,
-        JSON.stringify(imageDimensions.pc),
       );
     const oldScripts = await page
       .locator(
@@ -99,10 +89,12 @@ try {
         JSON.stringify(sources),
       );
     }
-    const stagePC = await page
-      .locator(".nr-hero-showcase [data-capture-pc='canvas']")
+    // The hero shows one upright phone; PC mode has its own section further
+    // down (2026-11 redesign), so the hero holds exactly one real capture.
+    const stagePhones = await page
+      .locator(".nr-hero-showcase [data-capture]")
       .count();
-    if (stagePC !== 1) log("PC hero capture missing", width);
+    if (stagePhones !== 1) log("Hero phone capture missing", width);
     const missingPair = await page.evaluate(
       () =>
         [

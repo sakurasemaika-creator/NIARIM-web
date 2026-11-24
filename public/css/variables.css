@@ -420,3 +420,24 @@ body[data-i18n-title="meta.home.title"] #faq + .section + .final-cta {
   --font-serif: var(--font-sans);
   --font-display-with-body: var(--font-sans);
 }
+
+/* Paper, ink and red pencil — the 2026-11 redesign.
+   One paper ground for every page, white only for sheets laid on it (cards,
+   tables, forms), one ink for text and lines, and the brand pink used the way
+   an animator uses a red pencil: the primary action, the current place,
+   links and small marks such as frame numbers. New rules read only these. */
+:root {
+  --paper: var(--color-bg);
+  --sheet: var(--color-white);
+  --ink: var(--color-ink);
+  --ink-2: #5f5864;
+  --rule: rgba(40, 36, 44, 0.14);
+  --rule-strong: rgba(40, 36, 44, 0.32);
+  --pencil: var(--color-accent);
+  --pencil-dark: var(--color-accent-dark);
+  --pencil-ink: var(--color-accent-text);
+  --radius-control: 8px;
+  --radius-sheet: 14px;
+  --shadow-device:
+    0 1px 2px rgba(40, 36, 44, 0.14), 0 28px 56px -24px rgba(40, 36, 44, 0.42);
+}

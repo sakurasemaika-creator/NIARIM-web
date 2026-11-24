@@ -1,0 +1,359 @@
+/*
+ * Home (トップページ).
+ *
+ * Rules are scoped under #main, the page root every page has, so that the
+ * element-level rules of the older stylesheets (h1–h4, p, li with long
+ * html/body/:lang() chains) cannot reach the parts rebuilt here. When those
+ * stylesheets are folded away the #main prefix can be dropped.
+ */
+
+/* ---- Hero: paper, the wordmark, one sentence, one action, the real phone */
+#main .nr-hero {
+  position: relative;
+  margin: 0;
+  padding: clamp(28px, 3.6vw, 52px) 0 0;
+  overflow: visible;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+#main .nr-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(32px, 6vw, 104px);
+  align-items: center;
+}
+
+#main .nr-hero-copy {
+  min-width: 0;
+  max-width: 640px;
+}
+
+#main .nr-hero-wordmark {
+  margin: 0;
+  line-height: 0;
+}
+
+#main .nr-hero-brand-logo {
+  display: block;
+  width: clamp(200px, 24vw, 336px);
+  height: auto;
+}
+
+#main .nr-hero-name {
+  margin: 12px 0 0;
+  color: var(--ink-2);
+  font: 400 0.875rem / 1.5 var(--font-sans);
+  letter-spacing: 0.08em;
+}
+
+#main .nr-hero-strap {
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  color: var(--ink);
+  font: 400 clamp(1.5rem, 1.05rem + 1.55vw, 2.3rem) / 1.36 var(--font-serif);
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+#main .nr-hero-lead {
+  max-width: 34em;
+  margin: 18px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.9 var(--font-sans);
+}
+
+#main .nr-hero .nr-store-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin: 28px 0 0;
+}
+
+#main .nr-hero-feature-link {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  border-radius: var(--radius-control);
+  background: var(--pencil);
+  color: var(--color-white);
+  font: 400 1rem / 1.2 var(--font-serif);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+#main .nr-hero-feature-link:hover {
+  background: var(--pencil-dark);
+}
+
+#main .nr-hero-screens-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--ink);
+  font: 400 0.9375rem / 1.4 var(--font-serif);
+  text-decoration: underline;
+  text-decoration-color: var(--pencil);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+}
+
+#main .nr-hero-screens-link:hover {
+  color: var(--pencil-ink);
+}
+
+#main :is(.nr-hero-feature-link, .nr-hero-screens-link):focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+#main .nr-hero .nr-store-notice,
+#main .nr-hero .nr-play-trademark {
+  margin: 16px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.6 var(--font-sans);
+}
+
+#main .nr-hero .nr-play-trademark {
+  margin-top: 6px;
+  font-size: 0.75rem;
+}
+
+/* The one floating object on the page: the phone, upright, with its own
+   shadow. */
+#main .nr-hero-showcase {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+#main .nr-hero-phone {
+  width: clamp(208px, 17vw, 252px);
+  margin: 0;
+  padding: 9px;
+  border-radius: 36px;
+  background: var(--ink);
+  box-shadow: var(--shadow-device);
+}
+
+#main .nr-hero-phone :is(picture, img) {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 27px;
+}
+
+#main .nr-hero-caption {
+  max-width: 20em;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.6 var(--font-sans);
+  text-align: center;
+}
+
+/* ---- Frame strip: the bouncing ball, numbered like an exposure sheet ---- */
+#main .nr-frames {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+  gap: 16px clamp(16px, 2.4vw, 32px);
+  align-items: start;
+  margin-block: clamp(28px, 3.4vw, 44px) 0;
+  padding: 20px 0 clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--rule-strong);
+}
+
+#main .nr-frames-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#main .nr-frames svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#main .nr-frames-preview {
+  display: grid;
+  gap: 8px;
+}
+
+#main .nr-frames-sheet {
+  margin-top: calc(0.8125rem + 8px);
+}
+
+#main .nr-frames-preview svg {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+}
+
+#main :is(.nr-frames-label, .nr-frame-no) {
+  color: var(--pencil-ink);
+  font: 400 0.8125rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+#main .nr-frames-sheet {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  list-style: none;
+}
+
+#main .nr-frame {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 8px 6px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--sheet);
+}
+
+/* The key frame is circled in red pencil, as an animator marks a drawing. */
+#main .nr-frame.is-key .nr-frame-no {
+  display: inline-grid;
+  width: 1.75em;
+  height: 1.75em;
+  place-items: center;
+  margin: -0.3em 0 -0.15em -0.3em;
+  border: 1.5px solid var(--pencil);
+  border-radius: 50%;
+}
+
+#main .nr-ball-shadow {
+  fill: rgba(40, 36, 44, 0.14);
+}
+
+/* Onion skin as the app draws it: the previous frame in red, the next in
+   blue, both faint. */
+#main .nr-onion {
+  opacity: 0.6;
+}
+
+#main .nr-impact {
+  fill: none;
+  stroke: #8a8590;
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+#main .nr-frames-caption {
+  grid-column: 2;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.7 var(--font-sans);
+}
+
+/* Playback: each drawing shows for one eighth of a second, like 8 fps. */
+#main .nr-flip {
+  visibility: hidden;
+  animation: nr-flip 1s steps(1, end) infinite;
+  animation-delay: calc(var(--i) * 0.125s);
+}
+
+@keyframes nr-flip {
+  0% {
+    visibility: visible;
+  }
+  12.5%,
+  100% {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main .nr-flip {
+    animation: none;
+  }
+
+  #main .nr-flip:nth-child(6) {
+    visibility: visible;
+  }
+}
+
+@media (max-width: 820px) {
+  /* Stacked, the frame strip comes straight after the action so that the
+     playing animation is in the first screen; the phone follows it. */
+  #main .nr-hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #main .nr-hero-grid {
+    display: contents;
+  }
+
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: min(1216px, calc(100% - 48px));
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  #main .nr-frames {
+    order: 1;
+    margin-block: 32px 0;
+    padding-bottom: 32px;
+  }
+
+  #main .nr-hero-showcase {
+    order: 2;
+    margin-bottom: clamp(40px, 8vw, 64px);
+  }
+
+  #main .nr-hero-showcase {
+    justify-self: start;
+    justify-items: start;
+  }
+
+  #main .nr-hero-caption {
+    text-align: left;
+  }
+
+  #main .nr-frames {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .nr-frames-preview {
+    max-width: 320px;
+  }
+
+  #main .nr-frames-caption {
+    grid-column: 1;
+  }
+}
+
+/* Same column as .nr-wrap at these widths. */
+@media (max-width: 740px) {
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: min(100% - 32px, 600px);
+  }
+}
+
+@media (max-width: 560px) {
+  #main :is(.nr-hero-copy, .nr-hero-showcase) {
+    width: calc(100% - 36px);
+  }
+}
+
+@media (max-width: 480px) {
+  #main .nr-hero-feature-link {
+    width: 100%;
+  }
+
+  #main .nr-frame {
+    padding: 6px 4px 4px;
+  }
+}

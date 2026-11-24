@@ -96,7 +96,7 @@ async function measure(page, route, width, lang) {
         return false;
       if (img.getAttribute("src")?.includes("/pc-")) return false;
       if (img.closest(".nr-hero-showcase"))
-        return !img.closest(".nr-hero-sp-view");
+        return !img.closest(".nr-hero-phone");
       return !img.closest(".nr-duo,.nr-feature-duo");
     });
     return {
