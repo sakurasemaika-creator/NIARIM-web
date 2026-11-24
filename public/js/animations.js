@@ -119,6 +119,66 @@
     }
   }
 
+  /* On narrow screens the section tabs are one row that scrolls sideways.
+     A fade in the paper colour (CSS: [data-edge-fades]) sits at an edge only
+     while more tabs are off that side, so a tab cut at the edge reads as
+     "more this way". --nav-gap lets the fades take no room in the row, and
+     --nav-pad-start/-end put them at the very edges. The
+     current tab is scrolled into the row when the reader moves through the
+     page, without moving the page itself. */
+  function initNavEdges(nav) {
+    var scheduled = false;
+    function update() {
+      scheduled = false;
+      var style = getComputedStyle(nav);
+      nav.style.setProperty(
+        "--nav-gap",
+        (parseFloat(style.columnGap) || 0) + "px",
+      );
+      // The fades stick to the edges of the row's padding box.
+      nav.style.setProperty("--nav-pad-start", style.paddingLeft);
+      nav.style.setProperty("--nav-pad-end", style.paddingRight);
+      var max = nav.scrollWidth - nav.clientWidth;
+      var left = Math.abs(nav.scrollLeft);
+      nav.toggleAttribute("data-more-start", max > 1 && left > 1);
+      nav.toggleAttribute("data-more-end", max > 1 && left < max - 1);
+    }
+    function request() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(update);
+    }
+    update();
+    nav.setAttribute("data-edge-fades", "");
+    nav.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request);
+    if (document.fonts && document.fonts.ready)
+      document.fonts.ready.then(request);
+    return {
+      reveal: function (link) {
+        var max = nav.scrollWidth - nav.clientWidth;
+        if (max <= 1) return;
+        var navBox = nav.getBoundingClientRect();
+        var box = link.getBoundingClientRect();
+        // Keep the tab clear of the fades (about 3em on each side).
+        var room = Math.min(48, navBox.width / 6);
+        var delta = 0;
+        if (box.left < navBox.left + room)
+          delta = box.left - navBox.left - room;
+        else if (box.right > navBox.right - room)
+          delta = box.right - navBox.right + room;
+        if (!delta) return;
+        nav.scrollTo({
+          left: Math.max(0, Math.min(max, nav.scrollLeft + delta)),
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
+        });
+      },
+    };
+  }
+
   function initFeatureNavSpy() {
     var nav = document.querySelector(".feature-nav");
     var sections = document.querySelectorAll(".feature-section[id]");
@@ -126,14 +186,17 @@
 
     var links = nav.querySelectorAll("a[href^='#']");
     var currentId = "";
+    var edges = initNavEdges(nav);
     function setActive(id) {
       if (id === currentId) return;
       currentId = id;
       links.forEach(function (link) {
         var active = link.getAttribute("href") === "#" + id;
         link.classList.toggle("is-active", active);
-        if (active) link.setAttribute("aria-current", "location");
-        else link.removeAttribute("aria-current");
+        if (active) {
+          link.setAttribute("aria-current", "location");
+          edges.reveal(link);
+        } else link.removeAttribute("aria-current");
       });
     }
 

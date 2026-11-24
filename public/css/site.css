@@ -5073,3 +5073,89 @@ html body .site-footer::before {
   content: none !important;
   display: none !important;
 }
+
+/* ---- Features / Help section tabs: edge fades (2026-11-24) ---- */
+/* On narrow screens the tabs are one row that scrolls sideways. A fade in the
+   paper colour sits at an edge only while more tabs are off that side
+   (animations.js sets data-more-start / data-more-end), so a tab cut at the
+   edge reads as "more this way" rather than broken. The fades are sticky
+   items of the row itself, so they stay at the edges while it scrolls, and
+   their negative margins (the fade width plus the row's gap, --nav-gap) keep
+   them from taking any room. */
+#main .feature-nav[data-edge-fades] {
+  --nav-fade: 2.75rem;
+}
+
+#main .feature-nav[data-edge-fades]::before,
+#main .feature-nav[data-edge-fades]::after {
+  content: "";
+  display: block;
+  position: sticky;
+  inset: auto;
+  z-index: 1;
+  flex: 0 0 var(--nav-fade);
+  align-self: stretch;
+  width: var(--nav-fade);
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast, 0.15s) ease;
+}
+
+#main .feature-nav[data-edge-fades]::before {
+  left: calc(-1 * var(--nav-pad-start, 0px));
+  order: -1;
+  margin: 0 calc(-1 * (var(--nav-fade) + var(--nav-gap, 0px))) 0 0;
+  /* A small "‹" in the secondary ink says the row continues this way even
+     when the edge falls between two tabs. */
+  background:
+    linear-gradient(
+        to bottom right,
+        transparent calc(50% - 0.75px),
+        var(--ink-2) calc(50% - 0.75px) calc(50% + 0.75px),
+        transparent calc(50% + 0.75px)
+      )
+      left 0.45rem top calc(50% - 5px) / 6px 5px no-repeat,
+    linear-gradient(
+        to top right,
+        transparent calc(50% - 0.75px),
+        var(--ink-2) calc(50% - 0.75px) calc(50% + 0.75px),
+        transparent calc(50% + 0.75px)
+      )
+      left 0.45rem top 50% / 6px 5px no-repeat,
+    linear-gradient(90deg, var(--paper) 45%, transparent);
+}
+
+#main .feature-nav[data-edge-fades]::after {
+  right: calc(-1 * var(--nav-pad-end, 0px));
+  order: 9999;
+  margin: 0 0 0 calc(-1 * (var(--nav-fade) + var(--nav-gap, 0px)));
+  background:
+    linear-gradient(
+        to bottom left,
+        transparent calc(50% - 0.75px),
+        var(--ink-2) calc(50% - 0.75px) calc(50% + 0.75px),
+        transparent calc(50% + 0.75px)
+      )
+      right 0.45rem top calc(50% - 5px) / 6px 5px no-repeat,
+    linear-gradient(
+        to top left,
+        transparent calc(50% - 0.75px),
+        var(--ink-2) calc(50% - 0.75px) calc(50% + 0.75px),
+        transparent calc(50% + 0.75px)
+      )
+      right 0.45rem top 50% / 6px 5px no-repeat,
+    linear-gradient(270deg, var(--paper) 45%, transparent);
+}
+
+#main .feature-nav[data-more-start]::before,
+#main .feature-nav[data-more-end]::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main .feature-nav[data-edge-fades]::before,
+  #main .feature-nav[data-edge-fades]::after {
+    transition: none;
+  }
+}
