@@ -299,6 +299,9 @@
 .help-support-links a {
   display: inline-flex;
   min-height: 44px;
+  /* 英語・仏語の「FAQ」は3文字で35pxしかなく、押せる幅が足りなかった。 */
+  min-width: 44px;
+  justify-content: center;
   align-items: center;
   color: var(--color-accent-text, #b8264a);
   font: 600 0.9375rem/1.4 var(--font-serif);
