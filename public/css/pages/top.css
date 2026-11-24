@@ -1032,3 +1032,33 @@
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.8 var(--font-sans);
 }
+
+/* A quiet text action: the page has one pink filled action per view (the
+   hero), others are underlined links in ink. */
+#main .nr-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 20px;
+  border: 0;
+  color: var(--ink);
+  font: 400 0.9375rem / 1.4 var(--font-serif);
+  text-decoration: underline;
+  text-decoration-color: var(--pencil);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+}
+
+#main .nr-text-link:hover {
+  color: var(--pencil-ink);
+}
+
+#main .nr-text-link:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+/* The wide brush text keeps a readable line length. */
+#main .tp-feature--wide > p {
+  max-width: 44em;
+}

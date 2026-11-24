@@ -154,10 +154,13 @@ try {
       }
     }
     if (width === 390) {
-      for (const variant of [1, 2, 3, 4, 1]) {
-        await page
-          .locator(".nr-palette-button[data-variant='" + variant + "']")
-          .click();
+      // The palette swatches were removed from the home gallery on
+      // 2026-11-24 (the theme block shows the app's real themes); the
+      // gallery shows the base captures, phone and PC in the same colour.
+      if (await page.locator(".nr-palette-button").count())
+        log("Home gallery palette swatches should be gone");
+      {
+        const variant = 1;
         const state = await page
           .locator(".nr-gallery-item")
           .first()
@@ -167,14 +170,14 @@ try {
               .querySelector(".nr-shot")
               .style.getPropertyValue("--capture-accent"),
           }));
-        const expectedTail = variant === 1 ? "" : "-v" + variant;
+        const expectedTail = "";
         if (
           !new URL(state.src, base).pathname.endsWith(
             "canvas" + expectedTail + ".webp",
           )
         )
           log("Variant switch", variant, JSON.stringify(state));
-        const expectedColors = ["#3AA6FF", "#F2B90F", "#B15CFF", "#10B981"];
+        const expectedColors = ["#3AA6FF"];
         if (state.color.toUpperCase() !== expectedColors[variant - 1])
           log("Theme/frame mismatch", variant, state.color);
         const desktop = await page
@@ -251,12 +254,11 @@ try {
       .locator(".nr-gallery-item")
       .first()
       .getByRole("button");
-    await page.locator(".nr-palette-button[data-variant='3']").click();
     await trigger.press("Enter");
     if (!(await viewer.isVisible())) log("Gallery opens from keyboard", lang);
     for (const [device, file] of [
-      ["phone", "canvas-v3"],
-      ["desktop", "pc-canvas-v3"],
+      ["phone", "canvas"],
+      ["desktop", "pc-canvas"],
     ]) {
       await viewer.locator('[data-device="' + device + '"]').click();
       const image = viewer.locator(".capture-stage img");
