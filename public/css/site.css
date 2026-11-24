@@ -27,6 +27,7 @@
   transition: border-color 0.15s ease;
 }
 
+.site-header .main-nav a.nav-release::before,
 .site-header .main-nav a.nav-release::after {
   content: none;
   display: none;
