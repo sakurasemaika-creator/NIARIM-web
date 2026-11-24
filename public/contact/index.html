@@ -327,20 +327,22 @@
                     required
                     data-i18n-attr="placeholder:contact.form.messagePlaceholder"
                   ></textarea>
-                  <p
-                    class="form-hint"
-                    id="message-hint"
-                    data-i18n="contact.form.messageHint"
-                  >
-                    1,000文字以内でご記入ください。
-                  </p>
-                  <output
-                    class="form-hint"
-                    id="message-count"
-                    for="message"
-                    aria-live="off"
-                    >0 / 1,000</output
-                  >
+                  <div class="form-meta">
+                    <p
+                      class="form-hint"
+                      id="message-hint"
+                      data-i18n="contact.form.messageHint"
+                    >
+                      1,000文字以内でご記入ください。
+                    </p>
+                    <output
+                      class="form-hint"
+                      id="message-count"
+                      for="message"
+                      aria-live="off"
+                      >0 / 1,000</output
+                    >
+                  </div>
                   <p class="form-error" data-i18n="contact.error.tooLong">
                     文字数が上限を超えています。
                   </p>

@@ -381,6 +381,10 @@
         submitBtn.disabled = false;
         submitLabel.setAttribute("data-i18n", "contact.form.submit");
         submitLabel.textContent = t("contact.form.submit");
+        // The disabled button dropped keyboard focus to <body>; give it back
+        // so the next Tab continues from the form, not from the page top.
+        if (!document.activeElement || document.activeElement === document.body)
+          submitBtn.focus();
       }
 
       if (response?.ok && data?.ok === true) {

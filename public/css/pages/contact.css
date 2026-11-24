@@ -358,3 +358,66 @@ textarea.form-control {
   overflow-wrap: anywhere;
   min-width: 0;
 }
+
+/*
+ * 2026-11 redesign: the page is paper and the form is the one white sheet
+ * on it (no card inside a card). Controls share one height, the hint and
+ * the character count share one line, and the addresses look like links.
+ * Scoped under #main so the older layered rules cannot reach it.
+ */
+#main .contact-panel {
+  padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 7vw, 96px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#main .contact-form {
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+}
+
+#main .contact-form :is(input.form-control, select.form-control) {
+  box-sizing: border-box;
+  height: 56px;
+  min-height: 56px;
+}
+
+#main .contact-form .form-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-top: 8px;
+}
+
+#main .contact-form .form-meta .form-hint {
+  margin: 0;
+}
+
+#main .contact-form .form-meta output {
+  margin: 0 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+#main .contact-intro a[href^="mailto:"] {
+  color: var(--pencil-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+#main .contact-intro a[href^="mailto:"]:hover {
+  text-decoration-thickness: 2px;
+}
+
+#main .contact-intro a[href^="mailto:"]:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 2px;
+}
