@@ -805,6 +805,37 @@
   max-width: none;
 }
 
+/* Saving and sharing: on a wide screen the text sits beside the phone
+   captures, so the row is used across its width (the captures alone filled
+   a little over half of it). Narrower screens stack them. */
+@media (min-width: 1180px) {
+  #main :is(.tp-save, .tp-share) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: clamp(40px, 4vw, 72px);
+  }
+
+  #main :is(.tp-save, .tp-share) .tp-fill-text {
+    max-width: 30em;
+  }
+
+  #main :is(.tp-save, .tp-share) .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: repeat(auto-fill, 340px);
+    margin-top: 0;
+  }
+
+  #main .tp-save .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: repeat(2, 340px);
+  }
+
+  /* One capture: it stays next to its text. */
+  #main .tp-share {
+    grid-template-columns: minmax(0, 30em) auto;
+    justify-content: start;
+  }
+}
+
 /* Home screen widgets: the pictures the app makes, at their own size
    (150 px tiles with a 10 px shadow margin), grouped by how the colour is
    chosen. */
