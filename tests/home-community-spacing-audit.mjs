@@ -1,173 +1,176 @@
+/* Home: the Work Plaza section (作品広場, #nr-community) at every responsive
+ * width.
+ *
+ * This audit used to measure the old hero (.hero, .hero-copy, .hero-showcase)
+ * and a coded "community" mock inside the old screenshot scroller. Both were
+ * removed in the 2026-11 redesign: the hero is now .nr-hero (measured by
+ * hero-rendered-layout-audit.mjs and home-width-sweep.mjs), and the Work Plaza
+ * is shown as its own section with the real app capture. It now checks that
+ * section, which is what visitors see:
+ *   - the text column and the capture sit inside the shared page column
+ *     (.nr-wrap, the same left edge as the sections around it) and never
+ *     overlap each other;
+ *   - the capture is the real app screen (app-captures/plaza-<lang>…, in the page language), loaded,
+ *     drawn at its own aspect ratio and fully inside its frame;
+ *   - the space above and below the section is the site's section rhythm, not
+ *     a dead band (no more than the largest normal gap between sections);
+ *   - no horizontal page scroll.
+ */
 import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
+const base = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const browser = await chromium.launch(launchOptions());
-const page = await browser.newPage();
 const widths = [
   320, 360, 375, 390, 430, 520, 559, 560, 600, 640, 641, 700, 759, 760, 900,
-  1024, 1280, 1440,
+  1024, 1280, 1440, 1920,
 ];
+const langs = (process.env.AUDIT_LANGS || "ja,en,ko").split(",");
 const failures = [];
 
-for (const width of widths) {
-  await page.setViewportSize({ width, height: 844 });
-  await page.goto("http://127.0.0.1:8787/", { waitUntil: "networkidle" });
-  await page.waitForTimeout(500);
-
-  const state = await page.evaluate(() => {
-    const rect = (el) => {
-      if (!el) return null;
-      const r = el.getBoundingClientRect();
-      return {
-        left: r.left,
-        right: r.right,
-        top: r.top,
-        bottom: r.bottom,
-        width: r.width,
-        height: r.height,
-      };
-    };
-
-    const heroContainer = document.querySelector(".hero > .container");
-    const heroCopy = document.querySelector(".hero-copy");
-    const heroShowcase = document.querySelector(".hero-showcase");
-    const heroTitle = document.querySelector(".hero-title");
-    const heroLead = document.querySelector(".hero-lead");
-    const heroActions = document.querySelector(".hero-actions");
-    const heroBridge = document.querySelector(".hero-bridge");
-    const sharedContainer = document.querySelector("main .section .container");
-    const scroller = document.querySelector(".screenshot-scroller");
-    const communityCard = scroller?.querySelector(".screenshot-card-community");
-    const communityScreen = communityCard?.querySelector(
-      ".hero-community-mini",
+for (const lang of langs) {
+  for (const width of widths) {
+    const page = await browser.newPage({ viewport: { width, height: 844 } });
+    await page.goto(`${base}/?lang=${lang}`, { waitUntil: "networkidle" });
+    const section = page.locator("#nr-community");
+    await section.scrollIntoViewIfNeeded();
+    await page.locator("#nr-community .nr-plaza-capture-image").evaluate(
+      (img) =>
+        img.complete ||
+        new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        }),
     );
-    const cardStyle = communityCard ? getComputedStyle(communityCard) : null;
+    await page.waitForTimeout(300);
 
-    return {
-      hero: rect(heroContainer),
-      copy: rect(heroCopy),
-      showcase: rect(heroShowcase),
-      title: rect(heroTitle),
-      lead: rect(heroLead),
-      actions: rect(heroActions),
-      bridge: rect(heroBridge),
-      shared: rect(sharedContainer),
-      scrollWidth: document.documentElement.scrollWidth,
-      clientWidth: document.documentElement.clientWidth,
-      screenshotCount:
-        scroller?.querySelectorAll(":scope > .screenshot-card").length ?? 0,
-      communityCard: rect(communityCard),
-      communityScreen: rect(communityScreen),
-      communityBorderLeft: cardStyle
-        ? parseFloat(cardStyle.borderLeftWidth) || 0
-        : 0,
-      communityBorderRight: cardStyle
-        ? parseFloat(cardStyle.borderRightWidth) || 0
-        : 0,
-      communityBorderTop: cardStyle
-        ? parseFloat(cardStyle.borderTopWidth) || 0
-        : 0,
-      communityBorderBottom: cardStyle
-        ? parseFloat(cardStyle.borderBottomWidth) || 0
-        : 0,
-      communityTitle:
-        communityScreen
-          ?.querySelector(".hero-community-appbar > strong")
-          ?.textContent?.trim() ?? "",
-      communityWorks:
-        communityScreen?.querySelectorAll(".hero-community-work").length ?? 0,
-    };
-  });
+    const state = await page.evaluate(() => {
+      const box = (el) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left,
+          right: r.right,
+          top: r.top + scrollY,
+          bottom: r.bottom + scrollY,
+          width: r.width,
+          height: r.height,
+        };
+      };
+      const section = document.querySelector("#nr-community");
+      const wrap = section?.querySelector(".nr-plaza-grid");
+      const copy = wrap?.firstElementChild;
+      const art = section?.querySelector(".nr-plaza-art");
+      const frame = section?.querySelector(".nr-plaza-capture-device");
+      const img = section?.querySelector(".nr-plaza-capture-image");
+      const sections = [...document.querySelectorAll("main > section")];
+      const at = sections.indexOf(section);
+      const contentBox = (s) => {
+        // The visible content of a section: its descendants with a box.
+        let top = Infinity;
+        let bottom = -Infinity;
+        for (const el of s.querySelectorAll("*")) {
+          const r = el.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          if (getComputedStyle(el).visibility === "hidden") continue;
+          top = Math.min(top, r.top + scrollY);
+          bottom = Math.max(bottom, r.bottom + scrollY);
+        }
+        return { top, bottom };
+      };
+      const gaps = [];
+      for (let i = 1; i < sections.length; i++)
+        gaps.push(
+          contentBox(sections[i]).top - contentBox(sections[i - 1]).bottom,
+        );
+      // A section that is itself the page column (.nr-wrap on the section).
+      const neighbour = document.querySelector("main > section.nr-wrap");
+      return {
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+        wrap: box(wrap),
+        neighbour: box(neighbour),
+        copy: box(copy),
+        art: box(art),
+        frame: box(frame),
+        image: box(img),
+        src: img?.currentSrc || "",
+        natural: img ? [img.naturalWidth, img.naturalHeight] : null,
+        heading: section?.querySelector("h2")?.textContent.trim() || "",
+        link: Boolean(section?.querySelector('a[href^="/community/"]')),
+        gapAbove: at > 0 ? gaps[at - 1] : null,
+        gapBelow: at < gaps.length ? gaps[at] : null,
+        otherGaps: gaps.filter((_, i) => i !== at - 1 && i !== at),
+      };
+    });
 
-  if (!state.hero || !state.shared) {
-    failures.push({ width, kind: "missing-container", state });
-  } else {
-    /* Home Hero owns a deliberately wider responsive container below 1024px so
-       copy and the live product preview can remain side-by-side without
-       collisions. Requiring its edges to equal the lower editorial container
-       defeats that composition. What matters here is that the dedicated Hero
-       container stays centered and retains a real viewport safety inset. */
-    const leftInset = state.hero.left;
-    const rightInset = state.clientWidth - state.hero.right;
-    const centerDelta = Math.abs(leftInset - rightInset);
-    if (centerDelta > 1) {
-      failures.push({
-        width,
-        kind: "hero-container-off-center",
-        leftInset,
-        rightInset,
-        centerDelta,
-        hero: state.hero,
+    const fail = (kind, detail = {}) =>
+      failures.push({ lang, width, kind, ...detail });
+    if (!state.wrap || !state.copy || !state.art || !state.image) {
+      fail("missing-plaza-section", { state });
+      await page.close();
+      continue;
+    }
+    if (state.scrollWidth > state.clientWidth + 1)
+      fail("horizontal-overflow", {
+        scrollWidth: state.scrollWidth,
+        clientWidth: state.clientWidth,
       });
-    }
-    if (Math.min(leftInset, rightInset) < 8) {
-      failures.push({
-        width,
-        kind: "hero-container-unsafe-inset",
-        leftInset,
-        rightInset,
-        hero: state.hero,
+    if (state.neighbour && Math.abs(state.wrap.left - state.neighbour.left) > 1)
+      fail("plaza-column-not-aligned", {
+        plaza: state.wrap.left,
+        page: state.neighbour.left,
       });
+    for (const [name, b] of [
+      ["copy", state.copy],
+      ["art", state.art],
+    ])
+      if (b.left < state.wrap.left - 1 || b.right > state.wrap.right + 1)
+        fail("outside-page-column", { block: name, box: b, wrap: state.wrap });
+    const overlapX =
+      Math.min(state.copy.right, state.art.right) -
+      Math.max(state.copy.left, state.art.left);
+    const overlapY =
+      Math.min(state.copy.bottom, state.art.bottom) -
+      Math.max(state.copy.top, state.art.top);
+    if (overlapX > 1 && overlapY > 1)
+      fail("copy-and-capture-overlap", { overlapX, overlapY });
+    if (!new RegExp(`/app-captures/plaza-${lang}\\.webp`).test(state.src))
+      fail("not-the-real-capture", { src: state.src });
+    if (!state.natural || !state.natural[0])
+      fail("capture-not-loaded", { src: state.src });
+    else {
+      const drawn = state.image.width / state.image.height;
+      const own = state.natural[0] / state.natural[1];
+      if (Math.abs(drawn - own) / own > 0.02)
+        fail("capture-distorted", { drawn, own });
     }
-  }
-
-  if (state.scrollWidth > state.clientWidth + 1) {
-    failures.push({ width, kind: "horizontal-overflow", state });
-  }
-
-  if (width < 760) {
     if (
-      state.title &&
-      (state.title.left < state.hero.left - 1 ||
-        state.title.right > state.hero.right + 1)
-    ) {
-      failures.push({ width, kind: "hero-title-outside-container", state });
-    }
-    if (
-      state.actions &&
-      (state.actions.left < state.hero.left - 1 ||
-        state.actions.right > state.hero.right + 1)
-    ) {
-      failures.push({ width, kind: "hero-actions-outside-container", state });
-    }
-  }
-
-  /* 560–759px intentionally uses the compact two-column first-view composition.
-     Assert the geometry that matters to users: the product preview must have a
-     real horizontal safety gap from every visible copy/control block. This is
-     stricter than comparing wrapper vertical ranges, which falsely reports a
-     collision whenever two valid columns share the same rows. */
-  if (width >= 560 && width < 760 && state.showcase) {
-    const copyBlocks = [
-      ["title", state.title],
-      ["lead", state.lead],
-      ["actions", state.actions],
-      ["bridge", state.bridge],
-    ];
-    for (const [name, block] of copyBlocks) {
-      if (!block) continue;
-      const horizontalGap = state.showcase.left - block.right;
-      const verticalRangesOverlap =
-        block.top < state.showcase.bottom - 1 &&
-        block.bottom > state.showcase.top + 1;
-      if (verticalRangesOverlap && horizontalGap < 8) {
-        failures.push({
-          width,
-          kind: "hero-compact-content-collision",
-          block: name,
-          horizontalGap,
-          state,
-        });
-      }
-    }
-  }
-
-  // The coded Community app preview was intentionally removed. Community
-  // remains a normal website card/link, not an app-screen reproduction.
-  // The duplicate timeline-style legacy shot was also removed, leaving five
-  // distinct app-screen cards in this gallery.
-  if (state.screenshotCount !== 5) {
-    failures.push({ width, kind: "screenshot-count", state });
+      state.frame &&
+      (state.image.left < state.frame.left - 1 ||
+        state.image.right > state.frame.right + 1 ||
+        state.image.top < state.frame.top - 1 ||
+        state.image.bottom > state.frame.bottom + 1)
+    )
+      fail("capture-outside-frame", {
+        image: state.image,
+        frame: state.frame,
+      });
+    if (state.image.right > state.clientWidth + 1 || state.image.left < -1)
+      fail("capture-outside-viewport", { image: state.image });
+    if (!state.heading || !state.link)
+      fail("missing-heading-or-link", {
+        heading: state.heading,
+        link: state.link,
+      });
+    const normal = Math.max(...state.otherGaps);
+    for (const [where, gap] of [
+      ["above", state.gapAbove],
+      ["below", state.gapBelow],
+    ])
+      if (gap !== null && gap > normal + 2)
+        fail("dead-gap", { where, gap, largestOtherGap: normal });
+    await page.close();
   }
 }
 
@@ -182,15 +185,13 @@ console.log(
   JSON.stringify(
     {
       ok: true,
+      langs,
       widths,
       checks: [
-        "Hero responsive container stays centered with a safe viewport inset",
-        "560-759px compact copy/device columns keep >=8px clearance for every overlapping content block",
-        "Hero title and actions stay inside the Hero container",
-        "No horizontal overflow appears across the full responsive width ladder",
-        "App Preview contains the Community reproduction",
-        "Community reproduction fills the device content box inside its bezel",
-        "Community reproduction contains title and four work cards",
+        "Work Plaza text and capture stay inside the shared page column and never overlap",
+        "The capture is the real app screen, loaded, at its own aspect ratio, inside its frame",
+        "The gaps above and below the section are no larger than the other section gaps",
+        "No horizontal overflow across the responsive width ladder",
       ],
     },
     null,
