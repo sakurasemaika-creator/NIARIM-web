@@ -613,8 +613,7 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   gap: 0.9rem;
 }
 
-.faq-list,
-.news-list {
+.faq-list {
   gap: 0.7rem;
 }
 .faq-question {
@@ -690,8 +689,7 @@ select:focus {
 @supports (content-visibility: auto) {
   .feature-section,
   .community-gallery,
-  .faq-list,
-  .news-list {
+  .faq-list {
     content-visibility: auto;
     contain-intrinsic-size: auto 720px;
   }

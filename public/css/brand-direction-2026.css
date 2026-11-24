@@ -379,12 +379,7 @@ body main .nr-curated-item {
 body main :is(.about-name) {
   border-color: var(--nr-rule);
 }
-body main .news-item {
-  transition: border-color 0.2s ease;
-}
-body main .news-item:focus-within {
-  border-color: var(--color-accent-text, #b8264a);
-}
+
 @media (min-width: 960px) {
   html body.nr-site .nr-story-card:nth-child(even) {
     grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
