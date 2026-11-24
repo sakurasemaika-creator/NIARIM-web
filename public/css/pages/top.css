@@ -353,3 +353,185 @@
     padding: 6px 4px 4px;
   }
 }
+
+/* ---- Body sections: one paper, numbered like a timesheet ---- */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing
+  ) {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  background-image: none;
+  color: var(--ink);
+}
+
+#main .tp-index {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--pencil-ink);
+  font: 400 0.875rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+/* Every capture sits in the same neutral frame (no per-screen colours). */
+#main .nr-shot {
+  --capture-accent: var(--ink);
+}
+
+/* ---- NIARIM-only features, each shown with the engine's real output ---- */
+#main .tp-unique {
+  padding-block: clamp(56px, 7vw, 104px);
+}
+
+#main .tp-head {
+  max-width: 44em;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+}
+
+#main .tp-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem) / 1.3 var(--font-serif);
+}
+
+#main .tp-head p {
+  margin: 14px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.8 var(--font-sans);
+}
+
+#main .tp-unique-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 56px) clamp(20px, 3vw, 40px);
+}
+
+#main .tp-feature {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  margin: 0;
+}
+
+#main .tp-feature h3 {
+  margin: 18px 0 0;
+  color: var(--ink);
+  font: 400 1.125rem / 1.4 var(--font-serif);
+}
+
+#main .tp-feature p {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-figure {
+  display: flex;
+  height: clamp(200px, 22vw, 280px);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+#main .tp-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#main .tp-pair > div,
+#main .tp-strips > div {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+}
+
+#main .tp-pair > div {
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+#main .tp-pair img {
+  align-self: center;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+#main :is(.tp-pair, .tp-strips) span {
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.3 var(--font-sans);
+}
+
+#main .tp-strips {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+#main .tp-strips > div {
+  justify-items: start;
+  width: 100%;
+}
+
+#main .tp-strips img {
+  width: 100%;
+}
+
+#main .tp-capture img {
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+@media (max-width: 1023px) {
+  #main .tp-unique-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  #main .tp-unique-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .tp-figure {
+    height: 240px;
+  }
+}
+
+/* Captures: one neutral frame (the per-screen colour comes in through an
+   inline custom property, so the shadow itself is replaced). */
+#main .nr-shot {
+  box-shadow:
+    0 0 0 1px var(--rule-strong),
+    0 18px 36px -22px rgba(40, 36, 44, 0.4);
+}
+
+#main .nr-story-card {
+  background: transparent;
+  box-shadow: none;
+}
+
+#main :is(.nr-gallery-visual, .nr-story-media, .nr-workspace-media) {
+  background: transparent;
+}

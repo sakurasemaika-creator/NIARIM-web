@@ -556,9 +556,7 @@
         class="nr-statement nr-wrap"
         aria-labelledby="nr-statement-title"
       >
-        <p class="nr-kicker" data-i18n="refresh.story.kicker">
-          DRAW / ANIMATE / EXPORT
-        </p>
+        <span class="tp-index" aria-hidden="true">01</span>
         <h2 id="nr-statement-title" data-i18n-html="refresh.story.title">
           NIARIMでアニメを作る流れ
         </h2>
@@ -569,11 +567,7 @@
       <section class="nr-story nr-wrap" aria-labelledby="nr-statement-title">
         <article class="nr-story-card nr-story-draw">
           <div class="nr-story-media">
-            <figure
-              class="nr-shot"
-              data-capture="layers"
-              style="--capture-accent: #ff8a3d"
-            >
+            <figure class="nr-shot" data-capture="layers">
               <picture
                 ><source
                   type="image/avif"
@@ -602,11 +596,7 @@
         </article>
         <article class="nr-story-card nr-story-move">
           <div class="nr-story-media">
-            <figure
-              class="nr-shot"
-              data-capture="timeline"
-              style="--capture-accent: #2e9b4f"
-            >
+            <figure class="nr-shot" data-capture="timeline">
               <picture
                 ><source
                   type="image/avif"
@@ -635,11 +625,7 @@
         </article>
         <article class="nr-story-card nr-story-share">
           <div class="nr-story-media">
-            <figure
-              class="nr-shot"
-              data-capture="export"
-              style="--capture-accent: #0086c9"
-            >
+            <figure class="nr-shot" data-capture="export">
               <picture
                 ><source
                   type="image/avif"
@@ -667,104 +653,171 @@
           </div>
         </article>
       </section>
-      <section class="nr-feature-band">
-        <div class="nr-wrap nr-feature-layout">
-          <div class="nr-feature-text">
-            <h2 data-i18n-html="refresh.expression.title">編集に使える機能</h2>
-            <p data-i18n="refresh.expression.body">
-              オニオンスキン、描画フィルター、音声トラック、セーブツリーを使えます。前後のフレームや音の波形を見ながら、動きのタイミングを合わせられます。
-            </p>
-            <div class="nr-mini-list">
-              <span data-i18n="refresh.expression.item1"
-                >前後のコマを見ながら描く</span
-              ><span data-i18n="refresh.expression.item2"
-                >音と動きを一緒に編集する</span
-              ><span data-i18n="refresh.expression.item3"
-                >作品の保存状態を管理する</span
-              >
-            </div>
-          </div>
-          <div class="nr-feature-visual">
-            <figure
-              class="nr-shot nr-feature-shot-top"
-              data-capture="onion-skin"
-              style="--capture-accent: #e85d75"
-            >
-              <picture
-                ><source
-                  type="image/avif"
-                  srcset="/assets/images/app-captures/onion-skin.avif" />
-                <img
-                  src="/assets/images/app-captures/onion-skin.webp"
-                  alt="NIARIM オニオンスキン"
-                  data-i18n-attr="alt:refresh.screen.onion-skin"
-                  width="320"
-                  height="569"
-                  loading="lazy"
-                  decoding="async"
-              /></picture>
+      <section class="tp-unique nr-wrap" aria-labelledby="tp-unique-title">
+        <header class="tp-head">
+          <span class="tp-index" aria-hidden="true">02</span>
+          <h2 id="tp-unique-title" data-i18n="top.unique.title">
+            NIARIM独自の機能
+          </h2>
+          <p data-i18n="top.unique.lead">
+            下の絵はどれも、アプリの描画エンジンで描いた実際の結果です。
+          </p>
+        </header>
+        <div class="tp-unique-list">
+          <article class="tp-feature">
+            <figure class="tp-figure">
+              <img
+                src="/assets/images/engine/hair-fold.webp"
+                width="1000"
+                height="1120"
+                alt="折り畳みモードの三日月カールで描いた後ろ髪"
+                data-i18n-attr="alt:top.unique.fold.alt"
+                loading="lazy"
+                decoding="async"
+              />
             </figure>
-            <figure
-              class="nr-shot nr-feature-shot-bottom"
-              data-capture="audio-editor"
-              style="--capture-accent: #4b8fdc"
-            >
-              <picture
-                ><source
-                  type="image/avif"
-                  srcset="/assets/images/app-captures/audio-editor.avif" />
-                <img
-                  src="/assets/images/app-captures/audio-editor.webp"
-                  alt="NIARIM 音声編集"
-                  data-i18n-attr="alt:refresh.screen.audio-editor"
-                  width="320"
-                  height="569"
-                  loading="lazy"
-                  decoding="async"
-              /></picture>
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section class="nr-tools nr-wrap">
-        <div class="nr-section-header">
-          <div>
-            <h2 data-i18n="refresh.tools.title">作業の手間を減らす機能</h2>
-          </div>
-          <a
-            class="nr-text-link"
-            href="/features/"
-            data-i18n="refresh.tools.all"
-            >全機能を見る</a
-          >
-        </div>
-        <div class="nr-tool-grid">
-          <article>
-            <span class="nr-tool-number">01</span>
-            <h3 data-i18n="refresh.tool1.title">自動塗り</h3>
-            <p data-i18n="refresh.tool1.body">
-              パーツごとに決めておいた色で、線画の中を自動で塗り分けます。
+            <h3 data-i18n="top.unique.fold.title">折り畳みモード</h3>
+            <p data-i18n="top.unique.fold.body">
+              縁取りのペンで描いた線が、曲がる所で自動で折り返し、折り目の線と縁取りが付きます。髪の毛を1本の線ずつ描けます。
             </p>
           </article>
-          <article>
-            <span class="nr-tool-number">02</span>
-            <h3 data-i18n="refresh.tool2.title">自動操作</h3>
-            <p data-i18n="refresh.tool2.body">
-              キャンバスやタイムラインでの操作を記録し、名前を付けてくり返し実行できます（プレミアム）。
+          <article class="tp-feature">
+            <figure class="tp-figure tp-pair">
+              <div>
+                <img
+                  src="/assets/images/engine/auto-lineart-rough.webp"
+                  width="260"
+                  height="256"
+                  alt="ラフ"
+                  data-i18n-attr="alt:top.unique.lineart.before"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="top.unique.lineart.before">ラフ</span>
+              </div>
+              <div>
+                <img
+                  src="/assets/images/engine/auto-lineart-result.webp"
+                  width="260"
+                  height="256"
+                  alt="自動線画"
+                  data-i18n-attr="alt:top.unique.lineart.title"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="top.unique.lineart.title">自動線画</span>
+              </div>
+            </figure>
+            <h3 data-i18n="top.unique.lineart.title">自動線画</h3>
+            <p data-i18n="top.unique.lineart.body">
+              ラフから、形を保ったまま整った線画を作ります。近くに並んだ線は、1本にまとめずに別の線として残します。
             </p>
           </article>
-          <article>
-            <span class="nr-tool-number">03</span>
+          <article class="tp-feature">
+            <figure class="tp-figure tp-pair">
+              <div>
+                <img
+                  src="/assets/images/engine/ink-pool-before.webp"
+                  width="238"
+                  height="208"
+                  alt="元の線"
+                  data-i18n-attr="alt:top.unique.ink.before"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="top.unique.ink.before">元の線</span>
+              </div>
+              <div>
+                <img
+                  src="/assets/images/engine/ink-pool-after.webp"
+                  width="238"
+                  height="208"
+                  alt="墨溜まり"
+                  data-i18n-attr="alt:top.unique.ink.title"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="top.unique.ink.title">墨溜まり</span>
+              </div>
+            </figure>
+            <h3 data-i18n="top.unique.ink.title">墨溜まり</h3>
+            <p data-i18n="top.unique.ink.body">
+              線の角や交わる所に、インクが溜まったような太りを付けます。どの角度までの角に付けるかを選べます。
+            </p>
+          </article>
+          <article class="tp-feature">
+            <figure class="tp-figure tp-strips">
+              <div>
+                <span data-i18n="top.unique.mix.before">デジタル</span
+                ><img
+                  src="/assets/images/engine/mixing-digital.webp"
+                  width="560"
+                  height="69"
+                  alt="デジタル"
+                  data-i18n-attr="alt:top.unique.mix.before"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <span data-i18n="top.unique.mix.title">油彩風混色</span
+                ><img
+                  src="/assets/images/engine/mixing-oil.webp"
+                  width="560"
+                  height="69"
+                  alt="油彩風混色"
+                  data-i18n-attr="alt:top.unique.mix.title"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </figure>
+            <h3 data-i18n="top.unique.mix.title">油彩風混色</h3>
+            <p data-i18n="top.unique.mix.body">
+              下の色と混ぜながら塗ります。黄色の上の青は緑に、赤の上の青は紫になり、明るさが急に変わりません。
+            </p>
+          </article>
+          <article class="tp-feature">
+            <figure class="tp-figure tp-capture">
+              <img
+                src="/assets/images/engine/save-tree-crop.webp"
+                width="640"
+                height="718"
+                alt="セーブツリー"
+                data-i18n-attr="alt:refresh.tool3.title"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <h3 data-i18n="refresh.tool3.title">セーブツリー</h3>
             <p data-i18n="refresh.tool3.body">
               保存するたびに保存地点が増え、前の地点から枝分かれして別の案を試せます。保存数に上限はありません。
             </p>
           </article>
-          <article>
-            <span class="nr-tool-number">04</span>
-            <h3 data-i18n="refresh.tool4.title">ワークスペース</h3>
-            <p data-i18n="refresh.tool4.body">
-              左利きモードやPCモード、ツールバーの設定に名前を付けて保存し、用途ごとに切り替えられます。
+          <article class="tp-feature">
+            <figure class="tp-figure tp-pair">
+              <div>
+                <img
+                  src="/assets/images/engine/autofill-before.webp"
+                  width="800"
+                  height="820"
+                  alt="線画"
+                  data-i18n-attr="alt:top.unique.autofill.before"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="top.unique.autofill.before">線画</span>
+              </div>
+              <div>
+                <img
+                  src="/assets/images/engine/autofill-after.webp"
+                  width="800"
+                  height="820"
+                  alt="自動塗り"
+                  data-i18n-attr="alt:refresh.tool1.title"
+                  loading="lazy"
+                  decoding="async"
+                /><span data-i18n="refresh.tool1.title">自動塗り</span>
+              </div>
+            </figure>
+            <h3 data-i18n="refresh.tool1.title">自動塗り</h3>
+            <p data-i18n="refresh.tool1.body">
+              パーツごとに決めておいた色で、線画の中を自動で塗り分けます。
             </p>
           </article>
         </div>
@@ -772,11 +825,7 @@
       <section class="nr-workspace">
         <div class="nr-wrap nr-workspace-grid">
           <div class="nr-workspace-media">
-            <figure
-              class="nr-shot"
-              data-capture="workspace"
-              style="--capture-accent: #e65f2b"
-            >
+            <figure class="nr-shot" data-capture="workspace">
               <picture
                 ><source
                   type="image/avif"
@@ -791,11 +840,7 @@
                   decoding="async"
               /></picture>
             </figure>
-            <figure
-              class="nr-shot"
-              data-capture="widget"
-              style="--capture-accent: #00796b"
-            >
+            <figure class="nr-shot" data-capture="widget">
               <picture
                 ><source
                   type="image/avif"
@@ -812,8 +857,9 @@
             </figure>
           </div>
           <div class="nr-workspace-copy">
+            <span class="tp-index" aria-hidden="true">03</span>
             <h2 data-i18n-html="refresh.workspace.title">
-              スマホ画面とPCモードに対応
+              1つのアプリをスマホとPCモードで使えます
             </h2>
             <p data-i18n="refresh.workspace.body">
               スマホでは画面下のツールバーで操作します。画面の広い端末ではPCモードになり、複数のパネルを同時に表示できます。左利きモードと外観テーマも設定できます。
@@ -830,6 +876,7 @@
       <section class="nr-plaza" id="nr-community">
         <div class="nr-wrap nr-plaza-grid">
           <div>
+            <span class="tp-index" aria-hidden="true">04</span>
             <h2 data-i18n-html="refresh.plaza.title">
               NIARIMで作られたアニメを作品広場で見られます
             </h2>
@@ -867,6 +914,7 @@
       <section class="nr-gallery nr-wrap" id="nr-gallery">
         <div class="nr-section-header">
           <div>
+            <span class="tp-index" aria-hidden="true">05</span>
             <h2 data-i18n="refresh.gallery.title">
               スマホ版・PCモード版のアプリ画面
             </h2>
@@ -922,11 +970,7 @@
         <div class="nr-gallery-grid">
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="canvas"
-                style="--capture-accent: #3aa6ff"
-              >
+              <figure class="nr-shot" data-capture="canvas">
                 <picture
                   ><source
                     type="image/avif"
@@ -949,11 +993,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="layers"
-                style="--capture-accent: #ff8a3d"
-              >
+              <figure class="nr-shot" data-capture="layers">
                 <picture
                   ><source
                     type="image/avif"
@@ -976,11 +1016,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="onion-skin"
-                style="--capture-accent: #e85d75"
-              >
+              <figure class="nr-shot" data-capture="onion-skin">
                 <picture
                   ><source
                     type="image/avif"
@@ -1003,11 +1039,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="timeline"
-                style="--capture-accent: #2e9b4f"
-              >
+              <figure class="nr-shot" data-capture="timeline">
                 <picture
                   ><source
                     type="image/avif"
@@ -1030,11 +1062,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="audio-editor"
-                style="--capture-accent: #4b8fdc"
-              >
+              <figure class="nr-shot" data-capture="audio-editor">
                 <picture
                   ><source
                     type="image/avif"
@@ -1057,11 +1085,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="save-tree"
-                style="--capture-accent: #c15f35"
-              >
+              <figure class="nr-shot" data-capture="save-tree">
                 <picture
                   ><source
                     type="image/avif"
@@ -1084,11 +1108,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="export"
-                style="--capture-accent: #0086c9"
-              >
+              <figure class="nr-shot" data-capture="export">
                 <picture
                   ><source
                     type="image/avif"
@@ -1111,11 +1131,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="workspace"
-                style="--capture-accent: #e65f2b"
-              >
+              <figure class="nr-shot" data-capture="workspace">
                 <picture
                   ><source
                     type="image/avif"
@@ -1138,11 +1154,7 @@
           </article>
           <article class="nr-gallery-item">
             <div class="nr-gallery-visual">
-              <figure
-                class="nr-shot"
-                data-capture="widget"
-                style="--capture-accent: #00796b"
-              >
+              <figure class="nr-shot" data-capture="widget">
                 <picture
                   ><source
                     type="image/avif"
@@ -1171,6 +1183,7 @@
       <section class="nr-pricing">
         <div class="nr-wrap nr-pricing-grid">
           <div>
+            <span class="tp-index" aria-hidden="true">06</span>
             <h2 data-i18n="refresh.price.title">基本の制作機能は無料です</h2>
             <p data-i18n="refresh.price.body">
               描画、アニメーション、音入れ、書き出し。作品づくりの基本は無料で。もっと自由に仕上げたい人にはプレミアムも。
@@ -1198,42 +1211,6 @@
               >
             </div>
           </div>
-        </div>
-      </section>
-      <section class="nr-new-features" aria-labelledby="nr-new-features-title">
-        <div class="nr-wrap">
-          <h2 id="nr-new-features-title" data-i18n="feature.title">
-            細かく調整できる3つの機能
-          </h2>
-          <p data-i18n="feature.lead">
-            自分用のブラシを作ったり、描いた形をあとから直したり、カメラの動きを付けたりできます。
-          </p>
-          <div class="nr-new-feature-grid">
-            <article>
-              <h3 data-i18n="feature.brush">カスタムブラシ</h3>
-              <p data-i18n="feature.brushBody">
-                形状やストロークを調整して、自分の線が描けるブラシを作れます。
-              </p>
-            </article>
-            <article>
-              <h3 data-i18n="feature.mesh">自由変形・メッシュ変形</h3>
-              <p data-i18n="feature.meshBody">
-                描いたパーツの輪郭や位置を、描き直さずに整えられます。
-              </p>
-            </article>
-            <article>
-              <h3 data-i18n="feature.camera">カメラキーフレーム</h3>
-              <p data-i18n="feature.cameraBody">
-                カメラの位置とタイミングを指定して、シーンに動きを付けられます。
-              </p>
-            </article>
-          </div>
-          <a
-            class="nr-text-link"
-            href="/features/"
-            data-i18n="refresh.tools.all"
-            >全機能を見る</a
-          >
         </div>
       </section>
       <section class="nr-launch" id="download">
