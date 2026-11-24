@@ -580,8 +580,9 @@
   gap: 8px;
 }
 .nr-gallery-meta span {
-  font-size: 0.69rem;
-  color: #9f8290;
+  /* 12px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
   white-space: nowrap;
 }
 .nr-gallery-meta h3 {
@@ -589,8 +590,8 @@
   margin: 0;
 }
 .nr-gallery-note {
-  font-size: 0.77rem;
-  color: #796f77;
+  font-size: 0.8125rem;
+  color: var(--color-gray-500);
   text-align: right;
   margin-top: 18px;
 }
@@ -600,13 +601,14 @@
   align-items: center;
   flex: none;
 }
+/* 44px touch targets (36px before); the swatch inside keeps its size. */
 .nr-palette-button {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border: 2px solid transparent;
   background: white;
   border-radius: 50%;
-  padding: 5px;
+  padding: 9px;
   cursor: pointer;
 }
 .nr-palette-button span {

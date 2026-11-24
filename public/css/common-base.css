@@ -993,7 +993,7 @@ p {
   border: 1.5px solid var(--color-gray-300);
   font-size: var(--fs-small);
   font-weight: 600;
-  min-height: 40px;
+  min-height: 44px;
 }
 
 .lang-trigger::after {

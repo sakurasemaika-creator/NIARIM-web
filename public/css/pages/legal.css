@@ -55,9 +55,11 @@
 .legal-body h2 {
   font-size: var(--fs-h3);
   margin-bottom: var(--space-sm);
-  /* 見出しとはいえ font-weight:600 / 約19pxで「大きな文字」の扱いには
-     ならないため、4.5:1を満たす濃さを使う。 */
-  color: var(--color-accent-strong);
+  /* Article headings use the heading ink like every other heading; the
+     accent stays on the left rule. In the accent pink (#ff5c7a) they were
+     2.7:1 on the paper, under the 3:1 even large text needs, and every
+     heading of the page was pink (DESIGN.md 2). */
+  color: var(--color-footer-brown, #3b2429);
 }
 
 .legal-body h3 {
@@ -83,14 +85,15 @@
    周囲の地の文と同じ色になり、リンクだと気づきにくかった。 */
 .legal-body a {
   /* 本文サイズのリンクなので装飾用アクセントではなく濃色を使う
-     （#ff5c7a は白背景で2.97:1しかない）。 */
-  color: var(--color-accent-strong);
+     （#ff5c7a は白背景で2.97:1しかない）。--color-accent-strong は今は
+     アクセントそのものを指すので、文字専用の濃い赤を使う。 */
+  color: var(--color-accent-text);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
 .legal-body a:hover {
-  color: var(--color-accent-strong-dark);
+  color: var(--color-footer-brown, #3b2429);
 }
 
 .legal-body ul,

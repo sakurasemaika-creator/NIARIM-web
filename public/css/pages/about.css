@@ -125,7 +125,9 @@
    以前はHTML側のstyle属性で色を指定していたが、CSPでstyle属性を
    減らす方針とあわせてCSSへ移した。 */
 .about-name-result {
-  color: var(--color-accent-strong);
+  /* --color-accent-strong now points at the accent itself; the darker
+     accent keeps the pink and reaches 3:1 for this large text. */
+  color: var(--color-accent-dark);
 }
 
 /* Keep the Only in NIARIM heading as a distinct introduction block.

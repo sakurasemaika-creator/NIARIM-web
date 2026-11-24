@@ -68,10 +68,21 @@ try {
 
   await page.goto(`${base}/privacy/`, { waitUntil: "networkidle" });
   await setLang("ja");
+  // The policy's own article 2 now carries the clause
+  // (legal.privacy.art2.aiTraining); the shared script adds its copy only
+  // where the page does not. Either way it must appear exactly once.
   const clause = await assertVisible(
-    "[data-ai-training-privacy]",
+    '[data-i18n="legal.privacy.art2.aiTraining"], [data-ai-training-privacy]',
     "AI training privacy clause was not rendered",
   );
+  const clauseCount = await page.evaluate(
+    () =>
+      [...document.querySelectorAll("main p")].filter((p) =>
+        p.textContent.includes("機械学習モデル"),
+      ).length,
+  );
+  if (clauseCount !== 1)
+    throw new Error(`privacy AI clause appears ${clauseCount} times`);
   const jaClause = (await clause.innerText()).trim();
   if (!jaClause.includes("機械学習モデル"))
     throw new Error("Japanese privacy AI clause is missing expected text");

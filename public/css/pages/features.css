@@ -78,7 +78,7 @@
 .feature-nav a:hover {
   border-color: var(--color-accent);
   /* 枠線は装飾用アクセントのまま、文字だけコントラストを満たす濃色にする。 */
-  color: var(--color-accent-strong);
+  color: var(--color-accent-text);
 }
 
 .feature-nav a.is-active {

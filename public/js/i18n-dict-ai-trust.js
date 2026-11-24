@@ -100,6 +100,11 @@
   function ensurePrivacyClause() {
     var art2 = document.querySelector('[data-i18n="legal.privacy.art2.body"]');
     if (!art2) return;
+    // The policy now carries this clause itself (legal.privacy.art2.aiTraining,
+    // the app's own article 2 text), so adding it again printed the same
+    // sentence twice in a row.
+    if (document.querySelector('[data-i18n="legal.privacy.art2.aiTraining"]'))
+      return;
     var clause = document.querySelector("[data-ai-training-privacy]");
     if (!clause) {
       clause = document.createElement("p");
