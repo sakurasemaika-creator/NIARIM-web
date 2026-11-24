@@ -20,7 +20,9 @@ const [
   read("public/js/user-request-fixes.js"),
   read("public/js/lang-flag.js"),
   read("public/css/line-break.css"),
-  read("public/js/home-hero-showcase.js"),
+  // Deleted with the old hero (2026-11 redesign); the checks below only
+  // apply to a home that still loads it.
+  read("public/js/home-hero-showcase.js").catch(() => ""),
   read("public/about/index.html"),
 ]);
 

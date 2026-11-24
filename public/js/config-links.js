@@ -103,30 +103,6 @@
     document.head.appendChild(link);
   }
 
-  function loadHomeHeroViewport() {
-    if (!document.querySelector(".hero + .marquee-section")) return;
-    addStyleOnce(
-      "/css/home-hero-viewport.css",
-      "data-niarim-home-hero-viewport",
-    );
-    addStyleOnce(
-      "/css/home-hero-fidelity.css",
-      "data-niarim-home-hero-fidelity",
-    );
-    addStyleOnce("/css/home-hero-fit-628.css", "data-niarim-home-hero-fit-628");
-    addStyleOnce(
-      "/css/home-community-spacing.css",
-      "data-niarim-home-community-spacing",
-    );
-    if (!document.querySelector("script[data-niarim-home-hero-showcase]")) {
-      var script = document.createElement("script");
-      script.src = "/js/home-hero-showcase.js";
-      script.defer = true;
-      script.setAttribute("data-niarim-home-hero-showcase", "true");
-      document.head.appendChild(script);
-    }
-  }
-
   function loadSignatureShowcase() {
     if (!document.querySelector(".about-hero, .features-header")) return;
     addStyleOnce(
@@ -183,7 +159,6 @@
     applyRequestedCommunityCopy();
     apply();
     loadFeatureFidelity();
-    loadHomeHeroViewport();
     loadSignatureShowcase();
     scheduleFrameCentering();
     window.addEventListener("load", scheduleFrameCentering);
