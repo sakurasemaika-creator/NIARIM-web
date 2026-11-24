@@ -51,9 +51,32 @@ for (const width of widths) {
           : null;
       };
       const cs = getComputedStyle(el);
+      // A container with display: contents has no box of its own (the home
+      // hero stacks its parts in another order below 821px); its parts are
+      // measured instead.
+      const containerRect = (node) => {
+        if (!node || getComputedStyle(node).display !== "contents")
+          return rect(node);
+        const boxes = [...node.children]
+          .map((child) => child.getBoundingClientRect())
+          .filter((r) => r.width > 0 && r.height > 0);
+        if (!boxes.length) return rect(node);
+        const left = Math.min(...boxes.map((r) => r.left));
+        const right = Math.max(...boxes.map((r) => r.right));
+        const top = Math.min(...boxes.map((r) => r.top));
+        const bottom = Math.max(...boxes.map((r) => r.bottom));
+        return {
+          left,
+          right,
+          top,
+          bottom,
+          width: right - left,
+          height: bottom - top,
+        };
+      };
       return {
         hero: rect(el),
-        container: rect(el.querySelector(names.container)),
+        container: containerRect(el.querySelector(names.container)),
         copy: rect(el.querySelector(names.copy)),
         visual: rect(el.querySelector(names.visual)),
         title: rect(el.querySelector(names.title)),

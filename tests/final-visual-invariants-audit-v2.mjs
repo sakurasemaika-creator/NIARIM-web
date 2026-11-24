@@ -7,7 +7,6 @@ import { spawnSync } from "node:child_process";
    by final-visual-invariants-audit.mjs. Keep independent source/UI contracts,
    but do not re-run the superseded duplicate. */
 const scripts = [
-  "tests/hero-preview-scale-contract-audit.mjs",
   "tests/timeline-toolbar-frame-mode-contract.mjs",
   "tests/final-visual-invariants-audit.mjs",
   "tests/user-request-regressions-audit.mjs",

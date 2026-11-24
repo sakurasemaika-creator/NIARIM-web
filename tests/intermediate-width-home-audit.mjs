@@ -4,12 +4,16 @@ import { chromium } from "playwright";
 import { launchOptions } from "./browser-launch.mjs";
 
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
-const widths = [
-  320, 339, 360, 375, 390, 414, 480, 520, 543, 559, 560, 600, 640, 641, 642,
-  700, 732, 733, 759, 760, 768, 834, 900, 901, 1023, 1024, 1100, 1199, 1200,
-  1279, 1280, 1366, 1440, 1600, 1920,
-];
-const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
+const widths = process.env.AUDIT_WIDTHS
+  ? process.env.AUDIT_WIDTHS.split(",").map(Number)
+  : [
+      320, 339, 360, 375, 390, 414, 480, 520, 543, 559, 560, 600, 640, 641, 642,
+      700, 732, 733, 759, 760, 768, 834, 900, 901, 1023, 1024, 1100, 1199, 1200,
+      1279, 1280, 1366, 1440, 1600, 1920,
+    ];
+const languages = process.env.AUDIT_LANGS
+  ? process.env.AUDIT_LANGS.split(",")
+  : ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];
 const captureWidths = new Set(widths);
 const firstFoldWidths = new Set([320, 339, 360, 375, 390, 414]);
 const outDir =
@@ -86,7 +90,11 @@ for (const width of widths) {
             const r = el.getBoundingClientRect();
             return r.width > 0 && (r.left < -2 || r.right > innerWidth + 2);
           })
-          .map((el) => el.className.toString() || el.tagName);
+          .map(
+            (el) =>
+              // getAttribute: an SVG element's className is an object.
+              `${el.tagName.toLowerCase()}.${el.getAttribute("class") || ""}`,
+          );
       return {
         hero: rectOf(document.querySelector(".nr-hero")),
         title: rectOf(document.querySelector("#nr-hero-title")),

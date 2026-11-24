@@ -131,13 +131,18 @@
   margin: 0;
 }
 
-#main .nr-hero-phone {
-  width: clamp(208px, 17vw, 252px);
-  margin: 0;
-  padding: 9px;
-  border-radius: 36px;
+/* The capture fills its frame exactly at every width; the bezel is a ring
+   drawn outside it (and the margin keeps the ring's room in the layout). */
+#main .nr-shot.nr-hero-phone {
+  width: clamp(190px, calc(17vw - 18px), 234px);
+  margin: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 27px;
   background: var(--ink);
-  box-shadow: var(--shadow-device);
+  box-shadow:
+    0 0 0 9px var(--ink),
+    var(--shadow-device);
 }
 
 #main .nr-hero-phone :is(picture, img) {
@@ -166,7 +171,9 @@
   border-top: 1px solid var(--rule-strong);
 }
 
-#main .nr-frames-defs {
+/* Only holds the drawings the frames reuse; it must take no room (the rule
+   below for the frames' drawings is more specific than a class alone). */
+#main .nr-frames svg.nr-frames-defs {
   position: absolute;
   width: 0;
   height: 0;

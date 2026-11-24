@@ -205,7 +205,8 @@ for (const width of widths) {
         ".help-item",
         ".faq-item",
         ".about-name",
-        ".contact-panel",
+        // The contact page is one white sheet (the form) on the paper.
+        "#main .contact-form",
       ].join(",");
       const roundedSurfaceSelector = [
         ".intro-card",
@@ -219,7 +220,7 @@ for (const width of widths) {
         ".news-card",
         // Help is intentionally an app-like accordion list, not a rounded card.
         ".about-name",
-        ".contact-panel",
+        "#main .contact-form",
       ].join(",");
       const symmetricPaddingSelector = [
         ".intro-card",
@@ -231,7 +232,7 @@ for (const width of widths) {
         ".news-card",
         // Accordion rows do not require card-style symmetric inset padding.
         ".about-name",
-        ".contact-panel",
+        "#main .contact-form",
       ].join(",");
       const surfaces = [...document.querySelectorAll(surfaceSelector)]
         .filter(visible)
