@@ -6,6 +6,7 @@
       "contact.email.studio": "MIRANIMA Studioの総合窓口",
       "contact.form.attachmentRemove": "外す",
       "contact.form.attachmentRemoveNamed": "%sを外す",
+      "contact.form.legend": "お問い合わせフォーム",
       "contact.error.attachmentCount": "添付は3件までです。",
       "contact.error.attachmentFormat":
         "「%s」は対応形式ではないか、中身がありません。",
@@ -21,6 +22,7 @@
       "contact.email.studio": "MIRANIMA Studio general inquiries",
       "contact.form.attachmentRemove": "Remove",
       "contact.form.attachmentRemoveNamed": "Remove %s",
+      "contact.form.legend": "Contact form",
       "contact.error.attachmentCount": "You can attach up to 3 files.",
       "contact.error.attachmentFormat":
         "%s is empty or uses an unsupported format.",
@@ -36,6 +38,7 @@
       "contact.email.studio": "MIRANIMA Studio 综合咨询",
       "contact.form.attachmentRemove": "移除",
       "contact.form.attachmentRemoveNamed": "移除 %s",
+      "contact.form.legend": "联系表单",
       "contact.error.attachmentCount": "最多可添加 3 个附件。",
       "contact.error.attachmentFormat": "“%s”为空或格式不受支持。",
       "contact.error.attachmentSize": "“%s”超出单个文件的大小限制。",
@@ -49,6 +52,7 @@
       "contact.email.studio": "MIRANIMA Studio 一般聯絡",
       "contact.form.attachmentRemove": "移除",
       "contact.form.attachmentRemoveNamed": "移除 %s",
+      "contact.form.legend": "聯絡表單",
       "contact.error.attachmentCount": "最多可加入 3 個附件。",
       "contact.error.attachmentFormat": "「%s」是空檔案或格式不受支援。",
       "contact.error.attachmentSize": "「%s」超過單一檔案的大小上限。",
@@ -62,6 +66,7 @@
       "contact.email.studio": "MIRANIMA Studio 일반 문의",
       "contact.form.attachmentRemove": "제거",
       "contact.form.attachmentRemoveNamed": "%s 제거",
+      "contact.form.legend": "문의 양식",
       "contact.error.attachmentCount":
         "첨부 파일은 최대 3개까지 추가할 수 있습니다.",
       "contact.error.attachmentFormat":
@@ -78,6 +83,7 @@
       "contact.email.studio": "Demandes générales à MIRANIMA Studio",
       "contact.form.attachmentRemove": "Retirer",
       "contact.form.attachmentRemoveNamed": "Retirer %s",
+      "contact.form.legend": "Formulaire de contact",
       "contact.error.attachmentCount":
         "Vous pouvez joindre jusqu’à 3 fichiers.",
       "contact.error.attachmentFormat":
@@ -94,6 +100,7 @@
       "contact.email.studio": "Consultas generales a MIRANIMA Studio",
       "contact.form.attachmentRemove": "Quitar",
       "contact.form.attachmentRemoveNamed": "Quitar %s",
+      "contact.form.legend": "Formulario de contacto",
       "contact.error.attachmentCount": "Puedes adjuntar hasta 3 archivos.",
       "contact.error.attachmentFormat":
         "El archivo «%s» está vacío o tiene un formato incompatible.",
