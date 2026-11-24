@@ -417,37 +417,37 @@
   "ja": [
     "PCモード版のキャンバス画面",
     "スマホ版のキャンバス画面",
-    "作品広場の新着カード、検索、並べ替え、ブックマークの操作"
+    "まだ作品が無いときの作品広場。新着・ランキング・検索のタブと「投稿する」ボタン"
   ],
   "en": [
     "Canvas in PC mode",
     "Canvas on a phone",
-    "Work Plaza showing new works, search, sorting and bookmarks"
+    "The Work Plaza before any work is posted: tabs for new works, ranking and search, and a Post button"
   ],
   "fr": [
     "Canevas en mode PC",
     "Canevas sur téléphone",
-    "Place des œuvres avec les nouveautés, la recherche, le tri et les favoris"
+    "La Place des œuvres avant toute publication : onglets nouveautés, classement et recherche, et bouton Publier"
   ],
   "es": [
     "Lienzo en modo PC",
     "Lienzo en el teléfono",
-    "Plaza de Obras con novedades, búsqueda, orden y marcadores"
+    "La Plaza de Obras antes de que se publique ninguna obra: pestañas de novedades, clasificación y búsqueda, y botón Publicar"
   ],
   "zh-Hans": [
     "电脑模式下的画布",
     "手机上的画布",
-    "作品广场的新作品、搜索、排序和收藏"
+    "尚无作品时的作品广场：新作品、排行榜、搜索标签页和“发布”按钮"
   ],
   "zh-Hant": [
     "電腦模式下的畫布",
     "手機上的畫布",
-    "作品廣場的新作品、搜尋、排序與書籤"
+    "尚無作品時的作品廣場：新作品、排行榜、搜尋分頁與「發佈」按鈕"
   ],
   "ko": [
     "PC 모드의 캔버스",
     "스마트폰의 캔버스",
-    "신작, 검색, 정렬 및 북마크를 보여 주는 작품 광장"
+    "아직 작품이 없을 때의 작품 광장: 신작·랭킹·검색 탭과 ‘게시하기’ 버튼"
   ]
 };
   for (const [locale, [desktop, phone, plaza]] of Object.entries(captions)) {

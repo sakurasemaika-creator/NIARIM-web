@@ -34,9 +34,9 @@ for (const path of routes) {
   );
 }
 const home = html("/");
-// The Work Plaza capture is taken in every page language (plaza-<lang>.webp);
+// The Work Plaza capture is taken in every page language (plaza-v2-<lang>.webp);
 // the Worker and i18n.js pick the page's file through img.plaza.
-assert.match(home, /assets\/images\/app-captures\/plaza-ja\.webp/);
+assert.match(home, /assets\/images\/app-captures\/plaza-v2-ja\.webp/);
 assert.match(home, /data-i18n-attr="src:img\.plaza\|/);
 assert.match(home, /loading="lazy"\s+decoding="async"/);
 assert.doesNotMatch(
@@ -55,7 +55,7 @@ assert.match(css, /prefers-reduced-motion/);
 const dict = fs.readFileSync("public/js/i18n-dict-refresh-2026.js", "utf8");
 assert.match(dict, /"plaza\.title":\s*"作品から、<br>次の物語へ。"/);
 for (const lang of ["ja", "en", "es", "fr", "ko", "zh-Hans", "zh-Hant"]) {
-  const image = `public/assets/images/app-captures/plaza-${lang}.webp`;
+  const image = `public/assets/images/app-captures/plaza-v2-${lang}.webp`;
   const buf = fs.readFileSync(image);
   assert.equal(buf.subarray(0, 4).toString("ascii"), "RIFF", image);
   assert.equal(buf.subarray(8, 12).toString("ascii"), "WEBP", image);
