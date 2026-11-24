@@ -54,8 +54,11 @@
           "/assets/images/app-captures/" + (isPc ? "pc-" : "") + name + suffix;
         const source = figure.querySelector('source[type="image/avif"]');
         const img = figure.querySelector("img");
-        if (source) source.srcset = base + ".avif?v=" + revision;
-        if (img) img.src = base + ".webp?v=" + revision;
+        // The capture in the page's language (i18n.js).
+        const localize =
+          (window.NIARIM_I18N && window.NIARIM_I18N.captureUrl) || String;
+        if (source) source.srcset = localize(base + ".avif?v=" + revision);
+        if (img) img.src = localize(base + ".webp?v=" + revision);
       });
     document.querySelectorAll(".nr-palette-button").forEach(function (btn) {
       const selected = Number(btn.dataset.variant) === n;

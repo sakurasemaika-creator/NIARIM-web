@@ -40,7 +40,7 @@ for (const viewport of viewports) {
       // instead of relying on intersection timing.
       const timelineImage = page
         .locator(
-          '#animation .real-app-capture img[src*="/assets/images/app-captures/timeline."]',
+          '#animation .real-app-capture img[src*="/assets/images/app-captures/timeline"]',
         )
         .first();
       await timelineImage.waitFor({ state: "attached" });
@@ -56,9 +56,10 @@ for (const viewport of viewports) {
 
       const timelines = await page.evaluate(() =>
         [...document.querySelectorAll("#animation .real-app-capture img")]
+          // The capture in the page's language: timeline-<lang>.webp.
           .filter((img) =>
-            (img.currentSrc || img.src).includes(
-              "/assets/images/app-captures/timeline.",
+            /\/assets\/images\/app-captures\/timeline(?:-(?:en|es|fr|ko|zh-Hans|zh-Hant))?\./.test(
+              img.currentSrc || img.src,
             ),
           )
           .map((img) => {

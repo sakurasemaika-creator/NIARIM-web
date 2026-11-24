@@ -79,9 +79,10 @@ try {
           id,
           Boolean(
             image &&
-              (image.currentSrc || image.src).includes(
-                `/assets/images/app-captures/${name}.`,
-              ) &&
+              // The capture in the page's language: <name>-<lang>.webp.
+              new RegExp(
+                `/assets/images/app-captures/${name}(?:-(?:en|es|fr|ko|zh-Hans|zh-Hant))?\\.`,
+              ).test(image.currentSrc || image.src) &&
               image.naturalWidth > 0 &&
               image.naturalHeight > 0 &&
               rect.width > 0 &&

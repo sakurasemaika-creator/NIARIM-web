@@ -442,6 +442,8 @@
       }
     }
 
+    localizeCaptures(lang);
+
     // Layout help only: a failure here must never stop the language switch.
     try {
       keepHeadingWords(lang);
@@ -452,6 +454,35 @@
     );
 
     return lang;
+  }
+
+  // App screen captures are taken in every page language: Japanese is
+  // <name>.webp (and .avif), the others <name>-<lang>.webp next to it. The
+  // Worker rewrites the static <img>/<source> (src/capture-url.js, the same
+  // rule); scripts that build capture URLs pass them through captureUrl().
+  var CAPTURE_LANGS = ["en", "es", "fr", "ko", "zh-Hans", "zh-Hant"];
+  var CAPTURE_URL =
+    /^(.*\/assets\/images\/app-captures\/(?:pc-)?(?:canvas|layers|onion-skin|timeline|audio-editor|save-tree|export|workspace|widget)(?:-v[234])?)(?:-(?:en|es|fr|ko|zh-Hans|zh-Hant))?(\.(?:webp|avif)(?:\?.*)?)$/;
+
+  function captureUrl(url, lang) {
+    var match = CAPTURE_URL.exec(url || "");
+    if (!match) return url;
+    lang = lang || document.documentElement.lang || "ja";
+    var suffix = CAPTURE_LANGS.indexOf(lang) >= 0 ? "-" + lang : "";
+    return match[1] + suffix + match[2];
+  }
+
+  function localizeCaptures(lang) {
+    document
+      .querySelectorAll(
+        'img[src*="/app-captures/"], source[srcset*="/app-captures/"]',
+      )
+      .forEach(function (el) {
+        var attribute = el.tagName === "SOURCE" ? "srcset" : "src";
+        var value = el.getAttribute(attribute);
+        var next = captureUrl(value, lang);
+        if (next !== value) el.setAttribute(attribute, next);
+      });
   }
 
   function setLangDropdownOpen(dropdown, open, restoreFocus) {
@@ -562,5 +593,6 @@
     languages: LANGS,
     translate: t,
     applyLang: applyLang,
+    captureUrl: captureUrl,
   };
 })();

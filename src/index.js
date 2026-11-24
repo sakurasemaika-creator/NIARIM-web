@@ -5,6 +5,7 @@
  * 翻訳辞書由来のSEO metadataはWrangler custom buildで生成するため、Web本文と
  * title/descriptionの文言が別管理にならない。
  */
+import { localizedCaptureUrl } from "./capture-url.js";
 import {
   PAGE_TRANSLATIONS,
   SEO_I18N,
@@ -416,6 +417,16 @@ function rewriteSeoHtml(response, request, env, metadata) {
     .on("[data-i18n], [data-i18n-html], [data-i18n-attr]", {
       element(element) {
         localizeElement(element, translations);
+      },
+    })
+    // The app captures in the page's language, before the browser asks for
+    // the Japanese ones.
+    .on('img[src*="/app-captures/"], source[srcset*="/app-captures/"]', {
+      element(element) {
+        const attribute = element.tagName === "source" ? "srcset" : "src";
+        const value = element.getAttribute(attribute);
+        const next = localizedCaptureUrl(value, metadata.lang);
+        if (next !== value) element.setAttribute(attribute, next);
       },
     })
     .on("title", {

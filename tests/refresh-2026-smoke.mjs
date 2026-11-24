@@ -171,9 +171,14 @@ try {
               .style.getPropertyValue("--capture-accent"),
           }));
         const expectedTail = "";
+        // The capture is in the page's language: canvas-<lang>.webp.
+        const localized = (name) =>
+          new RegExp(
+            "/" + name + "(?:-(?:en|es|fr|ko|zh-Hans|zh-Hant))?\\.webp$",
+          );
         if (
-          !new URL(state.src, base).pathname.endsWith(
-            "canvas" + expectedTail + ".webp",
+          !localized("canvas" + expectedTail).test(
+            new URL(state.src, base).pathname,
           )
         )
           log("Variant switch", variant, JSON.stringify(state));
@@ -189,8 +194,8 @@ try {
             accent: el.style.getPropertyValue("--capture-accent"),
           }));
         if (
-          !new URL(desktop.src, base).pathname.endsWith(
-            "pc-canvas" + expectedTail + ".webp",
+          !localized("pc-canvas" + expectedTail).test(
+            new URL(desktop.src, base).pathname,
           )
         )
           log("PC gallery variant mismatch", variant, desktop.src);
@@ -266,7 +271,9 @@ try {
       const current = await image.evaluate(
         (img) => new URL(img.currentSrc).pathname,
       );
-      if (!current.includes("/" + file + "."))
+      // The viewer shows the capture in the page's language.
+      const localized = "/" + file + (lang === "ja" ? "" : "-" + lang) + ".";
+      if (!current.includes(localized))
         log("Viewer lost palette or device", lang, current);
     }
     await viewer.locator(".capture-zoom").click();

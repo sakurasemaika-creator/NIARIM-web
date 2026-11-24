@@ -57,11 +57,14 @@
   function desktopPicture(name, variant) {
     const p = document.createElement("picture");
     const base = root + "pc-" + name + variant;
+    // The capture in the page's language (i18n.js).
+    const localize =
+      (window.NIARIM_I18N && window.NIARIM_I18N.captureUrl) || String;
     const source = document.createElement("source");
     source.type = "image/avif";
-    source.srcset = base + ".avif";
+    source.srcset = localize(base + ".avif");
     const img = document.createElement("img");
-    img.src = base + ".webp";
+    img.src = localize(base + ".webp");
     img.dataset.pcCaptureAlt = name;
     img.alt = desktopAlt(name);
     img.width = 1440;

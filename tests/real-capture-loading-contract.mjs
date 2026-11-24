@@ -64,7 +64,13 @@ const result = await page.locator(homeCaptureSelector).evaluateAll((imgs) =>
       widthAttr: img.getAttribute("width"),
       heightAttr: img.getAttribute("height"),
       complete: img.complete,
-      file: img.src.split("/").pop().split("?")[0],
+      // The capture in the page's language (<name>-<lang>.webp) has the
+      // geometry of the Japanese <name>.webp.
+      file: img.src
+        .split("/")
+        .pop()
+        .split("?")[0]
+        .replace(/-(?:en|es|fr|ko|zh-Hans|zh-Hant)(\.\w+)$/, "$1"),
       top: r.top,
       bottom: r.bottom,
       renderedWidth: r.width,
@@ -158,7 +164,13 @@ const featureImages = await page
       const cs = frame ? getComputedStyle(frame) : null;
       return {
         loading: img.loading,
-        file: img.src.split("/").pop().split("?")[0],
+        // The capture in the page's language (<name>-<lang>.webp) has the
+        // geometry of the Japanese <name>.webp.
+        file: img.src
+          .split("/")
+          .pop()
+          .split("?")[0]
+          .replace(/-(?:en|es|fr|ko|zh-Hans|zh-Hant)(\.\w+)$/, "$1"),
         width: img.getAttribute("width"),
         height: img.getAttribute("height"),
         renderedWidth: ir.width,
