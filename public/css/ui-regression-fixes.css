@@ -17,6 +17,19 @@
   /* --nav-pad: the desktop link padding (niarim-game-site.css). */
   width: calc(100% - 2 * var(--nav-pad, 0.5rem)) !important;
 }
+/* In the drawer each link is a full-width row with its label on the left,
+   so the current-page mark is a short bar under the start of the label
+   (it ran across the whole row, starting 8px right of the text). */
+@media (max-width: 1180px) {
+  .main-nav a:not(.btn)::after {
+    left: 0 !important;
+    transform: none !important;
+  }
+  .main-nav a:not(.btn):hover::after,
+  .main-nav a:not(.btn)[aria-current="page"]::after {
+    width: 28px !important;
+  }
+}
 
 /* Contact consent: 25px control, optically aligned with the consent copy. */
 .contact-form .form-checkbox {

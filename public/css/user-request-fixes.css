@@ -145,7 +145,8 @@ html body #widget .fd-widget-grid > .fd-widget-tile {
   }
   .main-nav a:not(.btn) {
     width: 100% !important;
-    min-height: 42px !important;
+    /* 44px touch targets in the drawer too (42px before). */
+    min-height: 44px !important;
     padding-block: 0.25rem !important;
     justify-content: flex-start !important;
     text-align: left !important;
