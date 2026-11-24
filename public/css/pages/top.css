@@ -377,6 +377,82 @@
   color: var(--ink);
 }
 
+/* Every numbered section heading has the same size and sits on the left,
+   like the entries of one sheet (they were 4–5rem, centred in the first one,
+   and the workspace heading broke into four lines at 1440px). */
+#main
+  > :is(
+    .nr-statement,
+    .tp-unique,
+    .nr-workspace,
+    .nr-plaza,
+    .nr-gallery,
+    .nr-pricing
+  )
+  h2 {
+  max-width: 30em;
+  margin: 0 0 14px;
+  color: var(--ink);
+  font: 400 clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem) / 1.3 var(--font-serif);
+  letter-spacing: 0.01em;
+}
+
+#main .nr-statement {
+  padding-block: clamp(56px, 7vw, 104px);
+  text-align: left;
+}
+
+#main .nr-statement > p:last-child {
+  max-width: 44em;
+  margin: 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.8 var(--font-sans);
+}
+
+/* The three steps of the flow: the step number in red pencil (it was an
+   English label, 「01 — DRAW」), the step name one size below the section
+   heading. */
+#main .nr-story {
+  padding-bottom: 0;
+}
+
+#main .nr-story-card:last-child {
+  border-bottom: 0;
+}
+
+#main .nr-story-copy .nr-step {
+  display: block;
+  padding: 0;
+  border: 0;
+  color: var(--pencil-ink);
+  font: 400 0.875rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+#main .nr-story-copy h3 {
+  margin: 12px 0 0;
+  color: var(--ink);
+  font: 400 clamp(1.35rem, 1rem + 1vw, 1.75rem) / 1.35 var(--font-serif);
+  letter-spacing: 0.01em;
+}
+
+/* Work Plaza: the phone stands on the paper, without a tinted panel. */
+#main .nr-plaza-art {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* Plan names in the price summary are words in the reader's language, set
+   like the other small labels (they were English capitals in pink). */
+#main .nr-pricing-panel small {
+  color: var(--ink-2);
+  font: 400 0.8125rem / 1.4 var(--font-sans);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 #main .tp-index {
   display: block;
   margin: 0 0 12px;

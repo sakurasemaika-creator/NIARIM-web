@@ -94,20 +94,9 @@ body.brand-has-scrolled .site-header {
 body .site-footer {
   position: relative;
   overflow: hidden;
-  background: var(--nr-ink);
+  background: var(--ink);
   color: #f7f4f3;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-body .site-footer::before {
-  content: "NIARIM";
-  position: absolute;
-  bottom: -0.33em;
-  right: -0.02em;
-  font: 900 clamp(7rem, 21vw, 21rem) / 1 var(--font-serif);
-  letter-spacing: -0.085em;
-  white-space: nowrap;
-  color: rgba(255, 255, 255, 0.035);
-  pointer-events: none;
 }
 body .site-footer .container {
   position: relative;
@@ -509,10 +498,6 @@ body main .news-item:focus-within {
   }
   html body.nr-site .nr-gallery-grid {
     gap: 18px;
-  }
-  body .site-footer::before {
-    font-size: 8rem;
-    right: -0.08em;
   }
 }
 @media (prefers-reduced-motion: reduce) {

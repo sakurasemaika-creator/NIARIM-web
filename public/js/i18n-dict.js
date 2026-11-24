@@ -115,9 +115,9 @@
         "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。",
 
       "footer.tagline": "Android向け手描きアニメーション制作アプリ",
-      "footer.product": "Product",
-      "footer.support": "Support",
-      "footer.legal": "Legal",
+      "footer.product": "アプリ",
+      "footer.support": "サポート",
+      "footer.legal": "規約",
       "footer.privacy": "プライバシーポリシー",
       "footer.terms": "利用規約",
       "footer.x": "X（旧Twitter）",

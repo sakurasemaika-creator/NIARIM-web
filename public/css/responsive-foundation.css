@@ -649,7 +649,8 @@ select:focus {
   border-top: 1px solid var(--niarim-line);
 }
 .site-footer {
-  background: var(--color-footer-brown) !important;
+  /* The one dark surface of the site, in the ink of the text. */
+  background: var(--ink) !important;
   background-image: none !important;
 }
 

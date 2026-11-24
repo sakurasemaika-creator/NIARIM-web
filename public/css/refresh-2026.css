@@ -608,17 +608,20 @@
   font-size: 0.82rem;
   color: #6c646a;
 }
+/* The closing release note sits on the paper like every section; the
+   footer below is the only dark surface. */
 .nr-launch {
-  background: #242128;
-  color: white;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
   text-align: center;
-  padding: 118px 0 105px;
+  padding: 104px 0 96px;
 }
 .nr-launch h2 {
-  color: white;
+  color: var(--ink);
 }
 .nr-launch p:not(.nr-kicker) {
-  color: #d6cbd1;
+  color: var(--ink-2);
   line-height: 2;
 }
 .nr-launch .nr-kicker {
@@ -631,8 +634,8 @@
 }
 .nr-launch .nr-btn-secondary {
   background: transparent;
-  border-color: #9c8e97;
-  color: white !important;
+  border-color: var(--rule-strong);
+  color: var(--ink) !important;
 }
 .nr-actions-center {
   justify-content: center;
