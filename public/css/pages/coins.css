@@ -499,7 +499,8 @@ html body .coins-main .coins-unit {
   margin-left: 3px;
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 0.72em;
+  /* 12px in the 14px table cells (10px before). */
+  font-size: 0.86em;
   color: #684e5b;
   white-space: nowrap;
 }
