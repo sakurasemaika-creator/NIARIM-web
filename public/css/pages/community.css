@@ -273,6 +273,8 @@
 }
 
 #main .about-cta p {
+  max-width: var(--measure-text);
+  margin-inline: auto;
   color: var(--ink-2);
 }
 
@@ -375,7 +377,7 @@
 .community-gallery[data-community-gallery] .community-live-message {
   grid-column: 1/-1;
   margin: 0;
-  padding: 48px 24px;
+  padding: 48px max(24px, calc((100% - var(--measure-text)) / 2));
   border: 1px solid var(--rule);
   border-radius: var(--radius-sheet);
   background: var(--sheet);

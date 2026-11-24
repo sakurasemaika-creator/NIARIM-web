@@ -66,6 +66,11 @@
   font-size: var(--fs-h3);
   margin-bottom: var(--space-sm);
 }
+
+.about-not-supported li {
+  max-width: var(--measure-text);
+  text-wrap: pretty;
+}
 /* ---- Paper and ink (2026-11 redesign): one paper ground, sections split
    by a hairline rule, white only for sheets, no tinted bands, no dark
    gradient panel, no pink icon boxes. Scoped under #main so the older
@@ -304,7 +309,13 @@
 
 .pricing-list li span {
   display: block;
+  max-width: var(--measure-text);
   color: var(--color-text-muted);
+}
+/* A plain line (no name above it) reads at the measure; the benefit names
+   above their descriptions keep the card's width. */
+.pricing-list li:not(:has(> div)) {
+  max-width: var(--measure-text);
 }
 
 .pricing-card.is-premium .pricing-list li::before {
@@ -387,7 +398,7 @@
 }
 
 .premium-steps p {
-  max-width: 30em;
+  max-width: min(30em, var(--measure-text));
   margin: 0;
   font-size: 0.9375rem;
   line-height: 1.85;
@@ -396,7 +407,7 @@
 }
 
 .premium-renew-note {
-  max-width: 52em;
+  max-width: min(52em, var(--measure-text));
   margin-top: var(--space-lg);
   color: var(--color-gray-700);
   font-size: var(--fs-small);
@@ -550,6 +561,7 @@
 }
 
 #main .pricing-card #premium-store-terms {
+  max-width: var(--measure-text);
   margin: 0;
   padding: 12px 0 0;
   border: 0;
@@ -643,7 +655,7 @@ html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) h2 {
 }
 
 html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) p {
-  max-width: 52em;
+  max-width: min(52em, var(--measure-text));
   color: var(--ink-2);
   font-family: var(--font-sans);
   line-height: 1.9;

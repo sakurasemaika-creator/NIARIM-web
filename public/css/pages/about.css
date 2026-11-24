@@ -355,7 +355,7 @@
 
 .about-name p {
   color: var(--color-gray-700);
-  max-width: calc(68 * var(--measure-ch));
+  max-width: var(--measure-text);
   margin-inline: auto;
   overflow-wrap: normal;
   word-break: normal;
@@ -368,7 +368,7 @@
 
 .about-not-supported p {
   color: var(--color-gray-700);
-  max-width: calc(68 * var(--measure-ch));
+  max-width: var(--measure-text);
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -454,6 +454,8 @@
 }
 
 #main .about-cta p {
+  max-width: var(--measure-text);
+  margin-inline: auto;
   color: var(--ink-2);
 }
 

@@ -145,6 +145,11 @@ p {
      全角1文字はおおよそ1emなので、読みやすい行長（35〜40字前後）に
      なる係数を言語ごとに切り替える。 */
   --measure-ch: 1ch;
+  /* 地の文（段落・説明・注記・回答・規約の本文）の1行の長さの上限。
+     欧文は 64ch（このサイトの欧文の書体では1行の上限がおよそ70字）、
+     全角の言語は --measure-ch が 0.62em になるので約40em（1行40字まで）。
+     使う要素の文字の大きさで決まるので、小さい注記も同じ字数で折り返す。 */
+  --measure-text: calc(64 * var(--measure-ch));
   --color-white: #ffffff;
   --color-black: #17161c;
   --color-ink: #28242c;
@@ -2126,6 +2131,7 @@ p {
 }
 
 .feature-narrative-block p {
+  max-inline-size: var(--measure-text);
   color: var(--color-text-muted);
   line-height: 1.8;
 }
@@ -3387,7 +3393,7 @@ body :is(.about-hero, .help-header, .news-header, .legal-header) h1 {
   text-wrap: balance;
 }
 body :is(.about-hero, .help-header, .news-header, .legal-header) > p {
-  max-width: 36em;
+  max-width: min(36em, var(--measure-text));
   margin: 20px 0 0;
   color: var(--color-gray-700);
   text-align: left;
@@ -3765,7 +3771,7 @@ html body .lang-dropdown :is(.lang-trigger, .lang-menu button) {
 
 #main .ruled-rows > * > :not(h3) {
   grid-column: 2;
-  max-width: 44em;
+  max-width: min(44em, var(--measure-text));
 }
 
 #main .ruled-rows > * > p {

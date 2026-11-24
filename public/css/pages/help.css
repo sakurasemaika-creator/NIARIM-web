@@ -449,6 +449,7 @@
 }
 
 [data-help-category] .spec-item p {
+  max-width: var(--measure-text);
   margin: 0;
   padding: 0.1rem 3.25rem 1.25rem 0.25rem;
   color: var(--ink-2);

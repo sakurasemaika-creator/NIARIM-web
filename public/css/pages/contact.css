@@ -243,6 +243,7 @@ textarea.form-control {
 }
 
 .form-hint {
+  max-width: var(--measure-text);
   margin-top: 0.4rem;
   font-size: var(--fs-small);
   color: var(--color-text-muted);

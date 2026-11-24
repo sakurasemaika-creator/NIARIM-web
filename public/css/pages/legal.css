@@ -60,7 +60,7 @@
 /* Which part of the page is the app's policy: one plain line under the
    title (no tinted box). */
 .legal-notice {
-  max-width: 46em;
+  max-width: min(46em, var(--measure-text));
   margin-top: var(--space-sm);
   color: var(--ink-2);
   font-size: var(--fs-small);
@@ -98,6 +98,7 @@
 
 .legal-body p,
 .legal-body li {
+  max-width: var(--measure-text);
   color: var(--ink);
   line-height: 1.85;
 }

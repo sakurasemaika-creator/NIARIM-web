@@ -326,6 +326,8 @@
 }
 
 #main .about-cta p {
+  max-width: var(--measure-text);
+  margin-inline: auto;
   color: var(--ink-2);
 }
 
@@ -565,7 +567,7 @@ html
 }
 
 .faq-answer p {
-  max-width: none;
+  max-width: calc(var(--measure-text) + 2 * clamp(1.1rem, 3vw, 2rem));
   padding: 0 clamp(1.1rem, 3vw, 2rem) clamp(1.35rem, 3vw, 1.8rem);
 }
 

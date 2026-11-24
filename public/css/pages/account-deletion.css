@@ -140,6 +140,8 @@ p {
      全角1文字はおおよそ1emなので、読みやすい行長（35〜40字前後）に
      なる係数を言語ごとに切り替える。 */
   --measure-ch: 1ch;
+  /* 地の文の1行の長さの上限（site.css と同じ）。 */
+  --measure-text: calc(64 * var(--measure-ch));
   --color-white: #ffffff;
   --color-black: #17161c;
   --color-ink: #28242c;
@@ -1773,6 +1775,7 @@ h6 {
 
 .legal-body p,
 .legal-body li {
+  max-width: var(--measure-text);
   color: var(--ink);
   line-height: 1.85;
 }

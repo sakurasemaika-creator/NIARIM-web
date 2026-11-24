@@ -236,7 +236,7 @@
 .nr-plaza p:not(.nr-kicker) {
   line-height: 2;
   color: #57444c;
-  max-width: 475px;
+  max-width: min(475px, var(--measure-text));
 }
 .nr-plaza-art {
   min-height: 370px;
@@ -319,6 +319,7 @@
   align-items: center;
 }
 .nr-pricing p:not(.nr-kicker) {
+  max-width: var(--measure-text);
   color: #5b5c5b;
   line-height: 1.9;
 }
@@ -1020,7 +1021,7 @@ html body.nr-site .nr-story-copy h3 {
   text-wrap: pretty;
 }
 html body.nr-site .nr-story-copy p {
-  max-width: 35em;
+  max-width: min(35em, var(--measure-text));
 }
 html body.nr-site .nr-gallery-grid {
   align-items: stretch;
@@ -1043,7 +1044,7 @@ html body.nr-site .nr-workspace-copy {
   min-width: 0;
 }
 html body.nr-site .nr-workspace-copy > p {
-  max-width: 37em;
+  max-width: min(37em, var(--measure-text));
 }
 
 /* ---- from the former studio-unification-2026.css ---- */
@@ -1416,7 +1417,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .nr-hero-lead {
-  max-width: 34em;
+  max-width: min(34em, var(--measure-text));
   margin: 18px 0 0;
   color: var(--ink-2);
   font: 400 var(--fs-body) / 1.9 var(--font-sans);
@@ -1606,6 +1607,7 @@ body:has(.capture-viewer[open]) {
 
 #main .nr-frames-caption {
   grid-column: 2;
+  max-width: var(--measure-text);
   margin: 0;
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.7 var(--font-sans);
@@ -1763,7 +1765,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .nr-statement > p:last-child {
-  max-width: 44em;
+  max-width: min(44em, var(--measure-text));
   margin: 0;
   color: var(--ink-2);
   font: 400 var(--fs-body) / 1.8 var(--font-sans);
@@ -1860,6 +1862,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .tp-feature p {
+  max-width: var(--measure-text);
   margin: 8px 0 0;
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.8 var(--font-sans);
@@ -2034,6 +2037,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .tp-fill-text p {
+  max-width: var(--measure-text);
   margin: 8px 0 0;
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.8 var(--font-sans);
@@ -2216,7 +2220,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .tp-subnote {
-  max-width: 44em;
+  max-width: min(44em, var(--measure-text));
   margin: 6px 0 0;
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.8 var(--font-sans);
@@ -2266,7 +2270,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .tp-wide-capture figcaption {
-  max-width: 52em;
+  max-width: min(52em, var(--measure-text));
   margin-top: 8px;
   color: var(--ink-2);
   font: 400 0.75rem / 1.6 var(--font-sans);
@@ -2376,7 +2380,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .nr-launch .nr-launch-body {
-  max-width: 36em;
+  max-width: min(36em, var(--measure-text));
   margin: 20px auto 0;
   color: var(--ink-2);
   font: 400 var(--fs-body) / 2 var(--font-sans);
@@ -2396,5 +2400,5 @@ body:has(.capture-viewer[open]) {
 }
 /* The wide brush text keeps a readable line length. */
 #main .tp-feature--wide > p {
-  max-width: 44em;
+  max-width: min(44em, var(--measure-text));
 }

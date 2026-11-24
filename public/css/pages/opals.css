@@ -152,7 +152,7 @@ html body .coins-main h2 {
 }
 
 html body .coins-main .section > div > p {
-  max-width: 65em;
+  max-width: min(65em, var(--measure-text));
   line-height: 1.9;
 }
 
@@ -278,7 +278,7 @@ html body .coins-main .coins-accordion-content {
 }
 
 html body .coins-main .coins-accordion-content p {
-  max-width: 62em;
+  max-width: min(62em, var(--measure-text));
   line-height: 1.9;
 }
 /* Login days and mission goals: ruled rows inside the sheet, not boxes
@@ -405,7 +405,7 @@ html body .coins-main .coins-bundle-details h3 {
 }
 
 html body .coins-main .coins-bundle-details p {
-  max-width: 75em;
+  max-width: min(75em, var(--measure-text));
   font-size: 0.93rem;
   line-height: 1.8;
 }
@@ -635,7 +635,7 @@ html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
 }
 
 #main .coins-pack-caption {
-  max-width: 46em;
+  max-width: min(46em, var(--measure-text));
   margin: 0 0 14px;
   color: var(--ink-2);
   font: 400 var(--fs-small) / 1.7 var(--font-sans);
