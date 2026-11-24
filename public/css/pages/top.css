@@ -544,7 +544,7 @@
 /* Before / after: two equal panels side by side, each with its own name
    underneath, so the two can be compared at a glance. */
 #main
-  :is(.tp-pair, .tp-strips, .tp-ribbons, .tp-steps, .tp-filter-grid)
+  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
   figure {
   display: grid;
   gap: 6px;
@@ -566,7 +566,7 @@
 }
 
 #main
-  :is(.tp-pair, .tp-strips, .tp-ribbons, .tp-steps, .tp-filter-grid)
+  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
   figcaption {
   color: var(--ink-2);
   font: 400 0.75rem / 1.4 var(--font-sans);
@@ -588,34 +588,83 @@
   width: 100%;
 }
 
-/* Fold mode: one ribbon per fold type, in a row on one sheet. */
+/* Custom brushes: one sheet, three labelled groups (the fold types of the
+   ribbon brush, the hair presets, pixel mode off and on). */
 #main .tp-feature--wide {
   grid-column: 1 / -1;
 }
 
-#main .tp-ribbons {
+#main .tp-brush-sheet {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: end;
-  justify-content: center;
-  gap: 8px clamp(32px, 6vw, 96px);
-  padding: 24px 20px 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px clamp(24px, 4vw, 64px);
+  padding: 24px clamp(16px, 2.6vw, 36px) 20px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-sheet);
   background: var(--sheet);
 }
 
-#main .tp-ribbons img {
+#main .tp-brush-group {
+  min-width: 0;
+}
+
+#main .tp-brush-group--fold {
+  grid-column: 1 / -1;
+}
+
+#main .tp-brush-label {
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font: 400 0.8125rem / 1.4 var(--font-sans);
+}
+
+#main .tp-brush-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 16px 24px;
+}
+
+#main .tp-brush-group--fold .tp-brush-items {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Every picture sits in a box of the same height, so the names below line
+   up across the groups. */
+#main .tp-brush-items figure {
+  --brush-box: 250px;
+  display: grid;
+  grid-template-rows: var(--brush-box) auto;
+  justify-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
+#main .tp-brush-group--fold figure {
+  --brush-box: 300px;
+}
+
+#main .tp-brush-items img {
   display: block;
+  align-self: center;
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 240px;
-  margin: 0 auto;
+  max-height: var(--brush-box);
 }
 
-/* Pixel mode is shown enlarged; keep its pixels square and sharp. */
-#main .tp-ribbons img[src*="brush-pixel"],
+/* The hearts are 32 px canvases shown at a whole multiple of their size,
+   nearest neighbour, so every pixel stays square. */
+#main .tp-brush-group--pixel img {
+  width: 192px;
+  max-width: none;
+  height: 192px;
+  image-rendering: pixelated;
+}
+
 #main .tp-filter-grid img[src*="dither-o"] {
   image-rendering: pixelated;
 }
@@ -792,6 +841,11 @@
   max-width: 1000px;
 }
 
+#main .tp-texture-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 1160px;
+}
+
 #main .tp-capture img {
   border-radius: 10px;
   box-shadow: 0 0 0 1px var(--rule);
@@ -800,6 +854,14 @@
 @media (max-width: 1023px) {
   #main .tp-unique-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-brush-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .tp-texture-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   #main .tp-steps {
@@ -820,9 +882,30 @@
     height: 240px;
   }
 
-  #main .tp-ribbons {
+  #main .tp-brush-sheet {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px 14px;
+  }
+
+  #main .tp-brush-group--fold .tp-brush-items {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 14px;
+  }
+
+  #main .tp-brush-items figure,
+  #main .tp-brush-group--fold figure {
+    --brush-box: 220px;
+  }
+
+  #main .tp-brush-group--pixel img {
+    width: 128px;
+    height: 128px;
+  }
+}
+
+@media (max-width: 359px) {
+  #main .tp-brush-group--pixel img {
+    width: 96px;
+    height: 96px;
   }
 
   #main .tp-filter-grid {
