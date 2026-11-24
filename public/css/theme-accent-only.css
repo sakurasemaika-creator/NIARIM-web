@@ -14,8 +14,7 @@ html
     .download-actions .btn.btn-primary,
     .download-actions .btn.btn-accent,
     .scroll-top-btn,
-    .community-tabs button.is-active,
-    .feature-nav a.is-active
+    .community-tabs button.is-active
   ) {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
@@ -31,8 +30,7 @@ html
     .download-actions .btn.btn-primary,
     .download-actions .btn.btn-accent,
     .scroll-top-btn,
-    .community-tabs button.is-active,
-    .feature-nav a.is-active
+    .community-tabs button.is-active
   ):hover {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;

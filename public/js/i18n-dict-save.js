@@ -13,7 +13,7 @@
   var DATA = {
     ja: {
       "featuresPage.nav.save": "保存・共有",
-      "featuresPage.save.title": "Save & Share｜保存・データ管理",
+      "featuresPage.save.title": "保存・データ管理",
       "featuresPage.save.lead":
         "作品を守り、育て、別の端末へも届ける。柔軟な保存のしくみ。",
       "featuresPage.save.item1.title": "自動保存",
@@ -34,7 +34,7 @@
     },
     en: {
       "featuresPage.nav.save": "Save & Share",
-      "featuresPage.save.title": "Save & Share | Data Management",
+      "featuresPage.save.title": "Saving & Data Management",
       "featuresPage.save.lead":
         "Protect your work, grow it over time, and bring it to another device — a flexible way to save.",
       "featuresPage.save.item1.title": "Autosave",
@@ -55,7 +55,7 @@
     },
     "zh-Hans": {
       "featuresPage.nav.save": "保存、共享",
-      "featuresPage.save.title": "Save & Share｜保存与数据管理",
+      "featuresPage.save.title": "保存与数据管理",
       "featuresPage.save.lead":
         "守护你的作品，让它不断成长，也能带去其他设备。灵活的保存机制。",
       "featuresPage.save.item1.title": "自动保存",
@@ -76,7 +76,7 @@
     },
     "zh-Hant": {
       "featuresPage.nav.save": "保存、共享",
-      "featuresPage.save.title": "Save & Share｜保存與資料管理",
+      "featuresPage.save.title": "保存與資料管理",
       "featuresPage.save.lead":
         "守護你的作品，讓它不斷成長，也能帶去其他裝置。靈活的保存機制。",
       "featuresPage.save.item1.title": "自動保存",
@@ -97,7 +97,7 @@
     },
     ko: {
       "featuresPage.nav.save": "저장·공유",
-      "featuresPage.save.title": "Save & Share｜저장·데이터 관리",
+      "featuresPage.save.title": "저장·데이터 관리",
       "featuresPage.save.lead":
         "작품을 지키고, 발전시키고, 다른 기기로도 전달한다. 유연한 저장 구조.",
       "featuresPage.save.item1.title": "자동 저장",
@@ -118,7 +118,7 @@
     },
     fr: {
       "featuresPage.nav.save": "Enregistrer et partager",
-      "featuresPage.save.title": "Save & Share | Gestion des données",
+      "featuresPage.save.title": "Sauvegarde et gestion des données",
       "featuresPage.save.lead":
         "Protégez votre travail, faites-le grandir, et emportez-le sur un autre appareil — un système d’enregistrement flexible.",
       "featuresPage.save.item1.title": "Sauvegarde automatique",
@@ -140,7 +140,7 @@
     },
     es: {
       "featuresPage.nav.save": "Guardar y compartir",
-      "featuresPage.save.title": "Save & Share | Gestión de datos",
+      "featuresPage.save.title": "Guardado y gestión de datos",
       "featuresPage.save.lead":
         "Protege tu obra, hazla crecer y llévala a otro dispositivo: un sistema de guardado flexible.",
       "featuresPage.save.item1.title": "Guardado automático",

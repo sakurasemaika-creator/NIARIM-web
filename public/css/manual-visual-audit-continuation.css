@@ -291,8 +291,7 @@ html body .final-cta .hero-actions .btn.btn-primary,
 html body .download-actions .btn.btn-primary,
 html body .download-actions .btn.btn-accent,
 html body .scroll-top-btn,
-html body .community-tabs button.is-active,
-html body .feature-nav a.is-active {
+html body .community-tabs button.is-active {
   background: var(--color-accent) !important;
   border-color: var(--color-accent) !important;
   color: #fff !important;
@@ -305,8 +304,7 @@ html body .final-cta .hero-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-primary:hover,
 html body .download-actions .btn.btn-accent:hover,
 html body .scroll-top-btn:hover,
-html body .community-tabs button.is-active:hover,
-html body .feature-nav a.is-active:hover {
+html body .community-tabs button.is-active:hover {
   background: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
   color: #fff !important;

@@ -28,7 +28,7 @@
   var DATA = {
     ja: {
       "featuresPage.nav.widget": "ウィジェット",
-      "featuresPage.widget.title": "Widget｜ホーム画面ウィジェット",
+      "featuresPage.widget.title": "ホーム画面ウィジェット",
       "featuresPage.widget.lead":
         "自分の作品を、スマホのホーム画面に置いておけます。",
       "narrative.widget.1.heading":
@@ -62,7 +62,7 @@
     },
     en: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget | Home screen widgets",
+      "featuresPage.widget.title": "Home Screen Widgets",
       "featuresPage.widget.lead":
         "Keep your own work on your phone’s home screen.",
       "narrative.widget.1.heading":
@@ -96,7 +96,7 @@
     },
     "zh-Hans": {
       "featuresPage.nav.widget": "小组件",
-      "featuresPage.widget.title": "Widget｜主屏幕小组件",
+      "featuresPage.widget.title": "主屏幕小组件",
       "featuresPage.widget.lead": "把自己的作品放在手机主屏幕上。",
       "narrative.widget.1.heading": "让主屏幕成为自己作品的展示位。",
       "narrative.widget.1.body":
@@ -128,7 +128,7 @@
     },
     "zh-Hant": {
       "featuresPage.nav.widget": "小工具",
-      "featuresPage.widget.title": "Widget｜主畫面小工具",
+      "featuresPage.widget.title": "主畫面小工具",
       "featuresPage.widget.lead": "把自己的作品放在手機主畫面上。",
       "narrative.widget.1.heading": "讓主畫面成為自己作品的展示位。",
       "narrative.widget.1.body":
@@ -160,7 +160,7 @@
     },
     ko: {
       "featuresPage.nav.widget": "위젯",
-      "featuresPage.widget.title": "Widget｜홈 화면 위젯",
+      "featuresPage.widget.title": "홈 화면 위젯",
       "featuresPage.widget.lead":
         "자신의 작품을 스마트폰 홈 화면에 둘 수 있습니다.",
       "narrative.widget.1.heading": "홈 화면이 내 작품을 두는 자리가 됩니다.",
@@ -193,7 +193,7 @@
     },
     fr: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget | Widgets d’écran d’accueil",
+      "featuresPage.widget.title": "Widgets de l’écran d’accueil",
       "featuresPage.widget.lead":
         "Gardez vos propres œuvres sur l’écran d’accueil de votre téléphone.",
       "narrative.widget.1.heading":
@@ -227,7 +227,7 @@
     },
     es: {
       "featuresPage.nav.widget": "Widgets",
-      "featuresPage.widget.title": "Widget | Widgets de pantalla de inicio",
+      "featuresPage.widget.title": "Widgets de la pantalla de inicio",
       "featuresPage.widget.lead":
         "Ten tus propias obras en la pantalla de inicio del móvil.",
       "narrative.widget.1.heading":

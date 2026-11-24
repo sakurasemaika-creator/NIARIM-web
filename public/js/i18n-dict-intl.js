@@ -176,7 +176,7 @@
     "featuresPage.nav.audio": "音频",
     "featuresPage.nav.export": "导出",
 
-    "featuresPage.drawing.title": "Drawing｜绘画",
+    "featuresPage.drawing.title": "绘画",
     "featuresPage.drawing.lead": "可根据用途选择的多种画笔与绘制设置。",
     "featuresPage.drawing.item1.title": "G 笔",
     "featuresPage.drawing.item1.body": "带有笔压变化，适合勾勒轮廓线。",
@@ -216,7 +216,7 @@
     "featuresPage.drawing.item15.body":
       "笔刷、网点和印章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
-    "featuresPage.animation.title": "Animation｜动画",
+    "featuresPage.animation.title": "动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
     "featuresPage.animation.item1.title": "帧画面",
     "featuresPage.animation.item1.body": "逐帧添加画面，累积构成动作。",
@@ -234,7 +234,7 @@
     "featuresPage.animation.item6.body":
       "将多个图层编成一组后，用一个关键帧即可将它们一起移动。",
 
-    "featuresPage.editing.title": "Editing｜编辑",
+    "featuresPage.editing.title": "编辑",
     "featuresPage.editing.lead": "可以反复修改，直到满意为止的编辑自由度。",
     "featuresPage.editing.item1.title": "分图层，随时重新绘制",
     "featuresPage.editing.item1.body":
@@ -258,7 +258,7 @@
     "featuresPage.editing.item8.body":
       "通过自由变形与网格变形，将画好的图细致地调整成想要的形状。网格变形最多可使用10×10的网格，自由地变形图层。",
 
-    "featuresPage.audio.title": "Audio｜音频",
+    "featuresPage.audio.title": "音频",
     "featuresPage.audio.lead": "为作品配上声音的基础音频功能。",
     "featuresPage.audio.item1.title": "添加音频",
     "featuresPage.audio.item1.body": "可为作品添加音频文件。",
@@ -275,7 +275,7 @@
     "featuresPage.audio.item6.body":
       "音频片段上会淡淡地叠加显示波形，方便一边查看声音强弱一边调整在时间轴上的位置。",
 
-    "featuresPage.export.title": "Export｜导出",
+    "featuresPage.export.title": "导出",
     "featuresPage.export.lead": "将完成的作品导出为视频。",
     "featuresPage.export.item1.title": "分辨率",
     "featuresPage.export.item1.body": "可导出最高1920×1920分辨率的视频。",
@@ -481,7 +481,7 @@
     "featuresPage.nav.audio": "音訊",
     "featuresPage.nav.export": "匯出",
 
-    "featuresPage.drawing.title": "Drawing｜繪畫",
+    "featuresPage.drawing.title": "繪畫",
     "featuresPage.drawing.lead": "可依用途選擇的多種畫筆與繪製設定。",
     "featuresPage.drawing.item1.title": "G 筆",
     "featuresPage.drawing.item1.body": "帶有筆壓變化，適合勾勒輪廓線。",
@@ -521,7 +521,7 @@
     "featuresPage.drawing.item15.body":
       "筆刷、網點和印章都帶有「線稿」「上色」「模糊」「仿手繪」「像素畫」「網點」等標籤，即使記不住名稱也能依標籤篩選尋找。關鍵字搜尋與標籤搜尋可一鍵切換，自製素材還能自行加上標籤。",
 
-    "featuresPage.animation.title": "Animation｜動畫",
+    "featuresPage.animation.title": "動畫",
     "featuresPage.animation.lead": "疊加影格，在時間軸上構築動作。",
     "featuresPage.animation.item1.title": "影格",
     "featuresPage.animation.item1.body": "逐格新增畫面，累積構成動作。",
@@ -539,7 +539,7 @@
     "featuresPage.animation.item6.body":
       "將多個圖層編成一組後，用一個關鍵影格即可將它們一起移動。",
 
-    "featuresPage.editing.title": "Editing｜編輯",
+    "featuresPage.editing.title": "編輯",
     "featuresPage.editing.lead": "可以反覆修改，直到滿意為止的編輯自由度。",
     "featuresPage.editing.item1.title": "分圖層，隨時重新繪製",
     "featuresPage.editing.item1.body":
@@ -563,7 +563,7 @@
     "featuresPage.editing.item8.body":
       "透過自由變形與網格變形，將畫好的圖細緻地調整成想要的形狀。網格變形最多可使用10×10的網格，自由地變形圖層。",
 
-    "featuresPage.audio.title": "Audio｜音訊",
+    "featuresPage.audio.title": "音訊",
     "featuresPage.audio.lead": "為作品配上聲音的基礎音訊功能。",
     "featuresPage.audio.item1.title": "新增音訊",
     "featuresPage.audio.item1.body": "可為作品新增音訊檔案。",
@@ -580,7 +580,7 @@
     "featuresPage.audio.item6.body":
       "音訊片段上會淡淡地疊加顯示波形，方便一邊查看聲音強弱一邊調整在時間軸上的位置。",
 
-    "featuresPage.export.title": "Export｜匯出",
+    "featuresPage.export.title": "匯出",
     "featuresPage.export.lead": "將完成的作品匯出為影片。",
     "featuresPage.export.item1.title": "解析度",
     "featuresPage.export.item1.body": "可匯出最高1920×1920解析度的影片。",
@@ -796,7 +796,7 @@
     "featuresPage.nav.audio": "오디오",
     "featuresPage.nav.export": "내보내기",
 
-    "featuresPage.drawing.title": "Drawing｜드로잉",
+    "featuresPage.drawing.title": "드로잉",
     "featuresPage.drawing.lead":
       "목적에 맞게 선택할 수 있는 다양한 브러시와 드로잉 설정.",
     "featuresPage.drawing.item1.title": "G펜",
@@ -843,7 +843,7 @@
     "featuresPage.drawing.item15.body":
       "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
 
-    "featuresPage.animation.title": "Animation｜애니메이션",
+    "featuresPage.animation.title": "애니메이션",
     "featuresPage.animation.lead":
       "프레임을 쌓아 타임라인에서 움직임을 구성합니다.",
     "featuresPage.animation.item1.title": "프레임",
@@ -865,7 +865,7 @@
     "featuresPage.animation.item6.body":
       "여러 레이어를 그룹으로 묶으면, 하나의 키프레임으로 한꺼번에 움직일 수 있습니다.",
 
-    "featuresPage.editing.title": "Editing｜편집",
+    "featuresPage.editing.title": "편집",
     "featuresPage.editing.lead":
       "만족할 때까지 다시 그릴 수 있는 편집의 자유로움.",
     "featuresPage.editing.item1.title":
@@ -893,7 +893,7 @@
     "featuresPage.editing.item8.body":
       "그린 그림을 자유 변형과 메시 변형으로 원하는 형태로 세밀하게 조정할 수 있습니다. 메시 변형은 최대 10×10 격자를 사용해 레이어를 자유롭게 변형합니다.",
 
-    "featuresPage.audio.title": "Audio｜오디오",
+    "featuresPage.audio.title": "오디오",
     "featuresPage.audio.lead": "작품에 소리를 더하는 기본적인 오디오 기능.",
     "featuresPage.audio.item1.title": "오디오 추가",
     "featuresPage.audio.item1.body": "작품에 오디오 파일을 추가할 수 있습니다.",
@@ -912,7 +912,7 @@
     "featuresPage.audio.item6.body":
       "음성 클립에는 파형이 옅게 겹쳐 표시되어, 소리의 강약을 보면서 타임라인 상의 배치를 조정할 수 있습니다.",
 
-    "featuresPage.export.title": "Export｜내보내기",
+    "featuresPage.export.title": "내보내기",
     "featuresPage.export.lead": "완성한 작품을 영상으로 전달합니다.",
     "featuresPage.export.item1.title": "해상도",
     "featuresPage.export.item1.body":
@@ -1143,7 +1143,7 @@
     "featuresPage.nav.audio": "Audio",
     "featuresPage.nav.export": "Export",
 
-    "featuresPage.drawing.title": "Drawing | Dessin",
+    "featuresPage.drawing.title": "Dessin",
     "featuresPage.drawing.lead":
       "Plusieurs pinceaux et réglages de dessin pour chaque usage.",
     "featuresPage.drawing.item1.title": "Stylo G",
@@ -1213,7 +1213,7 @@
     "featuresPage.animation.item6.body":
       "Regroupez plusieurs calques pour les déplacer tous ensemble avec une seule image clé.",
 
-    "featuresPage.editing.title": "Editing | Édition",
+    "featuresPage.editing.title": "Édition",
     "featuresPage.editing.lead":
       "La liberté de recommencer jusqu’à ce que ce soit parfait.",
     "featuresPage.editing.item1.title":
@@ -1491,7 +1491,7 @@
     "featuresPage.nav.audio": "Audio",
     "featuresPage.nav.export": "Exportar",
 
-    "featuresPage.drawing.title": "Drawing | Dibujo",
+    "featuresPage.drawing.title": "Dibujo",
     "featuresPage.drawing.lead":
       "Varios pinceles y ajustes de dibujo para cada propósito.",
     "featuresPage.drawing.item1.title": "Lápiz G",
@@ -1538,7 +1538,7 @@
     "featuresPage.drawing.item15.body":
       "Los pinceles, las tramas y los sellos llevan etiquetas como línea, relleno, desenfoque, analógico, pixel art o semitono, así que puedes filtrar por etiqueta aunque no recuerdes un nombre. Un toque alterna entre búsqueda por palabra clave y por etiqueta, y puedes etiquetar tú mismo tus recursos.",
 
-    "featuresPage.animation.title": "Animation | Animación",
+    "featuresPage.animation.title": "Animación",
     "featuresPage.animation.lead":
       "Apila cuadros y construye el movimiento en una línea de tiempo.",
     "featuresPage.animation.item1.title": "Cuadros",
@@ -1561,7 +1561,7 @@
     "featuresPage.animation.item6.body":
       "Agrupa varias capas para moverlas todas juntas con un solo fotograma clave.",
 
-    "featuresPage.editing.title": "Editing | Edición",
+    "featuresPage.editing.title": "Edición",
     "featuresPage.editing.lead":
       "La libertad de rehacer tu trabajo hasta que quede como quieres.",
     "featuresPage.editing.item1.title":
@@ -1609,7 +1609,7 @@
     "featuresPage.audio.item6.body":
       "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
 
-    "featuresPage.export.title": "Export | Exportar",
+    "featuresPage.export.title": "Exportar",
     "featuresPage.export.lead": "Entrega tu trabajo terminado como video.",
     "featuresPage.export.item1.title": "Resolución",
     "featuresPage.export.item1.body":

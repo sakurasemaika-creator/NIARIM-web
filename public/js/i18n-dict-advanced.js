@@ -11,7 +11,7 @@
   var DATA = {
     ja: {
       "featuresPage.nav.advanced": "作画支援",
-      "featuresPage.advanced.title": "Advanced｜作画支援ツール",
+      "featuresPage.advanced.title": "作画支援ツール",
       "featuresPage.advanced.lead": "作画から仕上げまで、一歩進んだツール群。",
       "featuresPage.advanced.item1.title": "オニオンスキン",
       "featuresPage.advanced.item1.body":
@@ -101,7 +101,7 @@
     },
     "zh-Hans": {
       "featuresPage.nav.advanced": "进阶工具",
-      "featuresPage.advanced.title": "Advanced｜进阶绘图工具",
+      "featuresPage.advanced.title": "进阶绘图工具",
       "featuresPage.advanced.lead": "面向绘图与后期加工的进阶工具群。",
       "featuresPage.advanced.item1.title": "洋葱皮（Onion Skin）",
       "featuresPage.advanced.item1.body":
@@ -145,7 +145,7 @@
     },
     "zh-Hant": {
       "featuresPage.nav.advanced": "進階工具",
-      "featuresPage.advanced.title": "Advanced｜進階繪圖工具",
+      "featuresPage.advanced.title": "進階繪圖工具",
       "featuresPage.advanced.lead": "面向繪圖與後製加工的進階工具群。",
       "featuresPage.advanced.item1.title": "洋蔥皮（Onion Skin）",
       "featuresPage.advanced.item1.body":
@@ -189,7 +189,7 @@
     },
     ko: {
       "featuresPage.nav.advanced": "전문 도구",
-      "featuresPage.advanced.title": "Advanced｜작화 지원 도구",
+      "featuresPage.advanced.title": "작화 지원 도구",
       "featuresPage.advanced.lead":
         "작화·마무리 작업을 고려한 한 단계 앞선 도구들.",
       "featuresPage.advanced.item1.title": "어니언 스킨",

@@ -1433,3 +1433,77 @@
     justify-self: end !important;
   }
 }
+
+/* ---- Paper and ink (2026-11 redesign). Scoped under #main so the older
+   site-wide layers cannot override it. Colours come only from the tokens
+   in variables.css. ---- */
+
+/* The section index is a frame number in red pencil (01, 02 …), in place
+   of the old three-bar mark and the gradient icon boxes. */
+#main {
+  counter-reset: feature-section;
+}
+
+#main .feature-section:not([data-help-category]) {
+  counter-increment: feature-section;
+}
+
+#main .feature-section:not([data-help-category]) .feature-section-head::before {
+  content: counter(feature-section, decimal-leading-zero) / "";
+  width: auto;
+  height: auto;
+  margin: 0 0 4px;
+  border-radius: 0;
+  background: none;
+  color: var(--pencil-ink);
+  font: 400 0.875rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+#main .feature-section:not([data-help-category]) .feature-section-head > span {
+  color: var(--ink-2);
+}
+
+/* Section links: one quiet row on the paper under a rule; the current
+   section is ink with a red-pencil underline. */
+#main .feature-nav {
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  box-shadow: none;
+}
+
+#main .feature-nav a {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+#main .feature-nav a:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+#main .feature-nav a.is-active {
+  background: transparent;
+  box-shadow: inset 0 -2px 0 var(--pencil);
+  color: var(--ink);
+}
+
+#main .feature-nav a:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: -2px;
+}
+
+/* Every capture sits in the same neutral frame (the per-screen colour comes
+   in through an inline custom property, so the shadow itself is replaced). */
+#main .feature-diagram.feature-diagram--real {
+  box-shadow:
+    0 0 0 1px var(--rule-strong),
+    0 18px 36px -22px color-mix(in srgb, var(--ink) 40%, transparent);
+}

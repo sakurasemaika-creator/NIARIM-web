@@ -12,7 +12,7 @@
   var DATA = {
     ja: {
       "featuresPage.nav.workspace": "作業環境",
-      "featuresPage.workspace.title": "Workspace｜自分に合った制作環境へ",
+      "featuresPage.workspace.title": "作業環境",
       "featuresPage.workspace.lead":
         "利き手や操作スタイルに合わせて、UIそのものをカスタマイズできます。",
       "featuresPage.workspace.item1.title": "ワークスペース",
@@ -39,7 +39,7 @@
     },
     en: {
       "featuresPage.nav.workspace": "Workspace",
-      "featuresPage.workspace.title": "Workspace | Make It Yours",
+      "featuresPage.workspace.title": "Workspace",
       "featuresPage.workspace.lead":
         "Customize the UI itself to match your dominant hand and your way of working.",
       "featuresPage.workspace.item1.title": "Workspaces",
@@ -66,7 +66,7 @@
     },
     "zh-Hans": {
       "featuresPage.nav.workspace": "工作环境",
-      "featuresPage.workspace.title": "Workspace｜打造专属制作环境",
+      "featuresPage.workspace.title": "工作环境",
       "featuresPage.workspace.lead": "可根据惯用手与操作习惯，自定义整个界面。",
       "featuresPage.workspace.item1.title": "工作区",
       "featuresPage.workspace.item1.body":
@@ -92,7 +92,7 @@
     },
     "zh-Hant": {
       "featuresPage.nav.workspace": "工作環境",
-      "featuresPage.workspace.title": "Workspace｜打造專屬製作環境",
+      "featuresPage.workspace.title": "工作環境",
       "featuresPage.workspace.lead": "可依慣用手與操作習慣，自訂整個介面。",
       "featuresPage.workspace.item1.title": "工作區",
       "featuresPage.workspace.item1.body":
@@ -118,7 +118,7 @@
     },
     ko: {
       "featuresPage.nav.workspace": "작업 환경",
-      "featuresPage.workspace.title": "Workspace｜나에게 맞는 제작 환경으로",
+      "featuresPage.workspace.title": "작업 환경",
       "featuresPage.workspace.lead":
         "주로 쓰는 손과 조작 스타일에 맞춰 UI 자체를 커스터마이즈할 수 있습니다.",
       "featuresPage.workspace.item1.title": "워크스페이스",
@@ -146,7 +146,7 @@
     fr: {
       "featuresPage.nav.workspace": "Espace de travail",
       "featuresPage.workspace.title":
-        "Workspace | Un environnement à votre image",
+        "Espace de travail",
       "featuresPage.workspace.lead":
         "Personnalisez l’interface elle-même selon votre main directrice et votre façon de travailler.",
       "featuresPage.workspace.item1.title": "Espaces de travail",
@@ -173,7 +173,7 @@
     },
     es: {
       "featuresPage.nav.workspace": "Espacio de trabajo",
-      "featuresPage.workspace.title": "Workspace | Un entorno a tu medida",
+      "featuresPage.workspace.title": "Espacio de trabajo",
       "featuresPage.workspace.lead":
         "Personaliza la propia interfaz según tu mano dominante y tu forma de trabajar.",
       "featuresPage.workspace.item1.title": "Espacios de trabajo",

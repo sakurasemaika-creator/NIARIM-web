@@ -564,8 +564,7 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
   background: transparent;
   color: var(--niarim-muted);
 }
-.feature-nav a:hover,
-.feature-nav a.is-active {
+.feature-nav a:hover {
   background: var(--niarim-accent-soft);
   color: var(--color-footer-brown);
 }
@@ -660,8 +659,7 @@ select:focus {
     );
   }
   .feature-tags li,
-  .feature-nav a:hover,
-  .feature-nav a.is-active {
+  .feature-nav a:hover {
     background: color-mix(in srgb, var(--color-accent) 8%, transparent);
   }
   .intro-card,

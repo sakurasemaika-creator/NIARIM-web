@@ -190,7 +190,7 @@
       "featuresPage.nav.audio": "音声",
       "featuresPage.nav.export": "書き出し",
 
-      "featuresPage.drawing.title": "Drawing｜描画",
+      "featuresPage.drawing.title": "描画",
       "featuresPage.drawing.lead":
         "目的に合わせて選べる、複数のブラシと描画設定。",
       "featuresPage.drawing.item1.title": "Gペン",
@@ -235,7 +235,7 @@
       "featuresPage.drawing.item15.body":
         "ブラシ・トーン・スタンプには「線画」「塗り」「ぼかし」「アナログ風」「ドット絵」「網点」といったタグが付いており、名前を覚えていなくてもタグで絞り込んで探せます。キーワード検索とタグ検索はワンタップで切り替えられ、自作素材には自分でタグを付けられます。",
 
-      "featuresPage.animation.title": "Animation｜アニメーション",
+      "featuresPage.animation.title": "アニメーション",
       "featuresPage.animation.lead":
         "フレームを重ね、タイムラインで動きを組み立てます。",
       "featuresPage.animation.item1.title": "フレーム",
@@ -258,7 +258,7 @@
       "featuresPage.animation.item6.body":
         "複数のレイヤーをグループ化すれば、1つのキーフレームでまとめて動かせます。",
 
-      "featuresPage.editing.title": "Editing｜編集",
+      "featuresPage.editing.title": "編集",
       "featuresPage.editing.lead": "納得がいくまで描き直せる、編集の自由さ。",
       "featuresPage.editing.item1.title": "レイヤーを分けて描き直せる",
       "featuresPage.editing.item1.body":
@@ -284,7 +284,7 @@
       "featuresPage.editing.item8.body":
         "描いた絵を自由変形やメッシュ変形で、狙った形へ細かく調整できます。メッシュ変形では、最大10×10の格子を使って、レイヤーを自由に変形できます。",
 
-      "featuresPage.audio.title": "Audio｜音声",
+      "featuresPage.audio.title": "音声",
       "featuresPage.audio.lead": "作品に音を添える、基本的な音声機能。",
       "featuresPage.audio.item1.title": "音声の追加",
       "featuresPage.audio.item1.body": "作品に音声ファイルを追加できます。",
@@ -303,7 +303,7 @@
       "featuresPage.audio.item6.body":
         "音声クリップに波形が薄く重ねて表示され、音の強弱を見ながらタイムライン上の配置を調整できます。",
 
-      "featuresPage.export.title": "Export｜書き出し",
+      "featuresPage.export.title": "書き出し",
       "featuresPage.export.lead": "完成した作品を、動画として届けます。",
       "featuresPage.export.item1.title": "解像度",
       "featuresPage.export.item1.body":
