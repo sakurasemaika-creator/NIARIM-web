@@ -194,8 +194,13 @@ async function auditDesignInvariants(page, vp, route) {
     const root = getComputedStyle(document.documentElement);
     const accent = resolveColor(root.getPropertyValue("--color-accent").trim());
     const themeAccent = accent;
+    // The footer is the one dark surface, painted in the ink colour (--ink)
+    // since 2026-11-24 (fd4f2a8f: "濃い面はフッターだけ"); it used to be the
+    // footer brown.
     const footerBrown = resolveColor(
-      root.getPropertyValue("--color-footer-brown").trim() || "#3b2429",
+      root.getPropertyValue("--ink").trim() ||
+        root.getPropertyValue("--color-footer-brown").trim() ||
+        "#3b2429",
     );
     const heroCopy = document.querySelector(".hero-copy");
     const primary = document.querySelector(".hero .btn-primary");
@@ -303,7 +308,7 @@ async function auditDesignInvariants(page, vp, route) {
   }
   if (state.footerBg && state.footerBg !== state.footerBrown) {
     finding(vp, route, "design-invariant", {
-      rule: "Footer must use footer brown",
+      rule: "Footer must use the ink colour (--ink)",
       expected: state.footerBrown,
       actual: state.footerBg,
     });

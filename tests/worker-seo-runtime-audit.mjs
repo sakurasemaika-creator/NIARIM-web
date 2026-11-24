@@ -314,8 +314,12 @@ for (const pathname of SEO_PAGE_PATHS) {
     for (const key of new Set(altKeys)) {
       const value = translations[key];
       assert.ok(value, `${path}: missing alt dictionary entry ${key}`);
+      // An image can localize several attributes ("src:…|alt:…"), in any
+      // order; find the one whose pairs include this alt key.
       const image = imageTags.find((tag) =>
-        tag.includes('data-i18n-attr="alt:' + key + '"'),
+        (tag.match(/data-i18n-attr="([^"]+)"/)?.[1] ?? "")
+          .split("|")
+          .includes("alt:" + key),
       );
       assert.ok(image, `${path}: missing localized image ${key}`);
       const alt = image.match(/\balt="([^"]*)"/i)?.[1];

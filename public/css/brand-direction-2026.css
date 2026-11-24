@@ -140,7 +140,10 @@ body :is(.about-hero, .help-header, .news-header, .legal-header)::after {
 body :is(.about-hero, .help-header, .news-header, .legal-header) h1 {
   max-width: 18em;
   margin: 0;
-  font-size: clamp(2.4rem, 3.6vw + 0.6rem, 3.55rem);
+  /* Below 366px the floor follows the viewport (33.6px at 320px), so the
+     longest single word of a title ("confidentialité", "개인정보처리방침")
+     fits the column without waiting for the script that shrinks headings. */
+  font-size: clamp(min(2.4rem, 10.5vw), 3.6vw + 0.6rem, 3.55rem);
   line-height: 1.12;
   letter-spacing: -0.02em;
   text-wrap: balance;
