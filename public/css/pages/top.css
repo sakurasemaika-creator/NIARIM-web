@@ -798,6 +798,37 @@
   max-width: none;
 }
 
+/* Home screen widgets: the pictures the app makes, at their own size
+   (150 px tiles with a 10 px shadow margin), grouped by how the colour is
+   chosen. */
+#main .tp-widget-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px clamp(24px, 4vw, 64px);
+  margin-top: 24px;
+  padding: 24px clamp(16px, 2.6vw, 36px);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-widget-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+#main .tp-widget-items img {
+  display: block;
+  width: 170px;
+  height: auto;
+}
+
+#main .tp-widget-items img.is-wide {
+  width: 320px;
+}
+
 /* The same screen in four themes and the colour settings, in one row. */
 #main .tp-filter-grid.tp-theme-grid {
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -933,6 +964,14 @@
 
   #main .tp-filter-grid.tp-theme-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-widget-items img {
+    width: 140px;
+  }
+
+  #main .tp-widget-items img.is-wide {
+    width: 264px;
   }
 }
 

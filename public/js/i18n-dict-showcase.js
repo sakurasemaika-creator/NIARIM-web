@@ -3,6 +3,13 @@
   const dictionary = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   const copy = {
   "ja": {
+    "top.unique.widget.wideAlt": "横長に置いた「作品広場」ウィジェット",
+    "top.unique.widget.plazaAlt": "「作品広場」ウィジェット",
+    "top.unique.widget.createAlt": "「作品をつくる」ウィジェット",
+    "top.unique.widget.custom": "色を選ぶ",
+    "top.unique.widget.theme": "アプリのテーマに合わせる",
+    "top.unique.widget.body": "スマホのホーム画面に「作品をつくる」「作品広場」のウィジェットを置くと、タップ1回でその画面が開きます。色はアプリのテーマに合わせるほか、背景色と文字・アイコンの色を選べます。置いたマスの形（正方形・横長・縦長）に合った絵になります。選んだ作品のフレーム1枚を表示するウィジェットも置けます。",
+    "top.unique.widget.title": "ホーム画面ウィジェット",
     "top.unique.theme.purpleDarkAlt": "同じプロジェクトの画面をテーマ「パープル（ダーク）」で表示したところ",
     "top.unique.theme.dustyGreenLightAlt": "同じプロジェクトの画面をテーマ「くすみグリーン（ライト）」で表示したところ",
     "top.unique.theme.blueDarkAlt": "同じプロジェクトの画面をテーマ「ブルー（ダーク）」で表示したところ",
@@ -116,6 +123,13 @@
     "feature.cameraBody": "カメラの位置とタイミングを指定して、シーンに動きを付けられます。"
   },
   "en": {
+    "top.unique.widget.wideAlt": "The Work Plaza widget placed wide",
+    "top.unique.widget.plazaAlt": "The Work Plaza widget",
+    "top.unique.widget.createAlt": "The Create an Animation widget",
+    "top.unique.widget.custom": "Pick a colour",
+    "top.unique.widget.theme": "Match the app theme",
+    "top.unique.widget.body": "Place the Create an Animation and Work Plaza widgets on your phone’s home screen to open those screens with one tap. They can match the app theme, or you can pick the background color and the text and icon color. The picture fits the shape of the space you give it (square, wide or tall). Another widget shows one frame of a work you choose.",
+    "top.unique.widget.title": "Home Screen Widgets",
     "top.unique.theme.purpleDarkAlt": "The same project screen with the theme “Purple (Dark)”",
     "top.unique.theme.dustyGreenLightAlt": "The same project screen with the theme “Dusty Green (Light)”",
     "top.unique.theme.blueDarkAlt": "The same project screen with the theme “Blue (Dark)”",
@@ -229,6 +243,13 @@
     "feature.cameraBody": "Set camera positions and timing to give a scene its movement."
   },
   "zh-Hans": {
+    "top.unique.widget.wideAlt": "横长放置的“作品广场”小组件",
+    "top.unique.widget.plazaAlt": "“作品广场”小组件",
+    "top.unique.widget.createAlt": "“制作动画”小组件",
+    "top.unique.widget.custom": "选择颜色",
+    "top.unique.widget.theme": "跟随应用主题",
+    "top.unique.widget.body": "在手机主屏幕上放置“制作动画”和“作品广场”小组件，点按一次即可打开对应画面。颜色可以跟随应用主题，也可以自己选择背景色和文字与图标颜色。图片会配合所放位置的形状（正方形、横长、竖长）。还可以放置显示所选作品某一帧的小组件。",
+    "top.unique.widget.title": "主屏幕小组件",
     "top.unique.theme.purpleDarkAlt": "同一个项目画面使用“紫色（深色）”主题的样子",
     "top.unique.theme.dustyGreenLightAlt": "同一个项目画面使用“灰绿色（浅色）”主题的样子",
     "top.unique.theme.blueDarkAlt": "同一个项目画面使用“蓝色（深色）”主题的样子",
@@ -342,6 +363,13 @@
     "feature.cameraBody": "设置镜头位置和时间，让画面动起来。"
   },
   "zh-Hant": {
+    "top.unique.widget.wideAlt": "橫長放置的「作品廣場」小工具",
+    "top.unique.widget.plazaAlt": "「作品廣場」小工具",
+    "top.unique.widget.createAlt": "「製作動畫」小工具",
+    "top.unique.widget.custom": "選擇顏色",
+    "top.unique.widget.theme": "跟隨應用程式主題",
+    "top.unique.widget.body": "在手機主畫面上放置「製作動畫」和「作品廣場」小工具，點一下即可開啟對應畫面。顏色可以跟隨應用程式主題，也可以自己選擇背景色和文字與圖示顏色。圖片會配合所放位置的形狀（正方形、橫長、直長）。還可以放置顯示所選作品某一個影格的小工具。",
+    "top.unique.widget.title": "主畫面小工具",
     "top.unique.theme.purpleDarkAlt": "同一個專案畫面使用「紫色（深色）」主題的樣子",
     "top.unique.theme.dustyGreenLightAlt": "同一個專案畫面使用「灰綠色（淺色）」主題的樣子",
     "top.unique.theme.blueDarkAlt": "同一個專案畫面使用「藍色（深色）」主題的樣子",
@@ -455,6 +483,13 @@
     "feature.cameraBody": "設定鏡頭位置與時間，讓畫面動起來。"
   },
   "ko": {
+    "top.unique.widget.wideAlt": "가로로 길게 놓은 ‘작품 광장’ 위젯",
+    "top.unique.widget.plazaAlt": "‘작품 광장’ 위젯",
+    "top.unique.widget.createAlt": "‘애니메이션 만들기’ 위젯",
+    "top.unique.widget.custom": "색 선택",
+    "top.unique.widget.theme": "앱 테마에 맞추기",
+    "top.unique.widget.body": "휴대폰 홈 화면에 ‘애니메이션 만들기’와 ‘작품 광장’ 위젯을 두면 한 번 탭으로 그 화면이 열립니다. 색은 앱 테마에 맞출 수도 있고, 배경색과 글자·아이콘 색을 고를 수도 있습니다. 놓은 칸의 모양(정사각형, 가로로 긴 모양, 세로로 긴 모양)에 맞는 그림이 됩니다. 고른 작품의 프레임 한 장을 표시하는 위젯도 둘 수 있습니다.",
+    "top.unique.widget.title": "홈 화면 위젯",
     "top.unique.theme.purpleDarkAlt": "같은 프로젝트 화면을 ‘퍼플 (다크)’ 테마로 표시한 모습",
     "top.unique.theme.dustyGreenLightAlt": "같은 프로젝트 화면을 ‘더스티 그린 (라이트)’ 테마로 표시한 모습",
     "top.unique.theme.blueDarkAlt": "같은 프로젝트 화면을 ‘블루 (다크)’ 테마로 표시한 모습",
@@ -568,6 +603,13 @@
     "feature.cameraBody": "카메라 위치와 타이밍을 정해 장면에 움직임을 더하세요."
   },
   "fr": {
+    "top.unique.widget.wideAlt": "Le widget Place des œuvres placé en largeur",
+    "top.unique.widget.plazaAlt": "Le widget Place des œuvres",
+    "top.unique.widget.createAlt": "Le widget Créer une animation",
+    "top.unique.widget.custom": "Choisir une couleur",
+    "top.unique.widget.theme": "Suivre le thème de l’application",
+    "top.unique.widget.body": "Placez les widgets Créer une animation et Place des œuvres sur l’écran d’accueil du téléphone pour ouvrir ces écrans d’un seul toucher. Ils peuvent suivre le thème de l’application, ou vous choisissez la couleur de fond et la couleur du texte et des icônes. L’image s’adapte à la forme de l’emplacement (carré, large ou haut). Un autre widget affiche une image d’une œuvre de votre choix.",
+    "top.unique.widget.title": "Widgets de l’écran d’accueil",
     "top.unique.theme.purpleDarkAlt": "Le même écran de projet avec le thème « Violet (mode sombre) »",
     "top.unique.theme.dustyGreenLightAlt": "Le même écran de projet avec le thème « Vert grisé (mode clair) »",
     "top.unique.theme.blueDarkAlt": "Le même écran de projet avec le thème « Bleu (mode sombre) »",
@@ -681,6 +723,13 @@
     "feature.cameraBody": "Placez la caméra à différents instants pour mettre la scène en mouvement."
   },
   "es": {
+    "top.unique.widget.wideAlt": "El widget Plaza de Obras colocado en ancho",
+    "top.unique.widget.plazaAlt": "El widget Plaza de Obras",
+    "top.unique.widget.createAlt": "El widget Crear una animación",
+    "top.unique.widget.custom": "Elegir un color",
+    "top.unique.widget.theme": "Seguir el tema de la app",
+    "top.unique.widget.body": "Coloca los widgets Crear una animación y Plaza de Obras en la pantalla de inicio del teléfono para abrir esas pantallas con un toque. Pueden seguir el tema de la app, o puedes elegir el color de fondo y el color de texto e iconos. La imagen se ajusta a la forma del espacio (cuadrado, ancho o alto). Otro widget muestra un fotograma de una obra que elijas.",
+    "top.unique.widget.title": "Widgets de la pantalla de inicio",
     "top.unique.theme.purpleDarkAlt": "La misma pantalla de proyecto con el tema «Púrpura (modo oscuro)»",
     "top.unique.theme.dustyGreenLightAlt": "La misma pantalla de proyecto con el tema «Verde apagado (modo claro)»",
     "top.unique.theme.blueDarkAlt": "La misma pantalla de proyecto con el tema «Azul (modo oscuro)»",
