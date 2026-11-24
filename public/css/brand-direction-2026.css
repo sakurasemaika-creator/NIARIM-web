@@ -36,6 +36,31 @@ body.brand-has-scrolled .site-header {
   background: rgba(250, 247, 246, 0.98);
   box-shadow: 0 10px 35px rgba(23, 22, 28, 0.055);
 }
+/* Desktop header geometry from the first paint. On the static build the
+   final values (polish.css, responsive-foundation.css) arrive only after the
+   page is shown, so the header changed from a 72px band with a 1220px
+   container and a 40px nav gap to 68px / 1320px / 20px while the page loaded:
+   the row of links wrapped and unwrapped (most of the home page's layout
+   shift on a slow connection). Same values as those layers, so nothing moves
+   when they arrive. */
+@media (min-width: 1181px) {
+  body .site-header {
+    height: auto;
+    min-height: 68px;
+  }
+  body .site-header .container {
+    width: min(calc(100% - 48px), 1320px);
+  }
+  body .site-header .main-nav {
+    gap: 1.25rem;
+  }
+  body .site-header .main-nav > .btn {
+    min-height: 46px;
+    padding-inline: 1.4rem;
+    border-radius: 11px;
+    font-size: 0.82rem;
+  }
+}
 .site-header .brand {
   transition: opacity 0.25s ease;
 }
@@ -166,18 +191,6 @@ html body.nr-site .nr-hero {
   overflow: hidden;
   min-height: auto;
   padding: clamp(48px, 5vw, 86px) 0 26px;
-  background:
-    radial-gradient(
-      ellipse 45% 64% at 84% 34%,
-      rgba(255, 92, 122, 0.19),
-      transparent 78%
-    ),
-    radial-gradient(
-      ellipse 50% 63% at 13% 100%,
-      rgba(152, 125, 184, 0.14),
-      transparent 83%
-    ),
-    linear-gradient(130deg, #17161c 1%, #25212e 56%, #14151d 100%);
 }
 html body.nr-site .nr-hero::before {
   opacity: 0.21;
@@ -196,22 +209,16 @@ html body.nr-site .nr-hero::before {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
   mask-image: linear-gradient(90deg, transparent, #000 70%);
 }
-html body.nr-site .nr-hero::after {
-  content: "";
-  position: absolute;
-  width: 35vw;
-  max-width: 500px;
-  aspect-ratio: 1;
-  right: -8%;
-  bottom: -44%;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 50%;
-  pointer-events: none;
-}
+/* The large arc that used to sit bottom-right had no relation to the app and
+   pulled the eye away from the captures; the light-table grid (::before) is
+   the only backdrop the hero needs. */
+/* On tall desktop screens (1920x1080 and up) the stage grows with the
+   viewport, so the hero ends at the fold instead of leaving a strip of
+   empty paper under it. Shorter screens keep the previous height. */
 html body.nr-site .nr-hero-grid {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
   gap: clamp(32px, 4vw, 64px);
-  min-height: clamp(590px, 54vw, 720px);
+  min-height: max(clamp(590px, 54vw, 720px), min(calc(100svh - 224px), 880px));
   align-items: center;
 }
 html body.nr-site .nr-hero-copy {
@@ -219,17 +226,20 @@ html body.nr-site .nr-hero-copy {
   padding: 16px 0 36px;
 }
 html body.nr-site .nr-hero-overline {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.065);
-  border-radius: 4px;
-  padding: 9px 12px;
-  color: #f6e6ea;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  color: #e9e1e6;
   letter-spacing: 0.12em;
 }
+html body.nr-site .nr-hero-pulse {
+  box-shadow: none;
+}
 html body.nr-site .nr-hero-category {
-  margin-top: clamp(27px, 4vw, 55px);
+  margin-top: clamp(20px, 2.4vw, 34px);
   color: #ff9aad;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
 }
 html body.nr-site .nr-hero-wordmark {
   font-size: clamp(4rem, 8vw, 8.35rem) !important;
@@ -252,15 +262,11 @@ html body.nr-site .nr-hero-lead {
   line-height: 1.9;
   color: #e5dfe7;
 }
+/* The three chips repeated the strap (brush/layer/timeline, PC mode) in a
+   third typographic voice; without them the lead leads straight to the
+   action and the phone capture rises into the first screen on mobile. */
 html body.nr-site .nr-hero-highlights {
-  gap: 8px;
-  margin-top: 28px;
-}
-html body.nr-site .nr-hero-highlights span {
-  border-radius: 2px;
-  padding: 7px 11px;
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.045);
+  display: none;
 }
 html body.nr-site .nr-store-row {
   margin-top: 35px;
@@ -312,18 +318,53 @@ html body.nr-site .nr-hero-showcase .nr-shot--sp {
 }
 html body.nr-site .nr-image-caption {
   border-radius: 3px;
-  font-size: 0.67rem;
-  letter-spacing: 0.17em;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
 }
 html body.nr-site .nr-preview-footnote {
   bottom: -14px;
   left: 3%;
+  font-size: 0.75rem;
 }
+/* The closing rule of the hero is drawn as a timeline ruler: a frame tick
+   every 12px and a longer tick every sixth frame, the same rhythm as the
+   app's timeline. The two English filler labels it used to carry
+   ("OFFICIAL WEBSITE", "HAND-DRAWN ANIMATION") said nothing the page does
+   not already say, so only the jump to the screenshots remains. */
 html body.nr-site .nr-hero-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
-  padding-top: 20px;
+  border-top: 0;
+  padding-top: 22px;
+  justify-content: flex-end;
   color: #d1cad6;
-  letter-spacing: 0.17em;
+  letter-spacing: 0.08em;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.24)) 0 0 /
+      100% 1px no-repeat,
+    repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.2) 0 1px,
+        transparent 1px 12px
+      )
+      0 0 / 100% 5px no-repeat,
+    repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.42) 0 1px,
+        transparent 1px 72px
+      )
+      0 0 / 100% 10px no-repeat;
+}
+html body.nr-site .nr-hero-bottom > span {
+  display: none;
+}
+html body.nr-site .nr-hero-bottom a {
+  font-size: 0.8125rem;
+}
+/* Stacked hero (the grid becomes one column at 1150px, niarim-game-site.css):
+   the capture footnote hangs below the showcase, so the ruler starts below it. */
+@media (max-width: 1150px) {
+  html body.nr-site .nr-hero-bottom {
+    margin-top: 34px;
+  }
 }
 /* Editorial rhythm: large type, alternating product media, restrained rules. */
 html body.nr-site .nr-main {
@@ -531,7 +572,7 @@ body main .news-item:focus-within {
     padding: 12px 0 16px;
   }
   html body.nr-site .nr-hero-category {
-    margin-top: 28px;
+    margin-top: 20px;
   }
   html body.nr-site .nr-hero-wordmark {
     font-size: clamp(3.6rem, 11vw, 6rem) !important;
@@ -593,10 +634,6 @@ body main .news-item:focus-within {
   html body.nr-site .nr-hero-lead {
     font-size: 0.9rem;
   }
-  html body.nr-site .nr-hero-highlights span {
-    white-space: normal;
-    font-size: 0.68rem;
-  }
   html body.nr-site .nr-store-row {
     gap: 10px;
     margin-top: 26px;
@@ -619,19 +656,14 @@ body main .news-item:focus-within {
     bottom: 0;
   }
   html body.nr-site .nr-image-caption {
-    font-size: 0.58rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
     padding: 4px 6px;
   }
   html body.nr-site .nr-preview-footnote {
     left: 0;
     bottom: -18px;
-    font-size: 0.58rem;
-  }
-  html body.nr-site .nr-hero-bottom {
-    margin-top: 12px;
-  }
-  html body.nr-site .nr-hero-bottom span:nth-child(2) {
-    display: none;
+    font-size: 0.6875rem;
   }
   html body.nr-site .nr-statement {
     padding-top: 76px;
@@ -702,19 +734,10 @@ body main .news-item:focus-within {
 /* Studio-grade composition refinement — 2026-11-12 */
 /* A deliberate product presentation: one hero stage, tangible studio details,
    and a consistent editorial rhythm across the product story. */
+/* No coloured glow blobs behind the stage: the captures carry the colour.
+   A quiet warm lift toward the captures keeps the dark from going flat. */
 html body.nr-site .nr-hero {
-  background:
-    radial-gradient(
-      ellipse 41% 69% at 82% 46%,
-      rgba(255, 117, 144, 0.2),
-      transparent 76%
-    ),
-    radial-gradient(
-      ellipse 42% 60% at 7% 106%,
-      rgba(147, 129, 180, 0.18),
-      transparent 81%
-    ),
-    linear-gradient(122deg, #15151d 0%, #24202a 49%, #12141c 100%);
+  background: linear-gradient(122deg, #15151d 0%, #221e26 52%, #16161d 100%);
 }
 html body.nr-site .nr-hero-grid {
   position: relative;
@@ -723,11 +746,13 @@ html body.nr-site .nr-hero-copy {
   position: relative;
   z-index: 3;
 }
+/* "Hand-drawn animation app" is the first answer to "what is this?", so it
+   is set at a reading size (it was 11.7px). */
 html body.nr-site .nr-hero-category {
   display: flex;
   align-items: center;
   gap: 13px;
-  font-size: 0.73rem;
+  font-size: 0.875rem;
   font-weight: 750;
 }
 html body.nr-site .nr-hero-category::before {
@@ -749,17 +774,7 @@ html body.nr-site .nr-hero-showcase {
   isolation: isolate;
 }
 html body.nr-site .nr-hero-showcase::before {
-  content: "";
-  position: absolute;
-  inset: 8% -8% 7% 12%;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse,
-    rgba(255, 182, 199, 0.21),
-    transparent 66%
-  );
-  filter: blur(16px);
+  content: none;
 }
 /* Hero product imagery is intentionally static: the showcase is informational, not an interactive control. */
 html body.nr-site .nr-statement {

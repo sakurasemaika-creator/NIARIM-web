@@ -131,28 +131,60 @@ body:has(.capture-viewer[open]) {
   min-width: 100%;
 }
 
-/* Before distribution, exploration is the main action available to a visitor. */
+/* Before distribution, exploration is the main action available to a visitor,
+   so it is drawn as the one solid button of the hero. Paper on the dark stage
+   (not the accent): the header already carries the single pink CTA, and two
+   pink buttons in one screen compete (DESIGN.md 2, Primary CTA). The chevron
+   is drawn with borders, not a glyph, so it is the same in all languages. */
 html
   body.nr-site
   .nr-store-row:has([data-play-store-link][hidden])
   .nr-hero-feature-link {
   display: inline-flex;
   align-items: center;
-  min-height: 48px;
-  padding: 0.55rem 1.2rem;
-  background: #ffe0e7;
-  color: #32212b !important;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 22px 0 24px;
+  background: var(--color-surface-soft);
+  color: var(--color-black) !important;
   border: 1px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: background-color 0.18s ease;
+}
+html
+  body.nr-site
+  .nr-store-row:has([data-play-store-link][hidden])
+  .nr-hero-feature-link::after {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 1px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
 }
 html
   body.nr-site
   .nr-store-row:has([data-play-store-link][hidden])
   .nr-hero-feature-link:hover {
-  background: #fff;
+  background: var(--color-white);
+}
+html
+  body.nr-site
+  .nr-store-row:has([data-play-store-link][hidden])
+  .nr-hero-feature-link:hover::after {
+  transform: translateX(2px) rotate(45deg);
 }
 html body.nr-site .nr-hero-feature-link:focus-visible {
   outline: 3px solid #ffc1d0;
   outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html body.nr-site .nr-hero-feature-link,
+  html body.nr-site .nr-hero-feature-link::after {
+    transition: none;
+  }
 }

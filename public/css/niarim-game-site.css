@@ -984,6 +984,8 @@ html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li):not(.nr-hero-wordmark) {
     flex-wrap: wrap;
     justify-content: flex-end;
     row-gap: 4px;
+    /* The space between labels comes from each link's own padding. */
+    column-gap: 0;
   }
 
   html body .site-header .main-nav > ul > li,
@@ -994,23 +996,39 @@ html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li):not(.nr-hero-wordmark) {
   html body .site-header .main-nav a[data-i18n] {
     white-space: nowrap;
   }
-}
 
-/* French and Spanish labels are long: tighten the gaps so the whole row
-   fits on one line from 1181px (checked in all seven languages at
-   1181-1280px), keeping the 44px touch target of every link. */
-@media (min-width: 1181px) and (max-width: 1439px) {
-  html:is(:lang(fr), :lang(es)) body .site-header .main-nav > ul {
-    column-gap: 10px;
-    row-gap: 2px;
+  /* One rhythm for the whole row. With a gap on the list, the 44px minimum
+     box centred short labels ("FAQ", "機能", "소개") in extra space, so the
+     visible space between labels ran from 16px to 42px in one row. Now each
+     link has the same inline padding and the list no gap: the space between
+     any two labels is twice the padding, 12px at 1181px growing to 20px.
+     Korean and Chinese, whose labels are short, use a padding wide enough
+     that no label falls back to the 44px box. (Measured with the web fonts
+     loaded: Kuramubon's Latin letters are wide, so French and Spanish still
+     fold to a second row below 1366px, as they did before; Spanish used to
+     fold at every width.) */
+  html body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: clamp(6px, 1.1vw - 7px, 10px);
+    padding-inline: var(--nav-pad);
   }
-}
-
-/* Japanese has nine items, too: at 1181-1279px the last one (お問い合わせ)
-   alone dropped to a second row and the header grew from 68px to 93px.
-   A slightly smaller gap keeps the whole row on one line. */
-@media (min-width: 1181px) and (max-width: 1279px) {
-  html:lang(ja) body .site-header .main-nav > ul {
-    column-gap: 12px;
+  html:lang(ko) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: 11px;
+  }
+  /* The header container stops growing at 1320px, so the longest rows keep
+     a narrower ceiling: French 9px, Spanish 6px (one row from 1366px). */
+  html:lang(fr) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: clamp(6px, 1.1vw - 7px, 9px);
+  }
+  html:lang(es) body .site-header .main-nav > ul > li > a:not(.btn) {
+    --nav-pad: 6px;
+  }
+  html:is(:lang(zh-Hans), :lang(zh-Hant))
+    body
+    .site-header
+    .main-nav
+    > ul
+    > li
+    > a:not(.btn) {
+    --nav-pad: 12px;
   }
 }

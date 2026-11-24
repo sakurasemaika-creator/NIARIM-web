@@ -14,7 +14,8 @@
 }
 .main-nav a:not(.btn):hover::after,
 .main-nav a:not(.btn)[aria-current="page"]::after {
-  width: calc(100% - 1rem) !important;
+  /* --nav-pad: the desktop link padding (niarim-game-site.css). */
+  width: calc(100% - 2 * var(--nav-pad, 0.5rem)) !important;
 }
 
 /* Contact consent: 25px control, optically aligned with the consent copy. */

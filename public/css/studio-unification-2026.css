@@ -276,6 +276,9 @@ html body.nr-site .nr-hero-brand-logo {
   max-height: clamp(90px, 14vw, 155px);
   object-fit: contain;
   object-position: left center;
+  /* Optical alignment: the SVG's viewBox starts 60 units (of 3470) left of
+     the N stem, which left the wordmark 9px right of the text column. */
+  translate: calc(-60 / 3470 * 100%) 0;
 }
 html body.nr-site .nr-pricing-panel strong {
   font-family: var(--font-serif) !important;
