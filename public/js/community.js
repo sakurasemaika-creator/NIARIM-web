@@ -22,6 +22,8 @@
 
   const labels = {
     ja: {
+      prelaunch:
+        "作品広場は、アプリの配信開始と同時に公開します。公開後は、NIARIMから投稿された新着の作品と、ブックマーク数のランキングがここに並びます。",
       loading: "公開作品を読み込んでいます。",
       empty:
         "現在表示できる公開作品はありません。公開後、作品が投稿されるとここに表示されます。",
@@ -36,6 +38,8 @@
       title: "作品をYouTubeで開く",
     },
     en: {
+      prelaunch:
+        "The Work Plaza opens when the app is released. Then the newest works posted from NIARIM and the bookmark rankings will appear here.",
       loading: "Loading published works...",
       empty:
         "No published works are available yet. They will appear here after release.",
@@ -49,6 +53,8 @@
       title: "Open on YouTube",
     },
     "zh-Hans": {
+      prelaunch:
+        "作品广场将在应用上线时同步开放。上线后，这里会显示从NIARIM投稿的新作品和收藏排行榜。",
       hidden: "该作品已设为私密。",
       periodCount: "本期收藏",
       loading: "正在读取公开作品……",
@@ -60,6 +66,8 @@
       title: "在 YouTube 打开",
     },
     "zh-Hant": {
+      prelaunch:
+        "作品廣場將在應用程式上線時同步開放。上線後，這裡會顯示從NIARIM投稿的新作品和書籤排行榜。",
       hidden: "這部作品已設為私人。",
       periodCount: "本期書籤",
       loading: "正在讀取公開作品……",
@@ -71,6 +79,8 @@
       title: "在 YouTube 開啟",
     },
     ko: {
+      prelaunch:
+        "작품 광장은 앱 출시와 함께 열립니다. 출시 후에는 NIARIM에서 게시된 신작과 북마크 랭킹이 이곳에 표시됩니다.",
       hidden: "이 작품은 비공개로 전환되었습니다.",
       periodCount: "기간 내 북마크",
       loading: "공개 작품을 불러오는 중...",
@@ -83,6 +93,8 @@
       title: "YouTube에서 열기",
     },
     fr: {
+      prelaunch:
+        "La Place des œuvres ouvrira à la sortie de l’app. Les nouvelles œuvres publiées depuis NIARIM et les classements des favoris s’afficheront alors ici.",
       hidden: "Cette œuvre n’est plus publique.",
       periodCount: "Favoris de la période",
       loading: "Chargement des œuvres publiques…",
@@ -96,6 +108,8 @@
       title: "Ouvrir sur YouTube",
     },
     es: {
+      prelaunch:
+        "La Plaza de Obras abrirá con el lanzamiento de la app. Entonces aparecerán aquí las obras nuevas publicadas desde NIARIM y el ranking de marcadores.",
       hidden: "Esta obra ya no es pública.",
       periodCount: "Marcadores del período",
       loading: "Cargando obras públicas…",
@@ -118,6 +132,23 @@
     fr: "Impossible d’ouvrir cette œuvre. Réessayez plus tard.",
     es: "No se pudo abrir esta obra. Inténtalo más tarde.",
   };
+  // Before the app is released the plaza has no public API yet (the Worker
+  // answers 503 "not_configured"), so the feed says what will appear here and
+  // when, instead of reporting an error. After release a failure is an error.
+  function released() {
+    const candidate =
+      window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
+    try {
+      const url = new URL(candidate);
+      return (
+        url.origin === "https://play.google.com" &&
+        url.pathname === "/store/apps/details" &&
+        url.searchParams.get("id") === "com.niarim.niarim"
+      );
+    } catch (_) {
+      return false;
+    }
+  }
   function copy() {
     const lang = document.documentElement.lang;
     return labels[lang] || labels.ja;
@@ -292,7 +323,14 @@
       cache: "no-store",
     })
       .then(async (res) => {
-        if (!res.ok) throw Error("Community API status " + res.status);
+        if (!res.ok) {
+          const failure = Error("Community API status " + res.status);
+          failure.reason = await res
+            .json()
+            .then((body) => body?.error || "")
+            .catch(() => "");
+          throw failure;
+        }
         return res.json();
       })
       .then((body) => {
@@ -314,9 +352,10 @@
         }
         render();
       })
-      .catch(() => {
+      .catch((failure) => {
         if (thisRequest !== requestCounter) return;
-        state = { kind: "error", works: [] };
+        const prelaunch = failure?.reason === "not_configured" || !released();
+        state = { kind: prelaunch ? "prelaunch" : "error", works: [] };
         render();
       });
   }
