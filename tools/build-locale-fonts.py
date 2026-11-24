@@ -19,6 +19,8 @@ from fontTools import subset
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 
+from font_strays import drop_stray_contours, stray_glyphs
+
 
 def ranges(points):
     intervals = []
@@ -64,8 +66,11 @@ def main():
         if current.is_file():
             with TTFont(current) as old:
                 previous = set(old.getBestCmap())
+                strays = stray_glyphs(old)
             actual.update(previous)
-            if actual == previous:
+            # A subset that still carries stray contours (font_strays.py) is
+            # rebuilt without them even when its characters stay the same.
+            if actual == previous and not strays:
                 print(f"{family}: unchanged ({filename})")
                 continue
             version = re.match(r"(.*?)(?:\.v(\d+))?\.woff2$", filename)
@@ -83,6 +88,9 @@ def main():
             sub = subset.Subsetter(options=options)
             sub.populate(unicodes=actual)
             sub.subset(font)
+            dropped = drop_stray_contours(font)
+            if dropped:
+                print(f"{family}: removed stray contours from {', '.join(dropped)}")
             if "fvar" in font:
                 instantiateVariableFont(font, {"wght": 400}, inplace=True)
             font.flavor = "woff2"

@@ -344,6 +344,62 @@ try {
       await page.close();
     }
   }
+  // No shipped glyph may draw ink far outside its own box. Three glyphs of
+  // the HakkouMincho source (之 林 活) carried a small star 3.7–4.7 em to their
+  // right, which showed as a stray "×" where a line ended early (Opals'
+  // 「いつもの活動を」 at 390px). tools/font_strays.py removes such contours
+  // when the subsets are built; this checks every web font face once.
+  if (language === "ja") {
+    const page = await browser.newPage({
+      viewport: { width: 800, height: 600 },
+    });
+    await page.goto(new URL("/404.html", base).href, {
+      waitUntil: "networkidle",
+    });
+    const strays = await page.evaluate(
+      async (faces) => {
+        const size = 40;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        const out = [];
+        for (const [family, points] of faces) {
+          const text = points.map((p) => String.fromCodePoint(p)).join("");
+          await document.fonts.load(`${size}px "${family}"`, text);
+          context.font = `${size}px "${family}"`;
+          for (const point of points) {
+            const character = String.fromCodePoint(point);
+            const m = context.measureText(character);
+            if (!(m.width > 0)) continue;
+            if (
+              m.actualBoundingBoxRight > m.width + size / 2 ||
+              m.actualBoundingBoxLeft > size / 2
+            )
+              out.push({
+                family,
+                character,
+                right: Math.round(m.actualBoundingBoxRight),
+                advance: Math.round(m.width),
+              });
+          }
+        }
+        return out;
+      },
+      [...definedFaces]
+        .filter(([name]) => !/Fallback$/.test(name))
+        .map(([name, points]) => [name, [...points]]),
+    );
+    for (const stray of strays)
+      findings.push({
+        route: "fonts",
+        width: 0,
+        family: stray.family,
+        chars: stray.character,
+        where: "stray ink outside the glyph box",
+        text: `ink to ${stray.right}px, advance ${stray.advance}px at 40px`,
+      });
+    console.log("FONT_STRAY_INK", JSON.stringify(strays));
+    await page.close();
+  }
 } finally {
   await browser.close();
 }

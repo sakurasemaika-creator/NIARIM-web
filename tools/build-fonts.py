@@ -36,6 +36,8 @@ common-base.css の @font-face ブロック（マーカーで囲んだ範囲）�
 import re, glob, subprocess, sys, os, json, hashlib, html
 from fontTools.ttLib import TTFont
 
+from font_strays import drop_stray_contours
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "public/assets/fonts")
 CSS = os.path.join(ROOT, "public/css/common-base.css")
@@ -55,7 +57,7 @@ FONTS = [
     (
         "HakkouMincho",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
-        "HakkouMincho-subset.v2.woff2",
+        "HakkouMincho-subset.v3.woff2",
         "本文用（白光明朝／lavsic氏・Noto Serif JP派生）",
         "primary",
     ),
@@ -323,6 +325,14 @@ def split_latin(chars):
     return latin, rest
 
 
+def clean_strays(path):
+    """Removes contours drawn far outside a glyph (see tools/font_strays.py)."""
+    font = TTFont(path)
+    if drop_stray_contours(font):
+        font.flavor = "woff2"
+        font.save(path)
+
+
 def build():
     want = site_chars()
     print(f"サイトで使う文字: {len(want)}")
@@ -404,6 +414,7 @@ def build():
                 ],
                 check=True,
             )
+            clean_strays(dst)
             return os.path.getsize(dst)
 
         # 日本語の本体フォントだけ、ラテン側とそれ以外に割る。
@@ -475,6 +486,7 @@ def build():
             ],
             check=True,
         )
+        clean_strays(dst)
         size = os.path.getsize(dst)
         report.append(
             f"  {family}: {len(take)}字  {before / 1024:.0f}KB -> {size / 1024:.0f}KB"
