@@ -791,27 +791,15 @@
 }
 
 /* Share and save tree: a real capture beside its text. */
-#main .tp-unique-list--two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: clamp(48px, 6vw, 80px);
-  padding-top: clamp(28px, 3.4vw, 40px);
-  border-top: 1px solid var(--rule);
+/* App screens (phone captures) laid on the sheet one after another, at a
+   width where the app's labels can be read. */
+#main .tp-filter-grid.tp-screen-grid {
+  grid-template-columns: repeat(auto-fill, minmax(0, 340px));
+  max-width: none;
 }
 
-/* Share and save tree: the capture above its text, large enough that the
-   app's labels can be read. */
-#main .tp-feature--capture {
-  grid-template-rows: auto auto 1fr;
-}
-
-#main .tp-feature--capture .tp-figure {
-  height: clamp(260px, 30vw, 380px);
-  padding: 12px;
-}
-
-#main .tp-feature--capture .tp-figure img {
-  max-height: 100%;
-  object-fit: contain;
+#main .tp-screen-grid img {
+  border-radius: 10px;
 }
 
 #main .tp-subhead {
@@ -878,11 +866,6 @@
   font: 400 0.75rem / 1.6 var(--font-sans);
 }
 
-#main .tp-capture img {
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px var(--rule);
-}
-
 @media (max-width: 1023px) {
   #main .tp-unique-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -898,10 +881,6 @@
 
   #main .tp-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  #main .tp-unique-list--two {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -942,6 +921,10 @@
 
   #main .tp-filter-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-filter-grid.tp-screen-grid {
+    grid-template-columns: minmax(0, 360px);
   }
 }
 

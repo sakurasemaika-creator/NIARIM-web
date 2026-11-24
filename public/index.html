@@ -1018,45 +1018,28 @@
           </ol>
         </div>
 
-        <div class="tp-unique-list tp-unique-list--two">
-          <article class="tp-feature tp-feature--capture">
-            <figure class="tp-figure tp-capture">
-              <img
-                src="/assets/images/engine/share-project-detail.webp"
-                width="720"
-                height="910"
-                alt="プロジェクトの画面。線画のプレビューの下に「共有」のボタンがある"
-                data-i18n-attr="alt:top.unique.share.alt"
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-            <div>
-              <h3 data-i18n="top.unique.share.title">共有（.niashare）</h3>
-              <p data-i18n="top.unique.share.body">
-                プロジェクトを.niashareファイルにして、ほかの人や自分のほかの端末に渡せます。受け取った人が開くと、複製が自分のプロジェクト一覧に追加されます。線画を描いた人が渡し、受け取った人が色を塗って渡し返す、という分担ができます。自動塗り設定も.niafillファイルで渡せます。
-              </p>
-            </div>
-          </article>
-          <article class="tp-feature tp-feature--capture">
-            <figure class="tp-figure tp-capture">
-              <img
-                src="/assets/images/engine/save-tree-crop.webp"
-                width="640"
-                height="718"
-                alt="セーブツリー"
-                data-i18n-attr="alt:refresh.tool3.title"
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-            <div>
-              <h3 data-i18n="refresh.tool3.title">セーブツリー</h3>
-              <p data-i18n="refresh.tool3.body">
-                保存するたびに保存地点が増え、前の地点から枝分かれして別の案を試せます。保存数に上限はありません。
-              </p>
-            </div>
-          </article>
+        <div class="tp-filters tp-share">
+          <div class="tp-fill-text">
+            <h3 data-i18n="top.unique.share.title">共有（.niashare）</h3>
+            <p data-i18n="top.unique.share.body">
+              プロジェクトを.niashareファイルにして、ほかの人や自分のほかの端末に渡せます。受け取った人が開くと、複製が自分のプロジェクト一覧に追加されます。線画を描いた人が渡し、受け取った人が色を塗って渡し返す、という分担ができます。自動塗り設定も.niafillファイルで渡せます。
+            </p>
+          </div>
+          <ul class="tp-filter-grid tp-screen-grid">
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/share-project-detail.webp"
+                  width="720"
+                  height="910"
+                  alt="プロジェクトの画面。線画のプレビューの下に「共有」のボタンがある"
+                  data-i18n-attr="alt:top.unique.share.alt"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </li>
+          </ul>
         </div>
 
         <div class="tp-filters">
@@ -1424,6 +1407,49 @@
               1.25s」をタップして移ったフレームです。
             </figcaption>
           </figure>
+        </div>
+
+        <div class="tp-filters tp-save">
+          <div class="tp-fill-text">
+            <h3 data-i18n="top.unique.save.title">保存</h3>
+            <p data-i18n="top.unique.save.body">
+              編集中の内容は自動保存で記録され、直近の3件が残ります。作品ファイルが壊れたときは、読み込める最新の自動保存から戻します。好きなときに自分で保存する手動セーブは、ゲームのセーブデータのように、保存した時点を選んで読み込めます。手動セーブの方式は2つです。セーブスロットは、決まった数の枠（スロット）に保存先を選んで保存します。スロットの数は設定で変わります。セーブツリーは、保存するたびに保存地点が増え、前の地点から枝分かれして別の案を試せます。保存数に上限はありません。
+            </p>
+          </div>
+          <ul class="tp-filter-grid tp-screen-grid">
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/save-tree-branches.webp"
+                  width="1080"
+                  height="1539"
+                  alt="ラフから線画、色の案へ枝分かれして保存したセーブツリー"
+                  data-i18n-attr="alt:top.unique.save.treeAlt"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.save.tree">
+                  セーブツリー
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/save-slots.webp"
+                  width="1080"
+                  height="1539"
+                  alt="スロット1〜3にラフ・線画・色を保存したセーブスロット"
+                  data-i18n-attr="alt:top.unique.save.slotAlt"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.save.slot">
+                  セーブスロット
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
         </div>
       </section>
       <section class="nr-workspace">
