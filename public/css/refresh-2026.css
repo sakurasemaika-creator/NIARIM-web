@@ -572,12 +572,16 @@
   border-radius: 17px;
   box-shadow: 0 12px 26px #41334116;
 }
+/* The screen's name leads on the left and its position sits on the right,
+   at every width (the name used to be on the right on desktop and below
+   the number on phones). */
 .nr-gallery-meta {
   display: flex;
-  align-items: center;
+  flex-direction: row-reverse;
+  align-items: baseline;
   justify-content: space-between;
   padding: 18px 20px;
-  gap: 8px;
+  gap: 8px 12px;
 }
 .nr-gallery-meta span {
   /* 12px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
@@ -586,6 +590,7 @@
   white-space: nowrap;
 }
 .nr-gallery-meta h3 {
+  min-width: 0;
   font-size: 1rem;
   margin: 0;
 }
@@ -886,10 +891,10 @@
     width: 132px;
   }
   .nr-gallery-meta {
-    padding: 14px 12px;
+    padding: 14px 16px;
   }
   .nr-gallery-meta h3 {
-    font-size: 0.84rem;
+    font-size: 0.9375rem;
   }
   .nr-curated-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -931,12 +936,7 @@
   .nr-gallery-visual .nr-shot {
     width: 112px;
   }
-  .nr-gallery-meta {
-    display: block;
-  }
-  .nr-gallery-meta h3 {
-    margin-top: 5px;
-  }
+
   .nr-btn {
     width: 100%;
   }
