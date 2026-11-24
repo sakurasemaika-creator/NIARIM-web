@@ -152,6 +152,26 @@ html
   font-size: 1rem;
   transition: background-color 0.18s ease;
 }
+/* A button label: Kuramubon, as in Japanese (studio-unification-2026.css),
+   whose Latin letters cover English, French and Spanish. It was the thin
+   body face there. Korean and Chinese keep their own heading fallbacks:
+   the Kuramubon stack's Hangul/Hanzi subsets lack some of these letters. */
+html:is(:lang(en), :lang(fr), :lang(es))
+  body.nr-site
+  .nr-store-row:has([data-play-store-link][hidden])
+  .nr-hero-feature-link {
+  font-family: var(--font-serif);
+}
+/* "Explore the creative tools" stays on one line at 320px. */
+@media (max-width: 359px) {
+  html
+    body.nr-site
+    .nr-store-row:has([data-play-store-link][hidden])
+    .nr-hero-feature-link {
+    padding-inline: 18px 16px;
+    font-size: 0.9375rem;
+  }
+}
 html
   body.nr-site
   .nr-store-row:has([data-play-store-link][hidden])
