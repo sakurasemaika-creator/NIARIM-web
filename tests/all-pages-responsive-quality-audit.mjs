@@ -242,8 +242,13 @@ for (const width of widths) {
           }));
           return {
             cls: el.className?.toString().slice(0, 120) || "",
-            requiresRadius: el.matches(roundedSurfaceSelector),
-            requiresSymmetricPadding: el.matches(symmetricPaddingSelector),
+            // A row of a ruled list (.ruled-rows) is a line on the paper,
+            // not a card: it has no box, so no radius or inset padding.
+            requiresRadius:
+              el.matches(roundedSurfaceSelector) && !el.closest(".ruled-rows"),
+            requiresSymmetricPadding:
+              el.matches(symmetricPaddingSelector) &&
+              !el.closest(".ruled-rows"),
             radius: px(cs.borderTopLeftRadius),
             paddingLeft: px(cs.paddingLeft),
             paddingRight: px(cs.paddingRight),

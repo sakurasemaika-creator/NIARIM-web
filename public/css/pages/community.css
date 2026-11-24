@@ -292,38 +292,6 @@
   white-space: normal;
 }
 
-/* ---- More of the plaza: a ruled list (name | what it does) ---- */
-#main .community-rows {
-  margin-top: var(--space-lg);
-  border-bottom: 1px solid var(--rule);
-}
-
-#main .community-row {
-  display: grid;
-  grid-template-columns: minmax(0, 18em) minmax(0, 1fr);
-  gap: var(--space-xs) var(--space-lg);
-  padding: 22px 0;
-  border-top: 1px solid var(--rule);
-}
-
-#main .community-row h3 {
-  color: var(--ink);
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
-#main .community-row p {
-  max-width: 44em;
-  color: var(--ink-2);
-  line-height: 1.9;
-}
-
-@media (max-width: 760px) {
-  #main .community-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 600px) {
   .community-tabs {
     flex-wrap: nowrap;

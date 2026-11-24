@@ -95,3 +95,72 @@
   outline: 2px solid var(--pencil-ink);
   outline-offset: 3px;
 }
+
+/* ---- Ruled rows: a list of "name | what it does" on the paper, like the
+   rows of an exposure sheet. Used for every list of short facts (features'
+   tool lists, the plaza's search ways and extra functions) instead of a grid
+   of equal white boxes. ---- */
+#main .ruled-rows {
+  display: block;
+  margin-top: var(--space-lg);
+  border-bottom: 1px solid var(--rule);
+}
+
+#main .ruled-rows > * {
+  display: grid;
+  grid-template-columns: minmax(0, 18em) minmax(0, 1fr);
+  column-gap: var(--space-lg);
+  row-gap: 0;
+  align-items: start;
+  margin: 0;
+  padding: 22px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+#main .ruled-rows > * > h3 {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+#main .ruled-rows > * > :not(h3) {
+  grid-column: 2;
+  max-width: 44em;
+}
+
+#main .ruled-rows > * > :not(h3) ~ :not(h3) {
+  margin-top: 10px;
+}
+
+#main .ruled-rows > * > p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--fs-body);
+  line-height: 1.9;
+}
+
+@media (max-width: 760px) {
+  #main .ruled-rows > * {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .ruled-rows > * > h3 {
+    grid-row: auto;
+  }
+
+  #main .ruled-rows > * > :not(h3) {
+    grid-column: 1;
+  }
+
+  #main .ruled-rows > * > h3 + * {
+    margin-top: var(--space-xs);
+  }
+}
