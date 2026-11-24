@@ -721,15 +721,11 @@ html body .coins-main .coins-rate-note {
   white-space: nowrap;
 }
 
-/* Bought one by one: the total the pack is compared with. */
+/* Exchanged one by one: the total the pack is compared with, in the
+   secondary ink (no strike-through: the numbers are real totals). */
 #main .coins-table--priced .coins-price-baseline :is(th, td) {
   border-top: 1px solid var(--rule-strong);
   color: var(--ink-2);
-}
-
-#main .coins-table--priced .coins-price-baseline td {
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
 }
 
 /* Numbers stay in the body face (owner font rule); the pack row is set
@@ -754,29 +750,41 @@ html body .coins-main .coins-rate-note {
   color: var(--ink-2);
 }
 
-#main .coins-saving-badge {
-  display: block;
-  margin: 2px 0 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--pencil-ink);
-  font: 400 0.75rem / 1.2 var(--font-serif);
-  letter-spacing: 0.04em;
-}
-
-#main .coins-bundle-row td:not(:nth-child(2)) .coins-saving-badge {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 @media (max-width: 560px) {
   #main .coins-table :is(th, td) {
     padding: 11px 12px;
     font-size: 0.875rem;
   }
+}
+
+/* The pack's discount is the same for every period, so it is said once, in
+   the row's own header, where it visibly covers the whole row. */
+#main .coins-table--priced .coins-bundle-row th > span {
+  display: block;
+}
+
+/* The pack's prices are the heavy ink of the table: the label face, which
+   has a heavy weight (the body face has only one). */
+#main .coins-table--priced .coins-bundle-row td {
+  color: var(--ink);
+  font-family: var(--font-serif);
+}
+
+#main .coins-table--priced .coins-pack-tag {
+  margin-top: 4px;
+  color: var(--pencil-ink);
+  font: 400 0.75rem / 1.35 var(--font-serif);
+  letter-spacing: 0.02em;
+}
+
+/* What the pack saves in each period, written as a difference (−). */
+#main .coins-table--priced .coins-price-saving td {
+  color: var(--pencil-ink);
+}
+
+#main .coins-pack-caption {
+  max-width: 46em;
+  margin: 0 0 14px;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.7 var(--font-sans);
 }

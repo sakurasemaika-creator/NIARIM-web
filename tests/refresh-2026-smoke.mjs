@@ -444,12 +444,14 @@ try {
     const rows = [...table.tBodies[0].rows];
     const benefitRows = rows.filter((row) =>
       row
-        .querySelector("th[data-i18n]")
+        .querySelector("th[data-i18n], th > [data-i18n]")
         ?.getAttribute("data-i18n")
         .match(/^coins\.b\d+$/),
     );
     function rowWith(key) {
-      return rows.find((row) => row.querySelector(`th[data-i18n="${key}"]`));
+      return rows.find((row) =>
+        row.querySelector(`th[data-i18n="${key}"], th [data-i18n="${key}"]`),
+      );
     }
     // Read the visible leading number, independently of the unit and badge.
     function amounts(row) {
@@ -457,7 +459,7 @@ try {
         Number(
           cell.textContent
             .trim()
-            .match(/^[0-9][0-9,]*/)?.[0]
+            .match(/^−?([0-9][0-9,]*)/)?.[1]
             .replaceAll(",", ""),
         ),
       );
@@ -520,9 +522,13 @@ try {
         document.querySelector(".coins-list-title")?.textContent || "",
       ),
       hasCompletePackLabel:
-        pack?.querySelector("th")?.textContent.trim() === "コンプリートパック",
+        pack
+          ?.querySelector("th [data-i18n='coins.b11']")
+          ?.textContent.trim() === "コンプリートパック",
+      // The rate is the same for every period, so the pack row states it
+      // once, in its header (owner, 2026-11-24).
       completePackDiscounts: [
-        ...(pack?.querySelectorAll(".coins-saving-badge") || []),
+        ...(pack?.querySelectorAll(".coins-pack-tag") || []),
       ].map((el) => el.textContent.trim()),
       comparisonSavingsHaveNoBadges:
         !!separate &&
@@ -577,7 +583,11 @@ try {
     !same(coins.separateAmounts, [18380, 36700, 82520, 110000, 1100000]) ||
     !same(coins.separateAmounts, coins.singleTotal) ||
     !same(coins.savingAmounts, coins.expectedSavings) ||
-    !same(coins.completePackDiscounts, coins.expectedBadges) ||
+    !(
+      coins.completePackDiscounts.length === 1 &&
+      new Set(coins.expectedBadges).size === 1 &&
+      coins.completePackDiscounts[0].includes(coins.expectedBadges[0])
+    ) ||
     !coins.comparisonSavingsHaveNoBadges ||
     !coins.featuredDiscountCardRemoved ||
     !coins.oldFullPremiumRemoved ||

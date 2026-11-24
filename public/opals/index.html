@@ -574,6 +574,9 @@
           <p class="coins-rate-note" data-i18n="coins.rateNote">
             比較の目安は100オパール＝1円相当。オパールは換金できません。毎日のログインで10オパール、対象のリワード広告1回で10オパール、ミッションからも集められます。
           </p>
+          <p class="coins-pack-caption" data-i18n="coins.packCaption">
+            コンプリートパックは、制作機能6つと全広告非表示をまとめたものです。どの期間も、単品で全部そろえた場合の半額です。
+          </p>
           <div
             class="coins-scroll"
             role="region"
@@ -972,7 +975,7 @@
                 </tr>
                 <tr class="coins-price-baseline">
                   <th scope="row" data-i18n="coins.compareSeparate">
-                    制作機能6つ＋全広告非表示の単品合計
+                    単品で全部そろえた場合の合計
                   </th>
                   <td>
                     18,380
@@ -1006,51 +1009,11 @@
                   </td>
                 </tr>
                 <tr class="coins-bundle-row">
-                  <th scope="row" data-i18n="coins.b11">コンプリートパック</th>
-                  <td>
-                    9,190
-                    <span class="coins-unit" data-i18n="coins.unit"
-                      >オパール</span
-                    ><span class="coins-saving-badge" aria-label="50% OFF"
-                      >50% OFF</span
+                  <th scope="row">
+                    <span data-i18n="coins.b11">コンプリートパック</span
+                    ><span class="coins-pack-tag" data-i18n="coins.packTag"
+                      >全期間 50% OFF</span
                     >
-                  </td>
-                  <td>
-                    18,350
-                    <span class="coins-unit" data-i18n="coins.unit"
-                      >オパール</span
-                    ><span class="coins-saving-badge" aria-label="50% OFF"
-                      >50% OFF</span
-                    >
-                  </td>
-                  <td>
-                    41,260
-                    <span class="coins-unit" data-i18n="coins.unit"
-                      >オパール</span
-                    ><span class="coins-saving-badge" aria-label="50% OFF"
-                      >50% OFF</span
-                    >
-                  </td>
-                  <td>
-                    55,000
-                    <span class="coins-unit" data-i18n="coins.unit"
-                      >オパール</span
-                    ><span class="coins-saving-badge" aria-label="50% OFF"
-                      >50% OFF</span
-                    >
-                  </td>
-                  <td class="coins-year-standard">
-                    550,000
-                    <span class="coins-unit" data-i18n="coins.unit"
-                      >オパール</span
-                    ><span class="coins-saving-badge" aria-label="50% OFF"
-                      >50% OFF</span
-                    >
-                  </td>
-                </tr>
-                <tr class="coins-price-saving">
-                  <th scope="row" data-i18n="coins.compareSaving">
-                    パックで節約できるオパール数
                   </th>
                   <td>
                     9,190
@@ -1083,6 +1046,41 @@
                     >
                   </td>
                 </tr>
+                <tr class="coins-price-saving">
+                  <th scope="row" data-i18n="coins.compareSaving">
+                    パックで節約できるオパール
+                  </th>
+                  <td>
+                    −9,190
+                    <span class="coins-unit" data-i18n="coins.unit"
+                      >オパール</span
+                    >
+                  </td>
+                  <td>
+                    −18,350
+                    <span class="coins-unit" data-i18n="coins.unit"
+                      >オパール</span
+                    >
+                  </td>
+                  <td>
+                    −41,260
+                    <span class="coins-unit" data-i18n="coins.unit"
+                      >オパール</span
+                    >
+                  </td>
+                  <td>
+                    −55,000
+                    <span class="coins-unit" data-i18n="coins.unit"
+                      >オパール</span
+                    >
+                  </td>
+                  <td class="coins-year-standard">
+                    −550,000
+                    <span class="coins-unit" data-i18n="coins.unit"
+                      >オパール</span
+                    >
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1091,7 +1089,7 @@
             aria-labelledby="coins-compare-heading"
           >
             <h3 id="coins-compare-heading" data-i18n="coins.compareTitle">
-              全部使うならセットがお得！
+              コンプリートパックと単品の違い
             </h3>
             <p data-i18n="coins.compareIntro">
               コンプリートパックは1か月55,000オパール、1年550,000オパールです。制作機能6つと全広告非表示を単品でそろえる場合の合計は、1か月110,000オパール、1年1,100,000オパールです。表の50%

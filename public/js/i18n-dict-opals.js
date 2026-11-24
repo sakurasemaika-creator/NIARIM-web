@@ -4,6 +4,8 @@
   const dictionary = window.NIARIM_I18N_DICT;
   const strings = {
   "ja": {
+    "coins.packTag": "全期間 50% OFF",
+    "coins.packCaption": "コンプリートパックは、制作機能6つと全広告非表示をまとめたものです。どの期間も、単品で全部そろえた場合の半額です。",
     "nav.coins": "オパール・ミッション",
     "refresh.premiumNotice": "料金と購入条件はGoogle Playの最新表示をご確認ください。オパールやミッションの利用条件はアプリ内で確認できます。",
     "coins.meta.title": "オパール・ミッション | NIARIM",
@@ -45,7 +47,7 @@
     "coins.choiceEarn": "オパールで好きな機能を",
     "coins.choiceEarnBody": "ログインやミッション、対象広告などで集めたオパールを、作品づくりのために使えます。",
     "coins.unit": "オパール",
-    "coins.compareSaving": "パックで節約できるオパール数",
+    "coins.compareSaving": "パックで節約できるオパール",
     "coins.compareCaution": "オパールの交換はアプリ内で行えます。交換できる特典と期間は、アプリのオパール交換画面で確認できます。",
     "coins.toPremiumTitle": "オパールを集める時間がないなら、プレミアム。",
     "coins.toPremiumBody": "特典をまとめて使いたい人には、月額550円・年額5,500円のプレミアムプランもおすすめ。オパール集めをしなくても、対象機能をまとめて利用できます。",
@@ -66,6 +68,8 @@
     "coins.pageNavigation": "ページ内メニュー"
   },
   "en": {
+    "coins.packTag": "50% off for every period",
+    "coins.packCaption": "The Complete Pack bundles the six creation features and the removal of all ads. For every period it costs half of exchanging them one by one.",
     "nav.coins": "Opals & Missions",
     "refresh.premiumNotice": "Check Google Play for current Premium purchase terms and the app for Opal reward availability.",
     "coins.meta.title": "Opals & Benefits | NIARIM",
@@ -103,7 +107,7 @@
     "coins.choiceEarn": "Turn earned Opals into benefits",
     "coins.choiceEarnBody": "Use Opals from sign-ins, missions and eligible ads for your creative projects.",
     "coins.unit": "Opals",
-    "coins.compareSaving": "Opals saved with pack",
+    "coins.compareSaving": "Opals saved with the pack",
     "coins.compareCaution": "Redeem Opals in the app. Open the Opal exchange screen to see available benefits and durations.",
     "coins.toPremiumTitle": "Short on time to collect Opals? Go Premium.",
     "coins.toPremiumBody": "For all-in-one benefits without Opal collecting, Premium is also available at ¥550/month or ¥5,500/year.",
@@ -124,6 +128,8 @@
     "coins.pageNavigation": "On this page"
   },
   "zh-Hans": {
+    "coins.packTag": "所有期限均为5折",
+    "coins.packCaption": "全功能组合包包含6项制作功能和移除所有广告。每个期限的价格都是逐项全部兑换的一半。",
     "nav.coins": "欧泊与任务",
     "refresh.premiumNotice": "Premium购买条件请以Google Play为准，欧泊奖励以应用内显示为准。",
     "coins.meta.title": "欧泊与权益 | NIARIM",
@@ -182,6 +188,8 @@
     "coins.pageNavigation": "本页导航"
   },
   "zh-Hant": {
+    "coins.packTag": "所有期限皆為5折",
+    "coins.packCaption": "全功能組合包包含6項製作功能與移除所有廣告。每個期限的價格都是逐項全部兌換的一半。",
     "nav.coins": "歐泊與任務",
     "refresh.premiumNotice": "Premium購買條件以Google Play為準，歐泊獎勵以應用程式為準。",
     "coins.meta.title": "歐泊與權益 | NIARIM",
@@ -219,7 +227,7 @@
     "coins.choiceEarn": "用收集的歐泊換權益",
     "coins.choiceEarnBody": "把登入、任務或指定廣告取得的歐泊用在創作上。",
     "coins.unit": "歐泊",
-    "coins.compareSaving": "組合包省下的歐泊",
+    "coins.compareSaving": "組合包節省的歐泊",
     "coins.compareCaution": "請在應用程式內兌換歐泊。在歐泊兌換頁面查看可兌換的權益與期間。",
     "coins.toPremiumTitle": "沒時間存歐泊？試試 Premium。",
     "coins.toPremiumBody": "不想存歐泊也能使用整套功能：還可選擇每月 550 日圓或每年 5,500 日圓的 Premium 方案。",
@@ -240,6 +248,8 @@
     "coins.pageNavigation": "本頁導覽"
   },
   "ko": {
+    "coins.packTag": "모든 기간 50% 할인",
+    "coins.packCaption": "컴플리트 팩은 제작 기능 6개와 모든 광고 제거를 묶은 것입니다. 어느 기간이든 하나씩 모두 교환할 때의 절반입니다.",
     "nav.coins": "오팔·미션",
     "refresh.premiumNotice": "Premium 구매 조건은 Google Play에서, 오팔 보상은 앱에서 확인하세요.",
     "coins.meta.title": "오팔·혜택 | NIARIM",
@@ -299,6 +309,8 @@
     "coins.pageNavigation": "이 페이지의 메뉴"
   },
   "fr": {
+    "coins.packTag": "50 % de réduction sur toutes les durées",
+    "coins.packCaption": "Le pack complet réunit les six fonctions de création et la suppression de toutes les publicités. Pour chaque durée, il coûte la moitié du total à l’unité.",
     "nav.coins": "Opales et missions",
     "refresh.premiumNotice": "Consultez Google Play pour les conditions Premium et l’application pour les récompenses en opales.",
     "coins.meta.title": "Opales et avantages | NIARIM",
@@ -336,7 +348,7 @@
     "coins.choiceEarn": "Transformez vos opales en avantages",
     "coins.choiceEarnBody": "Utilisez les opales issues des connexions, missions et publicités éligibles pour créer.",
     "coins.unit": "opales",
-    "coins.compareSaving": "Opales économisées",
+    "coins.compareSaving": "Opales économisées avec le pack",
     "coins.compareCaution": "Échangez vos opales dans l’application. L’écran d’échange indique les avantages et les durées disponibles.",
     "coins.toPremiumBody": "Pour profiter de l’ensemble sans accumuler d’opales, Premium est aussi disponible à 550 ¥/mois ou 5 500 ¥/an.",
     "premium.coinsTitle": "Envie de dépenser moins ? Collectez des opales.",
@@ -356,6 +368,8 @@
     "coins.pageNavigation": "Dans cette page"
   },
   "es": {
+    "coins.packTag": "50 % de descuento en todos los periodos",
+    "coins.packCaption": "El paquete completo reúne las seis funciones de creación y la eliminación de todos los anuncios. En todos los periodos cuesta la mitad que canjearlos por separado.",
     "nav.coins": "Ópalos y misiones",
     "refresh.premiumNotice": "Consulta Google Play para las condiciones Premium y la app para las recompensas en ópalos.",
     "coins.meta.title": "Ópalos y ventajas | NIARIM",
@@ -392,7 +406,7 @@
     "coins.choiceEarn": "Cambia tus ópalos por ventajas",
     "coins.choiceEarnBody": "Usa los ópalos de inicios de sesión, misiones y anuncios para tus creaciones.",
     "coins.unit": "ópalos",
-    "coins.compareSaving": "Ópalos ahorrados",
+    "coins.compareSaving": "Ópalos que ahorras con el paquete",
     "coins.compareCaution": "Canjea tus ópalos en la aplicación. Consulta las ventajas y los periodos disponibles en la pantalla de canje.",
     "coins.toPremiumTitle": "¿Sin tiempo para reunir ópalos? Elige Premium.",
     "coins.toPremiumBody": "Si prefieres todas las ventajas sin reunir ópalos, también tienes Premium por 550 ¥/mes o 5.500 ¥/año.",

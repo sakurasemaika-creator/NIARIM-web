@@ -52,16 +52,20 @@ const prices = [
   [9190, 18350, 41260, 55000, 550000],
 ];
 function values(row) {
-  return [...row.matchAll(/<td\b[^>]*>\s*([\d,]+)/g)].map((x) =>
+  return [...row.matchAll(/<td\b[^>]*>\s*−?([\d,]+)/g)].map((x) =>
     Number(x[1].replaceAll(",", "")),
   );
 }
 for (const [i, expected] of prices.entries()) {
   const row = table.match(
     new RegExp(
-      '<tr[^>]*>\\s*<th scope="row" data-i18n="coins\\.b' +
+      // The pack row's label sits in a span so the header can also carry
+      // the discount tag.
+      '<tr[^>]*>\\s*<th scope="row"(?: data-i18n="coins\\.b' +
         i +
-        '">[\\s\\S]*?<\\/tr>',
+        '">|>\\s*<span data-i18n="coins\\.b' +
+        i +
+        '">)[\\s\\S]*?<\\/tr>',
     ),
   )?.[0];
   assert.ok(row, "benefit row " + i);
@@ -86,8 +90,14 @@ for (const [label, expected] of [
 const rates = [50, 50, 50, 50, 50];
 const bundle = table.match(/<tr class="coins-bundle-row">[\s\S]*?<\/tr>/)?.[0];
 assert.ok(bundle);
+// The discount is the same for every period, so it is stated once, in the
+// pack row's header (owner, 2026-11-24: one badge under the 1h column read as
+// applying to 1h only). Each period's rate is checked from the numbers.
+assert.equal((bundle.match(/data-i18n="coins\.packTag"/g) || []).length, 1);
+assert.match(bundle, /data-i18n="coins\.packTag"\s*>[^<]*50% OFF/);
+assert.doesNotMatch(bundle, /coins-saving-badge/);
 assert.deepEqual(
-  [...bundle.matchAll(/aria-label="(\d+)% OFF"/g)].map((x) => Number(x[1])),
+  prices[11].map((price, i) => Math.round((1 - price / separate[i]) * 100)),
   rates,
 );
 assert.deepEqual(
@@ -95,7 +105,10 @@ assert.deepEqual(
   saving,
 );
 // Live HTML may be localized by the request's Accept-Language header.
-assert.match(table, /data-i18n="coins.b11">[^<]*<\/th>/);
+assert.match(
+  table,
+  /<th scope="row">\s*<span data-i18n="coins.b11">[^<]*<\/span/,
+);
 assert.match(page, /data-i18n="coins.yearNote"/);
 assert.match(page, /data-i18n="coins.rateNote"/);
 assert.match(page, /data-i18n="coins.compareCaution"/);
