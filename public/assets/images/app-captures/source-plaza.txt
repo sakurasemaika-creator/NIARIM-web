@@ -1,0 +1,10 @@
+source_repo=sakurasemaika-creator/NIARIM
+source_branch=dev_branch
+source_commit=61029b0e
+captured_at=2026-11-24T19:55:00Z
+screen=/community (作品広場), the app's own demo feed (no backend; every card shows the app's "sample data" label)
+languages=ja,en,es,fr,ko,zh-Hans,zh-Hant (the app set to each language: SettingsService language; zh-Hant is the app's zh_Hant)
+size=360x760 logical at 2x (720x1520), webp quality 82
+fonts=all of the app's bundled fonts loaded from pubspec.yaml (test/helpers/load_app_fonts.dart)
+file_names=plaza-<lang>.webp; the home page picks the page's language through img.plaza (public/js/i18n-dict-showcase.js), which the Worker applies before the browser asks for an image
+note=the demo works have Japanese titles and author names in every language (they are the app's demo data)

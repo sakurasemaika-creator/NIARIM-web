@@ -110,7 +110,14 @@ try {
           img.naturalWidth,
           img.naturalHeight,
         ]);
-        if (size[0] !== 360 || size[1] !== 760)
+        // The app's 360x760 phone screen, captured at 1x or 2x (the per-
+        // language captures are 2x so they stay sharp on high-density screens).
+        if (
+          !(
+            (size[0] === 360 && size[1] === 760) ||
+            (size[0] === 720 && size[1] === 1520)
+          )
+        )
           bad.push(
             "Native community capture " + width + " " + JSON.stringify(size),
           );

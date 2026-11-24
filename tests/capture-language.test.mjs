@@ -47,9 +47,10 @@ test("a capture URL takes the page language, Japanese keeps the plain name", () 
     localizedCaptureUrl("/assets/images/app-captures/onion-skin-en.avif", "ko"),
     "/assets/images/app-captures/onion-skin-ko.avif",
   );
-  // Captures that exist only in Japanese are left alone.
-  const community = "/assets/images/app-captures/community.webp";
-  assert.equal(localizedCaptureUrl(community, "en"), community);
+  // Other captures (the Work Plaza: plaza-<lang>.webp, chosen through the
+  // dictionary's img.plaza) are left alone by this rule.
+  const plaza = "/assets/images/app-captures/plaza-ja.webp";
+  assert.equal(localizedCaptureUrl(plaza, "en"), plaza);
 });
 
 test("the browser uses the same rule as the Worker", () => {
