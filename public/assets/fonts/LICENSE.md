@@ -27,7 +27,7 @@
 - 配布元: https://www.flopdesign.com/freefont/kuramubon.html
 - NIARIMアプリ本体でも見出しフォントとして使用しています。
 
-### NotoSerifKR-subset.v2.woff2 — 韓国語の補完
+### NotoSerifKR-subset.v3.woff2 — 韓国語の補完
 
 **Noto Serif KR**（Google / Source Han Serif ベース）
 
@@ -51,7 +51,7 @@
 - 見出しに出る文字だけのサブセット（計47KB）で、`unicode-range` 指定により
   その言語のページ以外では転送されない。
 
-### NotoSerifSC-subset.v2.woff2 — 簡体字中国語の補完
+### NotoSerifSC-subset.v3.woff2 — 簡体字中国語の補完
 
 **Noto Serif SC**（Google / Source Han Serif ベース）
 
@@ -61,7 +61,7 @@
   （日本語の漢字と範囲が重なるため、広い範囲ではなく収録文字ちょうどの
   範囲を指定しています。）
 
-### NotoSerifTC-subset.v2.woff2 — 繁体字中国語の補完
+### NotoSerifTC-subset.v3.woff2 — 繁体字中国語の補完
 
 **Noto Serif TC**（Google / Source Han Serif ベース）
 

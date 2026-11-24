@@ -114,14 +114,14 @@ FONTS = [
     (
         "NotoSerifKR",
         f"{SRCDIR}/noto/NotoSerifKR.woff2",
-        "NotoSerifKR-subset.v2.woff2",
+        "NotoSerifKR-subset.v3.woff2",
         "韓国語の補完（Noto Serif KR）",
         "fallback",
     ),
     (
         "NotoSerifSC",
         f"{SRCDIR}/noto/NotoSerifSC.woff2",
-        "NotoSerifSC-subset.v2.woff2",
+        "NotoSerifSC-subset.v3.woff2",
         "簡体字中国語の補完（Noto Serif SC）",
         "fallback",
     ),

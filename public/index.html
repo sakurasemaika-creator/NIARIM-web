@@ -660,7 +660,7 @@
             NIARIMのおすすめ機能
           </h2>
           <p data-i18n="top.unique.lead">
-            下の絵はどれも、アプリの描画エンジンで描いた実際の結果です。
+            下の絵は、アプリの描画エンジンで描いた実際の結果と、アプリの実際の画面です。
           </p>
         </header>
         <div class="tp-unique-list">
@@ -1383,6 +1383,47 @@
               </figure>
             </li>
           </ul>
+        </div>
+
+        <div class="tp-filters tp-speech">
+          <div class="tp-fill-text">
+            <h3 data-i18n="top.unique.speech.title">
+              読み上げとタイムスタンプ
+            </h3>
+            <p data-i18n="top.unique.speech.body">
+              タイムラインの「素材を追加」から「読み上げ」を選び、セリフを打ち込んで音声・読み上げ速度・音程を選ぶと、読み上げた音声が読み上げ専用のトラックに波形付きで入ります。タイムスタンプは、フレームにメモを残す機能です。名前をタップするとそのフレームへ移動し、フレームの上の三角からもメモを開けます。セリフの波形とタイムスタンプを並べると、口パクの口を開ける・閉じるのが何フレーム目かがひと目で分かります。
+            </p>
+            <p class="tp-note" data-i18n="top.unique.speech.note">
+              音声は、端末に入っている音声エンジン（Androidのオフライン音声）で作ります。商用利用・配信に使うときは、選んだ音声エンジンと音声データの提供元の利用条件を確かめてください。
+            </p>
+          </div>
+          <!-- The app's timeline screen (PC layout, 1280 px wide, ×2). The
+               speech clip holds a real WAV made with an offline speech
+               synthesiser on the build machine, because Android voices do not
+               run in tests; its waveform is drawn by the app itself. -->
+          <figure class="tp-wide-capture">
+            <div
+              class="tp-wide-capture-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="読み上げのトラックとタイムスタンプのあるタイムライン"
+              data-i18n-attr="aria-label:top.unique.speech.alt"
+            >
+              <img
+                src="/assets/images/engine/timeline-speech-timestamps.webp"
+                width="2560"
+                height="325"
+                alt="読み上げのトラックとタイムスタンプのあるタイムライン"
+                data-i18n-attr="alt:top.unique.speech.alt"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption data-i18n="top.unique.speech.caption">
+              「おはよう。いってきます。」を読み上げのトラックに入れ、3・16フレーム目に「口あけ」、11・28フレーム目に「口とじ」のタイムスタンプを付けた例（12fps）。赤い枠は「口あけ
+              1.25s」をタップして移ったフレームです。
+            </figcaption>
+          </figure>
         </div>
       </section>
       <section class="nr-workspace">

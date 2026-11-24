@@ -846,6 +846,38 @@
   max-width: 1160px;
 }
 
+/* A wide timeline capture: full width on large screens; on narrow ones it
+   keeps a readable size and scrolls sideways inside its frame. */
+#main .tp-wide-capture {
+  margin: 24px 0 0;
+}
+
+#main .tp-wide-capture-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-wide-capture-scroll:focus-visible {
+  outline: 2px solid var(--pencil);
+  outline-offset: 2px;
+}
+
+#main .tp-wide-capture img {
+  display: block;
+  width: 100%;
+  min-width: 860px;
+  height: auto;
+}
+
+#main .tp-wide-capture figcaption {
+  max-width: 52em;
+  margin-top: 8px;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.6 var(--font-sans);
+}
+
 #main .tp-capture img {
   border-radius: 10px;
   box-shadow: 0 0 0 1px var(--rule);
