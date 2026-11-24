@@ -186,3 +186,43 @@
 .about-unique-panel > .spec-grid {
   margin-top: 0;
 }
+
+/* ---- Paper and ink (2026-11 redesign): one paper ground, sections split
+   by a hairline rule, white only for sheets, no tinted bands, no dark
+   gradient panel, no pink icon boxes. Scoped under #main so the older
+   site-wide layers cannot override it. */
+#main .section-tint {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+#main :is(.about-name, .about-not-supported) {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+}
+
+#main .intro-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+}
+
+#main .about-cta {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+#main .about-cta h2 {
+  color: var(--ink);
+}
+
+#main .about-cta p {
+  color: var(--ink-2);
+}
