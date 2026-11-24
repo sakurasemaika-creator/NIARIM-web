@@ -62,7 +62,7 @@ FONTS = [
     (
         "Kuramubon",
         f"{SRCDIR}/kuramubon/KuramubonFont/Kuramubon.otf",
-        "Kuramubon-subset.woff2",
+        "Kuramubon-subset.v2.woff2",
         "見出し用（くらむぼん／フロップデザイン・Dela Gothic派生）",
         "heading",
     ),

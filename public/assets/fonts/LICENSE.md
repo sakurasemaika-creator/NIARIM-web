@@ -17,7 +17,7 @@
   ※ "Noto" は Google Inc. の商標です。
 - NIARIMアプリ本体でも本文フォントとして使用しています。
 
-### Kuramubon-subset.woff2 — 見出し用
+### Kuramubon-subset.v2.woff2 — 見出し用
 
 **くらむぼん**（フロップデザイン 制作）
 
