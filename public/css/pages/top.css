@@ -798,7 +798,14 @@
   max-width: none;
 }
 
-#main .tp-screen-grid img {
+/* The same screen in four themes and the colour settings, in one row. */
+#main .tp-filter-grid.tp-theme-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: none;
+}
+
+#main .tp-screen-grid img,
+#main .tp-theme-grid img {
   border-radius: 10px;
 }
 
@@ -879,6 +886,10 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  #main .tp-filter-grid.tp-theme-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   #main .tp-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -911,13 +922,6 @@
     width: 128px;
     height: 128px;
   }
-}
-
-@media (max-width: 359px) {
-  #main .tp-brush-group--pixel img {
-    width: 96px;
-    height: 96px;
-  }
 
   #main .tp-filter-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -925,6 +929,17 @@
 
   #main .tp-filter-grid.tp-screen-grid {
     grid-template-columns: minmax(0, 360px);
+  }
+
+  #main .tp-filter-grid.tp-theme-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 359px) {
+  #main .tp-brush-group--pixel img {
+    width: 96px;
+    height: 96px;
   }
 }
 
