@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
-"""Extend the shipped locale subsets without dropping their existing glyphs."""
+"""Extend the shipped locale subsets without dropping their existing glyphs.
+
+A published font is cached for 30 days under its file name (public/_headers),
+so a subset whose characters change is written under the next version name
+(Name.woff2 -> Name.v2.woff2 -> Name.v3.woff2), the @font-face points at it,
+its sha256 goes into tests/font-files.json and the old file is removed. A
+subset whose characters stay the same is left as it is.
+"""
 
 import argparse
+import hashlib
 import json
 import re
 import textwrap
@@ -36,20 +44,33 @@ def main():
 
     app_fonts = arguments.app / "assets/fonts"
     brand_faces = {
-        "Kuramubon": ("Kuramubon-latin.woff2", app_fonts / "Kuramubon.otf"),
-        "HakkouMincho": ("HakkouMincho-latin.woff2", app_fonts / "HakkouMincho.ttf"),
-        "HakkouMinchoCJK": ("HakkouMincho-subset.woff2", app_fonts / "HakkouMincho.ttf"),
-        "KuramubonCJK": ("Kuramubon-subset.v2.woff2", app_fonts / "Kuramubon.otf"),
+        "Kuramubon": app_fonts / "Kuramubon.otf",
+        "HakkouMincho": app_fonts / "HakkouMincho.ttf",
+        "HakkouMinchoCJK": app_fonts / "HakkouMincho.ttf",
+        "KuramubonCJK": app_fonts / "Kuramubon.otf",
     }
+    manifest_file = root / "tests/font-files.json"
+    manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
     for family, characters in supplements.items():
-        filename, source = brand_faces.get(family, (
-            f"{family}-subset.woff2", arguments.originals / f"{family}.ttf",
-        ))
-        target = font_dir / filename
+        source = brand_faces.get(family, arguments.originals / f"{family}.ttf")
+        published = re.search(
+            r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family)
+            + r'";[^}]*?/assets/fonts/([\w.-]+\.woff2)',
+            css,
+        )
+        filename = published[1] if published else f"{family}-subset.woff2"
+        current = font_dir / filename
         actual = {ord(character) for character in characters}
-        if target.is_file():
-            with TTFont(target) as old:
-                actual.update(old.getBestCmap())
+        if current.is_file():
+            with TTFont(current) as old:
+                previous = set(old.getBestCmap())
+            actual.update(previous)
+            if actual == previous:
+                print(f"{family}: unchanged ({filename})")
+                continue
+            version = re.match(r"(.*?)(?:\.v(\d+))?\.woff2$", filename)
+            filename = f"{version[1]}.v{int(version[2] or 1) + 1}.woff2"
+        target = font_dir / filename
         with TTFont(source, recalcTimestamp=False) as font:
             missing = actual - font.getBestCmap().keys()
             if missing:
@@ -70,10 +91,15 @@ def main():
         with TTFont(target) as generated:
             if generated.getBestCmap().keys() != actual:
                 raise ValueError(f"{family}: subset did not preserve the expected code points")
-        pattern = re.compile(r"@font-face\s*\{[^}]*?/assets/fonts/" + re.escape(filename) + r"[^}]*?\}")
+        manifest["files"][filename] = hashlib.sha256(target.read_bytes()).hexdigest()
+        if current != target and current.is_file():
+            current.unlink()
+            manifest["files"].pop(current.name, None)
+        pattern = re.compile(r"@font-face\s*\{[^}]*?/assets/fonts/" + re.escape(current.name) + r"[^}]*?\}")
         match = pattern.search(css)
         if match:
-            face = re.sub(r"unicode-range:\s*[^;]+;", "unicode-range:\n" + ranges(actual) + ";", match[0])
+            face = match[0].replace("/assets/fonts/" + current.name, "/assets/fonts/" + filename)
+            face = re.sub(r"unicode-range:\s*[^;]+;", "unicode-range:\n" + ranges(actual) + ";", face)
             if family not in brand_faces:
                 face = re.sub(r"^  font-weight: [^;]+;\n", "", face, flags=re.M)
             css = css[:match.start()] + face + css[match.end():]
@@ -98,6 +124,7 @@ def main():
             css = css[:stand_in.start()] + updated + css[stand_in.end():]
         print(f"{family}: {len(actual)} characters, {target.stat().st_size:,} bytes")
     sheet.write_text(css, encoding="utf-8")
+    manifest_file.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ FONTS = [
     (
         "HakkouMincho",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
-        "HakkouMincho-subset.woff2",
+        "HakkouMincho-subset.v2.woff2",
         "本文用（白光明朝／lavsic氏・Noto Serif JP派生）",
         "primary",
     ),
@@ -114,14 +114,14 @@ FONTS = [
     (
         "NotoSerifKR",
         f"{SRCDIR}/noto/NotoSerifKR.woff2",
-        "NotoSerifKR-subset.woff2",
+        "NotoSerifKR-subset.v2.woff2",
         "韓国語の補完（Noto Serif KR）",
         "fallback",
     ),
     (
         "NotoSerifSC",
         f"{SRCDIR}/noto/NotoSerifSC.woff2",
-        "NotoSerifSC-subset.woff2",
+        "NotoSerifSC-subset.v2.woff2",
         "簡体字中国語の補完（Noto Serif SC）",
         "fallback",
     ),

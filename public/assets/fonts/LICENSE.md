@@ -9,7 +9,7 @@
 
 ## 収録フォント
 
-### HakkouMincho-subset.woff2 — 本文用
+### HakkouMincho-subset.v2.woff2 — 本文用
 
 **白光明朝**（lavsic 氏 作）
 
@@ -27,7 +27,7 @@
 - 配布元: https://www.flopdesign.com/freefont/kuramubon.html
 - NIARIMアプリ本体でも見出しフォントとして使用しています。
 
-### NotoSerifKR-subset.woff2 — 韓国語の補完
+### NotoSerifKR-subset.v2.woff2 — 韓国語の補完
 
 **Noto Serif KR**（Google / Source Han Serif ベース）
 
@@ -51,29 +51,32 @@
 - 見出しに出る文字だけのサブセット（計47KB）で、`unicode-range` 指定により
   その言語のページ以外では転送されない。
 
-### NotoSerifSC-subset.woff2 — 簡体字中国語の補完
+### NotoSerifSC-subset.v2.woff2 — 簡体字中国語の補完
 
 **Noto Serif SC**（Google / Source Han Serif ベース）
 
-- 簡体字固有の字形（专・业・东 等）は白光明朝・くらむぼんに収録が無いため補完します。
+- 簡体字中国語のページの漢字・記号は、すべてこのフォントで描きます。白光明朝の日本の字形と
+  1つの文の中で混ざらないように、サイトで使う字とアプリの機能名の字をすべて収録しています。
 - こちらも `unicode-range` 指定により、簡体字が出ないページでは転送されません。
   （日本語の漢字と範囲が重なるため、広い範囲ではなく収録文字ちょうどの
   範囲を指定しています。）
 
-### NotoSerifTC-subset.woff2 — 繁体字中国語の補完
+### NotoSerifTC-subset.v2.woff2 — 繁体字中国語の補完
 
 **Noto Serif TC**（Google / Source Han Serif ベース）
 
-- 繁体字中国語のページで、本文用書体に収録されていない字を補います。
+- 繁体字中国語のページの漢字・記号は、すべてこのフォントで描きます（簡体字と同じ理由）。
 - [Noto Serif TCのライセンス](NotoSerifTC-OFL.txt)
 
 ## サブセットの再生成
 
-7言語の画面で見つけた不足字形は `tools/locale-font-characters.json` に記録します。
+7言語の画面で見つけた不足字形と、サイトで使うアプリの機能名の字は `tools/locale-font-characters.json` に記録します。
 Noto Serif KR・SC・TC の原本は [Google Fonts の固定リビジョン](https://github.com/google/fonts/tree/cc5661d43cd4f9aad5567033a8e15ca28dc35c86/ofl)
 から取得し、`NotoSerifKR.ttf`、`NotoSerifSC.ttf`、`NotoSerifTC.ttf` として同じフォルダに置きます。
 `python tools/build-locale-fonts.py <原本のフォルダ> <NIARIMのチェックアウト>` で、
 既存の字形を保持して、地域別フォント、白光明朝の本文用フォント、くらむぼんのラテン文字を更新できます。
+収録する字が変わったフォントは次の版の名前（`.v2` → `.v3`）で書き出され、CSS・`tests/font-files.json` も書き換わります
+（フォントは名前ごと30日キャッシュされるため、同じ名前のまま中身を変えない）。
 実行には FontTools と Brotli が必要です。
 
 サイトの文言を変更したら、収録文字が変わるため再生成が必要です。

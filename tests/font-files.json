@@ -2,16 +2,16 @@
   "//": "sha256 of every published font file. A published font is cached for 30 days under its name (public/_headers), so changed bytes need a new file name: add the new name here and point the CSS at it; never edit an entry in place.",
   "files": {
     "HakkouMincho-latin.woff2": "97becf39e38e476fe073ba10a0cfda28f117c869cecbd47da77d9fc19343e551",
-    "HakkouMincho-subset.woff2": "b6dd02b666ed6c9a9600a6618a211d025ff4d593f8d4ff21ab119340ffffc8bb",
     "Kuramubon-latin.woff2": "7d4d3f06313cdba9784fdd758f2f7371169bc03ed72a7f43faab21b0684c6a36",
     "Kuramubon-subset.v2.woff2": "86734c1b069a708abc80eb6d9de92c279406d104d47ce8c878ffbfe1c84c7090",
     "NotoSansHeadKR-subset.woff2": "c0f094758f802728bb494a8024c1630a02372f8ab62527f3b4cad5b6cb8d67d9",
     "NotoSansHeadSC-subset.woff2": "8e5a7d43765b3ac0015a1f0aed6759c3698eab4198078de7d6b5ae629a80c833",
-    "NotoSerifKR-subset.woff2": "0c7bc1fdf166d928664c4baf6cc216801f12be26205607f9e9357e3fd882602d",
     "NotoSerifMenuJP-subset.woff2": "687e90e39408b674354aeeda8f62cf9589aa9a790c579cac0213f56e2facd5f8",
     "NotoSerifMenuKR-subset.woff2": "38a6920ae669144e1115a17622b4a3cc09a008dd4a6b549edb43961232396e14",
     "NotoSerifMenuSC-subset.woff2": "937aa3c400c5735d9a2d0700a012e6644e9215e7d80d98f663fdb4b9737361dd",
-    "NotoSerifSC-subset.woff2": "0d37eb1f35435c557ad83f8a7cca672cf5436e0176a440bbfdebde6d775e6422",
-    "NotoSerifTC-subset.woff2": "b4ff2daeab8ea95ad437b3ebb1633c034501402229d2b47ef92f2011a401f12f"
+    "NotoSerifKR-subset.v2.woff2": "d5520574f6860546ef75fb8413045007c0c0263c74fb04ef6086e01ee0ed4b3b",
+    "NotoSerifSC-subset.v2.woff2": "abe741eb04cc184d7ed1fcf564ccd0e5b3b69f9d830ed06d0147b6d12d61a12f",
+    "NotoSerifTC-subset.v2.woff2": "e678e03c99d27c0532fd1988bdfed3ca10d498f3462e9f59bf91b461b9415132",
+    "HakkouMincho-subset.v2.woff2": "88242db5bb09a1e45cdcd4e724c620fa11aae6a3df899a1a75ebf9e6e30f5cc7"
   }
 }
