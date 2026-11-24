@@ -626,7 +626,17 @@ try {
   const premiumContrast = await page.evaluate(() => {
     const panel = document.querySelector(".premium-coin-panel");
     const heading = panel?.querySelector("h2");
-    const panelBg = panel && getComputedStyle(panel).backgroundColor;
+    // The panel may sit on the paper without its own fill: measure against
+    // the first opaque background behind it.
+    let bgNode = panel;
+    while (
+      bgNode &&
+      /^rgba\(0, 0, 0, 0\)$|^transparent$/.test(
+        getComputedStyle(bgNode).backgroundColor,
+      )
+    )
+      bgNode = bgNode.parentElement;
+    const panelBg = bgNode && getComputedStyle(bgNode).backgroundColor;
     const headingFg = heading && getComputedStyle(heading).color;
     function rgb(value) {
       return (value.match(/[0-9.]+/g) || []).slice(0, 3).map(Number);

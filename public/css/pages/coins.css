@@ -1,310 +1,315 @@
-.coins-hero {
-  background: linear-gradient(125deg, #261f2b, #60364d);
-  padding: clamp(85px, 9vw, 135px) 0;
-  color: #fff;
+/*
+ * Opals & Missions (/opals/) and the Opal cross-link on /premium/.
+ * Paper and ink (2026-11 redesign): one paper ground, white sheets with a
+ * hairline rule, ink text, the brand pink only for the primary action and
+ * small marks. Colours come only from the tokens in variables.css.
+ */
+
+html body .coins-main {
+  background: var(--paper);
+  color: var(--ink);
 }
-.coins-hero h1 {
-  font-size: clamp(2rem, 5vw, 4.2rem);
-  color: #fff;
-  line-height: 1.38;
-  max-width: 16em;
-}
-.coins-hero p:not(.eyebrow) {
-  font-family: var(--font-sans);
-  color: #f9e9ee;
-  line-height: 1.9;
-  max-width: 48em;
-  margin: 20px 0 30px;
-}
-.coins-shortcuts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding-block: 24px;
-}
-.coins-shortcuts a {
-  border: 1px solid #d2c6cd;
-  border-radius: 22px;
-  padding: 10px 18px;
-  font-family: var(--font-serif);
-  text-decoration: none;
-  color: #43313e;
-}
-.coins-main .section {
-  padding: clamp(65px, 8vw, 110px) 0;
+
+html body .coins-main .section {
+  padding: clamp(56px, 7vw, 96px) 0;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
   scroll-margin-top: 90px;
 }
-.coins-main h2 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  margin-bottom: 20px;
+
+/* ---- Hero: the page title on the paper, one pink action. ---- */
+html body .coins-main .coins-hero {
+  padding: clamp(56px, 7vw, 104px) 0 clamp(28px, 4vw, 44px);
+  background: var(--paper);
+  color: var(--ink);
 }
-.coins-main .section > div > p {
+
+html body .coins-main .coins-hero h1 {
+  max-width: 16em;
+  color: var(--ink);
+  font-size: clamp(2rem, 4.4vw, 3.55rem);
+  line-height: 1.38;
+}
+
+html body .coins-main .coins-hero p {
+  max-width: 48em;
+  margin: 20px 0 30px;
+  color: var(--ink-2);
+  font-family: var(--font-sans);
   line-height: 1.9;
+}
+
+/* ---- In-page links: a quiet row of text links under the hero. ---- */
+html body .coins-main .coins-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  padding-block: 0 clamp(20px, 3vw, 32px);
+}
+
+html body .coins-main .coins-shortcuts a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
+html body .coins-main .coins-shortcuts a:hover {
+  color: var(--ink);
+  background: transparent;
+  text-decoration-color: var(--pencil);
+}
+
+html body .coins-main .coins-shortcuts a:focus-visible {
+  outline: 2px solid var(--pencil-ink);
+  outline-offset: 3px;
+}
+
+/* ---- Section text ---- */
+html body .coins-main h2 {
+  margin-bottom: 20px;
+  color: var(--ink);
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+}
+
+html body .coins-main .section > div > p {
   max-width: 65em;
+  line-height: 1.9;
 }
-.coins-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 30px;
-}
-.coins-cards--two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.coins-cards article {
-  background: #fff;
-  border: 1px solid #e2d5db;
-  border-radius: 18px;
-  padding: clamp(20px, 2.5vw, 36px);
-  min-width: 0;
-}
-.coins-cards article h3 {
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  line-height: 1.5;
-  margin: 0 0 14px;
-}
-.coins-cards article p,
-.coins-caution,
-.coins-end p {
+
+html body .coins-main :is(.coins-caution, .coins-detail-note) {
+  color: var(--ink-2);
   font-family: var(--font-sans);
   font-size: 0.94rem;
   line-height: 1.85;
-  color: #5d535f;
-}
-.coins-value {
-  display: block;
-  font: 800 clamp(2rem, 3.5vw, 3rem) / 1.3 var(--font-serif);
-  color: #ae325a;
-  overflow-wrap: anywhere;
-  margin-bottom: 20px;
-}
-.coins-value small {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-}
-.coins-count {
-  display: flex;
-  align-items: baseline;
-  gap: 22px;
-  margin: 26px 0;
-  color: #b5325a;
-}
-.coins-count strong {
-  font: 800 clamp(4rem, 9vw, 7rem) / 1 var(--font-serif);
-}
-.coins-count span {
-  font-family: var(--font-sans);
-}
-.coins-list-title {
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  margin-top: 50px;
-  margin-bottom: 10px;
 }
 
-.coins-end {
-  border-radius: 20px;
-  border: 1px solid #e1d2d9;
-  background: #fff;
-  padding: clamp(25px, 4vw, 55px);
+html body .coins-main .coins-detail-note {
+  margin-top: 14px;
 }
-.coins-end p {
-  margin: 15px 0 22px;
+
+/* ---- Sheets: earning cards and the three ways to use Opals ---- */
+html body .coins-main :is(.coins-cards, .coins-choice-grid) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 30px 0;
 }
-@media (max-width: 750px) {
-  .coins-cards,
-  .coins-cards--two {
+
+html body .coins-main .coins-cards--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+html body .coins-main :is(.coins-cards, .coins-choice-grid) article {
+  min-width: 0;
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+  color: var(--ink);
+}
+
+html body .coins-main :is(.coins-cards, .coins-choice-grid) h3 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  line-height: 1.5;
+}
+
+html body .coins-main :is(.coins-cards, .coins-choice-grid) p {
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  line-height: 1.85;
+}
+
+@media (max-width: 830px) {
+  html body .coins-main .coins-choice-grid {
     grid-template-columns: 1fr;
   }
 }
-/* No JS animation or additional network requests: accordion = native details. */
-.coins-accordion-stack {
+
+@media (max-width: 750px) {
+  html body .coins-main :is(.coins-cards, .coins-cards--two) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Accordions (native details): white sheets with a hairline rule ---- */
+html body .coins-main .coins-accordion-stack {
   display: grid;
   gap: 12px;
   margin: 30px 0;
 }
-.coins-accordion {
-  border: 1px solid #dfd2d9;
-  border-radius: var(--niarim-radius, 14px);
-  background: #fff;
+
+html body .coins-main .coins-accordion {
   overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
 }
-.coins-accordion summary {
+
+html body .coins-main .coins-accordion summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  cursor: pointer;
-  list-style: none;
   /* the same row as the FAQ (polish.css) */
   padding: clamp(1.1rem, 2vw, 1.4rem) clamp(1.1rem, 3vw, 2rem);
+  background: var(--sheet);
+  color: var(--ink);
   font-family: var(--font-display-with-body);
   font-size: 1.05rem;
   line-height: 1.55;
+  list-style: none;
+  cursor: pointer;
 }
-.coins-accordion summary::-webkit-details-marker {
+
+html body .coins-main .coins-accordion summary::-webkit-details-marker {
   display: none;
 }
+
 /* The FAQ's drawn plus/minus (pages/home.css), not the "＋"/"−" glyphs. */
-.coins-accordion summary::after {
+html body .coins-main .coins-accordion summary::after {
   content: "";
   flex: 0 0 auto;
   width: 24px;
   height: 24px;
   background:
-    linear-gradient(var(--color-accent-text), var(--color-accent-text)) center /
-      14px 2px no-repeat,
-    linear-gradient(var(--color-accent-text), var(--color-accent-text)) center /
-      2px 14px no-repeat;
+    linear-gradient(var(--ink-2), var(--ink-2)) center / 14px 2px no-repeat,
+    linear-gradient(var(--ink-2), var(--ink-2)) center / 2px 14px no-repeat;
 }
-.coins-accordion[open] summary::after {
+
+html body .coins-main .coins-accordion[open] summary::after {
   background-size:
     14px 2px,
     0 0;
 }
-.coins-accordion summary:focus-visible {
-  outline: 3px solid #9c3c65;
+
+html body .coins-main .coins-accordion summary:focus-visible {
+  outline: 2px solid var(--pencil-ink);
   outline-offset: -4px;
 }
-.coins-accordion[open] summary {
-  border-bottom: 1px solid #ece2e7;
+
+html body .coins-main .coins-accordion[open] summary {
+  border-bottom: 1px solid var(--rule);
 }
-.coins-accordion-content {
+
+html body .coins-main .coins-accordion-content {
   padding: 21px clamp(1.1rem, 3vw, 2rem) 26px;
+  color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.9;
 }
-.coins-accordion-content p {
-  line-height: 1.9;
+
+html body .coins-main .coins-accordion-content p {
   max-width: 62em;
-}
-
-.coins-choice-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 30px 0 36px;
-}
-.coins-choice-grid article {
-  border: 1px solid #eadbe1;
-  border-radius: 16px;
-  background: #fff8fa;
-  padding: clamp(18px, 2vw, 27px);
-}
-.coins-choice-grid article > span,
-.coins-compare-eyebrow,
-.coins-conversion-kicker,
-.premium-coin-kicker {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: #b04b6d;
-}
-.coins-choice-grid h3 {
-  font-family: var(--font-display-with-body);
-  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
-  margin: 12px 0;
-  line-height: 1.5;
-}
-.coins-choice-grid p {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  line-height: 1.85;
-}
-.coins-compare {
-  margin: 40px 0 25px;
-  padding: clamp(22px, 3.5vw, 42px);
-  border-radius: 20px;
-  background: #f7e8ee;
-  border: 1px solid #edd0db;
-}
-.coins-compare h3 {
-  margin: 10px 0 15px;
-  font-family: var(--font-display-with-body);
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  line-height: 1.45;
-}
-.coins-compare-intro p {
-  font-family: var(--font-sans);
-  line-height: 1.85;
-}
-
-.coins-compare-best,
-.coins-compare-saving {
-  font-weight: 800 !important;
-  color: #9f2c52;
-}
-.coins-compare-highlight {
-  font-family: var(--font-display-with-body);
-  margin: 20px 0 10px;
-  font-size: clamp(1.13rem, 2vw, 1.52rem);
-  line-height: 1.6;
-}
-.coins-conversion {
-  background: #29212d;
-  color: #fff;
-}
-.coins-conversion-panel,
-.premium-coin-panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 35px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: clamp(25px, 4vw, 48px);
-  border-radius: 21px;
-}
-.coins-conversion-panel h2,
-.premium-coin-panel h2 {
-  font-family: var(--font-display-with-body);
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  margin: 12px 0 15px;
-  line-height: 1.5;
-}
-.coins-conversion-panel h2 {
-  color: #fff;
-}
-.coins-conversion-panel p,
-.premium-coin-panel p {
-  font-family: var(--font-sans);
   line-height: 1.9;
-  max-width: 52em;
 }
-.coins-conversion-panel p {
-  color: #f4dfea;
+
+/* Login days and mission goals: ruled rows inside the sheet, not boxes
+   inside the box. */
+html body .coins-main .coins-goals-guide {
+  margin: 18px 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: var(--font-sans);
 }
-.coins-conversion-panel .btn,
-.premium-coin-panel .btn {
-  flex: 0 0 auto;
-  white-space: normal;
+
+html body .coins-main .coins-goals-guide p {
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  line-height: 1.8;
+}
+
+html body .coins-main .coins-detail-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font: 700 1.1rem/1.6 var(--font-sans);
+}
+
+html body .coins-main .coins-milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+html body .coins-main .coins-milestone-grid li {
+  padding: 8px 4px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  color: var(--ink);
+  font: 650 0.9rem/1.5 var(--font-sans);
+  font-variant-numeric: tabular-nums;
   text-align: center;
 }
-.premium-coin-crosslink {
-  background: #f9eff3;
+
+html body .coins-main .coins-mission-detail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 0 24px;
+  margin-top: 18px;
 }
-.premium-coin-panel {
-  background: #fff;
-  border-color: #e7ccd7;
+
+html body .coins-main .coins-goal-group {
+  min-width: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
 }
-.premium-coin-panel h2 {
-  color: #322935;
+
+html body .coins-main .coins-goal-group strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--ink);
+  font: 700 0.95rem/1.7 var(--font-sans);
 }
-.premium-coin-panel p {
-  color: #5c4e57;
+
+html body .coins-main .coins-goal-group p {
+  margin: 0;
+  color: var(--ink-2);
+  font: 0.88rem/1.8 var(--font-sans);
+  overflow-wrap: anywhere;
 }
-@media (max-width: 830px) {
-  .coins-choice-grid {
+
+html body .coins-main .coins-goal-values {
+  font-variant-numeric: tabular-nums;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 550px) {
+  html body .coins-main .coins-milestone-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  html body .coins-main .coins-mission-detail-list {
     grid-template-columns: 1fr;
   }
-  .coins-conversion-panel,
-  .premium-coin-panel {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .coins-conversion-panel .btn,
-  .premium-coin-panel .btn {
-    width: 100%;
+}
+
+@media (max-width: 750px) {
+  html body .coins-main .coins-accordion summary {
+    font-size: 1rem;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .coins-accordion,
   .coins-accordion * {
@@ -313,268 +318,121 @@
   }
 }
 
-/* Visitor-facing coins: keep the warm paper palette legible on light and dark sections. */
-html body .coins-main {
-  background: #f7f4f3;
-  color: #28242c;
-}
-html body .coins-main .section {
-  background: #f7f4f3;
-  color: #28242c;
-}
-html body .coins-main .section.section-tint {
-  background: #f3e7eb;
-}
-html body .coins-main .section.coins-conversion {
-  background: #29212d;
-  color: #fff;
-}
-html body .coins-main :is(.coins-hero, .coins-conversion) .eyebrow,
-html body .coins-main .coins-hero .eyebrow {
-  color: #ffd1df !important;
-}
-html body .coins-main .coins-hero :is(h1, h2, h3) {
-  color: #fff !important;
-}
-html body .coins-main .coins-hero p:not(.eyebrow) {
-  color: #f9ecf0 !important;
-}
-html body .coins-main .coins-conversion .coins-conversion-kicker {
-  color: #ffbed0;
-}
-html body .coins-main .coins-conversion :is(h2, h3) {
-  color: #fff !important;
-}
-html body .coins-main .coins-conversion p {
-  color: #f4dfea !important;
-}
-html body .coins-main .coins-conversion-panel {
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(255, 255, 255, 0.34);
-}
-html body .coins-main .coins-compare {
-  background: #f5e5ea;
-  color: #302530;
-  border-color: #e4bbc9;
-}
-html body .coins-main .coins-compare :is(h2, h3, .coins-compare-highlight) {
-  color: #302530 !important;
-}
-html
-  body
-  .coins-main
-  :is(.coins-compare-eyebrow, .coins-choice-grid article > span) {
-  color: #882e4d;
-}
-html body .coins-main .coins-cards article {
-  color: #302530;
-  background: #fffdfd;
-  border-color: #dbccd3;
-}
-html body .coins-main .coins-card-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
-  margin: 0 0 20px;
-  border: 1px solid #e9b8c9;
-  border-radius: 15px;
-  color: #9f294e;
-  background: #fff0f5;
-  font:
-    800 1.55rem/1 system-ui,
-    sans-serif;
-}
-html body .coins-main .coins-shortcuts a {
-  background: #fff;
-  color: #402b38;
-}
-html body .coins-main .coins-shortcuts a:hover {
-  color: #882e4d;
-  background: #fff0f5;
-  border-color: #aa7189;
-}
-html body .coins-main .coins-shortcuts a:focus-visible {
-  outline: 3px solid #a82e55;
-  outline-offset: 3px;
-}
-html body .coins-main .coins-accordion summary {
-  color: #302530;
-  background: #fff;
-}
-
-html body .coins-main .coins-accordion-content {
-  color: #3f333c;
-}
-html body .coins-main .coins-detail-note {
-  margin-top: 14px;
-  color: #614651;
-}
-html body .coins-main .coins-choice-grid article {
-  background: #fffafb;
-  border-color: #dfcdd4;
-}
-html body .coins-main .coins-choice-grid p {
-  color: #4e424b;
-}
+/* ---- Unified Opal price and savings table: one scrollable comparison,
+   not two cards. Its notes come first; the sheet itself is below. ---- */
 html body .coins-main .coins-list-title {
-  color: #302530;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
 }
 
-html body .coins-main .coins-compare-best {
-  color: #92294e !important;
-  background: #fff2f6;
+html body .coins-main .coins-rate-note {
+  margin: 12px 0 18px;
+  color: var(--ink-2);
+  font: 500 0.9rem/1.85 var(--font-sans);
 }
-html body .coins-main .coins-compare-saving {
-  color: #92294e !important;
+
+html body .coins-main .coins-bundle-details {
+  margin-top: 25px;
+  padding: 18px 0 3px;
+  border-top: 1px solid var(--rule);
 }
-html body .coins-main .coins-featured-deals .coins-value {
-  font-variant-numeric: tabular-nums;
+
+html body .coins-main .coins-bundle-details h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: clamp(1.1rem, 2.2vw, 1.65rem);
 }
-html body .coins-main .coins-caution {
-  color: #594750;
+
+html body .coins-main .coins-bundle-details p {
+  max-width: 75em;
+  font-size: 0.93rem;
+  line-height: 1.8;
 }
-html body .coins-main .coins-end {
-  background: #fff;
-  border-color: #dfcad2;
+
+html body .coins-main .coins-year-versus-month {
+  margin: 20px 0 12px;
+  color: var(--ink-2);
+  font: 500 0.91rem/1.8 var(--font-sans);
 }
-html body .coins-main .coins-end :is(h2, h3) {
-  color: #302530;
+
+html body .coins-main .coins-year-versus-month strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-weight: 750;
 }
+
+html body .coins-main .coins-year-versus-month span {
+  display: block;
+}
+
+@media (max-width: 750px) {
+  html body .coins-main .coins-bundle-details {
+    margin-top: 18px;
+  }
+}
+
+/* ---- Closing: premium as the other way, on the paper under a rule ---- */
+html body .coins-main .coins-conversion-panel,
+html body .premium-coin-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) h2 {
+  margin: 0 0 15px;
+  color: var(--ink);
+  font-family: var(--font-display-with-body);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.5;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) p {
+  max-width: 52em;
+  color: var(--ink-2);
+  font-family: var(--font-sans);
+  line-height: 1.9;
+}
+
+html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) .btn {
+  flex: 0 0 auto;
+  text-align: center;
+  white-space: normal;
+}
+
 html body .premium-coin-crosslink {
-  background: #f4e7ec;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
 }
-html body .premium-coin-crosslink .premium-coin-panel {
-  background: #fff;
-  border-color: #dbc7cf;
+
+@media (max-width: 830px) {
+  html body .coins-main .coins-conversion-panel,
+  html body .premium-coin-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  html body :is(.coins-main .coins-conversion-panel, .premium-coin-panel) .btn {
+    width: 100%;
+  }
 }
-html body .premium-coin-crosslink .premium-coin-kicker {
-  color: #862c4c;
-}
-html body .premium-coin-crosslink .premium-coin-panel h2 {
-  color: #302530 !important;
-}
-html body .premium-coin-crosslink .premium-coin-panel p {
-  color: #51424b !important;
-}
+
 /* The small brand-font subset is completed with the site's licensed body font. */
 html:lang(ja)
   body
   .coins-main
-  :is(
-    h1,
-    h2,
-    h3,
-    .coins-accordion summary,
-    .coins-shortcuts a,
-    .coins-compare-highlight
-  ),
+  :is(h1, h2, h3, .coins-accordion summary, .coins-shortcuts a),
 html:lang(ja) body .premium-coin-crosslink h2 {
   font-family: var(--font-display-with-body), "Yu Mincho", serif !important;
-}
-@media (max-width: 750px) {
-  html body .coins-main .coins-compare {
-    padding: 22px 15px;
-  }
-
-  html body .coins-main .coins-shortcuts {
-    gap: 8px;
-    padding-block: 18px;
-  }
-  html body .coins-main .coins-shortcuts a {
-    padding: 9px 13px;
-  }
-  html body .coins-main .coins-accordion summary {
-    font-size: 1rem;
-  }
-}
-
-/* Goal conditions, not reward payouts; each label uses one licensed text face. */
-html body .coins-main .coins-goals-guide {
-  margin: 18px 0;
-  padding: 20px;
-  border-radius: 14px;
-  border: 1px solid #d9c4ce;
-  background: #fffafb;
-  color: #392a35;
-  font-family: var(--font-sans);
-}
-html body .coins-main .coins-goals-guide p {
-  color: #4d3c46;
-  font-family: var(--font-sans);
-  line-height: 1.8;
-}
-html body .coins-main .coins-detail-label {
-  display: block;
-  font: 700 1.1rem/1.6 var(--font-sans);
-  color: #48293b;
-  margin-bottom: 10px;
-}
-html body .coins-main .coins-milestone-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
-  gap: 8px;
-  padding: 0;
-  margin: 18px 0 0;
-}
-html body .coins-main .coins-milestone-grid li {
-  font: 650 0.9rem/1.5 var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  padding: 8px 4px;
-  background: #fff;
-  border: 1px solid #d7c1cb;
-  border-radius: 9px;
-  color: #3f2c38;
-}
-html body .coins-main .coins-mission-detail-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
-  gap: 13px;
-  margin-top: 18px;
-}
-html body .coins-main .coins-goal-group {
-  min-width: 0;
-  background: #fffafb;
-  border: 1px solid #e1cdd6;
-  border-radius: 12px;
-  padding: 15px 17px;
-}
-html body .coins-main .coins-goal-group .coins-goal-group {
-  margin-top: 12px;
-  background: #fff;
-}
-html body .coins-main .coins-goal-group strong {
-  display: block;
-  font: 700 0.95rem/1.7 var(--font-sans);
-  color: #582e44;
-  margin-bottom: 7px;
-}
-html body .coins-main .coins-goal-group p {
-  font: 0.88rem/1.8 var(--font-sans);
-  color: #4c3d47;
-  overflow-wrap: anywhere;
-  margin: 0;
-}
-html body .coins-main .coins-goal-values {
-  font-variant-numeric: tabular-nums;
-}
-@media (max-width: 550px) {
-  html body .coins-main .coins-milestone-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  html body .coins-main .coins-mission-detail-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* 2026-11: Annual exchange and percent-saving badges. */
-
-.coins-main .coins-goal-values {
-  overflow-wrap: anywhere;
-  line-height: 2;
 }
 
 /* Full benefit names and the period 週 need the licensed body font;
@@ -584,54 +442,6 @@ html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
   font-family: var(--font-sans) !important;
 }
 
-/* Pricing rows share one licensed face; prevent mismatched individual fallback glyphs. */
-
-html:lang(ja) body .coins-main .coins-compare-table :is(th, td) {
-  font-family: var(--font-sans) !important;
-}
-
-.coins-main .coins-year-versus-month {
-  font: 500 0.91rem/1.8 var(--font-sans);
-  margin: 20px 0 12px;
-  color: #4f3c46;
-}
-.coins-main .coins-year-versus-month strong {
-  display: block;
-  font-weight: 750;
-  color: #8d2b4b;
-  margin-bottom: 3px;
-}
-.coins-main .coins-year-versus-month span {
-  display: block;
-}
-
-/* Unified Opal price and savings table: one scrollable comparison, not two cards. */
-
-html body .coins-main .coins-bundle-details {
-  margin-top: 25px;
-  padding: 18px 0 3px;
-  border-top: 1px solid #dec8d0;
-}
-html body .coins-main .coins-bundle-details h3 {
-  margin: 0 0 10px;
-  font-size: clamp(1.1rem, 2.2vw, 1.65rem);
-}
-html body .coins-main .coins-bundle-details p {
-  max-width: 75em;
-  font-size: 0.93rem;
-  line-height: 1.8;
-}
-html body .coins-main .coins-rate-note {
-  margin: 12px 0 18px;
-  font: 500 0.9rem/1.85 var(--font-sans);
-  color: #5d4552;
-}
-
-@media (max-width: 750px) {
-  html body .coins-main .coins-bundle-details {
-    margin-top: 18px;
-  }
-}
 /*
  * Price tables (2026-11 redesign): one white ruled sheet on the paper.
  * Ink text, 1px row rules, no zebra or pink rows; every number in the same
@@ -649,14 +459,14 @@ html body .coins-main .coins-rate-note {
   border-radius: var(--radius-sheet);
   /* Shadows at the edges say that more columns are off to the side. */
   background:
-    linear-gradient(to right, var(--sheet) 30%, rgba(255, 255, 255, 0)) left /
-      32px 100% no-repeat local,
-    linear-gradient(to left, var(--sheet) 30%, rgba(255, 255, 255, 0)) right /
-      32px 100% no-repeat local,
-    linear-gradient(to right, rgba(40, 36, 44, 0.14), rgba(40, 36, 44, 0))
-      left / 12px 100% no-repeat scroll,
-    linear-gradient(to left, rgba(40, 36, 44, 0.14), rgba(40, 36, 44, 0))
-      right / 12px 100% no-repeat scroll,
+    linear-gradient(to right, var(--sheet) 30%, transparent) left / 32px 100%
+      no-repeat local,
+    linear-gradient(to left, var(--sheet) 30%, transparent) right / 32px 100%
+      no-repeat local,
+    linear-gradient(to right, var(--rule), transparent) left / 12px 100%
+      no-repeat scroll,
+    linear-gradient(to left, var(--rule), transparent) right / 12px 100%
+      no-repeat scroll,
     var(--sheet);
   box-shadow: none;
 }

@@ -7,14 +7,10 @@ const fontCss = readFileSync(
   new URL("../public/css/common-base.css", import.meta.url),
   "utf8",
 );
-assert.match(
-  fontCss,
-  /font-family:\s*"HakkouMincho";\s*font-display:\s*optional;/,
-);
-assert.match(
-  fontCss,
-  /font-family:\s*"Kuramubon";\s*font-display:\s*optional;/,
-);
+// The Latin faces swap in (with metric-matched stand-ins while they load),
+// so a first visit never keeps a system face for the page.
+assert.match(fontCss, /font-family:\s*"HakkouMincho";\s*font-display:\s*swap;/);
+assert.match(fontCss, /font-family:\s*"Kuramubon";\s*font-display:\s*swap;/);
 assert.match(
   fontCss,
   /font-family:\s*"HakkouMinchoCJK";\s*font-display:\s*swap;/,
@@ -332,24 +328,25 @@ for (const pathname of SEO_PAGE_PATHS) {
     }
 
     if (page === "opals") {
+      // The section leads (the page has no eyebrow labels any more).
       for (const key of [
-        "coins.eyebrowHero",
-        "coins.eyebrowEarn",
-        "coins.eyebrowMissions",
-        "coins.eyebrowBenefits",
+        "coins.lead",
+        "coins.earnLead",
+        "coins.missionBody",
+        "coins.benefitBody",
       ]) {
         const value = translations[key];
-        assert.ok(value, `${path}: missing eyebrow dictionary entry ${key}`);
+        assert.ok(value, `${path}: missing lead dictionary entry ${key}`);
         const paragraph = [
           ...text.matchAll(
             /<p\b[^>]*data-i18n="([^"]+)"[^>]*>([\s\S]*?)<\/p>/gi,
           ),
         ].find(([, id]) => id === key);
-        assert.ok(paragraph, `${path}: missing localized eyebrow ${key}`);
+        assert.ok(paragraph, `${path}: missing localized lead ${key}`);
         assert.equal(
           paragraph[2].trim(),
           escapeXml(value),
-          `${path}: server did not localize eyebrow ${key}`,
+          `${path}: server did not localize lead ${key}`,
         );
       }
     }
