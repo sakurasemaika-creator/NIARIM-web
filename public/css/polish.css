@@ -782,13 +782,15 @@ main {
   margin-inline: 0;
 }
 
+/* Same row as the opals accordions: 22px over and under, 18-32px at the
+   sides; the answer starts on the question's left edge. */
 .faq-question {
-  padding: clamp(1.2rem, 2.2vw, 1.6rem) clamp(1.25rem, 4vw, 2.6rem);
+  padding: clamp(1.1rem, 2vw, 1.4rem) clamp(1.1rem, 3vw, 2rem);
 }
 
 .faq-answer p {
   max-width: none;
-  padding: 0 clamp(1.25rem, 4vw, 2.6rem) clamp(1.35rem, 3vw, 1.8rem);
+  padding: 0 clamp(1.1rem, 3vw, 2rem) clamp(1.35rem, 3vw, 1.8rem);
 }
 
 /* ---- Performance: expensive always-on effectsを静的な奥行きへ置き換える ---- */

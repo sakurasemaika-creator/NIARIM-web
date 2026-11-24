@@ -155,7 +155,7 @@
 }
 .coins-accordion {
   border: 1px solid #dfd2d9;
-  border-radius: 15px;
+  border-radius: var(--niarim-radius, 14px);
   background: #fff;
   overflow: hidden;
 }
@@ -166,22 +166,31 @@
   gap: 14px;
   cursor: pointer;
   list-style: none;
-  padding: 20px clamp(18px, 2.8vw, 30px);
+  /* the same row as the FAQ (polish.css) */
+  padding: clamp(1.1rem, 2vw, 1.4rem) clamp(1.1rem, 3vw, 2rem);
   font-family: var(--font-display-with-body);
-  font-size: clamp(1rem, 1.65vw, 1.22rem);
+  font-size: 1.05rem;
   line-height: 1.55;
 }
 .coins-accordion summary::-webkit-details-marker {
   display: none;
 }
+/* The FAQ's drawn plus/minus (pages/home.css), not the "＋"/"−" glyphs. */
 .coins-accordion summary::after {
-  content: "＋";
+  content: "";
   flex: 0 0 auto;
-  color: #a83c60;
-  font-size: 1.3rem;
+  width: 24px;
+  height: 24px;
+  background:
+    linear-gradient(var(--color-accent-text), var(--color-accent-text)) center /
+      14px 2px no-repeat,
+    linear-gradient(var(--color-accent-text), var(--color-accent-text)) center /
+      2px 14px no-repeat;
 }
 .coins-accordion[open] summary::after {
-  content: "−";
+  background-size:
+    14px 2px,
+    0 0;
 }
 .coins-accordion summary:focus-visible {
   outline: 3px solid #9c3c65;
@@ -189,17 +198,9 @@
 }
 .coins-accordion[open] summary {
   border-bottom: 1px solid #ece2e7;
-  background: #fff6f9;
-}
-.coins-accordion-count {
-  margin-left: auto;
-  padding-inline: 10px;
-  color: #725a66;
-  font-size: 0.75rem;
-  white-space: nowrap;
 }
 .coins-accordion-content {
-  padding: 21px clamp(18px, 2.8vw, 30px) 26px;
+  padding: 21px clamp(1.1rem, 3vw, 2rem) 26px;
   font-family: var(--font-sans);
   line-height: 1.9;
 }
@@ -438,15 +439,7 @@ html body .coins-main .coins-accordion summary {
   color: #302530;
   background: #fff;
 }
-html body .coins-main .coins-accordion[open] summary {
-  background: #fff1f6;
-}
-html body .coins-main .coins-accordion-count {
-  color: #654250;
-  background: #f9edf1;
-  border-radius: 5px;
-  padding: 5px 9px;
-}
+
 html body .coins-main .coins-accordion-content {
   color: #3f333c;
 }
@@ -570,12 +563,7 @@ html:lang(ja) body .premium-coin-crosslink h2 {
     padding: 9px 13px;
   }
   html body .coins-main .coins-accordion summary {
-    padding: 17px 15px;
-    align-items: flex-start;
-  }
-  html body .coins-main .coins-accordion-count {
-    margin-left: auto;
-    font-size: 0.66rem;
+    font-size: 1rem;
   }
 }
 

@@ -721,13 +721,16 @@
   position: relative;
 }
 
+/* One open/close mark for every disclosure on the site (FAQ, the opals
+   accordions, the guide's entries): a drawn 14px plus that loses its
+   vertical stroke when open, in the text red. */
 .faq-question .icon::before,
 .faq-question .icon::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  background: var(--color-ink);
+  background: var(--color-accent-text);
   transform: translate(-50%, -50%);
   transition: transform var(--duration-fast) var(--ease-out);
 }

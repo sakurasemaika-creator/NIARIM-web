@@ -168,12 +168,10 @@
     background 200ms var(--ease-out);
 }
 
+/* Open: the card lifts to white; the pink inner edge and the drop shadow
+   are gone (cards are hairline and surface, DESIGN.md 6-7). */
 .faq-item.is-open {
-  border-color: rgba(255, 92, 122, 0.22);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow:
-    0 14px 42px rgba(40, 36, 44, 0.06),
-    inset 3px 0 0 rgba(255, 92, 122, 0.48);
+  background: var(--color-white);
 }
 
 .faq-question:hover {
@@ -307,10 +305,6 @@ section.section:has(.community-tabs) {
     min-height: 40px;
     display: inline-flex;
     align-items: center;
-  }
-
-  .faq-item.is-open {
-    box-shadow: inset 3px 0 0 rgba(255, 92, 122, 0.48);
   }
 
   /* Keep the persistent shortcut useful without covering small-screen content. */

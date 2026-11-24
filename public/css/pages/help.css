@@ -189,17 +189,16 @@
   display: grid;
   place-items: center;
   transform: translateY(-50%);
-  border-radius: 50%;
-  color: var(--color-accent-strong);
+  /* the FAQ's mark: a drawn 14px plus, no tinted disc */
+  color: var(--color-accent-text);
   background:
-    linear-gradient(currentColor, currentColor) center / 0.72rem 2px no-repeat,
-    linear-gradient(currentColor, currentColor) center / 2px 0.72rem no-repeat,
-    var(--color-sub-tint);
+    linear-gradient(currentColor, currentColor) center / 14px 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 14px no-repeat;
 }
 
 [data-help-category] .spec-item[open] h3::after {
   background-size:
-    0.72rem 2px,
+    14px 2px,
     0 0;
 }
 

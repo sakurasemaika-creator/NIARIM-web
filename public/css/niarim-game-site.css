@@ -726,7 +726,7 @@ html body .screenshot-card .nr-scroller-duo > picture.real-app-capture--pc img {
   border-radius: 13px;
 }
 .nr-enhanced .faq-item {
-  border-radius: 10px;
+  border-radius: var(--niarim-radius, 14px);
 }
 .nr-enhanced .section-head {
   margin-bottom: 26px;
