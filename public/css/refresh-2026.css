@@ -514,7 +514,7 @@
   padding: 18px 20px;
   gap: 8px 12px;
 }
-.nr-gallery-meta span {
+.nr-gallery-meta > span {
   /* 12px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
   font-size: 0.75rem;
   color: var(--color-gray-500);

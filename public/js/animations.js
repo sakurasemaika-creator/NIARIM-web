@@ -141,6 +141,13 @@
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) setActive(entry.target.id);
+          // Back above the first section (the page heading and the links):
+          // no section is current, rather than the last one passed.
+          else if (
+            entry.target === sections[0] &&
+            entry.boundingClientRect.top > 0
+          )
+            setActive("");
         });
       },
       { rootMargin: "-45% 0px -50% 0px" },

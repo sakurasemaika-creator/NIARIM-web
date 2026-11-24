@@ -569,7 +569,7 @@ html body.nr-site .nr-gallery-item {
 html body.nr-site .nr-gallery-meta {
   border-top: 1px solid var(--nr-rule);
 }
-html body.nr-site .nr-gallery-meta span {
+html body.nr-site .nr-gallery-meta > span {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.13em;
 }

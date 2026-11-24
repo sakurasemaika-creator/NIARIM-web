@@ -117,7 +117,10 @@
   font-size: var(--fs-h2);
 }
 
-.feature-section-head span {
+/* Only the lead line beside the heading: the words that i18n.js keeps
+   together inside the h2 are spans as well, and took this small grey style
+   (the section names shrank to a 14px label, 「作画支援ツール」 on three lines). */
+.feature-section-head > span {
   display: block;
   font-size: var(--fs-small);
   color: var(--color-text-muted);
@@ -1426,11 +1429,23 @@
   counter-increment: feature-section;
 }
 
+/* Each section opens like the numbered sections of the home page: the
+   frame number is a quiet kicker, the section name is the heading at the
+   site's section-heading size, and its one-line description is the lead
+   under it (it was a 14px label in a narrow column beside the description,
+   smaller than the sub-headings under it). */
+#main .feature-section .feature-section-head {
+  display: block;
+  max-width: 44em;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+}
+
 #main .feature-section .feature-section-head::before {
   content: counter(feature-section, decimal-leading-zero) / "";
+  display: block;
   width: auto;
   height: auto;
-  margin: 0 0 4px;
+  margin: 0 0 12px;
   border-radius: 0;
   background: none;
   color: var(--pencil-ink);
@@ -1439,8 +1454,29 @@
   letter-spacing: 0.08em;
 }
 
+/* Same size as the home's section headings; the weight stays the one of the
+   sub-headings under it (one weight in Kuramubon, semibold in the Korean and
+   Chinese serif, where 400 made the section name lighter than its h3s). */
+#main .feature-section .feature-section-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
 #main .feature-section .feature-section-head > span {
+  display: block;
+  margin: 14px 0 0;
   color: var(--ink-2);
+  font: 400 var(--fs-body) / 1.8 var(--font-sans);
+}
+
+/* The heading's own bottom margin is the gap to the section's text, which
+   then starts level with the capture beside it. */
+#main .feature-section > .feature-narrative {
+  margin-top: 0;
 }
 
 /* Section links: one quiet row on the paper under a rule; the current

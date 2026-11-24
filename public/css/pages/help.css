@@ -156,8 +156,8 @@
   contain-intrinsic-size: none;
 }
 
-/* Long help pages need wayfinding: each category opens with its icon,
-   name and the frame mark, the same heading as the features page, followed
+/* Long help pages need wayfinding: each category opens with its number and
+   name, the same heading as the features page (pages/features.css), followed
    directly by its list (the pink gradient panel it used to sit in was a
    third kind of surface on the page). */
 [data-help-category] .feature-section-head {
@@ -165,14 +165,6 @@
   border: 0;
   border-radius: 0;
   background: none;
-}
-
-[data-help-category] .feature-section-head::before {
-  margin-bottom: 0.45rem;
-}
-
-[data-help-category] .feature-section-head h2 {
-  line-height: 1.2;
 }
 
 /* Guide entries intentionally use an app-help-like accordion instead of the
