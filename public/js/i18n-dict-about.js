@@ -19,7 +19,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "NIARIMとは",
       "about.lead":
-        "誰でも手軽にアニメがつくれる。誰もがクリエイターに。NIARIMは、老若男女誰もが手軽にアニメーション制作を楽しめる手描きアニメーション制作アプリです。直感的な操作性へのこだわりと、本格的な作り込みの自由度を両立させています。",
+        "NIARIMは、スマートフォンで手描きアニメを作るためのAndroidアプリです。絵を描くキャンバスモードと、フレームや音声を並べるタイムラインモードの2つの画面で作ります。",
       "about.name.eyebrow": "The Name",
       "about.name.title": "NIARIMってどんな意味？",
       "about.name.body":
@@ -31,7 +31,7 @@
       "about.philosophy.title": "NIARIMが大切にしていること",
       "about.philosophy.item1.title": "誰でも手軽に、アニメをつくれる。",
       "about.philosophy.item1.body":
-        "専門的な知識や特別な道具は必要ありません。スマートフォン一つで、誰もがクリエイターに。NIARIMが目指すのは、そんな世界です。",
+        "スマートフォンだけで、線画から動画の書き出しまでできます。ペンタブレットやほかのソフトがなくても始められます。",
       "about.philosophy.item2.title": "アプリの軽量化への取り組み",
       "about.philosophy.item2.body":
         "アニメーション制作はフレーム数やレイヤー数が増えるほどデータが重くなりがちです。NIARIMでは、共通レイヤーやキャッシュ管理、容量削減機能に加え、パフォーマンス設定で画質プリセットや各項目を端末に合わせて調整できるようにするなど、端末への負荷を抑えるための工夫を重ねて開発しています。特別な機材がなくても、本格的な制作を始められます。",
@@ -94,7 +94,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "About NIARIM",
       "about.lead":
-        "Anyone can make animation, easily. Anyone can become a creator. NIARIM is a hand-drawn animation app built for people of every age to enjoy making animation easily. We’ve focused on intuitive, approachable controls while also offering plenty of creative freedom to dig into the details.",
+        "NIARIM is an Android app for making hand-drawn animation on your phone. You work in two screens: Canvas Mode for drawing, and Timeline Mode for arranging frames and audio.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "What does “NIARIM” mean?",
       "about.name.body":
@@ -106,7 +106,7 @@
       "about.philosophy.title": "What NIARIM values",
       "about.philosophy.item1.title": "Animation, made easy for everyone.",
       "about.philosophy.item1.body":
-        "No specialized knowledge or special tools required. Just a smartphone — and anyone can become a creator. That’s the world NIARIM is building toward.",
+        "Everything from line art to video export works on the phone alone. You can start without a pen tablet or other software.",
       "about.philosophy.item2.title": "Working to keep the app lightweight",
       "about.philosophy.item2.body":
         "Animation work tends to get heavier as frame and layer counts grow. Alongside common layers, cache management, and storage-reduction tools, we’ve also added performance settings that let you choose a quality preset — or tune individual settings — to match your device, all as part of easing the load it carries. You don’t need any special equipment to start creating seriously.",
@@ -171,7 +171,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "关于 NIARIM",
       "about.lead":
-        "人人都能轻松制作动画。人人都能成为创作者。NIARIM 是一款手绘动画制作应用，希望不分年龄、不论男女，任何人都能轻松享受动画制作的乐趣。我们兼顾了直观易用的操作体验与可以深入打磨作品的创作自由度。",
+        "NIARIM 是一款在手机上制作手绘动画的 Android 应用。在两个画面中工作：用于绘画的画布模式，以及排列帧和音频的时间轴模式。",
       "about.name.eyebrow": "The Name",
       "about.name.title": "“NIARIM”是什么意思？",
       "about.name.body":
@@ -183,7 +183,7 @@
       "about.philosophy.title": "NIARIM 重视的事",
       "about.philosophy.item1.title": "人人都能轻松制作动画。",
       "about.philosophy.item1.body":
-        "不需要专业知识或特殊工具。只要一部智能手机，人人都能成为创作者。这正是 NIARIM 所追求的世界。",
+        "从线稿到导出视频，只用手机就能完成。没有数位板或其他应用也能开始。",
       "about.philosophy.item2.title": "致力于让应用更轻量",
       "about.philosophy.item2.body":
         "随着帧数和图层数量的增加，动画制作容易让数据变得沉重。除了共同图层、缓存管理、释放空间等功能外，NIARIM 还提供性能设置，可以选择画质预设，或按需单独调整各项设置以适配你的设备，努力减轻对设备的负担。不需要特殊设备，也能开始正式创作。",
@@ -244,7 +244,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "關於 NIARIM",
       "about.lead":
-        "人人都能輕鬆製作動畫。人人都能成為創作者。NIARIM 是一款手繪動畫製作應用程式，希望不分年齡、不分男女，任何人都能輕鬆享受動畫製作的樂趣。我們兼顧了直覺易用的操作體驗與可以深入琢磨作品的創作自由度。",
+        "NIARIM 是一款在手機上製作手繪動畫的 Android 應用程式。在兩個畫面中工作：用於繪圖的畫布模式，以及排列影格與音訊的時間軸模式。",
       "about.name.eyebrow": "The Name",
       "about.name.title": "「NIARIM」是什麼意思？",
       "about.name.body":
@@ -256,7 +256,7 @@
       "about.philosophy.title": "NIARIM 重視的事",
       "about.philosophy.item1.title": "人人都能輕鬆製作動畫。",
       "about.philosophy.item1.body":
-        "不需要專業知識或特殊工具。只要一支智慧型手機，人人都能成為創作者。這正是 NIARIM 所追求的世界。",
+        "從線稿到匯出影片，只用手機就能完成。沒有繪圖板或其他軟體也能開始。",
       "about.philosophy.item2.title": "致力於讓應用程式更輕量",
       "about.philosophy.item2.body":
         "隨著影格數和圖層數量的增加，動畫製作容易讓資料變得沉重。除了共用圖層、快取管理、釋放空間等功能外，NIARIM 還提供效能設定，可以選擇畫質預設，或依需求單獨調整各項設定以配合你的裝置，努力減輕對裝置的負擔。不需要特殊設備，也能開始正式創作。",
@@ -318,7 +318,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "NIARIM 소개",
       "about.lead":
-        "누구나 손쉽게 애니메이션을 만든다. 누구나 크리에이터가 된다. NIARIM은 남녀노소 누구나 손쉽게 애니메이션 제작을 즐길 수 있는 손그림 애니메이션 제작 앱입니다. 직관적인 조작감을 중시하면서, 세밀하게 다듬을 수 있는 제작 자유도도 함께 갖추고 있습니다.",
+        "NIARIM은 스마트폰으로 손그림 애니메이션을 만드는 Android 앱입니다. 그림을 그리는 캔버스 모드와 프레임·오디오를 배치하는 타임라인 모드, 두 화면에서 작업합니다.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "NIARIM은 어떤 의미인가요?",
       "about.name.body":
@@ -330,7 +330,7 @@
       "about.philosophy.title": "NIARIM이 소중히 여기는 것",
       "about.philosophy.item1.title": "누구나 손쉽게, 애니메이션을.",
       "about.philosophy.item1.body":
-        "전문적인 지식이나 특별한 도구는 필요 없습니다. 스마트폰 하나로, 누구나 크리에이터가 된다. NIARIM이 지향하는 세상입니다.",
+        "선화부터 동영상 내보내기까지 스마트폰만으로 할 수 있습니다. 펜 태블릿이나 다른 소프트웨어 없이 시작할 수 있습니다.",
       "about.philosophy.item2.title": "앱 경량화를 위한 노력",
       "about.philosophy.item2.body":
         "프레임 수와 레이어 수가 늘어날수록 애니메이션 제작은 데이터가 무거워지기 쉽습니다. NIARIM은 공통 레이어, 캐시 관리, 용량 확보 기능뿐 아니라, 성능 설정에서 화질 프리셋을 고르거나 각 항목을 기기에 맞게 개별 조정할 수 있도록 마련해 기기에 걸리는 부담을 줄이기 위해 노력하며 개발하고 있습니다. 특별한 장비가 없어도 본격적인 제작을 시작할 수 있습니다.",
@@ -393,7 +393,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "À propos de NIARIM",
       "about.lead":
-        "Créer de l’animation, facilement, pour tous. Faire de chacun un créateur. NIARIM est une application de création d’animation dessinée à la main, pensée pour que chacun, quel que soit son âge, puisse profiter facilement de la création d’animation. Nous mettons l’accent sur une prise en main intuitive, tout en offrant une grande liberté créative pour peaufiner chaque détail.",
+        "NIARIM est une application Android pour créer des animations dessinées à la main sur téléphone. On travaille sur deux écrans : le mode canevas pour dessiner et le mode timeline pour agencer les images et le son.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "Que signifie « NIARIM » ?",
       "about.name.body":
@@ -405,7 +405,7 @@
       "about.philosophy.title": "Ce à quoi NIARIM tient",
       "about.philosophy.item1.title": "L’animation, facile pour tous.",
       "about.philosophy.item1.body":
-        "Aucune connaissance ni outil spécialisé requis. Un simple smartphone suffit pour que chacun devienne créateur. C’est le monde vers lequel NIARIM tend.",
+        "Du trait à l’export vidéo, tout se fait sur le téléphone seul. Vous pouvez commencer sans tablette graphique ni autre logiciel.",
       "about.philosophy.item2.title":
         "Des efforts pour garder l’application légère",
       "about.philosophy.item2.body":
@@ -473,7 +473,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "Acerca de NIARIM",
       "about.lead":
-        "Crear animación, fácil, para todos. Que cualquiera pueda ser creador. NIARIM es una app de animación dibujada a mano, pensada para que cualquier persona, sin importar su edad, disfrute de crear animación fácilmente. Cuidamos que el manejo sea intuitivo, además de ofrecer una gran libertad creativa para perfeccionar cada detalle.",
+        "NIARIM es una app para Android para crear animación dibujada a mano en el móvil. Se trabaja en dos pantallas: el modo lienzo para dibujar y el modo línea de tiempo para ordenar fotogramas y audio.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "¿Qué significa «NIARIM»?",
       "about.name.body":
@@ -485,7 +485,7 @@
       "about.philosophy.title": "Lo que valora NIARIM",
       "about.philosophy.item1.title": "Animación fácil para todos.",
       "about.philosophy.item1.body":
-        "No hace falta conocimiento ni herramientas especializadas. Con solo un smartphone, cualquiera puede ser creador. Ese es el mundo al que aspira NIARIM.",
+        "Del dibujo lineal a la exportación de vídeo, todo funciona solo con el móvil. Puedes empezar sin tableta gráfica ni otros programas.",
       "about.philosophy.item2.title": "Trabajando para mantener la app ligera",
       "about.philosophy.item2.body":
         "Crear animación tiende a generar más datos a medida que aumentan los fotogramas y las capas. Además de las capas comunes, la gestión de caché y las herramientas para liberar espacio, también hemos añadido ajustes de rendimiento que te permiten elegir un preajuste de calidad, o ajustar cada opción individualmente, según tu dispositivo, para aliviar la carga que soporta. No necesitas equipo especial para empezar a crear en serio.",

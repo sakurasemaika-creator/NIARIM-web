@@ -135,7 +135,7 @@ for (const file of [
   vm.runInNewContext(readFileSync(file, "utf8"), context, { filename: file });
 }
 const d = context.window.NIARIM_I18N_DICT;
-assert.equal(d.ja["coins.title"], "無料でもプレミアム機能が使える！");
+assert.equal(d.ja["coins.title"], "集めたオパールでプレミアムの機能を使えます");
 assert.equal(d.ja["coins.unit"], "オパール");
 assert.equal(d.ja["coins.compareFull"], "コンプリートパック");
 assert.equal(d.ja["coins.b11"], "コンプリートパック");

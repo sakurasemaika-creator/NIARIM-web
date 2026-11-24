@@ -4,7 +4,7 @@
   const dictionary = window.NIARIM_I18N_DICT;
   const strings = {
   "ja": {
-    "coins.title": "無料でもプレミアム機能が使える！",
+    "coins.title": "集めたオパールでプレミアムの機能を使えます",
     "coins.catalog": "引き換えに必要なオパール数",
     "coins.compareTitle": "コンプリートパックと単品の違い",
     "coins.compareIntro": "コンプリートパックは1か月55,000オパール、1年550,000オパールです。制作機能6つと全広告非表示を単品でそろえる場合の合計は、1か月110,000オパール、1年1,100,000オパールです。コンプリートパックは、同じ期間に単品でそろえる場合の半額です。",
@@ -44,7 +44,7 @@
     "refresh.launch.title": "NIARIMで次の物語を作ろう！"
   },
   "en": {
-    "coins.title": "Unlock Premium features with Opals!",
+    "coins.title": "Use Premium features with the opals you collect",
     "coins.catalog": "Opals needed for benefits",
     "coins.compareTitle": "Complete Pack compared with single benefits",
     "coins.compareIntro": "The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 110,000 and 1,100,000 separately. The table compares the pack with those individual prices for the same period.",
@@ -75,7 +75,7 @@
     "coins.goalVisitMonthly": "Monthly sign-in days"
   },
   "zh-Hans": {
-    "coins.title": "用欧泊体验 Premium 功能！",
+    "coins.title": "用收集的欧泊使用 Premium 功能",
     "coins.catalog": "兑换所需欧泊",
     "coins.compareTitle": "全功能组合包与单项权益的比较",
     "coins.compareIntro": "全功能组合包为每月55,000欧泊、每年550,000欧泊；六项工具和全部去广告的单项合计为110,000和1,100,000欧泊。表中的折扣按相同期间的单项合计计算。",
@@ -106,7 +106,7 @@
     "coins.goalVisitMonthly": "每月登录天数"
   },
   "zh-Hant": {
-    "coins.title": "用歐泊體驗 Premium 功能！",
+    "coins.title": "用收集的歐泊使用 Premium 功能",
     "coins.catalog": "兌換所需歐泊",
     "coins.compareTitle": "全功能組合包與單項權益的比較",
     "coins.compareIntro": "全功能組合包為每月55,000歐泊、每年550,000歐泊；六項工具和全部去廣告的單項總額為110,000和1,100,000歐泊。表中的折扣按相同期間的單項總額計算。",
@@ -137,7 +137,7 @@
     "coins.goalVisitMonthly": "每月登入日數"
   },
   "ko": {
-    "coins.title": "오팔로 Premium 기능을 즐겨 보세요!",
+    "coins.title": "모은 오팔로 Premium 기능을 사용할 수 있습니다",
     "coins.catalog": "교환에 필요한 오팔",
     "coins.compareTitle": "컴플리트 팩과 개별 혜택 비교",
     "coins.compareIntro": "컴플리트 팩은 한 달 55,000오팔, 1년 550,000오팔입니다. 제작 도구 6개와 전체 광고 제거의 단품 합계는 110,000오팔과 1,100,000오팔입니다. 할인율은 같은 기간의 단품 합계 기준입니다.",
@@ -168,7 +168,7 @@
     "coins.goalVisitMonthly": "월간 로그인 일수"
   },
   "fr": {
-    "coins.title": "Profitez des fonctions Premium avec des opales !",
+    "coins.title": "Utilisez les fonctions Premium avec les opales que vous gagnez",
     "coins.catalog": "Opales nécessaires pour les avantages",
     "coins.compareTitle": "Pack complet et avantages à l’unité",
     "coins.compareIntro": "Le Pack complet coûte 55 000 opales pour un mois et 550 000 pour un an. Les six outils et la suppression des pubs à l’unité totalisent 110 000 et 1 100 000 opales. La comparaison porte sur la même durée.",
@@ -199,7 +199,7 @@
     "coins.goalVisitMonthly": "Jours de connexion par mois"
   },
   "es": {
-    "coins.title": "¡Disfruta de funciones Premium con ópalos!",
+    "coins.title": "Usa las funciones Premium con los ópalos que reúnas",
     "coins.catalog": "Ópalos necesarios para canjear",
     "coins.compareTitle": "Paquete completo frente a ventajas sueltas",
     "coins.compareIntro": "El Paquete completo cuesta 55.000 ópalos al mes y 550.000 al año. Las seis herramientas y la eliminación de anuncios por separado suman 110.000 y 1.100.000 ópalos. El descuento compara el mismo periodo.",

@@ -110,7 +110,7 @@
       "faq.a7":
         "このサイトのお問い合わせフォームから、不具合報告・機能要望などをお送りください。",
 
-      "cta.title": "実際にアニメーションを つくってみよう！",
+      "cta.title": "NIARIMの配信について",
       "cta.body":
         "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。",
 
@@ -348,7 +348,7 @@
 
       "meta.404.title": "ページが見つかりません | NIARIM",
       "error404.eyebrow": "404",
-      "error404.title": "このフレームは見つかりませんでした。",
+      "error404.title": "ページが見つかりませんでした",
       "error404.body":
         "お探しのページは、移動または削除された可能性があります。URLをご確認いただくか、ホームからやり直してください。",
       "error404.cta": "ホームへ戻る",
@@ -447,7 +447,7 @@
       "faq.a7":
         "Please use the contact form on this site to send bug reports or feature requests.",
 
-      "cta.title": "Set your story in motion.",
+      "cta.title": "About the NIARIM release",
       "cta.body": "Start your next animation with NIARIM.",
 
       "footer.tagline": "Hand-drawn animation app for Android",
@@ -686,7 +686,7 @@
 
       "meta.404.title": "Page Not Found | NIARIM",
       "error404.eyebrow": "404",
-      "error404.title": "This frame couldn’t be found.",
+      "error404.title": "Page not found",
       "error404.body":
         "The page you’re looking for may have been moved or removed. Please check the URL, or start again from the home page.",
       "error404.cta": "Back to home",

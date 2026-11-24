@@ -100,7 +100,7 @@
     "faq.q7": "在哪里可以反馈问题或提出需求？",
     "faq.a7": "请通过本网站的联系表单，发送故障报告或功能需求。",
 
-    "cta.title": "让你的故事动起来。",
+    "cta.title": "关于 NIARIM 的发布",
     "cta.body": "用 NIARIM，开始你的下一部动画作品。",
 
     "footer.tagline": "Android 手绘动画制作应用",
@@ -314,7 +314,7 @@
 
     "meta.404.title": "页面未找到 | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "未能找到这一帧画面。",
+    "error404.title": "找不到页面",
     "error404.body":
       "您访问的页面可能已被移动或删除。请确认网址，或从首页重新开始。",
     "error404.cta": "返回首页",
@@ -405,7 +405,7 @@
     "faq.q7": "哪裡可以回報問題或提出需求？",
     "faq.a7": "請透過本網站的聯絡表單，傳送問題回報或功能需求。",
 
-    "cta.title": "讓你的故事動起來。",
+    "cta.title": "關於 NIARIM 的發布",
     "cta.body": "用 NIARIM，開始你的下一部動畫作品。",
 
     "footer.tagline": "Android 手繪動畫製作應用程式",
@@ -619,7 +619,7 @@
 
     "meta.404.title": "找不到頁面 | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "未能找到這一格畫面。",
+    "error404.title": "找不到頁面",
     "error404.body":
       "您造訪的頁面可能已被移動或刪除。請確認網址，或從首頁重新開始。",
     "error404.cta": "返回首頁",
@@ -718,7 +718,7 @@
     "faq.a7":
       "이 사이트의 문의 양식을 통해 오류 신고나 기능 요청 등을 보내 주세요.",
 
-    "cta.title": "당신의 이야기를 움직여 보세요.",
+    "cta.title": "NIARIM 출시 안내",
     "cta.body": "NIARIM으로 다음 애니메이션 작품을 시작해 보세요.",
 
     "footer.tagline": "Android용 손그림 애니메이션 제작 앱",
@@ -958,7 +958,7 @@
 
     "meta.404.title": "페이지를 찾을 수 없습니다 | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "이 프레임을 찾을 수 없습니다.",
+    "error404.title": "페이지를 찾을 수 없습니다",
     "error404.body":
       "찾으시는 페이지가 이동되었거나 삭제되었을 수 있습니다. URL을 확인하시거나 홈에서 다시 시작해 주세요.",
     "error404.cta": "홈으로 돌아가기",
@@ -1061,7 +1061,7 @@
     "faq.a7":
       "Veuillez utiliser le formulaire de contact de ce site pour envoyer un signalement de bug ou une demande de fonctionnalité.",
 
-    "cta.title": "Mettez votre histoire en mouvement.",
+    "cta.title": "À propos de la sortie de NIARIM",
     "cta.body": "Commencez votre prochaine animation avec NIARIM.",
 
     "footer.tagline": "Application d’animation dessinée à la main pour Android",
@@ -1310,7 +1310,7 @@
 
     "meta.404.title": "Page introuvable | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "Cette image n’a pas pu être trouvée.",
+    "error404.title": "Page introuvable",
     "error404.body":
       "La page que vous recherchez a peut-être été déplacée ou supprimée. Veuillez vérifier l’URL ou recommencer depuis la page d’accueil.",
     "error404.cta": "Retour à l’accueil",
@@ -1411,7 +1411,7 @@
     "faq.a7":
       "Utiliza el formulario de contacto de este sitio para enviar reportes de errores o solicitudes de funciones.",
 
-    "cta.title": "Pon tu historia en movimiento.",
+    "cta.title": "Sobre el lanzamiento de NIARIM",
     "cta.body": "Comienza tu próxima animación con NIARIM.",
 
     "footer.tagline": "App de animación dibujada a mano para Android",
@@ -1656,7 +1656,7 @@
 
     "meta.404.title": "Página no encontrada | NIARIM",
     "error404.eyebrow": "404",
-    "error404.title": "No se pudo encontrar este cuadro.",
+    "error404.title": "Página no encontrada",
     "error404.body":
       "Es posible que la página que buscas haya sido movida o eliminada. Comprueba la URL o vuelve a empezar desde la página de inicio.",
     "error404.cta": "Volver al inicio",
