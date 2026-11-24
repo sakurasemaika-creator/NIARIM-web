@@ -151,17 +151,12 @@
     picture.className = "real-app-capture";
     var avif = document.createElement("source");
     avif.type = "image/avif";
-    var revision = "08eb5dac";
     // The capture in the page's language (i18n.js).
     var localize =
       (window.NIARIM_I18N && window.NIARIM_I18N.captureUrl) || String;
-    avif.srcset = localize(
-      "/assets/images/app-captures/" + name + ".avif?v=" + revision,
-    );
+    avif.srcset = localize("/assets/images/app-captures/" + name + ".avif");
     var img = document.createElement("img");
-    img.src = localize(
-      "/assets/images/app-captures/" + name + ".webp?v=" + revision,
-    );
+    img.src = localize("/assets/images/app-captures/" + name + ".webp");
     img.alt = alt || "";
     // Reserve the canonical premium reference capture geometry before lazy decoding.
     var geometry = captureGeometry[captureBaseName(name)] || [320, 569];

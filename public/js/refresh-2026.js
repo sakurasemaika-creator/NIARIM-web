@@ -28,7 +28,6 @@
   function apply(variant) {
     const n = Math.max(1, Math.min(4, Number(variant) || 1));
     const suffix = n === 1 ? "" : "-v" + n;
-    const revision = "08eb5dac";
     document
       .querySelectorAll(
         "[data-capture], [data-capture-pc], .feature-diagram--real[data-capture-theme]",
@@ -57,8 +56,14 @@
         // The capture in the page's language (i18n.js).
         const localize =
           (window.NIARIM_I18N && window.NIARIM_I18N.captureUrl) || String;
-        if (source) source.srcset = localize(base + ".avif?v=" + revision);
-        if (img) img.src = localize(base + ".webp?v=" + revision);
+        // The served HTML already names the capture in the page's language
+        // (the Worker), so the first palette keeps those URLs and nothing is
+        // fetched twice. New file names, not a query, refresh a capture.
+        const avif = localize(base + ".avif");
+        const webp = localize(base + ".webp");
+        if (source && source.getAttribute("srcset") !== avif)
+          source.srcset = avif;
+        if (img && img.getAttribute("src") !== webp) img.src = webp;
       });
     document.querySelectorAll(".nr-palette-button").forEach(function (btn) {
       const selected = Number(btn.dataset.variant) === n;
