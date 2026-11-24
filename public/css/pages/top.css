@@ -47,6 +47,13 @@
   letter-spacing: 0.08em;
 }
 
+/* The concept line the owner chose, quiet under the reading. */
+#main .nr-hero-concept {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+  font: 400 0.9375rem / 1.6 var(--font-sans);
+}
+
 #main .nr-hero-strap {
   margin: clamp(20px, 2.4vw, 28px) 0 0;
   color: var(--ink);
@@ -997,4 +1004,31 @@
 
 #main :is(.nr-gallery-visual, .nr-story-media, .nr-workspace-media) {
   background: transparent;
+}
+
+/* Closing: the owner's invitation, then where to get the app. */
+#main .nr-launch h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 var(--fs-h2) / 1.4 var(--font-serif);
+}
+
+#main .nr-launch .nr-launch-body {
+  max-width: 36em;
+  margin: 20px auto 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-body) / 2 var(--font-sans);
+  text-wrap: pretty;
+}
+
+#main .nr-launch .nr-launch-release {
+  margin: 40px 0 0;
+  color: var(--ink);
+  font: 400 1rem / 1.5 var(--font-serif);
+}
+
+#main .nr-launch .nr-launch-release-body {
+  margin: 6px auto 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
 }

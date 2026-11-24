@@ -121,7 +121,7 @@ FONTS = [
     (
         "NotoSerifSC",
         f"{SRCDIR}/noto/NotoSerifSC.woff2",
-        "NotoSerifSC-subset.v3.woff2",
+        "NotoSerifSC-subset.v4.woff2",
         "簡体字中国語の補完（Noto Serif SC）",
         "fallback",
     ),

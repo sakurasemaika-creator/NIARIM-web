@@ -76,11 +76,15 @@ for (const [name, html] of [["faq", faq]]) {
     `${name} fallback CTA must match the requested Japanese copy`,
   );
 }
+// The owner asked (2026-11-24) for the closing invitation, written by the
+// owner (narrative.home.cta.*), to come back at the end of the home page.
+// It closes the page once; the old feature-narrative blocks stay away.
+const count = (text, needle) => text.split(needle).length - 1;
 expect(
   !home.includes("feature-narrative") &&
-    !home.includes("narrative.home.cta.heading") &&
-    !home.includes("narrative.home.cta.body"),
-  "Home must not retain the duplicate feature-narrative CTA block",
+    count(home, '"narrative.home.cta.heading"') === 1 &&
+    count(home, '"narrative.home.cta.body"') === 1,
+  "Home must close with the owner's CTA once, without the old feature-narrative blocks",
 );
 expect(
   !home.includes("fd-frame-strip-mode"),
