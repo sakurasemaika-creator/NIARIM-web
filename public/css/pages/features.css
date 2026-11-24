@@ -7,13 +7,8 @@
   padding-block: var(--space-2xl) var(--space-xl);
   text-align: center;
   overflow: hidden;
-  background:
-    radial-gradient(
-      80% 120% at 50% -20%,
-      rgba(255, 92, 122, 0.14) 0%,
-      transparent 60%
-    ),
-    var(--color-bg);
+  /* Paper, like every other page opening (no pink glow). */
+  background: none;
 }
 
 .features-header h1 {

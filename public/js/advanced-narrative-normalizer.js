@@ -41,9 +41,6 @@
     var section = document.getElementById("advanced");
     if (!section) return;
 
-    var special = section.querySelector(".signature-feature-layout");
-    if (special) special.remove();
-
     var narrative = section.querySelector(".feature-narrative");
     if (!narrative) return;
 
@@ -69,27 +66,10 @@
     block.querySelector("p").textContent = c.body;
   }
 
-  var observer = null;
-  function startObserver() {
-    var section = document.getElementById("advanced");
-    if (!section || observer) return;
-    observer = new MutationObserver(function () {
-      if (section.querySelector(".signature-feature-layout")) {
-        normalizeAdvancedNarrative();
-      }
-    });
-    observer.observe(section, { childList: true, subtree: true });
-  }
-
-  function init() {
-    normalizeAdvancedNarrative();
-    startObserver();
-  }
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", normalizeAdvancedNarrative);
   } else {
-    init();
+    normalizeAdvancedNarrative();
   }
 
   document.addEventListener("niarim:langchange", normalizeAdvancedNarrative);

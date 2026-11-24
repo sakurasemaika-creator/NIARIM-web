@@ -103,46 +103,18 @@
     document.head.appendChild(link);
   }
 
+  // Features: the auto line art paragraph in "作画支援" is added by
+  // advanced-narrative-normalizer.js. (The drawn stand-in screens that used to
+  // be loaded here were always replaced by the real app captures.)
   function loadSignatureShowcase() {
     if (!document.querySelector(".features-header")) return;
-    addStyleOnce(
-      "/css/signature-showcase.css",
-      "data-niarim-signature-showcase-style",
-    );
-    if (!document.querySelector("script[data-niarim-signature-showcase]")) {
-      var script = document.createElement("script");
-      script.src = "/js/signature-showcase.js";
-      script.defer = true;
-      script.setAttribute("data-niarim-signature-showcase", "true");
-      document.head.appendChild(script);
-    }
-    if (document.querySelector(".features-header")) {
-      if (!document.querySelector("script[data-niarim-auto-lineart-phone]")) {
-        var phone = document.createElement("script");
-        phone.src = "/js/auto-lineart-phone.js";
-        phone.defer = true;
-        phone.setAttribute("data-niarim-auto-lineart-phone", "true");
-        document.head.appendChild(phone);
-      }
-      if (!document.querySelector("script[data-niarim-advanced-narrative]")) {
-        var narrative = document.createElement("script");
-        narrative.src = "/js/advanced-narrative-normalizer.js";
-        narrative.defer = true;
-        narrative.setAttribute("data-niarim-advanced-narrative", "true");
-        document.head.appendChild(narrative);
-      }
-      addStyleOnce(
-        "/css/widget-phone-fidelity.css",
-        "data-niarim-widget-phone-style",
-      );
-      if (!document.querySelector("script[data-niarim-widget-phone]")) {
-        var widget = document.createElement("script");
-        widget.src = "/js/widget-phone-fidelity.js";
-        widget.defer = true;
-        widget.setAttribute("data-niarim-widget-phone", "true");
-        document.head.appendChild(widget);
-      }
-    }
+    if (document.querySelector("script[data-niarim-advanced-narrative]"))
+      return;
+    var narrative = document.createElement("script");
+    narrative.src = "/js/advanced-narrative-normalizer.js";
+    narrative.defer = true;
+    narrative.setAttribute("data-niarim-advanced-narrative", "true");
+    document.head.appendChild(narrative);
   }
 
   function loadAiTrustCopy() {
