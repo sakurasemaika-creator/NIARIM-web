@@ -381,3 +381,165 @@
     align-self: start;
   }
 }
+
+/* ---- Paper and ink (2026-11 redesign). Two white sheets side by side; the
+   premium sheet is told apart by an ink outline, not a dark fill. Its two
+   prices sit in one ruled row (no cards inside the card), the yearly saving
+   is a line of red pencil, and the store note is plain text under a rule.
+   Scoped under #main so the older layers cannot override it. Colours come
+   only from the tokens in variables.css. ---- */
+#main .plan-shortcuts {
+  gap: 0 28px;
+}
+
+#main .plan-shortcuts a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
+#main .plan-shortcuts a:hover {
+  background: transparent;
+  color: var(--ink);
+  text-decoration-color: var(--pencil);
+}
+
+#main .pricing-card,
+#main .pricing-card.is-premium {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  box-shadow: none;
+  color: var(--ink);
+}
+
+#main .pricing-card.is-premium {
+  border-color: var(--ink);
+}
+
+#main .pricing-card :is(h3, .pricing-price .amount) {
+  color: var(--ink);
+}
+
+#main .pricing-card :is(.pricing-price .unit, .pricing-basis) {
+  color: var(--ink-2);
+}
+
+#main .pricing-card .pricing-plan-compare {
+  gap: 0;
+  border-block: 1px solid var(--rule);
+}
+
+#main .pricing-card .pricing-plan-option,
+#main .pricing-card .pricing-plan-option-best {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 18px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+}
+
+#main .pricing-card .pricing-plan-option + .pricing-plan-option {
+  padding-left: 20px;
+  border-left: 1px solid var(--rule);
+}
+
+#main .pricing-card .pricing-plan-option-label {
+  color: var(--ink-2);
+}
+
+#main
+  .pricing-card
+  .pricing-plan-option
+  > :is(.pricing-price, .pricing-price-compare) {
+  margin-top: 10px;
+}
+
+#main .pricing-card .pricing-price-compare > .pricing-price {
+  margin-top: 0;
+}
+
+#main .pricing-card .pricing-plan-option .pricing-basis {
+  padding-top: 0;
+  border-top: 0;
+}
+
+#main .pricing-card .pricing-plan-badge {
+  display: block;
+  position: static;
+  align-self: flex-start;
+  order: 3;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--pencil-ink);
+  font-size: 0.8125rem;
+  text-align: left;
+  transform: none;
+}
+
+#main .pricing-card .pricing-plan-badge > span {
+  display: inline;
+  color: inherit;
+  font: inherit;
+}
+
+#main .pricing-card #premium-store-terms {
+  margin: 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-2);
+}
+
+#main .pricing-card .pricing-list li,
+#main .pricing-card .pricing-list li strong {
+  color: var(--ink);
+}
+
+#main .pricing-card .pricing-list li span {
+  color: var(--ink-2);
+}
+
+#main .pricing-card .pricing-list li::before {
+  color: var(--ink-2);
+}
+
+#main .pricing-card.is-premium .pricing-list li::before {
+  color: var(--pencil-ink);
+}
+
+#main .feature-narrative-block {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 520px) {
+  #main .pricing-card .pricing-plan-compare {
+    grid-template-columns: 1fr;
+  }
+
+  #main .pricing-card .pricing-plan-option + .pricing-plan-option {
+    padding-left: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 0;
+  }
+}
