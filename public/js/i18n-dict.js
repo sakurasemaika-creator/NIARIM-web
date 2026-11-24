@@ -114,7 +114,7 @@
       "cta.body":
         "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。",
 
-      "footer.tagline": "Animation made by your hands.",
+      "footer.tagline": "Android向け手描きアニメーション制作アプリ",
       "footer.product": "Product",
       "footer.support": "Support",
       "footer.legal": "Legal",
@@ -450,7 +450,7 @@
       "cta.title": "Set your story in motion.",
       "cta.body": "Start your next animation with NIARIM.",
 
-      "footer.tagline": "Animation made by your hands.",
+      "footer.tagline": "Hand-drawn animation app for Android",
       "footer.product": "Product",
       "footer.support": "Support",
       "footer.legal": "Legal",

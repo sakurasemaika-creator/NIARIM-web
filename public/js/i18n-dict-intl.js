@@ -103,7 +103,7 @@
     "cta.title": "让你的故事动起来。",
     "cta.body": "用 NIARIM，开始你的下一部动画作品。",
 
-    "footer.tagline": "Animation made by your hands.",
+    "footer.tagline": "Android 手绘动画制作应用",
     "footer.product": "Product",
     "footer.support": "Support",
     "footer.legal": "Legal",
@@ -408,7 +408,7 @@
     "cta.title": "讓你的故事動起來。",
     "cta.body": "用 NIARIM，開始你的下一部動畫作品。",
 
-    "footer.tagline": "Animation made by your hands.",
+    "footer.tagline": "Android 手繪動畫製作應用程式",
     "footer.product": "Product",
     "footer.support": "Support",
     "footer.legal": "Legal",
@@ -721,7 +721,7 @@
     "cta.title": "당신의 이야기를 움직여 보세요.",
     "cta.body": "NIARIM으로 다음 애니메이션 작품을 시작해 보세요.",
 
-    "footer.tagline": "Animation made by your hands.",
+    "footer.tagline": "Android용 손그림 애니메이션 제작 앱",
     "footer.product": "Product",
     "footer.support": "Support",
     "footer.legal": "Legal",
@@ -1064,7 +1064,7 @@
     "cta.title": "Mettez votre histoire en mouvement.",
     "cta.body": "Commencez votre prochaine animation avec NIARIM.",
 
-    "footer.tagline": "Animation made by your hands.",
+    "footer.tagline": "Application d’animation dessinée à la main pour Android",
     "footer.product": "Product",
     "footer.support": "Support",
     "footer.legal": "Legal",
@@ -1414,7 +1414,7 @@
     "cta.title": "Pon tu historia en movimiento.",
     "cta.body": "Comienza tu próxima animación con NIARIM.",
 
-    "footer.tagline": "Animation made by your hands.",
+    "footer.tagline": "App de animación dibujada a mano para Android",
     "footer.product": "Product",
     "footer.support": "Support",
     "footer.legal": "Legal",
