@@ -1,0 +1,11 @@
+source_repo=sakurasemaika-creator/NIARIM
+source_branch=dev_branch
+source_commit=ea312740
+captured_at=2026-11-24T22:30:00Z
+screen=/canvas/<project> (the phone canvas), the same 512x512 project before and after running auto fill
+art=the character of the website's auto fill pictures (public/assets/images/engine/autofill-*.webp): one auto fill line art layer per part (skin, clothes, hair in ink; the shadows and the highlight in blue, red and magenta lines), each assigned to a part of an auto fill preset, and the finished line art on a normal layer on top
+run=the app's own runAutofillForLayer (lib/engine/autofill_batch_runner.dart) on each line art layer, as the layer panel and the timeline do; the shadow and highlight parts use the line colour "same as fill"; the canvas is reopened before the second capture so the frame list's thumbnail shows the filled frame
+languages=ja,en,es,fr,ko,zh-Hans,zh-Hant (the app set to each language: SettingsService language; zh-Hant is the app's zh_Hant)
+size=320x569 logical at 2x (640x1138), webp quality 80
+fonts=all of the app's bundled fonts loaded from pubspec.yaml (test/helpers/load_app_fonts.dart)
+file_names=autofill-before-<lang>.webp and autofill-result-<lang>.webp; the Features page picks the page's language through img.autofill-before / img.autofill-result (public/js/i18n-dict-features-diagram.js), which the Worker applies before the browser asks for an image
