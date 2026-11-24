@@ -20,6 +20,9 @@
     var input = document.getElementById("help-search-input");
     var clear = document.getElementById("help-search-clear");
     var noResults = document.getElementById("help-no-results");
+    // With nothing found, the next places to look: the FAQ and the contact
+    // page (the same links as the header).
+    var noResultsLinks = document.querySelector("[data-help-no-results-links]");
     var categories = Array.prototype.slice.call(
       document.querySelectorAll("[data-help-category]"),
     );
@@ -118,6 +121,7 @@
       }
       if (!query) openBeforeSearch = null;
       if (noResults) noResults.hidden = !query || matches > 0;
+      if (noResultsLinks) noResultsLinks.hidden = !query || matches > 0;
       if (resultCount) {
         const label =
           query && matches

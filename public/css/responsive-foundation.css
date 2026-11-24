@@ -551,7 +551,10 @@ body .final-cta .hero-actions .btn.btn-primary:hover {
 
 .feature-nav {
   top: calc(var(--header-height) + 10px);
-  width: min(calc(100% - 24px), 1140px);
+  /* The full width of the content column, so the rail's edges line up with
+     the header, the search field and the lists (it was inset 40px at 1440px
+     and 12px on phones). */
+  width: 100%;
   padding: 0.55rem;
   border: 1px solid var(--niarim-line);
   border-radius: 12px;

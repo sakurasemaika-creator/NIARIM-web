@@ -69,19 +69,65 @@
   height: 2.75rem;
   border: 0;
   border-radius: 50%;
-  background: transparent;
   color: var(--color-text);
   cursor: pointer;
-  font: 1.4rem/1 sans-serif;
+  /* A drawn cross (the "×" in the markup is hidden): the system sans-serif
+     glyph was the one character of the page not in the site's faces. */
+  font-size: 0;
+  background:
+    linear-gradient(
+        45deg,
+        transparent calc(50% - 1px),
+        currentColor calc(50% - 1px) calc(50% + 1px),
+        transparent calc(50% + 1px)
+      )
+      center / 14px 14px no-repeat,
+    linear-gradient(
+        -45deg,
+        transparent calc(50% - 1px),
+        currentColor calc(50% - 1px) calc(50% + 1px),
+        transparent calc(50% + 1px)
+      )
+      center / 14px 14px no-repeat;
 }
 
 .help-search-clear:hover,
 .help-search-clear:focus-visible {
-  background: var(--color-sub-tint);
+  background-color: var(--color-sub-tint);
 }
 
 .help-search-clear:focus-visible {
-  outline: 2px solid var(--color-accent-strong);
+  outline: 2px solid var(--color-accent-text);
+}
+
+/* Same outline buttons as the premium page's section shortcuts. */
+.help-no-results-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin: 0.9rem 0 0;
+  padding-inline: 0.75rem;
+}
+
+.help-no-results-links[hidden] {
+  display: none;
+}
+
+.help-no-results-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  font: 600 0.9375rem/1.4 var(--font-serif);
+  text-decoration: none;
+}
+
+.help-no-results-links a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .help-search input:focus {
