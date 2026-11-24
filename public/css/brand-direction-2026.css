@@ -405,8 +405,9 @@ html body.nr-site .nr-statement > p:last-child {
   max-width: 590px;
 }
 html body.nr-site .nr-kicker {
-  letter-spacing: 0.2em;
-  color: #a53152;
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-text);
 }
 html body.nr-site .nr-story {
   gap: 0;
@@ -801,15 +802,8 @@ html body.nr-site .nr-statement {
   position: relative;
   border-bottom: 1px solid var(--nr-rule);
 }
-html body.nr-site .nr-statement::after {
-  content: "01 / THE PROCESS";
-  position: absolute;
-  right: 0;
-  bottom: 26px;
-  color: #82787d;
-  font: 700 0.67rem/1.4 var(--font-serif);
-  letter-spacing: 0.19em;
-}
+/* The "01 / THE PROCESS" label that sat here repeated the "01 — DRAW"
+   step label below it in untranslated English. */
 html body.nr-site .nr-story-card {
   overflow: hidden;
 }
@@ -817,18 +811,7 @@ html body.nr-site .nr-story-card .nr-story-media {
   position: relative;
   isolation: isolate;
 }
-html body.nr-site .nr-story-card .nr-story-media::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 70%;
-  aspect-ratio: 1;
-  left: 15%;
-  top: 14%;
-  border: 1px solid rgba(48, 37, 48, 0.1);
-  border-radius: 50%;
-  pointer-events: none;
-}
+/* No ring behind the captures: the app screens are the subject. */
 html body.nr-site .nr-story-copy h3 {
   max-width: 13em;
   text-wrap: pretty;
@@ -901,9 +884,6 @@ html body.nr-site .nr-feature-text > p {
   html body.nr-site .nr-hero-wordmark {
     font-size: clamp(3.6rem, 11vw, 6rem) !important;
   }
-  html body.nr-site .nr-statement::after {
-    bottom: 15px;
-  }
 }
 @media (max-width: 560px) {
   html body.nr-site .nr-hero-wordmark {
@@ -915,9 +895,6 @@ html body.nr-site .nr-feature-text > p {
   html body.nr-site .nr-hero-category::before {
     width: 18px;
     flex-basis: 18px;
-  }
-  html body.nr-site .nr-statement::after {
-    font-size: 0.57rem;
   }
   html body.nr-site .nr-tool-grid article::before {
     left: 14px;
