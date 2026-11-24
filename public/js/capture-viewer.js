@@ -12,9 +12,29 @@
     const zoom = dialog.querySelector(".capture-zoom");
     const deviceButtons = [...dialog.querySelectorAll("[data-device]")];
     const template = document.querySelector("#capture-open-template");
+    const count = dialog.querySelector(".capture-count");
+    const stepButtons = [...dialog.querySelectorAll("[data-step]")];
+    const cards = [...gallery.querySelectorAll(".nr-gallery-item")];
     let selectedCard;
     let trigger;
     let currentDevice;
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    // Browse the nine screens without closing the viewer: buttons, the
+    // arrow keys, and a horizontal swipe on the picture. The device and the
+    // zoom choice carry over; focus stays in the dialog.
+    function showCard(index) {
+      const total = cards.length;
+      const next = ((index % total) + total) % total;
+      selectedCard = cards[next];
+      if (count) count.textContent = pad(next + 1) + " / " + pad(total);
+      selectDevice(currentDevice);
+    }
+
+    function step(delta) {
+      showCard(cards.indexOf(selectedCard) + delta);
+    }
 
     function selectDevice(device) {
       const heading = selectedCard.querySelector("h3").textContent;
@@ -52,10 +72,10 @@
       visual.append(button);
       button.addEventListener("click", () => {
         trigger = button;
-        selectedCard = card;
-        selectDevice(
-          window.matchMedia("(max-width: 740px)").matches ? "phone" : "desktop",
-        );
+        currentDevice = window.matchMedia("(max-width: 740px)").matches
+          ? "phone"
+          : "desktop";
+        showCard(cards.indexOf(card));
         dialog.showModal();
       });
     }
@@ -65,6 +85,39 @@
         selectDevice(button.dataset.device),
       );
     }
+    for (const button of stepButtons) {
+      button.addEventListener("click", () => step(Number(button.dataset.step)));
+    }
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      // At actual size the arrow keys scroll the picture instead.
+      if (
+        stage.classList.contains("is-native-size") &&
+        stage.contains(event.target)
+      )
+        return;
+      event.preventDefault();
+      step(event.key === "ArrowLeft" ? -1 : 1);
+    });
+    let swipe = null;
+    stage.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") return;
+      swipe = { x: event.clientX, y: event.clientY };
+    });
+    stage.addEventListener("pointerup", (event) => {
+      if (!swipe || stage.classList.contains("is-native-size")) {
+        swipe = null;
+        return;
+      }
+      const dx = event.clientX - swipe.x;
+      const dy = event.clientY - swipe.y;
+      swipe = null;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5)
+        step(dx < 0 ? 1 : -1);
+    });
+    stage.addEventListener("pointercancel", () => {
+      swipe = null;
+    });
     zoom.addEventListener("click", () => {
       const native = stage.classList.toggle("is-native-size");
       zoom.setAttribute("aria-pressed", String(native));

@@ -1046,6 +1046,27 @@
     >
       <div class="capture-bar">
         <h2 id="capture-title"></h2>
+        <div class="capture-nav">
+          <button
+            type="button"
+            class="capture-step"
+            data-step="-1"
+            aria-label="前の画面"
+            data-i18n-attr="aria-label:viewer.prev"
+          >
+            <span class="capture-chevron is-prev" aria-hidden="true"></span>
+          </button>
+          <span class="capture-count" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="capture-step"
+            data-step="1"
+            aria-label="次の画面"
+            data-i18n-attr="aria-label:viewer.next"
+          >
+            <span class="capture-chevron is-next" aria-hidden="true"></span>
+          </button>
+        </div>
         <form method="dialog">
           <button
             class="capture-close"
