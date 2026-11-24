@@ -570,7 +570,7 @@ html:lang(zh-Hant) body :is(h1, h2, h3, h4, p, li) {
    Applies to every page (it was limited to the top page, body.nr-site, so
    French and Spanish items broke inside a word on the other pages at
    1181-1280px). */
-@media (min-width: 1181px) {
+@media (min-width: 901px) {
   html body .site-header .main-nav > ul {
     flex-wrap: wrap;
     justify-content: flex-end;

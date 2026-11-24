@@ -965,7 +965,7 @@
   });
 
   DICT["fr"] = Object.assign(DICT["fr"] || {}, {
-    "nav.features": "Fonctionnalités",
+    "nav.features": "Fonctions",
     "nav.news": "Actualités",
     "nav.faq": "FAQ",
     "nav.contact": "Contact",

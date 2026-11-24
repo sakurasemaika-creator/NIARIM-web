@@ -453,7 +453,7 @@
 /* Desktop navigation only: from 1024px to 1180px the menu is the drawer,
    whose links are 1.1rem (common-base.css); this rule used to shrink them to
    12.5px there. */
-@media (min-width: 1181px) {
+@media (min-width: 901px) {
   .main-nav > ul > li > a {
     font-size: 0.78rem;
     letter-spacing: 0.01em;

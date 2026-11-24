@@ -319,7 +319,7 @@
       ':scope > a[data-play-release-i18n="nav.download"]',
     );
     if (downloadLink) {
-      var mobileNav = window.matchMedia("(max-width: 1180px)");
+      var mobileNav = window.matchMedia("(max-width: 900px)");
       function alignNavOrder() {
         var next = mobileNav.matches ? dropdown : dropdown.nextElementSibling;
         if (next === downloadLink || downloadLink.nextElementSibling === next)

@@ -20,7 +20,7 @@
 /* In the drawer each link is a full-width row with its label on the left,
    so the current-page mark is a short bar under the start of the label
    (it ran across the whole row, starting 8px right of the text). */
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .main-nav a:not(.btn)::after {
     left: 0 !important;
     transform: none !important;

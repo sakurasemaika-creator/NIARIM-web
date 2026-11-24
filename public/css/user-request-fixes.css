@@ -133,7 +133,7 @@ html body #widget .fd-widget-grid > .fd-widget-tile {
   min-width: 0 !important;
   padding: 10px !important;
 }
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .main-nav {
     padding: clamp(0.85rem, 3vh, 1.35rem) var(--container-padding) !important;
   }
@@ -166,7 +166,7 @@ html body #widget .fd-widget-grid > .fd-widget-tile {
 }
 /* On tablets the drawer's column keeps a phone-like measure instead of
    stretching the button and the language field across 940px. */
-@media (min-width: 641px) and (max-width: 1180px) {
+@media (min-width: 641px) and (max-width: 900px) {
   .main-nav > :is(ul, .btn, .lang-dropdown) {
     width: min(100%, 520px) !important;
   }

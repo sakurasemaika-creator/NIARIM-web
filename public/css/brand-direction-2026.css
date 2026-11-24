@@ -43,7 +43,7 @@ body.brand-has-scrolled .site-header {
    the row of links wrapped and unwrapped (most of the home page's layout
    shift on a slow connection). Same values as those layers, so nothing moves
    when they arrive. */
-@media (min-width: 1181px) {
+@media (min-width: 901px) {
   body .site-header {
     height: auto;
     min-height: 68px;

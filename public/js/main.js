@@ -924,7 +924,7 @@
     var nav = document.querySelector(".main-nav");
     if (!toggle || !nav) return;
 
-    var narrow = window.matchMedia("(max-width: 1180px)");
+    var narrow = window.matchMedia("(max-width: 900px)");
     var header = toggle.closest(".site-header");
     var covered = Array.from(
       document.querySelectorAll(

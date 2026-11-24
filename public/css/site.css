@@ -44,11 +44,29 @@
   outline-offset: 3px;
 }
 
-@media (max-width: 1180px) {
-  .site-header .main-nav > a.nav-release {
+@media (max-width: 900px) {
+  html body .site-header .main-nav > a.nav-release {
+    align-self: flex-start;
+    justify-content: center;
     width: min(100%, 520px);
+    /* An older drawer rule forces links to width: 100% !important; the
+       maximum width still holds, so this matches the other drawer rows. */
+    max-width: 520px;
     min-height: 48px;
     margin: 8px 0 0;
     font-size: 0.9375rem;
+  }
+}
+
+/* With five items the header stays one row from 901px (the drawer starts at
+   900px). The list must not fold into a second row while the logo side still
+   has room. */
+@media (min-width: 901px) {
+  html body .site-header .main-nav > ul {
+    flex-wrap: nowrap;
+  }
+
+  html body .site-header .main-nav > ul > li > a {
+    white-space: nowrap;
   }
 }

@@ -72,7 +72,7 @@ main {
   -webkit-backdrop-filter: none;
 }
 
-@media (min-width: 1181px) {
+@media (min-width: 901px) {
   .site-header {
     top: 0;
     width: 100%;

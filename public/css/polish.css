@@ -34,7 +34,7 @@ main {
 }
 
 /* ---- Floating editorial header: desktop only ---- */
-@media (min-width: 1181px) {
+@media (min-width: 901px) {
   .site-header {
     top: 10px;
     width: min(calc(100% - 24px), 1400px);
@@ -573,7 +573,7 @@ main {
    only element on the site rounded that far (DESIGN.md 5). */
 
 /* ---- Responsive: deliberately recompose, don't just shrink ---- */
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .site-header {
     border-bottom-color: var(--color-border);
   }
