@@ -243,12 +243,6 @@
   opacity: 0.6;
 }
 
-#main .nr-impact {
-  fill: none;
-  stroke: #8a8590;
-  stroke-width: 1;
-  stroke-linecap: round;
-}
 
 #main .nr-frames-caption {
   grid-column: 2;

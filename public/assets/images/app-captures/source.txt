@@ -1,7 +1,7 @@
 source_repo=sakurasemaika-creator/NIARIM
 source_branch=dev_branch
-source_commit=08eb5dac824492825fbf2ade95ed7df266fe0901
-captured_at=2026-11-23T16:45:44Z
+source_commit=ec1b04f7674f1a10eb64fe9684cd9dee18cff89a
+captured_at=2026-11-24T06:50:00Z
 premium=true
 ads=false
 variants_per_screen=4
@@ -9,5 +9,5 @@ screens=9
 platforms=sp,pc
 sp_resolution=640x1138
 pc_resolution=1440x900
-source_test=test/app_web_reference_capture_test_v2.dart
-artwork=bouncing ball, 5 frames, and a branching save tree, drawn by the capture test
+source_test=test/app_web_reference_capture_test_v2.dart (run from an uncommitted copy whose ball drawing was replaced, see artwork)
+artwork=bouncing ball, 5 frames drawn exactly like frames 3-7 of the website SVG strip (public/index.html .nr-flip / #nr-ball: same positions, scales, rotations, shadows, ground and tufts, fitted into the canvas; no speed or impact lines; frame 3 of 5 is the squash), and a branching save tree, drawn by the capture test

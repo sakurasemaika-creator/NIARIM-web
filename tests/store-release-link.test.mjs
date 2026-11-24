@@ -90,13 +90,15 @@ test("missing or incorrect store URLs keep both links hidden and show pending co
   ]) {
     const { fields, links, confirmation } = storefront(url, "en");
     assert.ok(links.every(({ badge }) => badge === null));
-    assert.equal(fields.length, 5);
+    // 2026-11 redesign: the hero's "ANDROID / 配信前" badge became the plain
+    // release line under the action, so one release field fewer.
+    assert.equal(fields.length, 4);
     assert.equal(links.length, 2);
     assert.ok(fields.some(({ key }) => key === "nav.releaseInfo"));
     assert.equal(
       fields.filter(({ key }) => key.startsWith("refresh.release.pending."))
         .length,
-      4,
+      3,
     );
     assert.ok(links.every(({ hidden, href }) => hidden && !href));
     assert.equal(confirmation.hidden, true);
