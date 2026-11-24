@@ -110,7 +110,7 @@
       "faq.a7":
         "このサイトのお問い合わせフォームから、不具合報告・機能要望などをお送りください。",
 
-      "cta.title": "NIARIMの配信について",
+      "cta.title": "実際にアニメーションを つくってみよう！",
       "cta.body":
         "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。",
 
@@ -447,8 +447,8 @@
       "faq.a7":
         "Please use the contact form on this site to send bug reports or feature requests.",
 
-      "cta.title": "About the NIARIM release",
-      "cta.body": "Start your next animation with NIARIM.",
+      "cta.title": "Let’s actually make an animation!",
+      "cta.body": "The moment you feel like drawing, you can start. Draw every frame by hand or use keyframe animation, whichever you prefer. Take it as far as you want and make an original work that is all yours. When it’s done, everyone can watch it in the Work Plaza, and you can watch other people’s works too. Make it, publish it, discover it.",
 
       "footer.tagline": "Hand-drawn animation app for Android",
       "footer.product": "Product",

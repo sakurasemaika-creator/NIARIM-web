@@ -100,8 +100,8 @@
     "faq.q7": "在哪里可以反馈问题或提出需求？",
     "faq.a7": "请通过本网站的联系表单，发送故障报告或功能需求。",
 
-    "cta.title": "关于 NIARIM 的发布",
-    "cta.body": "用 NIARIM，开始你的下一部动画作品。",
+    "cta.title": "一起来做一部动画吧！",
+    "cta.body": "想画的时候，现在就能开始。全部帧手绘也好，关键帧动画也好，随你喜欢。尽情打磨到满意为止，做出只属于你的原创作品吧。完成后可以在作品广场让大家观看，也可以观看别人的作品。去创作，去发布，去发现。",
 
     "footer.tagline": "Android 手绘动画制作应用",
     "footer.product": "产品",
@@ -405,8 +405,8 @@
     "faq.q7": "哪裡可以回報問題或提出需求？",
     "faq.a7": "請透過本網站的聯絡表單，傳送問題回報或功能需求。",
 
-    "cta.title": "關於 NIARIM 的發布",
-    "cta.body": "用 NIARIM，開始你的下一部動畫作品。",
+    "cta.title": "一起來做一部動畫吧！",
+    "cta.body": "想畫的時候，現在就能開始。全部影格手繪也好，關鍵影格動畫也好，隨你喜歡。盡情琢磨到滿意為止，做出只屬於你的原創作品吧。完成後可以在作品廣場讓大家觀看，也可以觀看別人的作品。去創作，去發布，去發現。",
 
     "footer.tagline": "Android 手繪動畫製作應用程式",
     "footer.product": "產品",
@@ -718,8 +718,8 @@
     "faq.a7":
       "이 사이트의 문의 양식을 통해 오류 신고나 기능 요청 등을 보내 주세요.",
 
-    "cta.title": "NIARIM 출시 안내",
-    "cta.body": "NIARIM으로 다음 애니메이션 작품을 시작해 보세요.",
+    "cta.title": "실제로 애니메이션을 만들어 보자!",
+    "cta.body": "그리고 싶다는 생각이 들면 지금 바로 시작할 수 있습니다. 모든 프레임을 손으로 그려도, 키프레임 애니메이션으로 만들어도 원하는 대로 고를 수 있습니다. 만족할 때까지 충분히 공들여 나만의 오리지널 작품을 만들어 보세요. 완성하면 작품 광장에서 모두에게 보여 줄 수 있고, 다른 사람의 작품도 볼 수 있습니다. 만들고, 공개하고, 발견하자.",
 
     "footer.tagline": "Android용 손그림 애니메이션 제작 앱",
     "footer.product": "제품",
@@ -1061,8 +1061,8 @@
     "faq.a7":
       "Veuillez utiliser le formulaire de contact de ce site pour envoyer un signalement de bug ou une demande de fonctionnalité.",
 
-    "cta.title": "À propos de la sortie de NIARIM",
-    "cta.body": "Commencez votre prochaine animation avec NIARIM.",
+    "cta.title": "Passons à la pratique, créons une animation !",
+    "cta.body": "Dès que l’envie de dessiner vous prend, vous pouvez commencer. Dessinez chaque image à la main ou animez par images clés, comme vous préférez. Peaufinez jusqu’à être satisfait et créez une œuvre originale bien à vous. Une fois terminée, tout le monde pourra la voir dans la Place des œuvres, et vous pourrez voir les œuvres des autres. Créez, publiez, découvrez.",
 
     "footer.tagline": "Application d’animation dessinée à la main pour Android",
     "footer.product": "Produit",
@@ -1411,8 +1411,8 @@
     "faq.a7":
       "Utiliza el formulario de contacto de este sitio para enviar reportes de errores o solicitudes de funciones.",
 
-    "cta.title": "Sobre el lanzamiento de NIARIM",
-    "cta.body": "Comienza tu próxima animación con NIARIM.",
+    "cta.title": "¡Vamos a hacer una animación de verdad!",
+    "cta.body": "Cuando te den ganas de dibujar, puedes empezar enseguida. Dibuja cada fotograma a mano o usa animación por fotogramas clave, como prefieras. Cuida cada detalle hasta quedar satisfecho y crea una obra original solo tuya. Cuando la termines, todos podrán verla en la Plaza de Obras, y tú también podrás ver las obras de los demás. Crea, publica, descubre.",
 
     "footer.tagline": "App de animación dibujada a mano para Android",
     "footer.product": "Producto",

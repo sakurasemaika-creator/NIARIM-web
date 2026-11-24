@@ -12,9 +12,10 @@ const [main, baseCss, finalCss, dict, home, faq, finishCss] = await Promise.all(
   ],
 );
 
-// Rewritten from 「実際にアニメーションを つくってみよう！」 when the owner asked
-// for plain statements instead of ad-style copy (2026-11-24).
-const title = "NIARIMの配信について";
+// The owner's own words (f8ffb190, 2026-08-28). A rewrite on 2026-11-24 took
+// a coordinator's inference ("no ad-style copy") for an owner rule; the owner
+// asked for their own copy to stay, so it is back.
+const title = "実際にアニメーションを つくってみよう！";
 const body =
   "描きたいと思ったら今すぐにでも始められる。全フレーム手描きでもキーフレームアニメーションでもあなたのお好みで。納得するまでとことんこだわってあなただけのオリジナル作品をつくろう。完成したら作品広場でみんなにみてもらうことができます。逆に、他の人の作品をみることもできます。つくって、公開して、みつけよう。";
 const failures = [];
