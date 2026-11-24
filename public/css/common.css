@@ -499,3 +499,24 @@ html body .hero-subtitle-text {
     background-size: 100% 3px;
   }
 }
+
+/* A word kept on one line inside a heading (i18n.js). */
+.nw {
+  white-space: nowrap;
+}
+
+/* Headings break between phrases and never start a line with a closing
+   bracket, small kana or prolonged sound mark (pages without line-break.css
+   included). */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-break: strict;
+}
+
+:root:lang(ja) :is(h1, h2, h3, h4, h5, h6) {
+  word-break: auto-phrase;
+}

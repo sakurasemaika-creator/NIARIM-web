@@ -149,6 +149,176 @@
     );
   }
 
+  // Headings keep each word on one line: a line breaks only between words.
+  // Chinese has no spaces, so the browser otherwise breaks inside a word
+  // (「手|机」); a long Japanese katakana word or a long French or Korean word
+  // also broke wherever the line ran out. Each word becomes a no-wrap span, and
+  // when one word is wider than the heading, the heading's text is made smaller
+  // until the word fits (instead of breaking it).
+  var WORD_HOLDERS = "h1, h2, h3, h4, h5, h6, summary, .faq-question";
+  var wordPatterns = null;
+  try {
+    wordPatterns = {
+      kana: new RegExp("^[\\p{Script=Katakana}\\u30FC\\u30FB]{2,}$", "u"),
+      han: new RegExp("^\\p{Script=Han}{2,}$", "u"),
+      latin: /^[A-Za-z0-9À-ɏ][A-Za-z0-9À-ɏ.\-+'’]+$/,
+    };
+  } catch (_) {}
+
+  function keepWordTokens(lang, text) {
+    // Returns [text, keep] pieces, or null when nothing needs keeping.
+    var pieces = [];
+    var any = false;
+    if (lang === "ja" || lang === "zh-Hans" || lang === "zh-Hant") {
+      if (!window.Intl || !Intl.Segmenter) return null;
+      var segmenter = new Intl.Segmenter(lang, { granularity: "word" });
+      var it = segmenter.segment(text)[Symbol.iterator]();
+      for (var step = it.next(); !step.done; step = it.next()) {
+        var word = step.value.segment;
+        var keep =
+          step.value.isWordLike &&
+          (wordPatterns.han.test(word) ||
+            wordPatterns.latin.test(word) ||
+            (lang === "ja" && wordPatterns.kana.test(word)));
+        if (keep) any = true;
+        pieces.push([word, keep]);
+      }
+    } else {
+      // Split at ordinary spaces only, so a no-break space (French « : »)
+      // stays inside its word.
+      text.split(/([ \t\n\r]+)/).forEach(function (part) {
+        if (!part) return;
+        var keep = !/^[ \t\n\r]+$/.test(part) && part.length > 1;
+        if (keep) any = true;
+        pieces.push([part, keep]);
+      });
+    }
+    return any ? pieces : null;
+  }
+
+  function keepHeadingWords(lang) {
+    if (!wordPatterns) return;
+    var holders = Array.prototype.slice.call(
+      document.querySelectorAll(WORD_HOLDERS),
+    );
+    // Read everything first, then change the DOM, then measure, so the page
+    // is styled and laid out once rather than once per heading.
+    var texts = [];
+    var seen = new Set();
+    holders.forEach(function (holder) {
+      var walker = document.createTreeWalker(holder, NodeFilter.SHOW_TEXT);
+      for (var node = walker.nextNode(); node; node = walker.nextNode()) {
+        var parent = node.parentElement;
+        if (!parent || parent.closest(".nw, svg, script, style")) continue;
+        // A heading inside another holder (a <summary> with an <h3>) is
+        // walked twice; each text is changed once.
+        if (!node.data.trim() || seen.has(node)) continue;
+        seen.add(node);
+        // In a flex or grid box every child is its own item, so the words
+        // stay together in one inline wrapper there.
+        texts.push([node, /flex|grid/.test(getComputedStyle(parent).display)]);
+      }
+    });
+    texts.forEach(function (entry) {
+      var node = entry[0];
+      var pieces = keepWordTokens(lang, node.data);
+      if (!pieces) return;
+      var target = document.createDocumentFragment();
+      var fragment = target;
+      if (entry[1]) {
+        fragment = document.createElement("span");
+        target.appendChild(fragment);
+      }
+      pieces.forEach(function (piece) {
+        if (!piece[1]) {
+          fragment.appendChild(document.createTextNode(piece[0]));
+          return;
+        }
+        var span = document.createElement("span");
+        span.className = "nw";
+        span.textContent = piece[0];
+        fragment.appendChild(span);
+      });
+      node.parentNode.replaceChild(target, node);
+    });
+    holders.forEach(fitHeadingWords);
+    if (wordObserver)
+      holders.forEach(function (holder) {
+        wordObserver.observe(holder);
+      });
+  }
+
+  function contentWidth(element) {
+    var style = getComputedStyle(element);
+    return (
+      element.clientWidth -
+      (parseFloat(style.paddingLeft) || 0) -
+      (parseFloat(style.paddingRight) || 0)
+    );
+  }
+
+  function blockOf(word, holder) {
+    for (
+      var el = word.parentElement;
+      el && el !== holder;
+      el = el.parentElement
+    )
+      if (!/^inline/.test(getComputedStyle(el).display) || el === holder)
+        return el;
+    return holder;
+  }
+
+  function fitHeadingWords(holder) {
+    var words = holder.querySelectorAll(".nw");
+    if (!words.length) return;
+    if (holder.hasAttribute("data-fit-size")) {
+      holder.style.fontSize = "";
+      holder.removeAttribute("data-fit-size");
+      words.forEach(function (word) {
+        word.style.whiteSpace = "";
+      });
+    }
+    var worst = 1;
+    for (var round = 0; round < 3; round += 1) {
+      worst = 1;
+      for (var i = 0; i < words.length; i += 1) {
+        var width = words[i].getBoundingClientRect().width;
+        var room = contentWidth(blockOf(words[i], holder));
+        if (width > 0 && room > 0 && width > room + 0.5)
+          worst = Math.min(worst, room / width);
+      }
+      if (worst === 1) return;
+      var size = parseFloat(getComputedStyle(holder).fontSize);
+      holder.style.fontSize = (size * worst * 0.98).toFixed(2) + "px";
+      holder.setAttribute("data-fit-size", "");
+    }
+    // A width set in em shrinks with the text and never makes room: let the
+    // words that still do not fit break as before.
+    words.forEach(function (word) {
+      var room = contentWidth(blockOf(word, holder));
+      if (word.getBoundingClientRect().width > room + 0.5)
+        word.style.whiteSpace = "normal";
+    });
+  }
+
+  var wordObserver = null;
+  var fittedWidth = new WeakMap();
+  if (window.ResizeObserver) {
+    wordObserver = new ResizeObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var width = Math.round(entry.contentRect.width);
+        if (fittedWidth.get(entry.target) === width) return;
+        fittedWidth.set(entry.target, width);
+        fitHeadingWords(entry.target);
+      });
+    });
+  }
+  if (document.fonts && document.fonts.addEventListener) {
+    document.fonts.addEventListener("loadingdone", function () {
+      document.querySelectorAll(WORD_HOLDERS).forEach(fitHeadingWords);
+    });
+  }
+
   function renderLang(lang, options) {
     lang = normalizeLang(lang);
     if (!DICT[lang]) lang = DICT[DEFAULT_LANG] ? DEFAULT_LANG : "ja";
@@ -271,6 +441,11 @@
         }
       }
     }
+
+    // Layout help only: a failure here must never stop the language switch.
+    try {
+      keepHeadingWords(lang);
+    } catch (_) {}
 
     document.dispatchEvent(
       new CustomEvent("niarim:langchange", { detail: { lang: lang } }),
