@@ -416,7 +416,7 @@ try {
     viewport: { width: 1280, height: 960 },
   });
   for (const [path, selector] of [
-    ["/features/", ".nr-curated"],
+    ["/features/", ".feature-nav"],
     ["/premium/", ".nr-notice"],
     ["/opals/", "#benefits .coins-table--priced"],
     ["/help/", "#help-search-input"],

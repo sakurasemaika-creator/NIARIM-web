@@ -283,3 +283,25 @@
 [data-help-card] > summary[id] {
   scroll-margin-block-start: calc(var(--header-height, 4rem) + 6rem);
 }
+
+/* FAQ and contact left the header; the guide is where people look when
+   something does not work, so both are offered under its lead. */
+.help-support-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  margin: 0.75rem 0 0;
+  color: var(--color-text-sub, #5d5460);
+  font-size: var(--fs-small);
+}
+
+.help-support-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--color-accent-text, #b8264a);
+  font: 600 0.9375rem/1.4 var(--font-serif);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

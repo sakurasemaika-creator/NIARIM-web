@@ -975,7 +975,7 @@ p {
 }
 
 .main-nav a:hover::after,
-.main-nav a[aria-current="page"]::after {
+.main-nav a[aria-current]::after {
   width: 100%;
 }
 

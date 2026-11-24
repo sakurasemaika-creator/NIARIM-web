@@ -7,6 +7,10 @@
   var DATA = {
     ja: {
       "nav.releaseInfo": "配信情報",
+      "help.supportLead": "見つからないときは",
+      "nav.pricing": "料金",
+      "footer.accountDeletion": "アカウントの削除",
+      "footer.fontLicenses": "フォントライセンス",
       "refresh.playBadge.alt": "Google Play で手に入れよう",
       "refresh.playBadge.trademark": "Google Play および Google Play ロゴは Google LLC の商標です。",
       "a11y.skipToMain": "本文へスキップ",
@@ -33,6 +37,10 @@
     },
     en: {
       "nav.releaseInfo": "Release info",
+      "help.supportLead": "Can’t find it?",
+      "nav.pricing": "Pricing",
+      "footer.accountDeletion": "Delete your account",
+      "footer.fontLicenses": "Font licenses",
       "refresh.playBadge.alt": "Get it on Google Play",
       "refresh.playBadge.trademark": "Google Play and the Google Play logo are trademarks of Google LLC.",
       "a11y.skipToMain": "Skip to main content",
@@ -59,6 +67,10 @@
     },
     "zh-Hans": {
       "nav.releaseInfo": "上线信息",
+      "help.supportLead": "没有找到？",
+      "nav.pricing": "价格",
+      "footer.accountDeletion": "删除账号",
+      "footer.fontLicenses": "字体许可证",
       "refresh.playBadge.alt": "下载应用，请到 Google Play",
       "refresh.playBadge.trademark": "Google Play 和 Google Play 徽标是 Google LLC 的商标。",
       "a11y.skipToMain": "跳至主要内容",
@@ -85,6 +97,10 @@
     },
     "zh-Hant": {
       "nav.releaseInfo": "上線資訊",
+      "help.supportLead": "沒有找到？",
+      "nav.pricing": "價格",
+      "footer.accountDeletion": "刪除帳號",
+      "footer.fontLicenses": "字型授權",
       "refresh.playBadge.alt": "立即前往 Google Play 下載",
       "refresh.playBadge.trademark": "Google Play 和 Google Play 標誌是 Google LLC 的商標。",
       "a11y.skipToMain": "跳至主要內容",
@@ -111,6 +127,10 @@
     },
     ko: {
       "nav.releaseInfo": "출시 안내",
+      "help.supportLead": "찾는 내용이 없나요?",
+      "nav.pricing": "요금",
+      "footer.accountDeletion": "계정 삭제",
+      "footer.fontLicenses": "글꼴 라이선스",
       "refresh.playBadge.alt": "Google Play에서 다운로드",
       "refresh.playBadge.trademark": "Google Play 및 Google Play 로고는 Google LLC의 상표입니다.",
       "a11y.skipToMain": "본문으로 건너뛰기",
@@ -137,6 +157,10 @@
     },
     fr: {
       "nav.releaseInfo": "Disponibilité",
+      "help.supportLead": "Vous ne trouvez pas ?",
+      "nav.pricing": "Tarifs",
+      "footer.accountDeletion": "Supprimer votre compte",
+      "footer.fontLicenses": "Licences des polices",
       "refresh.playBadge.alt": "Disponible sur Google Play",
       "refresh.playBadge.trademark": "Google Play et le logo Google Play sont des marques de Google LLC.",
       "a11y.skipToMain": "Passer au contenu principal",
@@ -163,6 +187,10 @@
     },
     es: {
       "nav.releaseInfo": "Disponibilidad",
+      "help.supportLead": "¿No lo encuentras?",
+      "nav.pricing": "Precios",
+      "footer.accountDeletion": "Eliminar tu cuenta",
+      "footer.fontLicenses": "Licencias de las fuentes",
       "refresh.playBadge.alt": "Disponible en Google Play",
       "refresh.playBadge.trademark": "Google Play y el logotipo de Google Play son marcas comerciales de Google LLC.",
       "a11y.skipToMain": "Saltar al contenido principal",

@@ -54,7 +54,7 @@
 
   .main-nav > ul > li > a:hover::after,
   .main-nav > ul > li > a:focus-visible::after,
-  .main-nav > ul > li > a[aria-current="page"]::after {
+  .main-nav > ul > li > a[aria-current]::after {
     transform: scaleX(1);
     transform-origin: left center;
   }

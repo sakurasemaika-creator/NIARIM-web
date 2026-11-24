@@ -31,7 +31,7 @@
 }
 
 /* Navigation: current location should read before hover decoration. */
-.main-nav a[aria-current="page"] {
+.main-nav a[aria-current] {
   color: var(--color-ink);
   font-weight: 700;
 }
