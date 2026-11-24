@@ -16,6 +16,8 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
     ja: {
+      "about.name.glossNear": "近く",
+      "about.name.glossRim": "縁・境界",
       "about.eyebrow": "About NIARIM",
       "about.title": "NIARIMとは",
       "about.lead":
@@ -91,6 +93,8 @@
       "about.cta.link": "使い方ガイドを見る",
     },
     en: {
+      "about.name.glossNear": "near",
+      "about.name.glossRim": "edge, boundary",
       "about.eyebrow": "About NIARIM",
       "about.title": "About NIARIM",
       "about.lead":
@@ -168,6 +172,8 @@
       "about.cta.link": "View the guide",
     },
     "zh-Hans": {
+      "about.name.glossNear": "近",
+      "about.name.glossRim": "边缘、边界",
       "about.eyebrow": "About NIARIM",
       "about.title": "关于 NIARIM",
       "about.lead":
@@ -241,6 +247,8 @@
       "about.cta.link": "查看使用指南",
     },
     "zh-Hant": {
+      "about.name.glossNear": "近",
+      "about.name.glossRim": "邊緣、邊界",
       "about.eyebrow": "About NIARIM",
       "about.title": "關於 NIARIM",
       "about.lead":
@@ -315,6 +323,8 @@
       "about.cta.link": "查看使用指南",
     },
     ko: {
+      "about.name.glossNear": "가까이",
+      "about.name.glossRim": "가장자리, 경계",
       "about.eyebrow": "About NIARIM",
       "about.title": "NIARIM 소개",
       "about.lead":
@@ -390,6 +400,8 @@
       "about.cta.link": "이용 가이드 보기",
     },
     fr: {
+      "about.name.glossNear": "proche",
+      "about.name.glossRim": "bord, frontière",
       "about.eyebrow": "About NIARIM",
       "about.title": "À propos de NIARIM",
       "about.lead":
@@ -470,6 +482,8 @@
       "about.cta.link": "Voir le guide",
     },
     es: {
+      "about.name.glossNear": "cerca",
+      "about.name.glossRim": "borde, frontera",
       "about.eyebrow": "About NIARIM",
       "about.title": "Acerca de NIARIM",
       "about.lead":

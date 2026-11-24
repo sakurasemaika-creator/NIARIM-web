@@ -50,6 +50,22 @@
   gap: 0.6rem;
 }
 
+/* Each word of the name with its meaning underneath (NEAR = near,
+   RIM = edge, boundary), so the body below reads from the formula. */
+.about-name-term {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.about-name-gloss {
+  color: var(--ink-2);
+  font: 400 0.875rem / 1.4 var(--font-sans);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .about-name-word {
   font-size: var(--fs-h3);
   font-weight: 700;
