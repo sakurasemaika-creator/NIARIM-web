@@ -4,7 +4,7 @@
 
 .legal-header {
   padding-block: var(--space-xl) var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--rule);
 }
 
 .legal-header h1 {
@@ -14,15 +14,15 @@
 .legal-header .updated-at {
   margin-top: var(--space-xs);
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  color: var(--ink-2);
 }
 
+/* Which part of the page is the app's policy: one plain line under the
+   title (no tinted box). */
 .legal-notice {
-  margin-top: var(--space-md);
-  padding: var(--space-md);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-tint);
-  color: var(--color-brand-dark);
+  max-width: 46em;
+  margin-top: var(--space-sm);
+  color: var(--ink-2);
   font-size: var(--fs-small);
 }
 
@@ -31,35 +31,24 @@
   max-width: 760px;
 }
 
+/* Articles are separated by a hairline rule (no coloured side bar). */
 .legal-body section {
   position: relative;
-  padding: var(--space-md) 0 var(--space-lg) var(--space-md);
+  padding: var(--space-md) 0 var(--space-lg);
   margin-bottom: var(--space-lg);
 }
 
-/* section自体はクリックできる要素ではないため、ホバーで色が変わる
-   演出は付けない（クリックできると誤認させないため）。左の帯は常時
-   ブランドグラデーションで表示し、条文の区切りを視覚的に示す。 */
-.legal-body section::before {
-  content: "";
-  position: absolute;
-  inset: var(--space-md) auto var(--space-lg) 0;
-  width: 3px;
-  background: var(--grad-brand);
-}
-
 .legal-body section:not(:last-child) {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--rule);
 }
 
 .legal-body h2 {
   font-size: var(--fs-h3);
   margin-bottom: var(--space-sm);
-  /* Article headings use the heading ink like every other heading; the
-     accent stays on the left rule. In the accent pink (#ff5c7a) they were
-     2.7:1 on the paper, under the 3:1 even large text needs, and every
-     heading of the page was pink (DESIGN.md 2). */
-  color: var(--color-footer-brown, #3b2429);
+  /* Article headings use the ink like every other heading. In the accent
+     pink (#ff5c7a) they were 2.7:1 on the paper, under the 3:1 even large
+     text needs, and every heading of the page was pink (DESIGN.md 2). */
+  color: var(--ink);
 }
 
 .legal-body h3 {
@@ -70,7 +59,7 @@
 
 .legal-body p,
 .legal-body li {
-  color: var(--color-gray-700);
+  color: var(--ink);
   line-height: 1.85;
 }
 
@@ -87,13 +76,13 @@
   /* 本文サイズのリンクなので装飾用アクセントではなく濃色を使う
      （#ff5c7a は白背景で2.97:1しかない）。--color-accent-strong は今は
      アクセントそのものを指すので、文字専用の濃い赤を使う。 */
-  color: var(--color-accent-text);
+  color: var(--pencil-ink);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
 .legal-body a:hover {
-  color: var(--color-footer-brown, #3b2429);
+  color: var(--ink);
 }
 
 .legal-body ul,
@@ -122,17 +111,5 @@
 .legal-body td {
   text-align: left;
   padding: 0.6rem 0.8rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.todo-flag {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 107, 74, 0.14);
-  color: var(--color-accent-strong);
-  font-size: 0.75rem;
-  font-weight: 700;
-  margin-left: 0.4rem;
-  vertical-align: middle;
+  border-bottom: 1px solid var(--rule);
 }
