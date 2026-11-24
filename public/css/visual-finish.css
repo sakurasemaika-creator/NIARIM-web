@@ -207,8 +207,11 @@ section.section:has(.community-tabs) {
   border-color: rgba(40, 36, 44, 0.22);
 }
 
+/* Placeholder examples stay quieter than typed text but readable (about
+   5:1 on the white field; the old 52% brown was 2.7:1). */
 .form-control::placeholder {
-  color: rgba(74, 70, 54, 0.52);
+  color: var(--color-gray-500);
+  opacity: 1;
 }
 
 /* CTA-gallery inspired treatment: make the final action a single, legible
