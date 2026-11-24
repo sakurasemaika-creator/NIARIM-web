@@ -465,18 +465,22 @@
   gap: 12px;
 }
 
-#main .tp-pair > div,
-#main .tp-strips > div {
+/* Before / after: two equal panels side by side, each with its own name
+   underneath, so the two can be compared at a glance. */
+#main
+  :is(.tp-pair, .tp-strips, .tp-ribbons, .tp-steps, .tp-filter-grid)
+  figure {
   display: grid;
-  justify-items: center;
   gap: 6px;
   min-width: 0;
   min-height: 0;
+  margin: 0;
 }
 
-#main .tp-pair > div {
+#main .tp-pair figure {
   height: 100%;
   grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
 }
 
 #main .tp-pair img {
@@ -485,9 +489,12 @@
   object-fit: contain;
 }
 
-#main :is(.tp-pair, .tp-strips) span {
+#main
+  :is(.tp-pair, .tp-strips, .tp-ribbons, .tp-steps, .tp-filter-grid)
+  figcaption {
   color: var(--ink-2);
-  font: 400 0.75rem / 1.3 var(--font-sans);
+  font: 400 0.75rem / 1.4 var(--font-sans);
+  text-align: center;
 }
 
 #main .tp-strips {
@@ -496,13 +503,184 @@
   gap: 14px;
 }
 
-#main .tp-strips > div {
+#main .tp-strips figure {
   justify-items: start;
   width: 100%;
 }
 
 #main .tp-strips img {
   width: 100%;
+}
+
+/* Fold mode: one ribbon per fold type, in a row on one sheet. */
+#main .tp-feature--wide {
+  grid-column: 1 / -1;
+}
+
+#main .tp-ribbons {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px 16px;
+  padding: 20px 20px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-ribbons img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Auto fill: the settings, the line art, the colour separation and the
+   result, in the order they happen. */
+#main :is(.tp-fill, .tp-filters) {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+
+#main .tp-fill-text {
+  max-width: 44em;
+}
+
+#main .tp-fill-text h3 {
+  margin: 0;
+  color: var(--ink);
+  font: 400 1.125rem / 1.4 var(--font-serif);
+}
+
+#main .tp-fill-text p {
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+}
+
+#main .tp-fill-text .tp-note {
+  font-size: 0.75rem;
+}
+
+#main :is(.tp-steps, .tp-filter-grid) {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main .tp-steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+#main .tp-steps > li,
+#main .tp-filter-grid > li {
+  min-width: 0;
+  margin: 0;
+}
+
+#main :is(.tp-steps, .tp-filter-grid) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+/* The first step is a phone screen: the same width as the drawings, its
+   top part shown so that the parts and their colours read. */
+#main .tp-step-capture img {
+  aspect-ratio: 346 / 464;
+  object-fit: cover;
+  object-position: top;
+}
+
+#main .tp-steps figcaption {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* Step numbers in red pencil, like the frame numbers above. */
+#main .tp-step-no {
+  color: var(--pencil-ink);
+  font: 400 0.8125rem / 1 var(--font-serif);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The colour marks of step 3: each name beside the line and tint used for
+   it in the picture. */
+#main .tp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font: 400 0.75rem / 1.5 var(--font-sans);
+}
+
+#main .tp-legend li {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+#main .tp-legend li::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border: 2px solid;
+  border-radius: 2px;
+}
+
+#main .tp-legend .is-shadow::before {
+  border-color: #2f6bdb;
+  background: #bde6f6;
+}
+
+#main .tp-legend .is-highlight::before {
+  border-color: #e5394b;
+  background: #fff07a;
+}
+
+#main .tp-legend .is-deep::before {
+  border-color: #d23bae;
+  background: #f6b5e2;
+}
+
+/* Share and save tree: a real capture beside its text. */
+#main .tp-unique-list--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+
+#main .tp-feature--capture {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  grid-template-rows: auto;
+  gap: 24px;
+  align-items: start;
+}
+
+#main .tp-feature--capture .tp-figure {
+  height: auto;
+  padding: 12px;
+}
+
+#main .tp-feature--capture h3 {
+  margin-top: 0;
+}
+
+#main .tp-filter-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1000px;
 }
 
 #main .tp-capture img {
@@ -514,6 +692,14 @@
   #main .tp-unique-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  #main .tp-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-unique-list--two {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 599px) {
@@ -523,6 +709,20 @@
 
   #main .tp-figure {
     height: 240px;
+  }
+
+  #main .tp-ribbons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 14px;
+  }
+
+  #main .tp-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #main .tp-feature--capture {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    gap: 16px;
   }
 }
 
