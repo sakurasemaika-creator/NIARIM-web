@@ -666,23 +666,23 @@
         <div class="tp-unique-list">
           <article class="tp-feature tp-feature--wide">
             <div
-              class="tp-ribbons"
+              class="tp-ribbons tp-brush-row"
               role="group"
-              aria-label="折り畳みタイプ"
-              data-i18n-attr="aria-label:top.unique.fold.types"
+              aria-label="カスタムブラシ"
+              data-i18n-attr="aria-label:top.unique.brush.title"
             >
               <figure>
                 <img
                   src="/assets/images/engine/fold-ribbon-wave-top.webp"
                   width="264"
                   height="476"
-                  alt="ウェーブ俯瞰"
-                  data-i18n-attr="alt:top.unique.fold.t1"
+                  alt="折り畳みモード：ウェーブ俯瞰"
+                  data-i18n-attr="alt:top.unique.brush.fold1"
                   loading="lazy"
                   decoding="async"
                 />
-                <figcaption data-i18n="top.unique.fold.t1">
-                  ウェーブ俯瞰
+                <figcaption data-i18n="top.unique.brush.fold1">
+                  折り畳みモード：ウェーブ俯瞰
                 </figcaption>
               </figure>
               <figure>
@@ -690,19 +690,61 @@
                   src="/assets/images/engine/fold-ribbon-crescent.webp"
                   width="264"
                   height="476"
-                  alt="三日月カール"
-                  data-i18n-attr="alt:top.unique.fold.t5"
+                  alt="折り畳みモード：三日月カール"
+                  data-i18n-attr="alt:top.unique.brush.fold2"
                   loading="lazy"
                   decoding="async"
                 />
-                <figcaption data-i18n="top.unique.fold.t5">
-                  三日月カール
+                <figcaption data-i18n="top.unique.brush.fold2">
+                  折り畳みモード：三日月カール
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/assets/images/engine/brush-hair-wave.webp"
+                  width="303"
+                  height="476"
+                  alt="プリセット：ウェーブヘア（俯瞰）"
+                  data-i18n-attr="alt:top.unique.brush.hair"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.brush.hair">
+                  プリセット：ウェーブヘア（俯瞰）
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/assets/images/engine/brush-pixel-off.webp"
+                  width="480"
+                  height="288"
+                  alt="ドット絵モード：オフ（4倍に拡大）"
+                  data-i18n-attr="alt:top.unique.brush.pixelOffAlt"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.brush.pixelOff">
+                  ドット絵モード：オフ
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="/assets/images/engine/brush-pixel-on.webp"
+                  width="480"
+                  height="288"
+                  alt="ドット絵モード：オン（4倍に拡大）"
+                  data-i18n-attr="alt:top.unique.brush.pixelOnAlt"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.brush.pixelOn">
+                  ドット絵モード：オン
                 </figcaption>
               </figure>
             </div>
-            <h3 data-i18n="top.unique.fold.title">折り畳みモード</h3>
-            <p data-i18n="top.unique.fold.body">
-              リボンや髪のブラシで描いた線が、曲がる所で自動で折り返し、折り目の線と縁取りが付きます。同じ線でも、ウェーブ俯瞰では曲がる所でひっくり返って折り目が付き、三日月カールでは三日月の形にねじれます。
+            <h3 data-i18n="top.unique.brush.title">カスタムブラシ</h3>
+            <p data-i18n="top.unique.brush.body">
+              ブラシは、縁取り・折り畳みモード・筆圧・入り抜き・混色・ドット絵モードなどを組み合わせて、自分好みに作れます。折り畳みモードをオンにすると、線が曲がる所で折り返し、折り目の線と縁取りが付きます（例はリボンのブラシ）。髪の毛を描きやすいブラシもプリセットとして入っています。ドット絵モードをオンにすると、アンチエイリアスの無いくっきりした線になります。
             </p>
           </article>
           <article class="tp-feature">
@@ -1062,6 +1104,62 @@
                 />
                 <figcaption data-i18n="top.unique.filters.vhs">
                   VHSノイズ
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+          <h4 class="tp-subhead" data-i18n="top.unique.dither.title">
+            ドット絵：ディザリング
+          </h4>
+          <p class="tp-subnote" data-i18n="top.unique.dither.body">
+            ディザリングは、限られた色の点を細かく混ぜて、色と色の間のグラデーションを表します。下の2枚はどちらも色数を6色に指定しています。
+          </p>
+          <ul class="tp-filter-grid tp-tone-grid">
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/dither-source.webp"
+                  width="480"
+                  height="360"
+                  alt="元の絵"
+                  data-i18n-attr="alt:top.unique.filters.original"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.filters.original">
+                  元の絵
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/dither-off.webp"
+                  width="480"
+                  height="360"
+                  alt="ディザリング：オフ"
+                  data-i18n-attr="alt:top.unique.dither.off"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.dither.off">
+                  ディザリング：オフ
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/dither-on.webp"
+                  width="480"
+                  height="360"
+                  alt="ディザリング：オン"
+                  data-i18n-attr="alt:top.unique.dither.on"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.dither.on">
+                  ディザリング：オン
                 </figcaption>
               </figure>
             </li>

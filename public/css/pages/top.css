@@ -595,7 +595,8 @@
 
 #main .tp-ribbons {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 220px));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: end;
   justify-content: center;
   gap: 8px clamp(32px, 6vw, 96px);
   padding: 24px 20px 16px;
@@ -606,8 +607,17 @@
 
 #main .tp-ribbons img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 240px;
+  margin: 0 auto;
+}
+
+/* Pixel mode is shown enlarged; keep its pixels square and sharp. */
+#main .tp-ribbons img[src*="brush-pixel"],
+#main .tp-filter-grid img[src*="dither-o"] {
+  image-rendering: pixelated;
 }
 
 /* Auto fill: the settings, the line art, the colour separation and the
@@ -811,6 +821,7 @@
   }
 
   #main .tp-ribbons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 14px;
   }
 
