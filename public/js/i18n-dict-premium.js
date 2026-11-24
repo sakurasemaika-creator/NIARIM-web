@@ -63,6 +63,11 @@
       "premiumPage.premium.automation.title": "自動操作（操作記録）",
       "premiumPage.premium.automation.body":
         "キャンバスやタイムラインの操作手順を記録し、作業中に繰り返し実行できます。",
+      "premiumPage.start.title": "プレミアムの始め方",
+      "premiumPage.start.step1": "アプリのメニューから「契約状態」を開き、「プレミアム会員について詳しく見る」を選びます。プレミアムの機能を選んだときに表示される「プレミアム会員の詳細を見る」からも開けます。",
+      "premiumPage.start.step2": "「月額プラン」か「年額プラン」を選びます。購入には、Googleアカウントでのログインが必要です。",
+      "premiumPage.start.step3": "Google Playの画面で購入を確定します。購入が反映されないときは、「購入を復元」から確認し直せます。",
+      "premiumPage.start.renew": "月額・年額プランは、解約しない限り自動で更新されます。解約はGoogle Playの「お支払いと定期購入」からいつでもできます。",
       "premiumPage.faq.title": "プレミアムプランについてのご注意",
       "premiumPage.faq.item1":
         "無料版でご利用中の基本制作機能が、プレミアム加入によって制限されることはありません。",
@@ -128,6 +133,11 @@
         "Custom automations (action recording)",
       "premiumPage.premium.automation.body":
         "Record a sequence of canvas or timeline actions and replay it while you work.",
+      "premiumPage.start.title": "How to start Premium",
+      "premiumPage.start.step1": "In the app, open “Membership status” from the menu and choose “Learn about Premium”. You can also get there from “Learn about Premium membership”, shown when you choose a Premium feature.",
+      "premiumPage.start.step2": "Choose the “Monthly Plan” or the “Yearly Plan”. Purchasing requires signing in with your Google account.",
+      "premiumPage.start.step3": "Confirm the purchase on the Google Play screen. If it doesn’t show up, check again with “Restore Purchases”.",
+      "premiumPage.start.renew": "Monthly and annual plans renew automatically until you cancel. You can cancel at any time in Google Play under “Payments & subscriptions”.",
       "premiumPage.faq.title": "About the Premium plan",
       "premiumPage.faq.item1":
         "Core creation features available in the free version are never restricted by subscribing to Premium.",
@@ -190,6 +200,11 @@
       "premiumPage.premium.automation.title": "自定义自动操作（操作录制）",
       "premiumPage.premium.automation.body":
         "录制画布或时间轴上的操作步骤，以便在创作时重复执行。",
+      "premiumPage.start.title": "如何开始使用高级会员",
+      "premiumPage.start.step1": "在应用的菜单中打开“会员状态”，选择“了解高级会员”。选择高级功能时显示的“了解高级会员详情”也可以打开。",
+      "premiumPage.start.step2": "选择“月付套餐”或“年付套餐”。购买需要使用Google账号登录。",
+      "premiumPage.start.step3": "在Google Play的画面上确认购买。购买未生效时，可通过“恢复购买”重新确认。",
+      "premiumPage.start.renew": "月度方案和年度方案在取消之前会自动续订。可随时在Google Play的“付款和订阅”中取消。",
       "premiumPage.faq.title": "关于高级会员方案的说明",
       "premiumPage.faq.item1":
         "免费版中可使用的基础创作功能，不会因订阅高级会员而受到限制。",
@@ -251,6 +266,11 @@
       "premiumPage.premium.automation.title": "自訂自動操作（操作錄製）",
       "premiumPage.premium.automation.body":
         "錄製畫布或時間軸上的操作步驟，創作時可重複執行。",
+      "premiumPage.start.title": "如何開始使用高級會員",
+      "premiumPage.start.step1": "在應用程式的選單中開啟「會員狀態」，選擇「了解高級會員」。選擇進階功能時顯示的「了解進階會員詳情」也可以開啟。",
+      "premiumPage.start.step2": "選擇「月繳方案」或「年繳方案」。購買需要使用Google帳戶登入。",
+      "premiumPage.start.step3": "在Google Play的畫面上確認購買。購買未生效時，可透過「恢復購買」重新確認。",
+      "premiumPage.start.renew": "月繳方案及年繳方案在取消之前會自動續訂。可隨時於Google Play之「付款和訂閱」中取消。",
       "premiumPage.faq.title": "關於高級會員方案的說明",
       "premiumPage.faq.item1":
         "免費版中可使用的基礎創作功能，不會因訂閱高級會員而受到限制。",
@@ -315,6 +335,11 @@
         "사용자 지정 자동 작업(동작 기록)",
       "premiumPage.premium.automation.body":
         "캔버스나 타임라인의 작업 순서를 기록하고 작업 중에 반복 실행할 수 있습니다.",
+      "premiumPage.start.title": "프리미엄 시작하기",
+      "premiumPage.start.step1": "앱의 메뉴에서 「계약 상태」를 열고 「프리미엄 회원 자세히 보기」를 선택합니다. 프리미엄 기능을 선택했을 때 표시되는 같은 이름의 버튼에서도 열 수 있습니다.",
+      "premiumPage.start.step2": "「월간 플랜」 또는 「연간 플랜」을 선택합니다. 구매하려면 Google 계정으로 로그인해야 합니다.",
+      "premiumPage.start.step3": "Google Play 화면에서 구매를 확정합니다. 구매가 반영되지 않을 때는 「구매 복원」에서 다시 확인할 수 있습니다.",
+      "premiumPage.start.renew": "월간·연간 플랜은 해지할 때까지 자동으로 갱신됩니다. 해지는 Google Play의「결제 및 정기 결제」에서 언제든지 할 수 있습니다.",
       "premiumPage.faq.title": "프리미엄 플랜에 대한 안내",
       "premiumPage.faq.item1":
         "무료 버전에서 이용 중인 기본 제작 기능이 프리미엄 가입으로 인해 제한되는 일은 없습니다.",
@@ -381,6 +406,11 @@
         "Automatisations personnalisées (enregistrement d’actions)",
       "premiumPage.premium.automation.body":
         "Enregistrez une suite d’actions sur la toile ou la chronologie, puis rejouez-la pendant votre travail.",
+      "premiumPage.start.title": "Comment passer à Premium",
+      "premiumPage.start.step1": "Dans l’application, ouvrez « Statut d’adhésion » depuis le menu, puis choisissez « Découvrir Premium ». Vous pouvez aussi passer par « En savoir plus sur l’abonnement Premium », affiché lorsque vous choisissez une fonctionnalité Premium.",
+      "premiumPage.start.step2": "Choisissez la « Formule mensuelle » ou la « Formule annuelle ». L’achat nécessite de vous connecter avec votre compte Google.",
+      "premiumPage.start.step3": "Confirmez l’achat sur l’écran de Google Play. S’il n’est pas pris en compte, vérifiez-le de nouveau avec « Restaurer les achats ».",
+      "premiumPage.start.renew": "Les formules mensuelle et annuelle sont renouvelées automatiquement jusqu’à leur résiliation. Vous pouvez résilier à tout moment dans Google Play, sous « Paiements et abonnements ».",
       "premiumPage.faq.title": "À propos de l’offre Premium",
       "premiumPage.faq.item1":
         "Les fonctionnalités de création de base disponibles dans la version gratuite ne sont jamais restreintes par l’abonnement Premium.",
@@ -447,6 +477,11 @@
         "Automatizaciones personalizadas (grabación de acciones)",
       "premiumPage.premium.automation.body":
         "Graba una secuencia de acciones en el lienzo o la línea de tiempo y repítela mientras trabajas.",
+      "premiumPage.start.title": "Cómo empezar con Premium",
+      "premiumPage.start.step1": "En la app, abre «Estado de membresía» desde el menú y elige «Conocer Premium». También puedes llegar desde «Más información sobre la suscripción Premium», que aparece al elegir una función Premium.",
+      "premiumPage.start.step2": "Elige el «Plan mensual» o el «Plan anual». Para comprar, debes iniciar sesión con tu cuenta de Google.",
+      "premiumPage.start.step3": "Confirma la compra en la pantalla de Google Play. Si no se refleja, vuelve a comprobarla con «Restaurar compras».",
+      "premiumPage.start.renew": "Los planes mensual y anual se renuevan automáticamente hasta que los canceles. Puedes cancelarlos en cualquier momento en Google Play, en «Pagos y suscripciones».",
       "premiumPage.faq.title": "Sobre el plan Premium",
       "premiumPage.faq.item1":
         "Las funciones de creación básicas disponibles en la versión gratuita nunca se ven restringidas por suscribirte a Premium.",

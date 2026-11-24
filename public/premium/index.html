@@ -247,11 +247,13 @@
                 <li data-i18n="premiumPage.free.item2">
                   動画書き出し（最大1920×1920）
                 </li>
-                <li data-i18n="premiumPage.free.item3">広告表示あり</li>
-                <li data-i18n="premiumPage.free.item4">
+                <li class="is-limit" data-i18n="premiumPage.free.item3">
+                  広告表示あり
+                </li>
+                <li class="is-limit" data-i18n="premiumPage.free.item4">
                   書き出し時にNIARIM公式エンドロゴを自動追加（編集・削除不可）
                 </li>
-                <li data-i18n="premiumPage.free.item5">
+                <li class="is-limit" data-i18n="premiumPage.free.item5">
                   無料版は制作・書き出しともに90秒まで。長尺作品は先頭90秒を書き出せます。
                 </li>
               </ul>
@@ -428,6 +430,57 @@
                 NIARIMのエンドマークは、MP4・WebM・AVIの本編末尾に付く5秒のロゴです。エンドマーク特典が有効な間は、作品ごとに表示を切り替えられます。期限後も作品の設定は保存されます。GIFには付きません。
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section premium-start"
+        aria-labelledby="premium-start-title"
+      >
+        <div class="container">
+          <h2 id="premium-start-title" data-i18n="premiumPage.start.title">
+            プレミアムの始め方
+          </h2>
+          <ol class="premium-steps">
+            <li>
+              <span class="premium-step-no" aria-hidden="true">01</span>
+              <p data-i18n="premiumPage.start.step1">
+                アプリのメニューから「契約状態」を開き、「プレミアム会員について詳しく見る」を選びます。プレミアムの機能を選んだときに表示される「プレミアム会員の詳細を見る」からも開けます。
+              </p>
+            </li>
+            <li>
+              <span class="premium-step-no" aria-hidden="true">02</span>
+              <p data-i18n="premiumPage.start.step2">
+                「月額プラン」か「年額プラン」を選びます。購入には、Googleアカウントでのログインが必要です。
+              </p>
+            </li>
+            <li>
+              <span class="premium-step-no" aria-hidden="true">03</span>
+              <p data-i18n="premiumPage.start.step3">
+                Google
+                Playの画面で購入を確定します。購入が反映されないときは、「購入を復元」から確認し直せます。
+              </p>
+            </li>
+          </ol>
+          <p class="premium-renew-note" data-i18n="premiumPage.start.renew">
+            月額・年額プランは、解約しない限り自動で更新されます。解約はGoogle
+            Playの「お支払いと定期購入」からいつでもできます。
+          </p>
+          <div class="premium-store-row">
+            <a
+              class="nr-play-badge-link"
+              hidden
+              data-play-store-link
+              data-play-badge
+            ></a>
+            <p
+              class="premium-store-note"
+              data-i18n="refresh.release.pending.note"
+              data-play-release-i18n="refresh.hero.storeNote"
+            >
+              Google Playでの配信を準備しています。
+            </p>
           </div>
         </div>
       </section>
