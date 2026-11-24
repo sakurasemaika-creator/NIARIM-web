@@ -71,9 +71,12 @@ body.brand-has-scrolled .site-header {
   text-decoration-thickness: 1px;
   text-underline-offset: 7px;
 }
+/* The focus ring uses the text red (#b8264a), like the rest of the page:
+   the accent pink is 2.7:1 on the header, under the 3:1 a focus indicator
+   needs. */
 .site-header .main-nav a:not(.btn):focus-visible,
 .site-header .brand:focus-visible {
-  outline: 2px solid var(--nr-accent);
+  outline: 2px solid var(--color-accent-text, #b8264a);
   outline-offset: 5px;
 }
 .brand-reading-progress {

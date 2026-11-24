@@ -1058,7 +1058,12 @@ p {
 }
 
 .lang-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
+  min-height: 44px;
   text-align: left;
   padding: 0.55rem 0.7rem;
   border-radius: var(--radius-sm);
@@ -1069,9 +1074,23 @@ p {
   background: var(--color-bg-tint);
 }
 
+/* The current language: HakkouMincho has one weight, so bold alone did not
+   show which one was selected. A drawn tick (not the "✓" glyph, which reads
+   as a root sign in this face) and the text red mark it. */
 .lang-menu button[aria-pressed="true"] {
-  color: var(--color-brand);
+  color: var(--color-accent-text);
   font-weight: 700;
+}
+
+.lang-menu button[aria-pressed="true"]::after {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 5px;
+  margin: 0 2px 3px 0;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
 }
 
 @media (max-width: 1180px) {
@@ -1166,7 +1185,7 @@ p {
     /* ヘッダーの面と同じ色にする。純白のままだと、ヘッダー
        （#fffaf8）との境目に色の段差ができ、メニューとヘッダーの
        あいだに細い隙間が空いているように見えていた。 */
-    background: #fffaf8;
+    background: #faf7f6;
     flex-direction: column;
     align-items: stretch;
     padding: var(--space-lg) var(--container-padding);

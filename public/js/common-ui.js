@@ -70,6 +70,10 @@
         top: 0,
         behavior: prefersReducedMotion() ? "auto" : "smooth",
       });
+      // The button hides itself at the top, which dropped keyboard focus to
+      // the end of the page. Continue from the top: the brand link.
+      var start = document.querySelector(".site-header .brand");
+      if (start) start.focus({ preventScroll: true });
     });
   }
 

@@ -164,6 +164,13 @@ html body #widget .fd-widget-grid > .fd-widget-tile {
     text-align: left !important;
   }
 }
+/* On tablets the drawer's column keeps a phone-like measure instead of
+   stretching the button and the language field across 940px. */
+@media (min-width: 641px) and (max-width: 1180px) {
+  .main-nav > :is(ul, .btn, .lang-dropdown) {
+    width: min(100%, 520px) !important;
+  }
+}
 @media (max-width: 1023px) {
   .feature-diagram-stack {
     float: none !important;
