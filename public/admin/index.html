@@ -118,6 +118,139 @@
           </form>
           <p class="admin-small admin-muted" id="admin-ai-note"></p>
           <dl class="admin-rules" id="admin-rules"></dl>
+
+          <section class="admin-sub" aria-labelledby="admin-sub-title">
+            <h3 id="admin-sub-title">サブスクのClaudeで下見する</h3>
+            <p class="admin-small admin-muted">
+              APIキーの代わりに、Claudeのサブスクで通報の見立て（参考の判定）を書いてもらう方法です。AIが書くのは見立てだけで、決めるのは運営です。「重大」の見立ては、APIキーでの判定と同じく、確認するまで作品を一時非表示にします。
+            </p>
+
+            <section class="admin-sub-part" aria-labelledby="admin-bot-title">
+              <h4 id="admin-bot-title">下見の鍵（自動の下見）</h4>
+              <p class="admin-small admin-muted">
+                決まった時刻に動くClaude
+                Codeのセッションが、この鍵で未対応の通報を読み、見立てを書き込みます。
+              </p>
+              <p class="admin-bot-status" id="admin-bot-status"></p>
+              <ul class="admin-bot-details" id="admin-bot-details"></ul>
+              <div class="admin-row">
+                <button
+                  type="button"
+                  class="admin-button"
+                  id="admin-bot-create"
+                >
+                  鍵を作る
+                </button>
+                <button
+                  type="button"
+                  class="admin-button"
+                  id="admin-bot-revoke"
+                  hidden
+                >
+                  鍵を無効にする
+                </button>
+              </div>
+              <p
+                id="admin-bot-message"
+                class="admin-message"
+                role="status"
+                aria-live="polite"
+              ></p>
+              <div class="admin-secret" id="admin-bot-token" hidden>
+                <label for="admin-bot-token-value">新しい下見の鍵</label>
+                <div class="admin-copy-row">
+                  <input
+                    type="text"
+                    id="admin-bot-token-value"
+                    readonly
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    aria-describedby="admin-bot-token-note"
+                  />
+                  <button
+                    type="button"
+                    class="admin-button"
+                    id="admin-bot-token-copy"
+                    aria-label="下見の鍵をコピー"
+                  >
+                    コピー
+                  </button>
+                </div>
+                <p class="admin-secret-note" id="admin-bot-token-note">
+                  この鍵はこの画面を閉じると二度と表示されません。Claude
+                  Codeの環境の『ネットワークの秘密』に保存してください。チャットには貼らないでください。
+                </p>
+                <p class="admin-small">
+                  保存するときのホスト：<code id="admin-bot-host"></code>
+                </p>
+                <p
+                  id="admin-bot-copy-status"
+                  class="admin-message admin-small"
+                  role="status"
+                  aria-live="polite"
+                ></p>
+              </div>
+            </section>
+
+            <section class="admin-sub-part" aria-labelledby="admin-chat-title">
+              <h4 id="admin-chat-title">チャットで今すぐ頼む</h4>
+              <p class="admin-small admin-muted">
+                見立てを待っている通報（最大20件）をまとめた依頼の文をコピーして、Claudeのチャットに貼ります。Claudeの答えを下に貼ると、見立てとして取り込みます。
+              </p>
+              <div class="admin-row">
+                <button
+                  type="button"
+                  class="admin-button"
+                  id="admin-prompt-copy"
+                >
+                  AIに頼む文をコピー
+                </button>
+              </div>
+              <p
+                id="admin-prompt-status"
+                class="admin-message"
+                role="status"
+                aria-live="polite"
+              ></p>
+              <details class="admin-prompt" id="admin-prompt-box" hidden>
+                <summary>頼む文を見る</summary>
+                <label class="admin-visually-hidden" for="admin-prompt-text"
+                  >Claudeに頼む文</label
+                >
+                <textarea
+                  id="admin-prompt-text"
+                  rows="8"
+                  readonly
+                  spellcheck="false"
+                ></textarea>
+              </details>
+              <div class="admin-field">
+                <label for="admin-answer">Claudeの答えを貼る</label>
+                <textarea
+                  id="admin-answer"
+                  rows="6"
+                  autocomplete="off"
+                  spellcheck="false"
+                ></textarea>
+              </div>
+              <div class="admin-row">
+                <button
+                  type="button"
+                  class="admin-button"
+                  id="admin-answer-import"
+                >
+                  見立てを取り込む
+                </button>
+              </div>
+              <div
+                id="admin-answer-result"
+                class="admin-triage-result"
+                role="status"
+                aria-live="polite"
+              ></div>
+            </section>
+          </section>
         </section>
 
         <section

@@ -539,6 +539,359 @@ test("AI triage, AI mode and token expiry are read defensively", () => {
   assert.equal(A.tokenExpiry(undefined), null);
 });
 
+// ---- Triage with the owner's Claude subscription ----------------------------
+
+test("the triage endpoints use the documented paths and bodies", async () => {
+  const { api, fetch } = client((url) => {
+    if (url.pathname === "/admin/triage/token")
+      return {
+        body: {
+          token: "nt_secret",
+          createdAt: "2026-11-25T01:00:00Z",
+          settings: { triageBot: { configured: true } },
+        },
+      };
+    if (url.pathname === "/admin/triage/prompt")
+      return {
+        body: { prompt: "次の2件を…", reportCount: 2, reportIds: ["a", "b"] },
+      };
+    if (url.pathname === "/admin/triage/results")
+      return {
+        body: { results: [{ reportId: "a", ok: true, autoHidden: false }] },
+      };
+    return { body: { ok: true, settings: {} } };
+  });
+  assert.equal((await api.createTriageToken()).token, "nt_secret");
+  await api.revokeTriageToken();
+  const prompt = await api.triagePrompt();
+  assert.equal(prompt.reportCount, 2);
+  await api.triagePrompt({ limit: 5 });
+  const item = {
+    reportId: "a",
+    severity: "low",
+    category: "none",
+    recommendedAction: "keep",
+    rationale: "問題なし",
+  };
+  await api.submitTriageResults([item]);
+  assert.deepEqual(
+    fetch.calls.map(({ url, init }) => [
+      init.method,
+      url.pathname + url.search,
+      init.headers.Authorization,
+      init.body === undefined ? undefined : JSON.parse(init.body),
+    ]),
+    [
+      ["POST", "/admin/triage/token", "Bearer id-token", {}],
+      ["POST", "/admin/triage/token/revoke", "Bearer id-token", {}],
+      ["GET", "/admin/triage/prompt?limit=20", "Bearer id-token", undefined],
+      ["GET", "/admin/triage/prompt?limit=5", "Bearer id-token", undefined],
+      ["POST", "/admin/triage/results", "Bearer id-token", { results: [item] }],
+    ],
+  );
+});
+
+test("triage calls refuse bad input before sending and bad responses after", async () => {
+  const { api, fetch } = client(() => ({ body: { ok: true } }));
+  const code = async (promise) => {
+    try {
+      await promise;
+    } catch (error) {
+      return error.code;
+    }
+    return "resolved";
+  };
+  assert.equal(await code(api.submitTriageResults([])), "INVALID_TRIAGE");
+  assert.equal(
+    await code(api.submitTriageResults(Array(51).fill({ reportId: "a" }))),
+    "INVALID_TRIAGE",
+  );
+  assert.equal(await code(api.submitTriageResults(null)), "INVALID_TRIAGE");
+  assert.equal(await code(api.triagePrompt({ limit: 0 })), "INVALID_PAGE_SIZE");
+  assert.equal(
+    await code(api.triagePrompt({ limit: 51 })),
+    "INVALID_PAGE_SIZE",
+  );
+  assert.equal(fetch.calls.length, 0);
+  // A response without the key, the prompt or the results is not shown.
+  const empty = client(() => ({ body: { ok: true } })).api;
+  assert.equal(await code(empty.createTriageToken()), "INVALID_RESPONSE");
+  assert.equal(await code(empty.triagePrompt()), "INVALID_RESPONSE");
+  assert.equal(
+    await code(empty.submitTriageResults([{ reportId: "a" }])),
+    "INVALID_RESPONSE",
+  );
+  const none = client(() => ({
+    body: { prompt: "", reportCount: 0, reportIds: [] },
+  })).api;
+  assert.deepEqual(await none.triagePrompt(), {
+    prompt: "",
+    reportCount: 0,
+    reportIds: [],
+  });
+  for (const code of ["INVALID_TRIAGE", "ALREADY_TRIAGED"])
+    assert.match(A.errorMessage(code, 400), /見立て/, code);
+});
+
+const judgment = (reportId, extra) => ({
+  reportId,
+  severity: "low",
+  category: "none",
+  recommendedAction: "keep",
+  rationale: "問題は見当たりません",
+  ...extra,
+});
+
+test("parseTriageAnswer reads the ```json block of a Claude answer", () => {
+  const answer = [
+    "通報を確認しました。",
+    "```text",
+    "メモ：[参考] これは見立てではありません",
+    "```",
+    "```json",
+    JSON.stringify(
+      [
+        judgment("rep1", { severity: "critical", recommendedAction: "hide" }),
+        judgment("rep2", { extra: "捨てる", rationale: "  前後の空白  " }),
+      ],
+      null,
+      2,
+    ),
+    "```",
+    "以上です。",
+  ].join("\n");
+  const { results, errors } = A.parseTriageAnswer(answer);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(results, [
+    judgment("rep1", { severity: "critical", recommendedAction: "hide" }),
+    judgment("rep2", { rationale: "前後の空白" }),
+  ]);
+  // A plain ``` block, Windows line ends, and upper-case values.
+  const plain = A.parseTriageAnswer(
+    "```\r\n" +
+      JSON.stringify([judgment("rep3", { severity: "High" })]) +
+      "\r\n```",
+  );
+  assert.deepEqual(plain.results, [judgment("rep3", { severity: "high" })]);
+});
+
+test("parseTriageAnswer finds a bare array or an object with results", () => {
+  const bare = A.parseTriageAnswer(
+    `見立ては次のとおりです [注] ${JSON.stringify([judgment("a")])} ご確認ください。`,
+  );
+  assert.deepEqual(bare, { results: [judgment("a")], errors: [] });
+  const object = A.parseTriageAnswer(
+    JSON.stringify({ results: [judgment("b")] }),
+  );
+  assert.deepEqual(object, { results: [judgment("b")], errors: [] });
+  const fencedObject = A.parseTriageAnswer(
+    "```json\n" + JSON.stringify({ results: [judgment("c")] }) + "\n```",
+  );
+  assert.deepEqual(fencedObject.results, [judgment("c")]);
+  // A ] inside a string does not end the array.
+  const bracket = A.parseTriageAnswer(
+    "答え：" + JSON.stringify([judgment("d", { rationale: "記号 ] と [ " })]),
+  );
+  assert.deepEqual(bracket.results, [
+    judgment("d", { rationale: "記号 ] と [" }),
+  ]);
+});
+
+test("parseTriageAnswer explains what it could not read", () => {
+  for (const input of [
+    "",
+    "   ",
+    null,
+    42,
+    "すみません、判定できません。",
+    "```json\n[{oops\n```",
+    "{}",
+    JSON.stringify({ results: "none" }),
+    "[]",
+  ]) {
+    const { results, errors } = A.parseTriageAnswer(input);
+    assert.deepEqual(results, [], String(input));
+    assert.equal(errors.length, 1, String(input));
+    assert.match(errors[0], /[ぁ-ん]/, String(input));
+  }
+  assert.match(A.parseTriageAnswer("").errors[0], /貼ってください/);
+  assert.match(
+    A.parseTriageAnswer("判定できません").errors[0],
+    /見つかりませんでした/,
+  );
+  assert.match(
+    A.parseTriageAnswer("```json\n[{oops\n```").errors[0],
+    /JSONとして読めませんでした/,
+  );
+  assert.match(A.parseTriageAnswer("[]").errors[0], /1件も/);
+  assert.match(
+    A.parseTriageAnswer("あ".repeat(200001)).errors[0],
+    /長すぎます/,
+  );
+});
+
+test("parseTriageAnswer leaves out items that do not match the backend's shape", () => {
+  const { results, errors } = A.parseTriageAnswer(
+    JSON.stringify([
+      judgment("ok1"),
+      judgment("bad-severity", { severity: "severe" }),
+      judgment("bad-category", { category: "nudity" }),
+      judgment("bad-action", { recommendedAction: "delete" }),
+      judgment("", {}),
+      judgment("no-rationale", { rationale: "   " }),
+      judgment("long", { rationale: "あ".repeat(301) }),
+      judgment("just-300", { rationale: "あ".repeat(300) }),
+      "not an object",
+      [judgment("nested")],
+      judgment("ok1", { severity: "high" }),
+    ]),
+  );
+  assert.deepEqual(
+    results.map((r) => r.reportId),
+    ["ok1", "just-300"],
+  );
+  assert.equal(results[0].severity, "low", "the first of a duplicate is kept");
+  assert.equal(errors.length, 9);
+  assert.match(
+    errors[0],
+    /^2件目（bad-severity）：重大度（severity）「severe」/,
+  );
+  assert.match(errors[1], /^3件目（bad-category）：分類（category）「nudity」/);
+  assert.match(
+    errors[2],
+    /^4件目（bad-action）：推奨（recommendedAction）「delete」/,
+  );
+  assert.match(errors[3], /^5件目：通報のID（reportId）がありません/);
+  assert.match(errors[4], /理由（rationale）がありません/);
+  assert.match(errors[5], /300文字を超えています（301文字）/);
+  assert.match(errors[6], /^9件目：見立ての形/);
+  assert.match(errors[7], /^10件目：見立ての形/);
+  assert.match(errors[8], /^11件目（ok1）：同じ通報の見立てが前にもある/);
+});
+
+test("parseTriageAnswer sends at most 50 judgments", () => {
+  const many = Array.from({ length: 55 }, (_, i) => judgment(`r${i + 1}`));
+  const { results, errors } = A.parseTriageAnswer(JSON.stringify(many));
+  assert.equal(results.length, 50);
+  assert.equal(results.at(-1).reportId, "r50");
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /50件まで.*51件目からの5件は外しました/);
+});
+
+test("the import summary counts stored, hidden and refused judgments", () => {
+  const sent = ["a", "b", "c", "d", "e", "f", "g"].map((id) => judgment(id));
+  const summary = A.summarizeTriageResults(
+    {
+      results: [
+        { reportId: "a", ok: true, autoHidden: false },
+        { reportId: "b", ok: true, autoHidden: true },
+        { reportId: "c", ok: false, code: "INVALID_TRIAGE" },
+        { reportId: "d", ok: false, code: "NOT_FOUND" },
+        { reportId: "e", ok: false, code: "REPORT_RESOLVED" },
+        { reportId: "f", ok: false, code: "ALREADY_TRIAGED" },
+        { reportId: "zzz", ok: true, autoHidden: true },
+      ],
+    },
+    sent,
+  );
+  assert.equal(summary.imported, 2);
+  assert.equal(summary.autoHidden, 1);
+  assert.deepEqual(
+    summary.failed.map((f) => [f.reportId, f.reason]),
+    [
+      ["c", "形が正しくない"],
+      ["d", "通報が見つからない"],
+      ["e", "対応済み"],
+      ["f", "すでに見立てがある"],
+      ["g", "サーバーから結果が返らなかった"],
+    ],
+  );
+  assert.equal(
+    A.triageResultReason("SOMETHING"),
+    "取り込めなかった（SOMETHING）",
+  );
+  assert.deepEqual(A.summarizeTriageResults(null, []), {
+    imported: 0,
+    autoHidden: 0,
+    failed: [],
+  });
+});
+
+test("the AI triage line names who wrote it", () => {
+  const base = {
+    status: "ok",
+    severity: "low",
+    category: "none",
+    recommendedAction: "keep",
+    rationale: "問題なし",
+    triagedAt: "2026-11-24T15:05:00Z",
+  };
+  const view = (extra) => A.aiTriageView({ ...base, ...extra });
+  assert.equal(view({}).sourceLabel, "AI（API）", "no source is the API");
+  assert.equal(view({ source: "api" }).sourceLabel, "AI（API）");
+  assert.equal(
+    view({ source: "subscription" }).sourceLabel,
+    "AI（サブスクの下見）",
+  );
+  assert.equal(view({ source: "chat" }).sourceLabel, "AI（チャット）");
+  assert.equal(view({ source: "<b>x</b>" }).source, "api");
+  assert.equal(
+    view({ source: "chat", model: "some-model" }).byline,
+    "判定：AI（チャット）・2026/11/25（水）00:05・some-model",
+  );
+  assert.equal(
+    view({ source: "subscription", triagedAt: null }).byline,
+    "判定：AI（サブスクの下見）",
+  );
+  assert.equal(
+    view({ source: "chat" }).line,
+    "AI（チャット）：重大度：低・分類：該当なし・推奨：掲載のままでよい",
+  );
+  assert.equal(
+    A.aiTriageView({ status: "refused", source: "subscription" }).line,
+    "AI（サブスクの下見）：AIが判定できませんでした（人の確認が必要）",
+  );
+  assert.deepEqual(
+    [A.aiTriageView(null).byline, A.aiTriageView(null).line],
+    ["", "AI：AI判定なし"],
+  );
+});
+
+test("the triage key's state reads an old backend as not set", () => {
+  for (const bot of [undefined, null, "yes", {}, { configured: "true" }])
+    assert.deepEqual(A.triageBotView(bot), {
+      configured: false,
+      label: "未設定",
+      details: [],
+    });
+  assert.deepEqual(
+    A.triageBotView({
+      configured: true,
+      createdAt: "2026-11-24T15:05:00Z",
+      createdBy: "owner",
+      lastUsedAt: "2026-11-25T03:30:00Z",
+    }),
+    {
+      configured: true,
+      label: "設定済み",
+      details: [
+        "作った日時：2026/11/25（水）00:05（owner）",
+        "最後に使われた日時：2026/11/25（水）12:30",
+      ],
+    },
+  );
+  assert.deepEqual(
+    A.triageBotView({ configured: true, createdAt: null, lastUsedAt: null })
+      .details,
+    ["作った日時：不明", "まだ使われていません"],
+  );
+  assert.equal(
+    A.hostOf("https://abc.lambda-url.ap-northeast-1.on.aws/"),
+    "abc.lambda-url.ap-northeast-1.on.aws",
+  );
+  assert.equal(A.hostOf("javascript:alert(1)"), "");
+});
+
 test("the page's scripts have no HTML sinks and keep the token out of storage", () => {
   for (const file of ["public/js/admin.js", "public/js/admin-core.js"]) {
     const source = readFileSync(

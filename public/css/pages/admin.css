@@ -402,6 +402,132 @@ a {
   }
 }
 
+/* ---- Triage with the owner's Claude subscription ---- */
+.admin-sub {
+  display: grid;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.admin-sub h3 {
+  font-size: 1.05rem;
+}
+
+.admin-sub-part {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+
+.admin-sub-part h4 {
+  font-size: 1rem;
+}
+
+.admin-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-bot-status {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.admin-bot-status[data-configured="true"] {
+  color: var(--ink);
+}
+
+.admin-bot-details {
+  list-style: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.admin-bot-details:empty {
+  display: none;
+}
+
+/* The key shown once: the one place on the page that asks to be noticed. */
+.admin-secret {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--pencil-ink);
+  border-radius: var(--radius-control);
+  background: var(--pencil-tint);
+}
+
+.admin-secret label {
+  font-weight: 600;
+}
+
+.admin-copy-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-copy-row input {
+  flex: 1 1 10em;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+}
+
+.admin-secret-note {
+  font-weight: 600;
+}
+
+.admin-prompt summary {
+  padding: 10px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-prompt textarea,
+.admin-sub .admin-field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  font-size: 0.875rem;
+  resize: vertical;
+}
+
+.admin-prompt textarea {
+  min-height: 10em;
+  background: var(--sheet-soft);
+}
+
+.admin-triage-result {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-triage-result:empty {
+  display: none;
+}
+
+.admin-triage-result p {
+  font-weight: 600;
+}
+
+.admin-triage-result ul {
+  padding-left: 1.4em;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
 /* ---- Queue ---- */
 .admin-queue-section {
   display: grid;

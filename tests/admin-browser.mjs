@@ -4,10 +4,12 @@
 // interception: GIS is a stand-in script that hands the page fake ID tokens,
 // and the API is a small in-memory backend with the shapes of
 // backend/src/api/routes/admin.ts. The walk signs in, changes the AI triage
-// mode, pages through the queue, hides, dismisses, reviews (through a
-// REPORT_CHANGED conflict), suspends and unsuspends, re-shows a work, opens
-// the detail view, survives an expired sign-in and signs out. Report text
-// carrying <script> and <img onerror> must stay text.
+// mode, makes, copies, remakes and revokes the triage key of the scheduled
+// Claude Code session, pages through the queue, copies the request for a
+// Claude chat and takes the pasted answer back in, hides, dismisses, reviews
+// (through a REPORT_CHANGED conflict), suspends and unsuspends, re-shows a
+// work, opens the detail view, survives an expired sign-in and signs out.
+// Report text carrying <script> and <img onerror> must stay text.
 //
 //   node tests/admin-browser.mjs                       # serves public/ itself
 //   ADMIN_BASE_URL=http://127.0.0.1:8790 node tests/admin-browser.mjs
@@ -243,6 +245,8 @@ function makeBackend(tokens) {
     users,
     works,
     reports,
+    triageToken: null,
+    triageTokens: 0,
     log: [],
     revoked: new Set(),
     conflictOnce: new Set(["rep3CCCC:review"]),
@@ -268,6 +272,76 @@ function makeBackend(tokens) {
         return [400, { error: "x", code: "INVALID_AI_MODE" }];
       Object.assign(settings, { aiMode: body.aiMode, aiModeSource: "admin" });
       return [200, { ok: true, settings }];
+    }
+    // The triage endpoints (a backend without them has no settings.triageBot:
+    // the first /admin/me here has none, as an older backend would answer).
+    if (method === "POST" && path === "/admin/triage/token") {
+      const token = `nt_test_${++state.triageTokens}_${"k".repeat(40)}`;
+      const createdAt = new Date().toISOString();
+      settings.triageBot = {
+        configured: true,
+        createdAt,
+        createdBy: "test-moderator",
+        lastUsedAt: null,
+      };
+      state.triageToken = token;
+      return [200, { token, createdAt, settings }];
+    }
+    if (method === "POST" && path === "/admin/triage/token/revoke") {
+      settings.triageBot = {
+        configured: false,
+        createdAt: null,
+        createdBy: null,
+        lastUsedAt: null,
+      };
+      state.triageToken = null;
+      return [200, { ok: true, settings }];
+    }
+    if (method === "GET" && path === "/admin/triage/prompt") {
+      const waiting = reports
+        .filter((r) => r.status === "pending" && r.aiTriage?.status !== "ok")
+        .slice(0, Number(query.get("limit")));
+      return [
+        200,
+        {
+          prompt: waiting.length
+            ? [
+                "次の通報を見立てて、```json の配列で答えてください。",
+                ...waiting.map((r) => `- ${r.reportId}：${r.reason}`),
+              ].join("\n")
+            : "",
+          reportCount: waiting.length,
+          reportIds: waiting.map((r) => r.reportId),
+        },
+      ];
+    }
+    if (method === "POST" && path === "/admin/triage/results") {
+      if (!Array.isArray(body.results) || !body.results.length)
+        return [400, { error: "x", code: "INVALID_TRIAGE" }];
+      const results = body.results.map((item) => {
+        const r = reports.find((o) => o.reportId === item.reportId);
+        const fail = (code) => ({ reportId: item.reportId, ok: false, code });
+        if (!r) return fail("NOT_FOUND");
+        if (r.status === "resolved") return fail("REPORT_RESOLVED");
+        if (r.aiTriage?.status === "ok") return fail("ALREADY_TRIAGED");
+        const { reportId, ...judgment } = item;
+        const triagedAt = new Date().toISOString();
+        r.aiTriage = { status: "ok", source: "chat", ...judgment, triagedAt };
+        const work = r.workId && works[r.workId];
+        const autoHidden =
+          item.severity === "critical" &&
+          Boolean(work) &&
+          !work.moderationHidden;
+        if (autoHidden)
+          Object.assign(work, {
+            moderationHidden: true,
+            autoHidden: true,
+            autoHiddenReason: "ai",
+            autoHiddenAt: triagedAt,
+          });
+        return { reportId, ok: true, autoHidden };
+      });
+      return [200, { results }];
     }
     if (method === "GET" && path === "/admin/reports") {
       const status = query.get("status");
@@ -523,6 +597,33 @@ async function newPage(context, { configResponse } = {}) {
   return { page, problems, outside };
 }
 
+// The Clipboard API stand-in: what the page copies, and a switch to make the
+// browser refuse (the page then shows the text selected to copy by hand).
+function clipboardStub() {
+  window.__copied = [];
+  window.__clipboardFails = false;
+  const clipboard = {
+    async writeText(value) {
+      if (window.__clipboardFails)
+        throw new DOMException("Write permission denied.", "NotAllowedError");
+      window.__copied.push(String(value));
+    },
+  };
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    get: () => clipboard,
+  });
+}
+
+const verdict = (reportId, extra) => ({
+  reportId,
+  severity: "low",
+  category: "none",
+  recommendedAction: "keep",
+  rationale: "規約に反する所は見当たりません",
+  ...extra,
+});
+
 const card = (page, id) =>
   page.locator(`#admin-queue > .admin-card[data-report-id="${id}"]`);
 const confirmDialog = (page) => page.locator("#admin-confirm");
@@ -612,6 +713,7 @@ try {
     const tokens = [fakeToken(1), fakeToken(2), fakeToken(3)];
     const backend = makeBackend(tokens);
     const context = await browser.newContext({ ...viewport });
+    await context.addInitScript(clipboardStub);
     const { page, problems, outside } = await newPage(context);
     await page.route("https://accounts.google.com/gsi/client", (route) =>
       route.fulfill({
@@ -692,6 +794,101 @@ try {
           .filter((e) => e.path === "/admin/settings")
           .map((e) => e.body),
         [{ aiMode: "off" }],
+      );
+
+      // ---- The triage key of the scheduled Claude Code session --------------------------------
+      const botStatus = page.locator("#admin-bot-status");
+      const keyBox = page.locator("#admin-bot-token");
+      const keyField = page.getByLabel("新しい下見の鍵");
+      assert.equal(
+        await botStatus.textContent(),
+        "状態：未設定",
+        "no settings.triageBot (an older backend) reads as not set",
+      );
+      assert.equal(await page.locator("#admin-bot-revoke").isVisible(), false);
+      assert.equal(await keyBox.isVisible(), false);
+      await page.getByRole("button", { name: "鍵を作る" }).click();
+      await keyField.waitFor();
+      const firstKey = await keyField.inputValue();
+      assert.equal(firstKey, backend.triageToken);
+      assert.equal(await keyField.getAttribute("readonly"), "");
+      assert.equal(
+        await page.evaluate(() => document.activeElement?.id),
+        "admin-bot-token-value",
+        "the new key is focused, ready to copy",
+      );
+      assert.equal(
+        await page.locator("#admin-bot-host").textContent(),
+        new URL(config.apiBaseUrl).host,
+      );
+      assert.match(
+        await keyBox.textContent(),
+        /この鍵はこの画面を閉じると二度と表示されません。Claude\s+Codeの環境の『ネットワークの秘密』に保存してください。チャットには貼らないでください。/,
+      );
+      assert.equal(await botStatus.textContent(), "状態：設定済み");
+      assert.match(
+        await page.locator("#admin-bot-details").textContent(),
+        /作った日時：\d{4}\/\d\d\/\d\d（.）\d\d:\d\d（test-moderator）まだ使われていません/,
+      );
+      await page.getByRole("button", { name: "下見の鍵をコピー" }).click();
+      await page
+        .locator("#admin-bot-copy-status")
+        .filter({ hasText: "コピーしました" })
+        .waitFor();
+      assert.equal(await page.evaluate(() => window.__copied.at(-1)), firstKey);
+      assert.deepEqual(
+        await page.evaluate(() => [
+          localStorage.length,
+          sessionStorage.length,
+          document.cookie,
+        ]),
+        [0, 0, ""],
+        "the key is not kept in the browser",
+      );
+      await noHorizontalScroll(page, label + " key");
+      await shot(page, `${label}-triage-key`);
+
+      // Making it again asks first: the key before stops working.
+      await page.getByRole("button", { name: "鍵を作り直す" }).click();
+      assert.match(
+        await confirmDialog(page).textContent(),
+        /今の鍵は使えなくなります/,
+      );
+      await confirm(page);
+      await waitNotice(page, /下見の鍵を作り直しました/);
+      const secondKey = await keyField.inputValue();
+      assert.notEqual(secondKey, firstKey);
+      assert.equal(secondKey, backend.triageToken);
+
+      // The key is shown once: reading the page again takes it away.
+      backend.settings.triageBot.lastUsedAt = new Date().toISOString();
+      await page.locator("#admin-reload").click();
+      await keyBox.waitFor({ state: "hidden" });
+      assert.equal(await keyField.inputValue(), "");
+      await page
+        .locator("#admin-bot-details")
+        .filter({ hasText: "最後に使われた日時" })
+        .waitFor();
+
+      await page.getByRole("button", { name: "鍵を無効にする" }).click();
+      assert.match(
+        await confirmDialog(page).textContent(),
+        /自動の下見は止まります/,
+      );
+      await confirm(page);
+      await waitNotice(page, /下見の鍵を無効にしました/);
+      assert.equal(await botStatus.textContent(), "状態：未設定");
+      await page.getByRole("button", { name: "鍵を作る" }).waitFor();
+      assert.equal(await page.locator("#admin-bot-revoke").isVisible(), false);
+      assert.deepEqual(
+        backend.log
+          .filter((e) => e.path.startsWith("/admin/triage/token"))
+          .map((e) => [e.method, e.path, e.body]),
+        [
+          ["POST", "/admin/triage/token", {}],
+          ["POST", "/admin/triage/token", {}],
+          ["POST", "/admin/triage/token/revoke", {}],
+        ],
       );
 
       // ---- Queue, oldest first, with the waiting days ---------------------------------------
@@ -814,6 +1011,153 @@ try {
         "page2",
       );
       await page.locator("#admin-more").waitFor({ state: "hidden" });
+
+      // ---- Ask a Claude chat now: copy the request, paste the answer back -----------------------
+      const copyPrompt = page.getByRole("button", {
+        name: "AIに頼む文をコピー",
+      });
+      const promptStatus = page.locator("#admin-prompt-status");
+      const promptBox = page.locator("#admin-prompt-box");
+      await copyPrompt.click();
+      await promptStatus
+        .filter({
+          hasText:
+            "3件の通報の文をコピーしました。Claudeのチャットに貼ってください。",
+        })
+        .waitFor();
+      assert.deepEqual(
+        backend.log.filter((e) => e.path === "/admin/triage/prompt").at(-1)
+          .query,
+        { limit: "20" },
+      );
+      const copiedPrompt = await page.evaluate(() => window.__copied.at(-1));
+      assert.match(copiedPrompt, /rep3CCCC[\s\S]*rep2BBBB[\s\S]*rep4DDDD/);
+      assert.equal(
+        await page.locator("#admin-prompt-text").inputValue(),
+        copiedPrompt,
+      );
+      assert.equal(await promptBox.isVisible(), true);
+      assert.equal(await promptBox.getAttribute("open"), null, "collapsed");
+      // When the browser refuses the clipboard, the request is shown selected.
+      await page.evaluate(() => (window.__clipboardFails = true));
+      await copyPrompt.click();
+      await promptStatus
+        .filter({ hasText: "自動でコピーできなかった" })
+        .waitFor();
+      assert.equal(await promptBox.getAttribute("open"), "");
+      assert.deepEqual(
+        await page.evaluate(() => {
+          const field = document.activeElement;
+          return [
+            field.id,
+            field.selectionStart,
+            field.selectionEnd === field.value.length,
+          ];
+        }),
+        ["admin-prompt-text", 0, true],
+      );
+      await page.evaluate(() => (window.__clipboardFails = false));
+
+      const answer = page.getByLabel("Claudeの答えを貼る");
+      const importButton = page.getByRole("button", {
+        name: "見立てを取り込む",
+      });
+      const result = page.locator("#admin-answer-result");
+      const criticalOne = verdict("rep2BBBB", {
+        severity: "critical",
+        category: "privacy",
+        recommendedAction: "hide",
+        rationale: "<b>住所</b>が読めます",
+      });
+      await answer.fill(
+        [
+          "3件を確認しました。",
+          "```json",
+          JSON.stringify(
+            [
+              verdict("rep3CCCC"),
+              criticalOne,
+              verdict("rep1AAAA"),
+              verdict("rep9ZZZZ"),
+              verdict("rep4DDDD", { severity: "severe" }),
+            ],
+            null,
+            2,
+          ),
+          "```",
+          "判断は運営の方でお願いします。",
+        ].join("\n"),
+      );
+      await importButton.click();
+      await result.filter({ hasText: "取り込んだ見立て：2件" }).waitFor();
+      assert.deepEqual(
+        backend.log
+          .filter((e) => e.path === "/admin/triage/results")
+          .map((e) => e.body),
+        [
+          {
+            results: [
+              verdict("rep3CCCC"),
+              criticalOne,
+              verdict("rep1AAAA"),
+              verdict("rep9ZZZZ"),
+            ],
+          },
+        ],
+        "only the judgments that passed the check are sent",
+      );
+      const resultText = await result.textContent();
+      assert.match(
+        resultText,
+        /取り込んだ見立て：2件（「重大」で作品を一時非表示にしたもの：1件）/,
+      );
+      assert.match(resultText, /取り込めなかった見立て：2件/);
+      assert.match(resultText, /rep1AAAA：すでに見立てがある/);
+      assert.match(resultText, /rep9ZZZZ：通報が見つからない/);
+      assert.match(
+        resultText,
+        /送る前に外したもの：5件目（rep4DDDD）：重大度（severity）「severe」は使えません/,
+      );
+      assert.notEqual(
+        await answer.inputValue(),
+        "",
+        "the answer stays when part of it was not taken in",
+      );
+      // The queue is read again with the new judgments.
+      await card(page, "rep3CCCC")
+        .filter({ hasText: "判定：AI（チャット）" })
+        .waitFor();
+      assert.match(await first.textContent(), /判定：AI（API）・/);
+      assert.match(await second.textContent(), /AIが重大と判定したため/);
+      assert.match(await second.textContent(), /<b>住所<\/b>が読めます/);
+      assert.equal(await page.locator("#admin-queue b").count(), 0);
+      assert.equal(await page.evaluate(() => window.__xss), undefined);
+
+      // A clean answer is taken in whole and the box is emptied.
+      await answer.fill(JSON.stringify([verdict("rep4DDDD")]));
+      await importButton.click();
+      await result.filter({ hasText: "取り込んだ見立て：1件" }).waitFor();
+      assert.equal(await answer.inputValue(), "");
+      assert.doesNotMatch(
+        await result.textContent(),
+        /取り込めなかった|外した/,
+      );
+      await noHorizontalScroll(page, label + " triage");
+      await shot(page, `${label}-triage-chat`);
+      // An answer with nothing usable sends nothing.
+      const sentBefore = backend.log.length;
+      await answer.fill("すみません、判定できませんでした。");
+      await importButton.click();
+      await result
+        .filter({ hasText: "取り込める見立てがありませんでした" })
+        .waitFor();
+      assert.equal(backend.log.length, sentBefore);
+      await answer.fill("");
+      // The list was read again from the start: load its second page back.
+      await page.locator("#admin-more").click();
+      await card(page, "rep4DDDD")
+        .filter({ hasText: "判定：AI（チャット）" })
+        .waitFor();
 
       // ---- Hide (a double click sends one request) ------------------------------------------
       await first.getByRole("button", { name: "違反として非表示" }).click();
@@ -987,6 +1331,11 @@ try {
         .filter({ hasText: "未対応の通報はありません。" })
         .waitFor();
       assert.equal(backend.log.at(-1).authorization, `Bearer ${tokens[1]}`);
+      await copyPrompt.click();
+      await promptStatus
+        .filter({ hasText: "見立てを待っている通報はありません。" })
+        .waitFor();
+      assert.equal(await promptBox.isVisible(), false);
 
       // ---- Switch tabs (also with the arrow keys) -------------------------------------------------
       await page.getByRole("tab", { name: "未対応" }).focus();
@@ -1013,6 +1362,9 @@ try {
       });
 
       // ---- Sign out clears everything ----------------------------------------------------------
+      await page.getByRole("button", { name: "鍵を作る" }).click();
+      await keyField.waitFor();
+      await answer.fill("貼りかけの答え");
       await page.getByRole("button", { name: "ログアウト" }).click();
       await page
         .locator("#admin-sign-in-status")
@@ -1022,6 +1374,16 @@ try {
       assert.equal(await page.locator("#admin-queue > *").count(), 0);
       assert.equal(await page.locator("#admin-account").isVisible(), false);
       assert.equal(await page.evaluate(() => window.__gisSignedOut), true);
+      assert.deepEqual(
+        await page.evaluate(() =>
+          ["admin-bot-token-value", "admin-prompt-text", "admin-answer"].map(
+            (id) => document.getElementById(id).value,
+          ),
+        ),
+        ["", "", ""],
+        "the key, the request and the pasted answer leave with the sign-in",
+      );
+      assert.equal(await keyBox.isVisible(), false);
 
       assert.deepEqual(
         outside,

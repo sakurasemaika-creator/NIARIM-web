@@ -5,6 +5,8 @@
  * - 待っている営業日（日本時間の月〜金）の数え方
  * - 画面へ出す値の安全な扱い（文字は textContent だけ、URL は http(s) だけ、
  *   サムネイルは YouTube の画像のホストだけ）
+ * - サブスクのClaudeでの下見：チャットに貼られたClaudeの答えから見立ての
+ *   一覧を取り出して確かめる（parseTriageAnswer）・取り込んだ結果のまとめ
  *
  * ブラウザーでは window.NiarimAdmin、Node（tests/admin-core.test.mjs）では
  * require() で読む。画面の組み立ては /js/admin.js。
@@ -37,6 +39,26 @@
   const NOTE_MAX = 1000;
   const REASON_MAX = 500;
   const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
+  const TRIAGE_SEVERITIES = ["critical", "high", "medium", "low", "none"];
+  const TRIAGE_CATEGORIES = [
+    "child_safety",
+    "sexual",
+    "violence",
+    "hate_harassment",
+    "self_harm",
+    "illegal",
+    "privacy",
+    "copyright",
+    "spam_scam",
+    "other",
+    "none",
+  ];
+  const TRIAGE_ACTIONS = ["hide", "keep", "review"];
+  const TRIAGE_MAX = 50;
+  const RATIONALE_MAX = 300;
+  const TRIAGE_PROMPT_LIMIT = 20;
+  // A pasted answer longer than this is not a Claude answer about 50 reports.
+  const ANSWER_MAX = 200000;
 
   // ---- Text -------------------------------------------------------------
 
@@ -345,34 +367,304 @@
       : text(value);
   }
 
-  /** What to show for a report's AI triage. */
+  /** Who wrote a triage: the server's API key, the owner's subscription
+   *  (the scheduled Claude Code session) or a Claude chat pasted back here.
+   *  A triage without `source` was written by the API. */
+  const TRIAGE_SOURCE_LABELS = {
+    api: "AI（API）",
+    subscription: "AI（サブスクの下見）",
+    chat: "AI（チャット）",
+  };
+
+  /**
+   * What to show for a report's AI triage: `summary` (the judgment),
+   * `byline` (who wrote it and when: 「判定：AI（チャット）・日時」) and
+   * `line` (the one-line form used in the list of related reports).
+   */
   function aiTriageView(triage) {
     if (!triage || typeof triage !== "object")
-      return { state: "none", summary: "AI判定なし" };
-    if (triage.status === "refused")
       return {
+        state: "none",
+        summary: "AI判定なし",
+        sourceLabel: "",
+        byline: "",
+        line: "AI：AI判定なし",
+      };
+    const source = Object.prototype.hasOwnProperty.call(
+      TRIAGE_SOURCE_LABELS,
+      triage.source,
+    )
+      ? triage.source
+      : "api";
+    const sourceLabel = TRIAGE_SOURCE_LABELS[source];
+    const triagedAt = formatJstDateTime(triage.triagedAt);
+    const model = triage.status === "ok" ? text(triage.model) : "";
+    let view;
+    if (triage.status === "refused")
+      view = {
         state: "refused",
         summary: "AIが判定できませんでした（人の確認が必要）",
-        triagedAt: formatJstDateTime(triage.triagedAt),
       };
-    if (triage.status !== "ok")
-      return {
+    else if (triage.status !== "ok")
+      view = {
         state: "failed",
         summary: "AIの判定に失敗しました（人の確認が必要）",
-        triagedAt: formatJstDateTime(triage.triagedAt),
+      };
+    else
+      view = {
+        state: "ok",
+        severity: triage.severity,
+        summary: [
+          `重大度：${labelOf(SEVERITY_LABELS, triage.severity)}`,
+          `分類：${labelOf(CATEGORY_LABELS, triage.category)}`,
+          `推奨：${labelOf(ACTION_LABELS, triage.recommendedAction)}`,
+        ].join("・"),
+        rationale: text(triage.rationale),
+        model,
       };
     return {
-      state: "ok",
-      severity: triage.severity,
-      summary: [
-        `重大度：${labelOf(SEVERITY_LABELS, triage.severity)}`,
-        `分類：${labelOf(CATEGORY_LABELS, triage.category)}`,
-        `推奨：${labelOf(ACTION_LABELS, triage.recommendedAction)}`,
-      ].join("・"),
-      rationale: text(triage.rationale),
-      model: text(triage.model),
-      triagedAt: formatJstDateTime(triage.triagedAt),
+      ...view,
+      source,
+      sourceLabel,
+      triagedAt,
+      byline:
+        "判定：" + [sourceLabel, triagedAt, model].filter(Boolean).join("・"),
+      line: `${sourceLabel}：${view.summary}`,
     };
+  }
+
+  /**
+   * The state of the triage key (the bearer token of the scheduled Claude
+   * Code session) from `settings.triageBot`. A backend without the key
+   * (no `triageBot`) reads as not set.
+   */
+  function triageBotView(bot) {
+    if (!bot || typeof bot !== "object" || bot.configured !== true)
+      return { configured: false, label: "未設定", details: [] };
+    const createdAt = formatJstDateTime(bot.createdAt);
+    const lastUsedAt = formatJstDateTime(bot.lastUsedAt);
+    const createdBy = text(bot.createdBy);
+    return {
+      configured: true,
+      label: "設定済み",
+      details: [
+        `作った日時：${createdAt || "不明"}` +
+          (createdBy ? `（${createdBy}）` : ""),
+        lastUsedAt
+          ? `最後に使われた日時：${lastUsedAt}`
+          : "まだ使われていません",
+      ],
+    };
+  }
+
+  /** The host of an http(s) URL ("api.example.com"), or "". */
+  function hostOf(value) {
+    const href = safeHttpUrl(value);
+    return href ? new URL(href).host : "";
+  }
+
+  // ---- Triage pasted from a Claude chat -------------------------------------
+
+  function tryJson(source) {
+    try {
+      return { ok: true, value: JSON.parse(source) };
+    } catch {
+      return { ok: false };
+    }
+  }
+
+  /** The end index of the JSON array opening at `start` (strings are
+   *  skipped), or -1 when it never closes. */
+  function arrayEnd(source, start) {
+    let depth = 0;
+    let inString = false;
+    for (let index = start; index < source.length; index++) {
+      const c = source[index];
+      if (inString) {
+        if (c === "\\") index++;
+        else if (c === '"') inString = false;
+      } else if (c === '"') inString = true;
+      else if (c === "[") depth++;
+      else if (c === "]" && --depth === 0) return index;
+    }
+    return -1;
+  }
+
+  /** The first top-level JSON array written somewhere in the text. */
+  function firstJsonArray(source) {
+    let from = 0;
+    for (let tries = 0; tries < 200; tries++) {
+      const start = source.indexOf("[", from);
+      if (start < 0) return undefined;
+      const end = arrayEnd(source, start);
+      if (end >= 0) {
+        const parsed = tryJson(source.slice(start, end + 1));
+        if (parsed.ok && Array.isArray(parsed.value)) return parsed.value;
+      }
+      from = start + 1;
+    }
+    return undefined;
+  }
+
+  const ANSWER_NOT_FOUND =
+    "見立ての一覧（JSONの配列）が見つかりませんでした。Claudeの答えを、```json で始まる部分も含めてそのまま貼ってください。";
+
+  function enumValue(value) {
+    return typeof value === "string" ? value.trim().toLowerCase() : value;
+  }
+
+  /**
+   * Reads the judgments out of a Claude chat answer pasted on the page: the
+   * first ```json block (else the first ``` block, else the first JSON
+   * array in the text), as an array or as { results: [...] }. Each item is
+   * checked against the backend's shape; the ones that fail, repeat a
+   * report or go over 50 are left out with a Japanese reason in `errors`.
+   * Only the five documented fields are kept.
+   */
+  function parseTriageAnswer(input) {
+    const errors = [];
+    const results = [];
+    const value = typeof input === "string" ? input.trim() : "";
+    if (!value) return { results, errors: ["Claudeの答えを貼ってください。"] };
+    if (value.length > ANSWER_MAX)
+      return {
+        results,
+        errors: ["貼った文が長すぎます。Claudeの答えだけを貼ってください。"],
+      };
+    const fence =
+      value.match(/```[ \t]*json[ \t]*\r?\n([\s\S]*?)```/i) ||
+      value.match(/```[^\n`]*\r?\n([\s\S]*?)```/);
+    const body = fence ? fence[1] : value;
+    const whole = tryJson(body.trim());
+    let data = whole.ok ? whole.value : firstJsonArray(body);
+    if (data === undefined) {
+      errors.push(
+        fence
+          ? "```で囲まれた部分を、JSONとして読めませんでした。Claudeの答えをそのまま貼ってください。"
+          : ANSWER_NOT_FOUND,
+      );
+      return { results, errors };
+    }
+    if (data && typeof data === "object" && !Array.isArray(data))
+      data = data.results;
+    if (!Array.isArray(data)) return { results, errors: [ANSWER_NOT_FOUND] };
+    if (!data.length)
+      return { results, errors: ["見立てが1件も入っていませんでした。"] };
+    const seen = new Set();
+    data.forEach((item, index) => {
+      const id =
+        item && typeof item === "object" && typeof item.reportId === "string"
+          ? item.reportId.trim()
+          : "";
+      const where = id
+        ? `${index + 1}件目（${shorten(id, 40)}）`
+        : `${index + 1}件目`;
+      if (!item || typeof item !== "object" || Array.isArray(item)) {
+        errors.push(`${where}：見立ての形（オブジェクト）ではありません。`);
+        return;
+      }
+      const problems = [];
+      if (!id) problems.push("通報のID（reportId）がありません");
+      else if (id.length > 256)
+        problems.push("通報のID（reportId）が長すぎます");
+      const severity = enumValue(item.severity);
+      if (!TRIAGE_SEVERITIES.includes(severity))
+        problems.push(
+          `重大度（severity）「${shorten(text(item.severity), 20)}」は使えません`,
+        );
+      const category = enumValue(item.category);
+      if (!TRIAGE_CATEGORIES.includes(category))
+        problems.push(
+          `分類（category）「${shorten(text(item.category), 20)}」は使えません`,
+        );
+      const recommendedAction = enumValue(item.recommendedAction);
+      if (!TRIAGE_ACTIONS.includes(recommendedAction))
+        problems.push(
+          `推奨（recommendedAction）「${shorten(text(item.recommendedAction), 20)}」は使えません`,
+        );
+      const rationale =
+        typeof item.rationale === "string" ? item.rationale.trim() : "";
+      // UTF-16 units, the stricter of the two ways the server may count.
+      if (!rationale) problems.push("理由（rationale）がありません");
+      else if (rationale.length > RATIONALE_MAX)
+        problems.push(
+          `理由（rationale）が${RATIONALE_MAX}文字を超えています（${rationale.length}文字）`,
+        );
+      if (problems.length) {
+        errors.push(`${where}：${problems.join("。")}。`);
+        return;
+      }
+      if (seen.has(id)) {
+        errors.push(`${where}：同じ通報の見立てが前にもあるため、外しました。`);
+        return;
+      }
+      seen.add(id);
+      results.push({
+        reportId: id,
+        severity,
+        category,
+        recommendedAction,
+        rationale,
+      });
+    });
+    if (results.length > TRIAGE_MAX) {
+      const rest = results.splice(TRIAGE_MAX);
+      errors.push(
+        `一度に取り込めるのは${TRIAGE_MAX}件までです。${TRIAGE_MAX + 1}件目からの${rest.length}件は外しました。取り込んだ後に、あらためて頼んでください。`,
+      );
+    }
+    return { results, errors };
+  }
+
+  const TRIAGE_RESULT_REASONS = {
+    INVALID_TRIAGE: "形が正しくない",
+    NOT_FOUND: "通報が見つからない",
+    REPORT_RESOLVED: "対応済み",
+    ALREADY_TRIAGED: "すでに見立てがある",
+  };
+
+  function triageResultReason(code) {
+    if (Object.prototype.hasOwnProperty.call(TRIAGE_RESULT_REASONS, code))
+      return TRIAGE_RESULT_REASONS[code];
+    return text(code)
+      ? `取り込めなかった（${text(code)}）`
+      : "取り込めなかった";
+  }
+
+  /**
+   * Counts what POST /admin/triage/results did with the judgments sent:
+   * how many were stored, how many hid a work for now (a 「重大」 judgment),
+   * and which were refused and why. A judgment the response does not
+   * mention counts as refused.
+   */
+  function summarizeTriageResults(response, sent) {
+    const rows =
+      response && Array.isArray(response.results) ? response.results : [];
+    const byId = new Map();
+    for (const row of rows)
+      if (row && typeof row.reportId === "string" && !byId.has(row.reportId))
+        byId.set(row.reportId, row);
+    const ids = Array.isArray(sent)
+      ? sent.map((item) => item && item.reportId).filter(Boolean)
+      : Array.from(byId.keys());
+    let imported = 0;
+    let autoHidden = 0;
+    const failed = [];
+    for (const reportId of ids) {
+      const row = byId.get(reportId);
+      if (row && row.ok === true) {
+        imported++;
+        if (row.autoHidden === true) autoHidden++;
+      } else
+        failed.push({
+          reportId,
+          code: row ? text(row.code) || null : null,
+          reason: row
+            ? triageResultReason(row.code)
+            : "サーバーから結果が返らなかった",
+        });
+    }
+    return { imported, autoHidden, failed };
   }
 
   function aiModeOptions(settings) {
@@ -444,6 +736,9 @@
       "送った内容の形式が正しくありません。ページを読み込み直してください。",
     INVALID_RESET_STRIKES:
       "送った内容の形式が正しくありません。ページを読み込み直してください。",
+    INVALID_TRIAGE:
+      "見立ての形が正しくありません。Claudeの答えをそのまま貼ったか確かめてください（一度に50件まで）。",
+    ALREADY_TRIAGED: "この通報には、すでに見立てがあります。",
     NOT_FOUND:
       "対象が見つかりません。削除されたか、IDが正しくない可能性があります。",
     PAYLOAD_TOO_LARGE: "送る内容が大きすぎます。",
@@ -633,6 +928,48 @@
         request("POST", userPath(userId, "unsuspend"), {
           body: { resetStrikes: resetStrikes === true },
         }),
+      /** A new triage key for the scheduled Claude Code session; the one
+       *  before stops working. The key is in the response only this once. */
+      async createTriageToken() {
+        const data = await request("POST", "admin/triage/token", { body: {} });
+        if (typeof data.token !== "string" || !data.token.trim())
+          throw localError("INVALID_RESPONSE", 200);
+        return data;
+      },
+      revokeTriageToken: () =>
+        request("POST", "admin/triage/token/revoke", { body: {} }),
+      /** The request to paste into a Claude chat, for the reports still
+       *  waiting for a judgment. */
+      async triagePrompt({ limit = TRIAGE_PROMPT_LIMIT } = {}) {
+        if (!Number.isInteger(limit) || limit < 1 || limit > TRIAGE_MAX)
+          throw localError("INVALID_PAGE_SIZE");
+        const data = await request("GET", "admin/triage/prompt", {
+          query: { limit },
+        });
+        const count = Number(data.reportCount);
+        if (
+          !Number.isInteger(count) ||
+          count < 0 ||
+          (count > 0 && (typeof data.prompt !== "string" || !data.prompt))
+        )
+          throw localError("INVALID_RESPONSE", 200);
+        return { ...data, reportCount: count };
+      },
+      /** Judgments read by parseTriageAnswer (1 to 50). */
+      async submitTriageResults(results) {
+        if (
+          !Array.isArray(results) ||
+          !results.length ||
+          results.length > TRIAGE_MAX
+        )
+          throw localError("INVALID_TRIAGE");
+        const data = await request("POST", "admin/triage/results", {
+          body: { results },
+        });
+        if (!Array.isArray(data.results))
+          throw localError("INVALID_RESPONSE", 200);
+        return data;
+      },
     };
   }
 
@@ -693,6 +1030,13 @@
     NOTE_MAX,
     REASON_MAX,
     THUMBNAIL_HOSTS,
+    TRIAGE_MAX,
+    RATIONALE_MAX,
+    TRIAGE_PROMPT_LIMIT,
+    TRIAGE_SEVERITIES,
+    TRIAGE_CATEGORIES,
+    TRIAGE_ACTIONS,
+    TRIAGE_SOURCE_LABELS,
     STATUS_LABELS,
     DECISION_LABELS,
     PRIVACY_LABELS,
@@ -716,6 +1060,11 @@
     formatJstDay,
     tokenExpiry,
     aiTriageView,
+    triageBotView,
+    hostOf,
+    parseTriageAnswer,
+    triageResultReason,
+    summarizeTriageResults,
     aiModeOptions,
     aiModeLabel,
     aiModeSourceLabel,

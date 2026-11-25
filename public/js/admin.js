@@ -33,6 +33,23 @@
     aiSave: byId("admin-ai-save"),
     aiNote: byId("admin-ai-note"),
     rules: byId("admin-rules"),
+    botStatus: byId("admin-bot-status"),
+    botDetails: byId("admin-bot-details"),
+    botCreate: byId("admin-bot-create"),
+    botRevoke: byId("admin-bot-revoke"),
+    botMessage: byId("admin-bot-message"),
+    botToken: byId("admin-bot-token"),
+    botTokenValue: byId("admin-bot-token-value"),
+    botTokenCopy: byId("admin-bot-token-copy"),
+    botCopyStatus: byId("admin-bot-copy-status"),
+    botHost: byId("admin-bot-host"),
+    promptCopy: byId("admin-prompt-copy"),
+    promptStatus: byId("admin-prompt-status"),
+    promptBox: byId("admin-prompt-box"),
+    promptText: byId("admin-prompt-text"),
+    answer: byId("admin-answer"),
+    answerImport: byId("admin-answer-import"),
+    answerResult: byId("admin-answer-result"),
     tabs: Array.from(document.querySelectorAll('[role="tab"][data-status]')),
     order: byId("admin-order"),
     reload: byId("admin-reload"),
@@ -62,11 +79,18 @@
     "NOT_FOUND",
   ];
   const TOKEN_MARGIN_MS = 60000;
+  const TRIAGE_TOKEN_KEY = "triage-token";
+  const TRIAGE_PROMPT_KEY = "triage-prompt";
+  const TRIAGE_RESULTS_KEY = "triage-results";
 
   const state = {
     api: null,
     gis: null,
     clientId: "",
+    apiHost: "",
+    // Bumped when the triage parts are cleared: an answer that arrives
+    // later (after sign-out) is not put back on the page.
+    triageSession: 0,
     token: null,
     tokenExpiresAt: 0,
     email: "",
@@ -203,6 +227,7 @@
       if (!state.reports.size) reloadList();
     } else {
       closeDetail();
+      clearTriage();
       el.notice.hidden = true;
       selectTab(state.tab);
     }
@@ -227,6 +252,9 @@
     el.aiOptions.replaceChildren();
     el.aiCurrent.textContent = "";
     el.rules.replaceChildren();
+    clearTriage();
+    el.botStatus.textContent = "";
+    el.botDetails.replaceChildren();
     el.notice.hidden = true;
     el.app.hidden = true;
     el.app.inert = false;
@@ -275,6 +303,7 @@
       return;
     }
     state.clientId = config.clientId;
+    state.apiHost = A.hostOf(config.apiBaseUrl);
     state.api = A.createAdminApi({ baseUrl: config.apiBaseUrl, getToken });
     showSignInMessage("Googleのログインを読み込んでいます…");
     try {
@@ -341,7 +370,7 @@
     el.aiCurrent.textContent = `いまの設定：${A.aiModeLabel(s.aiMode, s)}（${A.aiModeSourceLabel(s.aiModeSource)}）`;
     el.aiSave.disabled = true;
     el.aiNote.textContent =
-      "AIは、サーバーにAPIキー（/niarim/moderation/anthropic-api-key）が設定されているときだけ動きます。" +
+      "APIキーでの判定は、サーバーにAPIキー（/niarim/moderation/anthropic-api-key）が設定されているときだけ動きます。" +
       `費用の目安は通報1件あたり約$0.01〜0.02です。判定は1日${A.text(s.aiDailyCap) || "?"}件までで、それを超えた分は判定しません。` +
       "AIの判定は参考で、決めるのは運営です。";
     const rule = (term, value) => [h("dt", null, term), h("dd", null, value)];
@@ -363,6 +392,7 @@
         `1日${A.text(s.mailDailyCap) || "?"}通まで`,
       ),
     );
+    renderTriageBot();
   }
 
   function onAiSubmit(event) {
@@ -388,6 +418,306 @@
       },
       focusAfter: () => el.aiSave,
     });
+  }
+
+  // ---- Triage with the owner's Claude subscription ---------------------------
+
+  /** A 404 without a code here means the backend has no such route. */
+  function triageErrorText(error) {
+    if (error && error.status === 404 && !error.code)
+      return "サーバーがこの操作を受け付けませんでした。バックエンドを最新にデプロイしてから、もう一度お試しください。";
+    return (error && error.message) || "操作できませんでした。";
+  }
+
+  function renderTriageBot() {
+    const bot = A.triageBotView(state.settings?.triageBot);
+    el.botStatus.textContent = `状態：${bot.label}`;
+    el.botStatus.dataset.configured = String(bot.configured);
+    el.botDetails.replaceChildren(
+      ...bot.details.map((line) => h("li", null, line)),
+    );
+    el.botCreate.textContent = bot.configured ? "鍵を作り直す" : "鍵を作る";
+    el.botRevoke.hidden = !bot.configured;
+    syncBusy();
+  }
+
+  /** The key is shown once: it leaves the page on sign-out and reload. */
+  function hideToken() {
+    el.botTokenValue.value = "";
+    el.botCopyStatus.textContent = "";
+    el.botHost.textContent = "";
+    el.botToken.hidden = true;
+  }
+
+  function showToken(token) {
+    el.botTokenValue.value = token;
+    el.botHost.textContent = state.apiHost || "（不明）";
+    el.botCopyStatus.textContent = "";
+    el.botToken.hidden = false;
+  }
+
+  /** Everything the triage parts hold (the key, report text in the prompt,
+   *  a pasted answer) goes when another session may be looking. */
+  function clearTriage() {
+    state.triageSession++;
+    hideToken();
+    el.botMessage.textContent = "";
+    el.promptStatus.textContent = "";
+    el.promptText.value = "";
+    el.promptBox.open = false;
+    el.promptBox.hidden = true;
+    el.answer.value = "";
+    el.answerResult.replaceChildren();
+  }
+
+  /** Copies with the Clipboard API. False when the browser refuses: the
+   *  caller then selects the text so it can be copied by hand. */
+  async function copyText(value) {
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return false;
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function selectText(field) {
+    field.focus();
+    field.select();
+  }
+
+  /** A button disabled while it worked loses the focus: give it back. */
+  function refocus(button) {
+    const active = document.activeElement;
+    if (!active || active === document.body || active === button)
+      button.focus();
+  }
+
+  /** Runs one triage request outside the confirmation dialog (null when
+   *  there is no sign-in: the sign-in is asked for again). */
+  async function runTriage(key, run) {
+    if (!getToken()) {
+      requireSignIn(A.ERROR_MESSAGES.UNAUTHORIZED);
+      return null;
+    }
+    setBusy([key], true);
+    try {
+      return { value: await run() };
+    } catch (error) {
+      return { error };
+    } finally {
+      setBusy([key], false);
+    }
+  }
+
+  function applyTokenResult(result) {
+    const bot = result.settings?.triageBot || {
+      configured: true,
+      createdAt: result.createdAt || new Date().toISOString(),
+      createdBy: state.email,
+      lastUsedAt: null,
+    };
+    state.settings = {
+      ...state.settings,
+      ...(result.settings || {}),
+      triageBot: bot,
+    };
+    renderTriageBot();
+    showToken(result.token);
+  }
+
+  async function onBotCreate() {
+    const configured = A.triageBotView(state.settings?.triageBot).configured;
+    const session = state.triageSession;
+    if (configured) {
+      confirmAction({
+        title: "下見の鍵を作り直す",
+        text: [
+          "新しい鍵を作ります。今の鍵は使えなくなります。",
+          "自動の下見を続けるときは、Claude Codeの環境に保存した鍵も、新しい鍵に替えてください。",
+        ],
+        submitLabel: "作り直す",
+        keys: [TRIAGE_TOKEN_KEY],
+        run: () => state.api.createTriageToken(),
+        done(result) {
+          if (session !== state.triageSession) return;
+          applyTokenResult(result);
+          el.botMessage.textContent = "";
+          selectText(el.botTokenValue);
+          notify(
+            "下見の鍵を作り直しました。今の鍵は使えません。新しい鍵をコピーして保存してください。",
+          );
+        },
+        focusAfter: () => el.botTokenValue,
+      });
+      return;
+    }
+    if (state.busy.has(TRIAGE_TOKEN_KEY)) return;
+    el.botMessage.textContent = "鍵を作っています…";
+    const outcome = await runTriage(TRIAGE_TOKEN_KEY, () =>
+      state.api.createTriageToken(),
+    );
+    if (session !== state.triageSession) return;
+    if (!outcome) {
+      el.botMessage.textContent = "";
+      return;
+    }
+    if (outcome.error) {
+      el.botMessage.textContent = triageErrorText(outcome.error);
+      if (!handleAuthError(outcome.error)) refocus(el.botCreate);
+      return;
+    }
+    applyTokenResult(outcome.value);
+    el.botMessage.textContent =
+      "下見の鍵を作りました。下の鍵をコピーして保存してください。";
+    selectText(el.botTokenValue);
+  }
+
+  function onBotRevoke() {
+    confirmAction({
+      title: "下見の鍵を無効にする",
+      text: [
+        "今の鍵を使えなくします。この鍵での自動の下見は止まります。",
+        "また使うときは、新しい鍵を作ってください。",
+      ],
+      submitLabel: "無効にする",
+      keys: [TRIAGE_TOKEN_KEY],
+      run: () => state.api.revokeTriageToken(),
+      done(result) {
+        state.settings = {
+          ...state.settings,
+          ...(result.settings || {}),
+          triageBot: result.settings?.triageBot || { configured: false },
+        };
+        hideToken();
+        el.botMessage.textContent = "";
+        renderTriageBot();
+        notify("下見の鍵を無効にしました。");
+      },
+      focusAfter: () => el.botCreate,
+    });
+  }
+
+  async function onBotTokenCopy() {
+    const token = el.botTokenValue.value;
+    if (!token) return;
+    if (await copyText(token)) {
+      el.botCopyStatus.textContent =
+        "コピーしました。Claude Codeの環境の『ネットワークの秘密』に保存してください。";
+      return;
+    }
+    selectText(el.botTokenValue);
+    el.botCopyStatus.textContent =
+      "自動でコピーできませんでした。選んだ鍵を Ctrl+C（Macは⌘+C）でコピーしてください。";
+  }
+
+  async function onPromptCopy() {
+    if (state.busy.has(TRIAGE_PROMPT_KEY)) return;
+    const session = state.triageSession;
+    el.promptStatus.textContent = "頼む文を作っています…";
+    const outcome = await runTriage(TRIAGE_PROMPT_KEY, () =>
+      state.api.triagePrompt({ limit: A.TRIAGE_PROMPT_LIMIT }),
+    );
+    if (session !== state.triageSession) return;
+    if (!outcome) {
+      el.promptStatus.textContent = "";
+      return;
+    }
+    if (outcome.error) {
+      el.promptStatus.textContent = triageErrorText(outcome.error);
+      if (!handleAuthError(outcome.error)) refocus(el.promptCopy);
+      return;
+    }
+    const { prompt, reportCount } = outcome.value;
+    if (!reportCount) {
+      el.promptText.value = "";
+      el.promptBox.open = false;
+      el.promptBox.hidden = true;
+      el.promptStatus.textContent = "見立てを待っている通報はありません。";
+      refocus(el.promptCopy);
+      return;
+    }
+    el.promptText.value = prompt;
+    el.promptBox.hidden = false;
+    if (await copyText(prompt)) {
+      el.promptStatus.textContent = `${reportCount}件の通報の文をコピーしました。Claudeのチャットに貼ってください。`;
+      refocus(el.promptCopy);
+      return;
+    }
+    el.promptBox.open = true;
+    selectText(el.promptText);
+    el.promptStatus.textContent = `${reportCount}件の通報の文を作りました。自動でコピーできなかったので、下の文を選んだまま Ctrl+C（Macは⌘+C）でコピーし、Claudeのチャットに貼ってください。`;
+  }
+
+  function renderImportResult(parsed, summary, error) {
+    const parts = [];
+    if (error) parts.push(h("p", null, triageErrorText(error)));
+    if (summary) {
+      parts.push(
+        h(
+          "p",
+          null,
+          `取り込んだ見立て：${summary.imported}件` +
+            `（「重大」で作品を一時非表示にしたもの：${summary.autoHidden}件）`,
+        ),
+      );
+      if (summary.failed.length)
+        parts.push(
+          h("p", null, `取り込めなかった見立て：${summary.failed.length}件`),
+          h(
+            "ul",
+            { "aria-label": "取り込めなかった見立て" },
+            summary.failed.map((item) =>
+              h("li", { dir: "auto" }, `${item.reportId}：${item.reason}`),
+            ),
+          ),
+        );
+    }
+    const nothing = !summary && !error;
+    if (nothing)
+      parts.push(h("p", null, "取り込める見立てがありませんでした。"));
+    if (parsed.errors.length) {
+      const title = nothing ? "理由" : "送る前に外したもの";
+      parts.push(
+        nothing ? null : h("p", null, `${title}：`),
+        h(
+          "ul",
+          { "aria-label": title },
+          parsed.errors.map((line) => h("li", { dir: "auto" }, line)),
+        ),
+      );
+    }
+    el.answerResult.replaceChildren(...parts.filter(Boolean));
+  }
+
+  async function onAnswerImport() {
+    if (state.busy.has(TRIAGE_RESULTS_KEY)) return;
+    const parsed = A.parseTriageAnswer(el.answer.value);
+    if (!parsed.results.length) {
+      renderImportResult(parsed, null, null);
+      return;
+    }
+    const session = state.triageSession;
+    el.answerResult.replaceChildren(h("p", null, "取り込んでいます…"));
+    const outcome = await runTriage(TRIAGE_RESULTS_KEY, () =>
+      state.api.submitTriageResults(parsed.results),
+    );
+    if (session !== state.triageSession) return;
+    if (!outcome) {
+      el.answerResult.replaceChildren();
+      return;
+    }
+    if (outcome.error) {
+      renderImportResult(parsed, null, outcome.error);
+      if (!handleAuthError(outcome.error)) refocus(el.answerImport);
+      return;
+    }
+    const summary = A.summarizeTriageResults(outcome.value, parsed.results);
+    renderImportResult(parsed, summary, null);
+    if (!summary.failed.length && !parsed.errors.length) el.answer.value = "";
+    refocus(el.answerImport);
+    reloadList();
   }
 
   // ---- Queue ---------------------------------------------------------------
@@ -835,12 +1165,8 @@
         triage.rationale
           ? h("p", { class: "admin-rationale", dir: "auto" }, triage.rationale)
           : null,
-        triage.triagedAt
-          ? h(
-              "p",
-              { class: "admin-small admin-muted" },
-              `判定：${triage.triagedAt}${triage.model ? `・${triage.model}` : ""}`,
-            )
+        triage.byline
+          ? h("p", { class: "admin-small admin-muted" }, triage.byline)
           : null,
       ),
       renderWork(report.work, detailed),
@@ -888,7 +1214,7 @@
             h(
               "p",
               { class: "admin-small" },
-              `AI：${A.aiTriageView(item.aiTriage).summary}`,
+              A.aiTriageView(item.aiTriage).line,
             ),
             item.reviewedAt || item.reviewedBy
               ? h(
@@ -1022,6 +1348,10 @@
       state.busy.has("settings") ||
       !selectedAiMode() ||
       selectedAiMode() === state.settings?.aiMode;
+    el.botCreate.disabled = state.busy.has(TRIAGE_TOKEN_KEY);
+    el.botRevoke.disabled = state.busy.has(TRIAGE_TOKEN_KEY);
+    el.promptCopy.disabled = state.busy.has(TRIAGE_PROMPT_KEY);
+    el.answerImport.disabled = state.busy.has(TRIAGE_RESULTS_KEY);
   }
 
   function setBusy(keys, on) {
@@ -1525,6 +1855,10 @@
     state.api
       ?.me()
       .then((me) => {
+        if (!state.busy.has(TRIAGE_TOKEN_KEY)) {
+          hideToken();
+          el.botMessage.textContent = "";
+        }
         if (me.settings && !state.busy.has("settings")) {
           state.settings = me.settings;
           renderSettings();
@@ -1533,6 +1867,11 @@
       .catch(handleAuthError);
   });
   el.more.addEventListener("click", loadMore);
+  el.botCreate.addEventListener("click", onBotCreate);
+  el.botRevoke.addEventListener("click", onBotRevoke);
+  el.botTokenCopy.addEventListener("click", onBotTokenCopy);
+  el.promptCopy.addEventListener("click", onPromptCopy);
+  el.answerImport.addEventListener("click", onAnswerImport);
   el.queue.addEventListener("click", onActionClick);
   el.detailContent.addEventListener("click", onActionClick);
   el.confirmForm.addEventListener("submit", onConfirmSubmit);
