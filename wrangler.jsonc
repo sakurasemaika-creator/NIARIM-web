@@ -26,10 +26,10 @@
     "CONTACT_SITE_ORIGIN": "https://niarim.miranima-studio.com",
     "CONTACT_TO_EMAIL": "support@miranima-studio.com",
     "CONTACT_FROM_EMAIL": "NIARIM <support@miranima-studio.com>",
+    // Public OAuth Web client ID shared with the backend's GOOGLE_CLIENT_ID,
+    // for the Google sign-in on /account-deletion/ and /admin/.
+    "ACCOUNT_DELETION_GOOGLE_CLIENT_ID": "673224289740-2dq86sb7504i055sng98fmdsp0qaimbo.apps.googleusercontent.com",
   },
-  // To enable the deletion page, set ACCOUNT_DELETION_GOOGLE_CLIENT_ID to the
-  // same public OAuth Web client ID as the backend's GOOGLE_CLIENT_ID.
-  // Register each enabled HTTPS site origin with that Google OAuth client.
   "durable_objects": {
     "bindings": [
       { "name": "CONTACT_RATE_LIMITER", "class_name": "ContactRateLimiter" },

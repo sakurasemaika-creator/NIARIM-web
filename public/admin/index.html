@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>通報の管理 | NIARIM</title>
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/pages/admin.css" />
+    <script defer src="/js/admin-core.js"></script>
+    <script defer src="/js/admin.js"></script>
+  </head>
+  <body>
+    <header class="admin-bar">
+      <div class="admin-bar-inner">
+        <p class="admin-brand">
+          <img src="/assets/icons/favicon.svg" width="28" height="28" alt="" />
+          <span>NIARIM 通報の管理</span>
+        </p>
+        <div class="admin-account" id="admin-account" hidden>
+          <p class="admin-account-email">
+            <span class="admin-muted">ログイン中：</span
+            ><span id="admin-email" dir="auto"></span>
+          </p>
+          <button type="button" class="admin-button" id="admin-sign-out">
+            ログアウト
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="admin-main">
+      <h1 class="admin-title">作品広場の通報の管理</h1>
+
+      <section class="admin-sheet" id="admin-setup" hidden>
+        <h2>管理ページの設定がまだ済んでいません</h2>
+        <p id="admin-setup-detail"></p>
+        <ol class="admin-steps">
+          <li>
+            Googleのログインに使うOAuthのWebクライアントIDを、<code
+              >wrangler.jsonc</code
+            >
+            の <code>vars</code> の
+            <code>ACCOUNT_DELETION_GOOGLE_CLIENT_ID</code>
+            に入れてデプロイします（バックエンドの
+            <code>GOOGLE_CLIENT_ID</code> と同じ公開の値）。
+          </li>
+          <li>
+            同じ <code>vars</code> の
+            <code>NIARIM_PUBLIC_API_BASE_URL</code>
+            に、バックエンドのLambda Function
+            URL（https）が入っていることを確かめます。
+          </li>
+          <li>
+            Google Cloud
+            ConsoleでそのOAuthクライアントの「承認済みのJavaScript生成元」に
+            <code>https://niarim.miranima-studio.com</code> を足します。
+          </li>
+        </ol>
+        <button type="button" class="admin-button" id="admin-setup-retry">
+          読み込み直す
+        </button>
+      </section>
+
+      <section class="admin-sheet" id="admin-sign-in" hidden>
+        <h2>Googleアカウントでログイン</h2>
+        <p>
+          管理に登録したGoogleアカウントでログインしてください。ログインの情報はこのタブを開いている間だけ使い、ブラウザーには保存しません。
+        </p>
+        <div id="admin-google" class="admin-google"></div>
+        <p id="admin-sign-in-status" class="admin-message" role="status"></p>
+        <button
+          type="button"
+          class="admin-button"
+          id="admin-sign-in-retry"
+          hidden
+        >
+          読み込み直す
+        </button>
+      </section>
+
+      <noscript>
+        <p class="admin-sheet">
+          管理ページを使うには、ブラウザーでJavaScriptを有効にしてください。
+        </p>
+      </noscript>
+
+      <div id="admin-app" hidden>
+        <p
+          id="admin-notice"
+          class="admin-notice"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></p>
+
+        <section
+          class="admin-sheet admin-settings"
+          id="admin-settings"
+          aria-labelledby="admin-settings-title"
+        >
+          <h2 id="admin-settings-title">AIの判定</h2>
+          <form id="admin-ai-form" class="admin-ai-form">
+            <fieldset>
+              <legend>通報をAIで先に判定するか</legend>
+              <div id="admin-ai-options" class="admin-ai-options"></div>
+            </fieldset>
+            <p class="admin-ai-current" id="admin-ai-current"></p>
+            <button
+              type="submit"
+              class="admin-button"
+              id="admin-ai-save"
+              disabled
+            >
+              この設定に変える
+            </button>
+          </form>
+          <p class="admin-small admin-muted" id="admin-ai-note"></p>
+          <dl class="admin-rules" id="admin-rules"></dl>
+        </section>
+
+        <section
+          class="admin-queue-section"
+          aria-labelledby="admin-queue-title"
+        >
+          <h2 id="admin-queue-title" class="admin-visually-hidden">
+            通報の一覧
+          </h2>
+          <div class="admin-tabs" role="tablist" aria-label="通報の状態">
+            <button
+              type="button"
+              role="tab"
+              id="admin-tab-pending"
+              data-status="pending"
+              aria-controls="admin-queue"
+              aria-selected="true"
+            >
+              未対応
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="admin-tab-reviewing"
+              data-status="reviewing"
+              aria-controls="admin-queue"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              確認中
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="admin-tab-resolved"
+              data-status="resolved"
+              aria-controls="admin-queue"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              対応済み
+            </button>
+          </div>
+          <div class="admin-toolbar">
+            <label class="admin-order">
+              <span>並び順</span>
+              <select id="admin-order">
+                <option value="oldest">古い順</option>
+                <option value="newest">新しい順</option>
+              </select>
+            </label>
+            <button type="button" class="admin-button" id="admin-reload">
+              読み込み直す
+            </button>
+            <p class="admin-small admin-muted" id="admin-queue-summary"></p>
+          </div>
+          <p class="admin-small admin-muted admin-target-note">
+            対応の目安は受付から10営業日です。土日を除いて日本時間で数えます（祝日は数に含めています）。8営業日以上待っている通報には印が付きます。
+          </p>
+          <p
+            id="admin-queue-status"
+            class="admin-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <div
+            id="admin-queue"
+            class="admin-queue"
+            role="tabpanel"
+            aria-labelledby="admin-tab-pending"
+            tabindex="-1"
+          ></div>
+          <button
+            type="button"
+            class="admin-button admin-more"
+            id="admin-more"
+            hidden
+          >
+            もっと読み込む
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <dialog
+      id="admin-confirm"
+      class="admin-dialog"
+      aria-labelledby="admin-confirm-title"
+    >
+      <form id="admin-confirm-form" class="admin-dialog-body" novalidate>
+        <h2 id="admin-confirm-title"></h2>
+        <div id="admin-confirm-text"></div>
+        <div id="admin-confirm-fields" class="admin-fields"></div>
+        <p id="admin-confirm-error" class="admin-error" role="alert"></p>
+        <div class="admin-dialog-actions">
+          <button type="button" class="admin-button" id="admin-confirm-cancel">
+            キャンセル
+          </button>
+          <button
+            type="submit"
+            class="admin-button admin-button-primary"
+            id="admin-confirm-submit"
+          ></button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog
+      id="admin-detail"
+      class="admin-dialog admin-dialog-wide"
+      aria-labelledby="admin-detail-title"
+    >
+      <div class="admin-dialog-body">
+        <div class="admin-dialog-head">
+          <h2 id="admin-detail-title">通報の詳細</h2>
+          <button type="button" class="admin-button" id="admin-detail-close">
+            閉じる
+          </button>
+        </div>
+        <p id="admin-detail-status" class="admin-message" role="status"></p>
+        <div id="admin-detail-content"></div>
+      </div>
+    </dialog>
+  </body>
+</html>

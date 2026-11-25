@@ -1,0 +1,816 @@
+/* NIARIM 通報の管理（/admin/）。所有者だけが使う、公開しないページ。
+
+   site.css を読まない単独のファイル（404・アカウント削除・フォントの
+   ライセンスと同じ扱い）。色・角丸・線は site.css の「Paper, ink and red
+   pencil」のトークンと同じ値を使う：紙色の地、白い面は1種類、細い線で
+   区切り影は付けない（浮くダイアログだけ影）、差し色は主な操作・選んで
+   いる状態・小さな印だけ。
+
+   文字は端末の日本語の書体で描く。サイトの白光明朝・くらむぼんは公開
+   ページに出る字だけを収めたサブセットで、通報の理由・作品名のような
+   利用者の文には無い字が多く、1つの文の中で書体が混ざるため。 */
+
+:root {
+  --paper: #f7f4f3;
+  --sheet: #ffffff;
+  --sheet-soft: #fbf9f8;
+  --ink: #28242c;
+  --ink-2: #5f5864;
+  --rule: rgba(40, 36, 44, 0.14);
+  --rule-strong: rgba(40, 36, 44, 0.32);
+  --pencil: #ff5c7a;
+  --pencil-dark: #e8425f;
+  --pencil-ink: #b8264a;
+  --pencil-tint: #fff0f3;
+  --dark-island: #17161c;
+  --radius-control: 8px;
+  --radius-sheet: 14px;
+  --shadow-float:
+    0 1px 2px rgba(40, 36, 44, 0.14), 0 28px 56px -24px rgba(40, 36, 44, 0.42);
+  --admin-font:
+    system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", "Noto Sans CJK JP", "Yu Gothic UI", "Yu Gothic", Meiryo,
+    sans-serif;
+  --gutter: 16px;
+  color-scheme: light;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--admin-font);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+ul,
+dl,
+dd,
+fieldset {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  background: var(--sheet-soft);
+  border: 1px solid var(--rule);
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: var(--pencil-ink);
+  text-underline-offset: 0.2em;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--pencil-ink);
+  outline-offset: 2px;
+}
+
+.admin-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.admin-muted {
+  color: var(--ink-2);
+}
+
+.admin-small {
+  font-size: 0.875rem;
+}
+
+.admin-nowrap {
+  white-space: nowrap;
+}
+
+/* ---- Header ---- */
+.admin-bar {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.admin-bar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.admin-account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.admin-account-email {
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+/* ---- Layout ---- */
+.admin-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px var(--gutter) 64px;
+  display: grid;
+  gap: 24px;
+}
+
+.admin-title {
+  font-size: clamp(1.4rem, 1.2vw + 1.1rem, 1.9rem);
+}
+
+#admin-app {
+  display: grid;
+  gap: 24px;
+}
+
+#admin-app.is-locked {
+  opacity: 0.55;
+}
+
+.admin-sheet {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .admin-sheet {
+    padding: 24px 28px;
+  }
+}
+
+.admin-sheet h2 {
+  font-size: 1.15rem;
+}
+
+.admin-steps {
+  padding-left: 1.4em;
+  display: grid;
+  gap: 6px;
+}
+
+.admin-google {
+  min-height: 44px;
+}
+
+.admin-message:empty,
+.admin-error:empty {
+  display: none;
+}
+
+.admin-message {
+  color: var(--ink-2);
+}
+
+.admin-error {
+  color: var(--pencil-ink);
+  font-weight: 700;
+}
+
+/* ---- Buttons ---- */
+.admin-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease-out,
+    background-color 180ms ease-out;
+}
+
+.admin-button:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.admin-button:disabled {
+  cursor: not-allowed;
+  color: var(--ink-2);
+  background: var(--sheet-soft);
+  border-color: var(--rule);
+}
+
+/* The one primary action on screen: the confirmation of a decision. White
+   on the accent's text shade (6.2:1); the light accent itself is 2.97:1. */
+.admin-button-primary {
+  background: var(--pencil-ink);
+  border-color: var(--pencil-ink);
+  color: #ffffff;
+}
+
+.admin-button-primary:hover:not(:disabled) {
+  border-color: var(--dark-island);
+  box-shadow: 0 0 0 1px var(--dark-island);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-button {
+    transition: none;
+  }
+}
+
+/* ---- Notice ---- */
+.admin-notice {
+  position: sticky;
+  top: 8px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sheet);
+  background: var(--dark-island);
+  color: #ffffff;
+  box-shadow: var(--shadow-float);
+}
+
+.admin-notice .admin-button {
+  min-height: 36px;
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-notice .admin-button:hover {
+  border-color: #ffffff;
+}
+
+/* ---- Settings ---- */
+.admin-ai-form {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-ai-form fieldset {
+  border: 0;
+  padding: 0;
+}
+
+.admin-ai-form legend {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.admin-ai-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+  cursor: pointer;
+}
+
+.admin-choice input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--pencil-ink);
+}
+
+.admin-choice:has(input:checked) {
+  border-color: var(--pencil-ink);
+  box-shadow: inset 0 0 0 1px var(--pencil-ink);
+}
+
+.admin-ai-current {
+  font-weight: 600;
+}
+
+.admin-ai-form .admin-button {
+  justify-self: start;
+}
+
+.admin-rules {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  font-size: 0.875rem;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.admin-rules dt {
+  color: var(--ink-2);
+}
+
+@media (max-width: 480px) {
+  .admin-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-rules dd {
+    margin-bottom: 6px;
+  }
+}
+
+/* ---- Queue ---- */
+.admin-queue-section {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+}
+
+.admin-tabs [role="tab"] {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-tabs [role="tab"][aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--pencil);
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.admin-order {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-order select {
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+}
+
+.admin-queue {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-queue:focus {
+  outline: none;
+}
+
+.admin-more {
+  justify-self: center;
+}
+
+/* ---- Cards ---- */
+.admin-card {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 720px) {
+  .admin-card {
+    padding: 20px 24px;
+  }
+}
+
+.admin-card:focus-visible {
+  outline: 3px solid var(--pencil-ink);
+  outline-offset: 2px;
+}
+
+/* Waiting 8 business days or more: a red-pencil rule and a label. */
+.admin-card[data-waiting="warn"],
+.admin-card[data-waiting="overdue"] {
+  border-left: 4px solid var(--pencil);
+}
+
+.admin-card[data-stale="true"] {
+  opacity: 0.6;
+}
+
+.admin-card[aria-busy="true"] {
+  cursor: progress;
+}
+
+.admin-card-head {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-card-title {
+  font-size: 1.05rem;
+}
+
+.admin-meta {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.admin-card[data-waiting="warn"] .admin-waiting,
+.admin-card[data-waiting="overdue"] .admin-waiting {
+  color: var(--pencil-ink);
+  font-weight: 700;
+}
+
+.admin-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--sheet);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.admin-badge[data-kind="warn"] {
+  border-color: var(--pencil-ink);
+  background: var(--pencil-tint);
+  color: var(--pencil-ink);
+}
+
+.admin-badge[data-kind="hidden"] {
+  border-color: var(--ink);
+}
+
+.admin-badge[data-kind="pending"] {
+  border-color: var(--ink);
+}
+
+.admin-badge[data-kind="resolved"],
+.admin-badge[data-kind="ok"] {
+  color: var(--ink-2);
+}
+
+.admin-badge[data-kind="current"] {
+  border-color: var(--pencil);
+}
+
+.admin-block {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-block h4 {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  font-weight: 700;
+}
+
+.admin-reason,
+.admin-description,
+.admin-rationale,
+.admin-note {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.admin-reason {
+  padding: 10px 12px;
+  border-radius: var(--radius-control);
+  background: var(--sheet-soft);
+  border: 1px solid var(--rule);
+}
+
+.admin-counts {
+  font-size: 0.875rem;
+}
+
+.admin-ai {
+  padding: 10px 12px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--rule);
+}
+
+.admin-ai[data-severity="critical"],
+.admin-ai[data-severity="high"] {
+  border-color: var(--pencil-ink);
+}
+
+.admin-ai[data-ai="refused"],
+.admin-ai[data-ai="failed"] {
+  border-style: dashed;
+  border-color: var(--rule-strong);
+}
+
+.admin-work-body {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .admin-work-body {
+    grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.admin-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--rule);
+  background: var(--sheet-soft);
+}
+
+.admin-work-text {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-work-title,
+.admin-author-name {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.admin-tags {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  font-size: 0.8125rem;
+}
+
+.admin-tags li {
+  padding: 0 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  overflow-wrap: anywhere;
+}
+
+.admin-tags li::before {
+  content: "#";
+  color: var(--ink-2);
+}
+
+.admin-link {
+  font-weight: 600;
+}
+
+.admin-suspension {
+  display: grid;
+  gap: 2px;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 480px) {
+  .admin-actions .admin-button {
+    flex: 1 1 calc(50% - 4px);
+  }
+}
+
+/* ---- Dialogs (they float, so they cast the one shadow) ---- */
+.admin-dialog {
+  width: min(560px, calc(100vw - 2 * var(--gutter)));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  overflow: auto;
+}
+
+.admin-dialog-wide {
+  width: min(960px, calc(100vw - 2 * var(--gutter)));
+  background: var(--paper);
+}
+
+.admin-dialog::backdrop {
+  background: rgba(23, 22, 28, 0.45);
+}
+
+.admin-dialog-body {
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+}
+
+.admin-dialog-body h2 {
+  font-size: 1.15rem;
+}
+
+/* The detail is long: its title and 閉じる stay in view while it scrolls. */
+.admin-dialog-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: -20px -20px 0;
+  padding: 12px 20px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-fields {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-fields:empty {
+  display: none;
+}
+
+.admin-field {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-field label {
+  font-weight: 600;
+}
+
+.admin-field textarea,
+.admin-field input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+}
+
+.admin-field textarea {
+  resize: vertical;
+  min-height: 5.5em;
+}
+
+.admin-field-check label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.admin-field-check input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--pencil-ink);
+}
+
+.admin-related {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-related h3 {
+  font-size: 1rem;
+}
+
+.admin-related-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.admin-related-item {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  padding: 12px;
+  display: grid;
+  gap: 4px;
+}

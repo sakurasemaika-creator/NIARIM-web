@@ -20,6 +20,11 @@ import {
 } from "./seo.js";
 import { handleContact } from "./contact.js";
 import { handleAccountDeletion } from "./account-deletion.js";
+import {
+  handleAdminConfig,
+  isAdminPath,
+  withAdminPageHeaders,
+} from "./admin.js";
 import { handleCommunityFeed } from "./community-feed.js";
 import { jsonResponse } from "./utils.js";
 import { canonicalRedirect } from "./canonical-host.js";
@@ -556,6 +561,10 @@ export default {
         );
       }
 
+      if (url.pathname === "/api/admin/config") {
+        return withSecurityHeaders(handleAdminConfig(request, env));
+      }
+
       if (url.pathname.startsWith("/api/")) {
         return withSecurityHeaders(jsonResponse(404, { error: "not_found" }));
       }
@@ -591,10 +600,14 @@ export default {
       }
       const assetResponse = await env.ASSETS.fetch(assetRequest);
       const seoResponse = rewriteSeoHtml(assetResponse, request, env, metadata);
-      return withSecurityHeaders(
+      const secured = withSecurityHeaders(
         seoResponse,
         /^\/account-deletion\/(?:index\.html)?$/.test(url.pathname),
       );
+      // The moderation page (owner only): its own CSP, never indexed.
+      return isAdminPath(url.pathname)
+        ? withAdminPageHeaders(secured, env)
+        : secured;
     } catch (err) {
       console.error("Unhandled error", err);
       return withSecurityHeaders(

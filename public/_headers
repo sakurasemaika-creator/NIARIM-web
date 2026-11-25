@@ -14,6 +14,11 @@
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; upgrade-insecure-requests
 
+# 通報の管理ページ（所有者だけが使う）は検索に出さない。HTMLはWorkerを
+# 通るので、ページ用のCSP・X-Robots-Tagは src/admin.js でも付ける。
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+
 # Web掲載用アプリ実キャプチャは同名ファイルを最新Appから継続更新する。
 # 一般assetsの30日キャッシュを適用すると、広告モックや旧UIを長期間表示し続けるため
 # 必ず再検証する。

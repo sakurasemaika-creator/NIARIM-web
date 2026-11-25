@@ -12,7 +12,11 @@ const pages = [
     .filter((x) => x.isDirectory())
     .map((x) => x.name + "/index.html"),
 ];
+// The owner-only moderation page (/admin/) is not a public page: it has no
+// site header, links only its own stylesheet and is not part of the art
+// direction (tests/admin-*.mjs check it).
 const pageFiles = pages.filter((path) => {
+  if (path === "admin/index.html") return false;
   try {
     readFileSync(fsRoot(path));
     return true;

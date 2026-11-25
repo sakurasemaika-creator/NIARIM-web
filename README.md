@@ -217,6 +217,36 @@ Cloudflare上でメールを送信する方法を検討した結果、以下の�
 
 外部ライブラリを新たに追加する場合は、「なぜ必要か／何が改善されるか／サイズ／ライセンス」を本セクションに追記してください。
 
+## 作品広場の通報の管理ページ（`/admin/`）
+
+所有者だけが使う、作品広場への通報を確認・対応するページです。日本語だけで、サイトのどこからもリンクしません。`<meta name="robots" content="noindex, nofollow">` と `X-Robots-Tag: noindex, nofollow`（`src/admin.js`・`public/_headers`）を付け、サイトマップ・SEO・7言語の監査のページ一覧にも入れていません。
+
+- **ファイル**：`public/admin/index.html`、`public/js/admin-core.js`（管理APIの呼び出し・エラーの日本語化・営業日の数え方・URLの確認。画面を持たない）、`public/js/admin.js`（画面）、`public/css/pages/admin.css`（site.cssを読まない単独のファイル。色・角丸・線はサイトのトークンと同じ値）、`src/admin.js`（Worker側）。
+- **ログイン**：ページは `GET /api/admin/config` から、アカウント削除のページと同じ `ACCOUNT_DELETION_GOOGLE_CLIENT_ID`（バックエンドの `GOOGLE_CLIENT_ID` と同じ公開のWebクライアントID）と、`NIARIM_PUBLIC_API_BASE_URL`（Lambda Function URL）を受け取り、Google Identity Servicesでログインします。IDトークンはそのタブのメモリーにだけ置き（localStorage・Cookieに書かない）、期限が切れたとき・401が返ったときはもう一度ログインしてもらいます。ログアウトすると画面の通報も消します。
+- **管理API**：ブラウザーがLambdaの `/admin/...` を `Authorization: Bearer <IDトークン>` で直接呼びます（Workerはトークンを中継しません）。バックエンドは `/admin/` のパスだけ、Originが `https://niarim.miranima-studio.com` のときにCORSを許すので、**本番のドメインで開いたときだけ**つながります。仕様はアプリのリポジトリの `backend/README.md`「作品広場の通報対応」。
+- **CSP**：`/admin/` だけ、GIS（`accounts.google.com/gsi/`）、Lambdaのオリジンへの通信、YouTubeのサムネイル（`i.ytimg.com`・`img.youtube.com`）を許すCSPに差し替えます（`src/admin.js`）。ほかのページのCSPは変えていません。
+- **安全のための決まり**：通報・作品・アカウントの文字はすべて `textContent` で出し（`innerHTML` を使わない）、リンク・画像はhttp(s)だけ、サムネイルはYouTubeの画像のホストだけ、YouTubeへのリンクは新しいタブ（`rel="noopener noreferrer"`）で開きます。
+
+### 所有者が最初に1回だけすること
+
+1. AWSのSystems Manager（東京リージョン）のパラメーターストアに、SecureStringの `/niarim/moderation/admin-emails` を作り、管理に使うGoogleアカウントのメールアドレスを入れる（複数はカンマ区切り）。無い間は、ページに「管理画面はまだ使えるように設定されていません」と出ます。通報メール（`/niarim/moderation/resend-api-key`）・AIの判定（`/niarim/moderation/anthropic-api-key`）のキーも同じ所に作ります（手順はアプリのリポジトリの `backend/README.md`）。
+2. Google Cloud Consoleで、そのWebクライアント（`GOOGLE_CLIENT_ID`）の「承認済みのJavaScript生成元」に `https://niarim.miranima-studio.com` を足す。
+3. `wrangler.jsonc` の `vars` の `ACCOUNT_DELETION_GOOGLE_CLIENT_ID` には、公開のWebクライアントIDを入れてあります。クライアントを作り直したときは、ここを新しいIDにしてデプロイし直します（空にするとページに設定の案内が出ます）。
+4. バックエンドの管理API（`/admin/...`・`/admin/settings`）は、アプリのリポジトリの Backend CI を手動で実行してデプロイしたときに本番に入ります。
+
+### 対応の流れ（目安は受付から10営業日）
+
+- 通報が届くと、サポートの受信箱（お問い合わせフォームの送り先と同じ）に件名 `[NIARIM通報]` のメールが届き、本文にこのページのURLがあります。
+- 「未対応」のタブは古い順に並び、各通報に受付からの営業日（日本時間の月〜金。祝日は数に含めています）と、10営業日目の期限の目安を出します。8営業日以上待っている通報には印が付きます。
+- 調べ始めたら「確認中にする」。決めたら「却下（問題なし）」か「違反として非表示」（投稿者の違反を1回数え、3回で投稿を自動で停止）。同じ作品・アカウントへの未対応の通報はまとめて対応済みになります。アカウントへの通報で非表示にするときは、作品のID（YouTubeの動画ID）か動画のURLを入れます。
+- 異議（お問い合わせ）を認めたときは「作品を再表示」（「違反の記録も取り消す」）や「停止を解除」（「違反の記録もリセット」）を使います。手動で止めるときは「投稿を停止」（理由は必須）。
+- ページの上の「AIの判定」で、AIの判定をオフ・常に判定する・通報が多いときだけ、から選べます（サーバーにAPIキーがあるときだけ動き、1件あたり約$0.01〜0.02）。
+
+### テスト
+
+- `node --test tests/admin-core.test.mjs tests/admin-worker.test.mjs`：APIの呼び出し（認証のヘッダー・エラーの日本語化・カーソルでの続きの読み込み）、日本時間の営業日、文字とURLの扱い、Workerの設定の返し方とCSP。
+- `node tests/admin-browser.mjs`：GISと管理APIを差し替えて、ログイン→AIの判定の切り替え→一覧→非表示→却下→確認中→投稿の停止と解除→再表示→詳細→ログインの期限切れ→ログアウトを通します（通報の文に入れた `<script>`・`<img onerror>` が文字のまま出ることも）。`ADMIN_BASE_URL=http://127.0.0.1:8790`（`wrangler dev`）を付けるとWorkerのCSPの下で動かし、`ADMIN_SHOTS=artifacts/admin` を付けると画面を撮ります。
+
 ## 所有者の作業として残っている項目
 
 - Googleの公式のGoogle Playのバッジの画像（7言語、手を加えずに）を `public/assets/badges/google-play/{ja,en,fr,es,ko,zh-Hans,zh-Hant}.png` に置く。置くまでは、ストアへのリンクは文字のボタンで出る（`public/js/store-release-link.js`）。
