@@ -124,12 +124,8 @@
             </button>
             <ul class="lang-menu" data-lang-menu></ul>
           </div>
-          <a
-            class="nav-release"
-            href="/#download"
-            data-i18n="nav.releaseInfo"
-            data-play-release-i18n="nav.download"
-            >配信情報</a
+          <a class="nav-release" href="/#download" data-i18n="nav.download"
+            >ダウンロード</a
           >
         </nav>
         <button
@@ -419,16 +415,20 @@
           <div class="premium-store-row">
             <a
               class="nr-play-badge-link"
-              hidden
+              href="https://play.google.com/store/apps/details?id=com.niarim.niarim"
+              target="_blank"
+              rel="noopener noreferrer"
               data-play-store-link
               data-play-badge
-            ></a>
-            <p
-              class="premium-store-note"
-              data-i18n="refresh.release.pending.note"
-              data-play-release-i18n="refresh.hero.storeNote"
+              ><span
+                class="nr-play-badge-text"
+                data-i18n="refresh.playBadge.alt"
+                >Google Play で手に入れよう</span
+              ></a
             >
-              Google Playでの配信を準備しています。
+            <p class="premium-store-note" data-i18n="refresh.hero.storeNote">
+              NIARIMはGoogle
+              Playで配信されるAndroidアプリです。公式ストアのリンクから入手できます。
             </p>
           </div>
         </div>

@@ -104,7 +104,9 @@ for (const width of widths) {
         showcase: rectOf(document.querySelector(".nr-hero-showcase")),
         // 2026-11 redesign: the hero shows one upright phone; PC mode has
         // its own section further down.
-        phone: rectOf(document.querySelector(".nr-hero-phone")),
+        phone: rectOf(
+          document.querySelector(".nr-hero-phone:not(.nr-hero-phone--side)"),
+        ),
         outside: inside(".nr-hero *"),
         clientWidth: de.clientWidth,
         scrollWidth: Math.max(de.scrollWidth, document.body.scrollWidth),

@@ -45,7 +45,7 @@ for (const lang of languages) {
         await page.route("**/js/config.js", (route) =>
           route.fulfill({
             contentType: "application/javascript",
-            body: 'window.NIARIM_CONFIG = { X_URL: "https://example.invalid/niarim", GOOGLE_PLAY_URL: "" };',
+            body: 'window.NIARIM_CONFIG = { X_URL: "https://example.invalid/niarim", GOOGLE_PLAY_URL: "https://play.google.com/store/apps/details?id=com.niarim.niarim", GOOGLE_PLAY_BADGE_LANGS: [] };',
           }),
         );
       }

@@ -45,7 +45,9 @@ for (const width of widths) {
   await page.evaluate(() => document.fonts.ready);
   await page.waitForFunction(
     () => {
-      const img = document.querySelector(".nr-hero-phone img");
+      const img = document.querySelector(
+        ".nr-hero-phone:not(.nr-hero-phone--side) img",
+      );
       return img?.complete && img.naturalWidth > 0;
     },
     null,
@@ -66,7 +68,9 @@ for (const width of widths) {
         height: round(r.height),
       };
     };
-    const img = document.querySelector(".nr-hero-phone img");
+    const img = document.querySelector(
+      ".nr-hero-phone:not(.nr-hero-phone--side) img",
+    );
     const parts = [
       ".nr-hero-wordmark",
       ".nr-hero-concept",
@@ -79,7 +83,9 @@ for (const width of widths) {
       width: innerWidth,
       scrollWidth: document.documentElement.scrollWidth,
       copy: rect(document.querySelector(".nr-hero-copy")),
-      phone: rect(document.querySelector(".nr-hero-phone")),
+      phone: rect(
+        document.querySelector(".nr-hero-phone:not(.nr-hero-phone--side)"),
+      ),
       capture: rect(img),
       natural: img ? [img.naturalWidth, img.naturalHeight] : null,
       strip: rect(document.querySelector(".nr-frames")),

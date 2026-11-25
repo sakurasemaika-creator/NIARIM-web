@@ -125,12 +125,8 @@
             </button>
             <ul class="lang-menu" data-lang-menu></ul>
           </div>
-          <a
-            class="nav-release"
-            href="/#download"
-            data-i18n="nav.releaseInfo"
-            data-play-release-i18n="nav.download"
-            >配信情報</a
+          <a class="nav-release" href="/#download" data-i18n="nav.download"
+            >ダウンロード</a
           >
         </nav>
         <button
@@ -176,11 +172,18 @@
             <div class="nr-store-row">
               <a
                 class="nr-play-badge-link"
-                hidden
+                href="https://play.google.com/store/apps/details?id=com.niarim.niarim"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-describedby="nr-store-notice"
                 data-play-store-link
                 data-play-badge
-              ></a>
+                ><span
+                  class="nr-play-badge-text"
+                  data-i18n="refresh.playBadge.alt"
+                  >Google Play で手に入れよう</span
+                ></a
+              >
               <a
                 href="/features/"
                 class="nr-hero-feature-link"
@@ -197,39 +200,75 @@
             <p
               id="nr-store-notice"
               class="nr-store-notice"
-              data-i18n="refresh.release.pending.note"
-              data-play-release-i18n="refresh.hero.storeNote"
+              data-i18n="refresh.hero.storeNote"
             >
-              Google Playでの配信を準備しています。
+              NIARIMはGoogle
+              Playで配信されるAndroidアプリです。公式ストアのリンクから入手できます。
             </p>
             <p
               class="nr-play-trademark"
-              data-play-release-only
-              hidden
               data-i18n="refresh.playBadge.trademark"
             >
               Google Play および Google Play ロゴは Google LLC の商標です。
             </p>
           </div>
           <div class="nr-hero-showcase">
-            <figure
-              class="nr-shot nr-shot--sp nr-hero-phone"
-              data-capture="onion-skin"
-            >
-              <picture
-                ><source
-                  type="image/avif"
-                  srcset="/assets/images/app-captures/onion-skin.avif" />
-                <img
-                  src="/assets/images/app-captures/onion-skin.webp"
-                  alt="NIARIM スマホ版のキャンバス画面"
-                  data-i18n-attr="alt:refresh.gallery.altPhone"
-                  width="320"
-                  height="569"
-                  decoding="async"
-                  fetchpriority="high"
-              /></picture>
-            </figure>
+            <div class="nr-hero-phones">
+              <figure
+                class="nr-shot nr-shot--sp nr-hero-phone nr-hero-phone--side nr-hero-phone--left"
+                data-capture="layers"
+                aria-hidden="true"
+              >
+                <picture
+                  ><source
+                    type="image/avif"
+                    srcset="/assets/images/app-captures/layers.avif" />
+                  <img
+                    src="/assets/images/app-captures/layers.webp"
+                    alt=""
+                    width="320"
+                    height="569"
+                    loading="lazy"
+                    decoding="async"
+                /></picture>
+              </figure>
+              <figure
+                class="nr-shot nr-shot--sp nr-hero-phone"
+                data-capture="onion-skin"
+              >
+                <picture
+                  ><source
+                    type="image/avif"
+                    srcset="/assets/images/app-captures/onion-skin.avif" />
+                  <img
+                    src="/assets/images/app-captures/onion-skin.webp"
+                    alt="NIARIM スマホ版のキャンバス画面"
+                    data-i18n-attr="alt:refresh.gallery.altPhone"
+                    width="320"
+                    height="569"
+                    decoding="async"
+                    fetchpriority="high"
+                /></picture>
+              </figure>
+              <figure
+                class="nr-shot nr-shot--sp nr-hero-phone nr-hero-phone--side nr-hero-phone--right"
+                data-capture="timeline"
+                aria-hidden="true"
+              >
+                <picture
+                  ><source
+                    type="image/avif"
+                    srcset="/assets/images/app-captures/timeline.avif" />
+                  <img
+                    src="/assets/images/app-captures/timeline.webp"
+                    alt=""
+                    width="320"
+                    height="569"
+                    loading="lazy"
+                    decoding="async"
+                /></picture>
+              </figure>
+            </div>
             <p class="nr-hero-caption" data-i18n="refresh.hero.captureNote">
               実際のアプリ画面です。アップデートにより表示が異なる場合があります。
             </p>
@@ -1864,27 +1903,25 @@
           <p class="nr-launch-body" data-i18n="narrative.home.cta.body">
             描きたいと思ったら、すぐに始められる。一枚の絵からでも、何十枚ものフレームを使った作品でも。手描きで動かす。キーフレームで動かす。画像や音を組み合わせる。仕上げまでこだわって、自分だけの作品にする。そして完成したら、「作品広場」へ。つくって、公開して、みつけよう。NIARIMで、アニメーションをつくってみよう！
           </p>
-          <p
-            class="nr-launch-release"
-            data-i18n="refresh.release.pending.title"
-            data-play-release-i18n="refresh.launch.title"
-          >
-            NIARIMは配信準備中です
+          <p class="nr-launch-release" data-i18n="refresh.launch.title">
+            NIARIMで次の物語を作ろう！
           </p>
-          <p
-            class="nr-launch-release-body"
-            data-i18n="refresh.release.pending.body"
-            data-play-release-i18n="refresh.launch.body"
-          >
-            配信が始まり次第、ここにGoogle Playへのリンクを掲載します。
+          <p class="nr-launch-release-body" data-i18n="refresh.launch.body">
+            NIARIMをダウンロードして、作画からアニメーションの書き出しまで。作品広場や使い方ガイドもアプリで利用できます。
           </p>
           <div class="nr-actions nr-actions-center">
             <a
               class="nr-play-badge-link"
-              hidden
+              href="https://play.google.com/store/apps/details?id=com.niarim.niarim"
+              target="_blank"
+              rel="noopener noreferrer"
               data-play-store-link
               data-play-badge
-            ></a
+              ><span
+                class="nr-play-badge-text"
+                data-i18n="refresh.playBadge.alt"
+                >Google Play で手に入れよう</span
+              ></a
             ><a
               class="nr-btn nr-btn-secondary"
               href="/features/"
@@ -1897,12 +1934,7 @@
               >使い方ガイド</a
             >
           </div>
-          <p
-            class="nr-launch-status"
-            data-play-release-only
-            hidden
-            data-i18n="refresh.launch.status"
-          >
+          <p class="nr-launch-status" data-i18n="refresh.launch.status">
             Google PlayでNIARIMを入手できます。
           </p>
         </div>

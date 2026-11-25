@@ -159,7 +159,7 @@ try {
   const motion = await live.newPage();
   await motion.goto(base + "/", { waitUntil: "networkidle" });
   const scene = motion.locator(".nr-hero-showcase");
-  const pc = motion.locator(".nr-hero-phone");
+  const pc = motion.locator(".nr-hero-phone:not(.nr-hero-phone--side)");
   const startTransform = await pc.evaluate(
     (el) => getComputedStyle(el).transform,
   );

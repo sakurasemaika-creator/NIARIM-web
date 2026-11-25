@@ -1,88 +1,108 @@
-/** Reveal the download links once the official NIARIM listing is configured. */
+/**
+ * Google Play links.
+ *
+ * The HTML already carries the NIARIM listing URL and a text label ("Get it on
+ * Google Play" in the page language), so the link works without JavaScript and
+ * for crawlers. Google's official badge (unaltered, one PNG per language at
+ * /assets/badges/google-play/<lang>.png, from
+ * https://play.google.com/intl/en_us/badges/) takes the label's place only for
+ * the languages listed in NIARIM_CONFIG.GOOGLE_PLAY_BADGE_LANGS, and only once
+ * the image has loaded. A badge that is not listed, missing or broken leaves
+ * the text link as it is: the link is never hidden, no broken image is shown,
+ * and nothing imitates Google's badge.
+ *
+ * The languages are listed rather than probed so that a badge file that has
+ * not been added yet does not cost every visitor a failed request.
+ */
 (function () {
   "use strict";
 
-  // Google's official "Get it on Google Play" badges, unaltered, one per
-  // language (downloaded from https://play.google.com/intl/en_us/badges/ and
-  // placed here before release). The badge image is created only once the
-  // listing is configured (an <img> without a source is invalid HTML), and the
-  // link is shown only after it has loaded, so a missing file never shows a
-  // broken image or an imitation.
   const BADGE_DIR = "/assets/badges/google-play/";
-  const BADGE_LANGS = ["ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"];
+  const LISTING_ID = "com.niarim.niarim";
+
+  function configuredListing() {
+    const candidate =
+      window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
+    if (typeof candidate !== "string" || !candidate) return "";
+    try {
+      const url = new URL(candidate);
+      return url.origin === "https://play.google.com" &&
+        url.pathname === "/store/apps/details" &&
+        url.searchParams.get("id") === LISTING_ID
+        ? url.href
+        : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function badgeLangs() {
+    const langs = window.NIARIM_CONFIG?.GOOGLE_PLAY_BADGE_LANGS;
+    return Array.isArray(langs) ? langs : [];
+  }
 
   function currentLang() {
-    const lang = document.documentElement.lang || "ja";
-    return BADGE_LANGS.includes(lang) ? lang : "en";
+    return document.documentElement.lang || "ja";
   }
 
   function translate(lang, key) {
     return window.NIARIM_I18N ? window.NIARIM_I18N.translate(lang, key) : "";
   }
 
-  function setBadge(badge, lang) {
-    badge.src = BADGE_DIR + lang + ".png";
+  function showText(entry) {
+    if (entry.badge) {
+      entry.badge.remove();
+      entry.badge = null;
+    }
+    if (entry.text) entry.text.hidden = false;
+  }
+
+  function showBadge(entry) {
+    const lang = currentLang();
+    const request = ++entry.request;
+    showText(entry);
+    if (!badgeLangs().includes(lang)) return;
+
+    const badge = document.createElement("img");
+    badge.className = "nr-play-badge";
+    badge.width = 646;
+    badge.height = 250;
+    badge.decoding = "async";
     badge.alt = translate(lang, "refresh.playBadge.alt");
+    badge.hidden = true;
+    badge.addEventListener("load", () => {
+      if (request !== entry.request) return;
+      badge.hidden = false;
+      if (entry.text) entry.text.hidden = true;
+    });
+    badge.addEventListener("error", () => {
+      if (request !== entry.request) return;
+      showText(entry);
+    });
+    entry.badge = badge;
+    entry.link.appendChild(badge);
+    badge.src = BADGE_DIR + lang + ".png";
   }
 
   function init() {
-    const candidate =
-      window.NIARIM_PLAY_STORE_URL || window.NIARIM_CONFIG?.GOOGLE_PLAY_URL;
-    if (typeof candidate !== "string" || !candidate) return;
-
-    let url;
-    try {
-      url = new URL(candidate);
-    } catch {
-      return;
-    }
-    if (
-      url.origin !== "https://play.google.com" ||
-      url.pathname !== "/store/apps/details" ||
-      url.searchParams.get("id") !== "com.niarim.niarim"
-    ) {
-      return;
-    }
-
-    document.querySelectorAll("[data-play-release-i18n]").forEach((element) => {
-      const key = element.dataset.playReleaseI18n;
-      element.setAttribute("data-i18n", key);
-      if (window.NIARIM_I18N) {
-        element.textContent = window.NIARIM_I18N.translate(
-          document.documentElement.lang || "ja",
-          key,
-        );
-      }
-    });
-    const badges = [];
+    const listing = configuredListing();
+    const entries = [];
     document.querySelectorAll("[data-play-store-link]").forEach((link) => {
-      link.href = url.href;
+      if (listing) link.href = listing;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      if (!link.hasAttribute?.("data-play-badge")) {
-        link.hidden = false;
-        return;
-      }
-      const badge = document.createElement("img");
-      badge.className = "nr-play-badge";
-      badge.width = 646;
-      badge.height = 250;
-      badge.decoding = "async";
-      link.appendChild(badge);
-      badges.push(badge);
-      badge.addEventListener("load", () => {
-        link.hidden = false;
+      link.hidden = false;
+      if (!link.hasAttribute("data-play-badge")) return;
+      entries.push({
+        link,
+        text: link.querySelector(".nr-play-badge-text"),
+        badge: null,
+        request: 0,
       });
-      badge.addEventListener("error", () => {
-        link.hidden = true;
-      });
-      setBadge(badge, currentLang());
     });
-    document.querySelectorAll("[data-play-release-only]").forEach((element) => {
-      element.hidden = false;
-    });
-    document.addEventListener?.("niarim:langchange", () => {
-      badges.forEach((badge) => setBadge(badge, currentLang()));
+    entries.forEach(showBadge);
+    document.addEventListener("niarim:langchange", () => {
+      entries.forEach(showBadge);
     });
   }
 

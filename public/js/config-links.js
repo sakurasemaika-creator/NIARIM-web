@@ -49,18 +49,6 @@
     }
   }
 
-  function applyRequestedCommunityCopy() {
-    var copy = "NIARIMでアニメを制作して、作品広場に投稿してみませんか？";
-    var dict = window.NIARIM_I18N_DICT;
-    if (dict && dict.ja) dict.ja["communityPage.cta.body"] = copy;
-    if ((document.documentElement.lang || "ja") !== "ja") return;
-    document
-      .querySelectorAll('[data-i18n="communityPage.cta.body"]')
-      .forEach(function (el) {
-        el.textContent = copy;
-      });
-  }
-
   function centerCurrentFrames() {
     document
       .querySelectorAll(".fd-frame-strip-scroll")
@@ -119,7 +107,6 @@
   loadAiTrustCopy();
 
   function init() {
-    applyRequestedCommunityCopy();
     apply();
     loadFeatureFidelity();
     loadSignatureShowcase();
@@ -128,10 +115,7 @@
     window.addEventListener("resize", scheduleFrameCentering, {
       passive: true,
     });
-    document.addEventListener("niarim:langchange", function () {
-      applyRequestedCommunityCopy();
-      scheduleFrameCentering();
-    });
+    document.addEventListener("niarim:langchange", scheduleFrameCentering);
     if (document.fonts && document.fonts.ready)
       document.fonts.ready.then(scheduleFrameCentering);
   }

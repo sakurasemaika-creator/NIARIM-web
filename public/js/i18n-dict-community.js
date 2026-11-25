@@ -1,11 +1,8 @@
 /**
  * NIARIM公式サイト コミュニティ(作品広場)ページ 翻訳辞書
  *
- * NIARIMアプリ(dev_branch)の
- * docs/AI設計書/29_動画投稿・ランキング機能仕様.md に基づく。
- * 同ドキュメント冒頭に明記の通り、本機能は「仕様検討・確定済みだが
- * コード実装には未着手」の段階であるため、本ページも「準備中の機能紹介」
- * として構成し、実装済みであるとは記載していない。
+ * NIARIMアプリの作品広場（docs/AI設計書/29_動画投稿・ランキング機能仕様.md
+ * と、その実装）に基づく。アプリで提供している機能として紹介する。
  * - ランキング種類: 累計/年間/月間/週間/デイリーの5種、Top50表示(8章)
  * - 更新頻度: 初期1日2〜4回、基本1日2回(14章)
  * - 閲覧(新着・ランキング・作者別一覧含む)はログイン不要、投稿・通報・
@@ -29,7 +26,6 @@
       "communityPage.tabs.weekly": "週間",
       "communityPage.tabs.daily": "デイリー",
       "communityPage.tabs.latest": "新着",
-      "communityPage.ranking.note": "各ランキングはTOP50を表示予定です。",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "探し方はいろいろ",
       "communityPage.search.lead":
@@ -66,7 +62,7 @@
         "作品一覧は「総合」「縦画面のみ」「横画面のみ」で絞り込めます。縦長（縦画面）の作品は、ボタン1つで全画面縦スクロール再生に切り替えられます。",
       "communityPage.cta.title": "あなたの作品も、ここに。",
       "communityPage.cta.body":
-        "NIARIMで手描きアニメーションを制作して、いつか、作品広場に投稿してみませんか。",
+        "NIARIMでアニメを制作して、作品広場に投稿してみませんか？",
       "communityPage.cta.link": "アプリをダウンロード",
     },
     en: {
@@ -83,8 +79,6 @@
       "communityPage.tabs.weekly": "Weekly",
       "communityPage.tabs.daily": "Daily",
       "communityPage.tabs.latest": "New",
-      "communityPage.ranking.note":
-        "Each ranking is planned to show the Top 50.",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "More ways to discover",
       "communityPage.search.lead":
@@ -120,7 +114,7 @@
         "Filter the gallery by All, Portrait only, or Landscape only. Portrait works can switch to a full-screen, vertically scrolling viewer with one tap.",
       "communityPage.cta.title": "Your work could be here too.",
       "communityPage.cta.body":
-        "Create a hand-drawn animation with NIARIM, and one day, why not post it to the Work Plaza for everyone to see?",
+        "Why not make an animation with NIARIM and post it to the Work Plaza for everyone to see?",
       "communityPage.cta.link": "Download the App",
     },
     "zh-Hans": {
@@ -137,7 +131,6 @@
       "communityPage.tabs.weekly": "周度",
       "communityPage.tabs.daily": "每日",
       "communityPage.tabs.latest": "新作",
-      "communityPage.ranking.note": "各排行榜预计显示前 50 名。",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "多种发现方式",
       "communityPage.search.lead":
@@ -173,7 +166,7 @@
         "作品列表可按“全部”“仅竖屏”“仅横屏”筛选。竖屏作品只需点击一个按钮，即可切换为全屏纵向连续播放模式。",
       "communityPage.cta.title": "你的作品，也能在这里展示。",
       "communityPage.cta.body":
-        "用 NIARIM 创作手绘动画，未来不妨投稿到 作品广场，与大家分享。",
+        "用 NIARIM 制作动画，投稿到作品广场，与大家分享吧。",
       "communityPage.cta.link": "下载应用",
     },
     "zh-Hant": {
@@ -190,7 +183,6 @@
       "communityPage.tabs.weekly": "週度",
       "communityPage.tabs.daily": "每日",
       "communityPage.tabs.latest": "新作",
-      "communityPage.ranking.note": "各排行榜預計顯示前 50 名。",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "多種發現方式",
       "communityPage.search.lead":
@@ -226,7 +218,7 @@
         "作品清單可依「全部」「僅直式」「僅橫式」篩選。直式作品只需點擊一個按鈕，即可切換為全螢幕縱向連續播放模式。",
       "communityPage.cta.title": "你的作品，也能在這裡展示。",
       "communityPage.cta.body":
-        "用 NIARIM 創作手繪動畫，未來不妨投稿到 作品廣場，與大家分享。",
+        "用 NIARIM 製作動畫，投稿到作品廣場，與大家分享吧。",
       "communityPage.cta.link": "下載應用程式",
     },
     ko: {
@@ -243,7 +235,6 @@
       "communityPage.tabs.weekly": "주간",
       "communityPage.tabs.daily": "데일리",
       "communityPage.tabs.latest": "신작",
-      "communityPage.ranking.note": "각 랭킹은 TOP 50을 표시할 예정입니다.",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "다양한 탐색 방법",
       "communityPage.search.lead":
@@ -279,7 +270,7 @@
         "작품 목록을 전체·세로 화면만·가로 화면만으로 필터링할 수 있습니다. 세로 화면 작품은 버튼 하나로 전체 화면 세로 스크롤 재생으로 전환할 수 있습니다.",
       "communityPage.cta.title": "당신의 작품도, 이곳에.",
       "communityPage.cta.body":
-        "NIARIM으로 손그림 애니메이션을 제작해, 언젠가 작품광장에 투고해 보지 않으시겠어요?",
+        "NIARIM으로 애니메이션을 만들어 작품 광장에 투고해 보지 않으시겠어요?",
       "communityPage.cta.link": "앱 다운로드",
     },
     fr: {
@@ -296,8 +287,6 @@
       "communityPage.tabs.weekly": "Hebdo",
       "communityPage.tabs.daily": "Quotidien",
       "communityPage.tabs.latest": "Nouveautés",
-      "communityPage.ranking.note":
-        "Chaque classement affichera le Top 50 prévu.",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "Plusieurs façons de découvrir",
       "communityPage.search.lead":
@@ -336,7 +325,7 @@
         "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d’un geste vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
-        "Créez une animation dessinée à la main avec NIARIM, et pourquoi pas la publier un jour dans la Place des œuvres pour que tout le monde la voie ?",
+        "Pourquoi ne pas créer une animation avec NIARIM et la publier dans la Place des œuvres pour que tout le monde la voie ?",
       "communityPage.cta.link": "Télécharger l’application",
     },
     es: {
@@ -353,8 +342,6 @@
       "communityPage.tabs.weekly": "Semanal",
       "communityPage.tabs.daily": "Diaria",
       "communityPage.tabs.latest": "Novedades",
-      "communityPage.ranking.note":
-        "Cada clasificación mostrará el Top 50 previsto.",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "Muchas formas de descubrir",
       "communityPage.search.lead":
@@ -391,7 +378,7 @@
         "Filtra la galería por Todo, Solo vertical o Solo horizontal. Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",
       "communityPage.cta.title": "Tu obra también podría estar aquí.",
       "communityPage.cta.body":
-        "Crea una animación dibujada a mano con NIARIM y, algún día, publícala en la Plaza de Obras para que todos la vean.",
+        "Crea una animación con NIARIM y publícala en la Plaza de Obras para que todos la vean.",
       "communityPage.cta.link": "Descargar la app",
     },
   };

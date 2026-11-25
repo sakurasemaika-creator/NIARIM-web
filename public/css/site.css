@@ -2916,7 +2916,8 @@ h6 {
 /* Google's official badge is shown as is: no frame, shadow or recolouring
    (Google Play badge guidelines). The PNG carries its own clear space. */
 .nr-play-badge-link {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
   line-height: 0;
   border-radius: 10px;
 }
@@ -2928,6 +2929,32 @@ h6 {
   display: block;
   width: auto;
   height: 72px;
+}
+/* The store link's text label, shown until (and unless) Google's badge image
+   for the page language has loaded. A plain site button in the red-pencil
+   accent, so it never reads as an imitation of Google's badge. */
+.nr-play-badge-text {
+  display: inline-flex;
+  flex: 1 1 auto;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 30px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: var(--pencil-ink);
+  color: var(--color-white);
+  font: 400 1rem / 1.4 var(--font-serif);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.nr-play-badge-link:hover .nr-play-badge-text {
+  background: color-mix(in srgb, var(--pencil-ink) 82%, var(--color-black));
+}
+.nr-play-badge-link [hidden] {
+  display: none !important;
 }
 /* Shared presentation on informational tabs; policy text remains readable. */
 .nr-enhanced .site-header {

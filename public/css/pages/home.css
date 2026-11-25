@@ -474,7 +474,8 @@
     width: 112px;
   }
 
-  .nr-btn {
+  .nr-btn,
+  .nr-launch .nr-play-badge-link {
     width: 100%;
   }
 }
@@ -1427,8 +1428,23 @@ body:has(.capture-viewer[open]) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 28px;
+  gap: 12px;
   margin: 28px 0 0;
+}
+
+/* The two buttons share the first line and the text link always has a line
+   of its own below them, in every language. The row then keeps its height
+   when the brand fonts arrive: with the Google Play button beside them, the
+   three used to fit on one line in the fallback font and wrap once the wider
+   web font had loaded, moving the page under the reader. */
+#main .nr-hero .nr-store-row::after {
+  content: "";
+  flex-basis: 100%;
+  order: 1;
+}
+
+#main .nr-hero .nr-hero-screens-link {
+  order: 2;
 }
 
 #main .nr-hero-feature-link {
@@ -1509,6 +1525,50 @@ body:has(.capture-viewer[open]) {
   width: 100%;
   height: auto;
   border-radius: 27px;
+}
+
+/* On wide screens the hero shows three real screens: the canvas in front and
+   the layers and timeline behind it, tilted to each side, so the space beside
+   the copy is filled with the app instead of paper. The side phones are hidden
+   (and, being lazy, not loaded) below that width. */
+#main .nr-hero-phones {
+  display: grid;
+  place-items: center;
+}
+
+#main .nr-hero-phones > .nr-hero-phone {
+  grid-area: 1 / 1;
+}
+
+#main .nr-hero-phone--side {
+  display: none;
+}
+
+@media (min-width: 1180px) {
+  #main .nr-hero-phones {
+    --nr-side-shift: clamp(118px, calc(10vw - 6px), 150px);
+    padding-inline: var(--nr-side-shift);
+  }
+
+  #main .nr-hero-phone--side {
+    display: block;
+    box-shadow: 0 0 0 9px var(--ink);
+  }
+
+  #main .nr-hero-phone--left {
+    transform: translateX(calc(-1 * var(--nr-side-shift))) translateY(18px)
+      rotate(-7deg) scale(0.86);
+  }
+
+  #main .nr-hero-phone--right {
+    transform: translateX(var(--nr-side-shift)) translateY(18px) rotate(7deg)
+      scale(0.86);
+  }
+
+  #main .nr-hero-phones > .nr-hero-phone:not(.nr-hero-phone--side) {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 #main .nr-hero-caption {
@@ -1701,7 +1761,7 @@ body:has(.capture-viewer[open]) {
   }
 }
 @media (max-width: 480px) {
-  #main .nr-hero-feature-link {
+  #main :is(.nr-hero-feature-link, .nr-hero .nr-play-badge-link) {
     width: 100%;
   }
 

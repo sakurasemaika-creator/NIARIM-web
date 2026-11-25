@@ -89,12 +89,18 @@ try {
         JSON.stringify(sources),
       );
     }
-    // The hero shows one upright phone; PC mode has its own section further
-    // down (2026-11 redesign), so the hero holds exactly one real capture.
+    // The hero shows the canvas phone; from 1180px wide the layers and
+    // timeline phones stand behind it on each side (owner's request,
+    // 2026-11-25: fill the space beside the copy with real screens). PC mode
+    // has its own section further down.
     const stagePhones = await page
       .locator(".nr-hero-showcase [data-capture]")
-      .count();
-    if (stagePhones !== 1) log("Hero phone capture missing", width);
+      .evaluateAll(
+        (figures) =>
+          figures.filter((f) => f.getBoundingClientRect().width > 0).length,
+      );
+    if (stagePhones !== (width >= 1180 ? 3 : 1))
+      log("Hero phone captures", width, stagePhones);
     const missingPair = await page.evaluate(
       () =>
         [
@@ -147,11 +153,36 @@ try {
         log("Brand display font missing", JSON.stringify(fonts));
       if (!fonts.body.includes("HakkouMincho"))
         log("Brand body font missing", JSON.stringify(fonts));
-      const store = page.locator("[data-play-store-button]");
-      if (await store.count()) {
-        if (!(await store.isDisabled()))
-          log("Pre-release Play Store CTA must not imply download");
-      }
+      // The app is on Google Play: both store links on the home page are
+      // visible links to the listing, labelled even without the badge image.
+      const store = await page
+        .locator("[data-play-store-link]")
+        .evaluateAll((links) =>
+          links.map((link) => ({
+            visible: link.getClientRects().length > 0,
+            href: link.href,
+            target: link.target,
+            rel: link.rel,
+            name: (
+              link.querySelector("img:not([hidden])")?.alt || link.innerText
+            ).trim(),
+            height: link.getBoundingClientRect().height,
+          })),
+        );
+      if (
+        store.length !== 2 ||
+        store.some(
+          (link) =>
+            !link.visible ||
+            link.href !==
+              "https://play.google.com/store/apps/details?id=com.niarim.niarim" ||
+            link.target !== "_blank" ||
+            link.rel !== "noopener noreferrer" ||
+            !link.name.includes("Google Play") ||
+            link.height < 48,
+        )
+      )
+        log("Google Play store links", JSON.stringify(store));
     }
     if (width === 390) {
       // The palette swatches were removed from the home gallery on
@@ -230,29 +261,38 @@ try {
     });
     const navigation = page.locator('button[aria-controls="main-nav"]');
     await navigation.click();
-    const releaseLink = page.locator(
-      'header a[data-play-release-i18n="nav.download"]',
-    );
-    await releaseLink.waitFor({ state: "visible" });
-    const releaseLabel = await releaseLink.innerText();
-    const pendingLabel = await page.evaluate(() =>
+    const downloadLink = page.locator("header a.nav-release");
+    await downloadLink.waitFor({ state: "visible" });
+    const downloadLabel = await downloadLink.innerText();
+    const expectedLabel = await page.evaluate(() =>
       window.NIARIM_I18N.translate(
         document.documentElement.lang,
-        "nav.releaseInfo",
+        "nav.download",
       ),
     );
-    const releaseUrl = new URL(await releaseLink.getAttribute("href"), base);
+    const downloadUrl = new URL(await downloadLink.getAttribute("href"), base);
     if (
-      releaseLabel.trim() !== pendingLabel ||
-      releaseUrl.pathname !== "/" ||
-      releaseUrl.hash !== "#download" ||
-      releaseUrl.searchParams.get("lang") !== lang
+      (await downloadLink.getAttribute("data-i18n")) !== "nav.download" ||
+      downloadLabel.trim() !== expectedLabel ||
+      downloadUrl.pathname !== "/" ||
+      downloadUrl.hash !== "#download" ||
+      downloadUrl.searchParams.get("lang") !== lang
     )
       log(
-        "Release navigation before launch",
+        "Download navigation",
         lang,
-        JSON.stringify({ releaseLabel, pendingLabel, url: releaseUrl.href }),
+        JSON.stringify({ downloadLabel, expectedLabel, url: downloadUrl.href }),
       );
+    // In the phone menu the download link comes before the language menu
+    // (i18n.js moves it there), so it is not pushed off the panel by the list.
+    if (
+      !(await downloadLink.evaluate(
+        (link) =>
+          link.nextElementSibling ===
+          document.querySelector("header [data-lang-dropdown]"),
+      ))
+    )
+      log("Download link before the language menu on phones", lang);
     await navigation.click();
     const viewer = page.locator("#capture-viewer");
     const trigger = page

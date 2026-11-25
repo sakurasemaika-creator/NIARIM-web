@@ -80,13 +80,11 @@
 
       "screenshots.eyebrow": "App Preview",
       "screenshots.title": "アプリ画面紹介",
-      "screenshots.placeholder": "画面キャプチャ準備中",
 
       "download.title": "NIARIMを\nはじめよう",
       "download.body":
         "あなたの手で描いた絵を、あなたの手でアニメーションにする。今すぐNIARIMをダウンロードして、物語を動かしはじめましょう。",
       "download.cta.googlePlay": "Google Playで手に入れる",
-      "download.cta.notReady": "近日公開予定",
 
       "faq.eyebrow": "FAQ",
       "faq.title": "よくある質問",
@@ -104,8 +102,6 @@
         "はい。最大1920×1920までの解像度、自由な縦横比で動画として書き出せます。",
       "faq.q5": "作った作品を共有できますか？",
       "faq.q6": "アカウント登録は必要ですか？",
-      "faq.a6":
-        "アカウントの要否については、正式リリース時の仕様をご確認ください。",
       "faq.q7": "不具合や要望はどこに連絡すればいいですか？",
       "faq.a7":
         "このサイトのお問い合わせフォームから、不具合報告・機能要望などをお送りください。",
@@ -144,7 +140,7 @@
       "contact.form.name": "お名前",
       "contact.form.namePlaceholder": "例）ニアリ 太郎",
       "contact.form.email": "メールアドレス",
-      "contact.form.emailPlaceholder": "例）example@niarim.com",
+      "contact.form.emailPlaceholder": "例）name@example.com",
       "contact.form.message": "お問い合わせ内容",
       "contact.form.messagePlaceholder": "できるだけ詳しくご記入ください",
       "contact.form.messageHint": "1,000文字以内でご記入ください。",
@@ -326,18 +322,18 @@
 
       "meta.news.title": "お知らせ | NIARIM",
       "meta.news.description":
-        "NIARIMの正式リリース・アップデート・メンテナンス情報をお知らせします。",
+        "NIARIMのアップデートやメンテナンスなどのお知らせを掲載します。",
       "newsPage.eyebrow": "News",
       "newsPage.title": "お知らせ",
       "newsPage.lead":
-        "正式リリース・アップデート・メンテナンス情報などを、こちらでお知らせします。",
+        "アップデートやメンテナンスなどのお知らせを掲載します。",
       "newsPage.empty":
         "現在、公開中のお知らせはありません。新しい情報が入り次第、こちらに掲載します。",
 
       "meta.privacy.title": "プライバシーポリシー | NIARIM",
       "meta.privacy.description":
         "NIARIM公式サイトおよびアプリのプライバシーポリシーです。",
-      "legal.updated": "最終更新日：2026年11月23日",
+      "legal.updated": "最終更新日：2026年11月25日",
       "legal.notice.privacy":
         "この文書は日本語を正本としています。表示言語を変更した場合も、本文は日本語で表示されます。",
       "legal.notice.terms":
@@ -419,13 +415,11 @@
 
       "screenshots.eyebrow": "App Preview",
       "screenshots.title": "App Screens",
-      "screenshots.placeholder": "Screenshots coming soon",
 
       "download.title": "Start creating with NIARIM.",
       "download.body":
         "Turn what you’ve drawn into animation, with your own hands. Download NIARIM now and start moving your story.",
       "download.cta.googlePlay": "Get it on Google Play",
-      "download.cta.notReady": "Coming soon",
 
       "faq.eyebrow": "FAQ",
       "faq.title": "Frequently Asked Questions",
@@ -442,7 +436,6 @@
         "Yes. You can export your work as video, at resolutions up to 1920×1920, with a freely configurable aspect ratio.",
       "faq.q5": "Can I share what I’ve made?",
       "faq.q6": "Do I need to create an account?",
-      "faq.a6": "Please check the official launch specification for this.",
       "faq.q7": "Where can I report a bug or request a feature?",
       "faq.a7":
         "Please use the contact form on this site to send bug reports or feature requests.",
@@ -479,7 +472,7 @@
       "contact.form.name": "Name",
       "contact.form.namePlaceholder": "e.g. Taro Niari",
       "contact.form.email": "Email address",
-      "contact.form.emailPlaceholder": "e.g. example@niarim.com",
+      "contact.form.emailPlaceholder": "e.g. name@example.com",
       "contact.form.message": "Message",
       "contact.form.messagePlaceholder":
         "Please share as much detail as you can.",
@@ -663,18 +656,18 @@
 
       "meta.news.title": "News | NIARIM",
       "meta.news.description":
-        "Official launch, update, and maintenance announcements for NIARIM.",
+        "Announcements about NIARIM updates, maintenance and more.",
       "newsPage.eyebrow": "News",
       "newsPage.title": "News",
       "newsPage.lead":
-        "Official launch, update, and maintenance announcements will be posted here.",
+        "Announcements about updates, maintenance and more are posted here.",
       "newsPage.empty":
         "There are no announcements at this time. New updates will be posted here.",
 
       "meta.privacy.title": "Privacy Policy | NIARIM",
       "meta.privacy.description":
         "The privacy policy for the NIARIM official site and app.",
-      "legal.updated": "Last updated: November 23, 2026",
+      "legal.updated": "Last updated: November 25, 2026",
       "legal.notice.privacy":
         "The Japanese version of this document is authoritative. The body text below is shown in Japanese regardless of the selected display language.",
       "legal.notice.terms":

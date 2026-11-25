@@ -6,7 +6,6 @@
   var DICT = window.NIARIM_I18N_DICT || (window.NIARIM_I18N_DICT = {});
   var DATA = {
     ja: {
-      "nav.releaseInfo": "配信情報",
       "help.supportLead": "見つからないときは",
       "nav.pricing": "料金",
       "footer.accountDeletion": "アカウントの削除",
@@ -36,7 +35,6 @@
       "help.backToTop": "カテゴリ一覧へ戻る",
     },
     en: {
-      "nav.releaseInfo": "Release info",
       "help.supportLead": "Can’t find it?",
       "nav.pricing": "Pricing",
       "footer.accountDeletion": "Delete your account",
@@ -66,7 +64,6 @@
       "help.backToTop": "Back to categories",
     },
     "zh-Hans": {
-      "nav.releaseInfo": "上线信息",
       "help.supportLead": "没有找到？",
       "nav.pricing": "价格",
       "footer.accountDeletion": "删除账号",
@@ -96,7 +93,6 @@
       "help.backToTop": "返回分类列表",
     },
     "zh-Hant": {
-      "nav.releaseInfo": "上線資訊",
       "help.supportLead": "沒有找到？",
       "nav.pricing": "價格",
       "footer.accountDeletion": "刪除帳號",
@@ -126,7 +122,6 @@
       "help.backToTop": "返回分類列表",
     },
     ko: {
-      "nav.releaseInfo": "출시 안내",
       "help.supportLead": "찾는 내용이 없나요?",
       "nav.pricing": "요금",
       "footer.accountDeletion": "계정 삭제",
@@ -156,7 +151,6 @@
       "help.backToTop": "카테고리 목록으로 돌아가기",
     },
     fr: {
-      "nav.releaseInfo": "Disponibilité",
       "help.supportLead": "Vous ne trouvez pas ?",
       "nav.pricing": "Tarifs",
       "footer.accountDeletion": "Supprimer votre compte",
@@ -186,7 +180,6 @@
       "help.backToTop": "Retour aux catégories",
     },
     es: {
-      "nav.releaseInfo": "Disponibilidad",
       "help.supportLead": "¿No lo encuentras?",
       "nav.pricing": "Precios",
       "footer.accountDeletion": "Eliminar tu cuenta",
