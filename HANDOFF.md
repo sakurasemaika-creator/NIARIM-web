@@ -361,13 +361,11 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
 バイト比較で確認すればよく、差分が無ければ対応不要と判断してよい
 （今後また同種の報告が来た場合の判断基準として記録）。
 
-### 6.3 未着手・低優先度（README.mdの「[要確認]」セクションと重複するが再掲）
+### 6.3 残っている項目（README.mdの「所有者の作業として残っている項目」と同じ）
 
-- News/Contactページは正式リリース前のプレースホルダーが多く残っている
-  （News: お知らせ0件、Contact: 送信先メールアドレス未設定）。正式
-  リリースのタイミングでREADME.mdの「[要確認]」セクションを参照して
-  差し替えること。
-- Google Play URL・公式XアカウントURL（`public/js/config.js`）は未確定。
+- サイトは、アプリがGoogle Playで配信中という前提の表現にした（2026-11-25）。ストアのURLは`public/js/config.js`の`GOOGLE_PLAY_URL`。
+- Googleの公式のGoogle Playのバッジの画像（7言語）を`public/assets/badges/google-play/`に置くのは所有者の作業（置くまでは文字のボタン）。
+- 公式XのURL（`X_URL`）は決まったら入れる。
 - [対応済み] apple-touch-icon（`public/assets/icons/apple-touch-icon.png`）と
   favicon（`public/assets/icons/favicon.svg`）は、単色プレースホルダー
   だったものを、Android/iOSアプリのランチャーアイコンと同じ意匠
@@ -383,10 +381,9 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
   今後アプリ側のグリフ比率がさらに変わった場合は、このバウンディング
   ボックス計算からやり直すこと（PILは本環境に無いため、Playwrightの
   Chromiumレンダリング＋手計算のtransformで対応した）。
-- OGP画像は単色プレースホルダーのまま（正式リリース前に差し替え要）。
+- [対応済み] OGP画像（`public/assets/images/ogp-default.png`）は、ロゴとアプリの画面の1200×630の画像にした（2026-11-25）。
 - Cloudflare Turnstileの導入要否（スパムが増えた場合に検討）。
-- 利用規約・プライバシーポリシーの専門家（弁護士）による法的最終確認は
-  未実施。
+- 利用規約・プライバシーポリシーは所有者の指定（2026-11-25「法務確認はOKとして作業進めてください」）で確認済みとして扱う。
 
 ---
 
