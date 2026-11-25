@@ -2240,10 +2240,6 @@ body:has(.capture-viewer[open]) {
   max-width: 1000px;
 }
 
-#main .tp-texture-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  max-width: 1160px;
-}
 /* A wide timeline capture: full width on large screens; on narrow ones it
    keeps a readable size and scrolls sideways inside its frame. */
 #main .tp-wide-capture {
@@ -2282,10 +2278,6 @@ body:has(.capture-viewer[open]) {
 
   #main .tp-brush-sheet {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  #main .tp-texture-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   #main .tp-filter-grid.tp-theme-grid {

@@ -417,37 +417,37 @@
   "ja": [
     "PCモード版のキャンバス画面",
     "スマホ版のキャンバス画面",
-    "まだ作品が無いときの作品広場。新着・ランキング・検索のタブと「投稿する」ボタン"
+    "見本の作品が並んだ作品広場。新着の作品カードと、絞り込み・並べ替え・ブックマークの操作"
   ],
   "en": [
     "Canvas in PC mode",
     "Canvas on a phone",
-    "The Work Plaza before any work is posted: tabs for new works, ranking and search, and a Post button"
+    "The Work Plaza with sample works: new-work cards, filters, sorting and bookmarks"
   ],
   "fr": [
     "Canevas en mode PC",
     "Canevas sur téléphone",
-    "La Place des œuvres avant toute publication : onglets nouveautés, classement et recherche, et bouton Publier"
+    "La Place des œuvres avec des œuvres d’exemple : cartes des nouveautés, filtres, tri et favoris"
   ],
   "es": [
     "Lienzo en modo PC",
     "Lienzo en el teléfono",
-    "La Plaza de Obras antes de que se publique ninguna obra: pestañas de novedades, clasificación y búsqueda, y botón Publicar"
+    "La Plaza de Obras con obras de muestra: tarjetas de novedades, filtros, orden y marcadores"
   ],
   "zh-Hans": [
     "电脑模式下的画布",
     "手机上的画布",
-    "尚无作品时的作品广场：新作品、排行榜、搜索标签页和“发布”按钮"
+    "排列着示例作品的作品广场：新作品卡片、筛选、排序和收藏"
   ],
   "zh-Hant": [
     "電腦模式下的畫布",
     "手機上的畫布",
-    "尚無作品時的作品廣場：新作品、排行榜、搜尋分頁與「發佈」按鈕"
+    "排列著範例作品的作品廣場：新作品卡片、篩選、排序與書籤"
   ],
   "ko": [
     "PC 모드의 캔버스",
     "스마트폰의 캔버스",
-    "아직 작품이 없을 때의 작품 광장: 신작·랭킹·검색 탭과 ‘게시하기’ 버튼"
+    "예시 작품이 놓인 작품 광장: 신작 카드, 필터, 정렬, 북마크"
   ]
 };
   for (const [locale, [desktop, phone, plaza]] of Object.entries(captions)) {
