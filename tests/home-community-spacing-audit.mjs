@@ -10,7 +10,7 @@
  *   - the text column and the capture sit inside the shared page column
  *     (.nr-wrap, the same left edge as the sections around it) and never
  *     overlap each other;
- *   - the capture is the real app screen (app-captures/plaza-v5-<lang>…, in the page language), loaded,
+ *   - the capture is the real app screen (app-captures/plaza-v6-<lang>…, in the page language), loaded,
  *     drawn at its own aspect ratio and fully inside its frame;
  *   - the space above and below the section is the site's section rhythm, not
  *     a dead band (no more than the largest normal gap between sections);
@@ -135,7 +135,7 @@ for (const lang of langs) {
       Math.max(state.copy.top, state.art.top);
     if (overlapX > 1 && overlapY > 1)
       fail("copy-and-capture-overlap", { overlapX, overlapY });
-    if (!new RegExp(`/app-captures/plaza-v5-${lang}\\.webp`).test(state.src))
+    if (!new RegExp(`/app-captures/plaza-v6-${lang}\\.webp`).test(state.src))
       fail("not-the-real-capture", { src: state.src });
     if (!state.natural || !state.natural[0])
       fail("capture-not-loaded", { src: state.src });
