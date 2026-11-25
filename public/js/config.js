@@ -14,7 +14,7 @@ window.NIARIM_CONFIG = {
   // 置いた言語。ここに並べた言語だけ、画像を読み込めたときにバッジを表示する。
   // 並べていない言語では「Google Play で手に入れよう」の文字のボタンを表示する。
   // 使える値: "ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"
-  GOOGLE_PLAY_BADGE_LANGS: [],
+  GOOGLE_PLAY_BADGE_LANGS: ["ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"],
 
   // 公式X（空のときは、Xへのリンクを表示しない）
   X_URL: "",

@@ -250,9 +250,12 @@ Cloudflare上でメールを送信する方法を検討した結果、以下の�
 - `node --test tests/admin-core.test.mjs tests/admin-worker.test.mjs`：APIの呼び出し（認証のヘッダー・エラーの日本語化・カーソルでの続きの読み込み）、日本時間の営業日、文字とURLの扱い、Workerの設定の返し方とCSP。
 - `node tests/admin-browser.mjs`：GISと管理APIを差し替えて、ログイン→通報の決まりの表示→一覧→非表示→却下→確認中→投稿の停止と解除→再表示→詳細→ログインの期限切れ→ログアウトを通します（通報の文に入れた `<script>`・`<img onerror>` が文字のまま出ることも）。`ADMIN_BASE_URL=http://127.0.0.1:8790`（`wrangler dev`）を付けるとWorkerのCSPの下で動かし、`ADMIN_SHOTS=artifacts/admin` を付けると画面を撮ります。
 
+## Google Playのバッジ
+
+Googleの公式のGoogle Playのバッジ（7言語、手を加えずに）を `public/assets/badges/google-play/{ja,en,fr,es,ko,zh-Hans,zh-Hant}.png` に置いてある（2026-11-25、`https://play.google.com/intl/<言語>/badges/static/images/badges/<言語>_badge_web_generic.png` から取ったもの。どれも646×250）。表示する言語は `public/js/config.js` の `GOOGLE_PLAY_BADGE_LANGS`。画像を読めない言語では、ストアへのリンクは文字のボタンで出る（`public/js/store-release-link.js`）。英語のバッジだけ、Googleの画像そのものに透明の余白が付いているので、ほかの言語より少し小さく見える（手を加えない決まりなのでそのまま）。
+
 ## 所有者の作業として残っている項目
 
-- Googleの公式のGoogle Playのバッジの画像（7言語、手を加えずに）を `public/assets/badges/google-play/{ja,en,fr,es,ko,zh-Hans,zh-Hant}.png` に置く。置くまでは、ストアへのリンクは文字のボタンで出る（`public/js/store-release-link.js`）。
 - 公式のXのアカウントを載せるときは `public/js/config.js` の `X_URL` に入れる（空の間はXのリンクを出さない）。
 - 運用：お問い合わせのメールの送信（Resendの送信元ドメインの認証）、スパムが増えたときのCloudflare Turnstileの追加、お知らせ（`public/news/`）の掲載。
 

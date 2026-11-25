@@ -187,9 +187,9 @@ test("every page shows the released state, with no pending copy left", () => {
   }
 });
 
-test("without a badge image the text link stays as it is", () => {
+test("a language without a listed badge keeps the text link as it is", () => {
   for (const lang of langs) {
-    const { links, badgeOf } = storefront(home, { lang });
+    const { links, badgeOf } = storefront(home, { lang, badgeLangs: [] });
     assert.equal(links.length, 2);
     for (const link of links) {
       assert.equal(link.hidden, false);
@@ -270,4 +270,29 @@ test("the store link is Google's badge or a plain site button, not an imitation"
     css,
     /\.nr-play-badge-link \[hidden\]\s*\{\s*display:\s*none !important;/,
   );
+});
+
+test("every language has Google's official badge, unaltered and listed", () => {
+  const window = {};
+  runInNewContext(config, { window });
+  assert.deepEqual(
+    [...window.NIARIM_CONFIG.GOOGLE_PLAY_BADGE_LANGS].sort(),
+    [...langs].sort(),
+  );
+  for (const lang of langs) {
+    const file = new URL(
+      `../public/assets/badges/google-play/${lang}.png`,
+      import.meta.url,
+    );
+    assert.ok(existsSync(file), `${lang}.png`);
+    const png = readFileSync(file);
+    assert.equal(
+      png.subarray(0, 8).toString("hex"),
+      "89504e470d0a1a0a",
+      `${lang}.png is a PNG`,
+    );
+    // Google ships every badge at 646 x 250; the page reserves that size.
+    assert.equal(png.readUInt32BE(16), 646, `${lang}.png width`);
+    assert.equal(png.readUInt32BE(20), 250, `${lang}.png height`);
+  }
 });
