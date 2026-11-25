@@ -1,9 +1,9 @@
 source_repo=sakurasemaika-creator/NIARIM
 source_branch=dev_branch
-source_commit=831683ff
-captured_at=2026-11-25T03:30:00Z
+source_commit=236a624b
+captured_at=2026-11-25T07:30:00Z
 screen=/community (作品広場), the app showing sample works through its real backend code path (a fake server answers with 9 sample works in the capture test, so no "sample data" badge). The page shows the note 「画面の作品は見本です」 under the image.
 thumbnails=pictures that are also on this site, each drawn with the app's own brushes and filters: the four ribbon fold types, the Bangs strokes, the crescent curl, the auto-filled character, the dithered pixel-art sunset and the pixel heart
 languages=ja,en,es,fr,ko,zh-Hans,zh-Hant (the app set to each language; titles written in each language with characters the app's fonts carry)
 size=360x760 logical at 2x (720x1520), webp quality 82
-file_names=plaza-v4-<lang>.webp; the home page picks the page's language through img.plaza (public/js/i18n-dict-showcase.js), which the Worker applies before the browser asks for an image
+file_names=plaza-v5-<lang>.webp; the home page picks the page's language through img.plaza (public/js/i18n-dict-showcase.js), which the Worker applies before the browser asks for an image

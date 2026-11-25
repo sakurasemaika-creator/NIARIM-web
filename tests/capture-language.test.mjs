@@ -47,9 +47,9 @@ test("a capture URL takes the page language, Japanese keeps the plain name", () 
     localizedCaptureUrl("/assets/images/app-captures/onion-skin-en.avif", "ko"),
     "/assets/images/app-captures/onion-skin-ko.avif",
   );
-  // Other captures (the Work Plaza: plaza-v4-<lang>.webp, chosen through the
+  // Other captures (the Work Plaza: plaza-v5-<lang>.webp, chosen through the
   // dictionary's img.plaza) are left alone by this rule.
-  const plaza = "/assets/images/app-captures/plaza-v4-ja.webp";
+  const plaza = "/assets/images/app-captures/plaza-v5-ja.webp";
   assert.equal(localizedCaptureUrl(plaza, "en"), plaza);
 });
 
