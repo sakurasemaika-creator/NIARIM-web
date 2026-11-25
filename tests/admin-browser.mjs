@@ -70,10 +70,6 @@ const PNG = Buffer.from(
 const SETTINGS = {
   reportHideThreshold: 3,
   strikeSuspendThreshold: 3,
-  aiMode: "backlog",
-  aiModeSource: "default",
-  aiBacklogThreshold: 20,
-  aiDailyCap: 50,
   mailDailyCap: 30,
 };
 const AUTHOR = "N" + "a".repeat(32);
@@ -181,7 +177,8 @@ function makeBackend(tokens) {
         category: "privacy",
         recommendedAction: "hide",
         rationale: "<b>個人情報</b>が見えています",
-        model: "claude-opus-5-5",
+        model: "claude-subscription",
+        source: "subscription",
         triagedAt: ago(13 * 86400000 - 60000),
       },
     }),
@@ -267,12 +264,6 @@ function makeBackend(tokens) {
     let match;
     if (method === "GET" && path === "/admin/me")
       return [200, { email: "test-moderator", settings }];
-    if (method === "POST" && path === "/admin/settings") {
-      if (!["off", "always", "backlog"].includes(body.aiMode))
-        return [400, { error: "x", code: "INVALID_AI_MODE" }];
-      Object.assign(settings, { aiMode: body.aiMode, aiModeSource: "admin" });
-      return [200, { ok: true, settings }];
-    }
     // The triage endpoints (a backend without them has no settings.triageBot:
     // the first /admin/me here has none, as an older backend would answer).
     if (method === "POST" && path === "/admin/triage/token") {
@@ -760,40 +751,23 @@ try {
         "the ID token is kept in memory only",
       );
 
-      // ---- AI triage setting ---------------------------------------------------------------
-      const current = page.locator("#admin-ai-current");
-      assert.match(
-        await current.textContent(),
-        /通報が多いときだけ（20件以上）（サーバーの既定（デプロイの設定））/,
+      // ---- Rules and the subscription triage (no Anthropic API key) -----------------------
+      assert.equal(
+        await page.locator("#admin-settings-title").textContent(),
+        "通報の決まりとAIの下見",
       );
-      for (const option of [
-        "AIの判定：オフ",
-        "常に判定する",
-        "通報が多いときだけ（20件以上）",
-      ])
-        await page.getByLabel(option).waitFor();
+      assert.equal(await page.locator('input[name="ai-mode"]').count(), 0);
       assert.match(
-        await page.locator("#admin-ai-note").textContent(),
-        /\$0\.01〜0\.02.*1日50件まで/,
+        await page.locator("#admin-settings").textContent(),
+        /AnthropicのAPIキーは使いません/,
       );
-      assert.equal(await page.locator("#admin-ai-save").isDisabled(), true);
-      await page.getByLabel("AIの判定：オフ").check();
-      await page.locator("#admin-ai-save").click();
-      assert.match(
-        await confirmDialog(page).textContent(),
-        /「通報が多いときだけ（20件以上）」から「AIの判定：オフ」に変えます/,
+      assert.doesNotMatch(
+        await page.locator("#admin-settings").textContent(),
+        /anthropic-api-key|\$0\.01/,
       );
-      await confirm(page);
-      await waitNotice(page, /AIの判定の設定を「AIの判定：オフ」にしました/);
-      assert.match(
-        await current.textContent(),
-        /AIの判定：オフ（この管理ページで選んだ設定）/,
-      );
-      assert.deepEqual(
-        backend.log
-          .filter((e) => e.path === "/admin/settings")
-          .map((e) => e.body),
-        [{ aiMode: "off" }],
+      assert.equal(
+        backend.log.filter((e) => e.path === "/admin/settings").length,
+        0,
       );
 
       // ---- The triage key of the scheduled Claude Code session --------------------------------
@@ -1127,7 +1101,7 @@ try {
       await card(page, "rep3CCCC")
         .filter({ hasText: "判定：AI（チャット）" })
         .waitFor();
-      assert.match(await first.textContent(), /判定：AI（API）・/);
+      assert.match(await first.textContent(), /判定：AI（サブスクの下見）・/);
       assert.match(await second.textContent(), /AIが重大と判定したため/);
       assert.match(await second.textContent(), /<b>住所<\/b>が読めます/);
       assert.equal(await page.locator("#admin-queue b").count(), 0);

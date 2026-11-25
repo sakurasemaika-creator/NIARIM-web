@@ -77,7 +77,6 @@ test("POST bodies are JSON with only the documented fields", async () => {
   await api.unhide("abcdefghijk", { keepStrike: false, note: "異議を認めた" });
   await api.suspend(USER, { reason: " 繰り返しの違反 " });
   await api.unsuspend(USER, { resetStrikes: true });
-  await api.updateSettings({ aiMode: "off" });
   const sent = fetch.calls.map(({ url, init }) => [
     init.method,
     url.pathname,
@@ -117,7 +116,6 @@ test("POST bodies are JSON with only the documented fields", async () => {
       "application/json",
       { resetStrikes: true },
     ],
-    ["POST", "/admin/settings", "application/json", { aiMode: "off" }],
   ]);
 });
 
@@ -147,10 +145,7 @@ test("invalid input is refused before it reaches the server", async () => {
     await code(api.hide(REPORT_ID, { workId: "not a video" })),
     "INVALID_WORK_ID",
   );
-  assert.equal(
-    await code(api.updateSettings({ aiMode: "sometimes" })),
-    "INVALID_AI_MODE",
-  );
+  assert.equal("updateSettings" in api, false, "no API-key AI mode to switch");
   assert.equal(await code(api.getReport("../me")), "NOT_FOUND");
   assert.equal(await code(api.getUser("someone")), "NOT_FOUND");
   assert.equal(
@@ -176,7 +171,6 @@ test("every server error code maps to a Japanese message", async () => {
     [400, "INVALID_PAGE_CURSOR", /読み込み直して/],
     [400, "INVALID_NOTE", /1000文字/],
     [400, "INVALID_REASON", /1〜500文字/],
-    [400, "INVALID_AI_MODE", /通報が多いときだけ/],
     [404, "NOT_FOUND", /見つかりません/],
   ];
   for (const [status, code, pattern] of codes) {
@@ -522,15 +516,7 @@ test("AI triage, AI mode and token expiry are read defensively", () => {
     "重大度：重大・分類：個人情報・推奨：非表示をすすめる",
   );
   assert.equal(ok.rationale, "<b>住所</b>");
-  assert.deepEqual(
-    A.aiModeOptions({ aiBacklogThreshold: 20 }).map((o) => o.label),
-    ["AIの判定：オフ", "常に判定する", "通報が多いときだけ（20件以上）"],
-  );
-  assert.equal(A.aiModeSourceLabel("admin"), "この管理ページで選んだ設定");
-  assert.equal(
-    A.aiModeSourceLabel("default"),
-    "サーバーの既定（デプロイの設定）",
-  );
+  assert.equal(A.aiModeOptions, undefined, "no API-key AI mode");
   const payload = Buffer.from(
     JSON.stringify({ exp: 1800000000, name: "テスト" }),
   ).toString("base64url");
@@ -827,14 +813,14 @@ test("the AI triage line names who wrote it", () => {
     triagedAt: "2026-11-24T15:05:00Z",
   };
   const view = (extra) => A.aiTriageView({ ...base, ...extra });
-  assert.equal(view({}).sourceLabel, "AI（API）", "no source is the API");
-  assert.equal(view({ source: "api" }).sourceLabel, "AI（API）");
+  assert.equal(view({}).sourceLabel, "AI", "no source is plain AI");
+  assert.equal(view({ source: "api" }).sourceLabel, "AI", "no API key is used");
   assert.equal(
     view({ source: "subscription" }).sourceLabel,
     "AI（サブスクの下見）",
   );
   assert.equal(view({ source: "chat" }).sourceLabel, "AI（チャット）");
-  assert.equal(view({ source: "<b>x</b>" }).source, "api");
+  assert.equal(view({ source: "<b>x</b>" }).source, "unknown");
   assert.equal(
     view({ source: "chat", model: "some-model" }).byline,
     "判定：AI（チャット）・2026/11/25（水）00:05・some-model",

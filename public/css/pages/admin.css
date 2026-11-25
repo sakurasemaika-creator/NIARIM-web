@@ -326,59 +326,6 @@ a {
 }
 
 /* ---- Settings ---- */
-.admin-ai-form {
-  display: grid;
-  gap: 12px;
-}
-
-.admin-ai-form fieldset {
-  border: 0;
-  padding: 0;
-}
-
-.admin-ai-form legend {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.admin-ai-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.admin-choice {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 6px 14px;
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-control);
-  background: var(--sheet);
-  cursor: pointer;
-}
-
-.admin-choice input {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  accent-color: var(--pencil-ink);
-}
-
-.admin-choice:has(input:checked) {
-  border-color: var(--pencil-ink);
-  box-shadow: inset 0 0 0 1px var(--pencil-ink);
-}
-
-.admin-ai-current {
-  font-weight: 600;
-}
-
-.admin-ai-form .admin-button {
-  justify-self: start;
-}
-
 .admin-rules {
   display: grid;
   grid-template-columns: max-content 1fr;

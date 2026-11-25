@@ -21,7 +21,6 @@
 
   const STATUSES = ["pending", "reviewing", "resolved"];
   const ORDERS = ["oldest", "newest"];
-  const AI_MODES = ["off", "always", "backlog"];
   const DAY_MS = 86400000;
   const JST_OFFSET_MS = 9 * 3600000;
   const TARGET_BUSINESS_DAYS = 10;
@@ -242,7 +241,6 @@
     for (
       let count = 0;
       count < (days === undefined ? TARGET_BUSINESS_DAYS : days);
-
     ) {
       day++;
       if (isBusinessDay(day)) count++;
@@ -367,13 +365,13 @@
       : text(value);
   }
 
-  /** Who wrote a triage: the server's API key, the owner's subscription
-   *  (the scheduled Claude Code session) or a Claude chat pasted back here.
-   *  A triage without `source` was written by the API. */
+  /** Who wrote a triage: the owner's subscription (the scheduled Claude
+   *  Code session) or a Claude chat pasted back here. No Anthropic API key
+   *  is used; any other value is shown as plain 「AI」. */
   const TRIAGE_SOURCE_LABELS = {
-    api: "AI（API）",
     subscription: "AI（サブスクの下見）",
     chat: "AI（チャット）",
+    unknown: "AI",
   };
 
   /**
@@ -395,7 +393,7 @@
       triage.source,
     )
       ? triage.source
-      : "api";
+      : "unknown";
     const sourceLabel = TRIAGE_SOURCE_LABELS[source];
     const triagedAt = formatJstDateTime(triage.triagedAt);
     const model = triage.status === "ok" ? text(triage.model) : "";
@@ -667,29 +665,6 @@
     return { imported, autoHidden, failed };
   }
 
-  function aiModeOptions(settings) {
-    const threshold = settings && settings.aiBacklogThreshold;
-    return [
-      { value: "off", label: "AIの判定：オフ" },
-      { value: "always", label: "常に判定する" },
-      {
-        value: "backlog",
-        label: `通報が多いときだけ（${text(threshold) || "?"}件以上）`,
-      },
-    ];
-  }
-
-  function aiModeLabel(mode, settings) {
-    const option = aiModeOptions(settings).find((o) => o.value === mode);
-    return option ? option.label : text(mode);
-  }
-
-  function aiModeSourceLabel(source) {
-    return source === "admin"
-      ? "この管理ページで選んだ設定"
-      : "サーバーの既定（デプロイの設定）";
-  }
-
   function autoHiddenReasonLabel(reason, settings) {
     if (reason === "ai") return "AIが重大と判定したため";
     if (reason === "reporters") {
@@ -730,8 +705,6 @@
     INVALID_REASON: `停止の理由を1〜${REASON_MAX}文字で入力してください。`,
     INVALID_WORK_ID:
       "作品のIDの形式が正しくありません（YouTubeの動画IDの11文字か、動画のURL）。",
-    INVALID_AI_MODE:
-      "AIの判定の設定は「オフ」「常に判定する」「通報が多いときだけ」のどれかを選んでください。",
     INVALID_KEEP_STRIKE:
       "送った内容の形式が正しくありません。ページを読み込み直してください。",
     INVALID_RESET_STRIKES:
@@ -874,11 +847,6 @@
 
     return {
       me: () => request("GET", "admin/me"),
-      updateSettings({ aiMode } = {}) {
-        if (!AI_MODES.includes(aiMode))
-          return Promise.reject(localError("INVALID_AI_MODE"));
-        return request("POST", "admin/settings", { body: { aiMode } });
-      },
       listReports({ status = "pending", order, limit = 20, cursor } = {}) {
         if (!STATUSES.includes(status))
           return Promise.reject(localError("INVALID_STATUS"));
@@ -1024,7 +992,6 @@
   return {
     STATUSES,
     ORDERS,
-    AI_MODES,
     TARGET_BUSINESS_DAYS,
     WARN_BUSINESS_DAYS,
     NOTE_MAX,
@@ -1065,9 +1032,6 @@
     parseTriageAnswer,
     triageResultReason,
     summarizeTriageResults,
-    aiModeOptions,
-    aiModeLabel,
-    aiModeSourceLabel,
     autoHiddenReasonLabel,
     errorMessage,
     AdminApiError,

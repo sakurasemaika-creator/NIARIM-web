@@ -27,11 +27,6 @@
     email: byId("admin-email"),
     signOut: byId("admin-sign-out"),
     notice: byId("admin-notice"),
-    aiForm: byId("admin-ai-form"),
-    aiOptions: byId("admin-ai-options"),
-    aiCurrent: byId("admin-ai-current"),
-    aiSave: byId("admin-ai-save"),
-    aiNote: byId("admin-ai-note"),
     rules: byId("admin-rules"),
     botStatus: byId("admin-bot-status"),
     botDetails: byId("admin-bot-details"),
@@ -249,8 +244,6 @@
     el.queueSummary.textContent = "";
     setQueueStatus("");
     el.more.hidden = true;
-    el.aiOptions.replaceChildren();
-    el.aiCurrent.textContent = "";
     el.rules.replaceChildren();
     clearTriage();
     el.botStatus.textContent = "";
@@ -346,33 +339,8 @@
 
   // ---- Settings ------------------------------------------------------------
 
-  function selectedAiMode() {
-    return el.aiOptions.querySelector('input[name="ai-mode"]:checked')?.value;
-  }
-
   function renderSettings() {
     const s = state.settings || {};
-    el.aiOptions.replaceChildren(
-      ...A.aiModeOptions(s).map((option) =>
-        h(
-          "label",
-          { class: "admin-choice" },
-          h("input", {
-            type: "radio",
-            name: "ai-mode",
-            value: option.value,
-            checked: option.value === s.aiMode,
-          }),
-          h("span", null, option.label),
-        ),
-      ),
-    );
-    el.aiCurrent.textContent = `いまの設定：${A.aiModeLabel(s.aiMode, s)}（${A.aiModeSourceLabel(s.aiModeSource)}）`;
-    el.aiSave.disabled = true;
-    el.aiNote.textContent =
-      "APIキーでの判定は、サーバーにAPIキー（/niarim/moderation/anthropic-api-key）が設定されているときだけ動きます。" +
-      `費用の目安は通報1件あたり約$0.01〜0.02です。判定は1日${A.text(s.aiDailyCap) || "?"}件までで、それを超えた分は判定しません。` +
-      "AIの判定は参考で、決めるのは運営です。";
     const rule = (term, value) => [h("dt", null, term), h("dd", null, value)];
     el.rules.replaceChildren(
       ...rule(
@@ -393,31 +361,6 @@
       ),
     );
     renderTriageBot();
-  }
-
-  function onAiSubmit(event) {
-    event.preventDefault();
-    const s = state.settings || {};
-    const mode = selectedAiMode();
-    if (!mode || mode === s.aiMode) return;
-    confirmAction({
-      title: "AIの判定の設定を変える",
-      text: [
-        `「${A.aiModeLabel(s.aiMode, s)}」から「${A.aiModeLabel(mode, s)}」に変えます。`,
-        "ここで選んだ設定は、サーバーの既定（デプロイの設定）より優先されます。通報の処理に効くまで最長1分ほどかかります。",
-      ],
-      submitLabel: "変える",
-      keys: ["settings"],
-      run: () => state.api.updateSettings({ aiMode: mode }),
-      done(result) {
-        state.settings = { ...state.settings, ...(result.settings || {}) };
-        renderSettings();
-        notify(
-          `AIの判定の設定を「${A.aiModeLabel(state.settings.aiMode, state.settings)}」にしました。`,
-        );
-      },
-      focusAfter: () => el.aiSave,
-    });
   }
 
   // ---- Triage with the owner's Claude subscription ---------------------------
@@ -1344,10 +1287,6 @@
     };
     for (const [id, card] of state.cards) apply(card, state.reports.get(id));
     apply(el.detailContent.querySelector(".admin-card"), state.detailReport);
-    el.aiSave.disabled =
-      state.busy.has("settings") ||
-      !selectedAiMode() ||
-      selectedAiMode() === state.settings?.aiMode;
     el.botCreate.disabled = state.busy.has(TRIAGE_TOKEN_KEY);
     el.botRevoke.disabled = state.busy.has(TRIAGE_TOKEN_KEY);
     el.promptCopy.disabled = state.busy.has(TRIAGE_PROMPT_KEY);
@@ -1824,8 +1763,6 @@
   el.notice.addEventListener("click", (event) => {
     if (event.target.closest(".admin-notice-close")) el.notice.hidden = true;
   });
-  el.aiOptions.addEventListener("change", syncBusy);
-  el.aiForm.addEventListener("submit", onAiSubmit);
   for (const tab of el.tabs) {
     tab.addEventListener("click", () => {
       if (tab.getAttribute("aria-selected") !== "true")
@@ -1859,7 +1796,7 @@
           hideToken();
           el.botMessage.textContent = "";
         }
-        if (me.settings && !state.busy.has("settings")) {
+        if (me.settings) {
           state.settings = me.settings;
           renderSettings();
         }

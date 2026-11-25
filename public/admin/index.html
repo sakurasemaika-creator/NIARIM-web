@@ -100,29 +100,13 @@
           id="admin-settings"
           aria-labelledby="admin-settings-title"
         >
-          <h2 id="admin-settings-title">AIの判定</h2>
-          <form id="admin-ai-form" class="admin-ai-form">
-            <fieldset>
-              <legend>通報をAIで先に判定するか</legend>
-              <div id="admin-ai-options" class="admin-ai-options"></div>
-            </fieldset>
-            <p class="admin-ai-current" id="admin-ai-current"></p>
-            <button
-              type="submit"
-              class="admin-button"
-              id="admin-ai-save"
-              disabled
-            >
-              この設定に変える
-            </button>
-          </form>
-          <p class="admin-small admin-muted" id="admin-ai-note"></p>
+          <h2 id="admin-settings-title">通報の決まりとAIの下見</h2>
           <dl class="admin-rules" id="admin-rules"></dl>
 
           <section class="admin-sub" aria-labelledby="admin-sub-title">
             <h3 id="admin-sub-title">サブスクのClaudeで下見する</h3>
             <p class="admin-small admin-muted">
-              APIキーの代わりに、Claudeのサブスクで通報の見立て（参考の判定）を書いてもらう方法です。AIが書くのは見立てだけで、決めるのは運営です。「重大」の見立ては、APIキーでの判定と同じく、確認するまで作品を一時非表示にします。
+              Claudeのサブスクで、通報の見立て（参考の判定）を書いてもらいます。AnthropicのAPIキーは使いません。AIが書くのは見立てだけで、決めるのは運営です。「重大」の見立ては、確認するまで作品を一時非表示にします。
             </p>
 
             <section class="admin-sub-part" aria-labelledby="admin-bot-title">
