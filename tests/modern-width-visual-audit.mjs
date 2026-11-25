@@ -16,6 +16,7 @@ const allPages = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/404.html",
 ];
 // AUDIT_PAGES and AUDIT_WIDTHS (comma separated) narrow or widen the sweep,

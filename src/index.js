@@ -70,6 +70,7 @@ const PAGE_KEYS = new Map([
   ["/premium/", "premium"],
   ["/privacy/", "privacy"],
   ["/terms/", "terms"],
+  ["/tokushoho/", "tokushoho"],
 ]);
 
 const OG_LOCALES = {

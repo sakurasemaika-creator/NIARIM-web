@@ -157,4 +157,17 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://niarim.miranima-studio.com/tokushoho/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://niarim.miranima-studio.com/tokushoho/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://niarim.miranima-studio.com/tokushoho/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://niarim.miranima-studio.com/tokushoho/?lang=zh-Hans" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://niarim.miranima-studio.com/tokushoho/?lang=zh-Hant" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://niarim.miranima-studio.com/tokushoho/?lang=ko" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://niarim.miranima-studio.com/tokushoho/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://niarim.miranima-studio.com/tokushoho/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://niarim.miranima-studio.com/tokushoho/" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

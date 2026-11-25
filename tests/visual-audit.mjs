@@ -17,6 +17,7 @@ const routes = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/404.html",
 ];
 const viewports = [

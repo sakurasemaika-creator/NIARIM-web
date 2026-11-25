@@ -23,6 +23,7 @@ export const SEO_PAGE_PATHS = [
   "/premium/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
 ];
 
 export function escapeXml(value) {

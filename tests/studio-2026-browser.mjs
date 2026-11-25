@@ -18,6 +18,7 @@ const routes = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/font-licenses/",
   "/404.html",
 ];

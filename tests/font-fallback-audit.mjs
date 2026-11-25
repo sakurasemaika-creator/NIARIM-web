@@ -29,6 +29,7 @@ const ROUTES = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/news/",
   "/download/",
 ];

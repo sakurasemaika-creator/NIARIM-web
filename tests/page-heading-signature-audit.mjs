@@ -16,6 +16,7 @@ const routes = [
   ["/news/", ".news-header"],
   ["/privacy/", ".legal-header"],
   ["/terms/", ".legal-header"],
+  ["/tokushoho/", ".legal-header"],
 ];
 const findings = [];
 const browser = await chromium.launch(launchOptions());

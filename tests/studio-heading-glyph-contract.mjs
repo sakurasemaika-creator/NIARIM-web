@@ -45,6 +45,7 @@ const routes = [
   "contact/",
   "privacy/",
   "terms/",
+  "tokushoho/",
   "font-licenses/",
 ];
 for (const route of routes) {

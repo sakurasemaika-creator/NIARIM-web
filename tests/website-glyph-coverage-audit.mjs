@@ -70,6 +70,7 @@ const routes = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/news/",
   "/font-licenses/",
   "/account-deletion/",

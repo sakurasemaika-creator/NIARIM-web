@@ -18,6 +18,7 @@ const routes = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/404.html",
 ];
 const languages = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];

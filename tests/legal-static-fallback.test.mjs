@@ -62,6 +62,95 @@ for (const page of ["terms", "privacy"]) {
   });
 }
 
+// The notice under the Specified Commercial Transactions Act (/tokushoho/):
+// the static Japanese text is the dictionary's, every language has every
+// item, the representative, address and telephone number are all "disclosed
+// on request" (owner, 2026-11-25), and the prices are the ones /premium/
+// shows.
+function tokushoho() {
+  const window = { NIARIM_I18N_DICT: {} };
+  const context = vm.createContext({ window });
+  for (const file of [
+    "i18n-dict-nav-extra.js",
+    "i18n-dict-tokushoho.js",
+    "i18n-dict-premium.js",
+  ]) {
+    vm.runInContext(
+      fs.readFileSync(path.join(root, "public", "js", file), "utf8"),
+      context,
+    );
+  }
+  return window.NIARIM_I18N_DICT;
+}
+
+test("static tokushoho text is the dictionary's Japanese text", () => {
+  const ja = tokushoho().ja;
+  const html = fs.readFileSync(
+    path.join(root, "public", "tokushoho", "index.html"),
+    "utf8",
+  );
+  const keys = [];
+  for (const match of html.matchAll(
+    /<(h1|p|dt|dd|span)[^>]*data-i18n="(tokushoho\.[^"]+|footer\.tokushoho)"[^>]*>([\s\S]*?)<\/\1\s*>/g,
+  )) {
+    const [, , key, inner] = match;
+    keys.push(key);
+    assert.equal(typeof ja[key], "string", `${key} has no Japanese text`);
+    assert.equal(
+      decode(inner).replace(/\s+/g, " ").trim(),
+      ja[key].replace(/\s+/g, " ").trim(),
+      key,
+    );
+  }
+  assert.ok(keys.length >= 28, `only ${keys.length} items on /tokushoho/`);
+  for (const address of [
+    "support@miranima-studio.com",
+    "contact@miranima-studio.com",
+  ]) {
+    assert.ok(html.includes(`href="mailto:${address}"`), address);
+  }
+});
+
+test("tokushoho has every item in every language", () => {
+  const dict = tokushoho();
+  const keys = Object.keys(dict.ja).filter(
+    (key) => key.startsWith("tokushoho.") || key === "footer.tokushoho",
+  );
+  for (const lang of ["en", "zh-Hans", "zh-Hant", "ko", "fr", "es"]) {
+    for (const key of keys) {
+      assert.ok(dict[lang]?.[key], `${lang} ${key}`);
+      if (!/\.seller\.value$/.test(key))
+        assert.notEqual(dict[lang][key], dict.ja[key], `${lang} ${key}`);
+    }
+    for (const field of ["title", "description"])
+      assert.ok(dict[lang][`meta.tokushoho.${field}`], `${lang} meta ${field}`);
+  }
+  for (const [lang, table] of Object.entries(dict)) {
+    if (!table["tokushoho.representative.value"]) continue;
+    for (const item of ["address", "phone"])
+      assert.equal(
+        table[`tokushoho.${item}.value`],
+        table["tokushoho.representative.value"],
+        `${lang} ${item} is disclosed on request`,
+      );
+  }
+});
+
+test("tokushoho prices are the prices /premium/ shows", () => {
+  const dict = tokushoho();
+  for (const [lang, table] of Object.entries(dict)) {
+    const price = table["tokushoho.price.value"];
+    if (!price) continue;
+    for (const plan of ["monthly", "yearly"]) {
+      const shown = table[`premiumPage.premium.${plan}.price`]
+        .replace(/[¥円日元圓엔\s]/g, "")
+        .replace(/[,.]/g, "");
+      const digits = price.replace(/\s/g, "").replace(/(\d)[,.](\d)/g, "$1$2");
+      assert.ok(digits.includes(shown), `${lang} ${plan} ${shown}`);
+    }
+  }
+});
+
 test("privacy page describes the website's own handling of information", () => {
   const html = fs.readFileSync(
     path.join(root, "public", "privacy", "index.html"),

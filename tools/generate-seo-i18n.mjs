@@ -24,6 +24,7 @@ const requiredPages = [
   "premium",
   "privacy",
   "terms",
+  "tokushoho",
 ];
 const seo = Object.fromEntries(langs.map((lang) => [lang, {}]));
 const pageTranslations = {};

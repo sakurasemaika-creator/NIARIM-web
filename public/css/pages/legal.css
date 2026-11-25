@@ -147,6 +147,56 @@
   padding: 0.6rem 0.8rem;
   border-bottom: 1px solid var(--rule);
 }
+/* 特定商取引法に基づく表記（/tokushoho/）：項目名と内容の組を1行ずつ並べる。
+   行の間は条文と同じ細い線だけ（カード・影・色の帯は付けない）。広い画面では
+   項目名を左の列に、スマホでは項目名の下に内容を置く。項目名はサイトの dt の
+   決まりどおり見出しの書体（くらむぼん）、内容は本文の書体。 */
+.legal-facts {
+  border-top: 1px solid var(--rule);
+}
+.legal-facts > div {
+  display: grid;
+  gap: 0.25rem;
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--rule);
+}
+.legal-facts dt {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.legal-facts dd {
+  max-width: var(--measure-text);
+  color: var(--ink);
+  line-height: 1.85;
+}
+@media (min-width: 641px) {
+  .legal-facts > div {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    column-gap: var(--space-md);
+  }
+  .legal-facts dt {
+    /* 内容の1行目と同じ高さに揃える（行の高さの差の半分だけ下げる）。 */
+    padding-top: 0.125rem;
+  }
+}
+.legal-body .legal-facts-mail {
+  padding-left: 0;
+  margin-top: 0;
+  list-style: none;
+  gap: 0.25rem;
+}
+/* 韓国語は語の途中で折らない（本文の p・li と同じ。dt・dd はその決まりの
+   対象に入っていなかった）。 */
+:root:lang(ko) .legal-facts :is(dt, dd) {
+  word-break: keep-all !important;
+  overflow-wrap: break-word;
+}
+/* 中国語・韓国語では見出しも本文と同じ書体なので、項目名は補助の文字色で
+   内容と見分ける（太字にすると1つの書体の中で太さが混ざる）。 */
+:root:is(:lang(zh-Hans), :lang(zh-Hant), :lang(ko)) .legal-facts dt {
+  color: var(--ink-2);
+}
 
 /* ---- from the former screen-mock-accuracy-base.css ---- */
 .hero-visual-reuse {

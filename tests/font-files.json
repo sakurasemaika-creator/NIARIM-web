@@ -3,7 +3,6 @@
   "files": {
     "HakkouMincho-latin.woff2": "97becf39e38e476fe073ba10a0cfda28f117c869cecbd47da77d9fc19343e551",
     "Kuramubon-latin.woff2": "7d4d3f06313cdba9784fdd758f2f7371169bc03ed72a7f43faab21b0684c6a36",
-    "Kuramubon-subset.v2.woff2": "86734c1b069a708abc80eb6d9de92c279406d104d47ce8c878ffbfe1c84c7090",
     "NotoSansHeadKR-subset.woff2": "c0f094758f802728bb494a8024c1630a02372f8ab62527f3b4cad5b6cb8d67d9",
     "NotoSansHeadSC-subset.woff2": "8e5a7d43765b3ac0015a1f0aed6759c3698eab4198078de7d6b5ae629a80c833",
     "NotoSerifMenuJP-subset.woff2": "687e90e39408b674354aeeda8f62cf9589aa9a790c579cac0213f56e2facd5f8",
@@ -12,6 +11,7 @@
     "NotoSerifKR-subset.v3.woff2": "678e5f0bacaf20ca6ea28beddc29caf2810dbac28ce685b11c2c0b686c3ec104",
     "NotoSerifSC-subset.v4.woff2": "b32a22144c6191be33ca450546cbdb772230c8fd557e46a6e604f839da2c0770",
     "NotoSerifTC-subset.v4.woff2": "7fc187faf55892fa5f4fa43955f9841acf11acbecf97f93cca0371c3a80bfeb9",
-    "HakkouMincho-subset.v3.woff2": "7f7a65a379a486019b8954880a49a8e7d37fc40c9348ee9e1388d55ad6edb717"
+    "HakkouMincho-subset.v3.woff2": "7f7a65a379a486019b8954880a49a8e7d37fc40c9348ee9e1388d55ad6edb717",
+    "Kuramubon-subset.v3.woff2": "2bdc0fab9a3bb49f1e8e65656732a4a7338e282c8e537fdbed7707c1138ea6c8"
   }
 }

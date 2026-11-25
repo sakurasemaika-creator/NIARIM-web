@@ -20,7 +20,7 @@ const out =
   process.env.LINE_BREAK_AUDIT_OUT || "artifacts/heading-line-breaks.json";
 const PATHS = (
   pathsArg ||
-  "/,/about/,/features/,/help/,/premium/,/opals/,/community/,/news/,/faq/,/contact/,/privacy/,/terms/,/account-deletion/,/font-licenses/,/404.html"
+  "/,/about/,/features/,/help/,/premium/,/opals/,/community/,/news/,/faq/,/contact/,/privacy/,/terms/,/tokushoho/,/account-deletion/,/font-licenses/,/404.html"
 ).split(",");
 const LANGS = (langsArg || "ja,en,es,fr,ko,zh-Hans,zh-Hant").split(",");
 const WIDTHS = (widthsArg || "320,390,768,1024,1440").split(",").map(Number);

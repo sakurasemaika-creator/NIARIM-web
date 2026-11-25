@@ -24,7 +24,7 @@ import { launchOptions } from "./browser-launch.mjs";
 const baseURL = process.env.AUDIT_BASE_URL || "http://127.0.0.1:8787";
 const routes = (
   process.env.HEADING_FONT_ROUTES ||
-  "/,/about/,/features/,/premium/,/opals/,/community/,/help/,/faq/,/news/,/contact/,/privacy/,/terms/,/account-deletion/,/font-licenses/,/404.html"
+  "/,/about/,/features/,/premium/,/opals/,/community/,/help/,/faq/,/news/,/contact/,/privacy/,/terms/,/tokushoho/,/account-deletion/,/font-licenses/,/404.html"
 ).split(",");
 const languages = (
   process.env.HEADING_FONT_LANGS || "ja,en,fr,es,ko,zh-Hans,zh-Hant"

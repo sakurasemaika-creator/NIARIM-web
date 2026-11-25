@@ -49,11 +49,12 @@ NIARIM-web/
 │   ├── faq/index.html          # よくある質問（独立ページ）
 │   ├── privacy/index.html
 │   ├── terms/index.html
+│   ├── tokushoho/index.html    # 特定商取引法に基づく表記（NIARIM Premiumの販売。代表者・所在地・電話番号は請求時に開示）
 │   ├── contact/index.html
 │   ├── news/index.html
 │   ├── features/index.html
 │   ├── robots.txt             # 全ページをクロール許可 + サイトマップの所在
-│   ├── sitemap.xml            # 全11ページ（canonicalと同一URL）
+│   ├── sitemap.xml            # 全13ページ（canonicalと同一URL）
 │   ├── _headers               # 静的アセットのセキュリティヘッダー（下記参照）
 │   ├── assets/
 │   │   ├── images/
@@ -72,6 +73,7 @@ NIARIM-web/
 │       ├── i18n-dict-intl.js    # 翻訳辞書（簡体字中国語・繁体字中国語・韓国語・仏語・西語）
 │       ├── i18n-dict-nav-extra.js  # About/Guideナビ用の追加辞書（全ページ共通）
 │       ├── i18n-dict-legal.js      # プライバシーポリシー・利用規約辞書（/privacy/, /terms/ のみ）
+│       ├── i18n-dict-tokushoho.js  # 特定商取引法に基づく表記の辞書（/tokushoho/ のみ。フッターの項目名は i18n-dict-nav-extra.js）
 │       ├── i18n-dict-advanced.js   # 追加機能紹介辞書（/, /features/ のみ）
 │       ├── i18n-dict-faq-fix.js    # FAQ訂正辞書（/ のみ）
 │       ├── i18n-dict-about.js      # NIARIMとはページ辞書（/about/ のみ）
@@ -114,7 +116,7 @@ npx wrangler dev
 npm run audit
 ```
 
-全12ページを1280/1024/768/375/320pxで開き、次を機械的に確認します。
+全13ページを1280/1024/768/375/320pxで開き、次を機械的に確認します。
 問題が1件でもあれば終了コード1で落ちるので、そのままCIに載せられます。
 
 - JSエラー・失敗したリクエスト・**同一オリジン以外への通信**（フォントを

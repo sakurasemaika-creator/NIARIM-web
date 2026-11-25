@@ -33,6 +33,7 @@ const PAGES = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/404.html",
 ];
 const WIDTHS = [320, 375, 768, 1024, 1280];

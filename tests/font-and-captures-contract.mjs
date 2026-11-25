@@ -18,6 +18,7 @@ const pages = [
     "premium",
     "privacy",
     "terms",
+    "tokushoho",
   ].map((name) => `public/${name}/index.html`),
 ];
 // The font and capture-frame rules (formerly font-and-capture-2026.css) are

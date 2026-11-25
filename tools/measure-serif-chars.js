@@ -32,6 +32,7 @@ const PAGES = [
   "/contact/",
   "/privacy/",
   "/terms/",
+  "/tokushoho/",
   "/404.html",
 ];
 const LANGS = ["ja", "en", "zh-Hans", "zh-Hant", "ko", "fr", "es"];

@@ -18,6 +18,7 @@ const routes = [
   ["public/premium/index.html", "/premium/"],
   ["public/privacy/index.html", "/privacy/"],
   ["public/terms/index.html", "/terms/"],
+  ["public/tokushoho/index.html", "/tokushoho/"],
 ];
 
 function expect(condition, kind, detail) {
