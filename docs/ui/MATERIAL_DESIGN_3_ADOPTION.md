@@ -1,0 +1,3 @@
+# Material Design 3 adoption — NIARIM web
+
+The existing `DESIGN.md` remains the visual contract. Preserve NIARIM's warm paper, restrained coral accent, product-native typography, precise borders and app-centered visuals. Use M3 for semantic components, hierarchy, tokens, states, accessibility, keyboard/focus, adaptive layouts and reduced motion where appropriate. Avoid generic Material-purple, SaaS/dashboard patterns, repeated rounded-card layouts, decorative Expressive effects, untruthful mockups, or unrequested full redesign. Preserve 7-language support. Review desktop/tablet/mobile and localized wrapping when relevant.
