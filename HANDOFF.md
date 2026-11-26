@@ -404,3 +404,8 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
 - Smoke内のブランド契約、価格比較ルール、全Web unit tests、7言語Help/search/disclosure、mobile menu focus/scroll、初期・保存言語、export guide、studio typography/community capture、responsive/image/palette、editorial fonts/motion/browser screenshots、非公開化redaction、Google verification/account deletion mock identity、全ページの日本語PC/mobile captureがすべてsuccess。
 - Evidence artifacts: `refreshed-website-mobile-desktop`（ID `14710901412`、10,117,725 bytes）、`site-all-pages-japanese-full-height`（ID `14710801678`、31,047,040 bytes）。GitHub Actions上に保存済み（14日保持）。Google Drive連携はこの実行環境で利用できず、Driveへの複製は未実施。
 - Cloudflare Access app `niarim-web - Cloudflare Workers` はdestination `preview_worker`、account-member allow policyを維持。previewのみ認証し、本番custom domain / workers.devの公開確認が成功した。
+
+
+## 日本語ユーザー向け文章の推敲（yomiyasu）
+
+日本語のWeb向け文章を新規作成・推敲するときは、上流 `nanaism/yomiyasu` の Agent Skill（version 3.4.1、commit `3979c750b5e1fe9892bd47bb354f0fb51d534ff2`）を草稿後の文章確認に使う。導入先は `.claude/skills/yomiyasu/` と `.agents/skills/yomiyasu/`。対象は日本語のユーザー向けコピーに限り、コード・HTML構造・i18nキー・URL・プレースホルダーは変更対象にしない。日本語の値だけを扱い、他の6言語は既存の翻訳確認手順で検証する。法的文書は所有者の明示依頼がない限り変更せず、既存文言の一括推敲もしない。既存の「NIARIMだけの機能と言い切らない」という文言ルールを優先する。
