@@ -339,7 +339,7 @@
       "premiumPage.start.step1": "앱의 메뉴에서 “계약 상태”를 열고 “프리미엄 회원 자세히 보기”를 선택합니다. 프리미엄 기능을 선택했을 때 표시되는 같은 이름의 버튼에서도 열 수 있습니다.",
       "premiumPage.start.step2": "“월간 플랜” 또는 “연간 플랜”을 선택합니다. 구매하려면 Google 계정으로 로그인해야 합니다.",
       "premiumPage.start.step3": "Google Play 화면에서 구매를 확정합니다. 구매가 반영되지 않을 때는 “구매 복원”에서 다시 확인할 수 있습니다.",
-      "premiumPage.start.renew": "월간·연간 플랜은 해지할 때까지 자동으로 갱신됩니다. 해지는 Google Play의“결제 및 정기 결제”에서 언제든지 할 수 있습니다.",
+      "premiumPage.start.renew": "월간·연간 플랜은 해지할 때까지 자동으로 갱신됩니다. 해지는 Google Play의 “결제 및 정기 결제”에서 언제든지 할 수 있습니다.",
       "premiumPage.faq.title": "프리미엄 플랜에 대한 안내",
       "premiumPage.faq.item1":
         "무료 버전에서 이용 중인 기본 제작 기능이 프리미엄 가입으로 인해 제한되는 일은 없습니다.",
