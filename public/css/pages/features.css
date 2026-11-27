@@ -766,7 +766,7 @@ html body .nr-feature-duo {
 
 /* ---- from the former brand-direction-2026.css ---- */
 body :is(.features-header, .faq-header) h1 {
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 body :is(.features-header, .faq-header) {
   position: relative;

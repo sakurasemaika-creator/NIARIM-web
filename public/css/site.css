@@ -1991,7 +1991,7 @@ p {
   max-width: 24em;
   overflow-wrap: normal;
   word-break: normal;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 /* フッター各列の見出し。ページ本文に h2 が無い場合（/news/ 等）に
    h1 から h3 へ飛ぶ見出し階層になってしまっていたため h2 にした。 */
@@ -2048,6 +2048,18 @@ p {
 
 .footer-social a:hover {
   background: rgba(255, 255, 255, 0.18);
+}
+/* From 781px to 1023px the four columns left the brand column 183px wide,
+   too narrow for its one-phrase tagline, which broke inside a word. The
+   brand takes the first row and the three link columns share the next. */
+@media (max-width: 1023px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 @media (max-width: 780px) {
   .footer-grid {
@@ -3611,11 +3623,14 @@ html:lang(ja)
     scroll-behavior: auto !important;
   }
 }
+/* Japanese headings are balanced, not "pretty": Chrome's pretty wrapping
+   still left one phrase alone on the last line of short headings at phone
+   widths (「NIARIMでできる／こと」, 「無料版とプレミアムの／違い」). */
 html:lang(ja) body main :is(h1, h2, h3, h4, h5, h6),
 html:lang(ja) body :is(.footer-col h2, .section-title, .feature-title) {
   letter-spacing: 0.018em !important;
   line-height: 1.36;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 html body .site-header :is(a, button) {
   -webkit-tap-highlight-color: transparent;

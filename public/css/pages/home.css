@@ -2013,6 +2013,7 @@ body:has(.capture-viewer[open]) {
   color: var(--ink-2);
   font: 400 0.8125rem / 1.5 var(--font-sans);
   text-align: center;
+  text-wrap: balance;
 }
 
 /* Custom brushes: one sheet, three labelled groups (the fold types of the
@@ -2280,7 +2281,7 @@ body:has(.capture-viewer[open]) {
   padding: 0;
   list-style: none;
   color: var(--ink-2);
-  font: 400 0.75rem / 1.5 var(--font-sans);
+  font: 400 0.8125rem / 1.5 var(--font-sans);
 }
 
 #main .tp-legend li {

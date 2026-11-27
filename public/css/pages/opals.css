@@ -564,6 +564,14 @@ html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
   background: var(--sheet);
   text-align: left;
   white-space: normal;
+  /* A perk name that wraps keeps more than one character on its last line
+     (「…追加・編/集」 at 320px). */
+  text-wrap: balance;
+}
+/* keep-all leaves Japanese perk names no break point but 「・」, so a long
+   name broke inside a word; Japanese breaks between phrases instead. */
+html:lang(ja) #main .coins-table :is(thead, tbody) th:first-child {
+  word-break: auto-phrase;
 }
 
 #main .coins-table tbody tr:last-child :is(th, td) {
@@ -626,7 +634,7 @@ html:lang(ja) body .coins-main [data-i18n="coins.compareFull"] {
 #main .coins-table--priced .coins-pack-tag {
   margin-top: 4px;
   color: var(--pencil-ink);
-  font: 400 0.75rem / 1.35 var(--font-serif);
+  font: 400 0.8125rem / 1.35 var(--font-serif);
   letter-spacing: 0.02em;
 }
 /* What the pack saves in each period, written as a difference (−). */
