@@ -261,11 +261,13 @@ body[data-i18n-title="meta.home.title"] #faq {
   }
 }
 /* 全角言語では ch ではなく em 基準で行長を決める。 */
-:root:lang(ja),
+:root:lang(ja) {
+  --measure-ch: 0.42em;
+}
 :root:lang(zh-Hans),
 :root:lang(zh-Hant),
 :root:lang(ko) {
-  --measure-ch: 0.62em;
+  --measure-ch: 0.5em;
 }
 /* Keep headings and body text in the same serif family for Chinese and Korean. */
 :root {

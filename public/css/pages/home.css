@@ -1095,8 +1095,8 @@ html body.nr-site .nr-plaza-capture-image {
 }
 html body.nr-site .nr-plaza-capture figcaption {
   margin: 13px 0 0;
-  font-size: 0.69rem;
-  letter-spacing: 0.09em;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
   color: #65525a;
   line-height: 1.5;
 }
@@ -1904,19 +1904,24 @@ body:has(.capture-viewer[open]) {
 
 #main .tp-unique-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(32px, 4vw, 56px) clamp(20px, 3vw, 40px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(48px, 6vw, 80px) clamp(24px, 3.4vw, 48px);
 }
-
+/* The name and the description come first and the picture follows. In a
+   row of two the pictures sit at the foot of their column, so they line up
+   whatever the length of the text above them. */
 #main .tp-feature {
   display: grid;
-  grid-template-rows: auto auto 1fr;
-  align-content: start;
+  grid-template-rows: auto 1fr auto;
   margin: 0;
 }
 
+#main .tp-feature--wide {
+  grid-template-rows: auto auto auto;
+}
+
 #main .tp-feature h3 {
-  margin: 18px 0 0;
+  margin: 0;
   color: var(--ink);
   font: 400 1.125rem / 1.4 var(--font-serif);
 }
@@ -1930,10 +1935,10 @@ body:has(.capture-viewer[open]) {
 
 #main .tp-figure {
   display: flex;
-  height: clamp(200px, 22vw, 280px);
+  height: clamp(220px, 24vw, 320px);
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: 20px 0 0;
   padding: 16px;
   overflow: hidden;
   border: 1px solid var(--rule);
@@ -1957,7 +1962,7 @@ body:has(.capture-viewer[open]) {
 /* Before / after: two equal panels side by side, each with its own name
    underneath, so the two can be compared at a glance. */
 #main
-  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
+  :is(.tp-pair, .tp-brush-items, .tp-mix-sheet, .tp-steps, .tp-filter-grid)
   figure {
   display: grid;
   gap: 6px;
@@ -1979,27 +1984,13 @@ body:has(.capture-viewer[open]) {
 }
 
 #main
-  :is(.tp-pair, .tp-strips, .tp-brush-items, .tp-steps, .tp-filter-grid)
+  :is(.tp-pair, .tp-brush-items, .tp-mix-sheet, .tp-steps, .tp-filter-grid)
   figcaption {
   color: var(--ink-2);
   font: 400 0.75rem / 1.4 var(--font-sans);
   text-align: center;
 }
 
-#main .tp-strips {
-  display: grid;
-  align-content: center;
-  gap: 14px;
-}
-
-#main .tp-strips figure {
-  justify-items: start;
-  width: 100%;
-}
-
-#main .tp-strips img {
-  width: 100%;
-}
 /* Custom brushes: one sheet, three labelled groups (the fold types of the
    ribbon brush, the hair presets, pixel mode off and on). */
 #main .tp-feature--wide {
@@ -2007,6 +1998,7 @@ body:has(.capture-viewer[open]) {
 }
 
 #main .tp-brush-sheet {
+  margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px clamp(24px, 4vw, 64px);
@@ -2065,6 +2057,42 @@ body:has(.capture-viewer[open]) {
   max-width: 100%;
   height: auto;
   max-height: var(--brush-box);
+}
+/* Colour mixing: the three mixing modes side by side, drawn with the same
+   brush; under the watercolour one, the same picture after the Watercolour
+   Edge draw filter, with its explanation beside it. */
+#main .tp-mix-sheet {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px clamp(16px, 2vw, 24px);
+  margin-top: 24px;
+}
+
+#main .tp-mix-sheet figure {
+  gap: 8px;
+}
+
+#main .tp-mix-sheet img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet);
+}
+
+#main .tp-mix-edge-text {
+  grid-column: 1 / span 2;
+  align-self: center;
+  max-width: min(36em, var(--measure-text));
+}
+
+#main .tp-mix-edge-text .tp-subhead {
+  margin-top: 0;
+}
+
+#main .tp-mix-edge {
+  grid-column: 3;
 }
 /* The hearts are 32 px canvases shown at a whole multiple of their size,
    nearest neighbour, so every pixel stays square. */
@@ -2300,9 +2328,11 @@ body:has(.capture-viewer[open]) {
   max-width: 1000px;
 }
 
-/* A wide timeline capture: full width on large screens; on narrow ones it
-   keeps a readable size and scrolls sideways inside its frame. */
+/* A wide timeline capture: the whole picture always fits the column, so
+   nothing is cut off at the sides. On a narrow column "Actual size" shows it
+   at the app's own size (1280 px), scrolled sideways inside its frame. */
 #main .tp-wide-capture {
+  container: tp-wide / inline-size;
   margin: 24px 0 0;
 }
 
@@ -2321,15 +2351,60 @@ body:has(.capture-viewer[open]) {
 #main .tp-wide-capture img {
   display: block;
   width: 100%;
-  min-width: 860px;
   height: auto;
+}
+
+#main .tp-wide-capture.is-zoomed img {
+  min-width: 1280px;
+}
+
+#main .tp-wide-zoom {
+  display: none;
+  gap: 6px;
+  align-items: center;
+  min-height: 44px;
+  margin: 4px 0 0 auto;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font: 400 var(--fs-small) / 1.2 var(--font-sans);
+  cursor: pointer;
+}
+
+#main .tp-wide-capture.is-ready .tp-wide-zoom {
+  display: flex;
+}
+
+#main .tp-wide-zoom:hover {
+  background: rgba(40, 36, 44, 0.06);
+}
+
+#main .tp-wide-zoom:focus-visible {
+  outline: 2px solid var(--pencil);
+  outline-offset: 2px;
+}
+
+#main .tp-wide-zoom[aria-pressed="true"] {
+  color: var(--pencil-ink);
+}
+
+#main .tp-wide-zoom .ic {
+  width: 18px;
+  height: 18px;
+}
+@container tp-wide (min-width: 1100px) {
+  #main .tp-wide-capture.is-ready .tp-wide-zoom {
+    display: none;
+  }
 }
 
 #main .tp-wide-capture figcaption {
   max-width: min(52em, var(--measure-text));
-  margin-top: 8px;
+  margin-top: 4px;
   color: var(--ink-2);
-  font: 400 0.75rem / 1.6 var(--font-sans);
+  font: 400 0.8125rem / 1.7 var(--font-sans);
 }
 @media (max-width: 1023px) {
   #main .tp-unique-list {
@@ -2351,6 +2426,19 @@ body:has(.capture-viewer[open]) {
 @media (max-width: 599px) {
   #main .tp-unique-list {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  #main .tp-mix-sheet {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  #main :is(.tp-mix-edge-text, .tp-mix-edge) {
+    grid-column: auto;
+  }
+
+  #main .tp-mix-edge-text {
+    margin-top: 12px;
   }
 
   #main .tp-figure {

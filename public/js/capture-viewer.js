@@ -172,3 +172,35 @@
     document.addEventListener("DOMContentLoaded", init, { once: true });
   } else init();
 })();
+
+// The wide timeline capture on the top page: the whole picture fits the
+// column at every width (nothing is cut off at the sides). Where the column
+// is narrow, "Actual size" shows it at the app's own size instead, scrolled
+// sideways inside its frame, and the frame takes focus for the arrow keys.
+(function () {
+  "use strict";
+
+  function init() {
+    document.querySelectorAll(".tp-wide-capture").forEach(function (figure) {
+      const button = figure.querySelector(".tp-wide-zoom");
+      const frame = figure.querySelector(".tp-wide-capture-scroll");
+      if (!button || !frame) return;
+      figure.classList.add("is-ready");
+      button.addEventListener("click", function () {
+        const zoomed = button.getAttribute("aria-pressed") !== "true";
+        button.setAttribute("aria-pressed", String(zoomed));
+        figure.classList.toggle("is-zoomed", zoomed);
+        if (zoomed) {
+          frame.setAttribute("tabindex", "0");
+        } else {
+          frame.removeAttribute("tabindex");
+          frame.scrollLeft = 0;
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else init();
+})();

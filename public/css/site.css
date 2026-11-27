@@ -147,7 +147,7 @@ p {
   --measure-ch: 1ch;
   /* 地の文（段落・説明・注記・回答・規約の本文）の1行の長さの上限。
      欧文は 64ch（このサイトの欧文の書体では1行の上限がおよそ70字）、
-     全角の言語は --measure-ch が 0.62em になるので約40em（1行40字まで）。
+     全角の言語は --measure-ch を言語ごとの字幅から決める（1行およそ40字）。
      使う要素の文字の大きさで決まるので、小さい注記も同じ字数で折り返す。 */
   --measure-text: calc(64 * var(--measure-ch));
   --color-white: #ffffff;
@@ -275,12 +275,20 @@ body[data-i18n-title="meta.home.title"] #faq + .section {
     padding-block: var(--space-md);
   }
 }
-/* 全角言語では ch ではなく em 基準で行長を決める。 */
-:root:lang(ja),
+/* 全角言語では ch ではなく em 基準で行長を決める。
+   係数は本文の書体で実際に測った1字の平均の幅から決める（1行およそ40字）。
+   白光明朝の日本語はかなが細く平均0.59em、中国語（Noto Serif SC）は0.75em、
+   韓国語は語の間に空白が入り0.48em。0.62emでは日本語が1行55〜60字、
+   中国語が50字を超えていた。 */
+:root:lang(ja) {
+  --measure-ch: 0.42em;
+}
 :root:lang(zh-Hans),
-:root:lang(zh-Hant),
+:root:lang(zh-Hant) {
+  --measure-ch: 0.5em;
+}
 :root:lang(ko) {
-  --measure-ch: 0.62em;
+  --measure-ch: 0.5em;
 }
 /* Keep headings and body text in the same serif family for Chinese and Korean. */
 :root {
