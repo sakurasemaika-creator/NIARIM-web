@@ -14,7 +14,7 @@
       q: "Is my work used to train AI?",
       a: "No. NIARIM does not use illustrations, animations, project data, or other works created or published by users as training data for generative AI models. Creation data and video files are not sent to or stored on the developer’s servers. When you publish a work to the Work Plaza, the video file is stored on YouTube; NIARIM manages only information needed to display the work, such as the YouTube video ID and title.",
       about:
-        "NIARIM does not include generative-AI features, and works or project data created or published by users are not used as training data for generative AI models.",
+        "NIARIM does not include generative-AI features, and it does not use works or project data created or published by users as training data for generative AI models.",
       privacy:
         "The developer does not use content created or published by users, project data, or other creation data as training data for generative AI models or other machine-learning models.",
     },

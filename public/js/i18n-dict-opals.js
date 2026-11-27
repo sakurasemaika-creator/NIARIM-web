@@ -86,7 +86,7 @@
     "coins.notice": "Opals cannot be exchanged for cash. Check the app for benefit availability and collection or redemption conditions.",
     "coins.b1": "Add and edit your own watermark",
     "coins.b2": "Tone Curve (drawing)",
-    "coins.b3": "Level Correction (drawing)",
+    "coins.b3": "Levels (drawing)",
     "coins.b11": "Complete Pack",
     "coins.compareIntro": "The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 110,000 and 1,100,000 separately. The table compares the pack with those individual prices for the same period.",
     "coins.compareFull": "Complete Pack",

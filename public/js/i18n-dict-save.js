@@ -61,9 +61,9 @@
       "featuresPage.save.item1.title": "自动保存",
       "featuresPage.save.item1.body":
         "可在保存列表中切换自动保存与手动保存。作品文件损坏时，会从最新的可读取自动保存恢复。",
-      "featuresPage.save.item2.title": "存档栏位",
+      "featuresPage.save.item2.title": "存档槽",
       "featuresPage.save.item2.body":
-        "保存到固定数量的栏位中，可在任意时刻调出。",
+        "保存到固定数量的存档槽中，可在任意时刻调出。",
       "featuresPage.save.item3.title": "存档树",
       "featuresPage.save.item3.body":
         "保存次数没有限制，可以像分支一样保留制作过程的历史记录。",

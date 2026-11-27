@@ -176,8 +176,8 @@
       "premiumPage.premium.yearly.label": "年付方案",
       "premiumPage.premium.yearly.price": "5,500 日元",
       "premiumPage.premium.yearly.unit": "／年（含税）",
-      "premiumPage.premium.yearly.badge.pre": "实质",
-      "premiumPage.premium.yearly.badge.main": "2个月免费",
+      "premiumPage.premium.yearly.badge.pre": "相当于",
+      "premiumPage.premium.yearly.badge.main": "免费2个月",
       "premiumPage.premium.yearly.basis": "按月支付12个月",
       "premiumPage.premium.yearly.fullPrice": "6,600 日元",
       "premiumPage.premium.item1.title": "移除广告",
@@ -294,7 +294,7 @@
       "premiumPage.priceNote":
         "요금과 구매 조건은 변경될 수 있습니다. 구매 전에 Google Play에 표시된 최신 요금과 조건을 확인해 주세요.",
       "premiumPage.free.title": "무료 버전",
-      "premiumPage.free.price": "0원",
+      "premiumPage.free.price": "0엔",
       "premiumPage.free.item1":
         "모든 기본 제작 기능（그리기·애니메이션·편집·오디오）",
       "premiumPage.free.item2": "영상 내보내기（최대 1920×1920）",
@@ -310,10 +310,10 @@
       "premiumPage.premium.yearly.price": "5,500엔",
       "premiumPage.premium.yearly.unit": "／년（세금 포함）",
       "premiumPage.premium.yearly.badge.pre": "실질",
-      "premiumPage.premium.yearly.badge.main": "2개월 무료",
+      "premiumPage.premium.yearly.badge.main": "2개월분 무료",
       "premiumPage.premium.yearly.basis": "월간 플랜 12개월 합계",
       "premiumPage.premium.yearly.fullPrice": "6,600엔",
-      "premiumPage.premium.item1.title": "광고 비표시",
+      "premiumPage.premium.item1.title": "광고 제거",
       "premiumPage.premium.item1.body": "앱 내 모든 광고 표시가 사라집니다.",
       "premiumPage.premium.item2.title": "공식 엔드마크 표시 전환",
       "premiumPage.premium.item2.body": "혜택이 유효하면 타임라인에서 작품별로 공식 로고의 표시 여부를 설정할 수 있습니다.",
@@ -330,7 +330,7 @@
       "premiumPage.premium.item6.body": "최대 2시간까지 만들고 내보낼 수 있습니다. 혜택이 끝나도 작품은 보관되며 처음 90초는 내보낼 수 있습니다.",
       "premiumPage.premium.item7.title": "작품 광장 하루 최대 3개 게시",
       "premiumPage.premium.item7.body":
-        "'작품광장'에 게시할 수 있는 작품 수가 무료 버전의 하루 1개에서 하루 3개로 늘어납니다.",
+        "'작품 광장'에 게시할 수 있는 작품 수가 무료 버전의 하루 1개에서 하루 3개로 늘어납니다.",
       "premiumPage.premium.automation.title":
         "사용자 지정 자동 작업(동작 기록)",
       "premiumPage.premium.automation.body":

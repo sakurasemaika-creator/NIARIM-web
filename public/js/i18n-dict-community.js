@@ -105,7 +105,7 @@
         "Tags aren’t just for the poster — anyone can add or remove them. Posters can lock important tags so others can’t delete them. Tap a tag to narrow the list down to works that share it.",
       "communityPage.advanced.follow.title": "Follows and reposts",
       "communityPage.advanced.follow.body":
-        "You can follow the creators you like. Switch to the \"Following\" tab to catch up on just their new work. You can share other people’s work with \"Repost\", and when someone you follow reposts a work it appears in your Following tab too, labelled \"Reposted by …\". Only you can view the lists of users you follow, your followers, and works you have bookmarked. Other users see only your following and follower counts. Following, bookmarking, or reposting does not send the other user an individual notification about that action.",
+        "You can follow the creators you like. Switch to the \"Following\" tab to catch up on just their new work. You can share other people’s work with \"Repost\", and when someone you follow reposts a work it appears in your Following tab too, labeled \"Reposted by …\". Only you can view the lists of users you follow, your followers, and works you have bookmarked. Other users see only your following and follower counts. Following, bookmarking, or reposting does not send the other user an individual notification about that action.",
       "communityPage.advanced.preview.title": "Floating preview & work details",
       "communityPage.advanced.preview.body":
         'Tapping a work card doesn’t jump straight to another screen. A small preview window appears in the corner, letting the video keep playing while you browse elsewhere. Drag it around or resize it freely. Tap "Details" to see the full work-detail screen with post date, author, tags, and bookmark count.',
@@ -157,7 +157,7 @@
         "标签不仅限于投稿者，任何人都可以添加或删除。投稿者可以锁定重要标签，防止他人删除。点击标签即可只筛选出带有该标签的作品。",
       "communityPage.advanced.follow.title": "关注与转发",
       "communityPage.advanced.follow.body":
-        "可以关注喜欢的作者。切换到“关注中”标签，即可只追看该作者的新作品。他人的作品可通过“转发”介绍出去；关注的作者转发了某个作品时，该作品也会标注“○○转发”并出现在“关注中”标签中。仅本人可查看关注的用户列表、粉丝列表和已收藏的作品列表。其他用户只能看到关注数和粉丝数。关注、收藏或转发时，系统不会向对方发送有关该操作的单独通知。",
+        "可以关注喜欢的作者。切换到“关注”标签，即可只追看该作者的新作品。他人的作品可通过“转发”介绍出去；关注的作者转发了某个作品时，该作品也会标注“○○转发”并出现在“关注”标签中。仅本人可查看关注的用户列表、粉丝列表和已收藏的作品列表。其他用户只能看到关注数和粉丝数。关注、收藏或转发时，系统不会向对方发送有关该操作的单独通知。",
       "communityPage.advanced.preview.title": "悬浮预览与作品详情",
       "communityPage.advanced.preview.body":
         "点击作品卡片不会立即跳转到其他画面。屏幕角落会出现一个小型预览窗口，让视频继续播放的同时可以浏览其他画面。可自由拖动、调整大小。点击“查看详情”即可看到汇总了投稿日期、投稿者、标签、收藏数等信息的作品详情画面。",
@@ -222,18 +222,18 @@
       "communityPage.cta.link": "下載應用程式",
     },
     ko: {
-      "meta.community.title": "작품광장",
+      "meta.community.title": "작품 광장",
       "meta.community.description":
         "NIARIM으로 만든 작품을 신작과 랭킹에서 발견할 수 있는 커뮤니티 기능을 소개합니다.",
       "communityPage.eyebrow": "Community",
-      "communityPage.title": "작품광장",
+      "communityPage.title": "작품 광장",
       "communityPage.lead":
         "NIARIM으로 제작된 작품을 발견할 수 있는 커뮤니티 기능입니다. 열람은 로그인 없이 가능해 누구나 부담 없이 즐길 수 있습니다.",
       "communityPage.tabs.overall": "누적",
       "communityPage.tabs.yearly": "연간",
       "communityPage.tabs.monthly": "월간",
       "communityPage.tabs.weekly": "주간",
-      "communityPage.tabs.daily": "데일리",
+      "communityPage.tabs.daily": "일간",
       "communityPage.tabs.latest": "신작",
       "communityPage.search.eyebrow": "Discover",
       "communityPage.search.title": "다양한 탐색 방법",
@@ -255,10 +255,10 @@
       "communityPage.moreInApp.link": "NIARIM 다운로드",
       "communityPage.advanced.title": "더 즐겁게, 더 편리하게",
       "communityPage.advanced.lead":
-        "모두 함께 태그를 가꾸거나, 영상을 재생한 채로 다른 화면을 둘러보거나, 자투리 시간에 가볍게 훑어보거나. 작품광장을 더 즐겁게 만드는 장치들입니다.",
+        "모두 함께 태그를 가꾸거나, 영상을 재생한 채로 다른 화면을 둘러보거나, 자투리 시간에 가볍게 훑어보거나. 작품 광장을 더 즐겁게 만드는 장치들입니다.",
       "communityPage.advanced.tags.title": "모두가 함께 가꾸는 태그",
       "communityPage.advanced.tags.body":
-        "태그는 투고자뿐만 아니라 누구나 추가·삭제할 수 있습니다. 투고자는 중요한 태그를 잠가 다른 사람이 삭제하지 못하게 할 수도 있습니다. 태그를 탭하면 해당 태그를 가진 작품만 좁혀서 찾을 수 있습니다.",
+        "태그는 게시자뿐만 아니라 누구나 추가·삭제할 수 있습니다. 게시자는 중요한 태그를 잠가 다른 사람이 삭제하지 못하게 할 수도 있습니다. 태그를 탭하면 해당 태그를 가진 작품만 좁혀서 찾을 수 있습니다.",
       "communityPage.advanced.follow.title": "팔로우와 리포스트",
       "communityPage.advanced.follow.body":
         "마음에 드는 작가를 팔로우할 수 있습니다. 「팔로잉」 탭으로 전환하면 그 작가의 새 작품만 모아서 볼 수 있습니다. 다른 사람의 작품은 「리포스트」로 소개할 수 있으며, 팔로우 중인 작가가 어떤 작품을 리포스트하면 그 작품도 「○○님이 리포스트」로 표시되어 「팔로잉」 탭에 함께 나타납니다. 팔로잉 목록, 팔로워 목록, 북마크한 작품 목록은 본인만 볼 수 있습니다. 다른 사용자에게는 팔로잉 수와 팔로워 수만 표시합니다. 팔로우, 북마크 또는 리포스트를 해도 상대방에게 해당 작업에 대한 개별 알림이 전송되지 않습니다.",
@@ -270,7 +270,7 @@
         "작품 목록을 전체·세로 화면만·가로 화면만으로 필터링할 수 있습니다. 세로 화면 작품은 버튼 하나로 전체 화면 세로 스크롤 재생으로 전환할 수 있습니다.",
       "communityPage.cta.title": "당신의 작품도, 이곳에.",
       "communityPage.cta.body":
-        "NIARIM으로 애니메이션을 만들어 작품 광장에 투고해 보지 않으시겠어요?",
+        "NIARIM으로 애니메이션을 만들어 작품 광장에 게시해 보지 않으시겠어요?",
       "communityPage.cta.link": "앱 다운로드",
     },
     fr: {

@@ -54,7 +54,7 @@
         "オニオンスキン・トーン・スタンプ・定規・テキストなど、仕上げまで見据えた作画支援ツールを搭載しています。",
     },
     en: {
-      "featuresPage.nav.advanced": "Pro Tools",
+      "featuresPage.nav.advanced": "Advanced Tools",
       "featuresPage.advanced.title": "Advanced Tools",
       "featuresPage.advanced.lead":
         "A step further for drawing and finishing work.",
@@ -112,12 +112,12 @@
       "featuresPage.advanced.item3.title": "图章（Stamp）",
       "featuresPage.advanced.item3.body":
         "可将常用素材注册为图章，反复配置使用。与用网点表现阴影的网点纸不同，图章是配置图案本身的功能。",
-      "featuresPage.advanced.item4.title": "尺规",
+      "featuresPage.advanced.item4.title": "标尺",
       "featuresPage.advanced.item4.body":
-        "使用直线、圆形和椭圆尺规，可以准确地画出所需线条。",
+        "使用直线、圆形和椭圆标尺，可以准确地画出所需线条。",
       "featuresPage.advanced.item5.title": "文字",
       "featuresPage.advanced.item5.body":
-        "可选择字体，将对白或文字元素配置到作品中。",
+        "可选择字体，将对白或文字元素放置到作品中。",
       "featuresPage.advanced.item6.title": "滤镜",
       "featuresPage.advanced.item6.body":
         "通过特效、色调调整等滤镜，调整作品的完成质感。",
@@ -218,7 +218,7 @@
         "이미지 또는 텍스트 워터마크를 작품에 추가할 수 있습니다（프리미엄 기능）.",
       "featuresPage.advanced.item9.title": "픽셀 모드",
       "featuresPage.advanced.item9.body":
-        "도트 그림처럼 픽셀로 표현한 작품을 만들 수 있는 모드입니다. 전용 도트 그림 팔레트를 만들고 저장해 두었다가, 그리거나 도트 그림 필터를 적용할 때 골라 쓸 수 있습니다. 팔레트는 .niapixelpalette 파일로 내보내기·가져오기할 수 있어 다른 사람과 공유할 수도 있습니다.",
+        "픽셀 아트처럼 픽셀로 표현한 작품을 만들 수 있는 모드입니다. 전용 픽셀 아트 팔레트를 만들고 저장해 두었다가, 그리거나 픽셀 아트 필터를 적용할 때 골라 쓸 수 있습니다. 팔레트는 .niapixelpalette 파일로 내보내기·가져오기할 수 있어 다른 사람과 공유할 수도 있습니다.",
       "featuresPage.advanced.item10.title": "색상 선택기",
       "featuresPage.advanced.item10.body":
         "색상·채도·명도로 그리기 색을 직관적으로 선택할 수 있습니다.",

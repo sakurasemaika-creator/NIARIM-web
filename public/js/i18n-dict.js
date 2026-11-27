@@ -456,13 +456,13 @@
       "contact.title": "Contact Us",
       "contact.lead":
         "For bug reports, feature requests, or questions about how to use the app, please reach out to us on X first.",
-      "contact.channel.title": "Start with official X",
+      "contact.channel.title": "Start with our official X account",
       "contact.channel.body":
         "For bug reports, feature requests, or questions about how to use the app, feel free to reply or send a direct message to our official X account.",
       "contact.channel.link": "Contact us on X",
       "contact.personalNote":
         "We can’t handle inquiries involving personal information, such as your account or email address, on X. Please use the form on the right instead.",
-      "contact.personalNote.formNote": "※ Submissions are received by email.",
+      "contact.personalNote.formNote": "Note: Submissions are received by email.",
       "contact.form.type": "Inquiry type",
       "contact.form.type.bug": "Bug report",
       "contact.form.type.request": "Feature request",
@@ -563,7 +563,7 @@
         "Fine-tune your brush feel with fade, stroke decay, color mixing, pressure curves, and more.",
       "featuresPage.drawing.item15.title": "Tag search for assets",
       "featuresPage.drawing.item15.body":
-        "Brushes, tones and stamps carry tags such as line art, fill, blur, analogue, pixel art and halftone, so you can narrow things down by tag even when you can’t remember a name. One tap switches between keyword and tag search, and you can tag your own assets yourself.",
+        "Brushes, tones and stamps carry tags such as line art, fill, blur, analog, pixel art and halftone, so you can narrow things down by tag even when you can’t remember a name. One tap switches between keyword and tag search, and you can tag your own assets yourself.",
 
       "featuresPage.animation.title": "Animation",
       "featuresPage.animation.lead":
@@ -642,7 +642,7 @@
       "featuresPage.export.item2.body": "Set the aspect ratio freely.",
       "featuresPage.export.item3.title": "Find and share an exported file",
       "featuresPage.export.item3.body":
-        "Find your export by its project name in Works on the home screen. Choose Share to save it to Photos or open it in another app.",
+        "Find your export by its project name in Works on the home screen. Choose Share to save it to a photo app or open it in another app.",
       "featuresPage.export.filenameExample": "My first animation 20261120-143000.gif",
       "featuresPage.export.item4.title": "Export formats",
       "featuresPage.export.item4.body":

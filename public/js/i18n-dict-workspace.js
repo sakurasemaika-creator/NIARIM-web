@@ -121,7 +121,7 @@
       "featuresPage.workspace.title": "작업 환경",
       "featuresPage.workspace.lead":
         "주로 쓰는 손과 조작 스타일에 맞춰 UI 자체를 커스터마이즈할 수 있습니다.",
-      "featuresPage.workspace.item1.title": "워크스페이스",
+      "featuresPage.workspace.item1.title": "작업 공간",
       "featuresPage.workspace.item1.body":
         "왼손 모드나 PC·DeX 모드 등의 설정을 한데 모아 이름을 붙여 저장하고, 애니메이션용·선화용·배경용 등 용도별로 전환할 수 있습니다.",
       "featuresPage.workspace.item2.title": "왼손 모드",
@@ -141,7 +141,7 @@
       "fd.gestureUndo": "실행 취소",
       "fd.gestureRedo": "다시 실행",
       "fd.gestureFrameMove": "프레임 이동",
-      "fd.gestureEyedropper": "스포이드",
+      "fd.gestureEyedropper": "스포이트",
     },
     fr: {
       "featuresPage.nav.workspace": "Espace de travail",

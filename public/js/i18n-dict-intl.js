@@ -37,7 +37,7 @@
     "hero.title.line2": "遇见。",
     "hero.subtitle": "让创作者与观众之间的界限变得模糊。",
     "hero.lead":
-      "NIARIM 是一款可以在智能手机上制作正式手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
+      "NIARIM 是一款在智能手机上就能制作真正手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
     "hero.bridge.html":
       '完成的作品，可以发布到<a href="/community/">“作品广场”</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。',
     "hero.cta.primary": "下载应用",
@@ -126,9 +126,9 @@
     "contact.form.type.account": "账号相关",
     "contact.form.type.other": "其他",
     "contact.form.name": "姓名",
-    "contact.form.namePlaceholder": "例）山田太郎",
+    "contact.form.namePlaceholder": "例：张三",
     "contact.form.email": "邮箱地址",
-    "contact.form.emailPlaceholder": "例）name@example.com",
+    "contact.form.emailPlaceholder": "例：name@example.com",
     "contact.form.message": "咨询内容",
     "contact.form.messagePlaceholder": "请尽量详细地填写",
     "contact.form.messageHint": "请在 1000 字以内填写。",
@@ -157,7 +157,7 @@
 
     "meta.contact.title": "联系我们 | NIARIM",
     "meta.contact.description":
-      "欢迎联系 NIARIM 团队，反馈故障、提出功能需求或咨询使用方法。",
+      "欢迎联系 NIARIM，反馈故障、提出功能需求或咨询使用方法。",
 
     "meta.features.title": "功能介绍 | NIARIM",
     "meta.features.description":
@@ -210,7 +210,7 @@
       "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
     "featuresPage.drawing.item15.title": "素材标签搜索",
     "featuresPage.drawing.item15.body":
-      "笔刷、网点和印章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
+      "笔刷、网点和图章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
     "featuresPage.animation.title": "动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
@@ -218,7 +218,7 @@
     "featuresPage.animation.item1.body": "逐帧添加画面，累积构成动作。",
     "featuresPage.animation.item2.title": "时间轴",
     "featuresPage.animation.item2.body":
-      "不仅是帧画面，图片、视频、音频、共用图层、摄像机关键帧等，都可以在同一条时间轴上统一管理。还可以将作品拆分为多个场景来整理。",
+      "不仅是帧画面，图片、视频、音频、公共图层、摄像机关键帧等，都可以在同一条时间轴上统一管理。还可以将作品拆分为多个场景来整理。",
     "featuresPage.animation.item3.title": "帧编辑",
     "featuresPage.animation.item3.body": "选择任意一帧，重新绘制。",
     "featuresPage.animation.item4.title": "动画预览",
@@ -811,7 +811,7 @@
     "featuresPage.drawing.item9.title": "페인트통·올가미 채우기",
     "featuresPage.drawing.item9.body":
       "둘러싸인 영역을 채우는 「페인트통」과, 올가미로 둘러싼 영역을 채우는 「올가미 채우기」를 지원합니다.",
-    "featuresPage.drawing.item10.title": "스포이드",
+    "featuresPage.drawing.item10.title": "스포이트",
     "featuresPage.drawing.item10.body":
       "캔버스 위의 색을 추출해 곧바로 그리기 색으로 설정할 수 있습니다.",
     "featuresPage.drawing.item11.title": "선택 도구",
@@ -828,7 +828,7 @@
       "페이드·스트로크 감쇠·혼색·필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
     "featuresPage.drawing.item15.title": "소재 태그 검색",
     "featuresPage.drawing.item15.body":
-      "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「도트 그림」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
+      "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「픽셀 아트」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
 
     "featuresPage.animation.title": "애니메이션",
     "featuresPage.animation.lead":
@@ -916,7 +916,7 @@
       "MP4·WebM·GIF·AVI를 지원합니다. 투명 WebM을 사용하면 배경을 투명하게 한 애니메이션 소재로 활용할 수 있습니다.",
     "featuresPage.export.item5.title": "제작·내보내기 시간 상한",
     "featuresPage.export.item5.body":
-      "무료로는 작품당 90초까지 제작하고 내보낼 수 있습니다. 프리미엄이나 길이 연장 혜택을 이용하면 최대 2시간까지 가능합니다. 혜택이 없어도 긴 작품의 처음 90초를 내보낼 수 있습니다. 작품 수에는 제한이 없습니다.",
+      "무료로는 작품당 90초까지 제작하고 내보낼 수 있습니다. 프리미엄이나 최대 길이 혜택을 이용하면 최대 2시간까지 가능합니다. 혜택이 없어도 긴 작품의 처음 90초를 내보낼 수 있습니다. 작품 수에는 제한이 없습니다.",
     "featuresPage.export.item6.title": "스틸 이미지 내보내기",
     "featuresPage.export.item6.body":
       "타임라인에 현재 표시된 프레임 한 장을 PNG 또는 JPEG 이미지로 저장할 수 있습니다.",

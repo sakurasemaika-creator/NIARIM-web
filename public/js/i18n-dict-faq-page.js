@@ -47,7 +47,7 @@
         '导出的视频文件可以自由地通过设备或其他应用进行分享。您还可以在 NIARIM 应用内直接将作品投稿至 YouTube，从而发布到 <a href="/community/">“作品广场”</a>。',
       "faq.q8": "高级会员方案能做什么？",
       "faq.a8.html":
-        '可移除广告、隐藏官方片尾标志、使用自定义水印、色调曲线、色阶调整等。详情请参阅<a href="/premium/">高级会员方案页面</a>。',
+        '可移除广告、隐藏官方片尾标记、使用自定义水印、色调曲线、色阶调整等。详情请参阅<a href="/premium/">高级会员方案页面</a>。',
       "faq.q9": "把作品发布到“作品广场”后，在 YouTube 上是不是谁都能看到？",
       "faq.a9":
         "发布到“作品广场”是通过在 NIARIM 应用内将视频上传到 YouTube 来实现的，但作品广场自身的公开/非公开设置与 YouTube 的公开范围是相互独立的。即使将 YouTube 视频设为“不公开列出”，它仍会在 NIARIM 作品广场中正常显示和播放，同时在 YouTube 自身的搜索和推荐中基本不会出现（只有知道链接的人才能在 YouTube 上直接观看）。相反，如果将 YouTube 视频设为“私享”或将其删除，播放链接将失效，因此无论 NIARIM 侧的设置如何，作品广场中的显示都会自动停止（NIARIM 侧的设置本身会被保留，一旦 YouTube 状态恢复，显示也会自动恢复）。如果不希望被知道链接的人评论，建议在 YouTube 侧关闭评论功能。",
@@ -73,7 +73,7 @@
         '내보낸 영상 파일은 사용 중인 기기나 다른 앱을 통해 자유롭게 공유하실 수 있습니다. 또한 NIARIM 앱 안에서 바로 YouTube에 작품을 업로드하여 <a href="/community/">「NIARIM 작품 광장」</a>에 공개할 수도 있습니다.',
       "faq.q8": "프리미엄 플랜으로 무엇을 할 수 있나요?",
       "faq.a8.html":
-        '광고 비표시, 공식 엔드마크 숨기기, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
+        '광고 제거, 공식 엔드마크 숨기기, 사용자 워터마크, 톤 커브, 레벨 보정 등을 이용하실 수 있습니다. 자세한 내용은 <a href="/premium/">프리미엄 플랜 페이지</a>를 확인해 주세요.',
       "faq.q9":
         "작품을 「NIARIM 작품 광장」에 공개하면 YouTube에서도 누구나 볼 수 있게 되나요?",
       "faq.a9":
@@ -122,7 +122,7 @@
     "faq.a6": "作品を描くだけならアカウント登録は不要です。作品やプロジェクトは端末内に保存されます。作品広場に投稿するときはGoogleアカウントでのログインが必要です。"
   },
   "en": {
-    "faq.a6": "You can draw and create without an account. Your works and projects are saved on your device. A Google account sign-in is required to post to the gallery."
+    "faq.a6": "You can draw and create without an account. Your works and projects are saved on your device. A Google account sign-in is required to post to the Work Plaza."
   },
   "zh-Hans": {
     "faq.a6": "无需注册账号也能进行创作。作品和项目保存在设备内。向作品广场投稿时需要登录 Google 账号。"
@@ -131,7 +131,7 @@
     "faq.a6": "無需註冊帳號也能進行創作。作品和專案會儲存在裝置內。投稿至作品廣場時需要登入 Google 帳號。"
   },
   "ko": {
-    "faq.a6": "계정 등록 없이도 작품을 만들 수 있어요. 작품과 프로젝트는 기기에 저장됩니다. 작품 광장에 게시하려면 Google 계정 로그인이 필요해요."
+    "faq.a6": "계정 등록 없이도 작품을 만들 수 있습니다. 작품과 프로젝트는 기기에 저장됩니다. 작품 광장에 게시하려면 Google 계정 로그인이 필요합니다."
   },
   "fr": {
     "faq.a6": "Aucun compte n’est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la galerie."

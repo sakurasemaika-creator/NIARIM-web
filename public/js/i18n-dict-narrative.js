@@ -311,7 +311,7 @@
       "narrative.community.1.heading": "Work Plaza",
       "narrative.community.1.body":
         "A place where anyone can casually browse work made with NIARIM. You can view work without logging in.",
-      "narrative.community.2.heading": "Check the newest work, newest first",
+      "narrative.community.2.heading": "Newly posted work",
       "narrative.community.2.body":
         "Check freshly posted work in order of newest first. You might find something you love among pieces nobody’s discovered yet.",
       "narrative.community.3.heading": "Check what’s trending on the rankings",
@@ -353,7 +353,7 @@
         "不仅可以设置粗细和不透明度，还能调整渐隐、笔画衰减、混色等参数。可以像水彩一样晕开颜色，也可以让线条末端产生飞白效果。根据自己的画法，调整出称心如意的笔触。",
       "narrative.drawing.4.heading": "支持压感与倾斜",
       "narrative.drawing.4.body":
-        "使用数位板、数位屏时可以利用压感与倾斜角度。调整压感曲线，可以让轻触也能画出粗线条，根据自己的习惯改变绘画手感。还可以为支持的画笔按键分配橡皮擦、吸管等操作。",
+        "使用数位板、数位屏时可以利用压感与倾斜角度。调整压感曲线，可以让轻触也能画出粗线条，根据自己的习惯改变绘画手感。还可以为支持的触控笔按键分配橡皮擦、吸管等操作。",
 
       "narrative.animation.1.heading": "一起来做手绘动画吧！",
       "narrative.animation.1.body":
@@ -384,7 +384,7 @@
         "一种可以在多个帧或场景中显示相同内容的图层。背景等固定不变的元素，无需每帧重新绘制。也可以将角色设为公共图层，只把嘴部分到普通图层中。这样角色本体保持不变，只需逐帧重新绘制嘴部，即可实现对口型效果。",
       "narrative.editing.5.heading": "自动上色",
       "narrative.editing.5.body":
-        "基于线稿，使用预先为各部位设置好的颜色或网点纸自动分区上色。对于需要反复绘制同一角色的手绘动画来说，能大幅减轻上色负担。同时支持渐变、描边，以及让颜色融入线稿的色彩描边。※自动上色并非使用生成式AI的功能，而是根据您设置的规则进行区域上色。",
+        "基于线稿，使用预先为各部位设置好的颜色或网点纸自动分区上色。对于需要反复绘制同一角色的手绘动画来说，能大幅减轻上色负担。同时支持渐变、描边，以及让颜色融入线稿的颜色描线。※自动上色并非使用生成式AI的功能，而是根据你设置的规则进行区域上色。",
 
       "narrative.advanced.1.heading": "让日常创作更顺畅。",
       "narrative.advanced.2.heading": "快速切换工具",
@@ -392,7 +392,7 @@
         "注册常用的笔刷和工具组合，只需一个按钮即可切换。可以打造“线稿用”“上色用”“精修用”等专属于自己的工作方式。",
       "narrative.advanced.3.heading": "收藏",
       "narrative.advanced.3.body":
-        "将常用的笔刷、图章等注册为收藏。只需要的东西可以立即调出。",
+        "将常用的笔刷、图章等注册为收藏。可以只把需要的项目立即调出。",
       "narrative.advanced.4.heading": "颜色选择器",
       "narrative.advanced.4.body":
         "可在HSV与RGB之间切换来选取颜色。常用的配色组合可以保存到调色板中。",
@@ -406,27 +406,27 @@
       "narrative.advanced.8.heading": "像素模式",
       "narrative.advanced.8.body":
         "可以为笔刷、字体、图章应用像素模式。去除抗锯齿，呈现出清晰的像素画风格。也可以用像素模式处理图章，将其作为像素风格的素材使用。",
-      "narrative.advanced.9.heading": "描绘滤镜",
+      "narrative.advanced.9.heading": "绘图滤镜",
       "narrative.advanced.9.body":
-        "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动画、显像管、动画风、描边、像素画、鱼眼镜头、极光全息、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
+        "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动漫、老电视、动漫风、描边、像素画、鱼眼镜头、极光全息、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
       "narrative.advanced.10.heading": "演出滤镜",
       "narrative.advanced.10.body":
-        "这是一种可按帧或按场景应用的影像效果。由于可以一次性处理多个帧，因此能为整部作品或某个场景统一添加相同的演出效果。叠加噪点、下雨、散发七彩光泽的极光全息等演出效果，来完成整部作品的氛围。想直接加工图层，就用描绘滤镜；想为整个帧或场景增添演出效果，就用演出滤镜。可根据用途灵活选用。",
+        "这是一种可按帧或按场景应用的影像效果。由于可以一次性处理多个帧，因此能为整部作品或某个场景统一添加相同的演出效果。叠加噪点、下雨、散发七彩光泽的极光全息等演出效果，来完成整部作品的氛围。想直接加工图层，就用绘图滤镜；想为整个帧或场景增添演出效果，就用演出滤镜。可根据用途灵活选用。",
 
       "narrative.save.1.heading": "让作品更轻量，创作更舒适。",
       "narrative.save.1.body":
-        "在动画制作中，帧数和图层数越多，数据也会越大。NIARIM提供了多种轻量化机制，帮助您长期持续创作。",
+        "在动画制作中，帧数和图层数越多，数据也会越大。NIARIM提供了多种轻量化机制，帮助你长期持续创作。",
       "narrative.save.2.heading": "画质设置",
       "narrative.save.2.body":
         "除了可以从低画质、中画质、高画质中选择外，还支持自定义设置。可以根据设备的容量和性能，细致调整保存方式、撤销次数、洋葱皮、倾斜检测等各项参数。无论是想优先节省容量、想让运行更轻快，还是想保留更多撤销记录，都能按照自己的使用方式调整环境设置。",
       "narrative.save.3.heading": "自动保存",
       "narrative.save.3.body":
         "打开编辑器后可继续上次的工作。如果作品文件损坏，NIARIM 会从自动保存恢复。",
-      "narrative.save.4.heading": "存档槽位",
+      "narrative.save.4.heading": "存档槽",
       "narrative.save.4.body": "由自己选择重要的状态进行保存。",
       "narrative.save.5.heading": "存档树",
       "narrative.save.5.body":
-        "可以从已保存的状态中分支出去，尝试不同的创作方向。当您想“回到这个时间点，尝试另一种展开”时会非常方便。",
+        "可以从已保存的状态中分支出去，尝试不同的创作方向。当你想“回到这个时间点，尝试另一种展开”时会非常方便。",
       "narrative.save.6.heading": "把作品发送到另一台设备。",
       "narrative.save.6.body":
         "将项目导出为 .niashare 文件，即可迁移到其他设备或分享给他人。文件始终包含项目本体。导出时可分别选择是否包含图像、视频、音频和字体。收到文件后，可以将它复制为自己的项目。",
@@ -449,12 +449,12 @@
 
       "narrative.export.1.heading": "让你的作品被更多人看到",
       "narrative.export.1.body":
-        "按用途选择四种格式之一，导出完成的动画。要保存单帧图像，可从时间线导出 PNG 或 JPEG。",
+        "按用途选择四种格式之一，导出完成的动画。要保存单帧图像，可从时间轴导出 PNG 或 JPEG。",
 
       "narrative.premium.1.heading": "开通高级会员，创作更自由。",
       "narrative.premium.1.body":
         "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
-      "narrative.premium.2.body": "NIARIM 片尾标志是 MP4、WebM 和 AVI 末尾的 5 秒标志。权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加标志。",
+      "narrative.premium.2.body": "NIARIM 片尾标记是 MP4、WebM 和 AVI 末尾的 5 秒标志。权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加片尾标记。",
 
       "narrative.community.1.heading": "作品广场",
       "narrative.community.1.body":
@@ -698,13 +698,13 @@
         "스탬프는 이미지 자체가 색 정보를 가지고 있습니다. 그렇기 때문에 컬러칩에서 지정한 색과 관계없이 스탬프 고유의 색으로 그려집니다. 효과선·배경 패턴·소품 등을 등록해 필요할 때 바로 배치할 수 있습니다. 회전이나 확대축소에도 대응합니다.",
       "narrative.advanced.8.heading": "픽셀 모드",
       "narrative.advanced.8.body":
-        "브러시·폰트·스탬프에 픽셀 모드를 적용할 수 있습니다. 안티에일리어싱을 제거해 또렷한 도트 그림풍 표현으로. 스탬프를 픽셀 모드로 가공해 도트 그림풍 소재로 사용할 수도 있습니다.",
-      "narrative.advanced.9.heading": "드로잉 필터",
+        "브러시·폰트·스탬프에 픽셀 모드를 적용할 수 있습니다. 안티에일리어싱을 제거해 또렷한 픽셀 아트풍 표현으로. 스탬프를 픽셀 모드로 가공해 픽셀 아트풍 소재로 사용할 수도 있습니다.",
+      "narrative.advanced.9.heading": "그리기 필터",
       "narrative.advanced.9.body":
-        "레이어별로 필터를 적용할 수 있습니다. 블러, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메풍, 테두리, 픽셀 아트, 어안 렌즈, 오로라 홀로그램, 배경 어우러짐 등. 게다가 안경 단면 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
+        "레이어별로 필터를 적용할 수 있습니다. 블러, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메 스타일, 테두리, 픽셀 아트, 어안 렌즈, 오로라 홀로그램, 배경 어우러짐 등. 게다가 안경 렌즈 왜곡 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
       "narrative.advanced.10.heading": "연출 필터",
       "narrative.advanced.10.body":
-        "이쪽은 프레임이나 씬 단위로 적용할 수 있는 영상 효과입니다. 여러 프레임을 한 번에 처리할 수 있어, 작품 전체나 하나의 씬에 같은 연출을 더할 수도 있습니다. 노이즈나 비, 무지갯빛 광택을 두른 오로라 홀로그램 등의 연출을 겹쳐 작품 전체의 분위기를 완성할 수 있습니다. 레이어를 직접 가공하려면 드로잉 필터. 프레임이나 씬 전체를 연출하려면 연출 필터. 용도에 맞춰 구분해 사용할 수 있습니다.",
+        "이쪽은 프레임이나 씬 단위로 적용할 수 있는 영상 효과입니다. 여러 프레임을 한 번에 처리할 수 있어, 작품 전체나 하나의 씬에 같은 연출을 더할 수도 있습니다. 노이즈나 비, 무지갯빛 광택을 두른 오로라 홀로그램 등의 연출을 겹쳐 작품 전체의 분위기를 완성할 수 있습니다. 레이어를 직접 가공하려면 그리기 필터. 프레임이나 씬 전체를 연출하려면 연출 필터. 용도에 맞춰 구분해 사용할 수 있습니다.",
 
       "narrative.save.1.heading": "작품을 가볍게. 제작을 쾌적하게.",
       "narrative.save.1.body":
@@ -733,7 +733,7 @@
       "narrative.workspace.2.heading": "테마·외관 설정",
       "narrative.workspace.2.body":
         "앱 전체의 테마나 포인트 컬러를 취향대로 커스터마이즈할 수 있습니다. 매일 사용하는 앱이기에, 자신이 쓰기 편한 모습으로.",
-      "narrative.workspace.3.heading": "워크스페이스 설정",
+      "narrative.workspace.3.heading": "작업 공간 설정",
       "narrative.workspace.3.body":
         "PC·DeX 모드 전환 등 작업 방식에 맞춘 설정을 준비했습니다. 왼손 모드에도 대응합니다. ※왼손 모드는 PC·DeX 모드 전용 기능입니다.",
       "narrative.workspace.4.heading": "제스처 설정",
@@ -747,7 +747,7 @@
       "narrative.premium.1.heading": "프리미엄으로 더 자유롭게.",
       "narrative.premium.1.body":
         "프리미엄에서는 제작뿐 아니라 작품 공개도 한층 쾌적해집니다.",
-      "narrative.premium.2.body": "NIARIM 엔드 마크는 MP4, WebM, AVI 끝에 붙는 5초 로고입니다. 혜택이 유효하면 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 설정이 저장되며 GIF에는 붙지 않습니다.",
+      "narrative.premium.2.body": "NIARIM 엔드마크는 MP4, WebM, AVI 끝에 붙는 5초 로고입니다. 혜택이 유효하면 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 설정이 저장되며 GIF에는 붙지 않습니다.",
 
       "narrative.community.1.heading": "NIARIM 작품 광장",
       "narrative.community.1.body":

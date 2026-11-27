@@ -72,18 +72,18 @@
       "narrative.widget.2.heading": "Choose right down to the frame",
       "narrative.widget.2.body":
         "Pick a work, pick a scene, then pick a single frame inside it. The frame picker shows fully composited previews, so you can choose the finished look without exporting anything first.",
-      "narrative.widget.3.heading": "Colour each one however you like",
+      "narrative.widget.3.heading": "Color each one however you like",
       "narrative.widget.3.body":
-        'For the "Create" and "Work Plaza" widgets the background can either follow the app theme or use any colour you choose. Colours are kept separately per widget, so all three can sit side by side and still be told apart at a glance.',
+        'For the "Create an Animation" and "Work Plaza" widgets the background can either follow the app theme or use any color you choose. Colors are kept separately per widget, so all three can sit side by side and still be told apart at a glance.',
       "featuresPage.widget.item1.title": "Launch screen widget",
       "featuresPage.widget.item1.body":
         "Shows one frame from the work you pick. Tapping it opens NIARIM.",
-      "featuresPage.widget.item2.title": "Create widget",
+      "featuresPage.widget.item2.title": "Create an Animation widget",
       "featuresPage.widget.item2.body":
-        'Tapping it opens the "Create" screen. The background either follows the theme or uses a colour you choose.',
+        'Tapping it opens the "New Project" screen. The background either follows the theme or uses a color you choose.',
       "featuresPage.widget.item3.title": "Work Plaza widget",
       "featuresPage.widget.item3.body":
-        "Tapping it opens the Work Plaza. The background either follows the theme or uses a colour you choose.",
+        "Tapping it opens the Work Plaza. The background either follows the theme or uses a color you choose.",
       "featuresPage.widget.item4.title": "Shown as a still image",
       "featuresPage.widget.item4.body":
         "Home screen widgets cannot play video, so a single frame of the chosen work is shown as a still image. Adding the widget itself is done by long-pressing your home screen.",
@@ -91,7 +91,7 @@
       "fd.widgetCreate": "Create",
       "fd.widgetPlaza": "Work Plaza",
       "fd.widgetColorTheme": "Follow the app theme",
-      "fd.widgetColorCustom": "Pick a colour",
+      "fd.widgetColorCustom": "Pick a color",
       "fd.widgetFrameLabel": "Frame 3",
     },
     "zh-Hans": {
@@ -168,7 +168,7 @@
         "NIARIM의 위젯은 어떤 작품을, 어떤 컷을, 어떤 배경색으로 보여줄지 직접 정합니다. 내가 그린 한 컷이 홈 화면에 있다는 것 자체가 다음 컷을 그릴 이유가 됩니다.",
       "narrative.widget.2.heading": "표시할 컷까지 직접 선택",
       "narrative.widget.2.body":
-        "작품을 고르고, 장면을 고르고, 그 안의 한 컷을 고르는 흐름으로 표시할 내용을 정합니다. 컷 선택 화면에는 실제로 합성한 미리보기가 나열되므로, 내보내지 않아도 완성된 모습 그대로 고를 수 있습니다.",
+        "작품을 고르고, 씬을 고르고, 그 안의 한 컷을 고르는 흐름으로 표시할 내용을 정합니다. 컷 선택 화면에는 실제로 합성한 미리보기가 나열되므로, 내보내지 않아도 완성된 모습 그대로 고를 수 있습니다.",
       "narrative.widget.3.heading": "색은 종류별로 자유롭게",
       "narrative.widget.3.body":
         "「작품 만들기」와 「작품 광장」 두 종류는 배경색을 앱 테마에 맞추거나 원하는 색을 직접 정할 수 있습니다. 색은 종류별로 따로 저장되므로 세 가지를 나란히 두어도 한눈에 구별됩니다.",

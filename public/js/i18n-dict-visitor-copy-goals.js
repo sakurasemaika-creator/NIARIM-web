@@ -44,7 +44,7 @@
     "refresh.launch.title": "NIARIMで次の物語を作ろう！"
   },
   "en": {
-    "coins.title": "Use Premium features with the opals you collect",
+    "coins.title": "Use Premium features with the Opals you collect",
     "coins.catalog": "Opals needed for benefits",
     "coins.compareTitle": "Complete Pack compared with single benefits",
     "coins.compareIntro": "The Complete Pack costs 55,000 Opals for one month and 550,000 for one year. Six tools and Remove All Ads total 110,000 and 1,100,000 separately. The table compares the pack with those individual prices for the same period.",
@@ -146,7 +146,7 @@
     "premium.coinsBody": "로그인과 미션으로 오팔을 모으면 대상 Premium 기능을 추가 결제 없이 사용할 수 있습니다. 필요한 기능과 기간을 고르세요.",
     "coins.toPremiumTitle": "오팔을 모을 시간이 없다면 Premium.",
     "coins.bonusMilestoneTitle": "누적 로그인 일수",
-    "coins.bonusMilestoneIntro": "아래 누적 로그인 일수에 도달하면 보너스를 받을 수 있습니다. 연속 로그인은 필요하지 않아요.",
+    "coins.bonusMilestoneIntro": "아래 누적 로그인 일수에 도달하면 보너스를 받을 수 있어요. 연속으로 로그인하지 않아도 일수는 사라지지 않아요.",
     "coins.hour": "1시간",
     "coins.day": "1일",
     "coins.week": "1주",
