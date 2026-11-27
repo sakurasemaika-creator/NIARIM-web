@@ -1,5 +1,6 @@
 /**
- * NIARIM 通報の管理（/admin/）の画面。
+ * NIARIM の管理ページ（/admin/）の画面：通報の管理と、上のタブの切り替え。
+ * クーポン・プレゼントの画面は /js/admin-gifts.js（ここから create する）。
  *
  * GoogleのIDトークンはこのタブのメモリーにだけ置き（localStorage・Cookieには
  * 書かない）、期限が切れたら・401が返ったら、もう一度ログインしてもらう。
@@ -46,6 +47,7 @@
     answerImport: byId("admin-answer-import"),
     answerResult: byId("admin-answer-result"),
     tabs: Array.from(document.querySelectorAll('[role="tab"][data-status]')),
+    viewTabs: Array.from(document.querySelectorAll('[role="tab"][data-view]')),
     order: byId("admin-order"),
     reload: byId("admin-reload"),
     queueSummary: byId("admin-queue-summary"),
@@ -91,6 +93,7 @@
     email: "",
     settings: null,
     tab: "pending",
+    view: "reports",
     orders: { pending: "oldest", reviewing: "oldest", resolved: "newest" },
     pager: null,
     generation: 0,
@@ -107,6 +110,21 @@
 
   let fieldCount = 0;
   const fieldId = () => `admin-field-${++fieldCount}`;
+
+  const VIEWS = ["reports", "coupons", "presents"];
+  const gifts = window.NiarimAdminGifts
+    ? window.NiarimAdminGifts.create({
+        h,
+        api: () => state.api,
+        getToken,
+        requireSignIn,
+        handleAuthError,
+        notify,
+        confirmAction,
+        copyText,
+        selectText,
+      })
+    : null;
 
   // ---- Sign-in -----------------------------------------------------------
 
@@ -223,9 +241,11 @@
     } else {
       closeDetail();
       clearTriage();
+      gifts?.reset();
       el.notice.hidden = true;
       selectTab(state.tab);
     }
+    if (state.view !== "reports") gifts?.show(state.view);
   }
 
   function signOut() {
@@ -246,6 +266,7 @@
     el.more.hidden = true;
     el.rules.replaceChildren();
     clearTriage();
+    gifts?.reset();
     el.botStatus.textContent = "";
     el.botDetails.replaceChildren();
     el.notice.hidden = true;
@@ -661,6 +682,37 @@
     if (!summary.failed.length && !parsed.errors.length) el.answer.value = "";
     refocus(el.answerImport);
     reloadList();
+  }
+
+  // ---- Views (通報・クーポン・プレゼント) ------------------------------------
+
+  /** The view in the address (#coupons, #presents), so a reload keeps it. */
+  function viewFromHash() {
+    const view = window.location.hash.replace(/^#/, "");
+    return VIEWS.includes(view) && (view === "reports" || gifts)
+      ? view
+      : "reports";
+  }
+
+  function selectView(view, focus) {
+    // A notice is about the view it came from.
+    if (state.view !== view) el.notice.hidden = true;
+    state.view = view;
+    for (const tab of el.viewTabs) {
+      const on = tab.dataset.view === view;
+      tab.setAttribute("aria-selected", String(on));
+      tab.tabIndex = on ? 0 : -1;
+      if (on && focus) tab.focus();
+    }
+    for (const name of VIEWS) byId(`admin-view-${name}`).hidden = name !== view;
+    const hash = view === "reports" ? "" : `#${view}`;
+    if (window.location.hash !== hash)
+      history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search + hash,
+      );
+    if (view !== "reports" && getToken()) gifts?.show(view);
   }
 
   // ---- Queue ---------------------------------------------------------------
@@ -1387,7 +1439,9 @@
     };
     el.confirmTitle.textContent = job.title;
     el.confirmText.replaceChildren(
-      ...job.text.filter(Boolean).map((line) => h("p", null, line)),
+      ...job.text
+        .filter(Boolean)
+        .map((line) => (typeof line === "string" ? h("p", null, line) : line)),
     );
     el.confirmFields.replaceChildren(...fields.map((field) => field.node));
     el.confirmError.textContent = "";
@@ -1782,6 +1836,26 @@
       selectTab(el.tabs[next].dataset.status, true);
     });
   }
+  for (const tab of el.viewTabs) {
+    tab.addEventListener("click", () => {
+      if (tab.getAttribute("aria-selected") !== "true")
+        selectView(tab.dataset.view, true);
+    });
+    tab.addEventListener("keydown", (event) => {
+      const index = el.viewTabs.indexOf(tab);
+      const last = el.viewTabs.length - 1;
+      const next = {
+        ArrowRight: index === last ? 0 : index + 1,
+        ArrowLeft: index === 0 ? last : index - 1,
+        Home: 0,
+        End: last,
+      }[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      selectView(el.viewTabs[next].dataset.view, true);
+    });
+  }
+  selectView(viewFromHash(), false);
   el.order.addEventListener("change", () => {
     if (!A.ORDERS.includes(el.order.value)) return;
     state.orders[state.tab] = el.order.value;

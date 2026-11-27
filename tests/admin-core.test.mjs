@@ -879,7 +879,11 @@ test("the triage key's state reads an old backend as not set", () => {
 });
 
 test("the page's scripts have no HTML sinks and keep the token out of storage", () => {
-  for (const file of ["public/js/admin.js", "public/js/admin-core.js"]) {
+  for (const file of [
+    "public/js/admin.js",
+    "public/js/admin-core.js",
+    "public/js/admin-gifts.js",
+  ]) {
     const source = readFileSync(
       new URL("../" + file, import.meta.url),
       "utf8",
@@ -911,4 +915,431 @@ test("the page's scripts have no HTML sinks and keep the token out of storage", 
   );
   assert.doesNotMatch(html, /\son\w+=/i, "no inline event handlers");
   assert.doesNotMatch(html, /@[\w-]+\.[a-z]/i, "no email address in the page");
+});
+
+// ---- Opal coupons and presents ------------------------------------------------
+
+const NOW = Date.parse("2026-11-27T01:00:00Z"); // 10:00 in Japan
+
+test("the gift endpoints use the documented paths, bodies and token", async () => {
+  const { api, fetch } = client((url, init) => {
+    const path = url.pathname;
+    if (init.method === "GET")
+      return {
+        body: path.endsWith("coupons")
+          ? { coupons: [], nextCursor: null }
+          : { presents: [], nextCursor: null },
+      };
+    if (path.endsWith("/deactivate"))
+      return {
+        body: path.includes("coupons")
+          ? { ok: true, coupon: { code: "WELCOME2027" } }
+          : { ok: true, present: { id: "mhx1y2z3a01234567" } },
+      };
+    return {
+      body: path.endsWith("coupons")
+        ? { ok: true, coupon: { code: "ABCDEFGHJKMN" } }
+        : { ok: true, present: { id: "mhx1y2z3a01234567" } },
+    };
+  });
+  await api.listCoupons({ cursor: "c1" });
+  await api.listPresents();
+  await api.createCoupon({
+    coins: 500,
+    validUntil: "2027-01-31T23:59:59+09:00",
+  });
+  await api.createPresent({
+    coins: 1,
+    title: "t",
+    claimUntil: "2027-01-31T23:59:59+09:00",
+  });
+  await api.deactivateCoupon("WELCOME2027");
+  await api.deactivatePresent("mhx1y2z3a01234567");
+  assert.deepEqual(
+    fetch.calls.map(({ url, init }) => [
+      init.method,
+      url.pathname + url.search,
+    ]),
+    [
+      ["GET", "/admin/gifts/coupons?limit=50&cursor=c1"],
+      ["GET", "/admin/gifts/presents?limit=50"],
+      ["POST", "/admin/gifts/coupons"],
+      ["POST", "/admin/gifts/presents"],
+      ["POST", "/admin/gifts/coupons/WELCOME2027/deactivate"],
+      ["POST", "/admin/gifts/presents/mhx1y2z3a01234567/deactivate"],
+    ],
+  );
+  for (const { init } of fetch.calls) {
+    assert.equal(init.headers.Authorization, "Bearer id-token");
+    assert.equal(init.credentials, "omit");
+  }
+  assert.deepEqual(JSON.parse(fetch.calls[2].init.body), {
+    coins: 500,
+    validUntil: "2027-01-31T23:59:59+09:00",
+  });
+  assert.equal(fetch.calls[4].init.body, "{}");
+});
+
+test("gift calls refuse bad ids before sending and bad answers after", async () => {
+  const { api, fetch } = client(() => ({ body: { ok: true } }));
+  await assert.rejects(
+    api.deactivateCoupon("welcome-2027"),
+    (e) => e.code === "NOT_FOUND",
+  );
+  await assert.rejects(
+    api.deactivateCoupon("../x"),
+    (e) => e.code === "NOT_FOUND",
+  );
+  await assert.rejects(
+    api.deactivatePresent("N" + "a".repeat(32)),
+    (e) => e.code === "NOT_FOUND",
+  );
+  await assert.rejects(
+    api.listCoupons({ limit: 51 }),
+    (e) => e.code === "INVALID_PAGE_SIZE",
+  );
+  assert.equal(fetch.calls.length, 0);
+  await assert.rejects(
+    api.createCoupon({ coins: 1 }),
+    (e) => e.code === "INVALID_RESPONSE",
+  );
+  await assert.rejects(
+    api.listPresents(),
+    (e) => e.code === "INVALID_RESPONSE",
+  );
+});
+
+test("gift error codes map to Japanese and keep what the server said", async () => {
+  for (const [status, code, pattern] of [
+    [400, "GIFT_INVALID_COINS", /1〜1,000,000/],
+    [400, "GIFT_INVALID_TIME", /日本時間/],
+    [400, "GIFT_INVALID_WINDOW", /366日以内/],
+    [400, "GIFT_INVALID_ELIGIBILITY", /対象のアカウント/],
+    [400, "GIFT_INVALID_TEXT", /80文字/],
+    [400, "GIFT_INVALID_LIMIT", /10,000,000/],
+    [400, "COUPON_INVALID_CODE", /4〜32文字/],
+    [409, "COUPON_CODE_TAKEN", /すでにあります/],
+    [409, "PRESENT_LIMIT_REACHED", /20件まで/],
+  ]) {
+    const { api } = client(() => ({
+      status,
+      body: { error: "サーバーの文", code },
+    }));
+    await assert.rejects(api.createPresent({}), (error) => {
+      assert.match(error.message, pattern, code);
+      assert.equal(
+        A.serverDetail(error),
+        `サーバーの答え：サーバーの文（${code}）`,
+      );
+      return true;
+    });
+  }
+  assert.equal(
+    A.serverDetail(new A.AdminApiError({ status: 0, code: "NETWORK" })),
+    "",
+  );
+});
+
+test("Japan-time fields become ISO 8601 with +09:00 in any browser time zone", () => {
+  assert.deepEqual(A.parseJstInput("2026-12-01T00:00"), {
+    ms: Date.parse("2026-11-30T15:00:00Z"),
+    iso: "2026-12-01T00:00:00+09:00",
+  });
+  assert.equal(
+    A.parseJstInput("2027-01-31T23:59", { endOfMinute: true }).iso,
+    "2027-01-31T23:59:59+09:00",
+  );
+  for (const bad of [
+    "",
+    "2026-02-30T00:00",
+    "2026-12-01",
+    "2026-12-01T24:00",
+    "x",
+  ])
+    assert.equal(A.parseJstInput(bad), null, bad);
+  assert.equal(A.jstInputValue(NOW), "2026-11-27T10:00");
+  assert.equal(
+    A.jstInputValue(Date.parse("2026-12-31T15:30:00Z")),
+    "2027-01-01T00:30",
+  );
+});
+
+test("a coupon form becomes the documented body", () => {
+  const { body, errors } = A.buildCouponRequest(
+    {
+      code: " welcome－2027 ",
+      coins: "１,０００",
+      validFrom: "2026-11-27T10:00",
+      validUntil: "2027-01-31T23:59",
+      maxRedemptions: "1000",
+      newAccountWithinDays: "7",
+      accountCreatedFrom: "",
+      accountCreatedUntil: "",
+      note: "  Xの告知\r\n2行目 ",
+    },
+    NOW,
+  );
+  assert.deepEqual(errors, []);
+  assert.deepEqual(body, {
+    code: "WELCOME2027",
+    coins: 1000,
+    validFrom: "2026-11-27T10:00:00+09:00",
+    validUntil: "2027-01-31T23:59:59+09:00",
+    maxRedemptions: 1000,
+    eligibility: { newAccountWithinDays: 7 },
+    note: "Xの告知\n2行目",
+  });
+  // A blank code and start are left to the server (it makes the code and
+  // starts now); no eligibility means every account.
+  assert.deepEqual(
+    A.buildCouponRequest({ coins: "1", validUntil: "2026-11-28T10:00" }, NOW)
+      .body,
+    { coins: 1, validUntil: "2026-11-28T10:00:59+09:00" },
+  );
+});
+
+test("a coupon form is checked against the server's limits", () => {
+  const fields = (input) =>
+    A.buildCouponRequest(input, NOW).errors.map((e) => e.field);
+  const base = { coins: "10", validUntil: "2026-12-27T10:00" };
+  assert.deepEqual(fields(base), []);
+  assert.deepEqual(fields({ ...base, code: "AB1" }), ["code"]);
+  assert.deepEqual(fields({ ...base, code: "A".repeat(33) }), ["code"]);
+  assert.deepEqual(fields({ ...base, coins: "" }), ["coins"]);
+  assert.deepEqual(fields({ ...base, coins: "0" }), ["coins"]);
+  assert.deepEqual(fields({ ...base, coins: "1000001" }), ["coins"]);
+  assert.deepEqual(fields({ ...base, coins: "1.5" }), ["coins"]);
+  assert.deepEqual(fields({ ...base, coins: "1000000" }), []);
+  assert.deepEqual(fields({ ...base, validUntil: "" }), ["validUntil"]);
+  assert.deepEqual(fields({ ...base, validUntil: "2026-11-27T09:00" }), [
+    "validUntil",
+  ]);
+  assert.deepEqual(
+    fields({ ...base, validFrom: "2026-12-28T00:00" }),
+    ["validUntil"],
+    "the end before the start",
+  );
+  assert.deepEqual(
+    fields({
+      ...base,
+      validFrom: "2026-11-27T10:00",
+      validUntil: "2027-11-29T10:00",
+    }),
+    ["validUntil"],
+    "longer than 366 days",
+  );
+  assert.deepEqual(
+    fields({
+      ...base,
+      validFrom: "2026-11-27T10:00",
+      validUntil: "2027-11-28T09:59",
+    }),
+    [],
+  );
+  assert.deepEqual(fields({ ...base, maxRedemptions: "0" }), [
+    "maxRedemptions",
+  ]);
+  assert.deepEqual(fields({ ...base, maxRedemptions: "10000001" }), [
+    "maxRedemptions",
+  ]);
+  assert.deepEqual(fields({ ...base, newAccountWithinDays: "366" }), [
+    "newAccountWithinDays",
+  ]);
+  assert.deepEqual(
+    fields({
+      ...base,
+      accountCreatedFrom: "2026-12-01T00:00",
+      accountCreatedUntil: "2026-11-01T00:00",
+    }),
+    ["accountCreatedUntil"],
+  );
+  assert.deepEqual(fields({ ...base, note: "あ".repeat(501) }), ["note"]);
+  assert.deepEqual(
+    fields({ ...base, note: "😀".repeat(500) }),
+    [],
+    "characters, not UTF-16 units",
+  );
+  assert.deepEqual(fields({ ...base, note: "a\u0007b" }), ["note"]);
+  // A coupon has no account list (the server refuses accountIds there).
+  assert.equal(
+    A.buildCouponRequest({ ...base, accountIds: "N" + "a".repeat(32) }, NOW)
+      .body.eligibility,
+    undefined,
+  );
+});
+
+test("a present form becomes the documented body", () => {
+  const ids = ["N" + "a".repeat(32), "N" + "b".repeat(32)];
+  const { body, errors } = A.buildPresentRequest(
+    {
+      coins: "300",
+      title: " メンテナンスのお詫び ",
+      body: "ご不便をおかけしました。",
+      translations: {
+        en: { title: "Sorry", body: "" },
+        ko: { title: "", body: "" },
+        zh_Hant: { title: "維護致歉", body: "造成不便" },
+      },
+      visibleFrom: "",
+      claimUntil: "2026-12-15T23:59",
+      accountCreatedUntil: "2026-12-01T00:00",
+      accountIds: `["${ids[0]}", "${ids[1]}"]\n${ids[0]}`,
+      note: "",
+    },
+    NOW,
+  );
+  assert.deepEqual(errors, []);
+  assert.deepEqual(body, {
+    coins: 300,
+    title: "メンテナンスのお詫び",
+    body: "ご不便をおかけしました。",
+    translations: {
+      en: { title: "Sorry", body: "" },
+      zh_Hant: { title: "維護致歉", body: "造成不便" },
+    },
+    claimUntil: "2026-12-15T23:59:59+09:00",
+    eligibility: {
+      accountCreatedUntil: "2026-12-01T00:00:59+09:00",
+      accountIds: ids,
+    },
+  });
+});
+
+test("a present form is checked against the server's limits", () => {
+  const base = { coins: "1", title: "t", claimUntil: "2026-12-01T00:00" };
+  const fields = (input) =>
+    A.buildPresentRequest({ ...base, ...input }, NOW).errors.map(
+      (e) => e.field,
+    );
+  assert.deepEqual(fields({}), []);
+  assert.deepEqual(fields({ title: "  " }), ["title"]);
+  assert.deepEqual(fields({ title: "あ".repeat(81) }), ["title"]);
+  assert.deepEqual(fields({ body: "あ".repeat(1001) }), ["body"]);
+  assert.deepEqual(
+    fields({ translations: { fr: { title: "", body: "Désolé" } } }),
+    ["translations.fr.title"],
+  );
+  assert.deepEqual(
+    fields({ translations: { es: { title: "a".repeat(81), body: "" } } }),
+    ["translations.es.title"],
+  );
+  const many = Array.from(
+    { length: 101 },
+    (_, i) => "N" + i.toString(16).padStart(32, "0"),
+  );
+  assert.deepEqual(fields({ accountIds: many.join("\n") }), ["accountIds"]);
+  assert.deepEqual(fields({ accountIds: many.slice(0, 100).join(",") }), []);
+  const invalid = A.buildPresentRequest(
+    { ...base, accountIds: "N123\nn" + "a".repeat(32) },
+    NOW,
+  ).errors[0];
+  assert.equal(invalid.field, "accountIds");
+  assert.match(invalid.message, /N123、n/);
+});
+
+test("who may use a gift, its state and the 20-present count read plainly", () => {
+  assert.equal(A.eligibilitySummary({}), "すべてのアカウント");
+  assert.equal(
+    A.eligibilitySummary({
+      newAccountWithinDays: null,
+      accountCreatedFrom: null,
+      accountCreatedUntil: null,
+      accountIds: null,
+    }),
+    "すべてのアカウント",
+  );
+  assert.equal(
+    A.eligibilitySummary({ newAccountWithinDays: 7 }),
+    "作ってから7日以内のアカウント",
+  );
+  assert.equal(
+    A.eligibilitySummary({ accountCreatedUntil: "2026-11-30T15:00:00.000Z" }),
+    "2026/12/01（火）00:00までに作ったアカウント",
+  );
+  assert.equal(
+    A.eligibilitySummary({
+      accountIds: ["N" + "a".repeat(32)],
+      accountCreatedFrom: "2026-12-01T00:00:00+09:00",
+    }),
+    "指定した1件のアカウント、かつ2026/12/01（火）00:00以降に作ったアカウント（すべてに当てはまるもの）",
+  );
+  const coupon = {
+    active: true,
+    validFrom: "2026-11-20T00:00:00Z",
+    validUntil: "2026-12-20T00:00:00Z",
+    maxRedemptions: 10,
+    redeemedCount: 3,
+  };
+  const state = (extra) => A.couponStatus({ ...coupon, ...extra }, NOW).key;
+  assert.equal(state({}), "live");
+  assert.equal(state({ active: false }), "inactive");
+  assert.equal(state({ validUntil: "2026-11-26T00:00:00Z" }), "expired");
+  assert.equal(state({ redeemedCount: 10 }), "full");
+  assert.equal(state({ validFrom: "2026-11-28T00:00:00Z" }), "scheduled");
+  const present = {
+    active: true,
+    visibleFrom: "2026-11-20T00:00:00Z",
+    claimUntil: "2026-12-20T00:00:00Z",
+  };
+  const pstate = (extra) => A.presentStatus({ ...present, ...extra }, NOW).key;
+  assert.equal(pstate({}), "live");
+  assert.equal(pstate({ visibleFrom: "2026-12-01T00:00:00Z" }), "scheduled");
+  assert.equal(pstate({ claimUntil: "2026-11-01T00:00:00Z" }), "expired");
+  assert.equal(pstate({ active: false }), "inactive");
+  assert.equal(A.presentCountsTowardLimit(present, NOW), true);
+  assert.equal(
+    A.presentCountsTowardLimit(
+      { ...present, visibleFrom: "2026-12-01T00:00:00Z" },
+      NOW,
+    ),
+    true,
+    "a present not shown yet already takes one of the 20",
+  );
+  assert.equal(
+    A.presentCountsTowardLimit({ ...present, active: false }, NOW),
+    false,
+  );
+  assert.deepEqual(
+    A.translationLabels({
+      zh_Hant: { title: "a" },
+      en: { title: "b" },
+      xx: { title: "c" },
+    }),
+    ["英語", "中国語（繁体字）"],
+  );
+  assert.equal(A.displayCouponCode("ABCDEFGHJKMN"), "ABCD-EFGH-JKMN");
+  assert.equal(A.displayCouponCode("WELCOME2027"), "WELCOME2027");
+  assert.equal(A.displayCouponCode("ABCDEFGHJKM0"), "ABCDEFGHJKM0");
+  assert.equal(A.formatCount(1234567), "1,234,567");
+});
+
+test("the gift pager reads 50 a page and never shows an item twice", async () => {
+  const pages = [
+    { coupons: [{ code: "AAAA" }, { code: "BBBB" }], nextCursor: "n1" },
+    { coupons: [{ code: "BBBB" }, { code: "CCCC" }, null], nextCursor: null },
+  ];
+  const asked = [];
+  const pager = A.createGiftPager(
+    async (options) => {
+      asked.push(options);
+      return pages[asked.length - 1];
+    },
+    "coupons",
+    (c) => c.code,
+  );
+  const first = pager.next();
+  assert.equal(await pager.next(), null, "no second request while loading");
+  assert.deepEqual(
+    (await first).map((c) => c.code),
+    ["AAAA", "BBBB"],
+  );
+  assert.deepEqual(
+    (await pager.next()).map((c) => c.code),
+    ["CCCC"],
+  );
+  assert.equal(pager.done, true);
+  assert.deepEqual(asked, [
+    { limit: 50, cursor: null },
+    { limit: 50, cursor: "n1" },
+  ]);
 });

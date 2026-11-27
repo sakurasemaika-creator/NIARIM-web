@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="referrer" content="no-referrer" />
-    <title>通報の管理 | NIARIM</title>
+    <title>管理 | NIARIM</title>
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/pages/admin.css" />
     <script defer src="/js/admin-core.js"></script>
+    <script defer src="/js/admin-gifts.js"></script>
     <script defer src="/js/admin.js"></script>
   </head>
   <body>
@@ -16,7 +17,7 @@
       <div class="admin-bar-inner">
         <p class="admin-brand">
           <img src="/assets/icons/favicon.svg" width="28" height="28" alt="" />
-          <span>NIARIM 通報の管理</span>
+          <span>NIARIM 管理</span>
         </p>
         <div class="admin-account" id="admin-account" hidden>
           <p class="admin-account-email">
@@ -31,7 +32,7 @@
     </header>
 
     <main id="main" class="admin-main">
-      <h1 class="admin-title">作品広場の通報の管理</h1>
+      <h1 class="admin-title">NIARIMの管理</h1>
 
       <section class="admin-sheet" id="admin-setup" hidden>
         <h2>管理ページの設定がまだ済んでいません</h2>
@@ -87,6 +88,41 @@
       </noscript>
 
       <div id="admin-app" hidden>
+        <div class="admin-views" role="tablist" aria-label="管理するもの">
+          <button
+            type="button"
+            role="tab"
+            id="admin-view-tab-reports"
+            data-view="reports"
+            aria-controls="admin-view-reports"
+            aria-selected="true"
+          >
+            通報
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="admin-view-tab-coupons"
+            data-view="coupons"
+            aria-controls="admin-view-coupons"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            クーポン
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="admin-view-tab-presents"
+            data-view="presents"
+            aria-controls="admin-view-presents"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            プレゼント
+          </button>
+        </div>
+
         <p
           id="admin-notice"
           class="admin-notice"
@@ -95,227 +131,848 @@
           hidden
         ></p>
 
-        <section
-          class="admin-sheet admin-settings"
-          id="admin-settings"
-          aria-labelledby="admin-settings-title"
+        <div
+          class="admin-view"
+          id="admin-view-reports"
+          role="tabpanel"
+          aria-labelledby="admin-view-tab-reports"
         >
-          <h2 id="admin-settings-title">通報の決まりとAIの下見</h2>
-          <dl class="admin-rules" id="admin-rules"></dl>
+          <section
+            class="admin-sheet admin-settings"
+            id="admin-settings"
+            aria-labelledby="admin-settings-title"
+          >
+            <h2 id="admin-settings-title">通報の決まりとAIの下見</h2>
+            <dl class="admin-rules" id="admin-rules"></dl>
 
-          <section class="admin-sub" aria-labelledby="admin-sub-title">
-            <h3 id="admin-sub-title">サブスクのClaudeで下見する</h3>
-            <p class="admin-small admin-muted">
-              Claudeのサブスクで、通報の見立て（参考の判定）を書いてもらいます。AnthropicのAPIキーは使いません。AIが書くのは見立てだけで、決めるのは運営です。「重大」の見立ては、確認するまで作品を一時非表示にします。
-            </p>
-
-            <section class="admin-sub-part" aria-labelledby="admin-bot-title">
-              <h4 id="admin-bot-title">下見の鍵（自動の下見）</h4>
+            <section class="admin-sub" aria-labelledby="admin-sub-title">
+              <h3 id="admin-sub-title">サブスクのClaudeで下見する</h3>
               <p class="admin-small admin-muted">
-                決まった時刻に動くClaude
-                Codeのセッションが、この鍵で未対応の通報を読み、見立てを書き込みます。
+                Claudeのサブスクで、通報の見立て（参考の判定）を書いてもらいます。AnthropicのAPIキーは使いません。AIが書くのは見立てだけで、決めるのは運営です。「重大」の見立ては、確認するまで作品を一時非表示にします。
               </p>
-              <p class="admin-bot-status" id="admin-bot-status"></p>
-              <ul class="admin-bot-details" id="admin-bot-details"></ul>
-              <div class="admin-row">
-                <button
-                  type="button"
-                  class="admin-button"
-                  id="admin-bot-create"
-                >
-                  鍵を作る
-                </button>
-                <button
-                  type="button"
-                  class="admin-button"
-                  id="admin-bot-revoke"
-                  hidden
-                >
-                  鍵を無効にする
-                </button>
-              </div>
-              <p
-                id="admin-bot-message"
-                class="admin-message"
-                role="status"
-                aria-live="polite"
-              ></p>
-              <div class="admin-secret" id="admin-bot-token" hidden>
-                <label for="admin-bot-token-value">新しい下見の鍵</label>
-                <div class="admin-copy-row">
-                  <input
-                    type="text"
-                    id="admin-bot-token-value"
-                    readonly
-                    autocomplete="off"
-                    autocapitalize="off"
-                    spellcheck="false"
-                    aria-describedby="admin-bot-token-note"
-                  />
+
+              <section class="admin-sub-part" aria-labelledby="admin-bot-title">
+                <h4 id="admin-bot-title">下見の鍵（自動の下見）</h4>
+                <p class="admin-small admin-muted">
+                  決まった時刻に動くClaude
+                  Codeのセッションが、この鍵で未対応の通報を読み、見立てを書き込みます。
+                </p>
+                <p class="admin-bot-status" id="admin-bot-status"></p>
+                <ul class="admin-bot-details" id="admin-bot-details"></ul>
+                <div class="admin-row">
                   <button
                     type="button"
                     class="admin-button"
-                    id="admin-bot-token-copy"
-                    aria-label="下見の鍵をコピー"
+                    id="admin-bot-create"
                   >
-                    コピー
+                    鍵を作る
+                  </button>
+                  <button
+                    type="button"
+                    class="admin-button"
+                    id="admin-bot-revoke"
+                    hidden
+                  >
+                    鍵を無効にする
                   </button>
                 </div>
-                <p class="admin-secret-note" id="admin-bot-token-note">
-                  この鍵はこの画面を閉じると二度と表示されません。Claude
-                  Codeの環境の『ネットワークの秘密』に保存してください。チャットには貼らないでください。
-                </p>
-                <p class="admin-small">
-                  保存するときのホスト：<code id="admin-bot-host"></code>
-                </p>
                 <p
-                  id="admin-bot-copy-status"
-                  class="admin-message admin-small"
+                  id="admin-bot-message"
+                  class="admin-message"
                   role="status"
                   aria-live="polite"
                 ></p>
-              </div>
-            </section>
+                <div class="admin-secret" id="admin-bot-token" hidden>
+                  <label for="admin-bot-token-value">新しい下見の鍵</label>
+                  <div class="admin-copy-row">
+                    <input
+                      type="text"
+                      id="admin-bot-token-value"
+                      readonly
+                      autocomplete="off"
+                      autocapitalize="off"
+                      spellcheck="false"
+                      aria-describedby="admin-bot-token-note"
+                    />
+                    <button
+                      type="button"
+                      class="admin-button"
+                      id="admin-bot-token-copy"
+                      aria-label="下見の鍵をコピー"
+                    >
+                      コピー
+                    </button>
+                  </div>
+                  <p class="admin-secret-note" id="admin-bot-token-note">
+                    この鍵はこの画面を閉じると二度と表示されません。Claude
+                    Codeの環境の『ネットワークの秘密』に保存してください。チャットには貼らないでください。
+                  </p>
+                  <p class="admin-small">
+                    保存するときのホスト：<code id="admin-bot-host"></code>
+                  </p>
+                  <p
+                    id="admin-bot-copy-status"
+                    class="admin-message admin-small"
+                    role="status"
+                    aria-live="polite"
+                  ></p>
+                </div>
+              </section>
 
-            <section class="admin-sub-part" aria-labelledby="admin-chat-title">
-              <h4 id="admin-chat-title">チャットで今すぐ頼む</h4>
-              <p class="admin-small admin-muted">
-                見立てを待っている通報（最大20件）をまとめた依頼の文をコピーして、Claudeのチャットに貼ります。Claudeの答えを下に貼ると、見立てとして取り込みます。
-              </p>
+              <section
+                class="admin-sub-part"
+                aria-labelledby="admin-chat-title"
+              >
+                <h4 id="admin-chat-title">チャットで今すぐ頼む</h4>
+                <p class="admin-small admin-muted">
+                  見立てを待っている通報（最大20件）をまとめた依頼の文をコピーして、Claudeのチャットに貼ります。Claudeの答えを下に貼ると、見立てとして取り込みます。
+                </p>
+                <div class="admin-row">
+                  <button
+                    type="button"
+                    class="admin-button"
+                    id="admin-prompt-copy"
+                  >
+                    AIに頼む文をコピー
+                  </button>
+                </div>
+                <p
+                  id="admin-prompt-status"
+                  class="admin-message"
+                  role="status"
+                  aria-live="polite"
+                ></p>
+                <details class="admin-prompt" id="admin-prompt-box" hidden>
+                  <summary>頼む文を見る</summary>
+                  <label class="admin-visually-hidden" for="admin-prompt-text"
+                    >Claudeに頼む文</label
+                  >
+                  <textarea
+                    id="admin-prompt-text"
+                    rows="8"
+                    readonly
+                    spellcheck="false"
+                  ></textarea>
+                </details>
+                <div class="admin-field">
+                  <label for="admin-answer">Claudeの答えを貼る</label>
+                  <textarea
+                    id="admin-answer"
+                    rows="6"
+                    autocomplete="off"
+                    spellcheck="false"
+                  ></textarea>
+                </div>
+                <div class="admin-row">
+                  <button
+                    type="button"
+                    class="admin-button"
+                    id="admin-answer-import"
+                  >
+                    見立てを取り込む
+                  </button>
+                </div>
+                <div
+                  id="admin-answer-result"
+                  class="admin-triage-result"
+                  role="status"
+                  aria-live="polite"
+                ></div>
+              </section>
+            </section>
+          </section>
+
+          <section
+            class="admin-queue-section"
+            aria-labelledby="admin-queue-title"
+          >
+            <h2 id="admin-queue-title" class="admin-visually-hidden">
+              通報の一覧
+            </h2>
+            <div class="admin-tabs" role="tablist" aria-label="通報の状態">
+              <button
+                type="button"
+                role="tab"
+                id="admin-tab-pending"
+                data-status="pending"
+                aria-controls="admin-queue"
+                aria-selected="true"
+              >
+                未対応
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="admin-tab-reviewing"
+                data-status="reviewing"
+                aria-controls="admin-queue"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                確認中
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="admin-tab-resolved"
+                data-status="resolved"
+                aria-controls="admin-queue"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                対応済み
+              </button>
+            </div>
+            <div class="admin-toolbar">
+              <label class="admin-order">
+                <span>並び順</span>
+                <select id="admin-order">
+                  <option value="oldest">古い順</option>
+                  <option value="newest">新しい順</option>
+                </select>
+              </label>
+              <button type="button" class="admin-button" id="admin-reload">
+                読み込み直す
+              </button>
+              <p class="admin-small admin-muted" id="admin-queue-summary"></p>
+            </div>
+            <p class="admin-small admin-muted admin-target-note">
+              対応の目安は受付から10営業日です。土日を除いて日本時間で数えます（祝日は数に含めています）。8営業日以上待っている通報には印が付きます。
+            </p>
+            <p
+              id="admin-queue-status"
+              class="admin-message"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div
+              id="admin-queue"
+              class="admin-queue"
+              role="tabpanel"
+              aria-labelledby="admin-tab-pending"
+              tabindex="-1"
+            ></div>
+            <button
+              type="button"
+              class="admin-button admin-more"
+              id="admin-more"
+              hidden
+            >
+              もっと読み込む
+            </button>
+          </section>
+        </div>
+        <div
+          class="admin-view"
+          id="admin-view-coupons"
+          role="tabpanel"
+          aria-labelledby="admin-view-tab-coupons"
+          hidden
+        >
+          <section
+            class="admin-sheet"
+            aria-labelledby="admin-coupon-form-title"
+          >
+            <h2 id="admin-coupon-form-title">クーポンを作る</h2>
+            <p class="admin-small admin-muted">
+              SNSなどで配るコードを作ります。アプリの「オパール・特典」でコードを入れると、オパールを受け取れます（1アカウント1回）。
+            </p>
+            <form id="admin-coupon-form" class="admin-form" novalidate>
+              <div class="admin-form-grid">
+                <div class="admin-field">
+                  <label for="admin-coupon-code">クーポンコード（任意）</label>
+                  <input
+                    type="text"
+                    id="admin-coupon-code"
+                    name="code"
+                    class="admin-code-field"
+                    autocomplete="off"
+                    autocapitalize="characters"
+                    spellcheck="false"
+                    aria-describedby="admin-coupon-code-help admin-coupon-code-error"
+                  />
+                  <p
+                    class="admin-small admin-muted"
+                    id="admin-coupon-code-help"
+                  >
+                    空欄なら、紛らわしい字（0とO、1とIとL）を除いた12文字を自動で作ります（例：<span
+                      class="admin-nowrap"
+                      >ABCD-EFGH-JKMN</span
+                    >）。自分で決めるときは英数字4〜32文字です（空白・ハイフンは数えません）。
+                  </p>
+                  <p class="admin-field-error" id="admin-coupon-code-error"></p>
+                </div>
+                <div class="admin-field">
+                  <label for="admin-coupon-coins">配るオパールの数</label>
+                  <div class="admin-unit">
+                    <input
+                      type="text"
+                      id="admin-coupon-coins"
+                      name="coins"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      required
+                      aria-describedby="admin-coupon-coins-help admin-coupon-coins-error"
+                    />
+                    <span aria-hidden="true">オパール</span>
+                  </div>
+                  <p
+                    class="admin-small admin-muted"
+                    id="admin-coupon-coins-help"
+                  >
+                    1〜1,000,000。1アカウントが1回受け取る数です。
+                  </p>
+                  <p
+                    class="admin-field-error"
+                    id="admin-coupon-coins-error"
+                  ></p>
+                </div>
+              </div>
+              <fieldset class="admin-fieldset">
+                <legend>使える期間（日本時間）</legend>
+                <div class="admin-form-grid">
+                  <div class="admin-field">
+                    <label for="admin-coupon-from">使い始め</label>
+                    <input
+                      type="datetime-local"
+                      id="admin-coupon-from"
+                      name="validFrom"
+                      step="60"
+                      aria-describedby="admin-coupon-from-help admin-coupon-from-error"
+                    />
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-coupon-from-help"
+                    >
+                      空欄なら作った時から使えます。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-coupon-from-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-coupon-until">使える期限</label>
+                    <input
+                      type="datetime-local"
+                      id="admin-coupon-until"
+                      name="validUntil"
+                      step="60"
+                      required
+                      aria-describedby="admin-coupon-until-help admin-coupon-until-error"
+                    />
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-coupon-until-help"
+                    >
+                      この分の終わり（59秒）まで使えます。使い始めから366日以内です。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-coupon-until-error"
+                    ></p>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="admin-field admin-field-narrow">
+                <label for="admin-coupon-uses">使える回数の上限（任意）</label>
+                <div class="admin-unit">
+                  <input
+                    type="text"
+                    id="admin-coupon-uses"
+                    name="maxRedemptions"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    aria-describedby="admin-coupon-uses-help admin-coupon-uses-error"
+                  />
+                  <span aria-hidden="true">回</span>
+                </div>
+                <p class="admin-small admin-muted" id="admin-coupon-uses-help">
+                  先着で何回まで使えるか（全員で合わせて）。空欄なら上限はありません。
+                </p>
+                <p class="admin-field-error" id="admin-coupon-uses-error"></p>
+              </div>
+              <fieldset class="admin-fieldset" data-eligibility>
+                <legend>使えるアカウント</legend>
+                <p class="admin-small admin-muted">
+                  何も入れなければ、すべてのアカウントが使えます。いくつか入れると、すべてに当てはまるアカウントだけが使えます。アカウントを作った時刻は、アプリで初めてGoogleアカウントでログインした時刻です。
+                </p>
+                <div class="admin-form-grid admin-form-grid-3">
+                  <div class="admin-field">
+                    <label for="admin-coupon-days"
+                      >作ってからの日数（任意）</label
+                    >
+                    <div class="admin-unit">
+                      <input
+                        type="text"
+                        id="admin-coupon-days"
+                        name="newAccountWithinDays"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        aria-describedby="admin-coupon-days-help admin-coupon-days-error"
+                      />
+                      <span aria-hidden="true">日以内</span>
+                    </div>
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-coupon-days-help"
+                    >
+                      コードを入れる時点で、作ってからこの日数以内のアカウント（1〜365）。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-coupon-days-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-coupon-created-from"
+                      >この日時以降に作ったアカウント（任意）</label
+                    >
+                    <input
+                      type="datetime-local"
+                      id="admin-coupon-created-from"
+                      name="accountCreatedFrom"
+                      step="60"
+                      aria-describedby="admin-coupon-created-from-error"
+                    />
+                    <p
+                      class="admin-field-error"
+                      id="admin-coupon-created-from-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-coupon-created-until"
+                      >この日時までに作ったアカウント（任意）</label
+                    >
+                    <input
+                      type="datetime-local"
+                      id="admin-coupon-created-until"
+                      name="accountCreatedUntil"
+                      step="60"
+                      aria-describedby="admin-coupon-created-until-error"
+                    />
+                    <p
+                      class="admin-field-error"
+                      id="admin-coupon-created-until-error"
+                    ></p>
+                  </div>
+                </div>
+                <p
+                  class="admin-gift-target"
+                  id="admin-coupon-target"
+                  aria-live="polite"
+                ></p>
+              </fieldset>
+              <div class="admin-field">
+                <label for="admin-coupon-note"
+                  >運営のメモ（任意・500文字まで）</label
+                >
+                <textarea
+                  id="admin-coupon-note"
+                  name="note"
+                  rows="2"
+                  autocomplete="off"
+                  aria-describedby="admin-coupon-note-help admin-coupon-note-error"
+                ></textarea>
+                <p class="admin-small admin-muted" id="admin-coupon-note-help">
+                  一覧に出ます。利用者には見えません（例：Xの告知）。
+                </p>
+                <p class="admin-field-error" id="admin-coupon-note-error"></p>
+              </div>
+              <p
+                class="admin-error admin-form-error"
+                id="admin-coupon-error"
+                role="alert"
+              ></p>
               <div class="admin-row">
+                <button
+                  type="submit"
+                  class="admin-button admin-button-primary"
+                  id="admin-coupon-submit"
+                >
+                  内容を確かめて作る
+                </button>
+              </div>
+            </form>
+            <div
+              class="admin-secret admin-gift-created"
+              id="admin-coupon-created"
+              tabindex="-1"
+              hidden
+            >
+              <p class="admin-gift-created-title">クーポンを作りました</p>
+              <label for="admin-coupon-created-code">クーポンコード</label>
+              <div class="admin-copy-row">
+                <input
+                  type="text"
+                  id="admin-coupon-created-code"
+                  class="admin-code-output"
+                  readonly
+                  autocomplete="off"
+                  spellcheck="false"
+                  aria-describedby="admin-coupon-created-summary"
+                />
                 <button
                   type="button"
                   class="admin-button"
-                  id="admin-prompt-copy"
+                  id="admin-coupon-created-copy"
+                  aria-label="クーポンコードをコピー"
                 >
-                  AIに頼む文をコピー
+                  コピー
                 </button>
               </div>
+              <p class="admin-small" id="admin-coupon-created-summary"></p>
               <p
-                id="admin-prompt-status"
-                class="admin-message"
+                class="admin-message admin-small"
+                id="admin-coupon-created-status"
                 role="status"
                 aria-live="polite"
               ></p>
-              <details class="admin-prompt" id="admin-prompt-box" hidden>
-                <summary>頼む文を見る</summary>
-                <label class="admin-visually-hidden" for="admin-prompt-text"
-                  >Claudeに頼む文</label
+            </div>
+          </section>
+
+          <section
+            class="admin-sheet"
+            aria-labelledby="admin-coupon-list-title"
+          >
+            <div class="admin-list-head">
+              <h2 id="admin-coupon-list-title">クーポンの一覧</h2>
+              <button
+                type="button"
+                class="admin-button"
+                id="admin-coupon-reload"
+              >
+                読み込み直す
+              </button>
+            </div>
+            <p class="admin-small admin-muted" id="admin-coupon-summary"></p>
+            <p
+              class="admin-message"
+              id="admin-coupon-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div class="admin-gift-list" id="admin-coupon-list"></div>
+            <button
+              type="button"
+              class="admin-button admin-more"
+              id="admin-coupon-more"
+              hidden
+            >
+              もっと読み込む
+            </button>
+          </section>
+        </div>
+
+        <div
+          class="admin-view"
+          id="admin-view-presents"
+          role="tabpanel"
+          aria-labelledby="admin-view-tab-presents"
+          hidden
+        >
+          <section
+            class="admin-sheet"
+            aria-labelledby="admin-present-form-title"
+          >
+            <h2 id="admin-present-form-title">プレゼントを作る</h2>
+            <p class="admin-small admin-muted">
+              アプリの「プレゼントボックス」に届きます。対象のアカウントは、受け取りの期限までに1回だけ受け取れます。
+            </p>
+            <p class="admin-gift-limit" id="admin-present-limit"></p>
+            <form id="admin-present-form" class="admin-form" novalidate>
+              <div class="admin-field admin-field-narrow">
+                <label for="admin-present-coins">配るオパールの数</label>
+                <div class="admin-unit">
+                  <input
+                    type="text"
+                    id="admin-present-coins"
+                    name="coins"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    required
+                    aria-describedby="admin-present-coins-help admin-present-coins-error"
+                  />
+                  <span aria-hidden="true">オパール</span>
+                </div>
+                <p
+                  class="admin-small admin-muted"
+                  id="admin-present-coins-help"
+                >
+                  1〜1,000,000。1アカウントが1回受け取る数です。
+                </p>
+                <p class="admin-field-error" id="admin-present-coins-error"></p>
+              </div>
+              <div class="admin-field">
+                <label for="admin-present-title">題（80文字まで）</label>
+                <input
+                  type="text"
+                  id="admin-present-title"
+                  name="title"
+                  autocomplete="off"
+                  required
+                  data-count-max="80"
+                  aria-describedby="admin-present-title-help admin-present-title-count admin-present-title-error"
+                />
+                <p
+                  class="admin-small admin-muted"
+                  id="admin-present-title-help"
+                >
+                  日本語で書きます。下でほかの言語の題を書かなかった言語にも、この題を出します。
+                </p>
+                <p
+                  class="admin-small admin-muted admin-count"
+                  id="admin-present-title-count"
+                ></p>
+                <p class="admin-field-error" id="admin-present-title-error"></p>
+              </div>
+              <div class="admin-field">
+                <label for="admin-present-body"
+                  >本文（任意・1000文字まで）</label
                 >
                 <textarea
-                  id="admin-prompt-text"
-                  rows="8"
-                  readonly
-                  spellcheck="false"
-                ></textarea>
-              </details>
-              <div class="admin-field">
-                <label for="admin-answer">Claudeの答えを貼る</label>
-                <textarea
-                  id="admin-answer"
-                  rows="6"
+                  id="admin-present-body"
+                  name="body"
+                  rows="4"
                   autocomplete="off"
-                  spellcheck="false"
+                  data-count-max="1000"
+                  aria-describedby="admin-present-body-count admin-present-body-error"
                 ></textarea>
+                <p
+                  class="admin-small admin-muted admin-count"
+                  id="admin-present-body-count"
+                ></p>
+                <p class="admin-field-error" id="admin-present-body-error"></p>
               </div>
+              <details class="admin-langs" id="admin-present-langs-box">
+                <summary>
+                  ほかの言語の題と本文（任意）<span
+                    class="admin-langs-count"
+                    id="admin-present-langs-count"
+                  ></span>
+                </summary>
+                <p class="admin-small admin-muted">
+                  アプリをその言語で使っている人に出します。書かなかった言語には、上の日本語の題と本文を出します。本文だけは書けません（題が要ります）。
+                </p>
+                <div class="admin-langs-list" id="admin-present-langs"></div>
+              </details>
+              <fieldset class="admin-fieldset">
+                <legend>表示と受け取りの期間（日本時間）</legend>
+                <div class="admin-form-grid">
+                  <div class="admin-field">
+                    <label for="admin-present-from">表示の開始</label>
+                    <input
+                      type="datetime-local"
+                      id="admin-present-from"
+                      name="visibleFrom"
+                      step="60"
+                      aria-describedby="admin-present-from-help admin-present-from-error"
+                    />
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-present-from-help"
+                    >
+                      空欄なら作った時からプレゼントボックスに出ます。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-present-from-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-present-until">受け取りの期限</label>
+                    <input
+                      type="datetime-local"
+                      id="admin-present-until"
+                      name="claimUntil"
+                      step="60"
+                      required
+                      aria-describedby="admin-present-until-help admin-present-until-error"
+                    />
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-present-until-help"
+                    >
+                      この分の終わり（59秒）まで受け取れます。過ぎるとプレゼントボックスから消えます。表示の開始から366日以内です。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-present-until-error"
+                    ></p>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="admin-fieldset" data-eligibility>
+                <legend>受け取れるアカウント</legend>
+                <p class="admin-small admin-muted">
+                  何も入れなければ、すべてのアカウントが受け取れます。いくつか入れると、すべてに当てはまるアカウントだけに届きます。アカウントを作った時刻は、アプリで初めてGoogleアカウントでログインした時刻です。
+                </p>
+                <div class="admin-form-grid admin-form-grid-3">
+                  <div class="admin-field">
+                    <label for="admin-present-days"
+                      >作ってからの日数（任意）</label
+                    >
+                    <div class="admin-unit">
+                      <input
+                        type="text"
+                        id="admin-present-days"
+                        name="newAccountWithinDays"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        aria-describedby="admin-present-days-help admin-present-days-error"
+                      />
+                      <span aria-hidden="true">日以内</span>
+                    </div>
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-present-days-help"
+                    >
+                      受け取る時点で、作ってからこの日数以内のアカウント（1〜365）。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-present-days-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-present-created-from"
+                      >この日時以降に作ったアカウント（任意）</label
+                    >
+                    <input
+                      type="datetime-local"
+                      id="admin-present-created-from"
+                      name="accountCreatedFrom"
+                      step="60"
+                      aria-describedby="admin-present-created-from-error"
+                    />
+                    <p
+                      class="admin-field-error"
+                      id="admin-present-created-from-error"
+                    ></p>
+                  </div>
+                  <div class="admin-field">
+                    <label for="admin-present-created-until"
+                      >この日時までに作ったアカウント（任意）</label
+                    >
+                    <input
+                      type="datetime-local"
+                      id="admin-present-created-until"
+                      name="accountCreatedUntil"
+                      step="60"
+                      aria-describedby="admin-present-created-until-help admin-present-created-until-error"
+                    />
+                    <p
+                      class="admin-small admin-muted"
+                      id="admin-present-created-until-help"
+                    >
+                      お詫びのときは、不具合が直った日時を入れます。
+                    </p>
+                    <p
+                      class="admin-field-error"
+                      id="admin-present-created-until-error"
+                    ></p>
+                  </div>
+                </div>
+                <div class="admin-field">
+                  <label for="admin-present-accounts"
+                    >アカウントを指定する（任意・100件まで）</label
+                  >
+                  <textarea
+                    id="admin-present-accounts"
+                    name="accountIds"
+                    rows="3"
+                    autocomplete="off"
+                    spellcheck="false"
+                    class="admin-code-field"
+                    aria-describedby="admin-present-accounts-help admin-present-accounts-count admin-present-accounts-error"
+                  ></textarea>
+                  <p
+                    class="admin-small admin-muted"
+                    id="admin-present-accounts-help"
+                  >
+                    NIARIM User
+                    ID（Nのあとに0〜9・a〜fの32文字）を、1行に1つか、カンマで区切って入れます。入れると、そのアカウントだけに届きます。
+                  </p>
+                  <p
+                    class="admin-small admin-muted admin-count"
+                    id="admin-present-accounts-count"
+                  ></p>
+                  <p
+                    class="admin-field-error"
+                    id="admin-present-accounts-error"
+                  ></p>
+                </div>
+                <p
+                  class="admin-gift-target"
+                  id="admin-present-target"
+                  aria-live="polite"
+                ></p>
+              </fieldset>
+              <div class="admin-field">
+                <label for="admin-present-note"
+                  >運営のメモ（任意・500文字まで）</label
+                >
+                <textarea
+                  id="admin-present-note"
+                  name="note"
+                  rows="2"
+                  autocomplete="off"
+                  aria-describedby="admin-present-note-help admin-present-note-error"
+                ></textarea>
+                <p class="admin-small admin-muted" id="admin-present-note-help">
+                  一覧に出ます。利用者には見えません。
+                </p>
+                <p class="admin-field-error" id="admin-present-note-error"></p>
+              </div>
+              <p
+                class="admin-error admin-form-error"
+                id="admin-present-error"
+                role="alert"
+              ></p>
               <div class="admin-row">
                 <button
-                  type="button"
-                  class="admin-button"
-                  id="admin-answer-import"
+                  type="submit"
+                  class="admin-button admin-button-primary"
+                  id="admin-present-submit"
                 >
-                  見立てを取り込む
+                  内容を確かめて作る
                 </button>
               </div>
-              <div
-                id="admin-answer-result"
-                class="admin-triage-result"
-                role="status"
-                aria-live="polite"
-              ></div>
-            </section>
+            </form>
           </section>
-        </section>
 
-        <section
-          class="admin-queue-section"
-          aria-labelledby="admin-queue-title"
-        >
-          <h2 id="admin-queue-title" class="admin-visually-hidden">
-            通報の一覧
-          </h2>
-          <div class="admin-tabs" role="tablist" aria-label="通報の状態">
-            <button
-              type="button"
-              role="tab"
-              id="admin-tab-pending"
-              data-status="pending"
-              aria-controls="admin-queue"
-              aria-selected="true"
-            >
-              未対応
-            </button>
-            <button
-              type="button"
-              role="tab"
-              id="admin-tab-reviewing"
-              data-status="reviewing"
-              aria-controls="admin-queue"
-              aria-selected="false"
-              tabindex="-1"
-            >
-              確認中
-            </button>
-            <button
-              type="button"
-              role="tab"
-              id="admin-tab-resolved"
-              data-status="resolved"
-              aria-controls="admin-queue"
-              aria-selected="false"
-              tabindex="-1"
-            >
-              対応済み
-            </button>
-          </div>
-          <div class="admin-toolbar">
-            <label class="admin-order">
-              <span>並び順</span>
-              <select id="admin-order">
-                <option value="oldest">古い順</option>
-                <option value="newest">新しい順</option>
-              </select>
-            </label>
-            <button type="button" class="admin-button" id="admin-reload">
-              読み込み直す
-            </button>
-            <p class="admin-small admin-muted" id="admin-queue-summary"></p>
-          </div>
-          <p class="admin-small admin-muted admin-target-note">
-            対応の目安は受付から10営業日です。土日を除いて日本時間で数えます（祝日は数に含めています）。8営業日以上待っている通報には印が付きます。
-          </p>
-          <p
-            id="admin-queue-status"
-            class="admin-message"
-            role="status"
-            aria-live="polite"
-          ></p>
-          <div
-            id="admin-queue"
-            class="admin-queue"
-            role="tabpanel"
-            aria-labelledby="admin-tab-pending"
-            tabindex="-1"
-          ></div>
-          <button
-            type="button"
-            class="admin-button admin-more"
-            id="admin-more"
-            hidden
+          <section
+            class="admin-sheet"
+            aria-labelledby="admin-present-list-title"
           >
-            もっと読み込む
-          </button>
-        </section>
+            <div class="admin-list-head">
+              <h2 id="admin-present-list-title">プレゼントの一覧</h2>
+              <button
+                type="button"
+                class="admin-button"
+                id="admin-present-reload"
+              >
+                読み込み直す
+              </button>
+            </div>
+            <p class="admin-small admin-muted" id="admin-present-summary"></p>
+            <p
+              class="admin-message"
+              id="admin-present-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div class="admin-gift-list" id="admin-present-list"></div>
+            <button
+              type="button"
+              class="admin-button admin-more"
+              id="admin-present-more"
+              hidden
+            >
+              もっと読み込む
+            </button>
+          </section>
+        </div>
       </div>
     </main>
 

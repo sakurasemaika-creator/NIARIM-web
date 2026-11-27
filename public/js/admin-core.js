@@ -1,5 +1,5 @@
 /**
- * NIARIM 通報の管理（/admin/）の、画面を持たない部分。
+ * NIARIM の管理ページ（/admin/）の、画面を持たない部分。
  *
  * - 管理API（AWSのLambda Function URLの /admin/...）の呼び出しとエラーの日本語化
  * - 待っている営業日（日本時間の月〜金）の数え方
@@ -7,6 +7,9 @@
  *   サムネイルは YouTube の画像のホストだけ）
  * - サブスクのClaudeでの下見：チャットに貼られたClaudeの答えから見立ての
  *   一覧を取り出して確かめる（parseTriageAnswer）・取り込んだ結果のまとめ
+ * - オパールのクーポン・プレゼント：入力欄の値をバックエンドと同じ上限で
+ *   確かめて送る本文にする（buildCouponRequest・buildPresentRequest。日時は
+ *   日本時間で入力し +09:00 を付けて送る）・一覧に出す状態と対象の文
  *
  * ブラウザーでは window.NiarimAdmin、Node（tests/admin-core.test.mjs）では
  * require() で読む。画面の組み立ては /js/admin.js。
@@ -58,6 +61,30 @@
   const TRIAGE_PROMPT_LIMIT = 20;
   // A pasted answer longer than this is not a Claude answer about 50 reports.
   const ANSWER_MAX = 200000;
+  // Opal coupons and presents: the limits of backend/src/lib/opalGifts.ts.
+  const GIFT_COINS_MAX = 1000000;
+  const GIFT_SPAN_DAYS = 366;
+  const GIFT_NOTE_MAX = 500;
+  const COUPON_USES_MAX = 10000000;
+  const NEW_ACCOUNT_DAYS_MAX = 365;
+  const PRESENT_ACTIVE_MAX = 20;
+  const PRESENT_ACCOUNTS_MAX = 100;
+  const PRESENT_TITLE_MAX = 80;
+  const PRESENT_BODY_MAX = 1000;
+  const GIFT_PAGE_SIZE = 50;
+  const COUPON_CODE = /^[A-Z0-9]{4,32}$/;
+  const COUPON_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const PRESENT_ID = /^[0-9a-z]{9}[0-9a-f]{8}$/;
+  // The present's own title and body are the Japanese ones (and the
+  // fallback); these are the other languages of the app.
+  const PRESENT_LANGUAGES = [
+    { code: "en", label: "英語", native: "English" },
+    { code: "es", label: "スペイン語", native: "Español" },
+    { code: "fr", label: "フランス語", native: "Français" },
+    { code: "ko", label: "韓国語", native: "한국어" },
+    { code: "zh", label: "中国語（簡体字）", native: "简体中文" },
+    { code: "zh_Hant", label: "中国語（繁体字）", native: "繁體中文" },
+  ];
 
   // ---- Text -------------------------------------------------------------
 
@@ -676,6 +703,452 @@
     return text(reason);
   }
 
+  // ---- Opal coupons and presents ------------------------------------------
+
+  /** "1,000,000" */
+  function formatCount(value) {
+    return Number.isSafeInteger(value)
+      ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      : "";
+  }
+
+  /** The value of a datetime-local field for a time, in Japan time. */
+  function jstInputValue(value) {
+    const ms = parseTime(value);
+    if (Number.isNaN(ms)) return "";
+    const d = new Date(ms + JST_OFFSET_MS);
+    return (
+      `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}` +
+      `T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`
+    );
+  }
+
+  /**
+   * A datetime-local value read as Japan time: `{ms, iso}` with the ISO
+   * string the backend takes ("2026-12-01T00:00:00+09:00"), or null. An end
+   * of a period (`endOfMinute`) covers its whole minute: "23:59" is 23:59:59.
+   */
+  function parseJstInput(value, { endOfMinute = false } = {}) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(
+      text(value).trim(),
+    );
+    if (!match) return null;
+    const [year, month, day, hour, minute] = match.slice(1, 6).map(Number);
+    let second = endOfMinute ? 59 : 0;
+    if (match[6] !== undefined) second = Number(match[6]);
+    if (year < 2000 || hour > 23 || minute > 59 || second > 59) return null;
+    const utc = Date.UTC(year, month - 1, day, hour, minute, second);
+    const check = new Date(utc);
+    if (check.getUTCMonth() !== month - 1 || check.getUTCDate() !== day)
+      return null;
+    return {
+      ms: utc - JST_OFFSET_MS,
+      iso: `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${pad(second)}+09:00`,
+    };
+  }
+
+  /** A whole number typed in a field (full-width digits and commas allowed). */
+  function parseWholeNumber(value) {
+    const raw = text(value)
+      .normalize("NFKC")
+      .replace(/[\s,_]/g, "");
+    if (!/^\d{1,16}$/.test(raw)) return null;
+    const number = Number(raw);
+    return Number.isSafeInteger(number) ? number : null;
+  }
+
+  /** As the backend compares codes (normalizeCouponCode in opalGifts.ts). */
+  function normalizeCouponCode(raw) {
+    if (typeof raw !== "string" || raw.length > 128) return null;
+    const folded = raw
+      .normalize("NFKC")
+      .toUpperCase()
+      .replace(/[\s\-_.‐-―−ー・－]/g, "");
+    return COUPON_CODE.test(folded) ? folded : null;
+  }
+
+  /** Generated 12-character codes are shown in groups of four. */
+  function displayCouponCode(code) {
+    const value = text(code);
+    return value.length === 12 &&
+      Array.from(value).every((c) => COUPON_ALPHABET.includes(c))
+      ? value.match(/.{4}/g).join("-")
+      : value;
+  }
+
+  /**
+   * NIARIM User IDs pasted one per line, or separated by commas (quotes and
+   * brackets of a pasted JSON array are ignored). Duplicates count once.
+   */
+  function parseAccountIds(value) {
+    const ids = [];
+    const invalid = [];
+    for (const item of text(value).split(/[\s,、，;；"'[\]]+/)) {
+      if (!item) continue;
+      if (!USER_ID.test(item)) invalid.push(item);
+      else if (!ids.includes(item)) ids.push(item);
+    }
+    return { ids, invalid };
+  }
+
+  function cleanGiftText(value) {
+    return text(value).replace(/\r\n?/g, "\n").trim();
+  }
+
+  const CONTROL_CHARS = /[\u0000-\u0008\u000b-\u001f\u007f]/;
+
+  /**
+   * One text field as the backend reads it (parseText): trimmed, counted in
+   * characters, without control characters. Returns the text ("" when empty)
+   * or null after reporting the problem.
+   */
+  function readGiftText(value, { field, label, max, required }, fail) {
+    const cleaned = cleanGiftText(value);
+    if (!cleaned) {
+      if (required) fail(field, `${label}を入力してください。`);
+      return required ? null : "";
+    }
+    const length = Array.from(cleaned).length;
+    if (length > max) {
+      fail(
+        field,
+        `${label}は${formatCount(max)}文字以内にしてください（今は${formatCount(length)}文字）。`,
+      );
+      return null;
+    }
+    if (CONTROL_CHARS.test(cleaned)) {
+      fail(field, `${label}に使えない文字（制御文字）が入っています。`);
+      return null;
+    }
+    return cleaned;
+  }
+
+  /** The period fields (Japan time): sets body[names.from/until]. */
+  function readGiftWindow(input, names, labels, now, body, fail) {
+    let from = now;
+    let fromOk = true;
+    if (text(input[names.from]).trim()) {
+      const parsed = parseJstInput(input[names.from]);
+      if (!parsed) {
+        fail(names.from, `${labels.from}の日時を正しく入力してください。`);
+        fromOk = false;
+      } else {
+        from = parsed.ms;
+        body[names.from] = parsed.iso;
+      }
+    }
+    if (!text(input[names.until]).trim()) {
+      fail(names.until, `${labels.until}を入力してください。`);
+      return;
+    }
+    const until = parseJstInput(input[names.until], { endOfMinute: true });
+    if (!until) {
+      fail(names.until, `${labels.until}の日時を正しく入力してください。`);
+      return;
+    }
+    if (until.ms <= now)
+      fail(
+        names.until,
+        `${labels.until}が過ぎています。今より後の日時にしてください。`,
+      );
+    else if (fromOk && until.ms <= from)
+      fail(
+        names.until,
+        `${labels.until}は${labels.from}より後にしてください。`,
+      );
+    else if (fromOk && until.ms - from > GIFT_SPAN_DAYS * DAY_MS)
+      fail(
+        names.until,
+        `${labels.from}から${labels.until}までは${GIFT_SPAN_DAYS}日以内にしてください。`,
+      );
+    else body[names.until] = until.iso;
+  }
+
+  /** Which accounts may use the gift: `eligibility` in the backend's shape. */
+  function readEligibility(input, { accountIds }, fail) {
+    const eligibility = {};
+    if (text(input.newAccountWithinDays).trim()) {
+      const days = parseWholeNumber(input.newAccountWithinDays);
+      if (days === null || days < 1 || days > NEW_ACCOUNT_DAYS_MAX)
+        fail(
+          "newAccountWithinDays",
+          `作ってからの日数は1〜${NEW_ACCOUNT_DAYS_MAX}の整数で入力してください。`,
+        );
+      else eligibility.newAccountWithinDays = days;
+    }
+    let from = null;
+    let until = null;
+    if (text(input.accountCreatedFrom).trim()) {
+      from = parseJstInput(input.accountCreatedFrom);
+      if (!from)
+        fail(
+          "accountCreatedFrom",
+          "「この日時以降に作ったアカウント」の日時を正しく入力してください。",
+        );
+      else eligibility.accountCreatedFrom = from.iso;
+    }
+    if (text(input.accountCreatedUntil).trim()) {
+      until = parseJstInput(input.accountCreatedUntil, { endOfMinute: true });
+      if (!until)
+        fail(
+          "accountCreatedUntil",
+          "「この日時までに作ったアカウント」の日時を正しく入力してください。",
+        );
+      else if (from && until.ms < from.ms)
+        fail(
+          "accountCreatedUntil",
+          "「この日時までに作った」は「この日時以降に作った」より後の日時にしてください。",
+        );
+      else eligibility.accountCreatedUntil = until.iso;
+    }
+    if (accountIds && text(input.accountIds).trim()) {
+      const parsed = parseAccountIds(input.accountIds);
+      if (parsed.invalid.length) {
+        const shown = parsed.invalid.slice(0, 3).map((id) => shorten(id, 40));
+        const rest = parsed.invalid.length - shown.length;
+        fail(
+          "accountIds",
+          `NIARIM User IDの形ではないものがあります：${shown.join("、")}` +
+            (rest > 0 ? ` ほか${rest}件` : "") +
+            "（Nのあとに0〜9・a〜fの32文字）。",
+        );
+      } else if (parsed.ids.length > PRESENT_ACCOUNTS_MAX)
+        fail(
+          "accountIds",
+          `指定できるアカウントは${PRESENT_ACCOUNTS_MAX}件までです（今は${parsed.ids.length}件）。`,
+        );
+      else eligibility.accountIds = parsed.ids;
+    }
+    return eligibility;
+  }
+
+  /** The valid part of the account fields, for the live 「対象：…」 line. */
+  function previewEligibility(input, { accountIds = false } = {}) {
+    return readEligibility(input || {}, { accountIds }, () => {});
+  }
+
+  function finishGift(body, errors) {
+    return errors.length ? { body: null, errors } : { body, errors };
+  }
+
+  /**
+   * The body of POST /admin/gifts/coupons from the form's values, checked
+   * against the backend's limits. `{body, errors: []}` or `{body: null,
+   * errors: [{field, message}]}`.
+   */
+  function buildCouponRequest(input, now = Date.now()) {
+    const errors = [];
+    const fail = (field, message) => errors.push({ field, message });
+    const body = {};
+    const code = text(input.code).trim();
+    if (code) {
+      const normalized = normalizeCouponCode(code);
+      if (!normalized)
+        fail(
+          "code",
+          "クーポンコードは英数字4〜32文字にしてください（空白・ハイフンは数えません）。空欄なら自動で作ります。",
+        );
+      else body.code = normalized;
+    }
+    readCoins(input, body, fail);
+    readGiftWindow(
+      input,
+      { from: "validFrom", until: "validUntil" },
+      { from: "使い始め", until: "使える期限" },
+      now,
+      body,
+      fail,
+    );
+    if (text(input.maxRedemptions).trim()) {
+      const uses = parseWholeNumber(input.maxRedemptions);
+      if (uses === null || uses < 1 || uses > COUPON_USES_MAX)
+        fail(
+          "maxRedemptions",
+          `使える回数の上限は1〜${formatCount(COUPON_USES_MAX)}の整数で入力してください。空欄なら上限はありません。`,
+        );
+      else body.maxRedemptions = uses;
+    }
+    const eligibility = readEligibility(input, { accountIds: false }, fail);
+    if (Object.keys(eligibility).length) body.eligibility = eligibility;
+    const note = readGiftText(
+      input.note,
+      { field: "note", label: "メモ", max: GIFT_NOTE_MAX },
+      fail,
+    );
+    if (note) body.note = note;
+    return finishGift(body, errors);
+  }
+
+  function readCoins(input, body, fail) {
+    if (!text(input.coins).trim()) {
+      fail("coins", "配るオパールの数を入力してください。");
+      return;
+    }
+    const coins = parseWholeNumber(input.coins);
+    if (coins === null || coins < 1 || coins > GIFT_COINS_MAX)
+      fail(
+        "coins",
+        `オパールの数は1〜${formatCount(GIFT_COINS_MAX)}の整数で入力してください。`,
+      );
+    else body.coins = coins;
+  }
+
+  /**
+   * The body of POST /admin/gifts/presents. `input.translations` holds
+   * `{title, body}` per language code of PRESENT_LANGUAGES; a language left
+   * empty is not sent (the app shows the Japanese title and body).
+   */
+  function buildPresentRequest(input, now = Date.now()) {
+    const errors = [];
+    const fail = (field, message) => errors.push({ field, message });
+    const body = {};
+    readCoins(input, body, fail);
+    const title = readGiftText(
+      input.title,
+      { field: "title", label: "題", max: PRESENT_TITLE_MAX, required: true },
+      fail,
+    );
+    if (title) body.title = title;
+    const message = readGiftText(
+      input.body,
+      { field: "body", label: "本文", max: PRESENT_BODY_MAX },
+      fail,
+    );
+    if (message) body.body = message;
+    const translations = {};
+    for (const language of PRESENT_LANGUAGES) {
+      const given = (input.translations || {})[language.code] || {};
+      const hasTitle = cleanGiftText(given.title) !== "";
+      const hasBody = cleanGiftText(given.body) !== "";
+      if (!hasTitle && !hasBody) continue;
+      const field = `translations.${language.code}`;
+      if (!hasTitle) {
+        fail(
+          `${field}.title`,
+          `${language.label}の題を入力してください（本文だけでは送れません）。`,
+        );
+        continue;
+      }
+      const localTitle = readGiftText(
+        given.title,
+        {
+          field: `${field}.title`,
+          label: `${language.label}の題`,
+          max: PRESENT_TITLE_MAX,
+        },
+        fail,
+      );
+      const localBody = readGiftText(
+        given.body,
+        {
+          field: `${field}.body`,
+          label: `${language.label}の本文`,
+          max: PRESENT_BODY_MAX,
+        },
+        fail,
+      );
+      if (localTitle && localBody !== null)
+        translations[language.code] = { title: localTitle, body: localBody };
+    }
+    if (Object.keys(translations).length) body.translations = translations;
+    readGiftWindow(
+      input,
+      { from: "visibleFrom", until: "claimUntil" },
+      { from: "表示の開始", until: "受け取りの期限" },
+      now,
+      body,
+      fail,
+    );
+    const eligibility = readEligibility(input, { accountIds: true }, fail);
+    if (Object.keys(eligibility).length) body.eligibility = eligibility;
+    const note = readGiftText(
+      input.note,
+      { field: "note", label: "メモ", max: GIFT_NOTE_MAX },
+      fail,
+    );
+    if (note) body.note = note;
+    return finishGift(body, errors);
+  }
+
+  /**
+   * Who may use a coupon or present, in plain Japanese. Takes the backend's
+   * view (`null` for unset fields) or a request body (fields left out).
+   */
+  function eligibilitySummary(eligibility) {
+    const e = eligibility && typeof eligibility === "object" ? eligibility : {};
+    const parts = [];
+    if (Array.isArray(e.accountIds) && e.accountIds.length)
+      parts.push(`指定した${formatCount(e.accountIds.length)}件のアカウント`);
+    if (Number.isSafeInteger(e.newAccountWithinDays))
+      parts.push(`作ってから${e.newAccountWithinDays}日以内のアカウント`);
+    const from = formatJstDateTime(e.accountCreatedFrom);
+    if (from) parts.push(`${from}以降に作ったアカウント`);
+    const until = formatJstDateTime(e.accountCreatedUntil);
+    if (until) parts.push(`${until}までに作ったアカウント`);
+    if (!parts.length) return "すべてのアカウント";
+    return parts.length === 1
+      ? parts[0]
+      : parts.join("、かつ") + "（すべてに当てはまるもの）";
+  }
+
+  /** "2026/12/01（火）00:00 〜 2026/12/31（木）23:59" (from missing: now). */
+  function periodText(from, until) {
+    const start = formatJstDateTime(from) || "作った時";
+    return `${start} 〜 ${formatJstDateTime(until)}`;
+  }
+
+  /** The state of a coupon from the admin list, `{key, label}`. */
+  function couponStatus(coupon, now = Date.now()) {
+    if (!coupon || coupon.active !== true)
+      return { key: "inactive", label: "止めた" };
+    if (!(parseTime(coupon.validUntil) > now))
+      return { key: "expired", label: "期限切れ" };
+    const max = coupon.maxRedemptions;
+    if (Number.isSafeInteger(max) && Number(coupon.redeemedCount) >= max)
+      return { key: "full", label: "上限に達した" };
+    if (parseTime(coupon.validFrom) > now)
+      return { key: "scheduled", label: "開始前" };
+    return { key: "live", label: "使える" };
+  }
+
+  /** The state of a present, `{key, label}`. */
+  function presentStatus(present, now = Date.now()) {
+    if (!present || present.active !== true)
+      return { key: "inactive", label: "止めた" };
+    if (!(parseTime(present.claimUntil) > now))
+      return { key: "expired", label: "期限切れ" };
+    if (parseTime(present.visibleFrom) > now)
+      return { key: "scheduled", label: "表示前" };
+    return { key: "live", label: "配布中" };
+  }
+
+  /** Counts toward the 20 presents the backend allows at once (it counts
+   *  every present not stopped whose claim period has not ended). */
+  function presentCountsTowardLimit(present, now = Date.now()) {
+    const key = presentStatus(present, now).key;
+    return key === "live" || key === "scheduled";
+  }
+
+  /** The language labels of a present's translations ("英語・韓国語"). */
+  function translationLabels(translations) {
+    if (!translations || typeof translations !== "object") return [];
+    return PRESENT_LANGUAGES.filter(
+      (language) =>
+        translations[language.code] &&
+        typeof translations[language.code].title === "string",
+    ).map((language) => language.label);
+  }
+
+  /** "サーバーの答え：…（CODE）" for an error the backend explained. */
+  function serverDetail(error) {
+    const message = text(error && error.serverMessage).trim();
+    if (!message) return "";
+    const code = text(error.code);
+    return (
+      `サーバーの答え：${shorten(message, 300)}` + (code ? `（${code}）` : "")
+    );
+  }
+
   // ---- Errors -----------------------------------------------------------
 
   const ERROR_MESSAGES = {
@@ -719,6 +1192,19 @@
       "サーバーに接続できませんでした。通信の状態を確かめてください。このページは https://niarim.miranima-studio.com/admin/ で開いたときだけ管理APIにつながります。",
     TIMEOUT:
       "サーバーの応答がありませんでした。しばらくしてからもう一度お試しください。",
+    GIFT_INVALID_COINS: `オパールの数は1〜${formatCount(GIFT_COINS_MAX)}の整数で入力してください。`,
+    GIFT_INVALID_TIME:
+      "日時の形が正しくありません。日本時間の日付と時刻を入れ直してください。",
+    GIFT_INVALID_WINDOW: `期間が正しくありません。期限は今より後で、始まりより後、始まりから${GIFT_SPAN_DAYS}日以内にしてください。`,
+    GIFT_INVALID_ELIGIBILITY:
+      "対象のアカウントの指定が正しくありません。日数・日時・NIARIM User IDを確かめてください。",
+    GIFT_INVALID_TEXT: `題・本文・メモの文字が正しくありません（題は${PRESENT_TITLE_MAX}文字、本文は${PRESENT_BODY_MAX}文字、メモは${GIFT_NOTE_MAX}文字まで）。`,
+    GIFT_INVALID_LIMIT: `使える回数の上限は1〜${formatCount(COUPON_USES_MAX)}の整数で入力してください。`,
+    COUPON_INVALID_CODE:
+      "クーポンコードは英数字4〜32文字にしてください（空白・ハイフンは数えません）。",
+    COUPON_CODE_TAKEN:
+      "このクーポンコードはすでにあります。別のコードにするか、空欄にして自動で作ってください。",
+    PRESENT_LIMIT_REACHED: `同時に配れるプレゼントは${PRESENT_ACTIVE_MAX}件までです。期限が過ぎていないプレゼントのどれかを止めてから作ってください。`,
     INVALID_RESPONSE:
       "サーバーの応答を読み取れませんでした。しばらくしてからもう一度お試しください。",
   };
@@ -845,7 +1331,61 @@
       );
     }
 
+    function giftPage(path, key, { limit = GIFT_PAGE_SIZE, cursor } = {}) {
+      if (!Number.isInteger(limit) || limit < 1 || limit > 50)
+        return Promise.reject(localError("INVALID_PAGE_SIZE"));
+      return request("GET", path, { query: { limit, cursor } }).then((data) => {
+        if (!Array.isArray(data[key]))
+          throw localError("INVALID_RESPONSE", 200);
+        return data;
+      });
+    }
+
+    async function giftWrite(path, body, key, valid) {
+      if (!body || typeof body !== "object" || Array.isArray(body))
+        throw localError("INVALID_RESPONSE", 0);
+      const data = await request("POST", path, { body });
+      if (!data[key] || typeof data[key] !== "object" || !valid(data[key]))
+        throw localError("INVALID_RESPONSE", 200);
+      return data;
+    }
+
+    const isCoupon = (coupon) => typeof coupon.code === "string";
+    const isPresent = (present) => typeof present.id === "string";
+
     return {
+      /** Opal coupons, in code order (50 a page). */
+      listCoupons: (options) =>
+        giftPage("admin/gifts/coupons", "coupons", options),
+      /** A body made by buildCouponRequest. */
+      createCoupon: (body) =>
+        giftWrite("admin/gifts/coupons", body, "coupon", isCoupon),
+      deactivateCoupon: async (code) => {
+        if (typeof code !== "string" || !COUPON_CODE.test(code))
+          throw localError("NOT_FOUND", 404);
+        return giftWrite(
+          `admin/gifts/coupons/${encodeURIComponent(code)}/deactivate`,
+          {},
+          "coupon",
+          isCoupon,
+        );
+      },
+      /** Opal presents, newest first (50 a page). */
+      listPresents: (options) =>
+        giftPage("admin/gifts/presents", "presents", options),
+      /** A body made by buildPresentRequest. */
+      createPresent: (body) =>
+        giftWrite("admin/gifts/presents", body, "present", isPresent),
+      deactivatePresent: async (id) => {
+        if (typeof id !== "string" || !PRESENT_ID.test(id))
+          throw localError("NOT_FOUND", 404);
+        return giftWrite(
+          `admin/gifts/presents/${encodeURIComponent(id)}/deactivate`,
+          {},
+          "present",
+          isPresent,
+        );
+      },
       me: () => request("GET", "admin/me"),
       listReports({ status = "pending", order, limit = 20, cursor } = {}) {
         if (!STATUSES.includes(status))
@@ -982,6 +1522,46 @@
     };
   }
 
+  /**
+   * Pages through the coupons (`api.listCoupons`, items under "coupons") or
+   * the presents. Like createReportPager: a call while a page is loading
+   * returns null, and an item already seen is not returned again.
+   */
+  function createGiftPager(list, key, idOf) {
+    let cursor = null;
+    let done = false;
+    let loading = false;
+    const seen = new Set();
+    return {
+      get done() {
+        return done;
+      },
+      get loading() {
+        return loading;
+      },
+      async next() {
+        if (done || loading) return done ? [] : null;
+        loading = true;
+        try {
+          const page = await list({ limit: GIFT_PAGE_SIZE, cursor });
+          cursor =
+            typeof page.nextCursor === "string" && page.nextCursor
+              ? page.nextCursor
+              : null;
+          done = cursor === null;
+          return page[key].filter((item) => {
+            const id = item && typeof item === "object" ? idOf(item) : null;
+            if (typeof id !== "string" || !id || seen.has(id)) return false;
+            seen.add(id);
+            return true;
+          });
+        } finally {
+          loading = false;
+        }
+      },
+    };
+  }
+
   /** Groups reports on the same work or account (one decision covers them). */
   function targetKey(report) {
     if (!report) return "";
@@ -1037,6 +1617,34 @@
     AdminApiError,
     createAdminApi,
     createReportPager,
+    createGiftPager,
+    GIFT_COINS_MAX,
+    GIFT_SPAN_DAYS,
+    GIFT_NOTE_MAX,
+    COUPON_USES_MAX,
+    NEW_ACCOUNT_DAYS_MAX,
+    PRESENT_ACTIVE_MAX,
+    PRESENT_ACCOUNTS_MAX,
+    PRESENT_TITLE_MAX,
+    PRESENT_BODY_MAX,
+    PRESENT_LANGUAGES,
+    formatCount,
+    jstInputValue,
+    parseJstInput,
+    parseWholeNumber,
+    normalizeCouponCode,
+    displayCouponCode,
+    parseAccountIds,
+    buildCouponRequest,
+    buildPresentRequest,
+    eligibilitySummary,
+    previewEligibility,
+    periodText,
+    couponStatus,
+    presentStatus,
+    presentCountsTowardLimit,
+    translationLabels,
+    serverDetail,
     targetKey,
   };
 });

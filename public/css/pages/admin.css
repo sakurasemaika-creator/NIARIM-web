@@ -1,4 +1,4 @@
-/* NIARIM 通報の管理（/admin/）。所有者だけが使う、公開しないページ。
+/* NIARIM の管理ページ（/admin/）。所有者だけが使う、公開しないページ。
 
    site.css を読まない単独のファイル（404・アカウント削除・フォントの
    ライセンスと同じ扱い）。色・角丸・線は site.css の「Paper, ink and red
@@ -828,6 +828,7 @@ a {
 .admin-field {
   display: grid;
   gap: 4px;
+  align-content: start;
 }
 
 .admin-field label {
@@ -886,4 +887,339 @@ a {
   padding: 12px;
   display: grid;
   gap: 4px;
+}
+
+/* ---- Views: 通報・クーポン・プレゼント ---- */
+.admin-views {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sheet);
+  background: var(--sheet-soft);
+  overflow-x: auto;
+}
+
+.admin-views [role="tab"] {
+  flex: 1 1 0;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.admin-views [role="tab"][aria-selected="true"] {
+  background: var(--sheet);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+  box-shadow: inset 0 -3px 0 var(--pencil);
+}
+
+@media (min-width: 720px) {
+  .admin-views {
+    justify-self: start;
+  }
+
+  .admin-views [role="tab"] {
+    flex: none;
+    min-width: 9em;
+  }
+}
+
+.admin-view {
+  display: grid;
+  gap: 24px;
+}
+
+/* Several lines (an explanation and what the server said). */
+.admin-error,
+.admin-message {
+  white-space: pre-line;
+}
+
+/* ---- Coupon and present forms ---- */
+.admin-form {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-form-grid {
+  display: grid;
+  gap: 12px 16px;
+}
+
+@media (min-width: 720px) {
+  .admin-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .admin-form-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.admin-field-narrow {
+  max-width: 26rem;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="datetime-local"],
+.admin-form textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--sheet);
+}
+
+.admin-form textarea {
+  resize: vertical;
+  min-height: 4.5em;
+}
+
+.admin-form [aria-invalid="true"] {
+  border-color: var(--pencil-ink);
+  box-shadow: 0 0 0 1px var(--pencil-ink);
+}
+
+.admin-code-field {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9375rem;
+}
+
+.admin-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-unit input {
+  flex: 1 1 auto;
+}
+
+.admin-unit span {
+  flex: none;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.admin-field-error {
+  color: var(--pencil-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.admin-field-error:empty,
+.admin-count:empty,
+.admin-gift-target:empty,
+.admin-gift-limit:empty {
+  display: none;
+}
+
+.admin-count[data-over="true"] {
+  color: var(--pencil-ink);
+  font-weight: 700;
+}
+
+.admin-fieldset {
+  display: grid;
+  gap: 12px;
+  padding: 12px 16px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+
+.admin-fieldset legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+.admin-gift-target {
+  padding: 8px 12px;
+  border-radius: var(--radius-control);
+  background: var(--sheet-soft);
+  font-weight: 600;
+}
+
+.admin-gift-limit {
+  font-weight: 600;
+}
+
+.admin-gift-limit[data-full="true"] {
+  color: var(--pencil-ink);
+}
+
+.admin-langs {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  padding: 0 16px;
+}
+
+.admin-langs[open] {
+  padding-bottom: 16px;
+}
+
+.admin-langs summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-langs-count {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.admin-langs > p {
+  margin-bottom: 12px;
+}
+
+.admin-langs-list {
+  display: grid;
+  gap: 12px 16px;
+}
+
+@media (min-width: 900px) {
+  .admin-langs-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.admin-lang {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 14px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+
+.admin-lang legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+.admin-lang-native {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+/* The code just made: the one thing to take away from the form. */
+.admin-gift-created-title {
+  font-weight: 700;
+}
+
+.admin-copy-row input.admin-code-output {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.admin-gift-created:focus {
+  outline: none;
+}
+
+/* ---- Coupon and present lists ---- */
+.admin-list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.admin-gift-list {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+}
+
+.admin-gift-list:empty {
+  display: none;
+}
+
+.admin-gift-card {
+  align-content: start;
+}
+
+.admin-gift-card[data-status="inactive"],
+.admin-gift-card[data-status="expired"] {
+  background: var(--sheet-soft);
+}
+
+.admin-gift-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.admin-gift-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.admin-gift-title {
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-gift-status[data-kind="live"] {
+  border-color: var(--pencil);
+  background: var(--pencil-tint);
+  color: var(--pencil-ink);
+}
+
+.admin-gift-status[data-kind="scheduled"] {
+  border-color: var(--ink);
+}
+
+.admin-gift-status[data-kind="inactive"],
+.admin-gift-status[data-kind="expired"],
+.admin-gift-status[data-kind="full"] {
+  color: var(--ink-2);
+}
+
+.admin-gift-status[data-kind="inactive"] {
+  border-style: dashed;
+}
+
+.admin-gift-facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 16px;
+  font-size: 0.875rem;
+}
+
+.admin-gift-facts dt {
+  color: var(--ink-2);
+}
+
+.admin-gift-facts dd {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .admin-gift-facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .admin-gift-facts dd {
+    margin-bottom: 6px;
+  }
 }
