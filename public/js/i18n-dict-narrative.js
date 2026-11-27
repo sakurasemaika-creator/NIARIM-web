@@ -454,7 +454,7 @@
       "narrative.premium.1.heading": "开通高级会员，创作更自由。",
       "narrative.premium.1.body":
         "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
-      "narrative.premium.2.body": "NIARIM 片尾标记是 MP4、WebM 和 AVI 末尾的 5 秒标志。权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加片尾标记。",
+      "narrative.premium.2.body": "NIARIM 片尾标记是 MP4、WebM 和 AVI 末尾的 5 秒标志。片尾标记权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加片尾标记。",
 
       "narrative.community.1.heading": "作品广场",
       "narrative.community.1.body":

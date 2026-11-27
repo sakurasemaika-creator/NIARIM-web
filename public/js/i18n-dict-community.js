@@ -372,7 +372,7 @@
       "communityPage.advanced.preview.title":
         "Vista previa flotante y detalles de la obra",
       "communityPage.advanced.preview.body":
-        "Tocar la tarjeta de una obra no te lleva de inmediato a otra pantalla. Aparece una pequeña ventana de vista previa en una esquina, dejando que el vídeo siga reproduciéndose mientras navegas por otras pantallas. Puedes arrastrarla o cambiar su tamaño libremente. Toca «Detalles» para ver la pantalla completa con la fecha de publicación, el autor, las etiquetas y el número de marcadores.",
+        "Tocar la tarjeta de una obra no te lleva de inmediato a otra pantalla. Aparece una pequeña ventana de vista previa en una esquina, dejando que el vídeo siga reproduciéndose mientras navegas por otras pantallas. Puedes arrastrarla o cambiar su tamaño libremente. Toca «Detalles» para ver la pantalla de detalles de la obra, con la fecha de publicación, el autor, las etiquetas y el número de marcadores.",
       "communityPage.advanced.shorts.title": "Modo vertical",
       "communityPage.advanced.shorts.body":
         "Filtra la lista de obras por «Todos», «Solo vertical» o «Solo horizontal». Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",

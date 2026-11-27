@@ -220,7 +220,7 @@
     "coins.goalPublishBody": "Publicar una obra también es una misión.",
     "coins.goalMarksTitle": "Marcadores por obra",
     "coins.goalGridTitle": "Obras y marcadores",
-    "coins.goalGridBody": "Combina objetivos de obras publicadas y marcadores en cada obra.",
+    "coins.goalGridBody": "Misión que combina el número de obras publicadas con el número de marcadores de cada obra.",
     "coins.goalGridWorks": "Obras publicadas",
     "coins.goalGridMarks": "Marcadores por obra",
     "coins.goalPlazaDaily": "1 día",

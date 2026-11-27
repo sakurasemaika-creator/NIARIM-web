@@ -37,7 +37,7 @@
     "hero.title.line2": "遇见。",
     "hero.subtitle": "让创作者与观众之间的界限变得模糊。",
     "hero.lead":
-      "NIARIM 是一款在智能手机上就能制作真正手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、配音到导出，一个应用就能完成作品。",
+      "NIARIM 是一款在智能手机上就能制作真正手绘动画的创作应用。既能一张张地画画并让它动起来，制作手绘动画，也能使用关键帧制作运动动画，甚至可以将图片组合成定格动画。从绘图、动画、编辑、添加音频到导出，一个应用就能完成作品。",
     "hero.bridge.html":
       '完成的作品，可以发布到<a href="/community/">“作品广场”</a>。看看别人的作品，再创作下一个作品。从人到作品，从作品到人。',
     "hero.cta.primary": "下载应用",
@@ -1409,7 +1409,7 @@
     "contact.personalNote":
       "No podemos atender por X las consultas que impliquen datos personales (cuenta, correo electrónico, etc.). Usa el formulario de la derecha.",
     "contact.personalNote.formNote":
-      "Nota: los envíos se reciben por correo electrónico.",
+      "Nota: el contenido del formulario nos llega por correo electrónico.",
     "contact.form.type": "Tipo de consulta",
     "contact.form.type.bug": "Reporte de error",
     "contact.form.type.request": "Solicitud de función",
@@ -1614,7 +1614,7 @@
     "newsPage.lead":
       "Aquí publicamos los anuncios sobre actualizaciones, mantenimiento y más.",
     "newsPage.empty":
-      "Por el momento no hay anuncios. Publicaremos aquí las novedades en cuanto las haya.",
+      "Por el momento no hay noticias publicadas. Las publicaremos aquí en cuanto haya información nueva.",
 
     "meta.privacy.title": "Política de privacidad | NIARIM",
     "meta.privacy.description":

@@ -54,8 +54,8 @@
         "オニオンスキン・トーン・スタンプ・定規・テキストなど、仕上げまで見据えた作画支援ツールを搭載しています。",
     },
     en: {
-      "featuresPage.nav.advanced": "Advanced Tools",
-      "featuresPage.advanced.title": "Advanced Tools",
+      "featuresPage.nav.advanced": "Drawing Aids",
+      "featuresPage.advanced.title": "Drawing Aids",
       "featuresPage.advanced.lead":
         "A step further for drawing and finishing work.",
       "featuresPage.advanced.item1.title": "Onion skin",
