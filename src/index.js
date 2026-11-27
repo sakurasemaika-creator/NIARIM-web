@@ -6,6 +6,7 @@
  * title/descriptionの文言が別管理にならない。
  */
 import { localizedCaptureUrl } from "./capture-url.js";
+import { runtimeScript, servedScript } from "./page-scripts.js";
 import {
   PAGE_RUNTIME,
   PAGE_TRANSLATIONS,
@@ -193,14 +194,6 @@ function pageBundleUrl(page, lang) {
   return `/js/generated/i18n-${page}.${lang}.js`;
 }
 
-// /features/ keeps main.js for its screen mocks; every other page that asks
-// for the plain /js/main.js runs the lightweight runtime instead.
-function runtimeScript(page, src) {
-  return page !== "features" && src === "/js/main.js"
-    ? "/js/common-ui.js"
-    : src;
-}
-
 function performanceHeadMarkup(page, lang) {
   const fontPreloadMarkup =
     page === "home" && ["en", "fr", "es"].includes(lang)
@@ -213,7 +206,8 @@ function performanceHeadMarkup(page, lang) {
   // <head>; only the scripts are preloaded here, under the exact URLs the
   // page's <script> elements end up with (a preload of /js/common-ui.js for a
   // script that asks for /js/common-ui.js?v=… is a second download).
-  const runtime = PAGE_RUNTIME[page] && runtimeScript(page, PAGE_RUNTIME[page]);
+  const runtime =
+    PAGE_RUNTIME[page] && servedScript(runtimeScript(page, PAGE_RUNTIME[page]));
   const scriptPreloads =
     `<link rel="preload" href="${pageBundleUrl(page, lang)}" as="script">` +
     (runtime ? `<link rel="preload" href="${runtime}" as="script">` : "");
@@ -485,8 +479,8 @@ function rewriteSeoHtml(response, request, env, metadata) {
           }
           return;
         }
-        const runtime = runtimeScript(metadata.page, src);
-        if (runtime !== src) element.setAttribute("src", runtime);
+        const served = servedScript(runtimeScript(metadata.page, src));
+        if (served !== src) element.setAttribute("src", served);
       },
     })
     .on("head", {

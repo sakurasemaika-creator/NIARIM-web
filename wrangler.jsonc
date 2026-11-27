@@ -4,7 +4,7 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-08-25",
   "build": {
-    "command": "node tools/generate-seo-i18n.mjs && node tools/build-css.mjs",
+    "command": "node tools/generate-seo-i18n.mjs && node tools/build-css.mjs && node tools/build-js.mjs",
     "watch_dir": ["public/js", "public/css", "tools"],
   },
   "assets": {

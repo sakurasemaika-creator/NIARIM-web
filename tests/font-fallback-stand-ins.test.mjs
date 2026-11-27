@@ -15,14 +15,31 @@ const root = path.resolve(import.meta.dirname, "..");
 const css = (file) =>
   fs.readFileSync(path.join(root, "public", "css", file), "utf8");
 
+// The characters of a family: a subset is served in several files (one
+// @font-face each, tools/font_chunks.py), so the ranges of all its faces.
 function faceRange(sheet, family) {
-  const face = sheet.match(
-    new RegExp(`@font-face\\s*\\{[^}]*font-family:\\s*"${family}";[^}]*\\}`),
-  );
-  assert.ok(face, `no @font-face for ${family}`);
-  const range = face[0].match(/unicode-range:\s*([^;]+);/);
-  assert.ok(range, `${family} has no unicode-range`);
-  return range[1].replace(/\s+/g, " ").trim();
+  const faces = [
+    ...sheet.matchAll(
+      new RegExp(
+        `@font-face\\s*\\{[^}]*font-family:\\s*"${family}";[^}]*\\}`,
+        "g",
+      ),
+    ),
+  ];
+  assert.ok(faces.length, `no @font-face for ${family}`);
+  const codePoints = new Set();
+  for (const [face] of faces) {
+    const range = face.match(/unicode-range:\s*([^;]+);/);
+    assert.ok(range, `${family} has no unicode-range`);
+    for (const part of range[1].split(",")) {
+      const [a, b = a] = part.trim().replace(/^U\+/i, "").split("-");
+      for (let cp = parseInt(a, 16); cp <= parseInt(b, 16); cp++) {
+        assert.ok(!codePoints.has(cp), `${family}: U+${cp.toString(16)} twice`);
+        codePoints.add(cp);
+      }
+    }
+  }
+  return [...codePoints].sort((x, y) => x - y);
 }
 
 for (const [subset, standIn, sizeAdjust] of [
@@ -31,7 +48,7 @@ for (const [subset, standIn, sizeAdjust] of [
 ]) {
   test(`${standIn} covers exactly the characters of ${subset}`, () => {
     const sheet = css("site.css");
-    assert.equal(faceRange(sheet, standIn), faceRange(sheet, subset));
+    assert.deepEqual(faceRange(sheet, standIn), faceRange(sheet, subset));
     const face = sheet.match(
       new RegExp(`@font-face\\s*\\{[^}]*font-family:\\s*"${standIn}";[^}]*\\}`),
     )[0];

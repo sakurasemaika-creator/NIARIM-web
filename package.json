@@ -26,6 +26,7 @@
     "audit:heading-font": "node tests/heading-font-cmap-audit.mjs"
   },
   "devDependencies": {
+    "esbuild": "0.28.1",
     "playwright": "^1.62.1",
     "prettier": "3.6.2",
     "wrangler": "^4.126.0"

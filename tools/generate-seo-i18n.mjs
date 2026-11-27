@@ -169,9 +169,8 @@ async function makePageBundle(page, dictionary, keys) {
       ",D[L]);var P=window.NIARIM_I18N_PAGE_BUNDLE||(window.NIARIM_I18N_PAGE_BUNDLE={page:" +
       JSON.stringify(page) +
       ",loaded:{}});P.loaded[L]=true;})();\n";
-    const languageContent = await prettier.format(banner + languageBody, {
-      parser: "babel",
-    });
+    // Served as is: one line of JSON, without the layout a formatter adds.
+    const languageContent = banner + languageBody;
     writeIfChanged(
       path.join(pageBundleDir, `i18n-${page}.${lang}.js`),
       languageContent,

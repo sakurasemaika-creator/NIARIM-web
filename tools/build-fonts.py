@@ -36,6 +36,7 @@ site.css の @font-face ブロック（マーカーで囲んだ範囲）を書�
 import re, glob, subprocess, sys, os, json, hashlib, html
 from fontTools.ttLib import TTFont
 
+from font_chunks import chunk_faces
 from font_strays import drop_stray_contours
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -63,14 +64,14 @@ FONTS = [
     (
         "HakkouMincho",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
-        "HakkouMincho-subset.v5.woff2",
+        "HakkouMincho-subset.v6.woff2",
         "本文用（白光明朝／lavsic氏・Noto Serif JP派生）",
         "primary",
     ),
     (
         "Kuramubon",
         f"{SRCDIR}/kuramubon/KuramubonFont/Kuramubon.otf",
-        "Kuramubon-subset.v2.woff2",
+        "Kuramubon-subset.v4.woff2",
         "見出し用（くらむぼん／フロップデザイン・Dela Gothic派生）",
         "heading",
     ),
@@ -456,23 +457,26 @@ def build():
                 # Latin faces swap (never left in a device font, owner's rule);
                 # the metric-matched *LatinFallback faces after the generated
                 # block in site.css keep the swap from moving text.
-                for out_name, out_dst, out_family, display in (
-                    (latin_out, latin_dst, family, "swap"),
-                    (outname, rest_dst, family + "CJK", "swap"),
-                ):
-                    blocks.append(
-                        "\n".join(
-                            [
-                                f"/* {role} */",
-                                "@font-face {",
-                                f'  font-family: "{out_family}";',
-                                f"  font-display: {display};",
-                                f'  src: url("/assets/fonts/{out_name}") format("woff2");',
-                                f"  unicode-range: {unicode_ranges(out_dst)};",
-                                "}",
-                            ]
-                        )
+                blocks.append(
+                    "\n".join(
+                        [
+                            f"/* {role} */",
+                            "@font-face {",
+                            f'  font-family: "{family}";',
+                            "  font-display: swap;",
+                            f'  src: url("/assets/fonts/{latin_out}") format("woff2");',
+                            f"  unicode-range: {unicode_ranges(latin_dst)};",
+                            "}",
+                        ]
                     )
+                )
+                # The CJK side is served in parts by page (tools/font_chunks.py:
+                # a page downloads only the parts holding its characters).
+                _, rules = chunk_faces(
+                    rest_dst, family + "CJK", outname.removesuffix(".woff2")
+                )
+                os.remove(rest_dst)
+                blocks.append(f"/* {role} */\n" + "\n".join(rules))
                 continue
 
         dst = os.path.join(OUT, outname)

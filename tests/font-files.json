@@ -14,6 +14,17 @@
     "Kuramubon-subset.v3.woff2": "2bdc0fab9a3bb49f1e8e65656732a4a7338e282c8e537fdbed7707c1138ea6c8",
     "HakkouMincho-subset.v4.woff2": "5b1048e95752a904b9c75a264f9c949f4a459df7d044e610f73df1b24ffedde7",
     "Kuramubon-latin.v2.woff2": "b89741933abd329b38861eb47763c825baa456142627799f45bbbcb728e40f69",
-    "HakkouMincho-subset.v5.woff2": "62f62435acd008023dadb21bb05aad19f270111a03f7c72730d615082f1988e7"
+    "HakkouMincho-subset.v5.woff2": "62f62435acd008023dadb21bb05aad19f270111a03f7c72730d615082f1988e7",
+    "HakkouMincho-subset.v6-kern.woff2": "a0281f9f216f83952c8c9f6a11aa7acd07789372fddb1e5e50818ca27ca3140d",
+    "HakkouMincho-subset.v6-latin.woff2": "1fbbfa32084de5732ac2afe5afdb2f98326ee0b70289792e631401daae765b41",
+    "HakkouMincho-subset.v6-intl.woff2": "67bfd22d85976134e6a43569be3009e2e0104a655d938d56fdfdbcdbd98b81e2",
+    "HakkouMincho-subset.v6-home.woff2": "7df844e1ffc23d212a29821ef6e7c3e33cc5c96d4e27f2843e41d6cd6455f5dd",
+    "HakkouMincho-subset.v6-pages.woff2": "e8b8f7c37a66940883da9ef54af05600233b5021be7c1e9b30cd651fcb94345b",
+    "HakkouMincho-subset.v6-legal.woff2": "b4cdbc7b146a9f0bcf4e957d1b76cd32d3412fb40ca3958762809c1d64efb212",
+    "HakkouMincho-subset.v6-rest.woff2": "acd720565f50669aa8387e97d37352e0b32057e0be5f015087f6c466ac11771d",
+    "Kuramubon-subset.v4-home.woff2": "aadf470aff3387c257d864459222fbf83de5425de335c3e2200b24facb57ff0e",
+    "Kuramubon-subset.v4-pages.woff2": "166c3b460b70a9e5b5bab0b2a832cb1cfd66b0b76cba62194f50ebc473c5fccb",
+    "Kuramubon-subset.v4-legal.woff2": "7e047ed5af460961dd815d7de0afe051d44e2644401b407a4623fe0999c02129",
+    "Kuramubon-subset.v4-rest.woff2": "e26341d13e588e9b912448d74974334cd036e6e060a0b6d02eb94d48926a41bf"
   }
 }
