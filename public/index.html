@@ -921,12 +921,12 @@
           <article class="tp-feature tp-feature--wide tp-mix">
             <h3 data-i18n="top.unique.mix.title">混色</h3>
             <p data-i18n="top.unique.mix.body">
-              ブラシの混色モードで、下の色との混ざり方を選べます。油彩風混色は絵の具のように混ざり、拾った色を引きずって伸ばします。水彩風混色は透明な絵の具を重ねます。どちらも、黄色の上の青は緑に、赤の上の青は紫になり、明るさが急に変わりません。下の3枚は、同じブラシの混色モードだけを変えて描いたものです。
+              ブラシの混色モードで、下の色との混ざり方を選べます。油彩風混色は不透明な絵の具のように下の色を覆い、その色を拾って引きずった所で混ざります。水彩風混色は透明な色で塗り、ほかの色と重なる所では色水のようにやわらかくにじんで混ざります。どれだけ透けるか、どこまで広がるかは、ブラシの水分量で変わります。混ざる所では、黄色の上の青は緑に、赤の上の青は紫になり、明るさが急に変わりません。下の3枚は同じ色と同じ線で、混色モードを変えて描いたものです。
             </p>
             <div class="tp-mix-sheet">
               <figure>
                 <img
-                  src="/assets/images/engine/mixing-digital.webp"
+                  src="/assets/images/engine/mixing-digital-v2.webp"
                   width="600"
                   height="400"
                   alt=""
@@ -939,7 +939,7 @@
               </figure>
               <figure>
                 <img
-                  src="/assets/images/engine/mixing-oil.webp"
+                  src="/assets/images/engine/mixing-oil-v2.webp"
                   width="600"
                   height="400"
                   alt=""
@@ -952,7 +952,7 @@
               </figure>
               <figure>
                 <img
-                  src="/assets/images/engine/mixing-watercolor.webp"
+                  src="/assets/images/engine/mixing-watercolor-v2.webp"
                   width="600"
                   height="400"
                   alt=""
@@ -968,12 +968,12 @@
                   描画フィルター
                 </h4>
                 <p class="tp-subnote" data-i18n="top.unique.mix.edgeBody">
-                  「水彩境界」を水彩風混色で塗った絵にかけると、塗った所の縁に色が溜まり、内側が透けて、乾いた水彩のようになります。縁の濃さや、縁から内側へどこまで濃くするかを調整できます。
+                  「水彩境界」を水彩風混色で塗った絵にかけると、塗った所の縁に色が溜まって濃くなり、乾いた水彩のようになります。縁より内側は塗ったときのままです。縁の濃さや、縁から内側へどこまで濃くするかを調整できます。
                 </p>
               </div>
               <figure class="tp-mix-edge">
                 <img
-                  src="/assets/images/engine/mixing-watercolor-edge.webp"
+                  src="/assets/images/engine/mixing-watercolor-edge-v2.webp"
                   width="600"
                   height="400"
                   alt=""
@@ -1157,9 +1157,10 @@
             <li>
               <figure>
                 <img
-                  src="/assets/images/engine/filter-pixel-art-v2.webp"
-                  width="400"
-                  height="400"
+                  class="is-pixel"
+                  src="/assets/images/engine/filter-pixel-art-48.webp"
+                  width="48"
+                  height="48"
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -1215,13 +1216,68 @@
               </figure>
             </li>
           </ul>
+          <h4 class="tp-subhead" data-i18n="top.unique.dots.title">
+            ドット絵：ドット数を指定
+          </h4>
+          <p class="tp-subnote" data-i18n="top.unique.dots.body">
+            ドット数を指定すると、キャンバスの解像度に関係なく、横と縦のドット数を自由に決められます。下は同じ絵を横48ドットと横24ドットにしたものです（色は元のまま）。
+          </p>
+          <ul class="tp-filter-grid tp-pixel-grid tp-dots-grid">
+            <li>
+              <figure>
+                <img
+                  src="/assets/images/engine/filter-original.webp"
+                  width="400"
+                  height="400"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.filters.original">
+                  元の絵
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  class="is-pixel"
+                  src="/assets/images/engine/pixel-dots-48.webp"
+                  width="48"
+                  height="48"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.dots.d48">
+                  横48×縦48ドット
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  class="is-pixel"
+                  src="/assets/images/engine/pixel-dots-24.webp"
+                  width="24"
+                  height="24"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption data-i18n="top.unique.dots.d24">
+                  横24×縦24ドット
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
           <h4 class="tp-subhead" data-i18n="top.unique.dither.title">
             ドット絵：配色方式とディザリング
           </h4>
           <p class="tp-subnote" data-i18n="top.unique.dither.body">
             配色方式は「色を指定しない」（元の色のまま）・「色数を指定する」（決めた数の色だけ）・「色を指定する」（指定した色だけ）・「パレットから選ぶ」（自分で作ったドット絵用パレットの色だけ）から選べます。色を限るときは、ディザリングで限られた色の点を細かく混ぜ、色と色の間のグラデーションを表せます。下の2枚はどちらも色数を6色に指定しています。
           </p>
-          <ul class="tp-filter-grid tp-tone-grid">
+          <ul class="tp-filter-grid tp-tone-grid tp-pixel-grid tp-dither-grid">
             <li>
               <figure>
                 <img
@@ -1240,9 +1296,10 @@
             <li>
               <figure>
                 <img
-                  src="/assets/images/engine/dither-off.webp"
-                  width="480"
-                  height="360"
+                  class="is-pixel"
+                  src="/assets/images/engine/dither-off-80.webp"
+                  width="80"
+                  height="60"
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -1255,9 +1312,10 @@
             <li>
               <figure>
                 <img
-                  src="/assets/images/engine/dither-on.webp"
-                  width="480"
-                  height="360"
+                  class="is-pixel"
+                  src="/assets/images/engine/dither-on-80.webp"
+                  width="80"
+                  height="60"
                   alt=""
                   loading="lazy"
                   decoding="async"

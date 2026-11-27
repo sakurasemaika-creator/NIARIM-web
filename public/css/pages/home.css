@@ -2103,8 +2103,71 @@ body:has(.capture-viewer[open]) {
   image-rendering: pixelated;
 }
 
-#main .tp-filter-grid img[src*="dither-o"] {
+/* Pixel art is shipped at its real size, one image pixel per dot, and
+   enlarged without smoothing. The frame is a ring outside the picture so
+   that the border does not take width from it. */
+#main .tp-filter-grid img.is-pixel,
+#main .tp-filter-grid.tp-pixel-grid img {
+  border: 0;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+
+#main .tp-filter-grid img.is-pixel {
+  image-rendering: crisp-edges;
   image-rendering: pixelated;
+}
+/* Where the dots are the point (dot counts, dithering), each picture is
+   enlarged by a whole number so every dot is the same size: the column is
+   a container and the picture takes the largest step that fits. */
+#main .tp-pixel-grid > li {
+  container-type: inline-size;
+}
+
+#main .tp-pixel-grid figure {
+  justify-items: center;
+}
+
+#main .tp-filter-grid.tp-dots-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 12px;
+  max-width: 800px;
+}
+
+@media (min-width: 600px) {
+  #main .tp-filter-grid.tp-dither-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 800px;
+  }
+}
+@container (min-width: 96px) {
+  #main .tp-filter-grid.tp-dots-grid img {
+    width: 96px;
+  }
+}
+@container (min-width: 144px) {
+  #main .tp-filter-grid.tp-dots-grid img {
+    width: 144px;
+  }
+}
+@container (min-width: 192px) {
+  #main .tp-filter-grid.tp-dots-grid img {
+    width: 192px;
+  }
+}
+@container (min-width: 240px) {
+  #main .tp-filter-grid.tp-dots-grid img {
+    width: 240px;
+  }
+}
+@container (min-width: 160px) {
+  #main .tp-filter-grid.tp-dither-grid img {
+    width: 160px;
+  }
+}
+@container (min-width: 240px) {
+  #main .tp-filter-grid.tp-dither-grid img {
+    width: 240px;
+  }
 }
 /* Auto fill: the settings, the line art, the colour separation and the
    result, in the order they happen. */
