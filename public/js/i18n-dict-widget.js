@@ -205,19 +205,19 @@
         "Choisissez une œuvre, puis une scène, puis une seule image à l’intérieur. Le sélecteur affiche des aperçus réellement composités : vous choisissez le rendu final sans rien exporter au préalable.",
       "narrative.widget.3.heading": "Une couleur par type, à votre goût",
       "narrative.widget.3.body":
-        "Pour les widgets « Créer » et « Place des œuvres », le fond suit le thème de l’application ou prend la couleur de votre choix. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d’un coup d'œil.",
+        "Pour les widgets « Créer une animation » et « Place des œuvres », le fond suit le thème de l’application ou prend la couleur de votre choix. Les couleurs sont mémorisées séparément pour chaque type : les trois peuvent voisiner et rester reconnaissables d’un coup d’œil.",
       "featuresPage.widget.item1.title": "Widget d’écran de démarrage",
       "featuresPage.widget.item1.body":
-        "Affiche une image de l'œuvre que vous choisissez. Un appui ouvre NIARIM.",
-      "featuresPage.widget.item2.title": "Widget « Créer »",
+        "Affiche une image de l’œuvre que vous choisissez. Un appui ouvre NIARIM.",
+      "featuresPage.widget.item2.title": "Widget « Créer une animation »",
       "featuresPage.widget.item2.body":
-        "Un appui ouvre l’écran « Créer ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
+        "Un appui ouvre l’écran « Créer une animation ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
       "featuresPage.widget.item3.title": "Widget « Place des œuvres »",
       "featuresPage.widget.item3.body":
         "Un appui ouvre la Place des œuvres. Le fond suit le thème ou utilise la couleur que vous choisissez.",
       "featuresPage.widget.item4.title": "Affiché en image fixe",
       "featuresPage.widget.item4.body":
-        "Les widgets de l’écran d’accueil ne peuvent pas lire de vidéo : une image de l'œuvre choisie est affichée en fixe. L’ajout du widget lui-même se fait par un appui long sur l’écran d’accueil.",
+        "Les widgets de l’écran d’accueil ne peuvent pas lire de vidéo : une image de l’œuvre choisie est affichée en fixe. L’ajout du widget lui-même se fait par un appui long sur l’écran d’accueil.",
       "fd.widgetLaunch": "Démarrage",
       "fd.widgetCreate": "Créer",
       "fd.widgetPlaza": "Place des œuvres",
@@ -229,7 +229,7 @@
       "featuresPage.nav.widget": "Widgets",
       "featuresPage.widget.title": "Widgets de la pantalla de inicio",
       "featuresPage.widget.lead":
-        "Ten tus propias obras en la pantalla de inicio del móvil.",
+        "Ten tus propias obras en la pantalla de inicio del teléfono.",
       "narrative.widget.1.heading":
         "Tu pantalla de inicio se convierte en el sitio de tus obras.",
       "narrative.widget.1.body":
@@ -239,13 +239,13 @@
         "Eliges una obra, luego una escena y después un solo fotograma dentro de ella. El selector muestra vistas previas realmente compuestas, así que eliges el resultado final sin exportar nada antes.",
       "narrative.widget.3.heading": "Un color por tipo, a tu gusto",
       "narrative.widget.3.body":
-        "En los widgets «Crear» y «Plaza de Obras» el fondo puede seguir el tema de la aplicación o tomar el color que prefieras. Los colores se guardan por separado para cada tipo, así que los tres pueden convivir y distinguirse de un vistazo.",
+        "En los widgets «Crear una animación» y «Plaza de Obras» el fondo puede seguir el tema de la aplicación o tomar el color que prefieras. Los colores se guardan por separado para cada tipo, así que los tres pueden convivir y distinguirse de un vistazo.",
       "featuresPage.widget.item1.title": "Widget de arranque",
       "featuresPage.widget.item1.body":
         "Muestra un fotograma de la obra que elijas. Al tocarlo se abre NIARIM.",
-      "featuresPage.widget.item2.title": "Widget «Crear»",
+      "featuresPage.widget.item2.title": "Widget «Crear una animación»",
       "featuresPage.widget.item2.body":
-        "Al tocarlo se abre la pantalla «Crear». El fondo sigue el tema o usa el color que elijas.",
+        "Al tocarlo se abre la pantalla «Crear una animación». El fondo sigue el tema o usa el color que elijas.",
       "featuresPage.widget.item3.title": "Widget «Plaza de Obras»",
       "featuresPage.widget.item3.body":
         "Al tocarlo se abre la Plaza de Obras. El fondo sigue el tema o usa el color que elijas.",

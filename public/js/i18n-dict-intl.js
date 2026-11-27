@@ -1065,7 +1065,7 @@
     "contact.personalNote":
       "Nous ne pouvons pas traiter sur X les demandes impliquant des informations personnelles (compte, adresse e-mail, etc.). Merci d’utiliser le formulaire à droite.",
     "contact.personalNote.formNote":
-      "※ Les messages envoyés via ce formulaire sont reçus par e-mail.",
+      "Remarque : les messages envoyés via ce formulaire sont reçus par e-mail.",
     "contact.form.type": "Type de demande",
     "contact.form.type.bug": "Signalement de bug",
     "contact.form.type.request": "Demande de fonctionnalité",
@@ -1169,7 +1169,7 @@
       "Affinez le rendu de votre pinceau avec le fondu, l’atténuation du trait, le mélange des couleurs, la courbe de pression, et plus encore.",
     "featuresPage.drawing.item15.title": "Recherche par étiquette",
     "featuresPage.drawing.item15.body":
-      "Les pinceaux, les trames et les tampons portent des étiquettes comme trait, remplissage, flou, rendu analogique, pixel art ou similigravure : vous filtrez par étiquette même sans vous rappeler d’un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
+      "Les pinceaux, les trames et les tampons portent des étiquettes comme « Trait », « Peinture », « Flou », « Analogique », « Pixel art » ou « Trame » : vous filtrez par étiquette même sans vous rappeler d’un nom. Un appui bascule entre recherche par mot-clé et par étiquette, et vous étiquetez vous-même vos propres ressources.",
 
     "featuresPage.animation.title": "Animation",
     "featuresPage.animation.lead":
@@ -1179,7 +1179,7 @@
       "Ajoutez les images une à une pour construire le dessin.",
     "featuresPage.animation.item2.title": "Timeline",
     "featuresPage.animation.item2.body":
-      "Gérez sur une seule chronologie bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l’organiser.",
+      "Gérez sur une seule timeline bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l’organiser.",
     "featuresPage.animation.item3.title": "Édition d’image",
     "featuresPage.animation.item3.body":
       "Sélectionnez n’importe quelle image et redessinez-la.",
@@ -1379,7 +1379,7 @@
       "Consulta la ficha de Google Play para conocer los sistemas y dispositivos compatibles.",
     "faq.q4": "¿Puedo exportar lo que he creado?",
     "faq.a4":
-      "Sí. Puedes exportar tu trabajo como video, hasta una resolución de 1920×1920, con una relación de aspecto configurable libremente.",
+      "Sí. Puedes exportar tu trabajo como vídeo, hasta una resolución de 1920×1920, con una relación de aspecto configurable libremente.",
     "faq.q5": "¿Puedo compartir lo que he creado?",
     "faq.q6": "¿Necesito crear una cuenta?",
     "faq.q7": "¿Dónde puedo reportar un error o solicitar una función?",
@@ -1387,7 +1387,7 @@
       "Utiliza el formulario de contacto de este sitio para enviar reportes de errores o solicitudes de funciones.",
 
     "cta.title": "¡Vamos a hacer una animación de verdad!",
-    "cta.body": "Cuando te den ganas de dibujar, puedes empezar enseguida. Dibuja cada fotograma a mano o usa animación por fotogramas clave, como prefieras. Cuida cada detalle hasta quedar satisfecho y crea una obra original solo tuya. Cuando la termines, todos podrán verla en la Plaza de Obras, y tú también podrás ver las obras de los demás. Crea, publica, descubre.",
+    "cta.body": "Cuando te den ganas de dibujar, puedes empezar enseguida. Dibuja cada fotograma a mano o usa animación por fotogramas clave, como prefieras. Cuida cada detalle hasta que te convenza y crea una obra original solo tuya. Cuando la termines, todos podrán verla en la Plaza de Obras, y tú también podrás ver las obras de los demás. Crea, publica, descubre.",
 
     "footer.tagline": "App de animación dibujada a mano para Android",
     "footer.product": "Producto",
@@ -1409,7 +1409,7 @@
     "contact.personalNote":
       "No podemos atender por X las consultas que impliquen datos personales (cuenta, correo electrónico, etc.). Usa el formulario de la derecha.",
     "contact.personalNote.formNote":
-      "※ Los envíos se reciben por correo electrónico.",
+      "Nota: los envíos se reciben por correo electrónico.",
     "contact.form.type": "Tipo de consulta",
     "contact.form.type.bug": "Reporte de error",
     "contact.form.type.request": "Solicitud de función",
@@ -1491,9 +1491,9 @@
     "featuresPage.drawing.item8.title": "Goma de borrar",
     "featuresPage.drawing.item8.body":
       "Una goma estándar para borrar partes de lo que has dibujado.",
-    "featuresPage.drawing.item9.title": "Cubo de pintura y relleno por lazo",
+    "featuresPage.drawing.item9.title": "Bote de pintura y relleno por lazo",
     "featuresPage.drawing.item9.body":
-      "Rellena un área cerrada con el «cubo de pintura», o un área rodeada con el lazo mediante el «relleno por lazo».",
+      "Rellena un área cerrada con el «bote de pintura», o un área rodeada con el lazo mediante el «relleno por lazo».",
     "featuresPage.drawing.item10.title": "Cuentagotas",
     "featuresPage.drawing.item10.body":
       "Toma un color del lienzo y ajústalo al instante como tu color de dibujo.",
@@ -1515,16 +1515,16 @@
 
     "featuresPage.animation.title": "Animación",
     "featuresPage.animation.lead":
-      "Apila cuadros y construye el movimiento en una línea de tiempo.",
+      "Apila fotogramas y construye el movimiento en una línea de tiempo.",
     "featuresPage.animation.item1.title": "Cuadros",
     "featuresPage.animation.item1.body":
       "Añade cuadros uno a uno, construyendo tu dibujo.",
     "featuresPage.animation.item2.title": "Línea de tiempo",
     "featuresPage.animation.item2.body":
-      "Gestiona en una sola línea de tiempo mucho más que cuadros: imágenes, vídeo, audio, capas comunes y fotogramas clave de cámara también tienen su lugar ahí. También puedes dividir tu obra en escenas para organizarla.",
-    "featuresPage.animation.item3.title": "Edición de cuadros",
+      "Gestiona en una sola línea de tiempo mucho más que fotogramas: imágenes, vídeo, audio, capas comunes y fotogramas clave de cámara también tienen su lugar ahí. También puedes dividir tu obra en escenas para organizarla.",
+    "featuresPage.animation.item3.title": "Edición de fotogramas",
     "featuresPage.animation.item3.body":
-      "Selecciona cualquier cuadro y vuelve a dibujarlo.",
+      "Selecciona cualquier fotograma y vuelve a dibujarlo.",
     "featuresPage.animation.item4.title": "Vista previa de animación",
     "featuresPage.animation.item4.body":
       "Comprueba el movimiento en cualquier momento mientras trabajas.",
@@ -1571,9 +1571,9 @@
     "featuresPage.audio.item1.body": "Añade un archivo de audio a tu proyecto.",
     "featuresPage.audio.item2.title": "Volumen",
     "featuresPage.audio.item2.body": "Ajusta el volumen.",
-    "featuresPage.audio.item3.title": "Cuadro de inicio",
+    "featuresPage.audio.item3.title": "Fotograma de inicio",
     "featuresPage.audio.item3.body":
-      "Especifica desde qué cuadro empieza a reproducirse el audio.",
+      "Especifica desde qué fotograma empieza a reproducirse el audio.",
     "featuresPage.audio.item4.title": "Fundido de entrada y salida",
     "featuresPage.audio.item4.body":
       "Suaviza el inicio y el final de tu audio.",
@@ -1585,7 +1585,7 @@
       "Los clips de audio muestran una forma de onda superpuesta tenue, para ajustar su posición en la línea de tiempo mientras ves la intensidad del sonido.",
 
     "featuresPage.export.title": "Exportar",
-    "featuresPage.export.lead": "Entrega tu trabajo terminado como video.",
+    "featuresPage.export.lead": "Entrega tu trabajo terminado como vídeo.",
     "featuresPage.export.item1.title": "Resolución",
     "featuresPage.export.item1.body":
       "Exporta hasta una resolución de 1920×1920.",
@@ -1614,7 +1614,7 @@
     "newsPage.lead":
       "Aquí publicamos los anuncios sobre actualizaciones, mantenimiento y más.",
     "newsPage.empty":
-      "Por el momento no hay anuncios. Las nuevas novedades se publicarán aquí.",
+      "Por el momento no hay anuncios. Publicaremos aquí las novedades en cuanto las haya.",
 
     "meta.privacy.title": "Política de privacidad | NIARIM",
     "meta.privacy.description":

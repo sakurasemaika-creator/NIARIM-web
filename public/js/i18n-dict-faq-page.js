@@ -97,14 +97,14 @@
       "meta.faq.title": "Preguntas frecuentes | NIARIM",
       "meta.faq.description": "Preguntas frecuentes y respuestas sobre NIARIM.",
       "faq.a5.html":
-        'Puedes compartir libremente tus archivos de video exportados a través de tu dispositivo u otras apps. También puedes publicar tu obra en la <a href="/community/">«Plaza de Obras»</a> subiéndola directamente a YouTube desde la app NIARIM.',
+        'Puedes compartir libremente tus archivos de vídeo exportados a través de tu dispositivo u otras apps. También puedes publicar tu obra en la <a href="/community/">«Plaza de Obras»</a> subiéndola directamente a YouTube desde la app NIARIM.',
       "faq.q8": "¿Qué puedo hacer con el plan Premium?",
       "faq.a8.html":
         'Premium elimina los anuncios y añade la opción de ocultar la marca final oficial, marca de agua personalizada, curva de tonos y ajuste de niveles. Consulta la <a href="/premium/">página de Premium</a> para más detalles.',
       "faq.q9":
         "Si publico mi obra en la Plaza de Obras, ¿podrá verla cualquiera también en YouTube?",
       "faq.a9":
-        "Publicar en la Plaza de Obras se hace subiendo un vídeo a YouTube desde dentro de la app NIARIM, pero el ajuste de público/privado de la propia Plaza de Obras es independiente de la configuración de visibilidad de YouTube. Aunque el vídeo de YouTube esté configurado como «Oculto», seguirá mostrándose y reproduciéndose con normalidad en la Plaza de Obras, mientras permanece prácticamente invisible en la búsqueda y las recomendaciones de YouTube (solo quienes tengan el enlace directo podrán verlo allí). Por el contrario, si el vídeo de YouTube se configura como «Privado» o se elimina, su URL de reproducción deja de funcionar, por lo que la visualización en la Plaza de Obras se suspende automáticamente sin importar tu configuración en NIARIM (tu configuración de NIARIM se conserva, así que la visualización se reanuda automáticamente si se restablece el estado en YouTube). Si no quieres recibir comentarios de quienes tengan el enlace, puedes desactivar los comentarios en YouTube para mayor tranquilidad.",
+        "Publicar en la Plaza de Obras se hace subiendo un vídeo a YouTube desde dentro de la app NIARIM, pero el ajuste de público/privado de la propia Plaza de Obras es independiente de la configuración de visibilidad de YouTube. Aunque el vídeo de YouTube esté configurado como «No listado», seguirá mostrándose y reproduciéndose con normalidad en la Plaza de Obras, mientras permanece prácticamente invisible en la búsqueda y las recomendaciones de YouTube (solo quienes tengan el enlace directo podrán verlo allí). Por el contrario, si el vídeo de YouTube se configura como «Privado» o se elimina, su URL de reproducción deja de funcionar, por lo que la visualización en la Plaza de Obras se suspende automáticamente sin importar tu configuración en NIARIM (tu configuración de NIARIM se conserva, así que la visualización se reanuda automáticamente si se restablece el estado en YouTube). Si no quieres recibir comentarios de quienes tengan el enlace, puedes desactivar los comentarios en YouTube para mayor tranquilidad.",
     },
   };
   for (var lang in DATA) {
@@ -134,9 +134,9 @@
     "faq.a6": "계정 등록 없이도 작품을 만들 수 있습니다. 작품과 프로젝트는 기기에 저장됩니다. 작품 광장에 게시하려면 Google 계정 로그인이 필요합니다."
   },
   "fr": {
-    "faq.a6": "Aucun compte n’est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la galerie."
+    "faq.a6": "Aucun compte n’est nécessaire pour créer. Vos œuvres et projets sont enregistrés sur votre appareil. Une connexion avec un compte Google est requise pour publier dans la Place des œuvres."
   },
   "es": {
-    "faq.a6": "Puedes crear sin registrarte. Tus obras y proyectos se guardan en el dispositivo. Para publicar en la galería, debes iniciar sesión con una cuenta de Google."
+    "faq.a6": "Puedes crear sin registrarte. Tus obras y proyectos se guardan en el dispositivo. Para publicar en la Plaza de Obras, debes iniciar sesión con una cuenta de Google."
   }
 }; var dictionary=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={}); Object.keys(entries).forEach(function(locale){dictionary[locale]=Object.assign(dictionary[locale]||{},entries[locale]);});})();

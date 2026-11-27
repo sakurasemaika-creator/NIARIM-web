@@ -22,10 +22,10 @@
   },
   "fr": {
     "communityPage.ranking.note": "Découvrez les nouveautés et les créations populaires auprès des utilisateurs.",
-    "narrative.community.3.body": "Consultez les œuvres les plus enregistrées dans les classements du jour, de la semaine, du mois, de l’année et de tous les temps.",
+    "narrative.community.3.body": "Consultez les œuvres les plus mises en favori dans les classements du jour, de la semaine, du mois, de l’année et de tous les temps.",
   },
   "es": {
     "communityPage.ranking.note": "Descubre obras nuevas y creaciones populares por sus marcadores.",
-    "narrative.community.3.body": "Consulta las obras más guardadas en los rankings diario, semanal, mensual, anual y total.",
+    "narrative.community.3.body": "Consulta las obras con más marcadores en los rankings diario, semanal, mensual, anual y total.",
   }
 }; var dict=window.NIARIM_I18N_DICT||(window.NIARIM_I18N_DICT={}); Object.keys(translations).forEach(function(locale){dict[locale]=Object.assign(dict[locale]||{},translations[locale]);});})();

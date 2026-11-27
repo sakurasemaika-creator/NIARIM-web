@@ -89,7 +89,7 @@
     es: {
       "faq.viewAll": "Ver todas las preguntas",
       "faq.a2":
-        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de video. Muestra anuncios y añade automáticamente la marca final oficial de NIARIM. Los planes de precios concretos están disponibles en la ficha de Google Play.",
+        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de vídeo. Muestra anuncios y añade automáticamente la marca final oficial de NIARIM. Los planes de precios concretos están disponibles en la ficha de Google Play.",
       "faq.a3":
         "La aplicación está disponible para dispositivos Android. También admite la conexión de una tableta gráfica o pantalla-tableta, así como el modo Galaxy DeX y el S Pen. Consulta la ficha de Google Play para conocer el detalle de las versiones del sistema compatibles.",
       "faq.a6":

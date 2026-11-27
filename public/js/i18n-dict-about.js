@@ -273,9 +273,9 @@
       "about.name.title": "Que signifie « NIARIM » ?",
       "about.name.body":
         "Rapprocher l’animation de tout le monde. Estomper la frontière entre créateurs et spectateurs. Chacun, à tout moment, peut être à la fois créateur et spectateur.",
-      "about.modes.title": "Mode Canevas et Mode Chronologie",
+      "about.modes.title": "Mode Canevas et Mode Timeline",
       "about.modes.body":
-        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Chronologie » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
+        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Timeline » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Ce à quoi NIARIM tient",
       "about.philosophy.item1.title": "Tout le monde peut faire de l’animation facilement.",
@@ -322,7 +322,7 @@
       "about.eyebrow": "About NIARIM",
       "about.title": "Acerca de NIARIM",
       "about.lead":
-        "Crear animación, fácil, para todos. Que cualquiera pueda ser creador. NIARIM es una app de animación dibujada a mano, pensada para que cualquier persona, sin importar su edad, disfrute de crear animación fácilmente. Cuidamos que el manejo sea intuitivo, además de ofrecer una gran libertad creativa para perfeccionar cada detalle.",
+        "Crear animación, fácil, para todos. Que cualquiera pueda crear. NIARIM es una app de animación dibujada a mano, pensada para que cualquier persona, sin importar su edad, disfrute de crear animación fácilmente. Cuidamos que el manejo sea intuitivo, además de ofrecer una gran libertad creativa para perfeccionar cada detalle.",
       "about.name.eyebrow": "The Name",
       "about.name.title": "¿Qué significa «NIARIM»?",
       "about.name.body":
@@ -334,7 +334,7 @@
       "about.philosophy.title": "Lo que valora NIARIM",
       "about.philosophy.item1.title": "Cualquiera puede hacer animación con facilidad.",
       "about.philosophy.item1.body":
-        "No hace falta conocimiento ni herramientas especializadas. Con solo un smartphone, cualquiera puede ser creador. Ese es el mundo al que aspira NIARIM.",
+        "No hace falta conocimiento ni herramientas especializadas. Con solo un smartphone, cualquiera puede crear. Ese es el mundo al que aspira NIARIM.",
       "about.philosophy.item2.title": "Trabajando para mantener la app ligera",
       "about.philosophy.item2.body":
         "Crear animación tiende a generar más datos a medida que aumentan los fotogramas y las capas. Además de las capas comunes, la gestión de caché y las herramientas para liberar espacio, también hemos añadido ajustes de rendimiento que te permiten elegir un preajuste de calidad, o ajustar cada opción individualmente, según tu dispositivo, para aliviar la carga que soporta. No necesitas equipo especial para empezar a crear en serio.",
@@ -347,13 +347,13 @@
       "about.device.eyebrow": "Supported Environment",
       "about.device.title": "Entornos compatibles",
       "about.device.lead":
-        "NIARIM funciona tanto en el móvil solo como con dispositivos externos conectados para una configuración más avanzada.",
+        "NIARIM funciona con el teléfono por sí solo y también con dispositivos externos conectados para una configuración más avanzada.",
       "about.device.item1.title": "Dispositivos Android en general",
       "about.device.item1.body":
         "NIARIM es compatible con una amplia variedad de dispositivos Android.",
-      "about.device.item2.title": "Tableta gráfica / pantalla-tableta",
+      "about.device.item2.title": "Tableta gráfica / pantalla con lápiz",
       "about.device.item2.body":
-        "Conecta una tableta gráfica o una pantalla-tableta externa para un entorno de dibujo más avanzado.",
+        "Conecta una tableta gráfica o una pantalla con lápiz externa para un entorno de dibujo más avanzado.",
       "about.device.item3.title": "Modo Galaxy DeX y S Pen",
       "about.device.item3.body":
         "Compatible con un uso tipo escritorio mediante el modo DeX de Galaxy, además de la detección de presión e inclinación del S Pen.",

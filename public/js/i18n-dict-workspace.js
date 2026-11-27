@@ -162,8 +162,8 @@
       "featuresPage.workspace.item4.body":
         "De nombreux préréglages sont inclus, des tons pastel aux tons sourds. Mais vous pouvez aller plus loin : couleur d’accent, couleur du texte, fond des panneaux, couleur de sélection, et même la couleur du repère de mise à jour — presque toutes les couleurs de l’application peuvent être librement combinées via un sélecteur de couleurs pour créer votre propre thème.",
       "fd.leftHandedMode": "Mode gaucher",
-      "fd.gestureTwoTap": "Tap à deux doigts",
-      "fd.gestureThreeTap": "Tap à trois doigts",
+      "fd.gestureTwoTap": "Appui à deux doigts",
+      "fd.gestureThreeTap": "Appui à trois doigts",
       "fd.gestureTwoSwipe": "Balayage à deux doigts",
       "fd.gestureLongPress": "Appui long",
       "fd.gestureUndo": "Annuler",

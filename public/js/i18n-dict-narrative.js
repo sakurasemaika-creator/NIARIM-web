@@ -786,11 +786,11 @@
       "narrative.drawing.1.heading":
         "Dessinez exactement ce que vous avez en tête.",
       "narrative.drawing.1.body":
-        "Dessinez au stylo. Effacez. Remplissez. Sélectionnez. Transformez. Alternez entre les outils dont vous avez besoin pour finaliser une œuvre.",
+        "Dessinez à la plume. Effacez. Remplissez. Sélectionnez. Transformez. Alternez entre les outils dont vous avez besoin pour finaliser une œuvre.",
       "narrative.drawing.2.heading":
         "Créez un ressenti de dessin qui vous ressemble.",
       "narrative.drawing.2.body":
-        "Au-delà d’alterner entre pinceaux comme le stylo G, le stylo et l’aérographe, vous pouvez affiner les pinceaux eux-mêmes en détail.",
+        "Au-delà d’alterner entre pinceaux comme la plume G, la plume et l’aérographe, vous pouvez affiner les pinceaux eux-mêmes en détail.",
       "narrative.drawing.3.heading": "Réglages des pinceaux",
       "narrative.drawing.3.body":
         "Réglez bien sûr l’épaisseur et l’opacité, ainsi que le fondu, l’atténuation du trait, le mélange de couleurs, et plus encore. Fondez les couleurs entre elles comme à l’aquarelle, ou estompez l’extrémité d’un trait. Ajustez le ressenti de votre trait selon votre façon de dessiner.",
@@ -802,7 +802,7 @@
       "narrative.animation.1.heading":
         "Créons une animation dessinée à la main !",
       "narrative.animation.1.body":
-        "Dessinez une image à la fois et empilez les images. Vérifiez la pelure d’oignon pour voir les images précédentes et suivantes, et affinez la façon dont le mouvement s’enchaîne. Organisez images et scènes sur la timeline, et synchronisez les dessins avec le son. Du premier trait jusqu’au moment où ça bouge, tout se fait dans NIARIM.",
+        "Dessinez une image à la fois et empilez les images. Grâce au papier calque, voyez les images précédentes et suivantes, et affinez la façon dont le mouvement s’enchaîne. Organisez images et scènes sur la timeline, et synchronisez les dessins avec le son. Du premier trait jusqu’au moment où ça bouge, tout se fait dans NIARIM.",
       "narrative.animation.3.heading":
         "Pas seulement dessiné à la main. Il y a plus d’une façon de s’exprimer.",
       "narrative.animation.4.heading": "Animer avec des images clés",
@@ -813,25 +813,25 @@
         "Placez des images ou des vidéos sur la timeline et combinez-les avec votre dessin fait main.",
       "narrative.animation.6.heading": "Le stop motion aussi",
       "narrative.animation.6.body":
-        "Disposez des images comme autant d’images-clés pour créer aussi des œuvres de style stop motion. Avec l’animation dessinée à la main au cœur du processus, vous pouvez combiner un large éventail de techniques expressives.",
+        "Disposez des images fixes en tant qu’images de l’animation pour créer aussi des œuvres de style stop motion. Avec l’animation dessinée à la main au cœur du processus, vous pouvez combiner un large éventail de techniques expressives.",
 
       "narrative.audio.1.heading": "Synchronisez vos dessins avec le son",
       "narrative.audio.1.body":
-        "Placez un fichier audio sur la timeline et réglez le volume ainsi que les fondus d’entrée et de sortie. Chaque clip audio affiche une forme d’onde en surimpression légère, pour voir l’intensité du son tout en ajustant son placement. Vous pouvez aussi déposer des repères temporels comme marqueurs pour vérifier la synchro labiale ou le timing des mouvements par rapport au son.",
+        "Placez un fichier audio sur la timeline et réglez le volume ainsi que les fondus d’entrée et de sortie. Chaque clip audio affiche une forme d’onde en surimpression légère, pour voir l’intensité du son tout en ajustant son placement. Vous pouvez aussi placer des horodatages comme repères pour vérifier la synchro labiale ou le timing des mouvements par rapport au son.",
 
       "narrative.editing.1.heading": "Peaufinez chaque détail, jusqu’à la fin.",
       "narrative.editing.1.body":
         "Les ajustements après le dessin se font aussi directement dans NIARIM.",
       "narrative.editing.2.heading": "Calques",
       "narrative.editing.2.body":
-        "Gérez le trait, la couleur et les arrière-plans comme des calques séparés. Organisez-les en dossiers de calques, ou utilisez le masque d’écrêtage pour éviter les débordements. Un large éventail de modes de fusion est disponible aussi : utilisez produit, superposition, incrustation, addition, soustraction et plus pour créer lumière et ombre.",
+        "Gérez le trait, la couleur et les arrière-plans comme des calques séparés. Organisez-les en dossiers de calques, ou utilisez le masque d’écrêtage pour éviter les débordements. Un large éventail de modes de fusion est disponible aussi : utilisez produit, écran, incrustation, addition, soustraction et plus pour créer lumière et ombre.",
       "narrative.editing.3.heading": "Rendez l’animation plus efficace.",
       "narrative.editing.4.heading": "Calques communs",
       "narrative.editing.4.body":
         "Un calque qui affiche le même contenu sur plusieurs images ou scènes. Vous n’avez pas besoin de redessiner des éléments fixes comme les arrière-plans à chaque image. Vous pouvez même transformer un personnage en calque commun tout en gardant juste la bouche sur un calque normal — le personnage reste en place pendant que seule la bouche est redessinée image par image, ce qui donne une synchro labiale.",
       "narrative.editing.5.heading": "Remplissage automatique",
       "narrative.editing.5.body":
-        "Colorie automatiquement chaque partie en utilisant les couleurs et tons que vous avez définis à l’avance, à partir du trait. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et le calque de couleur qui se fond dans le trait. Remarque : le remplissage automatique n’est pas une fonctionnalité d’IA générative. Il colorie selon des règles que vous définissez.",
+        "Colorie automatiquement chaque partie en utilisant les couleurs et tons que vous avez définis à l’avance, à partir du trait. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et la trace de couleur, qui fond le trait dans les couleurs. Remarque : le remplissage automatique n’est pas une fonctionnalité d’IA générative. Il colorie selon des règles que vous définissez.",
 
       "narrative.advanced.1.heading":
         "Rendez votre travail quotidien plus fluide.",
@@ -854,13 +854,13 @@
         "L’image d’un tampon porte sa propre information de couleur. Cela signifie qu’il est dessiné dans les couleurs propres du tampon, quelle que soit la couleur sélectionnée sur la puce de couleur. Enregistrez des lignes d’effet, motifs d’arrière-plan, accessoires et plus, et placez-les instantanément dès que nécessaire. La rotation et la mise à l’échelle sont prises en charge aussi.",
       "narrative.advanced.8.heading": "Mode pixel",
       "narrative.advanced.8.body":
-        "Appliquez le mode pixel aux pinceaux, polices et tampons. Il supprime l’anticrénelage pour un rendu pixel art net. Vous pouvez même traiter un tampon en mode pixel pour l’utiliser comme matériel de style pixel art.",
+        "Appliquez le mode pixel aux pinceaux, polices et tampons. Il supprime l’anticrénelage pour un rendu pixel art net. Vous pouvez même traiter un tampon en mode pixel pour l’utiliser comme matériau de style pixel art.",
       "narrative.advanced.9.heading": "Filtres de dessin",
       "narrative.advanced.9.body":
         "Appliquez un filtre à chaque calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixel art, objectif fisheye, hologramme aurore, fondu avec l’arrière-plan, et plus. Un filtre de correction optique peut même reproduire la façon dont une scène se déforme lorsqu’elle est vue à travers des verres de différentes puissances.",
       "narrative.advanced.10.heading": "Filtres d’effet",
       "narrative.advanced.10.body":
-        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l’hologramme aurore aux reflets irisés pour finaliser l’ambiance de toute l'œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d’effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
+        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l’hologramme aurore aux reflets irisés pour finaliser l’ambiance de toute l’œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d’effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
 
       "narrative.save.1.heading":
         "Gardez votre travail léger. Continuez à créer confortablement.",
@@ -868,7 +868,7 @@
         "Dans la production d’animation, les données grossissent à mesure que le nombre d’images et de calques augmente. NIARIM fournit toute une série de mécanismes pour vous aider à créer sur la durée.",
       "narrative.save.2.heading": "Réglages de qualité",
       "narrative.save.2.body":
-        "Choisissez entre qualité basse, moyenne ou haute, ou utilisez un réglage personnalisé. Ajustez finement des éléments comme la méthode de sauvegarde, le nombre d’annulations, la pelure d’oignon et la détection d’inclinaison pour correspondre au stockage et aux caractéristiques de votre appareil. Que vous souhaitiez privilégier l’espace de stockage, alléger les performances, ou conserver plus d’historique d’annulation, vous pouvez ajuster votre propre environnement en conséquence.",
+        "Choisissez entre qualité basse, moyenne ou haute, ou utilisez un réglage personnalisé. Ajustez finement des éléments comme la méthode de sauvegarde, le nombre d’annulations, le papier calque et la détection d’inclinaison pour correspondre au stockage et aux caractéristiques de votre appareil. Que vous souhaitiez privilégier l’espace de stockage, alléger les performances, ou conserver plus d’historique d’annulation, vous pouvez ajuster votre propre environnement en conséquence.",
       "narrative.save.3.heading": "Sauvegarde automatique",
       "narrative.save.3.body":
         "En ouvrant l’éditeur, vous reprenez là où vous en étiez. Si le fichier du projet est endommagé, NIARIM le récupère depuis une sauvegarde automatique.",
@@ -896,10 +896,10 @@
         "Personnalisez le thème général et la couleur d’accent de l’application à votre goût. C’est une application que vous utilisez tous les jours, alors donnez-lui l’apparence qui vous convient.",
       "narrative.workspace.3.heading": "Réglages de l’espace de travail",
       "narrative.workspace.3.body":
-        "Basculez entre le mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher est une fonctionnalité exclusive au mode PC/DeX.",
+        "Passez en mode PC/DeX et ajustez les réglages selon votre style de travail. Le mode gaucher est pris en charge aussi. Remarque : le mode gaucher est une fonctionnalité exclusive au mode PC/DeX.",
       "narrative.workspace.4.heading": "Réglages de gestes",
       "narrative.workspace.4.body":
-        "Assignez des actions comme annuler, rétablir, navigation d’image ou pipette au tap à deux doigts, tap à trois doigts, glissement, appui long, et plus. Personnalisez les gestes que vous utilisez souvent selon votre propre main.",
+        "Assignez des actions comme annuler, rétablir, navigation d’image ou pipette à l’appui à deux doigts, à l’appui à trois doigts, au glissement, à l’appui long, et plus. Personnalisez les gestes que vous utilisez souvent selon votre propre main.",
 
       "narrative.export.1.heading":
         "Partagez votre travail avec plus de monde.",
@@ -909,7 +909,7 @@
       "narrative.premium.1.heading": "Plus de liberté avec Premium.",
       "narrative.premium.1.body":
         "Premium rend non seulement la création, mais aussi la publication de votre travail, encore plus confortable.",
-      "narrative.premium.2.body": "Le logo final NIARIM de cinq secondes est ajouté aux exports MP4, WebM et AVI. Vous pouvez le masquer par projet tant que l’avantage est actif. Le réglage est conservé après expiration. Les GIF sont exclus.",
+      "narrative.premium.2.body": "La marque de fin NIARIM est un logo de cinq secondes ajouté à la fin des exports MP4, WebM et AVI. Tant que l’avantage de la marque de fin est actif, vous pouvez l’afficher ou la masquer pour chaque projet. Le réglage du projet est conservé après expiration. Elle n’est pas ajoutée aux GIF.",
 
       "narrative.community.1.heading": "Place des œuvres",
       "narrative.community.1.body":
@@ -939,7 +939,7 @@
       "narrative.community.9.heading":
         "Des personnes vers les œuvres. Des œuvres vers les personnes.",
       "narrative.community.9.body":
-        "Voyez l'œuvre de quelqu’un, et une nouvelle idée naît. Publiez ce que vous avez créé, et quelqu’un d’autre le voit à son tour. Ce sentiment de « j’ai envie d’essayer de créer aussi » se prolonge dans l'œuvre suivante. Votre œuvre devient le favori de quelqu’un. Et celui qui l’a vue va à son tour créer quelque chose de nouveau.",
+        "Voyez l’œuvre de quelqu’un, et une nouvelle idée naît. Publiez ce que vous avez créé, et quelqu’un d’autre le voit à son tour. Ce sentiment de « j’ai envie d’essayer de créer aussi » se prolonge dans l’œuvre suivante. Votre œuvre devient le favori de quelqu’un. Et celui qui l’a vue va à son tour créer quelque chose de nouveau.",
     },
     es: {
       "narrative.home.cta.heading": "¡Vamos a hacer una animación de verdad!",
@@ -949,29 +949,29 @@
       "narrative.drawing.1.heading":
         "Dibuja exactamente lo que tienes en mente.",
       "narrative.drawing.1.body":
-        "Dibuja con un lápiz. Borra. Rellena. Selecciona. Transforma. Alterna entre las herramientas que necesitas para terminar una obra.",
+        "Dibuja con la pluma. Borra. Rellena. Selecciona. Transforma. Alterna entre las herramientas que necesitas para terminar una obra.",
       "narrative.drawing.2.heading": "Crea un trazo que sea tuyo.",
       "narrative.drawing.2.body":
-        "Además de alternar entre pinceles como el lápiz G, el lápiz y el aerógrafo, puedes ajustar los pinceles mismos con precisión.",
+        "Además de alternar entre pinceles como la plumilla G, la pluma y el aerógrafo, puedes ajustar los pinceles mismos con precisión.",
       "narrative.drawing.3.heading": "Ajustes de pincel",
       "narrative.drawing.3.body":
         "Ajusta el grosor y la opacidad, por supuesto, además del desvanecido, la atenuación del trazo, la mezcla de color y más. Combina colores como en acuarela, o desvanece el extremo de una línea. Ajusta la sensación de tu trazo según tu forma de dibujar.",
       "narrative.drawing.4.heading": "Compatible con presión e inclinación",
       "narrative.drawing.4.body":
-        "Las tabletas gráficas y las pantallas con lápiz permiten usar presión e inclinación. Ajusta la curva de presión para que un toque suave siga dibujando una línea gruesa, adaptando la sensación de dibujo a tus propios hábitos. También puedes asignar acciones como borrador o cuentagotas a los botones de tu lápiz.",
+        "Las tabletas gráficas y las pantallas con lápiz permiten usar presión e inclinación. Ajusta la curva de presión para que un toque suave siga dibujando una línea gruesa, adaptando la sensación de dibujo a tus propios hábitos. También puedes asignar acciones como la goma de borrar o el cuentagotas a los botones de tu lápiz.",
 
       "narrative.animation.1.heading":
         "¡Hagamos una animación dibujada a mano!",
       "narrative.animation.1.body":
-        "Dibuja una imagen a la vez y apila los fotogramas. Revisa la piel de cebolla para ver los fotogramas anterior y siguiente, y ajusta cómo se conecta el movimiento. Organiza fotogramas y escenas en la línea de tiempo, y sincroniza los dibujos con el sonido. Desde el primer trazo hasta el momento en que se mueve, todo se hace en NIARIM.",
+        "Dibuja una imagen a la vez y apila los fotogramas. Revisa el papel cebolla para ver los fotogramas anterior y siguiente, y ajusta cómo se conecta el movimiento. Organiza fotogramas y escenas en la línea de tiempo, y sincroniza los dibujos con el sonido. Desde el primer trazo hasta el momento en que se mueve, todo se hace en NIARIM.",
       "narrative.animation.3.heading":
         "No solo a mano. Hay más de una forma de expresarte.",
       "narrative.animation.4.heading": "Animar con fotogramas clave",
       "narrative.animation.4.body":
         "Define la posición, escala y rotación de una capa con fotogramas clave. Los fotogramas intermedios se interpolan automáticamente, así que puedes crear animación de movimiento moviendo partes. También puedes agrupar varias capas y moverlas como una sola. Los fotogramas clave de cámara permiten configurar movimientos de cámara como paneos y zooms.",
-      "narrative.animation.5.heading": "Usa imágenes y video",
+      "narrative.animation.5.heading": "Usa imágenes y vídeo",
       "narrative.animation.5.body":
-        "Coloca material de imagen o video en la línea de tiempo y combínalo con tu arte dibujado a mano.",
+        "Coloca material de imagen o vídeo en la línea de tiempo y combínalo con tu arte dibujado a mano.",
       "narrative.animation.6.heading": "Stop motion, también",
       "narrative.animation.6.body":
         "Organiza imágenes como fotogramas para crear también obras al estilo stop motion. Con la animación dibujada a mano en su núcleo, puedes combinar una amplia variedad de técnicas expresivas.",
@@ -986,7 +986,7 @@
         "Los ajustes después de dibujar también se hacen dentro de NIARIM.",
       "narrative.editing.2.heading": "Capas",
       "narrative.editing.2.body":
-        "Gestiona el trazo, el color y los fondos como capas separadas. Organízalas en carpetas de capas, o usa el recorte para evitar que el trazo se salga. También hay una amplia variedad de modos de fusión disponibles: usa multiplicar, trama, superposición, sumar, restar y más para crear luces y sombras.",
+        "Gestiona el trazo, el color y los fondos como capas separadas. Organízalas en carpetas de capas, o usa el recorte para evitar que el trazo se salga. También hay una amplia variedad de modos de fusión disponibles: usa multiplicar, pantalla, superponer, suma, resta y más para crear luces y sombras.",
       "narrative.editing.3.heading": "Haz la animación más eficiente.",
       "narrative.editing.4.heading": "Capas comunes",
       "narrative.editing.4.body":
@@ -1029,7 +1029,7 @@
         "En la producción de animación, los datos crecen a medida que aumentan los fotogramas y las capas. NIARIM ofrece una variedad de mecanismos para ayudarte a seguir creando a largo plazo.",
       "narrative.save.2.heading": "Ajustes de calidad",
       "narrative.save.2.body":
-        "Elige entre calidad baja, media o alta, o usa un ajuste personalizado. Ajusta con precisión cosas como el método de guardado, el número de deshacer, la piel de cebolla y la detección de inclinación para adaptarse al almacenamiento y las especificaciones de tu dispositivo. Ya sea que quieras priorizar el espacio de almacenamiento, aligerar el rendimiento o conservar más historial de deshacer, puedes ajustar tu propio entorno para que se adapte.",
+        "Elige entre calidad baja, media o alta, o usa un ajuste personalizado. Ajusta con precisión cosas como el método de guardado, el número de deshacer, el papel cebolla y la detección de inclinación para adaptarse al almacenamiento y las especificaciones de tu dispositivo. Ya sea que quieras priorizar el espacio de almacenamiento, aligerar el rendimiento o conservar más historial de deshacer, puedes ajustar tu propio entorno para que se adapte.",
       "narrative.save.3.heading": "Guardado automático",
       "narrative.save.3.body":
         "Al abrir el editor, retomas el trabajo donde lo dejaste. Si el archivo del proyecto está dañado, NIARIM lo recupera desde un guardado automático.",
@@ -1041,7 +1041,7 @@
         "Ramifícate desde un estado guardado para probar una dirección creativa diferente. Es útil cada vez que piensas: «quiero volver a este punto y probar algo distinto».",
       "narrative.save.6.heading": "Envía tu trabajo a otro dispositivo.",
       "narrative.save.6.body":
-        "Exporta tu proyecto en formato .niashare para llevarlo a otro dispositivo o compartirlo. El archivo siempre incluye el proyecto. Al exportar puedes elegir por separado si incluyes las imágenes, los videos, el audio y las fuentes. Puedes duplicar un archivo .niashare recibido como proyecto propio.",
+        "Exporta tu proyecto en formato .niashare para llevarlo a otro dispositivo o compartirlo. El archivo siempre incluye el proyecto. Al exportar puedes elegir por separado si incluyes las imágenes, los vídeos, el audio y las fuentes. Puedes duplicar un archivo .niashare recibido como proyecto propio.",
       "narrative.save.7.heading": "Llévate toda tu configuración contigo.",
       "narrative.save.7.body":
         "Usa .niatra para migrar tu entorno de aplicación. Al cambiar a un dispositivo nuevo, la función de transferencia .niatra te cubre. Más allá de ajustes y materiales, puedes migrar pinceles, ajustes de relleno automático, temas, y paletas, todo junto, e incluir opcionalmente proyectos en curso. Elige exactamente qué elementos transferir usando casillas de verificación.",
@@ -1066,7 +1066,7 @@
       "narrative.premium.1.heading": "Más libertad con Premium.",
       "narrative.premium.1.body":
         "Premium hace que no solo crear, sino también publicar tu trabajo, sea aún más cómodo.",
-      "narrative.premium.2.body": "El logo final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Puedes ocultarlo por proyecto mientras el beneficio esté activo. El ajuste se conserva al caducar. Los GIF no lo incluyen.",
+      "narrative.premium.2.body": "La marca final de NIARIM dura cinco segundos y se añade a MP4, WebM y AVI. Mientras la ventaja de la marca final esté activa, puedes mostrarla u ocultarla por proyecto. El ajuste se conserva al caducar. Los GIF no la incluyen.",
 
       "narrative.community.1.heading": "Plaza de Obras",
       "narrative.community.1.body":
@@ -1089,10 +1089,10 @@
         "Encuentra una obra que te guste, y podrás revisar también las demás obras que su creador ha publicado. Encuentra un creador favorito y síguelo a medida que publica nuevas obras.",
       "narrative.community.7.heading": "Publica tu propia obra.",
       "narrative.community.7.body":
-        "Una obra terminada se puede publicar en la Plaza de Obras. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en favoritos, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
+        "Una obra terminada se puede publicar en la Plaza de Obras. Deja que alguien más vea lo que creaste. Alguien podría amarla tanto que la guarde en sus marcadores, e incluso podría llegar a las clasificaciones. Los miembros gratuitos pueden publicar hasta 1 obra al día; los miembros Premium hasta 3. Una vez que has creado algo, es hora de compartirlo con alguien.",
       "narrative.community.8.heading": "Iniciar sesión también es simple.",
       "narrative.community.8.body":
-        "No hay una cuenta NIARIM separada que crear. Inicia sesión con una cuenta de Google para publicar obras y guardarlas en favoritos. No necesitas iniciar sesión en absoluto solo para explorar.",
+        "No hay una cuenta NIARIM separada que crear. Inicia sesión con una cuenta de Google para publicar obras y usar los marcadores. No necesitas iniciar sesión en absoluto solo para explorar.",
       "narrative.community.9.heading":
         "De las personas a las obras. De las obras a las personas.",
       "narrative.community.9.body":

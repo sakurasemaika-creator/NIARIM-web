@@ -313,16 +313,16 @@
         "Des tags entretenus par tout le monde",
       "communityPage.advanced.tags.body":
         "Les tags ne sont pas réservés à l’auteur : tout le monde peut en ajouter ou en supprimer. L’auteur peut verrouiller les tags importants pour empêcher les autres de les supprimer. Touchez un tag pour ne voir que les œuvres qui le partagent.",
-      "communityPage.advanced.follow.title": "Abonnements et republications",
+      "communityPage.advanced.follow.title": "Abonnements et repartages",
       "communityPage.advanced.follow.body":
-        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. « Republier » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez republie une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Republié par … ». Vous seul pouvez consulter les listes des personnes que vous suivez, de vos abonnés et des œuvres que vous avez mises en favori. Les autres utilisateurs ne voient que le nombre d’abonnements et d’abonnés. Suivre une personne, mettre une œuvre en favori ou la repartager ne déclenche aucune notification individuelle à l’autre utilisateur concernant cette action.",
+        "Vous pouvez suivre les auteurs qui vous plaisent. L’onglet « Abonnements » ne montre alors que leurs nouveautés. « Repartager » permet de faire découvrir l’œuvre d’un autre : lorsqu’un auteur que vous suivez repartage une œuvre, celle-ci apparaît aussi dans votre onglet Abonnements, avec la mention « Repartagé par … ». Vous seul pouvez consulter les listes des personnes que vous suivez, de vos abonnés et des œuvres que vous avez mises en favori. Les autres utilisateurs ne voient que le nombre d’abonnements et d’abonnés. Suivre une personne, mettre une œuvre en favori ou la repartager ne déclenche aucune notification individuelle à l’autre utilisateur concernant cette action.",
       "communityPage.advanced.preview.title":
-        "Aperçu flottant et détails de l'œuvre",
+        "Aperçu flottant et détails de l’œuvre",
       "communityPage.advanced.preview.body":
-        "Toucher une carte d'œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d’aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d’autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l’écran complet avec la date de publication, l’auteur, les tags et le nombre de favoris.",
+        "Toucher une carte d’œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d’aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d’autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l’écran complet avec la date de publication, l’auteur, les tags et le nombre de favoris.",
       "communityPage.advanced.shorts.title": "Mode portrait",
       "communityPage.advanced.shorts.body":
-        "Filtrez la galerie par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d’un geste vers un lecteur plein écran à défilement vertical.",
+        "Filtrez la liste des œuvres par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d’un geste vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
         "Pourquoi ne pas créer une animation avec NIARIM et la publier dans la Place des œuvres pour que tout le monde la voie ?",
@@ -362,7 +362,7 @@
       "communityPage.moreInApp.link": "Descargar NIARIM",
       "communityPage.advanced.title": "Aún más diversión, aún más comodidad",
       "communityPage.advanced.lead":
-        "Haz crecer las etiquetas entre todos, mantén un video reproduciéndose mientras navegas por otras pantallas, o recorre las obras en tus ratos libres: pequeños detalles que hacen la Plaza de Obras aún más divertida de usar.",
+        "Haz crecer las etiquetas entre todos, mantén un vídeo reproduciéndose mientras navegas por otras pantallas, o recorre las obras en tus ratos libres: pequeños detalles que hacen la Plaza de Obras aún más divertida de usar.",
       "communityPage.advanced.tags.title": "Etiquetas que todos pueden cuidar",
       "communityPage.advanced.tags.body":
         "Las etiquetas no son solo cosa del autor: cualquiera puede añadirlas o eliminarlas. El autor puede bloquear las etiquetas importantes para que otros no puedan borrarlas. Toca una etiqueta para filtrar solo las obras que la comparten.",
@@ -372,10 +372,10 @@
       "communityPage.advanced.preview.title":
         "Vista previa flotante y detalles de la obra",
       "communityPage.advanced.preview.body":
-        "Tocar la tarjeta de una obra no te lleva de inmediato a otra pantalla. Aparece una pequeña ventana de vista previa en una esquina, dejando que el video siga reproduciéndose mientras navegas por otras pantallas. Puedes arrastrarla o cambiar su tamaño libremente. Toca «Detalles» para ver la pantalla completa con la fecha de publicación, el autor, las etiquetas y el número de marcadores.",
+        "Tocar la tarjeta de una obra no te lleva de inmediato a otra pantalla. Aparece una pequeña ventana de vista previa en una esquina, dejando que el vídeo siga reproduciéndose mientras navegas por otras pantallas. Puedes arrastrarla o cambiar su tamaño libremente. Toca «Detalles» para ver la pantalla completa con la fecha de publicación, el autor, las etiquetas y el número de marcadores.",
       "communityPage.advanced.shorts.title": "Modo vertical",
       "communityPage.advanced.shorts.body":
-        "Filtra la galería por Todo, Solo vertical o Solo horizontal. Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",
+        "Filtra la lista de obras por «Todos», «Solo vertical» o «Solo horizontal». Las obras verticales pueden pasar con un toque a un visor de pantalla completa con desplazamiento vertical.",
       "communityPage.cta.title": "Tu obra también podría estar aquí.",
       "communityPage.cta.body":
         "Crea una animación con NIARIM y publícala en la Plaza de Obras para que todos la vean.",

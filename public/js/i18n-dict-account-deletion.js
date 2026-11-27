@@ -171,7 +171,7 @@
       "accountDeletion.elsewhere":
         "Los proyectos guardados en tu dispositivo y tus vídeos de YouTube seguirán disponibles.",
       "accountDeletion.subscriptions":
-        "Gestiona tu suscripción a Google Play por separado",
+        "Gestiona por separado tu suscripción en Google Play",
       "accountDeletion.signIn":
         "Verifica tu identidad con la cuenta de Google vinculada a la cuenta de NIARIM que quieres eliminar.",
       "accountDeletion.understood":
@@ -182,7 +182,7 @@
       "accountDeletion.verified":
         "Tu identidad se ha verificado. Comprueba la cuenta que aparece arriba.",
       "accountDeletion.pending":
-        "La eliminación está en curso. Continuará si cierras esta página.",
+        "La eliminación está en curso. Continuará aunque cierres esta página.",
       "accountDeletion.complete": "Tu cuenta de NIARIM se ha eliminado.",
       "accountDeletion.noAccount":
         "No encontramos ninguna cuenta de NIARIM vinculada a esta cuenta de Google.",

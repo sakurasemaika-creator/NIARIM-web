@@ -237,7 +237,7 @@
       "featuresPage.advanced.title": "Outils avancés",
       "featuresPage.advanced.lead":
         "Un cran au-dessus pour le dessin et la finition.",
-      "featuresPage.advanced.item1.title": "Pelure d’oignon (onion skin)",
+      "featuresPage.advanced.item1.title": "Papier calque (pelure d’oignon)",
       "featuresPage.advanced.item1.body":
         "Affichez les images précédentes et suivantes en semi-transparence : vérifiez-les tout en dessinant pour garder la continuité du mouvement. Réglez le nombre d’images affichées, ainsi que leur couleur et leur opacité.",
       "featuresPage.advanced.item2.title": "Trames (tone)",
@@ -285,7 +285,7 @@
       "featuresPage.advanced.title": "Herramientas avanzadas",
       "featuresPage.advanced.lead":
         "Un paso más allá para el dibujo y el acabado.",
-      "featuresPage.advanced.item1.title": "Piel de cebolla (onion skin)",
+      "featuresPage.advanced.item1.title": "Papel cebolla (onion skin)",
       "featuresPage.advanced.item1.body":
         "Muestra los fotogramas anterior y siguiente en semitransparencia: compruébalos mientras dibujas para mantener la continuidad del movimiento. Ajusta cuántos fotogramas se muestran, además de su color y opacidad.",
       "featuresPage.advanced.item2.title": "Tramas (tone)",

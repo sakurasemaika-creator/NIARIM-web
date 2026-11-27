@@ -370,13 +370,13 @@
       "premiumPage.free.item2": "Export vidéo (jusqu’à 1920×1920)",
       "premiumPage.free.item3": "Publicités affichées",
       "premiumPage.free.item4":
-        "Le générique de fin officiel de NIARIM est ajouté automatiquement à l’export (non modifiable ni supprimable)",
+        "La marque de fin officielle de NIARIM est ajoutée automatiquement à l’export (ni modifiable ni supprimable)",
       "premiumPage.free.item5": "Créez et exportez gratuitement jusqu’à 90 secondes. Pour les projets longs, vous pouvez exporter les 90 premières secondes.",
       "premiumPage.premium.title": "Premium",
-      "premiumPage.premium.monthly.label": "Forfait mensuel",
+      "premiumPage.premium.monthly.label": "Formule mensuelle",
       "premiumPage.premium.monthly.price": "550 ¥",
       "premiumPage.premium.monthly.unit": "/mois (TTC)",
-      "premiumPage.premium.yearly.label": "Forfait annuel",
+      "premiumPage.premium.yearly.label": "Formule annuelle",
       "premiumPage.premium.yearly.price": "5 500 ¥",
       "premiumPage.premium.yearly.unit": "/an (TTC)",
       "premiumPage.premium.yearly.badge.pre": "Soit",
@@ -405,7 +405,7 @@
       "premiumPage.premium.automation.title":
         "Automatisations personnalisées (enregistrement d’actions)",
       "premiumPage.premium.automation.body":
-        "Enregistrez une suite d’actions sur la toile ou la chronologie, puis rejouez-la pendant votre travail.",
+        "Enregistrez une suite d’actions sur le canevas ou la timeline, puis rejouez-la pendant votre travail.",
       "premiumPage.start.title": "Comment passer à Premium",
       "premiumPage.start.step1": "Dans l’application, ouvrez « Statut d’adhésion » depuis le menu, puis choisissez « Découvrir Premium ». Vous pouvez aussi passer par « En savoir plus sur l’abonnement Premium », affiché lorsque vous choisissez une fonctionnalité Premium.",
       "premiumPage.start.step2": "Choisissez la « Formule mensuelle » ou la « Formule annuelle ». L’achat nécessite de vous connecter avec votre compte Google.",
@@ -427,21 +427,21 @@
       "meta.premium.title": "Plan Premium | NIARIM",
       "meta.premium.description":
         "Descubre lo que ofrece el plan Premium de NIARIM y en qué se diferencia de la versión gratuita.",
-      "premiumPage.compareTitle": "Compara el plan gratuito y el prémium",
+      "premiumPage.compareTitle": "Compara el plan gratuito y el Premium",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "Plan Premium",
       "premiumPage.lead":
-        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de video. El plan Premium elimina los anuncios y añade herramientas adicionales para el acabado.",
+        "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de vídeo. El plan Premium elimina los anuncios y añade herramientas adicionales para el acabado.",
       "premiumPage.priceNote":
         "Los precios y las condiciones de compra pueden cambiar. Consulta los precios y las condiciones vigentes en Google Play antes de comprar.",
       "premiumPage.free.title": "Gratis",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
         "Todas las funciones de creación básicas (dibujo, animación, edición, audio)",
-      "premiumPage.free.item2": "Exportación de video (hasta 1920×1920)",
+      "premiumPage.free.item2": "Exportación de vídeo (hasta 1920×1920)",
       "premiumPage.free.item3": "Se muestran anuncios",
       "premiumPage.free.item4":
-        "La placa de cierre oficial de NIARIM se añade automáticamente al exportar (no se puede editar ni eliminar)",
+        "La marca final oficial de NIARIM se añade automáticamente al exportar (no se puede editar ni eliminar)",
       "premiumPage.free.item5": "Crea y exporta gratis hasta 90 segundos. Para proyectos más largos, puedes exportar los primeros 90 segundos.",
       "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "Plan mensual",
@@ -458,7 +458,7 @@
       "premiumPage.premium.item1.body":
         "Elimina toda la publicidad dentro de la app.",
       "premiumPage.premium.item2.title": "Mostrar u ocultar la marca final oficial",
-      "premiumPage.premium.item2.body": "Mientras el beneficio esté activo, muestra u oculta el logo oficial por proyecto en la línea de tiempo.",
+      "premiumPage.premium.item2.body": "Mientras la ventaja esté activa, muestra u oculta la marca final oficial por proyecto en la línea de tiempo.",
       "premiumPage.premium.item3.title": "Marca de agua personalizada",
       "premiumPage.premium.item3.body":
         "Añade tu propia marca de agua de imagen o texto a tu obra.",
