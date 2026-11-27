@@ -126,7 +126,7 @@
     "coins.goalPublishTitle": "發表作品",
     "coins.goalPublishBody": "發表作品也有對應任務。",
     "coins.goalMarksTitle": "每件作品的收藏數",
-    "coins.goalGridTitle": "作品數量與收藏數",
+    "coins.goalGridTitle": "公開作品數與收藏數",
     "coins.goalGridBody": "依發表作品數與每件作品收藏數組合不同任務。",
     "coins.goalGridWorks": "發表作品數量",
     "coins.goalGridMarks": "每件作品的收藏數",

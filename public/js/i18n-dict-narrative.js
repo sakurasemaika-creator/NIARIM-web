@@ -600,7 +600,7 @@
       "narrative.premium.1.heading": "開通高級會員，創作更自由。",
       "narrative.premium.1.body":
         "高級會員不僅能讓創作更舒適，發布作品也會更加輕鬆。",
-      "narrative.premium.2.body": "NIARIM 片尾標記是 MP4、WebM 和 AVI 末尾的 5 秒標誌。權益有效時可依作品切換顯示。到期後仍保留設定。GIF 不會加上片尾標記。",
+      "narrative.premium.2.body": "NIARIM 片尾標記是 MP4、WebM 和 AVI 末尾的 5 秒標誌。片尾標記權益有效時，可依作品切換顯示。到期後仍保留作品的設定。GIF 不會加上片尾標記。",
 
       "narrative.community.1.heading": "作品廣場",
       "narrative.community.1.body":
