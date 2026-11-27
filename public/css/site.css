@@ -1986,9 +1986,12 @@ p {
 .footer-brand p {
   color: rgba(255, 255, 255, 0.66);
   font-size: var(--fs-small);
-  max-width: calc(32 * var(--measure-ch));
+  /* 32 measure units are about 13 Japanese characters, which left the last
+     character of the tagline alone on a line. */
+  max-width: 24em;
   overflow-wrap: normal;
   word-break: normal;
+  text-wrap: pretty;
 }
 /* フッター各列の見出し。ページ本文に h2 が無い場合（/news/ 等）に
    h1 から h3 へ飛ぶ見出し階層になってしまっていたため h2 にした。 */

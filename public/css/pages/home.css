@@ -28,6 +28,10 @@
 .nr-actions {
   display: flex;
   flex-wrap: wrap;
+  /* The Play badge image carries its own clear space (72px tall for a 56px
+     badge); centring keeps the site buttons at their own height beside it
+     instead of stretching them to the image box. */
+  align-items: center;
   gap: 12px;
   margin-top: 30px;
 }
@@ -292,8 +296,8 @@
   gap: 8px 12px;
 }
 .nr-gallery-meta > span {
-  /* 12px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
-  font-size: 0.75rem;
+  /* 13px and 4.5:1 on the white caption bar (11px at 3.4:1 before). */
+  font-size: 0.8125rem;
   color: var(--color-gray-500);
   white-space: nowrap;
 }
@@ -303,7 +307,7 @@
   margin: 0;
 }
 .nr-gallery-note {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--color-gray-500);
   text-align: right;
   margin-top: 18px;
@@ -348,7 +352,7 @@
 }
 .nr-pricing-panel span {
   line-height: 1.7;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: #6c646a;
 }
 /* The closing release note sits on the paper like every section; the
@@ -1095,7 +1099,7 @@ html body.nr-site .nr-plaza-capture-image {
 }
 html body.nr-site .nr-plaza-capture figcaption {
   margin: 13px 0 0;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.06em;
   color: #65525a;
   line-height: 1.5;
@@ -1496,7 +1500,7 @@ body:has(.capture-viewer[open]) {
 
 #main .nr-hero .nr-play-trademark {
   margin-top: 6px;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
 }
 /* The one floating object on the page: the phone, upright, with its own
    shadow. */
@@ -1575,7 +1579,7 @@ body:has(.capture-viewer[open]) {
   max-width: 20em;
   margin: 0;
   color: var(--ink-2);
-  font: 400 0.75rem / 1.6 var(--font-sans);
+  font: 400 0.8125rem / 1.6 var(--font-sans);
   text-align: center;
 }
 /* ---- Frame strip: the bouncing ball, numbered like an exposure sheet ---- */
@@ -1823,6 +1827,14 @@ body:has(.capture-viewer[open]) {
 #main .nr-statement {
   text-align: left;
 }
+/* The flow's intro leads straight into its three step cards. It keeps the
+   section rhythm above, but not a full band and a second rule below: those
+   left the intro about 100px away from the steps it introduces, with two
+   rules between them. The first step card's own rule divides them. */
+#main > .nr-statement {
+  padding-bottom: clamp(28px, 3.5vw, 48px);
+  border-bottom: 0;
+}
 
 #main .nr-statement > p:last-child {
   max-width: min(44em, var(--measure-text));
@@ -1841,14 +1853,26 @@ body:has(.capture-viewer[open]) {
   border-bottom: 0;
 }
 
+/* The step number of a story card. The section above already carries a
+   red-pencil index ("01"), so the steps are set in the quieter ink with a
+   short rule, and the two numbers no longer read as the same level. */
 #main .nr-story-copy .nr-step {
-  display: block;
+  display: flex;
+  gap: 10px;
+  align-items: center;
   padding: 0;
   border: 0;
-  color: var(--pencil-ink);
+  color: var(--ink-2);
   font: 400 0.875rem / 1 var(--font-serif);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
+}
+
+#main .nr-story-copy .nr-step::after {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  content: "";
 }
 
 #main .nr-story-copy h3 {
@@ -1867,7 +1891,7 @@ body:has(.capture-viewer[open]) {
    like the other small labels (they were English capitals in pink). */
 #main .nr-pricing-panel small {
   color: var(--ink-2);
-  font: 400 0.8125rem / 1.4 var(--font-sans);
+  font: 400 0.875rem / 1.4 var(--font-sans);
   letter-spacing: 0.02em;
   text-transform: none;
 }
@@ -1928,9 +1952,9 @@ body:has(.capture-viewer[open]) {
 
 #main .tp-feature p {
   max-width: var(--measure-text);
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   color: var(--ink-2);
-  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+  font: 400 var(--fs-body) / 1.85 var(--font-sans);
 }
 
 #main .tp-figure {
@@ -1987,7 +2011,7 @@ body:has(.capture-viewer[open]) {
   :is(.tp-pair, .tp-brush-items, .tp-mix-sheet, .tp-steps, .tp-filter-grid)
   figcaption {
   color: var(--ink-2);
-  font: 400 0.75rem / 1.4 var(--font-sans);
+  font: 400 0.8125rem / 1.5 var(--font-sans);
   text-align: center;
 }
 
@@ -2021,7 +2045,7 @@ body:has(.capture-viewer[open]) {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
   color: var(--ink);
-  font: 400 0.8125rem / 1.4 var(--font-sans);
+  font: 400 0.875rem / 1.4 var(--font-sans);
 }
 
 #main .tp-brush-items {
@@ -2189,13 +2213,14 @@ body:has(.capture-viewer[open]) {
 
 #main .tp-fill-text p {
   max-width: var(--measure-text);
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   color: var(--ink-2);
-  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+  font: 400 var(--fs-body) / 1.85 var(--font-sans);
 }
 
 #main .tp-fill-text .tp-note {
-  font-size: 0.75rem;
+  font-size: var(--fs-small);
+  line-height: 1.7;
 }
 
 #main :is(.tp-steps, .tp-filter-grid) {
@@ -2372,9 +2397,9 @@ body:has(.capture-viewer[open]) {
 
 #main .tp-subnote {
   max-width: min(44em, var(--measure-text));
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   color: var(--ink-2);
-  font: 400 var(--fs-small) / 1.8 var(--font-sans);
+  font: 400 var(--fs-body) / 1.85 var(--font-sans);
 }
 
 #main .tp-subnote + .tp-filter-grid {
@@ -2467,7 +2492,7 @@ body:has(.capture-viewer[open]) {
   max-width: min(52em, var(--measure-text));
   margin-top: 4px;
   color: var(--ink-2);
-  font: 400 0.8125rem / 1.7 var(--font-sans);
+  font: 400 0.875rem / 1.7 var(--font-sans);
 }
 @media (max-width: 1023px) {
   #main .tp-unique-list {

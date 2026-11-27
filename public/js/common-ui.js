@@ -31,11 +31,26 @@
       btn.setAttribute("aria-label", label || "ページトップへ戻る");
     }
 
+    // On a phone the button sits over the right edge of the text column, so
+    // it only shows while the reader is heading back up (or has reached the
+    // end of the page). Scrolling down to read hides it again. Wide screens
+    // keep it in the margin beside the content, always shown past 480px.
+    var narrowScreen = window.matchMedia("(max-width: 900px)");
+    var lastY = window.scrollY;
+
     function applyScrollState() {
       scheduled = false;
       var y = window.scrollY;
+      var show = y > 480;
       if (header) header.classList.toggle("is-scrolled", y > 8);
-      btn.classList.toggle("is-visible", y > 480);
+      if (show && narrowScreen.matches && document.activeElement !== btn) {
+        var doc = document.documentElement;
+        var nearEnd = y + window.innerHeight * 1.5 >= doc.scrollHeight;
+        if (y > lastY + 4) show = nearEnd;
+        else if (y >= lastY - 4) show = btn.classList.contains("is-visible");
+      }
+      if (Math.abs(y - lastY) > 4) lastY = y;
+      btn.classList.toggle("is-visible", show);
     }
 
     function requestScrollState() {
