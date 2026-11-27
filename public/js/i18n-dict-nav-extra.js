@@ -27,7 +27,7 @@
       "nav.help": "使い方ガイド",
       "meta.about.title": "NIARIMとは | NIARIM",
       "meta.about.description":
-        "手描きアニメ制作アプリNIARIMのコンセプト、対応環境、他にはない特徴的な機能をご紹介します。",
+        "手描きアニメ制作アプリNIARIMのコンセプト、対応環境、おすすめ機能をご紹介します。",
       "meta.help.title": "使い方ガイド | NIARIM",
       "meta.help.description":
         "NIARIMの使い方を、アプリ内ヘルプと同じ内容でウェブからも検索・閲覧できます。",
@@ -57,7 +57,7 @@
       "nav.help": "Guide",
       "meta.about.title": "About NIARIM | NIARIM",
       "meta.about.description":
-        "Learn about NIARIM’s concept, supported environments, and the features that set it apart.",
+        "Learn about NIARIM’s concept, supported environments and recommended features.",
       "meta.help.title": "Guide | NIARIM",
       "meta.help.description":
         "Search and browse the same content as the app’s built-in Help screen, right from the web.",
@@ -147,7 +147,7 @@
       "nav.help": "이용 가이드",
       "meta.about.title": "NIARIM 소개 | NIARIM",
       "meta.about.description":
-        "손그림 애니메이션 제작 앱 NIARIM의 콘셉트, 지원 환경, 다른 앱에 없는 특징적인 기능을 소개합니다.",
+        "손그림 애니메이션 제작 앱 NIARIM의 콘셉트, 지원 환경, 추천 기능을 소개합니다.",
       "meta.help.title": "이용 가이드 | NIARIM",
       "meta.help.description":
         "앱 내 도움말 화면과 거의 동일한 내용을 웹에서도 검색·열람할 수 있습니다.",
@@ -177,7 +177,7 @@
       "nav.help": "Guide",
       "meta.about.title": "À propos de NIARIM | NIARIM",
       "meta.about.description":
-        "Découvrez le concept de NIARIM, les environnements pris en charge et les fonctionnalités qui le distinguent.",
+        "Découvrez le concept de NIARIM, les environnements pris en charge et les fonctionnalités recommandées.",
       "meta.help.title": "Guide | NIARIM",
       "meta.help.description":
         "Recherchez et parcourez depuis le web le même contenu que l’écran d’aide intégré à l’application.",
@@ -207,7 +207,7 @@
       "nav.help": "Guía",
       "meta.about.title": "Acerca de NIARIM | NIARIM",
       "meta.about.description":
-        "Descubre el concepto de NIARIM, los entornos compatibles y las funciones que lo distinguen.",
+        "Descubre el concepto de NIARIM, los entornos compatibles y las funciones recomendadas.",
       "meta.help.title": "Guía | NIARIM",
       "meta.help.description":
         "Busca y consulta desde la web el mismo contenido que la pantalla de ayuda integrada en la app.",

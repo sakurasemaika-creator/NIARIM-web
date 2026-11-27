@@ -34,7 +34,7 @@
       "narrative.widget.1.heading":
         "ホーム画面が、自分の作品の置き場所になる。",
       "narrative.widget.1.body":
-        "多くのアプリのウィジェットは、決まった見た目のものを置くだけです。NIARIMのウィジェットは、表示する作品もフレームも背景色も自分で決められます。自分の描いた1コマがホーム画面にあること自体が、続きを描く理由になります。",
+        "NIARIMのウィジェットは、表示する作品もフレームも背景色も自分で決められます。自分の描いた1コマがホーム画面にあること自体が、続きを描く理由になります。",
       "narrative.widget.2.heading": "表示するフレームまで自分で選ぶ",
       "narrative.widget.2.body":
         "作品を選び、シーンを選び、その中の1フレームを選ぶ——という流れで表示内容を決めます。フレーム選択画面には実際に合成したプレビューが並ぶので、書き出さなくても仕上がりのまま選べます。",
@@ -68,7 +68,7 @@
       "narrative.widget.1.heading":
         "Your home screen becomes a place for your own work.",
       "narrative.widget.1.body":
-        "Most app widgets just sit there looking the way the app decided. With NIARIM you choose the work, the frame and the background colour yourself. Having a frame you drew on your home screen is itself a reason to go back and draw the next one.",
+        "With NIARIM you choose the work, the frame and the background color yourself. Having a frame you drew on your home screen is itself a reason to go back and draw the next one.",
       "narrative.widget.2.heading": "Choose right down to the frame",
       "narrative.widget.2.body":
         "Pick a work, pick a scene, then pick a single frame inside it. The frame picker shows fully composited previews, so you can choose the finished look without exporting anything first.",
@@ -100,7 +100,7 @@
       "featuresPage.widget.lead": "把自己的作品放在手机主屏幕上。",
       "narrative.widget.1.heading": "让主屏幕成为自己作品的展示位。",
       "narrative.widget.1.body":
-        "多数应用的小组件只能按既定样式摆放。NIARIM的小组件，显示哪个作品、哪一帧、什么背景色都由你决定。主屏幕上有自己画的一帧，本身就是继续画下去的理由。",
+        "NIARIM的小组件，显示哪个作品、哪一帧、什么背景色都由你决定。主屏幕上有自己画的一帧，本身就是继续画下去的理由。",
       "narrative.widget.2.heading": "连显示哪一帧都能自己选",
       "narrative.widget.2.body":
         "先选作品，再选场景，然后选其中的一帧。帧选择界面会排列实际合成后的预览，无需导出即可按成品效果挑选。",
@@ -132,7 +132,7 @@
       "featuresPage.widget.lead": "把自己的作品放在手機主畫面上。",
       "narrative.widget.1.heading": "讓主畫面成為自己作品的展示位。",
       "narrative.widget.1.body":
-        "多數應用程式的小工具只能依既定樣式擺放。NIARIM的小工具，顯示哪個作品、哪一格、什麼背景色都由你決定。主畫面上有自己畫的一格，本身就是繼續畫下去的理由。",
+        "NIARIM的小工具，顯示哪個作品、哪一格、什麼背景色都由你決定。主畫面上有自己畫的一格，本身就是繼續畫下去的理由。",
       "narrative.widget.2.heading": "連顯示哪一格都能自己選",
       "narrative.widget.2.body":
         "先選作品，再選場景，然後選其中的一格。選格畫面會排列實際合成後的預覽，不必先匯出就能依成品效果挑選。",
@@ -165,7 +165,7 @@
         "자신의 작품을 스마트폰 홈 화면에 둘 수 있습니다.",
       "narrative.widget.1.heading": "홈 화면이 내 작품을 두는 자리가 됩니다.",
       "narrative.widget.1.body":
-        "많은 앱의 위젯은 정해진 모습으로 놓을 수 있을 뿐입니다. NIARIM의 위젯은 어떤 작품을, 어떤 컷을, 어떤 배경색으로 보여줄지 직접 정합니다. 내가 그린 한 컷이 홈 화면에 있다는 것 자체가 다음 컷을 그릴 이유가 됩니다.",
+        "NIARIM의 위젯은 어떤 작품을, 어떤 컷을, 어떤 배경색으로 보여줄지 직접 정합니다. 내가 그린 한 컷이 홈 화면에 있다는 것 자체가 다음 컷을 그릴 이유가 됩니다.",
       "narrative.widget.2.heading": "표시할 컷까지 직접 선택",
       "narrative.widget.2.body":
         "작품을 고르고, 장면을 고르고, 그 안의 한 컷을 고르는 흐름으로 표시할 내용을 정합니다. 컷 선택 화면에는 실제로 합성한 미리보기가 나열되므로, 내보내지 않아도 완성된 모습 그대로 고를 수 있습니다.",
@@ -199,7 +199,7 @@
       "narrative.widget.1.heading":
         "Votre écran d’accueil devient la place de vos œuvres.",
       "narrative.widget.1.body":
-        "La plupart des widgets se contentent d’afficher ce que l’application a décidé. Avec NIARIM, vous choisissez l'œuvre, l’image et la couleur de fond. Avoir sous les yeux une image que vous avez dessinée est déjà une raison de dessiner la suivante.",
+        "Avec NIARIM, vous choisissez l’œuvre, l’image et la couleur de fond. Avoir sous les yeux une image que vous avez dessinée est déjà une raison de dessiner la suivante.",
       "narrative.widget.2.heading": "Choisissez jusqu’à l’image près",
       "narrative.widget.2.body":
         "Choisissez une œuvre, puis une scène, puis une seule image à l’intérieur. Le sélecteur affiche des aperçus réellement composités : vous choisissez le rendu final sans rien exporter au préalable.",
@@ -233,7 +233,7 @@
       "narrative.widget.1.heading":
         "Tu pantalla de inicio se convierte en el sitio de tus obras.",
       "narrative.widget.1.body":
-        "La mayoría de los widgets solo se colocan con el aspecto que decidió la aplicación. En NIARIM eliges tú la obra, el fotograma y el color de fondo. Tener a la vista un fotograma que dibujaste es, por sí solo, un motivo para dibujar el siguiente.",
+        "En NIARIM eliges tú la obra, el fotograma y el color de fondo. Tener a la vista un fotograma que dibujaste es, por sí solo, un motivo para dibujar el siguiente.",
       "narrative.widget.2.heading": "Eliges hasta el fotograma",
       "narrative.widget.2.body":
         "Eliges una obra, luego una escena y después un solo fotograma dentro de ella. El selector muestra vistas previas realmente compuestas, así que eliges el resultado final sin exportar nada antes.",
