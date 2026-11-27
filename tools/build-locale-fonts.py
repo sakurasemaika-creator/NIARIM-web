@@ -19,7 +19,10 @@ from fontTools import subset
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 
+from font_chunks import CHUNKED_FAMILIES, VERTICAL, chunk_faces, split_stand_in
 from font_strays import drop_stray_contours, stray_glyphs
+
+PART = re.compile(r"-(kern|latin|intl|home|pages|legal|rest)\.woff2$")
 
 
 def ranges(points):
@@ -58,23 +61,29 @@ def main():
     manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
     for family, characters in supplements.items():
         source = brand_faces.get(family, arguments.originals / f"{family}.ttf")
-        published = re.search(
+        published = re.findall(
             r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family)
             + r'";[^}]*?/assets/fonts/([\w.-]+\.woff2)',
             css,
         )
-        filename = published[1] if published else f"{family}-subset.woff2"
+        # A font served in parts (tools/font_chunks.py) is one subset: the
+        # characters of all its parts, rebuilt whole and split again.
+        parts = [font_dir / name for name in published]
+        filename = PART.sub(".woff2", published[0]) if published else f"{family}-subset.woff2"
         current = font_dir / filename
         actual = {ord(character) for character in characters}
-        if current.is_file():
-            with TTFont(current) as old:
-                previous = set(old.getBestCmap())
-                strays = stray_glyphs(old)
+        if any(part.is_file() for part in parts):
+            previous = set()
+            strays = []
+            for part in parts:
+                with TTFont(part) as old:
+                    previous |= set(old.getBestCmap())
+                    strays += stray_glyphs(old)
             actual.update(previous)
             # A subset that still carries stray contours (font_strays.py) is
             # rebuilt without them even when its characters stay the same.
             if actual == previous and not strays:
-                print(f"{family}: unchanged ({filename})")
+                print(f"{family}: unchanged ({', '.join(published)})")
                 continue
             version = re.match(r"(.*?)(?:\.v(\d+))?\.woff2$", filename)
             filename = f"{version[1]}.v{int(version[2] or 1) + 1}.woff2"
@@ -84,7 +93,9 @@ def main():
             if missing:
                 raise ValueError(f"{family}: source is missing requested code points {sorted(missing)}")
             options = subset.Options()
-            options.layout_features += ["vert", "vrt2", "tnum"]
+            # Tabular figures are used; vertical writing is not (its glyphs
+            # were half of Kuramubon-latin's bytes and drew nothing).
+            options.layout_features = [f for f in options.layout_features if f not in VERTICAL] + ["tnum"]
             options.hinting = False
             options.name_IDs = ["*"]
             options.notdef_outline = True
@@ -102,6 +113,45 @@ def main():
         with TTFont(target) as generated:
             if generated.getBestCmap().keys() != actual:
                 raise ValueError(f"{family}: subset did not preserve the expected code points")
+        if family in CHUNKED_FAMILIES:
+            # Split the rebuilt subset by page again, in place of the old parts.
+            files, rules = chunk_faces(str(target), family, filename.removesuffix(".woff2"))
+            target.unlink()
+            for path, _ in files:
+                manifest["files"][Path(path).name] = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+            old_faces = [
+                m
+                for m in re.finditer(r"@font-face\s*\{[^}]*\}", css)
+                if f'font-family: "{family}";' in m[0]
+            ]
+            for part in parts:
+                if part.is_file() and part.name not in {Path(p).name for p, _ in files}:
+                    part.unlink()
+            if old_faces:
+                start, end = old_faces[0].start(), old_faces[-1].end()
+                kept = css[start:end]
+                for m in old_faces:
+                    kept = kept.replace(m[0], "", 1)
+                css = css[:start] + "\n".join(rules) + kept + css[end:]
+            else:
+                marker = "/* === END generated font-face === */"
+                css = css.replace(marker, "\n".join(rules) + "\n" + marker, 1)
+            # The stand-in covers the whole subset, then takes the parts' ranges.
+            stand_ins = list(
+                re.finditer(
+                    r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family + "Fallback") + r'";[^}]*?\}', css
+                )
+            )
+            for extra in reversed(stand_ins[1:]):
+                css = css[: extra.start()] + css[extra.end() :].lstrip("\n")
+            if stand_ins:
+                first = re.search(
+                    r'@font-face\s*\{[^}]*?font-family:\s*"' + re.escape(family + "Fallback") + r'";[^}]*?\}', css
+                )
+                whole = re.sub(r"unicode-range:\s*[^;]+;", "unicode-range:\n" + ranges(actual) + ";", first[0])
+                css = split_stand_in(css[: first.start()] + whole + css[first.end() :], family)
+            print(f"{family}: {len(actual)} characters in {len(files)} parts")
+            continue
         manifest["files"][filename] = hashlib.sha256(target.read_bytes()).hexdigest()
         if current != target and current.is_file():
             current.unlink()

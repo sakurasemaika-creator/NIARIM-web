@@ -498,6 +498,13 @@ function rewriteSeoHtml(response, request, env, metadata) {
     });
 
   registerDiscardedMockContent(rewriter, metadata.page);
+  // HTML comments are notes for whoever edits the page (many in Japanese,
+  // which compresses poorly); the browser draws none of them.
+  rewriter.on("html", {
+    comments(comment) {
+      comment.remove();
+    },
+  });
 
   const transformed = rewriter.transform(response);
   const headers = new Headers(transformed.headers);

@@ -1,7 +1,8 @@
 /**
  * Measures, page by page and language by language, which characters the
- * browser draws with each Japanese font (KuramubonCJK for headings,
- * HakkouMinchoCJK for text), and writes tools/page-font-chars.json.
+ * browser draws with each CJK font (KuramubonCJK for Japanese headings,
+ * HakkouMinchoCJK for Japanese text, NotoSerifSC/TC/KR for Chinese and
+ * Korean), and writes tools/page-font-chars.json.
  * tools/font_chunks.py splits each of those fonts into files by these pages,
  * so a page downloads only the parts it uses.
  *
@@ -23,7 +24,13 @@ import { requireServer } from "./dev-server.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const out = path.join(root, "tools", "page-font-chars.json");
-export const MEASURED_FAMILIES = ["HakkouMinchoCJK", "KuramubonCJK"];
+export const MEASURED_FAMILIES = [
+  "HakkouMinchoCJK",
+  "KuramubonCJK",
+  "NotoSerifSC",
+  "NotoSerifTC",
+  "NotoSerifKR",
+];
 const PAGES = [
   "/",
   "/about/",
@@ -113,17 +120,45 @@ function collect(families) {
 const { base } = await requireServer();
 const browser = await chromium.launch(launchOptions());
 const result = Object.fromEntries(MEASURED_FAMILIES.map((f) => [f, {}]));
-for (const page of PAGES) {
-  for (const lang of LANGS) {
+// One page in one language. A page whose files did not all arrive (a dev
+// server restarting) is measured again, so a gap never shrinks a part.
+async function measure(page, lang) {
+  for (let attempt = 1; ; attempt++) {
     const tab = await browser.newPage({
       viewport: { width: 390, height: 844 },
     });
-    await tab.goto(`${base}${page}?lang=${lang}`, { waitUntil: "load" });
+    let failed = false;
+    tab.on("response", (response) => {
+      if (response.status() >= 500 && !response.url().includes("/api/"))
+        failed = true;
+    });
+    tab.on("requestfailed", (request) => {
+      if (["document", "script", "stylesheet"].includes(request.resourceType()))
+        failed = true;
+    });
+    const response = await tab
+      .goto(`${base}${page}?lang=${lang}`, { waitUntil: "load" })
+      .catch(() => null);
     await tab.waitForTimeout(2000);
-    const used = await tab.evaluate(collect, MEASURED_FAMILIES);
+    const shown = await tab
+      .evaluate(() => document.documentElement.lang)
+      .catch(() => null);
+    const used =
+      response && !failed && shown === lang
+        ? await tab.evaluate(collect, MEASURED_FAMILIES)
+        : null;
+    await tab.close();
+    if (used) return used;
+    if (attempt === 5) throw new Error(`${page} ${lang} did not load`);
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+  }
+}
+
+for (const page of PAGES) {
+  for (const lang of LANGS) {
+    const used = await measure(page, lang);
     for (const [family, chars] of Object.entries(used))
       result[family][`${page} ${lang}`] = chars;
-    await tab.close();
   }
 }
 await browser.close();

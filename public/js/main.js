@@ -696,9 +696,19 @@
     );
   }
 
+  /* 再現図の文言は日本語で組んである。差し込む前にページの言語へ直しておく
+     （差し込んだ直後のレイアウトで日本語のまま測られると、英語などのページでも
+     日本語のフォントの一部が読み込まれていた）。言語の切り替えで翻訳し直す
+     対象（data-i18n）は残るので、あとの表示は変わらない。 */
+  function localizeMock(root) {
+    if (window.NIARIM_I18N && window.NIARIM_I18N.localize)
+      window.NIARIM_I18N.localize(root);
+  }
+
   function htmlToElement(html) {
     var wrap = document.createElement("div");
     wrap.innerHTML = html;
+    localizeMock(wrap);
     return wrap.firstElementChild;
   }
 
@@ -753,6 +763,7 @@
       hero.className = "hero-visual fd-canvas-screen fd-app-screen";
       hero.removeAttribute("data-parallax");
       hero.innerHTML = canvasContents(null);
+      localizeMock(hero);
     }
     var heroSource = document.querySelector(".hero-visual");
     var firstFeatureMedia = document.querySelector(

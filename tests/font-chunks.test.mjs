@@ -3,13 +3,20 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-// HakkouMinchoCJK and KuramubonCJK are served in parts (tools/font_chunks.py,
+// The CJK fonts are served in parts (tools/font_chunks.py,
 // which checks glyphs, metrics and kerning when it writes them): a page
 // downloads only the parts holding the characters it draws. These checks keep
 // the parts and the measurements they were cut from in step.
 const root = path.resolve(import.meta.dirname, "..");
 const read = (...parts) => fs.readFileSync(path.join(root, ...parts), "utf8");
-const families = ["HakkouMinchoCJK", "KuramubonCJK"];
+// Each split font and the language whose pages it mainly draws.
+const families = {
+  HakkouMinchoCJK: "ja",
+  KuramubonCJK: "ja",
+  NotoSerifSC: "zh-Hans",
+  NotoSerifTC: "zh-Hant",
+  NotoSerifKR: "ko",
+};
 
 function faces(sheet, family) {
   return [
@@ -36,9 +43,9 @@ function faces(sheet, family) {
   }));
 }
 
-test("each Japanese font is served in parts, the same in every stylesheet", () => {
+test("each CJK font is served in parts, the same in every stylesheet", () => {
   const site = read("public", "css", "site.css");
-  for (const family of families) {
+  for (const family of Object.keys(families)) {
     const parts = faces(site, family);
     assert.ok(parts.length >= 3, `${family}: ${parts.length} files`);
     for (const { file } of parts)
@@ -62,22 +69,25 @@ test("the measurements cover every page", () => {
     )
       pages.push(`/${dir}/`);
   }
-  // The top page draws both fonts in Japanese; every page is measured in
-  // every language for the text font.
-  for (const page of pages)
-    assert.ok(
-      measured.HakkouMinchoCJK[`${page} ja`],
-      `${page} ja is not measured`,
-    );
+  // Every page is measured in the language of each font (the top page in
+  // Japanese draws both Japanese fonts).
+  for (const [family, lang] of Object.entries(families)) {
+    if (family === "KuramubonCJK") continue;
+    for (const page of pages)
+      assert.ok(
+        measured[family][`${page} ${lang}`],
+        `${family}: ${page} ${lang} is not measured`,
+      );
+  }
   assert.ok(measured.KuramubonCJK["/ ja"]);
 });
 
-test("the top page in Japanese needs only some of the parts", () => {
+test("the top page needs only some of the parts of each font", () => {
   const site = read("public", "css", "site.css");
   const measured = JSON.parse(read("tools", "page-font-chars.json"));
-  for (const family of families) {
+  for (const [family, lang] of Object.entries(families)) {
     const parts = faces(site, family);
-    const drawn = [...measured[family]["/ ja"]];
+    const drawn = [...measured[family][`/ ${lang}`]];
     const used = parts.filter((p) => drawn.some((ch) => p.chars.has(ch)));
     assert.ok(used.length < parts.length, `${family}: every part is fetched`);
     for (const ch of drawn)
@@ -91,7 +101,7 @@ test("the top page in Japanese needs only some of the parts", () => {
 test("English, French and Spanish pages need at most the kerning and latin parts", () => {
   const site = read("public", "css", "site.css");
   const measured = JSON.parse(read("tools", "page-font-chars.json"));
-  for (const family of families) {
+  for (const family of Object.keys(families)) {
     const parts = faces(site, family);
     for (const [key, text] of Object.entries(measured[family])) {
       if (!/ (en|fr|es)$/.test(key)) continue;

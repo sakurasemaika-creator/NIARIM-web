@@ -36,7 +36,7 @@ site.css の @font-face ブロック（マーカーで囲んだ範囲）を書�
 import re, glob, subprocess, sys, os, json, hashlib, html
 from fontTools.ttLib import TTFont
 
-from font_chunks import chunk_faces
+from font_chunks import CHUNKED_FAMILIES, chunk_faces
 from font_strays import drop_stray_contours
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -123,14 +123,14 @@ FONTS = [
     (
         "NotoSerifKR",
         f"{SRCDIR}/noto/NotoSerifKR.woff2",
-        "NotoSerifKR-subset.v3.woff2",
+        "NotoSerifKR-subset.v4.woff2",
         "韓国語の補完（Noto Serif KR）",
         "fallback",
     ),
     (
         "NotoSerifSC",
         f"{SRCDIR}/noto/NotoSerifSC.woff2",
-        "NotoSerifSC-subset.v4.woff2",
+        "NotoSerifSC-subset.v5.woff2",
         "簡体字中国語の補完（Noto Serif SC）",
         "fallback",
     ),
@@ -506,6 +506,12 @@ def build():
         report.append(
             f"  {family}: {len(take)}字  {before / 1024:.0f}KB -> {size / 1024:.0f}KB"
         )
+        if family in CHUNKED_FAMILIES:
+            # Served in parts by page (tools/font_chunks.py).
+            _, rules = chunk_faces(dst, family, outname.removesuffix(".woff2"))
+            os.remove(dst)
+            blocks.append(f"/* {role} */\n" + "\n".join(rules))
+            continue
         rule = [
             f"/* {role} */",
             "@font-face {",

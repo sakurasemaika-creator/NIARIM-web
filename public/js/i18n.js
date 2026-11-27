@@ -375,35 +375,21 @@
     });
   }
 
-  function renderLang(lang, options) {
-    lang = normalizeLang(lang);
-    if (!DICT[lang]) lang = DICT[DEFAULT_LANG] ? DEFAULT_LANG : "ja";
-    options = options || {};
+  // The elements of root (and root itself) that carry the attribute.
+  function within(root, selector) {
+    var found = Array.prototype.slice.call(root.querySelectorAll(selector));
+    if (root.matches && root.matches(selector)) found.unshift(root);
+    return found;
+  }
 
-    if (options.syncUrl === true) syncCurrentUrl(lang);
-    if (options.remember === true) {
-      try {
-        document.cookie =
-          "niarim_lang=" +
-          lang +
-          "; Path=/; Max-Age=31536000; SameSite=Lax" +
-          (window.location.protocol === "https:" ? "; Secure" : "");
-      } catch (_) {}
-    }
-
-    document.documentElement.setAttribute("lang", lang);
-
-    // ラテン系の言語のときは、font-familyからCJKサブセットを外す印を付ける
-    // （lang-flag.js が第一描画前に付けるのと同じ属性）。ページを開いたまま
-    // 言語を切り替えたときは、ここで付け直さないと「英語で開いてから日本語に
-    // 切り替えた」場合に日本語がOSのフォントで描かれたままになる。
-    if (lang === "en" || lang === "fr" || lang === "es") {
-      document.documentElement.setAttribute("data-latin-only", "");
-    } else {
-      document.documentElement.removeAttribute("data-latin-only");
-    }
-
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+  // Puts the language's text into the [data-i18n], [data-i18n-html] and
+  // [data-i18n-attr] elements of root (the whole document when the language
+  // is applied). Scripts that build markup with Japanese placeholder text
+  // (the screen mocks of /features/) call it on the new element before they
+  // insert it, so the page never lays out, and never fetches a Japanese font
+  // part for, text that the language would replace a moment later.
+  function localizeTree(root, lang) {
+    within(root, "[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       var translated = t(lang, key);
       if (translated !== key) {
@@ -436,13 +422,13 @@
       }
     });
 
-    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+    within(root, "[data-i18n-html]").forEach(function (el) {
       var key = el.getAttribute("data-i18n-html");
       var translated = t(lang, key);
       if (translated !== key) el.innerHTML = translated;
     });
 
-    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
+    within(root, "[data-i18n-attr]").forEach(function (el) {
       el.getAttribute("data-i18n-attr")
         .split("|")
         .forEach(function (pair) {
@@ -451,6 +437,37 @@
             el.setAttribute(parts[0], t(lang, parts[1]));
         });
     });
+  }
+
+  function renderLang(lang, options) {
+    lang = normalizeLang(lang);
+    if (!DICT[lang]) lang = DICT[DEFAULT_LANG] ? DEFAULT_LANG : "ja";
+    options = options || {};
+
+    if (options.syncUrl === true) syncCurrentUrl(lang);
+    if (options.remember === true) {
+      try {
+        document.cookie =
+          "niarim_lang=" +
+          lang +
+          "; Path=/; Max-Age=31536000; SameSite=Lax" +
+          (window.location.protocol === "https:" ? "; Secure" : "");
+      } catch (_) {}
+    }
+
+    document.documentElement.setAttribute("lang", lang);
+
+    // ラテン系の言語のときは、font-familyからCJKサブセットを外す印を付ける
+    // （lang-flag.js が第一描画前に付けるのと同じ属性）。ページを開いたまま
+    // 言語を切り替えたときは、ここで付け直さないと「英語で開いてから日本語に
+    // 切り替えた」場合に日本語がOSのフォントで描かれたままになる。
+    if (lang === "en" || lang === "fr" || lang === "es") {
+      document.documentElement.setAttribute("data-latin-only", "");
+    } else {
+      document.documentElement.removeAttribute("data-latin-only");
+    }
+
+    localizeTree(document, lang);
 
     var titleKey = document.body.getAttribute("data-i18n-title");
     if (titleKey) {
@@ -657,5 +674,9 @@
     translate: t,
     applyLang: applyLang,
     captureUrl: captureUrl,
+    // Localizes markup a script builds, in the language on screen.
+    localize: function (root) {
+      localizeTree(root, normalizeLang(document.documentElement.lang));
+    },
   };
 })();

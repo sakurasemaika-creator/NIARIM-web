@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Split the Japanese fonts (HakkouMinchoCJK, KuramubonCJK) into files by page.
+Split the CJK fonts (HakkouMinchoCJK, KuramubonCJK, NotoSerifSC, NotoSerifTC,
+NotoSerifKR) into files by page.
 
 Why: a page downloads a font file when one of its characters falls in that
 file's unicode-range. One file per font meant every Japanese page fetched the
 whole subset (HakkouMinchoCJK 314KB, KuramubonCJK 579KB) for the 150-500
-characters it shows, and an English privacy policy fetched the 314KB file for
-its "・" bullets.
+characters it shows, an English privacy policy fetched the 314KB file for its
+"・" bullets, and every Chinese or Korean page fetched its whole Noto Serif
+subset (130-260KB).
 
 Each font becomes several files of the same font-family, each with the
 unicode-range of its characters (tools/page-font-chars.json, measured with
@@ -15,10 +17,13 @@ tools/measure-page-font-chars.mjs, says which page draws which character):
          in HakkouMincho). They stay in one file, so the browser still
          shapes them in one run and the pairs keep their kerning.
   latin  characters drawn on English, French or Spanish pages
-  intl   characters drawn on Chinese or Korean pages
-  home   characters drawn on the top page
-  pages  characters drawn on the other pages (features, help, about...)
-  legal  characters drawn on the legal pages and the font licenses
+  intl   characters drawn on the pages of the other CJK languages
+  home   characters drawn on the top page in the font's own language
+         (Japanese for HakkouMinchoCJK and KuramubonCJK, Simplified Chinese
+         for NotoSerifSC, Traditional Chinese for NotoSerifTC, Korean for
+         NotoSerifKR)
+  pages  characters drawn on its other pages (features, help, about...)
+  legal  characters drawn on its legal pages and the font licenses
   rest   characters no page draws when it opens (later messages, results)
 Each character is in exactly one file, with the same outline, advance and
 metrics as before; only the vertical-writing features (the site sets no
@@ -51,12 +56,19 @@ CSS_FILES = [
     os.path.join(ROOT, "public/css/pages/account-deletion.css"),
     os.path.join(ROOT, "public/css/pages/font-licenses.css"),
 ]
-CHUNKED_FAMILIES = ("HakkouMinchoCJK", "KuramubonCJK")
+# Each split font and the language whose pages it mainly draws.
+CHUNKED_FAMILIES = {
+    "HakkouMinchoCJK": "ja",
+    "KuramubonCJK": "ja",
+    "NotoSerifSC": "zh-Hans",
+    "NotoSerifTC": "zh-Hant",
+    "NotoSerifKR": "ko",
+}
 VERTICAL = {"vert", "vrt2", "vkrn", "vpal", "vhal", "vchw", "valt", "vkna"}
 HOME = {"/"}
 LEGAL = {"/privacy/", "/terms/", "/tokushoho/", "/font-licenses/"}
 LATIN_LANGS = {"en", "fr", "es"}
-INTL_LANGS = {"zh-Hans", "zh-Hant", "ko"}
+CJK_LANGS = {"ja", "zh-Hans", "zh-Hant", "ko"}
 
 
 def features(font):
@@ -134,15 +146,16 @@ def plan(font, family, page_chars):
             out |= set(text)
         return out
 
+    own = {CHUNKED_FAMILIES[family]}
     other_pages = {key.split(" ")[0] for key in measured} - HOME - LEGAL
     kern = {ch for pair in kern_pairs(font) for ch in pair}
     groups = [
         ("kern", kern),
         ("latin", drawn(langs=LATIN_LANGS)),
-        ("intl", drawn(langs=INTL_LANGS)),
-        ("home", drawn(pages=HOME, langs={"ja"})),
-        ("pages", drawn(pages=other_pages, langs={"ja"})),
-        ("legal", drawn(pages=LEGAL, langs={"ja"})),
+        ("intl", drawn(langs=CJK_LANGS - own)),
+        ("home", drawn(pages=HOME, langs=own)),
+        ("pages", drawn(pages=other_pages, langs=own)),
+        ("legal", drawn(pages=LEGAL, langs=own)),
         ("rest", cmap),
     ]
     taken = set()
