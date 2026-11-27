@@ -47,7 +47,7 @@
       "tokushoho.delivery.value":
         "購入の手続きが完了した後、すぐにご利用いただけます。",
       "tokushoho.trial.label": "無料体験",
-      "tokushoho.trial.value": "アプリのダウンロードと基本機能のご利用は無料です。NIARIM Premium（有料の定期購入）に無料体験期間はありません。",
+      "tokushoho.trial.value": "アプリのダウンロードと基本機能のご利用は無料です。NIARIM Premium（有料の定期購入）に無料期間はありません。",
       "tokushoho.returns.label": "返品・キャンセル",
       "tokushoho.returns.value":
         "デジタルコンテンツの性質上、購入後の返品はお受けできません。定期購入は、Google Playの「定期購入」からいつでも解約でき、解約した後も契約期間の終わりまでご利用いただけます。返金は、Google Playの返金ポリシーに従います。",
