@@ -40,14 +40,17 @@ test("API calls, form posts, preview hosts and the canonical domain are not redi
 });
 
 test("static pages, robots and sitemap name only the canonical domain", async () => {
-  const { readFileSync, readdirSync, statSync } = await import("node:fs");
+  const { readFileSync, readdirSync } = await import("node:fs");
   const { join } = await import("node:path");
   const files = [];
+  // The entry types come with the listing: a separate stat of each name
+  // failed when another test file's generator renamed one of its temporary
+  // files in public/js/generated/ between the listing and the stat.
   const walk = (dir) => {
-    for (const name of readdirSync(dir)) {
-      const path = join(dir, name);
-      if (statSync(path).isDirectory()) walk(path);
-      else if (/\.(html|xml|txt)$/.test(name)) files.push(path);
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (/\.(html|xml|txt)$/.test(entry.name)) files.push(path);
     }
   };
   walk(new URL("../public", import.meta.url).pathname);

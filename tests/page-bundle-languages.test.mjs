@@ -64,9 +64,9 @@ test("each language's file holds that language of the page bundle", () => {
 });
 
 test("a language loaded later keeps the overrides scripts made before it", () => {
-  // i18n-dict-ai-trust.js / user-request-fixes.js run after the page's
-  // bundle and set some keys for every language. A language fetched later
-  // must not put the bundle's value back over them.
+  // user-request-fixes.js runs after the page's bundle and sets some keys
+  // for every language. A language fetched later must not put the bundle's
+  // value back over them.
   const window = run("i18n-home.ja.js", {});
   window.NIARIM_I18N_DICT.fr = { "nav.features": "override" };
   run("i18n-home.fr.js", window);

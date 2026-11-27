@@ -19,7 +19,7 @@ NIARIMは、AIが自動で作品を生成するアプリではありません。
 
 本サイトのロゴ・プライバシーポリシー・利用規約・機能紹介は、NIARIMアプリ本体リポジトリ（`sakurasemaika-creator/NIARIM`、`dev_branch`）の実データを確認したうえで反映しています。
 
-- **ロゴ**: `public/assets/images/logo/app_logo.svg` は、アプリリポジトリの `assets/logo/app_logo.svg` をそのまま使用しています（favicon も同一データ）。
+- **ロゴ**: `public/assets/images/logo/app_logo.v2.svg` は、アプリリポジトリの `assets/logo/app_logo.svg` からコメントと字下げだけを除いたものです（描画は同じ。`node tools/clean-svg.mjs <元のSVG> <出力>` で作る。favicon も同じデータ）。
 - **配色**: `public/css/site.css` のトークン（もとの variables.css）のブランドカラーは、アプリのデフォルトUIテーマ（`lib/models/app_theme_preset.dart` の `accentColor #FF5C7A`）およびロゴの配色（`#4A4636`）に合わせています。
 - **プライバシーポリシー・利用規約**: `public/js/i18n-dict-legal.js` に、アプリ本体の `lib/l10n/app_*.arb`（7言語）の条文を転記しています（最終更新日・問い合わせ先もアプリと同じ）。所有者の指定（2026-11-25「法務確認はOKとして作業進めてください」）で確認済みとして扱います。
 - **機能紹介・FAQ**: アプリの実装と画面（`public/assets/images/app-captures/`、アプリから撮った画面）に合わせています。作品広場は本番のサーバーで動いています。
@@ -58,10 +58,10 @@ NIARIM-web/
 │   ├── _headers               # 静的アセットのセキュリティヘッダー（下記参照）
 │   ├── assets/
 │   │   ├── images/
-│   │   │   ├── logo/app_logo.svg                   # NIARIMアプリ本体と共通の正式ロゴ
+│   │   │   ├── logo/app_logo.v2.svg                # NIARIMアプリ本体と共通の正式ロゴ（コメント・字下げを除いたもの）
 │   │   │   ├── screenshots/                        # アプリ画面キャプチャ差し替え用
 │   │   │   └── ogp-default.png                     # OGP画像（ロゴとアプリの画面、1200×630）
-│   │   ├── icons/              # favicon.svg / apple-touch-icon.png
+│   │   ├── icons/              # favicon.v2.svg / apple-touch-icon.png
 │   │   └── fonts/
 │   ├── css/
 │   │   ├── site.css（全ページ共通）

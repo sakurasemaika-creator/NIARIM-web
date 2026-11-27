@@ -155,7 +155,7 @@ p {
   --color-accent-dark: #e8425f;
   /* 面をテーマカラーで塗る箇所（ボタン等）に使う名前。利用者の指示は
      「赤系のボタンはロゴでも使っているテーマカラーの明るいピンクに白文字」
-     なので、装飾用と同じ #ff5c7a をそのまま使う（ロゴ favicon.svg も
+     なので、装飾用と同じ #ff5c7a をそのまま使う（ロゴ favicon.v2.svg も
      #FF5C7A の面に白抜き）。押したときだけ一段濃い側へ沈ませる。 */
   /* 小さな文字に使う赤。ボタンの面は明るいテーマカラー(#ff5c7a)で
      固定だが、eyebrow や必須マークのような「淡い地の上の小さな文字」は
@@ -3181,7 +3181,7 @@ main {
 /* ---- from the former manual-visual-audit-continuation.css ---- */
 /* 赤系のボタンは、ロゴでも使っているテーマカラーの明るいピンク
    (--color-accent = #ff5c7a) を不透明で敷き、文字は白（利用者の指示）。
-   ロゴ（favicon.svg）も同じ #FF5C7A の面に白抜きなので、面と文字の
+   ロゴ（favicon.v2.svg）も同じ #FF5C7A の面に白抜きなので、面と文字の
    組み合わせはロゴと揃う。 */
 html body .btn.btn-primary,
 html body .btn.btn-accent,

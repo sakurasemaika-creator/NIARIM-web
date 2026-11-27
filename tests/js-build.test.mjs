@@ -55,7 +55,6 @@ test("a script that loads another script loads its served copy", () => {
   for (const name of [
     "features-fidelity.js",
     "advanced-narrative-normalizer.js",
-    "i18n-dict-ai-trust.js",
   ])
     assert.ok(links.includes(`"/js/generated/compact/${name}"`), name);
 });

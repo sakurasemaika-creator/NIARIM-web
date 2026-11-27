@@ -2,10 +2,20 @@
 // hands the page the public OAuth client ID (the same variable as the
 // account-deletion page) and the /admin/-only headers.
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import worker from "../src/index.js";
 import { adminContentSecurityPolicy, handleAdminConfig } from "../src/admin.js";
+
+// The Worker imports src/generated/seo-i18n.js, which only the generator
+// writes (it is not checked in). Write it before loading the Worker: on a
+// fresh checkout this file would otherwise pass or fail depending on whether
+// another test file had run the generator first.
+execFileSync(process.execPath, ["tools/generate-seo-i18n.mjs"], {
+  cwd: new URL("..", import.meta.url),
+  stdio: "ignore",
+});
+const { default: worker } = await import("../src/index.js");
 
 // Node has no HTMLRewriter; the page rewriting itself is checked against
 // wrangler dev (tests/worker-seo-runtime-audit.mjs). Headers are what this
@@ -192,15 +202,17 @@ test("the admin page is in no sitemap, robots list or page list", async () => {
       file,
     );
   // Nothing on the public site links to it.
-  const { readdirSync, statSync } = await import("node:fs");
+  // The entry types come with the listing: a separate stat of each name
+  // failed when another test file's generator renamed one of its temporary
+  // files in public/js/generated/ between the listing and the stat.
+  const { readdirSync } = await import("node:fs");
   const { join } = await import("node:path");
   const root = new URL("../public/", import.meta.url).pathname;
   const walk = (dir) =>
-    readdirSync(dir).flatMap((name) => {
-      const path = join(dir, name);
-      if (statSync(path).isDirectory())
-        return name === "admin" ? [] : walk(path);
-      return /\.html$/.test(name) ? [path] : [];
+    readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) return entry.name === "admin" ? [] : walk(path);
+      return /\.html$/.test(entry.name) ? [path] : [];
     });
   for (const page of walk(root))
     assert.doesNotMatch(readFileSync(page, "utf8"), /href="\/admin\//, page);

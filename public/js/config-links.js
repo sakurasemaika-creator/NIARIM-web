@@ -96,16 +96,6 @@
     document.head.appendChild(narrative);
   }
 
-  function loadAiTrustCopy() {
-    if (document.querySelector("script[data-niarim-ai-trust]")) return;
-    var script = document.createElement("script");
-    script.src = "/js/i18n-dict-ai-trust.js";
-    script.defer = true;
-    script.setAttribute("data-niarim-ai-trust", "true");
-    document.head.appendChild(script);
-  }
-  loadAiTrustCopy();
-
   function init() {
     apply();
     loadFeatureFidelity();

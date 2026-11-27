@@ -111,12 +111,15 @@ ic-push_pin_outlined）、既存の視覚表現だけで十分なら装飾アイ
 
 ### 2.4 テーマカラーはアクセントカラー（`--color-accent: #FF5C7A`）
 
-タイトルロゴ・アプリロゴのSVG（`public/assets/images/logo/title_logo.svg`
-`app_logo.svg`）は、元々ブランドのダークブラウン（`#4A4636`）で塗られて
+タイトルロゴ・アプリロゴのSVG（`public/assets/images/logo/title_logo.v2.svg`
+`app_logo.v2.svg`）は、元々ブランドのダークブラウン（`#4A4636`）で塗られて
 いたが、ユーザーの指示により**テーマカラー`#FF5C7A`に変更済み**。
 今後アプリ本体からロゴSVGを再同期する際は、**塗り色を`#4A4636`のまま
 使わず、`#FF5C7A`に置換すること**（`sed -i 's/#4A4636/#FF5C7A/g;
-s/#4a4636/#FF5C7A/g' <file>` で一括置換できる）。フッターの方は
+s/#4a4636/#FF5C7A/g' <file>` で一括置換できる）。置換した後は
+`node tools/clean-svg.mjs <file> <出力>` でコメント・字下げを除き、/assets/ は
+30日キャッシュされるので新しいファイル名（`.v3.svg` など）で置いて参照を
+すべて直すこと。フッターの方は
 `filter: brightness(0) invert(1)` で強制的に白にしているため、
 色そのものは影響しない。
 
@@ -335,10 +338,12 @@ sakurasemaika-creator, repo: NIARIM, sha: "dev_branch"`）で新しい順に
 
 ### 6.1.2 [確認済み・対応不要] アプリアイコンのグリフ拡大は既に反映済み（複数回再確認済み）
 
-このサイトの `public/assets/images/logo/app_logo.svg` / `title_logo.svg` は
+このサイトの `public/assets/images/logo/app_logo.v2.svg` / `title_logo.v2.svg` は
 `sakurasemaika-creator/NIARIM` の `assets/logo/app_logo.svg` /
 `title_logo.svg`（モノグラムSVG本体）と、塗り色（テーマカラーへの変更、
-2.4節参照）以外は常にバイトレベルで同一である。**2026/08/31時点で
+2.4節参照）と、コメント・字下げを除いたこと（2026-11-27、軽量化。
+`node tools/clean-svg.mjs <元のSVG> <出力>` で作り、描画は同じ）以外は同一である。
+比べるときはアプリ側のSVGを同じツールに通してから比べること。**2026/08/31時点で
 `tool/gen_app_icon.py`のグリフ比率が0.58→0.74→0.86へ2段階目の拡大を
 経た（コミット`e6e9b53`「アプリアイコンのグリフをさらに拡大」）後も
 再確認したが、`assets/logo/app_logo.svg`自体のファイル内容（パス座標・
@@ -354,7 +359,7 @@ transform含む）は一切変更されておらず、サイト側の同期は�
 icon前景0.50）を掛けて`assets/icon/app_icon*.png`を生成するだけであり、
 `app_logo.svg`自身の中身（グリフの実寸）は変更しない。つまりこの比率は
 Android/iOSのアプリランチャーアイコン（PNG）専用のパラメータであり、
-サイトの`<img>`が直接参照している`app_logo.svg`/`title_logo.svg`には
+サイトの`<img>`が直接参照している`app_logo.v2.svg`/`title_logo.v2.svg`には
 そもそも影響しない値である。よって「アプリアイコン内svgのサイズを
 さらに変更した」という趣旨の報告を受けても、まず
 `assets/logo/app_logo.svg`/`title_logo.svg`自体に差分が出ているかを
@@ -367,7 +372,7 @@ Android/iOSのアプリランチャーアイコン（PNG）専用のパラメー
 - Googleの公式のGoogle Playのバッジの画像（7言語）を`public/assets/badges/google-play/`に置くのは所有者の作業（置くまでは文字のボタン）。
 - 公式XのURL（`X_URL`）は決まったら入れる。
 - [対応済み] apple-touch-icon（`public/assets/icons/apple-touch-icon.png`）と
-  favicon（`public/assets/icons/favicon.svg`）は、単色プレースホルダー
+  favicon（`public/assets/icons/favicon.v2.svg`）は、単色プレースホルダー
   だったものを、Android/iOSアプリのランチャーアイコンと同じ意匠
   （テーマカラー`#FF5C7A`のフルブリード正方形＋白抜きモノグラム、
   角丸はOS側の自動マスキングに委ねて焼き込まない）に差し替え済み。

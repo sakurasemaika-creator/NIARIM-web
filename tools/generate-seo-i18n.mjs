@@ -161,8 +161,8 @@ async function makePageBundle(page, dictionary, keys) {
   // shown in (about a seventh of the bytes). Another language is fetched by
   // i18n.js when the visitor picks it in the language menu. Keys already in
   // the table were put there by scripts that ran after the page's bundle
-  // (i18n-dict-ai-trust.js, user-request-fixes.js), so they keep precedence,
-  // as they had over the bundle with every language.
+  // (user-request-fixes.js), so they keep precedence, as they had over the
+  // bundle with every language.
   let languageBytes = 0;
   for (const lang of langs) {
     const languageBody =

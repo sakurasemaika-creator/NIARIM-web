@@ -243,7 +243,7 @@ function structuredData(request, env, metadata) {
         url: `${origin}/`,
         logo: {
           "@type": "ImageObject",
-          url: `${origin}/assets/images/logo/app_logo.svg`,
+          url: `${origin}/assets/images/logo/app_logo.v2.svg`,
         },
       },
       {
