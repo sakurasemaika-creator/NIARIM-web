@@ -79,7 +79,7 @@
       "a11y.switchLang": "切换语言",
       "a11y.categoryList": "分类列表",
       "a11y.featureList": "功能列表",
-      "nav.premium": "高级会员",
+      "nav.premium": "Premium",
       "nav.coins": "金币与任务",
       "nav.community": "作品广场",
       "common.scrollTop": "返回顶部",
@@ -90,9 +90,9 @@
         "介绍手绘动画制作应用 NIARIM 的理念、支持环境以及推荐功能。",
       "meta.help.title": "使用指南 | NIARIM",
       "meta.help.description":
-        "可在网页上搜索、浏览与应用内“帮助”画面几乎相同的内容。",
+        "可在网页上搜索、浏览与应用内“帮助”页面几乎相同的内容。",
       "help.lead":
-        "这里的内容与应用内的“帮助”画面基本相同，可在网页上搜索浏览。请输入想查找的关键词。",
+        "这里的内容与应用内的“帮助”页面基本相同，可在网页上搜索浏览。请输入想查找的关键词。",
       "help.backToTop": "返回分类列表",
     },
     "zh-Hant": {
@@ -109,7 +109,7 @@
       "a11y.switchLang": "切換語言",
       "a11y.categoryList": "分類列表",
       "a11y.featureList": "功能列表",
-      "nav.premium": "高級會員",
+      "nav.premium": "Premium",
       "nav.coins": "金幣與任務",
       "nav.community": "作品廣場",
       "common.scrollTop": "返回頂部",
@@ -130,7 +130,7 @@
       "nav.pricing": "요금",
       "footer.accountDeletion": "계정 삭제",
       "footer.fontLicenses": "글꼴 라이선스",
-      "footer.tokushoho": "특정상거래법에 따른 표기",
+      "footer.tokushoho": "일본 특정상거래법에 따른 표기",
       "refresh.playBadge.alt": "Google Play에서 다운로드",
       "refresh.playBadge.trademark": "Google Play 및 Google Play 로고는 Google LLC의 상표입니다.",
       "a11y.skipToMain": "본문으로 건너뛰기",

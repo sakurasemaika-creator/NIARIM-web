@@ -123,17 +123,17 @@
         "通过特效、色调调整等滤镜，调整作品的完成质感。",
       "featuresPage.advanced.item7.title": "字体管理",
       "featuresPage.advanced.item7.body":
-        "除内置字体外，还可从设置画面搜索并添加免费字体。",
+        "除内置字体外，还可从设置界面搜索并添加免费字体。",
       "featuresPage.advanced.item8.title": "水印",
       "featuresPage.advanced.item8.body":
-        "可为作品添加图片或文字水印（付费高级功能）。",
+        "可为作品添加图片或文字水印（Premium 功能）。",
       "featuresPage.advanced.item9.title": "像素模式",
       "featuresPage.advanced.item9.body":
         "可制作如像素画一般的点阵风格作品。可以创建并保存专用的像素画调色板，在绘制或应用像素画滤镜时选用。调色板可导出/导入为.niapixelpalette文件，与他人分享。",
       "featuresPage.advanced.item10.title": "颜色选择器",
       "featuresPage.advanced.item10.body":
         "可通过色相、饱和度、明度直观地选择绘图颜色。",
-      "featuresPage.advanced.item11.title": "快速切换工具、收藏",
+      "featuresPage.advanced.item11.title": "快速切换工具、星标",
       "featuresPage.advanced.item11.body":
         "预先注册常用的笔、画笔、尺寸组合，一键即可依次切换。",
       "featuresPage.advanced.item12.title": "描绘滤镜与演出滤镜",
@@ -180,9 +180,9 @@
       "featuresPage.advanced.item11.title": "快速切換工具、收藏",
       "featuresPage.advanced.item11.body":
         "預先註冊常用的筆、畫筆、尺寸組合，點一下即可依序切換。",
-      "featuresPage.advanced.item12.title": "描繪濾鏡與演出濾鏡",
+      "featuresPage.advanced.item12.title": "描繪濾鏡與特效濾鏡",
       "featuresPage.advanced.item12.body":
-        "分為直接套用於圖層的「描繪濾鏡」，以及可指定開始、結束影格、依場景或依所選的多個影格批次套用的「演出濾鏡」兩種。可疊加模糊、色調校正、光暈、雨、類似底片顆粒的雜訊等富有影像感的演出效果。",
+        "分為直接套用於圖層的「描繪濾鏡」，以及可指定開始、結束影格、依場景或依所選的多個影格批次套用的「特效濾鏡」兩種。可疊加模糊、色調校正、光暈、雨、類似底片顆粒的雜訊等富有影像感的特效。",
       "features.advanced.title": "支撐精細創作的進階工具",
       "features.advanced.body":
         "洋蔥皮、網點紙、圖章、尺規、文字等，配備了著眼於最終完成度的繪圖輔助工具。",

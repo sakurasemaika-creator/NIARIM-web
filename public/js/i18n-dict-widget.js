@@ -112,7 +112,7 @@
         "显示所选作品的一帧画面。点按即可打开 NIARIM。",
       "featuresPage.widget.item2.title": "创作小组件",
       "featuresPage.widget.item2.body":
-        "点按即可打开“创作”界面。背景色可跟随主题或使用指定颜色。",
+        "点按即可打开“新建项目”界面。背景色可跟随主题或使用指定颜色。",
       "featuresPage.widget.item3.title": "作品广场小组件",
       "featuresPage.widget.item3.body":
         "点按即可打开“作品广场”。背景色可跟随主题或使用指定颜色。",
@@ -144,7 +144,7 @@
         "顯示所選作品的一格畫面。點按即可開啟 NIARIM。",
       "featuresPage.widget.item2.title": "創作小工具",
       "featuresPage.widget.item2.body":
-        "點按即可開啟「創作」畫面。背景色可跟隨主題或使用指定顏色。",
+        "點按即可開啟「新增專案」畫面。背景色可跟隨主題或使用指定顏色。",
       "featuresPage.widget.item3.title": "作品廣場小工具",
       "featuresPage.widget.item3.body":
         "點按即可開啟「作品廣場」。背景色可跟隨主題或使用指定顏色。",
@@ -177,7 +177,7 @@
         "선택한 작품의 한 컷을 표시합니다. 누르면 NIARIM이 실행됩니다.",
       "featuresPage.widget.item2.title": "작품 만들기 위젯",
       "featuresPage.widget.item2.body":
-        "누르면 “작품 만들기” 화면이 열립니다. 배경색은 테마 연동 또는 지정한 색 중에서 선택합니다.",
+        "누르면 “새 프로젝트” 화면이 열립니다. 배경색은 테마 연동 또는 지정한 색 중에서 선택합니다.",
       "featuresPage.widget.item3.title": "작품 광장 위젯",
       "featuresPage.widget.item3.body":
         "누르면 “작품 광장”이 열립니다. 배경색은 테마 연동 또는 지정한 색 중에서 선택합니다.",
@@ -211,7 +211,7 @@
         "Affiche une image de l’œuvre que vous choisissez. Un appui ouvre NIARIM.",
       "featuresPage.widget.item2.title": "Widget « Créer une animation »",
       "featuresPage.widget.item2.body":
-        "Un appui ouvre l’écran « Créer une animation ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
+        "Un appui ouvre l’écran « Nouveau projet ». Le fond suit le thème ou utilise la couleur que vous choisissez.",
       "featuresPage.widget.item3.title": "Widget « Place des œuvres »",
       "featuresPage.widget.item3.body":
         "Un appui ouvre la Place des œuvres. Le fond suit le thème ou utilise la couleur que vous choisissez.",
@@ -245,7 +245,7 @@
         "Muestra un fotograma de la obra que elijas. Al tocarlo se abre NIARIM.",
       "featuresPage.widget.item2.title": "Widget «Crear una animación»",
       "featuresPage.widget.item2.body":
-        "Al tocarlo se abre la pantalla «Crear una animación». El fondo sigue el tema o usa el color que elijas.",
+        "Al tocarlo se abre la pantalla «Nuevo proyecto». El fondo sigue el tema o usa el color que elijas.",
       "featuresPage.widget.item3.title": "Widget «Plaza de Obras»",
       "featuresPage.widget.item3.body":
         "Al tocarlo se abre la Plaza de Obras. El fondo sigue el tema o usa el color que elijas.",

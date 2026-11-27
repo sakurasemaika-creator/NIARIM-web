@@ -90,7 +90,7 @@
       "premiumPage.lead":
         "Even the free version includes every core creation feature, including video export. The Premium plan removes ads and adds extra tools for finishing your work.",
       "premiumPage.priceNote":
-        "Prices and purchase terms may change. Please check the latest prices and terms on Google Play before purchasing.",
+        "Prices and purchase terms may change. Please check the latest prices and terms on Google Play before purchasing. The prices on this page are in Japanese yen; Google Play shows the price in your local currency.",
       "premiumPage.free.title": "Free",
       "premiumPage.free.price": "¥0",
       "premiumPage.free.item1":
@@ -151,16 +151,16 @@
       "premiumPage.cta.link": "Download the App",
     },
     "zh-Hans": {
-      "meta.premium.title": "高级会员方案 | NIARIM",
+      "meta.premium.title": "Premium 方案 | NIARIM",
       "meta.premium.description":
-        "介绍 NIARIM 高级会员方案能做什么，以及与免费版的区别。",
-      "premiumPage.compareTitle": "免费版与高级版的区别",
+        "介绍 NIARIM Premium 方案能做什么，以及与免费版的区别。",
+      "premiumPage.compareTitle": "免费版与 Premium 的区别",
       "premiumPage.eyebrow": "Premium",
-      "premiumPage.title": "高级会员方案",
+      "premiumPage.title": "Premium 方案",
       "premiumPage.lead":
-        "即使是免费版，也能使用包括视频导出在内的全部基础创作功能。高级会员方案可移除广告，并提供用于最终润色的附加功能。",
+        "即使是免费版，也能使用包括视频导出在内的全部基础创作功能。Premium 方案可移除广告，并提供用于最终润色的附加功能。",
       "premiumPage.priceNote":
-        "价格及购买条件可能调整。购买前请以 Google Play 显示的最新价格及条款为准。",
+        "价格及购买条件可能调整。购买前请以 Google Play 显示的最新价格及条款为准。本页面的价格以日元标示，Google Play 会以您所在地区的币种显示价格。",
       "premiumPage.free.title": "免费版",
       "premiumPage.free.price": "0 日元",
       "premiumPage.free.item1": "全部基础创作功能（绘画、动画、编辑、音频）",
@@ -169,7 +169,7 @@
       "premiumPage.free.item4":
         "导出时自动添加 NIARIM 官方片尾标志（无法编辑或删除）",
       "premiumPage.free.item5": "免费版支持制作和导出最长90秒的作品。长作品可导出开头90秒。",
-      "premiumPage.premium.title": "高级会员",
+      "premiumPage.premium.title": "Premium",
       "premiumPage.premium.monthly.label": "月付方案",
       "premiumPage.premium.monthly.price": "550 日元",
       "premiumPage.premium.monthly.unit": "／月（含税）",
@@ -200,33 +200,33 @@
       "premiumPage.premium.automation.title": "自定义自动操作（操作录制）",
       "premiumPage.premium.automation.body":
         "录制画布或时间轴上的操作步骤，以便在创作时重复执行。",
-      "premiumPage.start.title": "如何开始使用高级会员",
-      "premiumPage.start.step1": "在应用的菜单中打开“会员状态”，选择“了解高级会员”。选择高级功能时显示的“了解高级会员详情”也可以打开。",
+      "premiumPage.start.title": "如何开始使用 Premium",
+      "premiumPage.start.step1": "在应用的菜单中打开“会员状态”，选择“了解 Premium 会员”。选择 Premium 功能时显示的“了解 Premium 会员详情”也可以打开。",
       "premiumPage.start.step2": "选择“月付套餐”或“年付套餐”。购买需要使用Google账号登录。",
-      "premiumPage.start.step3": "在Google Play的画面上确认购买。购买未生效时，可通过“恢复购买”重新确认。",
+      "premiumPage.start.step3": "在Google Play的界面上确认购买。购买未生效时，可通过“恢复购买”重新确认。",
       "premiumPage.start.renew": "月度方案和年度方案在取消之前会自动续订。可随时在Google Play的“付款和订阅”中取消。",
-      "premiumPage.faq.title": "关于高级会员方案的说明",
+      "premiumPage.faq.title": "关于 Premium 方案的说明",
       "premiumPage.faq.item1":
-        "免费版中可使用的基础创作功能，不会因订阅高级会员而受到限制。",
+        "免费版中可使用的基础创作功能，不会因订阅 Premium 而受到限制。",
       "premiumPage.faq.item2":
         "购买后的取消、退款，适用 Google Play 的相关规定。",
       "premiumPage.faq.item3":
-        "无论使用免费版或高级会员版制作，作品（插画、动画等）的著作权均归拥有该权利的用户所有。",
+        "无论使用免费版或 Premium 版制作，作品（插画、动画等）的著作权均归拥有该权利的用户所有。",
       "premiumPage.cta.title": "开始使用 NIARIM",
       "premiumPage.cta.body": "不妨先从免费版开始，用你自己的双手绘制动画吧。",
       "premiumPage.cta.link": "下载应用",
     },
     "zh-Hant": {
-      "meta.premium.title": "高級會員方案 | NIARIM",
+      "meta.premium.title": "Premium 方案 | NIARIM",
       "meta.premium.description":
-        "介紹 NIARIM 高級會員方案能做什麼，以及與免費版的差異。",
+        "介紹 NIARIM Premium 方案能做什麼，以及與免費版的差異。",
       "premiumPage.compareTitle": "免費版與 Premium 的差異",
       "premiumPage.eyebrow": "Premium",
-      "premiumPage.title": "高級會員方案",
+      "premiumPage.title": "Premium 方案",
       "premiumPage.lead":
-        "即使是免費版，也能使用包括影片匯出在內的全部基礎創作功能。高級會員方案可移除廣告，並提供用於最終潤飾的附加功能。",
+        "即使是免費版，也能使用包括影片匯出在內的全部基礎創作功能。Premium 方案可移除廣告，並提供用於最終潤飾的附加功能。",
       "premiumPage.priceNote":
-        "價格及購買條件可能調整。購買前請以 Google Play 顯示的最新價格及條款為準。",
+        "價格及購買條件可能調整。購買前請以 Google Play 顯示的最新價格及條款為準。本頁價格以日圓標示，Google Play 則會以你所在地區的幣別顯示價格。",
       "premiumPage.free.title": "免費版",
       "premiumPage.free.price": "0 日圓",
       "premiumPage.free.item1": "全部基礎創作功能（繪圖、動畫、編輯、音訊）",
@@ -235,7 +235,7 @@
       "premiumPage.free.item4":
         "匯出時自動新增 NIARIM 官方片尾標記（無法編輯或刪除）",
       "premiumPage.free.item5": "免費版支援製作和匯出最長90秒的作品。長作品可匯出開頭90秒。",
-      "premiumPage.premium.title": "高級會員",
+      "premiumPage.premium.title": "Premium 方案",
       "premiumPage.premium.monthly.label": "月付方案",
       "premiumPage.premium.monthly.price": "550 日圓",
       "premiumPage.premium.monthly.unit": "／月（含稅）",
@@ -266,18 +266,18 @@
       "premiumPage.premium.automation.title": "自訂自動操作（操作錄製）",
       "premiumPage.premium.automation.body":
         "錄製畫布或時間軸上的操作步驟，創作時可重複執行。",
-      "premiumPage.start.title": "如何開始使用高級會員",
-      "premiumPage.start.step1": "在應用程式的選單中開啟「會員狀態」，選擇「了解高級會員」。選擇進階功能時顯示的「了解進階會員詳情」也可以開啟。",
+      "premiumPage.start.title": "如何開始使用 Premium",
+      "premiumPage.start.step1": "在應用程式的選單中開啟「會員狀態」，選擇「了解 Premium 會員」。選擇 Premium 功能時顯示的「了解 Premium 會員詳情」也可以開啟。",
       "premiumPage.start.step2": "選擇「月繳方案」或「年繳方案」。購買需要使用Google帳戶登入。",
       "premiumPage.start.step3": "在Google Play的畫面上確認購買。購買未生效時，可透過「恢復購買」重新確認。",
       "premiumPage.start.renew": "月繳方案及年繳方案在取消之前會自動續訂。可隨時於Google Play之「付款和訂閱」中取消。",
-      "premiumPage.faq.title": "關於高級會員方案的說明",
+      "premiumPage.faq.title": "關於 Premium 方案的說明",
       "premiumPage.faq.item1":
-        "免費版中可使用的基礎創作功能，不會因訂閱高級會員而受到限制。",
+        "免費版中可使用的基礎創作功能，不會因訂閱 Premium 而受到限制。",
       "premiumPage.faq.item2":
         "購買後的取消、退款，適用 Google Play 的相關規定。",
       "premiumPage.faq.item3":
-        "無論使用免費版或高級會員版製作，作品（插畫、動畫等）的著作權均歸擁有該權利的使用者所有。",
+        "無論使用免費版或 Premium 版製作，作品（插畫、動畫等）的著作權均歸擁有該權利的使用者所有。",
       "premiumPage.cta.title": "開始使用 NIARIM",
       "premiumPage.cta.body": "不妨先從免費版開始，用你自己的雙手繪製動畫吧。",
       "premiumPage.cta.link": "下載應用程式",
@@ -292,7 +292,7 @@
       "premiumPage.lead":
         "무료 버전에서도 영상 내보내기를 포함한 모든 기본 제작 기능을 이용할 수 있습니다. 프리미엄 플랜에서는 광고가 사라지고, 마무리 작업을 위한 추가 기능을 이용할 수 있습니다.",
       "premiumPage.priceNote":
-        "요금과 구매 조건은 변경될 수 있습니다. 구매 전에 Google Play에 표시된 최신 요금과 조건을 확인해 주세요.",
+        "요금과 구매 조건은 변경될 수 있습니다. 구매 전에 Google Play에 표시된 최신 요금과 조건을 확인해 주세요. 이 페이지의 요금은 일본 엔화 기준입니다. Google Play에서는 현지 통화로 요금이 표시됩니다.",
       "premiumPage.free.title": "무료 버전",
       "premiumPage.free.price": "0엔",
       "premiumPage.free.item1":
@@ -362,7 +362,7 @@
       "premiumPage.lead":
         "Même la version gratuite inclut toutes les fonctionnalités de création essentielles, y compris l’export vidéo. L’offre Premium supprime les publicités et ajoute des outils supplémentaires pour la finition.",
       "premiumPage.priceNote":
-        "Les prix et les conditions d’achat peuvent changer. Vérifiez les tarifs et les conditions en vigueur sur Google Play avant votre achat.",
+        "Les prix et les conditions d’achat peuvent changer. Vérifiez les tarifs et les conditions en vigueur sur Google Play avant votre achat. Les prix indiqués sur cette page sont en yens japonais. Google Play affiche le prix dans votre devise locale.",
       "premiumPage.free.title": "Gratuit",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":
@@ -433,7 +433,7 @@
       "premiumPage.lead":
         "Incluso la versión gratuita incluye todas las funciones de creación básicas, incluida la exportación de vídeo. El plan Premium elimina los anuncios y añade herramientas adicionales para el acabado.",
       "premiumPage.priceNote":
-        "Los precios y las condiciones de compra pueden cambiar. Consulta los precios y las condiciones vigentes en Google Play antes de comprar.",
+        "Los precios y las condiciones de compra pueden cambiar. Consulta los precios y las condiciones vigentes en Google Play antes de comprar. Los precios de esta página están en yenes japoneses. Google Play muestra el precio en tu moneda local.",
       "premiumPage.free.title": "Gratis",
       "premiumPage.free.price": "0 ¥",
       "premiumPage.free.item1":

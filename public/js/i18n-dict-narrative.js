@@ -226,9 +226,9 @@
       "narrative.editing.4.heading": "Common layers",
       "narrative.editing.4.body":
         "A layer that shows the same content across multiple frames or scenes. You don’t need to redraw fixed elements like backgrounds on every frame. You can even turn a character into a common layer while keeping just the mouth on a regular layer — the character stays put while only the mouth is redrawn frame by frame, giving you lip-sync.",
-      "narrative.editing.5.heading": "Auto-fill",
+      "narrative.editing.5.heading": "Autofill",
       "narrative.editing.5.body":
-        "Colors in each part automatically, using colors and tones you set in advance, based on the line art. For hand-drawn animation where the same character is drawn again and again, this greatly reduces the coloring workload. It also supports gradients, outlines, and color trace that blends into the line art. Note: auto-fill is not a generative-AI feature. It colors things in based on rules you set.",
+        "Colors in each part automatically, using colors and tones you set in advance, based on the line art. For hand-drawn animation where the same character is drawn again and again, this greatly reduces the coloring workload. It also supports gradients, outlines, and color trace that blends into the line art. Note: autofill is not a generative-AI feature. It colors things in based on rules you set.",
 
       "narrative.advanced.1.heading": "Make your everyday work smoother.",
       "narrative.advanced.1.body": "",
@@ -255,10 +255,10 @@
         "Apply pixel mode to brushes, fonts, and stamps. It removes anti-aliasing for a crisp, pixel-art look. You can even process a stamp in pixel mode to use it as pixel-art-style material.",
       "narrative.advanced.9.heading": "Draw filters",
       "narrative.advanced.9.body":
-        "Apply a filter to each layer. Blur, sharpen, unsharp mask, tone curve, levels, vignette, noise, retro anime, CRT, anime-style, outline, pixel art, fisheye lens, aurora hologram, background blend, and more. A lens-prescription filter can even reproduce how a scene distorts when viewed through lenses of different strengths.",
+        "Apply a filter to each layer. Blur, sharpen, unsharp mask, tone curve, levels, vignette, noise, retro anime, CRT, anime-style, outline, pixel art, fisheye lens, texture, background blend, and more. The Lens Distortion filter can even reproduce how the view through a lens looks distorted, depending on the strength of the lens.",
       "narrative.advanced.10.heading": "Effect filters",
       "narrative.advanced.10.body":
-        "These are visual effects you can apply per frame or per scene. Since multiple frames can be processed together, you can add the same effect across an entire piece or a single scene. Layer on effects like noise, rain, or the iridescent aurora hologram to finish the mood of the whole piece. Use a draw filter when you want to work on a layer directly; use an effect filter when you want to direct a whole frame or scene. Pick whichever fits what you’re doing.",
+        "These are visual effects you can apply per frame or per scene. Since multiple frames can be processed together, you can add the same effect across an entire piece or a single scene. Layer on effects like noise, rain, or Texture (which adds a holographic or metallic sheen) to finish the mood of the whole piece. Use a draw filter when you want to work on a layer directly; use an effect filter when you want to direct a whole frame or scene. Pick whichever fits what you’re doing.",
 
       "narrative.save.1.heading":
         "Keep your work light. Keep creating comfortably.",
@@ -281,7 +281,7 @@
         "Export your project as a .niashare file to move it to another device or share it with someone else. The project itself is always included. You can choose whether to include images, video, audio, and fonts separately. When you receive a .niashare file, you can duplicate it as your own project.",
       "narrative.save.7.heading": "Carry your whole setup with you.",
       "narrative.save.7.body":
-        "Use .niatra to migrate your app environment. When switching to a new device, the .niatra transfer feature has you covered. Beyond settings and materials, you can migrate brushes, auto-fill settings, themes, and palettes all together, and optionally include in-progress projects too. Pick exactly which items to carry over using checkboxes.",
+        "Use .niatra to migrate your app environment. When switching to a new device, the .niatra transfer feature has you covered. Beyond settings and materials, you can migrate brushes, autofill settings, themes, and palettes all together, and optionally include in-progress projects too. Pick exactly which items to carry over using checkboxes.",
       "narrative.save.8.heading": "",
       "narrative.save.8.body":
         "Use .niashare to hand off a piece of work; use .niatra to carry over your production environment. Pick whichever fits what you need.",
@@ -347,8 +347,8 @@
         "用笔绘制。擦除。填色。选取。变形。灵活运用各种工具，完成一幅画作。",
       "narrative.drawing.2.heading": "打造属于自己的笔触。",
       "narrative.drawing.2.body":
-        "除了可以切换G笔、笔、喷枪等多种笔刷之外，还能细致调整笔刷本身。",
-      "narrative.drawing.3.heading": "笔刷设置",
+        "除了可以切换G笔、笔、喷枪等多种画笔之外，还能细致调整画笔本身。",
+      "narrative.drawing.3.heading": "画笔设置",
       "narrative.drawing.3.body":
         "不仅可以设置粗细和不透明度，还能调整渐隐、笔画衰减、混色等参数。可以像水彩一样晕开颜色，也可以让线条末端产生飞白效果。根据自己的画法，调整出称心如意的笔触。",
       "narrative.drawing.4.heading": "支持压感与倾斜",
@@ -389,10 +389,10 @@
       "narrative.advanced.1.heading": "让日常创作更顺畅。",
       "narrative.advanced.2.heading": "快速切换工具",
       "narrative.advanced.2.body":
-        "注册常用的笔刷和工具组合，只需一个按钮即可切换。可以打造“线稿用”“上色用”“精修用”等专属于自己的工作方式。",
-      "narrative.advanced.3.heading": "收藏",
+        "注册常用的画笔和工具组合，只需一个按钮即可切换。可以打造“线稿用”“上色用”“精修用”等专属于自己的工作方式。",
+      "narrative.advanced.3.heading": "星标",
       "narrative.advanced.3.body":
-        "将常用的笔刷、图章等注册为收藏。可以只把需要的项目立即调出。",
+        "给常用的画笔、图章等加星标。可以只把需要的项目立即调出。",
       "narrative.advanced.4.heading": "颜色选择器",
       "narrative.advanced.4.body":
         "可在HSV与RGB之间切换来选取颜色。常用的配色组合可以保存到调色板中。",
@@ -405,13 +405,13 @@
         "图章的图像本身带有颜色信息。因此，无论色板当前选中的是什么颜色，图章都会以其自身固有的颜色绘制。可以注册效果线、背景图案、小道具等，需要时立即放置。同时支持旋转与缩放。",
       "narrative.advanced.8.heading": "像素模式",
       "narrative.advanced.8.body":
-        "可以为笔刷、字体、图章应用像素模式。去除抗锯齿，呈现出清晰的像素画风格。也可以用像素模式处理图章，将其作为像素风格的素材使用。",
+        "可以为画笔、字体、图章应用像素模式。去除抗锯齿，呈现出清晰的像素画风格。也可以用像素模式处理图章，将其作为像素风格的素材使用。",
       "narrative.advanced.9.heading": "绘图滤镜",
       "narrative.advanced.9.body":
-        "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动漫、老电视、动漫风、描边、像素画、鱼眼镜头、极光全息、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
+        "可以为每个图层应用滤镜。模糊、锐化、USM锐化、色调曲线、色阶、暗角、噪点、复古动漫、老电视、动漫风格、描边、像素画、鱼眼镜头、质感变换、背景融入等等。此外，眼镜断层滤镜还能再现透过不同度数镜片观察景物时产生的畸变效果。",
       "narrative.advanced.10.heading": "演出滤镜",
       "narrative.advanced.10.body":
-        "这是一种可按帧或按场景应用的影像效果。由于可以一次性处理多个帧，因此能为整部作品或某个场景统一添加相同的演出效果。叠加噪点、下雨、散发七彩光泽的极光全息等演出效果，来完成整部作品的氛围。想直接加工图层，就用绘图滤镜；想为整个帧或场景增添演出效果，就用演出滤镜。可根据用途灵活选用。",
+        "这是一种可按帧或按场景应用的影像效果。由于可以一次性处理多个帧，因此能为整部作品或某个场景统一添加相同的演出效果。叠加噪点、下雨，以及带来全息或金属般光泽的质感变换等演出效果，来完成整部作品的氛围。想直接加工图层，就用绘图滤镜；想为整个帧或场景增添演出效果，就用演出滤镜。可根据用途灵活选用。",
 
       "narrative.save.1.heading": "让作品更轻量，创作更舒适。",
       "narrative.save.1.body":
@@ -432,7 +432,7 @@
         "将项目导出为 .niashare 文件，即可迁移到其他设备或分享给他人。文件始终包含项目本体。导出时可分别选择是否包含图像、视频、音频和字体。收到文件后，可以将它复制为自己的项目。",
       "narrative.save.7.heading": "把整个环境，原样带走。",
       "narrative.save.7.body":
-        "通过.niatra迁移应用环境。更换新设备时，可以使用.niatra格式的迁移功能。不仅是设置和素材，还能将笔刷、自动上色设置、主题和调色板一并迁移，还可以选择性地一并包含制作中的项目。想要迁移的项目可以通过复选框逐一选择。",
+        "通过.niatra迁移应用环境。更换新设备时，可以使用.niatra格式的迁移功能。不仅是设置和素材，还能将画笔、自动上色设置、主题和调色板一并迁移，还可以选择性地一并包含制作中的项目。想要迁移的项目可以通过复选框逐一选择。",
       "narrative.save.8.body":
         "要传递作品，就用.niashare；要迁移创作环境，就用.niatra。可根据用途灵活选用。",
 
@@ -451,9 +451,9 @@
       "narrative.export.1.body":
         "按用途选择四种格式之一，导出完成的动画。要保存单帧图像，可从时间轴导出 PNG 或 JPEG。",
 
-      "narrative.premium.1.heading": "开通高级会员，创作更自由。",
+      "narrative.premium.1.heading": "开通 Premium，创作更自由。",
       "narrative.premium.1.body":
-        "高级会员不仅能让创作更舒适，发布作品也会更加轻松。",
+        "Premium 会员不仅能让创作更舒适，发布作品也会更加轻松。",
       "narrative.premium.2.body": "NIARIM 片尾标记是 MP4、WebM 和 AVI 末尾的 5 秒标志。片尾标记权益有效时可按作品切换显示。到期后仍保留设置。GIF 不添加片尾标记。",
 
       "narrative.community.1.heading": "作品广场",
@@ -475,7 +475,7 @@
         "发现喜欢的作品后，还可以查看该作者发布的其他作品。找到喜欢的作者，追更他们的新作品。",
       "narrative.community.7.heading": "发布你自己的作品吧。",
       "narrative.community.7.body":
-        "完成的作品可以发布到“作品广场”。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，高级会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
+        "完成的作品可以发布到“作品广场”。让别人看到你创作的作品。也许会有人喜欢并收藏它，甚至进入排行榜。免费会员每天最多可发布1部作品，Premium 会员每天最多可发布3部。创作完成后，不妨把它分享给某个人。",
       "narrative.community.8.heading": "登录也很简单。",
       "narrative.community.8.body":
         "无需注册NIARIM专属账号。使用 Google 账号登录后，即可发布和收藏作品。仅浏览作品则无需登录。",
@@ -554,10 +554,10 @@
         "可以為筆刷、字型、印章套用像素模式。去除反鋸齒，呈現出清晰的像素畫風格。也可以用像素模式處理印章，將其作為像素風格的素材使用。",
       "narrative.advanced.9.heading": "繪圖濾鏡",
       "narrative.advanced.9.body":
-        "可以為每個圖層套用濾鏡。模糊、銳化、USM銳化、色調曲線、色階、暗角、雜訊、復古動漫、老電視、動漫風格、描邊、像素畫、魚眼鏡頭、極光全息、背景融入等等。此外，眼鏡斷層濾鏡還能重現透過不同度數鏡片觀察景物時產生的扭曲效果。",
-      "narrative.advanced.10.heading": "演出濾鏡",
+        "可以為每個圖層套用濾鏡。模糊、銳化、USM銳化、色調曲線、色階、暗角、雜訊、復古動漫、老電視、動漫風格、描邊、像素畫、魚眼鏡頭、質感變換、背景融入等等。此外，眼鏡斷層濾鏡還能重現透過不同度數鏡片觀察景物時產生的扭曲效果。",
+      "narrative.advanced.10.heading": "特效濾鏡",
       "narrative.advanced.10.body":
-        "這是一種可依影格或依場景套用的影像效果。由於可以一次處理多個影格，因此能為整部作品或某個場景統一加上相同的演出效果。疊加雜訊、下雨、散發七彩光澤的極光全息等演出效果，來完成整部作品的氛圍。想直接加工圖層，就用繪圖濾鏡；想為整個影格或場景增添演出效果，就用演出濾鏡。可依用途靈活選用。",
+        "這是一種可依影格或依場景套用的影像效果。由於可以一次處理多個影格，因此能為整部作品或某個場景統一加上相同的特效。疊加雜訊、下雨，以及能呈現全息或金屬般光澤的質感變換等特效，來完成整部作品的氛圍。想直接加工圖層，就用繪圖濾鏡；想為整個影格或場景增添特效，就用特效濾鏡。可依用途靈活選用。",
 
       "narrative.save.1.heading": "讓作品更輕量，創作更舒適。",
       "narrative.save.1.body":
@@ -597,9 +597,9 @@
       "narrative.export.1.body":
         "依用途從四種格式中選擇，匯出完成的動畫。要儲存單格影像，可從時間軸匯出 PNG 或 JPEG。",
 
-      "narrative.premium.1.heading": "開通高級會員，創作更自由。",
+      "narrative.premium.1.heading": "成為 Premium 會員，創作更自由。",
       "narrative.premium.1.body":
-        "高級會員不僅能讓創作更舒適，發布作品也會更加輕鬆。",
+        "Premium 不僅能讓創作更舒適，發布作品也會更加輕鬆。",
       "narrative.premium.2.body": "NIARIM 片尾標記是 MP4、WebM 和 AVI 末尾的 5 秒標誌。片尾標記權益有效時，可依作品切換顯示。到期後仍保留作品的設定。GIF 不會加上片尾標記。",
 
       "narrative.community.1.heading": "作品廣場",
@@ -621,7 +621,7 @@
         "發現喜歡的作品後，還可以查看該作者發布的其他作品。找到喜歡的作者，追蹤他們的新作品。",
       "narrative.community.7.heading": "發布你自己的作品吧。",
       "narrative.community.7.body":
-        "完成的作品可以發布到「作品廣場」。讓別人看到你創作的作品。也許會有人喜歡並收藏它，甚至進入排行榜。免費會員每天最多可發布1部作品，高級會員每天最多可發布3部。創作完成後，不妨把它分享給某個人。",
+        "完成的作品可以發布到「作品廣場」。讓別人看到你創作的作品。也許會有人喜歡並收藏它，甚至進入排行榜。免費會員每天最多可發布1部作品，Premium 會員每天最多可發布3部。創作完成後，不妨把它分享給某個人。",
       "narrative.community.8.heading": "登入也很簡單。",
       "narrative.community.8.body":
         "不需要註冊NIARIM專屬帳號。使用 Google 帳號登入後，即可發布及收藏作品。僅瀏覽作品則不需要登入。",
@@ -701,10 +701,10 @@
         "브러시·폰트·스탬프에 픽셀 모드를 적용할 수 있습니다. 안티에일리어싱을 제거해 또렷한 픽셀 아트풍 표현으로. 스탬프를 픽셀 모드로 가공해 픽셀 아트풍 소재로 사용할 수도 있습니다.",
       "narrative.advanced.9.heading": "그리기 필터",
       "narrative.advanced.9.body":
-        "레이어별로 필터를 적용할 수 있습니다. 블러, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메 스타일, 테두리, 픽셀 아트, 어안 렌즈, 오로라 홀로그램, 배경 어우러짐 등. 게다가 안경 렌즈 왜곡 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
+        "레이어별로 필터를 적용할 수 있습니다. 흐림, 샤프, 언샤프 마스크, 톤 커브, 레벨 보정, 비네트, 노이즈, 레트로 애니메, 브라운관, 애니메 스타일, 테두리, 픽셀 아트, 어안 렌즈, 질감 변경, 배경 어우러짐 등. 게다가 안경 렌즈 왜곡 필터에서는 렌즈 도수에 따라 렌즈 너머의 풍경이 어떻게 왜곡되어 보이는지를 재현할 수 있습니다.",
       "narrative.advanced.10.heading": "연출 필터",
       "narrative.advanced.10.body":
-        "이쪽은 프레임이나 씬 단위로 적용할 수 있는 영상 효과입니다. 여러 프레임을 한 번에 처리할 수 있어, 작품 전체나 하나의 씬에 같은 연출을 더할 수도 있습니다. 노이즈나 비, 무지갯빛 광택을 두른 오로라 홀로그램 등의 연출을 겹쳐 작품 전체의 분위기를 완성할 수 있습니다. 레이어를 직접 가공하려면 그리기 필터. 프레임이나 씬 전체를 연출하려면 연출 필터. 용도에 맞춰 구분해 사용할 수 있습니다.",
+        "이쪽은 프레임이나 씬 단위로 적용할 수 있는 영상 효과입니다. 여러 프레임을 한 번에 처리할 수 있어, 작품 전체나 하나의 씬에 같은 연출을 더할 수도 있습니다. 노이즈나 비, 홀로그램이나 금속 같은 광택을 입히는 질감 변경 등의 연출을 겹쳐 작품 전체의 분위기를 완성할 수 있습니다. 레이어를 직접 가공하려면 그리기 필터. 프레임이나 씬 전체를 연출하려면 연출 필터. 용도에 맞춰 구분해 사용할 수 있습니다.",
 
       "narrative.save.1.heading": "작품을 가볍게. 제작을 쾌적하게.",
       "narrative.save.1.body":
@@ -857,10 +857,10 @@
         "Appliquez le mode pixel aux pinceaux, polices et tampons. Il supprime l’anticrénelage pour un rendu pixel art net. Vous pouvez même traiter un tampon en mode pixel pour l’utiliser comme matériau de style pixel art.",
       "narrative.advanced.9.heading": "Filtres de dessin",
       "narrative.advanced.9.body":
-        "Appliquez un filtre à chaque calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixel art, objectif fisheye, hologramme aurore, fondu avec l’arrière-plan, et plus. Un filtre de correction optique peut même reproduire la façon dont une scène se déforme lorsqu’elle est vue à travers des verres de différentes puissances.",
+        "Appliquez des filtres calque par calque. Flou, netteté, masque flou, courbe de tons, niveaux, vignettage, bruit, anime rétro, CRT, style anime, contour, pixel art, objectif fisheye, changement de texture, fondu avec l’arrière-plan, et plus. Le filtre de distorsion de lentille peut même reproduire la façon dont une scène se déforme lorsqu’elle est vue à travers des verres de différentes puissances.",
       "narrative.advanced.10.heading": "Filtres d’effet",
       "narrative.advanced.10.body":
-        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou l’hologramme aurore aux reflets irisés pour finaliser l’ambiance de toute l’œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d’effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
+        "Ce sont des effets visuels que vous pouvez appliquer par image ou par scène. Comme plusieurs images peuvent être traitées ensemble, vous pouvez ajouter le même effet sur une œuvre entière ou une seule scène. Superposez des effets comme le bruit, la pluie ou le changement de texture, qui donne un éclat holographique ou métallique, pour finaliser l’ambiance de toute l’œuvre. Utilisez un filtre de dessin quand vous voulez travailler directement sur un calque ; utilisez un filtre d’effet quand vous voulez mettre en scène une image ou une scène entière. Choisissez celui qui convient à ce que vous faites.",
 
       "narrative.save.1.heading":
         "Gardez votre travail léger. Continuez à créer confortablement.",
@@ -1018,10 +1018,10 @@
         "Aplica el modo píxel a pinceles, fuentes y sellos. Elimina el suavizado para lograr un look de pixel art nítido. Incluso puedes procesar un sello en modo píxel para usarlo como material de estilo pixel art.",
       "narrative.advanced.9.heading": "Filtros de dibujo",
       "narrative.advanced.9.body":
-        "Aplica un filtro a cada capa. Desenfoque, nitidez, máscara de enfoque, curva de tonos, niveles, viñeta, ruido, anime retro, CRT, estilo anime, contorno, pixel art, lente ojo de pez, holograma aurora, fusión con el fondo, y más. Un filtro de graduación de lentes incluso puede reproducir cómo se distorsiona una escena al verla a través de lentes de distintas graduaciones.",
+        "Aplica un filtro a cada capa. Desenfoque, nitidez, máscara de enfoque, curva de tonos, niveles, viñeta, ruido, anime retro, tubo de rayos catódicos, estilo anime, contorno, pixel art, lente ojo de pez, cambio de textura, mimetismo de fondo, y más. Además, el filtro Distorsión de lente puede reproducir cómo se distorsiona el paisaje visto a través de una lente según su graduación.",
       "narrative.advanced.10.heading": "Filtros de efecto",
       "narrative.advanced.10.body":
-        "Estos son efectos visuales que puedes aplicar por fotograma o por escena. Como se pueden procesar varios fotogramas juntos, puedes añadir el mismo efecto a toda una obra o a una sola escena. Superpón efectos como ruido, lluvia o el holograma aurora de reflejos iridiscentes para terminar el ambiente de toda la pieza. Usa un filtro de dibujo cuando quieras trabajar directamente sobre una capa; usa un filtro de efecto cuando quieras dirigir un fotograma o una escena completa. Elige el que se ajuste a lo que estás haciendo.",
+        "Estos son efectos visuales que puedes aplicar por fotograma o por escena. Como se pueden procesar varios fotogramas juntos, puedes añadir el mismo efecto a toda una obra o a una sola escena. Superpón efectos como ruido, lluvia o el cambio de textura, que envuelve la imagen en un brillo holográfico o metálico, para terminar el ambiente de toda la pieza. Usa un filtro de dibujo cuando quieras trabajar directamente sobre una capa; usa un filtro de efecto cuando quieras dirigir un fotograma o una escena completa. Elige el que se ajuste a lo que estás haciendo.",
 
       "narrative.save.1.heading":
         "Mantén tu trabajo ligero. Sigue creando cómodamente.",

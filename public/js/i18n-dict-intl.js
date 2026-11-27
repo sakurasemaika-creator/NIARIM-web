@@ -210,7 +210,7 @@
       "淡出、笔画衰减、混色、笔压曲线等，可细致调整画笔的绘画手感。",
     "featuresPage.drawing.item15.title": "素材标签搜索",
     "featuresPage.drawing.item15.body":
-      "笔刷、网点和图章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
+      "画笔、网点和图章都带有“线稿”“上色”“模糊”“仿手绘”“像素画”“网点”等标签，即使记不住名称也能按标签筛选查找。关键词搜索与标签搜索可一键切换，自制素材还能自行添加标签。",
 
     "featuresPage.animation.title": "动画",
     "featuresPage.animation.lead": "叠加帧画面，在时间轴上构建动作。",
@@ -285,7 +285,7 @@
       "支持 MP4、WebM、GIF、AVI。透明 WebM 可作为背景透明的动画素材使用。",
     "featuresPage.export.item5.title": "制作、导出时长上限",
     "featuresPage.export.item5.body":
-      "免费版每部作品最长90秒。高级会员或时长延长权益可将制作与导出的上限提高至2小时。没有这些权益时，仍可导出较长作品的开头90秒。作品数量不限。",
+      "免费版每部作品最长90秒。Premium 会员或时长延长权益可将制作与导出的上限提高至2小时。没有这些权益时，仍可导出较长作品的开头90秒。作品数量不限。",
     "featuresPage.export.item6.title": "静态图片导出",
     "featuresPage.export.item6.body":
       "可从时间轴将当前显示的一帧保存为PNG或JPEG图片。",
@@ -586,7 +586,7 @@
       "支援 MP4、WebM、GIF、AVI。透明 WebM 可作為背景透明的動畫素材使用。",
     "featuresPage.export.item5.title": "製作、匯出時長上限",
     "featuresPage.export.item5.body":
-      "免費版每部作品最長90秒。高級會員或延長片長權益可將製作與匯出的上限提高至2小時。沒有這些權益時，仍可匯出較長作品的開頭90秒。作品數量不限。",
+      "免費版每部作品最長90秒。Premium 或延長片長權益可將製作與匯出的上限提高至2小時。沒有這些權益時，仍可匯出較長作品的開頭90秒。作品數量不限。",
     "featuresPage.export.item6.title": "靜態圖片匯出",
     "featuresPage.export.item6.body":
       "可從時間軸將目前顯示的一個影格儲存為PNG或JPEG圖片。",
@@ -819,7 +819,7 @@
       "사각형이나 올가미로 범위를 선택해 이동·변형·삭제 등의 편집을 할 수 있습니다.",
     "featuresPage.drawing.item12.title": "손가락 도구",
     "featuresPage.drawing.item12.body":
-      "손가락으로 문지르듯 그림을 왜곡하거나 가우시안 블러와 모자이크 효과를 직접 그릴 수 있습니다. 길게 누르거나 위로 스와이프해 하위 도구를 전환합니다.",
+      "손가락으로 문지르듯 그림을 왜곡하거나 가우시안 흐림과 모자이크 효과를 직접 그릴 수 있습니다. 길게 누르거나 위로 스와이프해 하위 도구를 전환합니다.",
     "featuresPage.drawing.item13.title": "도형 도구",
     "featuresPage.drawing.item13.body":
       "직선·원·사각형 등 깔끔한 도형을 한 번에 그릴 수 있습니다.",
@@ -1394,7 +1394,7 @@
     "footer.support": "Ayuda",
     "footer.legal": "Legal",
     "footer.privacy": "Política de privacidad",
-    "footer.terms": "Términos de servicio",
+    "footer.terms": "Términos de Servicio",
     "footer.x": "X (antes Twitter)",
     "footer.rights": "Todos los derechos reservados.",
 
@@ -1625,7 +1625,7 @@
     "legal.notice.terms":
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
 
-    "meta.terms.title": "Términos de servicio | NIARIM",
+    "meta.terms.title": "Términos de Servicio | NIARIM",
     "meta.terms.description":
       "Los términos de servicio del sitio oficial y la app de NIARIM.",
 

@@ -51,7 +51,7 @@
         "A share file format that bundles the materials and fonts you used, so it opens exactly as-is on another device.",
       "featuresPage.save.item5.title": "Carry your setup over (.niatra)",
       "featuresPage.save.item5.body":
-        "Bundle just the items you choose — settings, brushes, tones, stamps, auto-fill presets, themes, palettes (color picker and pixel-art) — and move them to another device. You can also choose to include in-progress projects.",
+        "Bundle just the items you choose — settings, brushes, tones, stamps, autofill presets, themes, palettes (color picker and pixel-art) — and move them to another device. You can also choose to include in-progress projects.",
     },
     "zh-Hans": {
       "featuresPage.nav.save": "保存、共享",
@@ -93,7 +93,7 @@
         "一種會將使用的素材、字型一併匯出的共享檔案格式，在其他裝置上也能原樣開啟。",
       "featuresPage.save.item5.title": "轉移環境（.niatra）",
       "featuresPage.save.item5.body":
-        "可將設定、筆刷、網點紙、圖章、自動上色預設、主題、調色盤（取色器、像素畫專用）等，僅選擇所需項目打包轉移到其他裝置，還可以選擇性地一併包含製作中的專案。",
+        "可將設定、筆刷、網點紙、圖章、自動上色設定、主題、調色盤（取色器、像素畫專用）等，僅選擇所需項目打包轉移到其他裝置，還可以選擇性地一併包含製作中的專案。",
     },
     ko: {
       "featuresPage.nav.save": "저장·공유",

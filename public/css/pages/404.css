@@ -372,7 +372,7 @@ body[data-i18n-title="meta.home.title"] #faq {
 @font-face {
   font-family: "HakkouMinchoCJK";
   font-display: swap;
-  src: url("/assets/fonts/HakkouMincho-subset.v3.woff2") format("woff2");
+  src: url("/assets/fonts/HakkouMincho-subset.v4.woff2") format("woff2");
   unicode-range:
     U+03B1, U+25B6, U+3001-3002, U+3005, U+3007, U+300A-300D, U+3010-3011,
     U+301C, U+3042, U+3044, U+3046, U+3048, U+304A-3061, U+3063-306B,
@@ -528,8 +528,8 @@ body[data-i18n-title="meta.home.title"] #faq {
     U+9905, U+990A, U+9918, U+9996, U+99AC, U+99B4, U+9A37, U+9A57, U+9A6C,
     U+9AD4, U+9AD8, U+9AEA, U+9B06, U+9B54, U+9B5A, U+9BAE, U+9C7C, U+9CF4,
     U+9E97, U+9EA5, U+9EBB-9EBC, U+9EC3-9EC4, U+9ED1-9ED2, U+9ED8, U+9EDE,
-    U+9F20, U+9F52, U+9F61, U+9F7F, U+9F99, U+FF01, U+FF08-FF09, U+FF0B-FF0C,
-    U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
+    U+9F20, U+9F52, U+9F61-9F62, U+9F7F, U+9F99, U+FF01, U+FF08-FF09,
+    U+FF0B-FF0C, U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
 }
 /* 白光明朝・くらむぼんの日本語が届くまでの代わり（端末の日本語の書体）。
    届く前の字を端末の書体で描くと、白光明朝のかな・漢字（字幅0.65em）は
@@ -708,8 +708,8 @@ body[data-i18n-title="meta.home.title"] #faq {
     U+9905, U+990A, U+9918, U+9996, U+99AC, U+99B4, U+9A37, U+9A57, U+9A6C,
     U+9AD4, U+9AD8, U+9AEA, U+9B06, U+9B54, U+9B5A, U+9BAE, U+9C7C, U+9CF4,
     U+9E97, U+9EA5, U+9EBB-9EBC, U+9EC3-9EC4, U+9ED1-9ED2, U+9ED8, U+9EDE,
-    U+9F20, U+9F52, U+9F61, U+9F7F, U+9F99, U+FF01, U+FF08-FF09, U+FF0B-FF0C,
-    U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
+    U+9F20, U+9F52, U+9F61-9F62, U+9F7F, U+9F99, U+FF01, U+FF08-FF09,
+    U+FF0B-FF0C, U+FF0F, U+FF1A-FF1B, U+FF1D, U+FF1F, U+FF5C;
 }
 
 @font-face {

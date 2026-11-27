@@ -63,7 +63,7 @@ FONTS = [
     (
         "HakkouMincho",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
-        "HakkouMincho-subset.v3.woff2",
+        "HakkouMincho-subset.v4.woff2",
         "本文用（白光明朝／lavsic氏・Noto Serif JP派生）",
         "primary",
     ),
