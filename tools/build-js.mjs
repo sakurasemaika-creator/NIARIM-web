@@ -51,7 +51,11 @@ export function compactJs(source, names = new Set(sourceScripts())) {
 function writeIfChanged(file, content) {
   if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content) return;
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, content, "utf8");
+  // Write to a temporary file and rename it, so a reader running at the
+  // same time (another build or a test) never sees a half-written file.
+  const temporary = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(temporary, content, "utf8");
+  fs.renameSync(temporary, file);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

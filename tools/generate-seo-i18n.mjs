@@ -34,7 +34,11 @@ const loaded = new Set();
 function writeIfChanged(file, content) {
   if (fs.existsSync(file) && fs.readFileSync(file, "utf8") === content)
     return false;
-  fs.writeFileSync(file, content, "utf8");
+  // Write to a temporary file and rename it, so a reader running at the
+  // same time (another build or a test) never sees a half-written file.
+  const temporary = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(temporary, content, "utf8");
+  fs.renameSync(temporary, file);
   return true;
 }
 
