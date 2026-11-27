@@ -16,7 +16,7 @@
       "meta.tokushoho.title": "特定商取引法に基づく表記 | NIARIM",
       "meta.tokushoho.description":
         "NIARIM Premium（アプリ内の定期購入）の販売事業者、販売価格、支払方法、解約・返品などの表記です。",
-      "tokushoho.updated": "最終更新日：2026年11月25日",
+      "tokushoho.updated": "最終更新日：2026年11月27日",
       "tokushoho.notice":
         "日本の特定商取引法に基づき、NIARIMのアプリ内で販売する定期購入（NIARIM Premium）について表示しています。",
       "tokushoho.seller.label": "販売事業者",
@@ -47,7 +47,7 @@
       "tokushoho.delivery.value":
         "購入の手続きが完了した後、すぐにご利用いただけます。",
       "tokushoho.trial.label": "無料体験",
-      "tokushoho.trial.value": "ありません。",
+      "tokushoho.trial.value": "アプリのダウンロードと基本機能のご利用は無料です。NIARIM Premium（有料の定期購入）に無料体験期間はありません。",
       "tokushoho.returns.label": "返品・キャンセル",
       "tokushoho.returns.value":
         "デジタルコンテンツの性質上、購入後の返品はお受けできません。定期購入は、Google Playの「定期購入」からいつでも解約でき、解約した後も契約期間の終わりまでご利用いただけます。返金は、Google Playの返金ポリシーに従います。",
@@ -60,7 +60,7 @@
         "Notice under the Specified Commercial Transactions Act | NIARIM",
       "meta.tokushoho.description":
         "Seller, prices, payment, cancellation and returns for NIARIM Premium, the subscription sold in the NIARIM app.",
-      "tokushoho.updated": "Last updated: November 25, 2026",
+      "tokushoho.updated": "Last updated: November 27, 2026",
       "tokushoho.notice":
         "Under Japan’s Specified Commercial Transactions Act, this page describes NIARIM Premium, the subscription sold in the NIARIM app.",
       "tokushoho.seller.label": "Seller",
@@ -90,7 +90,7 @@
       "tokushoho.delivery.value":
         "Available as soon as the purchase is complete.",
       "tokushoho.trial.label": "Free trial",
-      "tokushoho.trial.value": "None.",
+      "tokushoho.trial.value": "The app is free to download, and its basic features are free to use. NIARIM Premium (a paid subscription) has no free trial period.",
       "tokushoho.returns.label": "Returns and cancellation",
       "tokushoho.returns.value":
         "Because of the nature of digital content, purchases cannot be returned. You can cancel the subscription at any time from “Subscriptions” in Google Play, and you can keep using it until the end of the current period after you cancel. Refunds follow Google Play’s refund policy.",
@@ -102,7 +102,7 @@
       "meta.tokushoho.title": "特定商业交易法相关标示 | NIARIM",
       "meta.tokushoho.description":
         "NIARIM Premium（应用内订阅）的销售者、价格、付款方式、取消与退货等信息。",
-      "tokushoho.updated": "最后更新日期：2026年11月25日",
+      "tokushoho.updated": "最后更新日期：2026年11月27日",
       "tokushoho.notice":
         "本页面依据日本的特定商业交易法，标示 NIARIM 应用内销售的订阅（NIARIM Premium）的相关信息。",
       "tokushoho.seller.label": "销售者",
@@ -129,7 +129,7 @@
       "tokushoho.delivery.label": "提供时间",
       "tokushoho.delivery.value": "购买手续完成后即可使用。",
       "tokushoho.trial.label": "免费试用",
-      "tokushoho.trial.value": "无。",
+      "tokushoho.trial.value": "应用的下载和基本功能的使用均免费。NIARIM Premium（付费订阅）没有免费试用期。",
       "tokushoho.returns.label": "退回与取消",
       "tokushoho.returns.value":
         "由于数字内容的性质，购买后无法退回。订阅可随时在 Google Play 的“订阅”中取消，取消后仍可使用至合同期间结束。退款依照 Google Play 的退款政策办理。",
@@ -141,7 +141,7 @@
       "meta.tokushoho.title": "特定商業交易法相關標示 | NIARIM",
       "meta.tokushoho.description":
         "NIARIM Premium（應用程式內訂閱）的銷售者、價格、付款方式、取消與退貨等資訊。",
-      "tokushoho.updated": "最後更新日期：2026年11月25日",
+      "tokushoho.updated": "最後更新日期：2026年11月27日",
       "tokushoho.notice":
         "本頁面依據日本的特定商業交易法，標示 NIARIM 應用程式內銷售的訂閱（NIARIM Premium）的相關資訊。",
       "tokushoho.seller.label": "銷售者",
@@ -168,7 +168,7 @@
       "tokushoho.delivery.label": "提供時間",
       "tokushoho.delivery.value": "購買手續完成後即可使用。",
       "tokushoho.trial.label": "免費試用",
-      "tokushoho.trial.value": "無。",
+      "tokushoho.trial.value": "應用程式的下載與基本功能的使用皆免費。NIARIM Premium（付費訂閱）沒有免費試用期。",
       "tokushoho.returns.label": "退回與取消",
       "tokushoho.returns.value":
         "由於數位內容的性質，購買後無法退回。訂閱可隨時於 Google Play 的「訂閱」中取消，取消後仍可使用至合約期間結束。退款依照 Google Play 的退款政策辦理。",
@@ -180,7 +180,7 @@
       "meta.tokushoho.title": "특정상거래법에 따른 표기 | NIARIM",
       "meta.tokushoho.description":
         "NIARIM Premium(앱 내 정기 결제)의 판매 사업자, 가격, 결제 방법, 해지·반품 등에 관한 표기입니다.",
-      "tokushoho.updated": "최종 업데이트: 2026년 11월 25일",
+      "tokushoho.updated": "최종 업데이트: 2026년 11월 27일",
       "tokushoho.notice":
         "일본의 특정상거래법에 따라 NIARIM 앱에서 판매하는 정기 결제(NIARIM Premium)에 관한 정보를 표기합니다.",
       "tokushoho.seller.label": "판매 사업자",
@@ -209,7 +209,7 @@
       "tokushoho.delivery.value":
         "구매 절차가 완료된 후 바로 이용하실 수 있습니다.",
       "tokushoho.trial.label": "무료 체험",
-      "tokushoho.trial.value": "없습니다.",
+      "tokushoho.trial.value": "앱 다운로드와 기본 기능 이용은 무료입니다. NIARIM Premium(유료 정기 결제)에는 무료 체험 기간이 없습니다.",
       "tokushoho.returns.label": "반품·취소",
       "tokushoho.returns.value":
         "디지털 콘텐츠의 특성상 구매 후 반품은 받지 않습니다. 정기 결제는 Google Play의「정기 결제」에서 언제든지 해지할 수 있으며, 해지한 후에도 계약 기간이 끝날 때까지 이용하실 수 있습니다. 환불은 Google Play의 환불 정책을 따릅니다.",
@@ -222,7 +222,7 @@
         "Mentions selon la loi sur les transactions commerciales spécifiées | NIARIM",
       "meta.tokushoho.description":
         "Vendeur, prix, paiement, résiliation et retours de NIARIM Premium, l’abonnement vendu dans l’application NIARIM.",
-      "tokushoho.updated": "Dernière mise à jour : 25 novembre 2026",
+      "tokushoho.updated": "Dernière mise à jour : 27 novembre 2026",
       "tokushoho.notice":
         "Conformément à la loi japonaise sur les transactions commerciales spécifiées, cette page présente NIARIM Premium, l’abonnement vendu dans l’application NIARIM.",
       "tokushoho.seller.label": "Vendeur",
@@ -254,7 +254,7 @@
       "tokushoho.delivery.value":
         "Disponible dès que l’achat est finalisé.",
       "tokushoho.trial.label": "Essai gratuit",
-      "tokushoho.trial.value": "Aucun.",
+      "tokushoho.trial.value": "Le téléchargement de l’application et l’utilisation de ses fonctions de base sont gratuits. NIARIM Premium (abonnement payant) n’a pas de période d’essai gratuit.",
       "tokushoho.returns.label": "Retours et annulation",
       "tokushoho.returns.value":
         "En raison de la nature des contenus numériques, les achats ne peuvent pas être retournés. Vous pouvez résilier l’abonnement à tout moment depuis « Abonnements » dans Google Play, et continuer à l’utiliser jusqu’à la fin de la période en cours après la résiliation. Les remboursements suivent la politique de remboursement de Google Play.",
@@ -267,7 +267,7 @@
         "Aviso según la Ley de Transacciones Comerciales Específicas | NIARIM",
       "meta.tokushoho.description":
         "Vendedor, precios, pago, cancelación y devoluciones de NIARIM Premium, la suscripción que se vende en la app NIARIM.",
-      "tokushoho.updated": "Última actualización: 25 de noviembre de 2026",
+      "tokushoho.updated": "Última actualización: 27 de noviembre de 2026",
       "tokushoho.notice":
         "Conforme a la Ley de Transacciones Comerciales Específicas de Japón, esta página describe NIARIM Premium, la suscripción que se vende en la app NIARIM.",
       "tokushoho.seller.label": "Vendedor",
@@ -297,7 +297,7 @@
       "tokushoho.delivery.value":
         "Disponible en cuanto se completa la compra.",
       "tokushoho.trial.label": "Prueba gratuita",
-      "tokushoho.trial.value": "No se ofrece.",
+      "tokushoho.trial.value": "La descarga de la app y el uso de sus funciones básicas son gratuitos. NIARIM Premium (suscripción de pago) no tiene periodo de prueba gratuita.",
       "tokushoho.returns.label": "Devoluciones y cancelación",
       "tokushoho.returns.value":
         "Por la naturaleza del contenido digital, no se aceptan devoluciones después de la compra. Puedes cancelar la suscripción en cualquier momento desde «Suscripciones» en Google Play y seguir usándola hasta el final del período en curso después de cancelarla. Los reembolsos se rigen por la política de reembolsos de Google Play.",
