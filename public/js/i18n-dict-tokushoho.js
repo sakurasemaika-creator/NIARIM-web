@@ -212,7 +212,7 @@
       "tokushoho.trial.value": "앱 다운로드와 기본 기능 이용은 무료입니다. NIARIM Premium(유료 정기 결제)에는 무료 체험 기간이 없습니다.",
       "tokushoho.returns.label": "반품·취소",
       "tokushoho.returns.value":
-        "디지털 콘텐츠의 특성상 구매 후 반품은 받지 않습니다. 정기 결제는 Google Play의「정기 결제」에서 언제든지 해지할 수 있으며, 해지한 후에도 계약 기간이 끝날 때까지 이용하실 수 있습니다. 환불은 Google Play의 환불 정책을 따릅니다.",
+        "디지털 콘텐츠의 특성상 구매 후 반품은 받지 않습니다. 정기 결제는 Google Play의“정기 결제”에서 언제든지 해지할 수 있으며, 해지한 후에도 계약 기간이 끝날 때까지 이용하실 수 있습니다. 환불은 Google Play의 환불 정책을 따릅니다.",
       "tokushoho.environment.label": "동작 환경",
       "tokushoho.environment.value":
         "Android 7.0 이상, Google Play를 지원하는 기기",

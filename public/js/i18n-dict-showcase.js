@@ -652,7 +652,7 @@
     "top.unique.filters.lens": "안경 렌즈 왜곡",
     "top.unique.filters.colortrace": "선화 색 트레이스",
     "top.unique.filters.title": "그리기 필터",
-    "top.unique.share.title": "공유（.niashare）",
+    "top.unique.share.title": "공유(.niashare)",
     "top.unique.fill.s1": "자동 채색 설정",
     "top.unique.filters.original": "원본",
     "top.unique.filters.body": "같은 그림에 그리기 필터를 적용한 결과입니다. 안경 렌즈 안쪽만 왜곡하거나, 픽셀 아트로 만들거나, 옛날 애니메이션이나 비디오처럼 마무리할 수 있습니다. 선화 색 트레이스는 선 색을 아래 채색에 맞추는 자동 작업입니다.",

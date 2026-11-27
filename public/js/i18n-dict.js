@@ -333,7 +333,7 @@
       "meta.privacy.title": "プライバシーポリシー | NIARIM",
       "meta.privacy.description":
         "NIARIM公式サイトおよびアプリのプライバシーポリシーです。",
-      "legal.updated": "最終更新日：2026年11月25日",
+      "legal.updated": "最終更新日：2026年11月27日",
       "legal.notice.privacy":
         "この文書は日本語を正本としています。表示言語を変更した場合も、本文は日本語で表示されます。",
       "legal.notice.terms":
@@ -667,7 +667,7 @@
       "meta.privacy.title": "Privacy Policy | NIARIM",
       "meta.privacy.description":
         "The privacy policy for the NIARIM official site and app.",
-      "legal.updated": "Last updated: November 25, 2026",
+      "legal.updated": "Last updated: November 27, 2026",
       "legal.notice.privacy":
         "The Japanese version of this document is authoritative. The body text below is shown in Japanese regardless of the selected display language.",
       "legal.notice.terms":

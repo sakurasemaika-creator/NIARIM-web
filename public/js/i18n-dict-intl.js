@@ -299,7 +299,7 @@
 
     "meta.privacy.title": "隐私政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方网站及应用程序的隐私政策。",
-    "legal.updated": "最后更新日期：2026年11月25日",
+    "legal.updated": "最后更新日期：2026年11月27日",
     "legal.notice.privacy":
       "本文档以日文版本为准。即使切换显示语言，正文内容仍以日文显示。",
     "legal.notice.terms":
@@ -600,7 +600,7 @@
 
     "meta.privacy.title": "隱私權政策 | NIARIM",
     "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私權政策。",
-    "legal.updated": "最後更新日期：2026年11月25日",
+    "legal.updated": "最後更新日期：2026年11月27日",
     "legal.notice.privacy":
       "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",
     "legal.notice.terms":
@@ -642,7 +642,7 @@
     "hero.lead":
       "NIARIM은 스마트폰만으로 본격적인 손그림 애니메이션을 만들 수 있는 제작 앱입니다. 한 장씩 그림을 그려 움직이는 손그림 애니메이션은 물론, 키프레임을 활용한 모션 애니메이션, 이미지를 조합한 스톱모션까지. 그리기부터 애니메이션, 편집, 사운드, 내보내기까지 앱 하나로 작품을 완성할 수 있습니다.",
     "hero.bridge.html":
-      '그리고 완성한 작품은 <a href="/community/">「작품광장」</a>으로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.',
+      '그리고 완성한 작품은 <a href="/community/">“작품광장”</a>으로. 누군가의 작품을 보고, 다음 작품을 만든다. 사람에서 작품으로. 작품에서 사람으로.',
     "hero.cta.primary": "앱 다운로드",
     "hero.cta.secondary": "기능 살펴보기",
     "hero.note": "지원 기기 및 제공 현황은 Google Play 페이지를 확인해 주세요.",
@@ -664,7 +664,7 @@
     "features.eyebrow": "Core Features",
     "features.title": "주요 기능",
     "features.lead":
-      "「있으면 편리할 것 같은」 기능을, 타협 없이 전부 담았습니다.",
+      "“있으면 편리할 것 같은” 기능을, 타협 없이 전부 담았습니다.",
     "features.drawing.title": "원하는 대로 그릴 수 있는 드로잉 도구",
     "features.drawing.body":
       "G펜·펜·에어브러시·사용자 펜 등 목적에 맞게 브러시를 사용할 수 있습니다. 색상 선택, 투명색, 불투명도 조절, 확대·이동으로 세부까지 그릴 수 있습니다.",
@@ -810,7 +810,7 @@
       "그린 선을 부분적으로 지울 수 있는 표준 지우개입니다.",
     "featuresPage.drawing.item9.title": "페인트통·올가미 채우기",
     "featuresPage.drawing.item9.body":
-      "둘러싸인 영역을 채우는 「페인트통」과, 올가미로 둘러싼 영역을 채우는 「올가미 채우기」를 지원합니다.",
+      "둘러싸인 영역을 채우는 “페인트통”과, 올가미로 둘러싼 영역을 채우는 “올가미 채우기”를 지원합니다.",
     "featuresPage.drawing.item10.title": "스포이트",
     "featuresPage.drawing.item10.body":
       "캔버스 위의 색을 추출해 곧바로 그리기 색으로 설정할 수 있습니다.",
@@ -828,7 +828,7 @@
       "페이드·스트로크 감쇠·혼색·필압 곡선 등 브러시의 그리는 느낌을 세밀하게 조정할 수 있습니다.",
     "featuresPage.drawing.item15.title": "소재 태그 검색",
     "featuresPage.drawing.item15.body":
-      "브러시·톤·스탬프에는 「선화」「채색」「흐림」「아날로그풍」「픽셀 아트」「망점」 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
+      "브러시·톤·스탬프에는 “선화”“채색”“흐림”“아날로그풍”“픽셀 아트”“망점” 같은 태그가 붙어 있어, 이름이 기억나지 않아도 태그로 좁혀 찾을 수 있습니다. 키워드 검색과 태그 검색은 한 번의 탭으로 전환되며, 직접 만든 소재에는 스스로 태그를 붙일 수 있습니다.",
 
     "featuresPage.animation.title": "애니메이션",
     "featuresPage.animation.lead":
@@ -934,7 +934,7 @@
     "meta.privacy.title": "개인정보처리방침 | NIARIM",
     "meta.privacy.description":
       "NIARIM 공식 사이트 및 앱의 개인정보처리방침입니다.",
-    "legal.updated": "최종 업데이트: 2026년 11월 25일",
+    "legal.updated": "최종 업데이트: 2026년 11월 27일",
     "legal.notice.privacy":
       "이 문서는 일본어를 원문으로 합니다. 표시 언어를 변경해도 본문은 일본어로 표시됩니다.",
     "legal.notice.terms":
@@ -1279,7 +1279,7 @@
     "meta.privacy.title": "Politique de confidentialité | NIARIM",
     "meta.privacy.description":
       "La politique de confidentialité du site officiel et de l’application NIARIM.",
-    "legal.updated": "Dernière mise à jour : 25 novembre 2026",
+    "legal.updated": "Dernière mise à jour : 27 novembre 2026",
     "legal.notice.privacy":
       "La version japonaise de ce document fait foi. Le corps du texte ci-dessous est affiché en japonais, quelle que soit la langue d’affichage sélectionnée.",
     "legal.notice.terms":
@@ -1619,7 +1619,7 @@
     "meta.privacy.title": "Política de privacidad | NIARIM",
     "meta.privacy.description":
       "La política de privacidad del sitio oficial y la app de NIARIM.",
-    "legal.updated": "Última actualización: 25 de noviembre de 2026",
+    "legal.updated": "Última actualización: 27 de noviembre de 2026",
     "legal.notice.privacy":
       "La versión en japonés de este documento es la oficial. El cuerpo del texto se muestra en japonés independientemente del idioma de visualización seleccionado.",
     "legal.notice.terms":

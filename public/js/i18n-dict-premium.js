@@ -296,19 +296,19 @@
       "premiumPage.free.title": "무료 버전",
       "premiumPage.free.price": "0엔",
       "premiumPage.free.item1":
-        "모든 기본 제작 기능（그리기·애니메이션·편집·오디오）",
-      "premiumPage.free.item2": "영상 내보내기（최대 1920×1920）",
+        "모든 기본 제작 기능(그리기·애니메이션·편집·오디오)",
+      "premiumPage.free.item2": "영상 내보내기(최대 1920×1920)",
       "premiumPage.free.item3": "광고가 표시됩니다",
       "premiumPage.free.item4":
-        "내보내기 시 NIARIM 공식 엔드마크가 자동으로 추가됩니다（편집·삭제 불가）",
+        "내보내기 시 NIARIM 공식 엔드마크가 자동으로 추가됩니다(편집·삭제 불가)",
       "premiumPage.free.item5": "무료로 최대 90초까지 만들고 내보낼 수 있습니다. 긴 작품은 처음 90초를 내보낼 수 있습니다.",
       "premiumPage.premium.title": "프리미엄",
       "premiumPage.premium.monthly.label": "월간 플랜",
       "premiumPage.premium.monthly.price": "550엔",
-      "premiumPage.premium.monthly.unit": "／월（세금 포함）",
+      "premiumPage.premium.monthly.unit": "/월(세금 포함)",
       "premiumPage.premium.yearly.label": "연간 플랜",
       "premiumPage.premium.yearly.price": "5,500엔",
-      "premiumPage.premium.yearly.unit": "／년（세금 포함）",
+      "premiumPage.premium.yearly.unit": "/년(세금 포함)",
       "premiumPage.premium.yearly.badge.pre": "실질",
       "premiumPage.premium.yearly.badge.main": "2개월분 무료",
       "premiumPage.premium.yearly.basis": "월간 플랜 12개월 합계",
@@ -336,17 +336,17 @@
       "premiumPage.premium.automation.body":
         "캔버스나 타임라인의 작업 순서를 기록하고 작업 중에 반복 실행할 수 있습니다.",
       "premiumPage.start.title": "프리미엄 시작하기",
-      "premiumPage.start.step1": "앱의 메뉴에서 「계약 상태」를 열고 「프리미엄 회원 자세히 보기」를 선택합니다. 프리미엄 기능을 선택했을 때 표시되는 같은 이름의 버튼에서도 열 수 있습니다.",
-      "premiumPage.start.step2": "「월간 플랜」 또는 「연간 플랜」을 선택합니다. 구매하려면 Google 계정으로 로그인해야 합니다.",
-      "premiumPage.start.step3": "Google Play 화면에서 구매를 확정합니다. 구매가 반영되지 않을 때는 「구매 복원」에서 다시 확인할 수 있습니다.",
-      "premiumPage.start.renew": "월간·연간 플랜은 해지할 때까지 자동으로 갱신됩니다. 해지는 Google Play의「결제 및 정기 결제」에서 언제든지 할 수 있습니다.",
+      "premiumPage.start.step1": "앱의 메뉴에서 “계약 상태”를 열고 “프리미엄 회원 자세히 보기”를 선택합니다. 프리미엄 기능을 선택했을 때 표시되는 같은 이름의 버튼에서도 열 수 있습니다.",
+      "premiumPage.start.step2": "“월간 플랜” 또는 “연간 플랜”을 선택합니다. 구매하려면 Google 계정으로 로그인해야 합니다.",
+      "premiumPage.start.step3": "Google Play 화면에서 구매를 확정합니다. 구매가 반영되지 않을 때는 “구매 복원”에서 다시 확인할 수 있습니다.",
+      "premiumPage.start.renew": "월간·연간 플랜은 해지할 때까지 자동으로 갱신됩니다. 해지는 Google Play의“결제 및 정기 결제”에서 언제든지 할 수 있습니다.",
       "premiumPage.faq.title": "프리미엄 플랜에 대한 안내",
       "premiumPage.faq.item1":
         "무료 버전에서 이용 중인 기본 제작 기능이 프리미엄 가입으로 인해 제한되는 일은 없습니다.",
       "premiumPage.faq.item2":
         "구매 후 취소·환불에 대해서는 Google Play의 규정이 적용됩니다.",
       "premiumPage.faq.item3":
-        "제작한 작품（일러스트·애니메이션 등）의 저작권은 무료 버전·프리미엄 버전 어느 쪽을 이용하더라도 권리를 가진 사용자에게 귀속됩니다.",
+        "제작한 작품(일러스트·애니메이션 등)의 저작권은 무료 버전·프리미엄 버전 어느 쪽을 이용하더라도 권리를 가진 사용자에게 귀속됩니다.",
       "premiumPage.cta.title": "NIARIM을 시작해 보세요",
       "premiumPage.cta.body":
         "먼저 무료 버전부터, 당신의 손으로 애니메이션을 그려보지 않으시겠어요?",
