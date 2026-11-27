@@ -275,7 +275,7 @@
         "Rapprocher l’animation de tout le monde. Estomper la frontière entre créateurs et spectateurs. Chacun, à tout moment, peut être à la fois créateur et spectateur.",
       "about.modes.title": "Mode Canevas et Mode Timeline",
       "about.modes.body":
-        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Timeline » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, et peaufinez en musique — tout le flux de création tient dans une seule application.",
+        "NIARIM se divise en un « Mode Canevas » pour dessiner et un « Mode Timeline » pour donner du mouvement. Plus besoin de jongler entre une appli de dessin et un logiciel de montage vidéo. Dessinez, animez aussitôt, ajoutez le son et peaufinez — tout le flux de création tient dans une seule application.",
       "about.philosophy.eyebrow": "Philosophy",
       "about.philosophy.title": "Ce à quoi NIARIM tient",
       "about.philosophy.item1.title": "Tout le monde peut faire de l’animation facilement.",

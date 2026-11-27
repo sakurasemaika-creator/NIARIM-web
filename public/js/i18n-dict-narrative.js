@@ -747,7 +747,7 @@
       "narrative.premium.1.heading": "프리미엄으로 더 자유롭게.",
       "narrative.premium.1.body":
         "프리미엄에서는 제작뿐 아니라 작품 공개도 한층 쾌적해집니다.",
-      "narrative.premium.2.body": "NIARIM 엔드마크는 MP4, WebM, AVI 끝에 붙는 5초 로고입니다. 혜택이 유효하면 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 설정이 저장되며 GIF에는 붙지 않습니다.",
+      "narrative.premium.2.body": "NIARIM 엔드마크는 MP4, WebM, AVI 본편 끝에 붙는 5초 로고입니다. 엔드마크 혜택이 유효한 동안에는 작품별로 표시 여부를 바꿀 수 있습니다. 만료 후에도 작품의 설정은 저장되며, GIF에는 붙지 않습니다.",
 
       "narrative.community.1.heading": "NIARIM 작품 광장",
       "narrative.community.1.body":
@@ -831,7 +831,7 @@
         "Un calque qui affiche le même contenu sur plusieurs images ou scènes. Vous n’avez pas besoin de redessiner des éléments fixes comme les arrière-plans à chaque image. Vous pouvez même transformer un personnage en calque commun tout en gardant juste la bouche sur un calque normal — le personnage reste en place pendant que seule la bouche est redessinée image par image, ce qui donne une synchro labiale.",
       "narrative.editing.5.heading": "Remplissage automatique",
       "narrative.editing.5.body":
-        "Colorie automatiquement chaque partie en utilisant les couleurs et tons que vous avez définis à l’avance, à partir du trait. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et la trace de couleur, qui fond le trait dans les couleurs. Remarque : le remplissage automatique n’est pas une fonctionnalité d’IA générative. Il colorie selon des règles que vous définissez.",
+        "Colorie automatiquement chaque partie à partir du trait, en utilisant les couleurs et les trames que vous avez définies à l’avance. Pour une animation dessinée à la main où le même personnage est redessiné encore et encore, cela réduit considérablement la charge de coloriage. Prend aussi en charge les dégradés, les contours, et la trace de couleur, qui fond le trait dans les couleurs. Remarque : le remplissage automatique n’est pas une fonctionnalité d’IA générative. Il colorie selon des règles que vous définissez.",
 
       "narrative.advanced.1.heading":
         "Rendez votre travail quotidien plus fluide.",
@@ -868,7 +868,7 @@
         "Dans la production d’animation, les données grossissent à mesure que le nombre d’images et de calques augmente. NIARIM fournit toute une série de mécanismes pour vous aider à créer sur la durée.",
       "narrative.save.2.heading": "Réglages de qualité",
       "narrative.save.2.body":
-        "Choisissez entre qualité basse, moyenne ou haute, ou utilisez un réglage personnalisé. Ajustez finement des éléments comme la méthode de sauvegarde, le nombre d’annulations, le papier calque et la détection d’inclinaison pour correspondre au stockage et aux caractéristiques de votre appareil. Que vous souhaitiez privilégier l’espace de stockage, alléger les performances, ou conserver plus d’historique d’annulation, vous pouvez ajuster votre propre environnement en conséquence.",
+        "Choisissez entre qualité basse, moyenne ou haute, ou utilisez un réglage personnalisé. Ajustez finement des éléments comme la méthode de sauvegarde, le nombre d’annulations, le papier calque et la détection d’inclinaison pour correspondre au stockage et aux caractéristiques de votre appareil. Que vous souhaitiez privilégier l’espace de stockage, rendre l’application plus légère, ou conserver plus d’historique d’annulation, vous pouvez ajuster votre propre environnement en conséquence.",
       "narrative.save.3.heading": "Sauvegarde automatique",
       "narrative.save.3.body":
         "En ouvrant l’éditeur, vous reprenez là où vous en étiez. Si le fichier du projet est endommagé, NIARIM le récupère depuis une sauvegarde automatique.",

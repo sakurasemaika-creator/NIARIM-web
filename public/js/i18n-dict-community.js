@@ -322,7 +322,7 @@
         "Toucher une carte d’œuvre ne bascule pas immédiatement vers un autre écran. Une petite fenêtre d’aperçu apparaît dans un coin, laissant la vidéo continuer à jouer pendant que vous parcourez d’autres écrans. Déplacez-la ou redimensionnez-la librement. Touchez « Détails » pour voir l’écran complet avec la date de publication, l’auteur, les tags et le nombre de favoris.",
       "communityPage.advanced.shorts.title": "Mode portrait",
       "communityPage.advanced.shorts.body":
-        "Filtrez la liste des œuvres par Tout, Portrait uniquement ou Paysage uniquement. Les œuvres en portrait peuvent basculer d’un geste vers un lecteur plein écran à défilement vertical.",
+        "Filtrez la liste des œuvres par « Tous », « Vertical uniquement » ou « Horizontal uniquement ». Les œuvres verticales peuvent basculer d’un seul bouton vers un lecteur plein écran à défilement vertical.",
       "communityPage.cta.title": "Votre œuvre pourrait aussi être ici.",
       "communityPage.cta.body":
         "Pourquoi ne pas créer une animation avec NIARIM et la publier dans la Place des œuvres pour que tout le monde la voie ?",

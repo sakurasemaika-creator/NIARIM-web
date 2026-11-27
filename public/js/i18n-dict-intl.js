@@ -1179,7 +1179,7 @@
       "Ajoutez les images une à une pour construire le dessin.",
     "featuresPage.animation.item2.title": "Timeline",
     "featuresPage.animation.item2.body":
-      "Gérez sur une seule timeline bien plus que des images : photos, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l’organiser.",
+      "Gérez sur une seule timeline bien plus que les images de l’animation : images importées, vidéos, audio, calques communs et images clés de caméra y trouvent aussi leur place. Vous pouvez aussi découper votre œuvre en scènes pour l’organiser.",
     "featuresPage.animation.item3.title": "Édition d’image",
     "featuresPage.animation.item3.body":
       "Sélectionnez n’importe quelle image et redessinez-la.",
