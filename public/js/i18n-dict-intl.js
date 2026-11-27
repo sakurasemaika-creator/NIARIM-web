@@ -338,7 +338,7 @@
     "hero.title.line2": "遇見。",
     "hero.subtitle": "讓創作者與觀眾之間的界線變得模糊。",
     "hero.lead":
-      "NIARIM 是一款可以在智慧型手機上製作正式手繪動畫的創作應用程式。既能一張張地畫圖並讓它動起來，製作手繪動畫，也能使用關鍵影格製作動態動畫，甚至可以將圖片組合成定格動畫。從繪圖、動畫、編輯、配音到匯出，一個應用程式就能完成作品。",
+      "NIARIM 是一款在智慧型手機上就能製作真正手繪動畫的創作應用程式。既能一張張地畫圖並讓它動起來，製作手繪動畫，也能使用關鍵影格製作動態動畫，甚至可以將圖片組合成定格動畫。從繪圖、動畫、編輯、配音到匯出，一個應用程式就能完成作品。",
     "hero.bridge.html":
       '完成的作品，可以發布到<a href="/community/">「作品廣場」</a>。看看別人的作品，再創作下一個作品。從人到作品，從作品到人。',
     "hero.cta.primary": "下載應用程式",
@@ -404,7 +404,7 @@
     "footer.product": "產品",
     "footer.support": "支援",
     "footer.legal": "法律資訊",
-    "footer.privacy": "隱私政策",
+    "footer.privacy": "隱私權政策",
     "footer.terms": "使用條款",
     "footer.x": "X（原 Twitter）",
     "footer.rights": "All Rights Reserved.",
@@ -427,9 +427,9 @@
     "contact.form.type.account": "帳號相關",
     "contact.form.type.other": "其他",
     "contact.form.name": "姓名",
-    "contact.form.namePlaceholder": "例）山田太郎",
+    "contact.form.namePlaceholder": "例：張小明",
     "contact.form.email": "電子郵件地址",
-    "contact.form.emailPlaceholder": "例）name@example.com",
+    "contact.form.emailPlaceholder": "例：name@example.com",
     "contact.form.message": "諮詢內容",
     "contact.form.messagePlaceholder": "請盡量詳細填寫",
     "contact.form.messageHint": "請於 1000 字以內填寫。",
@@ -441,14 +441,14 @@
     "contact.form.attachmentsCount": "已選擇 %d 個檔案",
     "contact.error.attachments": "附件數量或大小超出上限。",
     "contact.form.agree.pre": "我已閱讀並同意",
-    "contact.form.agree.link": "隱私政策",
+    "contact.form.agree.link": "隱私權政策",
     "contact.form.agree.post": "，並同意送出此表單",
     "contact.form.submit": "送出",
     "contact.form.submitting": "傳送中...",
     "contact.error.required": "此欄位為必填。",
     "contact.error.email": "電子郵件地址格式不正確。",
     "contact.error.tooLong": "已超出字數上限。",
-    "contact.error.agree": "請先同意隱私政策。",
+    "contact.error.agree": "請先同意隱私權政策。",
     "contact.status.successTitle": "您的諮詢已收到。",
     "contact.status.successBody":
       "感謝您的聯絡。我們會確認內容，並於必要時回覆您。",
@@ -496,7 +496,7 @@
     "featuresPage.drawing.item9.title": "油漆桶、套索填色",
     "featuresPage.drawing.item9.body":
       "支援填滿被線條圍住區域的「油漆桶」，以及為套索圈選區域上色的「套索填色」。",
-    "featuresPage.drawing.item10.title": "吸管",
+    "featuresPage.drawing.item10.title": "滴管",
     "featuresPage.drawing.item10.body": "可吸取畫布上的顏色，直接設為繪圖色。",
     "featuresPage.drawing.item11.title": "選擇工具",
     "featuresPage.drawing.item11.body":
@@ -579,7 +579,7 @@
     "featuresPage.export.item2.title": "畫面比例",
     "featuresPage.export.item2.body": "可自由設定畫面比例。",
     "featuresPage.export.item3.title": "尋找與分享匯出的作品",
-    "featuresPage.export.item3.body": "在首頁的「作品列表」可用專案名稱搜尋匯出的檔案。選取「分享」即可存到「照片」或用其他 App 開啟。",
+    "featuresPage.export.item3.body": "在首頁的「作品列表」可用專案名稱搜尋匯出的檔案。選取「分享」即可存到相簿或用其他應用程式開啟。",
     "featuresPage.export.filenameExample": "我的第一部動畫 20261120-143000.gif",
     "featuresPage.export.item4.title": "匯出格式",
     "featuresPage.export.item4.body":
@@ -598,8 +598,8 @@
     "newsPage.lead": "這裡發布更新、維護等相關公告。",
     "newsPage.empty": "目前暫無公告，如有新消息將於此發布。",
 
-    "meta.privacy.title": "隱私政策 | NIARIM",
-    "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私政策。",
+    "meta.privacy.title": "隱私權政策 | NIARIM",
+    "meta.privacy.description": "NIARIM 官方網站及應用程式的隱私權政策。",
     "legal.updated": "最後更新日期：2026年11月25日",
     "legal.notice.privacy":
       "本文件以日文版本為準。即使切換顯示語言，本文內容仍以日文顯示。",

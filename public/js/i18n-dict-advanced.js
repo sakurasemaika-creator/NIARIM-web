@@ -146,7 +146,7 @@
     "zh-Hant": {
       "featuresPage.nav.advanced": "進階工具",
       "featuresPage.advanced.title": "進階繪圖工具",
-      "featuresPage.advanced.lead": "面向繪圖與後製加工的進階工具群。",
+      "featuresPage.advanced.lead": "從作畫到後製加工，更進一步的工具群。",
       "featuresPage.advanced.item1.title": "洋蔥皮（Onion Skin）",
       "featuresPage.advanced.item1.body":
         "以半透明方式顯示前後影格。可以一邊確認前後的畫面一邊作畫，掌握動作的連貫性。顯示張數、顏色、透明度皆可調整。",
@@ -170,7 +170,7 @@
         "除內建字型外，還可從設定畫面搜尋並新增免費字型。",
       "featuresPage.advanced.item8.title": "浮水印",
       "featuresPage.advanced.item8.body":
-        "可為作品新增圖片或文字浮水印（付費進階功能）。",
+        "可為作品新增圖片或文字浮水印（Premium 功能）。",
       "featuresPage.advanced.item9.title": "像素模式",
       "featuresPage.advanced.item9.body":
         "可製作如像素畫一般的點陣風格作品。可以建立並儲存專用的像素畫調色盤，在繪製或套用像素畫濾鏡時選用。調色盤可匯出/匯入為.niapixelpalette檔案，與他人分享。",

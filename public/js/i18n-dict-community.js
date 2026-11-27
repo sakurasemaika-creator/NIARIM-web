@@ -180,7 +180,7 @@
       "communityPage.tabs.overall": "累計",
       "communityPage.tabs.yearly": "年度",
       "communityPage.tabs.monthly": "月度",
-      "communityPage.tabs.weekly": "週度",
+      "communityPage.tabs.weekly": "每週",
       "communityPage.tabs.daily": "每日",
       "communityPage.tabs.latest": "新作",
       "communityPage.search.eyebrow": "Discover",
@@ -213,9 +213,9 @@
       "communityPage.advanced.preview.title": "浮動預覽與作品詳情",
       "communityPage.advanced.preview.body":
         "點擊作品卡片不會立即跳轉到其他畫面。螢幕角落會出現一個小型預覽視窗，讓影片繼續播放的同時可以瀏覽其他畫面。可自由拖曳、調整大小。點擊「查看詳情」即可看到彙整了投稿日期、投稿者、標籤、收藏數等資訊的作品詳情畫面。",
-      "communityPage.advanced.shorts.title": "直式模式",
+      "communityPage.advanced.shorts.title": "直向模式",
       "communityPage.advanced.shorts.body":
-        "作品清單可依「全部」「僅直式」「僅橫式」篩選。直式作品只需點擊一個按鈕，即可切換為全螢幕縱向連續播放模式。",
+        "作品清單可依「綜合」「僅直向」「僅橫向」篩選。直向作品只需點擊一個按鈕，即可切換為全螢幕縱向連續播放模式。",
       "communityPage.cta.title": "你的作品，也能在這裡展示。",
       "communityPage.cta.body":
         "用 NIARIM 製作動畫，投稿到作品廣場，與大家分享吧。",

@@ -114,7 +114,7 @@
       "fd.gestureUndo": "復原",
       "fd.gestureRedo": "重做",
       "fd.gestureFrameMove": "切換影格",
-      "fd.gestureEyedropper": "吸管",
+      "fd.gestureEyedropper": "滴管",
     },
     ko: {
       "featuresPage.nav.workspace": "작업 환경",

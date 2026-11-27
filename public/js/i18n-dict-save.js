@@ -82,9 +82,9 @@
       "featuresPage.save.item1.title": "自動保存",
       "featuresPage.save.item1.body":
         "可在儲存列表中切換自動儲存與手動儲存。作品檔案損毀時，會從最新可讀取的自動儲存復原。",
-      "featuresPage.save.item2.title": "存檔欄位",
+      "featuresPage.save.item2.title": "存檔槽",
       "featuresPage.save.item2.body":
-        "保存到固定數量的欄位中，可在任意時刻叫出。",
+        "儲存到固定數量的存檔槽中，可在任意時刻叫出。",
       "featuresPage.save.item3.title": "存檔樹",
       "featuresPage.save.item3.body":
         "保存次數沒有限制，可以像分支一樣保留製作過程的歷史紀錄。",

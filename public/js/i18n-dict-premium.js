@@ -220,7 +220,7 @@
       "meta.premium.title": "高級會員方案 | NIARIM",
       "meta.premium.description":
         "介紹 NIARIM 高級會員方案能做什麼，以及與免費版的差異。",
-      "premiumPage.compareTitle": "免費版與進階版的差異",
+      "premiumPage.compareTitle": "免費版與 Premium 的差異",
       "premiumPage.eyebrow": "Premium",
       "premiumPage.title": "高級會員方案",
       "premiumPage.lead":
@@ -233,7 +233,7 @@
       "premiumPage.free.item2": "影片匯出（最高1920×1920）",
       "premiumPage.free.item3": "會顯示廣告",
       "premiumPage.free.item4":
-        "匯出時自動新增 NIARIM 官方片尾標誌（無法編輯或刪除）",
+        "匯出時自動新增 NIARIM 官方片尾標記（無法編輯或刪除）",
       "premiumPage.free.item5": "免費版支援製作和匯出最長90秒的作品。長作品可匯出開頭90秒。",
       "premiumPage.premium.title": "高級會員",
       "premiumPage.premium.monthly.label": "月付方案",
@@ -242,8 +242,8 @@
       "premiumPage.premium.yearly.label": "年付方案",
       "premiumPage.premium.yearly.price": "5,500 日圓",
       "premiumPage.premium.yearly.unit": "／年（含稅）",
-      "premiumPage.premium.yearly.badge.pre": "實質",
-      "premiumPage.premium.yearly.badge.main": "2個月免費",
+      "premiumPage.premium.yearly.badge.pre": "相當於",
+      "premiumPage.premium.yearly.badge.main": "免費2個月",
       "premiumPage.premium.yearly.basis": "按月支付12個月",
       "premiumPage.premium.yearly.fullPrice": "6,600 日圓",
       "premiumPage.premium.item1.title": "移除廣告",
@@ -254,7 +254,7 @@
       "premiumPage.premium.item3.body": "可為作品新增自己的圖片或文字浮水印。",
       "premiumPage.premium.item4.title": "色調曲線",
       "premiumPage.premium.item4.body":
-        "面向後製潤飾的色彩校正功能，可透過曲線細緻調整明暗平衡。",
+        "適合後製潤飾的色彩校正功能，可透過曲線細緻調整明暗平衡。",
       "premiumPage.premium.item5.title": "色階調整",
       "premiumPage.premium.item5.body":
         "調整黑場、白場與中間調，為作品的色彩做最後潤飾。",

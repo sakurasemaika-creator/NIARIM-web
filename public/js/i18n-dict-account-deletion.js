@@ -84,7 +84,7 @@
       "accountDeletion.title": "刪除 NIARIM 帳號",
       "accountDeletion.warning": "帳號及相關資料刪除後無法復原。",
       "accountDeletion.removed": "將刪除的資料",
-      "accountDeletion.profile": "個人資料、作品廣場的投稿、書籤和追蹤",
+      "accountDeletion.profile": "個人檔案、作品廣場的投稿、收藏和追蹤",
       "accountDeletion.rewards": "歐泊餘額、已兌換的權益、任務及通知記錄",
       "accountDeletion.elsewhere":
         "儲存在裝置上的作品和 YouTube 上的影片會保留。",
