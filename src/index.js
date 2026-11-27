@@ -7,6 +7,7 @@
  */
 import { localizedCaptureUrl } from "./capture-url.js";
 import {
+  PAGE_RUNTIME,
   PAGE_TRANSLATIONS,
   SEO_I18N,
   SEO_LANGS,
@@ -186,21 +187,36 @@ function pageMetadata(request) {
   };
 }
 
+// The page's translations in its language only (i18n.js fetches another
+// language's file when the visitor switches).
+function pageBundleUrl(page, lang) {
+  return `/js/generated/i18n-${page}.${lang}.js`;
+}
+
+// /features/ keeps main.js for its screen mocks; every other page that asks
+// for the plain /js/main.js runs the lightweight runtime instead.
+function runtimeScript(page, src) {
+  return page !== "features" && src === "/js/main.js"
+    ? "/js/common-ui.js"
+    : src;
+}
+
 function performanceHeadMarkup(page, lang) {
-  const hasScreenMocks = page === "features";
   const fontPreloadMarkup =
     page === "home" && ["en", "fr", "es"].includes(lang)
       ? [
           '<link rel="preload" href="/assets/fonts/HakkouMincho-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
-          '<link rel="preload" href="/assets/fonts/Kuramubon-latin.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
+          '<link rel="preload" href="/assets/fonts/Kuramubon-latin.v2.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">',
         ].join("")
       : "";
   // The page's stylesheets (site.css and its own file) are already in the
-  // <head>; only the scripts are preloaded here.
-  const runtime = hasScreenMocks ? "/js/main.js" : "/js/common-ui.js";
+  // <head>; only the scripts are preloaded here, under the exact URLs the
+  // page's <script> elements end up with (a preload of /js/common-ui.js for a
+  // script that asks for /js/common-ui.js?v=… is a second download).
+  const runtime = PAGE_RUNTIME[page] && runtimeScript(page, PAGE_RUNTIME[page]);
   const scriptPreloads =
-    `<link rel="preload" href="/js/generated/i18n-${page}.js" as="script">` +
-    `<link rel="preload" href="${runtime}" as="script">`;
+    `<link rel="preload" href="${pageBundleUrl(page, lang)}" as="script">` +
+    (runtime ? `<link rel="preload" href="${runtime}" as="script">` : "");
   return fontPreloadMarkup + scriptPreloads;
 }
 
@@ -355,7 +371,6 @@ function rewriteSeoHtml(response, request, env, metadata) {
   const schema = structuredData(request, env, metadata);
   const alternates = hreflangMarkup(request, env);
   const headPerformance = performanceHeadMarkup(metadata.page, metadata.lang);
-  const useLightweightRuntime = metadata.page !== "features";
   const ogLocale = OG_LOCALES[metadata.lang] || OG_LOCALES.ja;
   const alternateLocales = SEO_LANGS.filter((lang) => lang !== metadata.lang)
     .map(
@@ -391,6 +406,17 @@ function rewriteSeoHtml(response, request, env, metadata) {
         const value = element.getAttribute(attribute);
         const next = localizedCaptureUrl(value, metadata.lang);
         if (next !== value) element.setAttribute(attribute, next);
+      },
+    })
+    // The page's own stylesheet links point at the same stylesheets without
+    // their comments and indentation (tools/build-css.mjs); nothing is added.
+    // The source files serve static previews.
+    .on('link[href^="/css/"][href$=".css"]', {
+      element(element) {
+        const href = element.getAttribute("href");
+        if (!href.startsWith("/css/generated/")) {
+          element.setAttribute("href", "/css/generated/" + href.slice(5));
+        }
       },
     })
     .on("title", {
@@ -451,7 +477,7 @@ function rewriteSeoHtml(response, request, env, metadata) {
           if (!pageBundleInjected) {
             element.setAttribute(
               "src",
-              `/js/generated/i18n-${metadata.page}.js`,
+              pageBundleUrl(metadata.page, metadata.lang),
             );
             pageBundleInjected = true;
           } else {
@@ -459,9 +485,8 @@ function rewriteSeoHtml(response, request, env, metadata) {
           }
           return;
         }
-        if (useLightweightRuntime && src === "/js/main.js") {
-          element.setAttribute("src", "/js/common-ui.js");
-        }
+        const runtime = runtimeScript(metadata.page, src);
+        if (runtime !== src) element.setAttribute("src", runtime);
       },
     })
     .on("head", {

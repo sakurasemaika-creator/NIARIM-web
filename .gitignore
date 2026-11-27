@@ -10,3 +10,5 @@ artifacts/
 # Wrangler custom buildで翻訳辞書から毎回生成するSEO用モジュールとページ別の辞書
 src/generated/
 public/js/generated/
+# tools/build-css.mjs が毎回作る、コメントと字下げを除いた配信用のCSS
+public/css/generated/

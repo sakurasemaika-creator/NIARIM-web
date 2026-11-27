@@ -63,7 +63,7 @@ FONTS = [
     (
         "HakkouMincho",
         f"{SRCDIR}/hakkou/HakkouMincho_v1.004/HakkouMincho.ttf",
-        "HakkouMincho-subset.v4.woff2",
+        "HakkouMincho-subset.v5.woff2",
         "本文用（白光明朝／lavsic氏・Noto Serif JP派生）",
         "primary",
     ),
@@ -413,7 +413,11 @@ def build():
                     "--output-file=" + dst,
                     "--flavor=woff2",
                     "--unicodes=" + ",".join(f"U+{ord(c):04X}" for c in sorted(chars)),
-                    "--layout-features+=vert,vrt2,tnum",
+                    # The site sets no vertical writing mode: the vertical
+                    # features' glyphs (rotated Latin, vertical punctuation)
+                    # were half of Kuramubon-latin's bytes and drew nothing.
+                    "--layout-features+=tnum",
+                    "--layout-features-=vert,vrt2,vkrn,vpal,vhal,vchw,valt,vkna",
                     "--no-hinting",
                     "--name-IDs=*",
                     "--notdef-outline",
@@ -485,7 +489,8 @@ def build():
                 # 等幅数字(font-variant-numeric: tabular-nums)ぶんだけ足す。
                 # '*'のままだと未使用featureで白光明朝+87KB／くらむぼん+100KB膨らむ。
                 # --desubroutinize はこのフォント群では容量に影響しなかったため外す。
-                "--layout-features+=vert,vrt2,tnum",
+                "--layout-features+=tnum",
+                "--layout-features-=vert,vrt2,vkrn,vpal,vhal,vchw,valt,vkna",
                 "--no-hinting",
                 "--name-IDs=*",
                 "--notdef-outline",

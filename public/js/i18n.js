@@ -115,10 +115,66 @@
     });
   }
 
+  // A page served by the Worker carries the translations of its own language
+  // only (/js/generated/i18n-<page>.<lang>.js, which records itself in
+  // NIARIM_I18N_PAGE_BUNDLE). Another language's file is fetched when the
+  // visitor picks it. A static preview loads every dictionary and has no
+  // record, so nothing is fetched there.
+  var pageBundle = window.NIARIM_I18N_PAGE_BUNDLE;
+  var bundleLoads = {};
+  var bundleRequest = 0;
+
+  function loadPageBundle(lang) {
+    if (!pageBundle || pageBundle.loaded[lang]) return null;
+    if (!bundleLoads[lang]) {
+      bundleLoads[lang] = new Promise(function (resolve, reject) {
+        var script = document.createElement("script");
+        script.src =
+          "/js/generated/i18n-" + pageBundle.page + "." + lang + ".js";
+        script.onload = function () {
+          if (pageBundle.loaded[lang]) resolve();
+          else reject(new Error("Translations did not load"));
+        };
+        script.onerror = function () {
+          script.remove();
+          reject(new Error("Could not load translations"));
+        };
+        document.head.appendChild(script);
+      }).catch(function (error) {
+        delete bundleLoads[lang];
+        throw error;
+      });
+    }
+    return bundleLoads[lang];
+  }
+
+  function warmPageBundle(lang) {
+    var pending = loadPageBundle(lang);
+    if (pending) pending.catch(function () {});
+  }
+
+  function applyLang(lang, options) {
+    lang = normalizeLang(lang);
+    var request = ++bundleRequest;
+    var pending = loadPageBundle(lang);
+    if (!pending) return applyLoadedLang(lang, options);
+    return pending.then(
+      function () {
+        return request === bundleRequest
+          ? applyLoadedLang(lang, options)
+          : document.documentElement.lang;
+      },
+      function () {
+        // Keep the language on screen; picking the language again retries.
+        return document.documentElement.lang;
+      },
+    );
+  }
+
   var helpRequest = 0;
   var helpLanguage;
 
-  function applyLang(lang, options) {
+  function applyLoadedLang(lang, options) {
     var help = window.NIARIM_HELP_TRANSLATIONS;
     if (!help) return renderLang(lang, options);
 
@@ -505,6 +561,13 @@
       button.type = "button";
       button.textContent = lang.label;
       button.setAttribute("data-lang-switch", lang.code);
+      // Start fetching the language's translations as the pointer or focus
+      // reaches it, so the switch on click does not wait for the network.
+      ["pointerenter", "focus"].forEach(function (type) {
+        button.addEventListener(type, function () {
+          warmPageBundle(lang.code);
+        });
+      });
       button.addEventListener("click", function () {
         applyLang(lang.code, { syncUrl: true, remember: true });
         var dropdown = mount.closest("[data-lang-dropdown]");

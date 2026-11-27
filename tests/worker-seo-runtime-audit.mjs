@@ -358,7 +358,7 @@ for (const pathname of SEO_PAGE_PATHS) {
     if (page === "home" && ["en", "fr", "es"].includes(lang)) {
       for (const font of [
         "HakkouMincho-latin.woff2",
-        "Kuramubon-latin.woff2",
+        "Kuramubon-latin.v2.woff2",
       ]) {
         assert.ok(
           text.includes('href="/assets/fonts/' + font + '"'),
