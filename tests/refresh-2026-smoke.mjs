@@ -464,7 +464,21 @@ try {
     ["/community/", "[data-community-gallery]"],
   ]) {
     page.on("pageerror", (e) => log("Interior JS", path, e.message));
-    const response = await page.goto(base + path, { waitUntil: "networkidle" });
+    // /community/ never reaches "networkidle" when the public API is not
+    // reachable (as in a sandboxed run): the gallery shows its error message,
+    // but the failed /api/community request (a 502 whose body the page does
+    // not read) is never reported as finished. Wait for the page's own
+    // signal instead: the gallery clears aria-busy once the request has
+    // settled (works, empty or error).
+    const community = path === "/community/";
+    const response = await page.goto(base + path, {
+      waitUntil: community ? "load" : "networkidle",
+    });
+    if (community)
+      await page
+        .locator('[data-community-gallery][aria-busy="false"]')
+        .waitFor({ state: "attached", timeout: 30000 })
+        .catch(() => log("Community gallery never settled", path));
     if (response?.status() !== 200 || !(await page.locator(selector).count()))
       log("Interior missing", path, selector);
   }
@@ -617,7 +631,10 @@ try {
     !coins.eachRowHasFiveDurations ||
     coins.missionAccordions !== 4 ||
     coins.loginMilestones !== 54 ||
-    coins.missionGoalSections !== 13 ||
+    // 12, not 13: the work-time missions (1–100000 hours) were removed on
+    // purpose in 1fee4290 (owner, 2026-11-27). The app does not show them,
+    // because they cannot earn Opals.
+    coins.missionGoalSections !== 12 ||
     !coins.loginAccordion ||
     !coins.hasPremiumLink ||
     coins.units !== 70 ||
@@ -696,10 +713,19 @@ try {
     }
     const ratio = (a, b) =>
       (Math.max(lum(a), lum(b)) + 0.05) / (Math.min(lum(a), lum(b)) + 0.05);
-    return {
-      hasStylesheet: !!document.querySelector(
-        'link[href="/css/pages/premium.css"]',
+    // Since 65ce4517 the Worker points each stylesheet link at the copy
+    // without comments (/css/generated/…, tools/build-css.mjs); a static
+    // preview still serves the source file. Either is the page's stylesheet,
+    // as long as it has loaded.
+    const premiumSheet = [
+      ...document.querySelectorAll('link[rel="stylesheet"]'),
+    ].find((link) =>
+      /^\/css\/(?:generated\/)?pages\/premium\.css$/.test(
+        new URL(link.href).pathname,
       ),
+    );
+    return {
+      hasStylesheet: !!premiumSheet?.sheet,
       panelBg,
       headingFg,
       contrast: headingFg && panelBg ? ratio(headingFg, panelBg) : 0,
@@ -709,14 +735,26 @@ try {
     log("Premium coin panel contrast", JSON.stringify(premiumContrast));
 
   await page.goto(base + "/help/", { waitUntil: "networkidle" });
+  // The help page mirrors the app's help: one card per entry of
+  // tools/app-help-topic-map.json, which tools/sync-app-help.mjs keeps equal
+  // to the app. It grew from 81 to 84 on purpose (bd97d269 「入り抜き」,
+  // 4a6e545d 「作品の再生」「オパール・特典」), so read the number from the
+  // map instead of pinning it here.
+  const helpTopics = Object.keys(
+    JSON.parse(await fs.readFile("tools/app-help-topic-map.json", "utf8")),
+  ).length;
   const helpCards = await page.locator("[data-help-card]").count();
   if (
-    helpCards !== 81 ||
+    !helpTopics ||
+    helpCards !== helpTopics ||
     !(await page
       .locator('[data-help-card] [data-i18n="help.premiumExpiry.title"]')
       .count())
   )
-    log("Help must expose 81 topics including benefit expiry", helpCards);
+    log(
+      "Help must expose every app help topic including benefit expiry",
+      JSON.stringify({ helpCards, helpTopics }),
+    );
   await page.close();
 } catch (error) {
   log("Unexpected error", error.stack || error.message);
