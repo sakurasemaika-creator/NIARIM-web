@@ -3,9 +3,10 @@
  *
  * The HTML already carries the NIARIM listing URL and a text label ("Get it on
  * Google Play" in the page language), so the link works without JavaScript and
- * for crawlers. Google's official badge (unaltered, one PNG per language at
- * /assets/badges/google-play/<lang>.png, from
- * https://play.google.com/intl/en_us/badges/) takes the label's place only for
+ * for crawlers. Google's official badge (unaltered, one per language at
+ * /assets/badges/google-play/<lang>.webp: Google's PNG from
+ * https://play.google.com/intl/en_us/badges/, kept beside it, stored as
+ * lossless WebP with the same pixels) takes the label's place only for
  * the languages listed in NIARIM_CONFIG.GOOGLE_PLAY_BADGE_LANGS, and only once
  * the image has loaded. A badge that is not listed, missing or broken leaves
  * the text link as it is: the link is never hidden, no broken image is shown,
@@ -81,7 +82,7 @@
     });
     entry.badge = badge;
     entry.link.appendChild(badge);
-    badge.src = BADGE_DIR + lang + ".png";
+    badge.src = BADGE_DIR + lang + ".webp";
   }
 
   function init() {

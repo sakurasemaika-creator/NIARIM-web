@@ -185,11 +185,17 @@
       const button = figure.querySelector(".tp-wide-zoom");
       const frame = figure.querySelector(".tp-wide-capture-scroll");
       if (!button || !frame) return;
+      // The picture's srcset is chosen for the width it fits; at actual size
+      // it is 1280 px wide, so the browser picks the copy for that width.
+      const img = frame.querySelector("img");
+      const fitSizes = img ? img.getAttribute("sizes") : null;
       figure.classList.add("is-ready");
       button.addEventListener("click", function () {
         const zoomed = button.getAttribute("aria-pressed") !== "true";
         button.setAttribute("aria-pressed", String(zoomed));
         figure.classList.toggle("is-zoomed", zoomed);
+        if (img && fitSizes)
+          img.setAttribute("sizes", zoomed ? "1280px" : fitSizes);
         if (zoomed) {
           frame.setAttribute("tabindex", "0");
         } else {

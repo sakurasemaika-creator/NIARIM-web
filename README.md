@@ -252,7 +252,7 @@ Cloudflare上でメールを送信する方法を検討した結果、以下の�
 
 ## Google Playのバッジ
 
-Googleの公式のGoogle Playのバッジ（7言語、手を加えずに）を `public/assets/badges/google-play/{ja,en,fr,es,ko,zh-Hans,zh-Hant}.png` に置いてある（2026-11-25、`https://play.google.com/intl/<言語>/badges/static/images/badges/<言語>_badge_web_generic.png` から取ったもの。どれも646×250）。表示する言語は `public/js/config.js` の `GOOGLE_PLAY_BADGE_LANGS`。画像を読めない言語では、ストアへのリンクは文字のボタンで出る（`public/js/store-release-link.js`）。英語のバッジだけ、Googleの画像そのものに透明の余白が付いているので、ほかの言語より少し小さく見える（手を加えない決まりなのでそのまま）。
+Googleの公式のGoogle Playのバッジ（7言語、手を加えずに）を `public/assets/badges/google-play/{ja,en,fr,es,ko,zh-Hans,zh-Hant}.png` に置いてある（2026-11-25、`https://play.google.com/intl/<言語>/badges/static/images/badges/<言語>_badge_web_generic.png` から取ったもの。どれも646×250）。ページが読むのは、同じ画素のまま可逆のWebPにした `{言語}.webp`（PNGと全画素が一致することを確かめた。日本語は40,674→16,872バイト）で、PNGは元のファイルとして残してある。表示する言語は `public/js/config.js` の `GOOGLE_PLAY_BADGE_LANGS`。画像を読めない言語では、ストアへのリンクは文字のボタンで出る（`public/js/store-release-link.js`）。英語のバッジだけ、Googleの画像そのものに透明の余白が付いているので、ほかの言語より少し小さく見える（手を加えない決まりなのでそのまま）。
 
 ## 所有者の作業として残っている項目
 

@@ -211,7 +211,7 @@ test("Google's badge replaces the text only once it has loaded", () => {
       assert.equal(badge.className, "nr-play-badge");
       assert.equal(badge.width, 646);
       assert.equal(badge.height, 250);
-      assert.equal(badge.src, `/assets/badges/google-play/${lang}.png`);
+      assert.equal(badge.src, `/assets/badges/google-play/${lang}.webp`);
       assert.equal(badge.alt, translate(lang, "refresh.playBadge.alt"));
       assert.equal(badge.hidden, true);
       assert.equal(link.text.hidden, false);
@@ -242,7 +242,7 @@ test("changing the language swaps the badge and ignores the old image", () => {
   view.changeLanguage("fr");
   const french = view.badgeOf(link);
   assert.notEqual(french, japanese);
-  assert.equal(french.src, "/assets/badges/google-play/fr.png");
+  assert.equal(french.src, "/assets/badges/google-play/fr.webp");
   assert.equal(french.alt, translate("fr", "refresh.playBadge.alt"));
   japanese.listeners.load();
   assert.equal(link.text.hidden, false, "a stale image does not hide the text");
@@ -294,5 +294,21 @@ test("every language has Google's official badge, unaltered and listed", () => {
     // Google ships every badge at 646 x 250; the page reserves that size.
     assert.equal(png.readUInt32BE(16), 646, `${lang}.png width`);
     assert.equal(png.readUInt32BE(20), 250, `${lang}.png height`);
+
+    // The page shows the same badge as lossless WebP (VP8L, with alpha):
+    // the PNG's pixels exactly, in fewer bytes.
+    const webpFile = new URL(
+      `../public/assets/badges/google-play/${lang}.webp`,
+      import.meta.url,
+    );
+    assert.ok(existsSync(webpFile), `${lang}.webp`);
+    const webp = readFileSync(webpFile);
+    assert.equal(webp.subarray(0, 4).toString("latin1"), "RIFF");
+    assert.equal(webp.subarray(8, 16).toString("latin1"), "WEBPVP8L");
+    assert.equal(webp[20], 0x2f, `${lang}.webp VP8L signature`);
+    const bits = webp.readUInt32LE(21);
+    assert.equal((bits & 0x3fff) + 1, 646, `${lang}.webp width`);
+    assert.equal(((bits >>> 14) & 0x3fff) + 1, 250, `${lang}.webp height`);
+    assert.ok(webp.length < png.length, `${lang}.webp is smaller`);
   }
 });

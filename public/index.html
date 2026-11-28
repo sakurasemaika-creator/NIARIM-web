@@ -1401,7 +1401,12 @@
                clip holds a real WAV of that language's line made with an
                offline speech synthesiser (espeak-ng) on the build machine,
                because Android voices do not run in tests; its waveform is
-               drawn by the app itself. -->
+               drawn by the app itself.
+               The smaller copies (1024/1536/2048 px, same quality) are for
+               screens that need fewer pixels; sizes is the picture's
+               measured width at each page width (vw−38/−34, 598, vw−50,
+               then 1214 px), and capture-viewer.js sets it to 1280px for
+               "Actual size". -->
           <figure class="tp-wide-capture">
             <div
               class="tp-wide-capture-scroll"
@@ -1411,11 +1416,18 @@
               data-i18n-attr="aria-label:top.unique.speech.alt"
             >
               <img
+                srcset="
+                  /assets/images/engine/timeline-speech-timestamps-v2-ja-1024w.webp 1024w,
+                  /assets/images/engine/timeline-speech-timestamps-v2-ja-1536w.webp 1536w,
+                  /assets/images/engine/timeline-speech-timestamps-v2-ja-2048w.webp 2048w,
+                  /assets/images/engine/timeline-speech-timestamps-v2-ja.webp       2560w
+                "
+                sizes="(min-width: 1265px) 1214px, (min-width: 741px) calc(100vw - 50px), (min-width: 633px) 598px, (min-width: 561px) calc(100vw - 34px), calc(100vw - 38px)"
                 src="/assets/images/engine/timeline-speech-timestamps-v2-ja.webp"
                 width="2560"
                 height="325"
                 alt="読み上げのトラックとタイムスタンプのあるタイムライン"
-                data-i18n-attr="src:img.timeline-speech-timestamps|alt:top.unique.speech.alt"
+                data-i18n-attr="srcset:img.timeline-speech-timestamps.srcset|src:img.timeline-speech-timestamps|alt:top.unique.speech.alt"
                 loading="lazy"
                 decoding="async"
               />
@@ -1445,15 +1457,24 @@
               編集中の内容は自動保存で記録され、直近の3件が残ります。作品ファイルが壊れたときは、読み込める最新の自動保存から戻します。好きなときに自分で保存する手動セーブは、ゲームのセーブデータのように、保存した時点を選んで読み込めます。手動セーブの方式は2つです。セーブスロットは、決まった数の枠（スロット）に保存先を選んで保存します。スロットの数は設定で変わります。セーブツリーは、保存するたびに保存地点が増え、前の地点から枝分かれして別の案を試せます。保存数に上限はありません。
             </p>
           </div>
+          <!-- The app's screens at 360 px ×3. The 360/720 px copies (same
+               quality) are for screens that need fewer pixels; each picture
+               is at most 360 px wide (vw−36 below 397 px). -->
           <ul class="tp-filter-grid tp-screen-grid">
             <li>
               <figure>
                 <img
+                  srcset="
+                    /assets/images/engine/save-tree-branches-ja-360w.webp  360w,
+                    /assets/images/engine/save-tree-branches-ja-720w.webp  720w,
+                    /assets/images/engine/save-tree-branches-ja.webp      1080w
+                  "
+                  sizes="(min-width: 397px) 360px, calc(100vw - 36px)"
                   src="/assets/images/engine/save-tree-branches-ja.webp"
                   width="1080"
                   height="1539"
                   alt="ラフから線画、色の案へ枝分かれして保存したセーブツリー"
-                  data-i18n-attr="src:img.save-tree-branches|alt:top.unique.save.treeAlt"
+                  data-i18n-attr="srcset:img.save-tree-branches.srcset|src:img.save-tree-branches|alt:top.unique.save.treeAlt"
                   loading="lazy"
                   decoding="async"
                 />
@@ -1465,11 +1486,17 @@
             <li>
               <figure>
                 <img
+                  srcset="
+                    /assets/images/engine/save-slots-ja-360w.webp  360w,
+                    /assets/images/engine/save-slots-ja-720w.webp  720w,
+                    /assets/images/engine/save-slots-ja.webp      1080w
+                  "
+                  sizes="(min-width: 397px) 360px, calc(100vw - 36px)"
                   src="/assets/images/engine/save-slots-ja.webp"
                   width="1080"
                   height="1539"
                   alt="スロット1〜3にラフ・線画・色を保存したセーブスロット"
-                  data-i18n-attr="src:img.save-slots|alt:top.unique.save.slotAlt"
+                  data-i18n-attr="srcset:img.save-slots.srcset|src:img.save-slots|alt:top.unique.save.slotAlt"
                   loading="lazy"
                   decoding="async"
                 />

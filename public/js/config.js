@@ -10,7 +10,8 @@ window.NIARIM_CONFIG = {
   GOOGLE_PLAY_URL:
     "https://play.google.com/store/apps/details?id=com.niarim.niarim",
 
-  // Google Playの公式バッジ画像（/assets/badges/google-play/<言語>.png）を
+  // Google Playの公式バッジ画像（/assets/badges/google-play/<言語>.webp。Googleの
+  // PNGを画素を変えずに可逆のWebPにしたもの）を
   // 置いた言語。ここに並べた言語だけ、画像を読み込めたときにバッジを表示する。
   // 並べていない言語では「Google Play で手に入れよう」の文字のボタンを表示する。
   // 使える値: "ja", "en", "fr", "es", "ko", "zh-Hans", "zh-Hant"
